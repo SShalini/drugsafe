@@ -68,11 +68,12 @@ class Franchisee_Model extends Error_Model {
         }
         public function viewClientList($idfranchisee)
         {
-         
+            $whereAry = array('franchiseeId' => $idfranchisee,'isDeleted=' => '0');
+            
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
-            $this->db->where('franchiseeId', $idfranchisee);
+            $this->db->where($whereAry);
             $query = $this->db->get();
 
             if($query->num_rows() > 0)
@@ -84,6 +85,24 @@ class Franchisee_Model extends Error_Model {
                     return array();
             }
         }
+        public function deleteClient($idClient)
+	{
+           
+            $data = $this->input->post('idClient');
+		$dataAry = array(
+			'isDeleted' => '1'
+                );  
+                $this->db->where('id', $idClient);
+                 
+		if($query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
 }
 ?>
 
