@@ -56,7 +56,10 @@ class Admin_Model extends Error_Model {
         {
             $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_PASSWORD__, "szConfirmPassword", "Confirm Password", 6, 32);
         }
-        
+        function set_szClientType($value)
+        {
+            $this->data['szClientType'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szClientType", "Client Type",false, false, $flag);
+        }
        /*----------------------------ADMIN RELATED FUNCTIONS-------------------------------------------*/
        
         function validateUserData($data, $arExclude=array())
@@ -502,7 +505,27 @@ class Admin_Model extends Error_Model {
                     return false;
                 }	
 	}
-        
+         function validateClientData($data, $arExclude=array())
+        {
+            if(!empty($data))
+            {
+                if(!in_array('szName',$arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),true);
+                if(!in_array('szEmail',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),true);
+                if(!in_array('szContactNumber',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),true);
+                if(!in_array('szCountry',$arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])),true);
+                if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),true);
+                if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
+                if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
+                if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
+                if(!in_array('szClientType',$arExclude)) $this->set_szClientType(sanitize_all_html_input(trim($data['szClientType'])),true);
+                
+            if($this->error == true)
+                        return false;
+                else
+                       return true;
+            }
+            return false;
+        }
       
 }
 ?>

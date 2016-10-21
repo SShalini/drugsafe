@@ -74,9 +74,11 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="viewUserDetails('<?php echo $franchiseeData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client List" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Change User Status" onclick="franchiseeDelete(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
-
                                                 </a>
                                             </td>
                                         </tr>

@@ -45,3 +45,50 @@ if($mode == '__DELETE_FRANCHISEE_CONFIRM__')
     
     <?php
 }
+
+if($mode == '__DELETE_CLIENT_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="clientStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Delete Client</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Client?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="deleteClientConfirmation('<?php echo $idfranchisee;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__DELETE_CLIENT_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="clientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Deleted Client</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/franchisee/franchiseeList" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
