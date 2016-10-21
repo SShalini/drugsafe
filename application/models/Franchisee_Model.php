@@ -197,7 +197,7 @@ class Franchisee_Model extends Error_Model {
 
                 $this->db->where($whereAry);
 
-                $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+                $queyUpdate=$this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
                 
             if( $idClient=='')
             {
@@ -212,7 +212,7 @@ class Franchisee_Model extends Error_Model {
                 
             );
             
-            if($this->db->affected_rows() > 0)
+            if($queyUpdate)
                {
                 
                 $query=$this->db->update(__DBC_SCHEMATA_CLIENT__, $clientAry);
