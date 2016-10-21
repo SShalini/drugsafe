@@ -58,6 +58,11 @@ $route['admin/(:any)'] = "Admin_Controller/$1";
 $route['admin/(:any)/(:any)'] = "Admin_Controller/$1/$2";
 $route['admin/(:any)/(:any)/(:any)'] = "Admin_Controller/$1/$2/$3";
 
+$route['franchisee'] = "Franchisee_Controller";
+$route['franchisee/(:any)'] = "Franchisee_Controller/$1";
+$route['franchisee/(:any)/(:any)'] = "Franchisee_Controller/$1/$2";
+$route['franchisee/(:any)/(:any)/(:any)'] = "Franchisee_Controller/$1/$2/$3";
+
 $route['404_override'] = 'Error_Controller';
 $route['error'] = "Error_Controller";
 $route['translate_uri_dashes'] = FALSE;
