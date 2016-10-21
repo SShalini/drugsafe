@@ -87,6 +87,7 @@ class Franchisee_Controller extends CI_Controller {
                     $data['pageName'] = "Franchisee_List";
                     $data['countryAry'] = $countryAry;
                     $data['validate'] = $validate;
+                    $data['idfranchisee'] = $idfranchisee;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
             
             $this->load->view('layout/admin_header',$data);
@@ -177,5 +178,77 @@ class Franchisee_Controller extends CI_Controller {
             $this->Franchisee_Model->deleteClient($data['idClient']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
+        function getParentClient()
+        {
+            $franchiseeId = $this->input->post('franchiseeId');
+            $clientType = $this->input->post('clientType');
+            if($clientType=='2')
+            {
+                $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($franchiseeId));
+            if(!empty($parentClient))
+     	    {
+            $result = "<div id=\"parentId\" class=\"form-group\">
+                    <label class=\"col-md-3 control-label\">Parent Client</label>
+                        <div class=\"col-md-5\">
+                            <div class=\"input-group\">
+                                <span class=\"input-group-addon\">
+                                    <i class=\"fa fa-user\"></i>
+                                </span>
+                                <select class=\"form-control required\" name=\"clientData[szParentId]\" id=\"szParentId\"    Placeholder=\"Client Type\" onfocus=\"remove_formError(this.id,\"true\")\">";
+                                foreach ($parentClient as $parentClientData)
+          	                {
+             	                    $result .= "<option value='".$parentClientData['id']."'>".$parentClientData['szName']."</option>";
+         	                }
+         	                $result .= "</select>
+                                </select>
+                            </div>
+                        </div>
+                </div>";
+        }
+                echo $result;  
+            }
+            
+     	         
+  	}
+        
+        function viewClientDetailsData()
+        {
+           
+            $idClient = $this->input->post('idClient');
+            {
+                $this->session->set_userdata('idClient',$idClient);
+                echo "SUCCESS||||";
+                echo "viewClientDetails";
+            }
+            
+        }
+         function viewClientDetails()
+        {
+            $is_user_login = is_user_login($this);
+
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+            $idClient = $this->session->userdata('idClient');
+            $clientDetailsAray =$this->Franchisee_Model->viewClientDetails($idClient);
+            $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($idClient);
+            
+            
+            $data['idClient'] = $idClient;
+            $data['clientDetailsAray'] = $clientDetailsAray;
+            $data['childClientDetailsAray'] = $childClientDetailsAray;
+            $data['szMetaTagTitle'] = "Client Details";
+            $data['is_user_login'] = $is_user_login;
+                   
+                    
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('franchisee/clientDetails');
+            $this->load->view('layout/admin_footer');
+        }
+        
 }      
        

@@ -42,7 +42,11 @@ class Franchisee_Model extends Error_Model {
             }
             
            
-            $clientType=$data['szClientType'];
+            $clientType=$data['szParentId'];
+            if($clientType=='')
+            {
+                $clientType='0';
+            }
            // print_r($franchiseeId);die;
             $clientAry=array(
                 
@@ -88,7 +92,6 @@ class Franchisee_Model extends Error_Model {
             $this->db->where($whereAry);
             $query = $this->db->get();
             $s=$this->db->last_query();
-            
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -116,6 +119,62 @@ class Franchisee_Model extends Error_Model {
                     return false;
                 }	
 	}
+        function getParentClientDetails($franchiseeId)
+   	{
+                $whereAry = array('franchiseeId' => $franchiseeId,'clientType=' => '0','isDeleted=' => '0');
+   		$this->db->select('*');
+                $this->db->from(__DBC_SCHEMATA_CLIENT__);
+                $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+                $this->db->where($whereAry);
+                $query = $this->db->get();
+               
+		if($query->num_rows() > 0)
+                {
+                        return $query->result_array();
+                }
+                return false;
+   	}
+         public function viewClientDetails($idClient)
+        {
+            $whereAry = array('clientId' => $idClient,'isDeleted=' => '0');
+            
+            $this->db->select('*');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+            $this->db->where($whereAry);
+            $query = $this->db->get();
+           
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                return $row[0];
+            }
+            else
+            {
+                    return array();
+            }
+        }
+        
+        public function viewChildClientDetails($idClient)
+        {
+            $whereAry = array('clientType' => $idClient,'isDeleted=' => '0');
+            
+            $this->db->select('*');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+            $this->db->where($whereAry);
+            $query = $this->db->get();
+           
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                return $row;
+            }
+            else
+            {
+                    return array();
+            }
+        }
 }
 ?>
 

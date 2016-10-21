@@ -31,7 +31,6 @@
                                         <th> Email</th>
                                         <th> Client Type</th>
                                         <th> Contact No </th>
-                                        <th> Address </th>
                                         <th> Actions </th>
                                     </tr>
                                 </thead>
@@ -49,7 +48,7 @@
                                             <td>
                                                 
                                                 <?php
-                                                if($clientData['clientType']=='1')
+                                                if($clientData['clientType']=='0')
                                                 {
                                                     echo "Parent";
                                                 }
@@ -61,15 +60,20 @@
                                                 
                                             </td>
                                             <td> <?php echo $clientData['szContactNumber'];?> </td>
-                                            <td> <?php echo $clientData['szCity'];?> </td>
                                             <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editClient('<?php echo $clientData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
+                                                </a>
+                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $clientData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete(<?php echo $clientData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>
+                                                
+                                               
                                             </td>
                                         </tr>
                                         <?php 

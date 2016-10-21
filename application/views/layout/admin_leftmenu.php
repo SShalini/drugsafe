@@ -17,13 +17,7 @@
                                 <!-- END SIDEBAR TOGGLER BUTTON -->
                      </li>
                     
-                        <li class="nav-item start <?php if(trim($pageName)=='' || trim($pageName)=='Admin_Dashboard'){?>active open<?php }?>">
-                                <a href="<?php echo __BASE_URL__;?>/admin/dashboard" class="nav-link nav-toggle">
-                                    <i class="icon-home"></i>
-                                    <span class="title">Dashboard</span>
-                                    <span class="selected"></span>
-                                </a>
-                            </li>
+                       
                              <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                             <li class="nav-item start <?php if(trim($pageName)=='Franchisee_List'){?>active open<?php }?>">
                                 <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="nav-link nav-toggle">

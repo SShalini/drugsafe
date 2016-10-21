@@ -73,14 +73,14 @@
                                             </span>
                                         <?php }?>
                                     </div>
-                                    <div class="form-group <?php if(!empty($arErrorMessages['szClientType'])){?>has-error<?php }?>">
+                                    <div id="clientType" class="form-group <?php if(!empty($arErrorMessages['szClientType'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Client Type</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="clientData[szClientType]" id="szClientType"    Placeholder="Client Type" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control required" name="clientData[szClientType]" id="szClientType"    Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);">
                                                     <option value=''>Client Type</option>
                                                     <option value='1'>Parent</option>
                                                     <option value='2'>Child</option>

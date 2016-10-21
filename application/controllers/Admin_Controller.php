@@ -19,7 +19,7 @@ class Admin_Controller extends CI_Controller {
             if($is_user_login)
           {
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/dashboard");
+                    header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                     die;
            }
             else
@@ -37,7 +37,7 @@ class Admin_Controller extends CI_Controller {
             if($is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/dashboard");
+                header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                die;
             }	
             $validate= $this->input->post('adminLogin');
@@ -51,7 +51,7 @@ class Admin_Controller extends CI_Controller {
                         }
                         
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/dashboard");
+                        header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                         die;
                     }
                 }
@@ -122,7 +122,7 @@ class Admin_Controller extends CI_Controller {
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/dashboard");
+                        header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                         die;
                     }
                 }
@@ -296,16 +296,12 @@ class Admin_Controller extends CI_Controller {
             {
                 $szMessage['type'] = "success";
                 $szMessage['content'] = "<strong>Password Recovery! </strong> Your new password successfully updated.";
-                      //  print_R($szMessage);die;
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                
                 $this->session->userdata('drugsafe_user_message');
                 ob_end_clean();
                 header("Location:" . __BASE_URL__ . "/admin/admin_forgetPassword");
                   die;
             }
-            //  print_R($email);
-            
             $data['szMetaTagTitle'] = "Admin Forgot Password";
             $this->load->view('layout/login_header', $data);
             $this->load->view('admin/forgetPassword');
@@ -324,7 +320,5 @@ class Admin_Controller extends CI_Controller {
             $this->Admin_Model->deletefranchisee($data['idfranchisee']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-       
-        
 }      
        
