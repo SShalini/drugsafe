@@ -293,3 +293,15 @@ function viewClientDetails(idClient)
 
     });
 }
+function editClient(idClient)
+{
+    $.post(__BASE_URL__+"/franchisee/editClientData",{idClient:idClient},function(result){
+       
+        ar_result = result.split('||||');
+         
+        window.location = __BASE_URL__+"/franchisee/"+ar_result[1];
+
+    });
+}
+
+
