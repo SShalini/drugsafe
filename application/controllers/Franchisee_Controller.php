@@ -249,6 +249,69 @@ class Franchisee_Controller extends CI_Controller {
             $this->load->view('franchisee/clientDetails');
             $this->load->view('layout/admin_footer');
         }
+        function editClientData()
+        {
+          
+            $idClient = $this->input->post('idClient');
+    
+            if($idClient>0)
+            {
+                $this->session->set_userdata('idClient',$idClient);
+                echo "SUCCESS||||";
+                echo "editClient";
+            }
+            
+        }
         
+        public function editClient()
+        {
+       
+            $countryAry = $this->Admin_Model->getCountries();
+            $idClient = $this->session->userdata('idClient');
+            
+            if($idClient >0)
+            {
+
+                $data_validate = $this->input->post('clientData');
+              
+            
+                if(empty($data_validate))
+                {
+                   
+                    $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('',$idClient);
+             
+                }
+                else
+                {
+                    $userDataAry = $data_validate;
+                }
+                
+                if($this->Franchisee_Model->validateFranchiseeData($data_validate,array(), $idClient))
+                {
+                    if($this->Franchisee_Model->updateClientDetails($idClient))
+                    {
+                        $szMessage['type'] = "success";
+                        $szMessage['content'] = "<strong>Profile Update! </strong> User profile suucessfully updated.";
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                        
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/franchisee/clientList");
+                        die;
+                    }
+                }
+                    $data['szMetaTagTitle'] = "Edit Client Details ";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Edit Client Details"; 
+                    $data['countryAry'] = $countryAry;
+                    $data['validate'] = $validate;
+                    $_POST['clientData'] = $userDataAry;
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('franchisee/editClient');
+            $this->load->view('layout/admin_footer');
+            
+        }
+}      
 }      
 ?>
