@@ -171,9 +171,10 @@ class Franchisee_Controller extends CI_Controller {
         }
         public function deleteClientConfirmation()
         {
+           
             $data['mode'] = '__DELETE_CLIENT_CONFIRM__';
-            $data['idfranchisee'] = $this->input->post('idfranchisee');
-            $this->Admin_Model->deleteClient($data['idfranchisee']);
+            $data['idClient'] = $this->input->post('idClient');
+            $this->Franchisee_Model->deleteClient($data['idClient']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
 }      
