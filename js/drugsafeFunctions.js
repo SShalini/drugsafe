@@ -145,12 +145,10 @@ function forgot_password()
         }
     }
 }
-
 function isEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   return regex.test(email);
 }
-
 function getStateListingProfile(szCountry)
 {
   
@@ -254,6 +252,44 @@ function  deleteClientConfirmation(idClient)
             $('#clientStatusConfirmation').modal("show");
         }
         jQuery('#loader').attr('style','display:none');
+
+    });
+}
+
+function getParenDetails(franchiseeId,clientType)
+{
+  $.post(__BASE_URL__+"/franchisee/getParentClient",{franchiseeId:franchiseeId,clientType:clientType},function(result){    
+        if(result != '')
+        {
+            if (clientType == "2") 
+            {
+                $(result).insertAfter("#clientType");
+            } 
+            else 
+            {
+                $("#parentId").remove();
+            }
+               
+       		
+        }
+	});
+}
+function getStateListingProfileclient(szCountry)
+{
+  
+    $.post(__BASE_URL__+"/franchisee/getStatesByCountryClient",{szCountry:szCountry},function(result)
+    {    
+        if(result != ''){
+       		$("#state_container").html(result);
+  		}
+    });
+}
+function viewClientDetails(idClient)
+{
+   
+    $.post(__BASE_URL__+"/franchisee/viewClientDetailsData",{idClient:idClient},function(result){
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__+"/franchisee/"+ar_result[1];
 
     });
 }
