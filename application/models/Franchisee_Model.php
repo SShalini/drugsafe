@@ -16,12 +16,13 @@ class Franchisee_Model extends Error_Model {
         function insertClientDetails($data,$franchiseeId='')
         {
            
-           $replace_ary = array();
+            $szNewPassword = create_login_password();
             $date=date('Y-m-d');
             $dataAry = array(
 
                                 'szName' => $data['szName'],
                                 'szEmail' => $data['szEmail'],
+                                'szPassword'=>encrypt($szNewPassword),
                                 'szContactNumber' => $data['szContactNumber'],
                                 'szCountry' => $data['szCountry'],
                                 'szState' => $data['szState'],
@@ -37,10 +38,12 @@ class Franchisee_Model extends Error_Model {
             $id_client = (int)$this->db->insert_id();
             if($franchiseeId=='')
             {
-                $franchiseeId=$_SESSION['drugsafe_user']['id'];
+                 $franchiseeId=$_SESSION['drugsafe_user']['id'];
             }
             
+           
             $clientType=$data['szClientType'];
+           // print_r($franchiseeId);die;
             $clientAry=array(
                 
                 'franchiseeId' => $franchiseeId,
@@ -55,6 +58,16 @@ class Franchisee_Model extends Error_Model {
                 $this->db->insert(__DBC_SCHEMATA_CLIENT__, $clientAry);
                 if($this->db->affected_rows() > 0)
                 {
+                   $replace_ary = array();
+                   $id_player = (int)$this->db->insert_id();
+                   $replace_ary['szName']=$data['szName'];
+                   $replace_ary['szEmail']=$data['szEmail'];
+                   $replace_ary['szPassword']=$szNewPassword;
+                   $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+                   $replace_ary['Link']=__BASE_URL__."/franchisee/addClient";
+                   
+                   createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
+                                       
                      return true;
                     
                 }
@@ -64,7 +77,6 @@ class Franchisee_Model extends Error_Model {
                {
                    return false;
              }
-
         }
         public function viewClientList($idfranchisee)
         {
@@ -75,7 +87,8 @@ class Franchisee_Model extends Error_Model {
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             $this->db->where($whereAry);
             $query = $this->db->get();
-
+            $s=$this->db->last_query();
+            
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
