@@ -59,7 +59,7 @@
             <div class="page-header-inner ">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-                     <a href="<?php echo __BASE_URL__;?>/admin/dashboard" class="nav-link nav-toggle">
+                     <a href="<?php echo __BASE_URL__;?>/admin/" class="nav-link nav-toggle">
                         <h1 alt="logo" class="logo-default" >Drug Safe</h1> </a>
                     <div class="menu-toggler sidebar-toggler">
                         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->

@@ -33,9 +33,11 @@ defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
 
 if( !defined( "__APP_PATH__" ) )
 	define( "__APP_PATH__", realpath( dirname( __FILE__ ) . "/../../" ));
-
-define("__BASE_URL__", "http://local.drugsafe.com");
-
+if(ENVIRONMENT == 'development'){
+    define("__BASE_URL__", "http://local.drugsafe.com");
+}elseif (ENVIRONMENT == 'testing'){
+    define("__BASE_URL__", "http://whizsolutionsdev.com/drugsafe");
+}
 define("__BASE_CSS_URL__", __BASE_URL__ . "/css");
 define("__APP_PATH_CSS__", __APP_PATH__ . "/css");
 

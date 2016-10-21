@@ -177,4 +177,3 @@ class Franchisee_Model extends Error_Model {
         }
 }
 ?>
-

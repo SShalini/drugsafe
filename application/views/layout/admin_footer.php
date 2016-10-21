@@ -1,5 +1,4 @@
-
-</div> 
+</div>
 <!--END PAGE CONTAINER-->
 <!-- BEGIN COPYRIGHT -->
         <div class="page-footer">

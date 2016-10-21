@@ -72,13 +72,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
+$dbconfigVars = array();
+if(ENVIRONMENT == 'development'){
+    $dbconfigVars['hostname'] = 'localhost';
+    $dbconfigVars['username'] = 'root';
+    $dbconfigVars['password'] = '';
+    $dbconfigVars['database'] = 'drugsafe';
+}elseif (ENVIRONMENT == 'testing'){
+    $dbconfigVars['hostname'] = 'db653031407.db.1and1.com';
+    $dbconfigVars['username'] = 'dbo653031407';
+    $dbconfigVars['password'] = 'Whiz@2016';
+    $dbconfigVars['database'] = 'db653031407';
+}
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'drugsafe',
+	'hostname' => $dbconfigVars['hostname'],
+	'username' => $dbconfigVars['username'],
+	'password' => $dbconfigVars['password'],
+	'database' => $dbconfigVars['database'],
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

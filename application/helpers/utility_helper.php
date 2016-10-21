@@ -477,9 +477,4 @@ function curl_get_file_contents($URL,$bGeoplugin=false)
     if ($contents) return $contents;
     else return FALSE;
  }
- 
-
-
-
 ?>
-

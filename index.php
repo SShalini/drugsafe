@@ -70,6 +70,9 @@ switch (ENVIRONMENT)
 	break;
 
 	case 'testing':
+        error_reporting(E_ALL & ~E_NOTICE );
+        date_default_timezone_set('America/New_York');
+        break;
 	case 'production':
 		ini_set('display_errors', 0);
 		if (version_compare(PHP_VERSION, '5.3', '>='))

@@ -5,8 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="content">
  <!-- BEGIN LOGO -->
         <div class="logo">
-            <a href="index.html">
-               Drug Safe </a>
+            <a href="<?php echo __BASE_URL__;?>">
+               <h1 class="site-title">Drug Safe</h1> </a>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->
@@ -38,8 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             ?>
 
                 <div class="form-title">
-                    <span class="form-title">Welcome.</span>
-                    <span class="form-subtitle">Please login.</span>
+                    <!--<span class="form-title"><h3>Welcome.</h3></span>
+                    <span class="form-subtitle">Please login.</span>-->
                 </div>
                 <div class="alert alert-danger display-hide">
                     <button class="close" data-close="alert"></button>

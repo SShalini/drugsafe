@@ -23,7 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://local.drugsafe.com/';
+if(ENVIRONMENT == 'development'){
+    $config['base_url'] = 'http://local.drugsafe.com/';
+}elseif (ENVIRONMENT == 'testing'){
+    $config['base_url'] = 'http://whizsolutionsdev.com/drugsafe';
+}
 
 /*
 |--------------------------------------------------------------------------
