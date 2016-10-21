@@ -61,8 +61,9 @@ if($mode == '__DELETE_CLIENT_POPUP__')
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Client?</p>
                 </div>
                 <div class="modal-footer">
+                   
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="deleteClientConfirmation('<?php echo $idfranchisee;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                    <button type="button" onclick="deleteClientConfirmation('<?php echo $idClient;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
                 </div>
             </div>
         </div>
@@ -84,7 +85,7 @@ if($mode == '__DELETE_CLIENT_CONFIRM__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully deleted.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/franchisee/franchiseeList" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/franchisee/clientList" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
