@@ -1,9 +1,9 @@
 .login {
-    background-color: #5c97bd
+background: rgba(27,188,155,0.5) url("../../../images/drug-safe-coming-soon-bg.jpg") no-repeat fixed center top / cover;
 }
 
 .login a {
-    color: #edf4f8 !important
+    color: #333 !important
 }
 
 .login .logo {
@@ -13,7 +13,7 @@
 }
 
 .login .content {
-    background: rgba(0, 0, 0, 0) url("../img/bg-white-lock.png") repeat scroll 0 0;
+    background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
     border-radius: 7px !important;
     margin: 40px auto;
     padding: 20px 30px 15px;
@@ -51,8 +51,8 @@
 }
 
 .login .content .form-control {
-    background-color: #6ba3c8;
-    border: 1px solid #6ba3c8;
+    background-color: #1bbc9b;
+    border: 1px solid #1bbc9b;
     height: 43px;
     color: #d9ecf9
 }
@@ -179,7 +179,7 @@
 }
 
 .login .content .forget-password {
-    color: #d7eaf7;
+    color: #333;
     font-size: 15px
 }
 
@@ -188,7 +188,7 @@
 }
 
 .login .content .check {
-    color: #c9dce9 !important
+    color: #333 !important
 }
 
 .login .content .create-account {

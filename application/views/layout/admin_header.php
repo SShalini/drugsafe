@@ -38,7 +38,7 @@
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         
-        <link rel="shortcut icon" href="favicon.ico" /> </head>
+        <link rel="shortcut icon" href="favicon.ico" />
         <!-- END HEAD -->
         
         <!--BEGIN CUSTOM FILES-->
@@ -60,7 +60,8 @@
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
                      <a href="<?php echo __BASE_URL__;?>/admin/" class="nav-link nav-toggle">
-                        <h1 alt="logo" class="logo-default" >Drug Safe</h1> </a>
+<!--                        <h1 alt="logo" class="logo-default" >Drug Safe</h1> </a>-->
+                         <img class="admin-logo" src="../../../images/logo.png" />
                     <div class="menu-toggler sidebar-toggler">
                         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
                     </div>

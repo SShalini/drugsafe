@@ -11,7 +11,7 @@
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm blue" onclick="redirect_url('<?php echo base_url();?>franchisee/clientList');">
+                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>franchisee/clientList');">
                                         &nbsp;List Client
                                     </button>
                                 </div>

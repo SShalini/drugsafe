@@ -11,7 +11,7 @@
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm blue" onclick="redirect_url('<?php echo base_url();?>admin/franchiseeList');">
+                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>admin/franchiseeList');">
                                         &nbsp;List Franchisee
                                     </button>
                                 </div>
@@ -187,7 +187,7 @@
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                            <input type="submit" class="btn green" value="Save" name="addFranchisee[submit]">
+                                            <input type="submit" class="btn green-meadow" value="Save" name="addFranchisee[submit]">
                                         </div>
                                     </div>
                                     </div>

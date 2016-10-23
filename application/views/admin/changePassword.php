@@ -72,7 +72,7 @@
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
                                            <a href="<?=__BASE_URL__?>/admin/dashboard" class="btn default uppercase" type="button">Cancel</a>
-                                                                <input class="btn green uppercase btn-form-submit" type="submit" value="Submit"/>
+                                                                <input class="btn green-meadow uppercase btn-form-submit" type="submit" value="Submit"/>
                                         </div>
                                         
                                     </div>

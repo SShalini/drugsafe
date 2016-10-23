@@ -38,7 +38,7 @@
        
         <!-- BEGIN THEME LAYOUT STYLES -->
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" /> </head>
+        <link rel="shortcut icon" href="favicon.ico" />
         
         <!--BEGIN CUSTOM FILES-->
             <link href="<?php echo __BASE_CSS_URL__; ?>/drugsafe_custom_style.css?<?php echo time(); ?>" rel="stylesheet" type="text/css" />

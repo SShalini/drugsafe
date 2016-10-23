@@ -6,7 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  <!-- BEGIN LOGO -->
         <div class="logo">
             <a href="<?php echo __BASE_URL__;?>">
-               <h1 class="site-title">Drug Safe</h1> </a>
+<!--               <h1 class="site-title">Drug Safe</h1>-->
+                <img src="../../../images/logo.png" />
+            </a>
         </div>
         <!-- END LOGO -->
         <!-- BEGIN LOGIN -->

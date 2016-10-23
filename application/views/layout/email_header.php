@@ -13,7 +13,7 @@
                     <td>
                         <table cellpadding="0" cellspacing="0" border="0" width="100%">
                             <tr>
-                                <td><img src="<?=__BASE_IMAGES_URL__?>/email-logo.jpg" alt="Drug Safe" width="100px;" height="40px;"/><hr></td>
+                                <td><img src="<?=__BASE_IMAGES_URL__?>/logo.png" alt="Drug Safe" width="100px;" height="40px;"/><hr></td>
                             </tr>
                         </table>
                     </td>
