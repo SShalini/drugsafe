@@ -9,3 +9,7 @@ and open the template in the editor.
 */
 .login .logo .site-title{text-transform: uppercase;}
 .admin-logo{height: 75px}
+.pull-left {
+    color: #e73d4a;
+   
+}

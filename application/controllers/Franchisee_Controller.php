@@ -313,9 +313,15 @@ class Franchisee_Controller extends CI_Controller {
                     $data['countryAry'] = $countryAry;
                     $data['validate'] = $validate;
                     $_POST['clientData'] = $userDataAry;
+
                     $data['idfranchisee'] = $idfranchisee;
                     $data['parentClient'] = $parentClient;
                     $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
+
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+
+                    $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
+
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/editClient');
