@@ -2,12 +2,17 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
-<div class="content">
-
+<div class="content forgotpassword">
+        <div class="logo">
+            <a href="<?php echo __BASE_URL__;?>">
+                <!--               <h1 class="site-title">Drug Safe</h1>-->
+                <img src="<?php echo __BASE_URL__;?>/images/logo.png" />
+            </a>
+        </div>
          <!-- BEGIN FORGOT PASSWORD FORM -->
              <form class="login-form" id="forgetPassword" name="forgetPassword" method="post" autocomplete="off" action="<?php echo __BASE_URL__;?>/admin/admin_forgetPassword">
                  
-                 <h3 class="form-title font-green">Password Recovery</h3>
+<!--                 <h3 class="form-title font-green">Password Recovery</h3>-->
            <?php 
             if(!empty($_SESSION['drugsafe_user_message']))
             {

@@ -83,7 +83,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="clientData[szClientType]" id="szClientType"    Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);">
+                                                <select class="form-control required" name="clientData[szClientType]" id="szClientType"    Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);" required />
                                                     <option value=''>Client Type</option>
                                                     <option value='1'>Parent</option>
                                                     <option value='2'>Child</option>
