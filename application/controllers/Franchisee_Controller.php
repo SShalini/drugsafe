@@ -278,17 +278,14 @@ class Franchisee_Controller extends CI_Controller {
             {
 
                 $data_validate = $this->input->post('clientData');
-              
-            
+
+                if ($userDataAry['clientType'] !== '0') {
+                    $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
+                }
                 if(empty($data_validate))
                 {
                    
                     $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('',$idClient);
-//                    if($this->Admin_Model->validateClientData($data_validate,array(),$idClient)) {
-                        if ($userDataAry['clientType'] !== '0') {
-                            $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
-                        }
-//                    }
                 }
                 else
                 {
