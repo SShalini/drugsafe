@@ -258,25 +258,26 @@ function  deleteClientConfirmation(idClient)
 
 function getParenDetails(franchiseeId,clientType)
 {
-  $.post(__BASE_URL__+"/franchisee/getParentClient",{franchiseeId:franchiseeId,clientType:clientType},function(result){    
+    
+    $.post(__BASE_URL__+"/franchisee/getParentClient",{franchiseeId:franchiseeId,clientType:clientType},function(result){    
         if(result != '')
         {
             if (clientType == "2") 
             {
+                $("#parenitIdedit").remove();
                 $(result).insertAfter("#clientType");
+                
             } 
-            else 
+        }
+        else 
             {
                 $("#parentId").remove();
+                $("#parenitIdedit").remove();
             }
-               
-       		
-        }
 	});
 }
 function getStateListingProfileclient(szCountry)
 {
-  
     $.post(__BASE_URL__+"/franchisee/getStatesByCountryClient",{szCountry:szCountry},function(result)
     {    
         if(result != ''){
@@ -293,9 +294,10 @@ function viewClientDetails(idClient)
 
     });
 }
-function editClient(idClient)
+function editClient(idClient,idfranchisee)
 {
-    $.post(__BASE_URL__+"/franchisee/editClientData",{idClient:idClient},function(result){
+   
+    $.post(__BASE_URL__+"/franchisee/editClientData",{idClient:idClient,idfranchisee:idfranchisee},function(result){
        
         ar_result = result.split('||||');
          
