@@ -107,7 +107,6 @@ class Franchisee_Controller extends CI_Controller {
         
         function getStatesByCountryClient($szCountry='')
  	{  
-            
             if(trim($szCountry) != '')
             {
                 $_POST['szCountry'] = $szCountry; 
@@ -255,10 +254,12 @@ class Franchisee_Controller extends CI_Controller {
         {
           
             $idClient = $this->input->post('idClient');
+            $idfranchisee = $this->input->post('idfranchisee');
     
             if($idClient>0)
             {
                 $this->session->set_userdata('idClient',$idClient);
+                $this->session->set_userdata('idfranchisee',$idfranchisee);
                 echo "SUCCESS||||";
                 echo "editClient";
             }
@@ -270,6 +271,7 @@ class Franchisee_Controller extends CI_Controller {
        
             $countryAry = $this->Admin_Model->getCountries();
             $idClient = $this->session->userdata('idClient');
+            $idfranchisee = $this->session->userdata('idfranchisee');
             
             if($idClient >0)
             {
@@ -281,7 +283,10 @@ class Franchisee_Controller extends CI_Controller {
                 {
                    
                     $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('',$idClient);
-             
+                    if($userDataAry['clientType']!=='0')
+                    {
+                        $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
+                    }
                 }
                 else
                 {
@@ -290,7 +295,7 @@ class Franchisee_Controller extends CI_Controller {
                 
                 if($this->Franchisee_Model->validateFranchiseeData($data_validate,array(), $idClient))
                 {
-                    if($this->Franchisee_Model->updateClientDetails($idClient))
+                    if($this->Franchisee_Model->updateClientDetails($idClient,$data_validate))
                     {
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong>Profile Update! </strong> User profile suucessfully updated.";
@@ -307,7 +312,15 @@ class Franchisee_Controller extends CI_Controller {
                     $data['countryAry'] = $countryAry;
                     $data['validate'] = $validate;
                     $_POST['clientData'] = $userDataAry;
+<<<<<<< .mine
+                    $data['idfranchisee'] = $idfranchisee;
+                    $data['parentClient'] = $parentClient;
                     $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
+||||||| .r46
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+=======
+                    $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
+>>>>>>> .r53
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/editClient');
