@@ -10,7 +10,13 @@
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
+<<<<<<< .mine
+                                    <button class="btn btn-sm green-meadow " onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
+||||||| .r43
+                                    <button class="btn btn-sm blue" onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
+=======
                                     <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
+>>>>>>> .r53
                                         &nbsp;Add New Client
                                     </button>
                                 </div>
@@ -61,7 +67,7 @@
                                             </td>
                                             <td> <?php echo $clientData['szContactNumber'];?> </td>
                                             <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientData['id'];?>',<?php echo $idfranchisee;?>);" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $clientData['id'];?>);" href="javascript:void(0);"></i>

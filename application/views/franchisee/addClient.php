@@ -17,6 +17,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="portlet-body">
                             <form class="form-horizontal" id="clientData" action="<?=__BASE_URL__?>/franchisee/addClient" name="clientData" method="post">
                                 <div class="form-body">
@@ -83,10 +84,10 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="clientData[szClientType]" id="szClientType"    Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);">
+                                                <select class="form-control" name="clientData[szClientType]" id="szClientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);">
                                                     <option value=''>Client Type</option>
-                                                    <option value='1'>Parent</option>
-                                                    <option value='2'>Child</option>
+                                                    <option value='1' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '1' ? "selected" : "")?>>Parent</option>
+                                                    <option value='2' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '2' ? "selected" : "")?>>Child</option>
                                                 </select>
                                             </div>
                                             <?php if(!empty($arErrorMessages['szClientType'])){?>
@@ -137,7 +138,10 @@
                                                 <i class="fa fa-user"></i>
                                                 </span>
                                                 <div id="state_container">
-                                                    <input type="text" class="form-control" id="szState" name="clientData[szState]" placeholder="State" value="<?=sanitize_post_field_value($_POST['clientData']['szState'])?>" onfocus="remove_formError(this.id,'true')">
+                                                    <select class="form-control required" id="szState" name="clientData[szState]" placeholder="State" onfocus="remove_formError(this.id,'true')">";
+                                                        <option value=''>Select</option>
+         	                             </select>
+                                                    
                                                 </div>
                                             </div>
                                              <?php if(!empty($arErrorMessages['szState'])){?>
@@ -207,7 +211,7 @@
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                            <input type="submit" class="btn green" value="Save" name="clientData[submit]">
+                                            <input type="submit" class="btn green-meadow" value="Save" name="clientData[submit]">
                                         </div>
                                     </div>
                                     </div>

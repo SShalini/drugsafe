@@ -17,6 +17,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php //print_r($_POST['clientData']); ?>
                         <div class="portlet-body">
                             <form class="form-horizontal" id="clientData" action="<?=__BASE_URL__?>/franchisee/editClient" name="clientData" method="post">
                                 <div class="form-body">
@@ -74,28 +75,68 @@
                                         </div>
                                         
                                     </div>
-                                    <div class="form-group <?php if(!empty($arErrorMessages['szClientType'])){?>has-error<?php }?>">
+                                     <div id="clientType" class="form-group <?php if(!empty($arErrorMessages['clientType'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Client Type</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="clientData[clientType]" id="clientData[clientType]"    Placeholder="Client Type" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control" name="clientData[clientType]" id="clientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);">
                                                     <option value=''>Client Type</option>
-                                                    <option value="1" <?=$_POST['clientData']['clientType'] == 1 ? "selected=selected" : ""?>">Parent</option>
-                                                    <option value="2" <?=$_POST['clientData']['clientType'] == 2 ? "selected=selected" : ""?>">Child</option>
+                                                    <option value='1' <?=(sanitize_post_field_value($_POST['clientData']['clientType']) == '0' ? "selected" : "")?>>Parent</option>
+                                                    <option value='2' <?=(sanitize_post_field_value($_POST['clientData']['clientType']) > '0' ? "selected" : "")?>>Child</option>
                                                 </select>
                                             </div>
-                                            <?php if(!empty($arErrorMessages['szClientType'])){?>
+                                            <?php if(!empty($arErrorMessages['clientType'])){?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szClientType'];?>
+                                                <?php echo $arErrorMessages['clientType'];?>
+                                            </span>
+                                        <?php }?>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    if($_POST['clientData']['clientType']>0)
+                                    {
+                                        ?>
+                                        <div id="parenitIdedit" class="form-group <?php if(!empty($arErrorMessages['szParentId'])){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label">Parent Client</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <select class="form-control required" name="clientData[szParentId]" id="szParentId" onfocus="remove_formError(this.id,'true')">
+                                                   
+                                                    <?php
+                                                        if(!empty($parentClient))
+                                                        {
+                                                            foreach($parentClient as $parentClientData)
+                                                            {
+                                                                ?>
+                                                                    <option value="<?=trim($parentClientData['id'])?>" <?=(sanitize_post_field_value($_POST['clientData']['clientType']) == trim($parentClientData['id']) ? "selected" : "")?>><?=trim($parentClientData['szName'])?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <?php if(!empty($arErrorMessages['szParentId'])){?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szParentId'];?>
                                             </span>
                                         <?php }?>
                                         </div>
                                         
                                     </div>
+                                         <?php
+                                        
+                                    }
+                                    
+                                    ?>
+                                    
                                     <div class="form-group <?php if(!empty($arErrorMessages['szCountry'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Country</label>
                                         <div class="col-md-5">
@@ -184,8 +225,7 @@
                                         </div>
                                        
                                     </div>
-                                    
-                                     <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
+                                    <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Address</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
@@ -201,7 +241,6 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                        
                                     </div>
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="clientData[iRole]">
                                 <div class="form-actions">
