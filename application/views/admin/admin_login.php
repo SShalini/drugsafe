@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="logo">
             <a href="<?php echo __BASE_URL__;?>">
 <!--               <h1 class="site-title">Drug Safe</h1>-->
-                <img src="../../../images/logo.png" />
+                <img src="<?php echo __BASE_URL__;?>/images/logo.png" />
             </a>
         </div>
         <!-- END LOGO -->

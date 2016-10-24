@@ -69,6 +69,7 @@ class Franchisee_Controller extends CI_Controller {
         function addClient()
         {
             $validate= $this->input->post('clientData'); 
+            
             $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
             
@@ -89,6 +90,7 @@ class Franchisee_Controller extends CI_Controller {
                     $data['validate'] = $validate;
                     $data['idfranchisee'] = $idfranchisee;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    
             
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/addClient');
@@ -305,7 +307,7 @@ class Franchisee_Controller extends CI_Controller {
                     $data['countryAry'] = $countryAry;
                     $data['validate'] = $validate;
                     $_POST['clientData'] = $userDataAry;
-                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/editClient');
