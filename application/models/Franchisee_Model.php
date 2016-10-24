@@ -91,7 +91,7 @@ class Franchisee_Model extends Error_Model {
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             $this->db->where($whereAry);
             $query = $this->db->get();
-            $s=$this->db->last_query();
+           // $s=$this->db->last_query();
             if($query->num_rows() > 0)
             {
                 return $query->result_array();

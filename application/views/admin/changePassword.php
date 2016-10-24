@@ -21,7 +21,6 @@
                                                 </span>
                                                  <input type="password" name="drugsafeChangePassword[szOldPassword]" id="szOldPassword" class="form-control input-square-right required" placeholder="Current Password" > 
                                             </div>
-                                                               
                                                             </div>
                                                             <?php if(!empty($arErrorMessages['szOldPassword']) != ''){?>
                                                                 <span class="help-block pull-left">

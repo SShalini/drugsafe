@@ -211,7 +211,11 @@
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
+<<<<<<< .mine
+                                            <input type="submit" class="btn green btn-success" value="Save" name="clientData[submit]">
+=======
                                             <input type="submit" class="btn green-meadow" value="Save" name="clientData[submit]">
+>>>>>>> .r57
                                         </div>
                                     </div>
                                     </div>

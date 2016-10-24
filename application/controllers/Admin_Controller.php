@@ -69,7 +69,7 @@ class Admin_Controller extends CI_Controller {
         }
         
         public function dashboard() {
-//            echo"hiiii";die;
+           
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -78,7 +78,7 @@ class Admin_Controller extends CI_Controller {
                 die;
             }
         $user_session = $this->session->userdata('drugsafe_user');
-//print_r($user_session);die;
+
 
             $data['szMetaTagTitle'] = "Dashboard";
             $data['is_user_login'] = $is_user_login;
@@ -186,7 +186,7 @@ class Admin_Controller extends CI_Controller {
    
              $franchiseeAray =$this->Admin_Model->viewFranchiseeList($p_sortby,$p_sortorder);
            
-//                print_r($userAry);die;
+
             
             $data['franchiseeAray'] = $franchiseeAray;
             $data['szSortBy'] = $p_sortby;

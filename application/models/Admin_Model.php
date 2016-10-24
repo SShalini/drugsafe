@@ -22,11 +22,23 @@ class Admin_Model extends Error_Model {
         }
         function set_szEmail($value,$flag=true)
         {
-            $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szEmail", "Email", false, false, $flag);
+           $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Email address", false, false, $flag);
         }
         function set_szContactNumber($value,$flag=true)
         {
-            $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szContactNumber", "Contact Number", false, false, $flag);
+             if($value != '')
+        {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+            if(strpos($value, "+") === false)
+            {
+                    if(strlen($value) == 10)
+                            $value = "+1" . $value;
+                    else
+                            $value = "+" . $value;
+            }
+        }
+            $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_MOBILE_PHONE__, "szContactNumber", "Contact Number", false, false, $flag);
         }
         function set_szCountry($value,$flag=true)
         {
@@ -370,10 +382,9 @@ class Admin_Model extends Error_Model {
                     $replace_ary['id']=$id;
                     $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
 
-                    $confirmationLink=__BASE_URL__."/admin/admin_forgetPassword/".$szNewPassword;
-                    $replace_ary['szLink']="<a href='".$confirmationLink."'>CLICK HERE TO CHANGE PASSWORD.</a>";
+                     $confirmationLink="Password=".$szNewPassword;
+                    $replace_ary['szLink']=$confirmationLink;
                     $replace_ary['szHttpsLink']=$confirmationLink;
-
                     createEmail($this,'__USER_FORGOT_PASSWORD__', $replace_ary,$szEmail, '', __CUSTOMER_SUPPORT_EMAIL__,$id_admin, __CUSTOMER_SUPPORT_EMAIL__);
 
                     return true;
