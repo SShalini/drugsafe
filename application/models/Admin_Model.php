@@ -16,6 +16,10 @@ class Admin_Model extends Error_Model {
         {
             $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szName", "Name", false, false, $flag);
         }
+        function set_szClientType($value)
+        {
+            $this->data['szClientType'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szClientType", "Client Type",false, false, $flag);
+        }
         function set_szEmail($value,$flag=true)
         {
             $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szEmail", "Email", false, false, $flag);
@@ -56,10 +60,7 @@ class Admin_Model extends Error_Model {
         {
             $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szConfirmPassword", "Confirm Password", 6, 32);
         }
-        function set_szClientType($value)
-        {
-            $this->data['szClientType'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szClientType", "Client Type",false, false, $flag);
-        }
+        
        /*----------------------------ADMIN RELATED FUNCTIONS-------------------------------------------*/
        
         function validateUserData($data, $arExclude=array())
@@ -104,7 +105,8 @@ class Admin_Model extends Error_Model {
             $this->db->select('id,szName,szEmail,szPassword,iRole');
             $this->db->where($whereAry);
             $query = $this->db->get(__DBC_SCHEMATA_USERS__);
-
+            //$sql= $this->db->last_query();die();
+            //print_r($sql);
             if($query->num_rows() > 0)
             {
                 $row = $query->result_array();

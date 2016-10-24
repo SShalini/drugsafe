@@ -175,19 +175,19 @@ class Franchisee_Model extends Error_Model {
                     return array();
             }
         }
-        public function updateClientDetails($idClient=0)
+        public function updateClientDetails($idClient=0,$data)
     {
         $date=date('Y-m-d');
-       
+        
             $dataAry = array(                                  
-                               'szName' => $this->data['szName'],
-                                'szEmail' => $this->data['szEmail'],
-                                'szContactNumber' => $this->data['szContactNumber'],
-                                'szCountry' => $this->data['szCountry'],
-                                'szState' => $this->data['szState'],
-                                'szCity' => $this->data['szCity'],
-                                'szZipCode' => $this->data['szZipCode'],
-                                'szAddress' => $this->data['szAddress'],
+                               'szName' => $data['szName'],
+                                'szEmail' => $data['szEmail'],
+                                'szContactNumber' => $data['szContactNumber'],
+                                'szCountry' => $data['szCountry'],
+                                'szState' => $data['szState'],
+                                'szCity' => $data['szCity'],
+                                'szZipCode' => $data['szZipCode'],
+                                'szAddress' => $data['szAddress'],
                                 'iRole' => '3',
                                 'iActive' => '1',
                                 'dtUpdatedOn' => $date
@@ -203,8 +203,12 @@ class Franchisee_Model extends Error_Model {
             {
                 $idClient=$_SESSION['drugsafe_user']['id'];
             }
-            
-            $clientType= $this->data['clientType']; 
+            $clientType=$data['szParentId'];
+            if($clientType=='')
+            {
+                $clientType='0';
+            }
+            //$clientType= $this->data['clientType']; 
          
             $clientAry=array(
  
@@ -215,6 +219,8 @@ class Franchisee_Model extends Error_Model {
             if($queyUpdate)
                {
                 
+                $whereAry = array('clientId' => (int)$idClient);
+                $this->db->where($whereAry);
                 $query=$this->db->update(__DBC_SCHEMATA_CLIENT__, $clientAry);
                 if($query)
                 {
@@ -250,10 +256,6 @@ class Franchisee_Model extends Error_Model {
             $whereAry = array('szEmail' => $this->sql_real_escape_string(trim($szEmail)),'id' => (int)$id);
         }
         
-            //$this->db->select('*');
-            //$this->db->from('tbl_client');
-            //$this->db->join('ds_user', 'tbl_client.id = ds_user.id');
-            //$this->db->where('clientId', $id);
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
