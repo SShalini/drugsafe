@@ -4,7 +4,7 @@ $gray-color: #8E8F93;
 $white-color: #ffffff;
 
 body {
-  .alert-info {
+  .alert-info,.alert-success {
     background-color: #e0ebf9;
     border-color: #e0ebf9;
     color: $color-theme;

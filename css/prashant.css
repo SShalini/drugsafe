@@ -1,4 +1,4 @@
-body .alert-info {
+body .alert-info, body .alert-success {
   background-color: #e0ebf9;
   border-color: #e0ebf9;
   color: #1bbc9b;

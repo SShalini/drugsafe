@@ -188,7 +188,7 @@
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                            <input type="submit" class="btn green" value="Save" name="addFranchisee[submit]">
+                                            <input type="submit" class="btn green-meadow" value="Save" name="addFranchisee[submit]">
                                         </div>
                                     </div>
                                     </div>

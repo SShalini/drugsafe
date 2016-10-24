@@ -249,6 +249,7 @@ class Admin_Controller extends CI_Controller {
         {
             $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
+            //die($idfranchisee);
             if($idfranchisee >0)
             {
                 
@@ -268,7 +269,7 @@ class Admin_Controller extends CI_Controller {
                     if($this->Admin_Model->updateFranchiseeDetails($idfranchisee))
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Profile Update! </strong> User profile suucessfully updated.";
+                        $szMessage['content'] = "<strong>Franchisee Info! </strong> Franchisee data successfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         
                         ob_end_clean();

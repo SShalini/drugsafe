@@ -84,7 +84,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control" name="clientData[szClientType]" id="szClientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);">
+                                                <select class="form-control" name="clientData[szClientType]" id="szClientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);" required />
                                                     <option value=''>Client Type</option>
                                                     <option value='1' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '1' ? "selected" : "")?>>Parent</option>
                                                     <option value='2' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '2' ? "selected" : "")?>>Child</option>
@@ -98,6 +98,23 @@
                                         <?php }?>
                                         </div>
                                         
+                                    </div>
+                                    <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label">Address</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="szAddress" class="form-control" type="text" value="<?php echo $_POST['clientData']['szAddress'] ;?>" placeholder="Address" onfocus="remove_formError(this.id,'true')" name="clientData[szAddress]">
+                                            </div>
+                                            <?php if(!empty($arErrorMessages['szAddress'])){?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szAddress'];?>
+                                            </span>
+                                            <?php }?>
+                                        </div>
                                     </div>
                                     <div class="form-group <?php if(!empty($arErrorMessages['szCountry'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Country</label>
@@ -190,23 +207,7 @@
                                         
                                     </div>
                                     
-                                     <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label">Address</label>
-                                        <div class="col-md-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <input id="szAddress" class="form-control" type="text" value="<?php echo $_POST['clientData']['szAddress'] ;?>" placeholder="Address" onfocus="remove_formError(this.id,'true')" name="clientData[szAddress]">
-                                            </div>
-                                             <?php if(!empty($arErrorMessages['szAddress'])){?>
-                                            <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szAddress'];?>
-                                            </span>
-                                        <?php }?>
-                                        </div>
-                                    </div>
+
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="clientData[iRole]">
                                 <div class="form-actions">
                                     <div class="row">

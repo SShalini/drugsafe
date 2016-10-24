@@ -184,7 +184,7 @@ class Franchisee_Controller extends CI_Controller {
         {
             $franchiseeId = $this->input->post('franchiseeId');
             $clientType = $this->input->post('clientType');
-            if($clientType=='2')
+            if($clientType=='1')
             {
                 $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($franchiseeId));
             if(!empty($parentClient))
@@ -284,22 +284,23 @@ class Franchisee_Controller extends CI_Controller {
                 {
                    
                     $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('',$idClient);
-                    if($userDataAry['clientType']!=='0')
-                    {
-                        $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
-                    }
+//                    if($this->Admin_Model->validateClientData($data_validate,array(),$idClient)) {
+                        if ($userDataAry['clientType'] !== '0') {
+                            $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
+                        }
+//                    }
                 }
                 else
                 {
                     $userDataAry = $data_validate;
                 }
                 
-                if($this->Franchisee_Model->validateFranchiseeData($data_validate,array(), $idClient))
+                if($this->Admin_Model->validateClientData($data_validate,array(), $idClient))
                 {
                     if($this->Franchisee_Model->updateClientDetails($idClient,$data_validate))
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Profile Update! </strong> User profile suucessfully updated.";
+                        $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         
                         ob_end_clean();
@@ -316,11 +317,7 @@ class Franchisee_Controller extends CI_Controller {
 
                     $data['idfranchisee'] = $idfranchisee;
                     $data['parentClient'] = $parentClient;
-                    $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
-
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
-
-                    $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
 
                     
             $this->load->view('layout/admin_header',$data);

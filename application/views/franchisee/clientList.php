@@ -1,5 +1,22 @@
 <div class="page-content-wrapper">
         <div class="page-content">
+            <?php
+            if(!empty($_SESSION['drugsafe_user_message'])){
+                if(trim($_SESSION['drugsafe_user_message']['type']) == "success"){
+                    ?>
+                    <div class="alert alert-success">
+                        <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                    </div>
+                <?php }
+                if(trim($_SESSION['drugsafe_user_message']['type']) == "error") {
+                    ?>
+                    <div class="alert alert-danger">
+                        <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                    </div>
+                <?php }
+                $this->session->unset_userdata('drugsafe_user_message');
+            }
+            ?>
             <div id="page_content" class="row">
                 <div class="col-md-12">
                     <div class="portlet light bordered">
