@@ -1,0 +1,15 @@
+body .alert-info {
+  background-color: #e0ebf9;
+  border-color: #e0ebf9;
+  color: #1bbc9b;
+}
+
+body .forgotpassword .form-title, body .forgotpassword .form-subtitle {
+  color: #333333;
+}
+
+body .forgotpassword .btn-cancel {
+  background-color: #8E8F93;
+  color: #ffffff !important;
+  border: 1px solid #8E8F93;
+}

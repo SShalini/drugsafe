@@ -10,13 +10,13 @@
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-<<<<<<< .mine
-                                    <button class="btn btn-sm green-meadow " onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
-||||||| .r43
-                                    <button class="btn btn-sm blue" onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
-=======
+
+                                   <!-- <button class="btn btn-sm green-meadow " onclick="addClientData(<?php /*echo $idfranchisee;*/?>);" href="javascript:void(0);">
+
+                                    <button class="btn btn-sm blue" onclick="addClientData(<?php /*echo $idfranchisee;*/?>);" href="javascript:void(0);">-->
+
                                     <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
->>>>>>> .r53
+
                                         &nbsp;Add New Client
                                     </button>
                                 </div>

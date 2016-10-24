@@ -107,6 +107,7 @@ class Franchisee_Controller extends CI_Controller {
         
         function getStatesByCountryClient($szCountry='')
  	{  
+            
             if(trim($szCountry) != '')
             {
                 $_POST['szCountry'] = $szCountry; 
@@ -312,15 +313,9 @@ class Franchisee_Controller extends CI_Controller {
                     $data['countryAry'] = $countryAry;
                     $data['validate'] = $validate;
                     $_POST['clientData'] = $userDataAry;
-<<<<<<< .mine
                     $data['idfranchisee'] = $idfranchisee;
                     $data['parentClient'] = $parentClient;
                     $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
-||||||| .r46
-                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
-=======
-                    $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
->>>>>>> .r53
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/editClient');

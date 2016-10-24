@@ -62,15 +62,15 @@ class Admin_Model extends Error_Model {
         }
         function set_szPassword($value)
         {
-            $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", 6, 32);
+            $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", false, 32);
         }	
         function set_szOldPassword($value)
         {
-            $this->data['szOldPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__ , "szOldPassword", "Current Password", 6, 32);
+            $this->data['szOldPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__ , "szOldPassword", "Current Password", false, 32);
         }
         function set_szConfirmPassword($value)
         {
-            $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szConfirmPassword", "Confirm Password", 6, 32);
+            $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szConfirmPassword", "Confirm Password", false, 32);
         }
         
        /*----------------------------ADMIN RELATED FUNCTIONS-------------------------------------------*/

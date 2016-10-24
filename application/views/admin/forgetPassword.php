@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
                 <div class="form-actions">
                     
-                    <a href="<?=__BASE_URL__?>/admin/admin_login" class="btn btn-default" type="button">Cancel</a>
+                    <a href="<?=__BASE_URL__?>/admin/admin_login" class="btn btn-default btn-cancel" type="button">Cancel</a>
                     <button type="submit" class="btn red btn-form-submit btn-success">Submit</button>
                 </div>
             </form>
