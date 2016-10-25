@@ -187,6 +187,7 @@
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iRole]">
                                 <div class="form-actions">
                                     <div class="row">
+
                                         <div class="col-md-offset-3 col-md-4">
                                             <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="Save" name="addFranchisee[submit]">

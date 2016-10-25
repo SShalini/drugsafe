@@ -103,7 +103,13 @@ class Franchisee_Model extends Error_Model {
         }
         public function deleteClient($idClient)
 	{
-           
+        $childListArr = $this->viewChildClientDetails($idClient);
+        if (!empty($childListArr)) {
+            foreach ($childListArr as $childlist) {
+                $this->deleteClient($childlist['id']);
+            }
+
+        }
             $data = $this->input->post('idClient');
 		$dataAry = array(
 			'isDeleted' => '1'

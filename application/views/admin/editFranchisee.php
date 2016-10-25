@@ -12,7 +12,7 @@
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>admin/franchiseeList');">
-                                        &nbsp;Franchisee List 
+                                        &nbsp;List Franchisee
                                     </button>
                                 </div>
                             </div>
@@ -194,6 +194,7 @@
                                     </div>
                                     </div>
                             </form>
+                        
                     </div>
                 </div>
             </div> 

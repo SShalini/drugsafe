@@ -19,7 +19,7 @@
                         </div>
                         
                         <div class="portlet-body">
-                            <form class="form-horizontal" id="clientData" action="<?php echo__BASE_URL__?>/franchisee/addClient" name="clientData" method="post">
+                            <form class="form-horizontal" id="clientData" action="<?php echo __BASE_URL__?>/franchisee/addClient" name="clientData" method="post">
                                 <div class="form-body">
                                     <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Name</label>
@@ -217,9 +217,6 @@
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-
-<!--                                            <input type="submit" class="btn green btn-success" value="Save" name="clientData[submit]">-->
-                                            <a href="<?=__BASE_URL__?>/franchisee/clientList" class="btn default uppercase" type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="Save" name="clientData[submit]">
 
                                         </div>

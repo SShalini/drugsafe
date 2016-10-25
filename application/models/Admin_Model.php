@@ -112,6 +112,7 @@ class Admin_Model extends Error_Model {
       
         public function adminLoginUser($validate)
 	{
+        print_r($validate);
   
             $whereAry = array( 'szEmail' => $validate['szEmail'], 'szPassword' => encrypt($validate['szPassword']));
             $this->db->select('id,szName,szEmail,szPassword,iRole');
