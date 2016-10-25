@@ -7,7 +7,6 @@
             <div class="caption">
                 <i class="icon-equalizer font-red-sunglo"></i>
                 <span class="caption-subject font-red-sunglo bold uppercase">
-                 
                     <?php 
                     if($clientDetailsAray['clientType']=='0')
                     {
@@ -18,18 +17,8 @@
                        echo "Details";
                     }
                    ?>
-                    &nbsp; &nbsp;
-                  <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>',<?php echo $clientDetailsAray['franchiseeId'];?>);" href="javascript:void(0);">
-                    <i class="fa fa-pencil"></i> 
-                  </a>  
+                    
                 </span>
-            </div>
-            <div class="actions">
-                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>franchisee/clientList');">
-                        &nbsp;Client List
-                    </button>
-                </div>
             </div>
         </div>
         <div class="portlet-body alert">
@@ -133,7 +122,6 @@
 				<th> Name </th>
                                 <th> Email </th>
                                 <th>Contact No</th>
-                                <th> Actions </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -148,18 +136,6 @@
                                             <td> <?php echo $childClientDetailsData['szName']?> </td>
                                             <td> <?php echo $childClientDetailsData['szEmail'];?> </td>
                                              <td> <?php echo $childClientDetailsData['szContactNumber'];?> </td>
-                                               <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>);" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
-                                                </a>
-
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-
-                                                </a>
-                                                
-                                               
-                                            </td>
                                             
                                         </tr>
                                         <?php 
@@ -190,4 +166,4 @@
 </div>
 </div>
 </div>
-<div id="popup_box"></div>
+<div id="popup"></div>

@@ -30,15 +30,15 @@ class Admin_Model extends Error_Model {
         {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
-//            if(strpos($value, "+") === false)
-//            {
-//                    if(strlen($value) == 10)
-//                            $value = "+1" . $value;
-//                    else
-//                            $value = "+" . $value;
-//            }
+            if(strpos($value, "+") === false)
+            {
+                    if(strlen($value) == 10)
+                            $value = "+1" . $value;
+                    else
+                            $value = "+" . $value;
+            }
         }
-            $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Contact Number", false, 10, $flag);
+            $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_MOBILE_PHONE__, "szContactNumber", "Contact Number", false, false, $flag);
         }
         function set_szCountry($value,$flag=true)
         {
@@ -142,8 +142,7 @@ class Admin_Model extends Error_Model {
      
 
     public function checkUserExists($szEmail=false,$id=0)
-    {
-        //die($id);
+    { 
         $szEmail = trim($szEmail);
 
         $user_session = $this->session->userdata('drugsafe_user');
@@ -170,7 +169,7 @@ class Admin_Model extends Error_Model {
         }
         else 
         {
-            return false;
+        
         }
     }
     public function checkCurrentPasswordExists()
@@ -249,7 +248,7 @@ class Admin_Model extends Error_Model {
             }
    		return false;
    	}
-        function validateFranchiseeData($data, $arExclude=array(),$idfranchisee=0)
+        function validateFranchiseeData($data, $arExclude=array())
         {
             if(!empty($data))
             {
@@ -257,19 +256,11 @@ class Admin_Model extends Error_Model {
                 if(!in_array('szEmail',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),true);
                 if(!in_array('szContactNumber',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),true);
                 if(!in_array('szCountry',$arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])),true);
-                if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),false);
+                if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),true);
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
-                if ($this->error == false && $this->data['szEmail'] != '') {
-                    $adminData = $this->session->userdata('drugsafe_user');
-
-                    $this->data['id'] = $idfranchisee;
-                    if ($this->checkUserExists($this->data['szEmail'], $this->data['id'])) {
-                        $this->addError('szEmail',"Someone already registered with entered email address.");
-                        return false;
-                    }
-                }
+                
             if($this->error == true)
                         return false;
                 else
@@ -390,8 +381,9 @@ class Admin_Model extends Error_Model {
                     $replace_ary['szEmail']=$szEmail;
                     $replace_ary['id']=$id;
                     $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
-                    $confirmationLink=__BASE_URL__."/admin/passwordRecovery/".$szNewPassword;
-                    $replace_ary['szLink']="<a href='".$confirmationLink."'>CLICK HERE TO CHANGE PASSWORD.</a>";
+
+                     $confirmationLink="Password=".$szNewPassword;
+                    $replace_ary['szLink']=$confirmationLink;
                     $replace_ary['szHttpsLink']=$confirmationLink;
                     createEmail($this,'__USER_FORGOT_PASSWORD__', $replace_ary,$szEmail, '', __CUSTOMER_SUPPORT_EMAIL__,$id_admin, __CUSTOMER_SUPPORT_EMAIL__);
 
@@ -526,7 +518,7 @@ class Admin_Model extends Error_Model {
                     return false;
                 }	
 	}
-         function validateClientData($data, $arExclude=array(),$idClient=0)
+         function validateClientData($data, $arExclude=array())
         {
             if(!empty($data))
             {
@@ -534,19 +526,12 @@ class Admin_Model extends Error_Model {
                 if(!in_array('szEmail',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),true);
                 if(!in_array('szContactNumber',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),true);
                 if(!in_array('szCountry',$arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])),true);
-                if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),false);
+                if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),true);
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
                 if(!in_array('szClientType',$arExclude)) $this->set_szClientType(sanitize_all_html_input(trim($data['szClientType'])),true);
-                if ($this->error == false && $this->data['szEmail'] != '') {
-                    $adminData = $this->session->userdata('drugsafe_user');
-                    $this->data['id'] = $idClient;
-                    if ($this->checkUserExists($this->data['szEmail'], $this->data['id'])) {
-                        $this->addError('szEmail',"Someone already registered with entered email address.");
-                        return false;
-                    }
-                }
+                
             if($this->error == true)
                         return false;
                 else

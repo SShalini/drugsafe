@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                     
                     <div class="pull-right forget-password-block">
-                         <a href="<?php echo __BASE_URL__;?>/admin/admin_forgotPassword" id="forget-password" class="forget-password" >Forgot Password?</a>
+                         <a href="<?php echo __BASE_URL__;?>/admin/admin_forgetPassword" id="forget-password" class="forget-password" >Forgot Password?</a>
                     </div>
                 </div>
                 

@@ -69,7 +69,7 @@ class Admin_Controller extends CI_Controller {
         }
         
         public function dashboard() {
-
+//            echo"hiiii";die;
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -78,7 +78,7 @@ class Admin_Controller extends CI_Controller {
                 die;
             }
         $user_session = $this->session->userdata('drugsafe_user');
-
+//print_r($user_session);die;
 
             $data['szMetaTagTitle'] = "Dashboard";
             $data['is_user_login'] = $is_user_login;
@@ -249,7 +249,6 @@ class Admin_Controller extends CI_Controller {
         {
             $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
-            //die($idfranchisee);
             if($idfranchisee >0)
             {
                 
@@ -269,7 +268,7 @@ class Admin_Controller extends CI_Controller {
                     if($this->Admin_Model->updateFranchiseeDetails($idfranchisee))
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Franchisee Info! </strong> Franchisee data successfully updated.";
+                        $szMessage['content'] = "<strong>Profile Update! </strong> User profile suucessfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         
                         ob_end_clean();
@@ -289,7 +288,7 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('layout/admin_footer');
             }
         }
-        public function admin_forgotPassword()
+        public function admin_forgetPassword()
         {
             $email=$this->input->post('drugSafeForgotPassword[szEmail]');
              
@@ -300,12 +299,12 @@ class Admin_Controller extends CI_Controller {
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 $this->session->userdata('drugsafe_user_message');
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_forgotPassword");
+                header("Location:" . __BASE_URL__ . "/admin/admin_forgetPassword");
                   die;
             }
             $data['szMetaTagTitle'] = "Admin Forgot Password";
             $this->load->view('layout/login_header', $data);
-            $this->load->view('admin/forgotPassword');
+            $this->load->view('admin/forgetPassword');
             $this->load->view('layout/login_footer');
         }
          public function deleteFranchiseeAlert()

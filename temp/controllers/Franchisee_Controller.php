@@ -174,7 +174,7 @@ class Franchisee_Controller extends CI_Controller {
         }
         public function deleteClientConfirmation()
         {
-       
+           
             $data['mode'] = '__DELETE_CLIENT_CONFIRM__';
             $data['idClient'] = $this->input->post('idClient');
             $this->Franchisee_Model->deleteClient($data['idClient']);
@@ -184,7 +184,7 @@ class Franchisee_Controller extends CI_Controller {
         {
             $franchiseeId = $this->input->post('franchiseeId');
             $clientType = $this->input->post('clientType');
-            if($clientType=='1')
+            if($clientType=='2')
             {
                 $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($franchiseeId));
             if(!empty($parentClient))
@@ -278,26 +278,28 @@ class Franchisee_Controller extends CI_Controller {
             {
 
                 $data_validate = $this->input->post('clientData');
-
-                if ($userDataAry['clientType'] !== '0') {
-                    $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
-                }
+              
+            
                 if(empty($data_validate))
                 {
                    
                     $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('',$idClient);
+                    if($userDataAry['clientType']!=='0')
+                    {
+                        $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
+                    }
                 }
                 else
                 {
                     $userDataAry = $data_validate;
                 }
                 
-                if($this->Admin_Model->validateClientData($data_validate,array(), $idClient))
+                if($this->Franchisee_Model->validateFranchiseeData($data_validate,array(), $idClient))
                 {
                     if($this->Franchisee_Model->updateClientDetails($idClient,$data_validate))
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
+                        $szMessage['content'] = "<strong>Profile Update! </strong> User profile suucessfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         
                         ob_end_clean();
@@ -311,11 +313,9 @@ class Franchisee_Controller extends CI_Controller {
                     $data['countryAry'] = $countryAry;
                     $data['validate'] = $validate;
                     $_POST['clientData'] = $userDataAry;
-
                     $data['idfranchisee'] = $idfranchisee;
                     $data['parentClient'] = $parentClient;
-                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
-
+                    $data['arErrorMessages'] = $this->Franchisee_Model->arErrorMessages;
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/editClient');
