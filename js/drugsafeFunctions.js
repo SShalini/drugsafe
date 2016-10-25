@@ -186,7 +186,7 @@ function addClientData(idfranchisee,idclient) {
     });
 }
 function clientDelete(idClient) {
-
+alert(flag);
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/franchisee/deleteClientAlert", {idClient: idClient}, function (result) {
         var result_ary = result.split("||||");

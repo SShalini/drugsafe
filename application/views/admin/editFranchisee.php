@@ -12,7 +12,7 @@
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>admin/franchiseeList');">
-                                        &nbsp;List Franchisee
+                                        &nbsp;Franchisee List 
                                     </button>
                                 </div>
                             </div>
@@ -187,6 +187,7 @@
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
+                                            <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="Save" name="addFranchisee[submit]">
                                         </div>
                                     </div>

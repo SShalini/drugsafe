@@ -219,7 +219,7 @@
                                         <div class="col-md-offset-3 col-md-4">
 
 <!--                                            <input type="submit" class="btn green btn-success" value="Save" name="clientData[submit]">-->
-
+                                            <a href="<?=__BASE_URL__?>/franchisee/clientList" class="btn default uppercase" type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="Save" name="clientData[submit]">
 
                                         </div>
