@@ -1,5 +1,22 @@
 <div class="page-content-wrapper">
         <div class="page-content">
+             <?php
+            if(!empty($_SESSION['drugsafe_user_message'])){
+                if(trim($_SESSION['drugsafe_user_message']['type']) == "success"){
+                    ?>
+                    <div class="alert alert-success">
+                        <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                    </div>
+                <?php }
+                if(trim($_SESSION['drugsafe_user_message']['type']) == "error") {
+                    ?>
+                    <div class="alert alert-danger">
+                        <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                    </div>
+                <?php }
+                $this->session->unset_userdata('drugsafe_user_message');
+            }
+            ?>
             <div id="page_content" class="row">
                 <div class="col-md-12">
      <div class="portlet light bordered about-text" id="user_info">
@@ -19,7 +36,7 @@
                     }
                    ?>
                     &nbsp; &nbsp;
-                  <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>',<?php echo $clientDetailsAray['franchiseeId'];?>);" href="javascript:void(0);">
+                  <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','1');" href="javascript:void(0);">
                     <i class="fa fa-pencil"></i> 
                   </a>  
                 </span>
@@ -100,6 +117,7 @@
                   
                      
                 </div>
+              
              </div>
             
         </div>
@@ -149,11 +167,14 @@
                                             <td> <?php echo $childClientDetailsData['szEmail'];?> </td>
                                              <td> <?php echo $childClientDetailsData['szContactNumber'];?> </td>
                                                <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>);" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
 
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete(<?php echo $childClientDetailsData['id'];?>,'1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>

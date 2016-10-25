@@ -168,8 +168,11 @@ class Franchisee_Controller extends CI_Controller {
         }
         public function deleteClientAlert()
         {
+            $data['flag'] = $this->input->post('flag');
             $data['mode'] = '__DELETE_CLIENT_POPUP__';
             $data['idClient'] = $this->input->post('idClient');
+            
+            echo $data['flag'];die;
             $this->load->view('admin/admin_ajax_functions',$data);
         }
         public function deleteClientConfirmation()
@@ -177,6 +180,7 @@ class Franchisee_Controller extends CI_Controller {
        
             $data['mode'] = '__DELETE_CLIENT_CONFIRM__';
             $data['idClient'] = $this->input->post('idClient');
+            $data['flag'] = $this->input->post('flag');
             $this->Franchisee_Model->deleteClient($data['idClient']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
@@ -253,14 +257,15 @@ class Franchisee_Controller extends CI_Controller {
         }
         function editClientData()
         {
-          
             $idClient = $this->input->post('idClient');
             $idfranchisee = $this->input->post('idfranchisee');
-    
+            $flag = $this->input->post('flag');
+  
             if($idClient>0)
             {
                 $this->session->set_userdata('idClient',$idClient);
                 $this->session->set_userdata('idfranchisee',$idfranchisee);
+                $this->session->set_userdata('flag',$flag);
                 echo "SUCCESS||||";
                 echo "editClient";
             }
@@ -269,11 +274,12 @@ class Franchisee_Controller extends CI_Controller {
         
         public function editClient()
         {
-       
+    
             $countryAry = $this->Admin_Model->getCountries();
             $idClient = $this->session->userdata('idClient');
             $idfranchisee = $this->session->userdata('idfranchisee');
-            
+            $flag=   $this->session->userdata('flag');
+          
             if($idClient >0)
             {
 
@@ -296,13 +302,24 @@ class Franchisee_Controller extends CI_Controller {
                 {
                     if($this->Franchisee_Model->updateClientDetails($idClient,$data_validate))
                     {
+                        $flag=   $this->session->userdata('flag');
+                        
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         
+                        if($flag == 1){
+                            
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/franchisee/clientList");
+                        header("Location:" . __BASE_URL__ . "/franchisee/viewClientDetails");
+                        
                         die;
+                        }
+                        else{
+                            ob_end_clean();
+                            header("Location:" . __BASE_URL__ . "/franchisee/clientList");
+                            die;  
+                        }
                     }
                 }
                     $data['szMetaTagTitle'] = "Edit Client Details ";
@@ -322,6 +339,7 @@ class Franchisee_Controller extends CI_Controller {
             $this->load->view('layout/admin_footer');
             
         }
-}      
+} 
+
 }      
 ?>
