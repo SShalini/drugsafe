@@ -149,7 +149,7 @@ class Admin_Controller extends CI_Controller {
                 if($this->Admin_Model->insertFranchiseeDetails())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>New user ! </strong> New user successfully added.";
+                    $szMessage['content'] = "<strong>New Franchisee ! </strong> New franchisee added successfully.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/admin/franchiseeList");

@@ -175,17 +175,20 @@ function viewClient(idfranchisee) {
     });
 }
 
-function addClientData(idfranchisee) {
-    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee}, function (result) {
+function addClientData(idfranchisee,idclient) {
+    if(idclient == undefined || idclient == null){
+        idclient = 0;
+    }
+    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 
     });
 }
-function clientDelete(idClient,flag) {
+function clientDelete(idClient) {
 
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/franchisee/deleteClientAlert", {idClient: idClient},{flag: flag}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/deleteClientAlert", {idClient: idClient}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -196,13 +199,13 @@ function clientDelete(idClient,flag) {
 
     });
 }
-function deleteClientConfirmation(idClient,flag) {
+function deleteClientConfirmation(idClient) {
 
     $('.modal-backdrop').remove();
     $('#static').modal("hide");
     $('#clientStatus').modal("hide");
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/franchisee/deleteClientConfirmation", {idClient: idClient},{flag: flag}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/deleteClientConfirmation", {idClient: idClient}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -248,6 +251,7 @@ function viewClientDetails(idClient) {
 
     });
 }
+
 function editClient(idClient, idfranchisee,flag) {
 
     $.post(__BASE_URL__ + "/franchisee/editClientData", {

@@ -220,7 +220,8 @@ class Admin_Model extends Error_Model {
      function getCountries()
    	{
    		$this->db->select('name');
-                $this->db->from(__DBC_SCHEMATA_COUNTRY__);
+                $this->db->from(__DBC_SCHEMATA_COUNTRY__)
+                ->where('id','13');
                 $query = $this->db->get();
 		if($query->num_rows() > 0)
                 {
@@ -331,7 +332,7 @@ class Admin_Model extends Error_Model {
 
             $this->db->select('*');
             $this->db->where($whereAry);
-            $this->db->order_by($sortBy,$orderBy);
+            $this->db->order_by($p_sortby,$p_sortorder);
             $query = $this->db->get(__DBC_SCHEMATA_USERS__);
 
             if($query->num_rows() > 0)
@@ -343,10 +344,15 @@ class Admin_Model extends Error_Model {
                     return array();
             }
         }
-          public function getAdminDetailsByEmailOrId($szEmail)
+          public function getAdminDetailsByEmailOrId($szEmail='',$id='')
     {
        // print_r($szEmail);
-        $whereAry= array('szEmail' =>$szEmail);
+        if($szEmail != ''){
+            $whereAry= array('szEmail' =>$szEmail);
+        }elseif($id != ''){
+            $whereAry= array('id' =>$id);
+        }
+
        //print_r($this->db->last_query($whereAry));
          $this->db->select('*')
          ->where($whereAry);
@@ -538,7 +544,6 @@ class Admin_Model extends Error_Model {
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
-                if(!in_array('szClientType',$arExclude)) $this->set_szClientType(sanitize_all_html_input(trim($data['szClientType'])),true);
                 if ($this->error == false && $this->data['szEmail'] != '') {
                     $adminData = $this->session->userdata('drugsafe_user');
                     $this->data['id'] = $idClient;

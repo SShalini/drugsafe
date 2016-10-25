@@ -26,14 +26,14 @@
                 <span class="caption-subject font-red-sunglo bold uppercase">
                  
                     <?php 
-                    if($clientDetailsAray['clientType']=='0')
+                    /*if($clientDetailsAray['clientType']=='0')
                     {
-                        echo "Headquarters";
+                        echo $clientDetailsAray['szName']."'s Headquarters";
                     }
                     else
-                    {
-                       echo "Details";
-                    }
+                    {*/
+                       echo $clientDetailsAray['szName']."'s Details";
+//                    }
                    ?>
                     &nbsp; &nbsp;
                   <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','1');" href="javascript:void(0);">
@@ -54,68 +54,86 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>Address</lable>
+                            <lable>Name:</lable>
                         </div>
                         <div class="col-sm-8">
-                          <p><?php echo $clientDetailsAray['szAddress'];?></p>
+                            <p><?php echo $clientDetailsAray['szName'];?></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>ZIP/Postal Code</lable>
+                            <lable>Address:</lable>
                         </div>
                         <div class="col-sm-8">
-                         <p><?php echo $clientDetailsAray['szZipCode'];?></p>
+                            <p><?php echo $clientDetailsAray['szAddress'];?></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>City</lable>
+                            <lable>State:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szState'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ZIP/Postal Code:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szZipCode'];?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Email Id:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szEmail'];?></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>City:</lable>
                         </div>
                         <div class="col-sm-8">
                            <p><?php echo $clientDetailsAray['szCity'];?></p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>State</lable>
-                        </div>
-                        <div class="col-sm-8">
-                          <p><?php echo $clientDetailsAray['szState'];?></p>
-                        </div>
-                    </div>
                     
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>Country</lable>
+                            <lable>Country:</lable>
                         </div>
                         <div class="col-sm-8">
                           <p><?php echo $clientDetailsAray['szCountry'];?></p>
                         </div>
                     </div>
-                    <?php 
+
+                    <?php
                     if($clientDetailsAray['clientType']=='0')
                     {
                         ?>
-                           <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Total No of Child</lable>
+                        <div class="row">
+                            <div class="col-sm-4 text-info bold">
+                                <lable>Total No of Child:</lable>
+                            </div>
+                            <div class="col-sm-8">
+                                <p><?php
+                                    if($childClientDetailsAray)
+                                    {
+                                        echo count($childClientDetailsAray);
+                                    }
+                                    ?>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                          <p><?php 
-                          if($childClientDetailsAray)
-                          {
-                               echo count($childClientDetailsAray); 
-                          }
-                         ?>
-                        </div>
-                    </div>
                         <?php
                     }
-                    
-                   ?>
-                  
-                     
+
+                    ?>
                 </div>
               
              </div>
@@ -131,7 +149,7 @@
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Child Client</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $clientDetailsAray['szName'];?>'s Child Client(s)</span>
             </div>
            
             
@@ -174,7 +192,7 @@
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
 
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete(<?php echo $childClientDetailsData['id'];?>,'1');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>

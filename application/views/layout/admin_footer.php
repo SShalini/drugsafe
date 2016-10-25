@@ -2,7 +2,7 @@
 <!--END PAGE CONTAINER-->
 <!-- BEGIN COPYRIGHT -->
         <div class="page-footer">
-            <div class="page-footer-inner"> <?php echo date('Y');?> &copy; Drug Safe. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a> | <a href="#">Site Map</a>
+            <div class="page-footer-inner"> <?php echo date('Y');?> &copy; Drug Safe. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>

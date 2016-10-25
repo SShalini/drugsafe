@@ -58,11 +58,11 @@ class Franchisee_Controller extends CI_Controller {
         {
            
             $idfranchisee = $this->input->post('idfranchisee');
-            {
-                $this->session->set_userdata('idfranchisee',$idfranchisee);
-                echo "SUCCESS||||";
-                echo "addClient";
-            }
+            $idclient = $this->input->post('idclient');
+            $this->session->set_userdata('idfranchisee',$idfranchisee);
+            $this->session->set_userdata('idclient',$idclient);
+            echo "SUCCESS||||";
+            echo "addClient";
             
         }
         
@@ -72,11 +72,14 @@ class Franchisee_Controller extends CI_Controller {
             
             $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
-            
+            $idclient = $this->session->userdata('idclient');
             if($this->Admin_Model->validateClientData($validate))
             {
                 if($this->Franchisee_Model->insertClientDetails($validate,$idfranchisee))
                 {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
                    ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/franchisee/clientList");
                     die;
@@ -89,6 +92,7 @@ class Franchisee_Controller extends CI_Controller {
                     $data['countryAry'] = $countryAry;
                     $data['validate'] = $validate;
                     $data['idfranchisee'] = $idfranchisee;
+                    $data['szParentId'] = $idclient;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     
             
@@ -155,7 +159,8 @@ class Franchisee_Controller extends CI_Controller {
             }
             $idfranchisee = $this->session->userdata('idfranchisee');
             $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee);
-            
+            $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
+            $data['franchiseeDataArr'] = $franchiseeDataArr;
             $data['idfranchisee'] = $idfranchisee;
             $data['clientAry'] = $clientAray;
             $data['szMetaTagTitle'] = "Client List";
@@ -168,11 +173,9 @@ class Franchisee_Controller extends CI_Controller {
         }
         public function deleteClientAlert()
         {
-            $data['flag'] = $this->input->post('flag');
             $data['mode'] = '__DELETE_CLIENT_POPUP__';
             $data['idClient'] = $this->input->post('idClient');
-            
-            echo $data['flag'];die;
+
             $this->load->view('admin/admin_ajax_functions',$data);
         }
         public function deleteClientConfirmation()
@@ -180,7 +183,6 @@ class Franchisee_Controller extends CI_Controller {
        
             $data['mode'] = '__DELETE_CLIENT_CONFIRM__';
             $data['idClient'] = $this->input->post('idClient');
-            $data['flag'] = $this->input->post('flag');
             $this->Franchisee_Model->deleteClient($data['idClient']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }

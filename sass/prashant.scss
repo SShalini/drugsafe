@@ -24,6 +24,16 @@ body {
   }
 
 }
+.page-sidebar-closed-hide-logo{
+  .page-logo a{
+    display: inherit;
+  }
+}
+.page-sidebar-closed-hide-logo.page-sidebar-closed{
+  .page-logo a{
+    display: none;
+  }
+}
 @media (max-width:767px) {
   .login{
     .pull-right{

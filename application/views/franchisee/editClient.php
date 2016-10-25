@@ -75,32 +75,32 @@
                                         </div>
                                         
                                     </div>
-                                     <div id="clientType" class="form-group <?php if(!empty($arErrorMessages['clientType'])){?>has-error<?php }?>">
+                                     <!--<div id="clientType" class="form-group <?php /*if(!empty($arErrorMessages['clientType'])){*/?>has-error<?php /*}*/?>">
                                         <label class="col-md-3 control-label">Client Type</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control" name="clientData[clientType]" id="clientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);">
+                                                <select class="form-control" name="clientData[clientType]" id="clientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php /*echo $idfranchisee;*/?>,this.value);">
                                                     <option value=''>Client Type</option>
-                                                    <option value='0' <?php echo (sanitize_post_field_value($_POST['clientData']['clientType']) == '0' ? "selected" : "");?>>Parent</option>
-                                                    <option value='1' <?php echo (sanitize_post_field_value($_POST['clientData']['clientType']) > '0' ? "selected" : "");?>>Child</option>
+                                                    <option value='0' <?php /*echo (sanitize_post_field_value($_POST['clientData']['clientType']) == '0' ? "selected" : "");*/?>>Parent</option>
+                                                    <option value='1' <?php /*echo (sanitize_post_field_value($_POST['clientData']['clientType']) > '0' ? "selected" : "");*/?>>Child</option>
                                                 </select>
                                             </div>
-                                            <?php if(!empty($arErrorMessages['clientType'])){?>
+                                            <?php /*if(!empty($arErrorMessages['clientType'])){*/?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['clientType'];?>
+                                                <?php /*echo $arErrorMessages['clientType'];*/?>
                                             </span>
-                                        <?php }?>
+                                        <?php /*}*/?>
                                         </div>
                                     </div>
                                     <?php
-                                    if($_POST['clientData']['clientType']>0)
+/*                                    if($_POST['clientData']['clientType']>0)
                                     {
-                                        ?>
-                                        <div id="parenitIdedit" class="form-group <?php if(!empty($arErrorMessages['szParentId'])){?>has-error<?php }?>">
+                                        */?>
+                                        <div id="parenitIdedit" class="form-group <?php /*if(!empty($arErrorMessages['szParentId'])){*/?>has-error<?php /*}*/?>">
                                         <label class="col-md-3 control-label">Parent Client</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
@@ -110,32 +110,37 @@
                                                 <select class="form-control required" name="clientData[szParentId]" id="szParentId" onfocus="remove_formError(this.id,'true')">
                                                    
                                                     <?php
-                                                        if(!empty($parentClient))
+/*                                                        if(!empty($parentClient))
                                                         {
                                                             foreach($parentClient as $parentClientData)
                                                             {
-                                                                ?>
-                                                                    <option value="<?=trim($parentClientData['id'])?>" <?=(sanitize_post_field_value($_POST['clientData']['clientType']) == trim($parentClientData['id']) ? "selected" : "")?>><?=trim($parentClientData['szName'])?></option>
+                                                                */?>
+                                                                    <option value="<?/*=trim($parentClientData['id'])*/?>" <?/*=(sanitize_post_field_value($_POST['clientData']['clientType']) == trim($parentClientData['id']) ? "selected" : "")*/?>><?/*=trim($parentClientData['szName'])*/?></option>
                                                                 <?php
-                                                            }
+/*                                                            }
                                                         }
-                                                    ?>
+                                                    */?>
                                                 </select>
                                             </div>
-                                            <?php if(!empty($arErrorMessages['szParentId'])){?>
+                                            <?php /*if(!empty($arErrorMessages['szParentId'])){*/?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szParentId'];?>
+                                                <?php /*echo $arErrorMessages['szParentId'];*/?>
                                             </span>
-                                        <?php }?>
+                                        <?php /*}*/?>
                                         </div>
                                         
                                     </div>
-                                         <?php
-                                        
+                                         --><?php
+/*
                                     }
                                     
-                                    ?>
+                                    */?>
+                                    <?php if($_POST['clientData']['clientType'] > 0){?>
+                                        <input id="szParentId" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['clientType'];?>" name="clientData[szParentId]">
+                                    <?php }else{ ?>
+                                        <input id="szParentId" class="form-control" type="hidden" value="0" name="clientData[szParentId]">
+                                    <?php } ?>
                                     <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Address</label>
                                         <div class="col-md-5">
