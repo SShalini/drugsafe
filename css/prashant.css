@@ -17,3 +17,10 @@ body .forgotpassword .btn-cancel {
 body .logo img {
   height: 100px;
 }
+
+@media (max-width: 767px) {
+  .login .pull-right {
+    float: none;
+    clear: both;
+  }
+}

@@ -86,8 +86,8 @@
                                                 </span>
                                                 <select class="form-control" name="clientData[szClientType]" id="szClientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php echo $idfranchisee;?>,this.value);" required />
                                                     <option value=''>Client Type</option>
-                                                    <option value='1' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '1' ? "selected" : "")?>>Parent</option>
-                                                    <option value='2' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '2' ? "selected" : "")?>>Child</option>
+                                                    <option value='0' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '1' ? "selected" : "")?>>Parent</option>
+                                                    <option value='1' <?=(sanitize_post_field_value($_POST['clientData']['szClientType']) == '2' ? "selected" : "")?>>Child</option>
                                                 </select>
                                             </div>
                                             <?php if(!empty($arErrorMessages['szClientType'])){?>
