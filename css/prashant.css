@@ -4,6 +4,10 @@ body .alert-info, body .alert-success {
   color: #1bbc9b;
 }
 
+body .breadcrumb {
+  color: #8E8F93;
+}
+
 body .forgotpassword .form-title, body .forgotpassword .form-subtitle {
   color: #333333;
 }

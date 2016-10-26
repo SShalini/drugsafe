@@ -19,6 +19,32 @@
             ?>
             <div id="page_content" class="row">
                 <div class="col-md-12">
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+
+                        <?php if($clientDetailsAray['clientType'] > '0'){?>
+                            <li>
+                                <a onclick="viewClientDetails(<?php echo $ParentOfChild['id'];?>);" href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                        <?php } ?>
+                        <li>
+                            <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
+                        </li>
+                        <?php if($clientDetailsAray['clientType'] == '0'){?>
+                            <li>
+                                <i class="fa fa-circle"></i>
+                                <span class="active">Sites</span>
+                            </li>
+                        <?php } ?>
+                    </ul>
      <div class="portlet light bordered about-text" id="user_info">
         <div class="portlet-title">
             <div class="caption">
@@ -41,14 +67,15 @@
                   </a>  
                 </span>
             </div>
-            <div class="actions">
+            <!--<div class="actions">
                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>franchisee/clientList');">
+                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php /*echo base_url();*/?>franchisee/clientList');">
                         &nbsp;Client List
                     </button>
                 </div>
-            </div>
+            </div>-->
         </div>
+
         <div class="portlet-body alert">
             <div class="row">
                 <div class="col-md-6">
@@ -62,57 +89,29 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>Address:</lable>
+                            <lable>Contact No:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $clientDetailsAray['szAddress'];?></p>
+                            <p><?php echo $clientDetailsAray['szContactNumber'];?></p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>State:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $clientDetailsAray['szState'];?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>ZIP/Postal Code:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $clientDetailsAray['szZipCode'];?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Email Id:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $clientDetailsAray['szEmail'];?></p>
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>City:</lable>
                         </div>
                         <div class="col-sm-8">
-                           <p><?php echo $clientDetailsAray['szCity'];?></p>
+                            <p><?php echo $clientDetailsAray['szCity'];?></p>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Country:</lable>
                         </div>
                         <div class="col-sm-8">
-                          <p><?php echo $clientDetailsAray['szCountry'];?></p>
+                            <p><?php echo $clientDetailsAray['szCountry'];?></p>
                         </div>
                     </div>
-
                     <?php
                     if($clientDetailsAray['clientType']=='0')
                     {
@@ -135,6 +134,42 @@
 
                     ?>
                 </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Email Id:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szEmail'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Address:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szAddress'];?></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>State:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szState'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ZIP/Postal Code:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szZipCode'];?></p>
+                        </div>
+                    </div>
+
+                </div>
               
              </div>
             
@@ -149,9 +184,15 @@
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-equalizer font-red-sunglo"></i>
-                    <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $clientDetailsAray['szName'];?>'s Child Client(s)</span>
+                    <span class="caption-subject font-red-sunglo bold uppercase">SITES</span>
             </div>
-           
+            <div class="actions">
+                <div class="btn-group btn-group-devided" data-toggle="buttons">
+                    <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>);">
+                        &nbsp;Add Site
+                    </button>
+                </div>
+            </div>
             
         </div>
         <div class="portlet-body">

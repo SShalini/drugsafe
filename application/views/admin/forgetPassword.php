@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </a>
         </div>
          <!-- BEGIN FORGOT PASSWORD FORM -->
-             <form class="login-form" id="forgotPassword" name="forgotPassword" method="post" autocomplete="off" action="<?php echo __BASE_URL__;?>/admin/admin_forgotPassword">
+             <form class="login-form" id="forgetPassword" name="forgetPassword" method="post" autocomplete="off" action="<?php echo __BASE_URL__;?>/admin/admin_forgetPassword">
                  
 <!--                 <h3 class="form-title font-green">Password Recovery</h3>-->
            <?php 
@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             ?>
                  
                 <div class="form-title">
-                    <span class="form-title">Forgot Password ?</span>
+                    <span class="form-title">Forget Password ?</span>
                     <span class="form-subtitle">Enter your e-mail to reset it.</span>
                 </div>
                 <div class="form-group">

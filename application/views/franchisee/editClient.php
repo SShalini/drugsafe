@@ -3,19 +3,43 @@
             <div id="page_content" class="row">
                 
                 <div class="col-md-12">
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <?php if(!empty($clientChildDetailsAray)){?>
+                            <li>
+                                <a onclick="viewClientDetails(<?php echo $clientChildDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientChildDetailsAray['szName'];?></a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                        <?php } ?>
+                        <li>
+                            <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span class="active">Edit Client</span>
+                        </li>
+
+                    </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Edit Client</span>
                             </div>
-                            <div class="actions">
+                            <!--<div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>franchisee/clientList');">
+                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php /*echo base_url();*/?>franchisee/clientList');">
                                         &nbsp;Client List
                                     </button>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                         <?php //print_r($_POST['clientData']); ?>
                         <div class="portlet-body">

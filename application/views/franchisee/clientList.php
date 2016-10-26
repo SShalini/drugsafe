@@ -19,6 +19,19 @@
         ?>
         <div id="page_content" class="row">
             <div class="col-md-12">
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="<?php echo __BASE_URL__;?>">Home</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <li>
+                        <a onclick="viewClient(<?php echo $franchiseeDataArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeDataArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <li>
+                        <span class="active">Client List</span>
+                    </li>
+                </ul>
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -35,6 +48,7 @@
                             </div>
                         </div>
                     </div>
+
                     <?php
 
                     if (!empty($clientAry)) {

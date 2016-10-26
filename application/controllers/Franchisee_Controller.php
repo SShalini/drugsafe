@@ -73,6 +73,14 @@ class Franchisee_Controller extends CI_Controller {
             $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
             $idclient = $this->session->userdata('idclient');
+            if(!empty($idclient)){
+                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idclient);
+                $data['clientDetailsAray'] = $franchiseeDetArr1;
+            }
+            if(!empty($idfranchisee)){
+                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
+                $data['franchiseeArr'] = $franchiseeDetArr;
+            }
             if($this->Admin_Model->validateClientData($validate))
             {
                 if($this->Franchisee_Model->insertClientDetails($validate,$idfranchisee))
@@ -158,7 +166,7 @@ class Franchisee_Controller extends CI_Controller {
                 die;
             }
             $idfranchisee = $this->session->userdata('idfranchisee');
-            $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee);
+            $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee,true);
             $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
             $data['franchiseeDataArr'] = $franchiseeDataArr;
             $data['idfranchisee'] = $idfranchisee;
@@ -244,8 +252,15 @@ class Franchisee_Controller extends CI_Controller {
             $idClient = $this->session->userdata('idClient');
             $clientDetailsAray =$this->Franchisee_Model->viewClientDetails($idClient);
             $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($idClient);
-            
-            
+            $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
+            if($clientDetailsAray['clientType']>0){
+                $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientDetailsAray['clientType']);
+                $data['ParentOfChild'] = $parentClientDetArr;
+            }
+            if(!empty($clientFranchiseeArr)){
+                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientFranchiseeArr[0]['franchiseeId']);
+                $data['franchiseeArr'] = $franchiseeDetArr;
+            }
             $data['idClient'] = $idClient;
             $data['clientDetailsAray'] = $clientDetailsAray;
             $data['childClientDetailsAray'] = $childClientDetailsAray;
@@ -280,7 +295,19 @@ class Franchisee_Controller extends CI_Controller {
             $countryAry = $this->Admin_Model->getCountries();
             $idClient = $this->session->userdata('idClient');
             $idfranchisee = $this->session->userdata('idfranchisee');
-            $flag=   $this->session->userdata('flag');
+            $clientDetailsAray =$this->Franchisee_Model->viewClientDetails($idClient);
+            if(!empty($clientDetailsAray['clientType'])){
+                $franchiseeDetArr2 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientDetailsAray['clientType']);
+                $data['clientChildDetailsAray'] = $franchiseeDetArr2;
+            }
+            if(!empty($idClient)){
+                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientDetailsAray['clientId']);
+                $data['clientDetailsAray'] = $franchiseeDetArr1;
+            }
+            if(!empty($idfranchisee)){
+                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientDetailsAray['franchiseeId']);
+                $data['franchiseeArr'] = $franchiseeDetArr;
+            }
           
             if($idClient >0)
             {

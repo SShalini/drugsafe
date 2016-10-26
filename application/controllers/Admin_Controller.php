@@ -149,7 +149,7 @@ class Admin_Controller extends CI_Controller {
                 if($this->Admin_Model->insertFranchiseeDetails())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>New user ! </strong> New user successfully added.";
+                    $szMessage['content'] = "<strong>New Franchisee ! </strong> New franchisee added successfully.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
@@ -291,139 +291,23 @@ class Admin_Controller extends CI_Controller {
         }
         public function admin_forgotPassword()
         {
-            $is_user_login = is_user_login($this);
-        
-            if($is_user_login)
-            {
-                ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/dashboard");
-                die;
-            }
+            $email=$this->input->post('drugSafeForgotPassword[szEmail]');
              
-            $data_validate=$this->input->post('drugSafeForgotPassword');
-//            $data_validate = array('szEmail'=>$data_validate);
-             $data_not_validate = array(
-                            'id',
-                            'szName',
-                            'szContactNumber',
-                            'szCountry',
-                            'szState',
-                            'szCity',
-                            'szZipCode',
-                             'szAddress'
-              );
-             //print_r($data_validate);
-            if($this->Admin_Model->validateFranchiseeData($data_validate,$data_not_validate,'0',true))
+            if($this->Admin_Model->sendNewPasswordToAdmin($email))
             {
-                //echo "hiiiii";
-                if($this->Admin_Model->checkAdminAccountStatus($data_validate['szEmail']))
-                {  
-                    //echo"hello";
-                    if($this->Admin_Model->sendNewPasswordToAdmin($data_validate['szEmail']))
-                    {
-                        ///echo "preeti";
-                        $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Password Recovery! </strong> Please check your email to recover your password.";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                        $this->session->userdata('drugsafe_user_message');
-                        ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/admin_login");
-                          die;
-                    }
-                }
+                $szMessage['type'] = "success";
+                $szMessage['content'] = "<strong>Password Recovery! </strong> Your new password successfully updated.";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                $this->session->userdata('drugsafe_user_message');
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_forgotPassword");
+                  die;
             }
             $data['szMetaTagTitle'] = "Admin Forgot Password";
-            $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
-            
-            $data['is_user_login'] = $is_user_login;
-            
             $this->load->view('layout/login_header', $data);
             $this->load->view('admin/forgotPassword');
             $this->load->view('layout/login_footer');
-            
         }
-        
-         public function adminPassword_Recover($arg1='', $arg2='')
-        {
-            $is_user_login = is_user_login($this);
-            
-            // redirect to dashboard if already logged in
-            if($is_user_login)
-            {
-                ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/dashboard");
-                die;
-            }
-            //echo " Hello";
-            $passwordKey = $this->Admin_Model->sql_real_escape_string(trim($arg1));
-          //  echo $passwordKey;
-            if($this->Admin_Model->checkPasswordRecoveryExist($passwordKey))
-            {
-                
-
-                //echo $passwordKey;
-                $data_validate = $this->input->post('recoverAdminData');
-               // echo $data_validate;
-                $data_not_validate = array(
-                            'id',
-                            'szName',
-                            'szEmail',
-                            'szContactNumber',
-                            'szCountry',
-                            'szState',
-                            'szCity',
-                            'szZipCode',
-                             'szAddress'
-                            
-                );
-                if($this->Admin_Model->validateFranchiseeData($data_validate, $data_not_validate,0,TRUE))
-                {
-                    
-                    if($this->Admin_Model->updateAdminPassword($passwordKey,$data_validate))
-                    {
-
-                        $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Password Recovery! </strong> Your new password successfully updated.";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
-
-                        ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/admin_login");
-                        die;
-                    }
-                    else
-                    {
-                       // echo "Hello";
-                        $szMessage['type'] = "error";
-                        $szMessage['content'] = "<strong>Password Recovery! </strong> Password recovery link is expired. Please reset your password again.";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
-
-                        ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/admin_login");
-                        die;
-                    }
-
-                }
-                
-            }
-            else
-            {
-                $szMessage['type'] = "error";
-                $szMessage['content'] = "<strong>Password Recovery! </strong> Your Password Key is wrong. Please reset your password again.";
-                $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
-                die;
-            }
-            $data['szMetaTagTitle'] = "Admin Forgot Password";
-            $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
-            $data['is_user_login'] = $is_user_login;
-            $data['passwordKey'] = $passwordKey;
-        $this->load->view('layout/login_header', $data);
-        $this->load->view('admin/adminPassword_Recover', $data);
-        $this->load->view('layout/login_footer');
-        }
-           
-        
          public function deleteFranchiseeAlert()
         {
             $data['mode'] = '__DELETE_FRANCHISEE_POPUP__';
