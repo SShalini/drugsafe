@@ -250,7 +250,7 @@ class Admin_Model extends Error_Model {
             }
    		return false;
    	}
-         function validateFranchiseeData($data, $arExclude=array(),$idfranchisee=0,$forgotpass=FALSE)
+        /*function validateFranchiseeData($data, $arExclude=array(),$idfranchisee=0)
         {
             if(!empty($data))
             {
@@ -263,32 +263,60 @@ class Admin_Model extends Error_Model {
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
                 if ($this->error == false && $this->data['szEmail'] != '') {
-                    
                     $adminData = $this->session->userdata('drugsafe_user');
 
                     $this->data['id'] = $idfranchisee;
-                    
                     if ($this->checkUserExists($this->data['szEmail'], $this->data['id'])) {
-                        if($forgotpass){
-                            return TRUE;
-                        }else{
                         $this->addError('szEmail',"Someone already registered with entered email address.");
                         return false;
-                        }
                     }
                 }
             if($this->error == true)
-            {
                         return false;
+                else
+                       return true;
+            }
+            return false;
+        }*/
+
+    function validateFranchiseeData($data, $arExclude=array(),$idfranchisee=0,$forgotpass=FALSE)
+    {
+        if(!empty($data))
+        {
+            if(!in_array('szName',$arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),true);
+            if(!in_array('szEmail',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),true);
+            if(!in_array('szContactNumber',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),true);
+            if(!in_array('szCountry',$arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])),true);
+            if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),false);
+            if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
+            if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
+            if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
+            if ($this->error == false && $this->data['szEmail'] != '') {
+
+                $adminData = $this->session->userdata('drugsafe_user');
+                $this->data['id'] = $idfranchisee;
+
+                if ($this->checkUserExists($this->data['szEmail'], $this->data['id'])) {
+                    if($forgotpass){
+                        return TRUE;
+                    }else{
+                        $this->addError('szEmail',"Someone already registered with entered email address.");
+                        return false;
+                    }
+                }
+            }
+            if($this->error == true)
+            {
+                return false;
             }
             else
             {
-                       return true;
+                return true;
             }
             return false;
         }
     }
-        
+
           function insertFranchiseeDetails()
         {
              
@@ -355,11 +383,16 @@ class Admin_Model extends Error_Model {
                     return array();
             }
         }
-    public function getAdminDetailsByEmailOrId($szEmail)
+          public function getAdminDetailsByEmailOrId($szEmail='',$id='')
     {
-     
-        $whereAry= array('szEmail' =>$szEmail);
-       
+       // print_r($szEmail);
+        if($szEmail != ''){
+            $whereAry= array('szEmail' =>$szEmail);
+        }elseif($id != ''){
+            $whereAry= array('id' =>$id);
+        }
+
+       //print_r($this->db->last_query($whereAry));
          $this->db->select('*')
          ->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
@@ -367,7 +400,7 @@ class Admin_Model extends Error_Model {
         if($query->num_rows() > 0)
         {
             $row = $query->result_array();
-
+//            print_R($row[0]);die;
             return $row[0];
         }
         else
@@ -375,78 +408,78 @@ class Admin_Model extends Error_Model {
             return array();
         }
     }
-    
-     public function checkPasswordRecoveryExist($passwordKey)
+
+    public function checkPasswordRecoveryExist($passwordKey)
     {
         $passwordKey = $this->sql_real_escape_string(trim($passwordKey));
-         $this->db->select('szRecoveryPassword');
+        $this->db->select('szRecoveryPassword');
         $this->db->where('szRecoveryPassword =',$passwordKey);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
         if($query->num_rows() > 0)
         {
             return true;
         }
-        else 
+        else
         {
             return false;
         }
- 
+
     }
-    
-    
-   public function sendNewPasswordToAdmin($szEmail)
+
+    public function sendNewPasswordToAdmin($szEmail)
+    {
+
+        $adminDetailsAry = $this->getAdminDetailsByEmailOrId($szEmail);
+        if(!empty($adminDetailsAry))
         {
-       
-            $adminDetailsAry = $this->getAdminDetailsByEmailOrId($szEmail);
-            if(!empty($adminDetailsAry))
+            $id = $adminDetailsAry['id'];
+
+            $szNewPassword = create_login_password();
+            $data = array(
+                'szRecoveryPassword' =>$szNewPassword
+            );
+            $whereAry = array('id' => $id);
+            $this->db->where($whereAry);
+            if($this->db->update(__DBC_SCHEMATA_USERS__, $data))
             {
-                $id = $adminDetailsAry['id'];
-             
-                $szNewPassword = create_login_password();
-
-                 $data = array(
-                        'szRecoveryPassword' =>$szNewPassword
-                 );
-               $whereAry = array('id' => $id);
-                $this->db->where($whereAry);
-
-                if($this->db->update(__DBC_SCHEMATA_USERS__, $data))
-                {
-
-                    $replace_ary=array();
-                    $replace_ary['szName']='Admin';
-                    $replace_ary['szEmail']=$szEmail;
-                    $replace_ary['id']=$id;
-                    $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
-                    $confirmationLink=__BASE_URL__."/admin/adminPassword_Recover/".$szNewPassword;
-                    $replace_ary['szLink']="<a href='".$confirmationLink."'>CLICK HERE TO CHANGE PASSWORD.</a>";
-                    $replace_ary['szHttpsLink']=$confirmationLink;
-                    createEmail($this,'__USER_FORGOT_PASSWORD__', $replace_ary,$szEmail, '', __CUSTOMER_SUPPORT_EMAIL__,$id_admin, __CUSTOMER_SUPPORT_EMAIL__);
-
-                    return true;
-                }
-            }
-            else
-            {
-                return false;
+                $replace_ary=array();
+                $replace_ary['szName']='Admin';
+                $replace_ary['szEmail']=$szEmail;
+                $replace_ary['id']=$id;
+                $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+                $confirmationLink=__BASE_URL__."/admin/adminPassword_Recover/".$szNewPassword;
+                $replace_ary['szLink']="<a href='".$confirmationLink."'>CLICK HERE TO CHANGE PASSWORD.</a>";
+                $replace_ary['szHttpsLink']=$confirmationLink;
+                createEmail($this,'__USER_FORGOT_PASSWORD__', $replace_ary,$szEmail, '', __CUSTOMER_SUPPORT_EMAIL__,$id_admin, __CUSTOMER_SUPPORT_EMAIL__);
+                return true;
             }
         }
-        
-         public function updateAdminPassword($passwordKey,$dataArr=array())
+        else
         {
-       
+            return false;
+        }
+    }
+
+    /**
+     * @param $passwordKey
+     * @param array $dataArr
+     * @return bool
+     */
+    public function updateAdminPassword($passwordKey, $dataArr=array())
+    {
+
         $dataAry = array(
-                            'szPassword' =>encrypt($dataArr['szPassword']),
-                            'dtUpdatedOn' => date('Y-m-d H:i:s'),
-                            'szRecoveryPassword' => ''
+            'szPassword' =>encrypt($dataArr['szPassword']),
+            'dtUpdatedOn' => date('Y-m-d H:i:s'),
+            'szRecoveryPassword' => ''
         );
-     
+
         $whereAry = array('szRecoveryPassword' => $passwordKey);
-        
+
         $this->db->where($whereAry);
-        
+
         $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry) ;
-        
+
         if($this->db->affected_rows() > 0)
         {
             return true;
@@ -455,12 +488,12 @@ class Admin_Model extends Error_Model {
         {
             return false;
         }
-       
+
     }
         
         public function getEmailTemplateDetailsByTitle($szTitle)
     {
-          
+           // print_r($szTitle);
         $whereAry = array('sectionTitle' => $szTitle);
         $this->db->select('subject,sectionDescription');
         $this->db->where($whereAry);
@@ -607,10 +640,10 @@ class Admin_Model extends Error_Model {
             }
             return false;
         }
-     
-         public function checkAdminAccountStatus($szEmail='')
+
+    public function checkAdminAccountStatus($szEmail='')
     {
-            //echo $szEmail;
+        //echo $szEmail;
         if(trim($szEmail) == '')
         {
             $szEmail = $this->data['szEmail'];
@@ -619,31 +652,25 @@ class Admin_Model extends Error_Model {
         {
             $szEmail = $this->sql_real_escape_string(trim($szEmail));
         }
-        
+
         $this->db->select('iRole,iActive,isDeleted');
-
         $this->db->from(__DBC_SCHEMATA_USERS__);
-
         $this->db->where('szEmail =',$szEmail);
-
-
         $query = $this->db->get();
-
         if($query->num_rows() > 0)
         {
             $row = $query->row_array();
-            
-             if((int)$row['iRole'] != 1)
+            if((int)$row['iRole'] != 1)
             {
-                 
-                $this->addError("szEmail", "Your are not an admin.");
+
+                $this->addError("szEmail", "Your are not a franchisee or admin.");
             }
-            
+
             else if((int)$row['iActive'] == 0)
             {
                 $this->addError("szEmail", "Your account is inactive.");
             }
-           
+
             else if((int)$row['isDeleted'] == 1)
             {
                 $this->addError("szEmail", "Your account is deleted.");
@@ -653,12 +680,12 @@ class Admin_Model extends Error_Model {
         {
             $this->addError("szEmail", "This email address is not registered with Drug Safe.");
         }
-     
+
         if($this->error == true)
-                    return false;
-            else
-                    return true;
+            return false;
+        else
+            return true;
     }
-    
+      
 }
 ?>
