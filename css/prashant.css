@@ -36,3 +36,5 @@ body .logo img {
     clear: both;
   }
 }
+.img-responsive{max-width:70px;padding:10px;}
+.ajax-upload-dragdrop {width:100% !important}
