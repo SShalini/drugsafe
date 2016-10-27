@@ -13,7 +13,7 @@ class Franchisee_Model extends Error_Model {
 		parent::__construct();
 	}
         
-        function insertClientDetails($data,$franchiseeId='')
+function insertClientDetails($data,$franchiseeId='')
         {
            
             $szNewPassword = create_login_password();
@@ -36,12 +36,14 @@ class Franchisee_Model extends Error_Model {
             $this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
             
             $id_client = (int)$this->db->insert_id();
+            $CreatedBy=$_SESSION['drugsafe_user']['id'];
+          
             if($franchiseeId=='')
             {
                  $franchiseeId=$_SESSION['drugsafe_user']['id'];
+                      
             }
             
-           
             $clientType=$data['szParentId'];
             if($clientType=='')
             {
@@ -53,6 +55,8 @@ class Franchisee_Model extends Error_Model {
                 'franchiseeId' => $franchiseeId,
                 'clientId' => $id_client,
                 'clientType' => $clientType,
+                'szCreatedBy' => $CreatedBy,
+                
                 
             );
             
@@ -199,7 +203,7 @@ class Franchisee_Model extends Error_Model {
                     return array();
             }
         }
-        public function updateClientDetails($idClient=0,$data)
+ public function updateClientDetails($idClient=0,$data)
     {
         $date=date('Y-m-d');
         
@@ -223,6 +227,7 @@ class Franchisee_Model extends Error_Model {
 
                 $queyUpdate=$this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
                 
+            $UpdatedBy=$_SESSION['drugsafe_user']['id'];    
             if( $idClient=='')
             {
                 $idClient=$_SESSION['drugsafe_user']['id'];
@@ -237,6 +242,7 @@ class Franchisee_Model extends Error_Model {
             $clientAry=array(
  
                 'clientType' => $clientType,
+                'szLastUpdatedBy' => $UpdatedBy,
                 
             );
             

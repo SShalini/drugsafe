@@ -72,7 +72,60 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }
             }
-    
+     public function viewDrugTestKitList()
+        {
+
+            $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
+
+            $this->db->select('*');
+            $this->db->where($whereAry);  
+            $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
+
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
+         public function viewMarketingMaterialList()
+        {
+
+            $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
+
+            $this->db->select('*');
+            $this->db->where($whereAry);  
+            $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
+
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
+        public function deleteProduct($idProduct)
+	{
+                $data = $this->input->post('idProduct');
+               
+		$dataAry = array(
+			'isDeleted' => '1'
+                );  
+                $this->db->where('id', $idProduct);
+		if($query = $this->db->update(__DBC_SCHEMATA_PRODUCT__, $dataAry))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+       
        
 }
 ?>

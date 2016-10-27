@@ -44,18 +44,28 @@ class Admin_Controller extends CI_Controller {
             $iRemember = (int)$this->input->post('adminLogin[iRemember]');
                 if(!empty($validate))
                 {
+                     if($this->Admin_Model->checkUserAccountStatus($validate['szEmail']))
+                {   
                  $adminAry = $this->Admin_Model->adminLoginUser($validate);
                  if(!empty($adminAry)) {
                         if ((int) $iRemember == 1) {
                             set_customer_cookie($this, $adminAry);
                         }
-                        
+                        $user_session = $this->session->userdata('drugsafe_user');
+                      if($user_session[iRole]==1)
+                      {
                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                         die;
+                      }
+                      else{
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/franchisee/clientList");
+                        die;  
+                      }
                     }
                 }
-                
+                }
                 $data['szMetaTagTitle'] = "Admin Login";
                 $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                 $data['is_user_login'] = $is_user_login;
@@ -67,7 +77,7 @@ class Admin_Controller extends CI_Controller {
         $this->load->view('layout/login_footer');
 	    
         }
-        
+
         public function dashboard() {
 
             $is_user_login = is_user_login($this);

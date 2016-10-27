@@ -63,6 +63,8 @@
                                     <th> Email</th>
                                     <th> Client Type</th>
                                     <th> Contact No</th>
+                                    <th> Created By</th>
+                                    <th> Updated By</th>
                                     <th> Actions</th>
                                 </tr>
                                 </thead>
@@ -70,7 +72,9 @@
                                 <?php
                                 $i = 0;
                                 foreach ($clientAry as $clientData) {
-                                    $i++;
+                                    
+                                      
+                                   
                                     ?>
                                     <tr>
                                         <td> CL-<?php echo $clientData['id']; ?> </td>
@@ -88,6 +92,10 @@
 
                                         </td>
                                         <td> <?php echo $clientData['szContactNumber']; ?> </td>
+                                       
+                                        <td><?php echo $franchiseeDataArr[$i]['szName']; ?> </td>
+                                        <td><?php echo $updateByDataArr[$i]['szName']; ?> </td>
+                                       
                                         <td>
                                             <?php
                                             if ($clientData['clientType'] == '0') { ?>
@@ -123,6 +131,7 @@
                                         </td>
                                     </tr>
                                     <?php
+                                     $i++;
                                 }
                                 ?>
                                 </tbody>

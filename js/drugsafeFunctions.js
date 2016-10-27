@@ -265,6 +265,37 @@ function editClient(idClient, idfranchisee,flag) {
 
     });
 }
+function productDeleteAlert(idProduct,flag)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/inventory/deleteProductAlert", {idProduct: idProduct,flag: flag}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#productStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+    function deleteProductConfirmation(idProduct,flag) {
+
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#productStatus').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/inventory/deleteProductConfirmation", {idProduct: idProduct,flag: flag}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#productStatusConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
 
 
 

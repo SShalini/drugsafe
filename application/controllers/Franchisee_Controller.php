@@ -154,7 +154,7 @@ class Franchisee_Controller extends CI_Controller {
             }
             
         }
-         function clientList()
+        function clientList()
         {
             $is_user_login = is_user_login($this);
 
@@ -165,15 +165,28 @@ class Franchisee_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
+          
             $idfranchisee = $this->session->userdata('idfranchisee');
             $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee,true);
-            $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
-            $data['franchiseeDataArr'] = $franchiseeDataArr;
+
+            $frdata = array();
+             $UpdatedBy= array();
+            foreach ($clientAray as $cldata){
+                $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szCreatedBy']);
+                array_push($frdata, $franchiseeDataArr);
+                if(!empty($cldata['szLastUpdatedBy'])){
+                    $updateByDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szLastUpdatedBy']);
+                    array_push($UpdatedBy, $updateByDataArr);
+                }
+            }
+
+            $data['updateByDataArr'] = $UpdatedBy;
+            $data['franchiseeDataArr'] = $frdata;
             $data['idfranchisee'] = $idfranchisee;
             $data['clientAry'] = $clientAray;
             $data['szMetaTagTitle'] = "Client List";
             $data['is_user_login'] = $is_user_login;
-                   
+            $data['pageName'] = "Client_List";       
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/clientList');

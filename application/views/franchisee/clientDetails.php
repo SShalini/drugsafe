@@ -210,6 +210,8 @@
 				<th> Name </th>
                                 <th> Email </th>
                                 <th>Contact No</th>
+                                <th> Created By</th>
+                                <th> Updated By</th>
                                 <th> Actions </th>
                             </tr>
                         </thead>
@@ -218,13 +220,15 @@
                                        $i = 0;
                                         foreach($childClientDetailsAray as $childClientDetailsData)
                                         {
-                                            $i++;
+                                           
                                         ?>
                                         <tr>
                                             <td> CL-<?php echo $childClientDetailsData['id'];?> </td>
                                             <td> <?php echo $childClientDetailsData['szName']?> </td>
                                             <td> <?php echo $childClientDetailsData['szEmail'];?> </td>
                                              <td> <?php echo $childClientDetailsData['szContactNumber'];?> </td>
+                                             <td><?php echo $franchiseeDataArr[$i]['szName']; ?> </td>
+                                             <td><?php echo $updateByDataArr[$i]['szName']; ?> </td>
                                                <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
@@ -243,6 +247,7 @@
                                             
                                         </tr>
                                         <?php 
+                                         $i++;
                                         }
                                    ?>
                         </tbody>

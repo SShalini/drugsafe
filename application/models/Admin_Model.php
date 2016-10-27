@@ -109,7 +109,58 @@ class Admin_Model extends Error_Model {
         return false;
     }
             
-      
+     /*
+     * Check Admin Account Expire Or Inactive 
+     */
+    public function checkUserAccountStatus($szEmail='')
+    {
+        if(trim($szEmail) == '')
+        {
+            $szEmail = $this->data['szEmail'];
+        }
+        else
+        {
+            $szEmail = $this->sql_real_escape_string(trim($szEmail));
+        }
+        
+        $this->db->select('iRole,iActive,isDeleted');
+
+        $this->db->from(__DBC_SCHEMATA_USERS__);
+
+        $this->db->where('szEmail =',$szEmail);
+
+
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            $row = $query->row_array();
+           if((int)$row['iRole'] == 3)
+            {
+                $this->addError("szEmail", "Invalid EmailId or Password.");
+            } 
+           
+         elseif((int)$row['iActive'] == 0)
+            {
+                $this->addError("szEmail", "Your account is inactive.");
+            }
+           
+            else if((int)$row['isDeleted'] == 1)
+            {
+                $this->addError("szEmail", "Your account is deleted.");
+            }
+        }
+        else
+        {
+            $this->addError("szEmail", "This email address is not registered with Drug Safe.");
+        }
+     
+        if($this->error == true)
+                    return false;
+            else
+                    return true;
+    }      
+        
         public function adminLoginUser($validate)
 	{
 
@@ -383,24 +434,29 @@ class Admin_Model extends Error_Model {
                     return array();
             }
         }
-          public function getAdminDetailsByEmailOrId($szEmail='',$id='')
-    {
-       // print_r($szEmail);
-        if($szEmail != ''){
-            $whereAry= array('szEmail' =>$szEmail);
-        }elseif($id != ''){
-            $whereAry= array('id' =>$id);
+         public function getAdminDetailsByEmailOrId($szEmail='',$id=0)
+    { 
+              
+         if((int)$id>0 && empty($szEmail))
+        {
+            $whereAry = array('id' => (int)$id);
         }
-
-       //print_r($this->db->last_query($whereAry));
-         $this->db->select('*')
-         ->where($whereAry);
+        else if((int)$id == 0 && !empty($szEmail))
+        {
+            $whereAry = array('szEmail' => $this->sql_real_escape_string(trim($szEmail)));
+        }
+        else if((int)$id > 0 && !empty($szEmail))
+        {
+            $whereAry = array('szEmail' => $this->sql_real_escape_string(trim($szEmail)),'id' => (int)$id);
+        }
+        
+       $this->db->select('*');
+        $this->db->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
         
         if($query->num_rows() > 0)
         {
             $row = $query->result_array();
-//            print_R($row[0]);die;
             return $row[0];
         }
         else

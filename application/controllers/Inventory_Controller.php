@@ -92,10 +92,9 @@ class Inventory_Controller extends CI_Controller {
         }
         function uploadProfileImage()
         {
-            //If directory doesnot exists create it.
+            
             $output_dir = __APP_PATH_PRODUCT_IMAGES__;
-
-
+            
             $ret = array();
 
             $RandomNum   = time();
@@ -129,6 +128,79 @@ class Inventory_Controller extends CI_Controller {
 
             echo json_encode($ret);
         }
+        function drugtestkitlist()
+        {
+           $is_user_login = is_user_login($this);
+
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+
+             $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList();
+
+                    $data['drugTestKitAray'] = $drugTestKitAray;
+                    $data['szMetaTagTitle'] = " Drug Test Kit List";
+                    $data['is_user_login'] = $is_user_login;
+                     $data['subpageName'] = "Drug_Test_Kit_List";
+                    
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['data'] = $data;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('inventory/drugTestKitList');
+            $this->load->view('layout/admin_footer');
+        }
+        function marketingmateriallist()
+        {
+           $is_user_login = is_user_login($this);
+
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+
+             $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList();
+
+                    $data['marketingMaterialAray'] = $marketingMaterialAray;
+                    $data['szMetaTagTitle'] = "Marketing Material List";
+                    $data['is_user_login'] = $is_user_login;
+                      $data['subpageName'] = "Marketing_Material_List";
+                    
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['data'] = $data;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('inventory/marketingMaterialList');
+            $this->load->view('layout/admin_footer');
+        }
+       public function deleteProductAlert()
+        {
+            $data['mode'] = '__DELETE_PRODUCT_POPUP__';
+            $data['idProduct'] = $this->input->post('idProduct');
+            $data['flag'] = $this->input->post('flag');
+          
+            $this->load->view('admin/admin_ajax_functions',$data);
+
+        }
+        public function deleteProductConfirmation()
+        {
+            $data['mode'] = '__DELETE_PRODUCT_POPUP_CONFIRM__';
+            $data['idProduct'] = $this->input->post('idProduct');
+            $data['flag'] = $this->input->post('flag');
+          
+            $this->Inventory_Model->deleteProduct($data['idProduct']);
+
+            $this->load->view('admin/admin_ajax_functions',$data);
+            
+        }      
+        
     }      
     
 ?>
