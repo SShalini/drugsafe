@@ -52,6 +52,9 @@ define("__APP_PATH_ASSETS__", __APP_PATH__ . "/assets");
 
 define("__APP_PATH_LOGS__", __APP_PATH__ . "/application/logs");
 
+define("__BASE_USER_PRODUCT_IMAGES_URL__", __BASE_URL__ . "/product_img");
+define("__APP_PATH_PRODUCT_IMAGES__", __APP_PATH__ . "/product_img");
+
 define("__DBC_SCHEMATA_USERS__", "ds_user"); 
 define( "__DBC_SCHEMATA_COUNTRY__", "tbl_countries");
 define( "__DBC_SCHEMATA_STATE__", "tbl_states");
@@ -59,6 +62,7 @@ define( "__DBC_SCHEMATA_FRANCHISEE__", "tbl_franchisee");
 define( "__DBC_SCHEMATA_USERS_EMAIL_LOG__", "tbl_email_log");
 define( "__DBC_SCHEMATA_EMAIL_CMS__", "tbl_email_cms");
 define( "__DBC_SCHEMATA_CLIENT__", "tbl_client");
+define( "__DBC_SCHEMATA_PRODUCT__", "tbl_product");
 define("__CUSTOMER_SUPPORT_EMAIL__", 'support@whiz-solutions.com');
 
 /**

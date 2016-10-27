@@ -63,6 +63,11 @@ $route['franchisee/(:any)'] = "Franchisee_Controller/$1";
 $route['franchisee/(:any)/(:any)'] = "Franchisee_Controller/$1/$2";
 $route['franchisee/(:any)/(:any)/(:any)'] = "Franchisee_Controller/$1/$2/$3";
 
+$route['inventory'] = "Inventory_Controller";
+$route['inventory/(:any)'] = "Inventory_Controller/$1";
+$route['inventory/(:any)/(:any)'] = "Inventory_Controller/$1/$2";
+$route['inventory/(:any)/(:any)/(:any)'] = "Inventory_Controller/$1/$2/$3";
+
 $route['404_override'] = 'Error_Controller';
 $route['error'] = "Error_Controller";
 $route['translate_uri_dashes'] = FALSE;

@@ -90,7 +90,7 @@ $autoload['drivers'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','utility', 'cookie');
+$autoload['helper'] = array('url','utility', 'cookie', 'form');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Config files

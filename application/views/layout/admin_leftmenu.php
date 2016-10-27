@@ -26,6 +26,20 @@
                                     <span class="selected"></span>
                                 </a>
                             </li>
+                            <li class="nav-item start <?php if(trim($pageName)=='Inventory'){?>active open<?php }?>">
+                                <a href="javascript:void(0);" class="nav-link nav-toggle">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span class="title">Inventory </span>
+                                   <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu" <?php if($subpageName=='Inventory'){ ?> style="display: block;" <?php } ?> >
+				<li class="nav-item  <?php if($subpageName=='add_Product'){ ?> active open <?php } ?>">
+                                    <a class="nav-link " href="<?php echo __BASE_URL__;?>/inventory/addProduct">
+                                        <span class="title">Add Product</span>
+                                    </a>
+                                </li>
+                                </ul>
+                            </li>
                            <?php }?> 
                         </ul>
                      </div>  

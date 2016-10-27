@@ -44,6 +44,9 @@
         <!--BEGIN CUSTOM FILES-->
         <link href="<?php echo __BASE_CSS_URL__; ?>/drugsafe_custom_style.css?<?php echo time(); ?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_CSS_URL__; ?>/prashant.css" rel="stylesheet" type="text/css" />
+         <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.10/uploadfile.css" rel="stylesheet">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.10/jquery.uploadfile.min.js"></script>
         <script type="text/javascript">
             var __BASE_URL__ = '<?php echo __BASE_URL__;?>';
             var AUTO_SAVE = false;

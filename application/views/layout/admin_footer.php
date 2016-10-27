@@ -60,5 +60,7 @@
         <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
+        <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.10/uploadfile.css" rel="stylesheet">
+        <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.10/jquery.uploadfile.min.js"></script>
     </body>
 </html>
