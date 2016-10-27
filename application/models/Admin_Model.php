@@ -660,13 +660,7 @@ class Admin_Model extends Error_Model {
         if($query->num_rows() > 0)
         {
             $row = $query->row_array();
-            if((int)$row['iRole'] != 1)
-            {
-
-                $this->addError("szEmail", "Your are not a franchisee or admin.");
-            }
-
-            else if((int)$row['iActive'] == 0)
+            if((int)$row['iActive'] == 0)
             {
                 $this->addError("szEmail", "Your account is inactive.");
             }
