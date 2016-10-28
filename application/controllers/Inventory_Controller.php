@@ -26,7 +26,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductCategory]', 'Product Category', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             
@@ -44,15 +44,38 @@ class Inventory_Controller extends CI_Controller {
             {
                 if( $this->Inventory_Model->insertProduct())
                 {
-                    header("Location:" . __BASE_URL__ . "/franchisee/clientList");
+                   $szProductCategory = $_POST[productData][szProductCategory];
+                    if($szProductCategory==1)
+                        {
+                         header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
+                    die;
+                    }
+                 
+                    header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
                     die;
                 }
                ;
                 
             }
         }
-        public function editProduct() {
+          
+        function editProductData()
+        {
            
+             $idProduct = $this->input->post('idProduct');
+             $flag = $this->input->post('flag');
+     
+            $this->session->set_userdata('$idProduct',$idProduct);
+             $this->session->set_userdata('$flag',$flag);
+           
+            echo "SUCCESS||||";
+            echo "editProduct";
+            
+        }
+        
+        
+        public function editProduct() {
+          
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -60,12 +83,16 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-            $productId='1';
-            $productDataAry = $this->Inventory_Model->getProductDetailsById($productId);
+           
+            $idProduct = $this->session->userdata('$idProduct');
+            $flag = $this->session->userdata('$flag');
+         
+            $productDataAry = $this->Inventory_Model->getProductDetailsById($idProduct);
+           
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductCategory]', 'Product Category', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             
@@ -81,13 +108,18 @@ class Inventory_Controller extends CI_Controller {
             }
             else
             {
-                if( $this->Inventory_Model->UpdateProduct($productId))
+                if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
-                    header("Location:" . __BASE_URL__ . "/inventory/");
+                    if($flag==1){
+                    header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
                     die;
+                    }
+                    else{
+                    header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
+                    die;
+                    }
                 }
-               ;
-                
+
             }
         }
         function uploadProfileImage()
@@ -145,7 +177,8 @@ class Inventory_Controller extends CI_Controller {
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['szMetaTagTitle'] = " Drug Test Kit List";
                     $data['is_user_login'] = $is_user_login;
-                     $data['subpageName'] = "Drug_Test_Kit_List";
+                    $data['pageName'] = "Inventory";
+                    $data['subpageName'] = "Drug_Test_Kit_List";
                     
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
@@ -171,7 +204,8 @@ class Inventory_Controller extends CI_Controller {
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
                     $data['szMetaTagTitle'] = "Marketing Material List";
                     $data['is_user_login'] = $is_user_login;
-                      $data['subpageName'] = "Marketing_Material_List";
+                    $data['pageName'] = "Inventory";
+                    $data['subpageName'] = "Marketing_Material_List";
                     
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;

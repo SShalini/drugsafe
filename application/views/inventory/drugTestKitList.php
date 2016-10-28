@@ -8,13 +8,7 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
                             </div>
-                            <div class="actions">
-                                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm blue" onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
-                                        &nbsp;Add New Drug-Test Kit
-                                    </button>
-                                </div>
-                            </div>
+                           
                         </div>
                         <?php
                         
@@ -30,7 +24,6 @@
                                         <th> Product Code</th>
                                         <th> Product Descreption</th>
                                         <th> Product Cost</th>
-                                        
                                         <th> Actions </th>
                                     </tr>
                                 </thead>
@@ -38,20 +31,18 @@
                                     <?php
                                        $i = 0;
                                         foreach($drugTestKitAray as $drugTestKitData)
-                                        {
-                                           
+                                        {     
                                         ?>
                                         <tr>
                                             <td>
-                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $drugTestKitData['szProductImage']; ?>" width="60" height="60"/>
-                                                  
+                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $drugTestKitData['szProductImage']; ?>" width="60" height="60"/>    
                                             </td>
                                             <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                             <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                             <td> <?php echo $drugTestKitData['szProductCost'];?> </td>
                                             
                                             <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editProduct('<?php echo $drugTestKitData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editProduct('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $clientData['id'];?>);" href="javascript:void(0);"></i>

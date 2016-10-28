@@ -296,6 +296,18 @@ function productDeleteAlert(idProduct,flag)
 
         });
     }
+function editProduct(idProduct,flag) {
 
+    $.post(__BASE_URL__ + "/inventory/editProductData", {
+        idProduct: idProduct,flag: flag
+       
+    }, function (result) {
+
+        ar_result = result.split('||||');
+
+        window.location = __BASE_URL__ + "/inventory/" + ar_result[1];
+
+    });
+}
 
 

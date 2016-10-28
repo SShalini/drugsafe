@@ -8,13 +8,7 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Marketing Material</span>
                             </div>
-                            <div class="actions">
-                                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm blue" onclick="addClientData(<?php echo $idfranchisee;?>);" href="javascript:void(0);">
-                                        &nbsp;Add New Marketing Material
-                                    </button>
-                                </div>
-                            </div>
+                            
                         </div>
                         <?php
                         
@@ -51,7 +45,7 @@
                                             <td> <?php echo $marketingMaterialData['szProductCost'];?> </td>
                                            
                                             <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editProduct('<?php echo $marketingMaterialData['id'];?>','2');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $clientData['id'];?>);" href="javascript:void(0);"></i>

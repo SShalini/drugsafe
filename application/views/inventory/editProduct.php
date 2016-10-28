@@ -34,21 +34,7 @@
                                            
                                         </div>
                                     </div>
-                                    <div class="form-group <?php if(form_error('productData[szProductDiscription]')){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label"> Product Description</label>
-                                        <div class="col-md-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <input id="szProductDiscription" class="form-control" type="text" value="<?php echo set_value('productData[szProductDiscription]'); ?>" placeholder="Product Description" onfocus="remove_formError(this.id,'true')" name="productData[szProductDiscription]">
-                                            </div>
-                                              <?php
-                                            if(form_error('productData[szProductDiscription]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('productData[szProductDiscription]');?></span>
-                                            </span><?php }?>
-                                        </div>
-                                    </div>
+                                    
                                      <div class="form-group <?php if(form_error('productData[szProductCost]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Product Cost </label>
                                         <div class="col-md-5">
@@ -80,6 +66,22 @@
                                              <?php
                                             if(form_error('productData[szProductCategory]')){?>
                                             <span class="help-block pull-left"><span><?php echo form_error('productData[szProductCategory]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                    <div class="form-group <?php if(form_error('productData[szProductDiscription]')){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label"> Product Description</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                  <textarea  name="productData[szProductDiscription]" id="szProductDiscription" class="form-control"  value=""  rows="5" placeholder="Product Description" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('productData[szProductDiscription]'); ?></textarea>
+                                               
+                                            </div>
+                                              <?php
+                                            if(form_error('productData[szProductDiscription]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('productData[szProductDiscription]');?></span>
                                             </span><?php }?>
                                         </div>
                                     </div>
