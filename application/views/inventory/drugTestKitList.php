@@ -55,10 +55,7 @@
                                                 </a>
                                                  <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="productDeleteAlert(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
-
                                                 </a>
-                                                
-                                                 
                                             </td>
                                         </tr>
                                         <?php
