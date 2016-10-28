@@ -343,7 +343,7 @@ class Admin_Controller extends CI_Controller {
         }
 
         $data_validate=$this->input->post('drugSafeForgotPassword[szEmail]');
-        $data_validate = array('szEmail'=>$data_validate);
+        //$data_validate = array('szEmail'=>$data_validate);
         $data_not_validate = array(
             'id',
             'szName',
@@ -354,7 +354,6 @@ class Admin_Controller extends CI_Controller {
             'szZipCode',
             'szAddress'
         );
-
         if($this->Admin_Model->validateFranchiseeData($data_validate,$data_not_validate,'0',true))
         {
 

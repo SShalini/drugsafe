@@ -708,7 +708,8 @@ class Admin_Model extends Error_Model {
         {
             $szEmail = $this->sql_real_escape_string(trim($szEmail));
         }
-
+        $this->load->library('form_validation');
+        
         $this->db->select('iRole,iActive,isDeleted');
         $this->db->from(__DBC_SCHEMATA_USERS__);
         $this->db->where('szEmail =',$szEmail);
@@ -718,17 +719,20 @@ class Admin_Model extends Error_Model {
             $row = $query->row_array();
             if((int)$row['iActive'] == 0)
             {
-                $this->addError("szEmail", "Your account is inactive.");
+                $this->form_validation->set_rules('drugSafeForgotPassword[szEmail]', 'Your account is inactive.');
+                
             }
 
             else if((int)$row['isDeleted'] == 1)
             {
-                $this->addError("szEmail", "Your account is deleted.");
+                $this->form_validation->set_rules('drugSafeForgotPassword[szEmail]', 'Your account is deleted.');
+                
             }
         }
         else
         {
-            $this->addError("szEmail", "This email address is not registered with Drug Safe.");
+            $this->form_validation->set_rules('drugSafeForgotPassword[szEmail]', 'This email address is not registered with Drug Safe.');
+            
         }
 
         if($this->error == true)
