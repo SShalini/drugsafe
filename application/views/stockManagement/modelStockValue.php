@@ -35,7 +35,7 @@
                                         <div class="actions">
                                         <div class="btn-group btn-group-devided" data-toggle="buttons">
                                                 <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addDrugTestKit');">
-                                                    &nbsp;Add Test Kit
+                                                    &nbsp;Add Drug Test Kit
                                                 </button>
                                             </div>
                                     </div>

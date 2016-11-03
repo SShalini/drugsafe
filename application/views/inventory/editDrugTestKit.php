@@ -4,6 +4,15 @@
             <div id="page_content" class="row">
                 
                 <div class="col-md-12">
+                     <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span class="active">Edit Drug Test Kit</span>
+                        </li>
+                    </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">

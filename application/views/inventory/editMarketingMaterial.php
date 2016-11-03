@@ -3,7 +3,16 @@
         <div class="page-content">
             <div id="page_content" class="row">
                 
-                <div class="col-md-12">
+                <div class="col-md-12"> <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>/inventory/marketingmateriallist">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span class="active"> Edit Marketing Material</span>
+                        </li>
+                    </ul>
+                    
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
