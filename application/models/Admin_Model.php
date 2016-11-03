@@ -88,6 +88,10 @@ class Admin_Model extends Error_Model {
             if(!in_array('szOldPassword',$arExclude)) 
             {
                 $this->set_szOldPassword(sanitize_all_html_input(trim($data['szOldPassword'])));
+                
+                if($this->data['szOldPassword'] != '' && $this->error == false){
+                   $this->checkCurrentPasswordExists(); 
+                }
                  
             }
              

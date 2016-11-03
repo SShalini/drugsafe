@@ -87,7 +87,7 @@ function form_submit_validation(myForm, submit_form)
 
 function in_line_validation()
 {
-	$('.required').blur(function(){
+	$('.required').keyup(function(){
 		validate_require_field(this, true);		
 	});
 	

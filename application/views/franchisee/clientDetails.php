@@ -75,7 +75,6 @@
                 </div>
             </div>-->
         </div>
-
         <div class="portlet-body alert">
             <div class="row">
                 <div class="col-md-6">
@@ -103,7 +102,6 @@
                             <p><?php echo $clientDetailsAray['szCity'];?></p>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Country:</lable>
@@ -133,7 +131,6 @@
                         </div>
                         <?php
                     }
-
                     ?>
                 </div>
                 <div class="col-md-6">
@@ -153,7 +150,6 @@
                             <p><?php echo $clientDetailsAray['szAddress'];?></p>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>State:</lable>
@@ -170,19 +166,15 @@
                             <p><?php echo $clientDetailsAray['szZipCode'];?></p>
                         </div>
                     </div>
-
-                </div>
-              
+                </div> 
              </div>
-            
         </div>
      </div>
     <?php
      if($clientDetailsAray['clientType']=='0')
     {
-         ?>
-                    
-                    <div class="portlet light bordered">
+         ?>           
+       <div class="portlet light bordered">
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-equalizer font-red-sunglo"></i>
@@ -198,9 +190,7 @@
             
         </div>
         <div class="portlet-body">
-            <?php
-            
-                     
+            <?php        
             if($childClientDetailsAray)
             {
             ?>
@@ -265,13 +255,10 @@
             }
             ?>
         </div>
-    </div>
-                    
-          <?php
-        
+    </div>           
+          <?php   
     }
-    ?>
-     
+    ?>    
 </div>
 </div>
 </div>

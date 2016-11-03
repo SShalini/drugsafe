@@ -22,10 +22,6 @@
                                                  <input type="password" name="drugsafeChangePassword[szOldPassword]" id="szOldPassword" class="form-control input-square-right required" placeholder="Current Password" > 
                                             </div>
 
-                                             
-
-                                                           
-
                                                             <?php if(!empty($arErrorMessages['szOldPassword']) != ''){?>
                                                                 <span class="help-block pull-left">
                                                                     <i class="fa fa-times-circle"></i>
@@ -78,7 +74,7 @@
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
                                            <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>
-                                                                <input class="btn green-meadow uppercase btn-form-submit" type="submit" value="Submit"/>
+                                         <button class="btn green uppercase btn-form-submit" type="submit">Save</button>
                                         </div>
                                         
                                     </div>

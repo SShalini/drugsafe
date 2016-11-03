@@ -119,8 +119,7 @@ class Admin_Controller extends CI_Controller {
    
              if($this->Admin_Model->validateUserData($data_validate))
             {
-                if($this->Admin_Model->checkCurrentPasswordExists())
-                {
+
                     if($this->Admin_Model->updateChangePassword() )
                     {
                         $szMessage['type'] = "success";
@@ -131,7 +130,6 @@ class Admin_Controller extends CI_Controller {
                         header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                         die;
                     }
-                }
             }
         
             $data['szMetaTagTitle'] = "Change Password";

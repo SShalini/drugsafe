@@ -4,10 +4,8 @@ function set_customer_cookie($obj, $data)
     
     //set data to cookie and keep for 1 month
     $encKey1 = "#12EQ#83#";$encKey2="#AR3UIL#452#";
-    
-    
+
         $cookieData = $data['id'] . "~$encKey1" . $data['szEmail'] . "~$encKey2";
-   
     
     $encryptedC = base64_encode($cookieData);
     $cookie_time = 60*60*24*30;
