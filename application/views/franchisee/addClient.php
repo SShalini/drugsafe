@@ -151,7 +151,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="clientData[szCountry]" id="szCountry"  onchange="getStateListingProfileclient(this.value);"  Placeholder="Country" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control required" name="clientData[szCountry]" id="szCountry"   Placeholder="Country" onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
                                                     <?php
                                                         if(!empty($countryAry))
@@ -175,19 +175,28 @@
                                         </div>
                                        
                                     </div>
-                                     <div class="form-group <?php if(!empty($arErrorMessages['szState'])){?>has-error<?php }?>">
+                                        
+                                        <div class="form-group <?php if(!empty($arErrorMessages['szState'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">State</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <div id="state_container">
-                                                    <select class="form-control required" id="szState" name="clientData[szState]" placeholder="State" onfocus="remove_formError(this.id,'true')">";
-                                                        <option value=''>Select</option>
-         	                             </select>
-                                                    
-                                                </div>
+                                                <select class="form-control required" name="clientData[szState]" id="szState"   Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                    <option value=''>Select</option>
+                                                    <?php
+                                                        if(!empty($countryAry))
+                                                        {
+                                                            foreach($stateAry as $stateDetails)
+                                                            {
+                                                                ?>
+                                                                 <option value="<?php echo trim($stateDetails['name']);?>" <?php echo(sanitize_post_field_value($_POST['clientData']['szState']) == trim($stateDetails['name']) ? "selected" : "");?>><?php echo trim($stateDetails['name']);?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
                                             </div>
                                              <?php if(!empty($arErrorMessages['szState'])){?>
                                             <span class="help-block pull-left">

@@ -257,7 +257,7 @@ class Admin_Controller extends CI_Controller {
         {
             $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
-            //die($idfranchisee);
+            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             if($idfranchisee >0)
             {
                 
@@ -289,6 +289,7 @@ class Admin_Controller extends CI_Controller {
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Edit Franchisee Details"; 
                     $data['countryAry'] = $countryAry;
+                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
                     $_POST['addFranchisee'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;

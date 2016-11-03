@@ -45,10 +45,7 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                        
-                                        
                                     </div>
-                                    
                                     <div class="form-group <?php if(!empty($arErrorMessages['szEmail'])!= ''){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Email</label>
                                         <div class="col-md-5">

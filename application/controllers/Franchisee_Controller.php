@@ -71,6 +71,7 @@ class Franchisee_Controller extends CI_Controller {
             $validate= $this->input->post('clientData'); 
             
             $countryAry = $this->Admin_Model->getCountries();
+            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             $idfranchisee = $this->session->userdata('idfranchisee');
             $idclient = $this->session->userdata('idclient');
             if(!empty($idclient)){
@@ -98,6 +99,7 @@ class Franchisee_Controller extends CI_Controller {
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
                     $data['countryAry'] = $countryAry;
+                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
                     $data['idfranchisee'] = $idfranchisee;
                     $data['szParentId'] = $idclient;
@@ -323,6 +325,7 @@ class Franchisee_Controller extends CI_Controller {
         {
     
             $countryAry = $this->Admin_Model->getCountries();
+            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             $idClient = $this->session->userdata('idClient');
             $idfranchisee = $this->session->userdata('idfranchisee');
             $clientDetailsAray =$this->Franchisee_Model->viewClientDetails($idClient);
@@ -385,6 +388,7 @@ class Franchisee_Controller extends CI_Controller {
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Edit Client Details"; 
                     $data['countryAry'] = $countryAry;
+                    $data['stateAry'] = $stateAry ;
                     $data['validate'] = $validate;
                     $_POST['clientData'] = $userDataAry;
 
