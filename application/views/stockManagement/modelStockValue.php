@@ -176,7 +176,7 @@
                     </table>
                 </div>
                      <?php
-   echo "sr delete this";
+  
                 }
                 else
                 {
