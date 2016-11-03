@@ -1,7 +1,39 @@
 <div class="page-content-wrapper">
         <div class="page-content">
+              <?php 
+            if(!empty($_SESSION['drugsafe_user_message']))
+            {
+                    if(trim($_SESSION['drugsafe_user_message']['type']) == "success")
+                    {
+                    ?>
+                        <div class="alert alert-info">
+                            <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                        </div>
+                    <?php
+
+                    }
+                    if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
+                    {
+                    ?>
+                        <div class="alert alert-danger">
+                            <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                        </div>
+                    <?php
+                    }
+                    $this->session->unset_userdata('drugsafe_user_message');
+            }
+            ?>
             <div id="page_content" class="row">
                 <div class="col-md-12">
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>/inventory/marketingmateriallist">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span class="active">Marketing Material List</span>
+                        </li>
+                    </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">

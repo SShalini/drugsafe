@@ -190,7 +190,7 @@
             </div>
             <div class="actions">
                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                    <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>);">
+                    <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'1');">
                         &nbsp;Add Site
                     </button>
                 </div>

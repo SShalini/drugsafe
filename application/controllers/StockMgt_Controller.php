@@ -46,7 +46,7 @@ class StockMgt_Controller extends CI_Controller {
             $data['idfranchisee'] = $idfranchisee;
             $data['szMetaTagTitle'] = "Model Stock Value";
             $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Client_List";       
+            $data['pageName'] = "Model_Stock_Value";       
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/modelStockValue');

@@ -464,25 +464,7 @@ function addNewClient()
     });
 }
 
-function editClient()
-{
-    var value=jQuery("#editClientForm").serialize();
-    var newvalue=value+"&mode=__EDIT_CLIENT__";
-    jQuery('#loader').attr('style','display:block');
-    jQuery.post(__SITE_JS_PATH__+"/ajax_client.php",newvalue,function(result){
-        var result_ary = result.split("||||");
-        if(result_ary[0]=='SUCCESS')
-        {
-            $("#page_content").html(result_ary[1]);
-            $('#static').modal("show");
-        }
-        else if(result_ary[0]=='ERROR')
-        {
-            $("#page_content").html(result_ary[1]);
-        }
-        jQuery('#loader').attr('style','display:none');
-    });
-}
+
 
 
 function changeClientStatus(clientId,iStatus)

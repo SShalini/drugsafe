@@ -175,11 +175,11 @@ function viewClient(idfranchisee) {
     });
 }
 
-function addClientData(idfranchisee,idclient) {
+function addClientData(idfranchisee,idclient,flag) {
     if(idclient == undefined || idclient == null){
         idclient = 0;
     }
-    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,flag:flag}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 

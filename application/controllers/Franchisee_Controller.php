@@ -59,21 +59,25 @@ class Franchisee_Controller extends CI_Controller {
            
             $idfranchisee = $this->input->post('idfranchisee');
             $idclient = $this->input->post('idclient');
+            $flag = $this->input->post('flag');
             $this->session->set_userdata('idfranchisee',$idfranchisee);
             $this->session->set_userdata('idclient',$idclient);
+             $this->session->set_userdata('flag',$flag);
             echo "SUCCESS||||";
             echo "addClient";
             
         }
         
         function addClient()
-        {
-            $validate= $this->input->post('clientData'); 
-            
+        { 
+              $validate= $this->input->post('clientData'); 
+              $flag = $this->session->userdata('flag');
+        
             $countryAry = $this->Admin_Model->getCountries();
             $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             $idfranchisee = $this->session->userdata('idfranchisee');
             $idclient = $this->session->userdata('idclient');
+            
             if(!empty($idclient)){
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idclient);
                 $data['clientDetailsAray'] = $franchiseeDetArr1;
@@ -89,9 +93,17 @@ class Franchisee_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                   ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/franchisee/clientList");
+                     $flag = $this->session->userdata('flag');
+                 if($flag==1){
+                     ob_end_clean();
+                    header("Location:" . __BASE_URL__ . "/franchisee/viewClientDetails");
                     die;
+                 }
+                 else{
+                    ob_end_clean();
+                    header("Location:" . __BASE_URL__ . "/franchisee/clientList");
+                    die; 
+                 }
                 }
             }
            
@@ -372,7 +384,6 @@ class Franchisee_Controller extends CI_Controller {
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         
                         if($flag == 1){
-                            
                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/franchisee/viewClientDetails");
                         
