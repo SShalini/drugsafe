@@ -36,7 +36,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-equalizer font-red-sunglo"></i>
-                            <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $franchiseeDataArr['szName'];?>'s Client List</span>
+                            <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $franchiseeArr['szName'];?>'s Client List</span>
                         </div>
                         <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -72,9 +72,6 @@
                                 <?php
                                 $i = 0;
                                 foreach ($clientAry as $clientData) {
-                                    
-                                      
-                                   
                                     ?>
                                     <tr>
                                         <td> CL-<?php echo $clientData['id']; ?> </td>
