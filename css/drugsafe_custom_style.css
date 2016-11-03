@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Admin
 */
 .login .logo .site-title{text-transform: uppercase;}
-.admin-logo{height: 75px}
+.admin-logo{height: 75px;padding:8px;}
 .pull-left {
     color: #e73d4a;
    
