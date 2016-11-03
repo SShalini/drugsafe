@@ -110,7 +110,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="addFranchisee[szCountry]" id="szCountry"  onchange="getStateListingProfile(this.value);"  Placeholder="Country" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control required" name="addFranchisee[szCountry]" id="szCountry"  Placeholder="Country" onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
                                                     <?php
                                                         if(!empty($countryAry))
@@ -134,27 +134,38 @@
                                         </div>
 
                                     </div>
-                                     </div>
-                                     <div class="form-group <?php if(!empty($arErrorMessages['szState'])!= ''){?>has-error<?php }?>">
+                                    
+                                    <div class="form-group <?php if(!empty($arErrorMessages['szState'])!= ''){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">State</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <div id="state_container">
-                                                <input type="text" class="form-control" id="szState" name="addFranchisee[szState]" placeholder="State" value="<?=sanitize_post_field_value($_POST['addFranchisee']['szState'])?>" onfocus="remove_formError(this.id,'true')">
-                                             </div>
-                                            <?php if(!empty($arErrorMessages['szState'])){?>
+                                                <select class="form-control required" name="addFranchisee[szState]" id="szState" Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                    <option value=''>Select</option>
+                                                    <?php
+                                                        if(!empty($stateAry))
+                                                        {
+                                                            foreach($stateAry as $stateDetails)
+                                                            {
+                                                                ?>
+                                                                 <option value="<?=trim($stateDetails['name'])?>" <?=(sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim($stateDetails['name']) ? "selected" : "")?>><?=trim($stateDetails['name'])?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                             <?php if(!empty($arErrorMessages['szState'])){?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
                                                 <?php echo $arErrorMessages['szState'];?>
                                             </span>
                                         <?php }?>
                                         </div>
-                                        
+
                                     </div>
-                                    </div>    
                                     <div class="form-group <?php if(!empty($arErrorMessages['szCity'])!= ''){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> City</label>
                                         <div class="col-md-5">
