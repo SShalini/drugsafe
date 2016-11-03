@@ -145,14 +145,13 @@ class Inventory_Controller extends CI_Controller {
             {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
-                    if($flag==1){
-                    header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
+                   
+                        $szMessage['type'] = "success";
+                        $szMessage['content'] = "<strong>Drug Test Kit Info! </strong> Drug Test Kit updated successfully.";
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage); 
+                        header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
                     die;
-                    }
-                    else{
-                    header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
-                    die;
-                    }
+                   
                 }
 
             }
@@ -306,6 +305,9 @@ class Inventory_Controller extends CI_Controller {
             {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
+                    $szMessage['type'] = "success";
+                        $szMessage['content'] = "<strong> Marketing Material Info! </strong> Marketing Material updated successfully.";
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
                 }
 
