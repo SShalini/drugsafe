@@ -17,6 +17,7 @@
             $this->session->unset_userdata('drugsafe_user_message');
         }
         ?>
+        
         <div id="page_content" class="row">
             <div class="col-md-12">
                <ul class="page-breadcrumb breadcrumb">
@@ -32,6 +33,109 @@
                         <span class="active">Client List</span>
                     </li>
                 </ul>
+                
+                <div class="portlet light bordered about-text" id="user_info">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-equalizer font-red-sunglo"></i>
+                <span class="caption-subject font-red-sunglo bold uppercase">
+                 
+                    <?php 
+                    /*if($clientDetailsAray['clientType']=='0')
+                    {
+                        echo $clientDetailsAray['szName']."'s Headquarters";
+                    }
+                    else
+                    {*/
+                       echo "franchisee Details";
+//                    }
+                   ?>
+                    &nbsp; &nbsp;
+                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="viewUserDetails('<?php echo $franchiseeArr['id'];?>');" href="javascript:void(0);">
+                        <i class="fa fa-pencil"></i> 
+                    </a>
+                </span>
+            </div>
+            
+        </div>
+        <div class="portlet-body alert">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Name:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szName'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Contact No:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szContactNumber'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>City:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szCity'];?></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Country:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szCountry'];?></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Email Id:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szEmail'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Address:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szAddress'];?></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>State:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szState'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ZIP/Postal Code:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['szZipCode'];?></p>
+                        </div>
+                    </div>
+
+                </div>
+              
+             </div>
+            
+        </div>
+                </div>
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -41,10 +145,7 @@
                         <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
 
-                                <!--<button class="btn btn-sm green-meadow" onclick="addClientData(<?php /*echo $idfranchisee;*/ ?>);" href="javascript:void(0);">
-
-                                        &nbsp;Add New Client
-                                    </button>-->
+                                
                             </div>
                         </div>
                     </div>
@@ -61,7 +162,7 @@
                                     <th> Id.</th>
                                     <th> Name</th>
                                     <th> Email</th>
-                                    <th> Client Type</th>
+                                    <th> No of sites</th>
                                     <th> Contact No</th>
                                     <th> Created By</th>
                                     <th> Updated By</th>
@@ -78,14 +179,11 @@
                                         <td> <?php echo $clientData['szName'] ?> </td>
                                         <td> <?php echo $clientData['szEmail']; ?> </td>
                                         <td>
-
                                             <?php
-                                            if ($clientData['clientType'] == '0') {
-                                                echo "Parent";
-                                            } else {
-                                                echo "Child";
-                                            }
+                                                $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($clientData['id']);
+                                                echo count($childClientDetailsAray);
                                             ?>
+                                            
 
                                         </td>
                                         <td> <?php echo $clientData['szContactNumber']; ?> </td>
