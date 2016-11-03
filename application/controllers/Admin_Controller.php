@@ -14,14 +14,13 @@ class Admin_Controller extends CI_Controller {
 	
 	public function index()
 	{
-             $is_user_login = is_user_login($this);
-            
+            $is_user_login = is_user_login($this);
             if($is_user_login)
-          {
+            {
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                     die;
-           }
+            }
             else
             {
                 ob_end_clean();
@@ -69,12 +68,9 @@ class Admin_Controller extends CI_Controller {
                 $data['szMetaTagTitle'] = "Admin Login";
                 $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                 $data['is_user_login'] = $is_user_login;
-                
-                
-                
-        $this->load->view('layout/login_header', $data);
-        $this->load->view('admin/admin_login');
-        $this->load->view('layout/login_footer');
+                $this->load->view('layout/login_header', $data);
+                $this->load->view('admin/admin_login');
+                $this->load->view('layout/login_footer');
 	    
         }
 
@@ -391,7 +387,7 @@ class Admin_Controller extends CI_Controller {
         if($is_user_login)
         {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/dashboard");
+            header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
             die;
         }
         //echo " Hello";
@@ -399,7 +395,6 @@ class Admin_Controller extends CI_Controller {
         //  echo $passwordKey;
         if($this->Admin_Model->checkPasswordRecoveryExist($passwordKey))
         {
-
 
             //echo $passwordKey;
             $data_validate = $this->input->post('recoverAdminData');
@@ -432,7 +427,6 @@ class Admin_Controller extends CI_Controller {
                 }
                 else
                 {
-                    // echo "Hello";
                     $szMessage['type'] = "error";
                     $szMessage['content'] = "<strong>Password Recovery! </strong> Password recovery link is expired. Please reset your password again.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);

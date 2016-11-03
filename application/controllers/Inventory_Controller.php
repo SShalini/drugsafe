@@ -347,9 +347,7 @@ class Inventory_Controller extends CI_Controller {
             {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
-                   
                     header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
-                    
                 }
 
             }
