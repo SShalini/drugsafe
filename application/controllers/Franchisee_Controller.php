@@ -188,9 +188,10 @@ class Franchisee_Controller extends CI_Controller {
             $data['franchiseeDataArr'] = $frdata;
             $data['idfranchisee'] = $idfranchisee;
             $data['clientAry'] = $clientAray;
+            $data['pageName'] = "Franchisee_List";
             $data['szMetaTagTitle'] = "Client List";
             $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Client_List";       
+                
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('franchisee/clientList');
@@ -386,7 +387,8 @@ class Franchisee_Controller extends CI_Controller {
                 }
                     $data['szMetaTagTitle'] = "Edit Client Details ";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Edit Client Details"; 
+                    $data['pageName'] = "Franchisee_List";
+ 
                     $data['countryAry'] = $countryAry;
                     $data['stateAry'] = $stateAry ;
                     $data['validate'] = $validate;

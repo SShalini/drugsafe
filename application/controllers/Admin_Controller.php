@@ -287,7 +287,7 @@ class Admin_Controller extends CI_Controller {
                 }
                     $data['szMetaTagTitle'] = "Edit Franchisee Details ";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Edit Franchisee Details"; 
+                    $data['pageName'] = "Franchisee_List";
                     $data['countryAry'] = $countryAry;
                     $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;

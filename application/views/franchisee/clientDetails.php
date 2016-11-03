@@ -122,10 +122,12 @@
                             </div>
                             <div class="col-sm-8">
                                 <p><?php
+                                    $count='0';
                                     if($childClientDetailsAray)
                                     {
-                                        echo count($childClientDetailsAray);
+                                        $count=count($childClientDetailsAray);
                                     }
+                                    echo $count;
                                     ?>
                             </div>
                         </div>

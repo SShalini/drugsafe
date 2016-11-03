@@ -22,7 +22,7 @@
                             <li class="nav-item start <?php if(trim($pageName)=='Franchisee_List'){?>active open<?php }?>">
                                 <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="nav-link nav-toggle">
                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span class="title">Franchisee List</span>
+                                    <span class="title">Franchisee</span>
                                     <span class="selected"></span>
                                 </a>
                             </li>
