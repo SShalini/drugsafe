@@ -19,13 +19,13 @@
         ?>
         <div id="page_content" class="row">
             <div class="col-md-12">
-                <ul class="page-breadcrumb breadcrumb">
+               <ul class="page-breadcrumb breadcrumb">
                     <li>
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
-                        <a onclick="viewClient(<?php echo $franchiseeDataArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeDataArr['szName'];?></a>
+                        <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>

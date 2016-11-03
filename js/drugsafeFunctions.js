@@ -311,3 +311,11 @@ function editProduct(idProduct,flag) {
 }
 
 
+function viewModelStockValMgt(idfranchisee) {
+
+    $.post(__BASE_URL__ + "/stock_management/ModelStock", {idfranchisee: idfranchisee}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/stock_management/" + ar_result[1];
+
+    });
+}
