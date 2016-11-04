@@ -13,7 +13,7 @@ background: rgba(27,188,155,0.5) url("../../../images/drug-safe-coming-soon-bg.j
 }
 
 .login .content {
-    background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
+    background: rgba(255, 255, 255, 0.8) none repeat scroll 0 0;
     border-radius: 7px !important;
     margin: 40px auto;
     padding: 20px 30px 15px;
