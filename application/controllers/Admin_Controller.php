@@ -117,7 +117,7 @@ class Admin_Controller extends CI_Controller {
 		
             $data_validate = $this->input->post('drugsafeChangePassword');
    
-             if($this->Admin_Model->validateUserData($data_validate))
+            if($this->Admin_Model->validateUserData($data_validate))
             {
 
                     if($this->Admin_Model->updateChangePassword() )
@@ -186,7 +186,6 @@ class Admin_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
- 
             $p_sortby = (trim($_POST['p_sortby']) != '' ? trim($_POST['p_sortby']) : 'szName');
             $p_sortorder = (trim($_POST['p_sortorder']) != '' ? trim($_POST['p_sortorder']) : 'ASC');
    

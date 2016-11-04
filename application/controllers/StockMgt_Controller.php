@@ -27,6 +27,7 @@ class StockMgt_Controller extends CI_Controller {
         }
         function modelstockvalue()
         {
+           
             $is_user_login = is_user_login($this);
 
             // redirect to dashboard if already logged in
