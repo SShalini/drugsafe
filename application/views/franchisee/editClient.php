@@ -8,10 +8,19 @@
                             <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                        <li>
-                            <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
+                        <?php
+                         if($_SESSION['drugsafe_user']['iRole']=='1')
+                        {
+                             ?>
+                            <li>
+                                <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                             <?php
+                            
+                        }
+                        ?>
+                       
                         <?php if(!empty($clientChildDetailsAray)){?>
                             <li>
                                 <a onclick="viewClientDetails(<?php echo $clientChildDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientChildDetailsAray['szName'];?></a>

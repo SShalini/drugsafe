@@ -103,8 +103,12 @@ function insertClientDetails($data,$franchiseeId='')
                     return array();
             }
         }
-        public function getAllClientDetails($parent=false)
+        public function getAllClientDetails($parent=false,$franchiseId='')
         {
+            if($franchiseId)
+            {
+                 $this->db->where('clientType',0);
+            }
             $whereAry = array('isDeleted=' => '0');
             
             $this->db->select('*');
@@ -115,6 +119,10 @@ function insertClientDetails($data,$franchiseeId='')
             if($parent)
             {
                 $this->db->where('clientType',0);
+            }
+            if($franchiseId)
+            {
+                 $this->db->where('franchiseeId',$franchiseId);
             }
             $query = $this->db->get();
             $s=$this->db->last_query();

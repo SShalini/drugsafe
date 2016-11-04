@@ -59,20 +59,13 @@ class Franchisee_Controller extends CI_Controller {
            
             $idfranchisee = $this->input->post('idfranchisee');
             $idclient = $this->input->post('idclient');
-<<<<<<< .mine
             $url = $this->input->post('url');
-||||||| .r94
-=======
-            $flag = $this->input->post('flag');
->>>>>>> .r105
             $this->session->set_userdata('idfranchisee',$idfranchisee);
             $this->session->set_userdata('idclient',$idclient);
-<<<<<<< .mine
+
             $this->session->set_userdata('url',$url);
-||||||| .r94
-=======
-             $this->session->set_userdata('flag',$flag);
->>>>>>> .r105
+
+
             echo "SUCCESS||||";
             echo "addClient";
             
@@ -88,12 +81,11 @@ class Franchisee_Controller extends CI_Controller {
             $idfranchisee = $this->session->userdata('idfranchisee');
             $url = $this->session->userdata('url');
             $idclient = $this->session->userdata('idclient');
-<<<<<<< .mine
+
             $franchiseeAray =$this->Admin_Model->viewFranchiseeList();
-||||||| .r94
-=======
+
             
->>>>>>> .r105
+
             if(!empty($idclient)){
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idclient);
                 $data['clientDetailsAray'] = $franchiseeDetArr1;
@@ -109,33 +101,30 @@ class Franchisee_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
-<<<<<<< .mine
+
                     ob_end_clean();
                     $this->session->unset_userdata('idfranchisee');
                     $this->session->unset_userdata('idclient');
-                    header("Location:" . __BASE_URL__ . $url);
-||||||| .r94
-                   ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/franchisee/clientList");
-=======
-                     $flag = $this->session->userdata('flag');
-                 if($flag==1){
-                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/franchisee/viewClientDetails");
-                    die;
-                 }
-                 else{
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/franchisee/clientList");
->>>>>>> .r105
-                    die; 
-                 }
+                    header("Location:" . __BASE_URL__ . $url);
                 }
             }
-           
+                    if($idfranchisee)
+                    {
+                        $data['pageName'] = "Franchisee_List";
+                    }
+                    else
+                    {
+                        $data['pageName'] = "Client_Record";
+                    }
+                    if($_SESSION['drugsafe_user']['iRole']=='2')
+                    {
+                         $data['pageName'] = "Client_Record";
+                    }
+                    
                     $data['szMetaTagTitle'] = "Add Client";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Franchisee_List";
+                    
                     $data['countryAry'] = $countryAry;
                     $data['franchiseeAray'] = $franchiseeAray;
                     $data['stateAry'] = $stateAry;
@@ -332,8 +321,7 @@ class Franchisee_Controller extends CI_Controller {
                 $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientFranchiseeArr[0]['franchiseeId']);
                 $data['franchiseeArr'] = $franchiseeDetArr;
             }
-            
-           $data['updateByDataArr'] = $UpdatedBy; 
+            $data['updateByDataArr'] = $UpdatedBy; 
             $data['franchiseeDataArr'] = $frdata;
             $data['idClient'] = $idClient;
             $data['clientDetailsAray'] = $clientDetailsAray;
@@ -427,9 +415,21 @@ class Franchisee_Controller extends CI_Controller {
                         }
                     }
                 }
+                    if($idfranchisee)
+                    {
+                        $data['pageName'] = "Franchisee_List";
+                    }
+                    else
+                    {
+                        $data['pageName'] = "Client_Record";
+                    }
+                    if($_SESSION['drugsafe_user']['iRole']=='2')
+                    {
+                         $data['pageName'] = "Client_Record";
+                    }
                     $data['szMetaTagTitle'] = "Edit Client Details ";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Franchisee_List";
+                   
  
                     $data['countryAry'] = $countryAry;
                     $data['stateAry'] = $stateAry ;
@@ -451,16 +451,18 @@ class Franchisee_Controller extends CI_Controller {
         function clientRecord()
         {
             $is_user_login = is_user_login($this);
-
-            // redirect to dashboard if already logged in
+           
             if(!$is_user_login)
             {
                 ob_end_clean();
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-          
-            $clientAray =$this->Franchisee_Model->getAllClientDetails(true);
+           if($_SESSION['drugsafe_user']['iRole']=='2')
+           {
+                $franchiseId=$_SESSION['drugsafe_user']['id'];
+           }
+            $clientAray =$this->Franchisee_Model->getAllClientDetails(true,$franchiseId);
             $data['clientAry'] = $clientAray;
             $data['pageName'] = "Client_Record";
             $data['szMetaTagTitle'] = "Client Record";
@@ -471,6 +473,5 @@ class Franchisee_Controller extends CI_Controller {
             $this->load->view('franchisee/clientRecord');
             $this->load->view('layout/admin_footer');
         }
-
-}      
+    }      
 ?>

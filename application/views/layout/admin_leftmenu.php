@@ -22,7 +22,7 @@
                             <li class="nav-item start <?php if(trim($pageName)=='Franchisee_List'){?>active open<?php }?>">
                                 <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="nav-link nav-toggle">
                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span class="title">Franchisee</span>
+                                    <span class="title">Franchisees</span>
                                     <span class="selected"></span>
                                 </a>
                             </li>
@@ -35,7 +35,11 @@
                                     <span class="selected"></span>
                                 </a>
                             </li>
-                             <li class="nav-item start <?php if(trim($pageName)=='Inventory'){?>active open<?php }?>">
+                            <?php
+                             if($_SESSION['drugsafe_user']['iRole']=='1')
+                             {
+                                 ?>
+                                <li class="nav-item start <?php if(trim($pageName)=='Inventory'){?>active open<?php }?>">
                                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <span class="title">Inventory </span>
@@ -58,6 +62,11 @@
 				
                               
                             </li>
+                                 <?php
+                             }
+                            
+                            ?>
+                             
                         </ul>
                      </div>  
            

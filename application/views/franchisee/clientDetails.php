@@ -182,9 +182,26 @@
             </div>
             <div class="actions">
                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                    <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'1');">
+                    <?php
+                    if($_SESSION['drugsafe_user']['iRole']=='1')
+                    {
+                        ?>
+                        <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'1');">
                         &nbsp;Add Site
-                    </button>
+                        </button>
+                        <?php
+                    }
+                    else 
+                    {
+                        ?>
+                        <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__;?>');">
+                        &nbsp;Add Site
+                        </button>
+                        <?php
+     
+                    }
+                    ?>
+                    
                 </div>
             </div>
             

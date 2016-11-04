@@ -84,6 +84,12 @@ if(ENVIRONMENT == 'development'){
     $dbconfigVars['password'] = 'Whiz@2016';
     $dbconfigVars['database'] = 'db653031407';
 }
+elseif (ENVIRONMENT == 'production'){
+    $dbconfigVars['hostname'] = 'localhost';
+    $dbconfigVars['username'] = 'whiz';
+    $dbconfigVars['password'] = 'Whiz@2016';
+    $dbconfigVars['database'] = 'drugsafe';
+}
 
 $db['default'] = array(
 	'dsn'	=> '',

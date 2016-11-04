@@ -37,7 +37,7 @@
                         </div>
                         <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>franchisee/addClient');">
+                                <button class="btn btn-sm green-meadow" onclick="addClientData('','','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');" href="javascript:void(0);">
                                     &nbsp;Add New Client
                                 </button>
                             </div>
@@ -54,7 +54,16 @@
                                     <th> Id.</th>
                                     <th> Name</th>
                                     <th> Email</th>
-                                    <th> franchisee</th>
+                                    <?php
+                                    if($_SESSION['drugsafe_user']['iRole']=='1')
+                                    {
+                                        ?>
+                                         <th> franchisee</th>
+                                        <?php
+                                        
+                                    }
+                                    ?>
+                                    
                                     <th> No of sites</th>
                                     <th> Contact No</th>
                                     <th> Created By</th>
@@ -71,12 +80,20 @@
                                         <td> CL-<?php echo $clientData['id']; ?> </td>
                                         <td> <?php echo $clientData['szName'] ?> </td>
                                         <td> <?php echo $clientData['szEmail']; ?> </td>
-                                        <td>
+                                        <?php
+                                         if($_SESSION['drugsafe_user']['iRole']=='1')
+                                         {
+                                            ?>
+                                            <td>
                                             <?php 
                                               $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientData['franchiseeId']);
                                               echo $franchiseeDetArr['szName'];
                                             ?>
-                                        </td>
+                                            </td>  
+                                            <?php
+                                         }
+                                        ?>
+                                       
                                         <td>
                                             <?php
                                                 $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($clientData['id']);

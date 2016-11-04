@@ -175,19 +175,19 @@ function viewClient(idfranchisee) {
     });
 }
 
-function addClientData(idfranchisee,idclient,flag) {
+function addClientData(idfranchisee,idclient,url) {
     if(idclient == undefined || idclient == null){
         idclient = 0;
     }
-    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,flag:flag}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/addClient", {idfranchisee: idfranchisee,idclient:idclient,url:url}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 
     });
 }
-function clientDelete(idClient) {
+function clientDelete(idClient,url) {
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/franchisee/deleteClientAlert", {idClient: idClient}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/deleteClientAlert", {idClient: idClient,url:url}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -251,12 +251,12 @@ function viewClientDetails(idClient) {
     });
 }
 
-function editClient(idClient, idfranchisee,flag) {
+function editClient(idClient, idfranchisee,url) {
 
     $.post(__BASE_URL__ + "/franchisee/editClientData", {
         idClient: idClient,
         idfranchisee: idfranchisee,
-        flag: flag
+        url: url
     }, function (result) {
 
         ar_result = result.split('||||');
@@ -331,7 +331,5 @@ function viewModelStockValMgt(idfranchisee) {
     $.post(__BASE_URL__ + "/stock_management/ModelStock", {idfranchisee: idfranchisee}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/stock_management/" + ar_result[1];
-        
-
     });
 }

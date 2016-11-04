@@ -8,10 +8,19 @@
                             <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                        <li>
+                        <?php
+                        if($franchiseeArr['id'])
+                        {
+                            ?>
+                         <li>
                             <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
                             <i class="fa fa-circle"></i>
                         </li>
+                            <?php
+                            
+                        }
+                        ?>
+                       
                         <?php
 
                         if($szParentId > 0){?>
@@ -99,7 +108,11 @@
                                         </div>
                                        
                                     </div>
-                                    <div class="form-group <?php if(!empty($arErrorMessages['franchiseeid'])){?>has-error<?php }?>">
+                                    <?php
+                                   if($_SESSION['drugsafe_user']['iRole']=='1')
+                                    {
+                                       ?>
+                                         <div class="form-group <?php if(!empty($arErrorMessages['franchiseeid'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Franchisee</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
@@ -130,6 +143,17 @@
                                         </div>
                                        
                                     </div>
+                                       <?php
+                                        
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                    <input id="franchiseeid" class="form-control" type="hidden" value="<?php echo $_SESSION['drugsafe_user']['id'] ;?>" name="clientData[franchiseeid]">
+                                        <?php
+                                    }
+                                    ?>
+                                   
                                     <?php if($szParentId > 0){?>
                                     <input id="szParentId" class="form-control" type="hidden" value="<?php echo $szParentId;?>" name="clientData[szParentId]">
                                     <?php }else{ ?>

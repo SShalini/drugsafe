@@ -38,6 +38,9 @@ if(ENVIRONMENT == 'development'){
 }elseif (ENVIRONMENT == 'testing'){
     define("__BASE_URL__", "http://whizsolutionsdev.com/drugsafe");
 }
+elseif (ENVIRONMENT == 'production'){
+    define("__BASE_URL__", "http://drugsafe.dev.mobileconnekt.com.au");
+}
 define("__BASE_CSS_URL__", __BASE_URL__ . "/css");
 define("__APP_PATH_CSS__", __APP_PATH__ . "/css");
 
