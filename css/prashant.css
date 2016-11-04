@@ -35,6 +35,8 @@ body .logo img {
     float: none;
     clear: both;
   }
+  body .logo img {
+    width: 100%;
+    height: auto;
+  }
 }
-.img-responsive{max-width:70px;padding:10px;}
-.ajax-upload-dragdrop {width:100% !important}
