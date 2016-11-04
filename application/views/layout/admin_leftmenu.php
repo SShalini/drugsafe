@@ -27,15 +27,14 @@
                                 </a>
                             </li>
                            <?php }?> 
-                             <?php if($_SESSION['drugsafe_user']['iRole']==2){?>
-                            <li class="nav-item start <?php if(trim($pageName)=='Client_List'){?>active open<?php }?>">
-                                <a href="<?php echo __BASE_URL__;?>/franchisee/clientList" class="nav-link nav-toggle">
+                            
+                            <li class="nav-item start <?php if(trim($pageName)=='Client_Record'){?>active open<?php }?>">
+                                <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord" class="nav-link nav-toggle">
                                     <i class="fa fa-user" aria-hidden="true"></i>
-                                    <span class="title">Client List</span>
+                                    <span class="title">Client Record</span>
                                     <span class="selected"></span>
                                 </a>
                             </li>
-                           <?php }?> 
                              <li class="nav-item start <?php if(trim($pageName)=='Inventory'){?>active open<?php }?>">
                                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                                     <i class="fa fa-user" aria-hidden="true"></i>
