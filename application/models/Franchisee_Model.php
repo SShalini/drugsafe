@@ -38,12 +38,6 @@ function insertClientDetails($data,$franchiseeId='')
             $id_client = (int)$this->db->insert_id();
             $CreatedBy=$_SESSION['drugsafe_user']['id'];
           
-            if($franchiseeId=='')
-            {
-                 $franchiseeId=$_SESSION['drugsafe_user']['id'];
-                      
-            }
-            
             $clientType=$data['szParentId'];
             if($clientType=='')
             {
@@ -52,7 +46,7 @@ function insertClientDetails($data,$franchiseeId='')
            // print_r($franchiseeId);die;
             $clientAry=array(
                 
-                'franchiseeId' => $franchiseeId,
+                'franchiseeId' => $data['franchiseeid'],
                 'clientId' => $id_client,
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
@@ -95,6 +89,31 @@ function insertClientDetails($data,$franchiseeId='')
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             $this->db->where($whereAry);
             if($parent){
+                $this->db->where('clientType',0);
+            }
+            $query = $this->db->get();
+            $s=$this->db->last_query();
+           
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
+        public function getAllClientDetails($parent=false)
+        {
+            $whereAry = array('isDeleted=' => '0');
+            
+            $this->db->select('*');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+            $this->db->where($whereAry);
+            $this->db->order_by("franchiseeId","asc");
+            if($parent)
+            {
                 $this->db->where('clientType',0);
             }
             $query = $this->db->get();

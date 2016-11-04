@@ -94,8 +94,6 @@ class Admin_Model extends Error_Model {
                 }
                  
             }
-             
-
             if($this->data['szPassword'] != '' && !isset($this->arErrorMessages['szPassword']) && sanitize_all_html_input(trim($data['szConfirmPassword'])) != '' && $this->data['szPassword'] != sanitize_all_html_input(trim($data['szConfirmPassword'])))
             {
                     $this->addError("szConfirmPassword", "Confirm password does not match.");
@@ -392,7 +390,7 @@ class Admin_Model extends Error_Model {
 
         }
         
-        public function viewFranchiseeList($p_sortby,$p_sortorder)
+        public function viewFranchiseeList($p_sortby='',$p_sortorder='')
         {
 
             $whereAry = array('isDeleted=' => '0','iRole' => '2');
