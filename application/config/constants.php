@@ -279,3 +279,6 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 defined('__DBC_SCHEMATA_ADMIN__')      OR define('__DBC_SCHEMATA_ADMIN__', 'ds_user'); 
+
+define('__URL_FRANCHISEE_CLIENTRECORD__', '/franchisee/clientRecord');
+define('__URL_FRANCHISEE_VIEWCLIENTDETIALS__', '/franchisee/viewClientDetails'); 
