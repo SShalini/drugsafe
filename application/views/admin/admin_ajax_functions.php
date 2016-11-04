@@ -11,7 +11,7 @@ if($mode == '__DELETE_FRANCHISEE_POPUP__')
                     <h4 class="modal-title">Delete Franchisee Records</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Deleting this franchisee record will delete all the client records (main client and site records) associated with this client.?</p>
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Deleting this franchisee record will delete all the client records (main client and site records) associated with this client ?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
