@@ -40,7 +40,6 @@
                                 </div>
                             </div>-->
                         </div>
-
                         <div class="portlet-body">
                             <form class="form-horizontal" id="clientData" action="<?php echo __BASE_URL__?>/franchisee/addClient" name="clientData" method="post">
                                 <div class="form-body">
@@ -58,7 +57,7 @@
                                                 <i class="fa fa-times-circle"></i>
                                                 <?php echo $arErrorMessages['szName'];?>
                                             </span>
-                                        <?php }?>
+                                            <?php }?>
                                         </div>
                                        
                                         
@@ -100,28 +99,37 @@
                                         </div>
                                        
                                     </div>
-                                    <!--<div id="clientType" class="form-group <?php /*if(!empty($arErrorMessages['szClientType'])){*/?>has-error<?php /*}*/?>">
-                                        <label class="col-md-3 control-label">Client Type</label>
+                                    <div class="form-group <?php if(!empty($arErrorMessages['franchiseeid'])){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label">Franchisee</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control" name="clientData[szClientType]" id="szClientType" Placeholder="Client Type" onfocus="remove_formError(this.id,'true')" onchange="getParenDetails(<?php /*echo $idfranchisee;*/?>,this.value);" required />
-                                                    <option value=''>Client Type</option>
-                                                    <option value='0' <?php /*echo(sanitize_post_field_value($_POST['clientData']['szClientType']) == '1' ? "selected" : "");*/?>>Parent</option>
-                                                    <option value='1' <?php /*echo(sanitize_post_field_value($_POST['clientData']['szClientType']) == '2' ? "selected" : "");*/?>>Child</option>
+                                                <select class="form-control" name="clientData[franchiseeid]" id="franchiseeid"   Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                    <option value=''>Select</option>
+                                                    <?php
+                                                        if(!empty($franchiseeAray))
+                                                        {
+                                                            foreach($franchiseeAray as $franchiseeDetails)
+                                                            {
+                                                                ?>
+                                                                 <option value="<?php echo trim($franchiseeDetails['id']);?>" <?php echo(sanitize_post_field_value($_POST['clientData']['franchiseeid']) == trim($franchiseeDetails['id']) ? "selected" : "");?>><?php echo trim($franchiseeDetails['szName']);?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                    ?>
                                                 </select>
                                             </div>
-                                            <?php /*if(!empty($arErrorMessages['szClientType'])){*/?>
+                                             <?php if(!empty($arErrorMessages['franchiseeid'])){?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php /*echo $arErrorMessages['szClientType'];*/?>
+                                                <?php echo $arErrorMessages['franchiseeid'];?>
                                             </span>
-                                        <?php /*}*/?>
+                                        <?php }?>
                                         </div>
-                                        
-                                    </div>-->
+                                       
+                                    </div>
                                     <?php if($szParentId > 0){?>
                                     <input id="szParentId" class="form-control" type="hidden" value="<?php echo $szParentId;?>" name="clientData[szParentId]">
                                     <?php }else{ ?>
