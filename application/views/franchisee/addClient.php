@@ -1,7 +1,6 @@
 <div class="page-content-wrapper">
         <div class="page-content">
-            <div id="page_content" class="row">
-                
+            <div id="page_content" class="row">  
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>

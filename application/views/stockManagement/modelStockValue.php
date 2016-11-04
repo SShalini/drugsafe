@@ -1,7 +1,7 @@
 <div class="page-content-wrapper">
 <!-- BEGIN CONTENT BODY -->
   <div class="page-content">
-     <div class="portlet box blue">
+     <div class="portlet box green-meadow">
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-equalizer "></i>&nbsp; &nbsp;
@@ -32,16 +32,7 @@
                                             <i class="icon-equalizer font-red-sunglo"></i>
                                             <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
                                         </div>
-                                        <div class="actions">
-                                        <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                                <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addDrugTestKit');">
-                                                    &nbsp;Add Drug Test Kit
-                                                </button>
-                                            </div>
-                                    </div>
-
-
-                                    </div>
+                                       </div>
                                     <?php
 
                                     if(!empty($drugTestKitAray))
@@ -56,6 +47,7 @@
                                                     <th> Product Code</th>
                                                     <th> Product Descreption</th>
                                                     <th> Product Cost</th>
+                                                    <th> Model Stock Value </th>
                                                     <th> Actions </th>
                                                 </tr>
                                             </thead>
@@ -72,9 +64,9 @@
                                                         <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                                         <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                         <td> <?php echo $drugTestKitData['szProductCost'];?> </td>
-
+                                                        <td> </td>
                                                         <td>
-                                                            <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editProduct('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                                            <a class="btn btn-circle btn-icon-only btn-default" title="Edit Model Stock Value" onclick="editModelStockValue(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
                                                                 <i class="fa fa-pencil"></i> 
                                                             </a>
                                                              <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="productDeleteAlert(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
