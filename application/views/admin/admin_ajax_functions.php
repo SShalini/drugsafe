@@ -55,7 +55,7 @@ if($mode == '__DELETE_CLIENT_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Client</h4>
+                    <h4 class="modal-title">Delete Client Records</h4>
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Client?</p>
@@ -79,7 +79,7 @@ if($mode == '__DELETE_CLIENT_CONFIRM__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Client</h4>
+                    <h4 class="modal-title">Deleted Client Records</h4>
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully deleted.</p>
