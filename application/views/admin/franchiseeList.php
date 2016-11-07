@@ -81,23 +81,29 @@
                                             <td> <?php echo $franchiseeData['szContactNumber'];?> </td>
                                             <td> <?php echo $franchiseeData['szCity'];?> </td>
                                             <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+                                                <!--<a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php /*echo $franchiseeData['id'];*/?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
-                                                </a>
+                                                </a>-->
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="viewUserDetails('<?php echo $franchiseeData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client List" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Franchisee" onclick="franchiseeDelete(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Change User Status" onclick="franchiseeDelete(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+                                               <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php /*echo $franchiseeData['id'];*/?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>
+<<<<<<< .mine
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="franchiseeDelete(<?php /*echo $franchiseeData['id'];*/?>);" href="javascript:void(0);"></i>
+||||||| .r112
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="franchiseeDelete(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+=======
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="viewProductStockMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+>>>>>>> .r124
                                                     <i class="fa fa-cubes" aria-hidden="true"></i>
                                                 </a>
                                                 
