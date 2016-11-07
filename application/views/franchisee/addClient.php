@@ -110,7 +110,9 @@
                                     <?php
                                    if($_SESSION['drugsafe_user']['iRole']=='1')
                                     {
-                                       ?>
+                                      if(!$idfranchisee)
+                                      {
+                                        ?>
                                          <div class="form-group <?php if(!empty($arErrorMessages['franchiseeid'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Franchisee</label>
                                         <div class="col-md-5">
@@ -142,6 +144,17 @@
                                         </div>
                                        
                                     </div>
+                                        <?php
+                                          
+                                      }
+                                      else
+                                      {
+                                          ?>
+                                        <input id="franchiseeid" class="form-control" type="hidden" value="<?php echo $idfranchisee; ?>" name="clientData[franchiseeid]">
+                                          <?php
+                                      }
+                                       ?>
+                                         
                                        <?php
                                         
                                     }

@@ -36,6 +36,7 @@
                         </li>
 
                     </ul>
+                   
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -291,7 +292,7 @@
                                         </div>
                                        
                                     </div>
-
+                                    <input id="franchiseeid" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['franchiseeId'] ;?>" name="clientData[franchiseeid]">
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="clientData[iRole]">
                                 <div class="form-actions">
                                     <div class="row">

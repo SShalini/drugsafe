@@ -203,7 +203,7 @@
                                                 </a>
                                             <?php } ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data"
-                                               onclick="editClient('<?php echo $clientData['id']; ?>',<?php echo $idfranchisee; ?>);"
+                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $idfranchisee; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
                                                href="javascript:void(0);">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
@@ -216,7 +216,7 @@
                                             </a>
                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="Delete Client"
-                                               onclick="clientDelete(<?php echo $clientData['id']; ?>);"
+                                               onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
                                                href="javascript:void(0);"></i>
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
 

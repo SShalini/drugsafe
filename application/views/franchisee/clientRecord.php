@@ -58,14 +58,14 @@
                                     if($_SESSION['drugsafe_user']['iRole']=='1')
                                     {
                                         ?>
-                                         <th> franchisee</th>
+                                         <th> Franchisee</th>
                                         <?php
                                         
                                     }
                                     ?>
                                     
-                                    <th> No of sites</th>
-                                    <th> Contact No</th>
+                                    <th> No. of sites</th>
+                                    <th> Contact No.</th>
                                     <th> Created By</th>
                                     <th> Updated By</th>
                                     <th> Actions</th>
