@@ -105,19 +105,10 @@ class Franchisee_Controller extends CI_Controller {
                     header("Location:" . __BASE_URL__ . $url);
                 }
             }
-                    if($idfranchisee)
-                    {
-                        $data['pageName'] = "Franchisee_List";
-                    }
-                    else
-                    {
-                        $data['pageName'] = "Client_Record";
-                    }
-                    if($_SESSION['drugsafe_user']['iRole']=='2')
-                    {
-                         $data['pageName'] = "Client_Record";
-                    }
                     
+                         
+                   
+                    $data['pageName'] = "Client_Record";
                     $data['szMetaTagTitle'] = "Add Client";
                     $data['is_user_login'] = $is_user_login;
                     
@@ -127,7 +118,6 @@ class Franchisee_Controller extends CI_Controller {
                     $data['validate'] = $validate;
                     $data['idfranchisee'] = $idfranchisee;
                     $data['szParentId'] = $idclient;
-                    $_POST['clientData']['franchiseeid']=$idfranchisee;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     
             
@@ -212,7 +202,7 @@ class Franchisee_Controller extends CI_Controller {
             $data['franchiseeDataArr'] = $frdata;
             $data['idfranchisee'] = $idfranchisee;
             $data['clientAry'] = $clientAray;
-            $data['pageName'] = "Franchisee_List";
+            $data['pageName'] = "Client_Record";
             $data['szMetaTagTitle'] = "Client List";
             $data['is_user_login'] = $is_user_login;
                 
@@ -320,6 +310,7 @@ class Franchisee_Controller extends CI_Controller {
             $data['updateByDataArr'] = $UpdatedBy; 
             $data['franchiseeDataArr'] = $frdata;
             $data['idClient'] = $idClient;
+            $data['pageName'] = "Client_Record";
             $data['clientDetailsAray'] = $clientDetailsAray;
             $data['childClientDetailsAray'] = $childClientDetailsAray;
             $data['szMetaTagTitle'] = "Client Details";
@@ -335,7 +326,7 @@ class Franchisee_Controller extends CI_Controller {
             $idClient = $this->input->post('idClient');
             $idfranchisee = $this->input->post('idfranchisee');
             $url = $this->input->post('url');
-            $flag = $this->input->post('flag');
+            
   
             if($idClient>0)
             {
@@ -374,6 +365,7 @@ class Franchisee_Controller extends CI_Controller {
             {
 
                 $data_validate = $this->input->post('clientData');
+                
 
                 if ($userDataAry['clientType'] !== '0') {
                     $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
@@ -392,46 +384,27 @@ class Franchisee_Controller extends CI_Controller {
                 {
                     if($this->Franchisee_Model->updateClientDetails($idClient,$data_validate))
                     {
-                        $flag=   $this->session->userdata('flag');
+                        
                         
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         
-                        if($flag == 1){
-                        ob_end_clean();
+                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . $url);
                         
                         die;
-                        }
-                        else{
-                            ob_end_clean();
-                            header("Location:" . __BASE_URL__ . $url);
-                            die;  
-                        }
                     }
                 }
-                    if($idfranchisee)
-                    {
-                        $data['pageName'] = "Franchisee_List";
-                    }
-                    else
-                    {
-                        $data['pageName'] = "Client_Record";
-                    }
-                    if($_SESSION['drugsafe_user']['iRole']=='2')
-                    {
-                         $data['pageName'] = "Client_Record";
-                    }
+                   
+                        
                     $data['szMetaTagTitle'] = "Edit Client Details ";
                     $data['is_user_login'] = $is_user_login;
-                   
- 
+                    $data['pageName'] = "Client_Record";
                     $data['countryAry'] = $countryAry;
                     $data['stateAry'] = $stateAry ;
                     $data['validate'] = $validate;
                     $_POST['clientData'] = $userDataAry;
-
                     $data['idfranchisee'] = $idfranchisee;
                     $data['parentClient'] = $parentClient;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;

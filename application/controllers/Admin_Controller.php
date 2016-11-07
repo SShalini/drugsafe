@@ -28,7 +28,7 @@ class Admin_Controller extends CI_Controller {
                 {
                     
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "franchisee/clientRecord");
+                    header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
                     die;
                 }
             }
@@ -195,6 +195,12 @@ class Admin_Controller extends CI_Controller {
             {
                 ob_end_clean();
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }elseif($_SESSION['drugsafe_user']['iRole']!='1')
+            {
+
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
                 die;
             }
             $p_sortby = (trim($_POST['p_sortby']) != '' ? trim($_POST['p_sortby']) : 'szName');
