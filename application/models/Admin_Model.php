@@ -72,7 +72,10 @@ class Admin_Model extends Error_Model {
         {
             $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szConfirmPassword", "Confirm Password", false, 32);
         }
-        
+         function set_franchiseeid($value,$flag=true)
+        {
+            $this->data['franchiseeid'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "franchiseeid", "franchisee", false, false, $flag);
+        }
        /*----------------------------ADMIN RELATED FUNCTIONS-------------------------------------------*/
        
         function validateUserData($data, $arExclude=array())
@@ -377,7 +380,7 @@ class Admin_Model extends Error_Model {
                    $replace_ary['szEmail']=$this->data['szEmail'];
                    $replace_ary['szPassword']=$szNewPassword;
                    $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
-                   $replace_ary['Link']=__BASE_URL__."/admin/addFranchisee";
+                   $replace_ary['Link']=__BASE_URL__."/admin/admin_login";
                    
                    createEmail($this,'__ADD_NEW_FRANCHISEE__', $replace_ary,$this->data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
                                        
@@ -656,6 +659,7 @@ class Admin_Model extends Error_Model {
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
+                 if(!in_array('franchiseeid',$arExclude)) $this->set_franchiseeid(sanitize_all_html_input(trim($data['franchiseeid'])),true);
                 if ($this->error == false && $this->data['szEmail'] != '') {
                     $adminData = $this->session->userdata('drugsafe_user');
                     $this->data['id'] = $idClient;

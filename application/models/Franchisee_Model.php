@@ -68,7 +68,7 @@ function insertClientDetails($data,$franchiseeId='')
                    $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
                    $replace_ary['Link']=__BASE_URL__."/franchisee/addClient";
                    
-                   createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
+                   //createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
                                        
                      return true;
                     
