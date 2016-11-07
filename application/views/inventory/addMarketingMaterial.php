@@ -4,18 +4,6 @@
             <div id="page_content" class="row">
                 
                 <div class="col-md-12">
-<<<<<<< .mine
-                    <ul class="page-breadcrumb breadcrumb">
-                        <li>
-                            <a href="<?php echo __BASE_URL__;?>">Home</a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                        <li>
-                            <span class="active">Add Marketing Material List</span>
-                        </li>
-                    </ul>
-||||||| .r82
-=======
                      <ul class="page-breadcrumb breadcrumb">
                         <li>
                             <a href="<?php echo __BASE_URL__;?>/inventory/marketingmateriallist">Home</a>
@@ -25,7 +13,6 @@
                             <span class="active">Add Marketing Material </span>
                         </li>
                     </ul>
->>>>>>> .r125
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -62,7 +49,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-usd"></i>
+                                                <i class="fa fa-user"></i>
                                                 </span>
                                                 <input id="szProductCost" class="form-control" type="text" value="<?php echo set_value('productData[szProductCost]'); ?>" placeholder="Product Cost" onfocus="remove_formError(this.id,'true')" name="productData[szProductCost]">
                                             </div>

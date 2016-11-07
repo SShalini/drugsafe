@@ -13,3 +13,6 @@ and open the template in the editor.
     color: #e73d4a;
    
 }
+.read-only {
+  cursor: not-allowed;
+}

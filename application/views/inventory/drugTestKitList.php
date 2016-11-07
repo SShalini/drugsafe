@@ -25,18 +25,6 @@
             ?>
             <div id="page_content" class="row">
                 <div class="col-md-12">
-<<<<<<< .mine
-                    <ul class="page-breadcrumb breadcrumb">
-                        <li>
-                            <a href="<?php echo __BASE_URL__;?>">Home</a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                        <li>
-                            <span class="active">Drug Test Kit List</span>
-                        </li>
-                    </ul>
-||||||| .r89
-=======
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
                             <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist">Home</a>
@@ -46,7 +34,6 @@
                             <span class="active">Drug Test Kit List</span>
                         </li>
                     </ul>
->>>>>>> .r125
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -75,8 +62,8 @@
                                     <tr>
                                         <th> Image </th>
                                         <th> Product Code</th>
-                                        <th> Descreption</th>
-                                        <th> Cost</th>
+                                        <th>  Descreption</th>
+                                        <th>  Cost</th>
                                         <th> Actions </th>
                                     </tr>
                                 </thead>

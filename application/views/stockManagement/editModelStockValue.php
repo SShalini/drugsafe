@@ -16,39 +16,33 @@
                     </div>
                     <div class="portlet-body form">
                             <!-- BEGIN FORM-->
+                 
                         <form action=""  id="editModelStockValue" name="editModelStockValue" method="post" class="form-horizontal form-row-sepe">
                             <div class="form-body">
                                 <h4 class="form-section"></h4>
-                                <div class="form-group <?php if(form_error('editModelStockValue[szProductCategory]')){?>has-error<?php }?>">
+                                <div class="form-group <?php if(form_error('editModelStockValue[szName]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-3">Product Category</label>
                                         <div class="col-md-4">
-                                            <select class="form-control input-large select2me" name="editModelStockValue[szProductCategory]" id="szProductCategory" Placeholder="Category" onchange="getProductListing(this.value);"  onfocus="remove_formError(this.id,'true')">
-                                                   <option value=''>Product Category</option>
-                                                    <option value='1' <?php echo (set_value('editModelStockValue[szProductCategory]') == '1' ? "selected" : "");?>>Drug Test Kits</option>
-                                                    <option value='2' <?php echo (set_value('editModelStockValue[szProductCategory]') == '2' ? "selected" : "");?>>Marketing Material</option>
-                                            </select>
+                                            <input id="szName" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('editModelStockValue[szName]'); ?>" placeholder="Category" onfocus="remove_formError(this.id,'true')" name="editModelStockValue[szName]">
                                           <?php
-                                            if(form_error('editModelStockValue[szProductCategory]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('editModelStockValue[szProductCategory]');?></span>
+                                            if(form_error('editModelStockValue[szName]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('editModelStockValue[szName]');?></span>
                                             </span><?php }?>  
                                         </div>
                                 </div>
-                                <div class="form-group <?php if(form_error('editModelStockValue[szProduct]')){?>has-error<?php }?>">
+                                <div class="form-group <?php if(form_error('editModelStockValue[szProductCode]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-3">Product</label>
                                         <div class="col-md-4">
                                             <div id="product_container">
-                                                 <select class="form-control input-large select2me" name="editModelStockValue[szProduct]" id="szProduct" Placeholder="Product" onfocus="remove_formError(this.id,'true')">
-                                                    <option value="">Select</option>
-                                                 </select>
+                                                 <input id="szModelStockVal" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('editModelStockValue[szProductCode]'); ?>" placeholder="Model Stock Value" onfocus="remove_formError(this.id,'true')" name="editModelStockValue[szProductCode]">
                                              </div>
                                           
                                            <?php
-                                            if(form_error('editModelStockValue[szProduct]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('editModelStockValue[szProduct]');?></span>
+                                            if(form_error('editModelStockValue[szProductCode]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('editModelStockValue[szProductCode]');?></span>
                                             </span><?php }?>   
                                         </div>
                                 </div>
-                               
                                 <div class="form-group <?php if(form_error('editModelStockValue[szModelStockVal]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-3">Model Stock value</label>
                                         <div class="col-md-4">
@@ -61,16 +55,14 @@
                                             </span><?php }?> 
                                         </div>
                                 </div>  
-                                
+                             <input id="szProductCategory" class="form-control input-large select2me" type="hidden" value="<?php echo set_value('editModelStockValue[szProductCategory]'); ?>" placeholder="Product Category" onfocus="remove_formError(this.id,'true')" name="editModelStockValue[szProductCategory]"> 
                             <div class="row">
                                 <div class="col-md-offset-3 col-md-4">
-                                    <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>
-                                    <input type="submit" class="btn green-meadow" value="Save" name="editModelStockValue[submit]">
+                                    <a href="<?=__BASE_URL__?>/stock_management/modelstockvalue" class="btn default uppercase" type="button">Cancel</a>
+                                    <input type="submit" class="btn green-meadow" value="Save" name="addModelStockValue[submit]">
                                 </div>
                             </div>
-                         
-                            </div>
-                           
+                            </div> 
                         </form>    
                     </div>
                 </div>

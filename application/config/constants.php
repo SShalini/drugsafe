@@ -66,6 +66,7 @@ define( "__DBC_SCHEMATA_USERS_EMAIL_LOG__", "tbl_email_log");
 define( "__DBC_SCHEMATA_EMAIL_CMS__", "tbl_email_cms");
 define( "__DBC_SCHEMATA_CLIENT__", "tbl_client");
 define( "__DBC_SCHEMATA_PRODUCT__", "tbl_product");
+define( "__DBC_SCHEMATA_PRODUCT_CATEGORY__", "tbl_product_category");
 define("__CUSTOMER_SUPPORT_EMAIL__", 'support@whiz-solutions.com');
 define("__DBC_SCHEMATA_MODEL_STOCK_VALUE__", "fr_modelstock_val");
 

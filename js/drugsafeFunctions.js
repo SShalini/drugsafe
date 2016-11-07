@@ -335,9 +335,9 @@ function viewModelStockValMgt(idfranchisee) {
 }
 
 
-function editModelStockValue(idProduct) {
+function addModelStockValue(idProduct) {
 
-    $.post(__BASE_URL__ + "/stock_management/editModelStock", {idProduct: idProduct}, function (result) {
+    $.post(__BASE_URL__ + "/stock_management/addModelStock", {idProduct: idProduct}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/stock_management/" + ar_result[1];
         
@@ -353,3 +353,13 @@ function getProductListing(szProductCategory) {
         }
     });
 }
+function editModelStockValue(idProduct) {
+
+    $.post(__BASE_URL__ + "/stock_management/editModelStock", {idProduct: idProduct}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/stock_management/" + ar_result[1];
+        
+
+    });
+}
+

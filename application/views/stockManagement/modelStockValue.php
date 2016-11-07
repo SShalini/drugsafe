@@ -1,6 +1,29 @@
 <div class="page-content-wrapper">
 <!-- BEGIN CONTENT BODY -->
   <div class="page-content">
+     <?php 
+            if(!empty($_SESSION['drugsafe_user_message']))
+            {
+                    if(trim($_SESSION['drugsafe_user_message']['type']) == "success")
+                    {
+                    ?>
+                        <div class="alert alert-info">
+                            <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                        </div>
+                    <?php
+
+                    }
+                    if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
+                    {
+                    ?>
+                        <div class="alert alert-danger">
+                            <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                        </div>
+                    <?php
+                    }
+                    $this->session->unset_userdata('drugsafe_user_message');
+            }
+            ?> 
      <div class="portlet box green-meadow">
         <div class="portlet-title">
             <div class="caption">
@@ -13,17 +36,35 @@
             </div>
         </div>
     <div class="portlet-body">
+        
         <div class="tabbable tabbable-tabdrop">
             <ul class="nav nav-tabs">
-                <li class="active">
+                <?php 
+        
+            if(!empty($_SESSION['drugsafe_tab_status']))
+            {
+                if($_SESSION['drugsafe_tab_status']==1){
+                  $drActive ='active'; 
+                }
+                else{
+                  $mrActive ='active';   
+                }
+           $this->session->unset_userdata('drugsafe_tab_status');
+            }
+        else {
+               $drActive ='active'; 
+     
+ }
+            ?>
+                <li class=" <?php echo $drActive?> ">
                         <a href="#tab1" data-toggle="tab">Drug Test Kit List</a>
                 </li>
-                <li>
+                 <li class="<?php echo $mrActive?>">
                         <a href="#tab2" data-toggle="tab">Marketing Material List</a>
                 </li>
             </ul>
                  <div class="tab-content">
-                     <div class="tab-pane active" id="tab1">
+                     <div class="tab-pane <?php echo $drActive?>" id="tab1">
                         <div id="page_content" class="row">
                             <div class="col-md-12">
                                 <div class="portlet light bordered">
@@ -45,10 +86,10 @@
                                                 <tr>
                                                     <th> Image </th>
                                                     <th> Product Code</th>
-                                                    <th> Product Descreption</th>
-                                                    <th> Product Cost</th>
+                                                    <th>  Descreption</th>
+                                                    <th> Cost</th>
                                                     <th> Model Stock Value </th>
-                                                    <th> Actions </th>
+                                                    <th> Action </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -63,15 +104,19 @@
                                                         </td>
                                                         <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                                         <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
-                                                        <td> <?php echo $drugTestKitData['szProductCost'];?> </td>
-                                                        <td> </td>
+                                                        <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
+                                                        <td>  <?php echo $drugTestKitDataArr[$i]['szModelStockVal'];?></td>
                                                         <td>
-                                                            <a class="btn btn-circle btn-icon-only btn-default" title="Edit Model Stock Value" onclick="editModelStockValue(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
+                                                            <?php if(empty($drugTestKitDataArr[$i]['szModelStockVal']) && ($drugTestKitDataArr[$i]['szModelStockVal'] != '0')){?>
+                                                            <a class="btn btn-circle btn-icon-only btn-default" title="Edit Model Stock Value" onclick="addModelStockValue(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
+                                                                <i class="fa fa-plus"></i> 
+                                                            </a>
+                                                            <?php }else{?>
+                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Model Stock Value" onclick="editModelStockValue(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
                                                                 <i class="fa fa-pencil"></i> 
                                                             </a>
-                                                             <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="productDeleteAlert(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
-                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                            </a>
+                                                            <?php }?>
+                                                            
                                                         </td>
                                                     </tr>
                                                     <?php
@@ -95,7 +140,7 @@
                         </div> 
                  <div id="popup_box"></div>   
             </div>
-<div class="tab-pane" id="tab2">
+<div class="tab-pane <?php echo $mrActive?>" id="tab2">
     <div id="page_content" class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -104,14 +149,7 @@
                         <i class="icon-equalizer font-red-sunglo"></i>
                         <span class="caption-subject font-red-sunglo bold uppercase">Marketing Material</span>
                     </div>
-                    <div class="actions">
-                    <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addMarketingMaterial');">
-                                &nbsp;Add Marketing Material
-                            </button>
-                        </div>
-                </div>
-
+               
 
                 </div>
                 <?php
@@ -126,14 +164,14 @@
                             <tr>
                                 <th> Image </th>
                                 <th> Product Code</th>
-                                <th> Product Descreption</th>
-                                <th> Product Cost</th>
-
-                                <th> Actions </th>
+                                <th>  Descreption</th>
+                                <th>  Cost</th>
+                                <th> Model Stock Value </th>
+                                <th> Action </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+                            <?php 
                                $i = 0;
                                 foreach($marketingMaterialAray as $marketingMaterialData)
                                 {
@@ -146,18 +184,18 @@
                                     </td>
                                     <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                     <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
-                                    <td> <?php echo $marketingMaterialData['szProductCost'];?> </td>
-
-                                    <td>
-                                        <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editMarketingDetails('<?php echo $marketingMaterialData['id'];?>','2');" href="javascript:void(0);">
-                                            <i class="fa fa-pencil"></i> 
-                                        </a>
-                                        <a class="btn btn-circle btn-icon-only btn-default" id="MarketingMaterialStatus" title="Delete Client" onclick="productDeleteAlert(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);"></i>
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-
-                                        </a>
-
-
+                                    <td> $<?php echo $marketingMaterialData['szProductCost'];?> </td>
+                                    <td>  <?php echo $marketingMaterialDataArr[$i]['szModelStockVal'];?></td>
+                                                        <td>
+                                                            <?php if(empty($marketingMaterialDataArr[$i]['szModelStockVal'])){?>
+                                                            <a class="btn btn-circle btn-icon-only btn-default" title="Add Model Stock Value" onclick="addModelStockValue(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">
+                                                                <i class="fa fa-plus"></i> 
+                                                            </a>
+                                                            <?php }else{?>
+                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Model Stock Value" onclick="editModelStockValue(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">
+                                                                <i class="fa fa-pencil"></i> 
+                                                            </a>
+                                                            <?php }?>
                                     </td>
                                 </tr>
                                 <?php
