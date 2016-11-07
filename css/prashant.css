@@ -32,7 +32,7 @@ body .logo img {
 
 @media (max-width: 767px) {
   .login .pull-right {
-    float: none;
+    float: none !important;
     clear: both;
   }
   body .logo img {
