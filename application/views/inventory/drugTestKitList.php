@@ -25,6 +25,18 @@
             ?>
             <div id="page_content" class="row">
                 <div class="col-md-12">
+<<<<<<< .mine
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span class="active">Drug Test Kit List</span>
+                        </li>
+                    </ul>
+||||||| .r89
+=======
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
                             <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist">Home</a>
@@ -34,6 +46,7 @@
                             <span class="active">Drug Test Kit List</span>
                         </li>
                     </ul>
+>>>>>>> .r125
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -62,8 +75,8 @@
                                     <tr>
                                         <th> Image </th>
                                         <th> Product Code</th>
-                                        <th> Product Descreption</th>
-                                        <th> Product Cost</th>
+                                        <th> Descreption</th>
+                                        <th> Cost</th>
                                         <th> Actions </th>
                                     </tr>
                                 </thead>
@@ -79,7 +92,7 @@
                                             </td>
                                             <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                             <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
-                                            <td> <?php echo $drugTestKitData['szProductCost'];?> </td>
+                                            <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
                                             
                                             <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editProduct('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
