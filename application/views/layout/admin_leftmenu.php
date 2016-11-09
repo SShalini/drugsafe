@@ -17,7 +17,7 @@
                                 <!-- END SIDEBAR TOGGLER BUTTON -->
                      </li>
                     
-                       
+                   
                              <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                             <li class="nav-item start <?php if(trim($pageName)=='Franchisee_List'){?>active open<?php }?>">
                                 <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="nav-link nav-toggle">

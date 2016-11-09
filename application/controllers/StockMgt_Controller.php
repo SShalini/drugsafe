@@ -66,8 +66,8 @@ class StockMgt_Controller extends CI_Controller {
          
              $fr_value_data = array();
              foreach ($drugTestKitAray as $drugTestKitdata){
-                $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitdata['id']);
-                array_push($fr_value_data, $drugTestKitDataArr);
+             $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitdata['id']);
+             array_push($fr_value_data, $drugTestKitDataArr);
         
              }
 
@@ -135,8 +135,8 @@ class StockMgt_Controller extends CI_Controller {
 
             $this->load->library('form_validation');
             $this->form_validation->set_rules('addModelStockValue[szName]', 'Product Category', 'required');
-            $this->form_validation->set_rules('addModelStockValue[szProductCode]', 'Product Code', 'required');
-            $this->form_validation->set_rules('addModelStockValue[szModelStockVal]', 'Model Stock Value', 'required|numeric');
+            $this->form_validation->set_rules('addModelStockValue[szProductCode]', 'Product Code');
+            $this->form_validation->set_rules('addModelStockValue[szModelStockVal]', 'Model Stock Value','trim|required|numeric|max_length[4]');
            
             
             if ($this->form_validation->run() == FALSE)
@@ -177,7 +177,7 @@ class StockMgt_Controller extends CI_Controller {
             }
         }
 
-              function editModelStock()
+         function editModelStock()
         {
            $idProduct = $this->input->post('idProduct');
            $this->session->set_userdata('$idProduct',$idProduct);
@@ -217,7 +217,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('editModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editModelStockValue[szProductCode]', 'Product Code', 'required');
-            $this->form_validation->set_rules('editModelStockValue[szModelStockVal]', 'Model Stock Value', 'required|numeric');
+            $this->form_validation->set_rules('editModelStockValue[szModelStockVal]', 'Model Stock Value', 'required|numeric|max_length[4]');
            
             
             if ($this->form_validation->run() == FALSE)
@@ -361,7 +361,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('addProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addProductStockQty[szProductCode]', 'Product Code', 'required');
-            $this->form_validation->set_rules('addProductStockQty[szQuantity]', 'Quantity', 'required|numeric');
+            $this->form_validation->set_rules('addProductStockQty[szQuantity]', 'Quantity', 'required|numeric|max_length[4]');
            
             
             if ($this->form_validation->run() == FALSE)
@@ -447,7 +447,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('editProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editProductStockQty[szProductCode]', 'Product Code', 'required');
-            $this->form_validation->set_rules('editProductStockQty[szQuantity]', 'Quantity', 'required|numeric');
+            $this->form_validation->set_rules('editProductStockQty[szQuantity]', 'Quantity', 'required|numeric|max_length[4]');
            
              
             if ($this->form_validation->run() == FALSE)

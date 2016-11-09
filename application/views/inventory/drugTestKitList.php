@@ -1,5 +1,6 @@
 <div class="page-content-wrapper">
         <div class="page-content">
+          
              <?php 
             if(!empty($_SESSION['drugsafe_user_message']))
             {
@@ -40,6 +41,9 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
                             </div>
+                            <?php 
+                            if($_SESSION['drugsafe_user']['iRole']==1){
+                            ?>
                             <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addDrugTestKit');">
@@ -47,7 +51,7 @@
                                     </button>
                                 </div>
                         </div>
-                            
+                            <?php }?>    
                            
                         </div>
                         <?php
@@ -64,7 +68,14 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
+                                        <?php
+                                        if($_SESSION['drugsafe_user']['iRole']==1){
+                                        ?>
                                         <th> Actions </th>
+                                       <?php }else{?>
+                                        <th>  Model Stock</th>
+                                        <th>  Available Stock </th>
+                                       <?php }?> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,20 +91,30 @@
                                             <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                             <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                             <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
-                                            
-                                            <td>
+                                            <?php
+                                           if($_SESSION['drugsafe_user']['iRole']==1){
+                                             ?>
+                                                <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editProduct('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="productDeleteAlert(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
-                                            </td>
+                                                </td>
+                                        <?php }else{?>
+                                          <td><?php echo($drugTestKitDataArr[$i]['szModelStockVal'] > 0 ? $drugTestKitDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
+                                          <td><?php echo($drugTestKitQtyDataArr[$i]['szQuantity'] > 0 ? $drugTestKitQtyDataArr[$i]['szQuantity'] : 'N/A')?></td>
+                                         
+                                        <?php } 
+                                        
+                                        ?>  
                                         </tr>
                                         <?php
                                         $i++;
                                         }
                                    ?>
+                                        
                                 </tbody>
                             </table>
                         </div>

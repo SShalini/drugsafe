@@ -10,6 +10,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
+            $this->load->model('StockMgt_Model');
         
 	}
 	
@@ -198,7 +199,25 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-             $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList();
+               $idfranchisee = $_SESSION['drugsafe_user']['id'];
+          
+               $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList();
+               
+               $fr_value_data = array();
+               foreach ($drugTestKitAray as $drugTestKitdata){
+               $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitdata['id']);
+               array_push($fr_value_data, $drugTestKitDataArr);
+               }
+               
+                $fr_qty_data = array();
+                foreach ($drugTestKitAray as $drugTestKitdata){
+                $drugTestKitQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitdata['id']);
+                array_push($fr_qty_data, $drugTestKitQtyDataArr);
+        
+             }
+           
+                    $data['drugTestKitQtyDataArr'] = $fr_qty_data;
+                    $data['drugTestKitDataArr'] = $fr_value_data;
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['szMetaTagTitle'] = " Drug Test Kit List";
                     $data['is_user_login'] = $is_user_login;
@@ -222,8 +241,23 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
+             $idfranchisee = $_SESSION['drugsafe_user']['id'];
              $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList();
+             
+                $mr_value_data = array();
+                foreach ($marketingMaterialAray as $marketingMaterialdata){
+                $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialdata['id']);
+                array_push($mr_value_data,$marketingMaterialDataArr);
+             }
+             
+              $mr_qty_data = array();
+                    foreach ($marketingMaterialAray as $marketingMaterialdata){
+                    $marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
+                    array_push($mr_qty_data,$marketingMaterialQtyDataArr);
+             }
+                    $data['marketingMaterialQtyDataArr'] = $mr_qty_data;
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
+                    $data['marketingMaterialDataArr'] = $mr_value_data;
                     $data['szMetaTagTitle'] = "Marketing Material List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";

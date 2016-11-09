@@ -40,6 +40,9 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Marketing Material</span>
                             </div>
+                             <?php 
+                            if($_SESSION['drugsafe_user']['iRole']==1){
+                            ?>
                             <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addMarketingMaterial');">
@@ -47,7 +50,7 @@
                                     </button>
                                 </div>
                         </div>
-                            
+                           <?php }?>       
                             
                         </div>
                         <?php
@@ -64,8 +67,14 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
-                                       
+                                       <?php
+                                        if($_SESSION['drugsafe_user']['iRole']==1){
+                                        ?>
                                         <th> Actions </th>
+                                       <?php }else{?>
+                                        <th>  Model Stock</th>
+                                        <th>  Available Stock </th>
+                                       <?php }?> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +92,9 @@
                                             <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                             <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                             <td>$<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                           
+                                            <?php
+                                           if($_SESSION['drugsafe_user']['iRole']==1){
+                                             ?>
                                             <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editMarketingDetails('<?php echo $marketingMaterialData['id'];?>','2');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
@@ -92,9 +103,15 @@
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>
-                                                
-                                               
+  
                                             </td>
+                                             <?php }else{?>
+                                            <td><?php echo($marketingMaterialDataArr[$i]['szModelStockVal'] > 0 ?$marketingMaterialDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
+                                            <td><?php echo($marketingMaterialQtyDataArr[$i]['szQuantity'] > 0 ? $marketingMaterialQtyDataArr[$i]['szQuantity'] : 'N/A')?></td>
+                                           
+                                        <?php } 
+                                        
+                                        ?> 
                                         </tr>
                                         <?php
                                         $i++;
