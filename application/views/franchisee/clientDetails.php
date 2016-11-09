@@ -236,8 +236,31 @@
                                             <td> <?php echo $childClientDetailsData['szName']?> </td>
                                             <td> <?php echo $childClientDetailsData['szEmail'];?> </td>
                                              <td> <?php echo $childClientDetailsData['szContactNumber'];?> </td>
-                                             <td><?php echo $franchiseeDataArr[$i]['szName']; ?> </td>
-                                             <td><?php echo $updateByDataArr[$i]['szName']; ?> </td>
+                                              <td>
+                                        <?php
+                                        if($childClientDetailsData['szCreatedBy'])
+                                        {
+                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$childClientDetailsData['szCreatedBy']);
+                                            echo $franchiseeDetArr['szName'];
+                                        }
+                                        ?>
+                                        
+                                        </td>
+                                        <td>
+                                            <?php 
+                                            if($childClientDetailsData['szLastUpdatedBy'])
+                                            {
+                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$childClientDetailsData['szLastUpdatedBy']);
+                                                echo $franchiseeDetArr['szName'];
+                                            }
+                                            else
+                                            {
+                                               echo "N.A";
+                                            }
+                                           
+                                            ?> 
+                                        </td>
+                                            
                                                <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 

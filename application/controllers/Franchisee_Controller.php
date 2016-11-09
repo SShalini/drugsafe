@@ -186,6 +186,7 @@ class Franchisee_Controller extends CI_Controller {
             $idfranchisee = $this->session->userdata('idfranchisee');
             $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee,true);
             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
+           
             $frdata = array();
              $UpdatedBy= array();
             foreach ($clientAray as $cldata){
@@ -289,16 +290,16 @@ class Franchisee_Controller extends CI_Controller {
             $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
            
              
-            $frdata = array();
-             $UpdatedBy= array();
-            foreach ($childClientDetailsAray as $cldata){
-               $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szCreatedBy']);
-                array_push($frdata, $franchiseeDataArr);
-                 if(!empty($cldata['szLastUpdatedBy'])){
-                    $updateByDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szLastUpdatedBy']);
-                    array_push($UpdatedBy, $updateByDataArr);
-            }
-            }
+//            $frdata = array();
+//             $UpdatedBy= array();
+//            foreach ($childClientDetailsAray as $cldata){
+//               $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szCreatedBy']);
+//                array_push($frdata, $franchiseeDataArr);
+//                 if(!empty($cldata['szLastUpdatedBy'])){
+//                    $updateByDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szLastUpdatedBy']);
+//                    array_push($UpdatedBy, $updateByDataArr);
+//            }
+//            }
             if($clientDetailsAray['clientType']>0){
                 $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientDetailsAray['clientType']);
                 $data['ParentOfChild'] = $parentClientDetArr;
@@ -307,8 +308,8 @@ class Franchisee_Controller extends CI_Controller {
                 $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientFranchiseeArr[0]['franchiseeId']);
                 $data['franchiseeArr'] = $franchiseeDetArr;
             }
-            $data['updateByDataArr'] = $UpdatedBy; 
-            $data['franchiseeDataArr'] = $frdata;
+//            $data['updateByDataArr'] = $UpdatedBy; 
+//            $data['franchiseeDataArr'] = $frdata;
             $data['idClient'] = $idClient;
             $data['pageName'] = "Client_Record";
             $data['clientDetailsAray'] = $clientDetailsAray;
