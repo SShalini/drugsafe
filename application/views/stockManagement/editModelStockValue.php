@@ -1,25 +1,38 @@
 <div class="page-content-wrapper">
     <div class="page-content">
+         <ul class="page-breadcrumb breadcrumb">
+             
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                        <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                        <a onclick="#" href="javascript:void(0);"><?php echo $productDataAry['szProductCode'];?></a>
+                        <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span class="active">Model Stock Value Management</span>
+                        </li>
+     </ul>
         <div class="row">
             <div class="col-md-12">
-                <div class="portlet box green-meadow">
+                <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="icon-equalizer "></i>&nbsp; &nbsp;
-                            <span class="caption-subject  bold uppercase">Edit Model Stock Value</span>
+                            <i class="icon-equalizer font-red-sunglo"></i>&nbsp; &nbsp;
+                            <span class="caption-subject  bold uppercase font-red-sunglo">Edit Model Stock Value</span>
                         </div>
-                        <div class="tools">
-                                <a href="javascript:;" class="collapse">
-                                </a>
-                              
-                        </div>
+                       
                     </div>
                     <div class="portlet-body form">
                             <!-- BEGIN FORM-->
-                 
                         <form action=""  id="editModelStockValue" name="editModelStockValue" method="post" class="form-horizontal form-row-sepe">
                             <div class="form-body">
-                                <h4 class="form-section"></h4>
+                              
                                 <div class="form-group <?php if(form_error('editModelStockValue[szName]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-3">Product Category</label>
                                         <div class="col-md-4">

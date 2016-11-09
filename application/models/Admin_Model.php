@@ -632,6 +632,13 @@ class Admin_Model extends Error_Model {
         
         public function deletefranchisee($idfranchisee)
 	{
+          $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee,true);
+        if (!empty($clientAray)) {
+            foreach ($clientAray as $clientlist) {
+                $this->Franchisee_Model->deleteClient($clientlist['id']);
+            }
+
+        }
             
                 $data = $this->input->post('idfranchisee');
 		$dataAry = array(
@@ -639,6 +646,30 @@ class Admin_Model extends Error_Model {
                 );  
                 $this->db->where('id', $idfranchisee);
 		if($query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+        public function deletemodelStockValue($idfranchisee)
+	{
+                $this->db->where('iFranchiseeId', $idfranchisee);
+		if($query = $this->db->delete(__DBC_SCHEMATA_MODEL_STOCK_VALUE__))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+         public function deleteProductStockQuantity($idfranchisee)
+	{
+                $this->db->where('iFranchiseeId', $idfranchisee);
+		if($query = $this->db->delete(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__))
                 {
                     return true;
                 }

@@ -9,6 +9,7 @@ class Admin_Controller extends CI_Controller {
            
             $this->load->model('Error_Model');
             $this->load->model('Admin_Model');
+             $this->load->model('Franchisee_Model');
         
 	}
 	
@@ -342,6 +343,8 @@ class Admin_Controller extends CI_Controller {
             $data['mode'] = '__DELETE_FRANCHISEE_CONFIRM__';
             $data['idfranchisee'] = $this->input->post('idfranchisee');
             $this->Admin_Model->deletefranchisee($data['idfranchisee']);
+            $this->Admin_Model->deletemodelStockValue($data['idfranchisee']);
+            $this->Admin_Model->deleteProductStockQuantity($data['idfranchisee']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
     public function admin_forgotPassword()

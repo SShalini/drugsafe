@@ -164,7 +164,7 @@ function deleteFranchiseeConfirmation(idfranchisee) {
         }
         jQuery('#loader').attr('style', 'display:none');
 
-    });
+    }); 
 }
 function viewClient(idfranchisee) {
 
@@ -362,4 +362,33 @@ function editModelStockValue(idProduct) {
 
     });
 }
+function viewProductStockMgt(idfranchisee)
+{
+    $.post(__BASE_URL__+"/stock_management/productStock",{idfranchisee:idfranchisee},function(result){
+        ar_result = result.split('||||');
+        
+        if($.trim(ar_result[0]) == "SUCCESS")
+        {
+                window.location = __BASE_URL__+"/stock_management/"+ar_result[1];
+               
+        }
+    });
+}
+function addProductStockQuantity(idProduct) {
 
+    $.post(__BASE_URL__ + "/stock_management/addProductStock", {idProduct: idProduct}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/stock_management/" + ar_result[1];
+        
+
+    });
+}
+function editProductStockQuantity(idProduct,flag) {
+   
+    $.post(__BASE_URL__ + "/stock_management/editProductStock", {idProduct: idProduct,flag:flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/stock_management/" + ar_result[1];
+        
+
+    });
+}

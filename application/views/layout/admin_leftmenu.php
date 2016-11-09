@@ -35,10 +35,7 @@
                                     <span class="selected"></span>
                                 </a>
                             </li>
-                            <?php
-                             if($_SESSION['drugsafe_user']['iRole']=='1')
-                             {
-                                 ?>
+                          
                                 <li class="nav-item start <?php if(trim($pageName)=='Inventory'){?>active open<?php }?>">
                                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -62,10 +59,7 @@
 				
                               
                             </li>
-                                 <?php
-                             }
-                            
-                            ?>
+                      
                              
                         </ul>
                      </div>  
