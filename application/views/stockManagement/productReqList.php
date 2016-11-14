@@ -51,7 +51,15 @@
                                           
                                            $productDataAry = $this->Inventory_Model->getProductDetailsById($reqQtyListData['iProductId']);
                                            $productCategortDataAry = $this->StockMgt_Model->getCategoryDetailsById($productDataAry['szProductCategory']);
-                                           
+                                           $QtyAssignListAry = $this->StockMgt_Model->getQtyAssignListById($reqQtyListData['iProductId']); 
+                                          if($QtyAssignListAry)
+                                            {
+                                                $total='';
+                                               foreach($QtyAssignListAry as $QtyAssignListdata)
+                                               {
+                                                   $total+=$QtyAssignListdata['szQuantityAssigned'];
+                                               }
+                                            }                            
                                          
                                         ?>
                                         <tr>
@@ -65,8 +73,9 @@
                                             <td> <?php echo $productDataAry['szProductDiscription'];?> </td>
                                             <td> <?php echo $productDataAry['szProductCost'];?> </td>
                                             <td> <?php echo $reqQtyListData['szQuantity'];?>  </td>
-                                            <td></td>
+                                            <td> <?php echo ($total > 0 ? $total : 'N/A')?></td>
                                             
+                                           
                                             <td>
                                                  <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="Allot Quantity"  onclick="allotReqQtyAlert(<?php echo $productDataAry['id'];?>,<?php echo $reqQtyListData['szQuantity'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-mail-reply" aria-hidden="true"></i>

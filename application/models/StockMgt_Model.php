@@ -195,7 +195,7 @@ class StockMgt_Model extends Error_Model {
              }
 
         }
-        public function getQtyAssignById($idProduct)
+        public function getQtyAssignListById($idProduct)
         {
             $whereAry = array('iProductId=' => $idProduct);
             $this->db->select('*');
@@ -261,7 +261,7 @@ class StockMgt_Model extends Error_Model {
                           $this->db->where($whereAry);
                $ProcessUpdate  =    $this->db->update(__DBC_SCHEMATA_REQUEST_QUANTITY__, $dataAry);
                
-                $QtyAssignArr =  $this->getQtyAssignById($idProduct);
+                $QtyAssignArr =  $this->getQtyAssignListById($idProduct);
                 if($QtyAssignArr)
                 {
                      $total='';
@@ -297,7 +297,7 @@ class StockMgt_Model extends Error_Model {
                 if($this->db->affected_rows() > 0)
                {
                  
-               $QtyAssignArr =  $this->getQtyAssignById($idProduct);
+               $QtyAssignArr =  $this->getQtyAssignListById($idProduct);
             
                if($QtyAssignArr)
                {
