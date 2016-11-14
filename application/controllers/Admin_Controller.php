@@ -60,7 +60,8 @@ class Admin_Controller extends CI_Controller {
                  $adminAry = $this->Admin_Model->adminLoginUser($validate);
                  if(!empty($adminAry)) {
                         if ((int) $iRemember == 1) {
-                            set_customer_cookie($this, $adminAry);
+                        set_customer_cookie($this, $adminAry);
+                         
                         }
                         $user_session = $this->session->userdata('drugsafe_user');
                       if($user_session[iRole]==1)

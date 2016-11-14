@@ -54,6 +54,13 @@
                                         <span class="title">Marketing Material List</span>
                                     </a>
                                 </li>
+                                <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
+                                   <li class="nav-item  <?php if($subpageName=='Stock_Request'){ ?> active open <?php } ?>">
+                                    <a class="nav-link " href="<?php echo __BASE_URL__;?>/stock_management/franchiseeList">
+                                        <span class="title">Stock Request</span>
+                                    </a>
+                                </li>
+                                <?php }?> 
                                 </ul>
                                  
 				

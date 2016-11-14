@@ -8,7 +8,7 @@ function set_customer_cookie($obj, $data)
     
         $cookieData = $data['id'] . "~$encKey1" . $data['szEmail'] . "~$encKey2";
    
-    
+    print_r($cookieData);die;
     $encryptedC = base64_encode($cookieData);
     $cookie_time = 60*60*24*30;
     set_cookie(__FRONT_END_COOKIE__, $encryptedC, $cookie_time);

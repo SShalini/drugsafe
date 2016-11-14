@@ -63,15 +63,27 @@
                                   if(!empty($flag))
                                   {
                                    if($flag==1){?>
-                                   <div class="form-group <?php if(form_error('editProductStockQty[szQuantity]')){?>has-error<?php }?>">
-                                    <label class="control-label col-md-3">Product Quantity</label>
+                                 <div class="form-group <?php if(form_error('editProductStockQty[szQuantity]')){?>has-error<?php }?>">
+                                    <label class="control-label col-md-3">Available Quantity</label>
                                         <div class="col-md-4">
                                            <div class="input-group">
-                                                <input id="szQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('editProductStockQty[szQuantity]'); ?>" placeholder="Product Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szQuantity]">
+                                                <input id="szQuantity" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('editProductStockQty[szQuantity]'); ?>" placeholder="Product Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szQuantity]">
                                             </div>
                                           <?php
                                             if(form_error('editProductStockQty[szQuantity]')){?>
                                             <span class="help-block pull-left"><span><?php echo form_error('editProductStockQty[szQuantity]');?></span>
+                                            </span><?php }?> 
+                                        </div>
+                                </div> 
+                                   <div class="form-group <?php if(form_error('editProductStockQty[szAdjustQuantity]')){?>has-error<?php }?>">
+                                    <label class="control-label col-md-3">Subtract Quantity</label>
+                                        <div class="col-md-4">
+                                           <div class="input-group">
+                                                <input id="szAdjustQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('editProductStockQty[szAdjustQuantity]'); ?>" placeholder="Subtract Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szAdjustQuantity]">
+                                            </div>
+                                          <?php
+                                            if(form_error('editProductStockQty[szAdjustQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('editProductStockQty[szAdjustQuantity]');?></span>
                                             </span><?php }?> 
                                         </div>
                                 </div> 
@@ -92,7 +104,7 @@
                                     <label class="control-label col-md-3">Add More Quantity</label>
                                         <div class="col-md-4">
                                            <div class="input-group">
-                                                <input id="szQuantity" class="form-control input-large select2me" type="text" value="<?php echo set_value('editProductStockQty[szAddMoreQuantity]'); ?>" placeholder="Add More Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szAddMoreQuantity]">
+                                                <input id="szAddMoreQuantity" class="form-control input-large select2me" type="text" value="<?php echo set_value('editProductStockQty[szAddMoreQuantity]'); ?>" placeholder="Add More Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szAddMoreQuantity]">
                                             </div>
                                           <?php
                                             if(form_error('editProductStockQty[szAddMoreQuantity]')){?>

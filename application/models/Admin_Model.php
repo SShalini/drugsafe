@@ -199,7 +199,6 @@ class Admin_Model extends Error_Model {
 
     public function checkUserExists($szEmail=false,$id=0)
     {
-        //die($id);
         $szEmail = trim($szEmail);
 
         $user_session = $this->session->userdata('drugsafe_user');

@@ -107,7 +107,10 @@
                                                 <?php
                                                    $i = 0;
                                                     foreach($drugTestKitAray as $drugTestKitData)
-                                                    {     
+                                                    { $idfranchisee = $franchiseeArr['id'];
+                                                    
+                                                          $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
+                                                        
                                                     ?>
                                                     <tr>
                                                         <td>
@@ -116,15 +119,15 @@
                                                         <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                                         <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                         <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
-                                                        <td>  <?php echo $drugTestKitDataArr[$i]['szQuantity'];?></td>
+                                                        <td><?php echo($drugTestKitDataArr['szQuantity'] > 0 ? $drugTestKitDataArr['szQuantity'] : 'N/A')?></td>
                                                         <td>
-                                                            <?php if(empty($drugTestKitDataArr[$i]['szQuantity']) && ($drugTestKitDataArr[$i]['szQuantity'] != '0')){?>
+                                                            <?php if(empty($drugTestKitDataArr['szQuantity']) && ($drugTestKitDataArr['szQuantity'] != '0')){?>
                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Add Product Stock Quantity" onclick="addProductStockQuantity(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
                                                                 <i class="fa fa-plus"></i> 
                                                             </a>
                                                             <?php }else{?>
-                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);">
-                                                                <i class="fa fa-pencil"></i> 
+                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);">
+                                                                <i class="fa fa-minus"></i> 
                                                             </a>
                                                            <a class="btn btn-circle btn-icon-only btn-default" title=" Add More Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['id'];?>,'2');" href="javascript:void(0);">
                                                                 <i class="fa fa-plus"></i> 
@@ -188,7 +191,8 @@
                                $i = 0;
                                 foreach($marketingMaterialAray as $marketingMaterialData)
                                 {
-
+                                     $idfranchisee = $franchiseeArr['id'];
+                                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
                                 ?>
                                 <tr>
                                    <td>
@@ -198,18 +202,23 @@
                                     <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                     <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                     <td> $<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                    <td>  <?php echo $marketingMaterialDataArr[$i]['szQuantity'];?></td>
-                                                        <td>
-                                                            <?php if(empty($marketingMaterialDataArr[$i]['szQuantity']) && ($marketingMaterialDataArr[$i]['szQuantity'] != '0')){?>
-                                                            <a class="btn btn-circle btn-icon-only btn-default" title="Add Model Stock Value" onclick="addProductStockQuantity(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">
-                                                                <i class="fa fa-plus"></i> 
-                                                            </a>
-                                                            <?php }else{?>
-                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Model Stock Value" onclick="editProductStockQuantity(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">
-                                                                <i class="fa fa-pencil"></i> 
-                                                            </a>
-                                                            <?php }?>
+                                      <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr[$i]['szQuantity'] : 'N/A')?></td>
+                                   
+                                    <td>
+                                        <?php if(empty($marketingMaterialDataArr['szQuantity']) && ($marketingMaterialDataArr['szQuantity'] != '0')){?>
+                                        <a class="btn btn-circle btn-icon-only btn-default" title="Add Model Stock Value" onclick="addProductStockQuantity(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">
+                                            <i class="fa fa-plus"></i> 
+                                        </a>
+                                        <?php }else{?>
+                                         <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);">
+                                            <i class="fa fa-minus"></i> 
+                                        </a>
+                                         <a class="btn btn-circle btn-icon-only btn-default" title=" Add More Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['id'];?>,'2');" href="javascript:void(0);">
+                                            <i class="fa fa-plus"></i> 
+                                        </a>
+                                        <?php }?>
                                     </td>
+                                  
                                 </tr>
                                 <?php
                                 $i++;

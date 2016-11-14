@@ -115,7 +115,7 @@
                                                         <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                                         <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                         <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
-                                                        <td>  <?php echo $drugTestKitDataArr[$i]['szModelStockVal'];?></td>
+                                                         <td><?php echo($drugTestKitDataArr[$i]['szModelStockVal'] > 0 ? $drugTestKitDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
                                                         <td>
                                                             <?php if(empty($drugTestKitDataArr[$i]['szModelStockVal']) && ($drugTestKitDataArr[$i]['szModelStockVal'] != '0')){?>
                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Model Stock Value" onclick="addModelStockValue(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
@@ -195,7 +195,8 @@
                                     <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                     <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                     <td> $<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                    <td>  <?php echo $marketingMaterialDataArr[$i]['szModelStockVal'];?></td>
+                                     <td><?php echo($marketingMaterialDataArr[$i]['szModelStockVal'] > 0 ? $marketingMaterialDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
+                                  
                                                         <td>
                                                             <?php if(empty($marketingMaterialDataArr[$i]['szModelStockVal'])){?>
                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Add Model Stock Value" onclick="addModelStockValue(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">

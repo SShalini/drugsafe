@@ -15,4 +15,5 @@ and open the template in the editor.
 }
 .read-only {
   cursor: not-allowed;
+ input:read-only; 
 }

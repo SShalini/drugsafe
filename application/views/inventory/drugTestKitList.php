@@ -73,8 +73,9 @@
                                         ?>
                                         <th> Actions </th>
                                        <?php }else{?>
-                                        <th>  Model Stock</th>
-                                        <th>  Available Stock </th>
+                                        <th>  Model Stock Value</th>
+                                        <th>  Available Stock Quantity</th>
+                                        <th>  Action</th>
                                        <?php }?> 
                                     </tr>
                                 </thead>
@@ -105,7 +106,11 @@
                                         <?php }else{?>
                                           <td><?php echo($drugTestKitDataArr[$i]['szModelStockVal'] > 0 ? $drugTestKitDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
                                           <td><?php echo($drugTestKitQtyDataArr[$i]['szQuantity'] > 0 ? $drugTestKitQtyDataArr[$i]['szQuantity'] : 'N/A')?></td>
-                                         
+                                          <td>          
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                                    <i class="fa fa-pencil"></i> 
+                                              </a>
+                                          </td> 
                                         <?php } 
                                         
                                         ?>  

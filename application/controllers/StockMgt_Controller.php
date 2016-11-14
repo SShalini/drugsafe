@@ -288,24 +288,24 @@ class StockMgt_Controller extends CI_Controller {
              $idfranchisee = $this->session->userdata('idfranchisee');
              $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
              $drugTestKitAray =$this->StockMgt_Model->viewDrugTestKitList();
-           
-         
-             $fr_qty_data = array();
-              foreach ($drugTestKitAray as $drugTestKitdata){
-                $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitdata['id']);
-                array_push($fr_qty_data, $drugTestKitDataArr);
-        
-             }
+             
+            
+//             $fr_qty_data = array();
+//              foreach ($drugTestKitAray as $drugTestKitdata){
+//                $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitdata['id']);
+//                array_push($fr_qty_data, $drugTestKitDataArr);
+//        
+//             }
   
-                    $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
-                    $mr_qty_data = array();
-                    foreach ($marketingMaterialAray as $marketingMaterialdata){
-                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
-                    array_push($mr_qty_data,$marketingMaterialDataArr);
-             }
+//                    $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
+//                    $mr_qty_data = array();
+//                    foreach ($marketingMaterialAray as $marketingMaterialdata){
+//                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
+//                    array_push($mr_qty_data,$marketingMaterialDataArr);
+//             }
 
-                    $data['drugTestKitDataArr'] = $fr_qty_data;
-                    $data['marketingMaterialDataArr'] = $mr_qty_data;
+//                    $data['drugTestKitDataArr'] = $fr_qty_data;
+//                    $data['marketingMaterialDataArr'] = $mr_qty_data;
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['franchiseeArr'] = $franchiseeArr;
@@ -448,6 +448,12 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('editProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editProductStockQty[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('editProductStockQty[szQuantity]', 'Quantity', 'required|numeric|max_length[3]');
+            if($flag==1){
+            $this->form_validation->set_rules('editProductStockQty[szAdjustQuantity]', 'Adjust Quantity', 'required|numeric|max_length[3]');
+            }
+            else{
+             $this->form_validation->set_rules('editProductStockQty[szAddMoreQuantity]', 'Add More Quantity', 'required|numeric|max_length[3]');
+            }
            
              
             if ($this->form_validation->run() == FALSE)
@@ -471,9 +477,9 @@ class StockMgt_Controller extends CI_Controller {
             else
             {
                $data_validate = $this->input->post('editProductStockQty');
-      
+
            
-                if( $this->StockMgt_Model->updateProductStockQty($data_validate,$idProduct))
+                if( $this->StockMgt_Model->updateProductStockQty($data_validate,$idProduct,$flag))
                 {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Product Stock Quantity Info! </strong> Product Stock Quantity Updated successfully.";
@@ -494,6 +500,159 @@ class StockMgt_Controller extends CI_Controller {
                 }
             }
         }
+         public function quantityRequestAlert()
+        {
+            $data['mode'] = '__REQUEST_QUANTITY_POPUP__';
+            $data['idProduct'] = $this->input->post('idProduct');
+            $data['flag'] = $this->input->post('flag');
+          
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function quantityRequestConfirmation()
+         {  
+            
+            $data['mode'] = '__REQUEST_QUANTITY_POPUP_CONFIRM__';
+            $idProduct = $this->input->post('idProduct');
+            $data['flag'] = $this->input->post('flag');
+         //   $data['arErrorMessages'] = $this->StockMgt_Model->arErrorMessages;
+            $idfranchisee = $_SESSION['drugsafe_user']['id'];
+            $value = $this->input->post('value');
+//            $validate= array();
+//            $validate['szQuantity'] = $value;
+            
+//            if($this->StockMgt_Model->validatereqData($validate)){
+            
+            $this->StockMgt_Model->requestQuantity($idProduct,$value,$idfranchisee);
+            $this->load->view('admin/admin_ajax_functions',$data);
+// }
+   $data['arErrorMessages'] = $this->StockMgt_Model->arErrorMessages;
+        } 
+         
+        function franchiseeList()
+        {
+           $is_user_login = is_user_login($this);
+
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+           
+             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId();
+    
+         
+//                 
+//                 foreach ($reqQtyAray as $reqQtyData)
+//                 {
+//                     $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$reqQtyData['iFranchiseeId']);
+//                     
+//                 }
+//                 
+                 
+//                    if($reqQtyAray)
+//                    {   $i = 0;
+//                        foreach($reqQtyAray as $reqQtydata)
+//                        {
+//                            echo //$reqQtydata['id'];die();
+//                                 
+//                            $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$reqQtydata['iFranchiseeId']);
+//                            $i++;
+//                            //print_r($reqQtydata);
+//                        }
+//                        
+//                    }
+                    
+                    
+                    $data['frReqQtyAray'] = $frReqQtyAray;
+                   // $data['franchiseeAray'] = $reqQtyAray;
+                    $data['szMetaTagTitle'] = "Franchisee List";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Franchisee_List";
+                    
+                    $data['data'] = $data;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('stockManagement/reqQtyfranchiseeList');
+            $this->load->view('layout/admin_footer');
+        }
+        function viewproductlistData()
+        {
+            $idfranchisee = $this->input->post('idfranchisee');
+       
+            {
+              
+               $this->session->set_userdata('idfranchisee',$idfranchisee);
+                
+                echo "SUCCESS||||";
+                echo "viewproductlist";
+            }
+ 
+        }
+
+        function viewproductlist()
+        {
+            $is_user_login = is_user_login($this);
+
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+          
+            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList();
+
+            $data['reqQtyListAray'] = $reqQtyListAray;
+            $data['pageName'] = "Requested_Product_List";
+            $data['szMetaTagTitle'] = "Requested Product List";
+            $data['is_user_login'] = $is_user_login;
+                
+            $idfranchisee = $this->session->userdata('idfranchisee');  
+            
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('stockManagement/productReqList');
+            $this->load->view('layout/admin_footer');
+        }
+         public function allotReqQtyAlert()
+        {
+            $data['mode'] = '__ALLOT_QUANTITY_POPUP__';
+            $data['idProduct'] = $this->input->post('idProduct');
+            $requestQuantity =  $this->input->post('szReqQuantity');
+            $data['szReqQuantity'] = $requestQuantity;
+          
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function allotReqQtyConfirmation()
+           {  
+            $data['mode'] = '__ALLOT_QUANTITY_POPUP_CONFIRM__';
+            $idProduct = $this->input->post('idProduct');
+          
+            $value['szAddMoreQuantity'] = $this->input->post('szQuantity');
+          
+            $val['szReqQuantity'] = $this->input->post('szReqQuantity');
+          
+            $idfranchisee = $this->session->userdata('idfranchisee'); 
+            
+
+            $productQtyDetails =  $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$idProduct);
+          
+            $productQtyDetails['szAddMoreQuantity'] = $value['szAddMoreQuantity'];
+              
+            $productQtyDetails['szReqQuantity'] = $val['szReqQuantity'];
+          
+         
+      
+
+            $this->StockMgt_Model->updateProductStockQty($productQtyDetails,$idProduct,'3');
+            
+            $this->load->view('admin/admin_ajax_functions',$data);
+            
+        } 
+         
+        
     }      
     
 ?>

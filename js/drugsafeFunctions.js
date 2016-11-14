@@ -392,3 +392,81 @@ function editProductStockQuantity(idProduct,flag) {
 
     });
 }
+function requestQuantityAlert(idProduct,flag)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/stock_management/quantityRequestAlert", {idProduct: idProduct,flag: flag}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#requestQuantityStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+    function requestQuantityConfirmation(idProduct,flag) {
+        
+     var value = jQuery("#szQuantity").val();
+   
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#requestQuantityStatus').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/stock_management/quantityRequestConfirmation", {idProduct: idProduct,flag: flag,value: value}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#requestQuantityStatusConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
+    function allotReqQtyAlert(idProduct,szReqQuantity)
+{
+    
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/stock_management/allotReqQtyAlert", {idProduct: idProduct,szReqQuantity: szReqQuantity}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#allotQuantityStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+    function allotQuantityConfirmation(idProduct) {
+        
+     var szQuantity = jQuery("#szQuantity").val();
+     var szReqQuantity = jQuery("#szReqQuantity").val();
+   
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#allotQuantityStatus').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/stock_management/allotReqQtyConfirmation", {idProduct: idProduct,szQuantity: szQuantity,szReqQuantity: szReqQuantity}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#allotQuantityStatusConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
+    function ViewReqProductList(idfranchisee) {
+    $.post(__BASE_URL__ + "/stock_management/viewproductlistData", {idfranchisee: idfranchisee}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/stock_management/" + ar_result[1];
+
+    });
+}
+ 
+
+ 

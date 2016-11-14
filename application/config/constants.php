@@ -70,6 +70,8 @@ define( "__DBC_SCHEMATA_PRODUCT_CATEGORY__", "tbl_product_category");
 define("__CUSTOMER_SUPPORT_EMAIL__", 'support@whiz-solutions.com');
 define("__DBC_SCHEMATA_MODEL_STOCK_VALUE__", "fr_modelstock_val");
 define("__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__", "fr_prodstock_qty");
+define("__DBC_SCHEMATA_REQUEST_QUANTITY__", "tbl_stock_request");
+define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
 
 /**
  * Validate an int, uses is_numeric

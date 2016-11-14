@@ -62,7 +62,7 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
+            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|is_unique[tbl_product.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
@@ -202,22 +202,11 @@ class Inventory_Controller extends CI_Controller {
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
                $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList();
+              
                
-               $fr_value_data = array();
-               foreach ($drugTestKitAray as $drugTestKitdata){
-               $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitdata['id']);
-               array_push($fr_value_data, $drugTestKitDataArr);
-               }
                
-                $fr_qty_data = array();
-                foreach ($drugTestKitAray as $drugTestKitdata){
-                $drugTestKitQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitdata['id']);
-                array_push($fr_qty_data, $drugTestKitQtyDataArr);
-        
-             }
            
-                    $data['drugTestKitQtyDataArr'] = $fr_qty_data;
-                    $data['drugTestKitDataArr'] = $fr_value_data;
+                   
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['szMetaTagTitle'] = " Drug Test Kit List";
                     $data['is_user_login'] = $is_user_login;

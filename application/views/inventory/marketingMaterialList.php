@@ -72,8 +72,9 @@
                                         ?>
                                         <th> Actions </th>
                                        <?php }else{?>
-                                        <th>  Model Stock</th>
-                                        <th>  Available Stock </th>
+                                        <th>  Model Stock Value</th>
+                                        <th>  Available Stock Quantity</th>
+                                        <th>  Action</th>
                                        <?php }?> 
                                     </tr>
                                 </thead>
@@ -108,7 +109,11 @@
                                              <?php }else{?>
                                             <td><?php echo($marketingMaterialDataArr[$i]['szModelStockVal'] > 0 ?$marketingMaterialDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
                                             <td><?php echo($marketingMaterialQtyDataArr[$i]['szQuantity'] > 0 ? $marketingMaterialQtyDataArr[$i]['szQuantity'] : 'N/A')?></td>
-                                           
+                                           <td>          
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="marketingMaterialStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $marketingMaterialData['id'];?>','2');" href="javascript:void(0);">
+                                                    <i class="fa fa-pencil"></i> 
+                                              </a>
+                                          </td> 
                                         <?php } 
                                         
                                         ?> 

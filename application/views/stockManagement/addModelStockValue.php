@@ -37,7 +37,7 @@
                                 <div class="form-group <?php if(form_error('addModelStockValue[szName]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-3">Product Category</label>
                                         <div class="col-md-4">
-                                            <input id="szName" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('addModelStockValue[szName]'); ?>" placeholder="Category" onfocus="remove_formError(this.id,'true')" name="addModelStockValue[szName]">
+                                            <input id="szName" class="form-control input-large select2me read-only" type="text" readonly value="<?php echo set_value('addModelStockValue[szName]'); ?>" placeholder="Category" onfocus="remove_formError(this.id,'true')" name="addModelStockValue[szName]">
                                           <?php
                                             if(form_error('addModelStockValue[szName]')){?>
                                             <span class="help-block pull-left"><span><?php echo form_error('addModelStockValue[szName]');?></span>

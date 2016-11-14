@@ -145,4 +145,172 @@ if($mode == '__DELETE_PRODUCT_POPUP_CONFIRM__')
     
     <?php
 }
+if($mode == '__REQUEST_QUANTITY_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="requestQuantityStatus" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <div class="modal-title">
+                       <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Request Quantity</span> </h4>
+                        </div>
+                   
+                </div>
+                       </div>
+                <div class="modal-body">
+                      <form action=""  id="requestQuantity" name="requestQuantity" method="post" class="form-horizontal form-row-sepe">
+                       <div class="form-body">
+                          <div class="form-group <?php if(trim($arErrorMessages['szQuantity']) != ''){?>has-error<?php }?>">
+                                    <label class="control-label col-md-3">Request Quantity</label>
+                                        <div class="col-md-4">
+                                           <div class="input-group">
+                                                <input id="szQuantity" class="form-control input-large select2me input-square-right required  " type="text" value="<?php echo set_value('requestQuantity[szQuantity]'); ?>" placeholder="Request Quantity" onfocus="remove_formError(this.id,'true')" name="requestQuantity[szQuantity]">
+                                            </div>
+                                          <?php if(trim($arErrorMessages['szQuantity']) != ''){?>
+                                          <span class="help-block pull-left">
+                                          <i class="fa fa-times-circle"></i>
+                                          <?php echo $arErrorMessages['szQuantity'];?>
+                </span>
+            <?php }?>
+                                        </div>
+                                </div> 
+                </div>
+                      </form>
+                         
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="requestQuantityConfirmation('<?php echo $idProduct;?>','<?php  echo $flag ?>'); return false;" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__REQUEST_QUANTITY_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="requestQuantityStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="modal-title">
+                       <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Request Quantity</span> </h4>
+                        </div>
+                   
+                </div>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Requested Quantity has been successfully send  .</p>
+                </div>
+                <div class="modal-footer">
+                   
+                    <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="btn dark btn-outline">Close</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__ALLOT_QUANTITY_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="allotQuantityStatus" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <div class="modal-title">
+                       <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Allot Quantity</span> </h4>
+                        </div>
+                   
+                </div>
+                       </div>
+                <div class="modal-body">
+                      <form action=""  id="requestQuantity" name="requestQuantity" method="post" class="form-horizontal form-row-sepe">
+                       <div class="form-body">
+                          <div class="form-group <?php if(form_error('requestQuantity[szReqQuantity]')){?>has-error<?php }?>">
+                                    <label class="control-label col-md-4">Request Quantity</label>
+                                        <div class="col-md-4">
+                                           <div class="input-group">
+                                                <input id="szReqQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('szReqQuantity'); ?>" placeholder="Requested Quantity" onfocus="remove_formError(this.id,'true')" name="requestQuantity[szReqQuantity]">
+                                            </div>
+                                          <?php
+                                            if(form_error('requestQuantity[szReqQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('requestQuantity[szReqQuantity]');?></span>
+                                            </span><?php }?> 
+                                        </div>
+                                </div> 
+                           <div class="form-group <?php if(form_error('requestQuantity[szQuantity]')){?>has-error<?php }?>">
+                                    <label class="control-label col-md-4">Assign Quantity</label>
+                                        <div class="col-md-4">
+                                           <div class="input-group">
+                                                <input id="szQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('requestQuantity[szQuantity]'); ?>" placeholder="Assign Quantity" onfocus="remove_formError(this.id,'true')" name="requestQuantity[szQuantity]">
+                                            </div>
+                                          <?php
+                                            if(form_error('requestQuantity[szQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('requestQuantity[szQuantity]');?></span>
+                                            </span><?php }?> 
+                                        </div>
+                                </div> 
+                </div>
+                      </form>
+                         
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="allotQuantityConfirmation('<?php echo $idProduct;?>'); return false;" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__ALLOT_QUANTITY_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="allotQuantityStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="modal-title">
+                       <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Allot Quantity</span> </h4>
+                        </div>
+                   
+                </div>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i>  Quantity has been assigned successfully .</p>
+                </div>
+                <div class="modal-footer">
+                   
+                    <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="btn dark btn-outline">Close</a>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
 ?>
+
+
