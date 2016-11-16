@@ -48,7 +48,7 @@
                                     <label class="control-label col-md-3">Product</label>
                                         <div class="col-md-4">
                                             <div id="product_container">
-                                                 <input id="szProductCode" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('addModelStockValue[szProductCode]'); ?>" placeholder="Product Code" onfocus="remove_formError(this.id,'true')" name="addModelStockValue[szProductCode]">
+                                                 <input id="szProductCode" class="form-control input-large select2me read-only" type="text" readonly value="<?php echo set_value('addModelStockValue[szProductCode]'); ?>" placeholder="Product Code" onfocus="remove_formError(this.id,'true')" name="addModelStockValue[szProductCode]">
                                              </div>
                                           
                                            <?php

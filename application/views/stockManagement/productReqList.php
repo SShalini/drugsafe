@@ -3,15 +3,19 @@
           
             <div id="page_content" class="row">
                 <div class="col-md-12">
-<!--                    <ul class="page-breadcrumb breadcrumb">
+                    <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>/stock_management/stockreqlist">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Drug Test Kit List</span>
+                        <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
                         </li>
-                    </ul>-->
+                        <li>
+                            <span class="active">Request Product List</span>
+                        </li>
+                    </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -20,8 +24,9 @@
                             </div>
                            
                         </div>
-                        <?php
                         
+                        <?php
+                      
                         if(!empty($reqQtyListAray))
                         {
                            
@@ -46,21 +51,24 @@
                                      <?php
                                     if($reqQtyListAray)
                                     {   $i = 0;
+                                       
                                         foreach($reqQtyListAray as $reqQtyListData)
                                         {
-                                          
+                                         
                                            $productDataAry = $this->Inventory_Model->getProductDetailsById($reqQtyListData['iProductId']);
                                            $productCategortDataAry = $this->StockMgt_Model->getCategoryDetailsById($productDataAry['szProductCategory']);
-                                           $QtyAssignListAry = $this->StockMgt_Model->getQtyAssignListById($reqQtyListData['iProductId']); 
-                                          if($QtyAssignListAry)
+                                           $QtyAssignListAry = $this->StockMgt_Model->getQtyAssignListById($reqQtyListData['id']); 
+                                            $total=0;
+                                          if(!empty($QtyAssignListAry))
                                             {
-                                                $total='';
+                                               
                                                foreach($QtyAssignListAry as $QtyAssignListdata)
                                                {
                                                    $total+=$QtyAssignListdata['szQuantityAssigned'];
                                                }
-                                            }                            
-                                         
+                                            }  
+                                           
+                                          
                                         ?>
                                         <tr>
                                              <td>
@@ -73,7 +81,7 @@
                                             <td> <?php echo $productDataAry['szProductDiscription'];?> </td>
                                             <td> <?php echo $productDataAry['szProductCost'];?> </td>
                                             <td> <?php echo $reqQtyListData['szQuantity'];?>  </td>
-                                            <td> <?php echo ($total > 0 ? $total : 'N/A')?></td>
+                                           <td> <?php echo ($total > 0 ? $total : 'N/A')?></td>
                                             
                                            
                                             <td>

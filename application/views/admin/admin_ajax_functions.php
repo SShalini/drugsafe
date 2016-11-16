@@ -163,20 +163,18 @@ if($mode == '__REQUEST_QUANTITY_POPUP__')
                 </div>
                        </div>
                 <div class="modal-body">
-                      <form action=""  id="requestQuantity" name="requestQuantity" method="post" class="form-horizontal form-row-sepe">
+                      <form action=""  id="requestQuantityForm" name="requestQuantity" method="post" class="form-horizontal form-row-sepe">
                        <div class="form-body">
-                          <div class="form-group <?php if(trim($arErrorMessages['szQuantity']) != ''){?>has-error<?php }?>">
+                           <div class="form-group <?php if(form_error('requestQuantity[szQuantity]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-3">Request Quantity</label>
                                         <div class="col-md-4">
                                            <div class="input-group">
                                                 <input id="szQuantity" class="form-control input-large select2me input-square-right required  " type="text" value="<?php echo set_value('requestQuantity[szQuantity]'); ?>" placeholder="Request Quantity" onfocus="remove_formError(this.id,'true')" name="requestQuantity[szQuantity]">
                                             </div>
-                                          <?php if(trim($arErrorMessages['szQuantity']) != ''){?>
-                                          <span class="help-block pull-left">
-                                          <i class="fa fa-times-circle"></i>
-                                          <?php echo $arErrorMessages['szQuantity'];?>
-                </span>
-            <?php }?>
+                                          <?php
+                                            if(form_error('requestQuantity[szQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('requestQuantity[szQuantity]');?></span>
+                                            </span><?php }?> 
                                         </div>
                                 </div> 
                 </div>
@@ -214,8 +212,20 @@ if($mode == '__REQUEST_QUANTITY_POPUP_CONFIRM__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Requested Quantity has been successfully send  .</p>
                 </div>
                 <div class="modal-footer">
-                   
-                    <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="btn dark btn-outline">Close</a>
+                    <?php
+                    if($flag==1)
+                    {
+                        ?>
+                          <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist" class="btn dark btn-outline">Close</a>
+                        <?php
+                    }
+                    else
+                    {
+                       ?>
+                          <a href="<?php echo __BASE_URL__;?>/inventory/marketingmateriallist" class="btn dark btn-outline">Close</a>
+                        <?php
+                    }
+                    ?>
                     
                 </div>
             </div>
@@ -241,29 +251,29 @@ if($mode == '__ALLOT_QUANTITY_POPUP__')
                 </div>
                        </div>
                 <div class="modal-body">
-                      <form action=""  id="requestQuantity" name="requestQuantity" method="post" class="form-horizontal form-row-sepe">
+                      <form action=""  id="allotQuantityForm" name="allotQuantity" method="post" class="form-horizontal form-row-sepe">
                        <div class="form-body">
-                          <div class="form-group <?php if(form_error('requestQuantity[szReqQuantity]')){?>has-error<?php }?>">
+                          <div class="form-group <?php if(form_error('allotQuantity[szReqQuantity]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-4">Request Quantity</label>
                                         <div class="col-md-4">
                                            <div class="input-group">
-                                                <input id="szReqQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('szReqQuantity'); ?>" placeholder="Requested Quantity" onfocus="remove_formError(this.id,'true')" name="requestQuantity[szReqQuantity]">
+                                                <input id="szReqQuantity" class="form-control input-large select2me read-only" readonly type="text" value="<?php echo set_value('szReqQuantity'); ?>" placeholder="Requested Quantity" onfocus="remove_formError(this.id,'true')" name="allotQuantity[szReqQuantity]">
                                             </div>
                                           <?php
-                                            if(form_error('requestQuantity[szReqQuantity]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('requestQuantity[szReqQuantity]');?></span>
+                                            if(form_error('allotQuantity[szReqQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('allotQuantity[szReqQuantity]');?></span>
                                             </span><?php }?> 
                                         </div>
                                 </div> 
-                           <div class="form-group <?php if(form_error('requestQuantity[szQuantity]')){?>has-error<?php }?>">
+                           <div class="form-group <?php if(form_error('allotQuantity[szAddMoreQuantity]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-4">Assign Quantity</label>
                                         <div class="col-md-4">
                                            <div class="input-group">
-                                                <input id="szQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('requestQuantity[szQuantity]'); ?>" placeholder="Assign Quantity" onfocus="remove_formError(this.id,'true')" name="requestQuantity[szQuantity]">
+                                                <input id="szAddMoreQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('allotQuantity[szAddMoreQuantity]'); ?>" placeholder="Assign Quantity" onfocus="remove_formError(this.id,'true')" name="allotQuantity[szAddMoreQuantity]">
                                             </div>
                                           <?php
-                                            if(form_error('requestQuantity[szQuantity]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('requestQuantity[szQuantity]');?></span>
+                                            if(form_error('allotQuantity[szAddMoreQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('allotQuantity[szAddMoreQuantity]');?></span>
                                             </span><?php }?> 
                                         </div>
                                 </div> 
@@ -302,8 +312,7 @@ if($mode == '__ALLOT_QUANTITY_POPUP_CONFIRM__')
                     <p class="alert alert-success"><i class="fa fa-check"></i>  Quantity has been assigned successfully .</p>
                 </div>
                 <div class="modal-footer">
-                   
-                    <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/stock_management/viewproductlist" class="btn dark btn-outline">Close</a>
                    
                 </div>
             </div>

@@ -39,7 +39,7 @@
                                 <div class="form-group <?php if(form_error('editProductStockQty[szName]')){?>has-error<?php }?>">
                                     <label class="control-label col-md-3">Product Category</label>
                                         <div class="col-md-4">
-                                            <input id="szName" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('editProductStockQty[szName]'); ?>" placeholder="Category" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szName]">
+                                            <input id="szName" class="form-control input-large select2me read-only" type="text" readonly value="<?php echo set_value('editProductStockQty[szName]'); ?>" placeholder="Category" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szName]">
                                           <?php
                                             if(form_error('editProductStockQty[szName]')){?>
                                             <span class="help-block pull-left"><span><?php echo form_error('editProductStockQty[szName]');?></span>
@@ -50,7 +50,7 @@
                                     <label class="control-label col-md-3">Product</label>
                                         <div class="col-md-4">
                                             <div id="product_container">
-                                                 <input id="szProductCode" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('editProductStockQty[szProductCode]'); ?>" placeholder="Product Code" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szProductCode]">
+                                                 <input id="szProductCode" class="form-control input-large select2me read-only" readonly type="text" value="<?php echo set_value('editProductStockQty[szProductCode]'); ?>" placeholder="Product Code" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szProductCode]">
                                              </div>
                                           
                                            <?php
@@ -67,7 +67,7 @@
                                     <label class="control-label col-md-3">Available Quantity</label>
                                         <div class="col-md-4">
                                            <div class="input-group">
-                                                <input id="szQuantity" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('editProductStockQty[szQuantity]'); ?>" placeholder="Product Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szQuantity]">
+                                                <input id="szQuantity" class="form-control input-large select2me read-only" type="text" readonly value="<?php echo set_value('editProductStockQty[szQuantity]'); ?>" placeholder="Product Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szQuantity]">
                                             </div>
                                           <?php
                                             if(form_error('editProductStockQty[szQuantity]')){?>
@@ -92,7 +92,7 @@
                                     <label class="control-label col-md-3">Available Quantity</label>
                                         <div class="col-md-4">
                                            <div class="input-group">
-                                                <input id="szQuantity" class="form-control input-large select2me read-only" type="text" value="<?php echo set_value('editProductStockQty[szQuantity]'); ?>" placeholder="Product Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szQuantity]">
+                                                <input id="szQuantity" class="form-control input-large select2me read-only" type="text" readonly value="<?php echo set_value('editProductStockQty[szQuantity]'); ?>" placeholder="Product Quantity" onfocus="remove_formError(this.id,'true')" name="editProductStockQty[szQuantity]">
                                             </div>
                                           <?php
                                             if(form_error('editProductStockQty[szQuantity]')){?>

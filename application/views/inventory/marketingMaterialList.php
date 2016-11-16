@@ -83,6 +83,9 @@
                                        $i = 0;
                                         foreach($marketingMaterialAray as $marketingMaterialData)
                                         {
+                                              $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                             $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                             $marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
                                           
                                         ?>
                                         <tr>
@@ -107,8 +110,8 @@
   
                                             </td>
                                              <?php }else{?>
-                                            <td><?php echo($marketingMaterialDataArr[$i]['szModelStockVal'] > 0 ?$marketingMaterialDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
-                                            <td><?php echo($marketingMaterialQtyDataArr[$i]['szQuantity'] > 0 ? $marketingMaterialQtyDataArr[$i]['szQuantity'] : 'N/A')?></td>
+                                            <td><?php echo($marketingMaterialDataArr['szModelStockVal'] > 0 ?$marketingMaterialDataArr['szModelStockVal'] : 'N/A')?></td>
+                                            <td><?php echo($marketingMaterialQtyDataArr['szQuantity'] > 0 ? $marketingMaterialQtyDataArr['szQuantity'] : 'N/A')?></td>
                                            <td>          
                                               <a class="btn btn-circle btn-icon-only btn-default" id="marketingMaterialStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $marketingMaterialData['id'];?>','2');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 

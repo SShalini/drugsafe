@@ -83,8 +83,14 @@
                                     <?php
                                        $i = 0;
                                         foreach($drugTestKitAray as $drugTestKitData)
-                                        {     
-                                        ?>
+                                        {   
+                                             $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                          
+                                            $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitData['id']); 
+                                              
+                                            $drugTestKitQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
+                                        
+                                            ?>
                                         <tr>
                                             <td>
                                                 <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $drugTestKitData['szProductImage']; ?>" width="60" height="60"/>    
@@ -104,8 +110,8 @@
                                                 </a>
                                                 </td>
                                         <?php }else{?>
-                                          <td><?php echo($drugTestKitDataArr[$i]['szModelStockVal'] > 0 ? $drugTestKitDataArr[$i]['szModelStockVal'] : 'N/A')?></td>
-                                          <td><?php echo($drugTestKitQtyDataArr[$i]['szQuantity'] > 0 ? $drugTestKitQtyDataArr[$i]['szQuantity'] : 'N/A')?></td>
+                                          <td><?php echo($drugTestKitDataArr['szModelStockVal'] > 0 ? $drugTestKitDataArr['szModelStockVal'] : 'N/A')?></td>
+                                          <td><?php echo($drugTestKitQtyDataArr['szQuantity'] > 0 ? $drugTestKitQtyDataArr['szQuantity'] : 'N/A')?></td>
                                           <td>          
                                               <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 

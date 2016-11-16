@@ -136,7 +136,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('addModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addModelStockValue[szProductCode]', 'Product Code');
-            $this->form_validation->set_rules('addModelStockValue[szModelStockVal]', 'Model Stock Value','trim|required|numeric|max_length[3]');
+            $this->form_validation->set_rules('addModelStockValue[szModelStockVal]', 'Model Stock Value','trim|required|greater_than[0]|less_than_equal_to[1000]');
            
             
             if ($this->form_validation->run() == FALSE)
@@ -217,7 +217,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('editModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editModelStockValue[szProductCode]', 'Product Code', 'required');
-            $this->form_validation->set_rules('editModelStockValue[szModelStockVal]', 'Model Stock Value', 'required|numeric|max_length[3]');
+            $this->form_validation->set_rules('editModelStockValue[szModelStockVal]', 'Model Stock Value', 'required|numeric|greater_than[0]|less_than_equal_to[1000]');
            
             
             if ($this->form_validation->run() == FALSE)
@@ -297,7 +297,7 @@ class StockMgt_Controller extends CI_Controller {
 //        
 //             }
   
-//                    $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
+                   $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
 //                    $mr_qty_data = array();
 //                    foreach ($marketingMaterialAray as $marketingMaterialdata){
 //                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
@@ -361,7 +361,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('addProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addProductStockQty[szProductCode]', 'Product Code', 'required');
-            $this->form_validation->set_rules('addProductStockQty[szQuantity]', 'Quantity', 'required|numeric|max_length[3]');
+            $this->form_validation->set_rules('addProductStockQty[szQuantity]', 'Quantity', 'required|numeric|greater_than[0]|less_than_equal_to[1000]');
            
             
             if ($this->form_validation->run() == FALSE)
@@ -434,6 +434,7 @@ class StockMgt_Controller extends CI_Controller {
             
             $idProduct = $this->session->userdata('$idProduct');
             $modelStockDataAry = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$idProduct);
+           
             $productDataAry = $this->StockMgt_Model->getProductsDetailsById($idProduct);
            
             $idCategory = $productDataAry['szProductCategory'];
@@ -443,16 +444,18 @@ class StockMgt_Controller extends CI_Controller {
             $frdata = array();
             $frdata   =  array_merge($modelStockDataAry, $productDataAry,$CategoryDataAry);
 
-          
+            
             $this->load->library('form_validation');
             $this->form_validation->set_rules('editProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editProductStockQty[szProductCode]', 'Product Code', 'required');
-            $this->form_validation->set_rules('editProductStockQty[szQuantity]', 'Quantity', 'required|numeric|max_length[3]');
+            $this->form_validation->set_rules('editProductStockQty[szQuantity]', 'Quantity', 'required|numeric|less_than_equal_to[1000]');
             if($flag==1){
-            $this->form_validation->set_rules('editProductStockQty[szAdjustQuantity]', 'Adjust Quantity', 'required|numeric|max_length[3]');
+            $qty =  (int)$modelStockDataAry['szQuantity'] ;
+            $this->form_validation->set_rules('editProductStockQty[szAdjustQuantity]', 'Adjust Quantity', 'trim|required|numeric|integer|greater_than_equal_to[0]|less_than['.$qty.']');
             }
             else{
-             $this->form_validation->set_rules('editProductStockQty[szAddMoreQuantity]', 'Add More Quantity', 'required|numeric|max_length[3]');
+
+             $this->form_validation->set_rules('editProductStockQty[szAddMoreQuantity]', 'Add More Quantity', 'required|numeric|less_than_equal_to[1000]');
             }
            
              
@@ -478,8 +481,7 @@ class StockMgt_Controller extends CI_Controller {
             {
                $data_validate = $this->input->post('editProductStockQty');
 
-           
-                if( $this->StockMgt_Model->updateProductStockQty($data_validate,$idProduct,$flag))
+                if( $this->StockMgt_Model->updateProductStockQty($data_validate,$idfranchisee,$idProduct,$flag))
                 {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Product Stock Quantity Info! </strong> Product Stock Quantity Updated successfully.";
@@ -502,33 +504,78 @@ class StockMgt_Controller extends CI_Controller {
         }
          public function quantityRequestAlert()
         {
-            $data['mode'] = '__REQUEST_QUANTITY_POPUP__';
-            $data['idProduct'] = $this->input->post('idProduct');
-            $data['flag'] = $this->input->post('flag');
-          
+                $data['mode'] = '__REQUEST_QUANTITY_POPUP__';
+                $data['idProduct'] = $this->input->post('idProduct');
+                $data['flag'] = $this->input->post('flag');
+                
             $this->load->view('admin/admin_ajax_functions',$data);
         }
         public function quantityRequestConfirmation()
          {  
-            
-            $data['mode'] = '__REQUEST_QUANTITY_POPUP_CONFIRM__';
+            $data_validate = $this->input->post('requestQuantity');
+          
             $idProduct = $this->input->post('idProduct');
-            $data['flag'] = $this->input->post('flag');
-         //   $data['arErrorMessages'] = $this->StockMgt_Model->arErrorMessages;
+            $flag = $this->input->post('flag');
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
-            $value = $this->input->post('value');
-//            $validate= array();
-//            $validate['szQuantity'] = $value;
+            $data['flag'] = $this->input->post('flag');
             
-//            if($this->StockMgt_Model->validatereqData($validate)){
-            
-            $this->StockMgt_Model->requestQuantity($idProduct,$value,$idfranchisee);
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('requestQuantity[szQuantity]', 'Request Quantity','trim|required|numeric|integer|greater_than[0]|less_than[1000]');
+   
+            if ($this->form_validation->run() == FALSE)
+           {
+                ?>
+                <div id="requestQuantityStatus" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <div class="modal-title">
+                       <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Request Quantity</span> </h4>
+                        </div>
+                   
+                </div>
+                       </div>
+                <div class="modal-body">
+                      <form action=""  id="requestQuantityForm" name="requestQuantity" method="post" class="form-horizontal form-row-sepe">
+                       <div class="form-body">
+                           <div class="form-group <?php if(form_error('requestQuantity[szQuantity]')){?>has-error<?php }?>">
+                                    <label class="control-label col-md-3">Request Quantity</label>
+                                        <div class="col-md-4">
+                                           <div class="input-group">
+                                                <input id="szQuantity" class="form-control input-large select2me input-square-right required  " type="text" value="<?php echo set_value('requestQuantity[szQuantity]'); ?>" placeholder="Request Quantity" onfocus="remove_formError(this.id,'true')" name="requestQuantity[szQuantity]">
+                                            </div>
+                                         <?php
+                                            if(form_error('requestQuantity[szQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('requestQuantity[szQuantity]');?></span>
+                                            </span><?php }?> 
+                                        </div>
+                                </div> 
+                </div>
+                      </form>
+                         
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="requestQuantityConfirmation('<?php echo $idProduct;?>','<?php  echo $flag ?>'); return false;" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+           }
+           else{
+            $data['mode'] = '__REQUEST_QUANTITY_POPUP_CONFIRM__';
+            $this->StockMgt_Model->requestQuantity($idProduct,$data_validate,$idfranchisee);
             $this->load->view('admin/admin_ajax_functions',$data);
-// }
-   $data['arErrorMessages'] = $this->StockMgt_Model->arErrorMessages;
+           }
+  
         } 
          
-        function franchiseeList()
+        function stockreqlist()
         {
            $is_user_login = is_user_login($this);
 
@@ -542,34 +589,12 @@ class StockMgt_Controller extends CI_Controller {
            
              $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId();
     
-         
-//                 
-//                 foreach ($reqQtyAray as $reqQtyData)
-//                 {
-//                     $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$reqQtyData['iFranchiseeId']);
-//                     
-//                 }
-//                 
-                 
-//                    if($reqQtyAray)
-//                    {   $i = 0;
-//                        foreach($reqQtyAray as $reqQtydata)
-//                        {
-//                            echo //$reqQtydata['id'];die();
-//                                 
-//                            $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$reqQtydata['iFranchiseeId']);
-//                            $i++;
-//                            //print_r($reqQtydata);
-//                        }
-//                        
-//                    }
-                    
-                    
+            
                     $data['frReqQtyAray'] = $frReqQtyAray;
                    // $data['franchiseeAray'] = $reqQtyAray;
-                    $data['szMetaTagTitle'] = "Franchisee List";
+                    $data['szMetaTagTitle'] = "Stock Request List";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Franchisee_List";
+                    $data['pageName'] = "Stock_Request_List";
                     
                     $data['data'] = $data;
  
@@ -581,13 +606,13 @@ class StockMgt_Controller extends CI_Controller {
         {
             $idfranchisee = $this->input->post('idfranchisee');
        
-            {
+            
               
                $this->session->set_userdata('idfranchisee',$idfranchisee);
                 
                 echo "SUCCESS||||";
                 echo "viewproductlist";
-            }
+            
  
         }
 
@@ -602,15 +627,17 @@ class StockMgt_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-          
-            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList();
+            $idfranchisee = $this->session->userdata('idfranchisee');  
+            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($idfranchisee);
+            $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
 
             $data['reqQtyListAray'] = $reqQtyListAray;
+            $data['idfranchisee'] = $idfranchisee;
+            $data['franchiseeArr'] = $franchiseeArr;
             $data['pageName'] = "Requested_Product_List";
             $data['szMetaTagTitle'] = "Requested Product List";
             $data['is_user_login'] = $is_user_login;
-                
-            $idfranchisee = $this->session->userdata('idfranchisee');  
+         
             
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/productReqList');
@@ -625,10 +652,12 @@ class StockMgt_Controller extends CI_Controller {
           
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-        public function allotReqQtyConfirmation()
+         public function allotReqQtyConfirmation()
            {  
-            $data['mode'] = '__ALLOT_QUANTITY_POPUP_CONFIRM__';
+            $data_validate = $this->input->post('allotQuantity');
+           
             $idProduct = $this->input->post('idProduct');
+           
           
             $value['szAddMoreQuantity'] = $this->input->post('szQuantity');
           
@@ -638,18 +667,90 @@ class StockMgt_Controller extends CI_Controller {
             
 
             $productQtyDetails =  $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$idProduct);
-          
-            $productQtyDetails['szAddMoreQuantity'] = $value['szAddMoreQuantity'];
-              
-            $productQtyDetails['szReqQuantity'] = $val['szReqQuantity'];
-          
-         
-      
+            $productQtyDetails['szAddMoreQuantity'] = $data_validate['szAddMoreQuantity'];
+            $productQtyDetails['szReqQuantity'] = $data_validate['szReqQuantity'];
 
-            $this->StockMgt_Model->updateProductStockQty($productQtyDetails,$idProduct,'3');
-            
+           $this->load->library('form_validation');
+           $this->form_validation->set_rules('allotQuantity[szReqQuantity]', 'Request Quantity', 'required');
+           $QtyAssignArr =  $this->StockMgt_Model->getQtyAssignListById($idProduct);
+                 $total=0;
+               if(!empty($QtyAssignArr))
+               {
+                   
+                  foreach($QtyAssignArr as $QtyAssigndata)
+                  {
+                      $total+=$QtyAssigndata['szQuantityAssigned'];
+                  }
+              }
+           $qty =  (int)$data_validate['szReqQuantity']-$total ;
+           $this->form_validation->set_rules('allotQuantity[szAddMoreQuantity]', 'Assign Quantity', 'trim|required|numeric|integer|greater_than_equal_to[0]|less_than_equal_to['.$qty.']');
+          
+           
+          
+            if ($this->form_validation->run() == FALSE)
+           {
+           ?>
+                <div id="allotQuantityStatus" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <div class="modal-title">
+                       <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Allot Quantity</span> </h4>
+                        </div>
+                   
+                </div>
+                       </div>
+                <div class="modal-body">
+                      <form action=""  id="allotQuantityForm" name="allotQuantity" method="post" class="form-horizontal form-row-sepe">
+                       <div class="form-body">
+                          <div class="form-group <?php if(form_error('allotQuantity[szReqQuantity]')){?>has-error<?php }?>">
+                                    <label class="control-label col-md-4">Request Quantity</label>
+                                        <div class="col-md-4">
+                                           <div class="input-group">
+                                                <input id="szReqQuantity" class="form-control input-large select2me read-only" readonly type="text" value="<?php echo set_value('allotQuantity[szReqQuantity]'); ?>" placeholder="Requested Quantity" onfocus="remove_formError(this.id,'true')" name="allotQuantity[szReqQuantity]">
+                                            </div>
+                                          <?php
+                                            if(form_error('allotQuantity[szReqQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('allotQuantity[szReqQuantity]');?></span>
+                                            </span><?php }?> 
+                                        </div>
+                                </div> 
+                           <div class="form-group <?php if(form_error('allotQuantity[szAddMoreQuantity]')){?>has-error<?php }?>">
+                                    <label class="control-label col-md-4">Assign Quantity</label>
+                                        <div class="col-md-4">
+                                           <div class="input-group">
+                                                <input id="szAddMoreQuantity" class="form-control input-large select2me " type="text" value="<?php echo set_value('allotQuantity[szAddMoreQuantity]'); ?>" placeholder="Assign Quantity" onfocus="remove_formError(this.id,'true')" name="allotQuantity[szAddMoreQuantity]">
+                                            </div>
+                                          <?php
+                                            if(form_error('allotQuantity[szAddMoreQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('allotQuantity[szAddMoreQuantity]');?></span>
+                                            </span><?php }?> 
+                                        </div>
+                                </div> 
+                </div>
+                      </form>
+                         
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="allotQuantityConfirmation('<?php echo $idProduct;?>'); return false;" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+                
+              <?php
+           }
+           else{
+            $this->StockMgt_Model->updateProductStockQty($productQtyDetails,$idfranchisee,$idProduct,'3');
+            $data['mode'] = '__ALLOT_QUANTITY_POPUP_CONFIRM__';
             $this->load->view('admin/admin_ajax_functions',$data);
-            
+           }
         } 
          
         

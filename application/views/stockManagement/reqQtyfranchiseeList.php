@@ -26,20 +26,20 @@
 
             <div id="page_content" class="row">
                 <div class="col-md-12">
-<!--                    <ul class="page-breadcrumb breadcrumb">
+                   <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>/stock_management/stockreqlist">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Franchisee List</span>
+                            <span class="active">Request Franchisee List</span>
                         </li>
-                    </ul>-->
+                    </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Franchisee List</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Request Franchisee List</span>
                             </div>
                           
                         </div>

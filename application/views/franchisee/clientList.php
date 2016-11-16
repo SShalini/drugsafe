@@ -189,7 +189,21 @@
                                         <td> <?php echo $clientData['szContactNumber']; ?> </td>
                                        
                                         <td><?php echo $franchiseeDataArr[$i]['szName']; ?> </td>
-                                        <td><?php echo $updateByDataArr[$i]['szName']; ?> </td>
+                                        <td>
+                                            <?php 
+                                            if($clientData['szLastUpdatedBy'])
+                                            {
+                                               $updateByDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientData['szLastUpdatedBy']);
+                                                echo $updateByDataArr['szName'];
+                                            }
+                                            else
+                                            {
+                                               echo "N/A";
+                                            }
+                                           
+                                            ?> 
+                                        </td>
+                                        
                                        
                                         <td>
                                             <?php

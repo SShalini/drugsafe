@@ -9,7 +9,7 @@ class Admin_Controller extends CI_Controller {
            
             $this->load->model('Error_Model');
             $this->load->model('Admin_Model');
-             $this->load->model('Franchisee_Model');
+            $this->load->model('Franchisee_Model');
         
 	}
 	
@@ -20,14 +20,12 @@ class Admin_Controller extends CI_Controller {
             {
                 if($_SESSION['drugsafe_user']['iRole']=='1')
                 {
-                    
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                     die;
                 }
                 else
                 {
-                    
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
                     die;

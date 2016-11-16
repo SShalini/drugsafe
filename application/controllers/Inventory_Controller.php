@@ -233,20 +233,20 @@ class Inventory_Controller extends CI_Controller {
              $idfranchisee = $_SESSION['drugsafe_user']['id'];
              $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList();
              
-                $mr_value_data = array();
-                foreach ($marketingMaterialAray as $marketingMaterialdata){
-                $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialdata['id']);
-                array_push($mr_value_data,$marketingMaterialDataArr);
-             }
-             
-              $mr_qty_data = array();
-                    foreach ($marketingMaterialAray as $marketingMaterialdata){
-                    $marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
-                    array_push($mr_qty_data,$marketingMaterialQtyDataArr);
-             }
-                    $data['marketingMaterialQtyDataArr'] = $mr_qty_data;
+//                $mr_value_data = array();
+//                foreach ($marketingMaterialAray as $marketingMaterialdata){
+//                $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialdata['id']);
+//                array_push($mr_value_data,$marketingMaterialDataArr);
+//             }
+//             
+//              $mr_qty_data = array();
+//                    foreach ($marketingMaterialAray as $marketingMaterialdata){
+//                    $marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
+//                    array_push($mr_qty_data,$marketingMaterialQtyDataArr);
+//             }
+//                    $data['marketingMaterialQtyDataArr'] = $mr_qty_data;
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
-                    $data['marketingMaterialDataArr'] = $mr_value_data;
+//                    $data['marketingMaterialDataArr'] = $mr_value_data;
                     $data['szMetaTagTitle'] = "Marketing Material List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";

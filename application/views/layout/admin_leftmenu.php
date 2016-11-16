@@ -56,7 +56,7 @@
                                 </li>
                                 <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                    <li class="nav-item  <?php if($subpageName=='Stock_Request'){ ?> active open <?php } ?>">
-                                    <a class="nav-link " href="<?php echo __BASE_URL__;?>/stock_management/franchiseeList">
+                                    <a class="nav-link " href="<?php echo __BASE_URL__;?>/stock_management/stockreqlist">
                                         <span class="title">Stock Request</span>
                                     </a>
                                 </li>

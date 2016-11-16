@@ -190,10 +190,12 @@
                             <?php 
                                $i = 0;
                                 foreach($marketingMaterialAray as $marketingMaterialData)
-                                {
+                                {  
                                      $idfranchisee = $franchiseeArr['id'];
-                                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
-                                ?>
+
+                                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                                             
+                                    ?>
                                 <tr>
                                    <td>
                                         <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $marketingMaterialData['szProductImage']; ?>" width="60" height="60"/>
@@ -202,10 +204,12 @@
                                     <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                     <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                     <td> $<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                      <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr[$i]['szQuantity'] : 'N/A')?></td>
+                                     <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
+                                      
                                    
                                     <td>
-                                        <?php if(empty($marketingMaterialDataArr['szQuantity']) && ($marketingMaterialDataArr['szQuantity'] != '0')){?>
+                                         <?php if(empty($marketingMaterialDataArr['szQuantity']) && ($marketingMaterialDataArr['szQuantity'] != '0')){?>
+                                        
                                         <a class="btn btn-circle btn-icon-only btn-default" title="Add Model Stock Value" onclick="addProductStockQuantity(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">
                                             <i class="fa fa-plus"></i> 
                                         </a>

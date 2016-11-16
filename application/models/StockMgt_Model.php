@@ -74,7 +74,6 @@ class StockMgt_Model extends Error_Model {
         
     public function getStockValueDetailsById($idfranchisee,$id=0)
      {
-           
         $this->db->select('*');
         $whereAry = array('iProductId' => $id,'iFranchiseeId' => $idfranchisee);
         $this->db->where($whereAry);
@@ -154,7 +153,6 @@ class StockMgt_Model extends Error_Model {
         }
         public function getProductQtyDetailsById($idfranchisee,$id=0)
     {
-
         $this->db->select('*');
          $whereAry = array('iProductId' => $id,'iFranchiseeId' => $idfranchisee);
         $this->db->where($whereAry);
@@ -195,9 +193,9 @@ class StockMgt_Model extends Error_Model {
              }
 
         }
-        public function getQtyAssignListById($idProduct)
+        public function getQtyAssignListById($idReq)
         {
-            $whereAry = array('iProductId=' => $idProduct);
+            $whereAry = array('iReqId=' => $idReq);
             $this->db->select('*');
             $this->db->where($whereAry);
             $query = $this->db->get(__DBC_SCHEMATA_STOCK_REQ_TRACKING__);
@@ -216,7 +214,7 @@ class StockMgt_Model extends Error_Model {
         }
          public function getQtyReqById($idProduct)
         {
-            $whereAry = array('iProductId=' => $idProduct);
+            $whereAry = array('iProductId=' => $idProduct,'isCompleted='=>'0');
             $this->db->select('*');
             $this->db->where($whereAry);
             $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
@@ -231,8 +229,9 @@ class StockMgt_Model extends Error_Model {
                     return array();
             }
         }
-        public function updateProductStockQty($data_validate,$idProduct,$flag)
-         {
+        public function updateProductStockQty($data_validate,$idfranchisee,$idProduct,$flag)
+         { 
+
             $this->data['dtAssignedOn'] = date('Y-m-d H:i:s');
             if($flag==1){
                $szQuantity= trim($data_validate['szQuantity'] - $data_validate['szAdjustQuantity']);  
@@ -242,18 +241,19 @@ class StockMgt_Model extends Error_Model {
             } 
             $dataAry = array(
  
-                                 'szQuantity' => $szQuantity
+                  'szQuantity' => $szQuantity
                 );
-                $whereAry = array('iProductId' => (int)$idProduct);
+                $whereAry = array('iFranchiseeId' => (int)$idfranchisee);
 
                 $this->db->where($whereAry);
 
              $queryUpdate =    $this->db->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
-                
+
                 if(!empty($queryUpdate))
                 {
                     if($flag==3)
-                    {
+                    {   
+                        
                          $dataAry = array(
                                  'isProcessed' => '1'
                                  );
@@ -296,12 +296,12 @@ class StockMgt_Model extends Error_Model {
                 $this->db->insert(__DBC_SCHEMATA_STOCK_REQ_TRACKING__, $dataAry);
                 if($this->db->affected_rows() > 0)
                {
-                 
-               $QtyAssignArr =  $this->getQtyAssignListById($idProduct);
-            
-               if($QtyAssignArr)
+                $i=0;
+               $QtyAssignArr =  $this->getQtyAssignListById( $QtyReqArr[$i]['id']);
+                 $total=0;
+               if(!empty($QtyAssignArr))
                {
-                   $total='';
+                   
                   foreach($QtyAssignArr as $QtyAssigndata)
                   {
                       $total+=$QtyAssigndata['szQuantityAssigned'];
@@ -347,14 +347,15 @@ class StockMgt_Model extends Error_Model {
                 }
            
         }
-        function requestQuantity($idProduct,$value,$idfranchisee)
+        function requestQuantity($idProduct,$data_validate,$idfranchisee)
         { 
+          $szQuantity = $data_validate['szQuantity'];
          
             $dataAry = array(
 
                                 'iFranchiseeId' => $idfranchisee,
                                 'iProductId' => $idProduct,
-                                'szQuantity' => $value,
+                                'szQuantity' => $szQuantity,
                                 'isProcessed' => '0',
                                 'isCompleted' => '0'
                                 
@@ -393,9 +394,9 @@ class StockMgt_Model extends Error_Model {
                     return array();
             }
         }
-        public function getRequestQtyList()
+        public function getRequestQtyList($idfranchisee)
         {
-            $whereAry = array('isCompleted=' => '0');
+            $whereAry = array('isCompleted=' => '0','iFranchiseeId=' => $idfranchisee);
             $this->db->select('*');
             $this->db->where($whereAry);
             $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
@@ -435,6 +436,41 @@ class StockMgt_Model extends Error_Model {
 //       
 //         $this->addError("szQuantity", "Confirm password required.");
 //    }
-    
+//        function set_szAddMoreQuantity($value,$flag=true)
+//    {
+//        $this->data['szAddMoreQuantity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szAddMoreQuantity", "Add More Quantity", false, false, $flag);
+//    }
+//
+//    function set_szReqQuantity($value,$flag=true)
+//    {
+//        $this->data['set_szReqQuantity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szReqQuantity", "Req Quantity", false, false, $flag);
+//    }
+        
+        
+        
+//         function ValidateProductStockQty($data, $arExclude=array())
+//    {
+//    
+//        if(!empty($data))
+//        {
+//           
+//           
+//            if(!in_array('szAddMoreQuantity',$arExclude)) 
+//            {
+//                $this->set_szAddMoreQuantity(sanitize_all_html_input(trim($data['szAddMoreQuantity'])));
+//            }
+//            if(!in_array('szReqQuantity',$arExclude)) 
+//            {
+//                $this->set_szReqQuantity(sanitize_all_html_input(trim($data['szReqQuantity'])));			
+//            }
+//
+//            if($this->error == true)
+//                    return false;
+//            else
+//                    return true;
+//        }
+//        return false;
+//    }
+  
 }
 ?>
