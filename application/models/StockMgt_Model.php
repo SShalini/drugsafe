@@ -343,6 +343,7 @@ class StockMgt_Model extends Error_Model {
         }
         function requestQuantity($idProduct,$data_validate,$idfranchisee)
         { 
+          $this->data['dtRequestedOn'] = date('Y-m-d H:i:s');
           $szQuantity = $data_validate['szQuantity'];
          
             $dataAry = array(
@@ -351,7 +352,8 @@ class StockMgt_Model extends Error_Model {
                                 'iProductId' => $idProduct,
                                 'szQuantity' => $szQuantity,
                                 'isProcessed' => '0',
-                                'isCompleted' => '0'
+                                'isCompleted' => '0',
+                                'dtRequestedOn' => $this->data['dtRequestedOn']
                                 
             );
 

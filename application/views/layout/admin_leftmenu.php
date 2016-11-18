@@ -61,6 +61,7 @@
                                  <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                    <li class="nav-item  <?php if($pageName=='Stock_Request'){ ?> active open <?php } ?>">
                                     <a class="nav-link " href="<?php echo __BASE_URL__;?>/stock_management/stockreqlist">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
                                         <span class="title">Stock Request</span>
                                        <!-- BEGIN NOTIFICATION  -->
                                        
@@ -71,6 +72,28 @@
                                   
                                        
                                 </li>
+                                 <li class="nav-item start <?php if(trim($pageName)=='Reporting'){?>active open<?php }?>">
+                                <a href="javascript:void(0);" class="nav-link nav-toggle">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <span class="title">Reporting </span>
+                                   <span class="arrow"></span>
+                                </a>
+                                <ul class="sub-menu" <?php if($subpageName=='Reporting'){ ?> style="display: block;" <?php } ?> >
+                                <li class="nav-item  <?php if($subpageName=='All_Stock_Requests'){ ?> active open <?php } ?>">
+                                    <a class="nav-link " href="<?php echo __BASE_URL__;?>/reporting/allstockreqlist">
+                                        <span class="title">All Stock Requests</span>
+                                    </a>
+                                </li>
+                                
+				<li class="nav-item  <?php if($subpageName=='Stock_Assignments'){ ?> active open <?php } ?>">
+                                    <a class="nav-link " href="<?php echo __BASE_URL__;?>/inventory/marketingmateriallist">
+                                        <span class="title">Stock Assignments</span>
+                                    </a>
+                                </li>
+                               
+                                </ul>
+                
+                            </li>
                                 <?php }?> 
                              
                         </ul>

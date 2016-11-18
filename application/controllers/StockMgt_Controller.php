@@ -19,7 +19,7 @@ class StockMgt_Controller extends CI_Controller {
             if($is_user_login)
             {
   
-                    ob_end_clean();
+                   
                     header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
                     die;
 

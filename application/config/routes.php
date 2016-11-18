@@ -74,6 +74,12 @@ $route['stock_management/(:any)/(:any)'] = "StockMgt_Controller/$1/$2";
 $route['stock_management/(:any)/(:any)/(:any)'] = "StockMgt_Controller/$1/$2/$3";
 
 
+$route['reporting'] = "Reporting_Controller";
+$route['reporting/(:any)'] = "Reporting_Controller/$1";
+$route['reporting/(:any)/(:any)'] = "Reporting_Controller/$1/$2";
+$route['reporting/(:any)/(:any)/(:any)'] = "Reporting_Controller/$1/$2/$3";
+
+
 $route['404_override'] = 'Error_Controller';
 $route['error'] = "Error_Controller";
 $route['translate_uri_dashes'] = FALSE;
