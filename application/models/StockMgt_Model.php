@@ -264,25 +264,9 @@ class StockMgt_Model extends Error_Model {
                 $QtyReqArr =  $this->getQtyReqById($idProduct,$idfranchisee);
                 $i=0;
                 $reqId = $QtyReqArr[$i]['id'];
-               
-               
-                $QtyAssignArr =  $this->getQtyAssignListById($idProduct,$idfranchisee,$reqId);
-            
-                if($QtyAssignArr)
-                {
-                  $total='';
-                  foreach($QtyAssignArr as $QtyAssigndata)
-                  {
-                      $total+=$QtyAssigndata['szQuantityAssigned'];
-                  }
-                
-                  $szTotalAvailableQty =   $data_validate['szReqQuantity']-($total+$data_validate['szAddMoreQuantity']) ;
-                }
-                else
-                {
-                    $szTotalAvailableQty=$data_validate['szReqQuantity'] - $data_validate['szAddMoreQuantity'];
-                }
-             
+
+                 $szTotalAvailableQty= trim($data_validate['szQuantity'] + $data_validate['szAddMoreQuantity']);
+
                if(!empty($ProcessUpdate))
             {
                $QtyReqArr =  $this->getQtyReqById($idProduct,$idfranchisee);
