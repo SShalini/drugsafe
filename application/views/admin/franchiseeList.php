@@ -59,7 +59,7 @@
                                 <thead>
                                     <tr>
                                         <th> Id.</th>
-                                        <th> Name</th>
+                                        <th> Franchisee</th>
                                         <th> Email</th>
                                         <th> Contact No </th>
                                         <th> Address </th>

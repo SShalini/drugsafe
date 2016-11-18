@@ -115,7 +115,6 @@ class Franchisee_Controller extends CI_Controller
         $data['szParentId'] = $idclient;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
 
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/addClient');
         $this->load->view('layout/admin_footer');

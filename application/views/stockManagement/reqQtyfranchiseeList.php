@@ -53,11 +53,11 @@
                                 <thead>
                                     <tr>
                                         <th> Id.</th>
-                                        <th> Name</th>
+                                        <th> Franchisee</th>
                                         <th> Email</th>
-                                        <th> Contact No </th>
+                                        <th> Contact No. </th>
                                         <th> Address </th>
-                                        <th> Actions </th>
+                                        <th> Quantity Requests </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -86,13 +86,12 @@
                                             <td> <?php echo $franchiseeAray['szCity'];?> </td>
                                            <td>
                                                 
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="View Request Quantity" onclick="ViewReqProductList(<?php echo $franchiseeAray['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="View Quantity Requests" onclick="ViewReqProductList(<?php echo $franchiseeAray['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 <!-- BEGIN NOTIFICATION  -->
                                        
-                                                <span class="badge badge-success"><?php echo $count ?></span>
-                                                     </a>
+                                                <span class="badge badge-danger"><?php echo $count ?></span>
                                                 <!-- END NOTIFICATION  -->
 
                                                
