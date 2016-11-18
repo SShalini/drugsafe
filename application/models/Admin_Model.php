@@ -183,6 +183,7 @@ class Admin_Model extends Error_Model {
                 $adminAry['szName'] = $row[0]['szName'];
                 $adminAry['szEmail'] = $row[0]['szEmail'];
                 $adminAry['iRole'] = $row[0]['iRole'];
+                //$adminAry['Reqcount'] = $count;
 
                 $user_session= $this->session->set_userdata('drugsafe_user', $adminAry);
 
@@ -749,6 +750,19 @@ class Admin_Model extends Error_Model {
         else
             return true;
     }
+    public function getnotification(){
+            $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId();  
+                                  
+                    $count=0;
+                    foreach($frReqQtyAray as $frReqQtyData){
+
+                       $count++; 
+
+                     }
+                     
+                     return $count;
+        }
+
       
 }
 ?>

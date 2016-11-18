@@ -54,19 +54,24 @@
                                         <span class="title">Marketing Material List</span>
                                     </a>
                                 </li>
-                                <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
-                                   <li class="nav-item  <?php if($subpageName=='Stock_Request'){ ?> active open <?php } ?>">
+                               
+                                </ul>
+                
+                            </li>
+                                 <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
+                                   <li class="nav-item  <?php if($pageName=='Stock_Request'){ ?> active open <?php } ?>">
                                     <a class="nav-link " href="<?php echo __BASE_URL__;?>/stock_management/stockreqlist">
                                         <span class="title">Stock Request</span>
-                                    </a>
+                                       <!-- BEGIN NOTIFICATION  -->
+                                       
+                                       <span class="badge badge-success"><?php echo $notification; ?></span>
+                                      
+                                            </a>
+					<!-- END NOTIFICATION  -->
+                                  
+                                       
                                 </li>
                                 <?php }?> 
-                                </ul>
-                                 
-				
-                              
-                            </li>
-                      
                              
                         </ul>
                      </div>  

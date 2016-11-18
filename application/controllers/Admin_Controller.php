@@ -10,6 +10,7 @@ class Admin_Controller extends CI_Controller {
             $this->load->model('Error_Model');
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
+            $this->load->model('StockMgt_Model');
         
 	}
 	
@@ -39,7 +40,7 @@ class Admin_Controller extends CI_Controller {
             }
 
         } 
-      public function admin_login()
+        public function admin_login()
 	{
            $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -49,14 +50,17 @@ class Admin_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                die;
             }	
-            $validate= $this->input->post('adminLogin');
-            $iRemember = (int)$this->input->post('adminLogin[iRemember]');
+                $validate= $this->input->post('adminLogin');
+                $iRemember = (int)$this->input->post('adminLogin[iRemember]');
                 if(!empty($validate))
                 {
                      if($this->Admin_Model->checkUserAccountStatus($validate['szEmail']))
-                {   
+                {  
+                  
                  $adminAry = $this->Admin_Model->adminLoginUser($validate);
-                 if(!empty($adminAry)) {
+
+                 
+                     if(!empty($adminAry)) {
                         if ((int) $iRemember == 1) {
                         set_customer_cookie($this, $adminAry);
                          
@@ -79,6 +83,7 @@ class Admin_Controller extends CI_Controller {
                 $data['szMetaTagTitle'] = "Admin Login";
                 $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                 $data['is_user_login'] = $is_user_login;
+                
                 $this->load->view('layout/login_header', $data);
                 $this->load->view('admin/admin_login');
                 $this->load->view('layout/login_footer');
@@ -116,8 +121,9 @@ class Admin_Controller extends CI_Controller {
         }
          function changePassword()
         {
+            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
-
+             
             // redirect to dashboard if already logged in
             if(!$is_user_login)
             {
@@ -147,6 +153,7 @@ class Admin_Controller extends CI_Controller {
             $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Profile";
+            $data['notification'] = $count;
 
         $this->load->view('layout/admin_header', $data);
         $this->load->view('admin/changePassword');
@@ -158,6 +165,7 @@ class Admin_Controller extends CI_Controller {
             $validate= $this->input->post('addFranchisee'); 
             $countryAry = $this->Admin_Model->getCountries();
             $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
+            $count = $this->Admin_Model->getnotification();
             
             if($this->Admin_Model->validateFranchiseeData($validate))
             {
@@ -180,6 +188,7 @@ class Admin_Controller extends CI_Controller {
                     $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['notification'] = $count;
             
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/addFranchisee');
@@ -191,6 +200,8 @@ class Admin_Controller extends CI_Controller {
            $is_user_login = is_user_login($this);
 
             // redirect to dashboard if already logged in
+           $count = $this->Admin_Model->getnotification();
+        
             if(!$is_user_login)
             {
                 ob_end_clean();
@@ -221,7 +232,9 @@ class Admin_Controller extends CI_Controller {
                     $data['pageName'] = "Franchisee_List";
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
- 
+                    $data['notification'] = $count;
+                    
+         
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/franchiseeList');
             $this->load->view('layout/admin_footer');
@@ -256,7 +269,7 @@ class Admin_Controller extends CI_Controller {
         {
            
             $idfranchisee = $this->input->post('idfranchisee');
-            
+           
             
             if($idfranchisee>0)
             {
@@ -272,10 +285,11 @@ class Admin_Controller extends CI_Controller {
             $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
             $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
+            $count = $this->Admin_Model->getnotification();
             if($idfranchisee >0)
             {
                 
-
+                  
                 $data_validate = $this->input->post('addFranchisee');
                 if(empty($data_validate))
                 {
@@ -307,6 +321,7 @@ class Admin_Controller extends CI_Controller {
                     $data['validate'] = $validate;
                     $_POST['addFranchisee'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['notification'] = $count;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/editFranchisee');
             $this->load->view('layout/admin_footer');
@@ -349,14 +364,14 @@ class Admin_Controller extends CI_Controller {
     public function admin_forgotPassword()
     {
         $is_user_login = is_user_login($this);
-
+         
         if($is_user_login)
         {
             ob_end_clean();
             header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
             die;
         }
-
+        
         $data_validate=$this->input->post('drugSafeForgotPassword[szEmail]');
         //$data_validate = array('szEmail'=>$data_validate);
         $data_not_validate = array(

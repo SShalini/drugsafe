@@ -41,7 +41,7 @@ class Inventory_Model extends Error_Model {
             $this->db->from(__DBC_SCHEMATA_PRODUCT__);
             $this->db->where($whereAry);
             $query = $this->db->get();
-          
+            $sql = $this->db->last_query();
             if($query->num_rows() > 0)
             {
                 $row = $query->result_array();
@@ -122,7 +122,6 @@ class Inventory_Model extends Error_Model {
             $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');
             $this->db->where($whereAry);  
             $query = $this->db->get();
-
             }
             if($query->num_rows() > 0)
             {

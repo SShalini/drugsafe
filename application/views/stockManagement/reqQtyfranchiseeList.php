@@ -68,6 +68,14 @@
                                         {
                                           
                                             $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$frReqQtyArayData['iFranchiseeId']);
+                                            
+                                            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($franchiseeAray['id']);
+                                               $count=0;
+                                               foreach($reqQtyListAray as $reqQtyListData){
+
+                                                  $count++; 
+
+                                                }
                                            
                                         ?>
                                         <tr>
@@ -81,6 +89,12 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="View Request Quantity" onclick="ViewReqProductList(<?php echo $franchiseeAray['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+                                                <!-- BEGIN NOTIFICATION  -->
+                                       
+                                                <span class="badge badge-success"><?php echo $count ?></span>
+                                                     </a>
+                                                <!-- END NOTIFICATION  -->
+
                                                
                                             </td>
                                         </tr>

@@ -92,7 +92,7 @@ function insertClientDetails($data,$franchiseeId='')
                 $this->db->where('clientType',0);
             }
             $query = $this->db->get();
-            $s=$this->db->last_query();
+//            $s=$this->db->last_query();
            
             if($query->num_rows() > 0)
             {

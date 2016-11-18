@@ -54,17 +54,26 @@
                                        
                                         foreach($reqQtyListAray as $reqQtyListData)
                                         {
-                                         
+                                         $idfranchisee= $franchiseeArr['id'];
+                                          $idProduct =$reqQtyListData['iProductId'];
                                            $productDataAry = $this->Inventory_Model->getProductDetailsById($reqQtyListData['iProductId']);
+                                          
                                            $productCategortDataAry = $this->StockMgt_Model->getCategoryDetailsById($productDataAry['szProductCategory']);
-                                           $QtyAssignListAry = $this->StockMgt_Model->getQtyAssignListById($reqQtyListData['id']); 
+                                           $QtyReqArr =  $this->StockMgt_Model->getQtyReqById($idProduct,$idfranchisee);
+                                            $i=0;
+                                             $reqId = $QtyReqArr[$i]['id'];
+                                             $QtyAssignArr =  $this->StockMgt_Model->getQtyAssignListById($idProduct,$idfranchisee,$reqId);
+//                                             print_r($QtyAssignArr);die;
+                                          // $QtyAssignListAry = $this->StockMgt_Model->getQtyAssignListById($idProduct,$idfranchisee); 
+                                         
                                             $total=0;
-                                          if(!empty($QtyAssignListAry))
+                                          if(!empty($QtyAssignArr))
                                             {
                                                
-                                               foreach($QtyAssignListAry as $QtyAssignListdata)
+                                               foreach($QtyAssignArr as $QtyAssignListdata)
                                                {
                                                    $total+=$QtyAssignListdata['szQuantityAssigned'];
+                                                  
                                                }
                                             }  
                                            
@@ -79,7 +88,7 @@
                                             <td> <?php echo $productDataAry['szProductCode'];?> </td>
                                             <td> <?php echo $productCategortDataAry['szName']?> </td>
                                             <td> <?php echo $productDataAry['szProductDiscription'];?> </td>
-                                            <td> <?php echo $productDataAry['szProductCost'];?> </td>
+                                            <td> $<?php echo $productDataAry['szProductCost'];?> </td>
                                             <td> <?php echo $reqQtyListData['szQuantity'];?>  </td>
                                            <td> <?php echo ($total > 0 ? $total : 'N/A')?></td>
                                             

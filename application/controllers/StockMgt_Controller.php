@@ -87,7 +87,7 @@ class StockMgt_Controller extends CI_Controller {
                     $data['franchiseeArr'] = $franchiseeArr;
                     $data['szMetaTagTitle'] = "Model Stock Value";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Model_Stock_Value";
+                    $data['pageName'] = "Inventory";
                  
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/modelStockValue');
@@ -97,7 +97,7 @@ class StockMgt_Controller extends CI_Controller {
        function addModelStock()
         {
            $idProduct = $this->input->post('idProduct');
-          $this->session->set_userdata('$idProduct',$idProduct);
+          $this->session->set_userdata('idProduct',$idProduct);
             {
                 echo "SUCCESS||||";
                 echo "addmodelstockvalue";
@@ -120,8 +120,8 @@ class StockMgt_Controller extends CI_Controller {
             
             $validate = $this->input->post('addModelStockValue');
 
-            $idProduct = $this->session->userdata('$idProduct');
-            //$modelStockDataAry = $this->StockMgt_Model->getModelstockDetailsById($idfranchisee,$idProduct);
+            $idProduct = $this->session->userdata('idProduct');
+          
           
             $productDataAry = $this->StockMgt_Model->getProductsDetailsById($idProduct);
          
@@ -137,7 +137,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('addModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addModelStockValue[szProductCode]', 'Product Code');
             $this->form_validation->set_rules('addModelStockValue[szModelStockVal]', 'Model Stock Value','trim|required|greater_than[0]|less_than_equal_to[1000]');
-           
+             $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -180,7 +180,7 @@ class StockMgt_Controller extends CI_Controller {
          function editModelStock()
         {
            $idProduct = $this->input->post('idProduct');
-           $this->session->set_userdata('$idProduct',$idProduct);
+           $this->session->set_userdata('idProduct',$idProduct);
             {
                 echo "SUCCESS||||";
                 echo "editmodelstockvalue";
@@ -203,7 +203,7 @@ class StockMgt_Controller extends CI_Controller {
             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
             
            
-            $idProduct = $this->session->userdata('$idProduct');
+            $idProduct = $this->session->userdata('idProduct');
             $modelStockDataAry = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$idProduct);
             $productDataAry = $this->StockMgt_Model->getProductsDetailsById($idProduct);
             $idCategory = $productDataAry['szProductCategory'];
@@ -218,7 +218,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('editModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editModelStockValue[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('editModelStockValue[szModelStockVal]', 'Model Stock Value', 'required|numeric|greater_than[0]|less_than_equal_to[1000]');
-           
+            $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -241,7 +241,7 @@ class StockMgt_Controller extends CI_Controller {
             {
                $data_validate = $this->input->post('editModelStockValue');
            
-                if( $this->StockMgt_Model->updateModelStockVal($data_validate,$idProduct))
+                if( $this->StockMgt_Model->updateModelStockVal($data_validate,$idProduct,$idfranchisee))
                 {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Model Stock Value Info! </strong> Model Stock Value Updated successfully.";
@@ -288,31 +288,15 @@ class StockMgt_Controller extends CI_Controller {
              $idfranchisee = $this->session->userdata('idfranchisee');
              $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
              $drugTestKitAray =$this->StockMgt_Model->viewDrugTestKitList();
-             
-            
-//             $fr_qty_data = array();
-//              foreach ($drugTestKitAray as $drugTestKitdata){
-//                $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitdata['id']);
-//                array_push($fr_qty_data, $drugTestKitDataArr);
-//        
-//             }
-  
-                   $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
-//                    $mr_qty_data = array();
-//                    foreach ($marketingMaterialAray as $marketingMaterialdata){
-//                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
-//                    array_push($mr_qty_data,$marketingMaterialDataArr);
-//             }
+             $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
 
-//                    $data['drugTestKitDataArr'] = $fr_qty_data;
-//                    $data['marketingMaterialDataArr'] = $mr_qty_data;
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['franchiseeArr'] = $franchiseeArr;
                     $data['idfranchisee'] = $idfranchisee;
                     $data['szMetaTagTitle'] = "Product_Stock_Management";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Product_Stock_Management";
+                    $data['pageName'] = "Inventory";
                  
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/productStockMgt');
@@ -321,7 +305,7 @@ class StockMgt_Controller extends CI_Controller {
         function addProductStock()
         {
            $idProduct = $this->input->post('idProduct');
-           $this->session->set_userdata('$idProduct',$idProduct);
+           $this->session->set_userdata('idProduct',$idProduct);
             {
                 echo "SUCCESS||||";
                 echo "addProductStockqty";
@@ -345,7 +329,7 @@ class StockMgt_Controller extends CI_Controller {
             $validate = $this->input->post('addProductStockQty');
            
    
-            $idProduct = $this->session->userdata('$idProduct');
+            $idProduct = $this->session->userdata('idProduct');
           
           
             $productDataAry = $this->StockMgt_Model->getProductsDetailsById($idProduct);
@@ -362,7 +346,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('addProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addProductStockQty[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('addProductStockQty[szQuantity]', 'Quantity', 'required|numeric|greater_than[0]|less_than_equal_to[1000]');
-           
+            $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -409,7 +393,7 @@ class StockMgt_Controller extends CI_Controller {
             
             {
                  $this->session->set_userdata('flag',$flag);
-                 $this->session->set_userdata('$idProduct',$idProduct);
+                 $this->session->set_userdata('idProduct',$idProduct);
                 
                 echo "SUCCESS||||";
                 echo "editproductstockqty";
@@ -432,7 +416,7 @@ class StockMgt_Controller extends CI_Controller {
             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
             $flag = $this->session->userdata('flag');
             
-            $idProduct = $this->session->userdata('$idProduct');
+            $idProduct = $this->session->userdata('idProduct');
             $modelStockDataAry = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$idProduct);
            
             $productDataAry = $this->StockMgt_Model->getProductsDetailsById($idProduct);
@@ -454,10 +438,9 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('editProductStockQty[szAdjustQuantity]', 'Adjust Quantity', 'trim|required|numeric|integer|greater_than_equal_to[0]|less_than['.$qty.']');
             }
             else{
-
              $this->form_validation->set_rules('editProductStockQty[szAddMoreQuantity]', 'Add More Quantity', 'required|numeric|less_than_equal_to[1000]');
             }
-           
+             $this->form_validation->set_message('required', '{field} is required');
              
             if ($this->form_validation->run() == FALSE)
             {
@@ -520,8 +503,8 @@ class StockMgt_Controller extends CI_Controller {
             $data['flag'] = $this->input->post('flag');
             
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('requestQuantity[szQuantity]', 'Request Quantity','trim|required|numeric|integer|greater_than[0]|less_than[1000]');
-   
+            $this->form_validation->set_rules('requestQuantity[szQuantity]','Request Quantity','trim|required|numeric|integer|greater_than[0]|less_than[1000]|callback_requestQuantity_check');
+             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
            {
                 ?>
@@ -575,10 +558,29 @@ class StockMgt_Controller extends CI_Controller {
   
         } 
          
+        function requestQuantity_check($szQuantity)
+        {
+         $idProduct = $this->input->post('idProduct');
+        
+          $idfranchisee = $_SESSION['drugsafe_user']['id'];
+          $reqQtyListAray =$this->StockMgt_Model->reqQtyFr_check($idfranchisee,$idProduct);
+          if(!empty($reqQtyListAray))
+          {
+              $this->form_validation->set_message('requestQuantity_check', 'Request for this product has been already sent.');
+               return false;
+          }
+          else{
+               return true;
+          }
+          
+       }
+        
+        
+        
         function stockreqlist()
         {
            $is_user_login = is_user_login($this);
-
+    
             // redirect to dashboard if already logged in
             if(!$is_user_login)
             {
@@ -586,7 +588,7 @@ class StockMgt_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-           
+             $count = $this->Admin_Model->getnotification();
              $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId();
     
             
@@ -594,8 +596,8 @@ class StockMgt_Controller extends CI_Controller {
                    // $data['franchiseeAray'] = $reqQtyAray;
                     $data['szMetaTagTitle'] = "Stock Request List";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Stock_Request_List";
-                    
+                    $data['pageName'] = "Stock_Request";
+                    $data['notification'] = $count;
                     $data['data'] = $data;
  
             $this->load->view('layout/admin_header',$data);
@@ -627,14 +629,19 @@ class StockMgt_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-            $idfranchisee = $this->session->userdata('idfranchisee');  
+            
+            $idfranchisee = $this->session->userdata('idfranchisee'); 
+            $count = $this->Admin_Model->getnotification();
             $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($idfranchisee);
+            
+          
             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
 
             $data['reqQtyListAray'] = $reqQtyListAray;
             $data['idfranchisee'] = $idfranchisee;
             $data['franchiseeArr'] = $franchiseeArr;
-            $data['pageName'] = "Requested_Product_List";
+            $data['pageName'] = "Stock_Request";
+            $data['notification'] = $count;
             $data['szMetaTagTitle'] = "Requested Product List";
             $data['is_user_login'] = $is_user_login;
          
@@ -672,7 +679,10 @@ class StockMgt_Controller extends CI_Controller {
 
            $this->load->library('form_validation');
            $this->form_validation->set_rules('allotQuantity[szReqQuantity]', 'Request Quantity', 'required');
-           $QtyAssignArr =  $this->StockMgt_Model->getQtyAssignListById($idProduct);
+            $QtyReqArr =  $this->StockMgt_Model->getQtyReqById($idProduct,$idfranchisee);
+                $i=0;
+                $reqId = $QtyReqArr[$i]['id'];
+           $QtyAssignArr =  $this->StockMgt_Model->getQtyAssignListById($idProduct,$idfranchisee,$reqId);
                  $total=0;
                if(!empty($QtyAssignArr))
                {
@@ -684,7 +694,7 @@ class StockMgt_Controller extends CI_Controller {
               }
            $qty =  (int)$data_validate['szReqQuantity']-$total ;
            $this->form_validation->set_rules('allotQuantity[szAddMoreQuantity]', 'Assign Quantity', 'trim|required|numeric|integer|greater_than_equal_to[0]|less_than_equal_to['.$qty.']');
-          
+            $this->form_validation->set_message('required', '{field} is required');
            
           
             if ($this->form_validation->run() == FALSE)

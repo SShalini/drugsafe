@@ -16,7 +16,7 @@ class Inventory_Controller extends CI_Controller {
 	
 	
         public function addMarketingMaterial() {
-           
+           $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -29,9 +29,10 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
-            
+            $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
-            {
+            { 
+                $data['notification'] = $count;
                 $data['szMetaTagTitle'] = "Add Marketing Material";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";
@@ -53,7 +54,7 @@ class Inventory_Controller extends CI_Controller {
             }
         }
         public function addDrugTestKit() {
-           
+            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -66,9 +67,11 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+             $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
-            {
+            { 
+                $data['notification'] = $count;
                 $data['szMetaTagTitle'] = "Add Product";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";
@@ -97,7 +100,7 @@ class Inventory_Controller extends CI_Controller {
         }
         function editProductData()
         {
-           
+            
              $idProduct = $this->input->post('idProduct');
              $flag = $this->input->post('flag');
      
@@ -110,7 +113,7 @@ class Inventory_Controller extends CI_Controller {
         }
         
         public function editDrugTestKit() {
-          
+            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -130,6 +133,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductCategory]', 'Product Category', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+             $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -138,6 +142,7 @@ class Inventory_Controller extends CI_Controller {
                 $data['pageName'] = "Inventory";
                 $data['subpageName'] = "Drug_Test_Kit_List";
                 $_POST['productData']=$productDataAry;
+                $data['notification'] = $count;
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('inventory/editDrugTestKit');
                 $this->load->view('layout/admin_footer');
@@ -202,18 +207,14 @@ class Inventory_Controller extends CI_Controller {
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
                $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList();
-              
-               
-               
-           
-                   
+               $count = $this->Admin_Model->getnotification();
+
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['szMetaTagTitle'] = " Drug Test Kit List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";
                     $data['subpageName'] = "Drug_Test_Kit_List";
-                    
-                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['notification'] = $count;
                     $data['data'] = $data;
  
             $this->load->view('layout/admin_header',$data);
@@ -232,26 +233,15 @@ class Inventory_Controller extends CI_Controller {
             }
              $idfranchisee = $_SESSION['drugsafe_user']['id'];
              $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList();
+             $count = $this->Admin_Model->getnotification();
              
-//                $mr_value_data = array();
-//                foreach ($marketingMaterialAray as $marketingMaterialdata){
-//                $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialdata['id']);
-//                array_push($mr_value_data,$marketingMaterialDataArr);
-//             }
-//             
-//              $mr_qty_data = array();
-//                    foreach ($marketingMaterialAray as $marketingMaterialdata){
-//                    $marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialdata['id']);
-//                    array_push($mr_qty_data,$marketingMaterialQtyDataArr);
-//             }
-//                    $data['marketingMaterialQtyDataArr'] = $mr_qty_data;
+             
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
-//                    $data['marketingMaterialDataArr'] = $mr_value_data;
                     $data['szMetaTagTitle'] = "Marketing Material List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";
                     $data['subpageName'] = "Marketing_Material_List";
-                    
+                    $data['notification'] = $count;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
  
@@ -293,7 +283,7 @@ class Inventory_Controller extends CI_Controller {
         }
         
         public function editMarketingMaterial() {
-          
+            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -301,7 +291,7 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-           
+            
             $idProduct = $this->session->userdata('$idProduct');
             $flag = $this->session->userdata('$flag');
          
@@ -312,9 +302,11 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+             $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             {
+                $data['notification'] = $count;
                 $data['szMetaTagTitle'] = "Edit Product";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";

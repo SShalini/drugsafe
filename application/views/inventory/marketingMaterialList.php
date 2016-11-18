@@ -57,7 +57,7 @@
                         
                         if(!empty($marketingMaterialAray))
                         {
-                           
+                          
                             ?>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
@@ -83,9 +83,9 @@
                                        $i = 0;
                                         foreach($marketingMaterialAray as $marketingMaterialData)
                                         {
-                                              $idfranchisee = $_SESSION['drugsafe_user']['id'];
-                                             $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialData['id']);
-                                             $marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                             $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                             $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
+                                             //$marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
                                           
                                         ?>
                                         <tr>
@@ -111,9 +111,9 @@
                                             </td>
                                              <?php }else{?>
                                             <td><?php echo($marketingMaterialDataArr['szModelStockVal'] > 0 ?$marketingMaterialDataArr['szModelStockVal'] : 'N/A')?></td>
-                                            <td><?php echo($marketingMaterialQtyDataArr['szQuantity'] > 0 ? $marketingMaterialQtyDataArr['szQuantity'] : 'N/A')?></td>
+                                            <td><?php echo($marketingMaterialData['szQuantity'] > 0 ? $marketingMaterialData['szQuantity'] : 'N/A')?></td>
                                            <td>          
-                                              <a class="btn btn-circle btn-icon-only btn-default" id="marketingMaterialStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $marketingMaterialData['id'];?>','2');" href="javascript:void(0);">
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="marketingMaterialStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $marketingMaterialData['iProductId'];?>','2');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                               </a>
                                           </td> 

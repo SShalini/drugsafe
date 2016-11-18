@@ -41,7 +41,7 @@ class Inventory_Model extends Error_Model {
             $this->db->from(__DBC_SCHEMATA_PRODUCT__);
             $this->db->where($whereAry);
             $query = $this->db->get();
-          
+            $sql = $this->db->last_query();
             if($query->num_rows() > 0)
             {
                 $row = $query->result_array();
@@ -74,24 +74,14 @@ class Inventory_Model extends Error_Model {
             }
      public function viewDrugTestKitList()
         {
- 
-            if($_SESSION['drugsafe_user']['iRole']==1)
-            {
+         
+            
+           
             $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
             $this->db->select('*');
             $this->db->where($whereAry);  
             $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
-      
-            }
-            else{
-            $idfranchisee = $_SESSION['drugsafe_user']['id'];
-            $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','iFranchiseeId=' => $idfranchisee);
-            $this->db->select('*');
-            $this->db->from(__DBC_SCHEMATA_PRODUCT__);
-            $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');
-            $this->db->where($whereAry);  
-            $query = $this->db->get();
-            }
+          
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -104,26 +94,13 @@ class Inventory_Model extends Error_Model {
          public function viewMarketingMaterialList()
         {
           
-           
-            
-            if($_SESSION['drugsafe_user']['iRole']==1){
-          
             $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
+            
+           
             $this->db->select('*');
             $this->db->where($whereAry);  
             $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
-            } 
-         
-            else{
-            $idfranchisee = $_SESSION['drugsafe_user']['id'];
-            $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','iFranchiseeId=' => $idfranchisee);
-            $this->db->select('*');
-            $this->db->from(__DBC_SCHEMATA_PRODUCT__);
-            $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');
-            $this->db->where($whereAry);  
-            $query = $this->db->get();
-
-            }
+           
             if($query->num_rows() > 0)
             {
                 return $query->result_array();

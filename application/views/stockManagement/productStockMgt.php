@@ -214,10 +214,10 @@
                                             <i class="fa fa-plus"></i> 
                                         </a>
                                         <?php }else{?>
-                                         <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);">
+                                         <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $marketingMaterialData['id'];?>,'1');" href="javascript:void(0);">
                                             <i class="fa fa-minus"></i> 
                                         </a>
-                                         <a class="btn btn-circle btn-icon-only btn-default" title=" Add More Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['id'];?>,'2');" href="javascript:void(0);">
+                                         <a class="btn btn-circle btn-icon-only btn-default" title=" Add More Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);">
                                             <i class="fa fa-plus"></i> 
                                         </a>
                                         <?php }?>
