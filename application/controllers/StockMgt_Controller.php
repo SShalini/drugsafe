@@ -49,8 +49,9 @@ class StockMgt_Controller extends CI_Controller {
         }
         function modelstockvalue()
         {
+            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
-
+        
             // redirect to franchisee list if already logged in
             if(!$is_user_login)
             {
@@ -88,7 +89,8 @@ class StockMgt_Controller extends CI_Controller {
                     $data['szMetaTagTitle'] = "Model Stock Value";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";
-                 
+                    $data['notification'] = $count;
+                    
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/modelStockValue');
             $this->load->view('layout/admin_footer');
@@ -107,7 +109,7 @@ class StockMgt_Controller extends CI_Controller {
         function addmodelstockvalue()
         {
             $is_user_login = is_user_login($this);
-
+             $count = $this->Admin_Model->getnotification();
             // redirect to franchisee list if already logged in
             if(!$is_user_login)
             {
@@ -148,6 +150,7 @@ class StockMgt_Controller extends CI_Controller {
                 $data['szMetaTagTitle'] = "Add Model Stock Value";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Add_Model_Stock_Value";
+                $data['notification'] = $count;
                 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/addModelStockValue');
@@ -189,7 +192,7 @@ class StockMgt_Controller extends CI_Controller {
         }
         function editmodelstockvalue()
         {
-        
+            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
 
             // redirect to dashboard if already logged in
@@ -227,7 +230,7 @@ class StockMgt_Controller extends CI_Controller {
                 $data['idProduct'] = $idProduct;
                 $data['productDataAry'] = $productDataAry;
                 $data['franchiseeArr'] = $franchiseeArr;
-                
+                $data['notification'] = $count;
                 
                 $data['szMetaTagTitle'] = "Edit Model Stock Value";
                 $data['is_user_login'] = $is_user_login;
@@ -276,7 +279,7 @@ class StockMgt_Controller extends CI_Controller {
         function productstockqty()
         {
             $is_user_login = is_user_login($this);
-
+            $count = $this->Admin_Model->getnotification();
             // redirect to franchisee list if already logged in
             if(!$is_user_login)
             {
@@ -297,7 +300,7 @@ class StockMgt_Controller extends CI_Controller {
                     $data['szMetaTagTitle'] = "Product_Stock_Management";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";
-                 
+                    $data['notification'] = $count;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/productStockMgt');
             $this->load->view('layout/admin_footer');
@@ -315,7 +318,7 @@ class StockMgt_Controller extends CI_Controller {
         function addProductStockqty()
         {
             $is_user_login = is_user_login($this);
-
+            $count = $this->Admin_Model->getnotification();
             // redirect to franchisee list if already logged in
             if(!$is_user_login)
             {
@@ -357,7 +360,7 @@ class StockMgt_Controller extends CI_Controller {
                 $data['szMetaTagTitle'] = "Add_Product_Stock_Quantity";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Add_Product_Stock_Quantity";
-                
+                $data['notification'] = $count;
            $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/addProductStockQty');
             $this->load->view('layout/admin_footer');
@@ -402,9 +405,9 @@ class StockMgt_Controller extends CI_Controller {
         }
         function editproductstockqty()
         {
-        
+            
             $is_user_login = is_user_login($this);
-
+            $count = $this->Admin_Model->getnotification();
             // redirect to dashboard if already logged in
             if(!$is_user_login)
             {
@@ -450,8 +453,8 @@ class StockMgt_Controller extends CI_Controller {
                  $data['flag'] = $flag;
                  $data['productDataAry'] = $productDataAry;
                  $data['franchiseeArr'] = $franchiseeArr;
-               
- 
+                 
+                $data['notification'] = $count;
                 $data['szMetaTagTitle'] = "Edit Model Stock Value";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Edit_Product_Stock_Quantity";
@@ -580,7 +583,7 @@ class StockMgt_Controller extends CI_Controller {
         function stockreqlist()
         {
            $is_user_login = is_user_login($this);
-    
+           
             // redirect to dashboard if already logged in
             if(!$is_user_login)
             {
