@@ -19,7 +19,21 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Stock Assignments</span>
                             </div>
+                            <?php
+                      
+                        if(!empty($allQtyAssignAray))
+                        {
                            
+                            ?>
+                            <div class="actions">
+                                <a href="<?php echo __BASE_URL__;?>/reporting/pdfstockassignlist" class=" btn btn-circle btn green-meadow">
+                                <i class="fa fa-eye"></i> View Pdf </a>
+                                <a href="javascript:;" class=" btn btn-circle btn green-meadow">
+                                <i class="fa fa-eye"></i> View Xls </a>
+                            </div>
+                              <?php
+                        }
+                            ?>
                         </div>
                         
                         <?php
@@ -59,7 +73,7 @@
                                             <td> <?php echo $franchiseeArr['szName']?> </td>
                                             <td> <?php echo $productDataAry['szProductCode'];?> </td>
                                             <td> <?php echo $allQtyAssignData['szQuantityAssigned'];?> </td>
-                                            <td> <?php echo date('d/m/y h:i:s a',strtotime($allQtyAssignData['dtAssignedOn']))?>  </td>
+                                            <td> <?php echo date('d/m/Y h:i:s A',strtotime($allQtyAssignData['dtAssignedOn']))?>  </td>
 
                                         </tr>
                                         <?php 

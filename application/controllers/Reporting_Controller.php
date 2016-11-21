@@ -24,14 +24,14 @@ class Reporting_Controller extends CI_Controller {
                     header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                     die;
 
-            }
-            else
-            {
-                ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
-                die;
-            }
-
+           
+             }
+             else {
+            ob_end_clean();
+            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            die;
+        }
+   
         } 
         
          function allstockreqlist()
@@ -87,8 +87,129 @@ class Reporting_Controller extends CI_Controller {
             $this->load->view('layout/admin_footer');
         }
 
-
+ public function pdfstockreqlist (){
+    $this->load->library('Pdf');
+    $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+    $pdf->SetTitle('Pdf');
+    $pdf->SetHeaderMargin(20);
+    $pdf->SetTopMargin(20);
+    $pdf->setFooterMargin(20);
+    $pdf->SetAutoPageBreak(true);
+    $pdf->SetAuthor('Author');
+    $pdf->SetDisplayMode('real', 'default');
+     $pdf->SetCreator(PDF_CREATOR);
+    // Add a page
+    $pdf->AddPage();
     
+    $allReqQtyAray =$this->Reporting_Model->getAllQtyRequestDetails();
+     
+    $html.='       
+                        <div class= "table-responsive">
+                            <table class="table table-striped table-bordered table-hover" border="1">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th> <b>Id</b> </th>
+                                        <th> <b>Franchisee</b> </th>
+                                        <th> <b>Product Code</b> </th>
+                                        <th><b> Quantity</b> </th>
+                                        <th> <b>Requested On</b> </th>
+                                   
+                                    </tr>
+                                </thead>';
+                            if($allReqQtyAray)
+                            {
+                                $i = 0;
+                                foreach($allReqQtyAray as $allReqQtyData){
+                                    $productDataAry = $this->Inventory_Model->getProductDetailsById($allReqQtyData['iProductId']);
+                                    $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$allReqQtyData['iFranchiseeId']);
+                                    $html.='<tr>
+                                            <td> FR-'.$allReqQtyData['iFranchiseeId'].' </td>
+                                            <td> '. $franchiseeArr['szName'].'</td>
+                                            <td> '.$productDataAry['szProductCode'].' </td>
+                                            <td>'. $allReqQtyData['szQuantity'].' </td>
+                                             <td>'.date('d/m/Y h:i:s A',strtotime( $allReqQtyData['dtRequestedOn'])).' </td>
+                                
+                                        </tr>';
+                                    
+                                }
+                            }
+                            $i++;
+
+   
+                               $html.='
+                            </table>
+                        </div>
+                      
+                        ';
+    $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+    $pdf->Output('pdfexample.pdf', 'I'); 
+           
+ 
+ }
+      
+  public function pdfstockassignlist (){
+    $this->load->library('Pdf');
+    $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+    $pdf->SetTitle('Pdf');
+    $pdf->SetHeaderMargin(20);
+    $pdf->SetTopMargin(20);
+    $pdf->setFooterMargin(20);
+    $pdf->SetAutoPageBreak(true);
+    $pdf->SetAuthor('Author');
+    $pdf->SetDisplayMode('real', 'default');
+     $pdf->SetCreator(PDF_CREATOR);
+    // Add a page
+    $pdf->AddPage();
+    
+    $allQtyAssignAray =$this->Reporting_Model->getAllQtyAssignDetails();
+     
+    $html.='       
+                        <div class= "table-responsive">
+                            <table class="table table-striped table-bordered table-hover" border="1">
+                                <thead>
+                                    <tr>
+                                        
+                                        <th> <b>Id</b> </th>
+                                        <th> <b>Franchisee</b> </th>
+                                        <th> <b>Product Code</b> </th>
+                                        <th><b> Quantity</b> </th>
+                                        <th> <b>Requested On</b> </th>
+                                   
+                                    </tr>
+                                </thead>';
+                            if($allQtyAssignAray)
+                            {
+                                $i = 0;
+                                foreach($allQtyAssignAray as $allQtyAssignData){
+                                    $productDataAry = $this->Inventory_Model->getProductDetailsById($allQtyAssignData['iProductId']);
+                                    $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$allQtyAssignData['iFranchiseeId']);
+                                    $html.='<tr>
+                                            <td> FR-'.$allQtyAssignData['iFranchiseeId'].' </td>
+                                            <td> '. $franchiseeArr['szName'].'</td>
+                                            <td> '.$productDataAry['szProductCode'].' </td>
+                                            <td>'. $allQtyAssignData['szQuantityAssigned'].' </td>
+                                            <td>'.date('d/m/Y h:i:s A',strtotime( $allQtyAssignData['dtRequestedOn'])).' </td>
+                                
+                                        </tr>';
+                                    
+                                }
+                            }
+                            $i++;
+
+   
+                               $html.='
+                            </table>
+                        </div>
+                      
+                        ';
+    $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+    $pdf->Output('pdfexample.pdf', 'I'); 
+           
+ 
+ }
       
     }      
     

@@ -19,12 +19,20 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">All Stock Request List</span>
                             </div>
+                            <?php
+                            if(!empty($allReqQtyAray))
+                        {
+                           
+                            ?>
                             <div class="actions">
-                                <a href="javascript:;" class=" btn btn-circle btn green-meadow">
+                                <a href="<?php echo __BASE_URL__;?>/reporting/pdfstockreqlist" class=" btn btn-circle btn green-meadow">
                                 <i class="fa fa-eye"></i> View Pdf </a>
                                 <a href="javascript:;" class=" btn btn-circle btn green-meadow">
                                 <i class="fa fa-eye"></i> View Xls </a>
                             </div>
+                            <?php
+                        }
+                            ?>
                        
                         </div>
                         
@@ -66,7 +74,7 @@
                                             <td> <?php echo $franchiseeArr['szName']?> </td>
                                             <td> <?php echo $productDataAry['szProductCode'];?> </td>
                                             <td> <?php echo $allReqQtyData['szQuantity'];?> </td>
-                                             <td> <?php echo date('d/m/y h:i:s a',strtotime( $allReqQtyData['dtRequestedOn']))?>  </td>
+                                             <td> <?php echo date('d/m/Y h:i:s A',strtotime( $allReqQtyData['dtRequestedOn']))?>  </td>
                                       
 
                                         </tr>
