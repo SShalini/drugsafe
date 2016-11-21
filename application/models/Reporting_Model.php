@@ -18,6 +18,21 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
+         public function getAllQtyAssignDetails()
+        {
+            $this->db->select('*');
+            $query = $this->db->get(__DBC_SCHEMATA_STOCK_REQ_TRACKING__);
+
+
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
       
 }
 ?>

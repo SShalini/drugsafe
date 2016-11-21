@@ -90,7 +90,7 @@
                         </li>
 
                         <li class="nav-item  <?php if ($subpageName == 'Stock_Assignments') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/inventory/marketingmateriallist">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/stockassignlist">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Stock Assignments</span>
                             </a>

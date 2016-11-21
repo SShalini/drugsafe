@@ -60,6 +60,33 @@ class Reporting_Controller extends CI_Controller {
             $this->load->view('reporting/StockRequestList');
             $this->load->view('layout/admin_footer');
         }
+         function stockassignlist()
+        {
+           $is_user_login = is_user_login($this);
+           
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+             $count = $this->Admin_Model->getnotification();
+             $allQtyAssignAray =$this->Reporting_Model->getAllQtyAssignDetails();
+ 
+                    $data['allQtyAssignAray'] = $allQtyAssignAray;
+                    $data['szMetaTagTitle'] = "Stock Assignments";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Reporting";
+                    $data['subpageName'] = "Stock_Assignments";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('reporting/StockAssignList');
+            $this->load->view('layout/admin_footer');
+        }
+
 
     
       
