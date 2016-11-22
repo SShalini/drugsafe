@@ -26,7 +26,7 @@
                            
                             ?>
                             <div class="actions">
-                                <a href="<?php echo __BASE_URL__;?>/reporting/pdfstockassignlist" class=" btn btn-circle btn green-meadow">
+                                <a href="<?php echo __BASE_URL__;?>/reporting/pdfstockassignlist" target="_blank" class=" btn btn-circle btn green-meadow">
                                 <i class="fa fa-eye"></i> View Pdf </a>
                                 <a href="javascript:;" class=" btn btn-circle btn green-meadow">
                                 <i class="fa fa-eye"></i> View Xls </a>
@@ -49,7 +49,7 @@
                                         <th> Id </th>
                                         <th> Franchisee</th>
                                         <th> Product Code </th>
-                                        <th> Quantity Assign</th>
+                                        <th> Quantity Assigned</th>
                                         <th> Assigned On </th>
                                    
                                     </tr>
