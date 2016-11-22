@@ -119,7 +119,7 @@ class Reporting_Controller extends CI_Controller {
     // Add a page
     $pdf->AddPage();
     
-    $allReqQtyAray =$this->Reporting_Model->getAllQtyRequestDetails();
+    $allReqQtyAray =$this->Reporting_Model->getAllQtyRequestDetails(false,false);
      
     $html.='       
                         <div class= "table-responsive">
@@ -181,7 +181,7 @@ class Reporting_Controller extends CI_Controller {
     // Add a page
     $pdf->AddPage();
     
-    $allQtyAssignAray =$this->Reporting_Model->getAllQtyAssignDetails();
+    $allQtyAssignAray =$this->Reporting_Model->getAllQtyAssignDetails(false,false);
      
     $html.='       
                         <div class= "table-responsive">
