@@ -393,15 +393,18 @@ class Admin_Model extends Error_Model {
 
         }
         
-        public function viewFranchiseeList($p_sortby='',$p_sortorder='')
+         public function viewFranchiseeList($limit,$offset)
         {
-
+    
             $whereAry = array('isDeleted=' => '0','iRole' => '2');
 
             $this->db->select('*');
             $this->db->where($whereAry);
-            $this->db->order_by($p_sortby,$p_sortorder);
-            $query = $this->db->get(__DBC_SCHEMATA_USERS__);
+            $this->db->order_by($sortBy,$orderBy);
+            
+                $this->db->limit($limit, $offset);
+                $this->db->order_by("id", "asc");
+                $query = $this->db->get(__DBC_SCHEMATA_USERS__);
 
             if($query->num_rows() > 0)
             {
@@ -632,7 +635,7 @@ class Admin_Model extends Error_Model {
         
         public function deletefranchisee($idfranchisee)
 	{
-          $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee,true);
+          $clientAray =$this->Franchisee_Model->viewClientList($idfranchisee,true,false,false);
         if (!empty($clientAray)) {
             foreach ($clientAray as $clientlist) {
                 $this->Franchisee_Model->deleteClient($clientlist['id']);
@@ -751,7 +754,7 @@ class Admin_Model extends Error_Model {
             return true;
     }
     public function getnotification(){
-            $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId();  
+            $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId(false,false);  
                                   
                     $count=0;
                     foreach($frReqQtyAray as $frReqQtyData){

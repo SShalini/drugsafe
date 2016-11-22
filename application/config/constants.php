@@ -53,6 +53,9 @@ define("__APP_PATH_IMAGES__", __APP_PATH__ . "/images");
 define("__BASE_ASSETS_URL__", __BASE_URL__ . "/assets");
 define("__APP_PATH_ASSETS__", __APP_PATH__ . "/assets");
 
+define("__MIN_DROP_DOWN_LIMIT__", 5);
+define("__PAGINATION_RECORD_LIMIT__", 20);
+
 define("__APP_PATH_LOGS__", __APP_PATH__ . "/application/logs");
 
 define("__BASE_USER_PRODUCT_IMAGES_URL__", __BASE_URL__ . "/product_img");

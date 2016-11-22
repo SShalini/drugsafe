@@ -69,7 +69,7 @@
                                           
                                             $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$frReqQtyArayData['iFranchiseeId']);
                                             
-                                            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($franchiseeAray['id']);
+                                            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($franchiseeAray['id'],false,false);
                                                $count=0;
                                                foreach($reqQtyListAray as $reqQtyListData){
 
@@ -111,7 +111,19 @@
                             echo "Not Found";
                         }
                         ?>
-                        
+                       <?php  if(!empty($frReqQtyAray)){?>
+		<div class="row">
+                  
+                    <div class="col-md-7 col-sm-7">
+                        <div class="dataTables_paginate paging_bootstrap_full_number">
+                            <?php echo $this->pagination->create_links();?>
+                        </div>
+                    </div>
+	    	
+                 
+            </div>
+    	<?php }?>
+                         
                     </div>
                 </div>
             </div> 

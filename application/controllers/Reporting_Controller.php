@@ -6,6 +6,7 @@ class Reporting_Controller extends CI_Controller {
 	{
             parent::__construct();
            
+            $this->load->library('pagination');
             $this->load->model('Error_Model');
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
@@ -46,7 +47,16 @@ class Reporting_Controller extends CI_Controller {
                 die;
             }
              $count = $this->Admin_Model->getnotification();
-             $allReqQtyAray =$this->Reporting_Model->getAllQtyRequestDetails();
+             
+             
+        $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
+        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($limit,$offset));
+        $config['per_page'] = 5;
+
+
+        $this->pagination->initialize($config);
+        
+             $allReqQtyAray =$this->Reporting_Model->getAllQtyRequestDetails($config['per_page'],$this->uri->segment(3));
  
                     $data['allReqQtyAray'] = $allReqQtyAray;
                     $data['szMetaTagTitle'] = "All Stock Requests";
@@ -72,7 +82,15 @@ class Reporting_Controller extends CI_Controller {
                 die;
             }
              $count = $this->Admin_Model->getnotification();
-             $allQtyAssignAray =$this->Reporting_Model->getAllQtyAssignDetails();
+                   
+        $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
+        $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($limit,$offset));
+        $config['per_page'] = 5;
+
+
+        $this->pagination->initialize($config);
+             
+             $allQtyAssignAray =$this->Reporting_Model->getAllQtyAssignDetails($config['per_page'],$this->uri->segment(3));
  
                     $data['allQtyAssignAray'] = $allQtyAssignAray;
                     $data['szMetaTagTitle'] = "Stock Assignments";
@@ -191,7 +209,7 @@ class Reporting_Controller extends CI_Controller {
                                             <td> '.$productDataAry['szProductCode'].' </td>
                                             <td>'. $allQtyAssignData['szQuantityAssigned'].' </td>
                                             <td>'.date('d/m/Y h:i:s A',strtotime( $allQtyAssignData['dtRequestedOn'])).' </td>
-                                
+                                            <td> '. date('d/m/Y h:i:s A',strtotime($allQtyAssignData['dtAssignedOn'])).'  </td>
                                         </tr>';
                                     
                                 }

@@ -17,3 +17,5 @@ and open the template in the editor.
   cursor: not-allowed;
  input:read-only; 
 }
+.dataTables_paginate strong{display:inline-block;background:#ccc;padding:5px 7px;margin-left:4px;}
+.dataTables_paginate a{display:inline-block;background:#1bbc9b;padding:5px 7px;color:#fff;margin-left:4px;}

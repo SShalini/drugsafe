@@ -371,13 +371,14 @@ class StockMgt_Model extends Error_Model {
              }
 
         }
-        public function getQtyRequestFrId()
+        public function getQtyRequestFrId($limit,$offset)
         {
 
             $whereAry = array('isCompleted=' => '0');
             $this->db->distinct();
             $this->db->select('iFranchiseeId');
             $this->db->where($whereAry);
+             $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
 
 
@@ -390,11 +391,12 @@ class StockMgt_Model extends Error_Model {
                     return array();
             }
         }
-        public function getRequestQtyList($idfranchisee)
+        public function getRequestQtyList($idfranchisee,$limit,$offset)
         {
             $whereAry = array('isCompleted=' => '0','iFranchiseeId=' => $idfranchisee);
             $this->db->select('*');
             $this->db->where($whereAry);
+            $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
 
 

@@ -80,7 +80,7 @@ function insertClientDetails($data,$franchiseeId='')
                    return false;
              }
         }
-        public function viewClientList($idfranchisee,$parent = false)
+        public function viewClientList($idfranchisee,$parent = false,$limit,$offset)
         {
             $whereAry = array('franchiseeId' => $idfranchisee,'isDeleted=' => '0');
 
@@ -91,6 +91,7 @@ function insertClientDetails($data,$franchiseeId='')
             if($parent){
                 $this->db->where('clientType',0);
             }
+             $this->db->limit($limit, $offset);
             $query = $this->db->get();
 //            $s=$this->db->last_query();
            
@@ -103,7 +104,7 @@ function insertClientDetails($data,$franchiseeId='')
                     return array();
             }
         }
-        public function getAllClientDetails($parent=false,$franchiseId='')
+        public function getAllClientDetails($parent=false,$franchiseId='',$limit,$offset)
         {
             if($franchiseId)
             {
@@ -124,9 +125,11 @@ function insertClientDetails($data,$franchiseeId='')
             {
                  $this->db->where('franchiseeId',$franchiseId);
             }
+            $this->db->limit($limit, $offset);
             $query = $this->db->get();
-            $s=$this->db->last_query();
-           
+//              $sql = $this->db->last_query($query);
+//              print_r();die;
+//           
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -138,7 +141,7 @@ function insertClientDetails($data,$franchiseeId='')
         }
         public function deleteClient($idClient)
 	{
-        $childListArr = $this->viewChildClientDetails($idClient);
+        $childListArr = $this->viewChildClientDetails($idClient,false,false);
         if (!empty($childListArr)) {
             foreach ($childListArr as $childlist) {
                 $this->deleteClient($childlist['id']);
@@ -211,7 +214,7 @@ function insertClientDetails($data,$franchiseeId='')
             }
         }
         
-        public function viewChildClientDetails($idClient)
+        public function viewChildClientDetails($idClient,$limit,$offset)
         {
             $whereAry = array('clientType' => $idClient,'isDeleted=' => '0');
             
@@ -219,6 +222,7 @@ function insertClientDetails($data,$franchiseeId='')
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             $this->db->where($whereAry);
+            $this->db->limit($limit, $offset);
             $query = $this->db->get();
            
             if($query->num_rows() > 0)

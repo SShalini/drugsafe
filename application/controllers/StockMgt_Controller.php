@@ -11,7 +11,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
             $this->load->model('StockMgt_Model');
-        
+            $this->load->library('pagination');
 	}
         public function index()
 	{
@@ -592,7 +592,14 @@ class StockMgt_Controller extends CI_Controller {
                 die;
             }
              $count = $this->Admin_Model->getnotification();
-             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId();
+                $config['base_url'] = __BASE_URL__ . "/stock_management/stockreqlist/";
+                $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset));
+                $config['per_page'] = 5;
+
+
+        $this->pagination->initialize($config);
+             
+             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3));
     
             
                     $data['frReqQtyAray'] = $frReqQtyAray;
@@ -635,7 +642,14 @@ class StockMgt_Controller extends CI_Controller {
             
             $idfranchisee = $this->session->userdata('idfranchisee'); 
             $count = $this->Admin_Model->getnotification();
-            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($idfranchisee);
+                $config['base_url'] = __BASE_URL__ . "/stock_management/viewproductlist/";
+                $config['total_rows'] = count($this->StockMgt_Model->getRequestQtyList($idfranchisee,$limit,$offset));
+                $config['per_page'] = 5;
+
+
+        $this->pagination->initialize($config);
+            
+            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($idfranchisee,$config['per_page'],$this->uri->segment(3));
             
           
             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);

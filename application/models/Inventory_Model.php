@@ -72,14 +72,15 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }
             }
-     public function viewDrugTestKitList()
+     public function viewDrugTestKitList($limit,$offset)
         {
  
             if($_SESSION['drugsafe_user']['iRole']==1)
             {
             $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
             $this->db->select('*');
-            $this->db->where($whereAry);  
+            $this->db->where($whereAry); 
+            $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
       
             }
@@ -89,7 +90,8 @@ class Inventory_Model extends Error_Model {
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_PRODUCT__);
             $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');
-            $this->db->where($whereAry);  
+            $this->db->where($whereAry);
+            $this->db->limit($limit, $offset);
             $query = $this->db->get();
             }
             if($query->num_rows() > 0)
@@ -101,16 +103,14 @@ class Inventory_Model extends Error_Model {
                     return array();
             }
         }
-         public function viewMarketingMaterialList()
+         public function viewMarketingMaterialList($limit,$offset)
         {
-          
-           
-            
             if($_SESSION['drugsafe_user']['iRole']==1){
           
             $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
             $this->db->select('*');
-            $this->db->where($whereAry);  
+            $this->db->where($whereAry); 
+            $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
             } 
          
@@ -120,7 +120,8 @@ class Inventory_Model extends Error_Model {
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_PRODUCT__);
             $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');
-            $this->db->where($whereAry);  
+            $this->db->where($whereAry); 
+            $this->db->limit($limit, $offset);
             $query = $this->db->get();
 
             }

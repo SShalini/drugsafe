@@ -11,6 +11,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
             $this->load->model('StockMgt_Model');
+            $this->load->library('pagination');
         
 	}
 	
@@ -204,9 +205,16 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
+            
+             $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
+             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset));
+             $config['per_page'] = 5;
+
+             $this->pagination->initialize($config);
+            
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
-               $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList();
+               $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3));
                $count = $this->Admin_Model->getnotification();
 
                     $data['drugTestKitAray'] = $drugTestKitAray;
@@ -231,8 +239,16 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
+            
+            
+             $config['base_url'] = __BASE_URL__ . "/inventory/marketingmateriallist/";
+             $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($limit,$offset));
+             $config['per_page'] = 1;
+
+             $this->pagination->initialize($config);
+            
              $idfranchisee = $_SESSION['drugsafe_user']['id'];
-             $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList();
+             $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($config['per_page'],$this->uri->segment(3));
              $count = $this->Admin_Model->getnotification();
              
              

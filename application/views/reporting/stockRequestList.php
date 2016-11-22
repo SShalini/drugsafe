@@ -92,6 +92,19 @@
                             echo "Not Found";
                         }
                         ?>
+                        <?php  if(!empty($allReqQtyAray)){?>
+		<div class="row">
+                  
+                    <div class="col-md-7 col-sm-7">
+                        <div class="dataTables_paginate paging_bootstrap_full_number">
+                            <?php echo $this->pagination->create_links();?>
+                        </div>
+                    </div>
+	    	
+                 
+            </div>
+    	<?php }?>
+                        
                     </div>
                 </div>
             </div> 

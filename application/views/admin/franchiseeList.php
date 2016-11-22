@@ -59,7 +59,7 @@
                                 <thead>
                                     <tr>
                                         <th> Id.</th>
-                                        <th> Franchisee</th>
+                                        <th> Name</th>
                                         <th> Email</th>
                                         <th> Contact No </th>
                                         <th> Address </th>
@@ -117,8 +117,26 @@
                             echo "Not Found";
                         }
                         ?>
+                           <?php  if(!empty($franchiseeAray)){?>
+		<div class="row">
+                  
+                    <div class="col-md-7 col-sm-7">
+                        <div class="dataTables_paginate paging_bootstrap_full_number">
+                            <?php echo $this->pagination->create_links();?>
+                        </div>
+                    </div>
+	    	
+                 
+            </div>
+    	<?php }?>
+                
+           
+        </div>
+    </div>
+    
                         
                     </div>
+                 
                 </div>
             </div> 
         </div>

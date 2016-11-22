@@ -11,6 +11,7 @@ class Admin_Controller extends CI_Controller {
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
             $this->load->model('StockMgt_Model');
+            $this->load->library('pagination');
         
 	}
 	
@@ -195,7 +196,7 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('layout/admin_footer');
         }  
         
-        function franchiseeList()
+         function franchiseeList()
         {
            $is_user_login = is_user_login($this);
 
@@ -214,31 +215,34 @@ class Admin_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
                 die;
             }
-            $p_sortby = (trim($_POST['p_sortby']) != '' ? trim($_POST['p_sortby']) : 'szName');
-            $p_sortorder = (trim($_POST['p_sortorder']) != '' ? trim($_POST['p_sortorder']) : 'ASC');
-   
-             $franchiseeAray =$this->Admin_Model->viewFranchiseeList($p_sortby,$p_sortorder);
-           
-//                print_r($userAry);die;
+     
+             // handle pagination
+          
+                $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($limit,$offset));
+                $config['per_page'] = 5;
+              
             
-            $data['franchiseeAray'] = $franchiseeAray;
-            $data['szSortBy'] = $p_sortby;
-            $data['szSortOrder'] = $p_sortorder;
-            $data['obj'] = $this;
-            
-                    $data['franchiseeAray'] = $franchiseeAray;
+                $this->pagination->initialize($config);
+                $franchiseeAray =$this->Admin_Model->viewFranchiseeList( $config['per_page'],$this->uri->segment(3));
+          
+                  
                     $data['szMetaTagTitle'] = "Franchisee List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
                     $data['notification'] = $count;
-                    
+                    $data['franchiseeAray'] = $franchiseeAray;
          
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/franchiseeList');
             $this->load->view('layout/admin_footer');
         }
+        
+         
+     
+           
         
         function getStatesByCountry($szCountry='')
  	{  
