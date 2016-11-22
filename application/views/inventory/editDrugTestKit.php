@@ -129,6 +129,7 @@
 
         $(document).ready(function()
         {
+
             var settings = {
                     url: "<?php echo __BASE_URL__; ?>/inventory/uploadProfileImage",
                     method: "POST",
@@ -137,6 +138,7 @@
                     multiple: true,
                     onSuccess:function(files,data,xhr)
                     {
+                        $("#status").html("<font color='green'>Upload is success</font>");
                         data = JSON.parse(data);
                         $('#product_image').show();
                         $("#product_image").html(data.img_div);
@@ -144,8 +146,10 @@
                     },
                     afterUploadAll:function()
                     {
-                        $(".ajax-file-upload-statusbar").addClass('hide');
-                        $("#product_image_upload").addClass('hide');
+                        $(".profile-userbuttons .ajax-upload-dragdrop").addClass('hide');
+                        $(".profile-userbuttons .upload-statusbar").addClass('hide')
+                        $('#product_image').removeClass('hide');
+                        $('.help-block').addClass('hide');
                     },
                     onError: function(files,status,errMsg)
                     {		
@@ -153,6 +157,11 @@
                     }
             }
             $("#product_image_upload").uploadFile(settings);
+            if($('#product_image').is(':visible')){
+                setTimeout(function() { hideUploadBtn(); }, 500);
+            }
+
+
         });
         function removeIncidentPhoto(){
         $('#product_image').hide();
@@ -160,4 +169,9 @@
          $("#product_image_upload").removeClass('hide');
         $('#szProductImage').val('');
         }
+        function hideUploadBtn()
+        {
+            $(".ajax-upload-dragdrop").addClass('hide');
+        }
+
 </script>

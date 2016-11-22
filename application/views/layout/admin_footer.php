@@ -59,8 +59,11 @@
         <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/layout4/scripts/layout.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+
+        <link href="<?php echo __BASE_CSS_URL__; ?>/uploadfilemulti.css" rel="stylesheet" type="text/css" />
+        <script src="<?php echo __BASE_JS_URL__; ?>/jquery.fileuploadmulti.min.js"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
-        <link href="http://hayageek.github.io/jQuery-Upload-File/4.0.10/uploadfile.css" rel="stylesheet">
-        <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.10/jquery.uploadfile.min.js"></script>
+        <!--<link href="http://hayageek.github.io/jQuery-Upload-File/4.0.10/uploadfile.css" rel="stylesheet">
+        <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.10/jquery.uploadfile.min.js"></script>-->
     </body>
 </html>

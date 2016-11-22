@@ -128,13 +128,15 @@
         $(document).ready(function()
         {
             var settings = {
+
                     url: "<?php echo __BASE_URL__; ?>/inventory/uploadProfileImage",
                     method: "POST",
                     allowedTypes:"jpg,png,gif,jpe,jpeg,JPEG,JPG,PNG",
                     fileName: "myfile",
-                    multiple: true,
+                    multiple: false,
                     onSuccess:function(files,data,xhr)
                     {
+                        $("#status").html("<font color='green'>Upload is success</font>");
                         data = JSON.parse(data);
                         $('#product_image').show();
                         $("#product_image").html(data.img_div);
@@ -142,8 +144,11 @@
                     },
                     afterUploadAll:function()
                     {
-                        $(".ajax-file-upload-statusbar").addClass('hide');
-                        $("#product_image_upload").addClass('hide');
+                        $(".profile-userbuttons .ajax-upload-dragdrop").addClass('hide');
+                        $(".profile-userbuttons .upload-statusbar").addClass('hide')
+                        $('.preview_file').removeClass('hide');
+                        $('.help-block').addClass('hide');
+                        //$("#szIncidentPhoto_div").parent('div').removeClass('has-error ');
                     },
                     onError: function(files,status,errMsg)
                     {		
