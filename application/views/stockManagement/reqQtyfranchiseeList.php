@@ -48,6 +48,16 @@
                         if(!empty($frReqQtyAray))
                         {
                             ?>
+                        <div class="row">
+                              <form class="form-horizontal" id="szReqRrSearchForm" action="<?=__BASE_URL__?>/stock_management/stockreqlist" name="szReqRrSearchForm" method="post">
+                          <div class="search col-md-3">
+                            <input type="text" name="szReqProdFrList" id="szReqProdFrList" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?=sanitize_post_field_value($_POST['szReqProdFrList'])?>">
+                          
+                          </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </form>
+                          </div>
+                             <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -69,7 +79,7 @@
                                           
                                             $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$frReqQtyArayData['iFranchiseeId']);
                                             
-                                            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($franchiseeAray['id'],false,false);
+                                            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList(false,$franchiseeAray['id'],false,false);
                                                $count=0;
                                                foreach($reqQtyListAray as $reqQtyListData){
 
@@ -102,6 +112,7 @@
                                     } ?>
                                 </tbody>
                             </table>
+                        </div>
                         </div>
                              <?php
                             $i++;  

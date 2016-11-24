@@ -60,6 +60,17 @@
                         {
                            
                             ?>
+                        
+                          <div class="row">
+                           <form class="form-horizontal" id="szSearchDrugTestList" action="<?=__BASE_URL__?>/inventory/drugtestkitlist " name="szSearchDrugTestList" method="post">
+                          <div class="search col-md-3">
+                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="<?=sanitize_post_field_value($_POST['szSearchProdCode'])?>">
+                          
+                          </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </form>
+                          </div>
+                    <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -129,6 +140,7 @@
                                         
                                 </tbody>
                             </table>
+                             </div>
                         </div>
                              <?php
                             

@@ -211,6 +211,17 @@
             if($childClientDetailsAray)
             {
             ?>
+            
+             <div class="row">
+                           <form class="form-horizontal" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
+                          <div class="search col-md-3">
+                            <input type="text" name="szSearchClDetails" id="szSearchClDetails" class="form-control input-square-right " placeholder="Id,Name Or Email " value="<?=sanitize_post_field_value($_POST['szSearchClDetails'])?>">
+                          
+                          </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </form>
+                          </div>
+                    <div class="row">
                 <div class="table-responsive">
                    <table id="sample_1" class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid" aria-describedby="sample_1_info">
                         <thead>
@@ -285,6 +296,9 @@
                         </tbody>
                     </table>
                 </div>
+                 
+                          </div>
+                       
             <?php 
             }
             else

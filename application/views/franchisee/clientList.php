@@ -155,6 +155,16 @@
                     if (!empty($clientAry)) {
 
                         ?>
+                     <div class="row">
+                              <form class="form-horizontal" id="szSearchClientList" action="<?=__BASE_URL__?>/franchisee/clientList" name="szSearchClientList" method="post">
+                          <div class="search col-md-3">
+                            <input type="text" name="szSearchClList" id="szSearchClList" class="form-control input-square-right " placeholder="Id,Name Or Email " value="<?=sanitize_post_field_value($_POST['szSearchClList'])?>">
+                          
+                          </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </form>
+                          </div>
+                    <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -180,7 +190,7 @@
                                         <td> <?php echo $clientData['szEmail']; ?> </td>
                                         <td>
                                             <?php
-                                                $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($clientData['id'],false,false);
+                                                $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails(false,$clientData['id'],false,false);
                                                 echo count($childClientDetailsAray);
                                             ?>
                                             
@@ -245,6 +255,7 @@
                                 ?>
                                 </tbody>
                             </table>
+                        </div>
                         </div>
                         <?php
 

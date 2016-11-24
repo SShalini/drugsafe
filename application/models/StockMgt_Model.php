@@ -380,17 +380,26 @@ class StockMgt_Model extends Error_Model {
              }
 
         }
-        public function getQtyRequestFrId($limit,$offset)
+        public function getQtyRequestFrId($limit,$offset,$searchAry)
         {
-
-            $whereAry = array('isCompleted=' => '0');
-            $this->db->distinct();
-            $this->db->select('iFranchiseeId');
+             $searchAry = trim($searchAry);
+             $whereAry = array('isCompleted=' => '0');
+            $this->db->select('ds_user.id');
+            $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+            $this->db->join('ds_user','tbl_stock_request.iFranchiseeId = ds_user.id');
             $this->db->where($whereAry);
-             $this->db->limit($limit, $offset);
-            $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
-
-
+           $this->db->limit($limit, $offset);
+            $subQuery = $this->db->_compile_select(); 
+            
+            $this->db->_reset_select();
+            $this->db->select('*');
+            $this->db->from(__DBC_SCHEMATA_USERS__);
+            $this->db->where("id IN (".$subQuery.")");
+          
+              $query = $this->db->get();
+          $sql = $this->db->last_query();
+         // print_r($sql);die;
+ 
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -400,15 +409,30 @@ class StockMgt_Model extends Error_Model {
                     return array();
             }
         }
-        public function getRequestQtyList($idfranchisee,$limit,$offset)
+        public function getRequestQtyList($searchAry,$idfranchisee,$limit,$offset)
         {
-            $whereAry = array('isCompleted=' => '0','iFranchiseeId=' => $idfranchisee);
+             $searchAry = trim($searchAry);
+            
+             
+               if(!empty($searchAry)){
+                 $whereAry = array('isCompleted=' => '0','iFranchiseeId=' => $idfranchisee,'szProductCode=' => $searchAry);
+                }
+                else{
+                  $whereAry = array('isCompleted=' => '0','iFranchiseeId=' => $idfranchisee);  
+                }
+           
             $this->db->select('*');
+            $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+            $this->db->join('tbl_product','tbl_stock_request.iProductId = tbl_product.id');
             $this->db->where($whereAry);
             $this->db->limit($limit, $offset);
-            $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
-
-
+            $query = $this->db->get();
+//             $sql = $this->db->last_query($query);
+//             print_r($sql);die;
+            
+            
+            
+            
             if($query->num_rows() > 0)
             {
                 return $query->result_array();

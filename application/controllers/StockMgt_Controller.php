@@ -600,15 +600,18 @@ if(!empty($QtyAssignArr)){
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
+            
+             $searchAry = $_POST['szReqProdFrList'];
+            
              $count = $this->Admin_Model->getnotification();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/stockreqlist/";
-                $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset));
+                $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset,$searchAry));
                 $config['per_page'] = 5;
 
 
         $this->pagination->initialize($config);
              
-             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3));
+             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3),$searchAry);
     
             
                     $data['frReqQtyAray'] = $frReqQtyAray;
@@ -626,9 +629,7 @@ if(!empty($QtyAssignArr)){
         function viewproductlistData()
         {
             $idfranchisee = $this->input->post('idfranchisee');
-       
-            
-              
+ 
                $this->session->set_userdata('idfranchisee',$idfranchisee);
                 
                 echo "SUCCESS||||";
@@ -649,16 +650,18 @@ if(!empty($QtyAssignArr)){
                 die;
             }
             
+            $searchAry = $_POST['szProdReqList'];
+        
             $idfranchisee = $this->session->userdata('idfranchisee'); 
             $count = $this->Admin_Model->getnotification();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/viewproductlist/";
-                $config['total_rows'] = count($this->StockMgt_Model->getRequestQtyList($idfranchisee,$limit,$offset));
+                $config['total_rows'] = count($this->StockMgt_Model->getRequestQtyList($searchAry,$idfranchisee,$limit,$offset));
                 $config['per_page'] = 5;
 
 
         $this->pagination->initialize($config);
             
-            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($idfranchisee,$config['per_page'],$this->uri->segment(3));
+            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($searchAry,$idfranchisee,$config['per_page'],$this->uri->segment(3));
             
           
             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);

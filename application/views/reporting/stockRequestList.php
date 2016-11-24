@@ -24,10 +24,11 @@
                         {
                            
                             ?>
+                          
                             <div class="actions">
                                 <a href="<?php echo __BASE_URL__;?>/reporting/pdfstockreqlist" target="_blank" class=" btn btn-circle btn green-meadow">
                                 <i class="fa fa-eye"></i> View Pdf </a>
-                                <a href="javascript:;" class=" btn btn-circle btn green-meadow">
+                                <a href="<?php echo __BASE_URL__;?>/reporting/excelstockreqlist" class=" btn btn-circle btn green-meadow">
                                 <i class="fa fa-eye"></i> View Xls </a>
                             </div>
                             <?php
@@ -42,6 +43,16 @@
                         {
                            
                             ?>
+                          <div class="row">
+                           <form class="form-horizontal" id="szSearchQtyReqList" action="<?=__BASE_URL__?>/reporting/allstockreqlist " name="szSearchQtyReqList" method="post">
+                          <div class="search col-md-3">
+                            <input type="text" name="szSearchQtyReqList" id="szSearchQtyReqList" class="form-control input-square-right " placeholder="Id,Franchisee,Product Code" value="<?=sanitize_post_field_value($_POST['szSearchQtyReqList'])?>">
+                          
+                          </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </form>
+                          </div>
+                    <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -63,16 +74,16 @@
                                         foreach($allReqQtyAray as $allReqQtyData)
                                         {
                                         
-                                           $productDataAry = $this->Inventory_Model->getProductDetailsById($allReqQtyData['iProductId']);
+//                                           $productDataAry = $this->Inventory_Model->getProductDetailsById($allReqQtyData['iProductId']);
                                           
-                                           $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$allReqQtyData['iFranchiseeId']);
+//                                           $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$allReqQtyData['iFranchiseeId']);
                                         
                                           
                                         ?>
                                         <tr>
                                             <td> FR-<?php echo $allReqQtyData['iFranchiseeId'];?> </td>
-                                            <td> <?php echo $franchiseeArr['szName']?> </td>
-                                            <td> <?php echo $productDataAry['szProductCode'];?> </td>
+                                            <td> <?php echo $allReqQtyData['szName']?> </td>
+                                            <td> <?php echo $allReqQtyData['szProductCode'];?> </td>
                                             <td> <?php echo $allReqQtyData['szQuantity'];?> </td>
                                              <td> <?php echo date('d/m/Y h:i:s A',strtotime( $allReqQtyData['dtRequestedOn']))?>  </td>
                                       
@@ -83,7 +94,8 @@
                                     } ?>
                                 </tbody>
                             </table>
-                        </div>
+                             </div>
+                    </div>
                              <?php
                             $i++;  
                         }

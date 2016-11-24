@@ -393,19 +393,44 @@ class Admin_Model extends Error_Model {
 
         }
         
-         public function viewFranchiseeList($limit,$offset)
+         public function viewFranchiseeList($searchAry,$limit,$offset)
         {
-    
-            $whereAry = array('isDeleted=' => '0','iRole' => '2');
+              $searchAry = trim($searchAry);
+//           if (!empty($searchAry)){
+//               
+//               
+//               $whereAry = array('isDeleted=' => '0','iRole' => '2',);
+//               
+//               $or_whereAry= array( 
+//            
+//                                   'szName=' => $searchAry,
+//                                    'id' => $searchAry,
+//                                    'szEmail' => $searchAry   );
+//             
+//           }
+//           else{
+                $whereAry = array('isDeleted=' => '0','iRole' => '2');
+//           }
+           
 
             $this->db->select('*');
-            $this->db->where($whereAry);
-            $this->db->order_by($sortBy,$orderBy);
+            if(!empty($searchAry)){
+                $this->db->where('isDeleted','0');
+                 $this->db->where('iRole','2');
+               $this->db->where("(id LIKE '%$searchAry%' OR szName LIKE '%$searchAry%' OR szEmail LIKE '%$searchAry%')");
+    
+             
+            }
+            else{
+               $this->db->where($whereAry); 
+            }
             
+                $this->db->order_by($sortBy,$orderBy);
                 $this->db->limit($limit, $offset);
                 $this->db->order_by("id", "asc");
                 $query = $this->db->get(__DBC_SCHEMATA_USERS__);
 
+                
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -754,7 +779,7 @@ class Admin_Model extends Error_Model {
             return true;
     }
     public function getnotification(){
-            $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId(false,false);  
+            $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId(false,false,false);  
                                   
                     $count=0;
                     foreach($frReqQtyAray as $frReqQtyData){

@@ -72,12 +72,18 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }
             }
-     public function viewDrugTestKitList($limit,$offset)
+     public function viewDrugTestKitList($limit,$offset,$searchAry)
         {
- 
+            $searchAry = trim($searchAry);
             if($_SESSION['drugsafe_user']['iRole']==1)
             {
-            $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
+                if(!empty($searchAry)){
+                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','szProductCode'=>$searchAry);
+                }
+                else{
+                   $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
+                }
+            
             $this->db->select('*');
             $this->db->where($whereAry); 
             $this->db->limit($limit, $offset);
@@ -86,7 +92,14 @@ class Inventory_Model extends Error_Model {
             }
             else{
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
-            $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','iFranchiseeId=' => $idfranchisee);
+             if(!empty($searchAry)){
+                  
+                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','iFranchiseeId=' => $idfranchisee,'szProductCode'=>$searchAry);
+                }
+                else{
+                   $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','iFranchiseeId=' => $idfranchisee);
+                }
+           
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_PRODUCT__);
             $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');
@@ -103,11 +116,19 @@ class Inventory_Model extends Error_Model {
                     return array();
             }
         }
-         public function viewMarketingMaterialList($limit,$offset)
+         public function viewMarketingMaterialList($searchAry,$limit,$offset)
         {
+            $searchAry = trim($searchAry);
             if($_SESSION['drugsafe_user']['iRole']==1){
-          
-            $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
+            
+                 if(!empty($searchAry)){
+                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','szProductCode'=>$searchAry);
+                }
+                else{
+                   $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
+                }
+                
+            
             $this->db->select('*');
             $this->db->where($whereAry); 
             $this->db->limit($limit, $offset);
@@ -116,7 +137,13 @@ class Inventory_Model extends Error_Model {
          
             else{
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
-            $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','iFranchiseeId=' => $idfranchisee);
+             if(!empty($searchAry)){
+                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','iFranchiseeId=' => $idfranchisee,'szProductCode'=>$searchAry);
+                }
+                else{
+                   $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','iFranchiseeId=' => $idfranchisee);
+                }
+            
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_PRODUCT__);
             $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');

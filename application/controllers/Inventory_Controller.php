@@ -105,8 +105,8 @@ class Inventory_Controller extends CI_Controller {
              $idProduct = $this->input->post('idProduct');
              $flag = $this->input->post('flag');
      
-            $this->session->set_userdata('$idProduct',$idProduct);
-             $this->session->set_userdata('$flag',$flag);
+            $this->session->set_userdata('idProduct',$idProduct);
+             $this->session->set_userdata('flag',$flag);
            
             echo "SUCCESS||||";
             echo "editDrugTestKit";
@@ -205,16 +205,17 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-            
+             $searchAry = $_POST['szSearchProdCode'];
+             
              $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
-             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset));
+             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry));
              $config['per_page'] = 5;
 
              $this->pagination->initialize($config);
             
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
-               $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3));
+               $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3),$searchAry);
                $count = $this->Admin_Model->getnotification();
 
                     $data['drugTestKitAray'] = $drugTestKitAray;
@@ -240,15 +241,15 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
             
-            
+             $searchAry = $_POST['szSearchProductCode'];
              $config['base_url'] = __BASE_URL__ . "/inventory/marketingmateriallist/";
-             $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($limit,$offset));
-             $config['per_page'] = 1;
+             $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset));
+             $config['per_page'] = 5;
 
              $this->pagination->initialize($config);
             
              $idfranchisee = $_SESSION['drugsafe_user']['id'];
-             $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($config['per_page'],$this->uri->segment(3));
+             $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($searchAry,$config['per_page'],$this->uri->segment(3));
              $count = $this->Admin_Model->getnotification();
              
              
@@ -290,8 +291,8 @@ class Inventory_Controller extends CI_Controller {
              $idProduct = $this->input->post('idProduct');
              $flag = $this->input->post('flag');
      
-            $this->session->set_userdata('$idProduct',$idProduct);
-             $this->session->set_userdata('$flag',$flag);
+            $this->session->set_userdata('idProduct',$idProduct);
+             $this->session->set_userdata('flag',$flag);
            
             echo "SUCCESS||||";
             echo "editMarketingMaterial";

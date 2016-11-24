@@ -80,7 +80,7 @@ class Franchisee_Controller extends CI_Controller
         $url = $this->session->userdata('url');
         $idclient = $this->session->userdata('idclient');
 
-        $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false,false);
+        $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false,false,false);
         if (!empty($idclient)) {
             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idclient);
             $data['clientDetailsAray'] = $franchiseeDetArr1;
@@ -173,16 +173,16 @@ class Franchisee_Controller extends CI_Controller
         }
          $idfranchisee = $this->session->userdata('idfranchisee');
          // handle pagination
-
+        $searchAry = $_POST['szSearchClList'];
         $config['base_url'] = __BASE_URL__ . "/franchisee/clientList/";
-        $config['total_rows'] = count($this->Franchisee_Model->viewClientList($idfranchisee, true,$limit,$offset));
+        $config['total_rows'] = count($this->Franchisee_Model->viewClientList($searchAry,$idfranchisee, true,$limit,$offset));
         $config['per_page'] = 5;
 
 
         $this->pagination->initialize($config);
 
        
-        $clientAray = $this->Franchisee_Model->viewClientList($idfranchisee, true,$config['per_page'],$this->uri->segment(3));
+        $clientAray = $this->Franchisee_Model->viewClientList($searchAry,$idfranchisee, true,$config['per_page'],$this->uri->segment(3));
         $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idfranchisee);
         $count = $this->Admin_Model->getnotification();
         $frdata = array();
@@ -276,9 +276,9 @@ class Franchisee_Controller extends CI_Controller
             die;
         }
          $idClient = $this->session->userdata('idClient');
-         
+        $searchAry = $_POST['szSearchClDetails'];
         $config['base_url'] = __BASE_URL__ . "/franchisee/viewClientDetails/";
-        $config['total_rows'] = count( $this->Franchisee_Model->viewChildClientDetails($idClient,$limit,$offset));
+        $config['total_rows'] = count( $this->Franchisee_Model->viewChildClientDetails($searchAry,$idClient,$limit,$offset));
        
         $config['per_page'] = 5;
 
@@ -286,7 +286,7 @@ class Franchisee_Controller extends CI_Controller
         $this->pagination->initialize($config);
        
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
-        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,$config['per_page'],$this->uri->segment(3));
+        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($searchAry,$idClient,$config['per_page'],$this->uri->segment(3));
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
 
@@ -419,17 +419,17 @@ class Franchisee_Controller extends CI_Controller
         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
             $franchiseId = $_SESSION['drugsafe_user']['id'];
         }
-        
+          $searchAry = $_POST['szSearchClRecord'];
          // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
-                $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$limit,$offset));
+                $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$limit,$offset,$searchAry));
                 $config['per_page'] = 5;
            
             
-                $this->pagination->initialize($config);
-         
-        $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$config['per_page'],$this->uri->segment(3));
+        $this->pagination->initialize($config);
+      
+        $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$config['per_page'],$this->uri->segment(3),$searchAry);
 //        print_r($franchiseId);die;
         $data['clientAry'] = $clientAray;
         $data['pageName'] = "Client_Record";

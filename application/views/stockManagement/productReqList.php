@@ -31,6 +31,17 @@
                         {
                            
                             ?>
+                          <div class="row">
+                              <form class="form-horizontal" id="szSearchProdReqList" action="<?=__BASE_URL__?>/stock_management/viewproductlist" name="szSearchProdReqList" method="post">
+                          <div class="search col-md-3">
+                            <input type="text" name="szProdReqList" id="szProdReqList" class="form-control input-square-right " placeholder="Product Code" value="<?=sanitize_post_field_value($_POST['szProdReqList'])?>">
+                          
+                          </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </form>
+                          </div>
+                             <div class="row">
+                        
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -55,10 +66,9 @@
                                         foreach($reqQtyListAray as $reqQtyListData)
                                         {
                                          $idfranchisee= $franchiseeArr['id'];
-                                          $idProduct =$reqQtyListData['iProductId'];
-                                           $productDataAry = $this->Inventory_Model->getProductDetailsById($reqQtyListData['iProductId']);
+                                           $idProduct =$reqQtyListData['iProductId'];
                                           
-                                           $productCategortDataAry = $this->StockMgt_Model->getCategoryDetailsById($productDataAry['szProductCategory']);
+                                           $productCategortDataAry = $this->StockMgt_Model->getCategoryDetailsById($reqQtyListData['szProductCategory']);
                                            $QtyReqArr =  $this->StockMgt_Model->getQtyReqById($idProduct,$idfranchisee);
                                             $i=0;
                                              $reqId = $QtyReqArr[$i]['id'];
@@ -81,20 +91,20 @@
                                         ?>
                                         <tr>
                                              <td>
-                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $productDataAry['szProductImage']; ?>" width="60" height="60"/>
+                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $reqQtyListData['szProductImage']; ?>" width="60" height="60"/>
                                                   
                                             </td>
                                             
-                                            <td> <?php echo $productDataAry['szProductCode'];?> </td>
+                                            <td> <?php echo $reqQtyListData['szProductCode'];?> </td>
                                             <td> <?php echo $productCategortDataAry['szName']?> </td>
-                                            <td> <?php echo $productDataAry['szProductDiscription'];?> </td>
-                                            <td> $<?php echo $productDataAry['szProductCost'];?> </td>
+                                            <td> <?php echo $reqQtyListData['szProductDiscription'];?> </td>
+                                            <td> $<?php echo $reqQtyListData['szProductCost'];?> </td>
                                             <td> <?php echo $reqQtyListData['szQuantity'];?>  </td>
                                            <td> <?php echo ($total > 0 ? $total : 'N/A')?></td>
                                             
                                            
                                             <td>
-                                                 <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="Allot Quantity"  onclick="allotReqQtyAlert(<?php echo $productDataAry['id'];?>,<?php echo $reqQtyListData['szQuantity'];?>);" href="javascript:void(0);"></i>
+                                                 <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="Allot Quantity"  onclick="allotReqQtyAlert(<?php echo $idProduct;?>,<?php echo $reqQtyListData['szQuantity'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-mail-reply" aria-hidden="true"></i>
                                                 </a>
                                             </td>
@@ -105,6 +115,7 @@
                                     } ?>
                                 </tbody>
                             </table>
+                        </div>
                         </div>
                              <?php
                             $i++;  

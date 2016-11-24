@@ -59,6 +59,16 @@
                         {
                           
                             ?>
+                          <div class="row">
+                              <form class="form-horizontal" id="szSearchMarketingMaterialList" action="<?=__BASE_URL__?>/inventory/marketingmateriallist" name="szSearchMarketingMaterialList" method="post">
+                          <div class="search col-md-3">
+                            <input type="text" name="szSearchProductCode" id="szSearchProductCode" class="form-control input-square-right " placeholder="Product Code" value="<?=sanitize_post_field_value($_POST['szSearchProductCode'])?>">
+                          
+                          </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </form>
+                          </div>
+                    <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -127,6 +137,7 @@
                                    ?>
                                 </tbody>
                             </table>
+                        </div>
                         </div>
                              <?php
                             

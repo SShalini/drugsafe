@@ -215,16 +215,18 @@ class Admin_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
                 die;
             }
-     
+            $searchAry = $_POST['szSearch'];
+          
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
-                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($limit,$offset));
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$limit,$offset));
                 $config['per_page'] = 5;
               
             
                 $this->pagination->initialize($config);
-                $franchiseeAray =$this->Admin_Model->viewFranchiseeList( $config['per_page'],$this->uri->segment(3));
+               
+                $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry, $config['per_page'],$this->uri->segment(3));
           
                   
                     $data['szMetaTagTitle'] = "Franchisee List";
