@@ -340,9 +340,8 @@ class StockMgt_Model extends Error_Model
 
     }
 
-    public function getQtyRequestFrId($limit, $offset, $searchAry)
+    public function getQtyRequestFrId($limit, $offset)
     {
-        $searchAry = trim($searchAry);
         $whereAry = array('isCompleted=' => '0');
         $this->db->select('ds_user.id');
         $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);

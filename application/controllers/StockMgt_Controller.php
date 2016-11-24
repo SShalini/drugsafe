@@ -601,17 +601,16 @@ if(!empty($QtyAssignArr)){
                 die;
             }
             
-             $searchAry = $_POST['szReqProdFrList'];
             
              $count = $this->Admin_Model->getnotification();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/stockreqlist/";
-                $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset,$searchAry));
+                $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset));
                 $config['per_page'] = 5;
 
 
         $this->pagination->initialize($config);
              
-             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3),$searchAry);
+             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3));
 
                     $data['frReqQtyAray'] = $frReqQtyAray;
                    // $data['franchiseeAray'] = $reqQtyAray;
