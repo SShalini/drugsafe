@@ -113,11 +113,10 @@ class Reporting_Controller extends CI_Controller
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        
-                                        <th> <b>Id</b> </th>
+                                        <th style="width:80px"><b> Id</b> </th>
                                         <th> <b>Franchisee</b> </th>
                                         <th> <b>Product Code</b> </th>
-                                        <th style="width:100px"><b> Quantity</b> </th>
+                                        <th style="width:150px"><b> Quantity Requested</b> </th>
                                         <th style="width:170px"> <b>Requested On</b> </th>
                                    
                                     </tr>';
@@ -175,11 +174,13 @@ class Reporting_Controller extends CI_Controller
                             <table border="1" cellpadding="5">
                                     <tr>
                                         
-                                        <th> <b>Id</b> </th>
+                                     
+                                         <th style="width:80px"><b>Id</b> </th>
                                         <th> <b>Franchisee</b> </th>
                                         <th> <b>Product Code</b> </th>
-                                        <th style="width:100px"><b> Quantity</b> </th>
-                                        <th style="width:170px"> <b>Requested On</b> </th>
+                                        <th style="width:100px"><b> Quantity Assigned</b> </th>
+                                        <th style="width:100px"><b> Quantity Adjusted</b> </th>
+                                        <th style="width:170px"> <b>Assigned On</b> </th>
                                    
                                     </tr>';
         if ($allQtyAssignAray) {
@@ -192,6 +193,7 @@ class Reporting_Controller extends CI_Controller
                                             <td> ' . $franchiseeArr['szName'] . '</td>
                                             <td> ' . $productDataAry['szProductCode'] . ' </td>
                                             <td>' . $allQtyAssignData['szQuantityAssigned'] . ' </td>
+                                            <td>' . $allQtyAssignData['quantityDeducted'] . ' </td>
                                             <td> ' . date('d/m/Y h:i:s A', strtotime($allQtyAssignData['dtAssignedOn'])) . '  </td>
                                         </tr>';
             }
