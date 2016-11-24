@@ -62,6 +62,7 @@
                                         <th> Product Code </th>
                                         <th> Quantity Assigned</th>
                                         <th> Quantity Adjusted</th>
+                                        <th> Available Quantity</th>
                                         <th> Assigned On </th>
                                    
                                     </tr>
@@ -80,6 +81,7 @@
                                             <td> <?php echo $frAllQtyAssignData['szProductCode'];?> </td>
                                             <td> <?php echo $frAllQtyAssignData['szQuantityAssigned'];?> </td>
                                             <td> <?php echo $frAllQtyAssignData['quantityDeducted'];?> </td>
+                                            <td> <?php echo $frAllQtyAssignData['szTotalAvailableQty'];?> </td>
                                             <td> <?php echo date('d/m/Y h:i:s A',strtotime($frAllQtyAssignData['dtAssignedOn']))?>  </td>
 
                                         </tr>

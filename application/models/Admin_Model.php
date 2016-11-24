@@ -587,7 +587,7 @@ class Admin_Model extends Error_Model
 
     public function deletefranchisee($idfranchisee)
     {
-        $clientAray = $this->Franchisee_Model->viewClientList($idfranchisee, true, false, false);
+        $clientAray = $this->Franchisee_Model->viewClientList(false,$idfranchisee, true, false, false);
         if (!empty($clientAray)) {
             foreach ($clientAray as $clientlist) {
                 $this->Franchisee_Model->deleteClient($clientlist['id']);

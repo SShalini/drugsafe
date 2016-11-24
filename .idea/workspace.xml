@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Reporting_Model.php" afterPath="$PROJECT_DIR$/application/models/Reporting_Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Admin_Model.php" afterPath="$PROJECT_DIR$/application/models/Admin_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" afterPath="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Admin_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Admin_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Franchisee_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Franchisee_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Home_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Home_Controller.php" />
@@ -65,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Admin_Model.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Admin_Model.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="517">
-              <caret line="598" column="25" selection-start-line="598" selection-start-column="25" selection-end-line="598" selection-end-column="25" />
+            <state relative-caret-position="217">
+              <caret line="589" column="68" selection-start-line="589" selection-start-column="68" selection-end-line="589" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -95,7 +94,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stockRequestList.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stockRequestList.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/stockRequestList.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -105,11 +104,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editProductStockQty.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php">
+      <file leaf-file-name="frStockAssignList.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockAssignList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2720">
-              <caret line="160" column="103" selection-start-line="160" selection-start-column="84" selection-end-line="160" selection-end-column="103" />
+            <state relative-caret-position="340">
+              <caret line="83" column="100" selection-start-line="83" selection-start-column="100" selection-end-line="83" selection-end-column="100" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Admin_Controller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="364" column="48" selection-start-line="364" selection-start-column="32" selection-end-line="364" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -118,8 +127,8 @@
       <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="46" column="72" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="72" />
+            <state relative-caret-position="81">
+              <caret line="242" column="30" selection-start-line="242" selection-start-column="13" selection-end-line="242" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -135,22 +144,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="drugsafeFunctions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7769">
-              <caret line="457" column="72" selection-start-line="457" selection-start-column="49" selection-end-line="457" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/helpers/utility_helper.php" />
         <option value="$PROJECT_DIR$/whizdev/.htaccess" />
         <option value="$PROJECT_DIR$/application/controllers/Home_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/Welcome.php" />
@@ -196,11 +194,12 @@
         <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
         <option value="$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php" />
-        <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
         <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
         <option value="$PROJECT_DIR$/application/models/Reporting_Model.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
+        <option value="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" />
+        <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
       </list>
     </option>
   </component>
@@ -334,12 +333,12 @@
       <workItem from="1479699974508" duration="516000" />
       <workItem from="1479786854076" duration="15402000" />
       <workItem from="1479872821115" duration="13710000" />
-      <workItem from="1479959495036" duration="10826000" />
+      <workItem from="1479959495036" duration="11699000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82000000" />
+    <option name="totallyTimeSpent" value="82873000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -399,13 +398,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/admin/changePassword.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="94" selection-start-line="72" selection-start-column="94" selection-end-line="72" selection-end-column="94" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/layouts/layout4/css/themes/light.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1734">
@@ -530,13 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1054">
           <caret line="63" column="17" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2397">
-          <caret line="150" column="12" selection-start-line="150" selection-start-column="12" selection-end-line="150" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -706,14 +691,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="598" column="25" selection-start-line="598" selection-start-column="25" selection-end-line="598" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
@@ -748,8 +725,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="46" column="72" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="72" />
+        <state relative-caret-position="81">
+          <caret line="242" column="30" selection-start-line="242" selection-start-column="13" selection-end-line="242" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -758,6 +735,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockAssignList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="83" column="100" selection-start-line="83" selection-start-column="100" selection-end-line="83" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="364" column="48" selection-start-line="364" selection-start-column="32" selection-end-line="364" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="589" column="68" selection-start-line="589" selection-start-column="68" selection-end-line="589" selection-end-column="68" />
           <folding />
         </state>
       </provider>
