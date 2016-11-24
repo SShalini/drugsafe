@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/StockMgt_Model.php" afterPath="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php" afterPath="$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db changes/db changes.sql" afterPath="$PROJECT_DIR$/db changes/db changes.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Admin_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Admin_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Franchisee_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Franchisee_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Home_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Home_Controller.php" />
@@ -23,14 +26,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/views/layout/admin_header.php" afterPath="$PROJECT_DIR$/temp/views/layout/admin_header.php" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
-    <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
-    </list>
+    <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default" />
     <ignored path="drugsafe.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <file path="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" ignored="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,38 +49,48 @@
       <file leaf-file-name="StockMgt_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/StockMgt_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="582" column="29" selection-start-line="582" selection-start-column="17" selection-end-line="582" selection-end-column="29" />
+            <state relative-caret-position="8126">
+              <caret line="478" column="64" selection-start-line="478" selection-start-column="43" selection-end-line="478" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stockRequestList.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/reporting/stockRequestList.php">
+      <file leaf-file-name="StockMgt_Model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-204">
-              <caret line="27" column="109" selection-start-line="27" selection-start-column="109" selection-end-line="27" selection-end-column="109" />
+            <state relative-caret-position="4573">
+              <caret line="269" column="114" selection-start-line="269" selection-start-column="114" selection-end-line="269" selection-end-column="114" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stockAssignList.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stockAssignList.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/stockAssignList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="51" column="62" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
+            <state relative-caret-position="17">
+              <caret line="76" column="95" selection-start-line="76" selection-start-column="95" selection-end-line="76" selection-end-column="95" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="editProductStockQty.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2720">
+              <caret line="160" column="103" selection-start-line="160" selection-start-column="84" selection-end-line="160" selection-end-column="103" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="218" column="41" selection-start-line="218" selection-start-column="41" selection-end-line="218" selection-end-column="41" />
+            <state relative-caret-position="1564">
+              <caret line="92" column="74" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -89,18 +99,38 @@
       <file leaf-file-name="Reporting_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
+            <state relative-caret-position="357">
               <caret line="21" column="47" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin_header.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/layout/admin_header.php">
+      <file leaf-file-name="admin_ajax_functions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="66" column="96" selection-start-line="66" selection-start-column="54" selection-end-line="66" selection-end-column="96" />
+            <state relative-caret-position="4862">
+              <caret line="286" column="65" selection-start-line="286" selection-start-column="65" selection-end-line="286" selection-end-column="65" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="productReqList.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/stockManagement/productReqList.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1037">
+              <caret line="61" column="93" selection-start-line="61" selection-start-column="80" selection-end-line="61" selection-end-column="93" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="drugsafeFunctions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7769">
+              <caret line="457" column="72" selection-start-line="457" selection-start-column="49" selection-end-line="457" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -145,8 +175,6 @@
         <option value="$PROJECT_DIR$/application/views/admin/addFranchisee.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/addClient.php" />
         <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
-        <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
-        <option value="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/Franchisee_Controller.php" />
         <option value="$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php" />
         <option value="$PROJECT_DIR$/application/views/admin/franchiseeList.php" />
@@ -158,8 +186,12 @@
         <option value="$PROJECT_DIR$/application/views/inventory/addDrugTestKit.php" />
         <option value="$PROJECT_DIR$/application/views/inventory/editDrugTestKit.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
-        <option value="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
         <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
+        <option value="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
+        <option value="$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php" />
+        <option value="$PROJECT_DIR$/db changes/db changes.sql" />
+        <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
+        <option value="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
       </list>
     </option>
   </component>
@@ -291,12 +323,14 @@
       <workItem from="1477282067530" duration="10131000" />
       <workItem from="1477632643178" duration="969000" />
       <workItem from="1479699974508" duration="516000" />
-      <workItem from="1479786854076" duration="14058000" />
+      <workItem from="1479786854076" duration="15402000" />
+      <workItem from="1479872821115" duration="13710000" />
+      <workItem from="1479959495036" duration="101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56120000" />
+    <option name="totallyTimeSpent" value="71275000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -304,20 +338,20 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981631" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -356,34 +390,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/layout/email_footer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/layout/login_footer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/layouts/layout4/css/layout.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="259" column="13" selection-start-line="259" selection-start-column="11" selection-end-line="259" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/global/css/components.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253929">
-          <caret line="14937" column="18" selection-start-line="14937" selection-start-column="18" selection-end-line="14937" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/changePassword.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1224">
@@ -532,13 +538,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6596">
-          <caret line="401" column="41" selection-start-line="401" selection-start-column="41" selection-end-line="401" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -547,20 +546,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Franchisee_Controller.php.mine" />
-    <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="265" column="46" selection-start-line="265" selection-start-column="46" selection-end-line="265" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="94" column="212" selection-start-line="94" selection-start-column="212" selection-end-line="94" selection-end-column="212" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/stockManagement/modelStockValue.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -579,7 +564,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
           <caret line="118" column="39" selection-start-line="118" selection-start-column="39" selection-end-line="118" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -587,7 +571,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="969">
           <caret line="57" column="56" selection-start-line="57" selection-start-column="56" selection-end-line="57" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -595,7 +578,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1037">
           <caret line="61" column="55" selection-start-line="61" selection-start-column="55" selection-end-line="61" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -603,7 +585,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
           <caret line="63" column="68" selection-start-line="63" selection-start-column="68" selection-end-line="63" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -611,7 +592,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
           <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="63" selection-end-column="92" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -619,7 +599,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
           <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -627,7 +606,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -635,7 +613,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="364">
           <caret line="145" column="21" selection-start-line="145" selection-start-column="21" selection-end-line="145" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -643,7 +620,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
           <caret line="149" column="90" selection-start-line="149" selection-start-column="24" selection-end-line="149" selection-end-column="90" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -651,7 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
           <caret line="160" column="65" selection-start-line="160" selection-start-column="65" selection-end-line="160" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -659,31 +634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="50" column="23" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/StockMgt_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="582" column="29" selection-start-line="582" selection-start-column="17" selection-end-line="582" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/stockRequestList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret line="27" column="109" selection-start-line="27" selection-start-column="109" selection-end-line="27" selection-end-column="109" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/stockAssignList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="51" column="62" selection-start-line="51" selection-start-column="62" selection-end-line="51" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -691,30 +641,105 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="199" column="13" selection-start-line="199" selection-start-column="13" selection-end-line="199" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/layout/admin_header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="1122">
           <caret line="66" column="96" selection-start-line="66" selection-start-column="54" selection-end-line="66" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/stockRequestList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="27" column="109" selection-start-line="27" selection-start-column="109" selection-end-line="27" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-29">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/productReqList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="93" selection-start-line="61" selection-start-column="80" selection-end-line="61" selection-end-column="93" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4862">
+          <caret line="286" column="65" selection-start-line="286" selection-start-column="65" selection-end-line="286" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7769">
+          <caret line="457" column="72" selection-start-line="457" selection-start-column="49" selection-end-line="457" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="103" selection-start-line="0" selection-start-column="103" selection-end-line="0" selection-end-column="103" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
+        <state relative-caret-position="357">
           <caret line="21" column="47" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/StockMgt_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8126">
+          <caret line="478" column="64" selection-start-line="478" selection-start-column="43" selection-end-line="478" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4573">
+          <caret line="269" column="114" selection-start-line="269" selection-start-column="114" selection-end-line="269" selection-end-column="114" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="218" column="41" selection-start-line="218" selection-start-column="41" selection-end-line="218" selection-end-column="41" />
+        <state relative-caret-position="1564">
+          <caret line="92" column="74" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2720">
+          <caret line="160" column="103" selection-start-line="160" selection-start-column="84" selection-end-line="160" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/stockAssignList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="76" column="95" selection-start-line="76" selection-start-column="95" selection-end-line="76" selection-end-column="95" />
           <folding />
         </state>
       </provider>

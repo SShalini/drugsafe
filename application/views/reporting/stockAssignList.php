@@ -50,6 +50,7 @@
                                         <th> Franchisee</th>
                                         <th> Product Code </th>
                                         <th> Quantity Assigned</th>
+                                        <th> Quantity Adjusted</th>
                                         <th> Assigned On </th>
                                    
                                     </tr>
@@ -73,6 +74,7 @@
                                             <td> <?php echo $franchiseeArr['szName']?> </td>
                                             <td> <?php echo $productDataAry['szProductCode'];?> </td>
                                             <td> <?php echo $allQtyAssignData['szQuantityAssigned'];?> </td>
+                                            <td> <?php echo $allQtyAssignData['quantityDeducted'];?> </td>
                                             <td> <?php echo date('d/m/Y h:i:s A',strtotime($allQtyAssignData['dtAssignedOn']))?>  </td>
 
                                         </tr>

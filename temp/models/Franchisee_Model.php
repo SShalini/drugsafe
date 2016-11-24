@@ -82,14 +82,17 @@ class Franchisee_Model extends Error_Model {
                    return false;
              }
         }
-        public function viewClientList($idfranchisee)
+        public function viewClientList($idfranchisee,$parent = false)
         {
             $whereAry = array('franchiseeId' => $idfranchisee,'isDeleted=' => '0');
-            
+
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             $this->db->where($whereAry);
+            if($parent){
+                $this->db->where('clientType',0);
+            }
             $query = $this->db->get();
             $s=$this->db->last_query();
             if($query->num_rows() > 0)
@@ -103,7 +106,13 @@ class Franchisee_Model extends Error_Model {
         }
         public function deleteClient($idClient)
 	{
-           
+        $childListArr = $this->viewChildClientDetails($idClient);
+        if (!empty($childListArr)) {
+            foreach ($childListArr as $childlist) {
+                $this->deleteClient($childlist['id']);
+            }
+
+        }
             $data = $this->input->post('idClient');
 		$dataAry = array(
 			'isDeleted' => '1'
@@ -134,6 +143,21 @@ class Franchisee_Model extends Error_Model {
                 }
                 return false;
    	}
+    function getClientFranchisee($clientId)
+    {
+        $whereAry = array('clientId' => $clientId,'isDeleted=' => '0');
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_CLIENT__);
+        $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+        $this->db->where($whereAry);
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            return $query->result_array();
+        }
+        return false;
+    }
          public function viewClientDetails($idClient)
         {
             $whereAry = array('clientId' => $idClient,'isDeleted=' => '0');
