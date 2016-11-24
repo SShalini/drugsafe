@@ -17,6 +17,7 @@ class Reporting_Model extends Error_Model {
            
                 }
             $this->db->limit($limit, $offset);
+            $this->db->order_by(__DBC_SCHEMATA_REQUEST_QUANTITY__.'.id DESC');
             $query = $this->db->get();
             
             
