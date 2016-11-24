@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Admin_Model.php" afterPath="$PROJECT_DIR$/application/models/Admin_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Reporting_Model.php" afterPath="$PROJECT_DIR$/application/models/Reporting_Model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/StockMgt_Model.php" afterPath="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php" afterPath="$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Admin_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Admin_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Franchisee_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Franchisee_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/temp/controllers/Home_Controller.php" afterPath="$PROJECT_DIR$/temp/controllers/Home_Controller.php" />
@@ -44,8 +47,28 @@
       <file leaf-file-name="StockMgt_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/StockMgt_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="613" column="68" selection-start-line="613" selection-start-column="51" selection-end-line="613" selection-end-column="68" />
+            <state relative-caret-position="7">
+              <caret line="614" column="0" selection-start-line="614" selection-start-column="0" selection-end-line="614" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reqQtyfranchiseeList.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="81" column="125" selection-start-line="81" selection-start-column="125" selection-end-line="81" selection-end-column="125" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Admin_Model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="517">
+              <caret line="598" column="25" selection-start-line="598" selection-start-column="25" selection-end-line="598" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -54,8 +77,8 @@
       <file leaf-file-name="StockMgt_Model.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="398" column="46" selection-start-line="398" selection-start-column="46" selection-end-line="398" selection-end-column="46" />
+            <state relative-caret-position="285">
+              <caret line="357" column="42" selection-start-line="357" selection-start-column="42" selection-end-line="357" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -84,8 +107,8 @@
       <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1326">
-              <caret line="78" column="54" selection-start-line="78" selection-start-column="54" selection-end-line="78" selection-end-column="54" />
+            <state relative-caret-position="251">
+              <caret line="77" column="74" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="74" />
               <folding />
             </state>
           </provider>
@@ -94,12 +117,9 @@
       <file leaf-file-name="Reporting_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="748">
-              <caret line="44" column="47" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
-              <folding>
-                <marker date="1479973240570" expanded="true" signature="1874:1949" ph="{...}" />
-                <marker date="1479973240570" expanded="true" signature="1966:2030" ph="{...}" />
-              </folding>
+            <state relative-caret-position="319">
+              <caret line="48" column="80" selection-start-line="48" selection-start-column="80" selection-end-line="48" selection-end-column="80" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,18 +130,6 @@
             <state relative-caret-position="4862">
               <caret line="286" column="65" selection-start-line="286" selection-start-column="65" selection-end-line="286" selection-end-column="65" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="productReqList.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/stockManagement/productReqList.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="71" column="93" selection-start-line="71" selection-start-column="93" selection-end-line="71" selection-end-column="93" />
-              <folding>
-                <marker date="1479973243526" expanded="true" signature="1458:7437" ph="{...}" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -141,7 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/config/database.php" />
         <option value="$PROJECT_DIR$/application/helpers/utility_helper.php" />
         <option value="$PROJECT_DIR$/whizdev/.htaccess" />
         <option value="$PROJECT_DIR$/application/controllers/Home_Controller.php" />
@@ -174,9 +181,7 @@
         <option value="$PROJECT_DIR$/sass/prashant.scss" />
         <option value="$PROJECT_DIR$/application/views/admin/addFranchisee.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/addClient.php" />
-        <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Franchisee_Controller.php" />
-        <option value="$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php" />
         <option value="$PROJECT_DIR$/application/views/admin/franchiseeList.php" />
         <option value="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" />
         <option value="$PROJECT_DIR$/application/views/layout/admin_header.php" />
@@ -187,10 +192,13 @@
         <option value="$PROJECT_DIR$/application/views/inventory/editDrugTestKit.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
         <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
-        <option value="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
         <option value="$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php" />
         <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
+        <option value="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
+        <option value="$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php" />
+        <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
+        <option value="$PROJECT_DIR$/application/models/Reporting_Model.php" />
         <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
       </list>
     </option>
@@ -325,12 +333,12 @@
       <workItem from="1479699974508" duration="516000" />
       <workItem from="1479786854076" duration="15402000" />
       <workItem from="1479872821115" duration="13710000" />
-      <workItem from="1479959495036" duration="4175000" />
+      <workItem from="1479959495036" duration="8460000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75349000" />
+    <option name="totallyTimeSpent" value="79634000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -531,13 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="441" column="48" selection-start-line="441" selection-start-column="48" selection-end-line="441" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -564,13 +565,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
           <caret line="118" column="39" selection-start-line="118" selection-start-column="39" selection-end-line="118" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="56" selection-start-line="57" selection-start-column="56" selection-end-line="57" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -599,6 +594,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
           <caret line="56" column="38" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -698,25 +694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="47" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
-          <folding>
-            <marker date="1479973240570" expanded="true" signature="1874:1949" ph="{...}" />
-            <marker date="1479973240570" expanded="true" signature="1966:2030" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="78" column="54" selection-start-line="78" selection-start-column="54" selection-end-line="78" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2720">
@@ -733,18 +710,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="81" column="125" selection-start-line="81" selection-start-column="125" selection-end-line="81" selection-end-column="125" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/StockMgt_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="613" column="68" selection-start-line="613" selection-start-column="51" selection-end-line="613" selection-end-column="68" />
+        <state relative-caret-position="7">
+          <caret line="614" column="0" selection-start-line="614" selection-start-column="0" selection-end-line="614" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="77" column="74" selection-start-line="77" selection-start-column="52" selection-end-line="77" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="598" column="25" selection-start-line="598" selection-start-column="25" selection-end-line="598" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="48" column="80" selection-start-line="48" selection-start-column="80" selection-end-line="48" selection-end-column="80" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="398" column="46" selection-start-line="398" selection-start-column="46" selection-end-line="398" selection-end-column="46" />
+        <state relative-caret-position="285">
+          <caret line="357" column="42" selection-start-line="357" selection-start-column="42" selection-end-line="357" selection-end-column="42" />
           <folding />
         </state>
       </provider>

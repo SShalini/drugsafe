@@ -77,9 +77,9 @@
                                         foreach($frReqQtyAray as $frReqQtyArayData)
                                         {
                                           
-                                            $franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$frReqQtyArayData['iFranchiseeId']);
+                                            //$franchiseeAray = $this->Admin_Model->getUserDetailsByEmailOrId('',$frReqQtyArayData['iFranchiseeId']);
                                             
-                                            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList(false,$franchiseeAray['id'],false,false);
+                                            $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList(false,$frReqQtyArayData['id'],false,false);
                                                $count=0;
                                                foreach($reqQtyListAray as $reqQtyListData){
 
@@ -89,14 +89,14 @@
                                            
                                         ?>
                                         <tr>
-                                            <td> FR-<?php echo $franchiseeAray['id'];?> </td>
-                                            <td> <?php echo $franchiseeAray['szName']?> </td>
-                                            <td> <?php echo $franchiseeAray['szEmail'];?> </td>
-                                            <td> <?php echo $franchiseeAray['szContactNumber'];?> </td>
-                                            <td> <?php echo $franchiseeAray['szCity'];?> </td>
+                                            <td> FR-<?php echo $frReqQtyArayData['id'];?> </td>
+                                            <td> <?php echo $frReqQtyArayData['szName']?> </td>
+                                            <td> <?php echo $frReqQtyArayData['szEmail'];?> </td>
+                                            <td> <?php echo $frReqQtyArayData['szContactNumber'];?> </td>
+                                            <td> <?php echo $frReqQtyArayData['szCity'];?> </td>
                                            <td>
                                                 
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="View Quantity Requests" onclick="ViewReqProductList(<?php echo $franchiseeAray['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="View Quantity Requests" onclick="ViewReqProductList(<?php echo $frReqQtyArayData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 <!-- BEGIN NOTIFICATION  -->

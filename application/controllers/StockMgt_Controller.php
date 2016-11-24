@@ -612,8 +612,7 @@ if(!empty($QtyAssignArr)){
         $this->pagination->initialize($config);
              
              $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3),$searchAry);
-    
-            
+
                     $data['frReqQtyAray'] = $frReqQtyAray;
                    // $data['franchiseeAray'] = $reqQtyAray;
                     $data['szMetaTagTitle'] = "Stock Request List";
@@ -621,10 +620,10 @@ if(!empty($QtyAssignArr)){
                     $data['pageName'] = "Stock_Request";
                     $data['notification'] = $count;
                     $data['data'] = $data;
- 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/reqQtyfranchiseeList');
             $this->load->view('layout/admin_footer');
+
         }
         function viewproductlistData()
         {
