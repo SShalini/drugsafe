@@ -175,11 +175,12 @@ class Reporting_Controller extends CI_Controller
                                     <tr>
                                         
                                      
-                                         <th style="width:80px"><b>Id</b> </th>
-                                        <th> <b>Franchisee</b> </th>
-                                        <th> <b>Product Code</b> </th>
-                                        <th style="width:100px"><b> Quantity Assigned</b> </th>
-                                        <th style="width:100px"><b> Quantity Adjusted</b> </th>
+                                         <th style="width:70px"><b>Id</b> </th>
+                                         <th style="width:90px"><b> Franchisee </b> </th>
+                                         <th style="width:90px"><b> Product Code</b> </th>
+                                        <th style="width:90px"><b> Quantity Assigned</b> </th>
+                                        <th style="width:90px"><b> Quantity Adjusted</b> </th>
+                                         <th style="width:90px"><b> Available Quantity</b> </th>
                                         <th style="width:170px"> <b>Assigned On</b> </th>
                                    
                                     </tr>';
@@ -194,6 +195,7 @@ class Reporting_Controller extends CI_Controller
                                             <td> ' . $productDataAry['szProductCode'] . ' </td>
                                             <td>' . $allQtyAssignData['szQuantityAssigned'] . ' </td>
                                             <td>' . $allQtyAssignData['quantityDeducted'] . ' </td>
+                                            <td>' . $allQtyAssignData['szTotalAvailableQty'] . ' </td>
                                             <td> ' . date('d/m/Y h:i:s A', strtotime($allQtyAssignData['dtAssignedOn'])) . '  </td>
                                         </tr>';
             }
@@ -358,6 +360,7 @@ class Reporting_Controller extends CI_Controller
                                         <th> <b>Product Code</b> </th>
                                         <th><b> Quantity Assigned</b> </th>
                                         <th><b> Quantity Adjusted</b> </th>
+                                        <th><b> Available Quantity</b> </th>
                                         <th> <b>Assigned On</b> </th>
                                    
                                     </tr>';
@@ -369,6 +372,7 @@ class Reporting_Controller extends CI_Controller
                                             <td> ' . $frAllQtyAssignArayData['szProductCode'] . ' </td>
                                             <td>' . $frAllQtyAssignArayData['szQuantityAssigned'] . ' </td>
                                             <td>' . $frAllQtyAssignArayData['quantityDeducted'] . ' </td>
+                                             <td>' . $frAllQtyAssignArayData['szTotalAvailableQty'] . ' </td>
                                             <td> ' . date('d/m/Y h:i:s A', strtotime($frAllQtyAssignArayData['dtAssignedOn'])) . '  </td>
                                         </tr>';
             }
