@@ -99,8 +99,33 @@
                     </ul>
 
                 </li>
-            <?php } ?>
+            <?php }
+            else { ?>
+                <li class="nav-item start <?php if (trim($pageName) == 'Reporting') { ?>active open<?php } ?>">
+                    <a href="javascript:void(0);" class="nav-link nav-toggle">
+                        <i class="fa fa-list-alt" aria-hidden="true"></i>
+                        <span class="title">Reporting </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
+                        <li class="nav-item  <?php if ($subpageName == 'Franchisee_Stock_Requests') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frstockreqlist">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title"> Stock Requests</span>
+                            </a>
+                        </li>
 
+                        <li class="nav-item  <?php if ($subpageName == 'Franchisee_Stock_Assignments') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frstockassignlist">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Stock Assignments</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+            <?php } ?>
         </ul>
     </div>
 

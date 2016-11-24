@@ -456,8 +456,8 @@ if(!empty($QtyAssignArr)){
             {
               
                  $_POST['editProductStockQty'] = $frdata;
-                $data['assignqty'] = $totalAssign;
-                $data['qtyrequested'] = $QtyReqArr;
+                 $data['assignqty'] = $totalAssign;
+                 $data['qtyrequested'] = $QtyReqArr;
                  $data['idProduct'] = $idProduct;
                  $data['flag'] = $flag;
                  $data['productDataAry'] = $productDataAry;

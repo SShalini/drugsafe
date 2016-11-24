@@ -26,9 +26,9 @@
                            
                             ?>
                             <div class="actions">
-                                <a href="<?php echo __BASE_URL__;?>/reporting/pdfstockassignlist" target="_blank" class=" btn btn-circle btn green-meadow">
+                                <a href="<?php echo __BASE_URL__;?>/reporting/pdfstockassignlist" target="_blank" class=" btn green-meadow">
                                 <i class="fa fa-eye"></i> View Pdf </a>
-                                <a href="<?php echo __BASE_URL__;?>/reporting/excelstockreqlist" class=" btn btn-circle btn green-meadow">
+                                <a href="<?php echo __BASE_URL__;?>/reporting/excelstockreqlist" class=" btn green-meadow">
                                 <i class="fa fa-eye"></i> View Xls </a>
                             </div>
                               <?php
