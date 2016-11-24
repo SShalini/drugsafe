@@ -382,24 +382,26 @@ class StockMgt_Model extends Error_Model {
         }
         public function getQtyRequestFrId($limit,$offset,$searchAry)
         {
+            //$myquery = "SELECT * FROM `ds_user` WHERE id IN (SELECT `ds_user`.`id` FROM `tbl_stock_request` JOIN `ds_user` ON `tbl_stock_request`.`iFranchiseeId` = `ds_user`.`id` WHERE `isCompleted` = '0')";
              $searchAry = trim($searchAry);
              $whereAry = array('isCompleted=' => '0');
             $this->db->select('ds_user.id');
             $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
             $this->db->join('ds_user','tbl_stock_request.iFranchiseeId = ds_user.id');
             $this->db->where($whereAry);
-           $this->db->limit($limit, $offset);
+
             $subQuery = $this->db->_compile_select(); 
             
             $this->db->_reset_select();
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_USERS__);
             $this->db->where("id IN (".$subQuery.")");
-          
+            $this->db->limit($limit, $offset);
               $query = $this->db->get();
           $sql = $this->db->last_query();
          // print_r($sql);die;
- 
+            /*$data = $this->db->query($myquery);
+            $query = $data->result_array();*/
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
