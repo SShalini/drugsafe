@@ -43,36 +43,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <!--<span class="form-title"><h3>Welcome.</h3></span>
                     <span class="form-subtitle">Please login.</span>-->
                 </div>
-                <div class="alert alert-danger display-hide">
-                    <button class="close" data-close="alert"></button>
-                    <span> Enter any username and password. </span>
-                </div>
-                <div class="form-group <?php if(!empty($arErrorMessages['szEmail']) != ''){?>has-error<?php }?>">
+
+             <div class="form-group <?php if(trim($arErrorMessages['szEmail']) != ''){?>has-error<?php }?>">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                     <label class="control-label visible-ie8 visible-ie9">Email</label>
-                    <input class="form-control form-control-solid input-square-right required email registered-admin-email " type="email" autocomplete="off" placeholder="Email Address" name="adminLogin[szEmail]" id="szEmail" value="<?php echo $_POST['adminLogin']['szEmail'];?>"  onkeypress="remove_formError(this.id,'true')"/>
-                    <?php if(!empty($arErrorMessages['szEmail']) != ''){?>
-                <span class="help-block pull-left">
-                        <i class="fa fa-times-circle"></i>
-                        <?php echo $arErrorMessages['szEmail'];?>
-                </span>
-            <?php }?> 
+                    <input class="form-control form-control-solid input-square-right" type="email" autocomplete="off" placeholder="Email Address" name="adminLogin[szEmail]" id="szEmail" value="<?php echo $_POST['adminLogin']['szEmail'];?>"  onkeypress="remove_formError(this.id,'true')"/>
+                 <?php if(trim($arErrorMessages['szEmail']) != ''){?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szEmail'];?>
+                                            </span>
+                                        <?php }?>
+                </div>
+                 <div class="form-group <?php if(!empty($arErrorMessages['szPassword'])){?>has-error<?php }?>">
+                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                    <label class="control-label visible-ie8 visible-ie9">Password</label>
+                    <input class="form-control form-control-solid input-square-right" type="password" autocomplete="off" placeholder="Password" name="adminLogin[szPassword]" id="szPassword" value="<?php echo $_POST['adminLogin']['szPassword'];?>"  onkeypress="remove_formError(this.id,'true')"/>
+                   <?php if(!empty($arErrorMessages['szPassword'])){?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szPassword'];?>
+                                            </span>
+                                        <?php }?>
                 </div>
                 
-                <div class="form-group <?php if(!empty($arErrorMessages['szPassword']) != ''){?>has-error<?php }?>">
-               <label class="control-label visible-ie8 visible-ie9">Password</label>
-              <input class="form-control form-control-solid placeholder-no-fix input-square-right required " type="password" autocomplete="off" placeholder="Password" name="adminLogin[szPassword]" id="szPassword" value="<?php echo $_POST['adminLogin']['szPassword'];?>"  onfocus="remove_formError(this.id,'true')"/> 
-            <?php if(!empty($arErrorMessages['szPassword']) != ''){?>
-                <span class="help-block pull-left">
-                    <i class="fa fa-times-circle"></i>
-                    <?php echo $arErrorMessages['szPassword'];?>
-                </span>
-            <?php }?>
-        </div>
                
                 
                 <div class="form-actions">
-                     <button type="button" class="btn red btn-block uppercase btn-form-submit">Login</button>
+                     <input type="submit" class="btn red btn-block uppercase" value="Login" name="adminLogin[submit]">
+              
                 </div>
                 <div class="form-actions">
                     <div class="pull-left">
@@ -88,3 +87,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 
             </form>
 </div>
+
+
+
+
+
+
+
+
+
+
+

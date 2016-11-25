@@ -14,14 +14,67 @@ class Admin_Model extends Error_Model
         parent::__construct();
     }
 
+    function set_szEmail($value, $flag = true)
+    {
+        $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Email address", false, false, $flag);
+    }
+      function set_szPassword($value, $flag=true)
+    {
+        $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", false, false, $flag);
+    }
+
     function set_szClientType($value)
     {
         $this->data['szClientType'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szClientType", "Client Type", false, false, $flag);
+    }
+    function set_id($value,$flag=true)
+    {
+        $this->data['id'] = $this->validateInput( $value, __VLD_CASE_WHOLE_NUM__, "id", "Id", false, false, $flag );
     }
 
     function set_szConfirmPassword($value)
     {
         $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szConfirmPassword", "Confirm Password", false, 32);
+    }
+   function set_szContactNumber($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+//            if(strpos($value, "+") === false)
+//            {
+//                    if(strlen($value) == 10)
+//                            $value = "+1" . $value;
+//                    else
+//                            $value = "+" . $value;
+//            }
+        }
+        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Contact Number", false, 10, $flag);
+    }
+
+    function set_szCountry($value, $flag = true)
+    {
+        $this->data['szCountry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCountry", "Country", false, false, $flag);
+    }
+
+    function set_szState($value, $flag = true)
+    {
+        $this->data['szState'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szState", "State", false, false, $flag);
+    }
+
+    function set_szCity($value, $flag = true)
+    {
+        $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCity", "City", false, false, $flag);
+    }
+
+    function set_szZipCode($value, $flag = true)
+    {
+        $this->data['szZipCode'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szZipCode", "ZIP/Postal Code", false, false, $flag);
+    }
+
+    function set_szAddress($value, $flag = true)
+    {
+        $this->data['szAddress'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szAddress", "Address", false, false, $flag);
     }
 
     function validateUserData($data, $arExclude = array())
@@ -54,15 +107,17 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-    function set_szPassword($value)
-    {
-        $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", false, 32);
-    }
-
+   
     function set_szOldPassword($value)
     {
         $this->data['szOldPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szOldPassword", "Current Password", false, 32);
     }
+    
+    function set_szName($value, $flag = true)
+    {
+        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szName", "Name", false, false, $flag);
+    }
+
 
     public function checkCurrentPasswordExists()
     {
@@ -80,39 +135,7 @@ class Admin_Model extends Error_Model
         }
     }
 
-    public function checkUserAccountStatus($szEmail = '')
-    {
-        if (trim($szEmail) == '') {
-            $szEmail = $this->data['szEmail'];
-        } else {
-            $szEmail = $this->sql_real_escape_string(trim($szEmail));
-        }
-
-        $this->db->select('iRole,iActive,isDeleted');
-
-        $this->db->from(__DBC_SCHEMATA_USERS__);
-
-        $this->db->where('szEmail =', $szEmail);
-
-
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            $row = $query->row_array();
-            if ((int)$row['iRole'] == 3) {
-                $this->addError("szEmail", "Invalid EmailId or Password.");
-            } elseif ((int)$row['iActive'] == 0) {
-                $this->addError("szEmail", "Your account is inactive.");
-            } else if ((int)$row['isDeleted'] == 1) {
-                $this->addError("szEmail", "Your account is deleted.");
-            }
-        } 
-
-        if ($this->error == true)
-            return false;
-        else
-            return true;
-    }
+   
 
     public function adminLoginUser($validate)
     {
@@ -230,64 +253,16 @@ class Admin_Model extends Error_Model
             return false;
         }
     }
-
-    function set_szName($value, $flag = true)
-    {
-        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szName", "Name", false, false, $flag);
-    }
+   
+    
 
     /*----------------------------ADMIN RELATED FUNCTIONS-------------------------------------------*/
-
-    function set_szEmail($value, $flag = true)
-    {
-        $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Email address", false, false, $flag);
-    }
 
     /*
     * Check Admin Account Expire Or Inactive
     */
 
-    function set_szContactNumber($value, $flag = true)
-    {
-        if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-//            if(strpos($value, "+") === false)
-//            {
-//                    if(strlen($value) == 10)
-//                            $value = "+1" . $value;
-//                    else
-//                            $value = "+" . $value;
-//            }
-        }
-        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Contact Number", false, 10, $flag);
-    }
-
-    function set_szCountry($value, $flag = true)
-    {
-        $this->data['szCountry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCountry", "Country", false, false, $flag);
-    }
-
-    function set_szState($value, $flag = true)
-    {
-        $this->data['szState'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szState", "State", false, false, $flag);
-    }
-
-    function set_szCity($value, $flag = true)
-    {
-        $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCity", "City", false, false, $flag);
-    }
-
-    function set_szZipCode($value, $flag = true)
-    {
-        $this->data['szZipCode'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szZipCode", "ZIP/Postal Code", false, false, $flag);
-    }
-
-    function set_szAddress($value, $flag = true)
-    {
-        $this->data['szAddress'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szAddress", "Address", false, false, $flag);
-    }
-
+ 
     public function checkUserExists($szEmail = false, $id = 0)
     {
         $szEmail = trim($szEmail);
@@ -652,6 +627,43 @@ class Admin_Model extends Error_Model
         }
         return false;
     }
+     function validateAdminData($data, $arExclude = array())
+    { 
+        if (!empty($data)) {
+            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])), true);
+            if (!in_array('szPassword', $arExclude)) $this->set_szPassword(sanitize_all_html_input(trim($data['szPassword'])), true);
+            
+          if ($this->error == false && $this->data['szEmail'] != '' || $this->data['szPassword'] != '')
+                {
+        $this->db->select('iRole,iActive,isDeleted');
+
+        $this->db->from(__DBC_SCHEMATA_USERS__);
+
+        $this->db->where('szEmail =', $data['szEmail']);
+
+
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->row_array();
+            if ((int)$row['iRole'] == 3) {
+            $this->addError("szEmail", "Invalid EmailId or Password.");
+            } elseif ((int)$row['iActive'] == 0) {
+                $this->addError("szEmail", "Your account is inactive.");
+            } else if ((int)$row['isDeleted'] == 1) {
+                $this->addError("szEmail", "Your account is deleted.");
+            }
+        } 
+
+    } 
+            if ($this->error == true)
+                return false;
+            else
+                return true;
+        }
+        return false;
+    }
+
+    
 
     function set_franchiseeid($value, $flag = true)
     {

@@ -52,14 +52,16 @@ class Admin_Controller extends CI_Controller {
                die;
             }	
                 $validate= $this->input->post('adminLogin');
+            
+                
                 $iRemember = (int)$this->input->post('adminLogin[iRemember]');
-                if(!empty($validate))
-                {
-                     if($this->Admin_Model->checkUserAccountStatus($validate['szEmail']))
-                {  
-                  
+               
+              if($this->Admin_Model->validateAdminData($validate))
+             {
+               
                  $adminAry = $this->Admin_Model->adminLoginUser($validate);
-
+                    if(!empty($adminAry))
+                    { 
                  
                      if(!empty($adminAry)) {
                         if ((int) $iRemember == 1) {
@@ -80,7 +82,8 @@ class Admin_Controller extends CI_Controller {
                       }
                     }
                 }
-                }
+              
+            }
                 $data['szMetaTagTitle'] = "Admin Login";
                 $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                 $data['is_user_login'] = $is_user_login;
