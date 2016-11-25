@@ -107,7 +107,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="addFranchisee[szCountry]" id="szCountry"  Placeholder="Country" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control " name="addFranchisee[szCountry]" id="szCountry"  Placeholder="Country" onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
                                                     <?php
                                                         if(!empty($countryAry))
@@ -139,7 +139,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="addFranchisee[szState]" id="szState" Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control " name="addFranchisee[szState]" id="szState" Placeholder="State" onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
                                                     <?php
                                                         if(!empty($stateAry))

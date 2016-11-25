@@ -106,9 +106,7 @@ class Admin_Model extends Error_Model
             } else if ((int)$row['isDeleted'] == 1) {
                 $this->addError("szEmail", "Your account is deleted.");
             }
-        } else {
-            $this->addError("szEmail", "This email address is not registered with Drug Safe.");
-        }
+        } 
 
         if ($this->error == true)
             return false;

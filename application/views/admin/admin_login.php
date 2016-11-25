@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="form-group <?php if(!empty($arErrorMessages['szEmail']) != ''){?>has-error<?php }?>">
                     <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                     <label class="control-label visible-ie8 visible-ie9">Email</label>
-                    <input class="form-control form-control-solid input-square-right required email registered-admin-email " type="email" autocomplete="off" placeholder="Email Address" name="adminLogin[szEmail]" id="szEmail" value="<?php echo $_POST['adminLogin']['szEmail'];?>"/>
+                    <input class="form-control form-control-solid input-square-right required email registered-admin-email " type="email" autocomplete="off" placeholder="Email Address" name="adminLogin[szEmail]" id="szEmail" value="<?php echo $_POST['adminLogin']['szEmail'];?>"  onkeypress="remove_formError(this.id,'true')"/>
                     <?php if(!empty($arErrorMessages['szEmail']) != ''){?>
                 <span class="help-block pull-left">
                         <i class="fa fa-times-circle"></i>
@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 
                 <div class="form-group <?php if(!empty($arErrorMessages['szPassword']) != ''){?>has-error<?php }?>">
                <label class="control-label visible-ie8 visible-ie9">Password</label>
-              <input class="form-control form-control-solid placeholder-no-fix input-square-right required " type="password" autocomplete="off" placeholder="Password" name="adminLogin[szPassword]" id="szPassword" value="<?php echo $_POST['adminLogin']['szPassword'];?>" /> 
+              <input class="form-control form-control-solid placeholder-no-fix input-square-right required " type="password" autocomplete="off" placeholder="Password" name="adminLogin[szPassword]" id="szPassword" value="<?php echo $_POST['adminLogin']['szPassword'];?>"  onfocus="remove_formError(this.id,'true')"/> 
             <?php if(!empty($arErrorMessages['szPassword']) != ''){?>
                 <span class="help-block pull-left">
                     <i class="fa fa-times-circle"></i>

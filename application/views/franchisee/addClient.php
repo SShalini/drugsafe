@@ -195,7 +195,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="clientData[szCountry]" id="szCountry"   Placeholder="Country" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control " name="clientData[szCountry]" id="szCountry"   Placeholder="Country" onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
                                                     <?php
                                                         if(!empty($countryAry))
@@ -227,7 +227,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="clientData[szState]" id="szState"   Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control " name="clientData[szState]" id="szState"   Placeholder="State" onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
                                                     <?php
                                                         if(!empty($countryAry))

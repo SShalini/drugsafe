@@ -1,7 +1,7 @@
 /*
  * This Files contain all the jquery functions
  * Related To Form Validation
- * Author Lalit Tyagi
+ * Author Shalini Singh
  * Whiz-Solutions (IND)
  * 2016
  */

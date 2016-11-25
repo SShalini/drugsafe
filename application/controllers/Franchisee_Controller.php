@@ -71,6 +71,16 @@ class Franchisee_Controller extends CI_Controller
 
     function addClient()
     {
+        
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            die;
+        }
+
+        
         $count = $this->Admin_Model->getnotification();
         $validate = $this->input->post('clientData');
         $flag = $this->session->userdata('flag');
