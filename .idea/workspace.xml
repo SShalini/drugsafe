@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" afterPath="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/frStockRequestList.php" afterPath="$PROJECT_DIR$/application/views/reporting/frStockRequestList.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
     <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default" />
@@ -26,13 +29,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="154" column="37" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="37" />
+            <state relative-caret-position="255">
+              <caret line="284" column="40" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="40" />
               <folding>
-                <marker date="1480331723710" expanded="true" signature="22745:22956" ph="..." />
+                <element signature="n#pdfstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#excelstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#pdfstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#excelstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#frstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#frstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#pdffrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#excelfrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#pdf_fr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#excelfr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+                <marker date="1480335485892" expanded="true" signature="31036:31247" ph="..." />
               </folding>
             </state>
           </provider>
@@ -41,8 +54,8 @@
       <file leaf-file-name="frStockAssignList.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockAssignList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+            <state relative-caret-position="374">
+              <caret line="31" column="71" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -51,8 +64,8 @@
       <file leaf-file-name="stockRequestList.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/stockRequestList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="30" column="74" selection-start-line="29" selection-start-column="32" selection-end-line="30" selection-end-column="74" />
+            <state relative-caret-position="391">
+              <caret line="29" column="95" selection-start-line="29" selection-start-column="95" selection-end-line="29" selection-end-column="95" />
               <folding />
             </state>
           </provider>
@@ -61,18 +74,18 @@
       <file leaf-file-name="frStockRequestList.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockRequestList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="31" column="74" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="74" />
+            <state relative-caret-position="306">
+              <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stockAssignList.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stockAssignList.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/stockAssignList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="30" column="32" selection-start-line="30" selection-start-column="28" selection-end-line="31" selection-end-column="74" />
+            <state relative-caret-position="436">
+              <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -179,11 +192,11 @@
         <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
         <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
         <option value="$PROJECT_DIR$/application/models/Reporting_Model.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
+        <option value="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/frStockRequestList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
-        <option value="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
       </list>
     </option>
   </component>
@@ -324,12 +337,12 @@
       <workItem from="1479872821115" duration="13710000" />
       <workItem from="1479959495036" duration="12296000" />
       <workItem from="1480045764928" duration="6627000" />
-      <workItem from="1480312532320" duration="15511000" />
+      <workItem from="1480312532320" duration="19174000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105608000" />
+    <option name="totallyTimeSpent" value="109271000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -727,45 +740,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/stockAssignList.php">
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockAssignList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="30" column="32" selection-start-line="30" selection-start-column="28" selection-end-line="31" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockRequestList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="31" column="74" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="74" />
+        <state relative-caret-position="374">
+          <caret line="31" column="71" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reporting/stockRequestList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="30" column="74" selection-start-line="29" selection-start-column="32" selection-end-line="30" selection-end-column="74" />
+        <state relative-caret-position="391">
+          <caret line="29" column="95" selection-start-line="29" selection-start-column="95" selection-end-line="29" selection-end-column="95" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockAssignList.php">
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockRequestList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+        <state relative-caret-position="306">
+          <caret line="30" column="32" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="154" column="37" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="37" />
+        <state relative-caret-position="255">
+          <caret line="284" column="40" selection-start-line="284" selection-start-column="20" selection-end-line="284" selection-end-column="40" />
           <folding>
-            <marker date="1480331723710" expanded="true" signature="22745:22956" ph="..." />
+            <element signature="n#pdfstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#excelstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#pdfstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#excelstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#frstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#frstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#pdffrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#excelfrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#pdf_fr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#excelfr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
+            <marker date="1480335485892" expanded="true" signature="31036:31247" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/stockAssignList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
+          <folding />
         </state>
       </provider>
     </entry>

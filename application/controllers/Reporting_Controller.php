@@ -201,6 +201,7 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
                 $i++;
             }
         }
@@ -279,6 +280,85 @@ class Reporting_Controller extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
         $pdf->Output('stock-assignment-report.pdf', 'I');
+    }
+
+    public function excelstockassignlist()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Stock assignment';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', 'Franchisee Id');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Quantity Assigned');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Quantity Adjusted');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Total available quantity');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Assigned On');
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails(false, false, false);
+        if(!empty($allQtyAssignAray)){
+            $i = 2;
+            foreach($allQtyAssignAray as $item){
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['iFranchiseeId']);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szName']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szQuantityAssigned']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['quantityDeducted']);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i, $item['szTotalAvailableQty']);
+                $this->excel->getActiveSheet()->setCellValue('G'.$i, date('d/m/Y h:i:s A', strtotime($item['dtAssignedOn'])));
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
     }
 
     function frstockreqlist()
@@ -402,6 +482,59 @@ class Reporting_Controller extends CI_Controller
         $pdf->Output('stock-request-report.pdf', 'I');
     }
 
+    public function excelfrstockreqlist()
+    {
+        $franchiseeId = $_SESSION['drugsafe_user']['id'];
+        $frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails(false, false, false, $franchiseeId);
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Stock request';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Quantity Requested');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Requested On');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+
+        if(!empty($frAllReqQtyAray)){
+            $i = 2;
+            foreach($frAllReqQtyAray as $item){
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szQuantity']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, date('d/m/Y h:i:s A', strtotime($item['dtRequestedOn'])));
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+
     public function pdf_fr_stockassignlist()
     {
         $this->load->library('Pdf');
@@ -459,6 +592,73 @@ class Reporting_Controller extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
         $pdf->Output('stock-assignment-report.pdf', 'I');
+    }
+
+    public function excelfr_stockassignlist()
+    {
+        $franchiseeId = $_SESSION['drugsafe_user']['id'];
+        $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails(false, false, false, $franchiseeId);
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Stock assignment';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Quantity Assigned');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Quantity Adjusted');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Available Quantity');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Assigned On');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+
+        if(!empty($frAllQtyAssignAray)){
+            $i = 2;
+            foreach($frAllQtyAssignAray as $item){
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szQuantityAssigned']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['quantityDeducted']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szTotalAvailableQty']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, date('d/m/Y h:i:s A', strtotime($item['dtAssignedOn'])));
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
     }
 }
 
