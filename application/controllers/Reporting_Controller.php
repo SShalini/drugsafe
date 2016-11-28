@@ -157,33 +157,33 @@ class Reporting_Controller extends CI_Controller
         $this->load->library('excel');
         $filename = 'Report';
         $title = 'Stock request list';
-        $file = $filename . '-' . $title . '.xlsx'; //save our workbook as this file name
+        $file = $filename . '-' . $title ; //save our workbook as this file name
 
 
-        /*$this->excel->setActiveSheetIndex(0);
+        $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
         $this->excel->getActiveSheet()->setCellValue('A1', 'Franchisee Id');
-        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(20);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee');
-        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(20);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->excel->getActiveSheet()->setCellValue('C1', 'Product Code');
-        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(20);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->excel->getActiveSheet()->setCellValue('D1', 'Quantity Request');
-        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(20);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $this->excel->getActiveSheet()->setCellValue('E1', 'Requested On');
-        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(20);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
@@ -203,20 +203,7 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
                 $i++;
             }
-        }*/
-        $this->excel->setActiveSheetIndex(0);
-//name the worksheet
-        $this->excel->getActiveSheet()->setTitle('test worksheet');
-//set cell A1 content with some text
-        $this->excel->getActiveSheet()->setCellValue('A1', 'This is just some text value');
-//change the font size
-        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(20);
-//make the font become bold
-        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
-//merge cell A1 until D1
-        $this->excel->getActiveSheet()->mergeCells('A1:D1');
-//set aligment to center for that merged cell (A1 to D1)
-        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        }
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name

@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/libraries/Excel.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Admin_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Admin_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Inventory_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Inventory_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Admin_Model.php" afterPath="$PROJECT_DIR$/application/models/Admin_Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Reporting_Model.php" afterPath="$PROJECT_DIR$/application/models/Reporting_Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/StockMgt_Model.php" afterPath="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/addFranchisee.php" afterPath="$PROJECT_DIR$/application/views/admin/addFranchisee.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/inventory/addMarketingMaterial.php" afterPath="$PROJECT_DIR$/application/views/inventory/addMarketingMaterial.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/inventory/editMarketingMaterial.php" afterPath="$PROJECT_DIR$/application/views/inventory/editMarketingMaterial.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" afterPath="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/frStockRequestList.php" afterPath="$PROJECT_DIR$/application/views/reporting/frStockRequestList.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" afterPath="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
     <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default" />
@@ -40,23 +26,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="170">
+              <caret line="154" column="37" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="37" />
               <folding>
-                <marker date="1480328560865" expanded="true" signature="23510:23721" ph="..." />
+                <marker date="1480331723710" expanded="true" signature="22745:22956" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frStockAssignList.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="frStockAssignList.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockAssignList.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="31" column="74" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="74" />
+            <state relative-caret-position="266">
+              <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -193,11 +179,11 @@
         <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
         <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
         <option value="$PROJECT_DIR$/application/models/Reporting_Model.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockRequestList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/frStockRequestList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/frStockAssignList.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
       </list>
     </option>
   </component>
@@ -338,12 +324,12 @@
       <workItem from="1479872821115" duration="13710000" />
       <workItem from="1479959495036" duration="12296000" />
       <workItem from="1480045764928" duration="6627000" />
-      <workItem from="1480312532320" duration="12854000" />
+      <workItem from="1480312532320" duration="15511000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102951000" />
+    <option name="totallyTimeSpent" value="105608000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -733,16 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1480328560865" expanded="true" signature="23510:23721" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -777,9 +753,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reporting/frStockAssignList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="31" column="74" selection-start-line="30" selection-start-column="32" selection-end-line="31" selection-end-column="74" />
+        <state relative-caret-position="266">
+          <caret line="26" column="30" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="154" column="37" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="37" />
+          <folding>
+            <marker date="1480331723710" expanded="true" signature="22745:22956" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
