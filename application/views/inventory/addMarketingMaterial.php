@@ -142,8 +142,10 @@
                     },
                     afterUploadAll:function()
                     {
-                        $(".ajax-file-upload-statusbar").addClass('hide');
-                        $("#product_image_upload").addClass('hide');
+                        $(".profile-userbuttons .ajax-upload-dragdrop").addClass('hide');
+                        $(".profile-userbuttons .upload-statusbar").addClass('hide')
+                        $('.preview_file').removeClass('hide');
+                        $('.help-block').addClass('hide');
                     },
                     onError: function(files,status,errMsg)
                     {		

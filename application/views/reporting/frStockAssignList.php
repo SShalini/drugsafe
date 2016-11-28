@@ -28,8 +28,8 @@
                             <div class="actions">
                                 <a href="<?php echo __BASE_URL__;?>/reporting/pdf_fr_stockassignlist" target="_blank" class=" btn green-meadow">
                                 <i class="fa fa-eye"></i> View Pdf </a>
-                                <a href="<?php echo __BASE_URL__;?>/reporting/excelstockreqlist" class=" btn green-meadow">
-                                <i class="fa fa-eye"></i> View Xls </a>
+                                <!--<a href="<?php /*echo __BASE_URL__;*/?>/reporting/excelstockreqlist" class=" btn green-meadow">
+                                <i class="fa fa-eye"></i> View Xls </a>-->
                             </div>
                               <?php
                         }

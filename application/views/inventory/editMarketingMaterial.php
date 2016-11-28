@@ -144,8 +144,10 @@
                     },
                     afterUploadAll:function()
                     {
-                        $(".ajax-file-upload-statusbar").addClass('hide');
-                        $("#product_image_upload").addClass('hide');
+                        $(".profile-userbuttons .ajax-upload-dragdrop").addClass('hide');
+                        $(".profile-userbuttons .upload-statusbar").addClass('hide')
+                        $('.preview_file').removeClass('hide');
+                        $('.help-block').addClass('hide');
                     },
                     onError: function(files,status,errMsg)
                     {		
@@ -153,11 +155,18 @@
                     }
             }
             $("#product_image_upload").uploadFile(settings);
+            if($('#product_image').is(':visible')){
+                setTimeout(function() { hideUploadBtn(); }, 500);
+            }
         });
         function removeIncidentPhoto(){
         $('#product_image').hide();
         $(".ajax-upload-dragdrop").removeClass('hide');
          $("#product_image_upload").removeClass('hide');
         $('#szProductImage').val('');
+        }
+        function hideUploadBtn()
+        {
+            $(".ajax-upload-dragdrop").addClass('hide');
         }
 </script>

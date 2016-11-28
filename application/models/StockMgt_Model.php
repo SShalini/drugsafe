@@ -281,17 +281,20 @@ class StockMgt_Model extends Error_Model
 
     public function getQtyReqById($idProduct, $idfranchisee)
     {
-        $whereAry = array('iProductId=' => $idProduct, 'isCompleted=' => '0', 'iFranchiseeId' => (int)$idfranchisee,);
-        $this->db->select('*');
-        $this->db->where($whereAry);
-        $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+        if(!empty($idProduct) || !empty($idfranchisee)){
+            $whereAry = array('iProductId=' => $idProduct, 'isCompleted=' => '0', 'iFranchiseeId' => (int)$idfranchisee,);
+            $this->db->select('*');
+            $this->db->where($whereAry);
+            $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
 
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        } else {
-            return array();
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+            } else {
+                return array();
+            }
         }
+
     }
 
     public function getQtyAssignListById($idProduct, $idfranchisee, $reqId)
@@ -330,7 +333,9 @@ class StockMgt_Model extends Error_Model
 
 
         $this->db->insert(__DBC_SCHEMATA_REQUEST_QUANTITY__, $dataAry);
-
+/*$qu = $this->db->last_query();
+        print_r($qu);
+        die;*/
         if ($this->db->affected_rows() > 0) {
 
             return true;
@@ -340,29 +345,31 @@ class StockMgt_Model extends Error_Model
 
     }
 
-    public function getQtyRequestFrId($limit, $offset)
+    public function getQtyRequestFrId($limit=0, $offset=0)
     {
-        $whereAry = array('isCompleted=' => '0');
-        $this->db->select('ds_user.id');
-        $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
-        $this->db->join('ds_user', 'tbl_stock_request.iFranchiseeId = ds_user.id');
-        $this->db->where($whereAry);
 
-        $subQuery = $this->db->_compile_select();
+            $whereAry = array('isCompleted=' => '0');
+            $this->db->select('ds_user.id');
+            $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+            $this->db->join('ds_user', 'tbl_stock_request.iFranchiseeId = ds_user.id');
+            $this->db->where($whereAry);
 
-        $this->db->_reset_select();
-        $this->db->select('id, szName, szEmail, szContactNumber, szCity');
-        $this->db->from(__DBC_SCHEMATA_USERS__);
-        $this->db->where("id IN (" . $subQuery . ")");
-        $this->db->limit($limit, $offset);
+            $subQuery = $this->db->_compile_select();
 
-        $query = $this->db->get();
+            $this->db->_reset_select();
+            $this->db->select('id, szName, szEmail, szContactNumber, szCity');
+            $this->db->from(__DBC_SCHEMATA_USERS__);
+            $this->db->where("id IN (" . $subQuery . ")");
+            $this->db->limit($limit, $offset);
 
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        } else {
-            return array();
-        }
+            $query = $this->db->get();
+
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+            } else {
+                return array();
+            }
+
     }
 
     public function getRequestQtyList($searchAry, $idfranchisee, $limit, $offset)
@@ -428,18 +435,19 @@ class StockMgt_Model extends Error_Model
 
     public function reqQtyFr_check($idfranchisee, $idProduct)
     {
+if(!empty($idfranchisee) || !empty($idProduct)){
+    $whereAry = array('isCompleted=' => '0', 'iFranchiseeId=' => $idfranchisee, 'iProductId=' => $idProduct);
+    $this->db->select('*');
+    $this->db->where($whereAry);
+    $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
 
-        $whereAry = array('isCompleted=' => '0', 'iFranchiseeId=' => $idfranchisee, 'iProductId=' => $idProduct);
-        $this->db->select('*');
-        $this->db->where($whereAry);
-        $query = $this->db->get(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+    if ($query->num_rows() > 0) {
+        return $query->result_array();
+    } else {
+        return array();
+    }
+}
 
-
-        if ($query->num_rows() > 0) {
-            return $query->result_array();
-        } else {
-            return array();
-        }
 
     }
 

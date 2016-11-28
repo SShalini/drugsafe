@@ -123,8 +123,8 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
            
-            $idProduct = $this->session->userdata('$idProduct');
-            $flag = $this->session->userdata('$flag');
+            $idProduct = $this->session->userdata('idProduct');
+            $flag = $this->session->userdata('flag');
          
             $productDataAry = $this->Inventory_Model->getProductDetailsById($idProduct);
            
@@ -309,8 +309,8 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
             
-            $idProduct = $this->session->userdata('$idProduct');
-            $flag = $this->session->userdata('$flag');
+            $idProduct = $this->session->userdata('idProduct');
+            $flag = $this->session->userdata('flag');
          
             $productDataAry = $this->Inventory_Model->getProductDetailsById($idProduct);
            

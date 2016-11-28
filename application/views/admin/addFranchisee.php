@@ -115,7 +115,7 @@
                                                             foreach($countryAry as $countryDetails)
                                                             {
                                                                 ?>
-                                                                 <option value="" <?=(sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim($countryDetails['name']) ? "selected" : "")?>><?=trim($countryDetails['name'])?></option>
+                                                                 <option value="<?php echo (!empty($_POST['addFranchisee']['szCountry'])?$_POST['addFranchisee']['szCountry']:$countryDetails['name']);?>" <?=(sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim($countryDetails['name']) ? "selected" : "")?>><?=trim($countryDetails['name'])?></option>
                                                                 <?php
                                                             }
                                                         }

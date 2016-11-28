@@ -186,7 +186,7 @@ class Admin_Controller extends CI_Controller {
             }
            
                     $data['szMetaTagTitle'] = "Add Franchisee";
-                    $data['is_user_login'] = $is_user_login;
+                    //$data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
                     $data['countryAry'] = $countryAry;
                     $data['stateAry'] = $stateAry;
@@ -223,7 +223,7 @@ class Admin_Controller extends CI_Controller {
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
-                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$limit,$offset));
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,false,false));
                 $config['per_page'] = 5;
               
             

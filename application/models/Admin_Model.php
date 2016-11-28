@@ -706,16 +706,18 @@ class Admin_Model extends Error_Model
 
     public function getnotification()
     {
-        $frReqQtyAray = $this->StockMgt_Model->getQtyRequestFrId(false, false, false);
+        $frReqQtyAray = $this->StockMgt_Model->getQtyRequestFrId(false, false);
+if(!empty($frReqQtyAray)){
+    $count = 0;
+    foreach ($frReqQtyAray as $frReqQtyData) {
 
-        $count = 0;
-        foreach ($frReqQtyAray as $frReqQtyData) {
+        $count++;
 
-            $count++;
+    }
 
-        }
+    return $count;
+}
 
-        return $count;
     }
 
 

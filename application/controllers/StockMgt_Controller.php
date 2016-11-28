@@ -506,17 +506,24 @@ if(!empty($QtyAssignArr)){
             $this->load->view('admin/admin_ajax_functions',$data);
         }
         public function quantityRequestConfirmation()
-         {  
+         {
+
             $data_validate = $this->input->post('requestQuantity');
-          
+
             $idProduct = $this->input->post('idProduct');
+
             $flag = $this->input->post('flag');
+
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
+
             $data['flag'] = $this->input->post('flag');
-            
+
             $this->load->library('form_validation');
+
             $this->form_validation->set_rules('requestQuantity[szQuantity]','Request Quantity','trim|required|numeric|integer|greater_than[0]|less_than[1000]|callback_requestQuantity_check');
+
              $this->form_validation->set_message('required', '{field} is required');
+
             if ($this->form_validation->run() == FALSE)
            {
                 ?>
@@ -563,7 +570,9 @@ if(!empty($QtyAssignArr)){
 <?php
            }
            else{
+
             $data['mode'] = '__REQUEST_QUANTITY_POPUP_CONFIRM__';
+               //die($idProduct.'---'.$data_validate.'---'.$idfranchisee);
             $this->StockMgt_Model->requestQuantity($idProduct,$data_validate,$idfranchisee);
             $this->load->view('admin/admin_ajax_functions',$data);
            }

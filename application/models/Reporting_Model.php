@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Reporting_Model extends Error_Model {
     
-     public function getAllQtyRequestDetails($searchAry,$limit,$offset)
+     public function getAllQtyRequestDetails($searchAry,$limit=0,$offset=0)
         {
         
             $searchAry = trim($searchAry);
