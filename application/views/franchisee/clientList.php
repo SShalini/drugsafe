@@ -227,7 +227,7 @@
                                                 </a>
                                             <?php } ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data"
-                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $idfranchisee; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
+                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $idfranchisee; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>','1');"
                                                href="javascript:void(0);">
                                                 <i class="fa fa-pencil"></i>
                                             </a>

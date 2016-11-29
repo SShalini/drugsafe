@@ -13,9 +13,8 @@ class Franchisee_Model extends Error_Model {
 		parent::__construct();
 	}
         
-function insertClientDetails($data,$franchiseeId='')
+function insertClientDetails($data,$franchiseeId='',$flag=0)
         {
-           
             $szNewPassword = create_login_password();
             $date=date('Y-m-d');
             $dataAry = array(
@@ -43,21 +42,38 @@ function insertClientDetails($data,$franchiseeId='')
             {
                 $clientType='0';
             }
-           // print_r($franchiseeId);die;
+        if($flag==1){
             $clientAry=array(
                 
                 'franchiseeId' => $data['franchiseeid'],
                 'clientId' => $id_client,
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
+                'szBusinessName' => $data['szBusinessName'],
+                'szContactEmail' => $data['szContactEmail'],
+                'szContactPhone' => $data['szContactPhone'],
+                'szContactMobile' => $data['szContactMobile'],
                 
                 
             );
+        }else{
+             $clientAry=array(
+                
+                'franchiseeId' => $data['franchiseeid'],
+                'clientId' => $id_client,
+                'clientType' => $clientType,
+                'szCreatedBy' => $CreatedBy,
+         
+            );
+        }
+           
             
             if($this->db->affected_rows() > 0)
                {
                 
                 $this->db->insert(__DBC_SCHEMATA_CLIENT__, $clientAry);
+            
+                
                 if($this->db->affected_rows() > 0)
                 {
                    $replace_ary = array();
@@ -141,9 +157,7 @@ function insertClientDetails($data,$franchiseeId='')
             else{
                $this->db->where($whereAry); 
             }
-            
-            
-           
+       
             $this->db->order_by("franchiseeId","asc");
             if($parent)
             {
@@ -276,11 +290,13 @@ function insertClientDetails($data,$franchiseeId='')
                $this->db->where($whereAry); 
             }
             
-            
+           
             
             
             $this->db->limit($limit, $offset);
-            $query = $this->db->get();
+           $query = $this->db->get();
+//              $sql = $this->db->last_query($query);
+             
            
             if($query->num_rows() > 0)
             {
@@ -292,7 +308,7 @@ function insertClientDetails($data,$franchiseeId='')
                     return array();
             }
         }
- public function updateClientDetails($idClient=0,$data)
+ public function updateClientDetails($idClient=0,$data,$flag=0)
     {
         $date=date('Y-m-d');
         
@@ -326,21 +342,35 @@ function insertClientDetails($data,$franchiseeId='')
             {
                 $clientType='0';
             }
-            //$clientType= $this->data['clientType']; 
-         
+            //$clientType= $this->data['clientType'];
+                  if($flag==1){
             $clientAry=array(
- 
+                
                 'clientType' => $clientType,
                 'szLastUpdatedBy' => $UpdatedBy,
+                'szBusinessName' => $data['szBusinessName'],
+                'szContactEmail' => $data['szContactEmail'],
+                'szContactPhone' => $data['szContactPhone'],
+                'szContactMobile' => $data['szContactMobile'],
+                
                 
             );
-            
+        }else{
+             $clientAry=array(
+                
+                'clientType' => $clientType,
+                'szLastUpdatedBy' => $UpdatedBy,
+         
+            );
+        }
+        
             if($queyUpdate)
                {
                 
                 $whereAry = array('clientId' => (int)$idClient);
                 $this->db->where($whereAry);
                 $query=$this->db->update(__DBC_SCHEMATA_CLIENT__, $clientAry);
+              
                 if($query)
                 {
                      return true;

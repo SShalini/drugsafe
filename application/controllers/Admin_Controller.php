@@ -55,20 +55,17 @@ class Admin_Controller extends CI_Controller {
             
                 
                 $iRemember = (int)$this->input->post('adminLogin[iRemember]');
-               
+//               print_r($iRemember);die;
               if($this->Admin_Model->validateAdminData($validate))
              {
                
                  $adminAry = $this->Admin_Model->adminLoginUser($validate);
-                    if(!empty($adminAry))
-                    { 
-                 
                      if(!empty($adminAry)) {
                         if ((int) $iRemember == 1) {
                         set_customer_cookie($this, $adminAry);
                          
                         }
-                        $user_session = $this->session->userdata('drugsafe_user');
+                       $user_session = $this->session->userdata('drugsafe_user');
                       if($user_session[iRole]==1)
                       {
                         ob_end_clean();
@@ -81,7 +78,7 @@ class Admin_Controller extends CI_Controller {
                         die;  
                       }
                     }
-                }
+                
               
             }
                 $data['szMetaTagTitle'] = "Admin Login";
@@ -170,10 +167,9 @@ class Admin_Controller extends CI_Controller {
             $countryAry = $this->Admin_Model->getCountries();
             $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             $count = $this->Admin_Model->getnotification();
-            
             if($this->Admin_Model->validateFranchiseeData($validate))
             {
-                
+              
                 if($this->Admin_Model->insertFranchiseeDetails())
                 {
                     $szMessage['type'] = "success";

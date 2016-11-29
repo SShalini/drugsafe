@@ -25,3 +25,8 @@ padding: 0px;
 margin-bottom: 16px;
 }
 .help-block p{margin:5px;}
+
+.subCaption{
+   margin:20px;
+   alignment-adjust:central ;
+}

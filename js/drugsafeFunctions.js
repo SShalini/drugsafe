@@ -175,11 +175,11 @@ function viewClient(idfranchisee) {
     });
 }
 
-function addClientData(idfranchisee,idclient,url) {
+function addClientData(idfranchisee,idclient,url,flag) {
     if(idclient == undefined || idclient == null){
         idclient = 0;
     }
-    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,url:url}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,url:url,flag:flag}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 
@@ -251,12 +251,13 @@ function viewClientDetails(idClient) {
     });
 }
 
-function editClient(idClient, idfranchisee,url) {
+function editClient(idClient, idfranchisee,url,flag) {
 
     $.post(__BASE_URL__ + "/franchisee/editClientData", {
         idClient: idClient,
         idfranchisee: idfranchisee,
-        url: url
+        url: url,
+        flag: flag
     }, function (result) {
 
         ar_result = result.split('||||');
@@ -297,7 +298,6 @@ function productDeleteAlert(idProduct,flag)
         });
     }
 function editProduct(idProduct,flag) {
-
     $.post(__BASE_URL__ + "/inventory/editProductData", {
         idProduct: idProduct,flag: flag
        
