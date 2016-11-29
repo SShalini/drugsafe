@@ -91,7 +91,7 @@
                                             <td> <?php echo $franchiseeData['szContactNumber'];?> </td>
                                             <td> <?php echo $franchiseeData['szCity'];?> </td>
                                            <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>,'','','1');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>,'','');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>

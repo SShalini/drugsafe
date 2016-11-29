@@ -62,7 +62,7 @@
 //                    }
                    ?>
                     &nbsp; &nbsp;
-                  <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>','1');" href="javascript:void(0);">
+                  <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
                     <i class="fa fa-pencil"></i> 
                   </a>  
                 </span>
@@ -261,7 +261,8 @@
                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                     <?php
                     if($_SESSION['drugsafe_user']['iRole']=='1')
-                    {if($clientDetailsAray['szNoOfSites'] > $count){
+                    {
+                        if($clientDetailsAray['szNoOfSites'] > $count){
                         ?>
                         <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');">
                         &nbsp;Add Site

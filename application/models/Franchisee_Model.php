@@ -13,7 +13,7 @@ class Franchisee_Model extends Error_Model {
 		parent::__construct();
 	}
         
-function insertClientDetails($data,$franchiseeId='',$flag=0)
+function insertClientDetails($data,$franchiseeId='')
         {
             $szNewPassword = create_login_password();
             $date=date('Y-m-d');
@@ -42,9 +42,8 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
             {
                 $clientType='0';
             }
-        if($flag==1){
+        if(empty($clientType)){
             $clientAry=array(
-                
                 'franchiseeId' => $data['franchiseeId'],
                 'clientId' => $id_client,
                 'clientType' => $clientType,
@@ -60,7 +59,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
         }else{
              $clientAry=array(
                 
-                'franchiseeId' => $data['franchiseeid'],
+                'franchiseeId' => $data['franchiseeId'],
                 'clientId' => $id_client,
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
@@ -344,7 +343,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
                 $clientType='0';
             }
             //$clientType= $this->data['clientType'];
-                  if($flag==1){
+            if(empty($clientType)){
             $clientAry=array(
                 
                 'clientType' => $clientType,

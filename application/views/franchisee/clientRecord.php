@@ -37,7 +37,7 @@
                         </div>
                         <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                <button class="btn btn-sm green-meadow" onclick="addClientData('','','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>','1');" href="javascript:void(0);">
+                                <button class="btn btn-sm green-meadow" onclick="addClientData('','','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');" href="javascript:void(0);">
                                     &nbsp;Add New Client
                                 </button>
                             </div>
@@ -155,7 +155,7 @@
                                                 </a>
                                           <?php }} ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data"
-                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>','1');"
+                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
                                                href="javascript:void(0);">
                                                 <i class="fa fa-pencil"></i>
                                             </a>

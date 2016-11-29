@@ -100,11 +100,11 @@ class Franchisee_Controller extends CI_Controller
             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idfranchisee);
             $data['franchiseeArr'] = $franchiseeDetArr;
         }
-        if($flag==1){
+        if(empty($idclient)){
         
             if ($this->Admin_Model->validateParentClientData($validate, array(), $idclient)) {
-          
-            if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee,$flag)) {
+        
+            if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee)) {
                 $szMessage['type'] = "success";
                 $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
@@ -147,7 +147,6 @@ class Franchisee_Controller extends CI_Controller
         $data['franchiseeAray'] = $franchiseeAray;
         $data['stateAry'] = $stateAry;
         $data['validate'] = $validate;
-        $data['flag'] = $flag;
         $data['idfranchisee'] = $idfranchisee;
         $data['szParentId'] = $idclient;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
@@ -387,6 +386,7 @@ class Franchisee_Controller extends CI_Controller
         $url = $this->session->userdata('url');
         $flag = $this->session->userdata('flag');
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
+    
         if (!empty($clientDetailsAray['clientType'])) {
             $franchiseeDetArr2 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
             $data['clientChildDetailsAray'] = $franchiseeDetArr2;
@@ -412,10 +412,10 @@ class Franchisee_Controller extends CI_Controller
             } else {
                 $userDataAry = $data_validate;
             }
-           if($flag==1){
+           if(empty($clientDetailsAray['clientType'])){
                 if ($this->Admin_Model->validateParentClientData($data_validate, array(), $idClient)) {
             
-                if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry,$flag)) {
+                if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry)) {
 
 
                     $szMessage['type'] = "success";

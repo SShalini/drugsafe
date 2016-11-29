@@ -44,7 +44,7 @@
                             <form class="form-horizontal" id="clientData" action="<?php echo __BASE_URL__?>/franchisee/addClient" name="clientData" method="post">
                                 <?php?>
                                 <div class="form-body">
-                                     <?php if($flag==1){?>
+                                     <?php if(empty($szParentId)){?>
                                     <div class="form-group <?php if(!empty($arErrorMessages['szBusinessName'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Business Name</label>
                                         <div class="col-md-5">
@@ -239,7 +239,7 @@
                                       else
                                       {
                                           ?>
-                                        <input id="franchiseeid" class="form-control" type="hidden" value="<?php echo $idfranchisee; ?>" name="clientData[franchiseeid]">
+                                        <input id="franchiseeId" class="form-control" type="hidden" value="<?php echo $idfranchisee; ?>" name="clientData[franchiseeId]">
                                           <?php
                                       }
                                        ?>
@@ -261,7 +261,7 @@
                                         <input id="szParentId" class="form-control" type="hidden" value="0" name="clientData[szParentId]">
                                     <?php } ?>
                                    
-                       <?php if($flag==1){?>
+                       <?php if(empty($szParentId)){?>
                             <div class="subCaption">
                                 <i class="icon-equalizer font-green-meadow"></i>
                                 <span class="caption-subject font-green-meadow bold uppercase">Contact Details</span>

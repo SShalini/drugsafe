@@ -672,7 +672,6 @@ class Admin_Model extends Error_Model
             if (!in_array('szEmail', $arExclude)) $this->set_szPrimaryEmail(sanitize_all_html_input(trim($data['szEmail'])), true);
             if (!in_array('szContactNumber', $arExclude)) $this->set_szPrimaryPhone(sanitize_all_html_input(trim($data['szContactNumber'])), true);
             if (!in_array('szContactEmail', $arExclude)) $this->set_szContactEmail(sanitize_all_html_input(trim($data['szContactEmail'])), false);
-           
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactPhone(sanitize_all_html_input(trim($data['szContactPhone'])), false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactMobile(sanitize_all_html_input(trim($data['szContactMobile'])), false);
             if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);
