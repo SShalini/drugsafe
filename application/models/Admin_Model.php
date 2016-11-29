@@ -396,7 +396,7 @@ class Admin_Model extends Error_Model
 
     }
 
-    public function viewFranchiseeList($searchAry, $limit, $offset)
+    public function viewFranchiseeList($searchAry, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
         $searchAry = trim($searchAry);
 //           if (!empty($searchAry)){

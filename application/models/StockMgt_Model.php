@@ -345,7 +345,7 @@ class StockMgt_Model extends Error_Model
 
     }
 
-    public function getQtyRequestFrId($limit=0, $offset=0)
+    public function getQtyRequestFrId($limit=__PAGINATION_RECORD_LIMIT__, $offset=0)
     {
 
             $whereAry = array('isCompleted=' => '0');
@@ -372,7 +372,7 @@ class StockMgt_Model extends Error_Model
 
     }
 
-    public function getRequestQtyList($searchAry, $idfranchisee, $limit, $offset)
+    public function getRequestQtyList($searchAry = array(), $idfranchisee, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
         $searchAry = trim($searchAry);
 

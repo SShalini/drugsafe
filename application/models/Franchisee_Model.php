@@ -97,7 +97,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
                    return false;
              }
         }
-        public function viewClientList($searchAry,$idfranchisee,$parent = false,$limit,$offset)
+        public function viewClientList($searchAry,$idfranchisee,$parent = false,$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
         {
             $searchAry = trim($searchAry);
             $whereAry = array('franchiseeId' => $idfranchisee,'isDeleted=' => '0');
@@ -133,7 +133,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
                     return array();
             }
         }
-        public function getAllClientDetails($parent=false,$franchiseId='',$limit,$offset,$searchAry)
+        public function getAllClientDetails($parent=false,$franchiseId='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = array())
         {
               $searchAry = trim($searchAry);
             
@@ -270,7 +270,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
             }
         }
         
-        public function viewChildClientDetails($searchAry,$idClient,$limit,$offset)
+        public function viewChildClientDetails($searchAry,$idClient,$limit = __PAGINATION_RECORD_LIMIT__,$offset= 0)
         {
             $searchAry = trim($searchAry);
              

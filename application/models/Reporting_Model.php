@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Reporting_Model extends Error_Model {
     
-     public function getAllQtyRequestDetails($searchAry,$limit=0,$offset=0)
+     public function getAllQtyRequestDetails($searchAry = array(),$limit=__PAGINATION_RECORD_LIMIT__,$offset=0)
         {
         
             $searchAry = trim($searchAry);
@@ -33,7 +33,7 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
-         public function getAllQtyAssignDetails($searchAry,$limit,$offset)
+         public function getAllQtyAssignDetails($searchAry = array(),$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
         {
           
             $searchAry = trim($searchAry);
@@ -60,7 +60,7 @@ class Reporting_Model extends Error_Model {
             }
         }
       
-        public function getFrAllQtyRequestDetails($searchAry,$limit,$offset,$franchiseeId)
+        public function getFrAllQtyRequestDetails($searchAry = array(),$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$franchiseeId = 0)
         {
         
             $searchAry = trim($searchAry);
@@ -90,7 +90,7 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
-         public function getFrAllQtyAssignDetails($searchAry,$limit,$offset,$franchiseeId)
+         public function getFrAllQtyAssignDetails($searchAry=array(),$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$franchiseeId = 0)
         {
             $searchAry = trim($searchAry);
              if(!empty($searchAry)){
