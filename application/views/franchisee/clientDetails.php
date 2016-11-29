@@ -78,6 +78,45 @@
         <div class="portlet-body alert">
             <div class="row">
                 <div class="col-md-6">
+                     <?php
+                    if($clientDetailsAray['clientType']=='0')
+                    {
+                        ?>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable> Business Name:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szBusinessName'];?></p>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Primary Email:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szEmail'];?></p>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Contact Email:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szContactEmail'];?></p>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Contact Mobile:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szContactMobile'];?></p>
+                        </div>
+                    </div>
+                     <?php
+                    }else{
+                    ?>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Name:</lable>
@@ -94,6 +133,9 @@
                             <p><?php echo $clientDetailsAray['szContactNumber'];?></p>
                         </div>
                     </div>
+                     <?php
+                    }
+                    ?>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>City:</lable>
@@ -134,6 +176,37 @@
                     ?>
                 </div>
                 <div class="col-md-6">
+                     <?php
+                    if($clientDetailsAray['clientType']=='0')
+                    {
+                        ?>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Contact Name:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szName'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Primary Phone No:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szContactNumber'];?></p>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Contact Phone No:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['szContactPhone'];?></p>
+                        </div>
+                    </div>
+                      <?php
+                    }else{
+                    ?>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Email Id:</lable>
@@ -141,7 +214,11 @@
                         <div class="col-sm-8">
                             <p><?php echo $clientDetailsAray['szEmail'];?></p>
                         </div>
-                    </div>
+                    </div> 
+                   <?php
+                    }
+                    ?>
+                    
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Address:</lable>
