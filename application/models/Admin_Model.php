@@ -111,7 +111,15 @@ class Admin_Model extends Error_Model
     {
         $this->data['szAddress'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szAddress", "Address", false, false, $flag);
     }
-
+   function set_szNoOfSites($value, $flag = true)
+    {
+        $this->data['szNoOfSites'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "szNoOfSites", "No Of Sites", false, false, $flag);
+    }
+     function set_franchiseeId($value, $flag = true)
+    {
+        $this->data['franchiseeId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "franchiseeId", "Franchisee", false, false, $flag);
+    }
+    
     function validateUserData($data, $arExclude = array())
     {
         if (!empty($data)) {
@@ -656,8 +664,8 @@ class Admin_Model extends Error_Model
         }
     }
 
-    function validateParentClientData($data, $arExclude = array(), $idClient =0,$idfranchisee=0)
-    {
+    function validateParentClientData($data, $arExclude = array(), $idClient=0)
+  {
         if (!empty($data)) {
             if (!in_array('szBusinessName', $arExclude)) $this->set_szBusinessName(sanitize_all_html_input(trim($data['szBusinessName'])), true);
             if (!in_array('szName', $arExclude)) $this->set_szContactName(sanitize_all_html_input(trim($data['szName'])), true);
@@ -666,14 +674,15 @@ class Admin_Model extends Error_Model
             if (!in_array('szContactEmail', $arExclude)) $this->set_szContactEmail(sanitize_all_html_input(trim($data['szContactEmail'])), false);
            
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactPhone(sanitize_all_html_input(trim($data['szContactPhone'])), false);
-           
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactMobile(sanitize_all_html_input(trim($data['szContactMobile'])), false);
             if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);
             if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
-            if(!in_array('franchiseeid',$arExclude)) $this->set_franchiseeid(sanitize_all_html_input(trim($idfranchisee)),true);
+            
+            if(!in_array('franchiseeId',$arExclude)) $this->set_franchiseeId(sanitize_all_html_input(trim($data['franchiseeId'])),true);
+            if(!in_array('szNoOfSites',$arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])),true);
           
             if($this->error == false )
             {
@@ -733,10 +742,7 @@ class Admin_Model extends Error_Model
 
     
 
-    function set_franchiseeid($value, $flag = true)
-    {
-        $this->data['franchiseeid'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "franchiseeid", "franchisee", false, false, $flag);
-    }
+   
 
     public function checkAdminAccountStatus($szEmail = '')
     {
@@ -797,7 +803,6 @@ class Admin_Model extends Error_Model
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
-                 if(!in_array('franchiseeid',$arExclude)) $this->set_franchiseeid(sanitize_all_html_input(trim($data['franchiseeid'])),true);
                 if ($this->error == false && $this->data['szEmail'] != '') {
                     $adminData = $this->session->userdata('drugsafe_user');
                     $this->data['id'] = $idClient;

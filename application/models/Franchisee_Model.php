@@ -45,7 +45,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
         if($flag==1){
             $clientAry=array(
                 
-                'franchiseeId' => $data['franchiseeid'],
+                'franchiseeId' => $data['franchiseeId'],
                 'clientId' => $id_client,
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
@@ -53,6 +53,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
                 'szContactEmail' => $data['szContactEmail'],
                 'szContactPhone' => $data['szContactPhone'],
                 'szContactMobile' => $data['szContactMobile'],
+                'szNoOfSites' => $data['szNoOfSites'],
                 
                 
             );
@@ -352,6 +353,7 @@ function insertClientDetails($data,$franchiseeId='',$flag=0)
                 'szContactEmail' => $data['szContactEmail'],
                 'szContactPhone' => $data['szContactPhone'],
                 'szContactMobile' => $data['szContactMobile'],
+                'szNoOfSites' => $data['szNoOfSites'],
                 
                 
             );

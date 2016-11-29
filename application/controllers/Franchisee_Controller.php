@@ -102,7 +102,7 @@ class Franchisee_Controller extends CI_Controller
         }
         if($flag==1){
         
-            if ($this->Admin_Model->validateParentClientData($validate)) {
+            if ($this->Admin_Model->validateParentClientData($validate, array(), $idClient)) {
           
             if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee,$flag)) {
                 $szMessage['type'] = "success";
@@ -120,7 +120,7 @@ class Franchisee_Controller extends CI_Controller
         }
         else{
             
-              if ($this->Admin_Model->validateClientData($validate)) {
+              if ($this->Admin_Model->validateClientData($validate, array(), $idClient)) {
           
             if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee)) {
                 $szMessage['type'] = "success";
@@ -413,7 +413,7 @@ class Franchisee_Controller extends CI_Controller
                 $userDataAry = $data_validate;
             }
            if($flag==1){
-                if ($this->Admin_Model->validateParentClientData($data_validate, array(), $idClient,$idfranchisee)) {
+                if ($this->Admin_Model->validateParentClientData($data_validate, array(), $idClient)) {
             
                 if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry,$flag)) {
 
@@ -430,7 +430,7 @@ class Franchisee_Controller extends CI_Controller
             } 
            }
            else{
-                 if ($this->Admin_Model->validateClientData($data_validate, array(), $idClient,$idfranchisee)) {
+                 if ($this->Admin_Model->validateClientData($data_validate, array(), $idClient)) {
             
                 if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry)) {
 

@@ -120,6 +120,23 @@
                                         </div>
                                        
                                     </div>
+                                     <div class="form-group <?php if(!empty($arErrorMessages['szNoOfSites'])){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label">No Of Sites</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="szNoOfSites" class="form-control" type="text" value="<?php echo $_POST['clientData']['szNoOfSites'] ;?>" placeholder="No Of Sites" onfocus="remove_formError(this.id,'true')" name="clientData[szNoOfSites]">
+                                            </div>
+                                             <?php if(!empty($arErrorMessages['szNoOfSites'])){?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szNoOfSites'];?>
+                                            </span>
+                                        <?php }?>
+                                        </div>
+                                    </div>
                                      <?php }else{?>
                                     <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Name</label>
@@ -185,14 +202,14 @@
                                       if(!$idfranchisee)
                                       {
                                         ?>
-                                         <div class="form-group <?php if(!empty($arErrorMessages['franchiseeid'])){?>has-error<?php }?>">
+                                         <div class="form-group <?php if(!empty($arErrorMessages['franchiseeId'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Franchisee</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control" name="clientData[franchiseeid]" id="franchiseeid"   Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                <select class="form-control" name="clientData[franchiseeId]" id="franchiseeId"   Placeholder="State" onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
                                                     <?php
                                                         if(!empty($franchiseeAray))
@@ -200,17 +217,17 @@
                                                             foreach($franchiseeAray as $franchiseeDetails)
                                                             {
                                                                 ?>
-                                                                 <option value="<?php echo trim($franchiseeDetails['id']);?>" <?php echo(sanitize_post_field_value($_POST['clientData']['franchiseeid']) == trim($franchiseeDetails['id']) ? "selected" : "");?>><?php echo trim($franchiseeDetails['szName']);?></option>
+                                                                 <option value="<?php echo trim($franchiseeDetails['id']);?>" <?php echo(sanitize_post_field_value($_POST['clientData']['franchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : "");?>><?php echo trim($franchiseeDetails['szName']);?></option>
                                                                 <?php
                                                             }
                                                         }
                                                     ?>
                                                 </select>
                                             </div>
-                                             <?php if(!empty($arErrorMessages['franchiseeid'])){?>
+                                             <?php if(!empty($arErrorMessages['franchiseeId'])){?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['franchiseeid'];?>
+                                                <?php echo $arErrorMessages['franchiseeId'];?>
                                             </span>
                                         <?php }?>
                                         </div>

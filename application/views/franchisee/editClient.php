@@ -53,8 +53,10 @@
                         </div>
                         
                         <div class="portlet-body">
+                          
                             <form class="form-horizontal" id="clientData" action="<?=__BASE_URL__?>/franchisee/editClient" name="clientData" method="post">
                                 <div class="form-body">
+                                    
                                      <?php if($_POST['flag']==1){?>
                                      <div class="form-group <?php if(!empty($arErrorMessages['szBusinessName'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Business Name</label>
@@ -130,6 +132,23 @@
                                         <?php }?>
                                         </div>
                                        
+                                    </div>
+                                     <div class="form-group <?php if(!empty($arErrorMessages['szNoOfSites'])){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label">No Of Sites</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="szNoOfSites" class="form-control" type="text" value="<?php echo $_POST['clientData']['szNoOfSites'] ;?>" placeholder="No Of Sites" onfocus="remove_formError(this.id,'true')" name="clientData[szNoOfSites]">
+                                            </div>
+                                             <?php if(!empty($arErrorMessages['szNoOfSites'])){?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szNoOfSites'];?>
+                                            </span>
+                                        <?php }?>
+                                        </div>
                                     </div>
                                     <?php } else{?>
                                     <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
@@ -430,7 +449,7 @@
                                         </div>
                                        
                                     </div>
-                                    <input id="franchiseeid" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['franchiseeId'] ;?>" name="clientData[franchiseeid]">
+                                    <input id="franchiseeId" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['franchiseeId'] ;?>" name="clientData[franchiseeId]">
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="clientData[iRole]">
                                 <div class="form-actions">
                                     <div class="row">
