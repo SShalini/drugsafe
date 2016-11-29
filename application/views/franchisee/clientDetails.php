@@ -158,14 +158,15 @@
                         ?>
                         <div class="row">
                             <div class="col-sm-4 text-info bold">
-                                <lable>Total No of Child:</lable>
+                                <lable>Total No of Sites:</lable>
                             </div>
                             <div class="col-sm-8">
                                 <p><?php
+                                $countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails(false,$idClient,false,false);
                                     $count='0';
-                                    if($childClientDetailsAray)
+                                    if($countChildClientDetailsAray)
                                     {
-                                        $count=count($childClientDetailsAray);
+                                        $count=count($countChildClientDetailsAray);
                                     }
                                     echo $count;
                                     ?>

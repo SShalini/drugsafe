@@ -69,9 +69,8 @@ class Reporting_Controller extends CI_Controller
             die;
         }
         $count = $this->Admin_Model->getnotification();
-        $searchAry1 = $this->session->userdata('searchAry');
-        $searchAry = (!empty($_POST['szSearchReqAssignList']) ? $_POST['szSearchReqAssignList'] : (!empty($searchAry1) ? $searchAry1 : ''));
-        $this->session->set_userdata('searchAry', $searchAry);
+       
+        $searchAry = $_POST['szSearchReqAssignList'];
 //         $searchAry =    $this->session->userdata('searchAry');
 
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
@@ -79,6 +78,7 @@ class Reporting_Controller extends CI_Controller
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
         $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry, $config['per_page'], $this->uri->segment(3));
+//        print_r($allQtyAssignAray);die;
         $data['allQtyAssignAray'] = $allQtyAssignAray;
         $data['szMetaTagTitle'] = "Stock Assignments";
         $data['is_user_login'] = $is_user_login;

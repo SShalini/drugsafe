@@ -49,7 +49,8 @@ class Reporting_Model extends Error_Model {
             $this->db->limit($limit, $offset);
             $this->db->order_by(__DBC_SCHEMATA_STOCK_REQ_TRACKING__.'.id DESC');
             $query = $this->db->get();
-
+// $sql = $this->db->last_query($query);
+// print_r($sql);die;
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
