@@ -37,6 +37,7 @@
                                                 <i class="fa fa-user"></i>
                                                 </span>
                                                 <input id="szName" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szName'] ;?>" placeholder="Name" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szName]">
+
                                             </div>
                                             <?php if(!empty($arErrorMessages['szName'])){?>
                                             <span class="help-block pull-left">
@@ -211,13 +212,11 @@
                                         </div>
                                     </div>
                                     </div>
-                                    </div>
+
                             </form>
                         
                     </div>
                 </div>
             </div> 
         </div>
-    </div>
-</div>
     </div>

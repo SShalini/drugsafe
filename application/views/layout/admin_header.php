@@ -20,6 +20,9 @@
         
        <!-- BEGIN PAGE LEVEL PLUGINS -->
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />
@@ -44,7 +47,8 @@
         <!--BEGIN CUSTOM FILES-->
         <link href="<?php echo __BASE_CSS_URL__; ?>/drugsafe_custom_style.css?<?php echo time(); ?>" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_CSS_URL__; ?>/prashant.css" rel="stylesheet" type="text/css" />
-        <script src="<?php echo __BASE_JS_URL__; ?>/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo __BASE_ASSETS_URL__; ?>/jquery.min.js"></script>
 
         <script type="text/javascript">
             var __BASE_URL__ = '<?php echo __BASE_URL__;?>';
@@ -133,7 +137,6 @@
         <div class="page-container">
     
     <?php $this->view('layout/admin_leftmenu.php'); ?>
-</body>
            
                  
                
