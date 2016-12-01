@@ -27,19 +27,27 @@
                                 <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
                                 <i class="fa fa-circle"></i>
                             </li>
-                        <?php } ?>
+                             <li>
+                            <span class="active">Add Site</span>
+                            </li>
+                        <?php }else{?>
                         <li>
                             <span class="active">Add Client</span>
                         </li>
-
+                       <?php }?>
                     </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Add Client</span>
+                         <?php  if($szParentId > 0){?>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Add Site</span>
+                                  <?php } else {?>
+                             <span class="caption-subject font-red-sunglo bold uppercase">Add Client</span>
+                                    <?php }?>
                             </div>
                         </div>
+                       
                         <div class="portlet-body">
                             <form class="form-horizontal" id="clientData" action="<?php echo __BASE_URL__?>/franchisee/addClient" name="clientData" method="post">
                                 <?php?>

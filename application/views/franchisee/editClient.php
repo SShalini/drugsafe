@@ -32,7 +32,12 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Edit Client</span>
+                             <?php  if(empty($_POST['clientData']['clientType'])){?>
+                                <span class="active">Edit Client</span>
+                                  <?php } else {?>
+                             <span class="active">Edit Site</span>
+                                    <?php }?>
+                           
                         </li>
 
                     </ul>
@@ -41,7 +46,12 @@
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
+                                <?php  if(empty($_POST['clientData']['clientType'])){?>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Edit Client</span>
+                                  <?php } else {?>
+                             <span class="caption-subject font-red-sunglo bold uppercase">Edit Site</span>
+                                    <?php }?>
+                               
                             </div>
                             <!--<div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -475,21 +485,21 @@
                                       {?>
                                        
                                        <!-- BEGIN CONTACT DETAILS PORTLET-->
-                                            <div class="portlet box green-meadow">
+                                            <div class="portlet box green-meadow ">
 						<div class="portlet-title">
 							<div class="caption">
                                                              <i class="icon-equalizer "></i>
                                                            Contact Details     
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse">
-								</a>
+                                                        <a href="javascript:;" class="expand">
+                                                        </a>
 								
 								
 							</div>
 						</div>
                                         
-					<div class="portlet-body">
+					<div class="portlet-body ">
                                            <table class="table table-hover">
                                                <hr>
                                      <div class="font-green-meadow text">Who will be responsible for Scheduling ? If you would like us to manage the scheduling , write "Drugsafe".</div>
@@ -732,7 +742,7 @@
                                                            ON SITE SCREENING INFORMATION     
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse">
+								<a href="javascript:;" class="expand">
 								</a>
 								
 								
