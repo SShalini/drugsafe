@@ -787,9 +787,7 @@ if(!empty($QtyAssignArr)){
                 </div>
             </div>
         </div>
-    </div>
-                
-                
+    </div>   
               <?php
            }
            else{

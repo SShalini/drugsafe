@@ -175,11 +175,11 @@ function viewClient(idfranchisee) {
     });
 }
 
-function addClientData(idfranchisee,idclient,url,flag) {
+function addClientData(idfranchisee,idclient,url) {
     if(idclient == undefined || idclient == null){
         idclient = 0;
     }
-    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,url:url,flag:flag}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,url:url}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 
@@ -251,13 +251,12 @@ function viewClientDetails(idClient) {
     });
 }
 
-function editClient(idClient, idfranchisee,url,flag) {
+function editClient(idClient, idfranchisee,url) {
 
     $.post(__BASE_URL__ + "/franchisee/editClientData", {
         idClient: idClient,
         idfranchisee: idfranchisee,
         url: url,
-        flag: flag
     }, function (result) {
 
         ar_result = result.split('||||');
@@ -480,5 +479,16 @@ function requestQuantityAlert(idProduct,flag)
     });
 }
 
+function showHideTextbox(id){
+  if(id==0){
+     jQuery('#text').attr('style', 'display:none'); 
+  }
+  else if(id==1){
+    jQuery('#text').attr('style', 'display:none');   
+  }
+  else if(id==2){
+   jQuery('#text').attr('style', 'display:block');  
+  }      
+}
 
  

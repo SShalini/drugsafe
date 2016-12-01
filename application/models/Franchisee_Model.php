@@ -15,6 +15,7 @@ class Franchisee_Model extends Error_Model {
         
 function insertClientDetails($data,$franchiseeId='')
         {
+       
             $szNewPassword = create_login_password();
             $date=date('Y-m-d');
             $dataAry = array(
@@ -57,22 +58,22 @@ function insertClientDetails($data,$franchiseeId='')
                 
             );
         }else{
+           
              $clientAry=array(
                 
                 'franchiseeId' => $data['franchiseeId'],
                 'clientId' => $id_client,
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
-         
+             
             );
         }
            
-            
             if($this->db->affected_rows() > 0)
                {
                 
                 $this->db->insert(__DBC_SCHEMATA_CLIENT__, $clientAry);
-            
+             
                 
                 if($this->db->affected_rows() > 0)
                 {
@@ -85,12 +86,63 @@ function insertClientDetails($data,$franchiseeId='')
                    $replace_ary['Link']=__BASE_URL__."/franchisee/addClient";
                    
                    //createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
-                                       
-                     return true;
-                    
-                }
-               
+                 if(!empty($clientType)){
+                 $id_site = (int)$this->db->insert_id();
+                  $req_ppe = $data[req_ppe1];
+                $siteAry=array(
+                'siteid'=> $id_site,
+                'per_form_complete' => $data['per_form_complete'],
+                'sp_name' => $data['sp_name'],
+                'sp_mobile' => $data['sp_mobile'],
+                'sp_email' => $data['sp_email'],
+                'iis_name' => $data['iis_name'],
+                'iis_mobile' => $data['iis_mobile'],
+                'iis_email' => $data['iis_email'],
+                'rlr_name' => $data['rlr_name'],
+                'rlr_mobile' => $data['rlr_mobile'],
+                'rlr_email' => $data['rlr_email'],
+                'orlr_name' => $data['orlr_name'],
+                'orlr_mobile' => $data['orlr_mobile'],
+                'orlr_email' => $data['orlr_email'],
+                'psc_name' => $data['psc_name'],
+                'psc_phone' => $data['psc_phone'],
+                'psc_mobile' => $data['psc_mobile'],
+                'ssc_name' => $data['ssc_name'],
+                'ssc_phone' => $data['ssc_phone'],
+                'ssc_mobile' => $data['ssc_mobile'],
+                'instructions' => $data['instructions'],
+                'site_people' => $data['site_people'],
+                'test_count' => $data['test_count'],
+                'initial_testing_req' => $data['initial_testing_req'],
+                'ongoing_testing_req' => $data['ongoing_testing_req'],
+                'site_visit' => $data['site_visit'],
+                'onsite_service' => $data['onsite_service'],
+                'start_time' => $data['start_time'],
+                'power_access' => $data['power_access'], 
+                'risk_assessment' => $data['risk_assessment'], 
+                'req_comp_induction' => $data['req_comp_induction'],
+                'randomisation' => $data['randomisation'],
+                'req_ppe' => $req_ppe,
+                'paperwork' => $data['paperwork'],
+                'specify_contact' => $data['specify_contact'],
+        
+            );
+      $this->db->insert(__DBC_SCHEMATA_SITES__, $siteAry);
+               if($this->db->affected_rows() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                    return false;
+            }
+                 }
+            
+                   return true;
                }
+               return false;
+                              }
+
                else
                {
                    return false;

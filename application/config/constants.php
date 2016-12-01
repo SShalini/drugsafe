@@ -62,6 +62,7 @@ define("__BASE_USER_PRODUCT_IMAGES_URL__", __BASE_URL__ . "/product_img");
 define("__APP_PATH_PRODUCT_IMAGES__", __APP_PATH__ . "/product_img");
 
 define("__DBC_SCHEMATA_USERS__", "ds_user"); 
+define("__DBC_SCHEMATA_SITES__", "ds_sites"); 
 define( "__DBC_SCHEMATA_COUNTRY__", "tbl_countries");
 define( "__DBC_SCHEMATA_STATE__", "tbl_states");
 define( "__DBC_SCHEMATA_FRANCHISEE__", "tbl_franchisee");
@@ -180,6 +181,8 @@ define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
  *
  * 
  */
+        define( "__VLD_CASE_TIME__", "TIME" );
+        
 	define( "__VLD_CASE_PHONE__", "PHONE" );
 /**
  * Validate mobile phone, REGEX: /^\d{3}-\d{3}-\d{4}$/

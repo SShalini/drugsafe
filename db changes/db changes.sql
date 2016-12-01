@@ -2,3 +2,5 @@ ALTER TABLE `tbl_client` ADD `szBusinessName` VARCHAR(100) NULL , ADD `szContact
 <--29 nov-->
 ALTER TABLE `tbl_client` ADD `szNoOfSites` INT(5) NOT NULL AFTER `szContactMobile`;
 ALTER TABLE `tbl_client` ADD UNIQUE(`szBusinessName`);
+
+ALTER TABLE `ds_sites` CHANGE `psc_email` `psc_mobile` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL, CHANGE `ssc_mobile` `ssc_phone` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL, CHANGE `ssc_email` `ssc_mobile` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;

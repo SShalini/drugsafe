@@ -19,10 +19,62 @@ class Admin_Model extends Error_Model
     {
         $this->data['szBusinessName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szBusinessName", "Business Name", false, false, $flag);
     }
+     function set_sp_name($value, $flag = true)
+    {
+        $this->data['sp_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "sp_name", "Contact Name", false, false, $flag);
+    }
+     function set_ssc_name($value, $flag = true)
+    {
+        $this->data['ssc_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "ssc_name", "Contact Name", false, false, $flag);
+    }
+      function set_psc_name($value, $flag = true)
+    {
+        $this->data['psc_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "psc_name", "Contact Name", false, false, $flag);
+    }
+     function set_iis_name($value, $flag = true)
+    {
+        $this->data['iis_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "iis_name", "Contact Name", false, false, $flag);
+    }
+     function set_rlr_name($value, $flag = true)
+    {
+        $this->data['rlr_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "rlr_name", "Contact Name", false, false, $flag);
+    }
+     function set_orlr_name($value, $flag = true)
+    {
+        $this->data['orlr_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "orlr_name", "Contact Name", false, false, $flag);
+    }
+    function set_szCompanyName($value, $flag = true)
+    {
+        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szName", "Company Name", false, false, $flag);
+    }
+    function set_szCompanyEmail($value, $flag = true)
+    {
+        $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Company Email", false, false, $flag);
+    }
+    function set_per_form_complete($value, $flag = true)
+    {
+        $this->data['per_form_complete'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "per_form_complete", "Name of Person Completing Form", false, false, $flag);
+    }
 
     function set_szEmail($value, $flag = true)
     {
         $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Email address", false, false, $flag);
+    }
+     function set_sp_email($value, $flag = true)
+    {
+        $this->data['sp_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "sp_email", "Contact Email ", false, false, $flag);
+    }
+     function set_iis_email($value, $flag = true)
+    {
+        $this->data['iis_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "iis_email", "Contact Email ", false, false, $flag);
+    }
+     function set_rlr_email($value, $flag = true)
+    {
+        $this->data['rlr_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "rlr_email", "Contact Email ", false, false, $flag);
+    }
+     function set_orlr_email($value, $flag = true)
+    {
+        $this->data['orlr_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "orlr_email", "Contact Email ", false, false, $flag);
     }
    function set_szPrimaryEmail($value, $flag = true)
     {
@@ -50,6 +102,7 @@ class Admin_Model extends Error_Model
     {
         $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szConfirmPassword", "Confirm Password", false, 32);
     }
+   
    function set_szContactNumber($value, $flag = true)
     {
         if ($value != '') {
@@ -58,6 +111,88 @@ class Admin_Model extends Error_Model
        
         }
         $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Contact Number", false, 10, $flag);
+    }
+     function set_psc_phone($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['psc_phone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "set_psc_phone", "Landline Phone Number", false, 10, $flag);
+    }
+    function set_ssc_phone($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['ssc_phone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "ssc_phone", "Landline Phone Number", false, 10, $flag);
+    }
+     function set_sp_mobile($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['sp_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "sp_mobile", "Contact Phone Number", false, 10, $flag);
+    }
+    function set_ssc_mobile($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['ssc_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "ssc_mobile", "Mobile Phone Number", false, 10, $flag);
+    }
+     function set_psc_mobile($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['psc_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "psc_mobile", "Mobile Phone Number", false, 10, $flag);
+    }
+     function set_orlr_mobile($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['orlr_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "orlr_mobile", "Contact Phone Number", false, 10, $flag);
+    }
+     function set_rlr_mobile($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['rlr_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "rlr_mobile", "Contact Phone Number", false, 10, $flag);
+    }
+     function set_iis_mobile($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+       
+        }
+        $this->data['iis_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "iis_mobile", "Contact Phone Number", false, 10, $flag);
+    }
+     function set_szCompanyPhoneNumber($value, $flag = true)
+    {
+        if ($value != '') {
+            // strip all character except +, 0-9
+            $value = preg_replace('/[^\d+]/i', '', $value);
+      
+        }
+        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", " Company Phone Number", false, 10, $flag);
+     
     }
      function set_szContactMobile($value, $flag = true)
     {
@@ -86,6 +221,7 @@ class Admin_Model extends Error_Model
         }
         $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Primary Phone Number", false, 10, $flag);
     }
+    
 
     function set_szCountry($value, $flag = true)
     {
@@ -119,7 +255,18 @@ class Admin_Model extends Error_Model
     {
         $this->data['franchiseeId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "franchiseeId", "Franchisee", false, false, $flag);
     }
-    
+    function set_test_count($value, $flag = true)
+    {
+        $this->data['test_count'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "test_count", "Test Count", false, false, $flag);
+    }
+//    function set_start_time($value, $flag = true)
+//    {
+//        $this->data['start_time'] = $this->validateInput($value, __VLD_CASE_TIME__, "start_time", "Preffered start time", false, false, $flag);
+//    }
+     function set_site_people($value, $flag = true)
+    {
+        $this->data['site_people'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "site_people", "People on site", false, false, $flag);
+    }
     function validateUserData($data, $arExclude = array())
     {
         if (!empty($data)) {
@@ -794,15 +941,38 @@ class Admin_Model extends Error_Model
         {
             if(!empty($data))
             {
-                if(!in_array('szName',$arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),true);
-                if(!in_array('szEmail',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),true);
-                if(!in_array('szContactNumber',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),true);
+                if (!in_array('szName', $arExclude)) $this->set_szCompanyName(sanitize_all_html_input(trim($data['szName'])), true);
+                if(!in_array('per_form_complete',$arExclude)) $this->set_per_form_complete(sanitize_all_html_input(trim($data['per_form_complete'])),true);
+                if(!in_array('szEmail',$arExclude)) $this->set_szCompanyEmail(sanitize_all_html_input(trim($data['szEmail'])),true);
+                if(!in_array('szContactNumber',$arExclude)) $this->set_szCompanyPhoneNumber(sanitize_all_html_input(trim($data['szContactNumber'])),true);
                 if(!in_array('szCountry',$arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])),true);
                 if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),true);
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
-                if ($this->error == false && $this->data['szEmail'] != '') {
+                if (!in_array('sp_name', $arExclude)) $this->set_sp_name(sanitize_all_html_input(trim($data['sp_name'])), true);
+                if(!in_array('sp_mobile',$arExclude)) $this->set_sp_mobile(sanitize_all_html_input(trim($data['sp_mobile'])),true);
+                if(!in_array('sp_email',$arExclude)) $this->set_sp_email(sanitize_all_html_input(trim($data['sp_email'])),true);   
+                if (!in_array('iis_name', $arExclude)) $this->set_iis_name(sanitize_all_html_input(trim($data['iis_name'])), false);
+                if(!in_array('iis_mobile',$arExclude)) $this->set_iis_mobile(sanitize_all_html_input(trim($data['iis_mobile'])),false);
+                if(!in_array('iis_email',$arExclude)) $this->set_iis_email(sanitize_all_html_input(trim($data['iis_email'])),false);              
+                if (!in_array('rlr_name', $arExclude)) $this->set_rlr_name(sanitize_all_html_input(trim($data['rlr_name'])), true);
+                if(!in_array('rlr_mobile',$arExclude)) $this->set_rlr_mobile(sanitize_all_html_input(trim($data['rlr_mobile'])),true);
+                if(!in_array('rlr_email',$arExclude)) $this->set_rlr_email(sanitize_all_html_input(trim($data['rlr_email'])),true);   
+                if (!in_array('orlr_name', $arExclude)) $this->set_orlr_name(sanitize_all_html_input(trim($data['orlr_name'])), false);
+                if(!in_array('orlr_mobile',$arExclude)) $this->set_orlr_mobile(sanitize_all_html_input(trim($data['orlr_mobile'])),false);
+                if(!in_array('orlr_email',$arExclude)) $this->set_orlr_email(sanitize_all_html_input(trim($data['orlr_email'])),false);   
+                if (!in_array('psc_name', $arExclude)) $this->set_psc_name(sanitize_all_html_input(trim($data['psc_name'])), false);
+                if(!in_array('psc_phone',$arExclude)) $this->set_psc_phone(sanitize_all_html_input(trim($data['psc_phone'])),false);
+                if(!in_array('psc_mobile',$arExclude)) $this->set_psc_mobile(sanitize_all_html_input(trim($data['psc_mobile'])),false);
+                if(!in_array('ssc_name', $arExclude)) $this->set_ssc_name(sanitize_all_html_input(trim($data['ssc_name'])), false);
+                if(!in_array('ssc_phone',$arExclude)) $this->set_ssc_phone(sanitize_all_html_input(trim($data['ssc_phone'])),false);
+                if(!in_array('ssc_mobile',$arExclude)) $this->set_ssc_mobile(sanitize_all_html_input(trim($data['ssc_mobile'])),false);
+                if (!in_array('site_people', $arExclude)) $this->set_site_people(sanitize_all_html_input(trim($data['site_people'])), true);
+                if(!in_array('test_count',$arExclude)) $this->set_test_count(sanitize_all_html_input(trim($data['test_count'])),true);
+//                if (!in_array('start_time', $arExclude)) $this->set_start_time(sanitize_all_html_input(trim($data['start_time'])), true);
+//              
+                if ($this->error == false && $this->data['szEmail'] != '') { 
                     $adminData = $this->session->userdata('drugsafe_user');
                     $this->data['id'] = $idClient;
                     if ($this->checkUserExists($this->data['szEmail'], $this->data['id'])) {

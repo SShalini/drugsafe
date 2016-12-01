@@ -27,6 +27,21 @@ margin-bottom: 16px;
 .help-block p{margin:5px;}
 
 .subCaption{
-   margin:20px;
-   alignment-adjust:central ;
+  margin-bottom: 20px;
+    margin-right: 130px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.portlet_title{
+     text-align: center;
+}
+.radio{
+    padding-top: 0px !important;
+}
+.form-horizontal .radio span {
+    margin-top: 4px;
+}
+.text{
+  text-align: center;  
 }

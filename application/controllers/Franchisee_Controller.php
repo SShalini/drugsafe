@@ -59,10 +59,8 @@ class Franchisee_Controller extends CI_Controller
         $idfranchisee = $this->input->post('idfranchisee');
         $idclient = $this->input->post('idclient');
         $url = $this->input->post('url');
-        $flag = $this->input->post('flag');
         $this->session->set_userdata('idfranchisee', $idfranchisee);
         $this->session->set_userdata('idclient', $idclient);
-        $this->session->set_userdata('flag', $flag);
         $this->session->set_userdata('url', $url);
 
 
@@ -84,7 +82,7 @@ class Franchisee_Controller extends CI_Controller
         
         $count = $this->Admin_Model->getnotification();
         $validate = $this->input->post('clientData');
-        $flag = $this->session->userdata('flag');
+      
         $countryAry = $this->Admin_Model->getCountries();
         $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
         $idfranchisee = $this->session->userdata('idfranchisee');
@@ -121,7 +119,6 @@ class Franchisee_Controller extends CI_Controller
         else{
             
               if ($this->Admin_Model->validateClientData($validate, array(), $idclient)) {
-          
             if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee)) {
                 $szMessage['type'] = "success";
                 $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
@@ -363,14 +360,12 @@ class Franchisee_Controller extends CI_Controller
         $idClient = $this->input->post('idClient');
         $idfranchisee = $this->input->post('idfranchisee');
         $url = $this->input->post('url');
-        $flag = $this->input->post('flag');
 
 
         if ($idClient > 0) {
             $this->session->set_userdata('idClient', $idClient);
             $this->session->set_userdata('idfranchisee', $idfranchisee);
             $this->session->set_userdata('url', $url);
-            $this->session->set_userdata('flag', $flag);
             echo "SUCCESS||||";
             echo "editClient";
         }
@@ -384,7 +379,6 @@ class Franchisee_Controller extends CI_Controller
         $idClient = $this->session->userdata('idClient');
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
-        $flag = $this->session->userdata('flag');
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
     
         if (!empty($clientDetailsAray['clientType'])) {
@@ -406,7 +400,7 @@ class Franchisee_Controller extends CI_Controller
            
             if (empty($data_validate)) {
                 $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('', $idClient);
-                if ($userDataAry['clientType'] !== '0') {
+                if ($userDataAry['clientType'] != '0') {
                     $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
                 }
             } else {
@@ -455,7 +449,6 @@ class Franchisee_Controller extends CI_Controller
             $data['stateAry'] = $stateAry;
 //            $data['validate'] = $validate;
             $_POST['clientData'] = $userDataAry;
-            $_POST['flag'] = $flag;
             
             $data['idfranchisee'] = $idfranchisee;
             $data['parentClient'] = $parentClient;
