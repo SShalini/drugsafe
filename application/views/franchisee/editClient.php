@@ -471,7 +471,9 @@
                                         </div>
                                        
                                     </div>
-                                  <?php if(!empty($_POST['clientData']['clientType'])){?>
+                                  <?php if(!empty($_POST['clientData']['clientType']))
+                                      {?>
+                                       
                                        <!-- BEGIN CONTACT DETAILS PORTLET-->
                                             <div class="portlet box green-meadow">
 						<div class="portlet-title">
@@ -913,8 +915,8 @@
                                         <label class="col-md-3 control-label">Initial Testing Requirements :</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <label class="radio-inline "><input type="radio" id ="initial_testing_req" value="0" name="clientData[initial_testing_req]" checked > Random</label>
-                                              <label class="radio-inline"><input type="radio" id ="initial_testing_req" value="1" name="clientData[initial_testing_req]"> Blanket</label>
+                                              <label class="radio-inline "><input type="radio" id ="initial_testing_req" value="0" name="clientData[initial_testing_req]"  <?php if(trim($_POST['clientData']['initial_testing_req']=='0')){?>checked<?php }?> > Random</label>
+                                              <label class="radio-inline"><input type="radio" id ="initial_testing_req" value="1" name="clientData[initial_testing_req]" <?php if(trim($_POST['clientData']['initial_testing_req']=='1')){?>checked<?php }?> > Blanket</label>
                                             </div>
                                              <?php if(!empty($arErrorMessages['initial_testing_req'])){?>
                                             <span class="help-block pull-left">
@@ -929,8 +931,8 @@
                                         <label class="col-md-3 control-label">Ongoing Testing Requirements :</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <label class="radio-inline"><input type="radio" id="ongoing_testing_req" value="0" name="clientData[ongoing_testing_req]" checked> Random</label>
-                                              <label class="radio-inline"><input type="radio" id="ongoing_testing_req" value="1" name="clientData[ongoing_testing_req]"> Blanket</label>
+                                              <label class="radio-inline"><input type="radio" id="ongoing_testing_req" value="0" name="clientData[ongoing_testing_req]" <?php if(trim($_POST['clientData']['ongoing_testing_req']=='0')){?>checked<?php }?>> Random</label>
+                                              <label class="radio-inline"><input type="radio" id="ongoing_testing_req" value="1" name="clientData[ongoing_testing_req]" <?php if(trim($_POST['clientData']['ongoing_testing_req']=='1')){?>checked<?php }?>> Blanket</label>
                                             </div>
                                              <?php if(!empty($arErrorMessages['ongoing_testing_req'])){?>
                                             <span class="help-block pull-left">
@@ -965,8 +967,8 @@
                                         <label class="col-md-3 control-label">What type of service would you like on-site?</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <label class="radio-inline"><input type="radio" id="onsite_service" value="0" checked name="clientData[onsite_service]"> Mobile Clinic </label>
-                                              <label class="radio-inline"><input type="radio" id="onsite_service" value="1" name="clientData[onsite_service]"> In-house</label>
+                                              <label class="radio-inline"><input type="radio" id="onsite_service" value="0" checked name="clientData[onsite_service]" <?php if(trim($_POST['clientData']['onsite_service']=='0')){?>checked<?php }?>> Mobile Clinic </label>
+                                              <label class="radio-inline"><input type="radio" id="onsite_service" value="1" name="clientData[onsite_service]" <?php if(trim($_POST['clientData']['onsite_service']=='1')){?>checked<?php }?>> In-house</label>
                                             </div>
                                              <?php if(!empty($arErrorMessages['onsite_service'])){?>
                                             <span class="help-block pull-left">
@@ -997,8 +999,8 @@
                                         <label class="col-md-3 control-label">Access to power for our Mobile</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <label class="radio-inline"><input type="radio" id="power_access" value="0" name="clientData[power_access]"> Yes</label>
-                                              <label class="radio-inline"><input type="radio"  id="power_access" value="1" checked  name="clientData[power_access]"> No</label>
+                                              <label class="radio-inline"><input type="radio" id="power_access" value="0" name="clientData[power_access]"  <?php if(trim($_POST['clientData']['power_access']=='0')){?>checked<?php }?>> Yes</label>
+                                              <label class="radio-inline"><input type="radio"  id="power_access" value="1" checked  name="clientData[power_access]"  <?php if(trim($_POST['clientData']['power_access']=='1')){?>checked<?php }?>> No</label>
                                             </div>
                                              <?php if(!empty($arErrorMessages['power_access'])){?>
                                             <span class="help-block pull-left">
@@ -1013,8 +1015,8 @@
                                         <label class="col-md-3 control-label">Is a risk assessment required prior to working on-site</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <label class="radio-inline"><input type="radio"  id="risk_assessment" value="0" name="clientData[risk_assessment]"> Yes</label>
-                                              <label class="radio-inline"><input type="radio" id="risk_assessment" value="1" name="clientData[risk_assessment]" checked> No</label>
+                                              <label class="radio-inline"><input type="radio"  id="risk_assessment" value="0" name="clientData[risk_assessment]" <?php if(trim($_POST['clientData']['risk_assessment']=='0')){?>checked<?php }?>> Yes</label>
+                                              <label class="radio-inline"><input type="radio" id="risk_assessment" value="1" name="clientData[risk_assessment]"  <?php if(trim($_POST['clientData']['risk_assessment']=='1')){?>checked<?php }?>> No</label>
                                             </div>
                                              <?php if(!empty($arErrorMessages['risk_assessment'])){?>
                                             <span class="help-block pull-left">
@@ -1029,8 +1031,8 @@
                                         <label class="col-md-3 control-label">Are our people required to complete an induction?</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <label class="radio-inline"><input type="radio" id="req_comp_induction" value="0" name="clientData[req_comp_induction]"> Yes</label>
-                                              <label class="radio-inline"><input type="radio" id="req_comp_induction" value="1" name="clientData[req_comp_induction]" checked> No</label>
+                                              <label class="radio-inline"><input type="radio" id="req_comp_induction" value="0" name="clientData[req_comp_induction]"  <?php if(trim($_POST['clientData']['req_comp_induction']=='0')){?>checked<?php }?>> Yes</label>
+                                              <label class="radio-inline"><input type="radio" id="req_comp_induction" value="1" name="clientData[req_comp_induction]"  <?php if(trim($_POST['clientData']['req_comp_induction']=='1')){?>checked<?php }?>> No</label>
                                             </div>
                                              <?php if(!empty($arErrorMessages['req_comp_induction'])){?>
                                             <span class="help-block pull-left">
@@ -1045,13 +1047,13 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                              
-                                                <label><input type="radio"id="randomisation" value="0" name="clientData[randomisation]"> Marble selection (% split)-not accurate</label>
+                                                <label><input type="radio"id="randomisation" value="0" name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='0')){?>checked<?php }?>> Marble selection (% split)-not accurate</label>
                                            
                                              
-                                                <label><input type="radio" id="randomisation" value="1"name="clientData[randomisation]" checked> Drugsafe given names then select via algorythm</label>
+                                                <label><input type="radio" id="randomisation" value="1"name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='1')){?>checked<?php }?>> Drugsafe given names then select via algorythm</label>
                                             
                                               
-                                                <label><input type="radio" id="randomisation" value="2" name="clientData[randomisation]"> Client does randomization</label>
+                                                <label><input type="radio" id="randomisation" value="2" name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='2')){?>checked<?php }?>> Client does randomization</label>
                                              
                                             </div>
                                              <?php if(!empty($arErrorMessages['randomisation'])){?>
@@ -1067,20 +1069,22 @@
                                         <label class="col-md-3 control-label">Required PPE</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                              <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe1" value="1"  name="clientData[req_ppe1]"> High Vis Work Wear</label>
+                                                 
+                                              <div class="checkbox"> 
+                                                 
+                                                <label><input type="checkbox" id="req_ppe1" value="1"  name="req_ppe[]"<?php if(in_array("1", $req_ppe_ary)){?> checked<?php }?>> High Vis Work Wear</label>
                                               </div>
                                                <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe2" value="2"  name="clientData[req_ppe2]"> Head Protection</label>
+                                                <label><input type="checkbox" id="req_ppe2" value="2"  name="req_ppe[]"<?php if(in_array("2", $req_ppe_ary)){?>checked<?php }?>> Head Protection</label>
                                               </div>
                                                <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe3" value="3"  name="clientData[req_ppe3]"> Face/Eye Protection</label>
+                                                <label><input type="checkbox" id="req_ppe3" value="3"  name="req_ppe[]"<?php if(in_array("3", $req_ppe_ary)){?>checked<?php }?>> Face/Eye Protection</label>
                                               </div>
                                                 <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe4" value="4"  name="clientData[req_ppe4]"> Safety Boots</label>
+                                                <label><input type="checkbox" id="req_ppe4" value="4"  name="req_ppe[]"<?php if(in_array("4", $req_ppe_ary)){?>checked<?php }?>> Safety Boots</label>
                                               </div>
                                               <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe5"  name="clientData[req_ppe4]" value="5"> Long Sleev Clothing</label>
+                                                <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"<?php if(in_array("5", $req_ppe_ary)){?>checked<?php }?>> Long Sleev Clothing</label>
                                               </div>
                                             </div>
                                              <?php if(!empty($arErrorMessages['req_ppe'])){?>
@@ -1090,16 +1094,15 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                       
                                     </div>
                                          <div class="form-group <?php if(!empty($arErrorMessages['paperwork'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">who would be responsible for all the Paperwork at the time of testing</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                             
-                                                <label><input type="radio" id="paperwork" value="0" name="clientData[paperwork]" checked  onclick="showHideTextbox('0');"> Leave onsite with site contact</label>
-                                                <label><input type="radio" id="paperwork" value="1" name="clientData[paperwork]" onclick="showHideTextbox('1');"> Return to Drugsafe for filing</label>
-                                                <label><input type="radio" id="paperwork" value="2" name="clientData[paperwork]" onclick="showHideTextbox('2');"> Return to Drugsafe and and emailed to specific contact</label>
+                                                <label><input type="radio" id="paperwork" value="0" name="clientData[paperwork]" checked  onclick="showHideTextbox('0');"<?php if(trim($_POST['clientData']['paperwork']=='0')){?>checked<?php }?>> Leave onsite with site contact</label>
+                                                <label><input type="radio" id="paperwork" value="1" name="clientData[paperwork]" onclick="showHideTextbox('1');"<?php if(trim($_POST['clientData']['paperwork']=='1')){?>checked<?php }?>> Return to Drugsafe for filing</label>
+                                                <label><input type="radio" id="paperwork" value="2" name="clientData[paperwork]" onclick="showHideTextbox('2');"<?php if(trim($_POST['clientData']['paperwork']=='2')){?>checked<?php }?>> Return to Drugsafe and and emailed to specific contact</label>
                                              
                                               </div>
                                             </div>
@@ -1110,7 +1113,7 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                       <div class="text" id="text" style="display:none;"> 
+                                       <div class="text" id="text" <?php if(trim($_POST['clientData']['paperwork']=='2')){?>style="display:block;"<?php }else{?>style="display:none;"<?php }?>> 
                                         <div class="form-group <?php if(!empty($arErrorMessages['specify_contact'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Specify Contact</label>
                                         <div class="col-md-5">

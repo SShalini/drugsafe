@@ -1056,19 +1056,19 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                               <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe1" value="1"  name="clientData[req_ppe1]"> High Vis Work Wear</label>
+                                                <label><input type="checkbox" id="req_ppe1" value="1"  name="req_ppe[]"> High Vis Work Wear</label>
                                               </div>
                                                <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe2" value="2"  name="clientData[req_ppe2]"> Head Protection</label>
+                                                <label><input type="checkbox" id="req_ppe2" value="2"  name="req_ppe[]"> Head Protection</label>
                                               </div>
                                                <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe3" value="3"  name="clientData[req_ppe3]"> Face/Eye Protection</label>
+                                                <label><input type="checkbox" id="req_ppe3" value="3"  name="req_ppe[]"> Face/Eye Protection</label>
                                               </div>
                                                 <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe4" value="4"  name="clientData[req_ppe4]"> Safety Boots</label>
+                                                <label><input type="checkbox" id="req_ppe4" value="4"  name="req_ppe[]"> Safety Boots</label>
                                               </div>
                                               <div class="checkbox">
-                                                <label><input type="checkbox" id="req_ppe5"  name="clientData[req_ppe4]" value="5"> Long Sleev Clothing</label>
+                                                <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"> Long Sleev Clothing</label>
                                               </div>
                                             </div>
                                              <?php if(!empty($arErrorMessages['req_ppe'])){?>

@@ -82,6 +82,7 @@ class Franchisee_Controller extends CI_Controller
         
         $count = $this->Admin_Model->getnotification();
         $validate = $this->input->post('clientData');
+       
       
         $countryAry = $this->Admin_Model->getCountries();
         $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
@@ -119,7 +120,14 @@ class Franchisee_Controller extends CI_Controller
         else{
             
               if ($this->Admin_Model->validateClientData($validate, array(), $idclient)) {
-            if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee)) {
+                   $reqppearr = $this->input->post('req_ppe');
+                   $reqppval = '';
+        foreach ($reqppearr as $reqpp){
+            $reqppval .= $reqpp.',';
+        }
+        $reqppval = substr($reqppval, 0,-1);
+        
+            if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee,$reqppval)) {
                 $szMessage['type'] = "success";
                 $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
@@ -393,13 +401,16 @@ class Franchisee_Controller extends CI_Controller
             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['franchiseeId']);
             $data['franchiseeArr'] = $franchiseeDetArr;
         }
-
         if ($idClient > 0) {
 
             $data_validate = $this->input->post('clientData');
            
             if (empty($data_validate)) {
-                $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('', $idClient);
+                if(empty($clientDetailsAray['clientType'])){
+                $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('', $idClient);}
+                else{
+                    $userDataAry = $this->Franchisee_Model->getSiteDetailsById($idClient);
+                }
                 if ($userDataAry['clientType'] != '0') {
                     $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
                 }
@@ -425,8 +436,13 @@ class Franchisee_Controller extends CI_Controller
            }
            else{
                  if ($this->Admin_Model->validateClientData($data_validate, array(), $idClient)) {
-            
-                if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry)) {
+                   $reqppearr = $this->input->post('req_ppe');
+                   $reqppval = '';
+                   foreach ($reqppearr as $reqpp){
+                   $reqppval .= $reqpp.',';
+                   }
+                   $reqppval = substr($reqppval, 0,-1);
+                   if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry,$reqppval)) {
 
 
                     $szMessage['type'] = "success";
@@ -440,7 +456,12 @@ class Franchisee_Controller extends CI_Controller
                 }
             }
            }
+            if(!empty($clientDetailsAray['clientType'])){
+             $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
           
+             $data['req_ppe_ary'] = $req_ppe_ary;  
+            }
+//          print_r($userDataAry);die;
 
             $data['szMetaTagTitle'] = "Edit Client Details ";
 //            $data['is_user_login'] = $is_user_login;

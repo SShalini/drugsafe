@@ -13,7 +13,7 @@ class Franchisee_Model extends Error_Model {
 		parent::__construct();
 	}
         
-function insertClientDetails($data,$franchiseeId='')
+function insertClientDetails($data,$franchiseeId='',$reqppval)
         {
        
             $szNewPassword = create_login_password();
@@ -87,8 +87,7 @@ function insertClientDetails($data,$franchiseeId='')
                    
                    //createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
                  if(!empty($clientType)){
-                 $id_site = (int)$this->db->insert_id();
-                  $req_ppe = $data[req_ppe1];
+                $id_site = (int)$this->db->insert_id();
                 $siteAry=array(
                 'siteid'=> $id_site,
                 'per_form_complete' => $data['per_form_complete'],
@@ -122,7 +121,7 @@ function insertClientDetails($data,$franchiseeId='')
                 'risk_assessment' => $data['risk_assessment'], 
                 'req_comp_induction' => $data['req_comp_induction'],
                 'randomisation' => $data['randomisation'],
-                'req_ppe' => $req_ppe,
+                'req_ppe' => $reqppval,
                 'paperwork' => $data['paperwork'],
                 'specify_contact' => $data['specify_contact'],
         
@@ -360,7 +359,7 @@ function insertClientDetails($data,$franchiseeId='')
                     return array();
             }
         }
- public function updateClientDetails($idClient=0,$data,$flag=0)
+ public function updateClientDetails($idClient=0,$data,$reqppval)
     {
         $date=date('Y-m-d');
         
@@ -425,7 +424,68 @@ function insertClientDetails($data,$franchiseeId='')
                 $query=$this->db->update(__DBC_SCHEMATA_CLIENT__, $clientAry);
               
                 if($query)
+                { if(!empty($clientType)){
+                 if($data['paperwork']==2){
+                    $specify_contact = $data['specify_contact'];
+                 }  
+                 else{
+                     $specify_contact = ' '; 
+                 }
+               $siteAry=array(
+                'per_form_complete' => $data['per_form_complete'],
+                'sp_name' => $data['sp_name'],
+                'sp_mobile' => $data['sp_mobile'],
+                'sp_email' => $data['sp_email'],
+                'iis_name' => $data['iis_name'],
+                'iis_mobile' => $data['iis_mobile'],
+                'iis_email' => $data['iis_email'],
+                'rlr_name' => $data['rlr_name'],
+                'rlr_mobile' => $data['rlr_mobile'],
+                'rlr_email' => $data['rlr_email'],
+                'orlr_name' => $data['orlr_name'],
+                'orlr_mobile' => $data['orlr_mobile'],
+                'orlr_email' => $data['orlr_email'],
+                'psc_name' => $data['psc_name'],
+                'psc_phone' => $data['psc_phone'],
+                'psc_mobile' => $data['psc_mobile'],
+                'ssc_name' => $data['ssc_name'],
+                'ssc_phone' => $data['ssc_phone'],
+                'ssc_mobile' => $data['ssc_mobile'],
+                'instructions' => $data['instructions'],
+                'site_people' => $data['site_people'],
+                'test_count' => $data['test_count'],
+                'initial_testing_req' => $data['initial_testing_req'],
+                'ongoing_testing_req' => $data['ongoing_testing_req'],
+                'site_visit' => $data['site_visit'],
+                'onsite_service' => $data['onsite_service'],
+                'start_time' => $data['start_time'],
+                'power_access' => $data['power_access'], 
+                'risk_assessment' => $data['risk_assessment'], 
+                'req_comp_induction' => $data['req_comp_induction'],
+                'randomisation' => $data['randomisation'],
+                'req_ppe' => $reqppval,
+                'paperwork' => $data['paperwork'],
+                'specify_contact' => $specify_contact,
+        
+            );
+                $userDataAry = $this->getClientDetailsId($idClient);
+                
+                $id_site = $userDataAry['id'];
+           
+                $whereAry = array('siteid' => (int)$id_site);
+                $this->db->where($whereAry);
+                $siteUpdate=$this->db->update(__DBC_SCHEMATA_SITES__, $siteAry);
+          
+                if($siteUpdate)
+               {
+                   
+                        return true;
+               }
+                else
                 {
+                    return false;
+                }    
+                }  
                      return true;
                     
                 }
@@ -549,5 +609,52 @@ function set_szName($value,$flag=true)
             }
             return false;
         }
+            public function getSiteDetailsById($id=0)
+    {
+        if((int)$id>0 )
+        {
+            $whereAry = array('id' => (int)$id);
+        }
+        
+            $this->db->select('*');
+            $this->db->from('ds_sites');
+            $this->db->join('tbl_client', 'ds_sites.siteid = tbl_client.id');
+            $this->db->join('ds_user','tbl_client.clientId = ds_user.id');
+            $this->db->where('ds_user.id', $id);
+        
+       $query = $this->db->get();
+
+        if($query->num_rows() > 0)
+        {
+            $row = $query->result_array();
+            return $row[0];
+        }
+        else
+        {
+            return array();
+        }
+}
+ public function getClientDetailsId($id=0)
+    {
+        if((int)$id>0 )
+        {
+            $whereAry = array('clientId' => (int)$id);
+        }
+        
+            $this->db->select('id');
+            $this->db->where($whereAry);
+      $query = $this->db->get(__DBC_SCHEMATA_CLIENT__);
+
+            
+        if($query->num_rows() > 0)
+        {
+            $row = $query->result_array();
+            return $row[0];
+        }
+        else
+        {
+            return array();
+        }
+}
 }
 ?>
