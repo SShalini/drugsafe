@@ -70,8 +70,8 @@
                              <?php 
                              if(empty($_POST['clientData']['clientType'])){?>
                              <div class="form-group <?php if(!empty($arErrorMessages['szBusinessName'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Business Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Business Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -89,8 +89,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -109,8 +109,8 @@
                             </div>
 
                             <div class="form-group <?php if(!empty($arErrorMessages['szEmail'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Primary Email</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Primary Email</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -127,8 +127,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szContactNumber'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Primary Phone</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Primary Phone</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -145,8 +145,8 @@
 
                             </div>
                              <div class="form-group <?php if(!empty($arErrorMessages['szNoOfSites'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">No Of Sites</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">No Of Sites</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -163,8 +163,8 @@
                             </div>
                             <?php } else{?>
                              <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Company Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Company Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -182,8 +182,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['per_form_complete'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Name of Person Completing Form</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Name of Person Completing Form</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -202,8 +202,8 @@
                             </div>
 
                               <div class="form-group <?php if(!empty($arErrorMessages['szEmail'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Company Email</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Company Email</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -220,8 +220,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szContactNumber'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Company Phone Number </label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Company Phone Number </label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -311,8 +311,8 @@
                         <span class="caption-subject font-green-meadow bold uppercase">Contact Details</span>
                     </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['szContactEmail'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Email</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Email</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -329,8 +329,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szContactPhone'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Phone</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Phone</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -347,8 +347,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['szContactMobile'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Mobile</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Mobile</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -365,8 +365,8 @@
                                  <?php }?>
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Address</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Address</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -382,8 +382,8 @@
                                 </div>
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szCountry'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Country</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Country</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -414,8 +414,8 @@
                             </div>
 
                                 <div class="form-group <?php if(!empty($arErrorMessages['szState'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">State</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">State</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -445,8 +445,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szCity'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> City</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> City</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -464,8 +464,8 @@
                             </div>
 
                              <div class="form-group <?php if(!empty($arErrorMessages['szZipCode'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">ZIP/Postal Code</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">ZIP/Postal Code</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -505,8 +505,8 @@
                              <div class="font-green-meadow text">Who will be responsible for Scheduling ? If you would like us to manage the scheduling , write "Drugsafe".</div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['sp_name'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -523,8 +523,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['sp_mobile'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -541,8 +541,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['sp_email'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Email</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Email</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -562,8 +562,8 @@
                              <div class="font-green-meadow text">Would anyone else be involved in Scheduling ? </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['iis_name'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -580,8 +580,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['iis_mobile'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -598,8 +598,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['iis_email'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Email</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Email</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -619,8 +619,8 @@
                              <div class="font-green-meadow text">   Who is to receive the confirmatory lab results ? </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['rlr_name'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -637,8 +637,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['rlr_mobile'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -655,8 +655,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['rlr_email'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Email</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Email</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -676,8 +676,8 @@
                              <div class="font-green-meadow text">  Are there any other people Who are to receive the confirmatory lab results ? </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['orlr_name'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -694,8 +694,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['orlr_mobile'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -712,8 +712,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['orlr_email'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Contact Email</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Contact Email</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -755,8 +755,8 @@
                              <div class="font-green-meadow text"> Primary Site Contact (Assist with donar selection and supervise/manage donar if required).</div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['psc_name'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -773,8 +773,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['psc_phone'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Landline Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Landline Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -791,8 +791,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['psc_mobile'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Mobile Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Mobile Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -812,8 +812,8 @@
                              <div class="font-green-meadow text"> Secondary Site Contact (in the event that the primary site contact is unavailable). </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['ssc_name'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Contact Name</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Contact Name</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -830,8 +830,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['ssc_phone'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Landline Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Landline Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -848,8 +848,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['ssc_mobile'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Mobile Phone Number</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Mobile Phone Number</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -868,8 +868,8 @@
 
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['instructions'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label"> Any special instruction for Drugsafe staff (directions,instructions etc) </label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label"> Any special instruction for Drugsafe staff (directions,instructions etc) </label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -886,8 +886,8 @@
 
                             </div>
                                   <div class="form-group <?php if(!empty($arErrorMessages['site_people'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">How many people on site ?</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">How many people on site ?</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -904,8 +904,8 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['test_count'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">How many to test?</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">How many to test ?</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -922,8 +922,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['initial_testing_req'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Initial Testing Requirements :</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Initial Testing Requirements </label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline "><input type="radio" id ="initial_testing_req" value="0" name="clientData[initial_testing_req]"  <?php if(trim($_POST['clientData']['initial_testing_req']=='0')){?>checked<?php }?> > Random</label>
                                       <label class="radio-inline"><input type="radio" id ="initial_testing_req" value="1" name="clientData[initial_testing_req]" <?php if(trim($_POST['clientData']['initial_testing_req']=='1')){?>checked<?php }?> > Blanket</label>
@@ -938,8 +938,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['ongoing_testing_req'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Ongoing Testing Requirements :</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Ongoing Testing Requirements </label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline"><input type="radio" id="ongoing_testing_req" value="0" name="clientData[ongoing_testing_req]" <?php if(trim($_POST['clientData']['ongoing_testing_req']=='0')){?>checked<?php }?>> Random</label>
                                       <label class="radio-inline"><input type="radio" id="ongoing_testing_req" value="1" name="clientData[ongoing_testing_req]" <?php if(trim($_POST['clientData']['ongoing_testing_req']=='1')){?>checked<?php }?>> Blanket</label>
@@ -956,8 +956,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['site_visit'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">How many times would you like Drugsafe to visit your site and test per year?</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">How many times would you like Drugsafe to visit your site and test per year ?</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -974,8 +974,8 @@
 
                             </div>
                                 <div class="form-group <?php if(!empty($arErrorMessages['onsite_service'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">What type of service would you like on-site?</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">What type of service would you like on-site ?</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline"><input type="radio" id="onsite_service" value="0" checked name="clientData[onsite_service]" <?php if(trim($_POST['clientData']['onsite_service']=='0')){?>checked<?php }?>> Mobile Clinic </label>
                                       <label class="radio-inline"><input type="radio" id="onsite_service" value="1" name="clientData[onsite_service]" <?php if(trim($_POST['clientData']['onsite_service']=='1')){?>checked<?php }?>> In-house</label>
@@ -990,8 +990,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['start_time'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Preffered start time?</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Preffered start time</label>
+                                <div class="col-md-6">
                                       <div class="input-icon">
                                                     <i class="fa fa-clock-o"></i>
                                                     <input type="text" class="form-control timepicker timepicker-default"id="start_time" value="<?php echo $_POST['clientData']['start_time'] ;?>" name="clientData[start_time]" onfocus="remove_formError(this.id,'true')">
@@ -1006,8 +1006,8 @@
 
                             </div>
                                 <div class="form-group <?php if(!empty($arErrorMessages['power_access'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Access to power for our Mobile</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Access to power for our Mobile</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline"><input type="radio" id="power_access" value="0" name="clientData[power_access]"  <?php if(trim($_POST['clientData']['power_access']=='0')){?>checked<?php }?>> Yes</label>
                                       <label class="radio-inline"><input type="radio"  id="power_access" value="1" checked  name="clientData[power_access]"  <?php if(trim($_POST['clientData']['power_access']=='1')){?>checked<?php }?>> No</label>
@@ -1022,8 +1022,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['risk_assessment'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Is a risk assessment required prior to working on-site</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Is a risk assessment required prior to working on-site ? </label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline"><input type="radio"  id="risk_assessment" value="0" name="clientData[risk_assessment]" <?php if(trim($_POST['clientData']['risk_assessment']=='0')){?>checked<?php }?>> Yes</label>
                                       <label class="radio-inline"><input type="radio" id="risk_assessment" value="1" name="clientData[risk_assessment]"  <?php if(trim($_POST['clientData']['risk_assessment']=='1')){?>checked<?php }?>> No</label>
@@ -1038,8 +1038,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['req_comp_induction'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Are our people required to complete an induction?</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Are our people required to complete an induction?</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline"><input type="radio" id="req_comp_induction" value="0" name="clientData[req_comp_induction]"  <?php if(trim($_POST['clientData']['req_comp_induction']=='0')){?>checked<?php }?>> Yes</label>
                                       <label class="radio-inline"><input type="radio" id="req_comp_induction" value="1" name="clientData[req_comp_induction]"  <?php if(trim($_POST['clientData']['req_comp_induction']=='1')){?>checked<?php }?>> No</label>
@@ -1053,8 +1053,8 @@
                                 </div>
                                  </div>
                                   <div class="form-group <?php if(!empty($arErrorMessages['randomisation'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Randomization process:</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Randomization process</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
 
                                         <label><input type="radio"id="randomisation" value="0" name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='0')){?>checked<?php }?>> Marble selection (% split)-not accurate</label>
@@ -1076,8 +1076,8 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['req_ppe'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Required PPE</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Required PPE</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
 
                                       <div class="checkbox"> 
@@ -1106,8 +1106,8 @@
                                 </div>
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['paperwork'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">who would be responsible for all the Paperwork at the time of testing</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">who would be responsible for all the Paperwork at the time of testing ?</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
 
                                         <label><input type="radio" id="paperwork" value="0" name="clientData[paperwork]" checked  onclick="showHideTextbox('0');"<?php if(trim($_POST['clientData']['paperwork']=='0')){?>checked<?php }?>> Leave onsite with site contact</label>
@@ -1125,8 +1125,8 @@
                                 </div>
                                <div class="text" id="text" <?php if(trim($_POST['clientData']['paperwork']=='2')){?>style="display:block;"<?php }else{?>style="display:none;"<?php }?>> 
                                 <div class="form-group <?php if(!empty($arErrorMessages['specify_contact'])){?>has-error<?php }?>">
-                                <label class="col-md-3 control-label">Specify Contact</label>
-                                <div class="col-md-5">
+                                <label class="col-md-4 control-label">Specify Contact</label>
+                                <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>

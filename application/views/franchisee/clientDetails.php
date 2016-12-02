@@ -286,62 +286,62 @@
                 <hr>
               <div class="row">
             <div class="col-md-6">   
-               <div class="font-green-meadow bold">Who will be responsible for Scheduling ? If you would like us to manage the scheduling , write "Drugsafe".</div>  
+               <div class="font-green-meadow text bold ">Responsible for Scheduling. </div>  
               </div>  
              <div class="col-md-6"> 
-                 <div class="font-green-meadow bold">   Who is to receive the confirmatory lab results ? </div> 
+                 <div class="font-green-meadow text bold">   Receive the confirmatory lab results.  </div> 
               </div>
                  </div>
                 <hr>
                  <div class="row">
                  <div class="col-md-6">  
                  <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Name:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6 ">
                             <p><?php echo $userDataAry['sp_name'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Contact Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['sp_mobile'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Email:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['sp_email'];?></p>
                         </div>
                     </div>
                      </div>
                      <div class="col-md-6">  
                  <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 bold text-style ">
                             <lable>Contact Name:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['rlr_name'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 bold text-style ">
                             <lable>Contact Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['rlr_mobile'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6  bold text-style ">
                             <lable>Contact Email:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['rlr_email'];?></p>
                         </div>
                     </div>
@@ -350,62 +350,62 @@
                 <hr>
                <div class="row">
             <div class="col-md-6">   
-              <div class="font-green-meadow bold">Would anyone else be involved in Scheduling ? </div> 
+              <div class="font-green-meadow text bold">Involved in Scheduling. </div> 
               </div>  
              <div class="col-md-6"> 
-                 <div class="font-green-meadow bold">  Are there any other people Who are to receive the confirmatory lab results ? </div> 
+                 <div class="font-green-meadow text bold">  Other people  receive the confirmatory lab results. </div> 
               </div>
                  </div>
                 <hr>
                  <div class="row">
                  <div class="col-md-6">  
                  <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Name:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['iis_name'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['iis_mobile'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Email:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['iis_email'];?></p>
                         </div>
                     </div>
                      </div>
                      <div class="col-md-6">  
                  <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Name:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['orlr_name'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['orlr_mobile'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Email:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['orlr_email'];?></p>
                         </div>
                     </div>
@@ -437,62 +437,62 @@
                 <hr>
               <div class="row">
             <div class="col-md-6">   
-               <div class="font-green-meadow bold">Primary Site Contact (Assist with donar selection and supervise/manage donar if required).</div>  
+               <div class="font-green-meadow text bold">Primary Site Contact.</div>  
               </div>  
              <div class="col-md-6"> 
-                 <div class="font-green-meadow bold">Secondary Site Contact (in the event that the primary site contact is unavailable).</div> 
+                 <div class="font-green-meadow bold text">Secondary Site Contact.</div> 
               </div>
                  </div>
                 <hr>
                  <div class="row">
                  <div class="col-md-6">  
                  <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold ">
                             <lable>Contact Name:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['psc_name'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Landline Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['psc_phone'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                       <div class="col-sm-6 text-style bold">
                             <lable>Mobile Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['psc_mobile'];?></p>
                         </div>
                     </div>
                      </div>
                      <div class="col-md-6">  
                  <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Contact Name:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['ssc_name'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Landline Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['ssc_phone'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Mobile Phone Number:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['ssc_mobile'];?></p>
                         </div>
                     </div>
@@ -504,58 +504,58 @@
                  <div class="col-md-6">  
                  
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>How many people on site ? :</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>People on site:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['site_people'];?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>How many to test ? :</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>Test Count :</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['test_count'];?></p>
                         </div>
                     </div>
                       <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>What type of service would you like on-site ? :</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>Type of service like on-site:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                              <p><?php if($userDataAry['onsite_service']==0)  echo "Mobile Clinic ";  else echo "In-house";?></p>
                         </div>
                     </div>
                        <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>Access to power for our Mobile :</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>Access to power for Mobile:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php if($userDataAry['power_access']==0)  echo "Yes";  else echo "No";?></p>
                         </div>
                     </div>
                          <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>Are our people required to complete an induction ? :</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>People required to complete an induction:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php if($userDataAry['req_comp_induction']==0)  echo "Yes";  else echo "No";?></p>
                         </div>
                     </div>
                        <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Randomization process:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                              <p><?php if($userDataAry['randomisation']==0) { echo "Marble selection (% split)-not accurate";}  elseif($userDataAry['randomisation']==1) { echo "Drugsafe given names then select via algorythm";} else {echo "Client does randomization";}?></p>
                         </div>
                     </div>
                      <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>who would be responsible for all the Paperwork at the time of testing ? :</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>Paperwork at the time of testing:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                              <p><?php 
                          
                              if($userDataAry['paperwork']==0){
@@ -568,10 +568,10 @@
                         </div>
                     </div>
                     <div class="row">
-                         <div class="col-sm-8 text-info ">
-                            <lable>Any special instruction for Drugsafe staff (directions,instructions etc):</lable>
+                         <div class="col-sm-6 text-style bold">
+                            <lable>Special instruction for Drugsafe staff:</lable>
                         </div>
-                         <div class="col-sm-4">
+                         <div class="col-sm-6">
                             <p><?php echo $userDataAry['instructions'];?></p>
                         </div>
                     </div>
@@ -580,51 +580,51 @@
                      </div>
                      <div class="col-md-6">  
                  <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>Initial Testing Requirements :</lable>
+                       <div class="col-sm-6 text-style bold">
+                            <lable>Initial Testing Requirements:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php if($userDataAry['initial_testing_req']==0)  echo "Random";  else echo "Blanket";?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>Ongoing Testing Requirements :</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>Ongoing Testing Requirements:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php if($userDataAry['ongoing_testing_req']==0)  echo "Random";  else echo "Blanket";?></p>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>How many times would you like Drugsafe to visit your site and test per year ?</lable>
+                        <div class="col-sm-6 text-style bold">
+                            <lable>No of times  Drugsafe  visit your site:</lable>
 
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['site_visit'];?></p>
                         </div>
                     </div>
                           <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>Preffered start time :</lable>
+                       <div class="col-sm-6 text-style bold">
+                            <lable>Preffered start time:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['start_time'];?></p>
                         </div>
                     </div>
                           <div class="row">
-                        <div class="col-sm-8 text-info ">
-                            <lable>Is a risk assessment required prior to working on-site ? :</lable>
+                       <div class="col-sm-6 text-style bold">
+                            <lable>Risk assessment:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                            <p><?php if($userDataAry['risk_assessment']==0)  echo "Yes";  else echo "No";?></p>
                         </div>
                           </div>
                        <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Required PPE :</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php 
                             $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
                              if(in_array("1", $req_ppe_ary)){
@@ -643,10 +643,10 @@
                     </div>
                          <?php if($userDataAry['paperwork']==2){?>
                      <div class="row">
-                        <div class="col-sm-8 text-info ">
+                        <div class="col-sm-6 text-style bold">
                             <lable>Specify Contact:</lable>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <p><?php echo $userDataAry['specify_contact'];?></p>
                         </div>
                           </div> 
