@@ -4,3 +4,5 @@ ALTER TABLE `tbl_client` ADD `szNoOfSites` INT(5) NOT NULL AFTER `szContactMobil
 ALTER TABLE `tbl_client` ADD UNIQUE(`szBusinessName`);
 
 ALTER TABLE `ds_sites` CHANGE `psc_email` `psc_mobile` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL, CHANGE `ssc_mobile` `ssc_phone` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL, CHANGE `ssc_email` `ssc_mobile` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+ALTER TABLE `ds_sos` CHANGE `Drugtestid` `Drugtestid` VARCHAR(15) NOT NULL;
+ALTER TABLE `ds_sos` CHANGE `Drugtestid` `Drugtest` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;

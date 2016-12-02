@@ -492,14 +492,14 @@
                                                    Contact Details     
                                                 </div>
                                                 <div class="tools">
-                                                <a href="javascript:;" class="expand">
+                                                <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#contact-details">
                                                 </a>
 
 
                                                 </div>
                                         </div>
 
-                                <div class="portlet-body ">
+                                <div class="portlet-body collapse" id="contact-details">
                                    <table class="table table-hover">
                                        <hr>
                              <div class="font-green-meadow text">Who will be responsible for Scheduling ? If you would like us to manage the scheduling , write "Drugsafe".</div>
@@ -742,14 +742,14 @@
                                                    ON SITE SCREENING INFORMATION     
                                                 </div>
                                                 <div class="tools">
-                                                        <a href="javascript:;" class="expand">
+                                                        <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
                                                         </a>
 
 
                                                 </div>
                                         </div>
 
-                                <div class="portlet-body">
+                                <div id="onsite" class="portlet-body collapse">
                                    <table class="table table-hover">
                                        <hr>
                              <div class="font-green-meadow text"> Primary Site Contact (Assist with donar selection and supervise/manage donar if required).</div>

@@ -276,12 +276,12 @@
                            Contact Details     
                         </div>
                         <div class="tools">
-                                <a href="javascript:;" class="collapse">
+                                <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#contact-details">
                                 </a>
                         </div>
                 </div>
                                         
-                <div class="portlet-body">
+                <div class="portlet-body collapse" id="contact-details">
                    <table class="table table-hover">
                 <hr>
               <div class="row">
@@ -424,15 +424,15 @@
                 <div class="portlet-title">
                         <div class="caption">
                              <i class="icon-equalizer "></i>
-                           Contact Details     
+                            ON SITE SCREENING INFORMATION
                         </div>
                         <div class="tools">
-                                <a href="javascript:;" class="collapse">
+                                <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
                                 </a>
                         </div>
                 </div>
                                         
-                <div class="portlet-body">
+                <div id="onsite" class="portlet-body collapse">
                    <table class="table table-hover">
                 <hr>
               <div class="row">

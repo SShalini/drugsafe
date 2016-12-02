@@ -221,9 +221,9 @@
                                               if($clientData['szNoOfSites'] > count($childClientDetailsAray)){
                                                 ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userAdd"
-                                                   title="Add Child Client"
+                                                   title="Add Site"
                                                    onclick="addClientData(<?php echo $idfranchisee; ?>,<?php echo $clientData['id']; ?>);"
-                                                   href="javascript:void(0);"></i>
+                                                   href="javascript:void(0);">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>
@@ -236,14 +236,14 @@
                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="View Client Details"
                                                onclick="viewClientDetails(<?php echo $clientData['id']; ?>);"
-                                               href="javascript:void(0);"></i>
+                                               href="javascript:void(0);">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
 
                                             </a>
                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="Delete Client"
                                                onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
-                                               href="javascript:void(0);"></i>
+                                               href="javascript:void(0);">
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                             </a>

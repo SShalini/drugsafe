@@ -19,26 +19,26 @@
         <!-- END GLOBAL MANDATORY STYLES -->
         
        <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+<!--        <link href="--><?php //echo __BASE_ASSETS_URL__; ?><!--/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />-->
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/pages/css/profile.min.css" rel="stylesheet" type="text/css" />
+        <!--<link href="<?php /*echo __BASE_ASSETS_URL__; */?>/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php /*echo __BASE_ASSETS_URL__; */?>/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+        <link href="<?php /*echo __BASE_ASSETS_URL__; */?>/global/plugins/fullcalendar/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php /*echo __BASE_ASSETS_URL__; */?>/global/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css" />-->
+<!--        <link href="--><?php //echo __BASE_ASSETS_URL__; ?><!--/pages/css/profile.min.css" rel="stylesheet" type="text/css" />-->
         <!-- END PAGE LEVEL PLUGINS -->
         
 <!-- BEGIN THEME GLOBAL STYLES -->
             <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-            <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-            <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+            <link href="<?php echo __BASE_ASSETS_URL__; ?>/global/css/plugins.css" rel="stylesheet" type="text/css" />
+<!--            <link href="--><?php //echo __BASE_ASSETS_URL__; ?><!--/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />-->
 <!-- END THEME GLOBAL STYLES -->
         
         <!-- BEGIN THEME LAYOUT STYLES -->
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/layout.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/layout.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/custom.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/custom.css" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         
         <link rel="shortcut icon" href="favicon.ico" />

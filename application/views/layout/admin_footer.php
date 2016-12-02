@@ -19,10 +19,10 @@
        <script src="<?php echo __BASE_JS_URL__;?>/drugsafeFunctions.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
         <script src="<?php echo __BASE_JS_URL__;?>/validate.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
         <script type="text/javascript">
-           
+
             validate_form_fields();
             autoSaveHandler();
-           
+
         </script>
         <!--END CUSTOM JS-->
         
@@ -31,8 +31,6 @@
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/js.cookie.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-        <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
@@ -42,14 +40,9 @@
         
         <!-- BEGIN CORE PLUGINS -->
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        <!--<script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>-->
-        <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
-        <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/scripts/app.min.js" type="text/javascript"></script>
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
        
             
            <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -61,7 +54,6 @@
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="<?php echo __BASE_ASSETS_URL__;?>/global/scripts/metronic.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/layout4/scripts/layout.min.js" type="text/javascript"></script>
-        <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/layout4/scripts/demo.min.js" type="text/javascript"></script>
         <script src="<?php echo __BASE_ASSETS_URL__;?>/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="<?php echo __BASE_ASSETS_URL__;?>/pages/scripts/components-pickers.js" type="text/javascript"></script>
 

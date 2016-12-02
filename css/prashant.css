@@ -29,7 +29,8 @@ body .logo img {
 .page-sidebar-closed-hide-logo.page-sidebar-closed .page-logo a {
   display: none;
 }
-
+.collapse-sec{background-image: url("/assets/global/img/portlet-expand-icon-white.png"); width: 14px}
+.collapse-sec.collapsed{background-image: url("/assets/global/img/portlet-collapse-icon-white.png");}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;

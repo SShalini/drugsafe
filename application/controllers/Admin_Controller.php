@@ -194,7 +194,12 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('admin/addFranchisee');
             $this->load->view('layout/admin_footer');
         }  
-        
+        function welweb(){
+            $responsedata = array("code" => 200,"message"=>"Webservice Working sucessfully.");
+            header('Content-Type: application/json');
+            echo json_encode($responsedata);
+            die;
+        }
          function franchiseeList()
         {
            $is_user_login = is_user_login($this);
