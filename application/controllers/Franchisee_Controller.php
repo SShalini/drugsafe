@@ -426,7 +426,6 @@ class Franchisee_Controller extends CI_Controller
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                    $this->session->unset_userdata('flag');
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . $url);
 
@@ -446,9 +445,13 @@ class Franchisee_Controller extends CI_Controller
 
 
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
+                    if($clientDetailsAray['clientType']!='0')
+                    { 
+                    $szMessage['content'] = "<strong>Site Info! </strong> Site details successfully updated.";}
+                    else{
+                    $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";  
+                    }
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                    $this->session->unset_userdata('flag');
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . $url);
 

@@ -36,6 +36,9 @@ margin-bottom: 16px;
 .portlet_title{
      text-align: center;
 }
+.portlet_list_title{
+     text-align: left;
+}
 .radio{
     padding-top: 0px !important;
 }
@@ -45,3 +48,4 @@ margin-bottom: 16px;
 .text{
   text-align: center;  
 }
+
