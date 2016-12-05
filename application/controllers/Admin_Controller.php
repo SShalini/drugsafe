@@ -292,9 +292,9 @@ class Admin_Controller extends CI_Controller {
         
         public function editFranchisee()
         {
-            $countryAry = $this->Admin_Model->getCountries();
+//            $countryAry = $this->Admin_Model->getCountries();
             $idfranchisee = $this->session->userdata('idfranchisee');
-            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
+//            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             $count = $this->Admin_Model->getnotification();
             if($idfranchisee >0)
             {
@@ -326,8 +326,8 @@ class Admin_Controller extends CI_Controller {
                     $data['szMetaTagTitle'] = "Edit Franchisee Details ";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
-                    $data['countryAry'] = $countryAry;
-                    $data['stateAry'] = $stateAry;
+//                    $data['countryAry'] = $countryAry;
+//                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
                     $_POST['addFranchisee'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;

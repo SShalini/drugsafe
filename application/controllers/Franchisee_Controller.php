@@ -84,8 +84,8 @@ class Franchisee_Controller extends CI_Controller
         $validate = $this->input->post('clientData');
        
       
-        $countryAry = $this->Admin_Model->getCountries();
-        $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
+//        $countryAry = $this->Admin_Model->getCountries();
+//        $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
         $idclient = $this->session->userdata('idclient');
@@ -148,9 +148,9 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Add Client";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
-        $data['countryAry'] = $countryAry;
+//        $data['countryAry'] = $countryAry;
         $data['franchiseeAray'] = $franchiseeAray;
-        $data['stateAry'] = $stateAry;
+//        $data['stateAry'] = $stateAry;
         $data['validate'] = $validate;
         $data['idfranchisee'] = $idfranchisee;
         $data['szParentId'] = $idclient;
@@ -373,8 +373,8 @@ class Franchisee_Controller extends CI_Controller
     public function editClient()
     {
         $count = $this->Admin_Model->getnotification();
-        $countryAry = $this->Admin_Model->getCountries();
-        $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
+//        $countryAry = $this->Admin_Model->getCountries();
+//        $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
         $idClient = $this->session->userdata('idClient');
         $flag = $this->session->userdata('flag');
         $idfranchisee = $this->session->userdata('idfranchisee');
@@ -461,8 +461,8 @@ class Franchisee_Controller extends CI_Controller
             $data['szMetaTagTitle'] = "Edit Client Details ";
 //            $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Client_Record";
-            $data['countryAry'] = $countryAry;
-            $data['stateAry'] = $stateAry;
+//            $data['countryAry'] = $countryAry;
+//            $data['stateAry'] = $stateAry;
             $data['flag'] = $flag;
 //            $data['validate'] = $validate;
             $_POST['clientData'] = $userDataAry;
