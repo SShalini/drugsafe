@@ -78,7 +78,8 @@ class Inventory_Model extends Error_Model {
             if($_SESSION['drugsafe_user']['iRole']==1)
             {
                 if(!empty($searchAry)){
-                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','szProductCode'=>$searchAry);
+                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
+                    $this->db->where("(szProductCode LIKE '%$searchAry%')");
                 }
                 else{
                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
@@ -94,8 +95,9 @@ class Inventory_Model extends Error_Model {
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
              if(!empty($searchAry)){
                   
-                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','iFranchiseeId=' => $idfranchisee,'szProductCode'=>$searchAry);
-                }
+                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','iFranchiseeId=' => $idfranchisee);
+                      $this->db->where("(szProductCode LIKE '%$searchAry%')");
+                     }
                 else{
                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '1','iFranchiseeId=' => $idfranchisee);
                 }
@@ -122,8 +124,9 @@ class Inventory_Model extends Error_Model {
             if($_SESSION['drugsafe_user']['iRole']==1){
             
                  if(!empty($searchAry)){
-                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','szProductCode'=>$searchAry);
-                }
+                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
+                    $this->db->where("(szProductCode LIKE '%$searchAry%')");
+                    }
                 else{
                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
                 }
@@ -138,8 +141,8 @@ class Inventory_Model extends Error_Model {
             else{
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
              if(!empty($searchAry)){
-                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','iFranchiseeId=' => $idfranchisee,'szProductCode'=>$searchAry);
-                }
+                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','iFranchiseeId=' => $idfranchisee);
+                    $this->db->where("(szProductCode LIKE '%$searchAry%')");}
                 else{
                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '2','iFranchiseeId=' => $idfranchisee);
                 }
