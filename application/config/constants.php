@@ -63,6 +63,7 @@ define("__APP_PATH_PRODUCT_IMAGES__", __APP_PATH__ . "/product_img");
 
 define("__DBC_SCHEMATA_USERS__", "ds_user"); 
 define("__DBC_SCHEMATA_SITES__", "ds_sites"); 
+define("__DBC_SCHEMATA_DONER__", "ds_doner");
 define( "__DBC_SCHEMATA_COUNTRY__", "tbl_countries");
 define( "__DBC_SCHEMATA_STATE__", "tbl_states");
 define( "__DBC_SCHEMATA_FRANCHISEE__", "tbl_franchisee");
@@ -72,9 +73,11 @@ define( "__DBC_SCHEMATA_CLIENT__", "tbl_client");
 define( "__DBC_SCHEMATA_PRODUCT__", "tbl_product");
 define( "__DBC_SCHEMATA_PRODUCT_CATEGORY__", "tbl_product_category");
 define("__CUSTOMER_SUPPORT_EMAIL__", 'support@whiz-solutions.com');
+define("__ADMIN_EMAIL__", 'admin@drugsafe.com');
 define("__DBC_SCHEMATA_MODEL_STOCK_VALUE__", "fr_modelstock_val");
 define("__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__", "fr_prodstock_qty");
 define("__DBC_SCHEMATA_REQUEST_QUANTITY__", "tbl_stock_request");
+define("__DBC_SCHEMATA_SOS_FORM__", "ds_sos");
 define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
 
 /**

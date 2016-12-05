@@ -382,7 +382,7 @@ class Admin_Controller extends CI_Controller {
             die;
         }
         
-        $data_validate=$this->input->post('drugSafeForgotPassword[szEmail]');
+        $data_validate=$this->input->post('drugSafeForgotPassword');
         //$data_validate = array('szEmail'=>$data_validate);
         $data_not_validate = array(
             'id',

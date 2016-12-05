@@ -79,6 +79,11 @@ $route['reporting/(:any)'] = "Reporting_Controller/$1";
 $route['reporting/(:any)/(:any)'] = "Reporting_Controller/$1/$2";
 $route['reporting/(:any)/(:any)/(:any)'] = "Reporting_Controller/$1/$2/$3";
 
+$route['formManagement'] = "Form_Management_Controller";
+$route['formManagement/(:any)'] = "Form_Management_Controller/$1";
+$route['formManagement/(:any)/(:any)'] = "Form_Management_Controller/$1/$2";
+$route['formManagement/(:any)/(:any)/(:any)'] = "Form_Management_Controller/$1/$2/$3";
+
 
 $route['404_override'] = 'Error_Controller';
 $route['error'] = "Error_Controller";

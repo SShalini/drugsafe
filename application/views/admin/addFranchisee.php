@@ -239,7 +239,7 @@
                                     <div class="col-md-offset-3 col-md-4">
                                         <a href="<?= __BASE_URL__ ?>/admin/franchiseeList" class="btn default uppercase"
                                            type="button">Cancel</a>
-                                        <input type="submit" class="btn green-meadow" value="Save"
+                                        <input type="submit" class="btn green-meadow" value="SAVE"
                                                name="addFranchisee[submit]">
                                     </div>
                                 </div>

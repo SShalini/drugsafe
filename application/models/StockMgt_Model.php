@@ -333,12 +333,24 @@ class StockMgt_Model extends Error_Model
 
 
         $this->db->insert(__DBC_SCHEMATA_REQUEST_QUANTITY__, $dataAry);
-/*$qu = $this->db->last_query();
-        print_r($qu);
-        die;*/
+
         if ($this->db->affected_rows() > 0) {
+            $productDataAry = $this->getProductsDetailsById($idProduct);
+            $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idfranchisee);
+            $id_player = (int)$this->db->insert_id();
+            $replace_ary = array();
+            $replace_ary['szQuantity'] = $szQuantity;
+            $replace_ary['szEmail'] = __ADMIN_EMAIL__;
+            $replace_ary['szProductCode'] = $productDataAry['szProductCode'];
+            $replace_ary['szName'] = $franchiseeDataArr['szName'];
+            $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+            $replace_ary['Link'] = __BASE_URL__ . "/stock_management/stockreqlist";
+          
+
+      createEmail($this, '__REQUEST_FOR_QUANTITY__', $replace_ary,__ADMIN_EMAIL__, '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
 
             return true;
+        
         } else {
             return false;
         }

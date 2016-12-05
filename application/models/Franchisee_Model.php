@@ -184,9 +184,16 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
             }
         }
         public function getAllClientDetails($parent=false,$franchiseId='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = array())
-        {
-              $searchAry = trim($searchAry);
-            
+        { 
+            $searchAry = trim($searchAry);
+            $searchDataAry= explode("-",$searchAry) ;
+            if($searchDataAry[0]=='CL'){
+                $search=$searchDataAry[1];
+            }
+            else{
+                $search=$searchDataAry[0];
+            }
+              
             if($franchiseId)
             {
                  $this->db->where('clientType',0);
@@ -202,7 +209,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
             
              if(!empty($searchAry)){
                 $this->db->where('isDeleted','0');
-               $this->db->where("(clientId LIKE '%$searchAry%' OR szName LIKE '%$searchAry%' OR szEmail LIKE '%$searchAry%')");
+               $this->db->where("(clientId LIKE '%$search%' OR szName LIKE '%$search%' OR szEmail LIKE '%$search%')");
      
             }
             else{
@@ -323,7 +330,13 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
         public function viewChildClientDetails($searchAry,$idClient,$limit = __PAGINATION_RECORD_LIMIT__,$offset= 0)
         {
             $searchAry = trim($searchAry);
-             
+            $searchDataAry= explode("-",$searchAry) ;
+            if($searchDataAry[0]=='CL'){
+                $search=$searchDataAry[1];
+            }
+            else{
+                $search=$searchDataAry[0];
+            }
             $whereAry = array('clientType' => $idClient,'isDeleted=' => '0');
             
             $this->db->select('*');
@@ -334,7 +347,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
              if(!empty($searchAry)){
                $this->db->where('isDeleted','0');
                $this->db->where('clientType',$idClient);
-               $this->db->where("(clientId LIKE '%$searchAry%' OR szName LIKE '%$searchAry%' OR szEmail LIKE '%$searchAry%')");
+               $this->db->where("(clientId LIKE '%$search%' OR szName LIKE '%$search%' OR szEmail LIKE '%$search%')");
      
             }
             else{
@@ -566,7 +579,7 @@ function set_szName($value,$flag=true)
         }
         function set_szZipCode($value,$flag=true)
         {
-            $this->data['szZipCode'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szZipCode", "ZIP/Postal Code", false, false, $flag);
+            $this->data['szZipCode'] = $this->validateInput($value, __VLD_CASE_DIGITS__, "szZipCode", "ZIP/Postal Code", false, 4, $flag);
         }
          function set_szAddress($value,$flag=true)
         {

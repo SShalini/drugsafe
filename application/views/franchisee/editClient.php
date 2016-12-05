@@ -304,6 +304,7 @@
                                 <input id="szParentId" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['clientType'];?>" name="clientData[szParentId]">
                             <?php }else{ ?>
                                 <input id="szParentId" class="form-control" type="hidden" value="0" name="clientData[szParentId]">
+                               <input id="szOldNoOfSites" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['szNoOfSites'] ;?>" name="clientData[szOldNoOfSites]">
                             <?php } ?>
                                  <?php if(empty($_POST['clientData']['clientType'])){?>
                                  <div class="subCaption">
@@ -1155,8 +1156,12 @@
                                  <div class="form-actions">
                                  <div class="row">
                                     <div class="col-md-offset-3 col-md-4">
-                                         <a href="<?=__BASE_URL__?>/franchisee/clientList" class="btn default uppercase" type="button">Cancel</a>
-                                        <input type="submit" class="btn green-meadow" value="Save" name="clientData[submit]">
+                                        <?php if($flag==1){?> 
+                                         <a href="<?=__BASE_URL__?>/franchisee/viewClientDetails" class="btn default uppercase" type="button">Cancel</a>
+                                        <?php } else {?> 
+                                          <a href="<?=__BASE_URL__?>/franchisee/clientList" class="btn default uppercase" type="button">Cancel</a>
+                                        <?php } ?> 
+                                        <input type="submit" class="btn green-meadow" value="SAVE" name="clientData[submit]">
                                     </div>
                                  </div>
                                  </div>

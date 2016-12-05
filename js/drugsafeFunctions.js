@@ -251,12 +251,13 @@ function viewClientDetails(idClient) {
     });
 }
 
-function editClient(idClient, idfranchisee,url) {
+function editClient(idClient, idfranchisee,url,flag) {
 
     $.post(__BASE_URL__ + "/franchisee/editClientData", {
         idClient: idClient,
         idfranchisee: idfranchisee,
         url: url,
+        flag: flag,
     }, function (result) {
 
         ar_result = result.split('||||');
@@ -478,6 +479,13 @@ function requestQuantityAlert(idProduct,flag)
 
     });
 }
+  function ViewSosFormPdf(idClient) {
+    $.post(__BASE_URL__ + "/formManagement/ViewSosFormPdfData", {idClient: idClient}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
+
+    });
+}
 
 function showHideTextbox(id){
   if(id==0){
@@ -490,5 +498,11 @@ function showHideTextbox(id){
    jQuery('#text').attr('style', 'display:block');  
   }      
 }
+function viewSosFormDetails(idsite) {
+    $.post(__BASE_URL__ + "/formManagement/sosFormsdata", {idsite:idsite}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
 
+    });
+}
  

@@ -329,17 +329,6 @@ class Franchisee_Controller extends CI_Controller
         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($searchAry,$idClient,$config['per_page'],$this->uri->segment(3));
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
-
-//            $frdata = array();
-//             $UpdatedBy= array();
-//            foreach ($childClientDetailsAray as $cldata){
-//               $franchiseeDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szCreatedBy']);
-//                array_push($frdata, $franchiseeDataArr);
-//                 if(!empty($cldata['szLastUpdatedBy'])){
-//                    $updateByDataArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cldata['szLastUpdatedBy']);
-//                    array_push($UpdatedBy, $updateByDataArr);
-//            }
-//            }
         if ($clientDetailsAray['clientType'] > 0) {
             $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
             $data['ParentOfChild'] = $parentClientDetArr;
@@ -368,12 +357,14 @@ class Franchisee_Controller extends CI_Controller
         $idClient = $this->input->post('idClient');
         $idfranchisee = $this->input->post('idfranchisee');
         $url = $this->input->post('url');
+        $flag = $this->input->post('flag');
 
 
         if ($idClient > 0) {
             $this->session->set_userdata('idClient', $idClient);
             $this->session->set_userdata('idfranchisee', $idfranchisee);
             $this->session->set_userdata('url', $url);
+            $this->session->set_userdata('flag', $flag);
             echo "SUCCESS||||";
             echo "editClient";
         }
@@ -385,6 +376,7 @@ class Franchisee_Controller extends CI_Controller
         $countryAry = $this->Admin_Model->getCountries();
         $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
         $idClient = $this->session->userdata('idClient');
+        $flag = $this->session->userdata('flag');
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
@@ -471,6 +463,7 @@ class Franchisee_Controller extends CI_Controller
             $data['pageName'] = "Client_Record";
             $data['countryAry'] = $countryAry;
             $data['stateAry'] = $stateAry;
+            $data['flag'] = $flag;
 //            $data['validate'] = $validate;
             $_POST['clientData'] = $userDataAry;
             

@@ -126,6 +126,13 @@
 
                 </li>
             <?php } ?>
+                  <li class="nav-item start <?php if (trim($pageName) == 'Form_Management') { ?>active open<?php } ?>">
+                    <a href="<?php echo __BASE_URL__; ?>/formManagement/viewForm" class="nav-link nav-toggle">
+                        <i class="fa fa-bank" aria-hidden="true"></i>
+                        <span class="title">Form Management</span>
+                        <span class="selected"></span>
+                    </a>
+                </li>
         </ul>
     </div>
 

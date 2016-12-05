@@ -769,7 +769,7 @@
                                         </td>
                                             
                                                <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
@@ -799,10 +799,15 @@
             }
             else
             {
+             if($clientDetailsAray['clientType']=='0'){
             ?>
-                <p>No Client Found.</p>
+            
+                <p>No Site Found.</p>
             <?php
-            }
+            }else{ ?>
+                
+              <p>No Client Found.</p>   
+            <?php } }
             ?>
                          <?php  if(!empty($childClientDetailsAray)){?>
 		<div class="row">

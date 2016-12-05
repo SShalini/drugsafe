@@ -240,7 +240,7 @@ class Admin_Model extends Error_Model
 
     function set_szZipCode($value, $flag = true)
     {
-        $this->data['szZipCode'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szZipCode", "ZIP/Postal Code", false, false, $flag);
+        $this->data['szZipCode'] = $this->validateInput($value, __VLD_CASE_DIGITS__, "szZipCode", "ZIP/Postal Code", false,4, $flag);
     }
 
     function set_szAddress($value, $flag = true)
@@ -418,7 +418,9 @@ class Admin_Model extends Error_Model
     {
         if (!empty($data)) {
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])), true);
+            
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])), true);
+           
             if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])), true);
             if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);
             if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
@@ -498,6 +500,23 @@ class Admin_Model extends Error_Model
             return false;
         }
     }
+     public function checkCompanyNameExists($szCompanyName = false, $idClient = 0)
+    {
+        $szCompanyName = trim($szCompanyName);
+
+    
+        if ((int)$idClient > 0) {
+            $result = $this->db->get_where(__DBC_SCHEMATA_USERS__, array('szName' => $szCompanyName,'id!=' => (int)$idClient));
+        } else {
+            $result = $this->db->get_where(__DBC_SCHEMATA_USERS__, array('szName' => $szCompanyName));
+        }
+
+        if ($result->num_rows() > 0) {
+            return $result;
+        } else {
+            return false;
+        }
+    }
 
     function insertFranchiseeDetails()
     {
@@ -546,28 +565,19 @@ class Admin_Model extends Error_Model
     public function viewFranchiseeList($searchAry, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
         $searchAry = trim($searchAry);
-//           if (!empty($searchAry)){
-//
-//
-//               $whereAry = array('isDeleted=' => '0','iRole' => '2',);
-//
-//               $or_whereAry= array(
-//
-//                                   'szName=' => $searchAry,
-//                                    'id' => $searchAry,
-//                                    'szEmail' => $searchAry   );
-//
-//           }
-//           else{
+       $searchDataAry= explode("-",$searchAry) ;
+       if($searchDataAry[0]=='FR'){
+           $search=$searchDataAry[1];
+       }
+       else{
+           $search=$searchDataAry[0];
+       }
         $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
-//           }
-
 
         $this->db->select('*');
         if (!empty($searchAry)) {
-            $this->db->where('isDeleted', '0');
-            $this->db->where('iRole', '2');
-            $this->db->where("(id LIKE '%$searchAry%' OR szName LIKE '%$searchAry%' OR szEmail LIKE '%$searchAry%')");
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
+            $this->db->where("(id LIKE '%$search%' OR szName LIKE '%$search%' OR szEmail LIKE '%$search%')");
 
 
         } else {
@@ -579,7 +589,8 @@ class Admin_Model extends Error_Model
         $this->db->order_by("id", "asc");
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
 
-
+//$sql = $this->db->last_query($query);
+//print_r($sql);die;
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -826,7 +837,6 @@ class Admin_Model extends Error_Model
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
-            
             if(!in_array('franchiseeId',$arExclude)) $this->set_franchiseeId(sanitize_all_html_input(trim($data['franchiseeId'])),true);
             if(!in_array('szNoOfSites',$arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])),true);
           
@@ -840,6 +850,10 @@ class Admin_Model extends Error_Model
                     $this->addError('szBusinessName', "Business Name must be unique.");
                     return false;
                 }
+                if ($this->data['szNoOfSites'] < $data['szOldNoOfSites']) {
+                $this->addError('szNoOfSites', "No Of Sites must be greater than or equal to Previous no of sites");
+                return false;
+                }
             }
             
            
@@ -849,7 +863,8 @@ class Admin_Model extends Error_Model
                 return true;
         }
         return false;
-    }
+    
+  }
      function validateAdminData($data, $arExclude = array())
     { 
         if (!empty($data)) {
@@ -971,15 +986,21 @@ class Admin_Model extends Error_Model
                 if (!in_array('site_people', $arExclude)) $this->set_site_people(sanitize_all_html_input(trim($data['site_people'])), true);
                 if(!in_array('test_count',$arExclude)) $this->set_test_count(sanitize_all_html_input(trim($data['test_count'])),true);
 //                if (!in_array('start_time', $arExclude)) $this->set_start_time(sanitize_all_html_input(trim($data['start_time'])), true);
-//              
-                if ($this->error == false && $this->data['szEmail'] != '') { 
+  
+                 if($this->error == false )
+            {
                     $adminData = $this->session->userdata('drugsafe_user');
                     $this->data['id'] = $idClient;
-                    if ($this->checkUserExists($this->data['szEmail'], $this->data['id'])) {
-                        $this->addError('szEmail',"Someone already registered with entered email address.");
-                        return false;
-                    }
+                 if ($this->checkUserExists($this->data['szEmail'],$this->data['id'])) {
+                    $this->addError('szEmail', "Someone already registered with entered email address.");
+                    return false;
                 }
+                if ($this->checkCompanyNameExists($this->data['szName'],$this->data['id'])) {
+                    $this->addError('szName', "Company Name must be unique.");
+                    return false;
+                }
+            }
+                
             if($this->error == true)
                         return false;
                 else
@@ -992,3 +1013,13 @@ class Admin_Model extends Error_Model
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+
