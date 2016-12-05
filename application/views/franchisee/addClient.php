@@ -437,8 +437,8 @@
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div
-                                    class="form-group <?php if (!empty($arErrorMessages['szCountry'])) { ?>has-error<?php } ?>">
+                                 
+                                   <div class="form-group <?php if (!empty($arErrorMessages['szCountry']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label">Country</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -448,16 +448,8 @@
                                             <select class="form-control " name="clientData[szCountry]" id="szCountry"
                                                     Placeholder="Country" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
-                                                <?php
-                                                if (!empty($countryAry)) {
-                                                    foreach ($countryAry as $countryDetails) {
-                                                        ?>
-                                                        <option
-                                                            value="<?php echo trim($countryDetails['name']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['szCountry']) == trim($countryDetails['name']) ? "selected" : ""); ?>><?php echo trim($countryDetails['name']); ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>
+                                                <option value="Australia" name="clientData[szCountry]" <?= (sanitize_post_field_value($_POST['clientData']['szCountry']) == trim("Australia") ? "selected" : "") ?>>Australia</option>
+                                                
                                             </select>
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
@@ -470,8 +462,7 @@
 
                                 </div>
 
-                                <div
-                                    class="form-group <?php if (!empty($arErrorMessages['szState'])) { ?>has-error<?php } ?>">
+                                <div class="form-group <?php if (!empty($arErrorMessages['szState']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label">State</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -481,16 +472,17 @@
                                             <select class="form-control " name="clientData[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
-                                                <?php
-                                                if (!empty($countryAry)) {
-                                                    foreach ($stateAry as $stateDetails) {
-                                                        ?>
-                                                        <option
-                                                            value="<?php echo trim($stateDetails['name']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['szState']) == trim($stateDetails['name']) ? "selected" : ""); ?>><?php echo trim($stateDetails['name']); ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>
+                                                
+                                                        <option value="Australian Capital Territory" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Australian Capital Territory") ? "selected" : "") ?>>Australian Capital Territory</option>
+                                                        <option value="New South Wales" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("New South Wales") ? "selected" : "") ?>>New South Wales</option>
+                                                        <option value="Northern Territory" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Northern Territory") ? "selected" : "") ?>>Northern Territory</option>
+                                                        <option value="Queensland" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Queensland") ? "selected" : "") ?>>Queensland</option>
+                                                        <option value="South Australia" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("South Australia") ? "selected" : "") ?> >South Australia</option>
+                                                        <option value="Tasmania" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Tasmania") ? "selected" : "") ?>>Tasmania</option>
+                                                        <option value="Victoria" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Victoria") ? "selected" : "") ?>>Victoria</option>
+                                                        <option value="Western Australia" name="clientData[szState]" <?= (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Western Australia") ? "selected" : "") ?>>Western Australia </option>
+                                                       
+                                                  
                                             </select>
                                         </div>
                                         <?php if (!empty($arErrorMessages['szState'])) { ?>

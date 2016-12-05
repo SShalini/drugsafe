@@ -1,4 +1,5 @@
-<div class="page-content-wrapper">
+
+    <div class="page-content-wrapper">
     <div class="page-content">
         <div id="page_content" class="row">
 
@@ -130,16 +131,8 @@
                                             <select class="form-control " name="addFranchisee[szCountry]" id="szCountry"
                                                     Placeholder="Country" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
-                                                <?php
-                                                if (!empty($countryAry)) {
-                                                    foreach ($countryAry as $countryDetails) {
-                                                        ?>
-                                                        <option
-                                                            value="<?php echo(!empty($_POST['addFranchisee']['szCountry']) ? $_POST['addFranchisee']['szCountry'] : $countryDetails['name']); ?>" <?= (sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim($countryDetails['name']) ? "selected" : "") ?>><?= trim($countryDetails['name']) ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>
+                                                <option value="Australia" name="addFranchisee[szCountry]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim("Australia") ? "selected" : "") ?>>Australia</option>
+                                                
                                             </select>
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
@@ -163,16 +156,17 @@
                                             <select class="form-control " name="addFranchisee[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
-                                                <?php
-                                                if (!empty($stateAry)) {
-                                                    foreach ($stateAry as $stateDetails) {
-                                                        ?>
-                                                        <option
-                                                            value="<?= trim($stateDetails['name']) ?>" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim($stateDetails['name']) ? "selected" : "") ?>><?= trim($stateDetails['name']) ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>
+                                                
+                                                        <option value="Australian Capital Territory" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Australian Capital Territory") ? "selected" : "") ?>>Australian Capital Territory</option>
+                                                        <option value="New South Wales" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("New South Wales") ? "selected" : "") ?>>New South Wales</option>
+                                                        <option value="Northern Territory" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Northern Territory") ? "selected" : "") ?>>Northern Territory</option>
+                                                        <option value="Queensland" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Queensland") ? "selected" : "") ?>>Queensland</option>
+                                                        <option value="South Australia" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("South Australia") ? "selected" : "") ?> >South Australia</option>
+                                                        <option value="Tasmania" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Tasmania") ? "selected" : "") ?>>Tasmania</option>
+                                                        <option value="Victoria" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Victoria") ? "selected" : "") ?>>Victoria</option>
+                                                        <option value="Western Australia" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Western Australia") ? "selected" : "") ?>>Western Australia </option>
+                                                       
+                                                  
                                             </select>
                                         </div>
                                         <?php if (!empty($arErrorMessages['szState'])) { ?>
@@ -252,3 +246,4 @@
             </div>
         </div>
     </div>
+

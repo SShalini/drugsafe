@@ -164,8 +164,8 @@ class Admin_Controller extends CI_Controller {
         function addFranchisee()
 	{
             $validate= $this->input->post('addFranchisee'); 
-            $countryAry = $this->Admin_Model->getCountries();
-            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
+//            $countryAry = $this->Admin_Model->getCountries();
+//            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             $count = $this->Admin_Model->getnotification();
             if($this->Admin_Model->validateFranchiseeData($validate))
             {
@@ -184,8 +184,8 @@ class Admin_Controller extends CI_Controller {
                     $data['szMetaTagTitle'] = "Add Franchisee";
                     //$data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
-                    $data['countryAry'] = $countryAry;
-                    $data['stateAry'] = $stateAry;
+//                    $data['countryAry'] = $countryAry;
+//                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;

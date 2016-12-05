@@ -103,68 +103,64 @@
                                         </div>
                                        
                                     </div>
-                                    <div class="form-group <?php if(!empty($arErrorMessages['szCountry'])){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label">Country</label>
-                                        <div class="col-md-5">
-                                            <div class="input-group">
+ <div
+                                    class="form-group <?php if (!empty($arErrorMessages['szCountry']) != '') { ?>has-error<?php } ?>">
+                                    <label class="col-md-3 control-label">Country</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control required" name="addFranchisee[szCountry]" id="szCountry" Placeholder="Country" onfocus="remove_formError(this.id,'true')">
-                                                    <option value=''>Select</option>
-                                                    <?php
-                                                        if(!empty($countryAry))
-                                                        {
-                                                            foreach($countryAry as $countryDetails)
-                                                            {
-                                                                ?>
-                                                                 <option value="<?=trim($countryDetails['name'])?>" <?=(sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim($countryDetails['name']) ? "selected" : "")?>><?=trim($countryDetails['name'])?></option>
-                                                                <?php
-                                                            }
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <?php if(!empty($arErrorMessages['szCountry'])){?>
+                                            <select class="form-control " name="addFranchisee[szCountry]" id="szCountry"
+                                                    Placeholder="Country" onfocus="remove_formError(this.id,'true')">
+                                                <option value=''>Select</option>
+                                                <option value="Australia" name="addFranchisee[szCountry]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim("Australia") ? "selected" : "") ?>>Australia</option>
+                                                
+                                            </select>
+                                        </div>
+                                        <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szCountry'];?>
+                                                <?php echo $arErrorMessages['szCountry']; ?>
                                             </span>
-                                        <?php }?>
-                                        </div>
-                                        
+                                        <?php } ?>
                                     </div>
-                                    <div class="form-group <?php if(!empty($arErrorMessages['szState'])){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label">State</label>
-                                        <div class="col-md-5">
-                                            <div class="input-group">
+
+                                </div>
+
+                                <div
+                                    class="form-group <?php if (!empty($arErrorMessages['szState']) != '') { ?>has-error<?php } ?>">
+                                    <label class="col-md-3 control-label">State</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <select class="form-control" name="addFranchisee[szState]" id="szState" Placeholder="State" onfocus="remove_formError(this.id,'true')">
-                                                    <option value=''>Select</option>
-                                                    <?php
-                                                        if(!empty($stateAry))
-                                                        {
-                                                            foreach($stateAry as $stateDetails)
-                                                            {
-                                                                ?>
-                                                                 <option value="<?=trim($stateDetails['name'])?>" <?=(sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim($stateDetails['name']) ? "selected" : "")?>><?=trim($stateDetails['name'])?></option>
-                                                                <?php
-                                                            }
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <?php if(!empty($arErrorMessages['szState'])){?>
+                                            <select class="form-control " name="addFranchisee[szState]" id="szState"
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                <option value=''>Select</option>
+                                                
+                                                        <option value="Australian Capital Territory" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Australian Capital Territory") ? "selected" : "") ?>>Australian Capital Territory</option>
+                                                        <option value="New South Wales" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("New South Wales") ? "selected" : "") ?>>New South Wales</option>
+                                                        <option value="Northern Territory" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Northern Territory") ? "selected" : "") ?>>Northern Territory</option>
+                                                        <option value="Queensland" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Queensland") ? "selected" : "") ?>>Queensland</option>
+                                                        <option value="South Australia" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("South Australia") ? "selected" : "") ?> >South Australia</option>
+                                                        <option value="Tasmania" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Tasmania") ? "selected" : "") ?>>Tasmania</option>
+                                                        <option value="Victoria" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Victoria") ? "selected" : "") ?>>Victoria</option>
+                                                        <option value="Western Australia" name="addFranchisee[szState]" <?= (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Western Australia") ? "selected" : "") ?>>Western Australia </option>
+                                                       
+                                                  
+                                            </select>
+                                        </div>
+                                        <?php if (!empty($arErrorMessages['szState'])) { ?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szState'];?>
+                                                <?php echo $arErrorMessages['szState']; ?>
                                             </span>
-                                        <?php }?>
-                                        </div>
-                                        
+                                        <?php } ?>
                                     </div>
+
+                                </div>
                                     <div class="form-group <?php if(!empty($arErrorMessages['szCity'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> City</label>
                                         <div class="col-md-5">
