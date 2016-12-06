@@ -105,120 +105,116 @@ class Admin_Model extends Error_Model
    
    function set_szContactNumber($value, $flag = true)
     {
-        if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }
+
         $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Contact Number", false, 10, $flag);
     }
      function set_psc_phone($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['psc_phone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "set_psc_phone", "Landline Phone Number", false, 10, $flag);
     }
     function set_ssc_phone($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['ssc_phone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "ssc_phone", "Landline Phone Number", false, 10, $flag);
     }
      function set_sp_mobile($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['sp_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "sp_mobile", "Contact Phone Number", false, 10, $flag);
     }
     function set_ssc_mobile($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['ssc_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "ssc_mobile", "Mobile Phone Number", false, 10, $flag);
     }
      function set_psc_mobile($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['psc_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "psc_mobile", "Mobile Phone Number", false, 10, $flag);
     }
      function set_orlr_mobile($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['orlr_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "orlr_mobile", "Contact Phone Number", false, 10, $flag);
     }
      function set_rlr_mobile($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['rlr_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "rlr_mobile", "Contact Phone Number", false, 10, $flag);
     }
      function set_iis_mobile($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['iis_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "iis_mobile", "Contact Phone Number", false, 10, $flag);
     }
      function set_szCompanyPhoneNumber($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
       
-        }
+        }*/
         $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", " Company Phone Number", false, 10, $flag);
      
     }
      function set_szContactMobile($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['szContactMobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactMobile", "Contact Mobile Number", false, 10, $flag);
     }
      function set_szContactPhone($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['szContactPhone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactPhone", "Contact Phone Number", false, 10, $flag);
     }
     function set_szPrimaryPhone($value, $flag = true)
     {
-        if ($value != '') {
+        /*if ($value != '') {
             // strip all character except +, 0-9
             $value = preg_replace('/[^\d+]/i', '', $value);
        
-        }
+        }*/
         $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Primary Phone Number", false, 10, $flag);
     }
     
@@ -566,7 +562,8 @@ class Admin_Model extends Error_Model
     {
         $searchAry = trim($searchAry);
        $searchDataAry= explode("-",$searchAry) ;
-       if($searchDataAry[0]=='FR'){
+        $searchDataAry[0] = strtolower($searchDataAry[0]);
+       if($searchDataAry[0]=='fr'){
            $search=$searchDataAry[1];
        }
        else{

@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
         <div class="form-actions">
-            <button class="btn btn-form-submit btn-success" type="button">SAVE</button>
+            <button class="btn red btn-block uppercase" type="button">SAVE</button>
         </div>
 
         <div class="create-account">

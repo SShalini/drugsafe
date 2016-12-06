@@ -147,7 +147,7 @@
                                                 ?>
                                             
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userAdd"
-                                                   title="Add Child Client"
+                                                   title="Add Site"
                                                    onclick="addClientData(<?php echo $clientData['franchiseeId']; ?>,'<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
                                                    href="javascript:void(0);"></i>
                                                     <i class="fa fa-plus" aria-hidden="true"></i>

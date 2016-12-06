@@ -3,16 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Admin_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Admin_Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Admin_Model.php" afterPath="$PROJECT_DIR$/application/models/Admin_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Franchisee_Model.php" afterPath="$PROJECT_DIR$/application/models/Franchisee_Model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/addFranchisee.php" afterPath="$PROJECT_DIR$/application/views/admin/addFranchisee.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/adminPassword_Recover.php" afterPath="$PROJECT_DIR$/application/views/admin/adminPassword_Recover.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/editFranchisee.php" afterPath="$PROJECT_DIR$/application/views/admin/editFranchisee.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/franchisee/addClient.php" afterPath="$PROJECT_DIR$/application/views/franchisee/addClient.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/franchisee/clientDetails.php" afterPath="$PROJECT_DIR$/application/views/franchisee/clientDetails.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/franchisee/clientList.php" afterPath="$PROJECT_DIR$/application/views/franchisee/clientList.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" afterPath="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/franchisee/editClient.php" afterPath="$PROJECT_DIR$/application/views/franchisee/editClient.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/layout/admin_footer.php" afterPath="$PROJECT_DIR$/application/views/layout/admin_footer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/layout/admin_header.php" afterPath="$PROJECT_DIR$/application/views/layout/admin_header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/prashant.css" afterPath="$PROJECT_DIR$/css/prashant.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db changes/db changes.sql" afterPath="$PROJECT_DIR$/db changes/db changes.sql" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
     <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default" />
@@ -38,40 +36,71 @@
       <file leaf-file-name="Franchisee_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Franchisee_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-378">
-              <caret line="199" column="28" selection-start-line="199" selection-start-column="18" selection-end-line="199" selection-end-column="28" />
+            <state relative-caret-position="387">
+              <caret line="320" column="86" selection-start-line="320" selection-start-column="64" selection-end-line="320" selection-end-column="86" />
               <folding>
-                <marker date="1480653793270" expanded="true" signature="18649:19066" ph="..." />
+                <marker date="1480940695994" expanded="true" signature="18180:18691" ph="..." />
+                <marker date="1480940695994" expanded="true" signature="18274:18691" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clientList.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientList.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="231" column="94" selection-start-line="231" selection-start-column="94" selection-end-line="231" selection-end-column="94" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Admin_Controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/live/application/controllers/Admin_Controller.php">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3485">
-              <caret line="205" column="13" selection-start-line="205" selection-start-column="13" selection-end-line="205" selection-end-column="13" />
+            <state relative-caret-position="285">
+              <caret line="226" column="84" selection-start-line="226" selection-start-column="66" selection-end-line="226" selection-end-column="84" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db changes.sql" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+      <file leaf-file-name="Admin_Model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="116" selection-start-line="7" selection-start-column="116" selection-end-line="7" selection-end-column="116" />
+            <state relative-caret-position="268">
+              <caret line="565" column="32" selection-start-line="565" selection-start-column="32" selection-end-line="565" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Franchisee_Model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Franchisee_Model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="334" column="62" selection-start-line="334" selection-start-column="62" selection-end-line="334" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminPassword_Recover.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/admin/adminPassword_Recover.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="200" column="13" selection-start-line="200" selection-start-column="13" selection-end-line="200" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Error_Model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Error_Model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3887">
+              <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -80,62 +109,31 @@
       <file leaf-file-name="editClient.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/franchisee/editClient.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="751" column="78" selection-start-line="751" selection-start-column="36" selection-end-line="751" selection-end-column="78" />
+            <state relative-caret-position="-106">
+              <caret line="394" column="186" selection-start-line="394" selection-start-column="186" selection-end-line="394" selection-end-column="186" />
               <folding>
-                <element signature="n#div#18;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <marker date="1481021748522" expanded="true" signature="19891:20054" ph="..." />
+                <marker date="1481021748522" expanded="true" signature="84958:85028" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clientDetails.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientDetails.php">
+      <file leaf-file-name="addFranchisee.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/admin/addFranchisee.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="434" column="62" selection-start-line="434" selection-start-column="62" selection-end-line="434" selection-end-column="62" />
-              <folding>
-                <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin_header.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/layout/admin_header.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="39" column="95" selection-start-line="39" selection-start-column="95" selection-end-line="39" selection-end-column="95" />
+            <state relative-caret-position="425">
+              <caret line="167" column="55" selection-start-line="157" selection-start-column="48" selection-end-line="167" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin_footer.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/layout/admin_footer.php">
+      <file leaf-file-name="editFranchisee.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/admin/editFranchisee.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="935">
-              <caret line="55" column="126" selection-start-line="55" selection-start-column="126" selection-end-line="55" selection-end-column="126" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addClient.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/franchisee/addClient.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="566" column="95" selection-start-line="566" selection-start-column="45" selection-end-line="566" selection-end-column="95" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="prashant.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/prashant.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="41" column="3" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
+            <state relative-caret-position="319">
+              <caret line="121" column="79" selection-start-line="121" selection-start-column="79" selection-end-line="121" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -146,12 +144,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/admin/admin_login.php" />
-        <option value="$PROJECT_DIR$/css/drugsafe_custom_style.css" />
         <option value="$PROJECT_DIR$/assets/layouts/layout4/css/layout.min.css" />
         <option value="$PROJECT_DIR$/assets/layouts/layout4/css/themes/light.min.css" />
         <option value="$PROJECT_DIR$/assets/global/css/components.min.css" />
-        <option value="$PROJECT_DIR$/application/views/admin/editFranchisee.php" />
         <option value="$PROJECT_DIR$/application/views/admin/changePassword.php" />
         <option value="$PROJECT_DIR$/assets/pages/css/login-2.min.css" />
         <option value="$PROJECT_DIR$/application/views/layout/email_header.php" />
@@ -180,23 +175,26 @@
         <option value="$PROJECT_DIR$/application/views/reporting/frStockRequestList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/stockAssignList.php" />
         <option value="$PROJECT_DIR$/application/controllers/Franchisee_Controller.php" />
-        <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
-        <option value="$PROJECT_DIR$/application/models/Franchisee_Model.php" />
         <option value="$PROJECT_DIR$/application/models/Inventory_Model.php" />
         <option value="$PROJECT_DIR$/application/models/Reporting_Model.php" />
         <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
-        <option value="$PROJECT_DIR$/application/views/admin/addFranchisee.php" />
         <option value="$PROJECT_DIR$/application/controllers/Admin_Controller.php" />
         <option value="$PROJECT_DIR$/live/application/controllers/Admin_Controller.php" />
         <option value="$PROJECT_DIR$/assets/global/plugins/jquery.min.js" />
         <option value="$PROJECT_DIR$/application/views/layout/admin_footer.php" />
         <option value="$PROJECT_DIR$/css/prashant.css" />
-        <option value="$PROJECT_DIR$/application/views/franchisee/addClient.php" />
-        <option value="$PROJECT_DIR$/application/views/franchisee/editClient.php" />
         <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/application/views/layout/admin_header.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/clientList.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/clientDetails.php" />
+        <option value="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/addFranchisee.php" />
+        <option value="$PROJECT_DIR$/application/views/franchisee/addClient.php" />
+        <option value="$PROJECT_DIR$/application/views/franchisee/editClient.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/editFranchisee.php" />
+        <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
+        <option value="$PROJECT_DIR$/application/models/Franchisee_Model.php" />
+        <option value="$PROJECT_DIR$/application/views/admin/adminPassword_Recover.php" />
       </list>
     </option>
   </component>
@@ -242,7 +240,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../drugsafeapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laundry" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -345,15 +343,17 @@
       <workItem from="1480579739150" duration="58000" />
       <workItem from="1480580046972" duration="3607000" />
       <workItem from="1480588732285" duration="6579000" />
-      <workItem from="1480650635212" duration="8108000" />
+      <workItem from="1480650635212" duration="9241000" />
+      <workItem from="1480909753272" duration="375000" />
+      <workItem from="1481020750041" duration="4551000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="148431000" />
+    <option name="totallyTimeSpent" value="154490000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="744" extended-state="1" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981631" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -410,34 +410,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/productReqList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="71" column="93" selection-start-line="71" selection-start-column="93" selection-end-line="71" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4862">
-          <caret line="286" column="65" selection-start-line="286" selection-start-column="65" selection-end-line="286" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/editProductStockQty.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2720">
-          <caret line="160" column="103" selection-start-line="160" selection-start-column="84" selection-end-line="160" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/stockManagement/reqQtyfranchiseeList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
-          <caret line="72" column="125" selection-start-line="72" selection-start-column="125" selection-end-line="72" selection-end-column="125" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/Pdf.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -578,20 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="428" column="0" selection-start-line="428" selection-start-column="0" selection-end-line="428" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Franchisee_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="271" column="89" selection-start-line="271" selection-start-column="89" selection-end-line="271" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Inventory_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -669,27 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/addFranchisee.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="72" column="51" selection-start-line="72" selection-start-column="51" selection-end-line="72" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="201" column="9" selection-start-line="196" selection-start-column="8" selection-end-line="201" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/live/application/controllers/Admin_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3485">
@@ -715,16 +652,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/prashant.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
+        <state relative-caret-position="697">
           <caret line="41" column="3" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/franchisee/addClient.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="566" column="95" selection-start-line="566" selection-start-column="45" selection-end-line="566" selection-end-column="95" />
           <folding />
         </state>
       </provider>
@@ -739,47 +668,127 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/layout/admin_header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="663">
           <caret line="39" column="95" selection-start-line="39" selection-start-column="95" selection-end-line="39" selection-end-column="95" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Franchisee_Controller.php">
+    <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientDetails.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-378">
-          <caret line="199" column="28" selection-start-line="199" selection-start-column="18" selection-end-line="199" selection-end-column="28" />
-          <folding>
-            <marker date="1480653793270" expanded="true" signature="18649:19066" ph="..." />
-          </folding>
+        <state relative-caret-position="408">
+          <caret line="448" column="20" selection-start-line="448" selection-start-column="20" selection-end-line="448" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientList.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
+        <state relative-caret-position="17">
           <caret line="231" column="94" selection-start-line="231" selection-start-column="94" selection-end-line="231" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="139" column="47" selection-start-line="139" selection-start-column="47" selection-end-line="139" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/franchisee/addClient.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="483" column="0" selection-start-line="473" selection-start-column="48" selection-end-line="483" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/franchisee/editClient.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="751" column="78" selection-start-line="751" selection-start-column="36" selection-end-line="751" selection-end-column="78" />
+        <state relative-caret-position="-106">
+          <caret line="394" column="186" selection-start-line="394" selection-start-column="186" selection-end-line="394" selection-end-column="186" />
           <folding>
-            <element signature="n#div#18;n#div#0;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <marker date="1481021748522" expanded="true" signature="19891:20054" ph="..." />
+            <marker date="1481021748522" expanded="true" signature="84958:85028" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientDetails.php">
+    <entry file="file://$PROJECT_DIR$/application/views/admin/addFranchisee.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="434" column="62" selection-start-line="434" selection-start-column="62" selection-end-line="434" selection-end-column="62" />
+        <state relative-caret-position="425">
+          <caret line="167" column="55" selection-start-line="157" selection-start-column="48" selection-end-line="167" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/editFranchisee.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="121" column="79" selection-start-line="121" selection-start-column="79" selection-end-line="121" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="200" column="13" selection-start-line="200" selection-start-column="13" selection-end-line="200" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Error_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3887">
+          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="226" column="84" selection-start-line="226" selection-start-column="66" selection-end-line="226" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="565" column="32" selection-start-line="565" selection-start-column="32" selection-end-line="565" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Franchisee_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="320" column="86" selection-start-line="320" selection-start-column="64" selection-end-line="320" selection-end-column="86" />
           <folding>
-            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <marker date="1480940695994" expanded="true" signature="18180:18691" ph="..." />
+            <marker date="1480940695994" expanded="true" signature="18274:18691" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Franchisee_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="334" column="62" selection-start-line="334" selection-start-column="62" selection-end-line="334" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/adminPassword_Recover.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>

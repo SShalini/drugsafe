@@ -187,7 +187,8 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
         { 
             $searchAry = trim($searchAry);
             $searchDataAry= explode("-",$searchAry) ;
-            if($searchDataAry[0]=='CL'){
+            $searchDataAry[0] = strtolower($searchDataAry[0]);
+            if($searchDataAry[0]=='cl'){
                 $search=$searchDataAry[1];
             }
             else{
@@ -331,6 +332,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
         {
             $searchAry = trim($searchAry);
             $searchDataAry= explode("-",$searchAry) ;
+            $searchDataAry[0] = strtoupper($searchDataAry[0]);
             if($searchDataAry[0]=='CL'){
                 $search=$searchDataAry[1];
             }
