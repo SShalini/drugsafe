@@ -148,7 +148,7 @@ class Reporting_Controller extends CI_Controller
                         ';
         $pdf->writeHTML($html, true, false, true, false, '');
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
-        ob_end_clean();
+        error_reporting(E_ALL);
         $pdf->Output('stock-request-report.pdf', 'I');
     }
 

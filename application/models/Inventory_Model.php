@@ -181,7 +181,52 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }	
 	}
-       
+  public function viewConsumablesList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = array())
+        {
+            $searchAry = trim($searchAry);
+            if($_SESSION['drugsafe_user']['iRole']==1)
+            {
+                if(!empty($searchAry)){
+                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '3');
+                    $this->db->where("(szProductCode LIKE '%$searchAry%')");
+                }
+                else{
+                   $whereAry = array('isDeleted=' => '0','szProductCategory' => '3');
+                }
+            
+            $this->db->select('*');
+            $this->db->where($whereAry); 
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
+      
+            }
+            else{
+            $idfranchisee = $_SESSION['drugsafe_user']['id'];
+             if(!empty($searchAry)){
+                  
+                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '3','iFranchiseeId=' => $idfranchisee);
+                      $this->db->where("(szProductCode LIKE '%$searchAry%')");
+                     }
+                else{
+                   $whereAry = array('isDeleted=' => '0','szProductCategory' => '3','iFranchiseeId=' => $idfranchisee);
+                }
+           
+            $this->db->select('*');
+            $this->db->from(__DBC_SCHEMATA_PRODUCT__);
+            $this->db->join('fr_prodstock_qty', 'tbl_product.id = fr_prodstock_qty.iProductId');
+            $this->db->where($whereAry);
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+            }
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }      
        
 }
 ?>

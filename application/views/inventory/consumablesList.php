@@ -28,26 +28,26 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>/inventory/consumableslist">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Drug Test Kit List</span>
+                            <span class="active">Consumables List</span>
                         </li>
                     </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Consumables</span>
                             </div>
                             <?php 
                             if($_SESSION['drugsafe_user']['iRole']==1){
                             ?>
                             <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addDrugTestKit');">
-                                        &nbsp;Add Drug Test Kit
+                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addConsumables');">
+                                        &nbsp;Add Consumables
                                     </button>
                                 </div>
                         </div>
@@ -56,13 +56,13 @@
                         </div>
                         <?php
                         
-                        if(!empty($drugTestKitAray))
+                        if(!empty($consumablesAray))
                         {
                            
                             ?>
                         
                           <div class="row">
-                           <form class="form-horizontal" id="szSearchDrugTestList" action="<?=__BASE_URL__?>/inventory/drugtestkitlist " name="szSearchDrugTestList" method="post">
+                           <form class="form-horizontal" id="szSearchConsumablesList" action="<?=__BASE_URL__?>/inventory/consumableslist " name="szSearchConsumablesList" method="post">
                           <div class="search col-md-3">
                             <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="<?=sanitize_post_field_value($_POST['szSearchProdCode'])?>">
                           
@@ -93,11 +93,11 @@
                                 <tbody>
                                     <?php
                                        $i = 0;
-                                        foreach($drugTestKitAray as $drugTestKitData)
+                                        foreach($consumablesAray as $consumablesData)
                                         {  
                                              $idfranchisee = $_SESSION['drugsafe_user']['id'];
                                           
-                                            $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitData['iProductId']);
+                                            $consumablesDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$consumablesData['iProductId']);
                                             
                                               
                                            // $drugTestKitQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
@@ -105,27 +105,27 @@
                                             ?>
                                         <tr>
                                             <td>
-                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $drugTestKitData['szProductImage']; ?>" width="60" height="60"/>    
+                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $consumablesData['szProductImage']; ?>" width="60" height="60"/>    
                                             </td>
-                                            <td> <?php echo $drugTestKitData['szProductCode']?> </td>
-                                            <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
-                                            <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
+                                            <td> <?php echo $consumablesData['szProductCode']?> </td>
+                                            <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
+                                            <td> $<?php echo $consumablesData['szProductCost'];?> </td>
                                             <?php
                                            if($_SESSION['drugsafe_user']['iRole']==1){
                                              ?>
                                                 <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Drug-Test Kit Details" onclick="editProduct('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Consumables" onclick="editConsumables('<?php echo $consumablesData['id'];?>','3');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="productDeleteAlert(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="ConsumablesStatus" title="Delete Consumables Details" onclick="productDeleteAlert(<?php echo $consumablesData['id'];?>,'3');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                                 </td>
                                         <?php }else{?>
-                                          <td><?php echo($drugTestKitDataArr['szModelStockVal'] > 0 ? $drugTestKitDataArr['szModelStockVal'] : 'N/A')?></td>
-                                          <td><?php echo($drugTestKitData['szQuantity'] > 0 ? $drugTestKitData['szQuantity'] : 'N/A')?></td>
+                                          <td><?php echo($consumablesDataArr['szModelStockVal'] > 0 ? $consumablesDataArr['szModelStockVal'] : 'N/A')?></td>
+                                          <td><?php echo($consumablesData['szQuantity'] > 0 ? $consumablesData['szQuantity'] : 'N/A')?></td>
                                           <td>          
-                                              <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $drugTestKitData['iProductId'];?>','1');" href="javascript:void(0);">
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="ConsumablesStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $consumablesData['iProductId'];?>','3');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                               </a>
                                           </td> 
@@ -150,7 +150,7 @@
                             echo "Not Found";
                         }
                         ?>
-                        <?php  if(!empty($drugTestKitAray)){?>
+                        <?php  if(!empty($consumablesAray)){?>
 		<div class="row">
                   
                     <div class="col-md-7 col-sm-7">

@@ -40,6 +40,8 @@ class Form_Management_Model extends Error_Model {
     {
         $whereAry = array('sosid' => $idSos);
         $this->db->select('*');
+        $this->db->order_by($sortBy, $orderBy);
+        $this->db->order_by("id", "asc");
         $this->db->from(__DBC_SCHEMATA_DONER__);
         $this->db->where($whereAry); 
         $query = $this->db->get();

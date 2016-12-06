@@ -185,7 +185,7 @@
                                     <div class="col-md-offset-3 col-md-4">
                                         <a href="<?= __BASE_URL__ ?>/stock_management/productstockqty"
                                            class="btn default uppercase" type="button">Cancel</a>
-                                        <input type="submit" class="btn green-meadow" value="Save"
+                                        <input type="submit" class="btn green-meadow" value="SAVE"
                                                name="editProductStockQty[submit]">
                                     </div>
                                 </div>

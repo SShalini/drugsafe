@@ -111,7 +111,7 @@
                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                            <input type="submit" class="btn green-meadow" value="Save" name="productData[submit]">
+                                            <input type="submit" class="btn green-meadow" value="SAVE" name="productData[submit]">
                                         </div>
                                     </div>
                                     </div>

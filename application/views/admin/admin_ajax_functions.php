@@ -135,8 +135,10 @@ if($mode == '__DELETE_PRODUCT_POPUP_CONFIRM__')
                 <div class="modal-footer">
                     <?php if ($flag==1){?>
                     <a href="<?php echo __BASE_URL__;?>/inventory/drugTestKitList" class="btn dark btn-outline">Close</a>
-                    <?php }else{?>
+                    <?php }elseif($flag==2){?>
                      <a href="<?php echo __BASE_URL__;?>/inventory/marketingMaterialList" class="btn dark btn-outline">Close</a>
+                      <?php }else{?>
+                     <a href="<?php echo __BASE_URL__;?>/inventory/consumableslist" class="btn dark btn-outline">Close</a>
                     <?php }?>
                 </div>
             </div>
@@ -219,10 +221,16 @@ if($mode == '__REQUEST_QUANTITY_POPUP_CONFIRM__')
                           <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist" class="btn dark btn-outline">Close</a>
                         <?php
                     }
-                    else
+                    elseif($flag==2)
                     {
                        ?>
                           <a href="<?php echo __BASE_URL__;?>/inventory/marketingmateriallist" class="btn dark btn-outline">Close</a>
+                        <?php
+                    }
+                     else
+                    {
+                       ?>
+                          <a href="<?php echo __BASE_URL__;?>/inventory/consumableslist" class="btn dark btn-outline">Close</a>
                         <?php
                     }
                     ?>

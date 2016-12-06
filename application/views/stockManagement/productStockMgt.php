@@ -50,15 +50,18 @@
         
         <div class="tabbable tabbable-tabdrop">
             <ul class="nav nav-tabs">
-                <?php 
+              <?php 
         
             if(!empty($_SESSION['drugsafe_tab_status']))
             {
                 if($_SESSION['drugsafe_tab_status']==1){
                   $drActive ='active'; 
                 }
-                else{
-                  $mrActive ='active';   
+                 elseif($_SESSION['drugsafe_tab_status']==2){
+                  $mrActive ='active'; 
+                }
+                else {
+                  $conActive ='active';   
                 }
            $this->session->unset_userdata('drugsafe_tab_status');
             }
@@ -72,6 +75,9 @@
                 </li>
                  <li class="<?php echo $mrActive?>">
                         <a href="#tab2" data-toggle="tab">Marketing Material List</a>
+                </li>
+                 <li class="<?php echo $conActive?>">
+                        <a href="#tab3" data-toggle="tab">Consumables List</a>
                 </li>
             </ul>
                  <div class="tab-content">
@@ -245,6 +251,88 @@
     </div> 
                                
 </div>
+<div class="tab-pane <?php echo $conActive?>" id="tab3">
+                        <div id="page_content" class="row">
+                            <div class="col-md-12">
+                                <div class="portlet light bordered">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-equalizer font-red-sunglo"></i>
+                                            <span class="caption-subject font-red-sunglo bold uppercase">Consumables</span>
+                                        </div>
+                                       </div>
+                                    <?php
+
+                                    if(!empty($consumablesAray))
+                                    {
+
+                                        ?>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th> Image </th>
+                                                    <th> Product Code</th>
+                                                    <th> Descreption</th>
+                                                    <th> Cost</th>
+                                                    <th>Quantity </th>
+                                                    <th> Action </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                   $i = 0;
+                                                    foreach($consumablesAray as $consumablesData)
+                                                    { $idfranchisee = $franchiseeArr['id'];
+                                                    
+                                                          $consumablesDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$consumablesData['id']);
+                                                        
+                                                    ?>
+                                                    <tr>
+                                                        <td>
+                                                            <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $consumablesData['szProductImage']; ?>" width="60" height="60"/>    
+                                                        </td>
+                                                        <td> <?php echo $consumablesData['szProductCode']?> </td>
+                                                        <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
+                                                        <td> $<?php echo $consumablesData['szProductCost'];?> </td>
+                                                        <td><?php echo($consumablesDataArr['szQuantity'] > 0 ? $consumablesDataArr['szQuantity'] : 'N/A')?></td>
+                                                        <td>
+                                                            <?php if(empty($consumablesDataArr['szQuantity']) && ($consumablesDataArr['szQuantity'] != '0')){?>
+                                                            <a class="btn btn-circle btn-icon-only btn-default" title="Add Product Stock Quantity" onclick="addProductStockQuantity(<?php echo $consumablesData['id'];?>);" href="javascript:void(0);">
+                                                                <i class="fa fa-plus"></i> 
+                                                            </a>
+                                                            <?php }else{?>
+                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $consumablesData['id'];?>,'1');" href="javascript:void(0);">
+                                                                <i class="fa fa-minus"></i> 
+                                                            </a>
+                                                           <a class="btn btn-circle btn-icon-only btn-default" title=" Add More Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $consumablesData['id'];?>,'2');" href="javascript:void(0);">
+                                                                <i class="fa fa-plus"></i> 
+                                                            </a>
+                                                            <?php }?>
+                                                            
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                    $i++;
+                                                    }
+                                               ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                         <?php
+
+                                    }
+                                    else
+                                    {
+                                        echo "Not Found";
+                                    }
+                                    ?>
+
+                                </div>
+                            </div>
+                        </div> 
+                 <div id="popup_box"></div>   
+            </div>                     
 <div id="popup_box"></div>       
  </div>
  </div>

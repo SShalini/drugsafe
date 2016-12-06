@@ -64,6 +64,21 @@ class StockMgt_Model extends Error_Model
             return array();
         }
     }
+    public function viewConsumablesList()
+    {
+
+        $whereAry = array('isDeleted=' => '0', 'szProductCategory' => '3');
+
+        $this->db->select('*');
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
 
     public function getStockValueDetailsById($idfranchisee, $id = 0)
     {

@@ -99,13 +99,51 @@ class Inventory_Controller extends CI_Controller {
             }
         }
         }
+       public function addConsumables() {
+           $count = $this->Admin_Model->getnotification();
+            $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if (!$is_user_login) {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
+            $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+            $this->form_validation->set_message('required', '{field} is required');
+            if ($this->form_validation->run() == FALSE)
+            { 
+                $data['notification'] = $count;
+                $data['szMetaTagTitle'] = "Add Consumables";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "Inventory";
+                $data['subpageName'] = "Consumables_List";
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('inventory/addConsumables');
+                $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+                if( $this->Inventory_Model->insertProduct())
+                {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<strong>Consumables Info! </strong> Consumables added successfully.";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage); 
+                    header("Location:" . __BASE_URL__ . "/inventory/consumablesList");
+                    die;
+                }
+            }
+        }
         function editProductData()
         {
             
              $idProduct = $this->input->post('idProduct');
              $flag = $this->input->post('flag');
      
-            $this->session->set_userdata('idProduct',$idProduct);
+             $this->session->set_userdata('idProduct',$idProduct);
              $this->session->set_userdata('flag',$flag);
            
             echo "SUCCESS||||";
@@ -155,7 +193,10 @@ class Inventory_Controller extends CI_Controller {
                    
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong>Drug Test Kit Info! </strong> Drug Test Kit updated successfully.";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage); 
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                        $this->session->unset_userdata('idProduct');
+                        $this->session->unset_userdata('flag');
+                        ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
                     die;
                    
@@ -339,13 +380,115 @@ class Inventory_Controller extends CI_Controller {
                 {
                     $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong> Marketing Material Info! </strong> Marketing Material updated successfully.";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                    header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                        $this->session->unset_userdata('idProduct');
+                        $this->session->unset_userdata('flag');
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
+                        die;
                 }
 
             }
         }
-       
+        function editConsumablesData()
+        {
+           
+             $idProduct = $this->input->post('idProduct');
+             $flag = $this->input->post('flag');
+     
+            $this->session->set_userdata('idProduct',$idProduct);
+            $this->session->set_userdata('flag',$flag);
+           
+            echo "SUCCESS||||";
+            echo "editConsumables";
+            
+        }
+        
+         public function editConsumables() {
+            $count = $this->Admin_Model->getnotification();
+            $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if (!$is_user_login) {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+            
+            $idProduct = $this->session->userdata('idProduct');
+            $flag = $this->session->userdata('flag');
+         
+            $productDataAry = $this->Inventory_Model->getProductDetailsById($idProduct);
+           
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
+            $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+             $this->form_validation->set_message('required', '{field} is required');
+            
+            if ($this->form_validation->run() == FALSE)
+            {
+                $data['notification'] = $count;
+                $data['szMetaTagTitle'] = "Edit Product";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "Inventory";
+                $data['subpageName'] = "Consumables_List";
+                $_POST['productData']=$productDataAry;
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('inventory/editConsumables');
+                $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+                if( $this->Inventory_Model->UpdateProduct($idProduct))
+                {
+                    $szMessage['type'] = "success";
+                        $szMessage['content'] = "<strong> Consumables Info! </strong> Consumables updated successfully.";
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage); 
+                        $this->session->unset_userdata('idProduct');
+                        $this->session->unset_userdata('flag');
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/inventory/ConsumablesList");
+                        die;
+                }
+
+            }
+        }
+     function consumableslist()
+        {
+           $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+             $searchAry = $_POST['szSearchProdCode'];
+             
+             $config['base_url'] = __BASE_URL__ . "/inventory/consumableslist/";
+             $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry));
+             $config['per_page'] = 5;
+
+             $this->pagination->initialize($config);
+            
+               $idfranchisee = $_SESSION['drugsafe_user']['id'];
+          
+               $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry);
+               $count = $this->Admin_Model->getnotification();
+
+                    $data['consumablesAray'] = $consumablesAray;
+                    $data['szMetaTagTitle'] = " Consumables List";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Inventory";
+                    $data['subpageName'] = "Consumables_List";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('inventory/consumablesList');
+            $this->load->view('layout/admin_footer');
+        }  
         
     }      
     

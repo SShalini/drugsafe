@@ -74,15 +74,25 @@ class StockMgt_Controller extends CI_Controller {
 
             $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
   
-            $mr_value_data = array();
-            foreach ($marketingMaterialAray as $marketingMaterialdata){
+                $mr_value_data = array();
+                foreach ($marketingMaterialAray as $marketingMaterialdata){
                 $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialdata['id']);
                 array_push($mr_value_data,$marketingMaterialDataArr);
+             }
+             
+                $consumablesAray =$this->StockMgt_Model->viewConsumablesList();
+  
+                $con_value_data = array();
+                foreach ($consumablesAray as $consumablesdata){
+                $consumablesDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$consumablesdata['id']);
+                array_push($con_value_data,$consumablesDataArr);
              }
 
                     $data['drugTestKitDataArr'] = $fr_value_data;
                     $data['marketingMaterialDataArr'] = $mr_value_data;
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
+                    $data['consumablesDataArr'] = $con_value_data;
+                    $data['consumablesAray'] = $consumablesAray;
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['idfranchisee'] = $idfranchisee;
                     $data['franchiseeArr'] = $franchiseeArr;
@@ -170,9 +180,15 @@ class StockMgt_Controller extends CI_Controller {
                     header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
                     die;
                     }
-                    else{
+                    elseif($idCategory==2){
                     $mrActive= $idCategory                  ; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                    die;  
+                    }
+                    else{
+                    $conActive= $idCategory                  ; 
+                    $this->session->set_userdata('drugsafe_tab_status', $conActive);
                     header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
                     die;  
                     }
@@ -256,9 +272,15 @@ class StockMgt_Controller extends CI_Controller {
                     header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
                     die;
                     }
-                    else{
+                    elseif($idCategory==2){
                     $mrActive= $idCategory                  ; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                    die;  
+                    }
+                    else{
+                    $conActive= $idCategory; 
+                    $this->session->set_userdata('drugsafe_tab_status', $conActive);
                     header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
                     die;  
                     }
@@ -292,9 +314,11 @@ class StockMgt_Controller extends CI_Controller {
              $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
              $drugTestKitAray =$this->StockMgt_Model->viewDrugTestKitList();
              $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
+             $consumablesAray =$this->StockMgt_Model->viewConsumablesList(); 
 
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
                     $data['drugTestKitAray'] = $drugTestKitAray;
+                    $data['consumablesAray'] = $consumablesAray;
                     $data['franchiseeArr'] = $franchiseeArr;
                     $data['idfranchisee'] = $idfranchisee;
                     $data['szMetaTagTitle'] = "Product_Stock_Management";
@@ -379,9 +403,15 @@ class StockMgt_Controller extends CI_Controller {
                     header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
                     die;
                     }
-                    else{
+                    elseif($idCategory==2){
                     $mrActive= $idCategory                  ; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+                    header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
+                    die;  
+                    }
+                    else{
+                    $conActive= $idCategory; 
+                    $this->session->set_userdata('drugsafe_tab_status', $conActive);
                     header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
                     die;  
                     }
@@ -489,7 +519,7 @@ if(!empty($QtyAssignArr)){
                     die;
                     }
                     else{
-                    $mrActive= $idCategory                  ; 
+                    $mrActive= $idCategory; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
                     header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
                     die;  

@@ -74,7 +74,7 @@
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
                                            <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>
-                                         <button class="btn green-meadow uppercase btn-form-submit" type="submit">Save</button>
+                                         <button class="btn green-meadow uppercase btn-form-submit" type="submit">SAVE</button>
                                         </div>
                                         
                                     </div>

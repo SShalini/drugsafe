@@ -57,6 +57,13 @@
                             <span class="title">Marketing Material List</span>
                         </a>
                     </li>
+                    <li class="nav-item  <?php if ($subpageName == 'Consumables_List') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/inventory/consumableslist">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">Consumables List</span>
+                        </a>
+                    </li>
+
 
                 </ul>
 

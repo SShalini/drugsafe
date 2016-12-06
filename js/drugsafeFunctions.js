@@ -482,7 +482,8 @@ function requestQuantityAlert(idProduct,flag)
   function ViewSosFormPdf(idClient) {
     $.post(__BASE_URL__ + "/formManagement/ViewSosFormPdfData", {idClient: idClient}, function (result) {
         ar_result = result.split('||||');
-        window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
+     var URL = __BASE_URL__ + "/formManagement/" + ar_result[1];
+        window.open(URL,'_blank');
 
     });
 }
@@ -502,6 +503,18 @@ function viewSosFormDetails(idsite) {
     $.post(__BASE_URL__ + "/formManagement/sosFormsdata", {idsite:idsite}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
+
+    });
+}
+function editConsumables(idProduct,flag) {
+    $.post(__BASE_URL__ + "/inventory/editConsumablesData", {
+        idProduct: idProduct,flag: flag
+       
+    }, function (result) {
+
+        ar_result = result.split('||||');
+
+        window.location = __BASE_URL__ + "/inventory/" + ar_result[1];
 
     });
 }

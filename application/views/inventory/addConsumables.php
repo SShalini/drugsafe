@@ -4,11 +4,20 @@
             <div id="page_content" class="row">
                 
                 <div class="col-md-12">
+                     <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>/inventory/consumableslist">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                            <span class="active">Add Consumables </span>
+                        </li>
+                    </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Add Product</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Add Consumables</span>
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -16,14 +25,14 @@
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <form class="form-horizontal" id="clientData" action="<?php echo __BASE_URL__?>/inventory/addProduct" name="productDate" method="post">
+                            <form class="form-horizontal" id="clientData" action="<?php echo __BASE_URL__?>/inventory/addConsumables" name="productDate" method="post">
                                 <div class="form-body">
                                     <div class="form-group <?php if(form_error('productData[szProductCode]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Product Code</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                    <i class="fa fa-user"></i>
                                                 </span>
                                                 <input id="szProductCode" class="form-control" type="text" value="<?php echo set_value('productData[szProductCode]'); ?>" placeholder="Product Code" onfocus="remove_formError(this.id,'true')" name="productData[szProductCode]">
                                             </div>
@@ -50,26 +59,7 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
-                                    <div class="form-group <?php if(form_error('productData[szProductCategory]')){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label">Product Category</label>
-                                        <div class="col-md-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <select class="form-control" name="productData[szProductCategory]" id="szProductCategory" Placeholder="Category" onfocus="remove_formError(this.id,'true')">
-                                                    <option value=''>Product Category</option>
-                                                    <option value='1' <?php echo (set_value('productData[szProductCategory]') == '1' ? "selected" : "");?>>Drug Test Kits</option>
-                                                    <option value='2' <?php echo (set_value('productData[szProductCategory]') == '2' ? "selected" : "");?>>Marketing Material</option>
-                                                </select>
-                                            </div>
-                                             <?php
-                                            if(form_error('productData[szProductCategory]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('productData[szProductCategory]');?></span>
-                                            </span><?php }?>
-                                        </div>
-                                    </div>
-                                         <div class="form-group <?php if(form_error('productData[szProductDiscription]')){?>has-error<?php }?>">
+                                    <div class="form-group <?php if(form_error('productData[szProductDiscription]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Product Description</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
@@ -92,10 +82,11 @@
                                                 <div class="profile-userbuttons">
                                                     <div id="product_image">
                                                         <?php
+                                                        $NewImageName=set_value('productData[szProductImage]');
 							if($NewImageName!= '')
                                                         {
                                                             ?>
-							       <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $NewImageName; ?>" width="60" height="60"/>
+							        <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $NewImageName; ?>" width="60" height="60"/>
                                                                 <a href="javascript:void(0);" id="remove_btn_<?php echo $randomNum; ?>" class="btn red-intense btn-sm" onclick="removeIncidentPhoto('');">Remove</a>
                                                      </div>
 															<?php
@@ -113,6 +104,7 @@
                                             </span><?php }?>
                                             
                                         </div>
+                                        <input type="hidden" name="productData[szProductCategory]" id="szProductCategory" value="3"/> 
                                     </div>
                                     <div class="form-actions">
                                     <div class="row">
@@ -121,7 +113,7 @@
                                         </div>
                                     </div>
                                     </div>
-                                    </div>
+                                   
                             </form>
                         </div>
                 </div>
@@ -150,8 +142,10 @@
                     },
                     afterUploadAll:function()
                     {
-                        $(".ajax-file-upload-statusbar").addClass('hide');
-                        $("#product_image_upload").addClass('hide');
+                        $(".profile-userbuttons .ajax-upload-dragdrop").addClass('hide');
+                        $(".profile-userbuttons .upload-statusbar").addClass('hide')
+                        $('.preview_file').removeClass('hide');
+                        $('.help-block').addClass('hide');
                     },
                     onError: function(files,status,errMsg)
                     {		

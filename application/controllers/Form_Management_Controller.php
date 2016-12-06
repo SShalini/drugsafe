@@ -126,14 +126,38 @@ class Form_Management_Controller extends CI_Controller
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Form Management Report</b></p></div>
-         
-                  <div class="row">
+        
+                        <div>
+                             <lable><b>Requesting Client :</b> '.$sosRormDetailsAry['szName'].'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <lable><b>City :</b> '.$sosRormDetailsAry['szCity'].'</lable>  
+                             
+                        </div>
                         
-                            <lable>Requesting Client :</lable>
-                       
-                            <p>'.$sosRormDetailsAry['szName'].'</p>
-                      
-                    </div>  
+                         <div>
+                             <lable><b>Country :</b> '.$sosRormDetailsAry['szCountry'].'</lable>  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Address :</b> '.$sosRormDetailsAry['szAddress'].'</lable> 
+                        </div>
+                        <div>
+                             <lable><b>State :</b> '.$sosRormDetailsAry['szState'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <lable><b>ZIP/Postal Code :</b> '.$sosRormDetailsAry['szZipCode'].'</lable>  
+                        </div>
+                        
+                        <div>
+                             <lable><b>Service Commenced On :</b> '.$sosRormDetailsAry['ServiceCommencedOn'].'</lable>   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Service Concluded On :</b> '.$sosRormDetailsAry['ServiceConcludedOn'].'</lable>  
+                        </div>';
+                    
+                           $start_date =new DateTime($sosRormDetailsAry['ServiceConcludedOn']);
+                            $since_start = $start_date->diff(new DateTime($sosRormDetailsAry['ServiceCommencedOn']));
+                            $DaysTotal= $since_start->days.' days ';
+                            $years= $since_start->y.' years';
+                            $Months= $since_start->m.' months';
+                            $Days= $since_start->d.' days';
+                            $Hr= $since_start->h.' hr';
+                            $Min= $since_start->i.' min';
+                            $Sec= $since_start->s.' sec';
+                          $html .=' <div>
+                            <lable><b>Total Time : </b>'.$DaysTotal."$nbsp". $Hr ."$nbsp $nbsp ". $Min."$nbsp $nbsp " . $Sec.'</lable>
+                            </div>
+                  
+                    
+                  
         <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -148,7 +172,8 @@ class Form_Management_Controller extends CI_Controller
         if ($sosRormDetailsAry) { 
                                        $sosIdDetailByClientId = $this->Form_Management_Model->getsosFormDetailsByClientId($sosRormDetailsAry['Clientid']);
                                        $donarDetailBySosIdAry = $this->Form_Management_Model->getDonarDetailBySosId($sosIdDetailByClientId['id']);
-                                        $i = 0;
+                                       if(!empty($donarDetailBySosIdAry)){
+                                       $i = 0;
                                        foreach($donarDetailBySosIdAry as $donarDetailBySosIdData){
                                            
                                     
@@ -162,13 +187,76 @@ class Form_Management_Controller extends CI_Controller
                                             <td>' .$donarDetailBySosIdData['lab'] . ' </td>
                                         </tr>';
             }
+           }
+            else{
+               $html .= '<tr>
+                            <td align="center" colspan="6">Not Found</td>
+                        </tr>'; 
+            }
         }
         $i++;
         $html .= '
                             </table>
+                        </div>  
+                        <hr>
+                        <div class="table-responsive">
+                            <table  border="1" cellpadding="5">
+                                <thead>
+                                    <tr>
+                                        <th><b>* U = Result Requiring Further  Testing N = Negative <br> ** P = Positive N = Negative</b> </th>                                        
+                                        <th><b> Urine </b></th>
+                                        <th><b> Oral</b></th>  
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>Total Donar Screenings/Collections </td>
+                                            <td>'.$sosRormDetailsAry['TotalDonarScreeningUrine'].'</td>
+                                            <td> '. $sosRormDetailsAry['TotalDonarScreeningOral'].' </td>
+                                        </tr>
+                                         <tr>
+                                            <td> Negative Results</td>
+                                            <td>'.$sosRormDetailsAry['NegativeResultOral'].'</td>
+                                            <td>'.$sosRormDetailsAry['NegativeResultOral'].'</td>
+                                        </tr>
+                                         <tr>
+                                            <td> Result Requiring Further Testing </td>
+                                            <td>'.$sosRormDetailsAry['FurtherTestUrine'].'</td>
+                                            <td>'.$sosRormDetailsAry['FurtherTestOral'].' </td>
+                                        </tr>
+                                      
+                                </tbody>
+                            </table>
                         </div>
-                      
-                        ';
+                        <hr>
+                       <div>
+                            <lable><b>Total No Alcohol Screens : </b> '.$sosRormDetailsAry['TotalAlcoholScreening'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Positive Alcohol Results : </b> '.$sosRormDetailsAry['PositiveAlcohol'].'</lable>
+                        </div>
+                         <div>
+                            <lable><b>Refusals , No Shows or Others : </b> '.$sosRormDetailsAry['Refusals'].'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; <lable><b>Negative Alcohol Results :</b> '.$sosRormDetailsAry['NegativeAlcohol'].'</lable>
+                        </div>
+                        <hr>
+                         <div>
+                            <lable><b>Device Name : </b> '.$sosRormDetailsAry['DeviceName'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; <lable><b>Breath Testing Unit : </b> '.$sosRormDetailsAry['BreathTesting'].'</lable>
+                        </div> 
+                         <div>
+                            <lable><b>Extra Used :</b> '.$sosRormDetailsAry['ExtraUsed'].'</lable>
+                        </div>
+                        <hr>
+                         <div>
+                          <p>I/we <b>'.$sosRormDetailsAry['CollectorName'].'</b> conducted the alcohol and/or drugscreening/collection service detailed above and confirm that all procedures were undertaken in accordance with the relevant Standard.</p><b>Collector Signature : </b>'.$sosRormDetailsAry['CollectorSignature'].'</div>
+                        </div>
+                      <hr>
+                      <div>
+                          <p><b>Comments or Observation : </b>'.$sosRormDetailsAry['Comments'].'</div>
+                        </div>
+                      <hr>
+                        <div>
+                            <lable><b>Nominated Client Representative :</b> '.$sosRormDetailsAry['ClientRepresentative'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;<lable><b>Signed : </b> '.$sosRormDetailsAry['RepresentativeSignature'].'</lable>
+                        </div>
+                         <div>
+                          <lable><b>Status :</b> '.($sosRormDetailsAry['Status'] == 0 ? 'Not Completed':'Completed').'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; <lable><b>Time :</b> '.$sosRormDetailsAry['RepresentativeSignatureTime'].'</lable> 
+                        </div>';
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
         $pdf->Output('stock-assignment-report.pdf', 'I');
