@@ -218,7 +218,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
 { 
     
     $emailCMSAry = $obj->Admin_Model->getEmailTemplateDetailsByTitle($email_template);
-    
+    //print_r($emailCMSAry);
     ob_start();  
     $obj->load->view('layout/email_header');
     $message = ob_get_clean();
@@ -248,17 +248,17 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
     $message .= ob_get_clean();
     
     sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player);
-    
 }
 
 function sendEmail($obj,$to,$from,$subject,$message,$attach_file='',$id_player,$cc='',$bcc='')
 {
 	// Get a reference to the controller object
+    //
     $CI = get_instance();
+
     $CI->load->library('CI_PHPMailer');
-    
+
 	$mail = new PHPMailer();
-	
 	//$mail->isSMTP();
 	try
 	{
@@ -428,7 +428,7 @@ function sendEmail($obj,$to,$from,$subject,$message,$attach_file='',$id_player,$
 	fwrite($handle, "#################################".$subject."################################\n\nTo: ".$to."\n$from_name : $from_email\r\n" . print_r($to_addresses, true) . "\r\nMessage:".$body."\n\nStatus = $szStatusMsg");
 	fclose($handle);*/
     $logDataAry = array(
-                            'id'=> $id,
+
                             'szEmailBody' => $message,
                             'szEmailSubject' => $subject,
                             'szToAddress' => $to,

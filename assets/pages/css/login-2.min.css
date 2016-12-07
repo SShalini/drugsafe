@@ -51,10 +51,11 @@ background: rgba(27,188,155,0.5) url("../../../images/drug-safe-coming-soon-bg.j
 }
 
 .login .content .form-control {
-    background-color: #1bbc9b;
+    /*background-color: #1bbc9b;*/
+background: rgba(27, 188, 155, 0.4) none repeat scroll 0 0;
     border: 1px solid #1bbc9b;
     height: 43px;
-    color: #d9ecf9
+    color: #4C4C4C
 }
 
 .login .content .form-control:active, .login .content .form-control:focus {

@@ -1,3 +1,8 @@
+<script type='text/javascript'>
+    $(function() {
+        $("#szSearchProdCode").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
         <div class="page-content">
           
@@ -34,10 +39,21 @@
                           <div class="row">
                               <form class="form-horizontal" id="szSearchProdReqList" action="<?=__BASE_URL__?>/stock_management/viewproductlist" name="szSearchProdReqList" method="post">
                           <div class="search col-md-3">
-                            <input type="text" name="szProdReqList" id="szProdReqList" class="form-control input-square-right " placeholder="Product Code" value="<?=sanitize_post_field_value($_POST['szProdReqList'])?>">
-                          
+<!--                            <input type="text" name="szProdReqList" id="szProdReqList" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szProdReqList'])?><!--">-->
+                              <select class="form-control custom-select" name="szProdReqList" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
+                                  <option value="">Product Code</option>
+                                  <?php
+                                  foreach($reqProdListArr as $ReqProd)
+                                  {
+                                      $selected = ($ReqProd['szProductCode'] == $_POST['szProdReqList'] ? 'selected="selected"' : '');
+                                      echo '<option value="'.$ReqProd['szProductCode'].'" >'.$ReqProd['szProductCode'].'</option>';
+                                  }
+                                  ?>
+                              </select>
                           </div>
-                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                  <div class="col-md-1">
+                                      <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                  </div>
                            </form>
                           </div>
                              <div class="row">

@@ -257,6 +257,7 @@ class Inventory_Controller extends CI_Controller {
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
                $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3),$searchAry);
+            $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList();
                $count = $this->Admin_Model->getnotification();
 
                     $data['drugTestKitAray'] = $drugTestKitAray;
@@ -266,6 +267,7 @@ class Inventory_Controller extends CI_Controller {
                     $data['subpageName'] = "Drug_Test_Kit_List";
                     $data['notification'] = $count;
                     $data['data'] = $data;
+            $data['drugtestkitlist'] = $drugTestKitListAray;
  
             $this->load->view('layout/admin_header',$data);
             $this->load->view('inventory/drugTestKitList');
@@ -291,6 +293,7 @@ class Inventory_Controller extends CI_Controller {
             
              $idfranchisee = $_SESSION['drugsafe_user']['id'];
              $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($searchAry,$config['per_page'],$this->uri->segment(3));
+            $marketingMaterialListAray =$this->Inventory_Model->viewMarketingMaterialList();
              $count = $this->Admin_Model->getnotification();
              
              
@@ -302,6 +305,7 @@ class Inventory_Controller extends CI_Controller {
                     $data['notification'] = $count;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
+            $data['marketingMaterialListAray'] = $marketingMaterialListAray;
  
             $this->load->view('layout/admin_header',$data);
             $this->load->view('inventory/marketingMaterialList');

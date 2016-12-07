@@ -118,7 +118,7 @@ class Admin_Controller extends CI_Controller {
             logout($this);
             ob_end_clean();
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
-            die();			
+            die();
         }
          function changePassword()
         {
@@ -219,19 +219,29 @@ class Admin_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
                 die;
             }
-            $searchAry = $_POST['szSearch'];
+            $searchAry = '';
+            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+                $id = $_POST['szSearch'];
+            }
+            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
+                $id = $_POST['szSearch1'];
+            }
+            if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
+                $id = $_POST['szSearch2'];
+            }
+
           
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
-                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,false,false));
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,false,false,$id,$name,$email));
                 $config['per_page'] = 5;
               
             
                 $this->pagination->initialize($config);
                
-                $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry, $config['per_page'],$this->uri->segment(3));
-          
+                $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry, $config['per_page'],$this->uri->segment(3),$id,$name,$email);
+          $searchOptionArr = $this->Admin_Model->viewFranchiseeList();
                   
                     $data['szMetaTagTitle'] = "Franchisee List";
                     $data['is_user_login'] = $is_user_login;
@@ -240,6 +250,7 @@ class Admin_Controller extends CI_Controller {
                     $data['data'] = $data;
                     $data['notification'] = $count;
                     $data['franchiseeAray'] = $franchiseeAray;
+            $data['allfranchisee'] = $searchOptionArr;
          
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/franchiseeList');
@@ -394,15 +405,17 @@ class Admin_Controller extends CI_Controller {
             'szZipCode',
             'szAddress'
         );
+//        echo 'test1';
         if($this->Admin_Model->validateFranchiseeData($data_validate,$data_not_validate,'0',true))
         {
-
+//            echo 'test2';
             if($this->Admin_Model->checkAdminAccountStatus($data_validate['szEmail']))
             {
-
+//                echo 'test3';
                 if($this->Admin_Model->sendNewPasswordToAdmin($data_validate['szEmail']))
                 {
-
+//                    echo 'test4';
+                    //die;
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Password Recovery! </strong> Please check your email to recover your password.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
@@ -501,5 +514,4 @@ class Admin_Controller extends CI_Controller {
         $this->load->view('layout/login_footer');
     }
 
-}      
-       
+}

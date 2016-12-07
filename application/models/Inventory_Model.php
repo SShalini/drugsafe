@@ -72,7 +72,7 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }
             }
-     public function viewDrugTestKitList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = array())
+     public function viewDrugTestKitList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '')
         {
             $searchAry = trim($searchAry);
             if($_SESSION['drugsafe_user']['iRole']==1)
@@ -118,7 +118,7 @@ class Inventory_Model extends Error_Model {
                     return array();
             }
         }
-         public function viewMarketingMaterialList($searchAry= array(),$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
+         public function viewMarketingMaterialList($searchAry= '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
         {
             $searchAry = trim($searchAry);
             if($_SESSION['drugsafe_user']['iRole']==1){

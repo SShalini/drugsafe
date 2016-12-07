@@ -1,3 +1,10 @@
+<script type='text/javascript'>
+    $(function() {
+        $("#szSearch").customselect();
+        $("#szSearchname").customselect();
+        $("#szSearchemail").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php
@@ -50,11 +57,56 @@
                         ?>
                     <div class="row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/franchisee/clientRecord" name="szSearchClientRecord" method="post">
-                          <div class="search col-md-3">
-                            <input type="text" name="szSearchClRecord" id="szSearchClRecord" class="form-control input-square-right " placeholder="Id,Name Or Email " value="<?=sanitize_post_field_value($_POST['szSearchClRecord'])?>">
+                          <!--<div class="search col-md-3">
+                            <input type="text" name="szSearchClRecord" id="szSearchClRecord" class="form-control input-square-right " placeholder="Id,Name Or Email " value="<?/*=sanitize_post_field_value($_POST['szSearchClRecord'])*/?>">
                           
                           </div>
-                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+                                  <div class="search col-md-3">
+                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+                                      <select class="form-control custom-select" name="szSearchClRecord" id="szSearch" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Client Id</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >CL-'.$clientIdList['id'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+                                  <div class="search col-md-3">
+                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
+                                      <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Name</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szName'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <div class="search col-md-3">
+                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Email</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szEmail'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-1">
+                                      <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                  </div>
                            </form>
                           </div>
                     <div class="row">

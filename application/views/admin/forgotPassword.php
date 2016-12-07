@@ -11,32 +11,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
          <!-- BEGIN FORGOT PASSWORD FORM -->
              <form class="login-form" id="forgotPassword" name="forgotPassword" method="post" autocomplete="off" action="<?php echo __BASE_URL__;?>/admin/admin_forgotPassword">
-                 
-<!--                 <h3 class="form-title font-green">Password Recovery</h3>-->
-           <?php 
-            /*if(!empty($_SESSION['drugsafe_user_message']))
-            {
-                    if(trim($_SESSION['drugsafe_user_message']['type']) == "success")
-                    {
-                    */?><!--
-                        <div class="alert alert-info">
-                            <?php /*echo $_SESSION['drugsafe_user_message']['content'];*/?>
-                        </div>
-                    <?php
-/*
-                    }
-                    if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
-                    {
-                    */?>
-                        <div class="alert alert-danger">
-                            <?php /*echo $_SESSION['drugsafe_user_message']['content'];*/?>
-                        </div>
-                    --><?php
-/*                    }
-                    $this->session->unset_userdata('drugsafe_user_message');
-            }*/
-            ?>
-                 
                 <div class="form-title">
                     <span class="form-title">Forgot Password ?</span>
                     <span class="form-subtitle">Enter your e-mail to reset it.</span>

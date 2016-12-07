@@ -399,7 +399,7 @@ class StockMgt_Model extends Error_Model
 
     }
 
-    public function getRequestQtyList($searchAry = array(), $idfranchisee, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+    public function getRequestQtyList($searchAry = '', $idfranchisee, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
         $searchAry = trim($searchAry);
 
@@ -479,5 +479,4 @@ if(!empty($idfranchisee) || !empty($idProduct)){
     }
 
 }
-
 ?>

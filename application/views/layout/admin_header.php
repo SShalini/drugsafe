@@ -39,6 +39,7 @@
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/layout.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/custom.css" rel="stylesheet" type="text/css" />
+        <link href='<?php echo __BASE_ASSETS_URL__; ?>/customselect/src/jquery-customselect.css' rel='stylesheet' />
         <!-- END THEME LAYOUT STYLES -->
         
         <link rel="shortcut icon" href="favicon.ico" />

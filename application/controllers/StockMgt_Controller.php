@@ -699,11 +699,12 @@ if(!empty($QtyAssignArr)){
         $this->pagination->initialize($config);
             
             $reqQtyListAray =$this->StockMgt_Model->getRequestQtyList($searchAry,$idfranchisee,$config['per_page'],$this->uri->segment(3));
-            
-          
+            $reqProdListArr = $this->StockMgt_Model->getRequestQtyList('',$idfranchisee);
+          //print_r($reqProdListArr);
             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
 
             $data['reqQtyListAray'] = $reqQtyListAray;
+            $data['reqProdListArr'] = $reqProdListArr;
             $data['idfranchisee'] = $idfranchisee;
             $data['franchiseeArr'] = $franchiseeArr;
             $data['pageName'] = "Stock_Request";

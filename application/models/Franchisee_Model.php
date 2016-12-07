@@ -183,7 +183,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
                     return array();
             }
         }
-        public function getAllClientDetails($parent=false,$franchiseId='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = array())
+        public function getAllClientDetails($parent=false,$franchiseId='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '',$id=0)
         { 
             $searchAry = trim($searchAry);
             $searchDataAry= explode("-",$searchAry) ;
@@ -200,17 +200,20 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
                  $this->db->where('clientType',0);
             }
             $whereAry = array('isDeleted=' => '0');
-            
-            
-            
-            
+
+
+
+            $searchq = '';
+            if($id > '0'){
+                $searchq = 'clientId = '.(int)$id;
+            }
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             
-             if(!empty($searchAry)){
+             if(!empty($searchq)){
                 $this->db->where('isDeleted','0');
-               $this->db->where("(clientId LIKE '%$search%' OR szName LIKE '%$search%' OR szEmail LIKE '%$search%')");
+               $this->db->where($searchq);
      
             }
             else{
@@ -328,7 +331,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
             }
         }
         
-        public function viewChildClientDetails($searchAry,$idClient,$limit = __PAGINATION_RECORD_LIMIT__,$offset= 0)
+        public function viewChildClientDetails($searchAry='',$idClient,$limit = __PAGINATION_RECORD_LIMIT__,$offset= 0,$id=0)
         {
             $searchAry = trim($searchAry);
             $searchDataAry= explode("-",$searchAry) ;
@@ -339,6 +342,10 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
             else{
                 $search=$searchDataAry[0];
             }
+            $searchq = '';
+            if($id > '0'){
+                $searchq = 'clientId = '.(int)$id;
+            }
             $whereAry = array('clientType' => $idClient,'isDeleted=' => '0');
             
             $this->db->select('*');
@@ -346,10 +353,10 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             
               
-             if(!empty($searchAry)){
+             if(!empty($searchq)){
                $this->db->where('isDeleted','0');
                $this->db->where('clientType',$idClient);
-               $this->db->where("(clientId LIKE '%$search%' OR szName LIKE '%$search%' OR szEmail LIKE '%$search%')");
+               $this->db->where($searchq);
      
             }
             else{
@@ -539,7 +546,8 @@ function insertClientDetails($data,$franchiseeId='',$reqppval)
           $this->db->where('ds_user.id', $id);
         
        $query = $this->db->get();
-
+/*$q = $this->db->last_query($query);
+        print_r($q);*/
         if($query->num_rows() > 0)
         {
             $row = $query->result_array();
@@ -599,7 +607,7 @@ function set_szName($value,$flag=true)
         {
             $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_PASSWORD__, "szConfirmPassword", "Confirm Password", 6, 32);
         }
-        function set_szClientType($value)
+        function set_szClientType($value,$flag=false)
         {
             $this->data['szClientType'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szClientType", "Client Type",false, false, $flag);
         }
@@ -638,7 +646,8 @@ function set_szName($value,$flag=true)
             $this->db->where('ds_user.id', $id);
         
        $query = $this->db->get();
-
+/*$q = $this->db->last_query($query);
+        print_r($q);*/
         if($query->num_rows() > 0)
         {
             $row = $query->result_array();

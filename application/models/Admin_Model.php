@@ -89,7 +89,7 @@ class Admin_Model extends Error_Model
         $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", false, false, $flag);
     }
 
-    function set_szClientType($value)
+    function set_szClientType($value,$flag)
     {
         $this->data['szClientType'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szClientType", "Client Type", false, false, $flag);
     }
@@ -558,7 +558,7 @@ class Admin_Model extends Error_Model
 
     }
 
-    public function viewFranchiseeList($searchAry, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+    public function viewFranchiseeList($searchAry='', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='')
     {
         $searchAry = trim($searchAry);
        $searchDataAry= explode("-",$searchAry) ;
@@ -570,11 +570,20 @@ class Admin_Model extends Error_Model
            $search=$searchDataAry[0];
        }
         $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
-
+        $searchq = '';
+        if($id > '0'){
+            $searchq = 'id = '.(int)$id;
+        }
+        if(!empty($name)){
+            $searchq = "szName LIKE '%$name%'";
+        }
+        if(!empty($email)){
+            $searchq = "szEmail LIKE '%$email%'";
+        }
         $this->db->select('*');
-        if (!empty($searchAry)) {
+        if (!empty($searchq)) {
             $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
-            $this->db->where("(id LIKE '%$search%' OR szName LIKE '%$search%' OR szEmail LIKE '%$search%')");
+            $this->db->where($searchq);
 
 
         } else {
@@ -586,8 +595,8 @@ class Admin_Model extends Error_Model
         $this->db->order_by("id", "asc");
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
 
-//$sql = $this->db->last_query($query);
-//print_r($sql);die;
+/*$sql = $this->db->last_query($query);
+print_r($sql);*/
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -611,7 +620,6 @@ class Admin_Model extends Error_Model
 
     public function sendNewPasswordToAdmin($szEmail)
     {
-
         $adminDetailsAry = $this->getAdminDetailsByEmailOrId($szEmail);
         if (!empty($adminDetailsAry)) {
             $id = $adminDetailsAry['id'];
@@ -631,7 +639,8 @@ class Admin_Model extends Error_Model
                 $confirmationLink = __BASE_URL__ . "/admin/adminPassword_Recover/" . $szNewPassword;
                 $replace_ary['szLink'] = "<a href='" . $confirmationLink . "'>CLICK HERE TO CHANGE PASSWORD.</a>";
                 $replace_ary['szHttpsLink'] = $confirmationLink;
-                createEmail($this, '__USER_FORGOT_PASSWORD__', $replace_ary, $szEmail, '', __CUSTOMER_SUPPORT_EMAIL__, $id_admin, __CUSTOMER_SUPPORT_EMAIL__);
+
+                createEmail($this, '__USER_FORGOT_PASSWORD__', $replace_ary, $szEmail, '', __CUSTOMER_SUPPORT_EMAIL__, $id, __CUSTOMER_SUPPORT_EMAIL__);
                 return true;
             }
         } else {
@@ -656,6 +665,7 @@ class Admin_Model extends Error_Model
 
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
+
             return $row[0];
         } else {
             return array();
@@ -1010,13 +1020,3 @@ class Admin_Model extends Error_Model
 }
 
 ?>
-
-
-
-
-
-
-
-
-
-

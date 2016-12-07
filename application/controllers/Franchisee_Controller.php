@@ -316,9 +316,20 @@ class Franchisee_Controller extends CI_Controller
             die;
         }
          $idClient = $this->session->userdata('idClient');
-        $searchAry = $_POST['szSearchClDetails'];
+        //$searchAry = $_POST['szSearchClDetails'];
+        $searchAry = $_POST['szSearchClRecord'];
+        $searchAry = '';
+        if(isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])){
+            $id = $_POST['szSearchClRecord'];
+        }
+        if(isset($_POST['szSearchClRecord1']) && !empty($_POST['szSearchClRecord1'])){
+            $id = $_POST['szSearchClRecord1'];
+        }
+        if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
+            $id = $_POST['szSearchClRecord2'];
+        }
         $config['base_url'] = __BASE_URL__ . "/franchisee/viewClientDetails/";
-        $config['total_rows'] = count( $this->Franchisee_Model->viewChildClientDetails($searchAry,$idClient,$limit,$offset));
+        $config['total_rows'] = count( $this->Franchisee_Model->viewChildClientDetails($searchAry,$idClient,$limit,$offset,$id));
        
         $config['per_page'] = 5;
 
@@ -326,7 +337,8 @@ class Franchisee_Controller extends CI_Controller
         $this->pagination->initialize($config);
        
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
-        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($searchAry,$idClient,$config['per_page'],$this->uri->segment(3));
+        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($searchAry,$idClient,$config['per_page'],$this->uri->segment(3),$id);
+        $sitesArr = $this->Franchisee_Model->viewChildClientDetails('',$idClient);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
         if ($clientDetailsAray['clientType'] > 0) {
@@ -343,6 +355,7 @@ class Franchisee_Controller extends CI_Controller
         $data['pageName'] = "Client_Record";
         $data['clientDetailsAray'] = $clientDetailsAray;
         $data['childClientDetailsAray'] = $childClientDetailsAray;
+        $data['sitesArr'] = $sitesArr;
         $data['szMetaTagTitle'] = "Client Details";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
@@ -358,8 +371,6 @@ class Franchisee_Controller extends CI_Controller
         $idfranchisee = $this->input->post('idfranchisee');
         $url = $this->input->post('url');
         $flag = $this->input->post('flag');
-
-
         if ($idClient > 0) {
             $this->session->set_userdata('idClient', $idClient);
             $this->session->set_userdata('idfranchisee', $idfranchisee);
@@ -373,48 +384,64 @@ class Franchisee_Controller extends CI_Controller
     public function editClient()
     {
         $count = $this->Admin_Model->getnotification();
+        //echo '-2. <br />';
 //        $countryAry = $this->Admin_Model->getCountries();
 //        $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
         $idClient = $this->session->userdata('idClient');
+//        echo '-1. <br />';
         $flag = $this->session->userdata('flag');
+//        echo '0. <br />';
         $idfranchisee = $this->session->userdata('idfranchisee');
+//        echo '1. <br />';
         $url = $this->session->userdata('url');
+//        echo '2. <br />';
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
-    
+//        echo '3. <br />';
         if (!empty($clientDetailsAray['clientType'])) {
             $franchiseeDetArr2 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
             $data['clientChildDetailsAray'] = $franchiseeDetArr2;
+//            echo '4. <br />';
         }
         if (!empty($idClient)) {
             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientId']);
             $data['clientDetailsAray'] = $franchiseeDetArr1;
+//            echo '5. <br />';
         }
         if (!empty($idfranchisee)) {
             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['franchiseeId']);
             $data['franchiseeArr'] = $franchiseeDetArr;
+//            echo '6. <br />';
         }
         if ($idClient > 0) {
-
+//            echo '7. <br />';
             $data_validate = $this->input->post('clientData');
-           
+//            echo '8. <br />';
             if (empty($data_validate)) {
+//                echo '8.1<br />';
                 if(empty($clientDetailsAray['clientType'])){
-                $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('', $idClient);}
+
+                $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('', $idClient);
+//                    echo '9. <br />';
+                }
                 else{
+//                    echo '8.2<br />';
                     $userDataAry = $this->Franchisee_Model->getSiteDetailsById($idClient);
+//                    echo '10. <br />';
                 }
                 if ($userDataAry['clientType'] != '0') {
                     $parentClient = $this->Franchisee_Model->getParentClientDetails(trim($idfranchisee));
+//                    echo '11. <br />';
                 }
             } else {
                 $userDataAry = $data_validate;
+//                echo '12. <br />';
             }
            if(empty($clientDetailsAray['clientType'])){
                 if ($this->Admin_Model->validateParentClientData($data_validate, array(), $idClient)) {
-            
+//                    echo '13. <br />';
                 if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry)) {
 
-
+//                    echo '14. <br />';
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
@@ -429,18 +456,21 @@ class Franchisee_Controller extends CI_Controller
                  if ($this->Admin_Model->validateClientData($data_validate, array(), $idClient)) {
                    $reqppearr = $this->input->post('req_ppe');
                    $reqppval = '';
+//                     echo '15. <br />';
                    foreach ($reqppearr as $reqpp){
                    $reqppval .= $reqpp.',';
                    }
                    $reqppval = substr($reqppval, 0,-1);
                    if ($this->Franchisee_Model->updateClientDetails($idClient, $userDataAry,$reqppval)) {
 
-
+//                       echo '16. <br />';
                     $szMessage['type'] = "success";
                     if($clientDetailsAray['clientType']!='0')
-                    { 
+                    {
+//                        echo '17. <br />';
                     $szMessage['content'] = "<strong>Site Info! </strong> Site details successfully updated.";}
                     else{
+//                        echo '18. <br />';
                     $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";  
                     }
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
@@ -454,10 +484,11 @@ class Franchisee_Controller extends CI_Controller
             if(!empty($clientDetailsAray['clientType'])){
              $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
           
-             $data['req_ppe_ary'] = $req_ppe_ary;  
+             $data['req_ppe_ary'] = $req_ppe_ary;
+//                echo '19. <br />';
             }
 //          print_r($userDataAry);die;
-
+//die;
             $data['szMetaTagTitle'] = "Edit Client Details ";
 //            $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Client_Record";
@@ -491,28 +522,38 @@ class Franchisee_Controller extends CI_Controller
             $franchiseId = $_SESSION['drugsafe_user']['id'];
         }
           $searchAry = $_POST['szSearchClRecord'];
+        $searchAry = '';
+        if(isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])){
+            $id = $_POST['szSearchClRecord'];
+        }
+        if(isset($_POST['szSearchClRecord1']) && !empty($_POST['szSearchClRecord1'])){
+            $id = $_POST['szSearchClRecord1'];
+        }
+        if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
+            $id = $_POST['szSearchClRecord2'];
+        }
          // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
-                $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$limit,$offset,$searchAry));
+                $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$limit,$offset,$searchAry,$id));
                 $config['per_page'] = 5;
            
             
         $this->pagination->initialize($config);
       
-        $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$config['per_page'],$this->uri->segment(3),$searchAry);
+        $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$config['per_page'],$this->uri->segment(3),$searchAry,$id);
+        $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true);
 //        print_r($franchiseId);die;
         $data['clientAry'] = $clientAray;
         $data['pageName'] = "Client_Record";
         $data['szMetaTagTitle'] = "Client Record";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['clientlistArr'] = $clientlistArr;
 
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientRecord');
         $this->load->view('layout/admin_footer');
     }
-
 }
-
 ?>
