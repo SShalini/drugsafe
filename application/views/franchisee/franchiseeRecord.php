@@ -181,13 +181,13 @@
                                           <?php
                                           foreach($allfranchisee as $franchiseeIdList)
                                           {
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'" >'.$franchiseeIdList['szName'].'</option>';
+                                              $selected = ($franchiseeIdList['szName'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$franchiseeIdList['szName'].'" >'.$franchiseeIdList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
                                   </div>
-<div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
                                       <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
@@ -195,8 +195,8 @@
                                           <?php
                                           foreach($allfranchisee as $franchiseeIdList)
                                           {
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'" >'.$franchiseeIdList['szEmail'].'</option>';
+                                              $selected = ($franchiseeIdList['szEmail'] == $_POST['szSearch'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$franchiseeIdList['szEmail'].'" >'.$franchiseeIdList['szEmail'].'</option>';
                                           }
                                           ?>
                                       </select>
@@ -267,6 +267,7 @@
                     } else {
                         echo "Not Found";
                     }
+                  
                     ?>
          <?php  if(!empty($franchiseeAry)){?>
 		<div class="row">

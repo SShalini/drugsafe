@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Admin_Model.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/franchisee/clientDetails.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Admin_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Reporting_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Reporting_Model.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/reporting/stockAssignList.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/reporting/stockRequestList.php</file>
         </group>
     </open-files>
 </project-private>

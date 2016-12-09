@@ -28,7 +28,6 @@
                             </div>
                         </div>
                     </div>
-                  
                     <div class="portlet-body">
                         <form class="form-horizontal" id="addfranchisee"
                               action="<?= __BASE_URL__ ?>/admin/addFranchisee" name="addfranchisee" method="post">
@@ -100,8 +99,9 @@
 
                                 </div>
                                 <?php
+                              
                                   if($_SESSION['drugsafe_user']['iRole']=='1'){
-                                 if (!$idOperationManager) {
+                                 if ($flag==1) {
                                         ?>
                                         <div
                                             class="form-group <?php if (!empty($arErrorMessages['operationManagerId'])) { ?>has-error<?php } ?>">

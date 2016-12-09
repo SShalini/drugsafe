@@ -637,7 +637,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         $this->db->select('*');
         $this->db->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
-
+ 
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row[0];

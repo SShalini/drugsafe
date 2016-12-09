@@ -143,8 +143,9 @@ function editOperationManagerDetails(idOperationManager) {
 
     });
 }
-function addFranchiseeData(idOperationManager) {
-    $.post(__BASE_URL__ + "/admin/addFranchiseeData",{idOperationManager: idOperationManager}, function (result) {
+function addFranchiseeData(idOperationManager,flag) {
+
+    $.post(__BASE_URL__ + "/admin/addFranchiseeData",{idOperationManager: idOperationManager,flag: flag}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/admin/" + ar_result[1];
 

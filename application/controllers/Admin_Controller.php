@@ -165,9 +165,11 @@ class Admin_Controller extends CI_Controller {
          function addFranchiseeData()
     {
         $idOperationManager = $this->input->post('idOperationManager');
-        
-       if($idOperationManager>0){
-        $this->session->set_userdata('idOperationManager', $idOperationManager);
+          $flag = $this->input->post('flag');
+          
+        $this->session->set_userdata('flag',$flag);
+        if($idOperationManager>0){
+         $this->session->set_userdata('idOperationManager', $idOperationManager);
        }
         echo "SUCCESS||||";
         echo "addFranchisee";
@@ -176,7 +178,7 @@ class Admin_Controller extends CI_Controller {
 	{
             $validate= $this->input->post('addFranchisee');
             $idOperationManager = $this->session->userdata('idOperationManager');
-
+            $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
             if($this->Admin_Model->validateUsersData($validate))
             {
@@ -188,18 +190,22 @@ class Admin_Controller extends CI_Controller {
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
                     $this->session->unset_userdata('idOperationManager');
+                    $this->session->unset_userdata('flag');
+                    
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                     die;
                 }
             }
+           
                     $data['idOperationManager'] = $idOperationManager;
                     $data['szMetaTagTitle'] = "Add Franchisee";
                     $data['pageName'] = "Franchisee_List";
                     $data['validate'] = $validate;
+                    $data['flag'] = $flag;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
-            
+          
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/addFranchisee');
             $this->load->view('layout/admin_footer');

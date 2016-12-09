@@ -423,8 +423,7 @@ class Admin_Model extends Error_Model
         $this->db->order_by("franchiseeId", "asc");
         $query = $this->db->get();
 
-//$sql = $this->db->last_query($query);
-//print_r($sql);die;
+
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -699,7 +698,7 @@ class Admin_Model extends Error_Model
     }
        public function deleteOperationManagerDetails($idOperationManager)
     {
-        $franchiseeAray = $this->Franchisee_Model->viewFranchiseeListById($idOperationManager); 
+        $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false,$idOperationManager); 
         if (!empty($franchiseeAray)) {
             foreach ($franchiseeAray as $franchiseelist) {
                 $this->deletefranchisee($franchiseelist['id']);

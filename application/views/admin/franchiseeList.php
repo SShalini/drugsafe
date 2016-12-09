@@ -51,7 +51,7 @@
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow"  onclick="addFranchiseeData('');" href="javascript:void(0);">
+                                    <button class="btn btn-sm green-meadow"  onclick="addFranchiseeData('','1');" href="javascript:void(0);">
                                         &nbsp;Add New Franchisee
                                     </button>
                                 </div>

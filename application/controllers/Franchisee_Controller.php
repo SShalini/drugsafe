@@ -587,13 +587,13 @@ class Franchisee_Controller extends CI_Controller
         }
          $searchAry = '';
             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-                $id = $_POST['szSearch'];
+                $email = $_POST['szSearch'];
             }
             if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
                 $id = $_POST['szSearch1'];
             }
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
-                $id = $_POST['szSearch2'];
+                $name = $_POST['szSearch2'];
             }
          $idOperationManager = $this->session->userdata('idOperationManager');
          // handle pagination
@@ -608,7 +608,7 @@ class Franchisee_Controller extends CI_Controller
         $operationManagerAray = $this->Franchisee_Model->getOperationManagerDetailsById($idOperationManager);
         $franchiseeAray = $this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerAray['id'], $config['per_page'],$this->uri->segment(3),$id,$name,$email);
         $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerAray['id']);
-        $this->session->unset_userdata('idOperationManager');
+   
         $data['allfranchisee'] = $searchOptionArr;
         $data['operationManagerAray'] = $operationManagerAray;
         $data['franchiseeAray'] = $franchiseeAray;
