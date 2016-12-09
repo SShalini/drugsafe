@@ -2,7 +2,7 @@
     $(function() {
         $("#szSearch").customselect();
         $("#szSearchname").customselect();
-        $("#szSearchemail").customselect();
+        $("#szSearchProductCode").customselect();
 
     });
 </script>
@@ -77,8 +77,8 @@
                                           <?php
                                           foreach($allQtyAssignListAray as $allQtyAssignListItem)
                                           {
-                                              $selected = ($allQtyAssignListItem['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allQtyAssignListItem['id'].'" >'.$allQtyAssignListItem['szName'].'</option>';
+                                              $selected = ($allQtyAssignListItem['szName'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$allQtyAssignListItem['szName'].'" >'.$allQtyAssignListItem['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
@@ -86,13 +86,13 @@
                                <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
-                                      <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
+                                      <select class="form-control custom-select" name="szSearch" id="szSearchProductCode" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Product Code</option>
                                           <?php
                                           foreach($allQtyAssignListAray as $allQtyAssignListItem)
                                           {
-                                              $selected = ($allQtyAssignListItem['id'] == $_POST['szSearch'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allQtyAssignListItem['id'].'" >'.$allQtyAssignListItem['szProductCode'].'</option>';
+                                              $selected = ($allQtyAssignListItem['szProductCode'] == $_POST['szSearch'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$allQtyAssignListItem['szProductCode'].'" >'.$allQtyAssignListItem['szProductCode'].'</option>';
                                           }
                                           ?>
                                       </select>

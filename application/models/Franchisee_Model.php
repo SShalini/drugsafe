@@ -153,27 +153,18 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
        public function viewClientList($parent=false,$idfranchisee=0,$limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$searchAry = '',$id=0)
     {
-           $searchAry = trim($searchAry);
-            $searchDataAry= explode("-",$searchAry) ;
-            $searchDataAry[0] = strtolower($searchDataAry[0]);
-            if($searchDataAry[0]=='cl'){
-                $search=$searchDataAry[1];
-            }
-            else{
-                $search=$searchDataAry[0];
-            }
+           
              
             $whereAry = array('franchiseeId' => $idfranchisee,'isDeleted=' => '0');
              $searchq = '';
             if($id > '0'){
-                $searchq = 'clientId = '.(int)$id;
+                $searchq = array('clientId=' => (int)$id,'isDeleted=' => '0');
             }
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             
               if (!empty($searchq)) {
-            $whereAry = array('isDeleted=' => '0');
             $this->db->where($searchq);
 
 

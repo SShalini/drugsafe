@@ -41,18 +41,17 @@ class Reporting_Controller extends CI_Controller
 
       $searchAry = '';
             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-                $id = $_POST['szSearch'];
+                $productCode = $_POST['szSearch'];
             }
             if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
                 $id = $_POST['szSearch1'];
             }
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
-                $id = $_POST['szSearch2'];
+                $name = $_POST['szSearch2'];
             }
-
         $count = $this->Admin_Model->getnotification();
         $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
-        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$id=0,$name,$productCode));
+        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$id,$name,$productCode));
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
         $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3),$id,$name,$productCode);
@@ -81,22 +80,22 @@ class Reporting_Controller extends CI_Controller
         }
         $count = $this->Admin_Model->getnotification();
        
-      $searchAry = '';
+       $searchAry = '';
             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-                $id = $_POST['szSearch'];
+                $productCode = $_POST['szSearch'];
             }
             if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
                 $id = $_POST['szSearch1'];
             }
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
-                $id = $_POST['szSearch2'];
+                $name = $_POST['szSearch2'];
             }
             
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
-        $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset));
+        $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$id,$name,$productCode));
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
-        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry, $config['per_page'], $this->uri->segment(3));
+        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry, $config['per_page'], $this->uri->segment(3),$id,$name,$productCode);
         $allQtyAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails();
 //        print_r($allQtyAssignAray);die;
         $data['allQtyAssignAray'] = $allQtyAssignAray;
