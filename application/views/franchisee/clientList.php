@@ -1,3 +1,10 @@
+<script type='text/javascript'>
+    $(function() {
+        $("#szSearch").customselect();
+        $("#szSearchname").customselect();
+        $("#szSearchemail").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php
@@ -51,7 +58,9 @@
 //                    }
                    ?>
                     &nbsp; &nbsp;
-                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="viewUserDetails('<?php echo $franchiseeArr['id'];?>');" href="javascript:void(0);">
+                    <?php  $operationManagerIdArr = $this->Admin_Model->getoperationManagerId($franchiseeArr['id']);
+               ?>
+                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeArr['id'];?>','<?php echo $operationManagerIdArr['operationManagerId'];?>');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 
                     </a>
                 </span>
@@ -153,15 +162,54 @@
                     <?php
 
                     if (!empty($clientAry)) {
-
                         ?>
                      <div class="row">
                               <form class="form-horizontal" id="szSearchClientList" action="<?=__BASE_URL__?>/franchisee/clientList" name="szSearchClientList" method="post">
-                          <div class="search col-md-3">
-                            <input type="text" name="szSearchClList" id="szSearchClList" class="form-control input-square-right " placeholder="Id,Name Or Email " value="<?=sanitize_post_field_value($_POST['szSearchClList'])?>">
-                          
-                          </div>
-                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                                           <div class="search col-md-3">
+                                  
+                                      <select class="form-control custom-select" name="szSearchClRecord" id="szSearch" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Client Id</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >CL-'.$clientIdList['id'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+                                  <div class="search col-md-3">
+                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
+                                      <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Name</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szName'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <div class="search col-md-3">
+                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Email</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szEmail'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-1">
+                                      <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                  </div>
                            </form>
                           </div>
                     <div class="row">
@@ -190,7 +238,7 @@
                                         <td> <?php echo $clientData['szEmail']; ?> </td>
                                         <td>
                                             <?php
-                                                $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails(false,$clientData['id'],false,false);
+                                                $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($clientData['id'],false,false,false);
                                                 echo count($childClientDetailsAray);
                                             ?>
                                             

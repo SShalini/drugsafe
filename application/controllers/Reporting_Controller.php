@@ -39,15 +39,26 @@ class Reporting_Controller extends CI_Controller
             die;
         }
 
-        $searchAry = $_POST['szSearchQtyReqList'];
+      $searchAry = '';
+            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+                $id = $_POST['szSearch'];
+            }
+            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
+                $id = $_POST['szSearch1'];
+            }
+            if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
+                $id = $_POST['szSearch2'];
+            }
 
         $count = $this->Admin_Model->getnotification();
         $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
-        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset));
+        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$id=0,$name,$productCode));
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
-        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3));
+        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3),$id,$name,$productCode);
+        $allQtyAssignListAray = $this->Reporting_Model->getAllQtyRequestDetails();
         $data['allReqQtyAray'] = $allReqQtyAray;
+        $data['allQtyAssignListAray'] = $allQtyAssignListAray;
         $data['szMetaTagTitle'] = "All Stock Requests";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Reporting";
@@ -70,16 +81,26 @@ class Reporting_Controller extends CI_Controller
         }
         $count = $this->Admin_Model->getnotification();
        
-        $searchAry = $_POST['szSearchReqAssignList'];
-//         $searchAry =    $this->session->userdata('searchAry');
-
+      $searchAry = '';
+            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+                $id = $_POST['szSearch'];
+            }
+            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
+                $id = $_POST['szSearch1'];
+            }
+            if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
+                $id = $_POST['szSearch2'];
+            }
+            
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
         $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset));
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
         $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry, $config['per_page'], $this->uri->segment(3));
+        $allQtyAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails();
 //        print_r($allQtyAssignAray);die;
         $data['allQtyAssignAray'] = $allQtyAssignAray;
+        $data['allQtyAssignListAray'] = $allQtyAssignListAray;
         $data['szMetaTagTitle'] = "Stock Assignments";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Reporting";
@@ -371,7 +392,7 @@ class Reporting_Controller extends CI_Controller
             die;
         }
 
-        $searchAry = $_POST['szSearchFrQtyReqList'];
+        $searchAry = $_POST['szSearchProdCode'];
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
 
 
@@ -382,10 +403,12 @@ class Reporting_Controller extends CI_Controller
         $this->pagination->initialize($config);
 
         $frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3), $franchiseeId);
+        $AllQtyReqListAry = $this->Reporting_Model->getFrAllQtyRequestDetails(false,false,false,$franchiseeId);
         $data['frAllReqQtyAray'] = $frAllReqQtyAray;
         $data['szMetaTagTitle'] = " Stock Requests";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Reporting";
+        $data['AllQtyReqList'] = $AllQtyReqListAry;
         $data['subpageName'] = "Franchisee_Stock_Requests";
         $data['data'] = $data;
         $this->load->view('layout/admin_header', $data);
@@ -402,7 +425,7 @@ class Reporting_Controller extends CI_Controller
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die;
         }
-        $searchAry = $_POST['szSearchFrReqAssignList'];
+        $searchAry = $_POST['szSearchProdCode'];
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
 
 
@@ -413,8 +436,10 @@ class Reporting_Controller extends CI_Controller
         $this->pagination->initialize($config);
 
         $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails($searchAry, $config['per_page'], $this->uri->segment(3), $franchiseeId);
-
+        $allQtyAssignListAray = $this->Reporting_Model->getFrAllQtyAssignDetails(false, false, false, $franchiseeId);
+        
         $data['frAllQtyAssignAray'] = $frAllQtyAssignAray;
+         $data['allQtyAssignListAray'] = $allQtyAssignListAray;
         $data['szMetaTagTitle'] = "Stock Assignments";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Reporting";

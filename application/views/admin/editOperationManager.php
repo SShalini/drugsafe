@@ -9,25 +9,25 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Edit Franchisee</span>
+                            <span class="active">Edit Operation Manager</span>
                         </li>
                     </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Edit Franchisee</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Edit Operation Manager</span>
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>admin/franchiseeList');">
-                                        &nbsp;List Franchisee
+                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>admin/operationManagerList');">
+                                        &nbsp;List Operation Manager
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div class="portlet-body">
-                            <form class="form-horizontal" id="addFranchisee" action="<?=__BASE_URL__?>/admin/editFranchisee" name="addFranchisee" method="post">
+                            <form class="form-horizontal" id="editOperationManager" action="<?=__BASE_URL__?>/admin/edit_Operation_Manager" name="editOperationManager" method="post">
                                 <div class="form-body">
                                     <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Name</label>
@@ -36,7 +36,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="szName" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szName'] ;?>" placeholder="Name" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szName]">
+                                                <input id="szName" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szName'] ;?>" placeholder="Name" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szName]">
                                             </div>
                                             <?php if(!empty($arErrorMessages['szName'])){?>
                                             <span class="help-block pull-left">
@@ -56,7 +56,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="szEmail" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szEmail'] ;?>" placeholder="Email" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szEmail]">
+                                                <input id="szEmail" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szEmail'] ;?>" placeholder="Email" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szEmail]">
                                             </div>
                                              <?php if(!empty($arErrorMessages['szEmail'])){?>
                                             <span class="help-block pull-left">
@@ -74,7 +74,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="szContactNumber" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szContactNumber'] ;?>" placeholder="Contact Number" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szContactNumber]">
+                                                <input id="szContactNumber" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szContactNumber'] ;?>" placeholder="Contact Number" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szContactNumber]">
                                             </div>
                                              <?php if(!empty($arErrorMessages['szContactNumber'])){?>
                                             <span class="help-block pull-left">
@@ -92,7 +92,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="szAddress" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szAddress'] ;?>" placeholder="Address" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szAddress]">
+                                                <input id="szAddress" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szAddress'] ;?>" placeholder="Address" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szAddress]">
                                             </div>
                                              <?php if(!empty($arErrorMessages['szAddress'])){?>
                                             <span class="help-block pull-left">
@@ -111,10 +111,10 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                            <select class="form-control " name="addFranchisee[szCountry]" id="szCountry"
+                                            <select class="form-control " name="editOperationManager[szCountry]" id="szCountry"
                                                     Placeholder="Country" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
-                                                <option value="Australia" <?php echo(sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim("Australia") ? "selected='selected'" : ""); ?>>Australia</option>
+                                                <option value="Australia" <?php echo(sanitize_post_field_value($_POST['editOperationManager']['szCountry']) == trim("Australia") ? "selected='selected'" : ""); ?>>Australia</option>
                                                 
                                             </select>
                                         </div>
@@ -136,18 +136,18 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                            <select class="form-control " name="addFranchisee[szState]" id="szState"
+                                            <select class="form-control " name="editOperationManager[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
 
-                                                <option value="Australian Capital Territory" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Australian Capital Territory") ? "selected" : ""); ?>>Australian Capital Territory</option>
-                                                <option value="New South Wales" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("New South Wales") ? "selected" : ""); ?>>New South Wales</option>
-                                                <option value="Northern Territory" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Northern Territory") ? "selected" : ""); ?>>Northern Territory</option>
-                                                <option value="Queensland" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Queensland") ? "selected" : ""); ?>>Queensland</option>
-                                                <option value="South Australia" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("South Australia") ? "selected" : ""); ?> >South Australia</option>
-                                                <option value="Tasmania" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Tasmania") ? "selected" : ""); ?>>Tasmania</option>
-                                                <option value="Victoria" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Victoria") ? "selected" : ""); ?>>Victoria</option>
-                                                <option value="Western Australia" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Western Australia") ? "selected" : ""); ?>>Western Australia </option>
+                                                <option value="Australian Capital Territory" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("Australian Capital Territory") ? "selected" : ""); ?>>Australian Capital Territory</option>
+                                                <option value="New South Wales" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("New South Wales") ? "selected" : ""); ?>>New South Wales</option>
+                                                <option value="Northern Territory" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("Northern Territory") ? "selected" : ""); ?>>Northern Territory</option>
+                                                <option value="Queensland" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("Queensland") ? "selected" : ""); ?>>Queensland</option>
+                                                <option value="South Australia" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("South Australia") ? "selected" : ""); ?> >South Australia</option>
+                                                <option value="Tasmania" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("Tasmania") ? "selected" : ""); ?>>Tasmania</option>
+                                                <option value="Victoria" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("Victoria") ? "selected" : ""); ?>>Victoria</option>
+                                                <option value="Western Australia" <?php echo (sanitize_post_field_value($_POST['editOperationManager']['szState']) == trim("Western Australia") ? "selected" : ""); ?>>Western Australia </option>
 
 
                                             </select>
@@ -168,7 +168,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="szCity" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szCity'] ;?>" placeholder="City" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szCity]">
+                                                <input id="szCity" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szCity'] ;?>" placeholder="City" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szCity]">
                                             </div>
                                             <?php if(!empty($arErrorMessages['szCity'])){?>
                                             <span class="help-block pull-left">
@@ -187,7 +187,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="szZipCode" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szZipCode'] ;?>" placeholder="ZIP/Postal Code" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szZipCode]">
+                                                <input id="szZipCode" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szZipCode'] ;?>" placeholder="ZIP/Postal Code" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szZipCode]">
                                             </div>
                                             <?php if(!empty($arErrorMessages['szZipCode'])){?>
                                             <span class="help-block pull-left">
@@ -200,13 +200,12 @@
                                     </div>
                                     
                                     
-                                   <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iRole]">
-                                     <input id="operationManagerId" class="form-control" type="hidden"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
+                                   <input id="iRole" class="form-control" type="hidden" value="5" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="editOperationManager[iRole]">
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
                                             <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>
-                                            <input type="submit" class="btn green-meadow" value="SAVE" name="addFranchisee[submit]">
+                                            <input type="submit" class="btn green-meadow" value="SAVE" name="editOperationManager[submit]">
                                         </div>
                                     </div>
                                     </div>

@@ -181,7 +181,7 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }	
 	}
-  public function viewConsumablesList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = array())
+  public function viewConsumablesList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry ='')
         {
             $searchAry = trim($searchAry);
             if($_SESSION['drugsafe_user']['iRole']==1)

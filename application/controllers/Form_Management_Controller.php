@@ -259,7 +259,7 @@ class Form_Management_Controller extends CI_Controller
                         </div>';
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
-        $pdf->Output('stock-assignment-report.pdf', 'I');
+        $pdf->Output('Drugsafe_Form_Management_report.pdf', 'I');
     }
 
    

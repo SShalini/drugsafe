@@ -14,82 +14,25 @@ class Admin_Model extends Error_Model
         parent::__construct();
     }
 
-   
-     function set_szBusinessName($value, $flag = true)
+    function set_szEmail($value,$field=false,$message=false , $flag = true)
     {
-        $this->data['szBusinessName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szBusinessName", "Business Name", false, false, $flag);
+        $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "$field", "$message", false, false, $flag);
     }
-     function set_sp_name($value, $flag = true)
+    function set_szOldPassword($value)
     {
-        $this->data['sp_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "sp_name", "Contact Name", false, false, $flag);
+        $this->data['szOldPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szOldPassword", "Current Password", false, 32);
     }
-     function set_ssc_name($value, $flag = true)
+    
+    function set_szName($value,$field=false,$message=false, $flag = true)
     {
-        $this->data['ssc_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "ssc_name", "Contact Name", false, false, $flag);
-    }
-      function set_psc_name($value, $flag = true)
-    {
-        $this->data['psc_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "psc_name", "Contact Name", false, false, $flag);
-    }
-     function set_iis_name($value, $flag = true)
-    {
-        $this->data['iis_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "iis_name", "Contact Name", false, false, $flag);
-    }
-     function set_rlr_name($value, $flag = true)
-    {
-        $this->data['rlr_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "rlr_name", "Contact Name", false, false, $flag);
-    }
-     function set_orlr_name($value, $flag = true)
-    {
-        $this->data['orlr_name'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "orlr_name", "Contact Name", false, false, $flag);
-    }
-    function set_szCompanyName($value, $flag = true)
-    {
-        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szName", "Company Name", false, false, $flag);
-    }
-    function set_szCompanyEmail($value, $flag = true)
-    {
-        $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Company Email", false, false, $flag);
-    }
-    function set_per_form_complete($value, $flag = true)
-    {
-        $this->data['per_form_complete'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "per_form_complete", "Name of Person Completing Form", false, false, $flag);
+        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, $field, $message, false, false, $flag);
     }
 
-    function set_szEmail($value, $flag = true)
-    {
-        $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Email address", false, false, $flag);
-    }
-     function set_sp_email($value, $flag = true)
-    {
-        $this->data['sp_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "sp_email", "Contact Email ", false, false, $flag);
-    }
-     function set_iis_email($value, $flag = true)
-    {
-        $this->data['iis_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "iis_email", "Contact Email ", false, false, $flag);
-    }
-     function set_rlr_email($value, $flag = true)
-    {
-        $this->data['rlr_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "rlr_email", "Contact Email ", false, false, $flag);
-    }
-     function set_orlr_email($value, $flag = true)
-    {
-        $this->data['orlr_email'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "orlr_email", "Contact Email ", false, false, $flag);
-    }
-   function set_szPrimaryEmail($value, $flag = true)
-    {
-        $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szEmail", "Primary Email address", false, false, $flag);
-    }
-     function set_szContactEmail($value, $flag = true)
-    {
-        $this->data['szContactEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "szContactEmail", "Contact Email address", false, false, $flag);
-    }
       function set_szPassword($value, $flag=true)
     {
         $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", false, false, $flag);
     }
-
-    function set_szClientType($value,$flag)
+    function set_szClientType($value)
     {
         $this->data['szClientType'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szClientType", "Client Type", false, false, $flag);
     }
@@ -103,122 +46,17 @@ class Admin_Model extends Error_Model
         $this->data['szConfirmPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szConfirmPassword", "Confirm Password", false, 32);
     }
    
-   function set_szContactNumber($value, $flag = true)
+   function set_szContactNumber($value,$field=false,$message=false, $flag = true)
     {
+        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__,$field,$message, false, 10, $flag);
+    }
 
-        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Contact Number", false, 10, $flag);
-    }
-     function set_psc_phone($value, $flag = true)
+  
+     function set_szMobile($value, $field=false,$message=false ,$flag = true)
     {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['psc_phone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "set_psc_phone", "Landline Phone Number", false, 10, $flag);
+        $this->data['szmobile'] = $this->validateInput($value, __VLD_CASE_MOBILE_PHONE__,$field,$message, false, 10, $flag);
     }
-    function set_ssc_phone($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['ssc_phone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "ssc_phone", "Landline Phone Number", false, 10, $flag);
-    }
-     function set_sp_mobile($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['sp_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "sp_mobile", "Contact Phone Number", false, 10, $flag);
-    }
-    function set_ssc_mobile($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['ssc_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "ssc_mobile", "Mobile Phone Number", false, 10, $flag);
-    }
-     function set_psc_mobile($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['psc_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "psc_mobile", "Mobile Phone Number", false, 10, $flag);
-    }
-     function set_orlr_mobile($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['orlr_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "orlr_mobile", "Contact Phone Number", false, 10, $flag);
-    }
-     function set_rlr_mobile($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['rlr_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "rlr_mobile", "Contact Phone Number", false, 10, $flag);
-    }
-     function set_iis_mobile($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['iis_mobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "iis_mobile", "Contact Phone Number", false, 10, $flag);
-    }
-     function set_szCompanyPhoneNumber($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-      
-        }*/
-        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", " Company Phone Number", false, 10, $flag);
-     
-    }
-     function set_szContactMobile($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['szContactMobile'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactMobile", "Contact Mobile Number", false, 10, $flag);
-    }
-     function set_szContactPhone($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['szContactPhone'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactPhone", "Contact Phone Number", false, 10, $flag);
-    }
-    function set_szPrimaryPhone($value, $flag = true)
-    {
-        /*if ($value != '') {
-            // strip all character except +, 0-9
-            $value = preg_replace('/[^\d+]/i', '', $value);
-       
-        }*/
-        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__, "szContactNumber", "Primary Phone Number", false, 10, $flag);
-    }
-    
-
+  
     function set_szCountry($value, $flag = true)
     {
         $this->data['szCountry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCountry", "Country", false, false, $flag);
@@ -236,7 +74,7 @@ class Admin_Model extends Error_Model
 
     function set_szZipCode($value, $flag = true)
     {
-        $this->data['szZipCode'] = $this->validateInput($value, __VLD_CASE_DIGITS__, "szZipCode", "ZIP/Postal Code", false,4, $flag);
+        $this->data['szZipCode'] = $this->validateInput($value,__VLD_CASE_DIGITS__, "szZipCode", "ZIP/Postal Code", 4,4, $flag);
     }
 
     function set_szAddress($value, $flag = true)
@@ -251,14 +89,15 @@ class Admin_Model extends Error_Model
     {
         $this->data['franchiseeId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "franchiseeId", "Franchisee", false, false, $flag);
     }
+    function set_operationManagerId($value, $flag = true)
+    {
+        $this->data['operationManagerId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "operationManagerId", "Operation Manager", false, false, $flag);
+    }
     function set_test_count($value, $flag = true)
     {
         $this->data['test_count'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "test_count", "Test Count", false, false, $flag);
     }
-//    function set_start_time($value, $flag = true)
-//    {
-//        $this->data['start_time'] = $this->validateInput($value, __VLD_CASE_TIME__, "start_time", "Preffered start time", false, false, $flag);
-//    }
+
      function set_site_people($value, $flag = true)
     {
         $this->data['site_people'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "site_people", "People on site", false, false, $flag);
@@ -293,22 +132,6 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-   
-    function set_szOldPassword($value)
-    {
-        $this->data['szOldPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szOldPassword", "Current Password", false, 32);
-    }
-    
-    function set_szName($value, $flag = true)
-    {
-        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szName", "Name", false, false, $flag);
-    }
-   function set_szContactName($value, $flag = true)
-    {
-        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szName", "Contact Name", false, false, $flag);
-   }
-
-
     public function checkCurrentPasswordExists()
     {
         $userData = $this->session->userdata('drugsafe_user');
@@ -329,13 +152,10 @@ class Admin_Model extends Error_Model
 
     public function adminLoginUser($validate)
     {
-
         $whereAry = array('szEmail' => $validate['szEmail'], 'szPassword' => encrypt($validate['szPassword']));
         $this->db->select('id,szName,szEmail,szPassword,iRole');
         $this->db->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
-        //$sql= $this->db->last_query();die();
-        //print_r($sql);
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
 
@@ -343,7 +163,6 @@ class Admin_Model extends Error_Model
             $adminAry['szName'] = $row[0]['szName'];
             $adminAry['szEmail'] = $row[0]['szEmail'];
             $adminAry['iRole'] = $row[0]['iRole'];
-            //$adminAry['Reqcount'] = $count;
 
             $user_session = $this->session->set_userdata('drugsafe_user', $adminAry);
 
@@ -410,14 +229,15 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-    function validateFranchiseeData($data, $arExclude = array(), $idfranchisee = 0, $forgotpass = FALSE)
+    function validateUsersData($data, $arExclude = array(),$idUser = 0, $forgotpass = FALSE)
     {
         if (!empty($data)) {
-            if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])), true);
-            
-            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])), true);
-           
-            if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])), true);
+            if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Name", true);
+            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Email Address" ,true);
+            if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Contact Number", true);
+            if($data['iRole']==2){
+              if (!in_array('operationManagerId', $arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])), true);  
+            }
             if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);
             if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
@@ -425,10 +245,8 @@ class Admin_Model extends Error_Model
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
             if ($this->error == false && $this->data['szEmail'] != '') {
 
-                $adminData = $this->session->userdata('drugsafe_user');
-                $this->data['id'] = $idfranchisee;
 
-                if ($this->checkUserExists($this->data['szEmail'], $this->data['id'])) {
+                if ($this->checkUserExists($data['szEmail'],$idUser)) {
                     if ($forgotpass) {
                         return TRUE;
                     } else {
@@ -514,43 +332,54 @@ class Admin_Model extends Error_Model
         }
     }
 
-    function insertFranchiseeDetails()
+    function insertUserDetails($data,$id=0)
     {
-
-
         $szNewPassword = create_login_password();
         $date = date('Y-m-d');
         $dataAry = array(
 
-            'szName' => $this->data['szName'],
-            'szEmail' => $this->data['szEmail'],
+            'szName' => $data['szName'],
+            'szEmail' => $data['szEmail'],
             'szPassword' => encrypt($szNewPassword),
-            'szContactNumber' => $this->data['szContactNumber'],
-            'szCountry' => $this->data['szCountry'],
-            'szState' => $this->data['szState'],
-            'szCity' => $this->data['szCity'],
-            'szZipCode' => $this->data['szZipCode'],
-            'szAddress' => $this->data['szAddress'],
-            'iRole' => '2',
+            'szContactNumber' => $data['szContactNumber'],
+            'szCountry' => $data['szCountry'],
+            'szState' => $data['szState'],
+            'szCity' => $data['szCity'],
+            'szZipCode' => $data['szZipCode'],
+            'szAddress' => $data['szAddress'],
+            'iRole' => $data['iRole'],
             'iActive' => '1',
             'dtCreatedOn' => $date
         );
-
-
-        $this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
-
+        $query=$this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
+        
+        
+ 
         if ($this->db->affected_rows() > 0) {
 
-            $id_player = (int)$this->db->insert_id();
+             if($data['iRole']==2){
+            $id_franchisee = (int)$this->db->insert_id();
+            $franchiseeAry=array(
+            'franchiseeId' => $id_franchisee,
+            'operationManagerId' => $data['operationManagerId'],
+            );
+            $this->db->insert(__DBC_SCHEMATA_FRANCHISEE__, $franchiseeAry);
+         }
+            $id_player = (int)$id_franchisee;
             $replace_ary = array();
-            $replace_ary['szName'] = $this->data['szName'];
-            $replace_ary['szEmail'] = $this->data['szEmail'];
+            $replace_ary['szName'] = $data['szName'];
+            $replace_ary['szEmail'] = $data['szEmail'];
             $replace_ary['szPassword'] = $szNewPassword;
             $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
             $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
-
-            createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, $this->data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
-
+           if($data['iRole']==2){
+            createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+            
+           }
+           if($data['iRole']==5){
+             createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+           }
+           
             return true;
         } else {
             return false;
@@ -558,19 +387,81 @@ class Admin_Model extends Error_Model
 
     }
 
-    public function viewFranchiseeList($searchAry='', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='')
+    public function viewFranchiseeList($searchAry='',$operationManagerId=0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='')
+    {
+       
+       if(!empty($operationManagerId)){
+          $whereAry = array('operationManagerId=' => $operationManagerId,'isDeleted=' => '0', 'iRole' => '2');  
+       }
+       else{
+           $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
+       }
+        $searchq = '';
+        if($id > '0'){
+            $searchq = 'franchiseeId = '.(int)$id;
+        }
+        if(!empty($name)){
+            $searchq = "szName LIKE '%$name%'";
+        }
+        if(!empty($email)){
+            $searchq = "szEmail LIKE '%$email%'";
+        }
+
+            $this->db->select('*');
+            $this->db->from('tbl_franchisee');
+            $this->db->join('ds_user', 'tbl_franchisee.franchiseeId = ds_user.id');
+            
+        if (!empty($searchq)) {
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
+            $this->db->where($searchq);
+        } else {
+            $this->db->where($whereAry);
+        }
+
+        $this->db->order_by($sortBy, $orderBy);
+        $this->db->limit($limit, $offset);
+        $this->db->order_by("franchiseeId", "asc");
+        $query = $this->db->get();
+
+//$sql = $this->db->last_query($query);
+//print_r($sql);die;
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+    public function getoperationManagerId($id = 0)
+    {
+        $whereAry = array('franchiseeId' => $this->sql_real_escape_string(trim($id)));
+      
+        $this->db->select('operationManagerId');
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_FRANCHISEE__);
+//$sql = $this->db->last_query($query);
+//print_r($sql);die;
+        if ($query->num_rows() > 0) {
+           $row = $query->result_array();
+            return $row[0];
+        } else {
+           return array();
+        }
+   }
+
+
+     public function viewOperationManagerList($searchAry='', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='')
     {
         $searchAry = trim($searchAry);
-       $searchDataAry= explode("-",$searchAry) ;
+        $searchDataAry= explode("-",$searchAry) ;
         $searchDataAry[0] = strtolower($searchDataAry[0]);
-       if($searchDataAry[0]=='fr'){
+       if($searchDataAry[0]=='om'){
            $search=$searchDataAry[1];
        }
        else{
            $search=$searchDataAry[0];
        }
-        $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
-        $searchq = '';
+        $whereAry = array('isDeleted=' => '0', 'iRole' => '5');
+                $searchq = '';
         if($id > '0'){
             $searchq = 'id = '.(int)$id;
         }
@@ -581,10 +472,9 @@ class Admin_Model extends Error_Model
             $searchq = "szEmail LIKE '%$email%'";
         }
         $this->db->select('*');
-        if (!empty($searchq)) {
-            $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
+       if (!empty($searchq)) {
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '5');
             $this->db->where($searchq);
-
 
         } else {
             $this->db->where($whereAry);
@@ -595,8 +485,8 @@ class Admin_Model extends Error_Model
         $this->db->order_by("id", "asc");
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
 
-/*$sql = $this->db->last_query($query);
-print_r($sql);*/
+//$sql = $this->db->last_query($query);
+//print_r($sql);die;
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -620,6 +510,7 @@ print_r($sql);*/
 
     public function sendNewPasswordToAdmin($szEmail)
     {
+
         $adminDetailsAry = $this->getAdminDetailsByEmailOrId($szEmail);
         if (!empty($adminDetailsAry)) {
             $id = $adminDetailsAry['id'];
@@ -639,8 +530,7 @@ print_r($sql);*/
                 $confirmationLink = __BASE_URL__ . "/admin/adminPassword_Recover/" . $szNewPassword;
                 $replace_ary['szLink'] = "<a href='" . $confirmationLink . "'>CLICK HERE TO CHANGE PASSWORD.</a>";
                 $replace_ary['szHttpsLink'] = $confirmationLink;
-
-                createEmail($this, '__USER_FORGOT_PASSWORD__', $replace_ary, $szEmail, '', __CUSTOMER_SUPPORT_EMAIL__, $id, __CUSTOMER_SUPPORT_EMAIL__);
+                createEmail($this, '__USER_FORGOT_PASSWORD__', $replace_ary, $szEmail, '', __CUSTOMER_SUPPORT_EMAIL__, $id_admin, __CUSTOMER_SUPPORT_EMAIL__);
                 return true;
             }
         } else {
@@ -665,7 +555,6 @@ print_r($sql);*/
 
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
-
             return $row[0];
         } else {
             return array();
@@ -753,32 +642,32 @@ print_r($sql);*/
   * Get User Details By Email or Id
   */
 
-    public function updateFranchiseeDetails($idfranchisee = 0)
+    public function updateUsersDetails($data,$id = 0)
     {
         $date = date('Y-m-d');
         $dataAry = array(
 
-            'szName' => $this->data['szName'],
-            'szEmail' => $this->data['szEmail'],
-            'szContactNumber' => $this->data['szContactNumber'],
-            'szCountry' => $this->data['szCountry'],
-            'szState' => $this->data['szState'],
-            'szCity' => $this->data['szCity'],
-            'szZipCode' => $this->data['szZipCode'],
-            'szAddress' => $this->data['szAddress'],
-            'iRole' => '2',
+            'szName' => $data['szName'],
+            'szEmail' => $data['szEmail'],
+            'szContactNumber' => $data['szContactNumber'],
+            'szCountry' => $data['szCountry'],
+            'szState' => $data['szState'],
+            'szCity' => $data['szCity'],
+            'szZipCode' => $data['szZipCode'],
+            'szAddress' => $data['szAddress'],
+            'iRole' => $data['iRole'],
             'dtUpdatedOn' => $date
         );
 
-        if ($idfranchisee > 0) {
-            $whereAry = array('id' => (int)$idfranchisee);
+        if ($id> 0) {
+            $whereAry = array('id' => (int)$id);
 
             $this->db->where($whereAry);
 
-            $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+       $queyUpdate =  $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
 
-            if ($this->db->affected_rows() > 0) {
-                return true;
+            if ($queyUpdate) {
+                 return true;
             } else {
                 return false;
             }
@@ -789,7 +678,7 @@ print_r($sql);*/
 
     public function deletefranchisee($idfranchisee)
     {
-        $clientAray = $this->Franchisee_Model->viewClientList(false,$idfranchisee, true, false, false);
+       $clientAray = $this->Franchisee_Model->viewClientList(false,$idfranchisee, true, false, false);
         if (!empty($clientAray)) {
             foreach ($clientAray as $clientlist) {
                 $this->Franchisee_Model->deleteClient($clientlist['id']);
@@ -808,6 +697,26 @@ print_r($sql);*/
             return false;
         }
     }
+       public function deleteOperationManagerDetails($idOperationManager)
+    {
+        $franchiseeAray = $this->Franchisee_Model->viewFranchiseeListById($idOperationManager); 
+        if (!empty($franchiseeAray)) {
+            foreach ($franchiseeAray as $franchiseelist) {
+                $this->deletefranchisee($franchiseelist['id']);
+            }
+
+        }
+        $dataAry = array(
+            'isDeleted' => '1'
+        );
+        $this->db->where('id', $idOperationManager);
+        if ($query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function deletemodelStockValue($idfranchisee)
     {
@@ -832,13 +741,13 @@ print_r($sql);*/
     function validateParentClientData($data, $arExclude = array(), $idClient=0)
   {
         if (!empty($data)) {
-            if (!in_array('szBusinessName', $arExclude)) $this->set_szBusinessName(sanitize_all_html_input(trim($data['szBusinessName'])), true);
-            if (!in_array('szName', $arExclude)) $this->set_szContactName(sanitize_all_html_input(trim($data['szName'])), true);
-            if (!in_array('szEmail', $arExclude)) $this->set_szPrimaryEmail(sanitize_all_html_input(trim($data['szEmail'])), true);
-            if (!in_array('szContactNumber', $arExclude)) $this->set_szPrimaryPhone(sanitize_all_html_input(trim($data['szContactNumber'])), true);
-            if (!in_array('szContactEmail', $arExclude)) $this->set_szContactEmail(sanitize_all_html_input(trim($data['szContactEmail'])), false);
-            if (!in_array('szContactPhone', $arExclude)) $this->set_szContactPhone(sanitize_all_html_input(trim($data['szContactPhone'])), false);
-            if (!in_array('szContactMobile', $arExclude)) $this->set_szContactMobile(sanitize_all_html_input(trim($data['szContactMobile'])), false);
+            if (!in_array('szBusinessName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szBusinessName'])),"szBusinessName","Business Name",true);
+            if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", true);
+            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Primary Email address", true);
+            if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Primary Phone Number", true);
+            if (!in_array('szContactEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szContactEmail'])),"szContactEmail","Contact Email address", false);
+            if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
+            if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
             if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);
             if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
@@ -849,11 +758,11 @@ print_r($sql);*/
           
             if($this->error == false )
             {
-                 if ($this->checkUserExists($this->data['szEmail'], $idClient)) {
+                 if ($this->checkUserExists($data['szEmail'], $idClient)) {
                     $this->addError('szEmail', "Someone already registered with entered email address.");
                     return false;
                 }
-                if ($this->checkBusinessNameExists($this->data['szBusinessName'],$idClient)) {
+                if ($this->checkBusinessNameExists($data['szBusinessName'],$idClient)) {
                     $this->addError('szBusinessName', "Business Name must be unique.");
                     return false;
                 }
@@ -873,13 +782,13 @@ print_r($sql);*/
     
   }
      function validateAdminData($data, $arExclude = array())
-    { 
+    {
         if (!empty($data)) {
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])), true);
             if (!in_array('szPassword', $arExclude)) $this->set_szPassword(sanitize_all_html_input(trim($data['szPassword'])), true);
             
           if ($this->error == false && $this->data['szEmail'] != '' || $this->data['szPassword'] != '')
-                {
+         {
         $this->db->select('iRole,iActive,isDeleted');
 
         $this->db->from(__DBC_SCHEMATA_USERS__);
@@ -888,10 +797,12 @@ print_r($sql);*/
 
 
         $query = $this->db->get();
+        
         if ($query->num_rows() > 0) {
             $row = $query->row_array();
             if ((int)$row['iRole'] == 3) {
-            $this->addError("szEmail", "Invalid EmailId or Password.");
+             $this->addError('szEmail', "Invalid EmailId or Password.");
+                        return false;
             } elseif ((int)$row['iActive'] == 0) {
                 $this->addError("szEmail", "Your account is inactive.");
             } else if ((int)$row['isDeleted'] == 1) {
@@ -963,33 +874,33 @@ print_r($sql);*/
         {
             if(!empty($data))
             {
-                if (!in_array('szName', $arExclude)) $this->set_szCompanyName(sanitize_all_html_input(trim($data['szName'])), true);
-                if(!in_array('per_form_complete',$arExclude)) $this->set_per_form_complete(sanitize_all_html_input(trim($data['per_form_complete'])),true);
-                if(!in_array('szEmail',$arExclude)) $this->set_szCompanyEmail(sanitize_all_html_input(trim($data['szEmail'])),true);
-                if(!in_array('szContactNumber',$arExclude)) $this->set_szCompanyPhoneNumber(sanitize_all_html_input(trim($data['szContactNumber'])),true);
+                if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName"," Company Name",true);
+                if(!in_array('per_form_complete',$arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['per_form_complete'])),"per_form_complete","Name of Person Completing Form",true);
+                if(!in_array('szEmail',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Company Email",true);
+                if(!in_array('szContactNumber',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Company Phone Number",true);
                 if(!in_array('szCountry',$arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])),true);
                 if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),true);
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
-                if (!in_array('sp_name', $arExclude)) $this->set_sp_name(sanitize_all_html_input(trim($data['sp_name'])), true);
-                if(!in_array('sp_mobile',$arExclude)) $this->set_sp_mobile(sanitize_all_html_input(trim($data['sp_mobile'])),true);
-                if(!in_array('sp_email',$arExclude)) $this->set_sp_email(sanitize_all_html_input(trim($data['sp_email'])),true);   
-                if (!in_array('iis_name', $arExclude)) $this->set_iis_name(sanitize_all_html_input(trim($data['iis_name'])), false);
-                if(!in_array('iis_mobile',$arExclude)) $this->set_iis_mobile(sanitize_all_html_input(trim($data['iis_mobile'])),false);
-                if(!in_array('iis_email',$arExclude)) $this->set_iis_email(sanitize_all_html_input(trim($data['iis_email'])),false);              
-                if (!in_array('rlr_name', $arExclude)) $this->set_rlr_name(sanitize_all_html_input(trim($data['rlr_name'])), true);
-                if(!in_array('rlr_mobile',$arExclude)) $this->set_rlr_mobile(sanitize_all_html_input(trim($data['rlr_mobile'])),true);
-                if(!in_array('rlr_email',$arExclude)) $this->set_rlr_email(sanitize_all_html_input(trim($data['rlr_email'])),true);   
-                if (!in_array('orlr_name', $arExclude)) $this->set_orlr_name(sanitize_all_html_input(trim($data['orlr_name'])), false);
-                if(!in_array('orlr_mobile',$arExclude)) $this->set_orlr_mobile(sanitize_all_html_input(trim($data['orlr_mobile'])),false);
-                if(!in_array('orlr_email',$arExclude)) $this->set_orlr_email(sanitize_all_html_input(trim($data['orlr_email'])),false);   
-                if (!in_array('psc_name', $arExclude)) $this->set_psc_name(sanitize_all_html_input(trim($data['psc_name'])), false);
-                if(!in_array('psc_phone',$arExclude)) $this->set_psc_phone(sanitize_all_html_input(trim($data['psc_phone'])),false);
-                if(!in_array('psc_mobile',$arExclude)) $this->set_psc_mobile(sanitize_all_html_input(trim($data['psc_mobile'])),false);
-                if(!in_array('ssc_name', $arExclude)) $this->set_ssc_name(sanitize_all_html_input(trim($data['ssc_name'])), false);
-                if(!in_array('ssc_phone',$arExclude)) $this->set_ssc_phone(sanitize_all_html_input(trim($data['ssc_phone'])),false);
-                if(!in_array('ssc_mobile',$arExclude)) $this->set_ssc_mobile(sanitize_all_html_input(trim($data['ssc_mobile'])),false);
+                if (!in_array('sp_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['sp_name'])),"sp_name","Contact Name", true);
+                if(!in_array('sp_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['sp_mobile'])),"sp_mobile","Contact Phone Number",true);
+                if(!in_array('sp_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['sp_email'])),"sp_email"," Contact Email",true);   
+                if (!in_array('iis_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['iis_name'])),"iis_name","Contact Name", false);
+                if(!in_array('iis_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['iis_mobile'])),"iis_mobile","Contact Phone Number",false);
+                if(!in_array('iis_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['iis_email'])),"iis_email","Contact Email",false);              
+                if (!in_array('rlr_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['rlr_name'])),"rlr_name" ,"Contact Name", true);
+                if(!in_array('rlr_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['rlr_mobile'])),"rlr_mobile","Contact Phone Number",true);
+                if(!in_array('rlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['rlr_email'])),"rlr_email"," Contact Email",true);   
+                if (!in_array('orlr_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['orlr_name'])),"orlr_name","Contact Name", false);
+                if(!in_array('orlr_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['orlr_mobile'])),"orlr_mobile","Contact Phone Number",false);
+                if(!in_array('orlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['orlr_email'])),"orlr_email"," Contact Email",false);   
+                if (!in_array('psc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['psc_name'])),"psc_name","Contact Name", false);
+                if(!in_array('psc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_phone'])),"psc_phone","Landline Phone Number",false);
+                if(!in_array('psc_mobile',$arExclude)) $this->set_szmobile(sanitize_all_html_input(trim($data['psc_mobile'])),"psc_mobile","Mobile Phone Number",false);
+                if(!in_array('ssc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['ssc_name'])),"ssc_name","Contact Name",false);
+                if(!in_array('ssc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_phone'])),"ssc_phone","Landline Phone Number",false);
+                if(!in_array('ssc_mobile',$arExclude)) $this->set_szmobile(sanitize_all_html_input(trim($data['ssc_mobile'])),"ssc_mobile","Mobile Phone Number",false);
                 if (!in_array('site_people', $arExclude)) $this->set_site_people(sanitize_all_html_input(trim($data['site_people'])), true);
                 if(!in_array('test_count',$arExclude)) $this->set_test_count(sanitize_all_html_input(trim($data['test_count'])),true);
 //                if (!in_array('start_time', $arExclude)) $this->set_start_time(sanitize_all_html_input(trim($data['start_time'])), true);
@@ -998,11 +909,11 @@ print_r($sql);*/
             {
                     $adminData = $this->session->userdata('drugsafe_user');
                     $this->data['id'] = $idClient;
-                 if ($this->checkUserExists($this->data['szEmail'],$this->data['id'])) {
+                 if ($this->checkUserExists($data['szEmail'],$this->data['id'])) {
                     $this->addError('szEmail', "Someone already registered with entered email address.");
                     return false;
                 }
-                if ($this->checkCompanyNameExists($this->data['szName'],$this->data['id'])) {
+                if ($this->checkCompanyNameExists($data['szName'],$this->data['id'])) {
                     $this->addError('szName', "Company Name must be unique.");
                     return false;
                 }
@@ -1016,7 +927,16 @@ print_r($sql);*/
             return false;
         }
 
-
 }
 
 ?>
+
+
+
+
+
+
+
+
+
+

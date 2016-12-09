@@ -328,6 +328,52 @@ if($mode == '__ALLOT_QUANTITY_POPUP_CONFIRM__')
     </div>
     <?php
 }
+if($mode == '__DELETE_OPERATION_MANAGER_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="operationManagerStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Delete Operation Manager Records</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Deleting this operation manager record will delete all the franchisee and client records (main client and site records) associated with this operation manager ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="deleteOperationManagerConfirmation('<?php echo $idOperationManager;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__DELETE_OPERATION_MANAGER_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="operationManagerStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Deleted Operation Manager</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Operation Manager has been successfully deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
 ?>
 
 

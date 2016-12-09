@@ -1,3 +1,8 @@
+<script type='text/javascript'>
+    $(function() {
+        $("#szSearchProdCode").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
         <div class="page-content">
           
@@ -64,10 +69,21 @@
                           <div class="row">
                            <form class="form-horizontal" id="szSearchConsumablesList" action="<?=__BASE_URL__?>/inventory/consumableslist " name="szSearchConsumablesList" method="post">
                           <div class="search col-md-3">
-                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="<?=sanitize_post_field_value($_POST['szSearchProdCode'])?>">
-                          
+<!--                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProdCode'])?><!--">-->
+                              <select class="form-control custom-select" name="szSearchProdCode" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
+                                  <option value="">Product Code</option>
+                                  <?php
+                                  foreach($consumableslist as $consumablesItem)
+                                  {
+                                      $selected = ($consumablesItem['szProductCode'] == $_POST['szSearchProdCode'] ? 'selected="selected"' : '');
+                                      echo '<option value="'.$consumablesItem['szProductCode'].'" >'.$consumablesItem['szProductCode'].'</option>';
+                                  }
+                                  ?>
+                              </select>
                           </div>
+                               <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                               </div>
                            </form>
                           </div>
                     <div class="row">

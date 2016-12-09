@@ -52,25 +52,27 @@ class Admin_Controller extends CI_Controller {
                die;
             }	
                 $validate= $this->input->post('adminLogin');
-            
-                
                 $iRemember = (int)$this->input->post('adminLogin[iRemember]');
-//               print_r($iRemember);die;
+                
               if($this->Admin_Model->validateAdminData($validate))
              {
-               
                  $adminAry = $this->Admin_Model->adminLoginUser($validate);
                      if(!empty($adminAry)) {
                         if ((int) $iRemember == 1) {
-                        set_customer_cookie($this, $adminAry);
-                         
+                        set_customer_cookie($this, $adminAry); 
                         }
                        $user_session = $this->session->userdata('drugsafe_user');
                       if($user_session[iRole]==1)
                       {
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+                        header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
                         die;
+                      }
+                       elseif($user_session[iRole]==5)
+                           {
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+                        die;  
                       }
                       else{
                         ob_end_clean();
@@ -78,8 +80,7 @@ class Admin_Controller extends CI_Controller {
                         die;  
                       }
                     }
-                
-              
+           
             }
                 $data['szMetaTagTitle'] = "Admin Login";
                 $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
@@ -118,7 +119,7 @@ class Admin_Controller extends CI_Controller {
             logout($this);
             ob_end_clean();
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
-            die();
+            die();			
         }
          function changePassword()
         {
@@ -161,31 +162,40 @@ class Admin_Controller extends CI_Controller {
         $this->load->view('layout/admin_footer');
 
         }
+         function addFranchiseeData()
+    {
+        $idOperationManager = $this->input->post('idOperationManager');
+        
+       if($idOperationManager>0){
+        $this->session->set_userdata('idOperationManager', $idOperationManager);
+       }
+        echo "SUCCESS||||";
+        echo "addFranchisee";
+    }
         function addFranchisee()
 	{
-            $validate= $this->input->post('addFranchisee'); 
-//            $countryAry = $this->Admin_Model->getCountries();
-//            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
+            $validate= $this->input->post('addFranchisee');
+            $idOperationManager = $this->session->userdata('idOperationManager');
+
             $count = $this->Admin_Model->getnotification();
-            if($this->Admin_Model->validateFranchiseeData($validate))
+            if($this->Admin_Model->validateUsersData($validate))
             {
               
-                if($this->Admin_Model->insertFranchiseeDetails())
+                if($this->Admin_Model->insertUserDetails($validate))
                 {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>New Franchisee ! </strong> New franchisee added successfully.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
+                    $this->session->unset_userdata('idOperationManager');
+                    ob_end_clean();
                     header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                     die;
                 }
             }
-           
+                    $data['idOperationManager'] = $idOperationManager;
                     $data['szMetaTagTitle'] = "Add Franchisee";
-                    //$data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
-//                    $data['countryAry'] = $countryAry;
-//                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
@@ -212,13 +222,10 @@ class Admin_Controller extends CI_Controller {
                 ob_end_clean();
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
-            }elseif($_SESSION['drugsafe_user']['iRole']!='1')
-            {
-
-                ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
-                die;
             }
+             if ($_SESSION['drugsafe_user']['iRole'] == '5') {
+             $operationManagerId = $_SESSION['drugsafe_user']['id'];
+        }
             $searchAry = '';
             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
                 $id = $_POST['szSearch'];
@@ -229,19 +236,18 @@ class Admin_Controller extends CI_Controller {
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $id = $_POST['szSearch2'];
             }
-
           
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
-                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,false,false,$id,$name,$email));
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email));
                 $config['per_page'] = 5;
               
             
                 $this->pagination->initialize($config);
                
-                $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry, $config['per_page'],$this->uri->segment(3),$id,$name,$email);
-          $searchOptionArr = $this->Admin_Model->viewFranchiseeList();
+                 $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email);
+                 $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
                   
                     $data['szMetaTagTitle'] = "Franchisee List";
                     $data['is_user_login'] = $is_user_login;
@@ -250,17 +256,67 @@ class Admin_Controller extends CI_Controller {
                     $data['data'] = $data;
                     $data['notification'] = $count;
                     $data['franchiseeAray'] = $franchiseeAray;
-            $data['allfranchisee'] = $searchOptionArr;
+                    $data['allfranchisee'] = $searchOptionArr;
          
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/franchiseeList');
             $this->load->view('layout/admin_footer');
         }
+            function operationManagerList()
+        {
+           $is_user_login = is_user_login($this);
+
+            // redirect to dashboard if already logged in
+           $count = $this->Admin_Model->getnotification();
         
-         
-     
-           
-        
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }elseif($_SESSION['drugsafe_user']['iRole']!='1')
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
+                die;
+            }
+              $searchAry = '';
+            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+                $id = $_POST['szSearch'];
+            }
+            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
+                $id = $_POST['szSearch1'];
+            }
+            if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
+                $id = $_POST['szSearch2'];
+            }
+          
+             // handle pagination
+          
+                $config['base_url'] = __BASE_URL__ . "/admin/operationManagerList/";
+                $config['total_rows'] = count($this->Admin_Model->viewOperationManagerList($searchAry,false,false,$id,$name,$email));
+                $config['per_page'] = 5;
+              
+            
+                $this->pagination->initialize($config);
+               
+                $operationManagerAray =$this->Admin_Model->viewOperationManagerList($searchAry, $config['per_page'],$this->uri->segment(3),$id,$name,$email);
+                $searchOptionArr =$this->Admin_Model->viewOperationManagerList();
+          
+                  
+                    $data['szMetaTagTitle'] = "Operation Manager List";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Operation_Manager_List";
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['data'] = $data;
+                    $data['notification'] = $count;
+                    $data['operationManagerAray'] = $operationManagerAray;
+                    $data['allOperationManager'] = $searchOptionArr;
+                    
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('admin/operationManagerList');
+            $this->load->view('layout/admin_footer');
+        }
         function getStatesByCountry($szCountry='')
  	{  
             if(trim($szCountry) != '')
@@ -290,11 +346,13 @@ class Admin_Controller extends CI_Controller {
         {
            
             $idfranchisee = $this->input->post('idfranchisee');
+            $idOperationManager = $this->input->post('idOperationManager');
            
             
             if($idfranchisee>0)
             {
                 $this->session->set_userdata('idfranchisee',$idfranchisee);
+                $this->session->set_userdata('idOperationManager',$idOperationManager);
                 echo "SUCCESS||||";
                 echo "editFranchisee";
             }
@@ -303,9 +361,8 @@ class Admin_Controller extends CI_Controller {
         
         public function editFranchisee()
         {
-//            $countryAry = $this->Admin_Model->getCountries();
+            $idOperationManager = $this->session->userdata('idOperationManager');
             $idfranchisee = $this->session->userdata('idfranchisee');
-//            $stateAry = $this->Admin_Model->getStatesByCountry(trim(Australia));
             $count = $this->Admin_Model->getnotification();
             if($idfranchisee >0)
             {
@@ -321,14 +378,16 @@ class Admin_Controller extends CI_Controller {
                     $userDataAry = $data_validate;
                 }
                 
-                if($this->Admin_Model->validateFranchiseeData($data_validate,array(), $idfranchisee))
+                if($this->Admin_Model->validateUsersData($data_validate,array(), $idfranchisee))
                 {
-                    if($this->Admin_Model->updateFranchiseeDetails($idfranchisee))
+                    if($this->Admin_Model->updateUsersDetails($data_validate,$idfranchisee))
                     {
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong>Franchisee Info! </strong> Franchisee data successfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                        
+                        ob_end_clean();
+                        $this->session->unset_userdata('idOperationManager');
+                        $this->session->unset_userdata('idfranchisee');
                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                         die;
@@ -340,6 +399,7 @@ class Admin_Controller extends CI_Controller {
 //                    $data['countryAry'] = $countryAry;
 //                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
+                    $data['idOperationManager'] = $idOperationManager;
                     $_POST['addFranchisee'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
@@ -348,25 +408,7 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('layout/admin_footer');
             }
         }
-        /*public function admin_forgotPassword()
-        {
-            $email=$this->input->post('drugSafeForgotPassword[szEmail]');
-             
-            if($this->Admin_Model->sendNewPasswordToAdmin($email))
-            {
-                $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong>Password Recovery! </strong> Your new password successfully updated.";
-                $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                $this->session->userdata('drugsafe_user_message');
-                ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_forgotPassword");
-                  die;
-            }
-            $data['szMetaTagTitle'] = "Admin Forgot Password";
-            $this->load->view('layout/login_header', $data);
-            $this->load->view('admin/forgotPassword');
-            $this->load->view('layout/login_footer');
-        }*/
+ 
          public function deleteFranchiseeAlert()
         {
             $data['mode'] = '__DELETE_FRANCHISEE_POPUP__';
@@ -405,17 +447,15 @@ class Admin_Controller extends CI_Controller {
             'szZipCode',
             'szAddress'
         );
-//        echo 'test1';
         if($this->Admin_Model->validateFranchiseeData($data_validate,$data_not_validate,'0',true))
         {
-//            echo 'test2';
+
             if($this->Admin_Model->checkAdminAccountStatus($data_validate['szEmail']))
             {
-//                echo 'test3';
+
                 if($this->Admin_Model->sendNewPasswordToAdmin($data_validate['szEmail']))
                 {
-//                    echo 'test4';
-                    //die;
+
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong>Password Recovery! </strong> Please check your email to recover your password.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
@@ -513,5 +553,108 @@ class Admin_Controller extends CI_Controller {
         $this->load->view('admin/adminPassword_Recover', $data);
         $this->load->view('layout/login_footer');
     }
+     function addOperationManager()
+	{
+            $validate= $this->input->post('addOperationManager'); 
 
-}
+            $count = $this->Admin_Model->getnotification();
+            if($this->Admin_Model->validateUsersData($validate))
+            {
+              
+                if($this->Admin_Model->insertUserDetails($validate))
+                {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<strong>New Operation Manager! </strong> New operation manager added successfully.";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    ob_end_clean();
+                    header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                    die;
+                }
+            }
+           
+                    $data['szMetaTagTitle'] = "Add Operation Manager";
+                    $data['pageName'] = "Operation_Manager_List";
+                    $data['validate'] = $validate;
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['notification'] = $count;
+            
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('admin/addOperationManager');
+            $this->load->view('layout/admin_footer');
+        } 
+         function editOperationManagerData()
+        {
+           
+            $idOperationManager = $this->input->post('idOperationManager');
+           
+            
+            if($idOperationManager>0)
+            {
+                $this->session->set_userdata('idOperationManager',$idOperationManager);
+                echo "SUCCESS||||";
+                echo "edit_Operation_Manager";
+            }
+            
+        }
+        
+        public function edit_Operation_Manager()
+        {
+            $idOperationManager = $this->session->userdata('idOperationManager');
+            $count = $this->Admin_Model->getnotification();
+            if($idOperationManager >0)
+            {
+                
+                  
+                $data_validate = $this->input->post('editOperationManager');
+                if(empty($data_validate))
+                {
+                    $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idOperationManager);
+                }
+                else
+                {
+                    $userDataAry = $data_validate;
+                }
+                
+                if($this->Admin_Model->validateUsersData($data_validate,array(), $idOperationManager))
+                {
+                    if($this->Admin_Model->updateUsersDetails($data_validate,$idOperationManager))
+                    {
+                        $szMessage['type'] = "success";
+                        $szMessage['content'] = "<strong>Operation Manager Info! </strong> Operation Manager data successfully updated.";
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                        
+                        ob_end_clean();
+                        $this->session->unset_userdata('idOperationManager');
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                        die;
+                    }
+                }
+                    $data['szMetaTagTitle'] = "Edit Operation Manager Details ";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Operation_Manager_List";
+                    $data['validate'] = $validate;
+                    $_POST['editOperationManager'] = $userDataAry;
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['notification'] = $count;
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('admin/editOperationManager');
+            $this->load->view('layout/admin_footer');
+            }
+        }
+      public function deleteOperationManagerAlert()
+        {
+            $data['mode'] = '__DELETE_OPERATION_MANAGER_POPUP__';
+            $data['idOperationManager'] = $this->input->post('idOperationManager');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function deleteOperationManagerConfirmation()
+        {
+            $data['mode'] = '__DELETE_OPERATION_MANAGER_CONFIRM__';
+            $data['idOperationManager'] = $this->input->post('idOperationManager');
+            $this->Admin_Model->deleteOperationManagerDetails($data['idOperationManager']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }  
+}      
+?>
+       

@@ -179,7 +179,7 @@
                             </div>
                             <div class="col-sm-8">
                                 <p><?php
-                                $countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails(false,$idClient,false,false);
+                                $countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,false,false);
                                     $count='0';
                                     if($countChildClientDetailsAray)
                                     {
@@ -694,6 +694,15 @@
                         </button>
                         <?php
                     }}
+                    elseif($_SESSION['drugsafe_user']['iRole']=='5'){
+                       if($clientDetailsAray['szNoOfSites'] > $count){
+                        ?>
+                        <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');">
+                        &nbsp;Add Site
+                        </button>
+                        <?php
+                    }  
+                    }
                     else 
                     {
                         ?>

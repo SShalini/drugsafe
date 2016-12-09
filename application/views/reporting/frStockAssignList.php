@@ -1,3 +1,8 @@
+<script type='text/javascript'>
+    $(function() {
+        $("#szSearchProdCode").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
     <div class="page-content">
 
@@ -48,13 +53,22 @@
                                   action="<?= __BASE_URL__ ?>/reporting/frstockassignlist "
                                   name="szSearchFrReqAssignList" method="post">
                                 <div class="search col-md-3">
-                                    <input type="text" name="szSearchFrReqAssignList" id="szSearchFrReqAssignList"
-                                           class="form-control input-square-right " placeholder="Product Code "
-                                           value="<?= sanitize_post_field_value($_POST['szSearchFrReqAssignList']) ?>">
-
-                                </div>
-                                <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
-                            </form>
+<!--                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProdCode'])?><!--">-->
+                              <select class="form-control custom-select" name="szSearchProdCode" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
+                                  <option value="">Product Code</option>
+                                  <?php
+                                  foreach($allQtyAssignListAray as $allQtyAssignListItem)
+                                  {
+                                      $selected = ($allQtyAssignListItem['szProductCode'] == $_POST['szSearchProdCode'] ? 'selected="selected"' : '');
+                                      echo '<option value="'.$allQtyAssignListItem['szProductCode'].'" >'.$allQtyAssignListItem['szProductCode'].'</option>';
+                                  }
+                                  ?>
+                              </select>
+                          </div>
+                               <div class="col-md-1">
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                               </div>
+                           </form>
                         </div>
                         <div class="row">
 

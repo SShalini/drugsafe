@@ -468,7 +468,7 @@ class Inventory_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-             $searchAry = $_POST['szSearchProdCode'];
+            $searchAry = $_POST['szSearchProdCode'];
              
              $config['base_url'] = __BASE_URL__ . "/inventory/consumableslist/";
              $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry));
@@ -479,6 +479,7 @@ class Inventory_Controller extends CI_Controller {
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
                $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry);
+               $consumableslistAry =$this->Inventory_Model->viewConsumablesList();
                $count = $this->Admin_Model->getnotification();
 
                     $data['consumablesAray'] = $consumablesAray;
@@ -488,6 +489,7 @@ class Inventory_Controller extends CI_Controller {
                     $data['subpageName'] = "Consumables_List";
                     $data['notification'] = $count;
                     $data['data'] = $data;
+                    $data['consumableslist'] = $consumableslistAry;
  
             $this->load->view('layout/admin_header',$data);
             $this->load->view('inventory/consumablesList');

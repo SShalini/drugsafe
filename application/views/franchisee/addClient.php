@@ -322,11 +322,59 @@
 
                                     <?php
 
-                                } else {
+                                }
+                                elseif($_SESSION['drugsafe_user']['iRole'] == '5'){
+                                   if(!$idfranchisee) {?>
+                                             <div
+                                            class="form-group <?php if (!empty($arErrorMessages['franchiseeId'])) { ?>has-error<?php } ?>">
+                                            <label class="col-md-4 control-label">Franchisee</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                    <select class="form-control" name="clientData[franchiseeId]"
+                                                            id="franchiseeId" Placeholder="State"
+                                                            onfocus="remove_formError(this.id,'true')">
+                                                        <option value=''>Select</option>
+                                                        <?php
+                                                    $operationManagerId =     $_SESSION['drugsafe_user']['id'];
+                                                     $franchiseeAray =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
+                                             
+                                                        if (!empty($franchiseeAray)) {
+                                                            foreach ($franchiseeAray as $franchiseeDetails) {
+                                                                ?>
+                                                                <option
+                                                                    value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['franchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <?php if (!empty($arErrorMessages['franchiseeId'])) { ?>
+                                                    <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                        <?php echo $arErrorMessages['franchiseeId']; ?>
+                                            </span>
+                                                <?php } ?>
+                                            </div>
+
+                                        </div>
+                                    <?php   
+                                   }
+                                   else{?>
+                                       <input id="franchiseeid" class="form-control" type="hidden"
+                                           value="<?php echo $idfranchisee; ?>"
+                                           name="clientData[franchiseeId]">
+                                       <?php
+                                   }
+                                }
+                                else {
                                     ?>
-                                    <input id="franchiseeid" class="form-control" type="hidden"
-                                           value="<?php echo $_SESSION['drugsafe_user']['id']; ?>"
-                                           name="clientData[franchiseeid]">
+                                    <input id="franchiseeid" class="form-control" type="text"
+                                           value="<?php echo  $_SESSION['drugsafe_user']['id']; ?>"
+                                           name="clientData[franchiseeId]">
                                     <?php
                                 }
                                 ?>

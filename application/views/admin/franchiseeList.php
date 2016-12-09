@@ -51,7 +51,7 @@
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>admin/addFranchisee');">
+                                    <button class="btn btn-sm green-meadow"  onclick="addFranchiseeData('');" href="javascript:void(0);">
                                         &nbsp;Add New Franchisee
                                     </button>
                                 </div>
@@ -92,7 +92,7 @@
                                           ?>
                                       </select>
                                   </div>
-<div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
                                       <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
@@ -130,6 +130,7 @@
                                     {   $i = 0;
                                         foreach($franchiseeAray as $franchiseeData)
                                         {
+                                            $operationManagerId = $this->Franchisee_Model->getOperationManagerId($franchiseeData['id']);
                                             $i++;
                                         ?>
                                         <tr>
@@ -143,7 +144,7 @@
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="viewUserDetails('<?php echo $franchiseeData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client List" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
