@@ -474,8 +474,6 @@ if(!empty($idfranchisee) || !empty($idProduct)){
         return array();
     }
 }
-
-
     }
 
 }

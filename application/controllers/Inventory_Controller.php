@@ -495,7 +495,5 @@ class Inventory_Controller extends CI_Controller {
             $this->load->view('inventory/consumablesList');
             $this->load->view('layout/admin_footer');
         }  
-        
     }      
-    
 ?>

@@ -227,6 +227,5 @@ class Inventory_Model extends Error_Model {
                     return array();
             }
         }      
-       
 }
 ?>

@@ -757,7 +757,7 @@ class Admin_Model extends Error_Model
           
             if($this->error == false )
             {
-                 if ($this->checkUserExists($data['szEmail'], $idClient)) {
+                 if ($this->checkUserExists($data['szEmail'], $idClient)) {echo"hiiii";die;
                     $this->addError('szEmail', "Someone already registered with entered email address.");
                     return false;
                 }
@@ -925,17 +925,5 @@ class Admin_Model extends Error_Model
             }
             return false;
         }
-
 }
-
 ?>
-
-
-
-
-
-
-
-
-
-

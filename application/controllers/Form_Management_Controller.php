@@ -261,8 +261,5 @@ class Form_Management_Controller extends CI_Controller
         ob_end_clean();
         $pdf->Output('Drugsafe_Form_Management_report.pdf', 'I');
     }
-
-   
 }
-
 ?>

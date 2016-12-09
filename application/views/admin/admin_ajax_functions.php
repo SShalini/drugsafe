@@ -375,5 +375,3 @@ if($mode == '__DELETE_OPERATION_MANAGER_CONFIRM__')
     <?php
 }
 ?>
-
-

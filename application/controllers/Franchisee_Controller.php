@@ -439,11 +439,7 @@ class Franchisee_Controller extends CI_Controller
                     $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
-                    ob_end_clean();
-                $this->session->unset_userdata('idfranchisee');
-                $this->session->unset_userdata('idClient');
-                $this->session->unset_userdata('flag');
-                $this->session->unset_userdata('url');
+                  
                     header("Location:" . __BASE_URL__ . $url);
 
                     die;
@@ -624,8 +620,5 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('layout/admin_footer');
        
     }
-
-
 }
-
 ?>

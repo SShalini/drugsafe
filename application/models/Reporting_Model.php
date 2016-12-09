@@ -133,6 +133,5 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
-      
 }
 ?>

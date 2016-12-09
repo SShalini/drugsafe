@@ -1,4 +1,3 @@
-
 <div class="page-content-wrapper">
         <div class="page-content">
             <div id="page_content" class="row">

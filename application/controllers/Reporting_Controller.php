@@ -685,5 +685,4 @@ class Reporting_Controller extends CI_Controller
         $objWriter->save('php://output');
     }
 }
-
 ?>

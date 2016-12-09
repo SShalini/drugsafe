@@ -827,8 +827,5 @@ if(!empty($QtyAssignArr)){
             $this->load->view('admin/admin_ajax_functions',$data);
            }
         } 
-         
-        
     }      
-    
 ?>

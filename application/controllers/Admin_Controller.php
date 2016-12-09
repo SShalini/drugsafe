@@ -662,5 +662,4 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('admin/admin_ajax_functions',$data);
         }  
 }      
-?>
-       
+?>    
