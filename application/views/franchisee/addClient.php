@@ -275,47 +275,88 @@
                                 <?php
 
                                 if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                                    if (!$idfranchisee) {
+//                                    if (!$idfranchisee)
+                                       if ($flag==2) {
                                         ?>
-                                        <div
-                                            class="form-group <?php if (!empty($arErrorMessages['franchiseeId'])) { ?>has-error<?php } ?>">
-                                            <label class="col-md-4 control-label">Franchisee</label>
-                                            <div class="col-md-6">
-                                                <div class="input-group">
+
+                                 <div  class="form-group <?php if (!empty($arErrorMessages['operationManagerId'])) { ?>has-error<?php } ?>">
+                                        <label class="col-md-4 control-label">Operation Manager</label>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                    <select class="form-control" name="clientData[franchiseeId]"
-                                                            id="franchiseeId" Placeholder="State"
-                                                            onfocus="remove_formError(this.id,'true')">
-                                                        <option value=''>Select</option>
-                                                        <?php
-                                                        if (!empty($franchiseeAray)) {
-                                                            foreach ($franchiseeAray as $franchiseeDetails) {
+                                                <select class="form-control " name="clientData[operationManagerId]" id="operationManagerId" Placeholder="Operation Manager" onchange="getFranchiseeListing(this.value);"  onfocus="remove_formError(this.id,'true')">
+                                                    <option value=''>Select</option>
+                                                    <?php
+                                                     $operationManagerListArr =$this->Admin_Model->viewOperationManagerList();
+                                                        if(!empty($operationManagerListArr))
+                                                        {
+                                                            foreach ($operationManagerListArr as $operationManagerListDetails) 
+                                                            {
                                                                 ?>
-                                                                <option
-                                                                    value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['franchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
+                                                             <option value="<?php echo trim($operationManagerListDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['operationManagerId']) == trim($operationManagerListDetails['id']) ? "selected" : ""); ?>><?php echo trim($operationManagerListDetails['szName']); ?></option>
                                                                 <?php
                                                             }
                                                         }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                <?php if (!empty($arErrorMessages['franchiseeId'])) { ?>
-                                                    <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                        <?php echo $arErrorMessages['franchiseeId']; ?>
-                                            </span>
-                                                <?php } ?>
+                                                    ?>
+                                                </select>
                                             </div>
-
+                                               <?php if (!empty($arErrorMessages['operationManagerId'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['operationManagerId'];?>
+                                            </span>
+                                        <?php }?>
                                         </div>
+
+                                    </div>
+                                     </div>
+                                     <div  class="form-group <?php if (!empty($arErrorMessages['franchiseeId'])) { ?>has-error<?php } ?>">
+                                        <label class="col-md-4 control-label">Franchisee</label>
+                                         <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <div id="franchisee_container">
+                                                  <?php if(empty($validate['operationManagerId'])){?>
+                                                 <input type="text" class="form-control" id="franchiseeId" name="clientData[franchiseeId]" placeholder="Franchisee" value="<?=sanitize_post_field_value($_POST['clientData']['franchiseeId'])?>" onfocus="remove_formError(this.id,'true')">
+                                                  <?php } else{
+                                                       $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $validate['franchiseeId']);
+                                                  ?>
+
+                                                 <select class="form-control " name="clientData[franchiseeId]" id="franchiseeId" Placeholder="Franchisee"  onfocus="remove_formError(this.id,'true')">
+                                                    <option value=''>Select</option>
+                                                   
+                                                             <option value="<?php echo trim($franchiseeDetArr1['id']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['franchiseeId']) == trim($franchiseeDetArr1['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetArr1['szName']); ?></option>
+                                                             
+                                                </select>
+                                               <?php }?>
+                                                </div>
+                                                 </div>
+                                            <?php if (!empty($arErrorMessages['franchiseeId'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['franchiseeId'];?>
+                                            </span>
+                                        <?php }?>
+                                       
+                                        
+                                    </div>
+                                    </div>   
+                                
                                         <?php
 
                                     } else {
                                         ?>
-                                        <input id="franchiseeId" class="form-control" type="hidden"
+                                        <input id="franchiseeId" class="form-control" type="text"
                                                value="<?php echo $idfranchisee; ?>" name="clientData[franchiseeId]">
+                                        <?php  $franchiseeAry = $this->Franchisee_Model->getFranchiseeDetailsByOperationManagerId(trim($idfranchisee));
+                                       
+                                        ?>
+                                         <input id="OperationManagerId" class="form-control" type="text"
+                                               value="<?php echo $franchiseeAry['operationManagerId']; ?>" name="clientData[operationManagerId]">
                                         <?php
                                     }
                                     ?>
@@ -368,8 +409,10 @@
                                            value="<?php echo $idfranchisee; ?>"
                                            name="clientData[franchiseeId]">
                                        <?php
+                                   }?>
+                                   <input id="OperationManagerId" class="form-control" type="text" value="<?php echo $_SESSION['drugsafe_user']['id'] ?>" name="clientData[operationManagerId]">
+                                <?php
                                    }
-                                }
                                 else {
                                     ?>
                                     <input id="franchiseeid" class="form-control" type="text"

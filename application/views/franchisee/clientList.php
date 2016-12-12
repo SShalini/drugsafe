@@ -33,6 +33,14 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
+                         <?php  $operationManagerIdArr = $this->Admin_Model->getoperationManagerId($franchiseeArr['id']); 
+                          $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operationManagerIdArr['operationManagerId']);
+                          
+                         ?>
+                         <a onclick="viewFranchisee(<?php echo $operationManagerIdArr['operationManagerId'];?>);;" href="javascript:void(0);"><?php echo $operationManagerDetArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <li>
                         <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
                         <i class="fa fa-circle"></i>
                     </li>
@@ -58,8 +66,7 @@
 //                    }
                    ?>
                     &nbsp; &nbsp;
-                    <?php  $operationManagerIdArr = $this->Admin_Model->getoperationManagerId($franchiseeArr['id']);
-               ?>
+                   
                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeArr['id'];?>','<?php echo $operationManagerIdArr['operationManagerId'];?>');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 
                     </a>

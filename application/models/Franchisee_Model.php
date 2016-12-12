@@ -645,5 +645,22 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             return array();
         }
     }
+    public function getFranchiseeDetailsByOperationManagerId($id = 0)
+    {
+  
+        if ((int)$id > 0 ) {
+            $whereAry = array('franchiseeId' => (int)$id);
+        } 
+        $this->db->select('operationManagerId');
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_FRANCHISEE__);
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            return array();
+        }
+    }
 }
 ?>

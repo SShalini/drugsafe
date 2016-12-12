@@ -73,7 +73,7 @@
                                       foreach($allOperationManager as $operationManagerIdList)
                                       {
                                           $selected = ($operationManagerIdList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                          echo '<option value="'.$operationManagerIdList['id'].'" >om-'.$operationManagerIdList['id'].'</option>';
+                                          echo '<option value="'.$operationManagerIdList['id'].'" >Om-'.$operationManagerIdList['id'].'</option>';
                                       }
                                   ?>
                               </select>
@@ -143,7 +143,7 @@
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editOperationManagerDetails('<?php echo $operationManagerData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editOperationManagerDetails('<?php echo $operationManagerData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="OperationManagerView" title="View Franchisee List" onclick="viewFranchisee(<?php echo $operationManagerData['id'];?>);" href="javascript:void(0);"></i>

@@ -59,11 +59,14 @@ class Franchisee_Controller extends CI_Controller
         $idfranchisee = $this->input->post('idfranchisee');
         $idclient = $this->input->post('idclient');
         $url = $this->input->post('url');
+        $flag = $this->input->post('flag');
+       
         $this->session->set_userdata('idfranchisee', $idfranchisee);
         $this->session->set_userdata('idclient', $idclient);
         $this->session->set_userdata('url', $url);
+        $this->session->set_userdata('flag', $flag);
 
-
+      
         echo "SUCCESS||||";
         echo "addClient";
     }
@@ -82,9 +85,11 @@ class Franchisee_Controller extends CI_Controller
         
         $count = $this->Admin_Model->getnotification();
         $validate = $this->input->post('clientData');
-  
+    
+    
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
+        $flag = $this->session->userdata('flag');
         $idclient = $this->session->userdata('idclient');
 
         $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false,false,false);
@@ -140,15 +145,15 @@ class Franchisee_Controller extends CI_Controller
         }
 
         }
+      
         $data['pageName'] = "Client_Record";
         $data['szMetaTagTitle'] = "Add Client";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
-//        $data['countryAry'] = $countryAry;
         $data['franchiseeAray'] = $franchiseeAray;
-//        $data['stateAry'] = $stateAry;
         $data['validate'] = $validate;
         $data['idfranchisee'] = $idfranchisee;
+        $data['flag'] = $flag;
         $data['szParentId'] = $idclient;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
 
@@ -357,8 +362,7 @@ class Franchisee_Controller extends CI_Controller
             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientFranchiseeArr[0]['franchiseeId']);
             $data['franchiseeArr'] = $franchiseeDetArr;
         }
-//            $data['updateByDataArr'] = $UpdatedBy; 
-//            $data['franchiseeDataArr'] = $frdata;
+
         $data['sitesArr'] = $sitesArr;
         $data['idClient'] = $idClient;
         $data['pageName'] = "Client_Record";
@@ -439,7 +443,6 @@ class Franchisee_Controller extends CI_Controller
                     $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
-                  
                     header("Location:" . __BASE_URL__ . $url);
 
                     die;
@@ -465,11 +468,7 @@ class Franchisee_Controller extends CI_Controller
                     $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";  
                     }
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                    ob_end_clean();
-                $this->session->unset_userdata('idfranchisee');
-                $this->session->unset_userdata('idClient');
-                $this->session->unset_userdata('url');
-                $this->session->unset_userdata('flag');
+                   
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . $url);
 

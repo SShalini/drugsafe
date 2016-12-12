@@ -53,7 +53,7 @@
 
                    ?>
                     &nbsp; &nbsp;
-                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Operation Manager Data" onclick="editOperationManagerDetails('<?php echo $operationManagerAray['id'];?>');" href="javascript:void(0);">
+                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Operation Manager Data" onclick="editOperationManagerDetails('<?php echo $operationManagerAray['id'];?>','2');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 
                     </a>
                 </span>
@@ -235,7 +235,7 @@
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>);" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client List" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>

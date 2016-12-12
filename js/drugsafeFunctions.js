@@ -129,6 +129,14 @@ function getStateListingProfile(szCountry) {
         }
     });
 }
+function getFranchiseeListing(operationManagerId) {
+
+    $.post(__BASE_URL__ + "/admin/getFranchiseeByOperationManager", {operationManagerId: operationManagerId}, function (result) {
+        if (result != '') {
+            $("#franchisee_container").html(result);   
+        }
+    });
+}
 function editFranchiseeDetails(idfranchisee,idOperationManager) {
     $.post(__BASE_URL__ + "/admin/editfranchiseedata", {idfranchisee: idfranchisee,idOperationManager: idOperationManager}, function (result) {
         ar_result = result.split('||||');
@@ -136,8 +144,8 @@ function editFranchiseeDetails(idfranchisee,idOperationManager) {
 
     });
 }
-function editOperationManagerDetails(idOperationManager) {
-    $.post(__BASE_URL__ + "/admin/editOperationManagerData", {idOperationManager: idOperationManager}, function (result) {
+function editOperationManagerDetails(idOperationManager,flag) {
+    $.post(__BASE_URL__ + "/admin/editOperationManagerData", {idOperationManager: idOperationManager,flag: flag}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/admin/" + ar_result[1];
 
@@ -229,11 +237,11 @@ function viewFranchisee(idOperationManager) {
 }
 
 
-function addClientData(idfranchisee,idclient,url) {
+function addClientData(idfranchisee,idclient,url,flag) {
     if(idclient == undefined || idclient == null){
         idclient = 0;
     }
-    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,url:url}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/addClientData", {idfranchisee: idfranchisee,idclient:idclient,url:url,flag:flag}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 

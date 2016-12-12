@@ -89,6 +89,7 @@ class Admin_Model extends Error_Model
     {
         $this->data['franchiseeId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "franchiseeId", "Franchisee", false, false, $flag);
     }
+    
     function set_operationManagerId($value, $flag = true)
     {
         $this->data['operationManagerId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "operationManagerId", "Operation Manager", false, false, $flag);
@@ -387,9 +388,9 @@ class Admin_Model extends Error_Model
 
     }
 
-    public function viewFranchiseeList($searchAry='',$operationManagerId=0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='')
+    public function viewFranchiseeList($searchAry='',$operationManagerId=0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='',$opName='')
     {
-       
+     
        if(!empty($operationManagerId)){
           $whereAry = array('operationManagerId=' => $operationManagerId,'isDeleted=' => '0', 'iRole' => '2');  
        }
@@ -405,7 +406,10 @@ class Admin_Model extends Error_Model
         }
         if(!empty($email)){
             $searchq = "szEmail LIKE '%$email%'";
+        } if(!empty($opName)){
+            $searchq = "szName LIKE '%$opName%'";
         }
+        
 
             $this->db->select('*');
             $this->db->from('tbl_franchisee');
@@ -423,7 +427,8 @@ class Admin_Model extends Error_Model
         $this->db->order_by("franchiseeId", "asc");
         $query = $this->db->get();
 
-
+//$sql = $this->db->last_query($query);
+//print_r($sql);die;
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -753,11 +758,12 @@ class Admin_Model extends Error_Model
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
             if(!in_array('franchiseeId',$arExclude)) $this->set_franchiseeId(sanitize_all_html_input(trim($data['franchiseeId'])),true);
+            if(!in_array('operationManagerId',$arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])),true);
             if(!in_array('szNoOfSites',$arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])),true);
           
             if($this->error == false )
             {
-                 if ($this->checkUserExists($data['szEmail'], $idClient)) {echo"hiiii";die;
+                 if ($this->checkUserExists($data['szEmail'], $idClient)) {
                     $this->addError('szEmail', "Someone already registered with entered email address.");
                     return false;
                 }

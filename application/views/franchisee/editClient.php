@@ -1143,7 +1143,9 @@
                                 </div> 
                                     <!-- END CONTACT DETAILS PORTLET-->      
                               <?php } ?>    
-                                 <input id="franchiseeId" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['franchiseeId'] ;?>" name="clientData[franchiseeId]">
+                                 <input id="franchiseeId" class="form-control" type="text" value="<?php echo $_POST['clientData']['franchiseeId'] ;?>" name="clientData[franchiseeId]">
+                                 <?php $franchiseeAry = $this->Franchisee_Model->getFranchiseeDetailsByOperationManagerId(trim($idfranchisee)); ?>
+                                 <input id="operationManagerId" class="form-control" type="text" value="<?php echo $franchiseeAry['operationManagerId']; ?>" name="clientData[operationManagerId]">
                                  <input id="clientType" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['clientType'] ;?>" name="clientData[clientType]">
                                  <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="clientData[iRole]">
                                  <div class="form-actions">

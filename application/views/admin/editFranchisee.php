@@ -8,6 +8,18 @@
                             <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
+                       <li>
+                         <?php  
+                          $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idOperationManager);
+                          
+                         ?>
+                         <a onclick="viewFranchisee(<?php echo $operationManagerIdArr['operationManagerId'];?>);;" href="javascript:void(0);"><?php echo $operationManagerDetArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                      </li>
+                      <li>
+                         <a onclick="viewClient(<?php echo $idfranchisee;?>);;" href="javascript:void(0);"><?php echo $_POST['addFranchisee']['szName'] ;?></a>
+                        <i class="fa fa-circle"></i>
+                      </li>
                         <li>
                             <span class="active">Edit Franchisee</span>
                         </li>
@@ -201,7 +213,7 @@
                                     
                                     
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iRole]">
-                                     <input id="operationManagerId" class="form-control" type="hidden"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
+                                     <input id="operationManagerId" class="form-control" type="text"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">

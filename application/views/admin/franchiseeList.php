@@ -3,6 +3,7 @@
         $("#szSearch").customselect();
         $("#szSearchname").customselect();
         $("#szSearchemail").customselect();
+        $("#szSearchOperationmanager").customselect();
 
     });
 </script>
@@ -64,7 +65,7 @@
                             ?>
                          <div class="row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/admin/franchiseeList" name="szSearchField" method="post">
-                          <div class="search col-md-3">
+                          <div class="search col-md-2">
 <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
                               <select class="form-control custom-select" name="szSearch1" id="szSearch" onfocus="remove_formError(this.id,'true')">
                                   <option value="">Franchisee Id</option>
@@ -79,7 +80,7 @@
                           </div>
                                   <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
 <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
-                                  <div class="search col-md-3">
+                                  <div class="search col-md-2">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
@@ -92,8 +93,27 @@
                                           ?>
                                       </select>
                                   </div>
+                                   
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+<!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+                                  <div class="search col-md-2">
+                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
+                                      <select class="form-control custom-select" name="szSearch3" id="szSearchOperationmanager" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Operation Manager</option>
+                                          <?php
+                                          foreach($allfranchisee as $franchiseeIdList)
+                                          {  
+                                              $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $franchiseeIdList['operationManagerId']);
+                                         
+                                              $selected = ($operationManagerDetArr['szName'] == $_POST['szSearch3'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$operationManagerDetArr['szName'].'" >'.$operationManagerDetArr['szName'].'</option>';
+                                         
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
                                <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
-                                  <div class="search col-md-3">
+                                  <div class="search col-md-2">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
                                       <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Email</option>
@@ -119,6 +139,7 @@
                                         <th> Id.</th>
                                         <th> Name</th>
                                         <th> Email</th>
+                                        <th> Operation Manager </th>
                                         <th> Contact No </th>
                                         <th> Address </th>
                                         <th> Actions </th>
@@ -131,16 +152,18 @@
                                         foreach($franchiseeAray as $franchiseeData)
                                         {
                                             $operationManagerId = $this->Franchisee_Model->getOperationManagerId($franchiseeData['id']);
+                                            $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operationManagerId['operationManagerId']);
                                             $i++;
                                         ?>
                                         <tr>
                                             <td> FR-<?php echo $franchiseeData['id'];?> </td>
                                             <td> <?php echo $franchiseeData['szName']?> </td>
                                             <td> <?php echo $franchiseeData['szEmail'];?> </td>
+                                            <td> <?php echo $operationManagerDetArr['szName'];?> </td>
                                             <td> <?php echo $franchiseeData['szContactNumber'];?> </td>
                                             <td> <?php echo $franchiseeData['szCity'];?> </td>
                                            <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>,'','');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>,'','','1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>

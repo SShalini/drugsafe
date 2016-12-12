@@ -242,17 +242,20 @@ class Admin_Controller extends CI_Controller {
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $id = $_POST['szSearch2'];
             }
-          
+            if(isset($_POST['szSearch3']) && !empty($_POST['szSearch3'])){
+                $opName = $_POST['szSearch3'];
+            }
+           
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
-                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email));
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email,$opName));
                 $config['per_page'] = 5;
               
             
                 $this->pagination->initialize($config);
                
-                 $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email);
+                 $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email,$opName);
                  $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
                   
                     $data['szMetaTagTitle'] = "Franchisee List";
@@ -347,7 +350,32 @@ class Admin_Controller extends CI_Controller {
      	}
       	echo $result;           
   	}
-      
+              function getFranchiseeByOperationManager($operationManagerId='')
+ 	{  
+            if(trim($operationManagerId) != '')
+            {
+                $_POST['operationManagerId'] = $operationManagerId; 
+            }
+            
+            $franchiseeAry = $this->Admin_Model->viewFranchiseeList(false,trim($_POST['operationManagerId']));
+         
+            
+      	if(!empty($franchiseeAry))
+     	{
+        	$result = "<select class=\"form-control \" id=\"franchiseeId\" name=\"clientData[franchiseeId]\" placeholder=\"Franchisee\" onfocus=\"remove_formError(this.id,'true')\">";
+          	foreach ($franchiseeAry as $franchiseeDetails)
+          	{
+                    
+             	$result .= "<option value='".$franchiseeDetails['id']."' >".$franchiseeDetails['szName']."</option>";
+         	}
+         	$result .= "</select>";
+     	}
+     	else
+     	{
+     		$result = "<input type=\"text\" class=\"form-control required\" id=\"franchiseeId\" name=\"clientData[franchiseeId]\" placeholder=\"Franchisee\" onfocus=\"remove_formError(this.id,'true')\">";
+     	}
+      	echo $result;           
+  	}
         function editfranchiseedata()
         {
            
@@ -405,6 +433,7 @@ class Admin_Controller extends CI_Controller {
 //                    $data['countryAry'] = $countryAry;
 //                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
+                    $data['idfranchisee'] = $idfranchisee;
                     $data['idOperationManager'] = $idOperationManager;
                     $_POST['addFranchisee'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
@@ -592,11 +621,13 @@ class Admin_Controller extends CI_Controller {
         {
            
             $idOperationManager = $this->input->post('idOperationManager');
+            $flag = $this->input->post('flag');
            
             
             if($idOperationManager>0)
             {
-                $this->session->set_userdata('idOperationManager',$idOperationManager);
+                $this->session->set_userdata('flag',$flag);
+                 $this->session->set_userdata('idOperationManager',$idOperationManager);
                 echo "SUCCESS||||";
                 echo "edit_Operation_Manager";
             }
@@ -606,6 +637,7 @@ class Admin_Controller extends CI_Controller {
         public function edit_Operation_Manager()
         {
             $idOperationManager = $this->session->userdata('idOperationManager');
+            $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
             if($idOperationManager >0)
             {
@@ -628,11 +660,17 @@ class Admin_Controller extends CI_Controller {
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong>Operation Manager Info! </strong> Operation Manager data successfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                        
-                        ob_end_clean();
+                     
+                        if($flag==1){
+                        $this->session->unset_userdata('flag'); 
                         $this->session->unset_userdata('idOperationManager');
-                        ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                         ob_end_clean();
+                        }else{
+                          $this->session->unset_userdata('flag');
+                          header("Location:" . __BASE_URL__ . "/franchisee/franchiseeRecord");  
+                          ob_end_clean();
+                        }
                         die;
                     }
                 }
