@@ -183,12 +183,11 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                            <select class="form-control " name="addFranchisee[szCountry]" id="szCountry"
-                                                    Placeholder="Country" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-                                                <option value="Australia" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim("Australia") ? "selected" : ""); ?>>Australia</option>
-                                                
-                                            </select>
+                                             <input id="szCountry" class="form-control read-only" type="text"
+                                                   value="Australia" readonly
+                                                   placeholder="Country" onfocus="remove_formError(this.id,'true')"
+                                                   name="addFranchisee[szCountry]"> 
+                                           
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">
@@ -244,7 +243,7 @@
                                             <input id="szCity" class="form-control" type="text"
                                                    value="<?php echo $_POST['addFranchisee']['szCity']; ?>"
                                                    placeholder="City" onfocus="remove_formError(this.id,'true')"
-                                                   name="addFranchisee[szCity]">
+                                                   name="addFranchisee[szCity]"> 
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCity'])) { ?>
                                             <span class="help-block pull-left">

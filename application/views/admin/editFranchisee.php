@@ -123,8 +123,8 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                            <select class="form-control " name="addFranchisee[szCountry]" id="szCountry"
-                                                    Placeholder="Country" onfocus="remove_formError(this.id,'true')">
+                                            <select class="form-control read-only " name="addFranchisee[szCountry]" id="szCountry"
+                                                    Placeholder="Country" readonly onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
                                                 <option value="Australia" <?php echo(sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim("Australia") ? "selected='selected'" : ""); ?>>Australia</option>
                                                 
@@ -213,7 +213,7 @@
                                     
                                     
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iRole]">
-                                     <input id="operationManagerId" class="form-control" type="text"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
+                                     <input id="operationManagerId" class="form-control" type="hidden"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">

@@ -389,12 +389,10 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                            <select class="form-control " name="clientData[szCountry]" id="szCountry"
-                                                    Placeholder="Country" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-                                                <option value="Australia" <?php echo(sanitize_post_field_value($_POST['clientData']['szCountry']) == trim("Australia") ? "selected" : ""); ?>>Australia</option>
-                                                
-                                            </select>
+                                            <input id="szCountry" class="form-control read-only" type="text"
+                                                   value="Australia"
+                                                   placeholder="Country" onfocus="remove_formError(this.id,'true')" readonly
+                                                   name="clientData[szCountry]">
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">
@@ -1143,9 +1141,9 @@
                                 </div> 
                                     <!-- END CONTACT DETAILS PORTLET-->      
                               <?php } ?>    
-                                 <input id="franchiseeId" class="form-control" type="text" value="<?php echo $_POST['clientData']['franchiseeId'] ;?>" name="clientData[franchiseeId]">
+                                 <input id="franchiseeId" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['franchiseeId'] ;?>" name="clientData[franchiseeId]">
                                  <?php $franchiseeAry = $this->Franchisee_Model->getFranchiseeDetailsByOperationManagerId(trim($idfranchisee)); ?>
-                                 <input id="operationManagerId" class="form-control" type="text" value="<?php echo $franchiseeAry['operationManagerId']; ?>" name="clientData[operationManagerId]">
+                                 <input id="operationManagerId" class="form-control" type="hidden" value="<?php echo $franchiseeAry['operationManagerId']; ?>" name="clientData[operationManagerId]">
                                  <input id="clientType" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['clientType'] ;?>" name="clientData[clientType]">
                                  <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="clientData[iRole]">
                                  <div class="form-actions">

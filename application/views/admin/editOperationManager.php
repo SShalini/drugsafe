@@ -111,12 +111,10 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                            <select class="form-control " name="editOperationManager[szCountry]" id="szCountry"
-                                                    Placeholder="Country" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-                                                <option value="Australia" <?php echo(sanitize_post_field_value($_POST['editOperationManager']['szCountry']) == trim("Australia") ? "selected='selected'" : ""); ?>>Australia</option>
-                                                
-                                            </select>
+                                           <input id="szCountry" class="form-control read-only" type="text"
+                                                   value="Australia"
+                                                   placeholder="Country" onfocus="remove_formError(this.id,'true')"
+                                                   name="editOperationManager[szCountry]" readonly> 
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">

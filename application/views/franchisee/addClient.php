@@ -350,12 +350,12 @@
 
                                     } else {
                                         ?>
-                                        <input id="franchiseeId" class="form-control" type="text"
+                                        <input id="franchiseeId" class="form-control" type="hidden"
                                                value="<?php echo $idfranchisee; ?>" name="clientData[franchiseeId]">
                                         <?php  $franchiseeAry = $this->Franchisee_Model->getFranchiseeDetailsByOperationManagerId(trim($idfranchisee));
                                        
                                         ?>
-                                         <input id="OperationManagerId" class="form-control" type="text"
+                                         <input id="OperationManagerId" class="form-control" type="hidden"
                                                value="<?php echo $franchiseeAry['operationManagerId']; ?>" name="clientData[operationManagerId]">
                                         <?php
                                     }
@@ -536,12 +536,10 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                            <select class="form-control " name="clientData[szCountry]" id="szCountry"
-                                                    Placeholder="Country" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-                                                <option value="Australia" <?php echo(sanitize_post_field_value($_POST['clientData']['szCountry']) == trim("Australia") ? "selected" : ""); ?>>Australia</option>
-                                                
-                                            </select>
+                                         <input id="szCountry" class="form-control read-only" type="text"
+                                                   value="Australia"
+                                                   placeholder="Country" onfocus="remove_formError(this.id,'true')"
+                                                   name="clientData[szCountry]" readonly> 
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">
