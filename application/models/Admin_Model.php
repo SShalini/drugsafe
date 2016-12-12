@@ -25,7 +25,7 @@ class Admin_Model extends Error_Model
     
     function set_szName($value,$field=false,$message=false, $flag = true)
     {
-        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, $field, $message, false, false, $flag);
+        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ALPHA__, $field, $message, false, false, $flag);
     }
 
       function set_szPassword($value, $flag=true)
