@@ -3,20 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Reporting_Model extends Error_Model {
     
-     public function getAllQtyRequestDetails($searchAry = '',$limit=__PAGINATION_RECORD_LIMIT__,$offset=0,$id=0,$name='',$productCode='')
+     public function getAllQtyRequestDetails($searchAry = '',$limit=__PAGINATION_RECORD_LIMIT__,$offset=0,$searchItemData='')
         {
      
-          $searchq = '';
-        if($id > '0'){
-            $searchq = 'iFranchiseeId = '.(int)$id;
-        }
-        if(!empty($name)){
-            $searchq = "szName LIKE '%$name%'";
-        }
-        if(!empty($productCode)){
-            $searchq = "szProductCode LIKE '%$productCode%'";
-        }
-          
+          if(!empty($searchItemData)){
+               $searchq = "iFranchiseeId LIKE '%$searchItemData%' OR szName LIKE '%$searchItemData%' OR szProductCode LIKE '%$searchItemData%'";
+            }
           
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
@@ -40,19 +32,12 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
-         public function getAllQtyAssignDetails($searchAry = '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$id='0',$name='',$productCode='')
+         public function getAllQtyAssignDetails($searchAry = '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchItemData='')
         {
-          
-             $searchq = '';
-        if($id > '0'){
-            $searchq = 'iFranchiseeId = '.(int)$id;
-        }
-        if(!empty($name)){
-            $searchq = "szName LIKE '%$name%'";
-        }
-        if(!empty($productCode)){
-            $searchq = "szProductCode LIKE '%$productCode%'";
-        }
+            if(!empty($searchItemData)){
+               $searchq = "iFranchiseeId LIKE '%$searchItemData%' OR szName LIKE '%$searchItemData%' OR szProductCode LIKE '%$searchItemData%'";
+            }
+        
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_STOCK_REQ_TRACKING__);
             $this->db->join('ds_user','tbl_stock_assign_tracking.iFranchiseeId = ds_user.id');
@@ -68,6 +53,7 @@ class Reporting_Model extends Error_Model {
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
+               
             }
             else
             {

@@ -31,6 +31,9 @@ class Reporting_Controller extends CI_Controller
 
     function allstockreqlist()
     { 
+        if(!empty($_POST)){
+          $this->session->unset_userdata('searchterm');   
+        }
        
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
@@ -41,23 +44,26 @@ class Reporting_Controller extends CI_Controller
         }
 
            $searchAry = '';
-            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-              $productCode = $_POST['szSearch'];   
-        
+             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+               $searchItem = $_POST['szSearch']; 
+              
             }
+           
             if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
-                $id = $_POST['szSearch1'];
+                $searchItem = $_POST['szSearch1'];
             }
+           
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
-                $name = $_POST['szSearch2'];
-            }
+                $searchItem = $_POST['szSearch2'];
+             }
+             $searchItemData = $this->Reporting_Model->searchterm_handler($searchItem);
            
         $count = $this->Admin_Model->getnotification();
         $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
-        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$id,$name,$productCode));
+        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$searchItemData));
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
-        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3),$id,$name,$productCode);
+        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3),$searchItemData);
         $allQtyAssignListAray = $this->Reporting_Model->getAllQtyRequestDetails();
         $data['allReqQtyAray'] = $allReqQtyAray;
         $data['allQtyAssignListAray'] = $allQtyAssignListAray;
@@ -89,32 +95,27 @@ class Reporting_Controller extends CI_Controller
        
           $searchAry = '';
              if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-               $prodCode = $_POST['szSearch']; 
-               $productCode = $this->Reporting_Model->searchterm_handler($prodCode);
+               $searchItem = $_POST['szSearch']; 
+              
             }
-            else{
-                 $productCode = $this->Reporting_Model->searchterm_handler($prodCode);
-                
-            }
+           
             if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
-                $id = $_POST['szSearch1'];
-                
+                $searchItem = $_POST['szSearch1'];
             }
            
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
-                $name = $_POST['szSearch2'];
-            
-            }
-            
+                $searchItem = $_POST['szSearch2'];
+             }
+             $searchItemData = $this->Reporting_Model->searchterm_handler($searchItem);
           
             
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
-        $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$id,$name,$productCode));
+        $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$searchItemData));
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
-        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry, $config['per_page'], $this->uri->segment(3),$id,$name,$productCode);
-        $allQtyAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails();
-//        print_r($allQtyAssignAray);die;
+        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry,$config['per_page'], $this->uri->segment(3),$searchItemData);
+        $allQtyAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails(false,false);
+     
         $data['allQtyAssignAray'] = $allQtyAssignAray;
         $data['allQtyAssignListAray'] = $allQtyAssignListAray;
         $data['szMetaTagTitle'] = "Stock Assignments";
@@ -400,6 +401,10 @@ class Reporting_Controller extends CI_Controller
 
     function frstockreqlist()
     {
+        if(!empty($_POST)){
+          $this->session->unset_userdata('searchterm');   
+        }
+       
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -408,7 +413,8 @@ class Reporting_Controller extends CI_Controller
             die;
         }
 
-        $searchAry = $_POST['szSearchProdCode'];
+        $searchAryData = $_POST['szSearchProdCode'];
+        $searchAry = $this->Reporting_Model->searchterm_handler($searchAryData);
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
 
 
@@ -434,6 +440,10 @@ class Reporting_Controller extends CI_Controller
 
     function frstockassignlist()
     {
+        
+         if(!empty($_POST)){
+          $this->session->unset_userdata('searchterm');   
+        }
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -441,9 +451,9 @@ class Reporting_Controller extends CI_Controller
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die;
         }
-        $searchAry = $_POST['szSearchProdCode'];
+        $searchAryData = $_POST['szSearchProdCode'];
+        $searchAry = $this->Reporting_Model->searchterm_handler($searchAryData);
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
-
 
         $config['base_url'] = __BASE_URL__ . "/reporting/frstockassignlist/";
         $config['total_rows'] = count($this->Reporting_Model->getFrAllQtyAssignDetails($searchAry, $limit, $offset, $franchiseeId));
