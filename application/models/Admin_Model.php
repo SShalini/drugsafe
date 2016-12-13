@@ -385,7 +385,7 @@ class Admin_Model extends Error_Model
 
     }
 
-    public function viewFranchiseeList($searchAry='',$operationManagerId=0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='',$opName='')
+    public function viewFranchiseeList($searchAry='',$operationManagerId=0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$id=0,$name='',$email='',$opId='')
     {
      
        if(!empty($operationManagerId)){
@@ -403,8 +403,8 @@ class Admin_Model extends Error_Model
         }
         if(!empty($email)){
             $searchq = "szEmail LIKE '%$email%'";
-        } if(!empty($opName)){
-            $searchq = "szName LIKE '%$opName%'";
+        } if(!empty($opId)){
+            $searchq = "operationManagerId LIKE '%$opId%'";
         }
         
 
@@ -424,8 +424,7 @@ class Admin_Model extends Error_Model
         $this->db->order_by("franchiseeId", "asc");
         $query = $this->db->get();
 
-//$sql = $this->db->last_query($query);
-//print_r($sql);die;
+
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {

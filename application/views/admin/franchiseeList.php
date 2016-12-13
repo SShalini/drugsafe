@@ -105,8 +105,8 @@
                                           {  
                                               $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $franchiseeIdList['operationManagerId']);
                                          
-                                              $selected = ($operationManagerDetArr['szName'] == $_POST['szSearch3'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$operationManagerDetArr['szName'].'" >'.$operationManagerDetArr['szName'].'</option>';
+                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch3'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$franchiseeIdList['id'].'" >'.$operationManagerDetArr['szName'].'</option>';
                                          
                                           }
                                           ?>

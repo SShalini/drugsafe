@@ -243,21 +243,21 @@ class Admin_Controller extends CI_Controller {
                 $id = $_POST['szSearch2'];
             }
             if(isset($_POST['szSearch3']) && !empty($_POST['szSearch3'])){
-                $opName = $_POST['szSearch3'];
+                $id = $_POST['szSearch3'];
             }
-           
+         
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
-                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email,$opName));
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email,$opId));
                 $config['per_page'] = 5;
               
             
                 $this->pagination->initialize($config);
                
-                 $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email,$opName);
+                 $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email,$opId);
                  $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
-                  
+                
                     $data['szMetaTagTitle'] = "Franchisee List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
