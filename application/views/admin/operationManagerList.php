@@ -36,7 +36,7 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>

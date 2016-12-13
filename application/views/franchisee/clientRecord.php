@@ -28,10 +28,23 @@
         <div id="page_content" class="row">
             <div class="col-md-12">
                <ul class="page-breadcrumb breadcrumb">
+                   
+                    <?php
+                    if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                     ?>
+                  
+                    <li>
+                        <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord">Home</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                      <?php } else {?>
+                    
                     <li>
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
+                      <?php  } ?>
+                 
                     <li>
                         <span class="active">Client Record</span>
                     </li>

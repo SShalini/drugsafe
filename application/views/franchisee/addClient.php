@@ -410,12 +410,12 @@
                                            name="clientData[franchiseeId]">
                                        <?php
                                    }?>
-                                   <input id="OperationManagerId" class="form-control" type="text" value="<?php echo $_SESSION['drugsafe_user']['id'] ?>" name="clientData[operationManagerId]">
+                                   <input id="OperationManagerId" class="form-control" type="hidden" value="<?php echo $_SESSION['drugsafe_user']['id'] ?>" name="clientData[operationManagerId]">
                                 <?php
                                    }
                                 else {
                                     ?>
-                                    <input id="franchiseeid" class="form-control" type="text"
+                                    <input id="franchiseeid" class="form-control" type="hidden"
                                            value="<?php echo  $_SESSION['drugsafe_user']['id']; ?>"
                                            name="clientData[franchiseeId]">
                                     <?php

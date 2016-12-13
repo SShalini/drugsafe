@@ -29,10 +29,19 @@
         <div id="page_content" class="row">
             <div class="col-md-12">
                <ul class="page-breadcrumb breadcrumb">
+                    <?php
+                    if($_SESSION['drugsafe_user']['iRole'] == '1'){
+                     ?>
                     <li>
+                        <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList">Home</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                     <?php } else {?>
+                     <li>
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
+                     <?php }?>
                     <li>
                         <a onclick="viewFranchisee(<?php echo $operationManagerAray['id'];?>);" href="javascript:void(0);"><?php echo $operationManagerAray['szName'];?></a>
                         <i class="fa fa-circle"></i>

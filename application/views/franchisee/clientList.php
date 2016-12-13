@@ -24,7 +24,10 @@
             $this->session->unset_userdata('drugsafe_user_message');
         }
         ?>
-        
+        <?php  $operationManagerIdArr = $this->Admin_Model->getoperationManagerId($franchiseeArr['id']); 
+        $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operationManagerIdArr['operationManagerId']);
+
+       ?>
         <div id="page_content" class="row">
             <div class="col-md-12">
                <ul class="page-breadcrumb breadcrumb">
@@ -32,14 +35,17 @@
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
+                     <?php
+                    if($_SESSION['drugsafe_user']['iRole'] == '1'){
+                     ?>
                     <li>
-                         <?php  $operationManagerIdArr = $this->Admin_Model->getoperationManagerId($franchiseeArr['id']); 
-                          $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operationManagerIdArr['operationManagerId']);
-                          
-                         ?>
+                         
                          <a onclick="viewFranchisee(<?php echo $operationManagerIdArr['operationManagerId'];?>);;" href="javascript:void(0);"><?php echo $operationManagerDetArr['szName'];?></a>
                         <i class="fa fa-circle"></i>
                     </li>
+                     <?php
+                    }
+                     ?>
                     <li>
                         <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
                         <i class="fa fa-circle"></i>
