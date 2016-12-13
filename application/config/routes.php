@@ -84,6 +84,10 @@ $route['formManagement/(:any)'] = "Form_Management_Controller/$1";
 $route['formManagement/(:any)/(:any)'] = "Form_Management_Controller/$1/$2";
 $route['formManagement/(:any)/(:any)/(:any)'] = "Form_Management_Controller/$1/$2/$3";
 
+$route['webservices'] = "Webservices_Controller";
+$route['webservices/(:any)'] = "Webservices_Controller/$1";
+$route['webservices/(:any)/(:any)'] = "Webservices_Controller/$1/$2";
+$route['webservices/(:any)/(:any)/(:any)'] = "Webservices_Controller/$1/$2/$3";
 
 $route['404_override'] = 'Error_Controller';
 $route['error'] = "Error_Controller";
