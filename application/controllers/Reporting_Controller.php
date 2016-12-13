@@ -30,7 +30,8 @@ class Reporting_Controller extends CI_Controller
     }
 
     function allstockreqlist()
-    {
+    { 
+       
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -39,9 +40,10 @@ class Reporting_Controller extends CI_Controller
             die;
         }
 
-      $searchAry = '';
+           $searchAry = '';
             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-                $productCode = $_POST['szSearch'];
+              $productCode = $_POST['szSearch'];   
+        
             }
             if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
                 $id = $_POST['szSearch1'];
@@ -49,6 +51,7 @@ class Reporting_Controller extends CI_Controller
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $name = $_POST['szSearch2'];
             }
+           
         $count = $this->Admin_Model->getnotification();
         $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
         $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$id,$name,$productCode));
@@ -71,6 +74,10 @@ class Reporting_Controller extends CI_Controller
 
     function stockassignlist()
     {
+        if(!empty($_POST)){
+          $this->session->unset_userdata('searchterm');   
+        }
+       
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -80,16 +87,26 @@ class Reporting_Controller extends CI_Controller
         }
         $count = $this->Admin_Model->getnotification();
        
-       $searchAry = '';
-            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-                $productCode = $_POST['szSearch'];
+          $searchAry = '';
+             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+               $prodCode = $_POST['szSearch']; 
+               $productCode = $this->Reporting_Model->searchterm_handler($prodCode);
+            }
+            else{
+                 $productCode = $this->Reporting_Model->searchterm_handler($prodCode);
+                
             }
             if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
                 $id = $_POST['szSearch1'];
+                
             }
+           
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $name = $_POST['szSearch2'];
+            
             }
+            
+          
             
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
         $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$id,$name,$productCode));

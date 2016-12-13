@@ -133,5 +133,23 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
+public function searchterm_handler($searchterm='')
+{
+    if($searchterm)
+    { 
+        $this->session->set_userdata('searchterm',$searchterm);
+        return $searchterm;
+    }
+    elseif($this->session->userdata('searchterm'))
+    { 
+        $searchterm = $this->session->userdata('searchterm');
+        return $searchterm;
+    }
+    else
+    { 
+        $searchterm ="";
+        return $searchterm;
+    }
+}
 }
 ?>

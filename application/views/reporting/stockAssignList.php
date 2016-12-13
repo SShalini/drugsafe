@@ -6,6 +6,7 @@
 
     });
 </script>
+
 <div class="page-content-wrapper">
     <div class="page-content">
 
@@ -98,7 +99,7 @@
                                       </select>
                                   </div>
                                   <div class="col-md-1">
-                                  <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                  <button class="btn green-meadow" type="submit" value="Submit" name="submit"><i class="fa fa-search"></i></button>
                                   </div>
                             </form>
                         </div>
@@ -156,10 +157,10 @@
                     ?>
                     <?php if (!empty($allQtyAssignAray)) { ?>
                         <div class="row">
-
                             <div class="col-md-7 col-sm-7">
                                 <div class="dataTables_paginate paging_bootstrap_full_number">
                                     <?php echo $this->pagination->create_links(); ?>
+                                   
                                 </div>
                             </div>
 
