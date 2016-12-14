@@ -29,6 +29,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
@@ -67,8 +68,9 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|is_unique[tbl_product.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
-             $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             { 
@@ -112,6 +114,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
@@ -171,6 +174,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
             $this->form_validation->set_rules('productData[szProductCategory]', 'Product Category', 'required');
+            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
              $this->form_validation->set_message('required', '{field} is required');
             
@@ -363,6 +367,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
              $this->form_validation->set_message('required', '{field} is required');
             
@@ -427,6 +432,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
              $this->form_validation->set_message('required', '{field} is required');
             

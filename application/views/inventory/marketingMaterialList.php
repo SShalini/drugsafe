@@ -93,6 +93,7 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
+                                        <th>  Expiry Date</th>
                                        <?php
                                         if($_SESSION['drugsafe_user']['iRole']==1){
                                         ?>
@@ -122,6 +123,10 @@
                                             <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                             <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                             <td>$<?php echo $marketingMaterialData['szProductCost'];?> </td>
+                                            <td><?php 
+                                            $date= $marketingMaterialData['dtExpiredOn'];
+                                            $dtExpiredOn = date("d-m-Y", strtotime($date)); 
+                                            echo $dtExpiredOn;?> </td>
                                             <?php
                                            if($_SESSION['drugsafe_user']['iRole']==1){
                                              ?>

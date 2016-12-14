@@ -663,12 +663,20 @@
                             $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
                              if(in_array("1", $req_ppe_ary)){
                              echo "High Vis Work Wear" ; }
+                              ?></p>
+                               <p><?php 
                              if(in_array("2", $req_ppe_ary)){
                              echo " Head Protection" ;  } 
+                              ?></p>
+                              <p><?php 
                               if(in_array("3", $req_ppe_ary)){
-                               echo " Face/Eye Protection" ;  } 
+                               echo " Face/Eye Protection" ;  }
+                                ?></p>
+                               <p><?php 
                                if(in_array("4", $req_ppe_ary)){
                                echo " Safety Boots" ;  }
+                                 ?></p>
+                                <p><?php 
                               if(in_array("5", $req_ppe_ary)){
                                  echo "  Long Sleev Clothing" ;  
                                }

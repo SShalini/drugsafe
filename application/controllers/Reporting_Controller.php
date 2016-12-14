@@ -284,13 +284,15 @@ class Reporting_Controller extends CI_Controller
                                     <tr>
                                         
                                      
-                                         <th style="width:70px"><b>Id</b> </th>
-                                         <th style="width:90px"><b> Franchisee </b> </th>
-                                         <th style="width:90px"><b> Product Code</b> </th>
-                                        <th style="width:90px"><b> Quantity Assigned</b> </th>
-                                        <th style="width:90px"><b> Quantity Adjusted</b> </th>
-                                         <th style="width:90px"><b> Available Quantity</b> </th>
-                                        <th style="width:170px"> <b>Assigned On</b> </th>
+                                         <th style="width:60px"><b>Id</b> </th>
+                                         <th style="width:85px"><b> Franchisee </b> </th>
+                                         <th style="width:70px"><b> Product Code</b> </th>
+                                         <th style="width:70px"><b>Cost Per Item</b> </th>
+                                         <th style="width:90px"><b> Total Cost For Quantity Assign</b> </th>
+                                        <th style="width:80px"><b> Quantity Assigned</b> </th>
+                                        <th style="width:80px"><b> Quantity Adjusted</b> </th>
+                                         <th style="width:80px"><b> Available Quantity</b> </th>
+                                        <th style="width:100px"> <b>Assigned On</b> </th>
                                    
                                     </tr>';
         if ($allQtyAssignAray) {
@@ -298,10 +300,15 @@ class Reporting_Controller extends CI_Controller
             foreach ($allQtyAssignAray as $allQtyAssignData) {
                 $productDataAry = $this->Inventory_Model->getProductDetailsById($allQtyAssignData['iProductId']);
                 $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $allQtyAssignData['iFranchiseeId']);
+                $Qty= $allQtyAssignData['szQuantityAssigned'];
+                $Cost= $productDataAry['szProductCost'];
+                $TotalCostPerQty = ($Qty*$Cost);
                 $html .= '<tr>
                                             <td> FR-' . $allQtyAssignData['iFranchiseeId'] . ' </td>
                                             <td> ' . $franchiseeArr['szName'] . '</td>
-                                            <td> ' . $productDataAry['szProductCode'] . ' </td>
+                                            <td> ' . $allQtyAssignData['szProductCode'] . ' </td>
+                                            <td> $' . $allQtyAssignData['szProductCost'] . ' </td>
+                                            <td> $' .$TotalCostPerQty. ' </td>
                                             <td>' . $allQtyAssignData['szQuantityAssigned'] . ' </td>
                                             <td>' . $allQtyAssignData['quantityDeducted'] . ' </td>
                                             <td>' . $allQtyAssignData['szTotalAvailableQty'] . ' </td>
@@ -344,38 +351,55 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('D1', 'Quantity Assigned');
+        
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Cost Per Item');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Quantity Adjusted');
+        
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Total Cost For Quantity Assign');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Total available quantity');
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Quantity Assigned');
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('G1', 'Assigned On');
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Quantity Adjusted');
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
+        $this->excel->getActiveSheet()->setCellValue('H1', 'Total available quantity');
+        $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('H1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('I1', 'Assigned On');
+        $this->excel->getActiveSheet()->getStyle('I1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('I1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
         $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails(false, false, false);
+               
         if(!empty($allQtyAssignAray)){
             $i = 2;
             foreach($allQtyAssignAray as $item){
+                $Qty= $item['szQuantityAssigned'];
+                $Cost= $item['szProductCost'];
+                $TotalCostPerQty = ($Qty*$Cost);
+                
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['iFranchiseeId']);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szQuantityAssigned']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['quantityDeducted']);
-                $this->excel->getActiveSheet()->setCellValue('F'.$i, $item['szTotalAvailableQty']);
-                $this->excel->getActiveSheet()->setCellValue('G'.$i, date('d/m/Y h:i:s A', strtotime($item['dtAssignedOn'])));
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szProductCost']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, $TotalCostPerQty);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i, $item['szQuantityAssigned']);
+                $this->excel->getActiveSheet()->setCellValue('G'.$i, $item['quantityDeducted']);
+                $this->excel->getActiveSheet()->setCellValue('H'.$i, $item['szTotalAvailableQty']);
+                $this->excel->getActiveSheet()->setCellValue('I'.$i, date('d/m/Y h:i:s A', strtotime($item['dtAssignedOn'])));
 
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
@@ -384,6 +408,8 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('I')->setAutoSize(TRUE);
                 $i++;
             }
         }
@@ -604,7 +630,7 @@ class Reporting_Controller extends CI_Controller
 // set default monospaced font
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
-        // Add a page
+        // Add a page  
         $pdf->AddPage();
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
         $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails(false, false, false, $franchiseeId);
@@ -615,6 +641,8 @@ class Reporting_Controller extends CI_Controller
                             <table border="1" cellpadding="5">
                                     <tr>
                                         <th> <b>Product Code</b> </th>
+                                        <th><b>Cost Per Item</b> </th>
+                                         <th><b> Total Cost For Quantity Assign</b> </th>
                                         <th><b> Quantity Assigned</b> </th>
                                         <th><b> Quantity Adjusted</b> </th>
                                         <th><b> Available Quantity</b> </th>
@@ -624,9 +652,14 @@ class Reporting_Controller extends CI_Controller
         if ($frAllQtyAssignAray) {
             $i = 0;
             foreach ($frAllQtyAssignAray as $frAllQtyAssignArayData) {
+                 $Qty= $frAllQtyAssignArayData['szQuantityAssigned'];
+                 $Cost= $frAllQtyAssignArayData['szProductCost'];
+                 $TotalCostPerQty = ($Qty*$Cost);
 
                 $html .= '<tr>
                                             <td> ' . $frAllQtyAssignArayData['szProductCode'] . ' </td>
+                                            <td> $' . $frAllQtyAssignArayData['szProductCost'] . ' </td>
+                                            <td> $' .$TotalCostPerQty. ' </td>
                                             <td>' . $frAllQtyAssignArayData['szQuantityAssigned'] . ' </td>
                                             <td>' . $frAllQtyAssignArayData['quantityDeducted'] . ' </td>
                                              <td>' . $frAllQtyAssignArayData['szTotalAvailableQty'] . ' </td>
@@ -661,42 +694,61 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Quantity Assigned');
+       
+        
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Cost Per Item');
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Quantity Adjusted');
+        
+         $this->excel->getActiveSheet()->setCellValue('C1', 'Total Cost For Quantity Assign');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
 
-        $this->excel->getActiveSheet()->setCellValue('D1', 'Available Quantity');
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Quantity Assigned');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Assigned On');
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Quantity Adjusted');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Available Quantity');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Assigned On');
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
 
         if(!empty($frAllQtyAssignAray)){
             $i = 2;
             foreach($frAllQtyAssignAray as $item){
+                 $Qty= $item['szQuantityAssigned'];
+                $Cost= $item['szProductCost'];
+                $TotalCostPerQty = ($Qty*$Cost);
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szQuantityAssigned']);
-                $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['quantityDeducted']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szTotalAvailableQty']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i, date('d/m/Y h:i:s A', strtotime($item['dtAssignedOn'])));
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szProductCost']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, $TotalCostPerQty);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szQuantityAssigned']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['quantityDeducted']);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i, $item['szTotalAvailableQty']);
+                $this->excel->getActiveSheet()->setCellValue('G'.$i, date('d/m/Y h:i:s A', strtotime($item['dtAssignedOn'])));
 
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
                 $i++;
             }
         }

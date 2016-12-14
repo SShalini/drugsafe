@@ -78,6 +78,8 @@
                                     <tr>
 
                                         <th> Product Code</th>
+                                        <th> Cost Per Item </th>
+                                        <th> Total Cost For Quantity Assign</th>
                                         <th> Quantity Assigned</th>
                                         <th> Quantity Adjusted</th>
                                         <th> Available Quantity</th>
@@ -96,6 +98,13 @@
                                             <tr>
 
                                                 <td> <?php echo $frAllQtyAssignData['szProductCode']; ?> </td>
+                                                 <td> $<?php echo $frAllQtyAssignData['szProductCost']; ?> </td>
+                                                 <td> $<?php
+                                                        $Qty= $frAllQtyAssignData['szQuantityAssigned'];
+                                                        $Cost= $frAllQtyAssignData['szProductCost'];
+                                                        $TotalCostPerQty = ($Qty*$Cost);
+                                                         echo  $TotalCostPerQty; ?> 
+                                                </td>
                                                 <td> <?php echo $frAllQtyAssignData['szQuantityAssigned']; ?> </td>
                                                 <td> <?php echo $frAllQtyAssignData['quantityDeducted']; ?> </td>
                                                 <td> <?php echo $frAllQtyAssignData['szTotalAvailableQty']; ?> </td>

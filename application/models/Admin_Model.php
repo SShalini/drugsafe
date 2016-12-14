@@ -52,11 +52,11 @@ class Admin_Model extends Error_Model
     }
 
   
-     function set_szMobile($value, $field=false,$message=false ,$flag = true)
-    {
-        $this->data['szmobile'] = $this->validateInput($value, __VLD_CASE_MOBILE_PHONE__,$field,$message, false, 10, $flag);
-    }
-  
+//     function set_szMobile($value, $field=false,$message=false ,$flag = true)
+//    {
+//        $this->data['szmobile'] = $this->validateInput($value, __VLD_CASE_MOBILE_PHONE__,$field,$message, false, 10, $flag);
+//    }
+//  
     
 
     function set_szState($value, $flag = true)
@@ -898,10 +898,10 @@ class Admin_Model extends Error_Model
                 if(!in_array('orlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['orlr_email'])),"orlr_email"," Contact Email",false);   
                 if (!in_array('psc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['psc_name'])),"psc_name","Contact Name", false);
                 if(!in_array('psc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_phone'])),"psc_phone","Landline Phone Number",false);
-                if(!in_array('psc_mobile',$arExclude)) $this->set_szmobile(sanitize_all_html_input(trim($data['psc_mobile'])),"psc_mobile","Mobile Phone Number",false);
+                if(!in_array('psc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_mobile'])),"psc_mobile","Mobile Phone Number",false);
                 if(!in_array('ssc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['ssc_name'])),"ssc_name","Contact Name",false);
                 if(!in_array('ssc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_phone'])),"ssc_phone","Landline Phone Number",false);
-                if(!in_array('ssc_mobile',$arExclude)) $this->set_szmobile(sanitize_all_html_input(trim($data['ssc_mobile'])),"ssc_mobile","Mobile Phone Number",false);
+                if(!in_array('ssc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_mobile'])),"ssc_mobile","Mobile Phone Number",false);
                 if (!in_array('site_people', $arExclude)) $this->set_site_people(sanitize_all_html_input(trim($data['site_people'])), true);
                 if(!in_array('test_count',$arExclude)) $this->set_test_count(sanitize_all_html_input(trim($data['test_count'])),true);
 //                if (!in_array('start_time', $arExclude)) $this->set_start_time(sanitize_all_html_input(trim($data['start_time'])), true);

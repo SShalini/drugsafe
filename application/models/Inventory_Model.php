@@ -9,16 +9,18 @@ class Inventory_Model extends Error_Model {
     var $data = array();
     
 	function insertProduct()
-        {
-			
+        {		
             $date=date('Y-m-d');
+            $expiredOn=$_POST['productData']['dtExpiredOn'];
+            $dtExpiredOn = date("Y-m-d", strtotime($expiredOn));
             $dataAry = array(
                                 'szProductImage' => $_POST['productData']['szProductImage'],
                                 'szProductCode' => $_POST['productData']['szProductCode'],
                                 'szProductDiscription'=>$_POST['productData']['szProductDiscription'],
                                 'szProductCost' => $_POST['productData']['szProductCost'],
                                 'szProductCategory' => $_POST['productData']['szProductCategory'],
-				'dtCreatedOn' => $date
+				'dtCreatedOn' => $date,
+                                'dtExpiredOn' => $dtExpiredOn
                             );
 	    $this->db->insert(__DBC_SCHEMATA_PRODUCT__, $dataAry);
             
@@ -54,11 +56,14 @@ class Inventory_Model extends Error_Model {
         }
         public function UpdateProduct($id)
         {
+            $expiredOn=$_POST['productData']['dtExpiredOn'];
+            $dtExpiredOn = date("Y-m-d", strtotime($expiredOn));
             $dataAry = array(                                  
                                 'szProductImage' => $_POST['productData']['szProductImage'],
                                 'szProductCode' => $_POST['productData']['szProductCode'],
                                 'szProductDiscription'=>$_POST['productData']['szProductDiscription'],
                                 'szProductCost' => $_POST['productData']['szProductCost'],
+                                'dtExpiredOn' => $dtExpiredOn,
                                 'szProductCategory' => $_POST['productData']['szProductCategory'],
                             );
                 $this->db->where('id',(int)$id);

@@ -686,6 +686,7 @@ class Admin_Controller extends CI_Controller {
                     $_POST['editOperationManager'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
+                    $data['flag'] = $flag;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/editOperationManager');
             $this->load->view('layout/admin_footer');

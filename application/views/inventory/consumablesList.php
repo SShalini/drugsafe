@@ -95,7 +95,8 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
-                                        <?php
+                                        <th>  Expiry Date</th>
+                                            <?php
                                         if($_SESSION['drugsafe_user']['iRole']==1){
                                         ?>
                                         <th> Actions </th>
@@ -104,6 +105,7 @@
                                         <th>  Available Stock Quantity</th>
                                         <th>  Action</th>
                                        <?php }?> 
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -126,6 +128,10 @@
                                             <td> <?php echo $consumablesData['szProductCode']?> </td>
                                             <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                             <td> $<?php echo $consumablesData['szProductCost'];?> </td>
+                                             <td><?php 
+                                            $date= $consumablesData['dtExpiredOn'];
+                                            $dtExpiredOn = date("d-m-Y", strtotime($date)); 
+                                            echo $dtExpiredOn;?> </td>
                                             <?php
                                            if($_SESSION['drugsafe_user']['iRole']==1){
                                              ?>
@@ -147,7 +153,8 @@
                                           </td> 
                                         <?php } 
                                         
-                                        ?>  
+                                        ?> 
+                                      
                                         </tr>
                                         <?php
                                         $i++;

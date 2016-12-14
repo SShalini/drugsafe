@@ -36,6 +36,7 @@
 <!-- END THEME GLOBAL STYLES -->
         
         <!-- BEGIN THEME LAYOUT STYLES -->
+        <link href="<?php echo __BASE_ASSETS_URL__; ?>/admin/layout4/css/custom.css" rel="stylesheet" type="text/css"/>   
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/layout.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="<?php echo __BASE_ASSETS_URL__; ?>/layouts/layout4/css/custom.css" rel="stylesheet" type="text/css" />

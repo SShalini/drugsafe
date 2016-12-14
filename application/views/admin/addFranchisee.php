@@ -285,8 +285,13 @@
                                 <div class="row">
 
                                     <div class="col-md-offset-3 col-md-4">
+                                      <?php  if ($flag==1){ ?>
                                         <a href="<?= __BASE_URL__ ?>/admin/franchiseeList" class="btn default uppercase"
                                            type="button">Cancel</a>
+                                        <?php } else {?>
+                                         <a href="<?= __BASE_URL__ ?>/admin/operationManagerList" class="btn default uppercase"
+                                           type="button">Cancel</a>
+                                      <?php }?>
                                         <input type="submit" class="btn green-meadow" value="SAVE"
                                                name="addFranchisee[submit]">
                                     </div>

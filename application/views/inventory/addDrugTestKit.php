@@ -74,6 +74,27 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
+                                     <div class="form-group <?php if(form_error('productData[dtExpiredOn]')){?>has-error<?php }?>">
+                                             <label class="col-md-3 control-label">Expiry Date</label>
+                                            <div class="col-md-3">
+                                                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                                                         <span class="input-group-addon">
+                                                         <i class="fa fa-user"></i>
+                                                         </span>
+                                                        <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('productData[dtExpiredOn]'); ?>" readonly placeholder="Expired On" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                                            <span class="input-group-btn">
+                                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                            </span>
+                                                    </div>
+                                                    <!-- /input-group -->
+                                                  <?php
+                                            if(form_error('productData[dtExpiredOn]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('productData[dtExpiredOn]');?></span>
+                                            </span><?php }?>  
+                                            </div>
+                                    </div>
+
+
                                     <div class="form-group <?php if(form_error('productData[szProductImage]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Product Image</label>
                                         <div class="col-md-5">
@@ -86,13 +107,13 @@
                                                         {
                                                             ?>
 							        <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $NewImageName; ?>" width="60" height="60"/>
-                                                                <a href="javascript:void(0);" id="remove_btn_<?php echo $randomNum; ?>" class="btn red-intense btn-sm" onclick="removeIncidentPhoto('');">Remove</a>
+                                                                <a href="javascript:void(0);" id="remove_btn_<?php echo $randomNum; ?>" class="btn red-intense btn-sm" onclick="removeIncidentPhoto('');" >Remove</a>
                                                      </div>
 															<?php
                                                         }
                                                         ?>
                                                     </div>
-                                                    <div class="<?php if($NewImageName) { ?> hide <?php }?>"  id="product_image_upload" onfocus="remove_formError(this.id,'true')">Upload</div>
+                                                    <div class="<?php if($NewImageName) { ?> hide <?php }?>"  id="product_image_upload" onfocus="remove_formError(this.id,'true')" >Upload</div>
                                                 </div>
                                                 <input type="hidden" name="productData[szProductImage]" id="szProductImage" value="<?php echo set_value('productData[szProductImage]'); ?>" onfocus="remove_formError(this.id,'true')" /> 
                                             <p id="upload_error_status" class="hide" style="font-color:#e73d4a">Error occur while uploading image. Please inform to Anova Golf.</p>
@@ -103,6 +124,7 @@
                                             </span><?php }?>
                                             
                                         </div>
+                                    
                                         <input type="hidden" name="productData[szProductCategory]" id="szProductCategory" value="1"/> 
                                     </div>
                                     <div class="form-actions">

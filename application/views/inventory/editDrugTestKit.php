@@ -74,6 +74,30 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
+                                     <div class="form-group <?php if(form_error('productData[dtExpiredOn]')){?>has-error<?php }?>">
+                                             <label class="col-md-3 control-label">Expiry Date</label>
+                                            <div class="col-md-3">
+                                                    <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
+                                                         <span class="input-group-addon">
+                                                         <i class="fa fa-user"></i>
+                                                         </span>
+                                                        <?php 
+                                                         $date=$_POST['productData']['dtExpiredOn'];
+                                                            $dtExpiredOn = date("d-m-Y", strtotime($date));
+                                                        
+                                                        ?>
+                                                        <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo $dtExpiredOn ; ?>" readonly placeholder="Expired On" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                                            <span class="input-group-btn">
+                                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                            </span>
+                                                    </div>
+                                                    <!-- /input-group -->
+                                                  <?php
+                                            if(form_error('productData[dtExpiredOn]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('productData[dtExpiredOn]');?></span>
+                                            </span><?php }?>  
+                                            </div>
+                                    </div>
                                     <div class="form-group <?php if(form_error('productData[szProductImage]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Product Image</label>
                                         <div class="col-md-5">
