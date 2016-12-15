@@ -456,8 +456,9 @@ class StockMgt_Controller extends CI_Controller {
             
             $idProduct = $this->session->userdata('idProduct');
             $modelStockDataAry = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$idProduct);
+         
             $QtyReqArr =  $this->StockMgt_Model->getQtyReqById($idProduct,$idfranchisee);
-
+   
             $QtyAssignArr =  $this->StockMgt_Model->getQtyAssignListById($idProduct,$idfranchisee,$QtyReqArr[0]['id']);
             $productDataAry = $this->StockMgt_Model->getProductsDetailsById($idProduct);
            
@@ -468,8 +469,8 @@ class StockMgt_Controller extends CI_Controller {
             $frdata = array();
             $frdata   =  array_merge($modelStockDataAry, $productDataAry,$CategoryDataAry);
             $totalAssign = 0;
-if(!empty($QtyAssignArr)){
-    foreach ($QtyAssignArr as $qtyassign){
+          if(!empty($QtyAssignArr)){
+            foreach ($QtyAssignArr as $qtyassign){
         $totalAssign = $totalAssign + $qtyassign['szQuantityAssigned'];
     }
 }

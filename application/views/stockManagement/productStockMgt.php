@@ -186,6 +186,15 @@
                                                                 <i class="fa fa-plus"></i> 
                                                             </a>
                                                             <?php }else{?>
+                                                            <?php  if($_SESSION['drugsafe_user']['iRole']==5){?>
+                                                        <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['iProductId'];?>,'1');" href="javascript:void(0);">
+                                                                <i class="fa fa-minus"></i> 
+                                                            </a>
+                                                           <a class="btn btn-circle btn-icon-only btn-default" title=" Add More Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['iProductId'];?>,'2');" href="javascript:void(0);">
+                                                                <i class="fa fa-plus"></i> 
+                                                            </a>
+                                                       <?php } else { ?> 
+                                                      
                                                              <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);">
                                                                 <i class="fa fa-minus"></i> 
                                                             </a>
@@ -193,7 +202,7 @@
                                                                 <i class="fa fa-plus"></i> 
                                                             </a>
                                                             <?php }?>
-                                                            
+                                                           <?php }?>  
                                                         </td>
                                                     </tr>
                                                     <?php
