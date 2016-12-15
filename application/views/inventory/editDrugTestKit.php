@@ -87,8 +87,8 @@
                                                         
                                                         ?>
                                                         <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo $dtExpiredOn ; ?>" readonly placeholder="Expired On" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
-                                                            <span class="input-group-btn">
-                                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                             <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
                                                             </span>
                                                     </div>
                                                     <!-- /input-group -->

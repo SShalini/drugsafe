@@ -76,6 +76,8 @@ define("__CUSTOMER_SUPPORT_EMAIL__", 'support@whiz-solutions.com');
 define("__ADMIN_EMAIL__", 'admin@drugsafe.com');
 define("__DBC_SCHEMATA_MODEL_STOCK_VALUE__", "fr_modelstock_val");
 define("__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__", "fr_prodstock_qty");
+define("__DBC_SCHEMATA_QUANTITY_TRACKING__", "tbl_qty_tracking");
+define("__DBC_SCHEMATA_VALUE_TRACKING__", "tbl_value_tracking");
 define("__DBC_SCHEMATA_REQUEST_QUANTITY__", "tbl_stock_request");
 define("__DBC_SCHEMATA_SOS_FORM__", "ds_sos");
 define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");

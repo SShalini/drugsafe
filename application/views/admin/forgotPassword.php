@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span class="form-subtitle">Enter your e-mail to reset it.</span>
                 </div>
                 <div class="form-group">
-                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="drugSafeForgotPassword[szEmail]" value="<?php echo $_POST['drugSafeForgotPassword']['szEmail'];?>" >
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email"  id="drugSafeForgotPassword" name="drugSafeForgotPassword[szEmail]" onfocus="remove_formError(this.id,'true')"  value="<?php echo $_POST['drugSafeForgotPassword']['szEmail'];?>" >
                     <?php if(!empty($arErrorMessages['szEmail']) != ''){?>
                         <span class="help-block pull-left">
                                                                     <i class="fa fa-times-circle"></i>

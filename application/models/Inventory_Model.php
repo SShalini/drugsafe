@@ -80,7 +80,7 @@ class Inventory_Model extends Error_Model {
      public function viewDrugTestKitList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '')
         {
             $searchAry = trim($searchAry);
-            if($_SESSION['drugsafe_user']['iRole']==1)
+            if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5 )
             {
                 if(!empty($searchAry)){
                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
@@ -126,7 +126,7 @@ class Inventory_Model extends Error_Model {
          public function viewMarketingMaterialList($searchAry= '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
         {
             $searchAry = trim($searchAry);
-            if($_SESSION['drugsafe_user']['iRole']==1){
+            if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
             
                  if(!empty($searchAry)){
                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '2');
@@ -189,7 +189,7 @@ class Inventory_Model extends Error_Model {
   public function viewConsumablesList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry ='')
         {
             $searchAry = trim($searchAry);
-            if($_SESSION['drugsafe_user']['iRole']==1)
+            if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5)
             {
                 if(!empty($searchAry)){
                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '3');

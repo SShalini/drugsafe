@@ -47,7 +47,7 @@
                                 <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
                             </div>
                             <?php 
-                            if($_SESSION['drugsafe_user']['iRole']==1){
+                            if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                             ?>
                             <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
@@ -97,7 +97,7 @@
                                         <th>  Cost</th>
                                         <th>  Expiry Date</th>
                                         <?php
-                                        if($_SESSION['drugsafe_user']['iRole']==1){
+                                          if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                                         ?>
                                         <th> Actions </th>
                                        <?php }else{?>
@@ -132,7 +132,7 @@
                                             $dtExpiredOn = date("d-m-Y", strtotime($date)); 
                                             echo $dtExpiredOn;?> </td>
                                             <?php
-                                           if($_SESSION['drugsafe_user']['iRole']==1){
+                                           if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                                              ?>
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Drug-Test Kit Details" onclick="editProduct('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">

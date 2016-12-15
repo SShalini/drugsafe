@@ -106,6 +106,8 @@
                                                     <th> Descreption</th>
                                                     <th> Cost</th>
                                                     <th>Quantity </th>
+                                                    <th>Quantity Assign By </th>
+                                                    <th>Quantity Updated By  </th>
                                                     <th> Action </th>
                                                 </tr>
                                             </thead>
@@ -116,6 +118,10 @@
                                                     { $idfranchisee = $franchiseeArr['id'];
                                                     
                                                           $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
+                                                          $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$drugTestKitData['id']);
+                                                          $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$drugTestKitData['id']);
+                                                          $qtyUpdateData1Arr =end($qtyUpdateDataArr);  
+                                                          
                                                         
                                                     ?>
                                                     <tr>
@@ -126,6 +132,35 @@
                                                         <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                         <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
                                                         <td><?php echo($drugTestKitDataArr['szQuantity'] > 0 ? $drugTestKitDataArr['szQuantity'] : 'N/A')?></td>
+                                                         <td>
+                                                        <?php 
+                                                        if($qtyAssignDataArr['szAssignBy'])
+                                                        {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyAssignDataArr['szAssignBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        else
+                                                        {
+                                                           echo "N.A";
+                                                        }
+
+                                                        ?> 
+                                                    </td>
+                                                        
+                                                        <td>
+                                                             <?php 
+                                                        if($qtyUpdateData1Arr['szLastUpdatedBy'])
+                                                        {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyUpdateData1Arr['szLastUpdatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        else
+                                                        {
+                                                           echo "N.A";
+                                                        }
+
+                                                        ?> 
+                                                    </td>
                                                         <td>
                                                             <?php if(empty($drugTestKitDataArr['szQuantity']) && ($drugTestKitDataArr['szQuantity'] != '0')){?>
                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Add Product Stock Quantity" onclick="addProductStockQuantity(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
@@ -189,6 +224,8 @@
                                 <th> Descreption</th>
                                 <th> Cost</th>
                                 <th> Quantity </th>
+                                <th>Quantity Assign By </th>
+                                <th>Quantity Updated By  </th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -210,6 +247,8 @@
                                     <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                     <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                     <td> $<?php echo $marketingMaterialData['szProductCost'];?> </td>
+                                     <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
+                                     <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
                                      <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
                                       
                                    
@@ -276,6 +315,8 @@
                                                     <th> Descreption</th>
                                                     <th> Cost</th>
                                                     <th>Quantity </th>
+                                                    <th>Quantity Assign By </th>
+                                                    <th>Quantity Updated By  </th>
                                                     <th> Action </th>
                                                 </tr>
                                             </thead>
@@ -296,6 +337,8 @@
                                                         <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                                         <td> $<?php echo $consumablesData['szProductCost'];?> </td>
                                                         <td><?php echo($consumablesDataArr['szQuantity'] > 0 ? $consumablesDataArr['szQuantity'] : 'N/A')?></td>
+                                                        <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
+                                                        <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
                                                         <td>
                                                             <?php if(empty($consumablesDataArr['szQuantity']) && ($consumablesDataArr['szQuantity'] != '0')){?>
                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Add Product Stock Quantity" onclick="addProductStockQuantity(<?php echo $consumablesData['id'];?>);" href="javascript:void(0);">

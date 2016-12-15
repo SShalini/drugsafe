@@ -114,6 +114,8 @@
                                         <th> Product Code</th>
                                         <th> Cost Per Item </th>
                                         <th> Total Cost For Quantity Assign</th>
+                                        <th>Quantity Assign By </th>
+                                        <th>Quantity Updated By  </th>
                                         <th> Quantity Assigned</th>
                                         <th> Quantity Adjusted</th>
                                         <th> Available Quantity</th>
@@ -127,7 +129,9 @@
                                         $i = 0;
 
                                         foreach ($allQtyAssignAray as $allQtyAssignData) {
-//                                        
+                                                          $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($allQtyAssignData['iFranchiseeId'],$allQtyAssignData['id']);
+                                                          $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($allQtyAssignData['iFranchiseeId'],$allQtyAssignData['id']);
+                                                          $qtyUpdateData1Arr =end($qtyUpdateDataArr);
 //                                           $productDataAry = $this->Inventory_Model->getProductDetailsById($allQtyAssignData['iProductId']);
 //                                          
 //                                           $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$allQtyAssignData['iFranchiseeId']);
@@ -145,6 +149,35 @@
                                                         $TotalCostPerQty = ($Qty*$Cost);
                                                          echo  $TotalCostPerQty; ?> 
                                                 </td>
+                                                 <td>
+                                                        <?php 
+                                                        if($qtyAssignDataArr['szAssignBy'])
+                                                        {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyAssignDataArr['szAssignBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        else
+                                                        {
+                                                           echo "N.A";
+                                                        }
+
+                                                        ?> 
+                                                    </td>
+                                                        
+                                                        <td>
+                                                             <?php 
+                                                        if($qtyUpdateData1Arr['szLastUpdatedBy'])
+                                                        {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyUpdateData1Arr['szLastUpdatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        else
+                                                        {
+                                                           echo "N.A";
+                                                        }
+
+                                                        ?> 
+                                                    </td>
                                                 <td> <?php echo $allQtyAssignData['szQuantityAssigned']; ?> </td>
                                                 <td> <?php echo $allQtyAssignData['quantityDeducted']; ?> </td>
                                                 <td> <?php echo $allQtyAssignData['szTotalAvailableQty']; ?> </td>

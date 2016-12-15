@@ -73,7 +73,14 @@
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
+                                            <?php if($_SESSION['drugsafe_user']['iRole']==5){?>
                                            <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>
+                                            
+                                            <?php } elseif($_SESSION['drugsafe_user']['iRole']==2){?>
+                                           <a href="<?=__BASE_URL__?>/franchisee/clientRecord" class="btn default uppercase" type="button">Cancel</a>
+                                           <?php  } else{?>
+                                           <a href="<?=__BASE_URL__?>/admin/operationManagerList" class="btn default uppercase" type="button">Cancel</a>
+                                            <?php }?>
                                          <button class="btn green-meadow uppercase btn-form-submit" type="submit">SAVE</button>
                                         </div>
                                         

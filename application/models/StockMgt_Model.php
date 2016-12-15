@@ -25,6 +25,17 @@ class StockMgt_Model extends Error_Model
         $this->db->insert(__DBC_SCHEMATA_MODEL_STOCK_VALUE__, $dataAry);
 
         if ($this->db->affected_rows() > 0) {
+            
+           $qtydataAry = array(
+                'iFranchiseeId' => $idfranchisee,
+                'iProductId' => $idProduct,
+                'szAssignBy' => $_SESSION['drugsafe_user']['id'],
+                'szModelStockVal' => $data['szModelStockVal']
+                
+            );
+              $this->db->insert(__DBC_SCHEMATA_VALUE_TRACKING__, $qtydataAry);  
+            
+            
 
             return true;
         } else {
@@ -143,6 +154,14 @@ class StockMgt_Model extends Error_Model
         $queryUpdate = $this->db->update(__DBC_SCHEMATA_MODEL_STOCK_VALUE__, $dataAry);
 
         if (!empty($queryUpdate)) {
+                $qtydataAry = array(
+                'iFranchiseeId' => $idfranchisee,
+                'iProductId' => $idProduct,
+                'szLastUpdatedBy' => $_SESSION['drugsafe_user']['id'],
+                'szModelStockVal' => $szModelStockVal
+                
+            );
+              $this->db->insert(__DBC_SCHEMATA_VALUE_TRACKING__, $qtydataAry); 
             return true;
         } else {
             return false;
@@ -166,7 +185,41 @@ class StockMgt_Model extends Error_Model
             return array();
         }
     }
+      public function getQtyAssignTrackingDetailsById($idfranchisee, $id = 0)
+    {
+        $this->db->select('szAssignBy');
 
+        $whereAry = array('iProductId' => $id, 'iFranchiseeId' => $idfranchisee,'szAssignBy!=' => '0');
+
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_QUANTITY_TRACKING__);
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            return array();
+        }
+    }
+
+         public function getQtyUpdateTrackingDetailsById($idfranchisee, $id = 0)
+    {
+        $this->db->select('szLastUpdatedBy');
+
+        $whereAry = array('iProductId' => $id, 'iFranchiseeId' => $idfranchisee,'szLastUpdatedBy!=' => '0');
+
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_QUANTITY_TRACKING__);
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return array();
+        }
+    }
+
+    
     function insertProductStockQuantity($idfranchisee, $data, $idProduct)
     {
 
@@ -182,7 +235,16 @@ class StockMgt_Model extends Error_Model
         $this->db->insert(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
 
         if ($this->db->affected_rows() > 0) {
-
+     
+            $qtydataAry = array(
+                'iFranchiseeId' => $idfranchisee,
+                'iProductId' => $idProduct,
+                'szQuantityAssigned' => $data['szQuantity'],
+                'szAssignBy' => $_SESSION['drugsafe_user']['id']
+                
+            );
+              $this->db->insert(__DBC_SCHEMATA_QUANTITY_TRACKING__, $qtydataAry);
+            
             return true;
         } else {
             return false;
@@ -210,6 +272,32 @@ class StockMgt_Model extends Error_Model
         $queryUpdate = $this->db->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
 
         if (!empty($queryUpdate)) {
+            
+             if(!empty($data_validate['szAdjustQuantity'])){
+             
+                  $qtydataAry = array(
+                'iFranchiseeId' => $idfranchisee,
+                'iProductId' => $idProduct,
+                'szQuantityDeducted' =>$data_validate['szAdjustQuantity'] ,
+                'szLastUpdatedBy' => $_SESSION['drugsafe_user']['id']
+                
+            );
+            }
+            else{
+                $qtydataAry = array(
+                'iFranchiseeId' => $idfranchisee,
+                'iProductId' => $idProduct,
+                'szQuantityAssigned' =>$data_validate['szAddMoreQuantity'],
+                'szLastUpdatedBy' => $_SESSION['drugsafe_user']['id']
+                
+            ); 
+            }
+                
+            
+            
+              $this->db->insert(__DBC_SCHEMATA_QUANTITY_TRACKING__, $qtydataAry);
+            
+            
             /* if($flag==3)
              {*/
 

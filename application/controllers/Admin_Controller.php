@@ -150,9 +150,19 @@ class Admin_Controller extends CI_Controller {
                         $szMessage['content'] = "<strong>Password Recovery! </strong> Your new password successfully updated.";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
+                       if($_SESSION['drugsafe_user']['iRole']==5){
                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+                        die;                 
+                      } elseif($_SESSION['drugsafe_user']['iRole']==2){
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
                         die;
+                        } else{
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                        die;
+                        }
                     }
             }
         
@@ -487,7 +497,7 @@ class Admin_Controller extends CI_Controller {
             'szZipCode',
             'szAddress'
         );
-        if($this->Admin_Model->validateFranchiseeData($data_validate,$data_not_validate,'0',true))
+        if($this->Admin_Model->validateUsersData($data_validate,$data_not_validate,'0',true))
         {
 
             if($this->Admin_Model->checkAdminAccountStatus($data_validate['szEmail']))
