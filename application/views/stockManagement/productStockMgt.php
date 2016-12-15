@@ -115,12 +115,21 @@
                                                 <?php
                                                    $i = 0;
                                                     foreach($drugTestKitAray as $drugTestKitData)
-                                                    { $idfranchisee = $franchiseeArr['id'];
-                                                    
-                                                          $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
+                                                    {        
+                                                        $idfranchisee = $franchiseeArr['id'];
+                                                    if($_SESSION['drugsafe_user']['iRole']==5){
+                                                          $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['iProductId']);
+                                                          $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$drugTestKitData['iProductId']);
+                                                          $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$drugTestKitData['iProductId']);
+                                                          $qtyUpdateData1Arr =end($qtyUpdateDataArr);
+                                                    } else
+                                                        {
+                                                          $drugTestKitDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']); 
                                                           $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$drugTestKitData['id']);
                                                           $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$drugTestKitData['id']);
-                                                          $qtyUpdateData1Arr =end($qtyUpdateDataArr);  
+                                                          $qtyUpdateData1Arr =end($qtyUpdateDataArr);
+                                                    }
+                                                            
                                                           
                                                         
                                                     ?>
@@ -131,8 +140,12 @@
                                                         <td> <?php echo $drugTestKitData['szProductCode']?> </td>
                                                         <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                         <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
+                                                       <?php  if($_SESSION['drugsafe_user']['iRole']==5){?>
+                                                        <td><?php echo($drugTestKitData['szQuantity'] > 0 ? $drugTestKitData['szQuantity'] : 'N/A')?></td>
+                                                       <?php } else { ?> 
                                                         <td><?php echo($drugTestKitDataArr['szQuantity'] > 0 ? $drugTestKitDataArr['szQuantity'] : 'N/A')?></td>
-                                                         <td>
+                                                       <?php }?>
+                                                        <td>
                                                         <?php 
                                                         if($qtyAssignDataArr['szAssignBy'])
                                                         {
@@ -152,7 +165,13 @@
                                                         if($qtyUpdateData1Arr['szLastUpdatedBy'])
                                                         {
                                                             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyUpdateData1Arr['szLastUpdatedBy']);
-                                                            echo $franchiseeDetArr['szName'];
+                                                            if(empty($qtyAssignDataArr['szAssignBy'])){
+                                                              echo "N.A";   
+                                                            }
+                                                            else{
+                                                                 echo $franchiseeDetArr['szName'];
+                                                            }
+                                                           
                                                         }
                                                         else
                                                         {
@@ -235,8 +254,20 @@
                                 foreach($marketingMaterialAray as $marketingMaterialData)
                                 {  
                                      $idfranchisee = $franchiseeArr['id'];
+                                        if($_SESSION['drugsafe_user']['iRole']==5){
+                                               $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
+                                              $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
+                                              $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
+                                              $qtyUpdateData1Arr =end($qtyUpdateDataArr);
+                                        } else
+                                            {
+                                            $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                            $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                              $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                              $qtyUpdateData1Arr =end($qtyUpdateDataArr);
+                                        }
 
-                                    $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                   
                                                              
                                     ?>
                                 <tr>
@@ -247,11 +278,41 @@
                                     <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                     <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                     <td> $<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                     <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
-                                     <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
-                                     <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
-                                      
-                                   
+                                       <?php  if($_SESSION['drugsafe_user']['iRole']==5){?>
+                                        <td><?php echo($marketingMaterialData['szQuantity'] > 0 ? $marketingMaterialData['szQuantity'] : 'N/A')?></td>
+                                       <?php } else { ?> 
+                                        <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
+                                       <?php }?>
+                                        <td>
+                                        <?php 
+                                        if($qtyAssignDataArr['szAssignBy'])
+                                        {
+                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyAssignDataArr['szAssignBy']);
+                                            echo $franchiseeDetArr['szName'];
+                                        }
+                                        else
+                                        {
+                                           echo "N.A";
+                                        }
+
+                                        ?> 
+                                    </td>
+
+                                        <td>
+                                             <?php 
+                                        if($qtyUpdateData1Arr['szLastUpdatedBy'])
+                                        {
+                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyUpdateData1Arr['szLastUpdatedBy']);
+                                            echo $franchiseeDetArr['szName'];
+                                        }
+                                        else
+                                        {
+                                           echo "N.A";
+                                        }
+
+                                        ?> 
+                                    </td>
+                                     
                                     <td>
                                          <?php if(empty($marketingMaterialDataArr['szQuantity']) && ($marketingMaterialDataArr['szQuantity'] != '0')){?>
                                         
@@ -326,6 +387,18 @@
                                                     foreach($consumablesAray as $consumablesData)
                                                     { $idfranchisee = $franchiseeArr['id'];
                                                     
+                                                     if($_SESSION['drugsafe_user']['iRole']==5){
+                                              $consumablesDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$consumablesData['iProductId']);
+                                              $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$consumablesData['iProductId']);
+                                              $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$consumablesData['iProductId']);
+                                              $qtyUpdateData1Arr =end($qtyUpdateDataArr);
+                                        } else
+                                            {
+                                             $consumablesDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$consumablesData['id']);
+                                            $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$consumablesData['id']);
+                                              $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$consumablesData['id']);
+                                              $qtyUpdateData1Arr =end($qtyUpdateDataArr);
+                                        }
                                                           $consumablesDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$consumablesData['id']);
                                                         
                                                     ?>
@@ -336,7 +409,41 @@
                                                         <td> <?php echo $consumablesData['szProductCode']?> </td>
                                                         <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                                         <td> $<?php echo $consumablesData['szProductCost'];?> </td>
-                                                        <td><?php echo($consumablesDataArr['szQuantity'] > 0 ? $consumablesDataArr['szQuantity'] : 'N/A')?></td>
+                                                       <?php  if($_SESSION['drugsafe_user']['iRole']==5){?>
+                                                            <td><?php echo($consumablesData['szQuantity'] > 0 ? $consumablesData['szQuantity'] : 'N/A')?></td>
+                                                           <?php } else { ?> 
+                                                            <td><?php echo($consumablesDataArr['szQuantity'] > 0 ? $consumablesDataArr['szQuantity'] : 'N/A')?></td>
+                                                           <?php }?>
+                                                            <td>
+                                                            <?php 
+                                                            if($qtyAssignDataArr['szAssignBy'])
+                                                            {
+                                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyAssignDataArr['szAssignBy']);
+                                                                echo $franchiseeDetArr['szName'];
+                                                            }
+                                                            else
+                                                            {
+                                                               echo "N.A";
+                                                            }
+
+                                                            ?> 
+                                                        </td>
+
+                                                            <td>
+                                                                 <?php 
+                                                            if($qtyUpdateData1Arr['szLastUpdatedBy'])
+                                                            {
+                                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyUpdateData1Arr['szLastUpdatedBy']);
+                                                                echo $franchiseeDetArr['szName'];
+                                                            }
+                                                            else
+                                                            {
+                                                               echo "N.A";
+                                                            }
+
+                                                            ?> 
+                                                        </td>
+
                                                         <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
                                                         <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
                                                         <td>

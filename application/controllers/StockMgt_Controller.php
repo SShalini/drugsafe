@@ -63,16 +63,21 @@ class StockMgt_Controller extends CI_Controller {
              $idfranchisee = $this->session->userdata('idfranchisee');
              $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
 
-             $drugTestKitAray =$this->StockMgt_Model->viewDrugTestKitList();
-         
+             $drugTestKitAray =$this->StockMgt_Model->viewDrugTestKitList($idfranchisee,'1');
+      
              $fr_value_data = array();
              foreach ($drugTestKitAray as $drugTestKitdata){
-             $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitdata['id']);
+              if($_SESSION['drugsafe_user']['iRole']==5){
+              $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitdata['iProductId']);}
+              else{
+              $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitdata['id']);}    
+            
              array_push($fr_value_data, $drugTestKitDataArr);
-        
-             }
-
-            $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
+          }
+         
+             
+             
+            $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList($idfranchisee);
   
                 $mr_value_data = array();
                 foreach ($marketingMaterialAray as $marketingMaterialdata){
@@ -80,7 +85,7 @@ class StockMgt_Controller extends CI_Controller {
                 array_push($mr_value_data,$marketingMaterialDataArr);
              }
              
-                $consumablesAray =$this->StockMgt_Model->viewConsumablesList();
+                $consumablesAray =$this->StockMgt_Model->viewConsumablesList($idfranchisee);
   
                 $con_value_data = array();
                 foreach ($consumablesAray as $consumablesdata){
@@ -312,9 +317,9 @@ class StockMgt_Controller extends CI_Controller {
           
              $idfranchisee = $this->session->userdata('idfranchisee');
              $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idfranchisee);
-             $drugTestKitAray =$this->StockMgt_Model->viewDrugTestKitList();
-             $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList();
-             $consumablesAray =$this->StockMgt_Model->viewConsumablesList(); 
+             $drugTestKitAray =$this->StockMgt_Model->viewDrugTestKitList($idfranchisee);
+             $marketingMaterialAray =$this->StockMgt_Model->viewMarketingMaterialList($idfranchisee);
+             $consumablesAray =$this->StockMgt_Model->viewConsumablesList($idfranchisee); 
 
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
                     $data['drugTestKitAray'] = $drugTestKitAray;

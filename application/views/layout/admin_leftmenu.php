@@ -52,7 +52,7 @@
                     <span class="selected"></span>
                 </a>
             </li>
-
+          <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole']==2) { ?>
             <li class="nav-item start <?php if (trim($pageName) == 'Inventory') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cubes" aria-hidden="true"></i>
@@ -84,6 +84,7 @@
                 </ul>
 
             </li>
+           <?php } ?>
             <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole']==5) { ?>
                 <li class="nav-item  <?php if ($pageName == 'Stock_Request') { ?> active open <?php } ?>">
                     <a class="nav-link " href="<?php echo __BASE_URL__; ?>/stock_management/stockreqlist">
