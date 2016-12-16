@@ -62,9 +62,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+                                    <?php 
                                     if($frReqQtyAray)
                                     {   $i = 0;
+                                     $frReqQtyAray = array_filter($frReqQtyAray);  
                                         foreach($frReqQtyAray as $frReqQtyArayData)
                                         {
                                           

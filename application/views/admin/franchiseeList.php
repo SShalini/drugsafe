@@ -93,7 +93,7 @@
                                           ?>
                                       </select>
                                   </div>
-                                   
+                                  <?php if($_SESSION['drugsafe_user']['iRole']==1){?> 
                                   <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
 <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
                                   <div class="search col-md-2">
@@ -112,6 +112,7 @@
                                           ?>
                                       </select>
                                   </div>
+                                  <?php }?>
                                <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
                                   <div class="search col-md-2">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
@@ -139,7 +140,9 @@
                                         <th> Id.</th>
                                         <th> Name</th>
                                         <th> Email</th>
+                                        <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                         <th> Operation Manager </th>
+                                        <?php }?>
                                         <th> Contact No </th>
                                         <th> Address </th>
                                         <th> Actions </th>
@@ -159,7 +162,9 @@
                                             <td> FR-<?php echo $franchiseeData['id'];?> </td>
                                             <td> <?php echo $franchiseeData['szName']?> </td>
                                             <td> <?php echo $franchiseeData['szEmail'];?> </td>
+                                             <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                             <td> <?php echo $operationManagerDetArr['szName'];?> </td>
+                                            <?php }?>
                                             <td> <?php echo $franchiseeData['szContactNumber'];?> </td>
                                             <td> <?php echo $franchiseeData['szCity'];?> </td>
                                            <td>

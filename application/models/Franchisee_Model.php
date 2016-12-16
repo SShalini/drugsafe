@@ -198,7 +198,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             }
             $this->db->select('*');
             $this->db->from('tbl_franchisee');
-           $this->db->join('tbl_client', 'tbl_franchisee.franchiseeId = tbl_client.franchiseeId');
+            $this->db->join('tbl_client', 'tbl_franchisee.franchiseeId = tbl_client.franchiseeId');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
              if(!empty($searchq)){
                $this->db->where('isDeleted','0');

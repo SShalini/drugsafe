@@ -9,20 +9,39 @@ class Reporting_Model extends Error_Model {
           if(!empty($searchItemData)){
                $searchq = "iFranchiseeId LIKE '%$searchItemData%' OR szName LIKE '%$searchItemData%' OR szProductCode LIKE '%$searchItemData%'";
             }
-          
+         
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+            if($_SESSION['drugsafe_user']['iRole']==5){
+          
+            $operationManagerId =  $_SESSION['drugsafe_user']['id'];
+            $whereAry = array('operationManagerId' => $operationManagerId);
             $this->db->join('ds_user','tbl_stock_request.iFranchiseeId = ds_user.id');
             $this->db->join('tbl_product','tbl_stock_request.iProductId = tbl_product.id');
+            $this->db->join('tbl_franchisee','tbl_stock_request.iFranchiseeId = tbl_franchisee.franchiseeId');
+             if (!empty($searchq)) {
+               $this->db->where($searchq);
+               $this->db->where($whereAry);
+               }
+               else{
+                  $this->db->where($whereAry);  
+               }
             
-              if (!empty($searchq)) {
+            }
+            else{
+             $this->db->join('ds_user','tbl_stock_request.iFranchiseeId = ds_user.id');
+             $this->db->join('tbl_product','tbl_stock_request.iProductId = tbl_product.id');   
+             if (!empty($searchq)) {
                $this->db->where($searchq);
                } 
+            }
+            
             
             $this->db->limit($limit, $offset);
             $this->db->order_by(__DBC_SCHEMATA_REQUEST_QUANTITY__.'.id DESC');
             $query = $this->db->get();
-
+//$sql = $this->db->last_query($query);
+// print_r($sql);die;
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -40,15 +59,34 @@ class Reporting_Model extends Error_Model {
         
             $this->db->select('*');
             $this->db->from(__DBC_SCHEMATA_STOCK_REQ_TRACKING__);
+            
+             if($_SESSION['drugsafe_user']['iRole']==5){
+          
+            $operationManagerId =  $_SESSION['drugsafe_user']['id'];
+            $whereAry = array('operationManagerId' => $operationManagerId);
+            $this->db->join('ds_user','tbl_stock_assign_tracking.iFranchiseeId = ds_user.id');
+            $this->db->join('tbl_product','tbl_stock_assign_tracking.iProductId = tbl_product.id');
+            $this->db->join('tbl_franchisee','tbl_stock_assign_tracking.iFranchiseeId = tbl_franchisee.franchiseeId');
+             if (!empty($searchq)) {
+               $this->db->where($searchq);
+               $this->db->where($whereAry);
+               }
+               else{
+                  $this->db->where($whereAry);  
+               }
+            
+            }
+            else{
             $this->db->join('ds_user','tbl_stock_assign_tracking.iFranchiseeId = ds_user.id');
             $this->db->join('tbl_product','tbl_stock_assign_tracking.iProductId = tbl_product.id');
              if (!empty($searchq)) {
                $this->db->where($searchq);
                }
+            }
             $this->db->limit($limit, $offset);
             $this->db->order_by(__DBC_SCHEMATA_STOCK_REQ_TRACKING__.'.id DESC');
             $query = $this->db->get();
-// $sql = $this->db->last_query($query);
+//$sql = $this->db->last_query($query);
 // print_r($sql);die;
             if($query->num_rows() > 0)
             {

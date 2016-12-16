@@ -647,16 +647,30 @@ class StockMgt_Controller extends CI_Controller {
             }
             
             
-             $count = $this->Admin_Model->getnotification();
+                $count = $this->Admin_Model->getnotification();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/stockreqlist/";
                 $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset));
                 $config['per_page'] = 5;
 
 
-        $this->pagination->initialize($config);
-             
-             $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3));
-
+               $this->pagination->initialize($config);
+              if($_SESSION['drugsafe_user']['iRole']==1){
+               $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrId($config['per_page'],$this->uri->segment(3));
+              }
+              else{
+                   $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                    $franchiseeAray =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
+                   $frReqQtyAray = array();
+                   $i=0;
+                     foreach ($franchiseeAray as $franchiseeData) {
+                     $frReqQtyAray[$i] =$this->StockMgt_Model->getQtyRequestFrIdByOpId($franchiseeData['franchiseeId']);
+                     //array_push($frReqQtyAray, $frdata);
+                     $i++;
+             }
+                 
+                    
+                  //  $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrIdByOpId();
+                  }
                     $data['frReqQtyAray'] = $frReqQtyAray;
                    // $data['franchiseeAray'] = $reqQtyAray;
                     $data['szMetaTagTitle'] = "Stock Request List";

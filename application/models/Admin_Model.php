@@ -860,7 +860,22 @@ class Admin_Model extends Error_Model
 
     public function getnotification()
     {
+        if($_SESSION['drugsafe_user']['iRole']==1){
         $frReqQtyAray = $this->StockMgt_Model->getQtyRequestFrId(false, false);
+       }
+       else {
+           
+           
+        $operationManagerId = $_SESSION['drugsafe_user']['id'];
+        $franchiseeAray =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
+        $frReqQtyAray = array();
+        $i=0;
+        foreach ($franchiseeAray as $franchiseeData) {
+        $frReqQtyAray[$i] =$this->StockMgt_Model->getQtyRequestFrIdByOpId($franchiseeData['franchiseeId']);
+        $i++;
+            }
+        $frReqQtyAray = array_filter($frReqQtyAray);  
+        }
 
         $count = 0;
         foreach ($frReqQtyAray as $frReqQtyData) {

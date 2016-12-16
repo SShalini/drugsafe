@@ -518,6 +518,36 @@ class StockMgt_Model extends Error_Model
             }
 
     }
+       public function getQtyRequestFrIdByOpId($franchiseeId)
+    {
+
+            $whereAry = array('isCompleted=' => '0','ds_user.id='=>$franchiseeId);
+            $this->db->select('ds_user.id');
+            $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+            $this->db->join('ds_user', 'tbl_stock_request.iFranchiseeId = ds_user.id');
+            $this->db->where($whereAry);
+
+            $subQuery = $this->db->_compile_select();
+
+            $this->db->_reset_select();
+            $this->db->select('id, szName, szEmail, szContactNumber, szCity');
+            $this->db->from(__DBC_SCHEMATA_USERS__);
+            $this->db->where("id IN (" . $subQuery . ")");
+            $this->db->limit($limit, $offset);
+
+            $query = $this->db->get();
+//           $sql = $this->db->last_query($query);
+//            print_r($sql);die;
+
+            if ($query->num_rows() > 0) {
+               
+               $row=  $query->result_array();
+                 return $row[0];
+            } else {
+                return array();
+            }
+
+    }
 
     public function getRequestQtyList($searchAry = '', $idfranchisee, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
