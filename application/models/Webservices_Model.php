@@ -68,6 +68,79 @@ return true;
             $this->addError("usernotexist", "User does not exist.");
         }
     }
+    function getclientdetails($franchiseeid,$parent=0){
+        $array = array(__DBC_SCHEMATA_CLIENT__.'.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__.'.clientType' => (int)$parent);
+        $query =  $this->db->select(__DBC_SCHEMATA_USERS__.'.id, szName, szEmail')
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->join(__DBC_SCHEMATA_CLIENT__, __DBC_SCHEMATA_CLIENT__.'.clientId = '.__DBC_SCHEMATA_USERS__.'.id')
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        }else{
+            $this->addError("usernotexist", "User does not exist.");
+        }
+    }
+
+    function addsosdata($data){
+        $datearr = explode('/',$data['sosdate']);
+        $data['testdate'] = $datearr['2'].'-'.$datearr['1'].'-'.$datearr['0'];
+        $dataAry = array(
+            'testdate' => date('Y-m-d',strtotime($data['testdate'])),
+            'Clientid' => $data['site'],
+            'Drugtestid' => $data['drugtest'],
+            'ServiceCommencedOn' => $data['servicecomm'],
+            'ServiceConcludedOn' => $data['servicecon'],
+            'FurtherTestRequired' => $data['furthertestreq'],
+            'TotalDonarScreeningUrine' => $data['totscreenu'],
+            'TotalDonarScreeningOral' => $data['totscreeno'],
+            'NegativeResultUrine' => $data['negresu'],
+            'NegativeResultOral' => $data['negreso'],
+            'FurtherTestUrine' => $data['furtestu'],
+            'FurtherTestOral' => $data['furtesto'],
+            'TotalAlcoholScreening' => $data['totalcscreen'],
+            'NegativeAlcohol' => $data['negalcres'],
+            'PositiveAlcohol' => $data['posalcres'],
+            'Refusals' => $data['refusals'],
+            'DeviceName' => $data['devicename'],
+            'ExtraUsed' => $data['extraused'],
+            'BreathTesting' => $data['breathtest'],
+            'CollectorSignature' => $data['sign'],
+            'CollectorName' => $data['sign'],
+            'Comments' => $data['comments'],
+            'ClientRepresentative' => $data['nominated'],
+            'RepresentativeSignature' => $data['nominated'],
+            'RepresentativeSignatureTime' => date('Y-m-d'),
+            'Status' => $data['status']
+        );
+        $this->db->insert(__DBC_SCHEMATA_SOS_FORM__, $dataAry);
+        if ($this->db->affected_rows() > 0) {
+            $sosid = (int)$this->db->insert_id();
+            $failarr = array();
+            for($i=1;$i<=$data['donercount'];$i++){
+                $donerAry=array(
+                    'donerName' => $data['name'.$i],
+                    'result' => $data['result'.$i],
+                    'drug' => $data['drugtype'.$i],
+                    'alcoholreading1' => $data['pos1read'.$i],
+                    'alcoholreading2' => $data['pos2read'.$i],
+                    'lab' => $data['lab'.$i],
+                    'sosid' => (int)$sosid
+                );
+                $this->db->insert(__DBC_SCHEMATA_DONER__, $donerAry);
+                if (!($this->db->affected_rows() > 0)){
+                    $message = "Some error occurred while adding ".$data['name'.$i]." donor. Please try again.";
+                    array_push($failarr,$message);
+                }
+            }
+            return $failarr;
+    }else{
+            $failarr = array("No data inserted");
+            return $failarr;
+        }
+
+    }
 
     function set_szEmail($value,$field=false,$message=false , $flag = true)
     {
