@@ -150,7 +150,7 @@ class Admin_Model extends Error_Model
 
     public function adminLoginUser($validate)
     {
-        $whereAry = array('szEmail' => $validate['szEmail'], 'szPassword' => encrypt($validate['szPassword']));
+        $whereAry = array('szEmail' => $validate['szEmail'], 'szPassword' => encrypt($validate['szPassword']),'isDeleted=' => '0','iActive=' => '1');
         $this->db->select('id,szName,szEmail,szPassword,iRole');
         $this->db->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
@@ -804,11 +804,13 @@ class Admin_Model extends Error_Model
             if ((int)$row['iRole'] == 3) {
              $this->addError('szEmail', "Invalid EmailId or Password.");
                         return false;
-            } elseif ((int)$row['iActive'] == 0) {
-                $this->addError("szEmail", "Your account is inactive.");
-            } else if ((int)$row['isDeleted'] == 1) {
-                $this->addError("szEmail", "Your account is deleted.");
-            }
+            } 
+//            elseif ((int)$row['iActive'] == 0) {
+//                $this->addError("szEmail", "Your account is inactive.");
+//            }
+//            else if ((int)$row['isDeleted'] == 1) {
+//                $this->addError("szEmail", "Your account is deleted.");
+//            }
         } 
 
     } 
