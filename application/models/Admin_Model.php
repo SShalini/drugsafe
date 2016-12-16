@@ -748,7 +748,6 @@ class Admin_Model extends Error_Model
             if (!in_array('szContactEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szContactEmail'])),"szContactEmail","Contact Email address", false);
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
-           
             if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
@@ -866,7 +865,6 @@ class Admin_Model extends Error_Model
         $frReqQtyAray = $this->StockMgt_Model->getQtyRequestFrId(false, false);
        }
        else {
-           
            
         $operationManagerId = $_SESSION['drugsafe_user']['id'];
         $franchiseeAray =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);

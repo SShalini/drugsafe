@@ -668,7 +668,7 @@ class StockMgt_Controller extends CI_Controller {
                      $i++;
              }
                  
-                    
+                 $frReqQtyAray = array_filter($frReqQtyAray);    
                   //  $frReqQtyAray =$this->StockMgt_Model->getQtyRequestFrIdByOpId();
                   }
                     $data['frReqQtyAray'] = $frReqQtyAray;

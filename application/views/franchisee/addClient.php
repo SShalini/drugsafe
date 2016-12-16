@@ -414,10 +414,14 @@
                                 <?php
                                    }
                                 else {
-                                    ?>
+                                    ?> 
+                                     
                                     <input id="franchiseeid" class="form-control" type="hidden"
                                            value="<?php echo  $_SESSION['drugsafe_user']['id']; ?>"
                                            name="clientData[franchiseeId]">
+                                    <?php $idfranchisee = $_SESSION['drugsafe_user']['id']; 
+                                    $franchiseeAry = $this->Franchisee_Model->getFranchiseeDetailsByOperationManagerId(trim($idfranchisee));?>
+                                               <input id="OperationManagerId" class="form-control" type="hidden" value="<?php echo $franchiseeAry['operationManagerId'] ?>" name="clientData[operationManagerId]">
                                     <?php
                                 }
                                 ?>

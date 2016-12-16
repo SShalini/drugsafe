@@ -86,7 +86,7 @@ class Franchisee_Controller extends CI_Controller
         $count = $this->Admin_Model->getnotification();
         $validate = $this->input->post('clientData');
     
-    
+   
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
         $flag = $this->session->userdata('flag');

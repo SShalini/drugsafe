@@ -453,8 +453,6 @@
                                                             ?> 
                                                         </td>
 
-                                                        <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
-                                                        <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
                                                         <td>
                                                             <?php if(empty($consumablesDataArr['szQuantity']) && ($consumablesDataArr['szQuantity'] != '0')){?>
                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Add Product Stock Quantity" onclick="addProductStockQuantity(<?php echo $consumablesData['id'];?>);" href="javascript:void(0);">
