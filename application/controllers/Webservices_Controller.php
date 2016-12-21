@@ -26,6 +26,7 @@ class Webservices_Controller extends CI_Controller
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['user']['szEmail'] = !empty($jsondata->szEmail) ? $jsondata->szEmail : "";
         $data['user']['szPassword'] = !empty($jsondata->szPassword) ? $jsondata->szPassword : "";
+        $data['user']['szrole'] = !empty($jsondata->szrole) ? $jsondata->szrole : "cl";
         $userLoginArr = $this->Webservices_Model->validateuser($data['user']);
         if(!empty($userLoginArr))
         {
@@ -95,11 +96,15 @@ class Webservices_Controller extends CI_Controller
         }
         echo json_encode($responsedata);
     }
+
+    /**
+     *
+     */
     function addsosdata(){
         $jsondata = json_decode(file_get_contents("php://input"));
-        $dataArr['sosdate'] = !empty($jsondata->sosdate) ? $jsondata->sosdate : date('d/m/Y');
-        $dataArr['reqclient'] = !empty($jsondata->reqclient) ? $jsondata->reqclient : "0";
-        $dataArr['site'] = !empty($jsondata->site) ? $jsondata->site : "0";
+        $dataArr['sosdate'] = !empty($jsondata->sosdate) ? $jsondata->sosdate : "";
+        $dataArr['reqclient'] = !empty($jsondata->reqclient) ? $jsondata->reqclient : "";
+        $dataArr['site'] = !empty($jsondata->site) ? $jsondata->site : "";
         $drug = '';
         if(!empty($jsondata->drugtest)){
             foreach ($jsondata->drugtest as $key=>$value){
@@ -164,21 +169,103 @@ class Webservices_Controller extends CI_Controller
             $dataArr['furthertestreq'] = '0';
         }
 
-
         if(!empty($dataArr))
         {
             $sosdatares = $this->Webservices_Model->addsosdata($dataArr);
-            if(!empty($sosdatares)){
-                $responsedata = array("code" => 201,
-                    "errordata"=>$sosdatares);
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['testdate'])){
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['testdate']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['site'])){
+                $responsedata = array("code" => 204, "message"=>$errorMsgArr['site']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['drugtest'])){
+                $responsedata = array("code" => 205, "message"=>$errorMsgArr['drugtest']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['servicecomm'])){
+                $responsedata = array("code" => 206, "message"=>$errorMsgArr['servicecomm']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['servicecon'])){
+                $responsedata = array("code" => 207, "message"=>$errorMsgArr['servicecon']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['totscreenu'])){
+                $responsedata = array("code" => 208, "message"=>$errorMsgArr['totscreenu']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['totscreeno'])){
+                $responsedata = array("code" => 209, "message"=>$errorMsgArr['totscreeno']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['negresu'])){
+                $responsedata = array("code" => 210, "message"=>$errorMsgArr['negresu']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['negreso'])){
+                $responsedata = array("code" => 211, "message"=>$errorMsgArr['negreso']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['furtestu'])){
+                $responsedata = array("code" => 212, "message"=>$errorMsgArr['furtestu']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['furtesto'])){
+                $responsedata = array("code" => 213, "message"=>$errorMsgArr['furtesto']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['totalcscreen'])){
+                $responsedata = array("code" => 214, "message"=>$errorMsgArr['totalcscreen']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['negalcres'])){
+                $responsedata = array("code" => 215, "message"=>$errorMsgArr['negalcres']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['posalcres'])){
+                $responsedata = array("code" => 216, "message"=>$errorMsgArr['posalcres']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['refusals'])){
+                $responsedata = array("code" => 217, "message"=>$errorMsgArr['refusals']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['devicename'])){
+                $responsedata = array("code" => 218, "message"=>$errorMsgArr['devicename']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['extraused'])){
+                $responsedata = array("code" => 219, "message"=>$errorMsgArr['extraused']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['breathtest'])){
+                $responsedata = array("code" => 220, "message"=>$errorMsgArr['breathtest']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominated'])){
+                $responsedata = array("code" => 221, "message"=>$errorMsgArr['nominated']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sign'])){
+                $responsedata = array("code" => 222, "message"=>$errorMsgArr['sign']);
+            }elseif(!empty($sosdatares)){
+                $responsedata = array("code" => 201, "errordata"=>$sosdatares);
             }else{
-                $responsedata = array("code" => 200,
-                    "message"=>"SOS form data added successfully.");
+                $responsedata = array("code" => 200, "message"=>"SOS form data added successfully.");
             }
         }else{
             $responsedata = array("code" => 111,"message"=>"Bad Request.");
         }
         header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getsosformdatabysiteid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['siteid'] = !empty($jsondata->siteid) ? $jsondata->siteid : "";
+        $sosformdata = $this->Webservices_Model->getsosformdata($data['siteid']);
+        if(!empty($sosformdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$sosformdata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getclientsites(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['clientid'] = !empty($jsondata->clientid) ? $jsondata->clientid : "";
+        $clientdata = $this->Webservices_Model->getsosformdata($data['clientid']);
+        if(!empty($sosformdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$clientdata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
         echo json_encode($responsedata);
     }
 }

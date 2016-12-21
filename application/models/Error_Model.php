@@ -292,16 +292,12 @@
 						}
 						break;
 					case "DATE":
-                        if( !strtotime( $value ) || strtotime( $value ) == -1 )
-						{
+                        if( !strtotime( $value ) || strtotime( $value ) == -1 || !preg_match('/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/',$value))
+                        {
                             $error = true;
-							$this->addError( $error_field, $szErrorMessage . " must be a valid date [ie. YYYY-MM-DD]." );
-							return false;
-						}
-						/*else
-                                        {
-                                            $value = strtotime( $value );
-                                        }*/
+                            $this->addError( $error_field, $szErrorMessage . " must be a valid date [ie. DD/MM/YYYY]." );
+                            return false;
+                        }
 						break;
 					case "PHONE":
 						if( !preg_match( "/^\d{3}-\d{3}-\d{4}$/", $value ) )
