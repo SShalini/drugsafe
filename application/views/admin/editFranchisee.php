@@ -24,6 +24,7 @@
                             <span class="active">Edit Franchisee</span>
                         </li>
                     </ul>
+                   
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
@@ -95,8 +96,51 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                       
-                                    </div>
+                                        
+                                          </div>
+                                           <?php
+                              
+                                  if($_SESSION['drugsafe_user']['iRole']=='1'){
+                                        ?>
+                                        <div class="form-group <?php if (!empty($arErrorMessages['operationManagerId'])) { ?>has-error<?php } ?>">
+                                            <label class="col-md-3 control-label">Operation Manager</label>
+                                            <div class="col-md-5">
+                                                <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                    <select class="form-control" name="addFranchisee[operationManagerId]"
+                                                            id="franchiseeId" Placeholder="Operation Manager"
+                                                            onfocus="remove_formError(this.id,'true')">
+                                                         <option value=''>Select</option>
+                                                       
+                                                        <?php
+                                                      
+                                                        $operationManagerAray =$this->Admin_Model->viewOperationManagerList();
+                                                        if (!empty($operationManagerAray)) {
+                                                            foreach ($operationManagerAray as $operationManagerDetails) { echo $operationManagerDetails;
+                                                                ?>
+                                                                <option
+                                                                    value="<?php echo $operationManagerDetails['id'];?>" <?php echo(sanitize_post_field_value($idOperationManager) == trim($operationManagerDetails['id']) ? "selected" : ""); ?>><?php echo trim($operationManagerDetails['szName']); ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <?php if (!empty($arErrorMessages['operationManagerId'])) { ?>
+                                                    <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                        <?php echo $arErrorMessages['operationManagerId']; ?>
+                                            </span>
+                                                <?php } ?>
+                                            </div>
+
+                                        </div>
+                                        <?php
+                                  }
+                                        ?> 
+                                  
                                      <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Address</label>
                                         <div class="col-md-5">
@@ -213,8 +257,13 @@
                                     
                                     
                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iRole]">
-                                     <input id="operationManagerId" class="form-control" type="hidden"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
-                                <div class="form-actions">
+                                     <?php
+                              
+                                  if($_SESSION['drugsafe_user']['iRole']=='5'){
+                                        ?>
+                                     <input id="operationManagerId" class="form-control" type="text"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
+                                  <?php }?>
+                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
                                             <a href="<?=__BASE_URL__?>/admin/franchiseeList" class="btn default uppercase" type="button">Cancel</a>

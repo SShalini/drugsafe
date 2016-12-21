@@ -50,7 +50,6 @@
                             <?php } ?>
                         </div>
                     </div>
-
                     <div class="portlet-body">
                         <form class="form-horizontal" id="clientData"
                               action="<?php echo __BASE_URL__ ?>/franchisee/addClient" name="clientData" method="post">
@@ -635,8 +634,8 @@
 
                                 <?php if (!empty($szParentId)) { ?>
                                     <!-- BEGIN CONTACT DETAILS PORTLET-->
-                                    <div class="portlet box green-meadow">
-                                        <div class="portlet-title">
+                                    <div class="portlet box green-meadow" >
+                                        <div class="portlet-title" data-toggle="collapse" data-target="#contact-details">
                                             <div class="caption">
                                                 <i class="icon-equalizer "></i>
                                                 Contact Details
@@ -653,8 +652,8 @@
                                             <table class="table table-hover">
                                                 <hr>
                                                 <div class="font-green-meadow text">Who will be responsible for
-                                                    Scheduling ? If you would like us to manage the scheduling , write
-                                                    "Drugsafe".
+                                                    Scheduling? If you would like us to manage the scheduling , write
+                                                    "DrugSafe".
                                                 </div>
                                                 <hr>
                                                 <div
@@ -728,7 +727,7 @@
                                                 </div>
                                                 <hr>
                                                 <div class="font-green-meadow text">Would anyone else be involved in
-                                                    Scheduling ?
+                                                    Scheduling?
                                                 </div>
                                                 <hr>
                                                 <div
@@ -802,7 +801,7 @@
                                                 </div>
                                                 <hr>
                                                 <div class="font-green-meadow text"> Who is to receive the confirmatory
-                                                    lab results ?
+                                                    lab results?
                                                 </div>
                                                 <hr>
                                                 <div
@@ -876,7 +875,7 @@
                                                 </div>
                                                 <hr>
                                                 <div class="font-green-meadow text"> Are there any other people Who are
-                                                    to receive the confirmatory lab results ?
+                                                    to receive the confirmatory lab results?
                                                 </div>
                                                 <hr>
                                                 <div
@@ -953,17 +952,16 @@
                                         </div>
                                     </div>
                                     <!-- END CONTACT DETAILS PORTLET-->
-                                    <!-- BEGIN CONTACT DETAILS PORTLET-->
-                                    <div class="portlet box green-meadow">
-                                        <div class="portlet-title">
+                                    <!-- BEGIN ONSITE SCREENING INFORMATION PORTLET-->
+                                    <div class="portlet box green-meadow " >
+                                        <div class="portlet-title" data-toggle="collapse" data-target="#onsite">
                                             <div class="caption">
                                                 <i class="icon-equalizer "></i>
-                                                ON SITE SCREENING INFORMATION
+                                                ONSITE SCREENING INFORMATION
                                             </div>
                                             <div class="tools">
                                                 <a href="javascript:void(0);" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
                                                 </a>
-
 
                                             </div>
                                         </div>
@@ -972,7 +970,7 @@
                                             <table class="table table-hover">
                                                 <hr>
                                                 <div class="font-green-meadow text"> Primary Site Contact (Assist with
-                                                    donar selection and supervise/manage donar if required).
+                                                    donor selection and supervise/manage donorS if required).
                                                 </div>
                                                 <hr>
                                                 <div
@@ -1123,7 +1121,7 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['instructions'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label"> Any special instruction for
-                                                        Drugsafe staff (directions,instructions etc) </label>
+                                                        DrugSafe staff (directions,instructions etc) </label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
@@ -1133,7 +1131,7 @@
                                                                       class="form-control"
                                                                       value="<?php echo $_POST['clientData']['ssc_mobile']; ?>"
                                                                       rows="5"
-                                                                      placeholder=" Any special instruction for Drugsafe staff "
+                                                                      placeholder=" Any special instruction for DrugSafe staff "
                                                                       onfocus="remove_formError(this.id,'true')"><?php echo set_value('clientData[instructions]'); ?></textarea>
                                                         </div>
                                                         <?php if (!empty($arErrorMessages['instructions'])) { ?>
@@ -1147,8 +1145,7 @@
                                                 </div>
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['site_people'])) { ?>has-error<?php } ?>">
-                                                    <label class="col-md-4 control-label">How many people on site
-                                                        ?</label>
+                                                    <label class="col-md-4 control-label">How many people on site?</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
@@ -1171,7 +1168,7 @@
                                                 </div>
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['test_count'])) { ?>has-error<?php } ?>">
-                                                    <label class="col-md-4 control-label">How many to test ?</label>
+                                                    <label class="col-md-4 control-label">How many to tes?</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
@@ -1197,14 +1194,15 @@
                                                     <label class="col-md-4 control-label">Initial Testing Requirements</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
+                                                      
                                                             <label class="radio-inline "><input type="radio"
                                                                                                 id="initial_testing_req"
-                                                                                                value="0"
+                                                                                                value="0" <?php echo(sanitize_post_field_value($_POST['clientData']['initial_testing_req']) == 0 ? "checked" : ""); ?>
                                                                                                 name="clientData[initial_testing_req]"
                                                                                                 checked> Random</label>
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="initial_testing_req"
-                                                                                               value="1"
+                                                                                               value="1"<?php echo(sanitize_post_field_value($_POST['clientData']['initial_testing_req']) == 1 ? "checked" : ""); ?>
                                                                                                name="clientData[initial_testing_req]">
                                                                 Blanket</label>
                                                         </div>
@@ -1224,12 +1222,12 @@
                                                         <div class="input-group">
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="ongoing_testing_req"
-                                                                                               value="0"
+                                                                                               value="0"<?php echo(sanitize_post_field_value($_POST['clientData']['ongoing_testing_req']) == 0 ? "checked" : ""); ?>
                                                                                                name="clientData[ongoing_testing_req]"
                                                                                                checked> Random</label>
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="ongoing_testing_req"
-                                                                                               value="1"
+                                                                                               value="1"<?php echo(sanitize_post_field_value($_POST['clientData']['ongoing_testing_req']) == 1 ? "checked" : ""); ?>
                                                                                                name="clientData[ongoing_testing_req]">
                                                                 Blanket</label>
                                                         </div>
@@ -1246,14 +1244,28 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['site_visit'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">How many times would you like
-                                                        Drugsafe to visit your site and test per year ?</label>
+                                                        DrugSafe to visit your site and test per year?</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
+                                                             <?php 
+                                                          if(!empty($_POST['clientData'])){
+                                                       
+                                                                if($_POST['clientData']['site_visit']==0){
+                                                                 $val ="0"; 
+                                                                
+                                                                }
+                                                                else{
+                                                                    $val =$_POST['clientData']['site_visit']; } }
+                                                                else {
+                                                                  $val ="0";
+                                                                }
+                                                          
+                                                        ?>
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                            <input id="site_visit" class="form-control" type="text"
-                                                                   value="<?php echo $_POST['clientData']['site_visit']; ?>"
+                                                            <input id="site_visit" class="form-control" type="number"min="0" max="52"
+                                                                   value="<?php  echo $val ;?>"
                                                                    placeholder="Site Visit"
                                                                    onfocus="remove_formError(this.id,'true')"
                                                                    name="clientData[site_visit]">
@@ -1270,17 +1282,18 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['onsite_service'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">What type of service would you
-                                                        like on-site ?</label>
+                                                        like on-site?</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="onsite_service"
-                                                                                               value="0" checked
+                                                                                               value="0"<?php echo(sanitize_post_field_value($_POST['clientData']['onsite_service']) == 0 ? "checked" : ""); ?>
+                                                                                               checked
                                                                                                name="clientData[onsite_service]">
                                                                 Mobile Clinic </label>
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="onsite_service"
-                                                                                               value="1"
+                                                                                               value="1"<?php echo(sanitize_post_field_value($_POST['clientData']['onsite_service']) == 1 ? "checked" : ""); ?>
                                                                                                name="clientData[onsite_service]">
                                                                 In-house</label>
                                                         </div>
@@ -1295,7 +1308,7 @@
                                                 </div>
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['start_time'])) { ?>has-error<?php } ?>">
-                                                    <label class="col-md-4 control-label">Preffered start time</label>
+                                                    <label class="col-md-4 control-label">Preferred  start time</label>
                                                     <div class="col-md-6">
                                                         <div class="input-icon">
                                                             <i class="fa fa-clock-o"></i>
@@ -1320,15 +1333,29 @@
                                                     <label class="col-md-4 control-label">Access to power for our
                                                         Mobile</label>
                                                     <div class="col-md-6">
+                                                         <?php 
+                                                          if(!empty($_POST['clientData'])){
+                                                       
+                                                                if($_POST['clientData']['power_access']==0){
+                                                                 $Ychecked ="checked"; 
+                                                                
+                                                                }
+                                                                if($_POST['clientData']['power_access']==1){
+                                                          $Nchecked ="checked"; } }
+                                                                else {
+                                                                   $Nchecked ="checked"; 
+                                                                }
+                                                          
+                                                        ?>
                                                         <div class="input-group">
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="power_access"
-                                                                                               value="0"
+                                                                                               value="0" <?php echo $Ychecked ;?>
                                                                                                name="clientData[power_access]">
                                                                 Yes</label>
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="power_access"
-                                                                                               value="1" checked
+                                                                                               value="1"<?php  echo $Nchecked ;?>
                                                                                                name="clientData[power_access]">
                                                                 No</label>
                                                         </div>
@@ -1344,19 +1371,33 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['risk_assessment'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">Is a risk assessment required
-                                                        prior to working on-site ?</label>
+                                                        prior to working on-site?</label>
                                                     <div class="col-md-6">
+                                                         <?php 
+                                                          if(!empty($_POST['clientData'])){
+                                                                  $Ychecked = '';
+                                                                  $Nchecked = '';
+                                                                if($_POST['clientData']['risk_assessment']==0){ 
+                                                                 $Ychecked ="checked"; 
+                                                               }
+                                                                if($_POST['clientData']['risk_assessment']==1){
+                                                                   $Nchecked ="checked"; } }
+                                                                else {
+                                                                   $Nchecked ="checked"; 
+                                                                }
+                                                          
+                                                        ?>
                                                         <div class="input-group">
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="risk_assessment"
-                                                                                               value="0"
+                                                                                               value="0" <?php echo $Ychecked ;?>
                                                                                                name="clientData[risk_assessment]">
                                                                 Yes</label>
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="risk_assessment"
-                                                                                               value="1"
+                                                                                               value="1" <?php echo $Nchecked ;?>
                                                                                                name="clientData[risk_assessment]"
-                                                                                               checked> No</label>
+                                                                                               > No</label>
                                                         </div>
                                                         <?php if (!empty($arErrorMessages['risk_assessment'])) { ?>
                                                             <span class="help-block pull-left">
@@ -1370,19 +1411,33 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['req_comp_induction'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">Are our people required to
-                                                        complete an induction ?</label>
+                                                        complete an induction?</label>
                                                     <div class="col-md-6">
+                                                         <?php 
+                                                          if(!empty($_POST['clientData'])){
+                                                       
+                                                                if($_POST['clientData']['req_comp_induction']==0){
+                                                                 $Ychecked ="checked"; 
+                                                                
+                                                                }
+                                                                if($_POST['clientData']['req_comp_induction']==1){
+                                                          $Nchecked ="checked"; } }
+                                                                else {
+                                                                   $Nchecked ="checked"; 
+                                                                }
+                                                          
+                                                        ?>
                                                         <div class="input-group">
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="req_comp_induction"
-                                                                                               value="0"
+                                                                                               value="0" <?php echo $Ychecked ;?>
                                                                                                name="clientData[req_comp_induction]">
                                                                 Yes</label>
                                                             <label class="radio-inline"><input type="radio"
                                                                                                id="req_comp_induction"
-                                                                                               value="1"
+                                                                                               value="1" <?php echo $Nchecked ;?>
                                                                                                name="clientData[req_comp_induction]"
-                                                                                               checked> No</label>
+                                                                                               > No</label>
                                                         </div>
                                                         <?php if (!empty($arErrorMessages['req_comp_induction'])) { ?>
                                                             <span class="help-block pull-left">
@@ -1396,19 +1451,35 @@
                                                     class="form-group <?php if (!empty($arErrorMessages['randomisation'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">Randomization process</label>
                                                     <div class="col-md-6">
+                                                         <?php 
+                                                          if(!empty($_POST['clientData'])){
+                                                       
+                                                                if($_POST['clientData']['randomisation']==0){
+                                                                        $Mchecked ="checked"; 
+                                                                }
+                                                                if($_POST['clientData']['randomisation']==1){
+                                                                $Dchecked ="checked";
+                                                                }
+                                                                if($_POST['clientData']['randomisation']==2){
+                                                               $Cchecked ="checked"; }}
+                                                                else {
+                                                                   $Dchecked ="checked"; 
+                                                                }
+                                                          
+                                                        ?>
                                                         <div class="input-group">
 
-                                                            <label><input type="radio" id="randomisation" value="0"
+                                                            <label><input type="radio" id="randomisation" value="0" <?php echo $Mchecked ;?>
                                                                           name="clientData[randomisation]"> Marble
                                                                 selection (% split)-not accurate</label>
 
 
-                                                            <label><input type="radio" id="randomisation" value="1"
-                                                                          name="clientData[randomisation]" checked>
-                                                                Drugsafe given names then select via algorythm</label>
+                                                            <label><input type="radio" id="randomisation" value="1" <?php echo $Dchecked ;?>
+                                                                          name="clientData[randomisation]">
+                                                                DrugSafe given names then select via algorythm</label>
 
 
-                                                            <label><input type="radio" id="randomisation" value="2"
+                                                            <label><input type="radio" id="randomisation" value="2" <?php echo $Cchecked ;?>
                                                                           name="clientData[randomisation]"> Client does
                                                                 randomization</label>
 
@@ -1423,32 +1494,57 @@
 
                                                 </div>
                                                 <div
+                                                    
                                                     class="form-group <?php if (!empty($arErrorMessages['req_ppe'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">Required PPE</label>
                                                     <div class="col-md-6">
+                                                        <?php if(!empty($_POST['req_ppe'])) {
+                                                          if(in_array("1", $_POST['req_ppe']))
+                                                          {
+                                                           $checked1 ="checked";    
+                                                          }
+                                                           if(in_array("2", $_POST['req_ppe']))
+                                                          {
+                                                           $checked2 ="checked";    
+                                                          }
+                                                           if(in_array("3", $_POST['req_ppe']))
+                                                          {
+                                                           $checked3 ="checked";    
+                                                          }
+                                                           if(in_array("4", $_POST['req_ppe']))
+                                                          {
+                                                           $checked4 ="checked";    
+                                                          }
+                                                           if(in_array("5", $_POST['req_ppe']))
+                                                          {
+                                                           $checked5 ="checked";    
+                                                          }
+                                                        }
+                                                        ?>
                                                         <div class="input-group">
                                                             <div class="checkbox">
-                                                                <label><input type="checkbox" id="req_ppe1" value="1"
+                                                                <label><input type="checkbox" id="req_ppe1" value="1" <?php echo $checked1 ; ?>
                                                                               name="req_ppe[]"> High Vis Work
                                                                     Wear</label>
                                                             </div>
                                                             <div class="checkbox">
-                                                                <label><input type="checkbox" id="req_ppe2" value="2"
+                                                                <label><input type="checkbox" id="req_ppe2" value="2" <?php echo $checked2 ; ?>
                                                                               name="req_ppe[]"> Head Protection</label>
                                                             </div>
                                                             <div class="checkbox">
-                                                                <label><input type="checkbox" id="req_ppe3" value="3"
+                                                                <label><input type="checkbox" id="req_ppe3" value="3"<?php echo $checked3 ; ?>
                                                                               name="req_ppe[]"> Face/Eye
                                                                     Protection</label>
                                                             </div>
                                                             <div class="checkbox">
-                                                                <label><input type="checkbox" id="req_ppe4" value="4"
+                                                                <label><input type="checkbox" id="req_ppe4" value="4" <?php echo $checked4 ; ?>
                                                                               name="req_ppe[]"> Safety Boots</label>
                                                             </div>
                                                             <div class="checkbox">
                                                                 <label><input type="checkbox" id="req_ppe5"
-                                                                              name="req_ppe[]" value="5"> Long Sleev
-                                                                    Clothing</label>
+                                                                              name="req_ppe[]" value="5" <?php echo $checked5 ; ?> >
+                                                                    Long Sleeve Clothing
+                                                                    </label>
                                                             </div>
                                                         </div>
                                                         <?php if (!empty($arErrorMessages['req_ppe'])) { ?>
@@ -1463,22 +1559,22 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['paperwork'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">who would be responsible for
-                                                        all the Paperwork at the time of testing ?</label>
+                                                        all the paperwork at the end of testing?</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
 
-                                                            <label><input type="radio" id="paperwork" value="0"
+                                                            <label><input type="radio" id="paperwork" value="0"<?php echo(sanitize_post_field_value($_POST['clientData']['paperwork']) == 0 ? "checked" : ""); ?>
                                                                           name="clientData[paperwork]" checked
                                                                           onclick="showHideTextbox('0');"> Leave onsite
                                                                 with site contact</label>
-                                                            <label><input type="radio" id="paperwork" value="1"
+                                                            <label><input type="radio" id="paperwork" value="1"<?php echo(sanitize_post_field_value($_POST['clientData']['paperwork']) == 1 ? "checked" : ""); ?>
                                                                           name="clientData[paperwork]"
                                                                           onclick="showHideTextbox('1');"> Return to
-                                                                Drugsafe for filing</label>
-                                                            <label><input type="radio" id="paperwork" value="2"
+                                                                DrugSafe for filing</label>
+                                                            <label><input type="radio" id="paperwork" value="2"<?php echo(sanitize_post_field_value($_POST['clientData']['paperwork']) == 2 ? "checked" : ""); ?>
                                                                           name="clientData[paperwork]"
                                                                           onclick="showHideTextbox('2');"> Return to
-                                                                Drugsafe and and emailed to specific contact</label>
+                                                                DrugSafe and and emailed to specific contact</label>
 
                                                         </div>
                                                     </div>

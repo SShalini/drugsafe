@@ -82,8 +82,8 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                    $replace_ary['szPassword']=$szNewPassword;
                    $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
                    $replace_ary['Link']=__BASE_URL__."/franchisee/addClient";
-                   
-                   //createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
+                 
+                   createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
                  if(!empty($clientType)){
                      if(empty($reqppval)){
                       $reqppval='';   
@@ -133,6 +133,17 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
       $this->db->insert(__DBC_SCHEMATA_SITES__, $siteAry);
                if($this->db->affected_rows() > 0)
             {
+                   $replace_ary = array();
+                   $id_player = (int)$this->db->insert_id();
+                   $replace_ary['szName']=$data['szName'];
+                   $replace_ary['szEmail']=$data['szEmail'];
+                   $replace_ary['szPassword']=$szNewPassword;
+                   $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+                   $replace_ary['Link']=__BASE_URL__."/franchisee/addClient";
+                 
+                   createEmail($this,'__ADD_NEW_SITE__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
+                   
+                   
                 return true;
             }
             else
@@ -214,15 +225,26 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
            $query = $this->db->get();
                 }
         else{
+             if($id > '0'){
+                 if($_SESSION['drugsafe_user']['iRole']==1){
+                 $searchq = 'franchiseeId = '.(int)$id; 
+            } else{
+                $searchq = 'clientId = '.(int)$id;
+            } 
+            }
+            
             if($franchiseId)
             {
                  $this->db->where('clientType',0);
             }
             $whereAry = array('isDeleted=' => '0');
             
-             $searchq = '';
-            if($id > '0'){
+             if($id > '0'){
+                 if($_SESSION['drugsafe_user']['iRole']==1){
+                 $searchq = 'franchiseeId = '.(int)$id; 
+            } else{
                 $searchq = 'clientId = '.(int)$id;
+            } 
             }
             $this->db->select('*');
             $this->db->from('tbl_client');
@@ -250,6 +272,8 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
         }
+//          $s=$this->db->last_query();
+//           print_r($s);die;
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -662,5 +686,20 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             return array();
         }
     }
+     function getClientCountId($franchiseeId)
+   	{
+                $whereAry = array('franchiseeId' => $franchiseeId);
+   		$this->db->select('id');
+                $this->db->from(__DBC_SCHEMATA_CLIENT__);
+                $this->db->where($whereAry);
+                $query = $this->db->get();
+                 $s=$this->db->last_query();
+     
+		if($query->num_rows() > 0)
+                {
+                        return $query->result_array();
+                }
+                return false;
+   	}
 }
 ?>

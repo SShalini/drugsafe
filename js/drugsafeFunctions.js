@@ -359,6 +359,37 @@ function productDeleteAlert(idProduct,flag)
 
         });
     }
+    function deleteCategoryAlert(idCategory)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/deleteCategoryAlert", {idCategory: idCategory}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#CategoryStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+    function deleteCategoryConfirmation(idCategory) {
+
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#CategoryStatus').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/forum/deleteCategoryConfirmation", {idCategory: idCategory}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#categoryStatusConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
 function editProduct(idProduct,flag) {
     $.post(__BASE_URL__ + "/inventory/editProductData", {
         idProduct: idProduct,flag: flag
@@ -368,6 +399,18 @@ function editProduct(idProduct,flag) {
         ar_result = result.split('||||');
 
         window.location = __BASE_URL__ + "/inventory/" + ar_result[1];
+
+    });
+}
+function editCategory(idCategory) {
+    $.post(__BASE_URL__ + "/forum/editCategoryData", {
+        idCategory: idCategory
+       
+    }, function (result) {
+
+        ar_result = result.split('||||');
+
+        window.location = __BASE_URL__ + "/forum/" + ar_result[1];
 
     });
 }

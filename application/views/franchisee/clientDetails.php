@@ -1,8 +1,8 @@
 <script type='text/javascript'>
     $(function() {
-        $("#szSearch").customselect();
+       
         $("#szSearchname").customselect();
-        $("#szSearchemail").customselect();
+        
     });
 </script>
 <div class="page-content-wrapper">
@@ -97,9 +97,11 @@
 //                    }
                    ?>
                     &nbsp; &nbsp;
+                   <?php  if($_SESSION['drugsafe_user']['iRole']=='2'){?>
                   <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
                     <i class="fa fa-pencil"></i> 
-                  </a>  
+                  </a> 
+                <?php }?>
                 </span>
             </div>
             <!--<div class="actions">
@@ -458,7 +460,7 @@
                 <div class="portlet-title">
                         <div class="caption">
                              <i class="icon-equalizer "></i>
-                            ON SITE SCREENING INFORMATION
+                            ONSITE SCREENING INFORMATION
                         </div>
                         <div class="tools">
                                 <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
@@ -720,16 +722,8 @@
             <div class="actions">
                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                     <?php
-                    if($_SESSION['drugsafe_user']['iRole']=='1')
-                    {
-                        if($clientDetailsAray['szNoOfSites'] > $count){
-                        ?>
-                        <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');">
-                        &nbsp;Add Site
-                        </button>
-                        <?php
-                    }}
-                    elseif($_SESSION['drugsafe_user']['iRole']=='5'){
+                   
+                    if($_SESSION['drugsafe_user']['iRole']=='5'){
                        if($clientDetailsAray['szNoOfSites'] > $count){
                         ?>
                         <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');">
@@ -738,7 +732,7 @@
                         <?php
                     }  
                     }
-                    else 
+                    if($_SESSION['drugsafe_user']['iRole']=='2')
                     {
                         if($clientDetailsAray['szNoOfSites'] > $count){
                         ?>
@@ -767,8 +761,8 @@
                           
                           </div>
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
-                               <div class="search col-md-3">
-                                   <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+<!--                               <div class="search col-md-3">
+                                                               <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
                                    <select class="form-control custom-select" name="szSearchClRecord" id="szSearch" onfocus="remove_formError(this.id,'true')">
                                        <option value="">Client Id</option>
                                        <?php
@@ -780,7 +774,7 @@
                                        ?>
                                    </select>
                                </div>
-                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
                                <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
                                <div class="search col-md-3">
                                    <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
@@ -795,9 +789,9 @@
                                        ?>
                                    </select>
                                </div>
-                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
-                               <div class="search col-md-3">
-                                   <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+<!--                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
+<!--                               <div class="search col-md-3">
+                                                               <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
                                    <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
                                        <option value="">Company Email</option>
                                        <?php
@@ -808,7 +802,7 @@
                                        }
                                        ?>
                                    </select>
-                               </div>
+                               </div>-->
                                <div class="col-md-1">
                                    <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                </div>
@@ -864,20 +858,26 @@
                                            
                                             ?> 
                                         </td>
-                                            
-                                               <td>
+                                         <td>
+                                              <?php
+                                              if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                               ?>
+                                              
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
+                                                    <?php }  ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-
+                                                <?php
+                                              if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                               ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete('<?php echo $childClientDetailsData['id'];?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>
-                                                
+                                                 <?php }  ?>
                                                
                                             </td>
                                             

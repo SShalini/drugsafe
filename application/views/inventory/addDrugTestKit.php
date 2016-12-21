@@ -130,6 +130,8 @@
                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
+                                             <a href="<?= __BASE_URL__ ?>/inventory/drugtestkitlist" class="btn default uppercase"
+                                           type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="SAVE" name="productData[submit]">
                                         </div>
                                     </div>
@@ -144,17 +146,17 @@
 </div>
     </div>
     
-    <script type="text/javascript">
+  <script type="text/javascript">
 
         $(document).ready(function()
         {
-            var settings = {
 
+            var settings = {
                     url: "<?php echo __BASE_URL__; ?>/inventory/uploadProfileImage",
                     method: "POST",
                     allowedTypes:"jpg,png,gif,jpe,jpeg,JPEG,JPG,PNG",
                     fileName: "myfile",
-                    multiple: false,
+                    multiple: true,
                     onSuccess:function(files,data,xhr)
                     {
                         $("#status").html("<font color='green'>Upload is success</font>");
@@ -167,9 +169,8 @@
                     {
                         $(".profile-userbuttons .ajax-upload-dragdrop").addClass('hide');
                         $(".profile-userbuttons .upload-statusbar").addClass('hide')
-                        $('.preview_file').removeClass('hide');
+                        $('#product_image').removeClass('hide');
                         $('.help-block').addClass('hide');
-                        //$("#szIncidentPhoto_div").parent('div').removeClass('has-error ');
                     },
                     onError: function(files,status,errMsg)
                     {		
@@ -177,6 +178,11 @@
                     }
             }
             $("#product_image_upload").uploadFile(settings);
+            if($('#product_image').is(':visible')){
+                setTimeout(function() { hideUploadBtn(); }, 500);
+            }
+
+
         });
         function removeIncidentPhoto(){
         $('#product_image').hide();
@@ -184,4 +190,9 @@
          $("#product_image_upload").removeClass('hide');
         $('#szProductImage').val('');
         }
+        function hideUploadBtn()
+        {
+            $(".ajax-upload-dragdrop").addClass('hide');
+        }
+
 </script>

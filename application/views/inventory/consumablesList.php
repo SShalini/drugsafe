@@ -136,10 +136,10 @@
                                            if($_SESSION['drugsafe_user']['iRole']==1){
                                              ?>
                                                 <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Consumables" onclick="editConsumables('<?php echo $consumablesData['id'];?>','3');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Consumable Details" onclick="editConsumables('<?php echo $consumablesData['id'];?>','3');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="ConsumablesStatus" title="Delete Consumables Details" onclick="productDeleteAlert(<?php echo $consumablesData['id'];?>,'3');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="ConsumablesStatus" title="Delete Consumable Details" onclick="productDeleteAlert(<?php echo $consumablesData['id'];?>,'3');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                                 </td>

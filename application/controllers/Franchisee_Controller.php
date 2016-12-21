@@ -85,7 +85,7 @@ class Franchisee_Controller extends CI_Controller
         
         $count = $this->Admin_Model->getnotification();
         $validate = $this->input->post('clientData');
-    
+        $reqppearr = $this->input->post('req_ppe');
    
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
@@ -107,7 +107,7 @@ class Franchisee_Controller extends CI_Controller
         
             if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
+                $szMessage['content'] = "<strong>Client added successfully.</strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                 ob_end_clean();
@@ -125,14 +125,15 @@ class Franchisee_Controller extends CI_Controller
                    $reqppearr = $this->input->post('req_ppe');
                    if(!empty($reqppearr)){
                    $reqppval = '';
-        foreach ($reqppearr as $reqpp){
+         foreach ($reqppearr as $reqpp){
             $reqppval .= $reqpp.',';
         }
         $reqppval = substr($reqppval, 0,-1);
                    }
+                   
             if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee,$reqppval)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong>Client Info! </strong> Client added successfully.";
+                $szMessage['content'] = "<strong> Site added successfully.</strong>";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                 ob_end_clean();
@@ -440,7 +441,7 @@ class Franchisee_Controller extends CI_Controller
 
 
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";
+                    $szMessage['content'] = "<strong>Client details successfully updated.</strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
                     header("Location:" . __BASE_URL__ . $url);
@@ -463,9 +464,9 @@ class Franchisee_Controller extends CI_Controller
                     $szMessage['type'] = "success";
                     if($clientDetailsAray['clientType']!='0')
                     { 
-                    $szMessage['content'] = "<strong>Site Info! </strong> Site details successfully updated.";}
+                    $szMessage['content'] = "<strong>Site details successfully updated. </strong> ";}
                     else{
-                    $szMessage['content'] = "<strong>Client Info! </strong> Client details successfully updated.";  
+                    $szMessage['content'] = "<strong>Client details successfully updated. </strong> ";  
                     }
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                    
@@ -478,7 +479,6 @@ class Franchisee_Controller extends CI_Controller
            }
             if(!empty($clientDetailsAray['clientType'])){
              $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
-          
              $data['req_ppe_ary'] = $req_ppe_ary;  
             }
         
@@ -486,9 +486,7 @@ class Franchisee_Controller extends CI_Controller
             $data['szMetaTagTitle'] = "Edit Client Details ";
             $data['pageName'] = "Client_Record";
             $data['flag'] = $flag;
-//            $data['validate'] = $validate;
             $_POST['clientData'] = $userDataAry;
-            
             $data['idfranchisee'] = $idfranchisee;
             $data['parentClient'] = $parentClient;
             $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;

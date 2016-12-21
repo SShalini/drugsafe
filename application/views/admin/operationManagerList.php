@@ -1,8 +1,8 @@
 <script type='text/javascript'>
     $(function() {
-        $("#szSearch").customselect();
+//        $("#szSearch").customselect();
         $("#szSearchname").customselect();
-        $("#szSearchemail").customselect();
+//        $("#szSearchemail").customselect();
 
     });
 </script>  
@@ -65,8 +65,8 @@
                             ?>
                          <div class="row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/admin/operationManagerList" name="szSearchField" method="post">
-                           <div class="search col-md-3">
-<!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?=sanitize_post_field_value($_POST['szSearch'])?>">-->
+<!--                           <div class="search col-md-3">
+                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?=sanitize_post_field_value($_POST['szSearch'])?>">
                           <select class="form-control custom-select" name="szSearch1" id="szSearch" onfocus="remove_formError(this.id,'true')">
                                   <option value="">Operation Manager Id</option>
                                   <?php
@@ -78,7 +78,7 @@
                                   ?>
                               </select>
                           </div>
-                                    <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                    <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
                                   <div class="search col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
@@ -92,9 +92,9 @@
                                           ?>
                                       </select>
                                   </div>
-                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+<!--                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
                                   <div class="search col-md-3">
-                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
                                       <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Operation Manager Email</option>
                                           <?php
@@ -105,7 +105,7 @@
                                           }
                                           ?>
                                       </select>
-                                  </div>
+                                  </div>-->
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>

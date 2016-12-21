@@ -69,6 +69,7 @@ define( "__DBC_SCHEMATA_STATE__", "tbl_states");
 define( "__DBC_SCHEMATA_FRANCHISEE__", "tbl_franchisee");
 define( "__DBC_SCHEMATA_USERS_EMAIL_LOG__", "tbl_email_log");
 define( "__DBC_SCHEMATA_EMAIL_CMS__", "tbl_email_cms");
+define("__DBC_SCHEMATA_FORUM_CATEGORY__", "fo_category");
 define( "__DBC_SCHEMATA_CLIENT__", "tbl_client");
 define( "__DBC_SCHEMATA_PRODUCT__", "tbl_product");
 define( "__DBC_SCHEMATA_PRODUCT_CATEGORY__", "tbl_product_category");
@@ -123,6 +124,12 @@ define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
 	define( "__VLD_CASE_ALPHA__", "ALPHA" );
 /**
  * Validate anything, allows ANYTHING!
+ *
+ * 
+ */
+     define( "__VLD_CASE_NAME__", "NAME" );
+/**
+ * Validate anything, allows ALPHA AND SPACE ALSO!
  *
  * 
  */

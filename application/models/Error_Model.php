@@ -179,13 +179,21 @@
 								$this->addError( $error_field, $szErrorMessage . " must be no more than " . $max_length . " digits." );
 								return false;
 							}
-						}
+                                                }
 						break;
 					case "ALPHA":
 						if( !preg_match( "/^[a-z]+$/i", $value ) )
 						{
 							$error = true;
 							$this->addError( $error_field, $szErrorMessage . " must be only letters." );
+							return false;
+						}
+						break;
+                                                case "NAME":
+						if(!preg_match("/^[a-zA-Z ]*$/",$value) )
+						{
+							$error = true;
+							$this->addError( $error_field, $szErrorMessage . " must be only letters and white space." );
 							return false;
 						}
 						break;

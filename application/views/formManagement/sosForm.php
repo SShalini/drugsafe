@@ -170,7 +170,7 @@
                                 <thead>
                                     <tr>
                                         <th class=" text-info bold" style="width:60px"> Emp/Con.</th>
-                                        <th class=" text-info bold" style="width:120px"> Donar Name</th>
+                                        <th class=" text-info bold" style="width:120px"> Donor Name</th>
                                         <th class=" text-info bold" style="width:100px"> Result</th>
                                         <th class=" text-info bold" style="width:100px"> Drug </th>
                                         <th class=" text-info bold" style="width:100px"> Alcohol </th>

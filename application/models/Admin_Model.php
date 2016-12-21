@@ -18,6 +18,10 @@ class Admin_Model extends Error_Model
     {
         $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "$field", "$message", false, false, $flag);
     }
+    function set_specify_contact($value,$flag = true)
+    {
+        $this->data['specify_contact'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "specify_contact", "Specify Contact", false, false, $flag);
+    }
     function set_szOldPassword($value)
     {
         $this->data['szOldPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szOldPassword", "Current Password", false, 32);
@@ -25,7 +29,7 @@ class Admin_Model extends Error_Model
     
     function set_szName($value,$field=false,$message=false, $flag = true)
     {
-        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_ALPHA__, $field, $message, false, false, $flag);
+        $this->data['szName'] = $this->validateInput($value, __VLD_CASE_NAME__, $field, $message, false, false, $flag);
     }
 
       function set_szPassword($value, $flag=true)
@@ -93,7 +97,7 @@ class Admin_Model extends Error_Model
     }
     function set_test_count($value, $flag = true)
     {
-        $this->data['test_count'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "test_count", "Test Count", false, false, $flag);
+        $this->data['test_count'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "test_count", "How many to test ?", false, false, $flag);
     }
 
      function set_site_people($value, $flag = true)
@@ -227,16 +231,15 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-    function validateUsersData($data, $arExclude = array(),$idUser = 0, $forgotpass = FALSE)
+    function validateUsersData($data, $arExclude = array(),$idUser = 0, $forgotpass = FALSE,$flag=0)
     {
         if (!empty($data)) {
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Name", true);
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Email Address" ,true);
             if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Contact Number", true);
-            if($data['iRole']==2){
-              if (!in_array('operationManagerId', $arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])), true);  
+            if($flag==1){
+            if (!in_array('operationManagerId', $arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])), true);  
             }
-           
             if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
@@ -424,7 +427,7 @@ class Admin_Model extends Error_Model
         $this->db->order_by("franchiseeId", "asc");
         $query = $this->db->get();
 
-
+        
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -667,6 +670,13 @@ class Admin_Model extends Error_Model
        $queyUpdate =  $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
 
             if ($queyUpdate) {
+                 $OmAry=array(
+                
+                'operationManagerId' => $data['operationManagerId'],
+                   );
+                $whereAry = array('franchiseeId' => (int)$id);
+                $this->db->where($whereAry);
+                $this->db->update(__DBC_SCHEMATA_FRANCHISEE__, $OmAry);
                  return true;
             } else {
                 return false;
@@ -901,26 +911,49 @@ class Admin_Model extends Error_Model
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
                 if (!in_array('sp_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['sp_name'])),"sp_name","Contact Name", true);
                 if(!in_array('sp_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['sp_mobile'])),"sp_mobile","Contact Phone Number",true);
-                if(!in_array('sp_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['sp_email'])),"sp_email"," Contact Email",true);   
+                if(!in_array('sp_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['sp_email'])),"sp_email"," Contact Email",true); 
+                 if(!empty($data['iis_name'] || $data['iis_mobile'] ||  $data['iis_email'] )){
+               if (!in_array('iis_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['iis_name'])),"iis_name","Contact Name", true);
+                if(!in_array('iis_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['iis_mobile'])),"iis_mobile","Contact Phone Number",true);
+                if(!in_array('iis_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['iis_email'])),"iis_email","Contact Email",true);              
+                }
+                else{
                 if (!in_array('iis_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['iis_name'])),"iis_name","Contact Name", false);
                 if(!in_array('iis_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['iis_mobile'])),"iis_mobile","Contact Phone Number",false);
-                if(!in_array('iis_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['iis_email'])),"iis_email","Contact Email",false);              
+                if(!in_array('iis_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['iis_email'])),"iis_email","Contact Email",false); 
+                }
                 if (!in_array('rlr_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['rlr_name'])),"rlr_name" ,"Contact Name", true);
                 if(!in_array('rlr_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['rlr_mobile'])),"rlr_mobile","Contact Phone Number",true);
-                if(!in_array('rlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['rlr_email'])),"rlr_email"," Contact Email",true);   
+                if(!in_array('rlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['rlr_email'])),"rlr_email"," Contact Email",true);  
+                 if(!empty($data['orlr_name'] || $data['orlr_mobile'] ||  $data['orlr_email'] )){
+                if (!in_array('orlr_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['orlr_name'])),"orlr_name","Contact Name", true);
+                if(!in_array('orlr_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['orlr_mobile'])),"orlr_mobile","Contact Phone Number",true);
+                if(!in_array('orlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['orlr_email'])),"orlr_email"," Contact Email",true);   
+                }
+                else{
                 if (!in_array('orlr_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['orlr_name'])),"orlr_name","Contact Name", false);
                 if(!in_array('orlr_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['orlr_mobile'])),"orlr_mobile","Contact Phone Number",false);
                 if(!in_array('orlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['orlr_email'])),"orlr_email"," Contact Email",false);   
-                if (!in_array('psc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['psc_name'])),"psc_name","Contact Name", false);
-                if(!in_array('psc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_phone'])),"psc_phone","Landline Phone Number",false);
-                if(!in_array('psc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_mobile'])),"psc_mobile","Mobile Phone Number",false);
-                if(!in_array('ssc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['ssc_name'])),"ssc_name","Contact Name",false);
+                }
+                if (!in_array('psc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['psc_name'])),"psc_name","Contact Name", true);
+                if(!in_array('psc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_phone'])),"psc_phone","Landline Phone Number",true);
+                if(!in_array('psc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_mobile'])),"psc_mobile","Mobile Phone Number",true);
+                if(!empty($data['ssc_name'] || $data['ssc_phone'] ||  $data['ssc_mobile'] )){
+                if(!in_array('ssc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['ssc_name'])),"ssc_name","Contact Name",true);
+                if(!in_array('ssc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_phone'])),"ssc_phone","Landline Phone Number",true);
+                if(!in_array('ssc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_mobile'])),"ssc_mobile","Mobile Phone Number",true);
+                }
+                else{
+                    if(!in_array('ssc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['ssc_name'])),"ssc_name","Contact Name",false);
                 if(!in_array('ssc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_phone'])),"ssc_phone","Landline Phone Number",false);
-                if(!in_array('ssc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_mobile'])),"ssc_mobile","Mobile Phone Number",false);
+                if(!in_array('ssc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_mobile'])),"ssc_mobile","Mobile Phone Number",false);  
+                }
                 if (!in_array('site_people', $arExclude)) $this->set_site_people(sanitize_all_html_input(trim($data['site_people'])), true);
                 if(!in_array('test_count',$arExclude)) $this->set_test_count(sanitize_all_html_input(trim($data['test_count'])),true);
 //                if (!in_array('start_time', $arExclude)) $this->set_start_time(sanitize_all_html_input(trim($data['start_time'])), true);
-  
+                if($data['paperwork']==2){
+                if(!in_array('specify_contact',$arExclude)) $this->set_specify_contact(sanitize_all_html_input(trim($data['specify_contact'])),true);   
+                }
                  if($this->error == false )
             {
                     $adminData = $this->session->userdata('drugsafe_user');
@@ -932,6 +965,10 @@ class Admin_Model extends Error_Model
                 if ($this->checkCompanyNameExists($data['szName'],$this->data['id'])) {
                     $this->addError('szName', "Company Name must be unique.");
                     return false;
+                }
+                if ($this->data['site_people'] < $data['test_count']) {
+                $this->addError('test_count', "The test count can not be more than the no of people on site.");
+                return false;
                 }
             }
                 

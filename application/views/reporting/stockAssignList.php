@@ -1,6 +1,6 @@
 <script type='text/javascript'>
     $(function() {
-        $("#szSearch").customselect();
+//        $("#szSearch").customselect();
         $("#szSearchname").customselect();
         $("#szSearchProductCode").customselect();
 
@@ -56,8 +56,8 @@
                             <form class="form-horizontal" id="szSearchReqAssignList"
                                   action="<?= __BASE_URL__ ?>/reporting/stockassignlist " name="szSearchReqAssignList"
                                   method="post">
-                                  <div class="search col-md-3">
-<!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+<!--                                  <div class="search col-md-3">
+                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
                               <select class="form-control custom-select" name="szSearch1" id="szSearch" onfocus="remove_formError(this.id,'true')">
                                   <option value="">Franchisee Id</option>
                                   <?php
@@ -69,7 +69,7 @@
                                   ?>
                               </select>
                           </div>
-                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
 <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->

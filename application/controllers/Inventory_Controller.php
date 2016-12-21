@@ -28,7 +28,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+           $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('required', '{field} is required');
@@ -48,7 +48,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->insertProduct())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>Marketing Material Info! </strong> Marketing Material added successfully.";
+                    $szMessage['content'] = "<strong> Marketing Material added successfully.</strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
                     die;
@@ -67,7 +67,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|is_unique[tbl_product.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('required', '{field} is required');
@@ -91,7 +91,7 @@ class Inventory_Controller extends CI_Controller {
                     if($szProductCategory==1)
                         {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Drug Test Kit Info! </strong> Drug Test Kit added successfully.";
+                        $szMessage['content'] = "<strong>Drug Test Kit added successfully.</strong>";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                         header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
                         die;
@@ -113,7 +113,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('required', '{field} is required');
@@ -133,7 +133,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->insertProduct())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>Consumables Info! </strong> Consumables added successfully.";
+                    $szMessage['content'] = "<strong>Consumables added successfully. </strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     header("Location:" . __BASE_URL__ . "/inventory/consumablesList");
                     die;
@@ -172,7 +172,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szProductCategory]', 'Product Category', 'required');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
@@ -196,7 +196,7 @@ class Inventory_Controller extends CI_Controller {
                 {
                    
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong>Drug Test Kit Info! </strong> Drug Test Kit updated successfully.";
+                        $szMessage['content'] = "<strong> Drug Test Kit updated successfully. </strong> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
@@ -366,7 +366,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
              $this->form_validation->set_message('required', '{field} is required');
@@ -388,7 +388,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
                     $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong> Marketing Material Info! </strong> Marketing Material updated successfully.";
+                        $szMessage['content'] = "<strong> Marketing Material updated successfully. </strong> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
@@ -431,7 +431,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Discription', 'required');
-            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric');
+            $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
              $this->form_validation->set_message('required', '{field} is required');
@@ -453,7 +453,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
                     $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong> Consumables Info! </strong> Consumables updated successfully.";
+                        $szMessage['content'] = "<strong> Consumables updated successfully. </strong> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');

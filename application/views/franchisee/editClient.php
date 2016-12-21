@@ -477,7 +477,7 @@
                               {?>
 
                                <!-- BEGIN CONTACT DETAILS PORTLET-->
-                                    <div class="portlet box green-meadow ">
+                                    <div class="portlet box green-meadow " data-toggle="collapse" data-target="#contact-details">
                                         <div class="portlet-title">
                                                 <div class="caption">
                                                      <i class="icon-equalizer "></i>
@@ -494,7 +494,7 @@
                                 <div class="portlet-body collapse" id="contact-details">
                                    <table class="table table-hover">
                                        <hr>
-                             <div class="font-green-meadow text">Who will be responsible for Scheduling ? If you would like us to manage the scheduling , write "Drugsafe".</div>
+                             <div class="font-green-meadow text">Who will be responsible for Scheduling? If you would like us to manage the scheduling , write "DrugSafe".</div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['sp_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>
@@ -551,7 +551,7 @@
 
                             </div>
                                         <hr>
-                             <div class="font-green-meadow text">Would anyone else be involved in Scheduling ? </div>
+                             <div class="font-green-meadow text">Would anyone else be involved in Scheduling? </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['iis_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>
@@ -608,7 +608,7 @@
 
                             </div>
                                 <hr>
-                             <div class="font-green-meadow text">   Who is to receive the confirmatory lab results ? </div>
+                             <div class="font-green-meadow text">   Who is to receive the confirmatory lab results? </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['rlr_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>
@@ -665,7 +665,7 @@
 
                             </div>
                                 <hr>
-                             <div class="font-green-meadow text">  Are there any other people Who are to receive the confirmatory lab results ? </div>
+                             <div class="font-green-meadow text">  Are there any other people Who are to receive the confirmatory lab results? </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['orlr_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>
@@ -727,11 +727,11 @@
                                 </div> 
                                 <!-- END CONTACT DETAILS PORTLET-->
                               <!-- BEGIN CONTACT DETAILS PORTLET-->
-                                    <div class="portlet box green-meadow">
+                                    <div class="portlet box green-meadow"  data-toggle="collapse" data-target="#onsite">
                                         <div class="portlet-title">
                                                 <div class="caption">
                                                      <i class="icon-equalizer "></i>
-                                                   ON SITE SCREENING INFORMATION     
+                                                   ONSITE SCREENING INFORMATION     
                                                 </div>
                                                 <div class="tools">
                                                         <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
@@ -744,7 +744,7 @@
                                 <div id="onsite" class="portlet-body collapse">
                                    <table class="table table-hover">
                                        <hr>
-                             <div class="font-green-meadow text"> Primary Site Contact (Assist with donar selection and supervise/manage donar if required).</div>
+                             <div class="font-green-meadow text"> Primary Site Contact (Assist with donor selection and supervise/manage donor if required).</div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['psc_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>
@@ -860,13 +860,13 @@
 
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['instructions'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label"> Any special instruction for Drugsafe staff (directions,instructions etc) </label>
+                                <label class="col-md-4 control-label"> Any special instruction for DrugSafe staff (directions,instructions etc) </label>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                         </span>
-                                        <textarea  name="clientData[instructions]" id="instructions" class="form-control"  value="<?php echo $_POST['clientData']['ssc_mobile'] ;?>"  rows="5" placeholder=" Any special instruction for Drugsafe staff " onfocus="remove_formError(this.id,'true')" ><?php echo set_value('clientData[instructions]'); ?></textarea>
+                                        <textarea  name="clientData[instructions]" id="instructions" class="form-control"  value="<?php echo $_POST['clientData']['ssc_mobile'] ;?>"  rows="5" placeholder=" Any special instruction for DrugSafe staff " onfocus="remove_formError(this.id,'true')" ><?php echo set_value('clientData[instructions]'); ?></textarea>
                                     </div>
                                     <?php if(!empty($arErrorMessages['instructions'])){?>
                                     <span class="help-block pull-left">
@@ -878,7 +878,7 @@
 
                             </div>
                                   <div class="form-group <?php if(!empty($arErrorMessages['site_people'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label">How many people on site ?</label>
+                                <label class="col-md-4 control-label">How many people on site?</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
@@ -896,7 +896,7 @@
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['test_count'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label">How many to test ?</label>
+                                <label class="col-md-4 control-label">How many to test?</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
@@ -948,7 +948,7 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['site_visit'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label">How many times would you like Drugsafe to visit your site and test per year ?</label>
+                                <label class="col-md-4 control-label">How many times would you like DrugSafe to visit your site and test per year?</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
@@ -966,7 +966,7 @@
 
                             </div>
                                 <div class="form-group <?php if(!empty($arErrorMessages['onsite_service'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label">What type of service would you like on-site ?</label>
+                                <label class="col-md-4 control-label">What type of service would you like on-site?</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline"><input type="radio" id="onsite_service" value="0" checked name="clientData[onsite_service]" <?php if(trim($_POST['clientData']['onsite_service']=='0')){?>checked<?php }?>> Mobile Clinic </label>
@@ -982,7 +982,7 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['start_time'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label">Preffered start time</label>
+                                <label class="col-md-4 control-label">Preferred  start time</label>
                                 <div class="col-md-6">
                                       <div class="input-icon">
                                                     <i class="fa fa-clock-o"></i>
@@ -1014,7 +1014,7 @@
 
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['risk_assessment'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label">Is a risk assessment required prior to working on-site ? </label>
+                                <label class="col-md-4 control-label">Is a risk assessment required prior to working on-site? </label>
                                 <div class="col-md-6">
                                     <div class="input-group">
                                       <label class="radio-inline"><input type="radio"  id="risk_assessment" value="0" name="clientData[risk_assessment]" <?php if(trim($_POST['clientData']['risk_assessment']=='0')){?>checked<?php }?>> Yes</label>
@@ -1052,7 +1052,7 @@
                                         <label><input type="radio"id="randomisation" value="0" name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='0')){?>checked<?php }?>> Marble selection (% split)-not accurate</label>
 
 
-                                        <label><input type="radio" id="randomisation" value="1"name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='1')){?>checked<?php }?>> Drugsafe given names then select via algorythm</label>
+                                        <label><input type="radio" id="randomisation" value="1"name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='1')){?>checked<?php }?>> DrugSafe given names then select via algorythm</label>
 
 
                                         <label><input type="radio" id="randomisation" value="2" name="clientData[randomisation]" <?php if(trim($_POST['clientData']['randomisation']=='2')){?>checked<?php }?>> Client does randomization</label>
@@ -1086,7 +1086,7 @@
                                         <label><input type="checkbox" id="req_ppe4" value="4"  name="req_ppe[]"<?php if(in_array("4", $req_ppe_ary)){?>checked<?php }?>> Safety Boots</label>
                                       </div>
                                       <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"<?php if(in_array("5", $req_ppe_ary)){?>checked<?php }?>> Long Sleev Clothing</label>
+                                        <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"<?php if(in_array("5", $req_ppe_ary)){?>checked<?php }?>> Long Sleeve Clothing</label>
                                       </div>
                                     </div>
                                      <?php if(!empty($arErrorMessages['req_ppe'])){?>
@@ -1098,13 +1098,13 @@
                                 </div>
                             </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['paperwork'])){?>has-error<?php }?>">
-                                <label class="col-md-4 control-label">who would be responsible for all the Paperwork at the time of testing ?</label>
+                                <label class="col-md-4 control-label">who would be responsible for all the paperwork at the end of testing?</label>
                                 <div class="col-md-6">
                                     <div class="input-group">
 
                                         <label><input type="radio" id="paperwork" value="0" name="clientData[paperwork]" checked  onclick="showHideTextbox('0');"<?php if(trim($_POST['clientData']['paperwork']=='0')){?>checked<?php }?>> Leave onsite with site contact</label>
-                                        <label><input type="radio" id="paperwork" value="1" name="clientData[paperwork]" onclick="showHideTextbox('1');"<?php if(trim($_POST['clientData']['paperwork']=='1')){?>checked<?php }?>> Return to Drugsafe for filing</label>
-                                        <label><input type="radio" id="paperwork" value="2" name="clientData[paperwork]" onclick="showHideTextbox('2');"<?php if(trim($_POST['clientData']['paperwork']=='2')){?>checked<?php }?>> Return to Drugsafe and and emailed to specific contact</label>
+                                        <label><input type="radio" id="paperwork" value="1" name="clientData[paperwork]" onclick="showHideTextbox('1');"<?php if(trim($_POST['clientData']['paperwork']=='1')){?>checked<?php }?>> Return to DrugSafe for filing</label>
+                                        <label><input type="radio" id="paperwork" value="2" name="clientData[paperwork]" onclick="showHideTextbox('2');"<?php if(trim($_POST['clientData']['paperwork']=='2')){?>checked<?php }?>> Return to DrugSafe and and emailed to specific contact</label>
 
                                       </div>
                                     </div>

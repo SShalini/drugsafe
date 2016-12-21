@@ -101,7 +101,7 @@
                                 <?php
                               
                                   if($_SESSION['drugsafe_user']['iRole']=='1'){
-                                 if ($flag==1) {
+                                    if ($flag==1) {
                                         ?>
                                         <div
                                             class="form-group <?php if (!empty($arErrorMessages['operationManagerId'])) { ?>has-error<?php } ?>">

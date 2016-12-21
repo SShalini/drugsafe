@@ -100,14 +100,16 @@
                                                 <div class="profile-userbuttons">
                                                     <div id="product_image">
                                                         <?php
-                                                        $NewImageName=set_value('productData[szProductImage]');
-							if($NewImageName!= '')
+							$NewImageName=set_value('productData[szProductImage]');
+                                                        if($NewImageName!= '')
                                                         {
+							    $randomNum=rand().time();
                                                             ?>
-							        <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $NewImageName; ?>" width="60" height="60"/>
+							    <div id="photoDiv_<?php echo $randomNum; ?>">
+                                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $NewImageName; ?>" width="60" height="60"/>
                                                                 <a href="javascript:void(0);" id="remove_btn_<?php echo $randomNum; ?>" class="btn red-intense btn-sm" onclick="removeIncidentPhoto('');">Remove</a>
-                                                     </div>
-															<?php
+                                                            </div>
+							<?php
                                                         }
                                                         ?>
                                                     </div>
@@ -127,6 +129,8 @@
                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
+                                            <a href="<?= __BASE_URL__ ?>/inventory/consumableslist" class="btn default uppercase"
+                                           type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="SAVE" name="productData[submit]">
                                         </div>
                                     </div>
@@ -141,10 +145,11 @@
 </div>
     </div>
     
-    <script type="text/javascript">
+  <script type="text/javascript">
 
         $(document).ready(function()
         {
+
             var settings = {
                     url: "<?php echo __BASE_URL__; ?>/inventory/uploadProfileImage",
                     method: "POST",
@@ -153,6 +158,7 @@
                     multiple: true,
                     onSuccess:function(files,data,xhr)
                     {
+                        $("#status").html("<font color='green'>Upload is success</font>");
                         data = JSON.parse(data);
                         $('#product_image').show();
                         $("#product_image").html(data.img_div);
@@ -162,7 +168,7 @@
                     {
                         $(".profile-userbuttons .ajax-upload-dragdrop").addClass('hide');
                         $(".profile-userbuttons .upload-statusbar").addClass('hide')
-                        $('.preview_file').removeClass('hide');
+                        $('#product_image').removeClass('hide');
                         $('.help-block').addClass('hide');
                     },
                     onError: function(files,status,errMsg)
@@ -171,6 +177,11 @@
                     }
             }
             $("#product_image_upload").uploadFile(settings);
+            if($('#product_image').is(':visible')){
+                setTimeout(function() { hideUploadBtn(); }, 500);
+            }
+
+
         });
         function removeIncidentPhoto(){
         $('#product_image').hide();
@@ -178,4 +189,9 @@
          $("#product_image_upload").removeClass('hide');
         $('#szProductImage').val('');
         }
+        function hideUploadBtn()
+        {
+            $(".ajax-upload-dragdrop").addClass('hide');
+        }
+
 </script>

@@ -86,7 +86,7 @@
                                                             $dtExpiredOn = date("d-m-Y", strtotime($date));
                                                         
                                                         ?>
-                                                        <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo $dtExpiredOn ; ?>" readonly placeholder="Expired On" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                                        <input type="text" id="dtExpiredOn" class="form-control" value="<?php if(!empty($dtExpiredOn)) { echo $dtExpiredOn; } else{ echo "N/A";} ?>" readonly placeholder="Expired On" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
                                                             <span class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                             </span>
@@ -134,6 +134,8 @@
                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
+                                            <a href="<?= __BASE_URL__ ?>/inventory/consumableslist" class="btn default uppercase"
+                                           type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="SAVE" name="productData[submit]">
                                         </div>
                                     </div>

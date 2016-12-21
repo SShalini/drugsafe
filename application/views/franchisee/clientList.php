@@ -1,8 +1,8 @@
 <script type='text/javascript'>
     $(function() {
-        $("#szSearch").customselect();
+//        $("#szSearch").customselect();
         $("#szSearchname").customselect();
-        $("#szSearchemail").customselect();
+//        $("#szSearchemail").customselect();
     });
 </script>
 <div class="page-content-wrapper">
@@ -72,10 +72,13 @@
 //                    }
                    ?>
                     &nbsp; &nbsp;
-                   
+                    <?php
+                    if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                     ?>
                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeArr['id'];?>','<?php echo $operationManagerIdArr['operationManagerId'];?>');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 
                     </a>
+                    <?php }?>
                 </span>
             </div>
             
@@ -178,7 +181,7 @@
                         ?>
                      <div class="row">
                               <form class="form-horizontal" id="szSearchClientList" action="<?=__BASE_URL__?>/franchisee/clientList" name="szSearchClientList" method="post">
-                                                           <div class="search col-md-3">
+<!--                                                           <div class="search col-md-3">
                                   
                                       <select class="form-control custom-select" name="szSearchClRecord" id="szSearch" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Client Id</option>
@@ -191,7 +194,7 @@
                                           ?>
                                       </select>
                                   </div>
-                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
                                   <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
@@ -206,9 +209,9 @@
                                           ?>
                                       </select>
                                   </div>
-                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+<!--                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
                                   <div class="search col-md-3">
-                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
                                       <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Email</option>
                                           <?php
@@ -219,7 +222,7 @@
                                           }
                                           ?>
                                       </select>
-                                  </div>
+                                  </div>-->
                                   <div class="col-md-1">
                                       <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
@@ -278,6 +281,9 @@
                                        
                                         <td>
                                             <?php
+                                                if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                                 ?>
+                                              <?php
                                             if ($clientData['clientType'] == '0') {
                                               if($clientData['szNoOfSites'] > count($childClientDetailsAray)){
                                                 ?>
@@ -294,6 +300,9 @@
                                                href="javascript:void(0);">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
+                                            <?php
+                                                }
+                                                 ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="View Client Details"
                                                onclick="viewClientDetails(<?php echo $clientData['id']; ?>);"
@@ -301,6 +310,9 @@
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
 
                                             </a>
+                                             <?php
+                                                if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                                 ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="Delete Client"
                                                onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
@@ -308,8 +320,9 @@
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                             </a>
-
-
+                                           <?php
+                                                }
+                                                 ?>
                                         </td>
                                     </tr>
                                     <?php
