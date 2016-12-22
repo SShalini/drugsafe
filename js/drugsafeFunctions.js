@@ -584,8 +584,8 @@ function requestQuantityAlert(idProduct,flag)
 
     });
 }
-  function ViewSosFormPdf(idClient) {
-    $.post(__BASE_URL__ + "/formManagement/ViewSosFormPdfData", {idClient: idClient}, function (result) {
+  function ViewSosFormPdf(idClient,idsite) {
+    $.post(__BASE_URL__ + "/formManagement/ViewSosFormPdfData", {idClient: idClient,idsite:idsite}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/formManagement/" + ar_result[1];
         window.open(URL,'_blank');
@@ -604,8 +604,8 @@ function showHideTextbox(id){
    jQuery('#text').attr('style', 'display:block');  
   }      
 }
-function viewSosFormDetails(idsite) {
-    $.post(__BASE_URL__ + "/formManagement/sosFormsdata", {idsite:idsite}, function (result) {
+function viewSosFormDetails(idClient,idsite) {
+    $.post(__BASE_URL__ + "/formManagement/sosFormsdata", {idClient:idClient,idsite:idsite}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
 

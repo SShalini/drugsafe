@@ -47,7 +47,7 @@ class Forum_Controller extends CI_Controller {
                 if( $this->Forum_Model->insertCategory())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong> Forum Category added successfully.</strong>";
+                    $szMessage['content'] = "<strong><h3> Forum Category added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     header("Location:" . __BASE_URL__ . "/forum/categoriesList");
                     die;
@@ -102,7 +102,7 @@ class Forum_Controller extends CI_Controller {
                 {
                    
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong> Category updated successfully.</strong>";
+                        $szMessage['content'] = "<strong><h3> Category updated successfully.</h3></strong>";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idCategory');
                         ob_end_clean();

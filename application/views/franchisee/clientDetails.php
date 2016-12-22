@@ -872,12 +872,15 @@
                                                 </a>
                                                 <?php
                                               if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                                    $id =   $childClientDetailsData['id'];
+                                                   $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
+                                                     if(empty($sosRormDetailsAry)) {
                                                ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete('<?php echo $childClientDetailsData['id'];?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>
-                                                 <?php }  ?>
+                                                     <?php } }  ?>
                                                
                                             </td>
                                             

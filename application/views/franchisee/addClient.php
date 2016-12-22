@@ -1168,7 +1168,7 @@
                                                 </div>
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['test_count'])) { ?>has-error<?php } ?>">
-                                                    <label class="col-md-4 control-label">How many to tes?</label>
+                                                    <label class="col-md-4 control-label">How many to test?</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
@@ -1585,7 +1585,7 @@
                                             </span>
                                                     <?php } ?>
                                                 </div>
-                                                <div class="text" id="text" style="display:none;">
+                                                <div class="text" id="text" <?php if(trim($_POST['clientData']['paperwork']=='2')){?>style="display:block;"<?php }else{?>style="display:none;"<?php }?>> 
                                                     <div
                                                         class="form-group <?php if (!empty($arErrorMessages['specify_contact'])) { ?>has-error<?php } ?>">
                                                         <label class="col-md-4 control-label">Specify Contact</label>

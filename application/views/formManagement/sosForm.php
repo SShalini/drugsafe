@@ -43,7 +43,7 @@
                 </span>
             </div>
             <div class="actions">
-                <a onclick="ViewSosFormPdf('224')" href="javascript:void(0);" 
+                <a onclick="ViewSosFormPdf(<?php echo  $idClient;?>,<?php echo $idsite;?>)" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-eye"></i> View Pdf </a>
                                 <a href="<?php echo __BASE_URL__; ?>/reporting/excelfr_stockassignlist"
@@ -137,28 +137,7 @@
                            <p><?php echo $sosRormDetailsAry['ServiceConcludedOn'];?></p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Total Time:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <?php
-                            $start_date =new DateTime($sosRormDetailsAry['ServiceConcludedOn']);
-                            $since_start = $start_date->diff(new DateTime($sosRormDetailsAry['ServiceCommencedOn']));
-                            $DaysTotal= $since_start->days.' days ';
-                            $years= $since_start->y.' years';
-                            $Months= $since_start->m.' months';
-                            $Days= $since_start->d.' days';
-                            $Hr= $since_start->h.' hr';
-                            $Min= $since_start->i.' min';
-                            $Sec= $since_start->s.' sec';
-                           echo $DaysTotal."$nbsp". $Hr ."$nbsp $nbsp ". $Min."$nbsp $nbsp " . $Sec;
-                          ?>
-                           
-                        </div>
-                    </div>
                     
-
                 </div>
               
              </div>
@@ -180,8 +159,9 @@
                                 <tbody>
                                    <?php
                                     if ($sosRormDetailsAry) { 
-                                       $sosIdDetailByClientId = $this->Form_Management_Model->getsosFormDetailsByClientId($sosRormDetailsAry['Clientid']);
-                                       $donarDetailBySosIdAry = $this->Form_Management_Model->getDonarDetailBySosId($sosIdDetailByClientId['id']);
+                                      
+                                       $donarDetailBySosIdAry = $this->Form_Management_Model->getDonarDetailBySosId($idsite);
+                                       
                                        if(!empty($donarDetailBySosIdAry)){
                                        $i = 0;
                                        foreach($donarDetailBySosIdAry as $donarDetailBySosIdData){

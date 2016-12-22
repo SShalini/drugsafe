@@ -239,13 +239,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             }
             $whereAry = array('isDeleted=' => '0');
             
-             if($id > '0'){
-                 if($_SESSION['drugsafe_user']['iRole']==1){
-                 $searchq = 'franchiseeId = '.(int)$id; 
-            } else{
-                $searchq = 'clientId = '.(int)$id;
-            } 
-            }
+             
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');

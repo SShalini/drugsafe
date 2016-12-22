@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Form_Management_Model extends Error_Model {
     
-   public function getsosFormDetails($idsite)
+   public function getsosFormDetails($idsite,$flag=0)
     {
         $whereAry = array('Clientid=' => $idsite);
         $this->db->select('*');
@@ -15,7 +15,12 @@ class Form_Management_Model extends Error_Model {
 
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
+            if($flag==1){
                 return $row[0];
+            }
+            else{
+               return $row;  
+            }
         } else {
             return array();
         }
@@ -23,7 +28,7 @@ class Form_Management_Model extends Error_Model {
      public function getsosFormDetailsByClientId($idClient)
     {
         $whereAry = array('Clientid' => $idClient);
-        $this->db->select('id');
+        $this->db->select('*');
         $this->db->from(__DBC_SCHEMATA_SOS_FORM__);
         $this->db->where($whereAry); 
         $query = $this->db->get();
@@ -31,7 +36,7 @@ class Form_Management_Model extends Error_Model {
 
         if ($query->num_rows() > 0) {
              $row = $query->result_array();
-                return $row[0];
+                return $row;
         } else {
             return array();
         }

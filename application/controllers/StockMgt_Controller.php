@@ -176,7 +176,7 @@ class StockMgt_Controller extends CI_Controller {
                 if( $this->StockMgt_Model->insertModelStockValue($idfranchisee,$validate,$idProduct))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>Model Stock Value added successfully.</strong> ";
+                    $szMessage['content'] = "<strong><h3>Model Stock Value added successfully.</h3></strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     
                     if($idCategory==1){
@@ -268,7 +268,7 @@ class StockMgt_Controller extends CI_Controller {
                 if( $this->StockMgt_Model->updateModelStockVal($data_validate,$idProduct,$idfranchisee))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>Model Stock Value Updated successfully.</strong> ";
+                    $szMessage['content'] = "<strong><h3>Model Stock Value Updated successfully.</h3></strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     if($idCategory==1){ 
                         
@@ -399,7 +399,7 @@ class StockMgt_Controller extends CI_Controller {
                 if( $this->StockMgt_Model->insertProductStockQuantity($idfranchisee,$validate,$idProduct))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong> Product Stock Quantity added successfully.</strong>";
+                    $szMessage['content'] = "<strong><h3> Product Stock Quantity added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     
                     if($idCategory==1){
@@ -515,7 +515,7 @@ class StockMgt_Controller extends CI_Controller {
                 if( $this->StockMgt_Model->updateProductStockQty($data_validate,$idfranchisee,$idProduct,$flag))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong>Product Stock Quantity Updated successfully.</strong> ";
+                    $szMessage['content'] = "<strong></h3>Product Stock Quantity Updated successfully.<h3></strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     if($idCategory==1){ 
                         

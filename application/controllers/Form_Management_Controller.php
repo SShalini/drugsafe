@@ -38,14 +38,34 @@ class Form_Management_Controller extends CI_Controller
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die;
         }
-
+        $searchAry = '';
+        if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
+            $id = $_POST['szSearchClRecord2'];
+        }
+        $flag = $_POST['iflag'];
       
-
+        if(!empty($id)){
+        if( $_POST['iflag']['flag']==2){
+        $idClient  = $id;  
+       $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,false,false,false,false); 
+        }
+        elseif($_POST['iflag']['flag']==3){
+          $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
+        }
+        else{
+        $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$id);
+        }
+        
+        }
         $count = $this->Admin_Model->getnotification();
         
-        
+        $data['clientlistArr'] = $clientlistArr;    
+        $data['sosRormDetailsAry'] = $sosRormDetailsAry;
+        $data['childClientDetailsAray'] = $childClientDetailsAray;
         $data['notification'] = $count;
         $data['data'] = $data;
+        $_POST['iflag'] = $flag;
+        
         $data['szMetaTagTitle'] = "Form Management";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Form_Management";
@@ -56,8 +76,10 @@ class Form_Management_Controller extends CI_Controller
     function sosFormsdata()
         {
             $idsite = $this->input->post('idsite');
+            $idClient = $this->input->post('idClient');
  
-               $this->session->set_userdata('idsite',$idsite);
+               $this->session->set_userdata('idClient',$idClient);
+                $this->session->set_userdata('idsite',$idsite);
                 
                 echo "SUCCESS||||";
                 echo "sosForm";
@@ -74,13 +96,13 @@ class Form_Management_Controller extends CI_Controller
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die;
         }
-
-      
-
         $count = $this->Admin_Model->getnotification();
         $idsite = $this->session->userdata('idsite');
-        $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetails($idsite);
+        $idClient = $this->session->userdata('idClient');
+        $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetails($idClient,1);
+       
         
+        $data['idClient'] = $idClient;
         $data['idsite'] = $idsite;
         $data['data'] = $data;
         $data['notification'] = $count;
@@ -95,8 +117,10 @@ class Form_Management_Controller extends CI_Controller
      function ViewSosFormPdfData()
         {
             $idClient = $this->input->post('idClient');
- 
-               $this->session->set_userdata('idClient',$idClient);
+            $idsite = $this->input->post('idsite');
+            
+            $this->session->set_userdata('idClient',$idClient);
+            $this->session->set_userdata('idsite',$idsite);
                 
                 echo "SUCCESS||||";
                 echo "pdf_sosform";
@@ -122,7 +146,9 @@ class Form_Management_Controller extends CI_Controller
         // Add a page
         $pdf->AddPage();
         $idClient = $this->session->userdata('idClient');
-         $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetails($idClient);
+        $idsite = $this->session->userdata('idsite');
+         $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetails($idClient,1);
+        
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Form Management Report</b></p></div>
@@ -133,28 +159,18 @@ class Form_Management_Controller extends CI_Controller
                         </div>
                         
                          <div>
-                             <lable><b>Country :</b> '.$sosRormDetailsAry['szCountry'].'</lable>  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Address :</b> '.$sosRormDetailsAry['szAddress'].'</lable> 
+                             <lable><b>Country :</b> '.$sosRormDetailsAry['szCountry'].'</lable>  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Address :</b> '.$sosRormDetailsAry['szAddress'].'</lable> 
                         </div>
                         <div>
-                             <lable><b>State :</b> '.$sosRormDetailsAry['szState'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <lable><b>ZIP/Postal Code :</b> '.$sosRormDetailsAry['szZipCode'].'</lable>  
+                             <lable><b>State :</b> '.$sosRormDetailsAry['szState'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <lable><b>ZIP/Postal Code :</b> '.$sosRormDetailsAry['szZipCode'].'</lable>  
                         </div>
                         
                         <div>
-                             <lable><b>Service Commenced On :</b> '.$sosRormDetailsAry['ServiceCommencedOn'].'</lable>   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Service Concluded On :</b> '.$sosRormDetailsAry['ServiceConcludedOn'].'</lable>  
+                             <lable><b>Service Commenced On :</b> '.$sosRormDetailsAry['ServiceCommencedOn'].'</lable>   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Service Concluded On :</b> '.$sosRormDetailsAry['ServiceConcludedOn'].'</lable>  
                         </div>';
                     
-                           $start_date =new DateTime($sosRormDetailsAry['ServiceConcludedOn']);
-                            $since_start = $start_date->diff(new DateTime($sosRormDetailsAry['ServiceCommencedOn']));
-                            $DaysTotal= $since_start->days.' days ';
-                            $years= $since_start->y.' years';
-                            $Months= $since_start->m.' months';
-                            $Days= $since_start->d.' days';
-                            $Hr= $since_start->h.' hr';
-                            $Min= $since_start->i.' min';
-                            $Sec= $since_start->s.' sec';
-                          $html .=' <div>
-                            <lable><b>Total Time : </b>'.$DaysTotal."$nbsp". $Hr ."$nbsp $nbsp ". $Min."$nbsp $nbsp " . $Sec.'</lable>
-                            </div>
+                        
+                          $html .='
                   
                     
                   
@@ -170,8 +186,8 @@ class Form_Management_Controller extends CI_Controller
                                    
                                     </tr>';
         if ($sosRormDetailsAry) { 
-                                       $sosIdDetailByClientId = $this->Form_Management_Model->getsosFormDetailsByClientId($sosRormDetailsAry['Clientid']);
-                                       $donarDetailBySosIdAry = $this->Form_Management_Model->getDonarDetailBySosId($sosIdDetailByClientId['id']);
+                                      
+                                       $donarDetailBySosIdAry = $this->Form_Management_Model->getDonarDetailBySosId($idsite);
                                        if(!empty($donarDetailBySosIdAry)){
                                        $i = 0;
                                        foreach($donarDetailBySosIdAry as $donarDetailBySosIdData){
@@ -233,7 +249,7 @@ class Form_Management_Controller extends CI_Controller
                             <lable><b>Total No Alcohol Screens : </b> '.$sosRormDetailsAry['TotalAlcoholScreening'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Positive Alcohol Results : </b> '.$sosRormDetailsAry['PositiveAlcohol'].'</lable>
                         </div>
                          <div>
-                            <lable><b>Refusals , No Shows or Others : </b> '.$sosRormDetailsAry['Refusals'].'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; <lable><b>Negative Alcohol Results :</b> '.$sosRormDetailsAry['NegativeAlcohol'].'</lable>
+                            <lable><b>Refusals , No Shows or Others : </b> '.$sosRormDetailsAry['Refusals'].'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; <lable><b>Negative Alcohol Results :</b> '.$sosRormDetailsAry['NegativeAlcohol'].'</lable>
                         </div>
                         <hr>
                          <div>
@@ -255,7 +271,7 @@ class Form_Management_Controller extends CI_Controller
                             <lable><b>Nominated Client Representative :</b> '.$sosRormDetailsAry['ClientRepresentative'].'</lable> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;<lable><b>Signed : </b> '.$sosRormDetailsAry['RepresentativeSignature'].'</lable>
                         </div>
                          <div>
-                          <lable><b>Status :</b> '.($sosRormDetailsAry['Status'] == 0 ? 'Not Completed':'Completed').'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; <lable><b>Time :</b> '.$sosRormDetailsAry['RepresentativeSignatureTime'].'</lable> 
+                          <lable><b>Status :</b> '.($sosRormDetailsAry['Status'] == 0 ? 'Not Completed':'Completed').'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; <lable><b>Time :</b> '.$sosRormDetailsAry['RepresentativeSignatureTime'].'</lable> 
                         </div>';
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
