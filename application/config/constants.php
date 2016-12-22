@@ -81,6 +81,7 @@ define("__DBC_SCHEMATA_QUANTITY_TRACKING__", "tbl_qty_tracking");
 define("__DBC_SCHEMATA_VALUE_TRACKING__", "tbl_value_tracking");
 define("__DBC_SCHEMATA_REQUEST_QUANTITY__", "tbl_stock_request");
 define("__DBC_SCHEMATA_SOS_FORM__", "ds_sos");
+define("__DBC_SCHEMATA_COC_FORM__", "ds_coc");
 define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
 
 /**

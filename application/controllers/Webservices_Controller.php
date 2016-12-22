@@ -176,43 +176,52 @@ class Webservices_Controller extends CI_Controller
             if(!empty($errorMsgArr) && !empty($errorMsgArr['testdate'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['testdate']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['site'])){
-                $responsedata = array("code" => 204, "message"=>$errorMsgArr['site']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['site']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['drugtest'])){
-                $responsedata = array("code" => 205, "message"=>$errorMsgArr['drugtest']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['drugtest']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['servicecomm'])){
-                $responsedata = array("code" => 206, "message"=>$errorMsgArr['servicecomm']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['servicecomm']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['servicecon'])){
-                $responsedata = array("code" => 207, "message"=>$errorMsgArr['servicecon']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['servicecon']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['totscreenu'])){
-                $responsedata = array("code" => 208, "message"=>$errorMsgArr['totscreenu']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['totscreenu']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['totscreeno'])){
-                $responsedata = array("code" => 209, "message"=>$errorMsgArr['totscreeno']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['totscreeno']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['negresu'])){
-                $responsedata = array("code" => 210, "message"=>$errorMsgArr['negresu']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['negresu']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['negreso'])){
-                $responsedata = array("code" => 211, "message"=>$errorMsgArr['negreso']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['negreso']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['furtestu'])){
-                $responsedata = array("code" => 212, "message"=>$errorMsgArr['furtestu']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['furtestu']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['furtesto'])){
-                $responsedata = array("code" => 213, "message"=>$errorMsgArr['furtesto']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['furtesto']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['totalcscreen'])){
-                $responsedata = array("code" => 214, "message"=>$errorMsgArr['totalcscreen']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['totalcscreen']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['negalcres'])){
-                $responsedata = array("code" => 215, "message"=>$errorMsgArr['negalcres']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['negalcres']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['posalcres'])){
-                $responsedata = array("code" => 216, "message"=>$errorMsgArr['posalcres']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['posalcres']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['refusals'])){
-                $responsedata = array("code" => 217, "message"=>$errorMsgArr['refusals']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['refusals']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['devicename'])){
-                $responsedata = array("code" => 218, "message"=>$errorMsgArr['devicename']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['devicename']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['extraused'])){
-                $responsedata = array("code" => 219, "message"=>$errorMsgArr['extraused']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['extraused']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['breathtest'])){
-                $responsedata = array("code" => 220, "message"=>$errorMsgArr['breathtest']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['breathtest']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominated'])){
-                $responsedata = array("code" => 221, "message"=>$errorMsgArr['nominated']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['nominated']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sign'])){
-                $responsedata = array("code" => 222, "message"=>$errorMsgArr['sign']);
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['sign']);
+            }elseif(!empty($sosdatares['totalcoccount'][0]['totalcoc'])){
+                $coccount = (int)$sosdatares['totalcoccount'][0]['totalcoc'];
+                $cocid = (int)$sosdatares['cocid'][0]['cocid'];
+                if((int)$coccount > '1'){
+                    $responsedata = array("code" => 202, "count"=>(int)$coccount, "sosid"=>$sosdatares['sosid']);
+                }else{
+                    $responsedata = array("code" => 202, "count"=>(int)$coccount, "sosid"=>$sosdatares['sosid'], "cocid" => $cocid);
+                }
+
             }elseif(!empty($sosdatares)){
                 $responsedata = array("code" => 201, "errordata"=>$sosdatares);
             }else{
@@ -250,10 +259,97 @@ class Webservices_Controller extends CI_Controller
     function getclientsites(){
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['clientid'] = !empty($jsondata->clientid) ? $jsondata->clientid : "";
-        $clientdata = $this->Webservices_Model->getsosformdata($data['clientid']);
-        if(!empty($sosformdata))
+        $clientdata = $this->Webservices_Model->getclientsites($data['clientid']);
+        if(!empty($clientdata))
         {
             $responsedata = array("code" => 200,"dataarr"=>$clientdata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getfranchiseeclients(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
+        $franchiseedata = $this->Webservices_Model->getfranchiseeclients($data['franchiseeid']);
+        if(!empty($franchiseedata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$franchiseedata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+    function getfranchiseesites(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
+        $franchiseesitesdata = $this->Webservices_Model->getfranchiseesites($data['franchiseeid']);
+        if(!empty($franchiseesitesdata[0]))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$franchiseesitesdata[0]);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getclientsallsosdata(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['clientid'] = !empty($jsondata->clientid) ? $jsondata->clientid : "";
+        $clientsosdata = $this->Webservices_Model->getclientsosformdata($data['clientid']);
+        if(!empty($clientsosdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$clientsosdata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getfranchiseesosdata(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
+        $franchiseesosdata = $this->Webservices_Model->getfranchiseesosformdata($data['franchiseeid']);
+        if(!empty($franchiseesosdata[0]))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$franchiseesosdata[0]);
             header('Content-Type: application/json');
         }else{
             $errorMsgArr = $this->Webservices_Model->arErrorMessages;
