@@ -744,7 +744,7 @@
                                 <div id="onsite" class="portlet-body collapse">
                                    <table class="table table-hover">
                                        <hr>
-                             <div class="font-green-meadow text"> Primary Site Contact (Assist with donor selection and supervise/manage donor if required).</div>
+                             <div class="font-green-meadow text"> Primary Site Contact (Assist with donor selection and supervise/manage donorS if required).</div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['psc_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>

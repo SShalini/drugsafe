@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
-                        <a href="<?php echo __BASE_URL__; ?>">Home</a>
+                        <a href="<?php echo __BASE_URL__; ?>/admin/operationManagerList">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
@@ -23,7 +23,7 @@
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
                                 <button class="btn btn-sm green-meadow"
                                         onclick="redirect_url('<?php echo base_url(); ?>admin/operationManagerList');">
-                                    &nbsp;List Operation Manager
+                                    &nbsp; Operation Manager List
                                 </button>
                             </div>
                         </div>

@@ -19,7 +19,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                 <input type="password" name="drugsafeChangePassword[szOldPassword]" id="szOldPassword" class="form-control input-square-right required" placeholder="Current Password" > 
+                                                 <input type="password" name="drugsafeChangePassword[szOldPassword]" id="szOldPassword" class="form-control input-square-right required" onfocus="remove_formError(this.id,'true')" placeholder="Current Password" > 
                                             </div>
 
                                                             <?php if(!empty($arErrorMessages['szOldPassword']) != ''){?>
@@ -38,7 +38,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input type="password" name="drugsafeChangePassword[szPassword]" id="szPassword" class="form-control input-square-right required" placeholder="New Password"> 
+                                                <input type="password" name="drugsafeChangePassword[szPassword]" id="szPassword" class="form-control input-square-right required" placeholder="New Password" onfocus="remove_formError(this.id,'true')"> 
                                             </div>
                                                                
                                                            
@@ -57,7 +57,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                  <input type="password" name="drugsafeChangePassword[szConfirmPassword]" id="szConfirmPassword" class="form-control input-square-right required re-match" placeholder="Confirm Password" > 
+                                                  <input type="password" name="drugsafeChangePassword[szConfirmPassword]" id="szConfirmPassword" onfocus="remove_formError(this.id,'true')"  class="form-control input-square-right required re-match" placeholder="Confirm Password" > 
                                             </div>
                                                              
                                                            

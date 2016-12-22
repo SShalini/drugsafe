@@ -149,10 +149,13 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="OperationManagerView" title="View Franchisee List" onclick="viewFranchisee(<?php echo $operationManagerData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="OperationManagerStatus" title="Delete Operation Manager" onclick="operationManagerDelete(<?php echo $operationManagerData['id'];?>);" href="javascript:void(0);"></i>
+                                               <?php $franchiseeListArr = $this->Admin_Model->viewFranchiseeList(false,$operationManagerData['id']);
+                                               if(empty($franchiseeListArr)) {
+                                               ?> 
+                                               <a class="btn btn-circle btn-icon-only btn-default" id="OperationManagerStatus" title="Delete Operation Manager" onclick="operationManagerDelete(<?php echo $operationManagerData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
-                                                
+                                               <?php }?> 
                                             </td>
                                         </tr>
                                         <?php 

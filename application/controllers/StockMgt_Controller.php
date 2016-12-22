@@ -515,7 +515,7 @@ class StockMgt_Controller extends CI_Controller {
                 if( $this->StockMgt_Model->updateProductStockQty($data_validate,$idfranchisee,$idProduct,$flag))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong></h3>Product Stock Quantity Updated successfully.<h3></strong> ";
+                    $szMessage['content'] = "<strong><h3>Product Stock Quantity Updated successfully.</h3></strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     if($idCategory==1){ 
                         

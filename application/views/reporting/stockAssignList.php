@@ -143,11 +143,20 @@
                                                 <td> <?php echo $allQtyAssignData['szName'] ?> </td>
                                                 <td> <?php echo $allQtyAssignData['szProductCode']; ?> </td>
                                                  <td> $<?php echo $allQtyAssignData['szProductCost']; ?> </td>
-                                                 <td> $<?php
+                                                 <td> <?php
+                                                 if($allQtyAssignData['quantityDeducted'] !=0){
+                                                     $Qty= $allQtyAssignData['quantityDeducted'];
+                                                      $Cost= $allQtyAssignData['szProductCost'];
+                                                      $TotalCostPerQty = ($Qty*$Cost);
+                                                      echo  "(-) $". $TotalCostPerQty; 
+                                                   }
+                                                   else{
                                                         $Qty= $allQtyAssignData['szQuantityAssigned'];
                                                         $Cost= $allQtyAssignData['szProductCost'];
                                                         $TotalCostPerQty = ($Qty*$Cost);
-                                                         echo  $TotalCostPerQty; ?> 
+                                                         echo "(+) $".$TotalCostPerQty;  
+                                                     }
+                                                     ?>
                                                 </td>
                                                  <td>
                                                         <?php 

@@ -300,9 +300,19 @@ class Reporting_Controller extends CI_Controller
             foreach ($allQtyAssignAray as $allQtyAssignData) {
                 $productDataAry = $this->Inventory_Model->getProductDetailsById($allQtyAssignData['iProductId']);
                 $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $allQtyAssignData['iFranchiseeId']);
-                $Qty= $allQtyAssignData['szQuantityAssigned'];
-                $Cost= $productDataAry['szProductCost'];
-                $TotalCostPerQty = ($Qty*$Cost);
+              
+                if($allQtyAssignData['quantityDeducted'] !=0){
+                    $Qty= $allQtyAssignData['quantityDeducted'];
+                     $Cost= $allQtyAssignData['szProductCost'];
+                     $TotalCostPerQty = "(-) $".($Qty*$Cost);
+                    
+                  }
+                  else{
+                       $Qty= $allQtyAssignData['szQuantityAssigned'];
+                       $Cost= $allQtyAssignData['szProductCost'];
+                       $TotalCostPerQty =  "(+) $".($Qty*$Cost);
+                       
+                    }
                 $html .= '<tr>
                                             <td> FR-' . $allQtyAssignData['iFranchiseeId'] . ' </td>
                                             <td> ' . $franchiseeArr['szName'] . '</td>
@@ -387,9 +397,18 @@ class Reporting_Controller extends CI_Controller
         if(!empty($allQtyAssignAray)){
             $i = 2;
             foreach($allQtyAssignAray as $item){
-                $Qty= $item['szQuantityAssigned'];
-                $Cost= $item['szProductCost'];
-                $TotalCostPerQty = ($Qty*$Cost);
+               if($item['quantityDeducted'] !=0){
+                    $Qty= $item['quantityDeducted'];
+                     $Cost= $item['szProductCost'];
+                     $TotalCostPerQty = "(-) $".($Qty*$Cost);
+                    
+                  }
+                  else{
+                       $Qty= $item['szQuantityAssigned'];
+                       $Cost= $item['szProductCost'];
+                       $TotalCostPerQty =  "(+) $".($Qty*$Cost);
+                       
+                    }
                 
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['iFranchiseeId']);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szName']);
@@ -652,9 +671,16 @@ class Reporting_Controller extends CI_Controller
         if ($frAllQtyAssignAray) {
             $i = 0;
             foreach ($frAllQtyAssignAray as $frAllQtyAssignArayData) {
-                 $Qty= $frAllQtyAssignArayData['szQuantityAssigned'];
-                 $Cost= $frAllQtyAssignArayData['szProductCost'];
-                 $TotalCostPerQty = ($Qty*$Cost);
+               if($frAllQtyAssignArayData['quantityDeducted'] !=0){
+                            $Qty= $frAllQtyAssignArayData['quantityDeducted'];
+                             $Cost= $frAllQtyAssignArayData['szProductCost'];
+                             $TotalCostPerQty = "(-) $".($Qty*$Cost);
+                          }
+                          else{
+                               $Qty= $frAllQtyAssignArayData['szQuantityAssigned'];
+                               $Cost= $frAllQtyAssignArayData['szProductCost'];
+                               $TotalCostPerQty = "(+) $".($Qty*$Cost);
+                          }              
 
                 $html .= '<tr>
                                             <td> ' . $frAllQtyAssignArayData['szProductCode'] . ' </td>
@@ -731,9 +757,16 @@ class Reporting_Controller extends CI_Controller
         if(!empty($frAllQtyAssignAray)){
             $i = 2;
             foreach($frAllQtyAssignAray as $item){
-                 $Qty= $item['szQuantityAssigned'];
-                $Cost= $item['szProductCost'];
-                $TotalCostPerQty = ($Qty*$Cost);
+                 if($item['quantityDeducted'] !=0){
+                            $Qty= $item['quantityDeducted'];
+                             $Cost= $item['szProductCost'];
+                             $TotalCostPerQty = "(-) $".($Qty*$Cost);
+                          }
+                          else{
+                               $Qty= $item['szQuantityAssigned'];
+                               $Cost= $item['szProductCost'];
+                               $TotalCostPerQty = "(+) $".($Qty*$Cost);
+                          }
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['szProductCode']);
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szProductCost']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $TotalCostPerQty);

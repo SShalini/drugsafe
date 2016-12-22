@@ -23,6 +23,14 @@ class StockMgt_Model extends Error_Model
 
 
         $this->db->insert(__DBC_SCHEMATA_MODEL_STOCK_VALUE__, $dataAry);
+         $QtydataAry = array(
+
+            'iFranchiseeId' => $idfranchisee,
+            'iProductId' => $idProduct,
+            'szQuantity' => $data['szModelStockVal']
+
+        );
+        $this->db->insert(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $QtydataAry);
 
         if ($this->db->affected_rows() > 0) {
             
@@ -34,10 +42,8 @@ class StockMgt_Model extends Error_Model
                 
             );
               $this->db->insert(__DBC_SCHEMATA_VALUE_TRACKING__, $qtydataAry);  
-            
-            
-
-            return true;
+        
+         return true;
         } else {
             return false;
         }

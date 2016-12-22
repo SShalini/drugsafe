@@ -99,12 +99,22 @@
 
                                                 <td> <?php echo $frAllQtyAssignData['szProductCode']; ?> </td>
                                                  <td> $<?php echo $frAllQtyAssignData['szProductCost']; ?> </td>
-                                                 <td> $<?php
+                                                 <td> <?php
+                                                 if($frAllQtyAssignData['quantityDeducted'] !=0){
+                                                     $Qty= $frAllQtyAssignData['quantityDeducted'];
+                                                      $Cost= $frAllQtyAssignData['szProductCost'];
+                                                      $TotalCostPerQty = ($Qty*$Cost);
+                                                      echo  "(-) $". $TotalCostPerQty; 
+                                                   }
+                                                   else{
                                                         $Qty= $frAllQtyAssignData['szQuantityAssigned'];
                                                         $Cost= $frAllQtyAssignData['szProductCost'];
                                                         $TotalCostPerQty = ($Qty*$Cost);
-                                                         echo  $TotalCostPerQty; ?> 
+                                                         echo "(+) $".$TotalCostPerQty;  
+                                                     }
+                                                     ?>
                                                 </td>
+                                                
                                                 <td> <?php echo $frAllQtyAssignData['szQuantityAssigned']; ?> </td>
                                                 <td> <?php echo $frAllQtyAssignData['quantityDeducted']; ?> </td>
                                                 <td> <?php echo $frAllQtyAssignData['szTotalAvailableQty']; ?> </td>
