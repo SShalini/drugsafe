@@ -250,15 +250,16 @@ class Webservices_Model extends Error_Model
             return false;
         }
     }
-    function getsosformdata($siteid)
+    function getsosformdata($siteid, $status=false)
     {
-        $whereAry = array('Clientid' => (int)$siteid);
-        $query = $this->db->select('id, testdate, Clientid, Drugtestid, ServiceCommencedOn, ServiceConcludedOn,
-                                                FurtherTestRequired, TotalDonarScreeningUrine, TotalDonarScreeningOral, NegativeResultUrine,
-                                                NegativeResultOral, FurtherTestUrine, FurtherTestOral, TotalAlcoholScreening, NegativeAlcohol,
-                                                PositiveAlcohol, Refusals, DeviceName, ExtraUsed, BreathTesting, Comments, ClientRepresentative,
-                                                RepresentativeSignature, RepresentativeSignatureTime, Status')
-            ->from(__DBC_SCHEMATA_SOS_FORM__)
+        $whereAry = 'sos.Clientid ='.(int)$siteid.($status?' AND sos.Status = 0':'');
+        $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
+                                                sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
+                                                sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
+                                                sos.PositiveAlcohol, sos.Refusals, DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
+                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId')
+            ->from(__DBC_SCHEMATA_SOS_FORM__.' as sos')
+            ->join(__DBC_SCHEMATA_CLIENT__.' as client', 'sos.Clientid = client.clientId')
             ->where($whereAry)
             ->get();
         if ($query->num_rows() > 0) {
@@ -341,42 +342,15 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getclientsosformdata($clientid)
+    function getclientsosformdata($clientid,$status=false)
     {
         $resultarr = array();
         $clientsitesarr = $this->getclientsites($clientid);
-
         if(!empty($clientsitesarr)){
             foreach ($clientsitesarr as $clientsite){
-                $sosdataarr = $this->getsosformdata($clientsite['userid']);
+                $sosdataarr = $this->getsosformdata($clientsite['userid'],$status);
                 if(!empty($sosdataarr)){
                     array_push($resultarr,$sosdataarr);
-                }
-            }
-            if(!empty($resultarr)){
-                return $resultarr[0];
-            }else{
-                $this->addError("norecord", "No record found.");
-                return false;
-            }
-        }else{
-            $this->addError("norecord", "No record found.");
-            return false;
-        }
-    }
-
-    function getfranchiseesosformdata($franchiseeid)
-    {
-        $resultarr = array();
-        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
-        if(!empty($franchiseeclientsarr)){
-            foreach ($franchiseeclientsarr as $franchiseeclient){
-                $clientsosdataarr = $this->getclientsosformdata($franchiseeclient['clientId']);
-                if(!empty($clientsosdataarr)){
-                    foreach ($clientsosdataarr as $key=>$val){
-                        $clientsosdataarr[$key]['parentclientid'] = $franchiseeclient['clientId'];
-                    }
-                    array_push($resultarr,$clientsosdataarr);
                 }
             }
             if(!empty($resultarr)){
@@ -388,6 +362,57 @@ class Webservices_Model extends Error_Model
         }else{
             $this->addError("norecord", "No record found.");
             return false;
+        }
+    }
+
+    function getfranchiseesosformdata($franchiseeid,$status=false)
+    {
+        $resultarr = array();
+        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
+        if(!empty($franchiseeclientsarr)){
+            foreach ($franchiseeclientsarr as $franchiseeclient){
+                $clientsosdataarr = $this->getclientsosformdata($franchiseeclient['clientId'],$status);
+
+                if(!empty($clientsosdataarr)){
+                    foreach ($clientsosdataarr as $key=>$val){
+                        $clientsosdataarr[$key][0]['parentclientid'] = $franchiseeclient['clientId'];
+                        $clientdetarr = $this->getuserdetails($franchiseeclient['clientId']);
+                        if(!empty($clientdetarr)){
+                            $clientsosdataarr[$key][0]['clientname'] = $clientdetarr[0]['szName'];
+                        }
+                        $sitedetarr = $this->getuserdetails($clientsosdataarr[$key][0]['Clientid']);
+                        if(!empty($sitedetarr)){
+                            $clientsosdataarr[$key][0]['sitename'] = $sitedetarr[0]['szName'];
+                        }
+                    }
+                    array_push($resultarr,$clientsosdataarr);
+                }
+            }
+
+            if(!empty($resultarr)){
+                return $resultarr;
+            }else{
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        }else{
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getdonorsbysosid($sosid)
+    {
+        $array = array('sosid' => (int)$sosid);
+        $query = $this->db->select('id, donerName, result, drug, alcoholreading1, alcoholreading2, lab, sosid, cocid, cocstatus')
+            ->from(__DBC_SCHEMATA_DONER__)
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
         }
     }
 } 

@@ -346,10 +346,33 @@ class Webservices_Controller extends CI_Controller
     function getfranchiseesosdata(){
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
-        $franchiseesosdata = $this->Webservices_Model->getfranchiseesosformdata($data['franchiseeid']);
+        $data['status'] = $jsondata->status == '1' ? true : false;
+        $franchiseesosdata = $this->Webservices_Model->getfranchiseesosformdata($data['franchiseeid'],$data['status']);
         if(!empty($franchiseesosdata[0]))
         {
-            $responsedata = array("code" => 200,"dataarr"=>$franchiseesosdata[0]);
+            $responsedata = array("code" => 200,"dataarr"=>$franchiseesosdata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getdonorsbysosid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['sosid'] = !empty($jsondata->sosid) ? $jsondata->sosid : "";
+        $donordata = $this->Webservices_Model->getdonorsbysosid($data['sosid']);
+        if(!empty($donordata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$donordata);
             header('Content-Type: application/json');
         }else{
             $errorMsgArr = $this->Webservices_Model->arErrorMessages;

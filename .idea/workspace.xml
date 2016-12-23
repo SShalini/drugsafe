@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/constants.php" afterPath="$PROJECT_DIR$/application/config/constants.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Webservices_Model.php" afterPath="$PROJECT_DIR$/application/models/Webservices_Model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db changes/db changes.sql" afterPath="$PROJECT_DIR$/db changes/db changes.sql" />
@@ -32,7 +31,7 @@
       <file leaf-file-name="Form_Management_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="527">
               <caret line="31" column="21" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="21" />
               <folding />
             </state>
@@ -52,14 +51,11 @@
       <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="221" column="130" selection-start-line="221" selection-start-column="130" selection-end-line="221" selection-end-column="130" />
+            <state relative-caret-position="731">
+              <caret line="387" column="40" selection-start-line="387" selection-start-column="40" selection-end-line="387" selection-end-column="40" />
               <folding>
                 <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="e#4496#4514#0#PHP" expanded="false" />
-                <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -73,12 +69,10 @@
       <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="207" column="110" selection-start-line="207" selection-start-column="110" selection-end-line="207" selection-end-column="110" />
+            <state relative-caret-position="191">
+              <caret line="403" column="29" selection-start-line="403" selection-start-column="13" selection-end-line="403" selection-end-column="29" />
               <folding>
                 <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -87,8 +81,8 @@
       <file leaf-file-name="Admin_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1874">
-              <caret line="679" column="29" selection-start-line="679" selection-start-column="29" selection-end-line="679" selection-end-column="29" />
+            <state relative-caret-position="183">
+              <caret line="415" column="27" selection-start-line="415" selection-start-column="23" selection-end-line="415" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -97,7 +91,7 @@
       <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/config/constants.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
+            <state relative-caret-position="1394">
               <caret line="82" column="46" selection-start-line="82" selection-start-column="46" selection-end-line="83" selection-end-column="46" />
               <folding />
             </state>
@@ -107,7 +101,7 @@
       <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/live/application/config/constants.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
+            <state relative-caret-position="1343">
               <caret line="79" column="46" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
               <folding />
             </state>
@@ -117,8 +111,8 @@
       <file leaf-file-name="error_log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/error_log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="34">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -230,8 +224,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -298,6 +290,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -424,14 +418,15 @@
       <workItem from="1482291953716" duration="4690000" />
       <workItem from="1482307559398" duration="14091000" />
       <workItem from="1482378735222" duration="15094000" />
+      <workItem from="1482464944445" duration="18013000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="298385000" />
+    <option name="totallyTimeSpent" value="316398000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1378" height="744" extended-state="1" />
+    <frame x="-8" y="0" width="1378" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17033774" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -765,7 +760,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="527">
           <caret line="31" column="21" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="21" />
           <folding />
         </state>
@@ -813,7 +808,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/constants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
+        <state relative-caret-position="1394">
           <caret line="82" column="46" selection-start-line="82" selection-start-column="46" selection-end-line="83" selection-end-column="46" />
           <folding />
         </state>
@@ -821,7 +816,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/live/application/config/constants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
+        <state relative-caret-position="1343">
           <caret line="79" column="46" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
           <folding />
         </state>
@@ -829,42 +824,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1874">
-          <caret line="679" column="29" selection-start-line="679" selection-start-column="29" selection-end-line="679" selection-end-column="29" />
+        <state relative-caret-position="183">
+          <caret line="415" column="27" selection-start-line="415" selection-start-column="23" selection-end-line="415" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/error_log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="34">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="207" column="110" selection-start-line="207" selection-start-column="110" selection-end-line="207" selection-end-column="110" />
+        <state relative-caret-position="191">
+          <caret line="403" column="29" selection-start-line="403" selection-start-column="13" selection-end-line="403" selection-end-column="29" />
           <folding>
             <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="221" column="130" selection-start-line="221" selection-start-column="130" selection-end-line="221" selection-end-column="130" />
+        <state relative-caret-position="731">
+          <caret line="387" column="40" selection-start-line="387" selection-start-column="40" selection-end-line="387" selection-end-column="40" />
           <folding>
             <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="e#4496#4514#0#PHP" expanded="false" />
-            <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
