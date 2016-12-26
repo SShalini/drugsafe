@@ -161,8 +161,7 @@ class Form_Management_Controller extends CI_Controller
         }
   
          if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){ 
-        $id = $_POST['szSearchClRecord2'];
-       
+         $id = $_POST['szSearchClRecord2'];
          $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
        
          if(empty($childClientDetailsAray)){
@@ -178,6 +177,7 @@ class Form_Management_Controller extends CI_Controller
          $data['sosRormDetailsAry'] = $sosRormDetailsAry;
          $data['childClientDetailsAray'] = $childClientDetailsAray;
          $data['data'] = $data;
+         $data['flag'] = $flag;
          $data['notification'] = $count;
          $data['szMetaTagTitle'] = "Form Management";
          $data['is_user_login'] = $is_user_login;
@@ -199,9 +199,9 @@ class Form_Management_Controller extends CI_Controller
              
            $value = "2";
           
-           $data['value'] = $value;
+            $data['value'] = $value;
             $parentClientId = $this->session->userdata('parentClientId');
-          $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($parentClientId,false,false,false,false);   
+           $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($parentClientId,false,false,false,false);   
              
             $data['childClientDetailsAray'] = $childClientDetailsAray;
             $data['data'] = $data;
@@ -213,14 +213,6 @@ class Form_Management_Controller extends CI_Controller
             $this->load->view('formManagement/formViewBySite');
            $this->load->view('layout/admin_footer');
         }
-        
-         
-        
-          
-       
-        
-       
-       
     }
     function sosFormsdata()
         {

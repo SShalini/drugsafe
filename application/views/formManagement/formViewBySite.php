@@ -29,6 +29,9 @@
         <div id="page_content" class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
+                   <?php  if (empty($sosRormDetailsAry)) {
+
+                        ?>
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-equalizer font-green-meadow"></i>
@@ -68,7 +71,7 @@
                                    $parentClientId = $this->session->userdata('parentClientId');
                                    ?>
                                    <input type="hidden" name="clientId[clientId]" id="idFr" value="<?php echo $parentClientId ;?>"/> 
-                                   <input type="hidden" name="iflag[flag]" id="flag" value="3"/> 
+                                   <input type="text" name="iflag[flag]" id="flag" value="3"/> 
                            </form>
                           </div>
                       <?php  if($data['value']==2){?>
@@ -76,7 +79,7 @@
               <div class="row">  
                 <h4>Not Found </h4>
                   </div>
-                      <?php }?> 
+                   <?php }} else{?> 
                   <?php
                   if(!empty($_POST['szSearchClRecord2'])){
                     if (!empty($sosRormDetailsAry)) {
@@ -133,7 +136,7 @@
                     } else {
                         echo "Not Found";
              }
-                  }
+                   }}
                     ?>
          <?php  if(!empty($clientAry)){?>
 		<div class="row">
