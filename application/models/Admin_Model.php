@@ -32,7 +32,7 @@ class Admin_Model extends Error_Model
         $this->data['szName'] = $this->validateInput($value, __VLD_CASE_NAME__, $field, $message, false, false, $flag);
     }
 
-      function set_szPassword($value, $flag=true)
+      function set_szPassword($value,$flag=true)
     {
         $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", false, false, $flag);
     }
@@ -91,7 +91,7 @@ class Admin_Model extends Error_Model
         $this->data['franchiseeId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "franchiseeId", "Franchisee", false, false, $flag);
     }
     
-    function set_operationManagerId($value, $flag = true)
+    function set_operationManagerId($value,$flag = true)
     {
         $this->data['operationManagerId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "operationManagerId", "Operation Manager", false, false, $flag);
     }
@@ -99,7 +99,6 @@ class Admin_Model extends Error_Model
     {
         $this->data['test_count'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "test_count", "How many to test ?", false, false, $flag);
     }
-
      function set_site_people($value, $flag = true)
     {
         $this->data['site_people'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "site_people", "People on site", false, false, $flag);
@@ -133,7 +132,6 @@ class Admin_Model extends Error_Model
         }
         return false;
     }
-
     public function checkCurrentPasswordExists()
     {
         $userData = $this->session->userdata('drugsafe_user');
@@ -146,8 +144,7 @@ class Admin_Model extends Error_Model
             return true;
         } else {
             $this->addError("szOldPassword", "Current Password does not match.");
-
-        }
+    }
     }
 
    
@@ -160,7 +157,6 @@ class Admin_Model extends Error_Model
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
-
             $adminAry['id'] = $row[0]['id'];
             $adminAry['szName'] = $row[0]['szName'];
             $adminAry['szEmail'] = $row[0]['szEmail'];
@@ -169,13 +165,12 @@ class Admin_Model extends Error_Model
             $user_session = $this->session->set_userdata('drugsafe_user', $adminAry);
 
             return $row[0];
-        } else {
+            } else {
             $this->addError("szPassword", "Invalid email or password.");
             return array();
         }
 
     }
-
     public function updateChangePassword()
     {
 

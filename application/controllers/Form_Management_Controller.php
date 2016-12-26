@@ -29,6 +29,19 @@ class Form_Management_Controller extends CI_Controller
             die;
         }
     }
+    function viewFormData()
+        {
+            $flag = $this->input->post('flag');
+            
+ 
+               
+                $this->session->set_userdata('flag',$flag);
+                
+                echo "SUCCESS||||";
+                echo "viewForm";
+            
+ 
+        }
     function viewForm()
     {
         $is_user_login = is_user_login($this);
@@ -38,40 +51,176 @@ class Form_Management_Controller extends CI_Controller
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die;
         }
-        $searchAry = '';
-        if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
-            $id = $_POST['szSearchClRecord2'];
-        }
-        $flag = $_POST['iflag'];
-      
-        if(!empty($id)){
-        if( $_POST['iflag']['flag']==2){
-        $idClient  = $id;  
-       $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,false,false,false,false); 
-        }
-        elseif($_POST['iflag']['flag']==3){
-          $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
-        }
-        else{
-        $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$id);
-        }
-        
-        }
-        $count = $this->Admin_Model->getnotification();
-        
-        $data['clientlistArr'] = $clientlistArr;    
+        $flag = $this->session->userdata('flag');
+        if($flag==1){
+         $count = $this->Admin_Model->getnotification();
         $data['sosRormDetailsAry'] = $sosRormDetailsAry;
         $data['childClientDetailsAray'] = $childClientDetailsAray;
         $data['notification'] = $count;
         $data['data'] = $data;
-        $_POST['iflag'] = $flag;
+        $data['flag'] = $flag;
         
         $data['szMetaTagTitle'] = "Form Management";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Form_Management";
         $this->load->view('layout/admin_header', $data);
-        $this->load->view('formManagement/viewForm');
+        $this->load->view('formManagement/formViewByFr');
         $this->load->view('layout/admin_footer');
+      }
+        if(isset($_POST['szSearchFrRecord']) && !empty($_POST['szSearchFrRecord'])){
+        $id = $_POST['szSearchFrRecord']; 
+        
+        $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$id);
+      
+        
+         $data['clientlistArr'] = $clientlistArr;
+         $data['data'] = $data;
+         $data['notification'] = $count;
+         $data['szMetaTagTitle'] = "Form Management";
+         $data['is_user_login'] = $is_user_login;
+         $data['pageName'] = "Form_Management";
+        
+        if(empty($clientlistArr)){
+           $value = "1";
+          
+           $data['value'] = $value; 
+        }
+        $this->load->view('layout/admin_header', $data);
+        if(empty($clientlistArr)){
+         
+         $this->load->view('formManagement/formViewByFr');  
+        }
+        else{
+          $this->load->view('formManagement/formViewByCl');   
+        }
+        $this->load->view('layout/admin_footer');
+        }
+        if(empty($_POST['szSearchFrRecord'])&&$_POST['iflag']['flag']==1 ){
+         $data['clientlistArr'] = $clientlistArr;
+         $data['data'] = $data;
+         $data['notification'] = $count;
+         $data['szMetaTagTitle'] = "Form Management";
+         $data['is_user_login'] = $is_user_login;
+         $data['pageName'] = "Form_Management";
+          $this->load->view('layout/admin_header', $data);
+          $this->load->view('formManagement/formViewByFr');
+          $this->load->view('layout/admin_footer');
+        }
+        
+        if(isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])){ 
+        $id = $_POST['szSearchClRecord'];
+        
+         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($id,false,false,false,false);
+         if(empty($childClientDetailsAray)){
+              $value = "2";
+          
+           $data['value'] = $value;
+           $franchiseeId = $this->session->userdata('franchiseeId');
+           $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$franchiseeId);
+             
+         }
+         
+         
+         $data['clientlistArr'] = $clientlistArr;
+         $data['childClientDetailsAray'] = $childClientDetailsAray;
+         $data['data'] = $data;
+         $data['notification'] = $count;
+         $data['szMetaTagTitle'] = "Form Management";
+         $data['is_user_login'] = $is_user_login;
+         $data['pageName'] = "Form_Management";
+        
+        
+        
+        $this->load->view('layout/admin_header', $data);
+        if(!empty($childClientDetailsAray)){
+        $this->load->view('formManagement/formViewBySite');
+        }
+        else{
+           $this->load->view('formManagement/formViewByCl');    
+        }
+        $this->load->view('layout/admin_footer');
+        }
+      
+         if(empty($_POST['szSearchClRecord']) && $_POST['iflag']['flag']==2 ){
+             
+           $value = "2";
+          
+           $data['value'] = $value;
+           $franchiseeId = $this->session->userdata('franchiseeId');
+           $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$franchiseeId);   
+             
+            $data['clientlistArr'] = $clientlistArr;
+            $data['data'] = $data;
+            $data['notification'] = $count;
+            $data['szMetaTagTitle'] = "Form Management";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Form_Management";
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/formViewByCl');
+           $this->load->view('layout/admin_footer');
+        }
+  
+         if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){ 
+        $id = $_POST['szSearchClRecord2'];
+       
+         $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
+       
+         if(empty($childClientDetailsAray)){
+              $value = "3";
+          
+           $data['value'] = $value;
+           $parentClientId = $this->session->userdata('parentClientId');
+           $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($parentClientId,false,false,false,false);
+             
+         }
+         
+        
+         $data['sosRormDetailsAry'] = $sosRormDetailsAry;
+         $data['childClientDetailsAray'] = $childClientDetailsAray;
+         $data['data'] = $data;
+         $data['notification'] = $count;
+         $data['szMetaTagTitle'] = "Form Management";
+         $data['is_user_login'] = $is_user_login;
+         $data['pageName'] = "Form_Management";
+        
+        
+        
+        $this->load->view('layout/admin_header', $data);
+        if(!empty($sosRormDetailsAry)){
+        $this->load->view('formManagement/formViewBySite');
+        }
+        else{
+           $this->load->view('formManagement/formViewBySite');    
+        }
+        $this->load->view('layout/admin_footer');
+        }
+      
+         if(empty($_POST['szSearchClRecord']) && $_POST['iflag']['flag']==3 ){
+             
+           $value = "2";
+          
+           $data['value'] = $value;
+            $parentClientId = $this->session->userdata('parentClientId');
+          $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($parentClientId,false,false,false,false);   
+             
+            $data['childClientDetailsAray'] = $childClientDetailsAray;
+            $data['data'] = $data;
+            $data['notification'] = $count;
+            $data['szMetaTagTitle'] = "Form Management";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Form_Management";
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/formViewBySite');
+           $this->load->view('layout/admin_footer');
+        }
+        
+         
+        
+          
+       
+        
+       
+       
     }
     function sosFormsdata()
         {

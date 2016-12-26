@@ -78,7 +78,7 @@ class Admin_Controller extends CI_Controller {
                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
                         die;  
-                      }
+                          }
                       else{
                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
@@ -283,7 +283,7 @@ class Admin_Controller extends CI_Controller {
                 $config['per_page'] = 5;
               
             
-                $this->pagination->initialize($config);
+                 $this->pagination->initialize($config);
                
                  $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email,$opId);
                  $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);

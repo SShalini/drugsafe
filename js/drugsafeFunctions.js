@@ -219,6 +219,14 @@ function deleteOperationManagerConfirmation(idOperationManager) {
 
     }); 
 }
+function viewForm(flag) {
+
+    $.post(__BASE_URL__ + "/formManagement/viewFormData", {flag: flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
+
+    });
+}
 function viewClient(idfranchisee) {
 
     $.post(__BASE_URL__ + "/franchisee/viewClientData", {idfranchisee: idfranchisee}, function (result) {
