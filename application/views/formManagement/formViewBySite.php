@@ -71,7 +71,7 @@
                                    $parentClientId = $this->session->userdata('parentClientId');
                                    ?>
                                    <input type="hidden" name="clientId[clientId]" id="idFr" value="<?php echo $parentClientId ;?>"/> 
-                                   <input type="text" name="iflag[flag]" id="flag" value="3"/> 
+                                   <input type="hidden" name="iflag[flag]" id="flag" value="3"/> 
                            </form>
                           </div>
                       <?php  if($data['value']==2){?>
