@@ -115,7 +115,7 @@ class Webservices_Controller extends CI_Controller
             }
         }
         $dataArr['drugtest'] = $drug;
-        $dataArr['status'] = !empty($jsondata->status) ? $jsondata->status : "0";;
+        $dataArr['status'] = !empty($jsondata->status) ? $jsondata->status : "0";
         $dataArr['servicecomm'] = !empty($jsondata->servicecomm) ? $jsondata->servicecomm : "";
         $dataArr['donercount'] = !empty($jsondata->donercount) ? $jsondata->donercount : "1";
         $dataArr['servicecon'] = !empty($jsondata->servicecon) ? $jsondata->servicecon : "";
@@ -373,6 +373,232 @@ class Webservices_Controller extends CI_Controller
         if(!empty($donordata))
         {
             $responsedata = array("code" => 200,"dataarr"=>$donordata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getsosbycocid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['cocid'] = !empty($jsondata->cocid) ? $jsondata->cocid : "";
+        $sosdata = $this->Webservices_Model->getsosdatabycocid($data['cocid']);
+        if(!empty($sosdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$sosdata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function addcocdata(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['coc']['cocdate'] = !empty($jsondata->cocdate) ? $jsondata->cocdate : "";
+        $data['coc']['drugtest'] = !empty($jsondata->drugtest) ? $jsondata->drugtest : "";
+        $data['coc']['dob'] = !empty($jsondata->dob) ? $jsondata->dob : "";
+        $data['coc']['employeetype'] = !empty($jsondata->employeetype) ? $jsondata->employeetype : "";
+        $data['coc']['contractor'] = !empty($jsondata->contractor) ? $jsondata->contractor : "";
+        $data['coc']['idtype'] = !empty($jsondata->idtype) ? $jsondata->idtype : "";
+        $data['coc']['idnumber'] = !empty($jsondata->idnumber) ? $jsondata->idnumber : "";
+        $data['coc']['donorsign'] = !empty($jsondata->donorsign) ? $jsondata->donorsign : "";
+        $data['coc']['voidtime'] = !empty($jsondata->voidtime) ? $jsondata->voidtime : "";
+        $data['coc']['sampletempc'] = !empty($jsondata->sampletempc) ? $jsondata->sampletempc : "";
+        $data['coc']['tempreadtime'] = !empty($jsondata->tempreadtime) ? $jsondata->tempreadtime : "";
+        $data['coc']['intect'] = !empty($jsondata->intect) ? $jsondata->intect : "";
+        $data['coc']['intectexpiry'] = !empty($jsondata->intectexpiry) ? $jsondata->intectexpiry : "";
+        $data['coc']['visualcolor'] = !empty($jsondata->visualcolor) ? $jsondata->visualcolor : "";
+        $data['coc']['creatinine'] = !empty($jsondata->creatinine) ? $jsondata->creatinine : "";
+        $data['coc']['otherintegrity'] = !empty($jsondata->otherintegrity) ? $jsondata->otherintegrity : "";
+        $data['coc']['hudration'] = !empty($jsondata->hudration) ? $jsondata->hudration : "";
+        $data['coc']['devicename'] = !empty($jsondata->devicename) ? $jsondata->devicename : "";
+        $data['coc']['lotno'] = !empty($jsondata->lotno) ? $jsondata->lotno : "";
+        $data['coc']['lotexpiry'] = !empty($jsondata->lotexpiry) ? $jsondata->lotexpiry : "";
+        $data['coc']['cocain'] = !empty($jsondata->cocain) ? $jsondata->cocain : "";
+        $data['coc']['amp'] = !empty($jsondata->amp) ? $jsondata->amp : "";
+        $data['coc']['mamp'] = !empty($jsondata->mamp) ? $jsondata->mamp : "";
+        $data['coc']['thc'] = !empty($jsondata->thc) ? $jsondata->thc : "";
+        $data['coc']['opiates'] = !empty($jsondata->opiates) ? $jsondata->opiates : "";
+        $data['coc']['benzo'] = !empty($jsondata->benzo) ? $jsondata->benzo : "";
+        $data['coc']['collectorone'] = !empty($jsondata->collectorone) ? $jsondata->collectorone : "";
+        $data['coc']['collectorsignone'] = !empty($jsondata->collectorsignone) ? $jsondata->collectorsignone : "";
+        $data['coc']['collectortwo'] = !empty($jsondata->collectortwo) ? $jsondata->collectortwo : "";
+        $data['coc']['collectorsigntwo'] = !empty($jsondata->collectorsigntwo) ? $jsondata->collectorsigntwo : "";
+        $data['coc']['comments'] = !empty($jsondata->comments) ? $jsondata->comments : "";
+        $data['coc']['onsitescreeningrepo'] = !empty($jsondata->onsitescreeningrepo) ? $jsondata->onsitescreeningrepo : "";
+        $data['coc']['receiverone'] = !empty($jsondata->receiverone) ? $jsondata->receiverone : "";
+        $data['coc']['receiveronesign'] = !empty($jsondata->receiveronesign) ? $jsondata->receiveronesign : "";
+        $data['coc']['receiveronedate'] = !empty($jsondata->receiveronedate) ? $jsondata->receiveronedate : "";
+        $data['coc']['receiveronetime'] = !empty($jsondata->receiveronetime) ? $jsondata->receiveronetime : "";
+        $data['coc']['receiveroneseal'] = !empty($jsondata->receiveroneseal) ? $jsondata->receiveroneseal : "";
+        $data['coc']['receiveronelabel'] = !empty($jsondata->receiveronelabel) ? $jsondata->receiveronelabel : "";
+        $data['coc']['receivertwo'] = !empty($jsondata->receivertwo) ? $jsondata->receivertwo : "";
+        $data['coc']['receivertwosign'] = !empty($jsondata->receivertwosign) ? $jsondata->receivertwosign : "";
+        $data['coc']['receivertwodate'] = !empty($jsondata->receivertwodate) ? $jsondata->receivertwodate : "";
+        $data['coc']['receivertwotime'] = !empty($jsondata->receivertwotime) ? $jsondata->receivertwotime : "";
+        $data['coc']['receivertwoseal'] = !empty($jsondata->receivertwoseal) ? $jsondata->receivertwoseal : "";
+        $data['coc']['receivertwolabel'] = !empty($jsondata->receivertwolabel) ? $jsondata->receivertwolabel : "";
+        $data['coc']['reference'] = (!empty($jsondata->reference) ? $jsondata->reference : "");
+        $data['coc']['cocid'] = (!empty($jsondata->cocid) ? $jsondata->cocid : "");
+        $data['coc']['status'] = (!empty($jsondata->status) ? $jsondata->status : "");
+        $donordata = $this->Webservices_Model->addcocdata($data['coc']);
+        $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+        if($donordata)
+        {
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['success'])){
+                $responsedata = array("code" => 200,"message"=>$errorMsgArr['success']);
+            }elseif (!empty($errorMsgArr) && !empty($errorMsgArr['successcomplete'])){
+                $responsedata = array("code" => 202,"message"=>$errorMsgArr['successcomplete']);
+            }
+        }else{
+
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['cocdate'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['cocdate']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['drugtest'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['drugtest']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dob'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dob']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['employeetype'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['employeetype']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['idtype'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['idtype']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['idnumber'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['idnumber']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donorsign'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donorsign']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['voidtime'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['voidtime']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sampletempc'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['sampletempc']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['tempreadtime'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['tempreadtime']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['intect'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['intect']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['intectexpiry'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['intectexpiry']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['visualcolor'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['visualcolor']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['creatinine'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['creatinine']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['otherintegrity'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['otherintegrity']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['hudration'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['hudration']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['devicename'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['devicename']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['reference'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['reference']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['lotno'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['lotno']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['lotexpiry'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['lotexpiry']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['cocain'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['cocain']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['amp'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['amp']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['mamp'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['mamp']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['thc'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['thc']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['opiates'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['opiates']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['benzo'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['benzo']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['collectorone'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['collectorone']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['collectorsignone'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['collectorsignone']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['collectortwo'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['collectortwo']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['collectorsigntwo'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['collectorsigntwo']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['onsitescreeningrepo'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['onsitescreeningrepo']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiverone'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiverone']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiveronedate'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiveronedate']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiveronetime'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiveronetime']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiveroneseal'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiveroneseal']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiveronelabel'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiveronelabel']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiveronesign'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiveronesign']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['error'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['error']);
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+            }
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getuserhierarchybysiteid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['siteid'] = !empty($jsondata->siteid) ? $jsondata->siteid : "";
+        $hierdata = $this->Webservices_Model->getuserhierarchybysiteid($data['siteid']);
+        if(!empty($hierdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$hierdata);
             header('Content-Type: application/json');
         }else{
             $errorMsgArr = $this->Webservices_Model->arErrorMessages;

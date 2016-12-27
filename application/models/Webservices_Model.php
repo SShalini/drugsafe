@@ -109,8 +109,7 @@ class Webservices_Model extends Error_Model
 
     function addsosdata($data)
     {
-        $datearr = explode('/', $data['sosdate']);
-        $data['testdate'] = $datearr['2'] . '-' . $datearr['1'] . '-' . $datearr['0'];
+        $data['testdate'] = $this->formatdate($data['sosdate']);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['testdate'])), 'testdate', 'Date', true, __VLD_CASE_DATE__);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['site'])), 'site', 'Site', true);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['drugtest'])), 'drugtest', 'Drug to be tested', true);
@@ -256,7 +255,7 @@ class Webservices_Model extends Error_Model
         $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
                                                 sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                                 sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
-                                                sos.PositiveAlcohol, sos.Refusals, DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
+                                                sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
                                                 sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId')
             ->from(__DBC_SCHEMATA_SOS_FORM__.' as sos')
             ->join(__DBC_SCHEMATA_CLIENT__.' as client', 'sos.Clientid = client.clientId')
@@ -407,6 +406,209 @@ class Webservices_Model extends Error_Model
         $query = $this->db->select('id, donerName, result, drug, alcoholreading1, alcoholreading2, lab, sosid, cocid, cocstatus')
             ->from(__DBC_SCHEMATA_DONER__)
             ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+        }
+    }
+
+    function getsosdatabycocid($cocid)
+    {
+        $whereAry = 'donor.cocid ='.(int)$cocid.' AND sos.Status = 0 AND donor.cocstatus = 0';
+        $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
+                                    sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
+                                    sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
+                                    sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
+                                    sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, donor.donerName, donor.cocid, 
+                                    coc.cocdate, coc.drugtest, coc.dob, coc.employeetype, coc.contractor, coc.idtype, coc.idnumber, coc.donorsign,
+                                    coc.voidtime, coc.sampletempc, coc.tempreadtime, 
+                                    coc.intect, coc.intectexpiry, coc.visualcolor, coc.creatinine,coc.otherintegrity,coc.hudration,coc.devicename as cocdevice,coc.lotno,coc.lotexpiry,coc.cocain,
+                                    coc.amp,coc.mamp,coc.thc, coc.opiates, coc.benzo, coc.collectorone, coc.collectorsignone, coc.collectortwo, coc.collectorsigntwo, coc.comments,
+                                    coc.onsitescreeningrepo, coc.receiverone, coc.receiveronesign, coc.receiveronedate, coc.receiveronetime,coc.receiveroneseal,
+                                    coc.receiveronelabel, coc.receivertwo, coc.receivertwosign, coc.receivertwodate, coc.receivertwotime, coc.receivertwoseal, coc.receivertwolabel,
+                                    coc.reference')
+            ->from(__DBC_SCHEMATA_SOS_FORM__.' as sos')
+            ->join(__DBC_SCHEMATA_DONER__ . ' as donor', 'sos.id = donor.sosid')
+            ->join(__DBC_SCHEMATA_COC_FORM__ . ' as coc', 'coc.id = donor.cocid')
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+        }
+    }
+
+    function formatdate($date){
+        $datearr = explode('/', $date);
+        $res = $datearr['2'] . '-' . $datearr['1'] . '-' . $datearr['0'];
+        return $res;
+    }
+
+    function addcocdata($data){
+
+        $data['cocdate'] = $this->formatdate($data['cocdate']);
+        $data['dob'] = $this->formatdate($data['dob']);
+        $data['intectexpiry'] = $this->formatdate($data['intectexpiry']);
+        $data['lotexpiry'] = $this->formatdate($data['lotexpiry']);
+        $data['receiveronedate'] = $this->formatdate($data['receiveronedate']);
+        $data['receivertwodate'] = $this->formatdate($data['receivertwodate']);
+        $drugtestdata = '';
+        if(!empty($data['drugtest'])){
+            if(!empty($data['drugtest'][0])){
+                $drugtestdata = $data['drugtest'][0];
+            }
+            if(!empty($data['drugtest'][1])){
+                $drugtestdata = $drugtestdata.','.$data['drugtest'][1];
+            }
+        }
+        $data['drugtest'] = $drugtestdata;
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['cocdate'])), 'cocdate', 'Date', true, __VLD_CASE_DATE__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['drugtest'])), 'drugtest', 'Drug to be tested', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['dob'])), 'dob', 'DOB', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['employeetype'])), 'employeetype', 'Employment Type', true,__VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['contractor'])), 'contractor', 'Contractor Details', false);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['idtype'])), 'idtype', 'ID Type', true, __VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['idnumber'])), 'idnumber', 'ID Number', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['donorsign'])), 'donorsign', 'Donor Signature', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['voidtime'])), 'voidtime', 'Void Time', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['sampletempc'])), 'sampletempc', 'Sample Temp C', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['tempreadtime'])), 'tempreadtime', 'Temp Read Time within 4 min', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['intect'])), 'intect', 'Intect 7 Lot. No.', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['intectexpiry'])), 'intectexpiry', 'Intect 7 Expiry', true, __VLD_CASE_DATE__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['visualcolor'])), 'visualcolor', 'Visual Color', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['creatinine'])), 'creatinine', 'Creatinine', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['otherintegrity'])), 'otherintegrity', 'Other Integrity', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['hudration'])), 'hudration', 'Hudration', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['reference'])), 'reference', 'Reference', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['lotno'])), 'lotno', 'Lot No.', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['lotexpiry'])), 'lotexpiry', 'Lot Expiry', true, __VLD_CASE_DATE__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['cocain'])), 'cocain', 'Cocain', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['amp'])), 'amp', 'AMP', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['mamp'])), 'mamp', 'MAMP', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['thc'])), 'thc', 'THC', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['opiates'])), 'opiates', 'Opiates', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['benzo'])), 'benzo', 'Benzo', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorone'])), 'collectorone', 'Collector 1 Name Number', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorsignone'])), 'collectorsignone', 'Collector 1 Sign', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['collectortwo'])), 'collectortwo', 'Collector 2 Name Number', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorsigntwo'])), 'collectorsigntwo', 'Collector 2 Sign', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['comments'])), 'comments', 'Comments', false);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['onsitescreeningrepo'])), 'onsitescreeningrepo', 'On-Site Screening Report', true, __VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receiverone'])), 'receiverone', 'Received By (print)', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveronedate'])), 'receiveronedate', 'Receiving Date', true, __VLD_CASE_DATE__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveronetime'])), 'receiveronetime', 'Receiving Time', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveroneseal'])), 'receiveroneseal', 'Seal Intact', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveronelabel'])), 'receiveronelabel', 'Label/Bar Code', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveronesign'])), 'receiveronesign', 'Receiver Signature', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwo'])), 'receivertwo', 'Received By (print)', false);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwodate'])), 'receivertwodate', 'Receiving Date', false, __VLD_CASE_DATE__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwotime'])), 'receivertwotime', 'Receiving Time', false);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwoseal'])), 'receivertwoseal', 'Seal Intact', false);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwolabel'])), 'receivertwolabel', 'Label/Bar Code', false);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwosign'])), 'receivertwosign', 'Receiver Signature', false);
+
+        if ($this->error) {
+            return false;
+        } else {
+            $updatearr = array(
+                'cocdate' => date('Y-m-d', strtotime($data['cocdate'])),
+                'drugtest' => $data['drugtest'],
+                'dob' => date('Y-m-d', strtotime($data['dob'])),
+                'employeetype' => $data['employeetype'],
+                'contractor' => $data['contractor'],
+                'idtype' => $data['idtype'],
+                'idnumber' => $data['idnumber'],
+                'donorsign' => $data['donorsign'],
+                'voidtime' => $data['voidtime'],
+                'sampletempc' => $data['sampletempc'],
+                'tempreadtime' => $data['tempreadtime'],
+                'intect' => $data['intect'],
+                'intectexpiry' => date('Y-m-d', strtotime($data['intectexpiry'])),
+                'visualcolor' => $data['visualcolor'],
+                'creatinine' => $data['creatinine'],
+                'otherintegrity' => $data['otherintegrity'],
+                'hudration' => $data['hudration'],
+                'devicename' => $data['devicename'],
+                'reference' => $data['reference'],
+                'lotno' => $data['lotno'],
+                'lotexpiry' => date('Y-m-d', strtotime($data['lotexpiry'])),
+                'cocain' => $data['cocain'],
+                'amp' => $data['amp'],
+                'mamp' => $data['mamp'],
+                'thc' => $data['thc'],
+                'opiates' => $data['opiates'],
+                'benzo' => $data['benzo'],
+                'collectorone' => $data['collectorone'],
+                'collectorsignone' => $data['collectorsignone'],
+                'collectortwo' => $data['collectortwo'],
+                'collectorsigntwo' => $data['collectorsigntwo'],
+                'comments' => $data['comments'],
+                'onsitescreeningrepo' => $data['onsitescreeningrepo'],
+                'receiverone' => $data['receiverone'],
+                'receiveronedate' => date('Y-m-d', strtotime($data['receiveronedate'])),
+                'receiveronetime' => $data['receiveronetime'],
+                'receiveroneseal' => $data['receiveroneseal'],
+                'receiveronelabel' => $data['receiveronelabel'],
+                'receiveronesign' => $data['receiveronesign'],
+                'receivertwo' => $data['receivertwo'],
+                'receivertwodate' => date('Y-m-d', strtotime($data['receivertwodate'])),
+                'receivertwotime' => $data['receivertwotime'],
+                'receivertwoseal' => $data['receivertwoseal'],
+                'receivertwolabel' => $data['receivertwolabel'],
+                'receivertwosign' => $data['receivertwosign']
+            );
+            $cocid = $data['cocid'];
+
+            $whereAry = array('id' => (int)$cocid);
+            $this->db->where($whereAry)
+                ->update(__DBC_SCHEMATA_COC_FORM__, $updatearr);
+            /*$q = $this->db->last_query();
+            echo $q;*/
+            if ($this->db->affected_rows() > 0) {
+                if($data['status'] == '1'){
+                    $statusarr = array('cocstatus'=>'1');
+                    $conditionarr = array('cocid'=>(int)$cocid);
+                    $this->db->where($conditionarr)
+                        ->update(__DBC_SCHEMATA_DONER__, $statusarr);
+                    if ($this->db->affected_rows() > 0) {
+                        $this->addError("success", "COC data saved successfully");
+                        return true;
+                    }
+                }
+                $this->addError("success", "COC data saved successfully");
+                return true;
+            } else {
+                if($data['status'] == '1'){
+                    $statusarr = array('cocstatus'=>'1');
+                    $conditionarr = array('cocid'=>(int)$cocid);
+                    $this->db->where($conditionarr)
+                        ->update(__DBC_SCHEMATA_DONER__, $statusarr);
+                    if ($this->db->affected_rows() > 0) {
+                        $this->addError("successcomplete", "COC data saved successfully");
+                        return true;
+                    }
+                }else{
+                    $this->addError("error", "Due to some error COC data is not saved successfully. Please try again.");
+                    return false;
+                }
+
+            }
+        }
+    }
+
+    function getuserhierarchybysiteid($siteid)
+    {
+        $whereAry = 'client.clientId ='.(int)$siteid.' AND user.isDeleted = 0';
+        $query = $this->db->select('client.franchiseeId, user.szName')
+            ->from(__DBC_SCHEMATA_CLIENT__.' as client')
+            ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'client.franchiseeId = user.id')
+            ->where($whereAry)
             ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
