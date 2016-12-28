@@ -20,8 +20,10 @@ class Ordering_Controller extends CI_Controller {
     {
           $idsite = $this->input->post('idsite');
           $Drugtestid = $this->input->post('Drugtestid');
+          $sosid = $this->input->post('sosid');
            $this->session->set_userdata('Drugtestid', $Drugtestid);
          $this->session->set_userdata('idsite', $idsite);
+         $this->session->set_userdata('sosid', $sosid);
         echo "SUCCESS||||";
         echo "calform";
     }
@@ -36,6 +38,7 @@ class Ordering_Controller extends CI_Controller {
             }
             $Drugtestid = $this->session->userdata('Drugtestid');
             $idsite = $this->session->userdata('idsite');
+            $sosid = $this->session->userdata('sosid');
             $data= $this->input->post('orderingData');
             $this->load->library('form_validation');
             $this->form_validation->set_rules('orderingData[urineNata]', 'Urine NATA Laboratory screening', 'required|numeric');
@@ -54,6 +57,7 @@ class Ordering_Controller extends CI_Controller {
              $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
+                $data['sosid'] = $sosid;
                 $data['idsite'] = $idsite;
                 $data['Drugtestid'] = $Drugtestid;
                 $data['notification'] = $count;
@@ -70,11 +74,12 @@ class Ordering_Controller extends CI_Controller {
                 if( $this->Ordering_Model->insertCalulatedData($data))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>Manual Data added successfully.</h3> </strong> ";
+                    $szMessage['content'] = "<strong><h3>Calculations Data added successfully.</h3> </strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     
                 $data['idsite'] = $idsite;
-                 $data['Drugtestid'] = $Drugtestid;
+                $data['Drugtestid'] = $Drugtestid;
+                $data['sosid'] = $sosid;
                 $data['notification'] = $count;
                 $data['data'] = $data;
                 $data['szMetaTagTitle'] = "Ordering";

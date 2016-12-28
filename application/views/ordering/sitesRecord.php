@@ -148,7 +148,7 @@
                                   $drugtestArr= implode('', $drugtestidArr);
                                  
                                     ?>
-                                          <a class="btn btn-circle btn-icon-only btn-default" id="viewCalcForm" title="View  Calc Form" onclick="viewCalcform(<?php echo $sosRormDetailsData['Clientid'];?>,<?php echo $drugtestArr;?>);" href="javascript:void(0);"></i>
+                                          <a class="btn btn-circle btn-icon-only btn-default" id="viewCalcForm" title="View  Calc Form" onclick="viewCalcform(<?php echo $sosRormDetailsData['Clientid'];?>,<?php echo $drugtestArr;?>,<?php echo $sosRormDetailsData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>  
                                     

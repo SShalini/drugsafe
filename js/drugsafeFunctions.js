@@ -655,9 +655,9 @@ function calTotalTravel() {
  
 jQuery('#travel').html(res);
 }
- function viewCalcform(idsite,Drugtestid) {
+ function viewCalcform(idsite,Drugtestid,sosid) {
 
-    $.post(__BASE_URL__ + "/ordering/viewcalform", {idsite: idsite,Drugtestid : Drugtestid}, function (result) {
+    $.post(__BASE_URL__ + "/ordering/viewcalform", {idsite: idsite,Drugtestid : Drugtestid,sosid:sosid}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/ordering/" + ar_result[1];
 

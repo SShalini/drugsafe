@@ -29,11 +29,98 @@
                     </li>
                     
                     <li>
-                        <span class="active">Manual Calculations Result</span>
+                        <span class="active">Automatic Calculated Result</span>
                     </li>
                 </ul>
                 
                 <div class="portlet light bordered about-text" id="user_info">
+                    <?php 
+                            $DrugtestidArr  = array_map('intval', str_split($Drugtestid));
+                           if(in_array(1, $DrugtestidArr)||in_array(2, $DrugtestidArr)||in_array(3, $DrugtestidArr)){
+                           $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));  
+                         ?>    
+                      <div class="portlet-title">
+            <div class="caption">
+                <i class="icon-equalizer font-red-sunglo"></i>
+                <span class="caption-subject font-red-sunglo bold uppercase">
+                 
+                    <?php 
+                       echo "Automatic Calculated Result";
+
+                   ?>
+                    &nbsp; &nbsp;
+     
+                </span>
+            </div>
+            
+        </div>
+        <div class="portlet-body alert">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <?php $Val1=$countDoner*__RRP_1__;
+                              $Val2=$countDoner*__RRP_2__;
+                              $Val2=$countDoner*__RRP_3__;
+                        ?>
+                        <div class="col-sm-8 text-info bold">
+                            <lable>Total :</lable>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>$<?php $ValTotal=$Val1+$Val2+$Val3;echo $ValTotal;?> </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 text-info bold">
+                            <lable>Royalty fees:</lable>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>$<?php $Royaltyfees=$ValTotal*0.1;echo $Royaltyfees; ?> </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8 text-info bold">
+                            <lable>GST:</lable>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>$<?php $GST = $ValTotal*0.1;echo $GST; ?> </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-8 text-info bold">
+                            <lable>Total  before Royalty and Inc GST:</lable>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>$<?php $TotalbeforeRoyalty=$ValTotal+$Royaltyfees-$GST;echo $TotalbeforeRoyalty; ?> </p>
+                        </div>
+                    </div>
+               
+             
+                    <div class="row">
+                        <div class="col-sm-8 text-info bold">
+                            <lable>Total  after royalty and Inc GST:</lable>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>$<?php $TotalafterRoyalty=$ValTotal+$GST;echo $TotalbeforeRoyalty; ?> </p>
+                        </div>
+                    </div>
+                  
+
+                    <div class="row">
+                        <div class="col-sm-8 text-info bold">
+                            <lable>Net Total after royalty and exl GST:</lable>
+                        </div>
+                        <div class="col-sm-2">
+                            <p>$<?php $NetTotal =$ValTotal-$Royaltyfees;echo $NetTotal; ?></p>
+                        </div>
+                    </div>
+                    
+                </div>
+              
+             </div>
+            
+        </div>
+                           <?php }?>
         <div class="portlet-title">
             <div class="caption">
                 <i class="icon-equalizer font-red-sunglo"></i>
@@ -59,7 +146,7 @@
                             <lable>Total "Other Trevenu Streams:</lable>
                         </div>
                         <div class="col-sm-2">
-                            <p><?php 
+                            <p>$<?php 
                             $mobileScreen = $data['mobileScreenBasePrice']*$data['mobileScreenHr'];
                              echo   $mobileScreen;
                             $travel = $data['travelBasePrice']*$data['travelHr'];
@@ -75,7 +162,7 @@
                             <lable>Royalty fees:</lable>
                         </div>
                         <div class="col-sm-2">
-                            <p><?php $Royaltyfees = ( $TotalTrevenu*0.1);
+                            <p>$<?php $Royaltyfees = ( $TotalTrevenu*0.1);
                                     echo $Royaltyfees;?></p>
                         </div>
                     </div>
@@ -84,7 +171,7 @@
                             <lable>GST:</lable>
                         </div>
                         <div class="col-sm-2">
-                            <p><?php 
+                            <p>$<?php 
                             $GST=($TotalTrevenu*0.1);
                             echo $GST;?></p>
                         </div>
@@ -95,7 +182,7 @@
                             <lable>Total  before Royalty and Inc GST:</lable>
                         </div>
                         <div class="col-sm-2">
-                            <p><?php
+                            <p>$<?php
                             $Total1=  $TotalTrevenu+$GST;
                             echo $Total1; ?></p>
                         </div>
@@ -107,7 +194,7 @@
                             <lable>Total  after royalty and Inc GST:</lable>
                         </div>
                         <div class="col-sm-2">
-                            <p><?php 
+                            <p>$<?php 
                           $Total2=  $TotalTrevenu-$Royaltyfees+$GST;
                             echo $Total2;?></p>
                         </div>
@@ -119,7 +206,7 @@
                             <lable>Net Total after royalty and exl GST:</lable>
                         </div>
                         <div class="col-sm-2">
-                            <p><?php echo $Total1-$Total2;?></p>
+                            <p>$<?php echo $Total1-$Total2;?></p>
                         </div>
                     </div>
                     

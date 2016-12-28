@@ -17,6 +17,7 @@
                          <?php 
                              $DrugtestidArr  = array_map('intval', str_split($Drugtestid));
                             if(in_array(1, $DrugtestidArr)||in_array(2, $DrugtestidArr)||in_array(3, $DrugtestidArr)){
+                           $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));  
                          ?>     
                             <div class="portlet-title">
                             <div class="caption">
@@ -47,30 +48,64 @@
                                <?php if(in_array(1, $DrugtestidArr)){?>
                                     <tr>
                                         <td>URINE AS/NZA 4308/2001</td>
-                                        <td> <?php echo $userDataAry['szName'] ?> </td>
-                                        <td> <?php echo $sosRormDetailsData['testdate']; ?> </td>
-                                        <td> <?php echo $sosRormDetailsData['ServiceCommencedOn']; ?> </td>
-                                    <td>  </td> 
+                                        <td> <?php echo $countDoner ?> </td>
+                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_1__ ?> </td>
+                                        <td> $<?php echo __RRP_1__ ?> </td>
+                                     <td> $<?php $Val1=$countDoner*__RRP_1__; echo $Val1 ?>  </td> 
                                     </tr>
                                <?php }?> 
                                      <?php if(in_array(2, $DrugtestidArr)){?>
                                     <tr>
                                         <td>Oral Fluid AS 4760/2006</td>
-                                        <td> <?php echo $userDataAry['szName'] ?> </td>
-                                        <td> <?php echo $sosRormDetailsData['testdate']; ?> </td>
-                                        <td> <?php echo $sosRormDetailsData['ServiceCommencedOn']; ?> </td>
-                                    <td>  </td> 
+                                        <td> <?php echo $countDoner ?> </td>
+                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_2__ ?> </td>
+                                        <td> $<?php echo __RRP_2__ ?> </td>
+                                    <td> $<?php $Val2=$countDoner*__RRP_2__; echo $Val2 ?>  </td> 
                                     </tr>
                                <?php }?> 
                                      <?php if(in_array(3, $DrugtestidArr)){?>
                                     <tr>
                                         <td>Alcohol</td>
-                                        <td> <?php echo $userDataAry['szName'] ?> </td>
-                                        <td> <?php echo $sosRormDetailsData['testdate']; ?> </td>
-                                        <td> <?php echo $sosRormDetailsData['ServiceCommencedOn']; ?> </td>
-                                    <td>  </td> 
+                                        <td> <?php echo $countDoner ?> </td>
+                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_3__ ?> </td>
+                                        <td> $<?php echo __RRP_3__ ?> </td>
+                                       <td> $<?php $Val3=$countDoner*__RRP_3__; echo $Val3 ?>  </td> 
+                                   
                                     </tr>
-                               <?php }?> 
+                                      <?php }?> 
+                                     <tr>
+                                         <td colspan="4">Total</td>
+                                       
+                                    <td>$<?php $ValTotal=$Val1+$Val2+$Val3;echo $ValTotal; ?> </td> 
+                                    </tr>
+                                     <tr>
+                                         <td colspan="4">Royalty fees</td>
+                                       
+                                     <td>$<?php $Royaltyfees=$ValTotal*0.1;echo $Royaltyfees; ?> </td> 
+                                    </tr>
+                                     <tr>
+                                         <td colspan="4">GST</td>
+                                       
+                                    <td>$<?php $GST = $ValTotal*0.1;echo $GST; ?> </td> 
+                                    </tr>
+                                     <tr>
+                                         <td colspan="4">Total  before Royalty and Inc GST</td>
+                                       
+                                    <td>$<?php $TotalbeforeRoyalty=$ValTotal+$Royaltyfees-$GST;echo $TotalbeforeRoyalty; ?> </td> 
+                                    </tr> 
+                                    <tr>
+                                         <td colspan="4">Total  after royalty and Inc GST</td>
+                                       
+                                       <td>$<?php $TotalafterRoyalty=$ValTotal+$GST;echo $TotalbeforeRoyalty; ?> </td> 
+                                    </tr>
+                                     <tr>
+                                         <td colspan="4">Net Total after royalty and exl GST</td>
+                                       
+                                     <td>$<?php $NetTotal =$ValTotal-$Royaltyfees;echo $NetTotal; ?> </td> 
+                                    </tr> 
+                                    
+                                    
+                             
                                 </tbody>
                             </table>
                         </div>
@@ -96,7 +131,7 @@
                         
                         <div class="portlet-body">
                        
-                            <form class="form-horizontal" id="orderingData" action="<?php echo __BASE_URL__?>/ordering/manualcalform" name="orderingData" method="post">
+                            <form class="form-horizontal" id="orderingData" action="<?php echo __BASE_URL__?>/ordering/calform" name="orderingData" method="post">
                                 <div class="form-body">
                                     <div class="form-group <?php if(form_error('orderingData[urineNata]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label"> Urine NATA Laboratory screening</label>

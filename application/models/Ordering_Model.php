@@ -21,8 +21,9 @@ class Ordering_Model extends Error_Model {
                                 'travelType' => $data['travelType']
           
                             );
-	    $this->db->insert(__DBC_SCHEMATA_MANUAL_CAL__, $dataAry);
-            
+	$query=    $this->db->insert(__DBC_SCHEMATA_MANUAL_CAL__, $dataAry);
+//            $sql = $this->db->last_query($query);
+//print_r($sql);die;
             if($this->db->affected_rows() > 0)
             {
 //	         $orderingid= (int)$this->db->insert_id();
