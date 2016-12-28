@@ -15,8 +15,8 @@ class Inventory_Controller extends CI_Controller {
         
 	}
 	
-	
-        public function addMarketingMaterial() {
+        public function addMarketingMaterial() 
+        {
            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -55,7 +55,8 @@ class Inventory_Controller extends CI_Controller {
                 }
             }
         }
-        public function addDrugTestKit() {
+        public function addDrugTestKit() 
+        {
             $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -89,17 +90,15 @@ class Inventory_Controller extends CI_Controller {
                 {
                    $szProductCategory = $_POST[productData][szProductCategory];
                     if($szProductCategory==1)
-                        {
+                    {
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong><h3>Drug Test Kit added successfully.</h3></strong>";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                         header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
                         die;
-                  
+                    }
                 }
-              
             }
-        }
         }
        public function addConsumables() {
            $count = $this->Admin_Model->getnotification();
@@ -315,7 +314,7 @@ class Inventory_Controller extends CI_Controller {
             $this->load->view('inventory/marketingMaterialList');
             $this->load->view('layout/admin_footer');
         }
-       public function deleteProductAlert()
+        public function deleteProductAlert()
         {
             $data['mode'] = '__DELETE_PRODUCT_POPUP__';
             $data['idProduct'] = $this->input->post('idProduct');
@@ -328,24 +327,18 @@ class Inventory_Controller extends CI_Controller {
             $data['mode'] = '__DELETE_PRODUCT_POPUP_CONFIRM__';
             $data['idProduct'] = $this->input->post('idProduct');
             $data['flag'] = $this->input->post('flag');
-          
             $this->Inventory_Model->deleteProduct($data['idProduct']);
             $this->load->view('admin/admin_ajax_functions',$data);
-            
         }   
         
-         function editMarketingData()
+        function editMarketingData()
         {
-           
-             $idProduct = $this->input->post('idProduct');
-             $flag = $this->input->post('flag');
-     
+            $idProduct = $this->input->post('idProduct');
+            $flag = $this->input->post('flag');
             $this->session->set_userdata('idProduct',$idProduct);
-             $this->session->set_userdata('flag',$flag);
-           
+            $this->session->set_userdata('flag',$flag);
             echo "SUCCESS||||";
             echo "editMarketingMaterial";
-            
         }
         
         public function editMarketingMaterial() {
@@ -369,7 +362,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
-             $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -453,13 +446,13 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
                     $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3> Consumables updated successfully.</h3> </strong> ";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                        $this->session->unset_userdata('idProduct');
-                        $this->session->unset_userdata('flag');
-                        ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/inventory/ConsumablesList");
-                        die;
+                    $szMessage['content'] = "<strong><h3> Consumables updated successfully.</h3> </strong> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage); 
+                    $this->session->unset_userdata('idProduct');
+                    $this->session->unset_userdata('flag');
+                    ob_end_clean();
+                    header("Location:" . __BASE_URL__ . "/inventory/ConsumablesList");
+                    die;
                 }
 
             }
