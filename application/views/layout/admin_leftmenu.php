@@ -185,7 +185,7 @@
                     </ul>
 
                 </li>
-            <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
+           <!-- <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cubes" aria-hidden="true"></i>
                     <span class="title">Forum </span>
@@ -201,7 +201,7 @@
 
                 </ul>
 
-            </li>
+            </li>-->
            <?php } ?>
         </ul>
     </div>
