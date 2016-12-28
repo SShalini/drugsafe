@@ -281,6 +281,8 @@
                                  <div class="text align-center font-green-meadow">
                                              Travel</div>
                                                <hr>
+                                               
+                                               
                                      <div class="form-group <?php if(form_error('orderingData[travelType]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label">Base Price (BP/hr)</label>
                                         <div class="col-md-5">
@@ -292,8 +294,8 @@
                                                     Placeholder="Travel" onfocus="remove_formError(this.id,'true')"  onchange="showHideTextboxForCalc()">
                                                 <option value=''>Select</option>
                                                 
-                                                        <option  value="1" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == trim("Drugsafe Communiies") ? "selected" : ""); ?>>Drugsafe Communiies</option>
-                                                        <option  value="2" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == trim("Marketing Material Communiies") ? "selected" : ""); ?>>Marketing Material Communiies</option>
+                                                        <option  value="1" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == "1" ? "selected" : ""); ?>>Drugsafe Communiies</option>
+                                                        <option  value="2" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == "2" ? "selected" : ""); ?>>Marketing Material Communiies</option>
                                                         
                                                        
                                                   
@@ -305,7 +307,16 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
-                                      <div class="text" id="text" style="display:none;"> 
+                                      <div class="text" id="text"
+                                           <?php
+                                           if($_POST['orderingData']['travelType']=="")
+                                           {
+                                               ?>
+                                                style="display:none;"
+                                               <?php
+                                           }
+                                           ?>
+                                           > 
                                         <div class="form-group <?php if(form_error('orderingData[travelBasePrice]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label ">Base Price </label>
                                         <div class="col-md-5">
