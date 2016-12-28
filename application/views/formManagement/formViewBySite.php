@@ -96,12 +96,10 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
-                               
                                     <th>Test Date</th>
                                     <th>ServiceCommencedOn</th>
                                     <th>ServiceConcludedOn</th>
                                     <th>Action</th>
-                                   
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -115,12 +113,12 @@
                                         <td> <?php echo $sosRormDetailsData['ServiceCommencedOn'] ?> </td>
                                         <td> <?php echo $sosRormDetailsData['ServiceConcludedOn']; ?> </td>
                                         <td> 
-                                         <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
+                                        <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="View SoS Form Details"
                                                onclick="viewSosFormDetails(<?php echo $sosRormDetailsData['Clientid']; ?>,<?php echo $sosRormDetailsData['id']; ?>);"
                                                href="javascript:void(0);"></i>
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
-                                            </a>
+                                        </a>
                                        </td>
                                     </tr>
                                     <?php
