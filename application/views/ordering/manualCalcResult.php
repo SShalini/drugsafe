@@ -57,9 +57,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
-                        <?php $Val1=$countDoner*__RRP_1__;
-                              $Val2=$countDoner*__RRP_2__;
-                              $Val2=$countDoner*__RRP_3__;
+                        <?php 
+                        $Val1=$countDoner*__RRP_1__;
+                        $Val2=$countDoner*__RRP_2__;
+                        $Val3=$countDoner*__RRP_3__;
                         ?>
                         <div class="col-sm-8 text-info bold">
                             <lable>Total :</lable>
@@ -84,7 +85,7 @@
                             <p>$<?php echo $GST = $ValTotal*0.1; ?> </p>
                         </div>
                     </div>
-
+                    
                     <div class="row">
                         <div class="col-sm-8 text-info bold">
                             <lable>Total  before Royalty and Inc GST:</lable>
@@ -94,7 +95,6 @@
                         </div>
                     </div>
                
-             
                     <div class="row">
                         <div class="col-sm-8 text-info bold">
                             <lable>Total  after royalty and Inc GST:</lable>
