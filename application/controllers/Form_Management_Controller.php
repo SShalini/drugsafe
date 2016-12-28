@@ -33,8 +33,6 @@ class Form_Management_Controller extends CI_Controller
         {
             $flag = $this->input->post('flag');
             
- 
-               
                 $this->session->set_userdata('flag',$flag);
                 
                 echo "SUCCESS||||";
@@ -412,6 +410,26 @@ class Form_Management_Controller extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
         $pdf->Output('Drugsafe_Form_Management_report.pdf', 'I');
+    }
+     function cocFormDetails()
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            die;
+        }
+       
+        
+        $data['notification'] = $count;
+        $data['szMetaTagTitle'] = "Form Management";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Form_Management";
+    
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('formManagement/cocForm');
+        $this->load->view('layout/admin_footer');
     }
 }
 ?>

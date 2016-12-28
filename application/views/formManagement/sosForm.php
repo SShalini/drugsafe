@@ -37,7 +37,7 @@
                 <span class="caption-subject font-red-sunglo bold uppercase">
                  
                     <?php 
-                       echo "View Form Details";
+                       echo "View SOS Form Details";
                     ?>
                  
                 </span>
