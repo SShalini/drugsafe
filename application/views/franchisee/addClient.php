@@ -1593,18 +1593,17 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                                <input id="specify_contact" class="form-control div1"
-                                                                       type="text"
-                                                                       value="<?php echo $_POST['clientData']['specify_contact']; ?>"
-                                                                       placeholder="Specify Contact"
-                                                                       onfocus="remove_formError(this.id,'true')"
-                                                                       name="clientData[specify_contact]">
-                                                            </div>
-                                                            <?php if (!empty($arErrorMessages['specify_contact'])) { ?>
-                                                                <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                                    <?php echo $arErrorMessages['specify_contact']; ?>
-                                            </span>
+                                        <input id="specify_contact" class="form-control div1"
+                                               type="text"
+                                               value="<?php echo $_POST['clientData']['specify_contact']; ?>"
+                                               placeholder="Specify Contact"
+                                               onfocus="remove_formError(this.id,'true')"
+                                               name="clientData[specify_contact]"> </div>
+                                    <?php if (!empty($arErrorMessages['specify_contact'])) { ?>
+                                        <span class="help-block pull-left">
+                                        <i class="fa fa-times-circle"></i>
+                                                            <?php echo $arErrorMessages['specify_contact']; ?>
+                                    </span>
                                                             <?php } ?>
                                                         </div>
                                                     </div>

@@ -85,6 +85,12 @@ $route['formManagement/(:any)/(:any)'] = "Form_Management_Controller/$1/$2";
 $route['formManagement/(:any)/(:any)/(:any)'] = "Form_Management_Controller/$1/$2/$3";
 
 
+$route['ordering'] = "Ordering_Controller";
+$route['ordering/(:any)'] = "Ordering_Controller/$1";
+$route['ordering/(:any)/(:any)'] = "Ordering_Controller/$1/$2";
+$route['ordering/(:any)/(:any)/(:any)'] = "Ordering_Controller/$1/$2/$3";
+
+
 $route['forum'] = "Forum_Controller";
 $route['forum/(:any)'] = "Forum_Controller/$1";
 $route['forum/(:any)/(:any)'] = "Forum_Controller/$1/$2";

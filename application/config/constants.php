@@ -72,6 +72,7 @@ define( "__DBC_SCHEMATA_EMAIL_CMS__", "tbl_email_cms");
 define("__DBC_SCHEMATA_FORUM_CATEGORY__", "fo_category");
 define( "__DBC_SCHEMATA_CLIENT__", "tbl_client");
 define( "__DBC_SCHEMATA_PRODUCT__", "tbl_product");
+define( "__DBC_SCHEMATA_MANUAL_CAL__", "tbl_manual_calc");
 define( "__DBC_SCHEMATA_PRODUCT_CATEGORY__", "tbl_product_category");
 define("__CUSTOMER_SUPPORT_EMAIL__", 'support@whiz-solutions.com');
 define("__ADMIN_EMAIL__", 'admin@drugsafe.com');

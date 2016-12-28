@@ -163,7 +163,7 @@ class Form_Management_Controller extends CI_Controller
          if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){ 
          $id = $_POST['szSearchClRecord2'];
          $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
-       
+      
          if(empty($childClientDetailsAray)){
               $value = "3";
           
@@ -186,17 +186,12 @@ class Form_Management_Controller extends CI_Controller
         
         
         $this->load->view('layout/admin_header', $data);
-        if(!empty($sosRormDetailsAry)){
-        $this->load->view('formManagement/formViewBySite');
-        }
-        else{
-           $this->load->view('formManagement/formViewBySite');    
-        }
+        $this->load->view('formManagement/formViewBySite'); 
         $this->load->view('layout/admin_footer');
         }
       
-         if(empty($_POST['szSearchClRecord']) && $_POST['iflag']['flag']==3 ){
-             
+         if(empty($_POST['szSearchClRecord2']) && $_POST['iflag']['flag']==3 ){
+            
            $value = "2";
           
             $data['value'] = $value;
@@ -211,7 +206,7 @@ class Form_Management_Controller extends CI_Controller
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/formViewBySite');
-           $this->load->view('layout/admin_footer');
+            $this->load->view('layout/admin_footer');
         }
     }
     function sosFormsdata()

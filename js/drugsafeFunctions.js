@@ -612,6 +612,15 @@ function showHideTextbox(id){
    jQuery('#text').attr('style', 'display:block');  
   }      
 }
+function showHideTextboxForCalc(){
+    var val=jQuery('#travelType').val();
+if(val==1||val==2){
+     jQuery('#text').attr('style', 'display:block'); 
+     }else{
+          jQuery('#text').attr('style', 'display:none'); 
+     }
+}
+ 
 function viewSosFormDetails(idClient,idsite) {
     $.post(__BASE_URL__ + "/formManagement/sosFormsdata", {idClient:idClient,idsite:idsite}, function (result) {
         ar_result = result.split('||||');
@@ -631,4 +640,27 @@ function editConsumables(idProduct,flag) {
 
     });
 }
+function calTotal() {
+ var Val1=jQuery('#mobileScreenBasePrice').val();
+ var Val2=jQuery('#mobileScreenHr').val();
+ var res= Val1*Val2;
+
+jQuery('#mobileScreen').html(res);
+}
+function calTotalTravel() {
  
+ var Val1=jQuery('#travelBasePrice').val();
+ var Val2=jQuery('#travelHr').val();
+ var res= Val1*Val2;
+ 
+jQuery('#travel').html(res);
+}
+ function viewCalcform(idsite,Drugtestid) {
+
+    $.post(__BASE_URL__ + "/ordering/viewcalform", {idsite: idsite,Drugtestid : Drugtestid}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/ordering/" + ar_result[1];
+
+    });
+
+}

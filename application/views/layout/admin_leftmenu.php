@@ -158,6 +158,25 @@
                     </a>
                 </li>
            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
+                
+                  <li class="nav-item start <?php if (trim($pageName) == 'Ordering') { ?>active open<?php } ?>">
+                    <a href="javascript:void(0);" class="nav-link nav-toggle">
+                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                        <span class="title">Ordering </span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" <?php if ($subpageName == 'Ordering') { ?> style="display: block;" <?php } ?> >
+                       
+                        <li class="nav-item  <?php if ($subpageName == 'Sites_Record') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Sites Record</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
             <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cubes" aria-hidden="true"></i>
