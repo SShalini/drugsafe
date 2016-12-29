@@ -250,13 +250,12 @@ if($mode == '__ALLOT_QUANTITY_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                     <div class="modal-title">
+                    <div class="modal-title">
                        <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                                 <span  class="caption-subject font-red-sunglo bold uppercase"> Allot Quantity</span> </h4>
                         </div>
-                   
-                </div>
+                    </div>
                        </div>
                 <div class="modal-body">
                       <form action=""  id="allotQuantityForm" name="allotQuantity" method="post" class="form-horizontal form-row-sepe">
@@ -285,13 +284,12 @@ if($mode == '__ALLOT_QUANTITY_POPUP__')
                                             </span><?php }?> 
                                         </div>
                                 </div> 
-                </div>
+                        </div>
                       </form>
                          
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    
                     <button type="button" onclick="allotQuantityConfirmation('<?php echo $idProduct;?>'); return false;" class="btn green">Submit</button>
                 </div>
             </div>
@@ -313,15 +311,13 @@ if($mode == '__ALLOT_QUANTITY_POPUP_CONFIRM__')
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                                 <span  class="caption-subject font-red-sunglo bold uppercase"> Allot Quantity</span> </h4>
                         </div>
-                   
-                </div>
+                    </div>
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i>  Quantity has been assigned successfully .</p>
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__;?>/stock_management/viewproductlist" class="btn dark btn-outline">Close</a>
-                   
                 </div>
             </div>
         </div>

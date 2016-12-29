@@ -373,6 +373,20 @@ class StockMgt_Controller extends CI_Controller {
  
             $frdata = array();
             $frdata   =  array_merge($productDataAry,$CategoryDataAry);
+           
+            if($frdata['szProductCategory']==1){
+                    $drActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $drActive);
+            }
+            if($frdata['szProductCategory']==2){
+                    $mrActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+            }
+            if($frdata['szProductCategory']==3){
+                    $conActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $conActive);
+            }
+           
 
             $this->load->library('form_validation');
             $this->form_validation->set_rules('addProductStockQty[szName]', 'Product Category', 'required');
