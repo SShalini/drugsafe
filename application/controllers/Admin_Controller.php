@@ -117,16 +117,14 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('admin/dashboard');
             $this->load->view('layout/admin_footer');
         }
-
-
-          function logout()
+        function logout()
         {
             logout($this);
             ob_end_clean();
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die();			
         }
-         function changePassword()
+        function changePassword()
         {
             $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
@@ -177,18 +175,17 @@ class Admin_Controller extends CI_Controller {
         $this->load->view('layout/admin_footer');
 
         }
-         function addFranchiseeData()
-    {
+        function addFranchiseeData()
+        {
              $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
-            }
-          $idOperationManager = $this->input->post('idOperationManager');
-          $flag = $this->input->post('flag');
-          
+        }
+        $idOperationManager = $this->input->post('idOperationManager');
+        $flag = $this->input->post('flag');
         $this->session->set_userdata('flag',$flag);
         if($idOperationManager>0){
          $this->session->set_userdata('idOperationManager', $idOperationManager);
@@ -245,7 +242,7 @@ class Admin_Controller extends CI_Controller {
             echo json_encode($responsedata);
             die;
         }
-         function franchiseeList()
+        function franchiseeList()
         {
            $is_user_login = is_user_login($this);
 

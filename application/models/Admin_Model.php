@@ -825,11 +825,6 @@ class Admin_Model extends Error_Model
         }
         return false;
     }
-
-    
-
-   
-
     public function checkAdminAccountStatus($szEmail = '')
     {
         //echo $szEmail;
