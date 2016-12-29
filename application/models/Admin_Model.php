@@ -789,7 +789,7 @@ class Admin_Model extends Error_Model
      function validateAdminData($data, $arExclude = array())
     {
         if (!empty($data)) {
-            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])), true);
+            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail"," Email address", true);
             if (!in_array('szPassword', $arExclude)) $this->set_szPassword(sanitize_all_html_input(trim($data['szPassword'])), true);
             
           if ($this->error == false && $this->data['szEmail'] != '' || $this->data['szPassword'] != '')
