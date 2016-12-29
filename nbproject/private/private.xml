@@ -3,54 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< .mine
+            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Franchisee_Model.php</file>
             <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Franchisee_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Reporting_Controller.php</file>
-||||||| .r222
-=======
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/cocForm.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/sosForm.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/donorDetailsList.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/js/drugsafeFunctions.js</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/config/constants.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Form_Management_Model.php</file>
->>>>>>> .r225
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/formViewByCl.php</file>
-<<<<<<< .mine
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/ordering/manualCalcResult.php</file>
-||||||| .r222
-            <file>file:/C:/xampp/htdocs/drugsafe/js/functions.js</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/ordering/manualCalcResult.php</file>
-=======
->>>>>>> .r225
-<<<<<<< .mine
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Error_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/formViewBySite.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/ordering/manualOrdering.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Admin_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Forum_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/formViewByFr.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/js/drugsafeFunctions.js</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Welcome.php</file>
-||||||| .r222
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Form_Management_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Ordering_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/formViewBySite.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/ordering/manualOrdering.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/formViewByFr.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/js/drugsafeFunctions.js</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Welcome.php</file>
-=======
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Form_Management_Controller.php</file>
->>>>>>> .r225
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/layout/admin_leftmenu.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/layout/admin_header.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Inventory_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/js/functions.js</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Form_Management_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Ordering_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/index.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Home_Controller.php</file>
         </group>
     </open-files>
 </project-private>

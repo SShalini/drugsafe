@@ -75,6 +75,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 
                 if($this->db->affected_rows() > 0)
                 {
+                    if(empty($clientType)){
                    $replace_ary = array();
                    $id_player = (int)$this->db->insert_id();
                    $replace_ary['szName']=$data['szName'];
@@ -84,7 +85,9 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                    $replace_ary['Link']=__BASE_URL__."/franchisee/addClient";
                  
                    createEmail($this,'__ADD_NEW_CLIENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
-                 if(!empty($clientType)){
+                
+                    }
+                    if(!empty($clientType)){
                      if(empty($reqppval)){
                       $reqppval='';   
                      }

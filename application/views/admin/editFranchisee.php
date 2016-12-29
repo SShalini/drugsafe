@@ -5,15 +5,15 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                        <li>
                          <?php  
                           $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idOperationManager);
-                          
+                        
                          ?>
-                         <a onclick="viewFranchisee(<?php echo $operationManagerIdArr['operationManagerId'];?>);;" href="javascript:void(0);"><?php echo $operationManagerDetArr['szName'];?></a>
+                         <a onclick="viewFranchisee(<?php echo $operationManagerDetArr['id'];?>);;" href="javascript:void(0);"><?php echo $operationManagerDetArr['szName'];?></a>
                         <i class="fa fa-circle"></i>
                       </li>
                       <li>
