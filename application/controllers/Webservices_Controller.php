@@ -135,6 +135,11 @@ class Webservices_Controller extends CI_Controller
         $dataArr['comments'] = !empty($jsondata->comments) ? $jsondata->comments : "";
         $dataArr['nominated'] = !empty($jsondata->nominated) ? $jsondata->nominated : "";
         $dataArr['sign'] = !empty($jsondata->sign) ? $jsondata->sign : "";
+        $dataArr['update'] = !empty($jsondata->update) ? $jsondata->update : "";
+        $dataArr['donercountpre'] = !empty($jsondata->donercountpre) ? $jsondata->donercountpre : "";
+        $dataArr['donercountpost'] = !empty($jsondata->donercountpost) ? $jsondata->donercountpost : "";
+        $dataArr['newdonerids'] = !empty($jsondata->newdonerids) ? $jsondata->newdonerids : "";
+        $dataArr['idsos'] = !empty($jsondata->idsos) ? $jsondata->idsos : "";
         for($i=1;$i<=$dataArr['donercount'];$i++){
             $namevar = 'name'.$i;
             $resultvar = 'result'.$i;
@@ -144,11 +149,15 @@ class Webservices_Controller extends CI_Controller
             $drugtypevar = 'drugtype'.$i;
             $pos1readvar = 'pos1read'.$i;
             $pos2readvar = 'pos2read'.$i;
+            $idcoc = 'idcoc'.$i;
+            $iddonor = 'iddonor'.$i;
             $dataArr['name'.$i] = !empty($jsondata->$namevar) ? $jsondata->$namevar : "";
             $dataArr['result'.$i] = !empty($jsondata->$resultvar) ? $jsondata->$resultvar : "0";
             $dataArr['drug'.$i] = !empty($jsondata->$drugvar) ? $jsondata->$drugvar : "0";
             $dataArr['alcohol'.$i] = !empty($jsondata->$alcoholvar) ? $jsondata->$alcoholvar : "0";
             $dataArr['lab'.$i] = !empty($jsondata->$labvar) ? $jsondata->$labvar : "";
+            $dataArr['idcoc'.$i] = !empty($jsondata->$idcoc) ? $jsondata->$idcoc : "0";
+            $dataArr['iddonor'.$i] = !empty($jsondata->$iddonor) ? $jsondata->$iddonor : "";
             $drugtype = '';
             if(!empty($jsondata->$drugtypevar)){
                 $drugtype = '';

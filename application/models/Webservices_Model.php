@@ -76,21 +76,6 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getuserdetails($userid)
-    {
-        $array = array('id' => (int)$userid, 'isDeleted' => 0);
-        $query = $this->db->select('id, szName, szEmail, iRole')
-            ->from(__DBC_SCHEMATA_USERS__)
-            ->where($array)
-            ->get();
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
-            return $row;
-        } else {
-            $this->addError("usernotexist", "User does not exist.");
-        }
-    }
-
     function getclientdetails($franchiseeid, $parent = 0)
     {
         $array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent);
@@ -160,11 +145,17 @@ class Webservices_Model extends Error_Model
                 'RepresentativeSignatureTime' => date('Y-m-d'),
                 'Status' => $data['status']
             );
-            $this->db->insert(__DBC_SCHEMATA_SOS_FORM__, $dataAry);
-            if ($this->db->affected_rows() > 0) {
-                $sosid = (int)$this->db->insert_id();
+            if ($data['update'] == '1') {
+                $wheresosAry = array('id' => (int)$data['idsos']);
+                $newdonors = (int)$data['donercountpost'] - (int)$data['donercountpre'];
+                $this->db->where($wheresosAry)
+                    ->update(__DBC_SCHEMATA_SOS_FORM__, $dataAry);
+
+                $sosid = (int)$data['idsos'];
                 $failarr = array();
+                $newupdate = false;
                 for ($i = 1; $i <= $data['donercount']; $i++) {
+                    $oldupdate = true;
                     if (!empty($data['name' . $i])) {
                         $donerAry = array(
                             'donerName' => $data['name' . $i],
@@ -175,68 +166,167 @@ class Webservices_Model extends Error_Model
                             'lab' => $data['lab' . $i],
                             'sosid' => (int)$sosid
                         );
-                        $this->db->insert(__DBC_SCHEMATA_DONER__, $donerAry);
-                        if(($this->db->affected_rows() > 0) && (($data['result' . $i] == '1') || ($data['drugnewcounter' . $i] == '1') || ($data['doneralcohol' . $i] == '1'))){
-                            $donerid = $this->db->insert_id();
-                            $cocdatearr = array( 'cocdate' => date('Y-m-d', strtotime($data['testdate'])));
-                            $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdatearr);
-                            if($this->db->affected_rows() > 0){
-                                $cocid = $this->db->insert_id();
-                                $updatearr = array('cocid' => (int)$cocid);
-                                $whereAry = array('id' => (int)$donerid);
-                                $this->db->where($whereAry)
-                                        ->update(__DBC_SCHEMATA_DONER__, $updatearr);
+                        if ($newdonors > '0') {
+                            $totalnewdonors = explode(',', $data['newdonerids']);
+                            foreach ($totalnewdonors as $newkey => $newval) {
+                                if ($i == $newval) {
+                                    $newupdate = true;
+                                    $this->db->insert(__DBC_SCHEMATA_DONER__, $donerAry);
+                                    if (($this->db->affected_rows() > 0) && (($data['result' . $i] == '1') || ($data['drugnewcounter' . $i] == '1') || ($data['doneralcohol' . $i] == '1'))) {
+                                        $donerid = $this->db->insert_id();
+                                        $cocdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
+                                        $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdatearr);
+                                        if ($this->db->affected_rows() > 0) {
+                                            $cocid = $this->db->insert_id();
+                                            $updatearr = array('cocid' => (int)$cocid);
+                                            $whereAry = array('id' => (int)$donerid);
+                                            $this->db->where($whereAry)
+                                                ->update(__DBC_SCHEMATA_DONER__, $updatearr);
 
-                                if (!($this->db->affected_rows() > 0)) {
-                                    $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
-                                    array_push($failarr, $message);
+                                            if (!($this->db->affected_rows() > 0)) {
+                                                $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                                array_push($failarr, $message);
+                                            }
+                                        }
+                                    } elseif (!($this->db->affected_rows() > 0)) {
+                                        $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                        array_push($failarr, $message);
+                                    }
+                                } else {
+                                    if($oldupdate && !$newupdate){
+                                        $oldupdate = false;
+                                        $weherecocarr = array('id' => (int)$data['iddonor' . $i]);
+                                        $this->db->where($weherecocarr)
+                                            ->update(__DBC_SCHEMATA_DONER__, $donerAry);
+                                        if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drugnewcounter' . $i] == '1') || ($data['doneralcohol' . $i] == '1'))) {
+                                            $cocdateupdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
+                                            $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdateupdatearr);
+                                            if ($this->db->affected_rows() > 0) {
+                                                $cocupdateid = $this->db->insert_id();
+                                                $updatedonorarr = array('cocid' => (int)$cocupdateid);
+                                                $whereupdateAry = array('id' => (int)$data['iddonor' . $i]);
+                                                $this->db->where($whereupdateAry)
+                                                    ->update(__DBC_SCHEMATA_DONER__, $updatedonorarr);
+                                                if (!($this->db->affected_rows() > 0)) {
+                                                    $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                                    array_push($failarr, $message);
+                                                }
+                                            }
+                                        } elseif (!($this->db->affected_rows() > 0)) {
+                                            $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                            array_push($failarr, $message);
+                                        }
+                                    }
                                 }
                             }
-                        }elseif (!($this->db->affected_rows() > 0)) {
-                            $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
-                            array_push($failarr, $message);
+                        } else {
+                            $weherecocarr = array('id' => (int)$data['iddonor' . $i]);
+                            $this->db->where($weherecocarr)
+                                ->update(__DBC_SCHEMATA_DONER__, $donerAry);
+                            if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drugnewcounter' . $i] == '1') || ($data['doneralcohol' . $i] == '1'))) {
+                                $cocdateupdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
+                                $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdateupdatearr);
+                                if ($this->db->affected_rows() > 0) {
+                                    $cocupdateid = $this->db->insert_id();
+                                    $updatedonorarr = array('cocid' => (int)$cocupdateid);
+                                    $whereupdateAry = array('id' => (int)$data['iddonor' . $i]);
+                                    $this->db->where($whereupdateAry)
+                                        ->update(__DBC_SCHEMATA_DONER__, $updatedonorarr);
+
+                                    if (!($this->db->affected_rows() > 0)) {
+                                        $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                        array_push($failarr, $message);
+                                    }
+                                }
+                            } elseif (!($this->db->affected_rows() > 0)) {
+                                $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                array_push($failarr, $message);
+                            }
                         }
                     }
                 }
                 $datacocarr = $this->getcocdonorsbysosid($sosid);
-                if(!empty($datacocarr)){
-                    if($datacocarr['totalcoc'] > '1'){
-                        $failarr = array("totalcoccount"=>$datacocarr, "sosid"=>$sosid);
-                    }else{
+                if (!empty($datacocarr)) {
+                    if ($datacocarr['totalcoc'] > '1') {
+                        $failarr = array("totalcoccount" => $datacocarr, "sosid" => $sosid);
+                    } else {
                         $singlecocarr = $this->getcocidbysosid($sosid);
-                        $failarr = array("totalcoccount"=>$datacocarr, "sosid"=>$sosid, "cocid"=>$singlecocarr);
+                        $failarr = array("totalcoccount" => $datacocarr, "sosid" => $sosid, "cocid" => $singlecocarr);
                     }
                 }
                 return $failarr;
             } else {
-                $failarr = array("No data inserted");
-                return $failarr;
+                $this->db->insert(__DBC_SCHEMATA_SOS_FORM__, $dataAry);
+                if ($this->db->affected_rows() > 0) {
+                    $sosid = (int)$this->db->insert_id();
+                    $failarr = array();
+                    for ($i = 1; $i <= $data['donercount']; $i++) {
+                        if (!empty($data['name' . $i])) {
+                            $donerAry = array(
+                                'donerName' => $data['name' . $i],
+                                'result' => $data['result' . $i],
+                                'drug' => $data['drugtype' . $i],
+                                'alcoholreading1' => $data['pos1read' . $i],
+                                'alcoholreading2' => $data['pos2read' . $i],
+                                'lab' => $data['lab' . $i],
+                                'sosid' => (int)$sosid
+                            );
+                            $this->db->insert(__DBC_SCHEMATA_DONER__, $donerAry);
+                            if (($this->db->affected_rows() > 0) && (($data['result' . $i] == '1') || ($data['drugnewcounter' . $i] == '1') || ($data['doneralcohol' . $i] == '1'))) {
+                                $donerid = $this->db->insert_id();
+                                $cocdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
+                                $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdatearr);
+                                if ($this->db->affected_rows() > 0) {
+                                    $cocid = $this->db->insert_id();
+                                    $updatearr = array('cocid' => (int)$cocid);
+                                    $whereAry = array('id' => (int)$donerid);
+                                    $this->db->where($whereAry)
+                                        ->update(__DBC_SCHEMATA_DONER__, $updatearr);
+
+                                    if (!($this->db->affected_rows() > 0)) {
+                                        $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                        array_push($failarr, $message);
+                                    }
+                                }
+                            } elseif (!($this->db->affected_rows() > 0)) {
+                                $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                array_push($failarr, $message);
+                            }
+                        }
+                    }
+                    $datacocarr = $this->getcocdonorsbysosid($sosid);
+                    if (!empty($datacocarr)) {
+                        if ($datacocarr['totalcoc'] > '1') {
+                            $failarr = array("totalcoccount" => $datacocarr, "sosid" => $sosid);
+                        } else {
+                            $singlecocarr = $this->getcocidbysosid($sosid);
+                            $failarr = array("totalcoccount" => $datacocarr, "sosid" => $sosid, "cocid" => $singlecocarr);
+                        }
+                    }
+                    return $failarr;
+                } else {
+                    $failarr = array("No data inserted");
+                    return $failarr;
+                }
             }
         }
+    }
+
+    function formatdate($date)
+    {
+        $datearr = explode('/', $date);
+        $res = $datearr['2'] . '-' . $datearr['1'] . '-' . $datearr['0'];
+        return $res;
     }
 
     function set_fieldReq($value, $field = false, $message = false, $flag = true, $validation = __VLD_CASE_ANYTHING__)
     {
         $this->data[$field] = $this->validateInput($value, $validation, $field, $message, false, false, $flag);
     }
-    function getcocidbysosid($sosid)
-    {
-        $whereAry = 'sosid ='.(int)$sosid.' AND cocid > 0';
-        $query = $this->db->select('cocid')
-            ->from(__DBC_SCHEMATA_DONER__)
-            ->where($whereAry)
-            ->get();
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
-            return $row;
-        } else {
-            $this->addError("norecord", "No record found.");
-            return false;
-        }
-    }
+
     function getcocdonorsbysosid($sosid)
     {
-        $whereAry = 'sosid ='.(int)$sosid.' AND cocid > 0';
+        $whereAry = 'sosid =' . (int)$sosid . ' AND cocid > 0';
         $query = $this->db->select('COUNT(id) as totalcoc')
             ->from(__DBC_SCHEMATA_DONER__)
             ->where($whereAry)
@@ -249,18 +339,59 @@ class Webservices_Model extends Error_Model
             return false;
         }
     }
-    function getsosformdata($siteid, $status=false)
+
+    function getcocidbysosid($sosid)
     {
-        $whereAry = 'sos.Clientid ='.(int)$siteid.($status?' AND sos.Status = 0':'');
-        $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
-                                                sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
-                                                sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
-                                                sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
-                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId')
-            ->from(__DBC_SCHEMATA_SOS_FORM__.' as sos')
-            ->join(__DBC_SCHEMATA_CLIENT__.' as client', 'sos.Clientid = client.clientId')
+        $whereAry = 'sosid =' . (int)$sosid . ' AND cocid > 0';
+        $query = $this->db->select('cocid')
+            ->from(__DBC_SCHEMATA_DONER__)
             ->where($whereAry)
             ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getfranchiseesites($franchiseeid)
+    {
+        $resultarr = array();
+        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
+        if (!empty($franchiseeclientsarr)) {
+            foreach ($franchiseeclientsarr as $franchiseeclient) {
+                $clientsitearr = $this->getclientsites($franchiseeclient['clientId']);
+                if (!empty($clientsitearr)) {
+                    array_push($resultarr, $clientsitearr);
+                }
+            }
+            if (!empty($resultarr)) {
+                return $resultarr;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getfranchiseeclients($franchiseeid)
+    {
+        $whereAry = array('client.franchiseeId' => (int)$franchiseeid, 'client.clientType' => '0', 'user.isDeleted' => '0');
+        $query = $this->db->select('client.id, client.clientId, client.szBusinessName, client.szContactEmail, client.szContactPhone, 
+        client.szContactMobile, user.szName,
+                                     user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode,
+                                     user.szCity, user.szState, user.szCountry')
+            ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
+            ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = client.clientId')
+            ->where($whereAry)
+            ->get();
+        /*$q = $this->db->last_query();
+        die($q);*/
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
@@ -296,19 +427,77 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getfranchiseeclients($franchiseeid)
+    function getfranchiseesosformdata($franchiseeid, $status = false)
     {
-        $whereAry = array('client.franchiseeId' => (int)$franchiseeid, 'client.clientType' => '0', 'user.isDeleted' => '0');
-        $query = $this->db->select('client.id, client.clientId, client.szBusinessName, client.szContactEmail, client.szContactPhone, 
-        client.szContactMobile, user.szName,
-                                     user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode,
-                                     user.szCity, user.szState, user.szCountry')
-            ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
-            ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = client.clientId')
+        $resultarr = array();
+        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
+        if (!empty($franchiseeclientsarr)) {
+            foreach ($franchiseeclientsarr as $franchiseeclient) {
+                $clientsosdataarr = $this->getclientsosformdata($franchiseeclient['clientId'], $status);
+
+                if (!empty($clientsosdataarr)) {
+                    foreach ($clientsosdataarr as $key => $val) {
+                        $clientsosdataarr[$key][0]['parentclientid'] = $franchiseeclient['clientId'];
+                        $clientdetarr = $this->getuserdetails($franchiseeclient['clientId']);
+                        if (!empty($clientdetarr)) {
+                            $clientsosdataarr[$key][0]['clientname'] = $clientdetarr[0]['szName'];
+                        }
+                        $sitedetarr = $this->getuserdetails($clientsosdataarr[$key][0]['Clientid']);
+                        if (!empty($sitedetarr)) {
+                            $clientsosdataarr[$key][0]['sitename'] = $sitedetarr[0]['szName'];
+                        }
+                    }
+                    array_push($resultarr, $clientsosdataarr);
+                }
+            }
+
+            if (!empty($resultarr)) {
+                return $resultarr;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getclientsosformdata($clientid, $status = false)
+    {
+        $resultarr = array();
+        $clientsitesarr = $this->getclientsites($clientid);
+        if (!empty($clientsitesarr)) {
+            foreach ($clientsitesarr as $clientsite) {
+                $sosdataarr = $this->getsosformdata($clientsite['userid'], $status);
+                if (!empty($sosdataarr)) {
+                    array_push($resultarr, $sosdataarr);
+                }
+            }
+            if (!empty($resultarr)) {
+                return $resultarr;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getsosformdata($siteid, $status = false)
+    {
+        $whereAry = 'sos.Clientid =' . (int)$siteid . ($status ? ' AND sos.Status = 0' : '');
+        $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
+                                                sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
+                                                sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
+                                                sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
+                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId')
+            ->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos')
+            ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'sos.Clientid = client.clientId')
             ->where($whereAry)
             ->get();
-        /*$q = $this->db->last_query();
-        die($q);*/
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
@@ -318,85 +507,18 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getfranchiseesites($franchiseeid)
+    function getuserdetails($userid)
     {
-        $resultarr = array();
-        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
-        if(!empty($franchiseeclientsarr)){
-            foreach ($franchiseeclientsarr as $franchiseeclient){
-                $clientsitearr = $this->getclientsites($franchiseeclient['clientId']);
-                if(!empty($clientsitearr)){
-                    array_push($resultarr,$clientsitearr);
-                }
-            }
-            if(!empty($resultarr)){
-                return $resultarr;
-            }else{
-                $this->addError("norecord", "No record found.");
-                return false;
-            }
-        }else{
-            $this->addError("norecord", "No record found.");
-            return false;
-        }
-    }
-
-    function getclientsosformdata($clientid,$status=false)
-    {
-        $resultarr = array();
-        $clientsitesarr = $this->getclientsites($clientid);
-        if(!empty($clientsitesarr)){
-            foreach ($clientsitesarr as $clientsite){
-                $sosdataarr = $this->getsosformdata($clientsite['userid'],$status);
-                if(!empty($sosdataarr)){
-                    array_push($resultarr,$sosdataarr);
-                }
-            }
-            if(!empty($resultarr)){
-                return $resultarr;
-            }else{
-                $this->addError("norecord", "No record found.");
-                return false;
-            }
-        }else{
-            $this->addError("norecord", "No record found.");
-            return false;
-        }
-    }
-
-    function getfranchiseesosformdata($franchiseeid,$status=false)
-    {
-        $resultarr = array();
-        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
-        if(!empty($franchiseeclientsarr)){
-            foreach ($franchiseeclientsarr as $franchiseeclient){
-                $clientsosdataarr = $this->getclientsosformdata($franchiseeclient['clientId'],$status);
-
-                if(!empty($clientsosdataarr)){
-                    foreach ($clientsosdataarr as $key=>$val){
-                        $clientsosdataarr[$key][0]['parentclientid'] = $franchiseeclient['clientId'];
-                        $clientdetarr = $this->getuserdetails($franchiseeclient['clientId']);
-                        if(!empty($clientdetarr)){
-                            $clientsosdataarr[$key][0]['clientname'] = $clientdetarr[0]['szName'];
-                        }
-                        $sitedetarr = $this->getuserdetails($clientsosdataarr[$key][0]['Clientid']);
-                        if(!empty($sitedetarr)){
-                            $clientsosdataarr[$key][0]['sitename'] = $sitedetarr[0]['szName'];
-                        }
-                    }
-                    array_push($resultarr,$clientsosdataarr);
-                }
-            }
-
-            if(!empty($resultarr)){
-                return $resultarr;
-            }else{
-                $this->addError("norecord", "No record found.");
-                return false;
-            }
-        }else{
-            $this->addError("norecord", "No record found.");
-            return false;
+        $array = array('id' => (int)$userid, 'isDeleted' => 0);
+        $query = $this->db->select('id, szName, szEmail, iRole')
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("usernotexist", "User does not exist.");
         }
     }
 
@@ -417,7 +539,7 @@ class Webservices_Model extends Error_Model
 
     function getsosdatabycocid($cocid)
     {
-        $whereAry = 'donor.cocid ='.(int)$cocid.' AND sos.Status = 0 AND donor.cocstatus = 0';
+        $whereAry = 'donor.cocid =' . (int)$cocid . ' AND sos.Status = 0 AND donor.cocstatus = 0';
         $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
                                     sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                     sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
@@ -430,7 +552,7 @@ class Webservices_Model extends Error_Model
                                     coc.onsitescreeningrepo, coc.receiverone, coc.receiveronesign, coc.receiveronedate, coc.receiveronetime,coc.receiveroneseal,
                                     coc.receiveronelabel, coc.receivertwo, coc.receivertwosign, coc.receivertwodate, coc.receivertwotime, coc.receivertwoseal, coc.receivertwolabel,
                                     coc.reference')
-            ->from(__DBC_SCHEMATA_SOS_FORM__.' as sos')
+            ->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos')
             ->join(__DBC_SCHEMATA_DONER__ . ' as donor', 'sos.id = donor.sosid')
             ->join(__DBC_SCHEMATA_COC_FORM__ . ' as coc', 'coc.id = donor.cocid')
             ->where($whereAry)
@@ -443,13 +565,8 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function formatdate($date){
-        $datearr = explode('/', $date);
-        $res = $datearr['2'] . '-' . $datearr['1'] . '-' . $datearr['0'];
-        return $res;
-    }
-
-    function addcocdata($data){
+    function addcocdata($data)
+    {
 
         $data['cocdate'] = $this->formatdate($data['cocdate']);
         $data['dob'] = $this->formatdate($data['dob']);
@@ -458,19 +575,19 @@ class Webservices_Model extends Error_Model
         $data['receiveronedate'] = $this->formatdate($data['receiveronedate']);
         $data['receivertwodate'] = $this->formatdate($data['receivertwodate']);
         $drugtestdata = '';
-        if(!empty($data['drugtest'])){
-            if(!empty($data['drugtest'][0])){
+        if (!empty($data['drugtest'])) {
+            if (!empty($data['drugtest'][0])) {
                 $drugtestdata = $data['drugtest'][0];
             }
-            if(!empty($data['drugtest'][1])){
-                $drugtestdata = $drugtestdata.','.$data['drugtest'][1];
+            if (!empty($data['drugtest'][1])) {
+                $drugtestdata = $drugtestdata . ',' . $data['drugtest'][1];
             }
         }
         $data['drugtest'] = $drugtestdata;
         $this->set_fieldReq(sanitize_all_html_input(trim($data['cocdate'])), 'cocdate', 'Date', true, __VLD_CASE_DATE__);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['drugtest'])), 'drugtest', 'Drug to be tested', true);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['dob'])), 'dob', 'DOB', true);
-        $this->set_fieldReq(sanitize_all_html_input(trim($data['employeetype'])), 'employeetype', 'Employment Type', true,__VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['employeetype'])), 'employeetype', 'Employment Type', true, __VLD_CASE_NUMERIC__);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['contractor'])), 'contractor', 'Contractor Details', false);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['idtype'])), 'idtype', 'ID Type', true, __VLD_CASE_NUMERIC__);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['idnumber'])), 'idnumber', 'ID Number', true);
@@ -571,9 +688,9 @@ class Webservices_Model extends Error_Model
             /*$q = $this->db->last_query();
             echo $q;*/
             if ($this->db->affected_rows() > 0) {
-                if($data['status'] == '1'){
-                    $statusarr = array('cocstatus'=>'1');
-                    $conditionarr = array('cocid'=>(int)$cocid);
+                if ($data['status'] == '1') {
+                    $statusarr = array('cocstatus' => '1');
+                    $conditionarr = array('cocid' => (int)$cocid);
                     $this->db->where($conditionarr)
                         ->update(__DBC_SCHEMATA_DONER__, $statusarr);
                     if ($this->db->affected_rows() > 0) {
@@ -584,16 +701,16 @@ class Webservices_Model extends Error_Model
                 $this->addError("success", "COC data saved successfully");
                 return true;
             } else {
-                if($data['status'] == '1'){
-                    $statusarr = array('cocstatus'=>'1');
-                    $conditionarr = array('cocid'=>(int)$cocid);
+                if ($data['status'] == '1') {
+                    $statusarr = array('cocstatus' => '1');
+                    $conditionarr = array('cocid' => (int)$cocid);
                     $this->db->where($conditionarr)
                         ->update(__DBC_SCHEMATA_DONER__, $statusarr);
                     if ($this->db->affected_rows() > 0) {
                         $this->addError("successcomplete", "COC data saved successfully");
                         return true;
                     }
-                }else{
+                } else {
                     $this->addError("error", "Due to some error COC data is not saved successfully. Please try again.");
                     return false;
                 }
@@ -604,9 +721,9 @@ class Webservices_Model extends Error_Model
 
     function getuserhierarchybysiteid($siteid)
     {
-        $whereAry = 'client.clientId ='.(int)$siteid.' AND user.isDeleted = 0';
+        $whereAry = 'client.clientId =' . (int)$siteid . ' AND user.isDeleted = 0';
         $query = $this->db->select('client.franchiseeId, user.szName')
-            ->from(__DBC_SCHEMATA_CLIENT__.' as client')
+            ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'client.franchiseeId = user.id')
             ->where($whereAry)
             ->get();
