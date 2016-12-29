@@ -13,11 +13,8 @@ class Forum_Controller extends CI_Controller {
             $this->load->model('Inventory_Model');
             $this->load->model('StockMgt_Model');
             $this->load->library('pagination');
-        
-	}
-	
-	
-        public function addCategory() {
+        }
+	public function addCategory() {
            $count = $this->Admin_Model->getnotification();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -29,7 +26,6 @@ class Forum_Controller extends CI_Controller {
             $this->load->library('form_validation');
             $this->form_validation->set_rules('forumData[szCategoryName]', 'Category Name', 'required');
             $this->form_validation->set_rules('forumData[szCategoryDiscription]', 'Category Discription', 'required');
-        
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
@@ -56,10 +52,8 @@ class Forum_Controller extends CI_Controller {
         }
         function editCategoryData()
         {
-            
-             $idCategory = $this->input->post('idCategory');
-     
-             $this->session->set_userdata('idCategory',$idCategory);
+            $idCategory = $this->input->post('idCategory');
+            $this->session->set_userdata('idCategory',$idCategory);
            
             echo "SUCCESS||||";
             echo "editCategory";
@@ -108,9 +102,7 @@ class Forum_Controller extends CI_Controller {
                         ob_end_clean();
                         header("Location:" . __BASE_URL__ . "/forum/categoriesList");
                     die;
-                   
                 }
-
             }
         }
        
@@ -135,10 +127,8 @@ class Forum_Controller extends CI_Controller {
              $this->pagination->initialize($config);
             
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
-          
-               $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
-            $categoriesListAray =$this->Forum_Model->viewCategoriesList();
-         
+                $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
+               $categoriesListAray =$this->Forum_Model->viewCategoriesList();
                $count = $this->Admin_Model->getnotification();
 
                     $data['categoriesAray'] = $categoriesAray;
@@ -154,8 +144,7 @@ class Forum_Controller extends CI_Controller {
             $this->load->view('forum/categoriesList');
             $this->load->view('layout/admin_footer');
         }
-       
-       public function deleteCategoryAlert()
+        public function deleteCategoryAlert()
         {
             $data['mode'] = '__DELETE_CATEGORY_POPUP__';
             $data['idCategory'] = $this->input->post('idCategory');
