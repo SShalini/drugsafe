@@ -29,17 +29,34 @@
                       ?> 
         <div id="page_content" class="row">
             <div class="col-md-12">
-                <div class="portlet light bordered">
-                    <div class="portlet-title">
-                        <div class="caption">
-                            <i class="icon-equalizer font-green-meadow"></i>
-                            <?php  
+                 <?php  
                             
                                    $franchiseeId = $clientlistArr[0]['franchiseeId'];
                                    $this->session->set_userdata('franchiseeId',$franchiseeId);
                                    $franchiseeId = $this->session->userdata('franchiseeId');
                             
                             $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$franchiseeId);?>
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a onclick="viewForm('1');" href="javascript:void(0);" >Home</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                      <li>
+                            <a onclick=""
+                               href="javascript:void(0);"><?php echo $userDataAry['szName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                   
+                        <li>
+                            <span class="active">Select Client</span>
+                        </li>
+                   
+                </ul>
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-equalizer font-green-meadow"></i>
+                           
                            
                             <span class="caption-subject font-green-meadow ">Plese select  <?php echo $userDataAry['szName'];?> 's client to display their related sites.</span>
                         </div>

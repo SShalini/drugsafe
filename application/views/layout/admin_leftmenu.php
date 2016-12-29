@@ -157,13 +157,7 @@
                         <span class="selected"></span>
                     </a>
                 </li>
-                 <li class="nav-item start <?php if (trim($pageName) == 'Form_Management') { ?>active open<?php } ?>">
-                     <a class="nav-link " href="<?php echo __BASE_URL__; ?>/formManagement/cocFormDetails">
-                        <i class="fa fa-bank" aria-hidden="true"></i>
-                        <span class="title">coc Management</span>
-                        <span class="selected"></span>
-                    </a>
-                </li>
+               
                 
            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
                 

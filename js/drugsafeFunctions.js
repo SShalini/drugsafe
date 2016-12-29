@@ -600,6 +600,23 @@ function requestQuantityAlert(idProduct,flag)
 
     });
 }
+ function ViewDonorDetails(idsos) {
+    $.post(__BASE_URL__ + "/formManagement/ViewDonorDetailsData", {idsos:idsos}, function (result) {
+        ar_result = result.split('||||');
+       window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
+        
+
+    });
+}
+   function viewCocForm(idcoc,idsos) {
+    $.post(__BASE_URL__ + "/formManagement/ViewCocFormData", {idcoc:idcoc,idsos:idsos}, function (result) {
+        ar_result = result.split('||||');
+       window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
+        
+
+    });
+}
+ 
 
 function showHideTextbox(id){
   if(id==0){

@@ -717,6 +717,22 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             return array();
         }
 }
+ function getClientTypeById($clientId)
+   	{
+                $whereAry = array('clientId' => $clientId);
+   		$this->db->select('clientType');
+                $this->db->from(__DBC_SCHEMATA_CLIENT__);
+                $this->db->where($whereAry);
+                $query = $this->db->get();
+                 $s=$this->db->last_query();
+     
+		if($query->num_rows() > 0)
+                {
+                         $row=$query->result_array();
+                         return $row[0];
+                }
+                return false;
+   	}
 }
 ?>
 

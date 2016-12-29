@@ -27,6 +27,17 @@
         ?>
         <div id="page_content" class="row">
             <div class="col-md-12">
+                  <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a onclick="viewForm('1');" href="javascript:void(0);" >Home</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                   
+                        <li>
+                            <span class="active">Select Franchisee</span>
+                        </li>
+                   
+                </ul>
                 <div class="portlet light bordered">
                       <div class="portlet-title">
                         <div class="caption">

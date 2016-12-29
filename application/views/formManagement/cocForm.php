@@ -67,16 +67,21 @@
                            <lable>Collection / Screen Date:</lable>
                         </div>
                         <div class="col-sm-6">
-                             <p><?php echo "1";?></p>
+                             <p><?php echo $cocFormDetailsAry['cocdate'];?></p>
                         </div>
                     </div>
-                  
+                  <?php  $SosDetailBySosIdAry = $this->Form_Management_Model->getSosDetailBySosId($idsos);
+                       $siteDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $SosDetailBySosIdAry['Clientid']);
+                       $ClientDetArr1 = $this->Franchisee_Model->getClientTypeById($SosDetailBySosIdAry['Clientid']);
+                       
+                      $ClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $ClientDetArr1['clientType']);
+                    ?>
                     <div class="row">
                          <div class="col-sm-6 text-style bold ">
                             <lable>Nominated Representative:</lable>
                         </div>
                         <div class="col-sm-6">
-                           <p><?php echo "1";?></p>
+                            <p><?php echo $SosDetailBySosIdAry['ClientRepresentative'];?></p>
                         </div>
                     </div>
 
@@ -85,7 +90,7 @@
                             <lable>Client:</lable>
                         </div>
                         <div class="col-sm-6">
-                         <p><?php echo "1";?></p>
+                          <p><?php echo $ClientDetArr['szName'];?></p>
                         </div>
                     </div>
                       <div class="row">
@@ -93,15 +98,15 @@
                             <lable>Collection Site:</lable>
                         </div>
                         <div class="col-sm-6">
-                         <p><?php echo "1";?></p>
+                          <p><?php echo $siteDetArr['szName'];?></p>
                         </div>
                     </div>
                     <div class="row">
                          <div class="col-sm-6 text-style bold ">
-                            <lable>Drug to be tested:Breath Alcohol & AS/NZS: 4308:2008</lable>
+                            <lable>Drug to be tested:</lable>
                         </div>
                         <div class="col-sm-6">
-                          <p><?php echo "1";?></p>
+                            <p><?php echo $cocFormDetailsAry['drugtest'];?></p>
                         </div>
                     </div>
                     <hr>
@@ -117,12 +122,15 @@
                       <div class=" ">
                     <div class="font-green-meadow text"><b>DONOR INFORMATION</b></div>
                     <hr>
+                    <?php  $donarDetailByCocIdAry = $this->Form_Management_Model->getDonarDetailByCocId($idcoc);
+                   
+                    ?>
                     <div class="row">
                        <div class="col-sm-6 text-style bold ">
                             <lable>Name:</lable>
                         </div>
                         <div class="col-sm-6">
-                            <p><?php echo "1";?></p>
+                            <p><?php echo $donarDetailByCocIdAry['donerName'];?></p>
                         </div>
                     </div>
 
@@ -139,15 +147,15 @@
                             <lable>DOB:</lable>
                         </div>
                         <div class="col-sm-6">
-                            <p><?php echo "1";?></p>
+                            <p><?php echo $cocFormDetailsAry['dob'];?></p>
                         </div>
                     </div>
                     <div class="row">
                        <div class="col-sm-6 text-style bold ">
-                            <lable>Employee :</lable> 
+                            <lable>Employment Type :</lable> 
                         </div>
                         <div class="col-sm-3">
-                          <p><?php echo "1";?></p>
+                           <p><?php echo $cocFormDetailsAry['employeetype'];?></p>
                         </div>
                        
                     </div>
@@ -156,51 +164,158 @@
                             <lable>Contractor Details:</lable>
                         </div>
                         <div class="col-sm-6">
-                           <p><?php echo "1";?></p>
+                            <p><?php echo $cocFormDetailsAry['contractor'];?></p>
                         </div>
                     </div>
                        <div class="row">
-                        <div class="col-sm-6 text-style bold ">
-                            <lable>Identify Verified:</lable>
+                       <div class="col-sm-6 text-style bold ">
+                            <lable>Id Type :</lable> 
+                        </div>
+                        <div class="col-sm-3">
+                           <p><?php echo $cocFormDetailsAry['idtype'];?></p>
                         </div>
                        
-                            <div class="col-sm-6">
-                              
-                            <p><?php echo "1";?></p>
+                    </div>
+                     <div class="row">
+                       <div class="col-sm-6 text-style bold ">
+                            <lable>Id No :</lable> 
                         </div>
+                        <div class="col-sm-3">
+                           <p><?php echo $cocFormDetailsAry['idnumber'];?></p>
+                        </div>
+                       
+                    </div>
+                     <div class="row">
+                       <div class="col-sm-6 text-style bold ">
+                            <lable>Donor Signature  :</lable> 
+                        </div>
+                        <div class="col-sm-3">
+                           <p><?php echo $cocFormDetailsAry['donorsign'];?></p>
+                        </div>
+                       
                     </div>
                     
                 </div>
               
              </div>
                 </div>
-            <hr>
-              <div class="row">
-                        <div class=" bold font-green-meadow ">
-                            <p>(Optional:) I have taken the following medication,drugs,or other non-prescription agent in the last week.</p>
-                            <p> I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs .  DONOR SIGNATURE</p>
-                        </div>
-                        
-                    </div>
-                 <hr>
-                  <div class="row">
-                        <div class=" bold col-md-3 ">
-                          <lable>Alcohol Breath Test :</lable>  
-                        </div>
-                        
-                    </div>
-                 <hr>
+                  <hr>
+                
                  <div class="font-green-meadow text bold"> <H4>COLLECTION OF SAMPLE /ON-SITE DRUG SCREENING RESULTS </H4>
                  </div>
                  <hr>
                  
                   <div class="row">
-                     
+                    <div class=" col-md-12 ">
+                       <div class="bold col-md-2 ">
+                          <lable>Void Time  :</lable>  
+                        </div>
+                         <div class="col-md-2">
+                              
+                            <p><?php echo $cocFormDetailsAry['voidtime'];?></p>
+                        </div>
+                        <div class="col-md-2 bold ">
+                          <lable>Sample Temp :</lable>  
+                        </div>
+                         <div class="col-md-2">
+                              
+                             <p><?php echo $cocFormDetailsAry['sampletempc'];?></p>
+                        </div>
+                        <div class="bold col-md-3 ">
+                          <lable>Temp Read Time within 4 min :</lable>  
+                        </div>
+                         <div class="col-md-1">
+                              
+                            <p><?php echo $cocFormDetailsAry['tempreadtime'];?></p>
+                        </div>
+                    </div> 
                  </div>
             
-             <hr>
-                <div class="row">
-                     
+             <hr> <div class="row">
+                    <div class="  col-md-12 ">
+                       <div class="col-md-2 bold">
+                          <lable>Intect 7 Lot No   :</lable>  
+                        </div>
+                         <div class="col-md-2">
+                              
+                            <p><?php echo $cocFormDetailsAry['intect'];?></p>
+                        </div>
+                        <div class="bold col-md-2 ">
+                          <lable>Expiry :</lable>  
+                        </div>
+                         <div class="col-md-2">
+                              
+                            <p><?php echo $cocFormDetailsAry['intectexpiry'];?></p>
+                        </div>
+                        <div class="col-md-3 bold ">
+                          <lable>Visual colour:</lable>  
+                        </div>
+                         <div class="col-md-1">
+                              
+                            <p><?php echo $cocFormDetailsAry['visualcolor'];?></p>
+                        </div>
+                    </div> 
+                 </div>
+             
+                 <div class="row">
+                    <div class="col-md-12 ">
+                       <div class="bold col-md-2 ">
+                          <lable>Creatinine:</lable>  
+                        </div>
+                         <div class="col-md-2">
+                              
+                           <p><?php echo $cocFormDetailsAry['creatinine'];?></p>
+                        </div>
+                        <div class="bold col-md-2 ">
+                          <lable>Other Intigrity :</lable>  
+                        </div>
+                         <div class="col-md-2">
+                              
+                            <p><?php echo $cocFormDetailsAry['otherintegrity'];?></p>
+                        </div>
+                        <div class="bold col-md-3 ">
+                          <lable>Hydration:</lable>  
+                        </div>
+                         <div class="col-md-1">
+                              
+                            <p><?php echo $cocFormDetailsAry['hudration'];?></p>
+                        </div>
+                    </div> 
+                 </div>
+            <hr>
+            <div class="row">
+                    <div class="  col-md-12 ">
+                       <div class="  col-md-2 bold">
+                          <lable>Device Name:</lable>  
+                        </div>
+                         <div class="col-md-1">
+                              
+                          <p><?php echo $cocFormDetailsAry['devicename'];?></p>
+                        </div>
+                        <div class="col-md-2 bold">
+                          <lable>REF# :</lable>  
+                        </div>
+                       
+                         <div class="col-md-1">
+                              
+                          <p><?php echo $cocFormDetailsAry['hudration'];?></p>
+                        </div>
+                         <div class="col-md-2 bold">
+                          <lable>Lot#:</lable>  
+                        </div>
+                         <div class="col-md-1">
+                              
+                           <p><?php echo $cocFormDetailsAry['lotno'];?></p>
+                        </div>
+                        <div class="col-md-2 bold">
+                          <lable>Expiry:</lable>  
+                        </div>
+                         
+                         <div class="col-md-1">
+                              
+                           <p><?php echo $cocFormDetailsAry['lotexpiry'];?></p>
+                        </div>
+                    </div> 
                  </div>
             <hr>
               <div class="row">
@@ -208,169 +323,199 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th class=" text-info bold" style="width:160px"><p>* U = Result Requiring Further Testing N = Negative</p><p>** P = Positive N = Negative</p></th>
-                                        <th class=" text-info bold" style="width:120px"> Urine</th>
-                                        <th class=" text-info bold" style="width:100px"> Oral</th>
+                                        <th class=" text-info bold text" colspan="2"><h4>Drug Class</h4></th>
+                                        <th class=" text-info bold" > Cocaine</th>
+                                        <th class=" text-info bold" > Amp</th>
+                                        <th class=" text-info bold"> mAmp</th>
+                                        <th class=" text-info bold" > THC</th>
+                                        <th class=" text-info bold" > Opiates</th>
+                                        <th class=" text-info bold"> Benzo</th>
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
                                    
                                         <tr>
-                                            <td class="bold">Total Donar Screenings/Collections </td>
-                                            <td> <?php echo $sosRormDetailsAry['TotalDonarScreeningUrine'];?></td>
-                                            <td> <?php echo $sosRormDetailsAry['TotalDonarScreeningOral'];?> </td>
+<!--                                            <th class=" text-info bold" style="width:160px"><p>* U = Result Requiring Further Testing N = Negative</p><p>** P = Positive N = Negative</p></th>-->
+                                            <td class="bold"> Screenings Result  </td>
+                                            
+                                            
+                                           
+                                            <td> <p>N = Negative Result </p> <p>U = Further Testing Required</p></td>
+                                            <td> <?php echo $cocFormDetailsAry['cocain'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['amp'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['mamp'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['thc'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['opiates'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['benzo'];?> </td>
+                                            
+                                              
                                         </tr>
-                                         <tr>
-                                            <td class="bold"> Negative Results</td>
-                                            <td> <?php echo $sosRormDetailsAry['NegativeResultOral'];?> </td>
-                                            <td> <?php echo $sosRormDetailsAry['NegativeResultOral'];?> </td>
-                                        </tr>
-                                         <tr>
-                                            <td class="bold"> Result Requiring Further Testing </td>
-                                            <td> <?php echo $sosRormDetailsAry['FurtherTestUrine'];?></td>
-                                            <td> <?php echo $sosRormDetailsAry['FurtherTestOral'];?> </td>
-                                        </tr>
+                                        
+                                       
                                       
                                 </tbody>
                             </table>
                         </div>
                  </div>
-             <hr>
+            <hr>
+                 <div class="font-green-meadow text bold"> <H4>DONOR DECLARATION</H4>
+                 </div>
+           <hr>
+            <div class="row">
+                        <div>
+                            <p> I certify that the specimen(s) accompanying this inform is my own. Where on-site screening was performed ,such screening was carried out in </p>
+                             <p> my presence . In the case of specimen(s) being sent to the laboratory for testing, I certify that the specimen containers were sealed with tamperevident</p>
+                              <p> seals in  my presence and the indentifying information on the label is correct. I certify that the information provided on this form to be  correct and I  </p>
+                             <p>consent to the release of all test results together with any relevant contained on this form to the nominated representative of the requesting authority. </p>
+                        </div>
+                        
+                    </div>
+           <hr>
                  <div class="row">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Total No Alcohol Screens:</lable>
+                        <div class="col-sm-8 text-info bold">
+                            <lable>Donor/Guardian Signature:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['TotalAlcoholScreening'];?></p>
+                            <p><?php echo $cocFormDetailsAry['donorsign'];?></p>
                         </div>
                     </div>
                    
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Positive Alcohol Results:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['PositiveAlcohol'];?></p>
-                        </div>
-                    </div>
+                   
                 </div>
                 <div class="col-md-6">
+                   
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>Negative Alcohol Results:</lable>
+                            <lable>Date:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['NegativeAlcohol'];?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Refusals , No Shows or Others:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                           <p><?php echo $sosRormDetailsAry['Refusals'];?></p>
+                           <p><?php echo $cocFormDetailsAry['Refusals'];?></p>
                         </div>
                     </div>
                      </div>
-                  
-                </div>
-              <hr>
-              
-              <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Device Name:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['DeviceName'];?></p>
-                        </div>
-                    </div>
-                   
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Extra Used:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['ExtraUsed'];?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Breath Testing Unit:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['BreathTesting'];?></p>
-                        </div>
-                    </div>
-                  
                      </div>
-                  
-                </div>
-              <hr>
-              <div class="row">
-              <p>I/we <?php echo $sosRormDetailsAry['CollectorName'];?> conducted the alcohol and/or drugscreening/collection service detailed above and confirm that all procedures were undertaken in accordance with the relevant Standard.</p><div class="col-md-3"><h4 class="bold"> Collector Signature:</h4></div> <div class="info"><?php echo $sosRormDetailsAry['CollectorSignature'];?></div>
-              </div>
-              <hr>
-              <div class="row">
-               <div class="col-sm-4 text-info bold">
-                 <lable>Comments Or Observation:</lable>
-                </div>
-                <div class="col-sm-8">
-                    <p><?php echo $sosRormDetailsAry['Comments'];?></p>
-                </div>
-              </div>
-              <hr>
-               <div class="row">
+                 <hr>
+                 <div class="font-green-meadow text bold"> <H4>COLLECTOR CERTIFICATION</H4>
+                 </div>
+           <hr>
+                    <div class="row">
+                        <div>
+                            <p> I certify that I witnessed the donor signature and that the  specimen(s) identified  on this form was provided to me by the donor whose consent and   </p>
+                             <p> declaration appears above,bears the same donor identification as set forth above,and that the specimen(s) has been collected and if needed divided </p>
+                              <p> labelled and sealed in accordance with the relevant Standard .</p>
+                        </div>
+                        
+                    </div>
+                  <hr>
+                <div class="row">
                 <div class="col-md-6">
                     <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Nominated Client Representative:</lable>
+                        <div class="col-md-6 text-info bold">
+                            <lable>Collector1 Name/Number:</lable>
                         </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['ClientRepresentative'];?></p>
+                        <div class="col-md-2">
+                            <p><?php echo $cocFormDetailsAry['collectorone'];?></p>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-md-6 text-info bold">
+                            <lable> Signature:</lable>
+                        </div>
+                        <div class="col-md-2">
+                            <p><?php echo $cocFormDetailsAry['collectorsignone'];?></p>
                         </div>
                     </div>
                    
                    
                 </div>
                 <div class="col-md-6">
+                   
                     <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Signed:</lable>
+                        <div class="col-md-6 text-info bold">
+                            <lable>Collector2 Name/Number:</lable>
                         </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['RepresentativeSignature'];?></p>
+                        <div class="col-md-2">
+                           <p><?php echo $cocFormDetailsAry['collectortwo'];?></p>
                         </div>
                     </div>
-                   <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Time:</lable>
+                     <div class="row">
+                        <div class="col-md-6 text-info bold">
+                            <lable> Signature:</lable>
                         </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $sosRormDetailsAry['RepresentativeSignatureTime'];?></p>
+                        <div class="col-md-2">
+                            <p><?php echo $cocFormDetailsAry['collectorsigntwo'];?></p>
                         </div>
                     </div>
                      </div>
-                  
-                </div>
-              <div class="row">
-               <div class="col-sm-2 text-info bold">
-                            <lable>Status:</lable>
+                     </div>
+                  <hr>
+             <div class="row">
+                        <div class="col-sm-5 text-info bold">
+                            <lable>Comments /Observations:</lable>
                         </div>
-                        <div class="col-sm-4">
-                            <p><?php if($sosRormDetailsAry['Status']==0)  echo "Not Completed";  else echo "Completed";?></p>
-                        </div>    
-             </div>
-             </div>
-        <?php //  }else{
-//            echo"Not Found";
-//        }?>
+                        <div class="col-sm-5">
+                           <p><?php echo $cocFormDetailsAry['comments'];?></p>
+                        </div>
+                    </div>
+     <hr>
+      <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>On-Site Screening Report:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                           <p><?php echo $cocFormDetailsAry['onsitescreeningrepo'];?></p>
+                        </div>
+                    </div>
+     <hr>
+     <div class="font-green-meadow text bold"> <H4>CHAIN OF CUSTODY</H4>
+                 </div>
+      
+                      <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th >Received by(prints) </th>
+                                        <th >Signature</th>
+                                        <th >Date/Time Received</th>
+                                        <th >Seat Intact</th>
+                                        <th >Labels/Bar code match</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                        <tr>
+                                       
+                                            <td> <?php echo $cocFormDetailsAry['receiverone'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receiveronesign'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receiveronetime'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receiveroneseal'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receiveronelabel'];?> </td>
+                                            
+                                              
+                                        </tr>
+                                        <tr>
+                                       
+                                            <td> <?php echo $cocFormDetailsAry['receivertwo'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receivertwosign'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receivertwotime'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receivertwoseal'];?> </td>
+                                            <td> <?php echo $cocFormDetailsAry['receivertwolabel'];?> </td>
+                                            
+                                              
+                                        </tr>
+                                        
+                                        
+                                       
+                                      
+                                </tbody>
+                            </table>
+                        </div>
+                 </div>
         </div>
           </div>
         </div>

@@ -27,7 +27,43 @@
         ?>
    
         <div id="page_content" class="row">
+              <?php  
+                 $parentClientId = $childClientDetailsAray[0]['clientType'];
+                
+                 $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$childClientDetailsAray[0]['franchiseeId']);
+                  $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$parentClientId);?>
             <div class="col-md-12">
+                 <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="javascript:void(0);" >Home</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                      <li>
+                            <a onclick=""
+                               href="javascript:void(0);"><?php echo $franchiseeDataAry['szName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                            <a onclick=""
+                               href="javascript:void(0);"><?php echo $userDataAry['szName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                   <?php  if (empty($sosRormDetailsAry)) {
+
+                        ?>
+                        <li>
+                            <span class="active">Select Site</span>
+                        </li>
+                   <?php } else {
+
+                        ?>
+                    <li>
+                            <span class="active">Test Details</span>
+                        </li>
+                         <?php } 
+
+                        ?>
+                </ul>
                 <div class="portlet light bordered">
                    <?php  if (empty($sosRormDetailsAry)) {
 
@@ -35,13 +71,7 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-equalizer font-green-meadow"></i>
-                             <?php  
-                            
-                                   $parentClientId = $childClientDetailsAray[0]['clientType'];
-                                  
-                                 
-                            
-                            $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$parentClientId);?>
+                           
                             <span class="caption-subject font-green-meadow ">Plese select <?php echo $userDataAry['szName'] ?>'s site to display their related  form data.</span>
                         </div>
                       </div>

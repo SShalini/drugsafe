@@ -43,6 +43,9 @@
                 </span>
             </div>
             <div class="actions">
+                <a onclick="ViewDonorDetails(<?php echo $idsite;?>)" href="javascript:void(0);" 
+                  class=" btn green-meadow">
+                 <i class="fa fa-eye"></i> View Donor Details</a>
                 <a onclick="ViewSosFormPdf(<?php echo  $idClient;?>,<?php echo $idsite;?>)" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-eye"></i> View Pdf </a>
