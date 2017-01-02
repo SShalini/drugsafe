@@ -29,13 +29,7 @@
                       ?> 
         <div id="page_content" class="row">
             <div class="col-md-12">
-                 <?php  
-                            
-                                   $franchiseeId = $clientlistArr[0]['franchiseeId'];
-                                   $this->session->set_userdata('franchiseeId',$franchiseeId);
-                                   $franchiseeId = $this->session->userdata('franchiseeId');
-                            
-                            $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$franchiseeId);?>
+                
                 <ul class="page-breadcrumb breadcrumb">
                     <li>
                         <a onclick="viewForm('1');" href="javascript:void(0);" >Home</a>
@@ -88,24 +82,12 @@
                                    
                            </form>
                           </div>
-                <?php  if($data['value']==2){?>
+               
                  
               <div class="row">  
-                <h4>Not Found </h4>
-                  </div>
-                      <?php }?>  
-         <?php  if(!empty($clientAry)){?>
-		<div class="row">
-                  
-                    <div class="col-md-7 col-sm-7">
-                        <div class="dataTables_paginate paging_bootstrap_full_number">
-                            <?php echo $this->pagination->create_links();?>
-                        </div>
-                    </div>
-	    	
-                 
-            </div>
-    	<?php }?>
+               <?php echo $notfount;?>
+             </div>
+                    
                 </div>
             </div>
         </div>

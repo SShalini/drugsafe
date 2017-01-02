@@ -40,6 +40,7 @@ class Form_Management_Controller extends CI_Controller
             
  
         }
+
     function viewForm()
     {
         $is_user_login = is_user_login($this);
@@ -49,162 +50,106 @@ class Form_Management_Controller extends CI_Controller
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die;
         }
-          $count = $this->Admin_Model->getnotification();
-        $flag = $this->session->userdata('flag');
-        if($flag==1){
-       
-        $data['sosRormDetailsAry'] = $sosRormDetailsAry;
-        $data['childClientDetailsAray'] = $childClientDetailsAray;
-        $data['notification'] = $count;
-        $data['data'] = $data;
-        $data['flag'] = $flag;
+        $count = $this->Admin_Model->getnotification();
+        $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
         
-        $data['szMetaTagTitle'] = "Form Management";
-        $data['is_user_login'] = $is_user_login;
-        $data['pageName'] = "Form_Management";
-        $this->load->view('layout/admin_header', $data);
-        $this->load->view('formManagement/formViewByFr');
-        $this->load->view('layout/admin_footer');
-      }
-        if(isset($_POST['szSearchFrRecord']) && !empty($_POST['szSearchFrRecord'])){
-        $id = $_POST['szSearchFrRecord']; 
-        
-        $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$id);
-      
-        
-         $data['clientlistArr'] = $clientlistArr;
-         $data['data'] = $data;
-         $data['notification'] = $count;
-         $data['szMetaTagTitle'] = "Form Management";
-         $data['is_user_login'] = $is_user_login;
-         $data['pageName'] = "Form_Management";
-        
-        if(empty($clientlistArr)){
-           $value = "1";
-          
-           $data['value'] = $value; 
-        }
-        $this->load->view('layout/admin_header', $data);
-        if(empty($clientlistArr)){
-         
-         $this->load->view('formManagement/formViewByFr');  
-        }
-        else{
-          $this->load->view('formManagement/formViewByCl');   
-        }
-        $this->load->view('layout/admin_footer');
-        }
-        if(empty($_POST['szSearchFrRecord'])&&$_POST['iflag']['flag']==1 ){
-         $data['clientlistArr'] = $clientlistArr;
-         $data['data'] = $data;
-         $data['notification'] = $count;
-         $data['szMetaTagTitle'] = "Form Management";
-         $data['is_user_login'] = $is_user_login;
-         $data['pageName'] = "Form_Management";
-          $this->load->view('layout/admin_header', $data);
-          $this->load->view('formManagement/formViewByFr');
-          $this->load->view('layout/admin_footer');
-        }
-        
-        if(isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])){ 
-        $id = $_POST['szSearchClRecord'];
-        
-         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($id,false,false,false,false);
-         if(empty($childClientDetailsAray)){
-              $value = "2";
-          
-           $data['value'] = $value;
-           $franchiseeId = $this->session->userdata('franchiseeId');
-           $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$franchiseeId);
-             
-         }
-         
-         
-         $data['clientlistArr'] = $clientlistArr;
-         $data['childClientDetailsAray'] = $childClientDetailsAray;
-         $data['data'] = $data;
-         $data['notification'] = $count;
-         $data['szMetaTagTitle'] = "Form Management";
-         $data['is_user_login'] = $is_user_login;
-         $data['pageName'] = "Form_Management";
-        
-        
-        
-        $this->load->view('layout/admin_header', $data);
-        if(!empty($childClientDetailsAray)){
-        $this->load->view('formManagement/formViewBySite');
-        }
-        else{
-           $this->load->view('formManagement/formViewByCl');    
-        }
-        $this->load->view('layout/admin_footer');
-        }
-      
-         if(empty($_POST['szSearchClRecord']) && $_POST['iflag']['flag']==2 ){
-             
-           $value = "2";
-          
-           $data['value'] = $value;
-           $franchiseeId = $this->session->userdata('franchiseeId');
-           $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$franchiseeId);   
-             
+        if($_POST['szSearchFrRecord'])
+        {
+           
+            $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchFrRecord']);
+            $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$_POST['szSearchFrRecord']);
+            $this->session->set_userdata('szSearchFrRecord',$_POST['szSearchFrRecord']);
+            if(empty($clientlistArr))
+            {
+                $data['searchOptionArr']=$searchOptionArr;
+                $data['data'] = $data;
+                $data['notfount']="Not Found";
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('formManagement/formViewByFr');
+                $this->load->view('layout/admin_footer');
+            }
             $data['clientlistArr'] = $clientlistArr;
+            $data['userDataAry']=$userDataAry;
             $data['data'] = $data;
-            $data['notification'] = $count;
             $data['szMetaTagTitle'] = "Form Management";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
-            $this->load->view('formManagement/formViewByCl');
-           $this->load->view('layout/admin_footer');
+            $this->load->view('formManagement/formViewByCl'); 
+            $this->load->view('layout/admin_footer');
+           
         }
-  
-         if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){ 
-         $id = $_POST['szSearchClRecord2'];
-         $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
-      
-         if(empty($childClientDetailsAray)){
-              $value = "3";
-          
-           $data['value'] = $value;
-           $parentClientId = $this->session->userdata('parentClientId');
-           $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($parentClientId,false,false,false,false);
-             
-         }
-         
-        
-         $data['sosRormDetailsAry'] = $sosRormDetailsAry;
-         $data['childClientDetailsAray'] = $childClientDetailsAray;
-         $data['data'] = $data;
-         $data['flag'] = $flag;
-         $data['notification'] = $count;
-         $data['szMetaTagTitle'] = "Form Management";
-         $data['is_user_login'] = $is_user_login;
-         $data['pageName'] = "Form_Management";
-        
-        
-        
-        $this->load->view('layout/admin_header', $data);
-        $this->load->view('formManagement/formViewBySite'); 
-        $this->load->view('layout/admin_footer');
-        }
-      
-         if(empty($_POST['szSearchClRecord2']) && $_POST['iflag']['flag']==3 ){
+        elseif ($_POST['szSearchClRecord']) 
+        {
+            $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchClRecord']);
+            $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearchClRecord'],false,false,false,false);
+            $this->session->set_userdata('szSearchClRecord',$_POST['szSearchClRecord']);
             
-           $value = "2";
-          
-            $data['value'] = $value;
-            $parentClientId = $this->session->userdata('parentClientId');
-           $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($parentClientId,false,false,false,false);   
-             
-            $data['childClientDetailsAray'] = $childClientDetailsAray;
+            if(empty($childClientDetailsAray))
+            {
+                $szSearchFrRecord = $this->session->userdata('szSearchFrRecord');
+                $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchFrRecord);
+                $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$szSearchFrRecord);
+                $data['clientlistArr'] = $clientlistArr;
+                $data['userDataAry']=$userDataAry;
+                $data['data'] = $data;
+                $data['notfount']="Not Found";
+                $data['szMetaTagTitle'] = "Form Management";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "Form_Management";
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('formManagement/formViewByCl'); 
+                $this->load->view('layout/admin_footer');
+            }
+            $data['franchiseeDataAry'] = $franchiseeDataAry;
+            $data['childClientDetailsAray']=$childClientDetailsAray;
             $data['data'] = $data;
-            $data['notification'] = $count;
             $data['szMetaTagTitle'] = "Form Management";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
-            $this->load->view('formManagement/formViewBySite');
+            $this->load->view('formManagement/formViewBySite'); 
+            $this->load->view('layout/admin_footer');
+        } 
+        elseif ($_POST['szSearchClRecord2']) 
+        {
+            $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($_POST['szSearchClRecord2']);
+            if(empty($sosRormDetailsAry))
+            {
+                $szSearchClRecord = $this->session->userdata('szSearchClRecord');
+                $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchClRecord);
+                $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($szSearchClRecord,false,false,false,false);
+                $data['franchiseeDataAry'] = $franchiseeDataAry;
+                $data['childClientDetailsAray']=$childClientDetailsAray;
+                $value = "2";
+                $data['value'] = $value;
+                $data['data'] = $data;
+                $data['notfount']="Not Found";
+                $data['szMetaTagTitle'] = "Form Management";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "Form_Management";
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('formManagement/formViewBySite'); 
+                $this->load->view('layout/admin_footer');
+            }
+            $data['sosRormDetailsAry'] = $sosRormDetailsAry;
+            $data['data'] = $data;
+            $data['szMetaTagTitle'] = "Form Management";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Form_Management";
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/formViewBySite'); 
+            $this->load->view('layout/admin_footer');
+        } 
+        else 
+        {
+            $data['searchOptionArr']=$searchOptionArr;
+            $data['data'] = $data;
+            $data['szMetaTagTitle'] = "Form Management";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Form_Management";
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/formViewByFr');
             $this->load->view('layout/admin_footer');
         }
     }

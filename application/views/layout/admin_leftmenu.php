@@ -158,7 +158,6 @@
                     </a>
                 </li>
                
-                
            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
                 
                   <li class="nav-item start <?php if (trim($pageName) == 'Ordering') { ?>active open<?php } ?>">

@@ -27,11 +27,10 @@
         ?>
    
         <div id="page_content" class="row">
-              <?php  
-                 $parentClientId = $childClientDetailsAray[0]['clientType'];
+             
+               
                 
-                 $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$childClientDetailsAray[0]['franchiseeId']);
-                  $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$parentClientId);?>
+                 
             <div class="col-md-12">
                  <ul class="page-breadcrumb breadcrumb">
                     <li>
@@ -96,20 +95,19 @@
                                   </div>
                                     <?php 
                                    
-                                   $parentClientId = $childClientDetailsAray[0]['clientType'];
-                                   $this->session->set_userdata('parentClientId',$parentClientId);
-                                   $parentClientId = $this->session->userdata('parentClientId');
+                                  
                                    ?>
                                    <input type="hidden" name="clientId[clientId]" id="idFr" value="<?php echo $parentClientId ;?>"/> 
                                    <input type="hidden" name="iflag[flag]" id="flag" value="3"/> 
                            </form>
                           </div>
+                   <?php }?>
                       <?php  if($data['value']==2){?>
                  
               <div class="row">  
-                <h4>Not Found </h4>
+                <h4> Not Found</h4>
                   </div>
-                   <?php }} else{?> 
+                   <?php } else{?> 
                   <?php
                   if(!empty($_POST['szSearchClRecord2'])){
                     if (!empty($sosRormDetailsAry)) {

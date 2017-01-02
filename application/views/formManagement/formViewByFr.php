@@ -51,12 +51,12 @@
                                       <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
-                                           $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
-                                         foreach($searchOptionArr as $searchOptionList)
-                                          {
-                                              $selected = ($searchOptionList['id'] == $_POST['szSearchFrRecord'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$searchOptionList['id'].'" >'.$searchOptionList['szName'].'</option>';
-                                          }
+                                            
+                                            foreach($searchOptionArr as $searchOptionList)
+                                            {
+                                                $selected = ($searchOptionList['id'] == $_POST['szSearchFrRecord'] ? 'selected="selected"' : '');
+                                                echo '<option value="'.$searchOptionList['id'].'" >'.$searchOptionList['szName'].'</option>';
+                                            }
                                           ?>
                                       </select>
                                   </div>
@@ -64,29 +64,15 @@
                                   <div class="col-md-1">
                                       <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
-                              <input type="hidden" name="iflag[flag]" id="flag" value="1"/>
+                             
                            </form>
                           </div>
-                    
-                      <?php  if($flag!=1){
-                      if(empty($data['clientlistArr'])){?>
-              <div class="row">  
-                <h4>Not Found </h4>
-                  </div>
-                      <?php }}?>
-                     <?php  $this->session->unset_userdata('flag'); ?>  
-  <?php  if(!empty($clientAry)){?>
-		<div class="row">
-                  
-                    <div class="col-md-7 col-sm-7">
-                        <div class="dataTables_paginate paging_bootstrap_full_number">
-                            <?php echo $this->pagination->create_links();?>
+                        <div class="row">  
+                            <h4><?php echo $notfount;?></h4>
                         </div>
-                    </div>
-	    	
-                 
-            </div>
-    	<?php }?>
+                        
+                     
+ 
                 </div>
             </div>
         </div>
