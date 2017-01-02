@@ -257,6 +257,8 @@ class Forum_Controller extends CI_Controller {
            
             $id = $this->session->userdata('id');
             $forumDataAry = $this->Forum_Model->getForumDetailsById($id);
+            
+           
          
             $this->load->library('form_validation');
             $this->form_validation->set_rules('forumData[szForumTitle]', 'Forum Title', 'required');
@@ -267,6 +269,7 @@ class Forum_Controller extends CI_Controller {
             
             if ($this->form_validation->run() == FALSE)
             {
+                
                 $data['szMetaTagTitle'] = "Edit Forum Data";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Forum";

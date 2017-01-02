@@ -206,8 +206,8 @@ class Form_Management_Controller extends CI_Controller
         $this->load->view('formManagement/sosForm');
         $this->load->view('layout/admin_footer');
     }
-     function ViewSosFormPdfData()
-        {
+    function ViewSosFormPdfData()
+    {
             $idClient = $this->input->post('idClient');
             $idsite = $this->input->post('idsite');
             
@@ -217,7 +217,7 @@ class Form_Management_Controller extends CI_Controller
                 echo "SUCCESS||||";
                 echo "pdf_sosform";
         }
- public function pdf_sosform()
+    public function pdf_sosform()
     {
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -369,7 +369,7 @@ class Form_Management_Controller extends CI_Controller
         ob_end_clean();
         $pdf->Output('Drugsafe_Form_Management_report.pdf', 'I');
     }
-     function cocFormDetails()
+    function cocFormDetails()
     {
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
