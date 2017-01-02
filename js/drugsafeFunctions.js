@@ -144,10 +144,17 @@ function editFranchiseeDetails(idfranchisee,idOperationManager) {
 
     });
 }
-function editOperationManagerDetails(idOperationManager,flag) {
-    $.post(__BASE_URL__ + "/admin/editOperationManagerData", {idOperationManager: idOperationManager,flag: flag}, function (result) {
+function editFranchiseeDetails(idfranchisee,idOperationManager) {
+    $.post(__BASE_URL__ + "/admin/editfranchiseedata", {idfranchisee: idfranchisee,idOperationManager: idOperationManager}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/admin/" + ar_result[1];
+
+    });
+}
+function editForum(id) {
+    $.post(__BASE_URL__ + "/forum/editForumData", {id: id}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/forum/" + ar_result[1];
 
     });
 }

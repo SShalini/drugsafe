@@ -51,7 +51,7 @@
         <link href="<?php echo __BASE_CSS_URL__; ?>/prashant.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo __BASE_ASSETS_URL__; ?>/jquery.min.js"></script>
-
+        <script src="<?php echo __BASE_ASSETS_URL__; ?>/global/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
         <script type="text/javascript">
             var __BASE_URL__ = '<?php echo __BASE_URL__;?>';
             var AUTO_SAVE = false;

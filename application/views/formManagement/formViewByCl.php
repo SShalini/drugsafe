@@ -85,7 +85,7 @@
                
                  
               <div class="row">  
-               <?php echo $notfount;?>
+              <?php echo $notfound;?>
              </div>
                     
                 </div>

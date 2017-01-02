@@ -68,7 +68,7 @@
                            </form>
                           </div>
                         <div class="row">  
-                            <h4><?php echo $notfount;?></h4>
+                            <?php echo $notfound;?>
                         </div>
                         
                      

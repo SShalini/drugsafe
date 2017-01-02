@@ -30,7 +30,13 @@
              
                
                 
-                 
+              <?php 
+              
+                $idFr = $this->session->userdata('szSearchFrRecord');
+                $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idFr);
+              
+               
+             ?>   
             <div class="col-md-12">
                  <ul class="page-breadcrumb breadcrumb">
                     <li>
@@ -39,23 +45,39 @@
                     </li>
                       <li>
                             <a onclick=""
-                               href="javascript:void(0);"><?php echo $franchiseeDataAry['szName']; ?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                         <li>
-                            <a onclick=""
                                href="javascript:void(0);"><?php echo $userDataAry['szName']; ?></a>
                             <i class="fa fa-circle"></i>
                         </li>
+                        
                    <?php  if (empty($sosRormDetailsAry)) {
-
+                   $idCl = $this->session->userdata('szSearchClRecord');
+                $clientDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idCl);
                         ?>
+                         <li>
+                             <a onclick=""
+                               href="javascript:void(0);"><?php echo $franchiseeDataAry['szName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
                         <li>
                             <span class="active">Select Site</span>
                         </li>
                    <?php } else {
-
+                        $idCl = $this->session->userdata('szSearchClRecord');
+                        $clientDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idCl);
+                $idCl2 = $this->session->userdata('szSearchClRecord2');
+                $siteDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchClRecord2']);
                         ?>
+                          <li>
+                             <a onclick=""
+                               href="javascript:void(0);"><?php echo $clientDataAry['szName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                          <li>
+                             <a onclick=""
+                               href="javascript:void(0);"><?php echo $siteDataAry['szName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         
                     <li>
                             <span class="active">Test Details</span>
                         </li>
@@ -71,7 +93,7 @@
                         <div class="caption">
                             <i class="icon-equalizer font-green-meadow"></i>
                            
-                            <span class="caption-subject font-green-meadow ">Plese select <?php echo $userDataAry['szName'] ?>'s site to display their related  form data.</span>
+                            <span class="caption-subject font-green-meadow ">Plese select <?php echo $franchiseeDataAry['szName'] ?>'s site to display their related  form data.</span>
                         </div>
                       </div>
                     <div class="row">

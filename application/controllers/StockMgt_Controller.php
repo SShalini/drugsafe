@@ -149,7 +149,19 @@ class StockMgt_Controller extends CI_Controller {
  
             $frdata = array();
             $frdata   =  array_merge($productDataAry,$CategoryDataAry);
-
+            if($frdata['szProductCategory']==1){
+                    $drActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $drActive);
+            }
+            if($frdata['szProductCategory']==2){
+                    $mrActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+            }
+            if($frdata['szProductCategory']==3){
+                    $conActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $conActive);
+            }
+            
             $this->load->library('form_validation');
             $this->form_validation->set_rules('addModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addModelStockValue[szProductCode]', 'Product Code');
@@ -237,7 +249,18 @@ class StockMgt_Controller extends CI_Controller {
             $frdata = array();
             $frdata   =  array_merge($modelStockDataAry, $productDataAry,$CategoryDataAry);
 
-          
+          if($frdata['szProductCategory']==1){
+                    $drActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $drActive);
+            }
+            if($frdata['szProductCategory']==2){
+                    $mrActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+            }
+            if($frdata['szProductCategory']==3){
+                    $conActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $conActive);
+            } 
             $this->load->library('form_validation');
             $this->form_validation->set_rules('editModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editModelStockValue[szProductCode]', 'Product Code', 'required');
@@ -480,6 +503,7 @@ class StockMgt_Controller extends CI_Controller {
            
             $CategoryDataAry = $this->StockMgt_Model->getCategoryDetailsById($idCategory);
  
+            
             $frdata = array();
             $frdata   =  array_merge($modelStockDataAry, $productDataAry,$CategoryDataAry);
             $totalAssign = 0;
@@ -488,7 +512,18 @@ class StockMgt_Controller extends CI_Controller {
         $totalAssign = $totalAssign + $qtyassign['szQuantityAssigned'];
     }
 }
-            
+             if($frdata['szProductCategory']==1){
+                    $drActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $drActive);
+            }
+            if($frdata['szProductCategory']==2){
+                    $mrActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+            }
+            if($frdata['szProductCategory']==3){
+                    $conActive= $frdata['szProductCategory'];   
+                    $this->session->set_userdata('drugsafe_tab_status', $conActive);
+            }
             $this->load->library('form_validation');
             $this->form_validation->set_rules('editProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editProductStockQty[szProductCode]', 'Product Code', 'required');

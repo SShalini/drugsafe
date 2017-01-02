@@ -44,12 +44,12 @@
             </div>
             <div class="actions">
                 <a onclick="ViewSosFormPdf(<?php echo  $idClient;?>,<?php echo $idsite;?>)" href="javascript:void(0);" 
-                                   class=" btn green-meadow">
-                                    <i class="fa fa-eye"></i> View Pdf </a>
-                                <a href="<?php echo __BASE_URL__; ?>/reporting/excelfr_stockassignlist"
-                                   class=" btn green-meadow">
-                                    <i class="fa fa-eye"></i> View Xls </a>
-                            </div>
+                class=" btn green-meadow">
+                 <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+             <a href="<?php echo __BASE_URL__; ?>/reporting/excelfr_stockassignlist"
+                class=" btn green-meadow">
+                 <i class="fa fa-file-excel-o"></i> View Xls </a>
+               </div>
         </div>
          
           <?php

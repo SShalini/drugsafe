@@ -81,6 +81,7 @@ define( "__DBC_SCHEMATA_FRANCHISEE__", "tbl_franchisee");
 define( "__DBC_SCHEMATA_USERS_EMAIL_LOG__", "tbl_email_log");
 define( "__DBC_SCHEMATA_EMAIL_CMS__", "tbl_email_cms");
 define("__DBC_SCHEMATA_FORUM_CATEGORY__", "fo_category");
+define("__DBC_SCHEMATA_FORUM_DATA__", "fo_data");
 define( "__DBC_SCHEMATA_CLIENT__", "tbl_client");
 define( "__DBC_SCHEMATA_PRODUCT__", "tbl_product");
 define( "__DBC_SCHEMATA_MANUAL_CAL__", "tbl_manual_calc");

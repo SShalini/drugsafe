@@ -32,10 +32,10 @@
                             <div class="actions">
                                 <a href="<?php echo __BASE_URL__; ?>/reporting/pdf_fr_stockassignlist" target="_blank"
                                    class=" btn green-meadow">
-                                    <i class="fa fa-eye"></i> View Pdf </a>
+                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>
                                 <a href="<?php echo __BASE_URL__; ?>/reporting/excelfr_stockassignlist"
                                    class=" btn green-meadow">
-                                    <i class="fa fa-eye"></i> View Xls </a>
+                                    <i class="fa fa-file-excel-o"></i> View Xls </a>
                             </div>
                             <?php
                         }
