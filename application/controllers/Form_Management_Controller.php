@@ -120,7 +120,7 @@ class Form_Management_Controller extends CI_Controller
                 $szSearchClRecord = $this->session->userdata('szSearchClRecord');
                 $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchClRecord);
                 $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($szSearchClRecord,false,false,false,false);
-                 unset($szSearchClRecord);
+                unset($szSearchClRecord);
                 $data['franchiseeDataAry'] = $franchiseeDataAry;
                 $data['childClientDetailsAray']=$childClientDetailsAray;
                 $value = "2";
@@ -156,7 +156,7 @@ class Form_Management_Controller extends CI_Controller
         }
     }
     function sosFormsdata()
-        {
+    {
             $idsite = $this->input->post('idsite');
             $idClient = $this->input->post('idClient');
  
@@ -165,10 +165,7 @@ class Form_Management_Controller extends CI_Controller
                 
                 echo "SUCCESS||||";
                 echo "sosForm";
-            
- 
-        }
-
+    }
     function sosForm()
     {
         $is_user_login = is_user_login($this);
