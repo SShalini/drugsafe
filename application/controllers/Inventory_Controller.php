@@ -457,9 +457,9 @@ class Inventory_Controller extends CI_Controller {
 
             }
         }
-     function consumableslist()
+        function consumableslist()
         {
-           $is_user_login = is_user_login($this);
+            $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if(!$is_user_login)
             {
@@ -468,14 +468,11 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
             $searchAry = $_POST['szSearchProdCode'];
-             
-             $config['base_url'] = __BASE_URL__ . "/inventory/consumableslist/";
-             $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry));
-             $config['per_page'] = 5;
-
-             $this->pagination->initialize($config);
-            
-               $idfranchisee = $_SESSION['drugsafe_user']['id'];
+            $config['base_url'] = __BASE_URL__ . "/inventory/consumableslist/";
+            $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry));
+            $config['per_page'] = 5;
+            $this->pagination->initialize($config);
+            $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
                $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry);
                $consumableslistAry =$this->Inventory_Model->viewConsumablesList();

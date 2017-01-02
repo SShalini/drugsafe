@@ -559,14 +559,12 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('franchisee/clientRecord');
         $this->load->view('layout/admin_footer');
     }
-     function viewFranchiseeData()
+    function viewFranchiseeData()
     {
         $idOperationManager = $this->input->post('idOperationManager');
-        {
-            $this->session->set_userdata('idOperationManager', $idOperationManager);
-            echo "SUCCESS||||";
-            echo "franchiseeRecord";
-        }
+        $this->session->set_userdata('idOperationManager', $idOperationManager);
+        echo "SUCCESS||||";
+        echo "franchiseeRecord";
     }
 
     function franchiseeRecord()
