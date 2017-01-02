@@ -34,7 +34,7 @@
                                                  <span class="input-group-addon">
                                                  <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="szForumTitle" class="form-control" type="text" value="<?php echo $_POST['forumData']['szForumTitle'] ;?>" placeholder="Forum Title" onfocus="remove_formError(this.id,'true')" name="forumData[szForumTitle]">
+                                                <input id="szForumTitle" class="form-control" type="text" value="<?php echo set_value('forumData[szForumTitle]') ;?>" placeholder="Forum Title" onfocus="remove_formError(this.id,'true')" name="forumData[szForumTitle]">
                                                 </div>
                                             <?php
                                               if(form_error('forumData[szForumTitle]')){?>

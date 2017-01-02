@@ -72,7 +72,7 @@ class Forum_Model extends Error_Model {
            
             $dataAry = array(
                                 'szForumTitle' => $data['szForumTitle'],
-                                'szForumTitle' => $data['szForumTitle'],
+                                'szForumDiscription' => $data['szForumDiscription'],
 				'szForumLongDiscription' => $data['szForumLongDiscription'],
                                 'szforumImage' => $data['szforumImage'],
                             );
