@@ -90,6 +90,7 @@ class Form_Management_Controller extends CI_Controller
                 $szSearchFrRecord = $this->session->userdata('szSearchFrRecord');
                 $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchFrRecord);
                 $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$szSearchFrRecord);
+                unset($szSearchFrRecord);
                 $data['clientlistArr'] = $clientlistArr;
                 $data['userDataAry']=$userDataAry;
                 $data['data'] = $data;
@@ -119,6 +120,7 @@ class Form_Management_Controller extends CI_Controller
                 $szSearchClRecord = $this->session->userdata('szSearchClRecord');
                 $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchClRecord);
                 $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($szSearchClRecord,false,false,false,false);
+                 unset($szSearchClRecord);
                 $data['franchiseeDataAry'] = $franchiseeDataAry;
                 $data['childClientDetailsAray']=$childClientDetailsAray;
                 $value = "2";
@@ -138,7 +140,7 @@ class Form_Management_Controller extends CI_Controller
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
-            $this->load->view('formManagement/formViewBySite'); 
+            $this->load->view('formManagement/formViewBySite');
             $this->load->view('layout/admin_footer');
         } 
         else 
@@ -378,28 +380,24 @@ class Form_Management_Controller extends CI_Controller
         $this->load->view('layout/admin_footer');
     }
     function ViewDonorDetailsData()
-        {
-            
-            $idsos = $this->input->post('idsos');
-            
-            
-            $this->session->set_userdata('idsos',$idsos);
-                
-                echo "SUCCESS||||";
-                echo "ViewDonorDetails";
-        }
-         function ViewDonorDetails()
+    {
+        $idsos = $this->input->post('idsos');
+        $this->session->set_userdata('idsos',$idsos);
+        echo "SUCCESS||||";
+        echo "ViewDonorDetails";
+    }
+    function ViewDonorDetails()
     {
         $idsos = $this->session->userdata('idsos');
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
-        if (!$is_user_login) {
+        if (!$is_user_login) 
+        {
             ob_end_clean();
             header("Location:" . __BASE_URL__ . "/admin/admin_login");
             die;
         }
-       $DonorDetailsAry = $this->Form_Management_Model->getActiveDonorDetailsBySosId($idsos);
-        
+        $DonorDetailsAry = $this->Form_Management_Model->getActiveDonorDetailsBySosId($idsos);
         $data['notification'] = $count;
         $data['idsos'] = $idsos;
         $data['szMetaTagTitle'] = "Donor Details";
@@ -411,42 +409,39 @@ class Form_Management_Controller extends CI_Controller
         $this->load->view('formManagement/donorDetailsList');
         $this->load->view('layout/admin_footer');
     }
-     function ViewCocFormData()
-        {
+    function ViewCocFormData()
+    {
             
-            $idcoc = $this->input->post('idcoc');
-              $idsos = $this->input->post('idsos');
-            
-             $this->session->set_userdata('idsos',$idsos);
-            $this->session->set_userdata('idcoc',$idcoc);
-                
-                echo "SUCCESS||||";
-                echo "ViewCocForm";
-        }
-         function ViewCocForm()
+        $idcoc = $this->input->post('idcoc');
+        $idsos = $this->input->post('idsos');
+        $this->session->set_userdata('idsos',$idsos);
+        $this->session->set_userdata('idcoc',$idcoc);
+        echo "SUCCESS||||";
+        echo "ViewCocForm";
+    }
+    function ViewCocForm()
     {
         $idcoc = $this->session->userdata('idcoc');
-         $idsos = $this->session->userdata('idsos');
+        $idsos = $this->session->userdata('idsos');
         $is_user_login = is_user_login($this);
-        // redirect to dashboard if already logged in
-        if (!$is_user_login) {
-            ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
-            die;
+            
+            if (!$is_user_login) 
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+            $cocFormDetailsAry = $this->Form_Management_Model->getCocFormDetailsByCocId($idcoc);
+            $data['notification'] = $count;
+            $data['idcoc'] = $idcoc;
+            $data['idsos'] = $idsos;
+            $data['szMetaTagTitle'] = "Donor Details";
+            $data['cocFormDetailsAry'] = $cocFormDetailsAry;
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Form_Management";
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/cocForm');
+            $this->load->view('layout/admin_footer');
         }
-       $cocFormDetailsAry = $this->Form_Management_Model->getCocFormDetailsByCocId($idcoc);
-       
-        $data['notification'] = $count;
-        $data['idcoc'] = $idcoc;
-        $data['idsos'] = $idsos;
-        $data['szMetaTagTitle'] = "Donor Details";
-        $data['cocFormDetailsAry'] = $cocFormDetailsAry;
-        $data['is_user_login'] = $is_user_login;
-        $data['pageName'] = "Form_Management";
-    
-        $this->load->view('layout/admin_header', $data);
-        $this->load->view('formManagement/cocForm');
-        $this->load->view('layout/admin_footer');
-    }
 }
 ?>
