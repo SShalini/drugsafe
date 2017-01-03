@@ -68,6 +68,13 @@
         Metronic.init();
             ComponentsPickers.init();
     });
+    jQuery('.timepicker').timepicker({
+        defaultTime: false,
+        minuteStep: 1,
+        showSeconds: true,
+        secondStep: 1,
+        showInputs: false
+    });
 </script>
     </body>
 </html>

@@ -969,7 +969,7 @@
                                         <div id="onsite" class="portlet-body collapse">
                                             <table class="table table-hover">
                                                 <hr>
-                                                <div class="font-green-meadow text"> Primary Site Contact (Assist with donor selection and supervise/manage donorS if required).
+                                                <div class="font-green-meadow text"> Primary Site Contact (Assist with donor selection and supervise/manage donors if required).
                                                 </div>
                                                 <hr>
                                                 <div

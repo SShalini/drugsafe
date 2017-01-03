@@ -22,7 +22,7 @@
             <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Operation_Manager_List') { ?>active open<?php } ?>">
                     <a href="<?php echo __BASE_URL__; ?>/admin/operationManagerList" class="nav-link nav-toggle">
-                        <i class="fa fa-bank" aria-hidden="true"></i>
+                        <i class="fa fa-male" aria-hidden="true"></i>
                         <span class="title">Operation Manager</span>
                         <span class="selected"></span>
                     </a>
@@ -152,7 +152,7 @@
             <?php } ?>
                   <li class="nav-item start <?php if (trim($pageName) == 'Form_Management') { ?>active open<?php } ?>">
                     <a onclick="viewForm('1');" href="javascript:void(0);" class="nav-link nav-toggle">
-                        <i class="fa fa-bank" aria-hidden="true"></i>
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
                         <span class="title">Form Management</span>
                         <span class="selected"></span>
                     </a>
