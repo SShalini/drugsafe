@@ -622,4 +622,23 @@ class Webservices_Controller extends CI_Controller
         }
         echo json_encode($responsedata);
     }
+
+    function marksoscomplete(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['sosid'] = !empty($jsondata->sosid) ? $jsondata->sosid : "";
+        $sosdata = $this->Webservices_Model->marksoscomplete($data['sosid']);
+        if($sosdata){
+            $responsedata = array("code" => 200,"message"=>"Status changed sucessfully");
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['error'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['error']);
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+            }
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
 }

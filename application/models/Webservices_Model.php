@@ -734,4 +734,19 @@ class Webservices_Model extends Error_Model
             $this->addError("norecord", "No record found.");
         }
     }
+
+    function marksoscomplete($sosid)
+    {
+        $statusarr = array('Status' => '1');
+        $conditionarr = array('id' => (int)$sosid);
+        $this->db->where($conditionarr)
+            ->update(__DBC_SCHEMATA_SOS_FORM__, $statusarr);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            $this->addError("error", "Something went wrong. Please try again.");
+            return false;
+        }
+    }
+
 } 
