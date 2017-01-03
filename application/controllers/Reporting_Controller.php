@@ -31,7 +31,7 @@ class Reporting_Controller extends CI_Controller
 
     function allstockreqlist()
     { 
-        if(!empty($_POST)){
+         if(empty($_POST)||empty($_POST['szSearchProdCode'])){
           $this->session->unset_userdata('searchterm');   
         }
        
