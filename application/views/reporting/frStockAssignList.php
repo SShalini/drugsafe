@@ -3,6 +3,7 @@
         $("#szSearchProdCode").customselect();
     });
 </script>
+
 <div class="page-content-wrapper">
     <div class="page-content">
 
@@ -68,6 +69,7 @@
                                <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                </div>
+                                 
                            </form>
                         </div>
                         <div class="row">
@@ -133,6 +135,7 @@
                     } else {
                         echo "Not Found";
                     }
+                  
                     ?>
                     <?php if (!empty($frAllQtyAssignAray)) { ?>
                         <div class="row">

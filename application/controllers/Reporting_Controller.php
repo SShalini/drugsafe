@@ -446,7 +446,7 @@ class Reporting_Controller extends CI_Controller
 
     function frstockreqlist()
     {
-        if(!empty($_POST)){
+        if(empty($_POST)||empty($_POST['szSearchProdCode'])){
           $this->session->unset_userdata('searchterm');   
         }
        
@@ -485,8 +485,7 @@ class Reporting_Controller extends CI_Controller
 
     function frstockassignlist()
     {
-        
-         if(!empty($_POST)){
+        if(!empty($_POST)){
           $this->session->unset_userdata('searchterm');   
         }
         $is_user_login = is_user_login($this);

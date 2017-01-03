@@ -24,7 +24,7 @@
                <ul class="page-breadcrumb breadcrumb">
                  
                     <li>
-                        <a href="<?php echo __BASE_URL__;?>ordering/sitesRecord>Home</a>
+                        <a href="<?php echo __BASE_URL__;?>/ordering/sitesRecord">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
                     
@@ -95,7 +95,6 @@
                         </div>
                     </div>
                
-             
                     <div class="row">
                         <div class="col-sm-8 text-info bold">
                             <lable>Total  after royalty and Inc GST:</lable>
@@ -104,9 +103,7 @@
                             <p>$<?php $TotalafterRoyalty=$ValTotal+$GST;echo $TotalbeforeRoyalty; ?> </p>
                         </div>
                     </div>
-                  
-
-                    <div class="row">
+                     <div class="row">
                         <div class="col-sm-8 text-info bold">
                             <lable>Net Total after royalty and exl GST:</lable>
                         </div>
@@ -163,7 +160,7 @@
                         </div>
                         <div class="col-sm-2">
                             <p>$<?php $Royaltyfees = ( $TotalTrevenu*0.1);
-                                    echo $Royaltyfees;?></p>
+                            echo $Royaltyfees;?></p>
                         </div>
                     </div>
                     <div class="row">
