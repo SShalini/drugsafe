@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Admin_Model extends Error_Model
 {
     var $id;
@@ -162,7 +161,7 @@ class Admin_Model extends Error_Model
             $adminAry['szEmail'] = $row[0]['szEmail'];
             $adminAry['iRole'] = $row[0]['iRole'];
 
-            $user_session = $this->session->set_userdata('drugsafe_user', $adminAry);
+            $this->session->set_userdata('drugsafe_user', $adminAry);
 
             return $row[0];
             } else {
@@ -271,6 +270,7 @@ class Admin_Model extends Error_Model
  
     public function checkUserExists($szEmail = false, $id = 0)
     {
+
         $szEmail = trim($szEmail);
 
         $user_session = $this->session->userdata('drugsafe_user');
@@ -902,7 +902,7 @@ class Admin_Model extends Error_Model
                 if (!in_array('sp_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['sp_name'])),"sp_name","Contact Name", true);
                 if(!in_array('sp_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['sp_mobile'])),"sp_mobile","Contact Phone Number",true);
                 if(!in_array('sp_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['sp_email'])),"sp_email"," Contact Email",true); 
-                 if(!empty($data['iis_name'] || $data['iis_mobile'] ||  $data['iis_email'] )){
+                 if(!empty($data['iis_name']) || !empty($data['iis_mobile']) ||  !empty($data['iis_email'] )){
                if (!in_array('iis_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['iis_name'])),"iis_name","Contact Name", true);
                 if(!in_array('iis_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['iis_mobile'])),"iis_mobile","Contact Phone Number",true);
                 if(!in_array('iis_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['iis_email'])),"iis_email","Contact Email",true);              
@@ -915,7 +915,7 @@ class Admin_Model extends Error_Model
                 if (!in_array('rlr_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['rlr_name'])),"rlr_name" ,"Contact Name", true);
                 if(!in_array('rlr_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['rlr_mobile'])),"rlr_mobile","Contact Phone Number",true);
                 if(!in_array('rlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['rlr_email'])),"rlr_email"," Contact Email",true);  
-                 if(!empty($data['orlr_name'] || $data['orlr_mobile'] ||  $data['orlr_email'] )){
+                 if(!empty($data['orlr_name']) || !empty($data['orlr_mobile']) ||  !empty($data['orlr_email'] )){
                 if (!in_array('orlr_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['orlr_name'])),"orlr_name","Contact Name", true);
                 if(!in_array('orlr_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['orlr_mobile'])),"orlr_mobile","Contact Phone Number",true);
                 if(!in_array('orlr_email',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['orlr_email'])),"orlr_email"," Contact Email",true);   
@@ -928,7 +928,7 @@ class Admin_Model extends Error_Model
                 if (!in_array('psc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['psc_name'])),"psc_name","Contact Name", true);
                 if(!in_array('psc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_phone'])),"psc_phone","Landline Phone Number",true);
                 if(!in_array('psc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['psc_mobile'])),"psc_mobile","Mobile Phone Number",true);
-                if(!empty($data['ssc_name'] || $data['ssc_phone'] ||  $data['ssc_mobile'] )){
+                if(!empty($data['ssc_name']) || !empty($data['ssc_phone']) ||  !empty($data['ssc_mobile'] )){
                 if(!in_array('ssc_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['ssc_name'])),"ssc_name","Contact Name",true);
                 if(!in_array('ssc_phone',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_phone'])),"ssc_phone","Landline Phone Number",true);
                 if(!in_array('ssc_mobile',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['ssc_mobile'])),"ssc_mobile","Mobile Phone Number",true);
@@ -969,5 +969,4 @@ class Admin_Model extends Error_Model
             }
             return false;
         }
-}
-?>
+}?>

@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Admin_Controller extends CI_Controller {
      
 	function __construct()
@@ -48,14 +47,20 @@ class Admin_Controller extends CI_Controller {
         } 
         public function admin_login()
 	{
+
+        ob_start();
            $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
+
             if($is_user_login)
             {
+
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
-               die;
-            }	
+                echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/franchiseeList';</script>";
+                exit();
+                /*header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+               die;*/
+            }
                 $validate= $this->input->post('adminLogin');
                 $iRemember = (int)$this->input->post('adminLogin[iRemember]');
                 
@@ -67,22 +72,28 @@ class Admin_Controller extends CI_Controller {
                         set_customer_cookie($this, $adminAry); 
                         }
                        $user_session = $this->session->userdata('drugsafe_user');
-                      if($user_session[iRole]==1)
+                      if($user_session[iRole]=='1')
                       {
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
-                        die;
+                          echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
+        exit();
+//                        header("Location:".__BASE_URL__."/admin/operationManagerList");
+                        //die;
                       }
-                       elseif($user_session[iRole]==5)
+                       elseif($user_session[iRole]=='5')
                            {
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
-                        die;  
+                               echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/franchiseeList';</script>";
+                               exit();
+                        /*header("Location:".__BASE_URL__."/admin/franchiseeList");
+                        die; */
                           }
                       else{
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
-                        die;  
+                          echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/franchisee/clientRecord';</script>";
+                          exit();
+                        /*header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
+                        die; */
                       }
                     }
            
@@ -90,11 +101,9 @@ class Admin_Controller extends CI_Controller {
                 $data['szMetaTagTitle'] = "Admin Login";
                 $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                 $data['is_user_login'] = $is_user_login;
-                
                 $this->load->view('layout/login_header', $data);
                 $this->load->view('admin/admin_login');
                 $this->load->view('layout/login_footer');
-	    
         }
 
         public function dashboard() {
@@ -121,8 +130,10 @@ class Admin_Controller extends CI_Controller {
         {
             logout($this);
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
-            die();			
+            echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/admin_login';</script>";
+            exit();
+            /*header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            die();*/
         }
         function changePassword()
         {
@@ -244,20 +255,24 @@ class Admin_Controller extends CI_Controller {
         }
         function franchiseeList()
         {
+//            echo 'fr1';
            $is_user_login = is_user_login($this);
-
+//            echo 'fr2';
             // redirect to dashboard if already logged in
            $count = $this->Admin_Model->getnotification();
-        
+//            echo 'fr3';
             if(!$is_user_login)
             {
+//                echo 'fr4';
                 ob_end_clean();
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
+//            echo 'fr5';
              if ($_SESSION['drugsafe_user']['iRole'] == '5') {
              $operationManagerId = $_SESSION['drugsafe_user']['id'];
         }
+//        die('fr6');
             $searchAry = '';
             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
                 $id = $_POST['szSearch'];
@@ -628,9 +643,10 @@ class Admin_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3>New operation manager added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                    ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
-                    die;
+                    echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
+                    exit();
+                    /*header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                    die;*/
                 }
             }
            
@@ -727,5 +743,4 @@ class Admin_Controller extends CI_Controller {
             $this->Admin_Model->deleteOperationManagerDetails($data['idOperationManager']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }  
-}      
-?>    
+} ?>

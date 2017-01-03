@@ -63,10 +63,3 @@
 <div class="menu-toggler sidebar-toggler"></div>
 <!-- END SIDEBAR TOGGLER BUTTON -->
 <!-- BEGIN LOGO -->
-        
-        
-        
-
-        
-        
-        

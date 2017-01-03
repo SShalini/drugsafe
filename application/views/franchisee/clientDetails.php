@@ -866,11 +866,11 @@
                                               if($_SESSION['drugsafe_user']['iRole'] == '2'){
                                                ?>
                                               
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>','1');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Site" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                     <?php }  ?>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Site Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 <?php
@@ -879,7 +879,7 @@
                                                    $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
                                                      if(empty($sosRormDetailsAry)) {
                                                ?>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Client" onclick="clientDelete('<?php echo $childClientDetailsData['id'];?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Site" onclick="clientDelete('<?php echo $childClientDetailsData['id'];?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>
