@@ -175,5 +175,23 @@ public function searchterm_handler($searchterm='')
         return $searchterm;
     }
 }
+public function searchtermAssign_handler($searchtermAssign='')
+{
+    if($searchtermAssign)
+    { 
+        $this->session->set_userdata('searchtermAssign',$searchtermAssign);
+        return $searchtermAssign;
+    }
+    elseif($this->session->userdata('searchtermAssign'))
+    { 
+        $searchtermAssign= $this->session->userdata('searchtermAssign');
+        return $searchtermAssign;
+    }
+    else
+    { 
+        $searchtermAssign ="";
+        return $searchtermAssign;
+    }
+}
 }
 ?>

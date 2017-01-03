@@ -6,7 +6,7 @@
 
     });
 </script>
-
+ <?php $this->session->unset_userdata('flag');?>
 <div class="page-content-wrapper">
     <div class="page-content">
 

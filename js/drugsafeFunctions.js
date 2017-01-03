@@ -256,6 +256,22 @@ function deleteOperationManagerConfirmation(idOperationManager) {
 
     }); 
 }
+function viewFrStockAssignList(flag) {
+
+    $.post(__BASE_URL__ + "/reporting/frstockassignlistData", {flag: flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/reporting/" + ar_result[1];
+
+    });
+}
+function viewStockAssignList(flag) {
+
+    $.post(__BASE_URL__ + "/reporting/stockassignlistData", {flag: flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/reporting/" + ar_result[1];
+
+    });
+}
 function viewForm(flag) {
 
     $.post(__BASE_URL__ + "/formManagement/viewFormData", {flag: flag}, function (result) {

@@ -114,7 +114,7 @@
                         </li>
 
                         <li class="nav-item  <?php if ($subpageName == 'Stock_Assignments') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/stockassignlist">
+                           <a class="nav-link nav-toggle"  onclick="viewStockAssignList('1');" href="javascript:void(0);">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Stock Assignments</span>
                             </a>
@@ -140,7 +140,7 @@
                         </li>
 
                         <li class="nav-item  <?php if ($subpageName == 'Franchisee_Stock_Assignments') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frstockassignlist">
+                             <a class="nav-link nav-toggle"  onclick="viewFrStockAssignList('1');" href="javascript:void(0);">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Stock Assignments</span>
                             </a>

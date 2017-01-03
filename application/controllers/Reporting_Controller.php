@@ -77,13 +77,26 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/stockRequestList');
         $this->load->view('layout/admin_footer');
     }
-
+ function stockassignlistData()
+        {
+            $flag = $this->input->post('flag');
+            
+                $this->session->set_userdata('flag',$flag);
+                
+                echo "SUCCESS||||";
+                echo "stockassignlist";
+            
+ 
+        }
     function stockassignlist()
     {
-        if(!empty($_POST)){
-          $this->session->unset_userdata('searchterm');   
+       if(!empty($_POST)){
+          $this->session->unset_userdata('searchtermAssign');   
         }
-       
+         $flag = $this->session->userdata('flag');
+         if($flag==1){
+            $this->session->unset_userdata('searchtermAssign');    
+         }
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -106,7 +119,7 @@ class Reporting_Controller extends CI_Controller
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $searchItem = $_POST['szSearch2'];
              }
-             $searchItemData = $this->Reporting_Model->searchterm_handler($searchItem);
+             $searchItemData = $this->Reporting_Model->searchtermAssign_handler($searchItem);
           
             
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
@@ -482,12 +495,26 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/frStockRequestList');
         $this->load->view('layout/admin_footer');
     }
-
+ function frstockassignlistData()
+        {
+            $flag = $this->input->post('flag');
+            
+                $this->session->set_userdata('flag',$flag);
+                
+                echo "SUCCESS||||";
+                echo "frstockassignlist";
+            
+ 
+        }
     function frstockassignlist()
     {
         if(!empty($_POST)){
-          $this->session->unset_userdata('searchterm');   
+          $this->session->unset_userdata('searchtermAssign');   
         }
+         $flag = $this->session->userdata('flag');
+         if($flag==1){
+            $this->session->unset_userdata('searchtermAssign');    
+         }
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -496,7 +523,7 @@ class Reporting_Controller extends CI_Controller
             die;
         }
         $searchAryData = $_POST['szSearchProdCode'];
-        $searchAry = $this->Reporting_Model->searchterm_handler($searchAryData);
+        $searchAry = $this->Reporting_Model->searchtermAssign_handler($searchAryData);
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
 
         $config['base_url'] = __BASE_URL__ . "/reporting/frstockassignlist/";
