@@ -228,10 +228,9 @@ class Admin_Controller extends CI_Controller {
                     ob_end_clean();
                     $this->session->unset_userdata('idOperationManager');
                     $this->session->unset_userdata('flag');
-                    
-                    ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
-                    die;
+                    echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/franchiseeList';</script>";
+                    exit();
+                   
                 }
             }
            
@@ -464,9 +463,9 @@ class Admin_Controller extends CI_Controller {
                         ob_end_clean();
                         $this->session->unset_userdata('idOperationManager');
                         $this->session->unset_userdata('idfranchisee');
-                        ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
-                        die;
+                        echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/franchiseeList';</script>";
+                        exit();
+                        
                     }
                 }
                     $data['szMetaTagTitle'] = "Edit Franchisee Details ";
@@ -707,14 +706,13 @@ class Admin_Controller extends CI_Controller {
                         if($flag==1){
                         $this->session->unset_userdata('flag'); 
                         $this->session->unset_userdata('idOperationManager');
-                        header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
-                         ob_end_clean();
+                         echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
+                          exit();
                         }else{
                           $this->session->unset_userdata('flag');
-                          header("Location:" . __BASE_URL__ . "/franchisee/franchiseeRecord");  
-                          ob_end_clean();
+                           echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/franchisee/franchiseeRecord';</script>";
+                       exit();
                         }
-                        die;
                     }
                 }
                     $data['szMetaTagTitle'] = "Edit Operation Manager Details ";
