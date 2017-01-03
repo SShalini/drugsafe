@@ -106,8 +106,8 @@
                                                     <th> Descreption</th>
                                                     <th> Cost</th>
                                                     <th>Quantity </th>
-                                                    <th>Quantity Assign By </th>
-                                                    <th>Quantity Updated By  </th>
+<!--                                                    <th>Quantity Assign By </th>
+                                                    <th>Quantity Updated By  </th>-->
                                                     <th> Action </th>
                                                 </tr>
                                             </thead>
@@ -145,7 +145,7 @@
                                                        <?php } else { ?> 
                                                         <td><?php echo($drugTestKitDataArr['szQuantity'] > 0 ? $drugTestKitDataArr['szQuantity'] : 'N/A')?></td>
                                                        <?php }?>
-                                                        <td>
+<!--                                                        <td>
                                                         <?php 
                                                         if($qtyAssignDataArr['szAssignBy'])
                                                         {
@@ -158,9 +158,9 @@
                                                         }
 
                                                         ?> 
-                                                    </td>
+                                                    </td>-->
                                                         
-                                                        <td>
+<!--                                                        <td>
                                                              <?php 
                                                         if($qtyUpdateData1Arr['szLastUpdatedBy'])
                                                         {
@@ -179,7 +179,7 @@
                                                         }
 
                                                         ?> 
-                                                    </td>
+                                                    </td>-->
                                                         <td>
                                                             <?php if(empty($drugTestKitDataArr['szQuantity']) && ($drugTestKitDataArr['szQuantity'] != '0')){?>
                                                             <a class="btn btn-circle btn-icon-only btn-default" title="Add Product Stock Quantity" onclick="addProductStockQuantity(<?php echo $drugTestKitData['id'];?>);" href="javascript:void(0);">
@@ -252,8 +252,8 @@
                                 <th> Descreption</th>
                                 <th> Cost</th>
                                 <th> Quantity </th>
-                                <th>Quantity Assign By </th>
-                                <th>Quantity Updated By  </th>
+<!--                                <th>Quantity Assign By </th>
+                                <th>Quantity Updated By  </th>-->
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -292,7 +292,7 @@
                                        <?php } else { ?> 
                                         <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
                                        <?php }?>
-                                        <td>
+<!--                                        <td>
                                         <?php 
                                         if($qtyAssignDataArr['szAssignBy'])
                                         {
@@ -305,9 +305,9 @@
                                         }
 
                                         ?> 
-                                    </td>
+                                    </td>-->
 
-                                        <td>
+<!--                                        <td>
                                              <?php 
                                         if($qtyUpdateData1Arr['szLastUpdatedBy'])
                                         {
@@ -320,7 +320,7 @@
                                         }
 
                                         ?> 
-                                    </td>
+                                    </td>-->
                                      
                                     <td>
                                          <?php if(empty($marketingMaterialDataArr['szQuantity']) && ($marketingMaterialDataArr['szQuantity'] != '0')){?>
@@ -385,8 +385,8 @@
                                                     <th> Descreption</th>
                                                     <th> Cost</th>
                                                     <th>Quantity </th>
-                                                    <th>Quantity Assign By </th>
-                                                    <th>Quantity Updated By  </th>
+<!--                                                    <th>Quantity Assign By </th>
+                                                    <th>Quantity Updated By  </th>-->
                                                     <th> Action </th>
                                                 </tr>
                                             </thead>
@@ -423,7 +423,7 @@
                                                            <?php } else { ?> 
                                                             <td><?php echo($consumablesDataArr['szQuantity'] > 0 ? $consumablesDataArr['szQuantity'] : 'N/A')?></td>
                                                            <?php }?>
-                                                            <td>
+<!--                                                            <td>
                                                             <?php 
                                                             if($qtyAssignDataArr['szAssignBy'])
                                                             {
@@ -436,9 +436,9 @@
                                                             }
 
                                                             ?> 
-                                                        </td>
+                                                        </td>-->
 
-                                                            <td>
+<!--                                                            <td>
                                                                  <?php 
                                                             if($qtyUpdateData1Arr['szLastUpdatedBy'])
                                                             {
@@ -451,7 +451,7 @@
                                                             }
 
                                                             ?> 
-                                                        </td>
+                                                        </td>-->
 
                                                         <td>
                                                             <?php if(empty($consumablesDataArr['szQuantity']) && ($consumablesDataArr['szQuantity'] != '0')){?>
