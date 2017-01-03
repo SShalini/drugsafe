@@ -186,12 +186,7 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu" <?php if ($subpageName == 'Forum') { ?> style="display: block;" <?php } ?> >
-                    <li class="nav-item  <?php if ($subpageName == 'Forum_List') { ?> active open <?php } ?>">
-                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/forumList">
-                            <i class="fa fa-ge" aria-hidden="true"></i>
-                            <span class="title">Forum List</span>
-                        </a>
-                    </li>
+                   
 
                       <li class="nav-item  <?php if ($subpageName == 'Categories') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/categoriesList">

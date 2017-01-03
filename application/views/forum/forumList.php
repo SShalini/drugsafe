@@ -63,7 +63,7 @@
                         
                         if(!empty($forumDataAray))
                         {
-                           
+                       
                             ?>
                         
                           <div class="row">
@@ -75,8 +75,8 @@
                                   <?php
                                   foreach($forumDataSearchAray as $forumDataSearchList)
                                   {
-                                      $selected = ($forumDataSearchList['szTitle'] == $_POST['szSearchforumTitle'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$forumDataSearchList['szTitle'].'" >'.$forumDataSearchList['szTitle'].'</option>';
+                                      $selected = ($forumDataSearchList['szForumTitle'] == $_POST['szSearchforumTitle'] ? 'selected="selected"' : '');
+                                      echo '<option value="'.$forumDataSearchList['szForumTitle'].'" >'.$forumDataSearchList['szForumTitle'].'</option>';
                                   }
                                   ?>
                               </select>
@@ -123,7 +123,7 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Forum Details" onclick="editForum('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="productDeleteAlert(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Delete Forum Details " onclick="forumDeleteAlert(<?php echo $forumDataData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                                 </td>

@@ -196,6 +196,36 @@ function deleteFranchiseeConfirmation(idfranchisee) {
 
     }); 
 }
+function forumDeleteAlert(id) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/forumDeleteAlert", {id: id}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#forumStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function deleteForumConfirmation(id) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#forumStatus').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/deleteForumConfirmation", {id: id}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#forumStatusConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
 function operationManagerDelete(idOperationManager) {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/admin/deleteOperationManagerAlert", {idOperationManager: idOperationManager}, function (result) {
@@ -231,6 +261,14 @@ function viewForm(flag) {
     $.post(__BASE_URL__ + "/formManagement/viewFormData", {flag: flag}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/formManagement/" + ar_result[1];
+
+    });
+}
+function viewForumDetails(idCategory) {
+
+    $.post(__BASE_URL__ + "/forum/viewForumData", {idCategory: idCategory}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/forum/" + ar_result[1];
 
     });
 }

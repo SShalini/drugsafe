@@ -306,15 +306,17 @@
             ?>
              <!-- BEGIN CONTACT DETAILS PORTLET-->
             <div class="portlet box green-meadow">
-                <div class="portlet-title">
-                        <div class="caption">
-                             <i class="icon-equalizer "></i>
-                           Contact Details     
-                        </div>
-                        <div class="tools">
-                                <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#contact-details">
-                                </a>
-                        </div>
+                 <div class="portlet-title" data-toggle="collapse" data-target="#contact-details">
+                    <div class="caption">
+                        <i class="icon-equalizer "></i>
+                        Contact Details
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#contact-details">
+                        </a>
+
+
+                    </div>
                 </div>
                                         
                 <div class="portlet-body collapse" id="contact-details">
@@ -457,15 +459,16 @@
             
                          <!-- BEGIN ON SITE SCREENING INFORMATION PORTLET-->
             <div class="portlet box green-meadow">
-                <div class="portlet-title">
-                        <div class="caption">
-                             <i class="icon-equalizer "></i>
-                            ONSITE SCREENING INFORMATION
-                        </div>
-                        <div class="tools">
-                                <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
-                                </a>
-                        </div>
+                <div class="portlet-title" data-toggle="collapse" data-target="#onsite">
+                    <div class="caption">
+                        <i class="icon-equalizer "></i>
+                        ONSITE SCREENING INFORMATION
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:void(0);" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
+                        </a>
+
+                    </div>
                 </div>
                                         
                 <div id="onsite" class="portlet-body collapse">

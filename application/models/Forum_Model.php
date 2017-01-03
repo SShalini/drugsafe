@@ -72,9 +72,12 @@ class Forum_Model extends Error_Model {
            
             $dataAry = array(
                                 'szForumTitle' => $data['szForumTitle'],
+                                 'idCategory' => $data['idCategory'],
                                 'szForumDiscription' => $data['szForumDiscription'],
 				'szForumLongDiscription' => $data['szForumLongDiscription'],
                                 'szforumImage' => $data['szforumImage'],
+                                 'isDeleted' => '0',
+                
                             );
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_DATA__, $dataAry);
             
@@ -103,16 +106,21 @@ class Forum_Model extends Error_Model {
             return array();
         }
     }
-         public function viewForumDataList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry ='')
+         public function viewForumDataList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry ='',$idCategory='0')
         {
             $searchAry = trim($searchAry);
-           
-              
+          
             if(!empty($searchAry)){
-                       
-                 $this->db->where('szTitle=',$searchAry);
+                   $whereAry = array('szForumTitle' => $searchAry,'isDeleted'=>'0','idCategory' => $idCategory);
+        $this->db->where($whereAry);      
+               
                  
                    
+                }
+                else{
+                    $whereAry = array('isDeleted'=>'0','idCategory' => $idCategory);
+        $this->db->where($whereAry);
+                     
                 }
                 
             
@@ -120,7 +128,8 @@ class Forum_Model extends Error_Model {
         
             $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_DATA__);
-     
+//      $sql = $this->db->last_query();
+//      print_r($sql);die;
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -138,6 +147,21 @@ class Forum_Model extends Error_Model {
                 );  
                 $this->db->where('id', $idCategory);
 		if($query = $this->db->update(__DBC_SCHEMATA_FORUM_CATEGORY__, $dataAry))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+         public function deleteForum($id)
+	{
+		$dataAry = array(
+			'isDeleted' => '1'
+                );  
+                $this->db->where('id', $id);
+		if($query = $this->db->update(__DBC_SCHEMATA_FORUM_DATA__, $dataAry))
                 {
                     return true;
                 }
@@ -176,6 +200,8 @@ class Forum_Model extends Error_Model {
                                 'szForumDiscription' => $data['szForumDiscription'],
 				'szForumLongDiscription' => $data['szForumLongDiscription'],
                                 'szforumImage' => $data['szforumImage'],
+                                'isDeleted' => '0',
+                 'idCategory' => $data['idCategory'],
                               
                             );
                 $this->db->where('id',(int)$id);

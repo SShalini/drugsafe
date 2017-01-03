@@ -107,11 +107,14 @@
                                            
                                           
                                                 <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Ccategory Details" onclick="editCategory('<?php echo $categoriesData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Category Details" onclick="editCategory('<?php echo $categoriesData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="deleteCategoryAlert(<?php echo $categoriesData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Category Details" onclick="deleteCategoryAlert(<?php echo $categoriesData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                                     <a class="btn btn-circle btn-icon-only btn-default" id="deleteCategoryStatus" title="View Forum  Details " onclick="viewForumDetails(<?php echo $categoriesData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 </td>
                                   

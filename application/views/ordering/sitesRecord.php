@@ -29,16 +29,29 @@
             <div class="col-md-12">
                <ul class="page-breadcrumb breadcrumb">
                    
-                    
-                  
-                    <li>
+                   
+                 
+                   <li>
                         <a href="<?php echo __BASE_URL__;?>/ordering/sitesRecord">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                 
+                     <?php 
+                   if(!empty($_POST['szSearchClRecord2'])){$userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchClRecord2']);
+         
+            ?>   
                     <li>
+                            <a onclick=""
+                               href="javascript:void(0);"><?php echo $userDataAry['szName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                    </li>
+                      <li>
                         <span class="active">Sites Record</span>
                     </li>
+                 <?php   }else{?>
+                    <li>
+                        <span class="active">Select Franchisee</span>
+                    </li>
+                    <?php   }?>
                 </ul>
                 
                 <div class="portlet light bordered">

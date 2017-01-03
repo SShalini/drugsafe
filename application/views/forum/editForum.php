@@ -43,7 +43,37 @@
                                            
                                         </div>
                                     </div>
-                                     
+                                     <div class="form-group <?php if(form_error('forumData[idCategory]')){?>has-error<?php }?>">
+                                            <label class="col-md-3 control-label">Forum Category</label>
+                                            <div class="col-md-5">
+                                                <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                    <select class="form-control" name="forumData[idCategory]"
+                                                            id="idCategory" Placeholder="Forum Category"
+                                                            onfocus="remove_formError(this.id,'true')">
+                                                        <option value=''>Select</option>
+                                                        <?php
+                                                         $categoriesListAray =$this->Forum_Model->viewCategoriesList();
+                                                        if (!empty($categoriesListAray)) {
+                                                            foreach ($categoriesListAray as $categoriesListDetails) {
+                                                                ?>
+                                                                <option
+                                                                    value="<?php echo trim($categoriesListDetails['id']); ?>" <?php echo(set_value('forumData[idCategory]') == trim($categoriesListDetails['id']) ? "selected" : ""); ?>><?php echo trim($categoriesListDetails['szName']); ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <?php
+                                            if(form_error('forumData[idCategory]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('forumData[idCategory]');?></span>
+                                            </span><?php }?>
+                                            </div>
+
+                                        </div>  
                                     <div class="form-group <?php if(form_error('forumData[szForumDiscription]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Short Description</label>
                                         <div class="col-md-5">

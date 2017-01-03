@@ -157,6 +157,29 @@ class Forum_Controller extends CI_Controller {
             $this->Forum_Model->deleteCategory($data['idCategory']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }   
+         public function forumDeleteAlert()
+        {
+            $data['mode'] = '__DELETE_FORUM_POPUP__';
+            $data['id'] = $this->input->post('id');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function deleteForumConfirmation()
+        {
+            $data['mode'] = '__DELETE_FORUM_POPUP_CONFIRM__';
+            $data['id'] = $this->input->post('id');
+            $this->Forum_Model->deleteForum($data['id']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        } 
+         function viewForumData()
+        {
+            $idCategory = $this->input->post('idCategory');
+            $this->session->set_userdata('idCategory',$idCategory);
+           
+            echo "SUCCESS||||";
+            echo "forumList";
+            
+        }
+        
          function forumList()
         {
            $is_user_login = is_user_login($this);
@@ -167,18 +190,19 @@ class Forum_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
+            $idCategory = $this->session->userdata('idCategory');
              $searchAry = $_POST['szSearchforumTitle'];
              
              $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
-             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry));
+             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry,$idCategory));
              $config['per_page'] = 5;
 
              $this->pagination->initialize($config);
             
              
           
-               $forumDataAray =$this->Forum_Model->viewForumDataList($config['per_page'],$this->uri->segment(3),$searchAry);
-               $forumDataSearchAray =$this->Forum_Model->viewForumDataList();
+               $forumDataAray =$this->Forum_Model->viewForumDataList($config['per_page'],$this->uri->segment(3),$searchAry,$idCategory);
+               $forumDataSearchAray =$this->Forum_Model->viewForumDataList(false,false,false,$idCategory);
                $count = $this->Admin_Model->getnotification();
 
                     $data['forumDataAray'] = $forumDataAray;
@@ -198,6 +222,7 @@ class Forum_Controller extends CI_Controller {
         {
             $count = $this->Admin_Model->getnotification();
              $validate = $this->input->post('forumData');
+            
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -210,6 +235,7 @@ class Forum_Controller extends CI_Controller {
             $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Discription', 'required');
             $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Discription', 'required');
             $this->form_validation->set_rules('forumData[szforumImage]', 'Forum Image', 'required');
+            $this->form_validation->set_rules('forumData[idCategory]', 'category ', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 

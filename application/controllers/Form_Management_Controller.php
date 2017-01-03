@@ -90,7 +90,7 @@ class Form_Management_Controller extends CI_Controller
             
             if(empty($childClientDetailsAray))
             {
-                  $count = $this->Admin_Model->getnotification();
+                $count = $this->Admin_Model->getnotification();
                 $szSearchFrRecord = $this->session->userdata('szSearchFrRecord');
                 $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchFrRecord);
                 $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$szSearchFrRecord);
