@@ -652,7 +652,7 @@
                                             <table class="table table-hover">
                                                 <hr>
                                                 <div class="font-green-meadow text">Who will be responsible for
-                                                    Scheduling? If you would like us to manage the scheduling , write
+                                                    Scheduling?If you would like us to manage the scheduling,write
                                                     "DrugSafe".
                                                 </div>
                                                 <hr>
@@ -874,7 +874,7 @@
 
                                                 </div>
                                                 <hr>
-                                                <div class="font-green-meadow text"> Are there any other people Who are
+                                                <div class="font-green-meadow text"> Are the any other people who are
                                                     to receive the confirmatory lab results?
                                                 </div>
                                                 <hr>
@@ -1120,7 +1120,7 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['instructions'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label"> Any special instruction for
-                                                        DrugSafe staff (directions,instructions etc) </label>
+                                                        DrugSafe staff (directions,instructions,etc.) </label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
@@ -1557,8 +1557,7 @@
                                                 </div>
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['paperwork'])) { ?>has-error<?php } ?>">
-                                                    <label class="col-md-4 control-label">who would be responsible for
-                                                        all the paperwork at the end of testing?</label>
+                                                     <label class="col-md-4 control-label">Who would be responsible for all the paperwork at the end of testing?</label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
 
@@ -1573,7 +1572,7 @@
                                                             <label><input type="radio" id="paperwork" value="2"<?php echo(sanitize_post_field_value($_POST['clientData']['paperwork']) == 2 ? "checked" : ""); ?>
                                                                           name="clientData[paperwork]"
                                                                           onclick="showHideTextbox('2');"> Return to
-                                                                DrugSafe and and emailed to specific contact</label>
+                                                                DrugSafe and emailed to specific contact</label>
 
                                                         </div>
                                                     </div>

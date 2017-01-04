@@ -39,8 +39,8 @@
              ?>   
             <div class="col-md-12">
                  <ul class="page-breadcrumb breadcrumb">
-                    <li>
-                        <a href="javascript:void(0);" >Home</a>
+                   <li>
+                        <a onclick="viewForm('1');" href="javascript:void(0);" >Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
                       <li>

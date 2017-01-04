@@ -272,6 +272,7 @@ function viewStockAssignList(flag) {
 
     });
 }
+
 function viewForm(flag) {
 
     $.post(__BASE_URL__ + "/formManagement/viewFormData", {flag: flag}, function (result) {

@@ -46,11 +46,20 @@
                 </li>
               <?php } ?>   
             <li class="nav-item start <?php if (trim($pageName) == 'Client_Record') { ?>active open<?php } ?>">
-                <a href="<?php echo __BASE_URL__; ?>/franchisee/clientRecord" class="nav-link nav-toggle">
-                    <i class="fa fa-users" aria-hidden="true"></i>
+               <?php  if ($_SESSION['drugsafe_user']['iRole'] == '1') { ?>
+                 <a href="<?php echo __BASE_URL__; ?>/franchisee/franchiseeClientRecord" class="nav-link nav-toggle">
+                     <i class="fa fa-users" aria-hidden="true"></i>
                     <span class="title">Client Record</span>
                     <span class="selected"></span>
                 </a>
+               <?php   } else{?>
+                     <a href="<?php echo __BASE_URL__; ?>/franchisee/clientRecord" class="nav-link nav-toggle">
+                         <i class="fa fa-users" aria-hidden="true"></i>
+                    <span class="title">Client Record</span>
+                    <span class="selected"></span>
+                </a>
+                      <?php   } ?>
+                    
             </li>
           <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole']==2) { ?>
             <li class="nav-item start <?php if (trim($pageName) == 'Inventory') { ?>active open<?php } ?>">

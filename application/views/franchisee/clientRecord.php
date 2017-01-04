@@ -3,9 +3,10 @@
     $(function() {
 //        $("#szSearch").customselect();
         $("#szSearchname").customselect();
-//        $("#szSearchemail").customselect();
+       $("#szSearchClientname").customselect();
     });
 </script>
+
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php
@@ -124,20 +125,22 @@
                                           ?>
                                       </select>
                                   </div>
-<!--                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                
+                                 <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
                                   <div class="search col-md-3">
-                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
-                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Email</option>
+                                                               
+                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Client Name</option>
                                           <?php
-                                          foreach($clientlistArr as $clientIdList)
+                                          foreach($clientlistArr as $clientList)
                                           {
-                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szEmail'].'</option>';
+                                              $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientList['id'].'" >'.$clientList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
-                                  </div>-->
+                                  </div>
+                              
                                   <div class="col-md-1">
                                       <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
@@ -145,7 +148,7 @@
                           </div>
                     
                       <?php
-                      if(!empty($_POST['szSearchClRecord2'])){
+                   
                       if (!empty($clientAry)) {
                       ?>  
                     <div class="portlet-title">
@@ -290,10 +293,10 @@
                          </div>
                         <?php
 
-                    } else {
+                      } else {
                         echo "Not Found";
                     } 
-                      }
+                      
                       
                                           } else {
                     
@@ -322,12 +325,12 @@
                                   <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
-                                      <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Client Name</option>
                                           <?php
                                           foreach($clientlistArr as $clientIdList)
                                           {
-                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
                                               echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szName'].'</option>';
                                           }
                                           ?>
@@ -493,19 +496,19 @@
                     } }
                     ?>
          <?php 
-          if(!empty($_POST['szSearchClRecord2'])){
-              if(!empty($clientAry)){?>
+         
+             ?>
 		<div class="row">
-                  
+                  <?php if(!empty($clientAry)){?>
                     <div class="col-md-7 col-sm-7">
                         <div class="dataTables_paginate paging_bootstrap_full_number">
                             <?php echo $this->pagination->create_links();?>
                         </div>
                     </div>
 	    	
-                 
+                  <?php }?>  
             </div>
-              <?php }}?>
+            
                 </div>
             </div>
         </div>

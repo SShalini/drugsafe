@@ -498,9 +498,49 @@ class Franchisee_Controller extends CI_Controller
             $this->load->view('layout/admin_footer');
         }
     }
+ function franchiseeClientRecord()
+    {
+      
+        $is_user_login = is_user_login($this);
+        $count = $this->Admin_Model->getnotification();
+        if (!$is_user_login) {
+            ob_end_clean();
+            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            die;
+        }
+       
+        $searchAry = '';
+        
+        if(isset($_POST['szSearchFrRecord']) && !empty($_POST['szSearchFrRecord'])){
+            $id = $_POST['szSearchFrRecord'];
+        }  
+        
+        if($id>0){
+          $clientAray = $this->Franchisee_Model->getAllClientDetails(true, false,false,false,false,false,$id);   
+    
+         if(!empty($clientAray)){
+           $this->session->set_userdata('id', $id);
+           ob_end_clean();
+            echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/franchisee/clientRecord';</script>";
+           exit();  
+         }   
+        }
+       
+         
+     
+        $data['clientAry'] = $clientAray;
+        $data['pageName'] = "Client_Record";
+        $data['szMetaTagTitle'] = "Client Record";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
 
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('franchisee/clientRecordByFr');
+        $this->load->view('layout/admin_footer');
+    }
     function clientRecord()
     {
+      
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
         if (!$is_user_login) {
@@ -516,25 +556,54 @@ class Franchisee_Controller extends CI_Controller
         
         }
         $searchAry = '';
-        if(isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])){
-            $id = $_POST['szSearchClRecord'];
+        
+        if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
+            $idFr = $_POST['szSearchClRecord2'];
         }
         if(isset($_POST['szSearchClRecord1']) && !empty($_POST['szSearchClRecord1'])){
-            $id = $_POST['szSearchClRecord1'];
-        }
-        if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
-            $id = $_POST['szSearchClRecord2'];
+            $idClient = $_POST['szSearchClRecord1'];
         }
          // handle pagination
           
-                $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
-                $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$id));
-                $config['per_page'] = 5;
+                   $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
+                 if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                     if(!empty($idFr)){
+                       $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$idFr));   
+                     }
+                     elseif(!empty($idClient)) {
+                     $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$idClient,1));   
+                     }else{
+                       $idFrSession = $this->session->userdata('id');
+                       $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$idFrSession));
+
+                     }
+                }
+                    else{
+                         $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$idClient,1));
+                    }
+
+                $config['per_page'] = 2;
            
             
         $this->pagination->initialize($config);
-      
-        $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$id);
+          if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+              if(!empty($idFr)){
+                 $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,false);     
+              }
+              elseif (!empty($idClient)) {
+               $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$franchiseId,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$idClient,1); 
+               
+          }
+          else{
+              
+              $id = $this->session->userdata('id');
+              $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$id,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,false);   
+          }
+        }
+        else{
+            $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$franchiseId,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$idClient,1);    
+        }
+       
         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
              $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,$franchiseId);
         }
@@ -543,12 +612,22 @@ class Franchisee_Controller extends CI_Controller
         
         }
         if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-           $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true);
+              if(!empty($idFr)){
+                  $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,$idFr);
+                   $this->session->set_userdata('idFr', $idFr);
+             }
+           else {
+           $idFrSession = $this->session->userdata('id');
+           $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,$idFrSession);
+               
+          }
+           
         
         }
         
         
         $data['clientAry'] = $clientAray;
+        $data['flag'] = $flag;
         $data['clientlistArr'] = $clientlistArr;
         $data['pageName'] = "Client_Record";
         $data['szMetaTagTitle'] = "Client Record";
