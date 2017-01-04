@@ -451,9 +451,9 @@ class Franchisee_Controller extends CI_Controller
                 }
             } 
            }
-           else{
+           else{ $reqppearr = $this->input->post('req_ppe');
                  if ($this->Admin_Model->validateClientData($data_validate, array(), $idClient)) {
-                   $reqppearr = $this->input->post('req_ppe');
+                  
                    $reqppval = '';
                    foreach ($reqppearr as $reqpp){
                    $reqppval .= $reqpp.',';

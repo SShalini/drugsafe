@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/inventory/editDrugTestKit.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/js/drugsafeFunctions.js</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Forum_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Admin_Controller.php</file>
             <file>file:/C:/xampp/htdocs/drugsafe/application/views/forum/forumList.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Inventory_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/forum/editForum.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Forum_Model.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/forum/addForum.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/franchisee/clientRecord.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/ordering/manualOrdering.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/formManagement/formViewBySite.php</file>
         </group>
     </open-files>
 </project-private>

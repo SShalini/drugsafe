@@ -39,11 +39,22 @@
                         <i class="fa fa-circle"></i>
                     </li>
                       <?php } else {?>
-                    
-                    <li>
-                        <a href="<?php echo __BASE_URL__;?>">Home</a>
+                     <li>
+                        <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
+                    <?php
+                           if(!empty($_POST['szSearchClRecord2'])){
+                               $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchClRecord2']);
+                          ?>
+                     <li>
+                           <a onclick=""
+                               href="javascript:void(0);"><?php echo $userDataAry['szName'] ; ?></a>
+                     
+                        <i class="fa fa-circle"></i>
+                    </li>
+                           <?php }?>
+                   
                       <?php  } ?>
                  
                     <li>
@@ -481,7 +492,9 @@
                         echo "Not Found";
                     } }
                     ?>
-         <?php  if(!empty($clientAry)){?>
+         <?php 
+          if(!empty($_POST['szSearchClRecord2'])){
+              if(!empty($clientAry)){?>
 		<div class="row">
                   
                     <div class="col-md-7 col-sm-7">
@@ -492,7 +505,7 @@
 	    	
                  
             </div>
-    	<?php }?>
+              <?php }}?>
                 </div>
             </div>
         </div>

@@ -1073,19 +1073,19 @@
 
                                       <div class="checkbox"> 
 
-                                        <label><input type="checkbox" id="req_ppe1" value="1"  name="req_ppe[]"<?php if(in_array("1", $req_ppe_ary)){?> checked<?php }?>> High Vis Work Wear</label>
+                                        <label><input type="checkbox" id="req_ppe1" value="1"  name="req_ppe[]"<?php if(in_array("1", $req_ppe_ary)||in_array("1", $_POST['req_ppe'])){?> checked<?php }?>> High Vis Work Wear</label>
                                       </div>
                                        <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe2" value="2"  name="req_ppe[]"<?php if(in_array("2", $req_ppe_ary)){?>checked<?php }?>> Head Protection</label>
+                                        <label><input type="checkbox" id="req_ppe2" value="2"  name="req_ppe[]"<?php if(in_array("2", $req_ppe_ary)||in_array("2", $_POST['req_ppe'])){?>checked<?php }?>> Head Protection</label>
                                       </div>
                                        <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe3" value="3"  name="req_ppe[]"<?php if(in_array("3", $req_ppe_ary)){?>checked<?php }?>> Face/Eye Protection</label>
+                                        <label><input type="checkbox" id="req_ppe3" value="3"  name="req_ppe[]"<?php if(in_array("3", $req_ppe_ary)||in_array("3", $_POST['req_ppe'])){?>checked<?php }?>> Face/Eye Protection</label>
                                       </div>
                                         <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe4" value="4"  name="req_ppe[]"<?php if(in_array("4", $req_ppe_ary)){?>checked<?php }?>> Safety Boots</label>
+                                        <label><input type="checkbox" id="req_ppe4" value="4"  name="req_ppe[]"<?php if(in_array("4", $req_ppe_ary)||in_array("4", $_POST['req_ppe'])){?>checked<?php }?>> Safety Boots</label>
                                       </div>
                                       <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"<?php if(in_array("5", $req_ppe_ary)){?>checked<?php }?>> Long Sleeve Clothing</label>
+                                        <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"<?php if(in_array("5", $req_ppe_ary)||in_array("5", $_POST['req_ppe'])){?>checked<?php }?>> Long Sleeve Clothing</label>
                                       </div>
                                     </div>
                                      <?php if(!empty($arErrorMessages['req_ppe'])){?>
