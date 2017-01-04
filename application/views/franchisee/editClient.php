@@ -477,8 +477,8 @@
                               {?>
 
                                <!-- BEGIN CONTACT DETAILS PORTLET-->
-                                    <div class="portlet box green-meadow " data-toggle="collapse" data-target="#contact-details">
-                                        <div class="portlet-title">
+                                    <div class="portlet box green-meadow ">
+                                        <div class="portlet-title" data-toggle="collapse" data-target="#contact-details">
                                                 <div class="caption">
                                                      <i class="icon-equalizer "></i>
                                                    Contact Details     
@@ -727,24 +727,23 @@
                                 </div> 
                                 <!-- END CONTACT DETAILS PORTLET-->
                               <!-- BEGIN CONTACT DETAILS PORTLET-->
-                                    <div class="portlet box green-meadow"  data-toggle="collapse" data-target="#onsite">
-                                        <div class="portlet-title">
-                                                <div class="caption">
-                                                     <i class="icon-equalizer "></i>
-                                                   ONSITE SCREENING INFORMATION     
-                                                </div>
-                                                <div class="tools">
-                                                        <a href="javascript:;" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
-                                                        </a>
+                                    <div class="portlet box green-meadow">
+                                  <div class="portlet-title" data-toggle="collapse" data-target="#onsite">
+                                      <div class="caption">
+                                          <i class="icon-equalizer "></i>
+                                          ONSITE SCREENING INFORMATION
+                                      </div>
+                                      <div class="tools">
+                                          <a href="javascript:void(0);" class="collapse-sec collapsed" data-toggle="collapse" data-target="#onsite">
+                                          </a>
 
-
-                                                </div>
-                                        </div>
+                                      </div>
+                                  </div>
 
                                 <div id="onsite" class="portlet-body collapse">
                                    <table class="table table-hover">
                                        <hr>
-                             <div class="font-green-meadow text"> Primary Site Contact (Assist with donor selection and supervise/manage donorS if required).</div>
+                             <div class="font-green-meadow text"> Primary Site Contact (Assist with donor selection and supervise/manage donors if required).</div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['psc_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>
