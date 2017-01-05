@@ -108,17 +108,9 @@ class Reporting_Controller extends CI_Controller
        
           $searchAry = '';
           if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
-              $searchItemFr = $_POST['szSearch2'];  
+              $searchItemFr = $_POST['szSearch'];  
               $searchItemProd = $_POST['szSearch']; 
-          $this->Reporting_Model->searchtermAssignFrAndProd_handler($searchItemFr,$searchItemProd); 
-           
-          }
-          
-          elseif($searchItemFr && $searchItemProd ){echo"hiiiii";die;
-             $searchItemFrAndProd = $this->Reporting_Model->searchtermAssignFrAndProd_handler($searchItemFr,$searchItemProd);   
-          }
-              
-              else{
+          }else{
               if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
                $searchItem = $_POST['szSearch']; 
               
@@ -133,20 +125,19 @@ class Reporting_Controller extends CI_Controller
             
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
        
-      
-          if($searchItemFr && $searchItemProd ) {
-                 $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,false,3));
-           }
-         else{
+       if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
+             
+               $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,false,3));
+          }else{
             $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$searchItemData)); 
               
             }
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
-        if( $searchItemFr && $searchItemProd ) {
-               $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry,$config['per_page'], $this->uri->segment(3),false,3);
-           }
-          else{
+        if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
+             
+              $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry,$config['per_page'], $this->uri->segment(3),false,3);
+          }else{
            $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry,$config['per_page'], $this->uri->segment(3),$searchItemData);
               
             }

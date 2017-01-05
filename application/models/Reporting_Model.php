@@ -213,29 +213,6 @@ public function searchtermAssign_handler($searchtermAssign='')
         return $searchtermAssign;
     }
 }
-public function searchtermAssignFrAndProd_handler($searchItemFr='',$searchItemProd='')
-{
-    if($searchItemFr && $searchItemProd)
-    {
-        $this->session->set_userdata('searchItemFr',$searchItemFr);
-        $this->session->set_userdata('searchItemProd',$searchItemProd);
-        return $searchItemFr;
-        return $searchItemProd;
-    }
-    elseif($this->session->userdata('searchItemFr')&&$this->session->userdata('searchItemProd'))
-    { 
-        $searchItemFr= $this->session->userdata('searchItemFr');
-         $searchItemProd= $this->session->userdata('searchItemProd');
-        return $searchItemFr;
-        return $searchItemProd;
-    }
-    else
-    { 
-        $searchItemFr ="";
-         $searchItemProd ="";
-          return $searchItemFr;
-        return $searchItemProd;
-    }
-}
+
 }
 ?>
