@@ -4,13 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/drugsafe/application/models/Admin_Model.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Franchisee_Model.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Admin_Controller.php</file>
             <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Franchisee_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/config/constants.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/franchisee/clientRecord.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/franchisee/editClient.php</file>
             <file>file:/C:/xampp/htdocs/drugsafe/application/views/layout/admin_leftmenu.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/franchisee/addClient.php</file>
             <file>file:/C:/xampp/htdocs/drugsafe/application/views/franchisee/clientRecordByFr.php</file>
         </group>
     </open-files>

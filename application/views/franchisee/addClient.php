@@ -652,7 +652,7 @@
                                             <table class="table table-hover">
                                                 <hr>
                                                 <div class="font-green-meadow text">Who will be responsible for
-                                                    Scheduling?If you would like us to manage the scheduling,write
+                                                    Scheduling? If you would like us to manage the scheduling,write
                                                     "DrugSafe".
                                                 </div>
                                                 <hr>

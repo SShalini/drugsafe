@@ -107,30 +107,57 @@ class Reporting_Controller extends CI_Controller
         $count = $this->Admin_Model->getnotification();
        
           $searchAry = '';
-             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+          if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
+              $searchItemFr = $_POST['szSearch2'];  
+              $searchItemProd = $_POST['szSearch']; 
+          $this->Reporting_Model->searchtermAssignFrAndProd_handler($searchItemFr,$searchItemProd); 
+           
+          }
+          
+          elseif($searchItemFr && $searchItemProd ){echo"hiiiii";die;
+             $searchItemFrAndProd = $this->Reporting_Model->searchtermAssignFrAndProd_handler($searchItemFr,$searchItemProd);   
+          }
+              
+              else{
+              if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
                $searchItem = $_POST['szSearch']; 
               
             }
-           
-            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
-                $searchItem = $_POST['szSearch1'];
-            }
-           
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $searchItem = $_POST['szSearch2'];
              }
-             $searchItemData = $this->Reporting_Model->searchtermAssign_handler($searchItem);
+             $searchItemData = $this->Reporting_Model->searchtermAssign_handler($searchItem); 
+          }
+            
           
             
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
-        $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$searchItemData));
+       
+      
+          if($searchItemFr && $searchItemProd ) {
+                 $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,false,3));
+           }
+         else{
+            $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$searchItemData)); 
+              
+            }
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
-        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry,$config['per_page'], $this->uri->segment(3),$searchItemData);
-        $allQtyAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails(false,false);
+        if( $searchItemFr && $searchItemProd ) {
+               $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry,$config['per_page'], $this->uri->segment(3),false,3);
+           }
+          else{
+           $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails($searchAry,$config['per_page'], $this->uri->segment(3),$searchItemData);
+              
+            }
+        
+        $allQtyAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails(false,false,false,false,1);
+        $allQtyProductAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails(false,false,false,false,2);
+       
      
         $data['allQtyAssignAray'] = $allQtyAssignAray;
         $data['allQtyAssignListAray'] = $allQtyAssignListAray;
+        $data['allQtyProductAssignListAray'] = $allQtyProductAssignListAray;
         $data['szMetaTagTitle'] = "Stock Assignments";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Reporting";

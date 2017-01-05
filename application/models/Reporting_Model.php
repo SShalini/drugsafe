@@ -51,13 +51,24 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
-         public function getAllQtyAssignDetails($searchAry = '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchItemData='')
+         public function getAllQtyAssignDetails($searchAry = '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchItemData='',$flag='0')
         {
             if(!empty($searchItemData)){
                $searchq = "iFranchiseeId LIKE '%$searchItemData%' OR szName LIKE '%$searchItemData%' OR szProductCode LIKE '%$searchItemData%'";
             }
-        
-            $this->db->select('*');
+           
+        if($flag==1){
+            $this->db->distinct();
+           $this->db->select( 'szName');  
+        }elseif($flag==2)
+        {
+           $this->db->distinct();
+           $this->db->select( 'szProductCode');   
+        }
+            else{
+           $this->db->select( '*');  
+        }
+           
             $this->db->from(__DBC_SCHEMATA_STOCK_REQ_TRACKING__);
             
              if($_SESSION['drugsafe_user']['iRole']==5){
@@ -82,6 +93,15 @@ class Reporting_Model extends Error_Model {
              if (!empty($searchq)) {
                $this->db->where($searchq);
                }
+                if($flag==3){
+                    if( $searchItemFr &&  $searchItemProd ){
+                          $whereAry = array('szName' => $searchItemFr,'szProductCode' => $searchItemProd);  
+                    } else{
+                         $whereAry = array('szName' => $_POST['szSearch2'],'szProductCode' => $_POST['szSearch']);   
+                    }
+           
+                 $this->db->where($whereAry);
+            }
             }
             $this->db->limit($limit, $offset);
             $this->db->order_by(__DBC_SCHEMATA_STOCK_REQ_TRACKING__.'.id DESC');
@@ -191,6 +211,30 @@ public function searchtermAssign_handler($searchtermAssign='')
     { 
         $searchtermAssign ="";
         return $searchtermAssign;
+    }
+}
+public function searchtermAssignFrAndProd_handler($searchItemFr='',$searchItemProd='')
+{
+    if($searchItemFr && $searchItemProd)
+    {
+        $this->session->set_userdata('searchItemFr',$searchItemFr);
+        $this->session->set_userdata('searchItemProd',$searchItemProd);
+        return $searchItemFr;
+        return $searchItemProd;
+    }
+    elseif($this->session->userdata('searchItemFr')&&$this->session->userdata('searchItemProd'))
+    { 
+        $searchItemFr= $this->session->userdata('searchItemFr');
+         $searchItemProd= $this->session->userdata('searchItemProd');
+        return $searchItemFr;
+        return $searchItemProd;
+    }
+    else
+    { 
+        $searchItemFr ="";
+         $searchItemProd ="";
+          return $searchItemFr;
+        return $searchItemProd;
     }
 }
 }

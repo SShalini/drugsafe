@@ -51,9 +51,15 @@
                                       <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
+                                           if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                                             $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
+                                            }
+                                            else{
+                                                    $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                                                     $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
+                                            }
                                             foreach($searchOptionArr as $searchOptionList)
-                                            {
+                                                            {
                                                 $selected = ($searchOptionList['id'] == $_POST['szSearchFrRecord'] ? 'selected="selected"' : '');
                                                 echo '<option value="'.$searchOptionList['id'].'" >'.$searchOptionList['szName'].'</option>';
                                             }

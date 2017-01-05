@@ -516,8 +516,13 @@ class Franchisee_Controller extends CI_Controller
         }  
         
         if($id>0){
-          $clientAray = $this->Franchisee_Model->getAllClientDetails(true, false,false,false,false,false,$id);   
-    
+              if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+            $clientAray = $this->Franchisee_Model->getAllClientDetails(true, false,false,false,false,false,$id);   
+            }
+            else{
+                   $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                   $clientAray = $this->Franchisee_Model->getAllClientDetails(true, false,$operationManagerId,false,false,false,$id);   
+            }
          if(!empty($clientAray)){
            $this->session->set_userdata('id', $id);
            ob_end_clean();

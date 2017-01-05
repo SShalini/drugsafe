@@ -203,7 +203,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
         
          public function getAllClientDetails($parent=false,$franchiseId='',$operationManagrrId='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '',$id=0,$flag=0)
-        { 
+        {
              if(!empty($operationManagrrId)){
             $whereAry = array('operationManagerId=' => $operationManagrrId,'clientType='=>'0'); 
             $searchq = '';

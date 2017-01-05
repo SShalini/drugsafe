@@ -21,7 +21,7 @@ class Admin_Model extends Error_Model
   
      function set_start_time($value, $flag = true)
     {
-        $this->data['start_time'] = $this->validateInput($value, __VLD_CASE_TIME__, "start_time", "Preferred Start Time", false, false, $flag);
+        $this->data['start_time'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "start_time", "Preferred Start Time", false, false, $flag);
     }
     function set_specify_contact($value,$flag = true)
     {
@@ -970,7 +970,7 @@ class Admin_Model extends Error_Model
             }
                 
             if($this->error == true)
-            {  print_r($this->arErrorMessages);die;
+            { 
             return false;
             
             }

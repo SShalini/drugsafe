@@ -494,7 +494,7 @@
                                 <div class="portlet-body collapse" id="contact-details">
                                    <table class="table table-hover">
                                        <hr>
-                             <div class="font-green-meadow text">Who will be responsible for Scheduling?If you would like us to manage the scheduling,write "DrugSafe".</div>
+                             <div class="font-green-meadow text">Who will be responsible for Scheduling? If you would like us to manage the scheduling,write "DrugSafe".</div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['sp_name'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label"> Contact Name</label>
@@ -550,7 +550,7 @@
                                 </div>
 
                             </div>
-                                        <hr>
+                             <hr>
                              <div class="font-green-meadow text">Would anyone else be involved in Scheduling? </div>
                                <hr>
                                   <div class="form-group <?php if(!empty($arErrorMessages['iis_name'])){?>has-error<?php }?>">
@@ -1066,6 +1066,14 @@
                                 </div>
 
                             </div>
+                               <?php 
+                                    
+                                    if(!empty($_POST['req_ppe']))
+                                    {
+                                        $req_ppe_ary = $_POST['req_ppe'];
+                                    }
+                                   
+                                   ?>
                                  <div class="form-group <?php if(!empty($arErrorMessages['req_ppe'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label">Required PPE</label>
                                 <div class="col-md-6">
@@ -1073,19 +1081,19 @@
 
                                       <div class="checkbox"> 
 
-                                        <label><input type="checkbox" id="req_ppe1" value="1"  name="req_ppe[]"<?php if(in_array("1", $req_ppe_ary)||in_array("1", $_POST['req_ppe'])){?> checked<?php }?>> High Vis Work Wear</label>
+                                        <label><input type="checkbox" id="req_ppe1" value="1"  name="req_ppe[]"<?php if(in_array("1", $req_ppe_ary)){?> checked<?php }?>> High Vis Work Wear</label>
                                       </div>
                                        <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe2" value="2"  name="req_ppe[]"<?php if(in_array("2", $req_ppe_ary)||in_array("2", $_POST['req_ppe'])){?>checked<?php }?>> Head Protection</label>
+                                        <label><input type="checkbox" id="req_ppe2" value="2"  name="req_ppe[]"<?php if(in_array("2", $req_ppe_ary)){?>checked<?php }?>> Head Protection</label>
                                       </div>
                                        <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe3" value="3"  name="req_ppe[]"<?php if(in_array("3", $req_ppe_ary)||in_array("3", $_POST['req_ppe'])){?>checked<?php }?>> Face/Eye Protection</label>
+                                        <label><input type="checkbox" id="req_ppe3" value="3"  name="req_ppe[]"<?php if(in_array("3", $req_ppe_ary)){?>checked<?php }?>> Face/Eye Protection</label>
                                       </div>
                                         <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe4" value="4"  name="req_ppe[]"<?php if(in_array("4", $req_ppe_ary)||in_array("4", $_POST['req_ppe'])){?>checked<?php }?>> Safety Boots</label>
+                                        <label><input type="checkbox" id="req_ppe4" value="4"  name="req_ppe[]"<?php if(in_array("4", $req_ppe_ary)){?>checked<?php }?>> Safety Boots</label>
                                       </div>
                                       <div class="checkbox">
-                                        <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"<?php if(in_array("5", $req_ppe_ary)||in_array("5", $_POST['req_ppe'])){?>checked<?php }?>> Long Sleeve Clothing</label>
+                                        <label><input type="checkbox" id="req_ppe5"  name="req_ppe[]" value="5"<?php if(in_array("5", $req_ppe_ary)){?>checked<?php }?>> Long Sleeve Clothing</label>
                                       </div>
                                     </div>
                                      <?php if(!empty($arErrorMessages['req_ppe'])){?>
