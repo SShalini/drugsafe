@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/franchisee/editClient.php" afterPath="$PROJECT_DIR$/application/views/franchisee/editClient.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Webservices_Model.php" afterPath="$PROJECT_DIR$/application/models/Webservices_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" afterPath="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db changes/db changes.sql" afterPath="$PROJECT_DIR$/db changes/db changes.sql" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
@@ -27,64 +29,60 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Admin_Controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
+      <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11016">
-              <caret line="648" column="13" selection-start-line="648" selection-start-column="13" selection-end-line="648" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addClient.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/franchisee/addClient.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16422">
-              <caret line="966" column="46" selection-start-line="956" selection-start-column="40" selection-end-line="966" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="editClient.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/franchisee/editClient.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16711">
-              <caret line="983" column="74" selection-start-line="983" selection-start-column="70" selection-end-line="983" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Franchisee_Controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Franchisee_Controller.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="108" column="60" selection-start-line="108" selection-start-column="41" selection-end-line="108" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Admin_Model.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="904" column="45" selection-start-line="904" selection-start-column="45" selection-end-line="904" selection-end-column="45" />
+            <state relative-caret-position="183">
+              <caret line="424" column="23" selection-start-line="424" selection-start-column="13" selection-end-line="424" selection-end-column="23" />
               <folding>
-                <marker date="1483440356552" expanded="true" signature="29247:29365" ph="..." />
+                <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="e#4496#4514#0#PHP" expanded="false" />
+                <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Franchisee_Model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/Franchisee_Model.php">
+      <file leaf-file-name="admin_leftmenu.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="127" column="63" selection-start-line="127" selection-start-column="63" selection-end-line="127" selection-end-column="63" />
+            <state relative-caret-position="444">
+              <caret line="172" column="66" selection-start-line="172" selection-start-column="66" selection-end-line="172" selection-end-column="66" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clientRecord.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientRecord.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="455">
+              <caret line="128" column="113" selection-start-line="128" selection-start-column="33" selection-end-line="128" selection-end-column="116" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="94" column="23" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="23" />
+              <folding>
+                <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="e#31032#31217#0#PHP" expanded="false" />
+                <element signature="e#31140#31217#0#PHP" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,7 +114,6 @@
         <option value="$PROJECT_DIR$/application/models/Inventory_Model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Inventory_Controller.php" />
         <option value="$PROJECT_DIR$/application/views/inventory/marketingMaterialList.php" />
-        <option value="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" />
         <option value="$PROJECT_DIR$/application/models/StockMgt_Model.php" />
         <option value="$PROJECT_DIR$/application/views/stockManagement/productReqList.php" />
         <option value="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
@@ -133,8 +130,6 @@
         <option value="$PROJECT_DIR$/error_log" />
         <option value="$PROJECT_DIR$/application/config/constants.php" />
         <option value="$PROJECT_DIR$/live/application/config/constants.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
-        <option value="$PROJECT_DIR$/application/models/Webservices_Model.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/addClient.php" />
         <option value="$PROJECT_DIR$/application/views/layout/admin_footer.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/clientDetails.php" />
@@ -142,9 +137,12 @@
         <option value="$PROJECT_DIR$/application/views/layout/login_header.php" />
         <option value="$PROJECT_DIR$/application/helpers/utility_helper.php" />
         <option value="$PROJECT_DIR$/application/controllers/Admin_Controller.php" />
-        <option value="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/editClient.php" />
         <option value="$PROJECT_DIR$/application/models/Admin_Model.php" />
+        <option value="$PROJECT_DIR$/application/models/Webservices_Model.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
+        <option value="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" />
+        <option value="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" />
       </list>
     </option>
   </component>
@@ -185,7 +183,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -334,15 +331,34 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laundry" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../drugsafeapp" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -474,12 +490,13 @@
       <workItem from="1483331791734" duration="58000" />
       <workItem from="1483419256638" duration="15818000" />
       <workItem from="1483451812007" duration="1820000" />
-      <workItem from="1483501667152" duration="278000" />
+      <workItem from="1483501667152" duration="5325000" />
+      <workItem from="1483590005159" duration="4129000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="382107000" />
+    <option name="totallyTimeSpent" value="391283000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1378" height="744" extended-state="0" />
@@ -625,13 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/config/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1817">
@@ -721,30 +731,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5134">
           <caret line="302" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/formManagement/viewForm.php" />
-    <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6936">
-          <caret line="628" column="73" selection-start-line="628" selection-start-column="73" selection-end-line="628" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="729" column="37" selection-start-line="729" selection-start-column="37" selection-end-line="729" selection-end-column="37" />
-          <folding>
-            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="e#31036#31221#0#PHP" expanded="false" />
-            <element signature="e#31144#31221#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Error_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
@@ -799,6 +790,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-29">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -813,7 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="464">
           <caret line="89" column="6" selection-start-line="89" selection-start-column="6" selection-end-line="89" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -842,21 +833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="263" column="9" selection-start-line="263" selection-start-column="9" selection-end-line="263" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11016">
-          <caret line="648" column="13" selection-start-line="648" selection-start-column="13" selection-end-line="648" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -897,17 +873,74 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="904" column="45" selection-start-line="904" selection-start-column="45" selection-end-line="904" selection-end-column="45" />
+        <state relative-caret-position="2216">
+          <caret line="909" column="21" selection-start-line="909" selection-start-column="21" selection-end-line="909" selection-end-column="21" />
           <folding>
-            <marker date="1483440356552" expanded="true" signature="29247:29365" ph="..." />
+            <marker date="1483603100889" expanded="true" signature="29247:29365" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="648" column="13" selection-start-line="648" selection-start-column="13" selection-end-line="648" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="94" column="23" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="23" />
+          <folding>
+            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="e#31032#31217#0#PHP" expanded="false" />
+            <element signature="e#31140#31217#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="424" column="23" selection-start-line="424" selection-start-column="13" selection-end-line="424" selection-end-column="23" />
+          <folding>
+            <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="e#4496#4514#0#PHP" expanded="false" />
+            <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="172" column="66" selection-start-line="172" selection-start-column="66" selection-end-line="172" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="128" column="113" selection-start-line="128" selection-start-column="33" selection-end-line="128" selection-end-column="116" />
+          <folding />
         </state>
       </provider>
     </entry>

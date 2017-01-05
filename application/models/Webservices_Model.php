@@ -114,7 +114,7 @@ class Webservices_Model extends Error_Model
         $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', true, __VLD_CASE_NUMERIC__);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true, __VLD_CASE_NUMERIC__);
         $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Respresentative', true);
-        $this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Email Address', true);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Signature', true);
 
         if ($this->error) {
             return false;

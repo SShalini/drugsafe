@@ -106,7 +106,10 @@ class Webservices_Controller extends CI_Controller
         $dataArr['reqclient'] = !empty($jsondata->reqclient) ? $jsondata->reqclient : "";
         $dataArr['site'] = !empty($jsondata->site) ? $jsondata->site : "";
         $drug = '';
-        if(!empty($jsondata->drugtest)){
+        $dsarrcount = count($jsondata->drugtest);
+        if($dsarrcount == '1'){
+            $drug = $jsondata->drugtest;
+        }elseif(($dsarrcount > '1') && !empty($jsondata->drugtest)){
             foreach ($jsondata->drugtest as $key=>$value){
                 $drug .= $value.',';
             }
@@ -226,9 +229,9 @@ class Webservices_Controller extends CI_Controller
                 $coccount = (int)$sosdatares['totalcoccount'][0]['totalcoc'];
                 $cocid = (int)$sosdatares['cocid'][0]['cocid'];
                 if((int)$coccount > '1'){
-                    $responsedata = array("code" => 202, "count"=>(int)$coccount, "sosid"=>$sosdatares['sosid']);
+                    $responsedata = array("code" => 200, "count"=>(int)$coccount, "sosid"=>$sosdatares['sosid'],"message"=>"SOS form data saved successfully.");
                 }else{
-                    $responsedata = array("code" => 202, "count"=>(int)$coccount, "sosid"=>$sosdatares['sosid'], "cocid" => $cocid);
+                    $responsedata = array("code" => 200, "count"=>(int)$coccount, "sosid"=>$sosdatares['sosid'], "cocid" => $cocid,"message"=>"SOS form data saved successfully.");
                 }
 
             }elseif(!empty($sosdatares)){
