@@ -21,7 +21,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 
         <div class="form-actions">
-            <button class="btn red btn-block uppercase" type="button">SAVE</button>
+            
+             <input type="submit" class="btn red btn-block uppercase" value="SAVE"
+                                               name="recoverAdminData[submit]">
         </div>
 
         <div class="create-account">

@@ -584,9 +584,8 @@ class Admin_Controller extends CI_Controller {
                 'szAddress'
 
             );
-            if($this->Admin_Model->validateFranchiseeData($data_validate, $data_not_validate,0,TRUE))
+            if($this->Admin_Model->validateUsersData($data_validate, $data_not_validate,0,TRUE))
             {
-
                 if($this->Admin_Model->updateAdminPassword($passwordKey,$data_validate))
                 {
 

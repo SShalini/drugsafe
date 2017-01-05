@@ -953,7 +953,7 @@
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                         </span>
-                                        <input id="site_visit" class="form-control" type="text" value="<?php echo $_POST['clientData']['site_visit'] ;?>" placeholder="Site Visit" onfocus="remove_formError(this.id,'true')" name="clientData[site_visit]">
+                                        <input id="site_visit" class="form-control" type="number"min="0" max="52" value="<?php echo $_POST['clientData']['site_visit'] ;?>" placeholder="Site Visit" onfocus="remove_formError(this.id,'true')" name="clientData[site_visit]">
                                     </div>
                                      <?php if(!empty($arErrorMessages['site_visit'])){?>
                                     <span class="help-block pull-left">

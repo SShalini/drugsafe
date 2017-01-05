@@ -4,6 +4,7 @@ class Admin_Model extends Error_Model
 {
     var $id;
     var $szName;
+     var $start_time;
     var $szEmail;
     var $szPassword;
     var $data = array();
@@ -16,6 +17,11 @@ class Admin_Model extends Error_Model
     function set_szEmail($value,$field=false,$message=false , $flag = true)
     {
         $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "$field", "$message", false, false, $flag);
+    }
+  
+     function set_start_time($value, $flag = true)
+    {
+        $this->data['start_time'] = $this->validateInput($value, __VLD_CASE_TIME__, "start_time", "Preferred Start Time", false, false, $flag);
     }
     function set_specify_contact($value,$flag = true)
     {
@@ -940,12 +946,13 @@ class Admin_Model extends Error_Model
                 }
                 if (!in_array('site_people', $arExclude)) $this->set_site_people(sanitize_all_html_input(trim($data['site_people'])), true);
                 if(!in_array('test_count',$arExclude)) $this->set_test_count(sanitize_all_html_input(trim($data['test_count'])),true);
-//                if (!in_array('start_time', $arExclude)) $this->set_start_time(sanitize_all_html_input(trim($data['start_time'])), true);
+                if (!in_array('start_time', $arExclude)) $this->set_start_time(sanitize_all_html_input(trim($data['start_time'])), true);
+               
                 if($data['paperwork']==2){
                 if(!in_array('specify_contact',$arExclude)) $this->set_specify_contact(sanitize_all_html_input(trim($data['specify_contact'])),true);   
                 }
                  if($this->error == false )
-            {
+            { 
                     $adminData = $this->session->userdata('drugsafe_user');
                     $this->data['id'] = $idClient;
                  if ($this->checkUserExists($data['szEmail'],$this->data['id'])) {
@@ -963,9 +970,12 @@ class Admin_Model extends Error_Model
             }
                 
             if($this->error == true)
-                        return false;
-                else
-                       return true;
+            {  print_r($this->arErrorMessages);die;
+            return false;
+            
+            }
+                else{
+                return true;}
             }
             return false;
         }
