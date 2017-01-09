@@ -44,29 +44,52 @@ class Reporting_Controller extends CI_Controller
         }
 
            $searchAry = '';
-             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
+            
+              if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
+              $searchItemFr = $_POST['szSearch'];  
+              $searchItemProd = $_POST['szSearch']; 
+          }else{
+              if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
                $searchItem = $_POST['szSearch']; 
               
             }
-           
-            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
-                $searchItem = $_POST['szSearch1'];
-            }
-           
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $searchItem = $_POST['szSearch2'];
              }
-             $searchItemData = $this->Reporting_Model->searchterm_handler($searchItem);
-           
+             $searchItemData = $this->Reporting_Model->searchtermAssign_handler($searchItem); 
+          }
+
+             
         $count = $this->Admin_Model->getnotification();
         $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
-        $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$searchItemData));
+        
+         if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
+             
+               $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$searchItemData,3));
+          }else{
+              $config['total_rows'] = count($this->Reporting_Model->getAllQtyRequestDetails($searchAry, $limit, $offset,$searchItemData)); 
+              
+            }
+
         $config['per_page'] = 5;
         $this->pagination->initialize($config);
-        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3),$searchItemData);
-        $allQtyAssignListAray = $this->Reporting_Model->getAllQtyRequestDetails();
+        
+          if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
+             
+             $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3),$searchItemData,3);
+          }else{
+            $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails($searchAry, $config['per_page'], $this->uri->segment(3),$searchItemData);
+              
+            }
+
+        $allQtyRequestListAray = $this->Reporting_Model->getAllQtyRequestDetails(false,false,false,false,1);
+        $allQtyProductRequestListAray = $this->Reporting_Model->getAllQtyRequestDetails(false,false,false,false,2);
+      
+        
+        
         $data['allReqQtyAray'] = $allReqQtyAray;
-        $data['allQtyAssignListAray'] = $allQtyAssignListAray;
+        $data['allQtyProductRequestListAray'] = $allQtyProductRequestListAray;
+        $data['allQtyRequestListAray'] = $allQtyRequestListAray;
         $data['szMetaTagTitle'] = "All Stock Requests";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Reporting";
