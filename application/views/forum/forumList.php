@@ -98,10 +98,11 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th> Image </th>
-                                        <th> Forum Title</th>
-                                        <th> Short Descreption </th>
-                                        <th> Actions </th>
+                                       
+                                        <th style="width:150px"> Forum Title</th>
+                                        <th style="width:300px"> Short Descreption </th>
+                                         <th style="width:100px"> Total Topics </th>
+                                        <th  style="width:100px"> Actions </th>
                                        
                                     </tr>
                                 </thead>
@@ -111,14 +112,11 @@
                                         foreach($forumDataAray as $forumDataData)
                                         {  
                                           
-                                          
-                                            
                                             ?>
                                         <tr>
-                                            <td>
-                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $forumDataData['szforumImage']; ?>" width="60" height="60"/>    
-                                            </td>
+                                           
                                             <td> <?php echo $forumDataData['szForumTitle']?> </td>
+                                            <td> <?php echo $forumDataData['szForumDiscription'];?> </td>
                                             <td> <?php echo $forumDataData['szForumDiscription'];?> </td>
                                         
                                                 <td>
