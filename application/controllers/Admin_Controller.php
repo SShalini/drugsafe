@@ -75,8 +75,9 @@ class Admin_Controller extends CI_Controller {
                       if($user_session[iRole]=='1')
                       {
                         ob_end_clean();
-                          echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
-        exit();
+                          /*echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
+        exit();*/
+                          redirect(base_url('/admin/operationManagerList'));
 //                        header("Location:".__BASE_URL__."/admin/operationManagerList");
                         //die;
                       }
