@@ -139,7 +139,7 @@ class Reporting_Model extends Error_Model {
             }
         }
       
-        public function getFrAllQtyRequestDetails($searchAry = '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$franchiseeId = 0)
+        public function getFrAllQtyRequestDetails($searchAry = '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$franchiseeId = 0,$flag='0')
         {
         
             $searchAry = trim($searchAry);
@@ -151,8 +151,16 @@ class Reporting_Model extends Error_Model {
                 else{
                     $whereAry = array('iFranchiseeId' => $franchiseeId); 
                 }
+            if($flag==1){
            
-            $this->db->select('*');
+           $this->db->distinct();
+           $this->db->select( 'szProductCode');   
+        }
+            else{
+           $this->db->select( '*');  
+        }
+         
+          
             $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
             $this->db->join('tbl_product','tbl_stock_request.iProductId = tbl_product.id');
           
@@ -169,7 +177,7 @@ class Reporting_Model extends Error_Model {
                     return array();
             }
         }
-         public function getFrAllQtyAssignDetails($searchAry='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$franchiseeId = 0)
+         public function getFrAllQtyAssignDetails($searchAry='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$franchiseeId = 0,$flag='0')
         {
             $searchAry = trim($searchAry);
              if(!empty($searchAry)){
@@ -180,7 +188,15 @@ class Reporting_Model extends Error_Model {
                 else{
                     $whereAry = array('iFranchiseeId' => $franchiseeId); 
                 }
-            $this->db->select('*');
+                 if($flag==1){
+           
+           $this->db->distinct();
+           $this->db->select( 'szProductCode');   
+        }
+            else{
+           $this->db->select( '*');  
+        }
+           
             $this->db->from(__DBC_SCHEMATA_STOCK_REQ_TRACKING__);
             $this->db->join('tbl_product','tbl_stock_assign_tracking.iProductId = tbl_product.id');
             $this->db->where($whereAry);

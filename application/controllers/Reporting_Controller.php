@@ -574,7 +574,7 @@ class Reporting_Controller extends CI_Controller
         $this->pagination->initialize($config);
 
         $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails($searchAry, $config['per_page'], $this->uri->segment(3), $franchiseeId);
-        $allQtyAssignListAray = $this->Reporting_Model->getFrAllQtyAssignDetails(false, false, false, $franchiseeId);
+        $allQtyAssignListAray = $this->Reporting_Model->getFrAllQtyAssignDetails(false, false, false, $franchiseeId,1);
         
         $data['frAllQtyAssignAray'] = $frAllQtyAssignAray;
          $data['allQtyAssignListAray'] = $allQtyAssignListAray;
