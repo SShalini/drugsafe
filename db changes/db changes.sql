@@ -1,12 +1,11 @@
-ALTER TABLE `tbl_client` ADD `szBusinessName` VARCHAR(100) NULL , ADD `szContactEmail` VARCHAR(100) NOT NULL , ADD `szContactPhone` VARCHAR(15) NOT NULL , ADD `szContactMobile` VARCHAR(15) NOT NULL , ADD UNIQUE (`szBusinessName`) ;=======
-<--29 nov-->
-ALTER TABLE `tbl_client` ADD `szNoOfSites` INT(5) NOT NULL AFTER `szContactMobile`;
-ALTER TABLE `tbl_client` ADD UNIQUE(`szBusinessName`);
+ALTER TABLE `ds_coc` ADD `devicesrno` VARCHAR( 100 ) NOT NULL ,
+ADD `cutoff` VARCHAR( 50 ) NOT NULL ,
+ADD `donwaittime` VARCHAR( 15 ) NOT NULL ,
+ADD `dontest1` VARCHAR( 100 ) NOT NULL ,
+ADD `dontesttime1` VARCHAR( 15 ) NOT NULL ,
+ADD `dontest2` VARCHAR( 100 ) NOT NULL ,
+ADD `dontesttime2` VARCHAR( 15 ) NOT NULL ,
+ADD `donordecdate` DATETIME NOT NULL ,
+ADD `donordecsign` VARCHAR( 255 ) NOT NULL ;
 
-ALTER TABLE `ds_sites` CHANGE `psc_email` `psc_mobile` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL, CHANGE `ssc_mobile` `ssc_phone` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL, CHANGE `ssc_email` `ssc_mobile` VARCHAR(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
-ALTER TABLE `ds_sos` CHANGE `Drugtestid` `Drugtestid` VARCHAR(15) NOT NULL;
-ALTER TABLE `ds_sos` CHANGE `Drugtestid` `Drugtest` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
-<--7 dec By shalini-->
-ALTER TABLE `ds_user` CHANGE `iRole` `iRole` TINYINT(4) NOT NULL COMMENT '1:Franchisor,2:Franchisee,3:Parent Client,4:Child Client,5:Operation Manager';
-
-ALTER TABLE `tbl_product` ADD `dtExpiredOn` DATE NOT NULL AFTER `dtCreatedOn`;
+ALTER TABLE `ds_coc` CHANGE `donordecdate` `donordecdate` DATE NOT NULL ;

@@ -652,7 +652,7 @@
                                             <table class="table table-hover">
                                                 <hr>
                                                 <div class="font-green-meadow text">Who will be responsible for
-                                                    Scheduling? If you would like us to manage the scheduling,write
+                                                    Scheduling? If you would like us to manage the scheduling, write
                                                     "DrugSafe".
                                                 </div>
                                                 <hr>
@@ -1120,7 +1120,7 @@
                                                 <div
                                                     class="form-group <?php if (!empty($arErrorMessages['instructions'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label"> Any special instruction for
-                                                        DrugSafe staff (directions,instructions,etc.) </label>
+                                                        DrugSafe staff (directions, instructions, etc.) </label>
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">

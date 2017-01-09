@@ -118,6 +118,7 @@ class Webservices_Controller extends CI_Controller
             }
         }
         $dataArr['drugtest'] = $drug;
+        $dataArr['formtype'] = $jsondata->formtype;
         $dataArr['status'] = !empty($jsondata->status) ? $jsondata->status : "0";
         $dataArr['servicecomm'] = !empty($jsondata->servicecomm) ? $jsondata->servicecomm : "";
         $dataArr['donercount'] = !empty($jsondata->donercount) ? $jsondata->donercount : "1";
@@ -470,7 +471,16 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['receivertwolabel'] = !empty($jsondata->receivertwolabel) ? $jsondata->receivertwolabel : "";
         $data['coc']['reference'] = (!empty($jsondata->reference) ? $jsondata->reference : "");
         $data['coc']['cocid'] = (!empty($jsondata->cocid) ? $jsondata->cocid : "");
-        $data['coc']['status'] = (!empty($jsondata->status) ? $jsondata->status : "");
+        $data['coc']['status'] = (!empty($jsondata->status) ? $jsondata->status : "0");
+        $data['coc']['devicesrno'] = !empty($jsondata->devicesrno) ? $jsondata->devicesrno : "";
+        $data['coc']['cutoff'] = !empty($jsondata->cutoff) ? $jsondata->cutoff : "";
+        $data['coc']['donwaittime'] = !empty($jsondata->donwaittime) ? $jsondata->donwaittime : "";
+        $data['coc']['dontest1'] = !empty($jsondata->dontest1) ? $jsondata->dontest1 : "";
+        $data['coc']['dontesttime1'] = !empty($jsondata->dontesttime1) ? $jsondata->dontesttime1 : "";
+        $data['coc']['dontest2'] = !empty($jsondata->dontest2) ? $jsondata->dontest2 : "";
+        $data['coc']['dontesttime2'] = !empty($jsondata->dontesttime2) ? $jsondata->dontesttime2 : "";
+        $data['coc']['donordecdate'] = !empty($jsondata->donordecdate) ? $jsondata->donordecdate : "";
+        $data['coc']['donordecsign'] = !empty($jsondata->donordecsign) ? $jsondata->donordecsign : "";
         $donordata = $this->Webservices_Model->addcocdata($data['coc']);
         $errorMsgArr = $this->Webservices_Model->arErrorMessages;
         if($donordata)
@@ -592,6 +602,33 @@ class Webservices_Controller extends CI_Controller
 
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiveronesign'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiveronesign']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['devicesrno'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['devicesrno']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['cutoff'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['cutoff']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donwaittime'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donwaittime']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontest1'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontest1']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontesttime1'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontesttime1']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontest2'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontest2']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontesttime2'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontesttime2']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donordecdate'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donordecdate']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donordecsign'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donordecsign']);
 
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['error'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['error']);
