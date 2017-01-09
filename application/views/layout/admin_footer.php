@@ -75,6 +75,25 @@
         secondStep: 1,
         showInputs: false
     });
+
+    var error;
+    $('input[type=submit]').on('click', function(){
+        error = 0;
+
+        $("input, select, textarea").focus(function() {
+            if(error === 0){
+                error = 1
+
+                var target = $(this).offset().top;
+                var header = $('.page-header').height();
+
+                $(window).scrollTop( target - (header + 10) )
+            }
+        });
+    });
+    $('.dropdown').on('click tap', function() {
+        $(this).toggleClass("open");
+    });
 </script>
     </body>
 </html>

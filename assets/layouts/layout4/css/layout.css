@@ -1057,7 +1057,10 @@ Page sidebar
     .page-sidebar .mega-menu-responsive-content {
       padding: 10px 18px 10px 45px; }
   .page-full-width .page-sidebar-menu {
-    display: block; } }
+    display: block; }
+  .page-header.navbar{
+    height:auto;
+  }}
 
 @media (min-width: 768px) and (max-width: 991px) {
   /* 768px & 991px */
