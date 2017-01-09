@@ -281,6 +281,14 @@ function viewForm(flag) {
 
     });
 }
+function viewForum(idForum) {
+
+    $.post(__BASE_URL__ + "/forum/viewForumListData", {idForum: idForum}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/forum/" + ar_result[1];
+
+    });
+}
 function viewForumDetails(idCategory) {
 
     $.post(__BASE_URL__ + "/forum/viewForumData", {idCategory: idCategory}, function (result) {

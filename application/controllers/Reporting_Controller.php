@@ -71,7 +71,7 @@ class Reporting_Controller extends CI_Controller
               
             }
 
-        $config['per_page'] = 5;
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
         $this->pagination->initialize($config);
         
           if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
@@ -155,7 +155,7 @@ class Reporting_Controller extends CI_Controller
             $config['total_rows'] = count($this->Reporting_Model->getAllQtyAssignDetails($searchAry, $limit, $offset,$searchItemData)); 
               
             }
-        $config['per_page'] = 5;
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
         $this->pagination->initialize($config);
         if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
              
@@ -519,7 +519,7 @@ class Reporting_Controller extends CI_Controller
 
         $config['base_url'] = __BASE_URL__ . "/reporting/frstockreqlist/";
         $config['total_rows'] = count($this->Reporting_Model->getFrAllQtyRequestDetails($searchAry, $limit, $offset, $franchiseeId));
-        $config['per_page'] = 5;
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
         $this->pagination->initialize($config);
 
@@ -569,7 +569,7 @@ class Reporting_Controller extends CI_Controller
 
         $config['base_url'] = __BASE_URL__ . "/reporting/frstockassignlist/";
         $config['total_rows'] = count($this->Reporting_Model->getFrAllQtyAssignDetails($searchAry, $limit, $offset, $franchiseeId));
-        $config['per_page'] = 5;
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
         $this->pagination->initialize($config);
 

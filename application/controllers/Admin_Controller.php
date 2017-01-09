@@ -291,7 +291,7 @@ class Admin_Controller extends CI_Controller {
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
                 $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email,$opId));
-                $config['per_page'] = 5;
+                $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
               
             
                  $this->pagination->initialize($config);
@@ -345,7 +345,7 @@ class Admin_Controller extends CI_Controller {
           
                 $config['base_url'] = __BASE_URL__ . "/admin/operationManagerList/";
                 $config['total_rows'] = count($this->Admin_Model->viewOperationManagerList($searchAry,false,false,$id,$name,$email));
-                $config['per_page'] = 5;
+                $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
               
             
                 $this->pagination->initialize($config);

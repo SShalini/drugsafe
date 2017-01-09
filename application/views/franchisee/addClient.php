@@ -1240,8 +1240,7 @@
 
 
                                                 </div>
-                                                <div
-                                                    class="form-group <?php if (!empty($arErrorMessages['site_visit'])) { ?>has-error<?php } ?>">
+                                                <div  class="form-group <?php if (!empty($arErrorMessages['site_visit'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">How many times would you like
                                                         DrugSafe to visit your site and test per year?</label>
                                                     <div class="col-md-6">
@@ -1271,15 +1270,14 @@
                                                         </div>
                                                         <?php if (!empty($arErrorMessages['site_visit'])) { ?>
                                                             <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
+                                                         <i class="fa fa-times-circle"></i>
                                                                 <?php echo $arErrorMessages['site_visit']; ?>
-                                            </span>
+                                                       </span>
                                                         <?php } ?>
                                                     </div>
 
                                                 </div>
-                                                <div
-                                                    class="form-group <?php if (!empty($arErrorMessages['onsite_service'])) { ?>has-error<?php } ?>">
+                                                <div class="form-group <?php if (!empty($arErrorMessages['onsite_service'])) { ?>has-error<?php } ?>">
                                                     <label class="col-md-4 control-label">What type of service would you
                                                         like on-site?</label>
                                                     <div class="col-md-6">

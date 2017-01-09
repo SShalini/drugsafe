@@ -122,7 +122,7 @@ class Forum_Controller extends CI_Controller {
              
              $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
              $config['total_rows'] = count($this->Forum_Model->viewCategoriesList($limit,$offset,$searchAry));
-             $config['per_page'] = 5;
+             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
              $this->pagination->initialize($config);
             
@@ -190,12 +190,12 @@ class Forum_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-            $idCategory = $this->session->userdata('idCategory');
+             $idCategory = $this->session->userdata('idCategory');
              $searchAry = $_POST['szSearchforumTitle'];
              
              $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
-             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry,$idCategory));
-             $config['per_page'] = 5;
+             $config['total_rows'] = count($this->Forum_Model->viewForumDataList($limit,$offset,$searchAry,$idCategory));
+             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
              $this->pagination->initialize($config);
             
@@ -208,6 +208,7 @@ class Forum_Controller extends CI_Controller {
                     $data['forumDataAray'] = $forumDataAray;
                     $data['szMetaTagTitle'] = " Forum List";
                     $data['is_user_login'] = $is_user_login;
+                    $data['idCategory'] = $idCategory;
                     $data['pageName'] = "Forum";
                     $data['subpageName'] = "Forum_List";
                     $data['notification'] = $count;
@@ -321,5 +322,57 @@ class Forum_Controller extends CI_Controller {
                 }
             }
         }
+         function viewForumListData()
+        {
+            $idForum = $this->input->post('idForum');
+            
+                $this->session->set_userdata('idForum',$idForum);
+                
+                echo "SUCCESS||||";
+                echo "viewForum";
+            
+ 
+        }
+        function viewForum()
+    {
+        $idForum = $this->session->userdata('idForum');
+        $is_user_login = is_user_login($this);
+
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            die;
+        }
+         $searchAry = '';
+         
+         // handle pagination
+        $searchAry = $_POST['szSearchforumTitle'];
+        $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
+        $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($idForum,$limit,$offset,$searchAry));
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
+
+
+        $this->pagination->initialize($config);
+      
+       $forumDetailsAry = $this->Forum_Model->getForumDetailsByForumId($idForum,$config['per_page'],$this->uri->segment(3),$searchAry);
+       $forumDataSearchAray =$this->Forum_Model->getForumDetailsByForumId($idForum);
+       $count = $this->Admin_Model->getnotification();
+  
+   
+        $data['forumDetailsAry'] = $forumDetailsAry;
+        $data['forumDataSearchAray'] = $forumDataSearchAray;
+        $data['pageName'] = "Forum";
+        $data['subpageName'] = "Forum_List";
+        $data['szMetaTagTitle'] = "Forum Details List";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
+
+        
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('forum/viewForum');
+        $this->load->view('layout/admin_footer');
+       
+    }
     }      
 ?>

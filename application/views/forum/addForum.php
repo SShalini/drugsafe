@@ -211,4 +211,7 @@
 </script>
 <script>
 CKEDITOR.replace( 'szForumLongDiscription' );
+$(document).ready(function() {
+   CKEDITOR.config.removePlugins = 'Save,Print,Preview,Find,About,Maximize,ShowBlocks,Bold';
+});
 </script>

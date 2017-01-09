@@ -33,6 +33,31 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }   
+        
+        
+        public function viewCategoriesListByCatId($idCategory)
+        {
+           
+               $whereAry = array('isDeleted=' => '0','id='=> $idCategory);
+            
+                 $this->db->where($whereAry); 
+           
+            $this->db->select('szName');
+        
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_CATEGORY__);
+//      $sql = $this->db->last_query($query);
+//    print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+                $row = $query->result_array();
+                return $row['0'];
+            }
+            else
+            {
+                    return array();
+            }
+        }   
          public function getCategoryDetailsById($idCategory)
     {
 
@@ -91,7 +116,32 @@ class Forum_Model extends Error_Model {
              }
         }
         
-    public function getForumDetailsById($id)
+    public function getForumDetailsByForumId($idForum,$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry ='')
+    {
+       $searchAry = trim($searchAry);
+       if(!empty($searchAry)){
+       $whereAry = array('szForumTitle' => $searchAry,'isDeleted'=>'0','id' => $idForum);
+       $this->db->where($whereAry);      
+         }
+        else{
+        $whereAry = array('id' => $idForum);
+        $this->db->where($whereAry);
+        }
+         
+        $this->db->select('*');
+       
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_FORUM_DATA__);
+//      $sql = $this->db->last_query();
+//      print_r($sql);die;
+        if ($query->num_rows() > 0) {
+          return  $query->result_array();
+             
+        } else {
+            return array();
+        }
+    }
+      public function getForumDetailsById($id)
     {
 
         $this->db->select('*');

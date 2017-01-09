@@ -231,7 +231,7 @@ class Franchisee_Controller extends CI_Controller
         
         $config['base_url'] = __BASE_URL__ . "/franchisee/clientList/";
         $config['total_rows'] = count($this->Franchisee_Model->viewClientList(true, $franchiseId,$limit,$offset,$searchAry,$id));
-        $config['per_page'] = 5;
+        $config['per_page'] =__PAGINATION_RECORD_LIMIT__;
 
 
         $this->pagination->initialize($config);
@@ -346,7 +346,7 @@ class Franchisee_Controller extends CI_Controller
         $config['base_url'] = __BASE_URL__ . "/franchisee/viewClientDetails/";
          $config['total_rows'] = count( $this->Franchisee_Model->viewChildClientDetails($idClient,$limit,$offset,$searchAry,$id));
        
-        $config['per_page'] = 5;
+        $config['per_page'] =__PAGINATION_RECORD_LIMIT__;
 
 
         $this->pagination->initialize($config);
@@ -587,7 +587,7 @@ class Franchisee_Controller extends CI_Controller
                          $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$idClient,1));
                     }
 
-                $config['per_page'] = 2;
+                $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
            
             
         $this->pagination->initialize($config);
@@ -676,7 +676,7 @@ class Franchisee_Controller extends CI_Controller
         $searchAry = $_POST['szSearchClList'];
         $config['base_url'] = __BASE_URL__ . "/franchisee/franchiseeRecord/";
         $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerAray['id'],false,false,$id,$name,$email));
-        $config['per_page'] = 5;
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
 
         $this->pagination->initialize($config);

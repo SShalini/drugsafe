@@ -36,16 +36,18 @@
                             <a href="<?php echo __BASE_URL__;?>/forum/categoriesList">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                         <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($idCategory); 
+                        <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($forumDetailsAry['0']['idCategory']); 
                        ?>
                          <li>
-                            <a onclick=""
-                               href="javascript:void(0);"><?php echo $categoriesListAray['szName']; ?></a>
+                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"><?php echo $categoriesListAray['szName']; ?></a>
                             <i class="fa fa-circle"></i>
                         </li>
-                        <li>
-                            <span class="active">Forum List</span>
+                         <li>
+                            <a onclick=""
+                               href="javascript:void(0);"><?php echo $forumDetailsAry['0']['szForumTitle']; ?>'s Details</a>
+                            
                         </li>
+                     
                     </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
@@ -68,13 +70,12 @@
                         </div>
                         <?php
                         
-                        if(!empty($forumDataAray))
+                        if(!empty($forumDetailsAry))
                         {
-                      
                             ?>
                         
                           <div class="row">
-                           <form class="form-horizontal" id="szSearchforumData" action="<?=__BASE_URL__?>/forum/forumList " name="szSearchforumData" method="post">
+                           <form class="form-horizontal" id="szSearchforumData" action="<?=__BASE_URL__?>/forum/viewForum " name="szSearchforumData" method="post">
                           <div class="search col-md-3">
 <!--                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProdCode'])?><!--">-->
                               <select class="form-control custom-select" name="szSearchforumTitle" id="szSearchforumTitle" onfocus="remove_formError(this.id,'true')">
@@ -100,39 +101,26 @@
                                     <tr>
                                         <th> Image </th>
                                         <th> Forum Title</th>
-                                        <th> Short Descreption </th>
-                                        <th> Actions </th>
+                                        <th> Long Descreption </th>
+                                      
                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                        $i = 0;
-                                        foreach($forumDataAray as $forumDataData)
+                                        foreach($forumDetailsAry as $forumDetailsData)
                                         {  
-                                          
-                                          
+                                         
                                             
                                             ?>
                                         <tr>
                                             <td>
-                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $forumDataData['szforumImage']; ?>" width="60" height="60"/>    
+                                                <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $forumDetailsData['szforumImage']; ?>" width="60" height="60"/>    
                                             </td>
-                                            <td> <?php echo $forumDataData['szForumTitle']?> </td>
-                                            <td> <?php echo $forumDataData['szForumDiscription'];?> </td>
-                                        
-                                                <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Forum Details" onclick="editForum('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
-                                                </a>
-                                                     <a class="btn btn-circle btn-icon-only btn-default" title="View Forum Details" onclick="viewForum('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
-                                                    <i class="fa fa-eye"></i> 
-                                                </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Delete Forum Details " onclick="forumDeleteAlert(<?php echo $forumDataData['id'];?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                </a>
-                                                </td>
-                                      
+                                            <td> <?php echo $forumDetailsData['szForumTitle']?> </td>
+                                            <td> <?php echo $forumDetailsData['szForumLongDiscription'];?> </td>
+                                     
                                         </tr>
                                         <?php
                                         $i++;

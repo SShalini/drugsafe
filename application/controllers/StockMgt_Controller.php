@@ -699,7 +699,7 @@ class StockMgt_Controller extends CI_Controller {
                 $count = $this->Admin_Model->getnotification();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/stockreqlist/";
                 $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset));
-                $config['per_page'] = 5;
+                $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
 
                $this->pagination->initialize($config);
@@ -762,7 +762,7 @@ class StockMgt_Controller extends CI_Controller {
             $count = $this->Admin_Model->getnotification();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/viewproductlist/";
                 $config['total_rows'] = count($this->StockMgt_Model->getRequestQtyList($searchAry,$idfranchisee,$limit,$offset));
-                $config['per_page'] = 5;
+                $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
 
         $this->pagination->initialize($config);

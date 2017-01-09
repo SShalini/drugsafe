@@ -253,7 +253,7 @@ class Inventory_Controller extends CI_Controller {
              
              $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
              $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry));
-             $config['per_page'] = 5;
+             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
              $this->pagination->initialize($config);
             
@@ -290,7 +290,7 @@ class Inventory_Controller extends CI_Controller {
              $searchAry = $_POST['szSearchProductCode'];
              $config['base_url'] = __BASE_URL__ . "/inventory/marketingmateriallist/";
              $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset));
-             $config['per_page'] = 5;
+             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
              $this->pagination->initialize($config);
             
@@ -470,7 +470,7 @@ class Inventory_Controller extends CI_Controller {
             $searchAry = $_POST['szSearchProdCode'];
             $config['base_url'] = __BASE_URL__ . "/inventory/consumableslist/";
             $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry));
-            $config['per_page'] = 5;
+            $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
             $this->pagination->initialize($config);
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
