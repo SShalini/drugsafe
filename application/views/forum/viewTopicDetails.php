@@ -159,8 +159,10 @@
                                                 <span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
                                                   <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Reply &nbsp;</a></li>
+                                                   <?php if($commentsData['idCmnters']==$_SESSION['drugsafe_user']['id'] ){ ?>
                                                   <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
                                                   <li><a onclick="cmntDelete(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
+                                                   <?php }?>
                                                 </ul>
                                               </div> 
                                             <?php }?>
@@ -206,15 +208,19 @@
                                                               <span class="caret"></span></button>-->
                                                                  </div>  
                                                                      <?php if( $forumTopicDataAry['0']['isClosed']==0){?>
+                                                                <?php if($replyData['idReplier']==$_SESSION['drugsafe_user']['id'] ){ ?>    
                                                             <div class="dropdown col-md-3">
                                                               <button class="todo-comment-btn btn btn-circle btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
                                                                 <span class="caret"></span></button>
                                                                 <ul class="dropdown-menu">
-                                                           
+                                                            
                                                             <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
                                                             <li><a onclick="replyDelete(<?php echo $replyData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
-                                                          </ul>
+                                                            
+                                                                </ul>
                                                         </div> 
+                                                                    <?php }?>
+                                                                   
                                                                      <?php }?>
                                                                
                                                                    </div>

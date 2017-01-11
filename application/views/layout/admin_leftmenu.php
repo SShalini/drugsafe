@@ -188,6 +188,8 @@
 
                 </li>
            
+         
+           <?php } ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cubes" aria-hidden="true"></i>
@@ -203,17 +205,17 @@
                             <span class="title">Categories List</span>
                         </a>
                     </li>
+                      <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
                      <li class="nav-item  <?php if ($subpageName == 'Reply Approval') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/Replylist">
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                             <span class="title">Reply Approval</span>
                         </a>
                     </li>
-                   
+                  <?php }?> 
                 </ul>
 
-            </li>
-           <?php } ?>
+            </li>       
         </ul>
     </div>
 

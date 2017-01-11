@@ -64,7 +64,7 @@
                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                             <a href="<?= __BASE_URL__ ?>/forum/categoriesList" class="btn default uppercase"
+                                             <a href="<?= __BASE_URL__ ?>/forum/forumList" class="btn default uppercase"
                                            type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="SAVE" name="forumData[submit]">
                                         </div>

@@ -46,7 +46,7 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Category List</span>
                             </div>
-                           
+                          <?php if($_SESSION['drugsafe_user']['iRole']==1){?>  
                             <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>forum/addCategory');">
@@ -54,7 +54,7 @@
                                     </button>
                                 </div>
                         </div>
-                             
+                          <?php }?>       
                            
                         </div>
                         <?php
@@ -107,20 +107,22 @@
                                            
                                           
                                                 <td>
-                                                    
+                                                  <?php if($_SESSION['drugsafe_user']['iRole']==1){?>    
                                                  <a class="btn btn-circle btn-icon-only btn-default" title="Add Forum" onclick="addForum('<?php echo $categoriesData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-plus"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Category Details" onclick="editCategory('<?php echo $categoriesData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
+                                                  <?php }?>
                                                       <a class="btn btn-circle btn-icon-only btn-default" id="viewCategoryStatus" title="View Forum  Details " onclick="viewForumDetails(<?php echo $categoriesData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+                                                      <?php if($_SESSION['drugsafe_user']['iRole']==1){?>    
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Category Details" onclick="deleteCategoryAlert(<?php echo $categoriesData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
-                                                   
+                                                      <?php }?>  
                                                 </td>
                                   
                                         </tr>

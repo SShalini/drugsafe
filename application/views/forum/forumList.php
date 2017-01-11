@@ -124,15 +124,19 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Add Topic " onclick="addTopic('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-plus"></i> 
                                                 </a>
+                                                      <?php if($_SESSION['drugsafe_user']['iRole']==1){?>  
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Forum Details" onclick="editForum('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
+                                                      <?php }  ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="View Forum Details" onclick="viewForum('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-eye"></i> 
                                                 </a>
+                                                      <?php if($_SESSION['drugsafe_user']['iRole']==1){?>  
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Delete Forum Details " onclick="forumDeleteAlert(<?php echo $forumDataData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
+                                                      <?php }?>
                                                 </td>
                                       
                                         </tr>
