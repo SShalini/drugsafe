@@ -45,7 +45,57 @@ class Forum_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3> Forum Category added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
+                   
                     header("Location:" . __BASE_URL__ . "/forum/categoriesList");
+                    die;
+                }
+            }
+        }
+        function addTopicData()
+        {
+            $idForum = $this->input->post('idForum');
+            $this->session->set_userdata('idForum',$idForum);
+           
+            echo "SUCCESS||||";
+            echo "addTopic";
+            
+        }
+        public function addTopic() {
+              $count = $this->Admin_Model->getnotification();
+              $is_user_login = is_user_login($this);
+              $idForum = $this->session->userdata('idForum');
+              $value = $this->input->post('forumData');
+             
+            // redirect to dashboard if already logged in
+            if (!$is_user_login) {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('forumData[szTopicTitle]', 'Topic Title', 'required');
+            $this->form_validation->set_rules('forumData[szTopicDiscription]', 'Topic Discription', 'required');
+            $this->form_validation->set_message('required', '{field} is required');
+            if ($this->form_validation->run() == FALSE)
+            { 
+                $data['notification'] = $count;
+                $data['szMetaTagTitle'] = "Add Topic";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "Forum";
+                $data['subpageName'] = "Categories";
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('forum/addTopic');
+                $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+                if( $this->Forum_Model->insertTopic($value,$idForum))
+                {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<strong><h3> Forum Topic added successfully.</h3></strong>";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage); 
+                     $this->session->unset_userdata('idForum');
+                    header("Location:" . __BASE_URL__ . "/forum/forumList");
                     die;
                 }
             }
@@ -219,11 +269,23 @@ class Forum_Controller extends CI_Controller {
             $this->load->view('forum/forumList');
             $this->load->view('layout/admin_footer');
         }
+         function addForumData()
+        {
+            $idCategory = $this->input->post('idCategory');
+            $flag = $this->input->post('flag');
+            $this->session->set_userdata('idCategory',$idCategory);
+            $this->session->set_userdata('flag',$flag);
+           
+            echo "SUCCESS||||";
+            echo "addforum";
+            
+        }
          public function addforum() 
         {
             $count = $this->Admin_Model->getnotification();
              $validate = $this->input->post('forumData');
-            
+             $idCategory = $this->session->userdata('idCategory');
+             $flag = $this->session->userdata('flag');
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -241,6 +303,8 @@ class Forum_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
+                $data['idCategory'] = $idCategory;
+                $data['flag'] = $flag;
                 $data['szMetaTagTitle'] = "Add Forum Data";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Forum";
@@ -359,7 +423,9 @@ class Forum_Controller extends CI_Controller {
        $forumDataSearchAray =$this->Forum_Model->getForumDetailsByForumId($idForum);
        $count = $this->Admin_Model->getnotification();
   
+       $forumTopicDataAry =$this->Forum_Model->viewTopicList($idForum);
    
+        $data['forumTopicDataAry'] = $forumTopicDataAry;
         $data['forumDetailsAry'] = $forumDetailsAry;
         $data['forumDataSearchAray'] = $forumDataSearchAray;
         $data['pageName'] = "Forum";
@@ -374,5 +440,189 @@ class Forum_Controller extends CI_Controller {
         $this->load->view('layout/admin_footer');
        
     }
+     function viewTopicData()
+        {
+            $idTopic = $this->input->post('idTopic');
+            $idForum = $this->input->post('idForum');
+            $this->session->set_userdata('idTopic',$idTopic);
+            $this->session->set_userdata('idForum',$idForum);
+                
+                echo "SUCCESS||||";
+                echo "viewTopicDetails";
+            
+ 
+        }
+        function viewTopicDetails()
+    {
+        $idTopic = $this->session->userdata('idTopic');
+        $idForum = $this->session->userdata('idForum');
+        $is_user_login = is_user_login($this);
+
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            die;
+        }
+  
+        $forumTopicDataAry =$this->Forum_Model->viewTopicList($idForum,$idTopic,1);
+        
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('replyData[szForumLongDiscription]', 'Comments', 'required');
+            
+            $this->form_validation->set_message('required', '{field} is required');
+            
+            if ($this->form_validation->run() == FALSE)
+            {
+                $data['forumTopicDataAry'] = $forumTopicDataAry;
+                $data['pageName'] = "Forum";
+                 $data['idForum'] = $idForum;
+                $data['subpageName'] = "Forum_List";
+                $data['szMetaTagTitle'] = "Topic Details ";
+                $data['is_user_login'] = $is_user_login;
+                $data['notification'] = $count;
+
+
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('forum/viewTopicDetails');
+                $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+                if( $this->Forum_Model->insertComents($idTopic))
+                {
+                   
+                        $szMessage['type'] = "success";
+                        $szMessage['content'] = "<strong><h3> Comments Posted successfully.</h3></strong>";
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                        ob_end_clean();
+                        header("Location:" . __BASE_URL__ . "/forum/viewTopicDetails");
+                    die;
+                }
+            }
+
+    }
+     public function replyToCmnt()
+        {
+            $data['mode'] = '__REPLY_POPUP__';
+            $data['idCmnt'] = $this->input->post('idCmnt');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function replyToCmntConfirmation()
+    {
+        
+        $data['mode'] = '__REPLY_CONFIRM_POPUP__';
+        $data['idCmnt'] = $this->input->post('idCmnt');
+        $data['val'] = $this->input->post('val');
+        $this->Forum_Model->insertReply($data['idCmnt'],$data['val']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+     function Replylist()
+        {
+           $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                die;
+            }
+              $replyDataArr = $this->Forum_Model->getAllReply(); 
+               $count = $this->Admin_Model->getnotification();
+
+                  
+                    $data['szMetaTagTitle'] = "Reply Approval";
+                    $data['replyDataArr'] = $replyDataArr;
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Forum";
+                    $data['subpageName'] = "Reply Approval";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+           
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('forum/replyListForApproval');
+            $this->load->view('layout/admin_footer');
+        }
+        public function showCommentData()
+        {
+            $data['mode'] = '__COMMENT_POPUP__';
+            $data['szComment'] = $this->input->post('szComment');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function showReplyData()
+        {
+            $data['mode'] = '__SHOW_REPLY_POPUP__';
+            $data['szReply'] = $this->input->post('szReply');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function approveReplyAlert()
+        {
+            $data['mode'] = '__APPROVE_REPLY_POPUP__';
+            $data['idReply'] = $this->input->post('idReply');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+         public function approveReplyConfirmation()
+    {
+        
+        $data['mode'] = '__REPLY_APPROVE_CONFIRM_POPUP__';
+        $data['idReply'] = $this->input->post('idReply');
+        $this->Forum_Model->updateReplyApproval($data['idReply']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+      public function replyDeleteAlert()
+        {
+            $data['mode'] = '__DELETE_REPLY_POPUP__';
+            $data['idReply'] = $this->input->post('idReply');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function replyDeleteConfirmation()
+        {
+            $data['mode'] = '__DELETE_REPLY_POPUP_CONFIRM__';
+            $data['idReply'] = $this->input->post('idReply');
+            $this->Forum_Model->deleteReply($data['idReply']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }  
+      public function unapproveReplyAlert()
+        {
+            $data['mode'] = '__UNAPPROVE_REPLY_POPUP__';
+            $data['idReply'] = $this->input->post('idReply');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+         public function unapproveReplyConfirmation()
+    {
+        
+        $data['mode'] = '__REPLY_UNAPPROVE_CONFIRM_POPUP__';
+        $data['idReply'] = $this->input->post('idReply');
+        $this->Forum_Model->updateReplyUnapproval($data['idReply']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+          public function cmntDeleteAlert()
+        {
+            $data['mode'] = '__DELETE_COMMENT_POPUP__';
+            $data['idCmnt'] = $this->input->post('idCmnt');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function cmntDeleteConfirmation()
+        {
+            $data['mode'] = '__DELETE_COMMENT_POPUP_CONFIRM__';
+           $data['idCmnt'] = $this->input->post('idCmnt');
+            $this->Forum_Model->deleteCmnt($data['idCmnt']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        } 
+         public function closeTopicAlert()
+        {
+            $data['mode'] = '__TOPIC_CLOSE_POPUP__';
+            $data['idTopic'] = $this->input->post('idTopic');
+          
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function closeTopicConfirmationData()
+        {
+            $data['mode'] = '__TOPIC_CLOSE_POPUP_CONFIRM__';
+           $data['idTopic'] = $this->input->post('idTopic');
+            $this->Forum_Model->closeTopic( $data['idTopic']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        } 
     }      
 ?>

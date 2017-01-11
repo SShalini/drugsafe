@@ -464,4 +464,356 @@ if($mode == '__DELETE_FORUM_POPUP_CONFIRM__')
     
     <?php
 }
+
+if($mode == '__REPLY_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="replyStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+<!--                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Reply</h4><br>
+                </div>-->
+           
+                  <form action=""  id="replyData" name="replyData" method="post" class="form-horizontal  ">
+                       <div class="form-body ">
+                            <p class="alert alert-info mdl_align" ><i class="fa fa-bell"></i> Please Type your reply below the given box.</p>
+                          
+                           <hr>
+                         <div class="form-group <?php if(form_error('replyData[szReply]')){?>has-error<?php }?>">
+                                        <label class="col-md-1 control-label"> </label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                               
+                                                 <textarea  name="replyData[szReply]" id="szReply" class="form-control"  value=""  rows="7" cols="250"  placeholder="Reply" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('replyData[szReply]'); ?></textarea>
+                                              
+                                            </div>
+                                              <?php
+                                            if(form_error('replyData[szReply]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('replyData[szReply]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+
+                        </div>
+                        
+                      </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="replyToCmntConfirmation('<?php echo $idCmnt;?>'); return false;" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}if($mode == '__REPLY_CONFIRM_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="replyStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Reply To Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been posted successfully .</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/viewTopicDetails" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if($mode == '__COMMENT_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="showComment" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title"><b> Comment </b></h4>
+                </div>
+                  <div class="modal-body">
+                      <p class="alert alert-success"><b <?php  echo $szComment ;?> </i> </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+
+if($mode == '__SHOW_REPLY_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+
+    <div id="showReply" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title"><b> Reply </b></h4>
+                </div>
+                  <div class="modal-body">
+                      <p class="alert alert-success">  <?php  echo $szReply ;?></p>
+                </div>
+               
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if($mode == '__APPROVE_REPLY_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="approveReplyAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Approve Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to approved this reply?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="approveReplyConfirmation('<?php echo $idReply;?>'); return false;" class="btn green"><i class="fa fa-check"></i> Approve</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__REPLY_APPROVE_CONFIRM_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="approveReplyConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Approve Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been successfully approved.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if($mode == '__UNAPPROVE_REPLY_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="unapproveReplyAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Unapprove Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to unapproved this reply?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="unapproveReplyConfirmation('<?php echo $idReply;?>'); return false;" class="btn green"><i class="fa fa-times"></i> Unapprove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__REPLY_UNAPPROVE_CONFIRM_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="unapproveReplyConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Unapprove Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been successfully unapproved.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if($mode == '__DELETE_REPLY_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="replyDelete" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Delete Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Reply?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="replyDeleteConfirmation('<?php echo $idReply;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__DELETE_REPLY_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="replyDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Deleted Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Reply has been successfully deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/viewTopicDetails" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if($mode == '__DELETE_COMMENT_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="cmntDelete" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Delete Reply</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Comment?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="cmntDeleteConfirmation('<?php echo $idCmnt;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__DELETE_COMMENT_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="cmntDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Deleted Comment</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Comment has been successfully deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/viewTopicDetails" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if($mode == '__TOPIC_CLOSE_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="closeTopic" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Topic Close</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to close the selected Topic?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    
+                    <button type="button" onclick="closeTopicConfirmation('<?php echo $idTopic;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Submit </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__TOPIC_CLOSE_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="closeTopicConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Close Topic</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Topic has been successfully closed.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/viewForum" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
 ?>

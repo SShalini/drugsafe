@@ -166,6 +166,22 @@ function addFranchiseeData(idOperationManager,flag) {
 
     });
 }
+function addTopic(idForum) {
+
+    $.post(__BASE_URL__ + "/forum/addTopicData",{idForum: idForum}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/forum/" + ar_result[1];
+
+    });
+}
+function addForum(idCategory,flag) {
+
+    $.post(__BASE_URL__ + "/forum/addForumData",{idCategory: idCategory,flag: flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/forum/" + ar_result[1];
+
+    });
+}
 function franchiseeDelete(idfranchisee) {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/admin/deleteFranchiseeAlert", {idfranchisee: idfranchisee}, function (result) {
@@ -284,6 +300,14 @@ function viewForm(flag) {
 function viewForum(idForum) {
 
     $.post(__BASE_URL__ + "/forum/viewForumListData", {idForum: idForum}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/forum/" + ar_result[1];
+
+    });
+}
+function viewTopicDetails(idTopic,idForum) {
+
+    $.post(__BASE_URL__ + "/forum/viewTopicData", {idTopic: idTopic,idForum:idForum}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/forum/" + ar_result[1];
 
@@ -463,6 +487,38 @@ function productDeleteAlert(idProduct,flag)
             if (res == 'SUCCESS') {
                 $("#popup_box").html(result_ary[1]);
                 $('#categoryStatusConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
+  function replyToCmntsAlert(idCmnt)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/replyToCmnt", {idCmnt: idCmnt}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#replyStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function replyToCmntConfirmation(idCmnt) {
+  var val=jQuery('#szReply').val();
+ 
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#replyStatus').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/forum/replyToCmntConfirmation", {val:val,idCmnt: idCmnt}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#replyStatusConfirmation').modal("show");
             }
             jQuery('#loader').attr('style', 'display:none');
 
@@ -750,4 +806,190 @@ jQuery('#travel').html(res);
 
     });
 
+}
+  function showComment(szComment)
+{
+    
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/showCommentData", {szComment: szComment,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#showComment').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function showReply(szReply)
+{
+    
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/showReplyData", {szReply: szReply,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#showReply').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function approveReply(idReply)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/approveReplyAlert", {idReply:idReply,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#approveReplyAlert').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function approveReplyConfirmation(idReply) {
+
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#approveReplyAlert').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/forum/approveReplyConfirmation", {idReply: idReply}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#approveReplyConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
+function unapproveReply(idReply)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/unapproveReplyAlert", {idReply:idReply,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#unapproveReplyAlert').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function unapproveReplyConfirmation(idReply) {
+
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#approveReplyAlert').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/forum/unapproveReplyConfirmation", {idReply: idReply}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#unapproveReplyConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
+    
+    function replyDelete(idReply) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/replyDeleteAlert", {idReply: idReply}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#replyDelete').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function replyDeleteConfirmation(idReply) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#replyDelete').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/replyDeleteConfirmation", {idReply: idReply}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#replyDeleteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+function cmntDelete(idCmnt) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/cmntDeleteAlert", {idCmnt: idCmnt}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#cmntDelete').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function cmntDeleteConfirmation(idCmnt) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#cmntDelete').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/cmntDeleteConfirmation", {idCmnt: idCmnt}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#cmntDeleteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+function closeTopic(idTopic) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/closeTopicAlert", {idTopic: idTopic}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#closeTopic').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function closeTopicConfirmation(idTopic) {
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#closeTopic').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/closeTopicConfirmationData", {idTopic: idTopic}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#closeTopicConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
 }

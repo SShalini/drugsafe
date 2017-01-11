@@ -60,3 +60,35 @@ margin-bottom: 16px;
     left: 761.5px;
     top: 196px;  
 }
+
+.Forum{
+  float: none;
+  height:40px;
+  background-color: #1bbc9b ;
+ text-align: center;
+ line-height: 2.5;
+ padding: 4px 28px;
+ 
+ 
+  
+}
+
+.Reply{
+  float: none;
+  background-color: #1bbc9b ;
+  height:40px;
+  text-margin : left;
+  line-height: 2.5;
+    padding: 4px 28px;
+ 
+  
+}
+.reply-editor{
+   margin-top: 30px; 
+}
+.cmnts{
+     margin-top: 30px;  
+}
+.mdl_align{
+  text-align: center;    
+}

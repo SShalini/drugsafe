@@ -44,31 +44,25 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Forum List</span>
+                            <span class="active">Reply List</span>
                         </li>
                     </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Forum List</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Reply List</span>
                             </div>
                             <?php 
                             if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                             ?>
-                            <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="addForum('',2);" href="javascript:void(0);">
-                                        &nbsp;Add Topic
-                                    </button>
-                                </div>
-                        </div>
+                        
                             <?php }?>    
                            
                         </div>
                         <?php
                         
-                        if(!empty($forumDataAray))
+                        if(!empty($replyDataArr))
                         {
                       
                             ?>
@@ -80,7 +74,7 @@
                               <select class="form-control custom-select" name="szSearchforumTitle" id="szSearchforumTitle" onfocus="remove_formError(this.id,'true')">
                                   <option value="">Forum Title</option>
                                   <?php
-                                  foreach($forumDataSearchAray as $forumDataSearchList)
+                                  foreach($replyDataArr as $replyData)
                                   {
                                       $selected = ($forumDataSearchList['szForumTitle'] == $_POST['szSearchforumTitle'] ? 'selected="selected"' : '');
                                       echo '<option value="'.$forumDataSearchList['szForumTitle'].'" >'.$forumDataSearchList['szForumTitle'].'</option>';
@@ -99,9 +93,11 @@
                                 <thead>
                                     <tr>
                                        
-                                        <th style="width:200px"> Forum Title</th>
-                                        <th style="width:500px"> Short Descreption </th>
-                                         <th style="width:100px"> Total Topics </th>
+                                        <th >Topic</th>
+                                        <th>Comment</th>
+                                        <th> Reply</th>
+                                        <th>Reply By</th>
+                                        <th>Reply Date&Time</th>
                                         <th> Actions </th>
                                        
                                     </tr>
@@ -109,29 +105,37 @@
                                 <tbody>
                                     <?php
                                        $i = 0;
-                                        foreach($forumDataAray as $forumDataData)
-                                        {  
-                                        $TotalTopics = count($this->Forum_Model->viewTopicList($forumDataData['id'])); 
-                                       
+                                       foreach($replyDataArr as $replyData)
+                                        { 
+                                        $cmntsArr =$this->Forum_Model->viewCmntListByCmntId($replyData['idCmnt']); 
+                                        $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntsArr['idTopic']); 
+                                        
+                                        $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$replyData['idReplier']);
                                             ?>
                                         <tr>
-                                           
-                                            <td> <?php echo $forumDataData['szForumTitle']?> </td>
-                                            <td> <?php echo $forumDataData['szForumDiscription'];?> </td>
-                                            <td> <?php echo $TotalTopics;?> </td>
+                                          
+                                              <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
+                                              <?php 
+                                                $text = $cmntsArr['szCmnt'];
+                                                $newtext = wordwrap($text, 8, "\n", true);
+                                                $x =  preg_split('/\s+/', $newtext);
+                                               ?>
+                                              <td> <?php echo $x['0']; ?>... <a onclick="showComment('<?php echo $cmntsArr['szCmnt'];?>');" href="javascript:void(0);">Read more</a></td>
+                                               <?php 
+                                                $reply = $replyData['szReply'];
+                                                $replytext = wordwrap($reply,16, "\n", true);
+                                                $reply =  preg_split('/\s+/', $replytext);
+                                               ?>
+                                              <td> <?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a></td> </td>
+                                              <td> <?php echo $franchiseeDetArr1['szName']?> </td>
+                                              <td> <?php echo $TotalTopics;?> </td>
                                         
                                                 <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Add Topic " onclick="addTopic('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
-                                                    <i class="fa fa-plus"></i> 
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">
+                                                    <i class="fa fa-check"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Forum Details" onclick="editForum('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
-                                                </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="View Forum Details" onclick="viewForum('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">
-                                                    <i class="fa fa-eye"></i> 
-                                                </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Delete Forum Details " onclick="forumDeleteAlert(<?php echo $forumDataData['id'];?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Unapprove" onclick="unapproveReply(<?php echo $replyData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
                                                 </a>
                                                 </td>
                                       

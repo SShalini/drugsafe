@@ -42,7 +42,7 @@
                                            
                                         </div>
                                     </div>
-                               
+                               <?php if($flag==2){?>
                                     <div class="form-group <?php if(form_error('forumData[idCategory]')){?>has-error<?php }?>">
                                             <label class="col-md-3 control-label">Forum Category</label>
                                             <div class="col-md-5">
@@ -73,7 +73,12 @@
                                             </span><?php }?>
                                             </div>
 
-                                        </div> 
+                                        </div>
+                               <?php }else{?>
+                                    <input id="idCategory" class="form-control" type="hidden" value="<?php echo $idCategory?>" placeholder="Role"
+                                   onfocus="remove_formError(this.id,'true')" name="forumData[idCategory]">     
+                               <?php }?>
+                                    
                                     <div class="form-group <?php if(form_error('forumData[szForumDiscription]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Short Description</label>
                                         <div class="col-md-5">

@@ -203,6 +203,12 @@
                             <span class="title">Categories List</span>
                         </a>
                     </li>
+                     <li class="nav-item  <?php if ($subpageName == 'Reply Approval') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/Replylist">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            <span class="title">Reply Approval</span>
+                        </a>
+                    </li>
                    
                 </ul>
 

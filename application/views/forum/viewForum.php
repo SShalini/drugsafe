@@ -64,18 +64,14 @@
                         <div class="table-responsive ">
                             <table class="table table-striped  table-hover ">
                                 <thead>
-                                    <tr>
-                                        <th style="color:#1bbc9b" ><h3> Image</h3> </th>
-                                        <th style="color:#1bbc9b" ><h3> Long Descreption</h3> </th>
-                              
-                                    </tr>
+                                   
                                 </thead>
                                 <tbody>
                                     <?php
                                        $i = 0;
                                         foreach($forumDetailsAry as $forumDetailsData)
                                         {  
-                                         
+                                       
                                             
                                             ?>
                                         <tr>
@@ -106,7 +102,7 @@
           <hr>
            <?php
                         
-                        if(!empty($forumDetailsAry))
+                        if(!empty($forumTopicDataAry))
                         {
                             ?>
                         
@@ -117,23 +113,45 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 300px">Topic</th>
-                                        <th style="width: 100px">Replies </th>
-                                        <th style="width: 100px">Last Posts </th>
+                                        <th style="width: 100px">Status </th>
+                                        <th style="width: 100px">Comments </th>
+                                        <th style="width: 100px">Action</th>
                               
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                        $i = 0;
-                                        foreach($forumDetailsAry as $forumDetailsData)
+                                        foreach($forumTopicDataAry as $forumTopicData)
                                         {  
-                                         
+                                           
+                                        $commentsDataArr = count($this->Forum_Model->getAllCommentsByTopicId($forumTopicData['id'])); 
                                             
                                             ?>
                                         <tr>
-                                            <td> <?php echo $forumDetailsData['szForumLongDiscription'];?> </td> 
-                                            <td> <?php echo $forumDetailsData['szForumLongDiscription'];?> </td> 
-                                            <td> <?php echo $forumDetailsData['szForumLongDiscription'];?> </td>
+                                            <td> <?php echo $forumTopicData['szTopicTitle'];?> </td> 
+                                            <?php if($forumTopicData['isClosed']==1)
+                                            {?>
+                                                  <td style="color: #e73d4a">Close</td> 
+                                       <?php      }
+                                            else{ ?>
+                                             <td style="color: #1bbc9b">Open</td>  
+                                                   
+                                            <?php         }
+                                                
+                                                
+                                                ?>
+                                          
+                                            <td> <?php echo $commentsDataArr;?> </td> 
+                                            <td> <a class="btn btn-circle btn-icon-only btn-default" title="View Topic Details" onclick="viewTopicDetails('<?php echo $forumTopicData['id'];?>','<?php echo $forumTopicData['idForum'];?>');" href="javascript:void(0);">
+                                                    <i class="fa fa-eye"></i> 
+                                             </a>
+                                            <?php if($forumTopicData['isClosed']==0){ ?>
+                                            <a class="btn btn-circle btn-icon-only btn-default" title=" Topic Close" onclick="closeTopic('<?php echo $forumTopicData['id'];?>');" href="javascript:void(0);">
+                                                    <i class="fa fa-times-circle"></i> 
+                                             </a>
+                                            <?php }?>   
+                                            </td>
                                      
                                         </tr>
                                         <?php
