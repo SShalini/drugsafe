@@ -73,8 +73,12 @@
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                                          
+                                         <?php if(!empty($allReqQtyAray)&& (!empty($_POST['szSearch2']))){?>
+                                             <option value=""><?php echo $allReqQtyAray['0']['szName']?></option>
+                                          <?php } else {?>
                                           <option value="">Franchisee Name</option>
-                                          <?php
+                                          <?php }
                                           foreach($allQtyRequestListAray as $allQtyRequestListItem)
                                           {
                                               $selected = ($allQtyRequestListItem['szName'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
@@ -87,8 +91,12 @@
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
                                       <select class="form-control custom-select" name="szSearch" id="szSearchProductCode" onfocus="remove_formError(this.id,'true')">
+                                         
+                                          <?php if(!empty($allReqQtyAray)&& (!empty($_POST['szSearch']))){?>
+                                             <option value=""><?php echo $allReqQtyAray['0']['szProductCode']?></option>
+                                          <?php } else {?>
                                           <option value="">Product Code</option>
-                                          <?php
+                                          <?php }
                                           foreach($allQtyProductRequestListAray as $allQtyProductRequestListItem)
                                           {
                                               $selected = ($allQtyProductRequestListItem['szProductCode'] == $_POST['szSearch'] ? 'selected="selected"' : '');
