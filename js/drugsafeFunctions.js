@@ -993,3 +993,35 @@ function closeTopicConfirmation(idTopic) {
 
     }); 
 }
+function replyEditAlert(idReply) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/replyEditData", {idReply: idReply}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#replyEdit').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function replyEditConfirmation(idReply) {
+     var val=jQuery('#szReply').val();
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#replyEdit').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/replyEditConfirmation", {idReply: idReply,val:val}, function (result) {
+       
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#replyEditConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+

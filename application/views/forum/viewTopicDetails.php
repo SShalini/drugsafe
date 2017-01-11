@@ -214,7 +214,7 @@
                                                                 <span class="caret"></span></button>
                                                                 <ul class="dropdown-menu">
                                                             
-                                                            <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
+                                                            <li><a onclick="replyEditAlert(<?php echo $replyData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
                                                             <li><a onclick="replyDelete(<?php echo $replyData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
                                                             
                                                                 </ul>

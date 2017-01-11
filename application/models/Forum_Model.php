@@ -504,10 +504,15 @@ class Forum_Model extends Error_Model {
                     return false;
                 }	
 	}
-        public function getAllReply()
+        public function getAllReply($idReply='0',$flag='0')
         {
-               $whereAry = array('isApproved='=> '0');  
-           
+            if($flag==1){
+                $whereAry = array('id='=> $idReply);   
+            }
+            else{
+                $whereAry = array('isApproved='=> '0');   
+            }
+          
             $this->db->where($whereAry); 
             $this->db->select('id,idCmnt,szReply,isApproved,dtReplyOn,idReplier');
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_REPLY__);
@@ -522,7 +527,8 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }
-        public function updateReplyApproval($idReply)
+       
+      public function updateReplyApproval($idReply)
     {
 
         $dataAry = array(
@@ -546,12 +552,11 @@ class Forum_Model extends Error_Model {
     }
     
     
-      public function updateReplyUnapproval($idReply)
+      public function updateReply($idReply,$val)
     {
 
         $dataAry = array(
-            'isAdminApproved' => '0',
-            'isApproved' => '1'
+            'szReply' => $val,
         );
 
         $whereAry = array('id ' => (int)$idReply);

@@ -816,4 +816,73 @@ if($mode == '__TOPIC_CLOSE_POPUP_CONFIRM__')
     
     <?php
 }
+
+if($mode == '__EDIT_REPLY_POPUP__')
+{ 
+    echo "SUCCESS||||";
+    
+    ?>
+    <div id="replyEdit" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+<!--                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Reply</h4><br>
+                </div>-->
+           
+                  <form action=""  id="replyData" name="replyData" method="post" class="form-horizontal  ">
+                       <div class="form-body ">
+                            <p class="alert alert-info mdl_align" ><i class="fa fa-pencil"></i> Reply Edit</p>
+                          
+                           <hr>
+                         <div class="form-group <?php if(form_error('replyData[szReply]')){?>has-error<?php }?>">
+                                        <label class="col-md-1 control-label"> </label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                               
+                                                <textarea  name="replyData[szReply]" id="szReply" class="form-control"  value="<?php echo $szReply ;?>"  rows="7" cols="250"  placeholder="Reply" onfocus="remove_formError(this.id,'true')" ><?php echo $szReply ;?></textarea>
+                                              
+                                            </div>
+                                              <?php
+                                            if(form_error('replyData[szReply]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('replyData[szReply]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+
+                        </div>
+                        
+                      </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="replyEditConfirmation('<?php echo $idReply;?>'); return false;" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}if($mode == '__EDIT_REPLY_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="replyEditConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Edit Reply </h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been edited successfully .</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/viewTopicDetails" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
 ?>

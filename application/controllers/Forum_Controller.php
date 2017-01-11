@@ -624,5 +624,21 @@ class Forum_Controller extends CI_Controller {
             $this->Forum_Model->closeTopic( $data['idTopic']);
             $this->load->view('admin/admin_ajax_functions',$data);
         } 
+          public function replyEditData()
+        {
+            $data['mode'] = '__EDIT_REPLY_POPUP__';
+            $data['idReply'] = $this->input->post('idReply');
+            $replyArr = $this->Forum_Model->getAllReply($data['idReply'],1);
+            $data['szReply'] = $replyArr['0']['szReply'];
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function replyEditConfirmation()
+        {
+            $data['mode'] = '__EDIT_REPLY_POPUP_CONFIRM__';
+            $data['idReply'] = $this->input->post('idReply');
+            $data['val'] = $this->input->post('val');
+            $this->Forum_Model->updateReply($data['idReply'],$data['val']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        } 
     }      
 ?>
