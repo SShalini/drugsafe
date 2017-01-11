@@ -25,30 +25,7 @@
                     $this->session->unset_userdata('drugsafe_user_message');
             }
             ?>
-          
-            <div id="page_content" class="row">
-                <div class="col-md-12">
-                    <ul class="page-breadcrumb breadcrumb">
-                        <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/categoriesList">Home</a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                        <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($forumDetailsAry['0']['idCategory']); 
-                       ?>
-                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"><?php echo $categoriesListAray['szName']; ?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                         <li>
-                            <a onclick=""
-                               href="javascript:void(0);"><?php echo $forumDetailsAry['0']['szForumTitle']; ?>'s Details</a>
-                            
-                        </li>
-                     
-                    </ul>
-                    <div class="portlet light bordered">
-
-                        <?php
+            <?php
                         
                         if(!empty($forumTopicDataAry))
                         {
@@ -56,6 +33,28 @@
                           $forumDataArr = $this->Forum_Model->getForumDetailsById($idForum);
                          
                             ?>
+            <div id="page_content" class="row">
+                <div class="col-md-12">
+                    <ul class="page-breadcrumb breadcrumb">
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>/forum/categoriesList">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                     
+                         <li>
+                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"> <?php echo $forumDataArr['szForumTitle'];?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                            <a onclick=""
+                               href="javascript:void(0);"><?php echo $forumTopicDataAry['0']['szTopicTitle']?>'s Details</a>
+                            
+                        </li>
+                     
+                    </ul>
+                    <div class="portlet light bordered">
+
+                      
                   <!-- somewhere deep start -->
      <div class="row">
     <div class="center-block col-md-16 Forum">
@@ -132,6 +131,20 @@
                     foreach($commentsDataArr as $commentsData)
                     {
                      
+
+                    $splitTime = explode(" ",$commentsData['cmntDate']);
+                    $Cmntdate = $splitTime[0];
+                    $time = $splitTime[1];
+
+                      $Cmnttime=  date("g:i a", strtotime($time));
+
+                     $NewdateComment= explode('-', $Cmntdate);
+
+                     $CnmtmonthNum  = $NewdateComment['1'];
+
+                     $dateObj   = DateTime::createFromFormat('!m', $CnmtmonthNum);
+                     $CmntmonthName = $dateObj->format('M');
+                        
               $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$commentsData['idCmnters']);
               $szImage = __BASE_IMAGES_URL__."/default_profile_image.jpg";
                         ?>
@@ -153,7 +166,8 @@
                                             <?php }?>
                                             
                                                 <p class="todo-comment-head">
-                                                        <span class="todo-comment-username"><?php echo $franchiseeDetArr1['szName']?></span> &nbsp; <span class="todo-comment-date">18 Sep 2014 at 9:22am</span>
+                                                  
+                                                        <span class="todo-comment-username"><?php echo $franchiseeDetArr1['szName']?></span> &nbsp; <span class="todo-comment-date"><?php echo $NewdateComment['2'];?> <?php echo $CmntmonthName;?>  <?php  echo $NewdateComment['0'];?> at <?php echo $Cmnttime;?></span>
                                                 </p>
                                                 <p class="todo-text-color">
                                                          <?php echo $commentsData['szCmnt'] ?> <br>
@@ -167,15 +181,17 @@
                                                             
                                                              $splitTimeStamp = explode(" ",$replyData['dtReplyOn']);
                                                              $date1 = $splitTimeStamp[0];
-                                                            $time1 = $splitTimeStamp[1];
+                                                             $time1 = $splitTimeStamp[1];
                                                            
+                                                           $x=  date("g:i a", strtotime($time1));
+                                                     
                                                           $date= explode('-', $date1);
-                                                          $time=  explode(':', $time1);
+                                                        
                                                           
                                                           $monthNum  = $date['1'];
                                                          
                                                           $dateObj   = DateTime::createFromFormat('!m', $monthNum);
-                                                          $monthName = $dateObj->format('M'); // March
+                                                          $monthName = $dateObj->format('M'); 
                                                          
                                                             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$replyData['idReplier']);
                                                            ?>
@@ -185,7 +201,7 @@
                                                             
                                                                <div class="row">
                                                                     <div class="col-md-4 todo-comment-head">
-                                                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="todo-comment-username"><b style="color: #1bbc9b"><?php echo $franchiseeDetArr1['szName']?></b> </span> &nbsp; <span class="todo-comment-date"><?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at 4:30pm</span>
+                                                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="todo-comment-username"><b style="color: #1bbc9b"><?php echo $franchiseeDetArr1['szName']?></b> </span> &nbsp; <span class="todo-comment-date"><?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?></span>
 <!--                                                              <button class="todo-comment-btn btn btn-circle btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
                                                               <span class="caret"></span></button>-->
                                                                  </div>  
@@ -212,11 +228,12 @@
                                                           <?php }?>
                                         </div>
                                 </li>
-                               
+                             <hr>   
                                   <?php
                     $i++;
                     }
                ?>
+                               
                         </ul>
                 </div>
         </div>
@@ -226,6 +243,7 @@
    <?php } else {
     echo "";
  } ?>
+
     <?php if( $forumTopicDataAry['0']['isClosed']==0){?>
    <div class="row reply-editor">
     <form class="form-horizontal" id="replyData" action="<?=__BASE_URL__?>/forum/viewTopicDetails " name="replyData" method="post">

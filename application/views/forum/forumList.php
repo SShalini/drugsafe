@@ -56,13 +56,13 @@
                             <?php 
                             if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                             ?>
-                            <div class="actions">
+<!--                            <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="addForum('',2);" href="javascript:void(0);">
                                         &nbsp;Add Topic
                                     </button>
                                 </div>
-                        </div>
+                        </div>-->
                             <?php }?>    
                            
                         </div>

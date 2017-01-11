@@ -36,13 +36,7 @@
                             <a href="<?php echo __BASE_URL__;?>/forum/categoriesList">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                         <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($idCategory); 
-                       ?>
-                         <li>
-                            <a onclick=""
-                               href="javascript:void(0);"><?php echo $categoriesListAray['szName']; ?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
+                       
                         <li>
                             <span class="active">Reply List</span>
                         </li>
@@ -64,6 +58,7 @@
                         
                         if(!empty($replyDataArr))
                         {
+                            
                       
                             ?>
                         
@@ -111,7 +106,16 @@
                                         $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntsArr['idTopic']); 
                                         
                                         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$replyData['idReplier']);
-                                            ?>
+                                          
+                                            $splitTimeStamp = explode(" ",$replyData['dtReplyOn']);
+                                            $date1 = $splitTimeStamp[0];
+                                            $time1 = $splitTimeStamp[1];
+                                            $ReplyTime=  date("g:i a", strtotime($time1));
+                                            $date= explode('-', $date1);
+                                            $monthNum  = $date['1'];
+                                            $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                                            $monthName = $dateObj->format('M'); 
+                                        ?>
                                         <tr>
                                           
                                               <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
@@ -128,7 +132,7 @@
                                                ?>
                                               <td> <?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a></td> </td>
                                               <td> <?php echo $franchiseeDetArr1['szName']?> </td>
-                                              <td> <?php echo $TotalTopics;?> </td>
+                                              <td> <?php echo  $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $ReplyTime;?></td>
                                         
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">

@@ -137,15 +137,14 @@ class Forum_Model extends Error_Model {
              }
         } function insertForumData($data)
         {		
-           
+             $date = date('Y-m-d H:i:s');
             $dataAry = array(
                                 'szForumTitle' => $data['szForumTitle'],
-                                 'idCategory' => $data['idCategory'],
+                                'idCategory' => $data['idCategory'],
                                 'szForumDiscription' => $data['szForumDiscription'],
 				'szForumLongDiscription' => $data['szForumLongDiscription'],
                                 'szforumImage' => $data['szforumImage'],
-                                 'isDeleted' => '0',
-                
+                                'dtUpdatedOn' => $date,                
                             );
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_DATA__, $dataAry);
             
@@ -221,8 +220,7 @@ class Forum_Model extends Error_Model {
         
             $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_DATA__);
-//      $sql = $this->db->last_query();
-//      print_r($sql);die;
+
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -235,11 +233,16 @@ class Forum_Model extends Error_Model {
         
          public function deleteCategory($idCategory)
 	{
-		$dataAry = array(
-			'isDeleted' => '1'
-                );  
+        $forumDataAray =$this->viewForumDataList(false,false,false,$idCategory);  
+           
+        if (!empty($forumDataAray)) {
+            foreach ($forumDataAray as $forumDatalist) {
+                $this->deleteForum($forumDatalist['id']);
+            }
+
+        }
                 $this->db->where('id', $idCategory);
-		if($query = $this->db->update(__DBC_SCHEMATA_FORUM_CATEGORY__, $dataAry))
+		if($query = $this->db->delete(__DBC_SCHEMATA_FORUM_CATEGORY__))
                 {
                     return true;
                 }
@@ -250,11 +253,37 @@ class Forum_Model extends Error_Model {
 	}
          public function deleteForum($id)
 	{
-		$dataAry = array(
-			'isDeleted' => '1'
-                );  
+             $TotalTopicsArr = $this->viewTopicList($id); 
+             
+              if (!empty($TotalTopicsArr)) {
+            foreach ($TotalTopicsArr as $TotalTopicslist) {
+                $this->deleteTopic($TotalTopicslist['id']);
+            }
+
+        }
                 $this->db->where('id', $id);
-		if($query = $this->db->update(__DBC_SCHEMATA_FORUM_DATA__, $dataAry))
+		if($query = $this->db->delete(__DBC_SCHEMATA_FORUM_DATA__))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+         public function deleteTopic($id)
+	{
+          
+             $commentsDataArr = $this->Forum_Model->getAllCommentsByTopicId($id);
+          
+              if (!empty($commentsDataArr)) {
+            foreach ($commentsDataArr as $commentsDatalist) {
+                $this->deleteCmnt($commentsDatalist['id']);
+            }
+
+        }
+                $this->db->where('id', $id);
+		if($query = $this->db->delete(__DBC_SCHEMATA_FORUM_TOPIC__))
                 {
                     return true;
                 }
@@ -287,14 +316,14 @@ class Forum_Model extends Error_Model {
             } 
              public function UpdateForum($data,$id)
         {
-         
+           $date = date('Y-m-d H:i:s');
             $dataAry = array(                                  
                                  'szForumTitle' => $data['szForumTitle'],
                                 'szForumDiscription' => $data['szForumDiscription'],
 				'szForumLongDiscription' => $data['szForumLongDiscription'],
                                 'szforumImage' => $data['szforumImage'],
-                                'isDeleted' => '0',
-                 'idCategory' => $data['idCategory'],
+                                'dtCreatedOn' => $date,
+                                'idCategory' => $data['idCategory'],
                               
                             );
                 $this->db->where('id',(int)$id);
@@ -455,7 +484,7 @@ class Forum_Model extends Error_Model {
                 }	
 	}
          public function deleteCmnt($idCmnt)
-	{
+	{   
           $replyDataArr = $this->Forum_Model->getAllReplyByCmntsId($idCmnt,1); 
          
         if (!empty($replyDataArr)) {
