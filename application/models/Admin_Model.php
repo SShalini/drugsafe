@@ -848,14 +848,17 @@ class Admin_Model extends Error_Model
         if ($query->num_rows() > 0) {
             $row = $query->row_array();
             if ((int)$row['iActive'] == 0) {
-                $this->form_validation->set_rules('drugSafeForgotPassword[szEmail]', 'Your account is inactive.');
+                $this->addError('szEmail', "Your account is inactive.");
+                $this->form_validation->set_rules('drugSafeForgotPassword[szEmail]', '');
 
             } else if ((int)$row['isDeleted'] == 1) {
-                $this->form_validation->set_rules('drugSafeForgotPassword[szEmail]', 'Your account is deleted.');
+             $this->addError('szEmail', "Your account is deleted.");
+                
 
             }
         } else {
-            $this->form_validation->set_rules('drugSafeForgotPassword[szEmail]', 'This email address is not registered with Drug Safe.');
+               $this->addError('szEmail', "This email address is not registered with Drug Safe.");
+              
 
         }
 

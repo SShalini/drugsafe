@@ -69,15 +69,15 @@
      
  }
             ?>
-                <li class=" <?php echo $drActive?> ">
+<!--                <li class=" <?php echo $drActive?> ">
                         <a href="#tab1" data-toggle="tab">Drug Test Kit List</a>
-                </li>
-                 <li class="<?php echo $mrActive?>">
+                </li>-->
+<!--                 <li class="<?php echo $mrActive?>">
                         <a href="#tab2" data-toggle="tab">Marketing Material List</a>
                 </li>
                 <li class="<?php echo $conActive?>">
                         <a href="#tab3" data-toggle="tab">Consumables List</a>
-                </li>
+                </li>-->
             </ul>
                  <div class="tab-content">
                      <div class="tab-pane <?php echo $drActive?>" id="tab1">
@@ -156,7 +156,7 @@
                         </div> 
                  <div id="popup_box"></div>   
             </div>
-<div class="tab-pane <?php echo $mrActive?>" id="tab2">
+<!--<div class="tab-pane <?php echo $mrActive?>" id="tab2">
     <div id="page_content" class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
@@ -309,7 +309,7 @@
 
     </div>
     </div>
-    </div> 
+    </div> -->
                  <div id="popup_box"></div>   
             </div>
 <div id="popup_box"></div>       

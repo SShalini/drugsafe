@@ -115,7 +115,11 @@
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
                                       <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Franchisee Name</option>
+                                          <?php if(!empty($_POST['szSearchClRecord2'])){?>
+                                          <option value=""><?php echo $searchOptionList['szName'];?></option>
+                                          <?php } else {?>
+                                           <option value="">Franchisee Name</option>
+                                           <?php } ?>
                                           <?php
                                          foreach($searchOptionArr as $searchOptionList)
                                           {
