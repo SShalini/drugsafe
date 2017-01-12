@@ -77,7 +77,7 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }
             }
-     public function viewDrugTestKitList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '')
+     public function viewDrugTestKitList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '',$flag='')
         {
             $searchAry = trim($searchAry);
             if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5 )
@@ -89,8 +89,13 @@ class Inventory_Model extends Error_Model {
                 else{
                    $whereAry = array('isDeleted=' => '0','szProductCategory' => '1');
                 }
+            if($flag==1){
+              $this->db->select('id');  
+            }
+            else{
+             $this->db->select('*');   
+            }
             
-            $this->db->select('*');
             $this->db->where($whereAry); 
             $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_PRODUCT__);

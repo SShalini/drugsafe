@@ -143,6 +143,20 @@ class StockMgt_Model extends Error_Model
             return array();
         }
     }
+     public function getStockValueDetailsByProductId($idfranchisee, $id = 0)
+    {
+        $this->db->select('id');
+         $whereAry = array('iProductId' => $id, 'iFranchiseeId' => $idfranchisee);
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_MODEL_STOCK_VALUE__);
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            return array();
+        }
+    }
 
     public function getProductsDetailsById($idproduct)
     {

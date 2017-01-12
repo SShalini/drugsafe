@@ -157,8 +157,7 @@
                                             $operationManagerId = $this->Franchisee_Model->getOperationManagerId($franchiseeData['id']);
                                             $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operationManagerId['operationManagerId']);
                                            
-                                           
-                                        ?>
+                                         ?>
                                         <tr>
                                             <td> FR-<?php echo $franchiseeData['id'];?> </td>
                                             <td> <?php echo $franchiseeData['szName']?> </td>
@@ -182,10 +181,32 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>
+                                               <?php 
+                                                $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList(false,false,false,1);
+                                           
+                                        
+                                            foreach($drugTestKitListAray as $drugTestKitListData)
+                                            {
+                                                $drugTestKitDataArr[$drugTestKitListData['id']] = $this->StockMgt_Model->getStockValueDetailsByProductId($franchiseeData['id'],$drugTestKitListData['id']);   
+                                               
+                                            }
+                                          $emptyArr = false;
+                                           foreach($drugTestKitDataArr as $key => $val) {
+                                           if(empty($val)){
+                                             $emptyArr = true;
+                                          }
+                                            }
+                                            
+
+                                            if($emptyArr != true){
+                                         
+                                              
+                                               
+                                               ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="viewProductStockMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cubes" aria-hidden="true"></i>
                                                 </a>
-                                               <?php 
+                                               <?php }
                                                 $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
                                                 
                                               // print_r($clientDetailsAray);
