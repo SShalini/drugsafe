@@ -1,12 +1,12 @@
 <script type='text/javascript'>
-    $(function() {
+    $(function () {
 //        $("#szSearch").customselect();
         $("#szSearchname").customselect();
         $("#szSearchProductCode").customselect();
 
     });
 </script>
- <?php $this->session->unset_userdata('flag');?>
+<?php $this->session->unset_userdata('flag'); ?>
 <div class="page-content-wrapper">
     <div class="page-content">
 
@@ -56,59 +56,57 @@
                             <form class="form-horizontal" id="szSearchReqAssignList"
                                   action="<?= __BASE_URL__ ?>/reporting/stockassignlist " name="szSearchReqAssignList"
                                   method="post">
-<!--                                  <div class="search col-md-3">
-                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
+                                <!--                                  <div class="search col-md-3">
+                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<? //=sanitize_post_field_value($_POST['szSearch'])?>">
                               <select class="form-control custom-select" name="szSearch1" id="szSearch" onfocus="remove_formError(this.id,'true')">
                                   <option value="">Franchisee Id</option>
                                   <?php
-                                      foreach($allQtyAssignListAray as $allQtyAssignListItem)
-                                      {
-                                          $selected = ($allQtyAssignListItem['iFranchiseeId'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                          echo '<option value="'.$allQtyAssignListItem['iFranchiseeId'].'" >FR-'.$allQtyAssignListItem['iFranchiseeId'].'</option>';
-                                      }
-                                  ?>
+                                foreach ($allQtyAssignListAray as $allQtyAssignListItem) {
+                                    $selected = ($allQtyAssignListItem['iFranchiseeId'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
+                                    echo '<option value="' . $allQtyAssignListItem['iFranchiseeId'] . '" >FR-' . $allQtyAssignListItem['iFranchiseeId'] . '</option>';
+                                }
+                                ?>
                               </select>
                           </div>
                                   <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
-<!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
-                                  <div class="search col-md-3">
-                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
-                                      <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
-                                       
-                                          <?php if(!empty($allQtyAssignAray)&& (!empty($_POST['szSearch2']))){?>
-                                             <option value=""><?php echo $allQtyAssignAray['0']['szName']?></option>
-                                          <?php } else {?>
-                                          <option value="">Franchisee Name</option>
-                                          <?php }
-                                          foreach($allQtyAssignListAray as $allQtyAssignListItem)
-                                          {
-                                              $selected = ($allQtyAssignListItem['szName'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allQtyAssignListItem['szName'].'" >'.$allQtyAssignListItem['szName'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
-                                  </div>
-                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;"></div>
-                                  <div class="search col-md-3">
-                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?//=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
-                                      <select class="form-control custom-select" name="szSearch" id="szSearchProductCode" onfocus="remove_formError(this.id,'true')">
-                                         <?php if(!empty($allQtyAssignAray)&& (!empty($_POST['szSearch']))){?>
-                                             <option value=""><?php echo $allQtyAssignAray['0']['szProductCode']?></option>
-                                          <?php } else {?>
-                                        <option value="">Product Code</option>
-                                         
-                                          <?php }
-                                          foreach($allQtyProductAssignListAray as $allQtyProductAssignListItem)
-                                          {
-                                              $selected = ($allQtyProductAssignListItem['szProductCode'] == $_POST['szSearch'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allQtyProductAssignListItem['szProductCode'].'" >'.$allQtyProductAssignListItem['szProductCode'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
-                                  </div>
-                                  <div class="col-md-1">
-                                  <button class="btn green-meadow" type="submit" value="Submit" name="submit"><i class="fa fa-search"></i></button>
-                                  </div>
+                                <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+                                <div class="search col-md-3">
+                                    <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="-->
+                                    <? /*//=sanitize_post_field_value($_POST['szSearch'])*/ ?><!--">-->
+                                    <select class="form-control custom-select" name="szSearch2" id="szSearchname"
+                                            onfocus="remove_formError(this.id,'true')">
+                                        <option value="">Franchisee</option>
+                                        <?php foreach ($allQtyAssignListAray as $allQtyAssignListItem) {
+                                            $selected = ($allQtyAssignListItem['szName'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
+                                            echo '<option value="' . $allQtyAssignListItem['szName'] . '" ' . $selected . '>' . $allQtyAssignListItem['szName'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-1" style="text-align: center; padding: 5px 0px;"></div>
+                                <div class="search col-md-3">
+                                    <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="-->
+                                    <? //=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
+                                    <select class="form-control custom-select" name="szSearch" id="szSearchProductCode"
+                                            onfocus="remove_formError(this.id,'true')">
+                                        <?php if (!empty($allQtyAssignAray) && (!empty($_POST['szSearch']))) { ?>
+                                            <option
+                                                value=""><?php echo $allQtyAssignAray['0']['szProductCode'] ?></option>
+                                        <?php } else { ?>
+                                            <option value="">Product Code</option>
+
+                                        <?php }
+                                        foreach ($allQtyProductAssignListAray as $allQtyProductAssignListItem) {
+                                            $selected = ($allQtyProductAssignListItem['szProductCode'] == $_POST['szSearch'] ? 'selected="selected"' : '');
+                                            echo '<option value="' . $allQtyProductAssignListItem['szProductCode'] . '" >' . $allQtyProductAssignListItem['szProductCode'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <button class="btn green-meadow" type="submit" value="Submit" name="submit"><i
+                                            class="fa fa-search"></i></button>
+                                </div>
                             </form>
                         </div>
                         <div class="row">
@@ -120,10 +118,10 @@
                                         <th> Id</th>
                                         <th> Franchisee</th>
                                         <th> Product Code</th>
-                                        <th> Cost Per Item </th>
+                                        <th> Cost Per Item</th>
                                         <th> Total Cost For Quantity Assign</th>
-                                        <th>Quantity Assign By </th>
-                                        <th>Quantity Updated By  </th>
+                                        <th>Quantity Assign By</th>
+                                        <th>Quantity Updated By</th>
                                         <th> Quantity Assigned</th>
                                         <th> Quantity Adjusted</th>
                                         <th> Available Quantity</th>
@@ -137,9 +135,9 @@
                                         $i = 0;
 
                                         foreach ($allQtyAssignAray as $allQtyAssignData) {
-                                                          $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($allQtyAssignData['iFranchiseeId'],$allQtyAssignData['id']);
-                                                          $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($allQtyAssignData['iFranchiseeId'],$allQtyAssignData['id']);
-                                                          $qtyUpdateData1Arr =end($qtyUpdateDataArr);
+                                            $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($allQtyAssignData['iFranchiseeId'], $allQtyAssignData['id']);
+                                            $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($allQtyAssignData['iFranchiseeId'], $allQtyAssignData['id']);
+                                            $qtyUpdateData1Arr = end($qtyUpdateDataArr);
 //                                           $productDataAry = $this->Inventory_Model->getProductDetailsById($allQtyAssignData['iProductId']);
 //                                          
 //                                           $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$allQtyAssignData['iFranchiseeId']);
@@ -150,51 +148,44 @@
                                                 <td> FR-<?php echo $allQtyAssignData['iFranchiseeId']; ?> </td>
                                                 <td> <?php echo $allQtyAssignData['szName'] ?> </td>
                                                 <td> <?php echo $allQtyAssignData['szProductCode']; ?> </td>
-                                                 <td> $<?php echo $allQtyAssignData['szProductCost']; ?> </td>
-                                                 <td> <?php
-                                                 if($allQtyAssignData['quantityDeducted'] !=0){
-                                                     $Qty= $allQtyAssignData['quantityDeducted'];
-                                                      $Cost= $allQtyAssignData['szProductCost'];
-                                                      $TotalCostPerQty = ($Qty*$Cost);
-                                                      echo  "(-) $". $TotalCostPerQty; 
-                                                   }
-                                                   else{
-                                                        $Qty= $allQtyAssignData['szQuantityAssigned'];
-                                                        $Cost= $allQtyAssignData['szProductCost'];
-                                                        $TotalCostPerQty = ($Qty*$Cost);
-                                                         echo "(+) $".$TotalCostPerQty;  
-                                                     }
-                                                     ?>
+                                                <td> $<?php echo $allQtyAssignData['szProductCost']; ?> </td>
+                                                <td> <?php
+                                                    if ($allQtyAssignData['quantityDeducted'] != 0) {
+                                                        $Qty = $allQtyAssignData['quantityDeducted'];
+                                                        $Cost = $allQtyAssignData['szProductCost'];
+                                                        $TotalCostPerQty = ($Qty * $Cost);
+                                                        echo "(-) $" . $TotalCostPerQty;
+                                                    } else {
+                                                        $Qty = $allQtyAssignData['szQuantityAssigned'];
+                                                        $Cost = $allQtyAssignData['szProductCost'];
+                                                        $TotalCostPerQty = ($Qty * $Cost);
+                                                        echo "(+) $" . $TotalCostPerQty;
+                                                    }
+                                                    ?>
                                                 </td>
-                                                 <td>
-                                                        <?php 
-                                                        if($qtyAssignDataArr['szAssignBy'])
-                                                        {
-                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyAssignDataArr['szAssignBy']);
-                                                            echo $franchiseeDetArr['szName'];
-                                                        }
-                                                        else
-                                                        {
-                                                           echo "N.A";
-                                                        }
+                                                <td>
+                                                    <?php
+                                                    if ($qtyAssignDataArr['szAssignBy']) {
+                                                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $qtyAssignDataArr['szAssignBy']);
+                                                        echo $franchiseeDetArr['szName'];
+                                                    } else {
+                                                        echo "N.A";
+                                                    }
 
-                                                        ?> 
-                                                    </td>
-                                                        
-                                                        <td>
-                                                             <?php 
-                                                        if($qtyUpdateData1Arr['szLastUpdatedBy'])
-                                                        {
-                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyUpdateData1Arr['szLastUpdatedBy']);
-                                                            echo $franchiseeDetArr['szName'];
-                                                        }
-                                                        else
-                                                        {
-                                                           echo "N.A";
-                                                        }
+                                                    ?>
+                                                </td>
 
-                                                        ?> 
-                                                    </td>
+                                                <td>
+                                                    <?php
+                                                    if ($qtyUpdateData1Arr['szLastUpdatedBy']) {
+                                                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $qtyUpdateData1Arr['szLastUpdatedBy']);
+                                                        echo $franchiseeDetArr['szName'];
+                                                    } else {
+                                                        echo "N.A";
+                                                    }
+
+                                                    ?>
+                                                </td>
                                                 <td> <?php echo $allQtyAssignData['szQuantityAssigned']; ?> </td>
                                                 <td> <?php echo $allQtyAssignData['quantityDeducted']; ?> </td>
                                                 <td> <?php echo $allQtyAssignData['szTotalAvailableQty']; ?> </td>
@@ -219,7 +210,7 @@
                             <div class="col-md-7 col-sm-7">
                                 <div class="dataTables_paginate paging_bootstrap_full_number">
                                     <?php echo $this->pagination->create_links(); ?>
-                                   
+
                                 </div>
                             </div>
 
