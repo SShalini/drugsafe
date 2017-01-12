@@ -51,7 +51,7 @@
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> <?php echo __FRANCHISEE_OWNER_PRICE_1__ ?> </td>
                                         <td> $<?php echo __RRP_1__ ?> </td>
-                                     <td> $<?php $Val1=$countDoner*__RRP_1__; echo $Val1 ?>  </td> 
+                                     <td> $<?php $Val1=$countDoner*__RRP_1__; echo $Val1; ?>  </td> 
                                     </tr>
                                <?php }?> 
                                      <?php if(in_array(2, $DrugtestidArr)){?>
@@ -60,7 +60,7 @@
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> <?php echo __FRANCHISEE_OWNER_PRICE_2__ ?> </td>
                                         <td> $<?php echo __RRP_2__ ?> </td>
-                                    <td> $<?php $Val2=$countDoner*__RRP_2__; echo $Val2 ?>  </td> 
+                                    <td> $<?php $Val2=$countDoner*__RRP_2__; echo $Val2; ?>  </td> 
                                     </tr>
                                <?php }?> 
                                      <?php if(in_array(3, $DrugtestidArr)){?>
@@ -69,7 +69,7 @@
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> <?php echo __FRANCHISEE_OWNER_PRICE_3__ ?> </td>
                                         <td> $<?php echo __RRP_3__ ?> </td>
-                                       <td> $<?php $Val3=$countDoner*__RRP_3__; echo $Val3 ?>  </td> 
+                                       <td> $<?php $Val3=$countDoner*__RRP_3__; echo $Val3; ?>  </td> 
                                    
                                     </tr>
                                       <?php }?> 

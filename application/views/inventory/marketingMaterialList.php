@@ -74,7 +74,7 @@
                                   foreach($marketingMaterialListAray as $marketItem)
                                   {
                                       $selected = ($marketItem['szProductCode'] == $_POST['szSearchProdCode'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$marketItem['szProductCode'].'" >'.$marketItem['szProductCode'].'</option>';
+                                      echo '<option value="'.$marketItem['szProductCode'].'" ' . $selected . '>'.$marketItem['szProductCode'].'</option>';
                                   }
                                   ?>
                               </select>

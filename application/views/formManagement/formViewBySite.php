@@ -106,7 +106,7 @@
                                          foreach($childClientDetailsAray as $childClientDetailsList)
                                           {
                                               $selected = ($childClientDetailsList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$childClientDetailsList['id'].'" >'.$childClientDetailsList['szName'].'</option>';
+                                              echo '<option value="'.$childClientDetailsList['id'].'" ' . $selected . '>'.$childClientDetailsList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>

@@ -116,7 +116,7 @@
                     </a>
                     <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
                         <li class="nav-item  <?php if ($subpageName == 'All_Stock_Requests') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/allstockreqlist">
+                           <a class="nav-link nav-toggle"  onclick="viewstockreqlistData('1');" href="javascript:void(0);">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">All Stock Requests</span>
                             </a>
@@ -209,7 +209,7 @@
                      <li class="nav-item  <?php if ($subpageName == 'Reply Approval') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/Replylist">
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
-                            <span class="title">Reply Approval</span>
+                            <span class="title"> Approval</span>
                         </a>
                     </li>
                   <?php }?> 

@@ -28,13 +28,27 @@ class Reporting_Controller extends CI_Controller
             die;
         }
     }
+    function allstockreqlistData()
+        {
+            $flag = $this->input->post('flag');
+            
+                $this->session->set_userdata('flag',$flag);
+                
+                echo "SUCCESS||||";
+                echo "allstockreqlist";
+            
+ 
+        }
 
     function allstockreqlist()
     { 
-         if(empty($_POST)||empty($_POST['szSearchProdCode'])){
+         if(!empty($_POST)){
           $this->session->unset_userdata('searchterm');   
         }
-       
+        $flag = $this->session->userdata('flag');
+         if($flag==1){
+            $this->session->unset_userdata('searchterm');    
+         }
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -56,10 +70,10 @@ class Reporting_Controller extends CI_Controller
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
                 $searchItem = $_POST['szSearch2'];
              }
-             $searchItemData = $this->Reporting_Model->searchtermAssign_handler($searchItem); 
+             $searchItemData = $this->Reporting_Model->searchterm_handler($searchItem); 
           }
-
-             
+       
+           
         $count = $this->Admin_Model->getnotification();
         $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
         
@@ -100,7 +114,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/stockRequestList');
         $this->load->view('layout/admin_footer');
     }
- function stockassignlistData()
+   function stockassignlistData()
         {
             $flag = $this->input->post('flag');
             
@@ -143,9 +157,6 @@ class Reporting_Controller extends CI_Controller
              }
              $searchItemData = $this->Reporting_Model->searchtermAssign_handler($searchItem); 
           }
-            
-          
-            
         $config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
        
        if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
@@ -182,7 +193,21 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/stockAssignList');
         $this->load->view('layout/admin_footer');
     }
-
+function ViewReqReportingPdfData()
+        {
+            $franchiseeName = $this->input->post('franchiseeName');
+            $productCode = $this->input->post('productCode');
+          
+            
+                $this->session->set_userdata('productCode',$productCode);
+                $this->session->set_userdata('franchiseeName',$franchiseeName);
+               
+                
+                echo "SUCCESS||||";
+                echo "pdfstockreqlist";
+            
+ 
+        }
     public function pdfstockreqlist()
     {
         ob_start();
@@ -204,7 +229,14 @@ class Reporting_Controller extends CI_Controller
         $pdf->SetFont('times', '', 12);
         // Add a page
         $pdf->AddPage();
-        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails(false, false, false);
+        
+        $franchiseeName = $this->session->userdata('franchiseeName');
+        $productCode = $this->session->userdata('productCode');
+        
+            
+           $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetailsForPdf($franchiseeName,$productCode);  
+       
+      
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Request Report</b></p></div>
             <div class= "table-responsive" >
@@ -241,9 +273,26 @@ class Reporting_Controller extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
         error_reporting(E_ALL);
+       
+          $this->session->unset_userdata('productCode');
+           $this->session->unset_userdata('franchiseeName');
         $pdf->Output('stock-request-report.pdf', 'I');
     }
-
+function excelstockreqlistData()
+        {
+            $franchiseeName = $this->input->post('franchiseeName');
+            $productCode = $this->input->post('productCode');
+          
+            
+                $this->session->set_userdata('productCode',$productCode);
+                $this->session->set_userdata('franchiseeName',$franchiseeName);
+               
+                
+                echo "SUCCESS||||";
+                echo "excelstockreqlist";
+            
+ 
+        }
     public function excelstockreqlist()
     {
         $this->load->library('excel');
@@ -279,7 +328,9 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails(false,false,false);
+        $franchiseeName = $this->session->userdata('franchiseeName');
+        $productCode = $this->session->userdata('productCode');
+         $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetailsForPdf($franchiseeName,$productCode);
         if(!empty($allReqQtyAray)){
             $i = 2;
             foreach($allReqQtyAray as $item){
@@ -305,10 +356,26 @@ class Reporting_Controller extends CI_Controller
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $this->session->unset_userdata('productCode');
+        $this->session->unset_userdata('franchiseeName');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-
+function ViewAssignReportingPdfData()
+        {
+            $franchiseeName = $this->input->post('franchiseeName');
+            $productCode = $this->input->post('productCode');
+            $flag = $this->input->post('flag');
+            
+                $this->session->set_userdata('productCode',$productCode);
+                $this->session->set_userdata('franchiseeName',$franchiseeName);
+                $this->session->set_userdata('flag',$flag);
+                
+                echo "SUCCESS||||";
+                echo "pdfstockassignlist";
+            
+ 
+        }
     public function pdfstockassignlist()
     {
         $this->load->library('Pdf');
@@ -329,7 +396,15 @@ class Reporting_Controller extends CI_Controller
         $pdf->SetFont('times', '', 12);
         // Add a page
         $pdf->AddPage();
-        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails(false, false, false);
+        $flag = $this->session->userdata('flag');
+        $franchiseeName = $this->session->userdata('franchiseeName');
+        $productCode = $this->session->userdata('productCode');
+        if($flag==1){
+            
+           $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetailsForPdf($franchiseeName,$productCode);  
+        }
+    
+        
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Assignment Report</b></p></div>
@@ -352,6 +427,7 @@ class Reporting_Controller extends CI_Controller
         if ($allQtyAssignAray) {
             $i = 0;
             foreach ($allQtyAssignAray as $allQtyAssignData) {
+               
                 $productDataAry = $this->Inventory_Model->getProductDetailsById($allQtyAssignData['iProductId']);
                 $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $allQtyAssignData['iFranchiseeId']);
               
@@ -388,9 +464,26 @@ class Reporting_Controller extends CI_Controller
                         ';
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
+         $this->session->unset_userdata('$flag');
+          $this->session->unset_userdata('productCode');
+           $this->session->unset_userdata('franchiseeName');
         $pdf->Output('stock-assignment-report.pdf', 'I');
     }
-
+function excelstockassignlistData()
+        {
+            $franchiseeName = $this->input->post('franchiseeName');
+            $productCode = $this->input->post('productCode');
+          
+            
+                $this->session->set_userdata('productCode',$productCode);
+                $this->session->set_userdata('franchiseeName',$franchiseeName);
+               
+                
+                echo "SUCCESS||||";
+                echo "excelstockassignlist";
+            
+ 
+        }
     public function excelstockassignlist()
     {
         $this->load->library('excel');
@@ -446,7 +539,9 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('I1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails(false, false, false);
+        $franchiseeName = $this->session->userdata('franchiseeName');
+        $productCode = $this->session->userdata('productCode');
+         $allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetailsForPdf($franchiseeName,$productCode);  
                
         if(!empty($allQtyAssignAray)){
             $i = 2;
@@ -495,6 +590,10 @@ class Reporting_Controller extends CI_Controller
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 //force user to download the Excel file without writing it to server's HD
+        //Session Unset
+        $this->session->unset_userdata('productCode');
+        $this->session->unset_userdata('franchiseeName');
+        //end session Unset
         $objWriter->save('php://output');
     }
 
@@ -536,6 +635,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/frStockRequestList');
         $this->load->view('layout/admin_footer');
     }
+    
  function frstockassignlistData()
         {
             $flag = $this->input->post('flag');
@@ -588,7 +688,18 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/frStockAssignList');
         $this->load->view('layout/admin_footer');
     }
-
+ function pdffrstockreqlistData()
+        {
+            
+            $productCode = $this->input->post('productCode');
+          
+            $this->session->set_userdata('productCode',$productCode);
+               
+                echo "SUCCESS||||";
+                echo "pdffrstockreqlist";
+            
+ 
+        }
     public function pdffrstockreqlist()
     {
         $this->load->library('Pdf');
@@ -609,8 +720,10 @@ class Reporting_Controller extends CI_Controller
         $pdf->SetFont('times', '', 12);
         // Add a page
         $pdf->AddPage();
+        
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
-        $frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails(false, false, false, $franchiseeId);
+         $productCode = $this->session->userdata('productCode');
+        $frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails($productCode, false, false, $franchiseeId);
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Request Report</b></p></div>
             <div class= "table-responsive" >
@@ -642,13 +755,26 @@ class Reporting_Controller extends CI_Controller
         $pdf->writeHTML($html, true, false, true, false, '');
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
         ob_end_clean();
+        $this->session->unset_userdata('productCode');
         $pdf->Output('stock-request-report.pdf', 'I');
     }
-
+function excelfrstockreqlistData()
+        {
+            
+            $productCode = $this->input->post('productCode');
+          
+            $this->session->set_userdata('productCode',$productCode);
+               
+                echo "SUCCESS||||";
+                echo "excelfrstockreqlist";
+            
+ 
+        }
     public function excelfrstockreqlist()
     {
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
-        $frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails(false, false, false, $franchiseeId);
+        $productCode = $this->session->userdata('productCode');
+        $frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails($productCode, false, false, $franchiseeId);
         $this->load->library('excel');
         $filename = 'Report';
         $title = 'Stock request';
@@ -695,9 +821,21 @@ class Reporting_Controller extends CI_Controller
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 //force user to download the Excel file without writing it to server's HD
+         $this->session->unset_userdata('productCode');
         $objWriter->save('php://output');
     }
-
+ function pdf_fr_stockassignlist_Data()
+        {
+            
+            $productCode = $this->input->post('productCode');
+          
+            $this->session->set_userdata('productCode',$productCode);
+               
+                echo "SUCCESS||||";
+                echo "pdf_fr_stockassignlist";
+            
+ 
+        }
     public function pdf_fr_stockassignlist()
     {
         $this->load->library('Pdf');
@@ -719,7 +857,9 @@ class Reporting_Controller extends CI_Controller
         // Add a page  
         $pdf->AddPage();
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
-        $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails(false, false, false, $franchiseeId);
+         $productCode = $this->session->userdata('productCode');
+       
+        $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails($productCode, false, false, $franchiseeId);
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Assignment Report</b></p></div>
@@ -768,13 +908,26 @@ class Reporting_Controller extends CI_Controller
                         ';
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
+        $this->session->unset_userdata('productCode');
         $pdf->Output('stock-assignment-report.pdf', 'I');
     }
-
+function excelfr_stockassignlist_Data()
+        {
+            
+            $productCode = $this->input->post('productCode');
+          
+            $this->session->set_userdata('productCode',$productCode);
+               
+                echo "SUCCESS||||";
+                echo "excelfr_stockassignlist";
+            
+ 
+        }
     public function excelfr_stockassignlist()
     {
         $franchiseeId = $_SESSION['drugsafe_user']['id'];
-        $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails(false, false, false, $franchiseeId);
+       $productCode = $this->session->userdata('productCode');
+       $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails($productCode, false, false, $franchiseeId);
         $this->load->library('excel');
         $filename = 'Report';
         $title = 'Stock assignment';
@@ -835,7 +988,7 @@ class Reporting_Controller extends CI_Controller
                                $TotalCostPerQty = "(+) $".($Qty*$Cost);
                           }
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $item['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szProductCost']);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $Cost);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $TotalCostPerQty);
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szQuantityAssigned']);
                 $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['quantityDeducted']);
@@ -860,6 +1013,7 @@ class Reporting_Controller extends CI_Controller
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+         $this->session->unset_userdata('productCode');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }

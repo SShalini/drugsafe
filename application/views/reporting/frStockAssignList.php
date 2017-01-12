@@ -30,11 +30,16 @@
                         if (!empty($frAllQtyAssignAray)) {
 
                             ?>
-                            <div class="actions">
-                                <a href="<?php echo __BASE_URL__; ?>/reporting/pdf_fr_stockassignlist" target="_blank"
+                            
+                         <div class="actions">
+                         
+                                     <a onclick="view_pdf_fr_stockassignlist('<?php echo $_POST['szSearchProdCode'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
-                                <a href="<?php echo __BASE_URL__; ?>/reporting/excelfr_stockassignlist"
+                                
+                                
+                               
+                               <a onclick="view_excelfr_stockassignlist('<?php echo $_POST['szSearchProdCode'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
                             </div>
@@ -61,7 +66,7 @@
                                   foreach($allQtyAssignListAray as $allQtyAssignListItem)
                                   {
                                       $selected = ($allQtyAssignListItem['szProductCode'] == $_POST['szSearchProdCode'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$allQtyAssignListItem['szProductCode'].'" >'.$allQtyAssignListItem['szProductCode'].'</option>';
+                                      echo '<option value="'.$allQtyAssignListItem['szProductCode'].'"' . $selected . ' >'.$allQtyAssignListItem['szProductCode'].'</option>';
                                   }
                                   ?>
                               </select>

@@ -12,7 +12,7 @@ class Reporting_Model extends Error_Model {
             if($flag==1){
             $this->db->distinct();
            $this->db->select( 'szName');  
-        }elseif($flag==2)
+         }elseif($flag==2)
         {
            $this->db->distinct();
            $this->db->select( 'szProductCode');   
@@ -249,6 +249,78 @@ public function searchtermAssign_handler($searchtermAssign='')
         return $searchtermAssign;
     }
 }
-
+public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
+        {
+            if(!empty($FrName)){
+               $searchq = " szName LIKE '%$FrName%'";
+            }
+            if(!empty($productCode)){
+               $searchq = "szProductCode LIKE '%$productCode%'";
+            }
+            if(!empty($FrName && $productCode)){
+               $searchq = array('szName' => $FrName,'szProductCode' => $productCode);
+            }
+           
+           $this->db->select( '*');  
+      
+           
+            $this->db->from(__DBC_SCHEMATA_STOCK_REQ_TRACKING__);
+            
+          
+            $this->db->join('ds_user','tbl_stock_assign_tracking.iFranchiseeId = ds_user.id');
+            $this->db->join('tbl_product','tbl_stock_assign_tracking.iProductId = tbl_product.id');
+             if (!empty($searchq)) {
+               $this->db->where($searchq);
+               }
+            
+            $query = $this->db->get();
+//$sql = $this->db->last_query($query);
+// print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+               
+            }
+            else
+            {
+                    return array();
+            }
+        }
+        public function getAllQtyRequestDetailsForPdf($FrName='',$productCode='')
+        {
+     
+          if(!empty($FrName)){
+               $searchq = " szName LIKE '%$FrName%'";
+            }
+            if(!empty($productCode)){
+               $searchq = "szProductCode LIKE '%$productCode%'";
+            }
+            if(!empty($FrName && $productCode)){
+               $searchq = array('szName' => $FrName,'szProductCode' => $productCode);
+            }
+           $this->db->select( '*');  
+      
+            $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
+           
+           
+             $this->db->join('ds_user','tbl_stock_request.iFranchiseeId = ds_user.id');
+             $this->db->join('tbl_product','tbl_stock_request.iProductId = tbl_product.id');   
+             if (!empty($searchq)) {
+               $this->db->where($searchq);
+               } 
+         
+           
+            $query = $this->db->get();
+//$sql = $this->db->last_query($query);
+// print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
 }
 ?>

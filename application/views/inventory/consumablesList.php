@@ -76,7 +76,7 @@
                                   foreach($consumableslist as $consumablesItem)
                                   {
                                       $selected = ($consumablesItem['szProductCode'] == $_POST['szSearchProdCode'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$consumablesItem['szProductCode'].'" >'.$consumablesItem['szProductCode'].'</option>';
+                                      echo '<option value="'.$consumablesItem['szProductCode'].'" ' . $selected . ' >'.$consumablesItem['szProductCode'].'</option>';
                                   }
                                   ?>
                               </select>

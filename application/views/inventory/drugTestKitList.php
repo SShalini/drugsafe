@@ -76,7 +76,7 @@
                                   foreach($drugtestkitlist as $drugItem)
                                   {
                                       $selected = ($drugItem['szProductCode'] == $_POST['szSearchProdCode'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$drugItem['szProductCode'].'" >'.$drugItem['szProductCode'].'</option>';
+                                      echo '<option value="'.$drugItem['szProductCode'].'" ' . $selected . ' >'.$drugItem['szProductCode'].'</option>';
                                   }
                                   ?>
                               </select>

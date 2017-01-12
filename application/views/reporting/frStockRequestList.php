@@ -31,11 +31,15 @@
                             ?>
                           
                             <div class="actions">
-                                <a href="<?php echo __BASE_URL__;?>/reporting/pdffrstockreqlist" target="_blank" class=" btn green-meadow">
-                                <i class="fa fa-file-pdf-o"></i> View Pdf </a>
-                                <a href="<?php echo __BASE_URL__; ?>/reporting/excelfrstockreqlist"
+                               
+                                 <a onclick="Viewpdffrstockreqlist('<?php echo $_POST['szSearchProdCode'];?>')" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                                
+                               <a onclick="Viewexcelfrstockreqlist('<?php echo $_POST['szSearchProdCode'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
+                                    
                             </div>
                             <?php
                         }
@@ -59,7 +63,7 @@
                                   foreach($AllQtyReqList as $AllQtyReqItem)
                                   {
                                       $selected = ($AllQtyReqItem['szProductCode'] == $_POST['szSearchProdCode'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$AllQtyReqItem['szProductCode'].'" >'.$AllQtyReqItem['szProductCode'].'</option>';
+                                      echo '<option value="'.$AllQtyReqItem['szProductCode'].'"' . $selected . ' >'.$AllQtyReqItem['szProductCode'].'</option>';
                                   }
                                   ?>
                               </select>

@@ -74,7 +74,7 @@
                                           foreach($allfranchisee as $franchiseeIdList)
                                           {
                                               $selected = ($franchiseeIdList['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'" >'.$franchiseeIdList['szName'].'</option>';
+                                              echo '<option value="'.$franchiseeIdList['id'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>

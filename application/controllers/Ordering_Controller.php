@@ -21,11 +21,11 @@ class Ordering_Controller extends CI_Controller {
           $idsite = $this->input->post('idsite');
           $Drugtestid = $this->input->post('Drugtestid');
           $sosid = $this->input->post('sosid');
-           $this->session->set_userdata('Drugtestid', $Drugtestid);
-         $this->session->set_userdata('idsite', $idsite);
-         $this->session->set_userdata('sosid', $sosid);
-        echo "SUCCESS||||";
-        echo "calform";
+          $this->session->set_userdata('Drugtestid', $Drugtestid);
+          $this->session->set_userdata('idsite', $idsite);
+          $this->session->set_userdata('sosid', $sosid);
+         echo "SUCCESS||||";
+         echo "calform";
     }
        public function calform() {
             $count = $this->Admin_Model->getnotification();
@@ -113,13 +113,15 @@ class Ordering_Controller extends CI_Controller {
         if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
             $id = $_POST['szSearchClRecord2'];
         }
+        
         if($id>0)
             {
                $childclientAray = $this->Ordering_Model->getAllChClientDetails($config['per_page'],$this->uri->segment(3),$id);
-             
+            
                $i=0;
                $sosRormDetailsAry=array();
                foreach($childclientAray as $childclientData ){
+                  
                    
                $sosRormDetailsAry[$i] = $this->Form_Management_Model->getsosFormDetailsByClientId($childclientData['clientId']);
                 $i++;
@@ -127,7 +129,7 @@ class Ordering_Controller extends CI_Controller {
                $sosRormDetailsAry = array_filter($sosRormDetailsAry);
        
             }
-      
+        
         $data['childclientAray'] = $childclientAray;
         $data['sosRormDetailsAry'] = $sosRormDetailsAry;
         $data['pageName'] = "Ordering";

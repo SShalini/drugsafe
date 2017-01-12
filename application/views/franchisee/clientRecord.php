@@ -105,7 +105,7 @@
                                           foreach($searchOptionArr as $searchOptionList)
                                           {
                                               $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$searchOptionList['id'].'" >FR-'.$searchOptionList['id'].'</option>';
+                                              echo '<option value="'.$searchOptionList['id'].'" ' . $selected . '>FR-'.$searchOptionList['id'].'</option>';
                                           }
                                           ?>
                                       </select>
@@ -115,16 +115,14 @@
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
                                       <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
-                                          <?php if(!empty($_POST['szSearchClRecord2'])){?>
-                                          <option value=""><?php echo $searchOptionList['szName'];?></option>
-                                          <?php } else {?>
+                                         
                                            <option value="">Franchisee Name</option>
-                                           <?php } ?>
+                                          
                                           <?php
                                          foreach($searchOptionArr as $searchOptionList)
                                           {
                                               $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$searchOptionList['id'].'" >'.$searchOptionList['szName'].'</option>';
+                                              echo '<option value="'.$searchOptionList['id'].'"' . $selected . ' >'.$searchOptionList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
@@ -139,7 +137,7 @@
                                           foreach($clientlistArr as $clientList)
                                           {
                                               $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$clientList['id'].'" >'.$clientList['szName'].'</option>';
+                                              echo '<option value="'.$clientList['id'].'"' . $selected . ' >'.$clientList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
@@ -335,7 +333,7 @@
                                           foreach($clientlistArr as $clientIdList)
                                           {
                                               $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szName'].'</option>';
+                                              echo '<option value="'.$clientIdList['id'].'"' . $selected . ' >'.$clientIdList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>

@@ -46,7 +46,7 @@
                                   foreach($reqProdListArr as $ReqProd)
                                   {
                                       $selected = ($ReqProd['szProductCode'] == $_POST['szProdReqList'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$ReqProd['szProductCode'].'" >'.$ReqProd['szProductCode'].'</option>';
+                                      echo '<option value="'.$ReqProd['szProductCode'].'"' . $selected . ' >'.$ReqProd['szProductCode'].'</option>';
                                   }
                                   ?>
                               </select>

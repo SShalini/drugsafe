@@ -204,7 +204,7 @@
                                           foreach($clientlistArr as $clientIdList)
                                           {
                                               $selected = ($clientIdList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szName'].'</option>';
+                                              echo '<option value="'.$clientIdList['id'].'"' . $selected . ' >'.$clientIdList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>

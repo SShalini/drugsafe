@@ -34,10 +34,14 @@
 
                             ?>
                             <div class="actions">
-                                <a href="<?php echo __BASE_URL__; ?>/reporting/pdfstockassignlist" target="_blank"
+                         
+                                     <a onclick="assignReportingPdf('<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch'];?>','1')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
-                                <a href="<?php echo __BASE_URL__; ?>/reporting/excelstockassignlist"
+                                
+                                
+                               
+                               <a onclick="stockassignexcellist('<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch'];?>','1')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
                             </div>
@@ -75,7 +79,7 @@
                                     <? /*//=sanitize_post_field_value($_POST['szSearch'])*/ ?><!--">-->
                                     <select class="form-control custom-select" name="szSearch2" id="szSearchname"
                                             onfocus="remove_formError(this.id,'true')">
-                                        <option value="">Franchisee</option>
+                                        <option value="">Franchisee Name</option>
                                         <?php foreach ($allQtyAssignListAray as $allQtyAssignListItem) {
                                             $selected = ($allQtyAssignListItem['szName'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
                                             echo '<option value="' . $allQtyAssignListItem['szName'] . '" ' . $selected . '>' . $allQtyAssignListItem['szName'] . '</option>';
@@ -89,16 +93,13 @@
                                     <? //=sanitize_post_field_value($_POST['szSearch'])?><!--">-->
                                     <select class="form-control custom-select" name="szSearch" id="szSearchProductCode"
                                             onfocus="remove_formError(this.id,'true')">
-                                        <?php if (!empty($allQtyAssignAray) && (!empty($_POST['szSearch']))) { ?>
-                                            <option
-                                                value=""><?php echo $allQtyAssignAray['0']['szProductCode'] ?></option>
-                                        <?php } else { ?>
+                                       
                                             <option value="">Product Code</option>
 
-                                        <?php }
+                                        <?php 
                                         foreach ($allQtyProductAssignListAray as $allQtyProductAssignListItem) {
                                             $selected = ($allQtyProductAssignListItem['szProductCode'] == $_POST['szSearch'] ? 'selected="selected"' : '');
-                                            echo '<option value="' . $allQtyProductAssignListItem['szProductCode'] . '" >' . $allQtyProductAssignListItem['szProductCode'] . '</option>';
+                                            echo '<option value="' . $allQtyProductAssignListItem['szProductCode'] . '"' . $selected . ' >' . $allQtyProductAssignListItem['szProductCode'] . '</option>';
                                         }
                                         ?>
                                     </select>

@@ -87,7 +87,7 @@
                                           foreach($allOperationManager as $operationManagerIdList)
                                           {
                                               $selected = ($operationManagerIdList['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$operationManagerIdList['id'].'" >'.$operationManagerIdList['szName'].'</option>';
+                                              echo '<option value="'.$operationManagerIdList['id'].'"' . $selected . ' >'.$operationManagerIdList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>

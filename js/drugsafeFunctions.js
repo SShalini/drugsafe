@@ -280,6 +280,14 @@ function viewFrStockAssignList(flag) {
 
     });
 }
+function viewstockreqlistData(flag) {
+
+    $.post(__BASE_URL__ + "/reporting/allstockreqlistData", {flag: flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/reporting/" + ar_result[1];
+
+    });
+}
 function viewStockAssignList(flag) {
 
     $.post(__BASE_URL__ + "/reporting/stockassignlistData", {flag: flag}, function (result) {
@@ -1024,4 +1032,75 @@ function replyEditConfirmation(idReply) {
 
     }); 
 }
+
+  function assignReportingPdf(franchiseeName,productCode,flag) {
+    $.post(__BASE_URL__ + "/reporting/ViewAssignReportingPdfData", {franchiseeName: franchiseeName,productCode:productCode,flag:flag}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ReqReportingPdf(franchiseeName,productCode) {
+    $.post(__BASE_URL__ + "/reporting/ViewReqReportingPdfData", {franchiseeName: franchiseeName,productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function stockassignexcellist(franchiseeName,productCode) {
+    $.post(__BASE_URL__ + "/reporting/excelstockassignlistData", {franchiseeName: franchiseeName,productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+      window.open(URL,'_blank');
+     
+      
+    });
+}
+function stockreqexcellist(franchiseeName,productCode) {
+    $.post(__BASE_URL__ + "/reporting/excelstockreqlistData", {franchiseeName: franchiseeName,productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+      window.open(URL,'_blank');
+      
+     
+
+    });
+}
+  function view_pdf_fr_stockassignlist(productCode) {
+    $.post(__BASE_URL__ + "/reporting/pdf_fr_stockassignlist_Data", {productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function view_excelfr_stockassignlist(productCode) {
+    $.post(__BASE_URL__ + "/reporting/excelfr_stockassignlist_Data", {productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+      window.open(URL,'_blank');
+     
+      
+    });
+}
+ function Viewpdffrstockreqlist(productCode) {
+    $.post(__BASE_URL__ + "/reporting/pdffrstockreqlistData", {productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function Viewexcelfrstockreqlist(productCode) {
+    $.post(__BASE_URL__ + "/reporting/excelfrstockreqlistData", {productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+      window.open(URL,'_blank');
+     
+      
+    });
+}
+
 

@@ -787,7 +787,7 @@
                                        foreach($sitesArr as $sitesIdList)
                                        {
                                            $selected = ($sitesIdList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                           echo '<option value="'.$sitesIdList['id'].'" >'.$sitesIdList['szName'].'</option>';
+                                           echo '<option value="'.$sitesIdList['id'].'" ' . $selected . '>'.$sitesIdList['szName'].'</option>';
                                        }
                                        ?>
                                    </select>

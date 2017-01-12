@@ -88,12 +88,9 @@
                                 <thead>
                                     <tr>
                                        
-                                        <th >Topic</th>
-                                        <th>Comment</th>
-                                        <th> Reply</th>
-                                        <th>Reply By</th>
-                                        <th>Reply Date&Time</th>
-                                        <th> Actions </th>
+                                        <th style="width: 180px">Topic</th>
+                                        <th style="width: 220px">Comment/Reply</th>
+                                       <th style="width: 80px"> Actions </th>
                                        
                                     </tr>
                                 </thead>
@@ -102,6 +99,7 @@
                                        $i = 0;
                                        foreach($replyDataArr as $replyData)
                                         { 
+                                       
                                         $cmntsArr =$this->Forum_Model->viewCmntListByCmntId($replyData['idCmnt']); 
                                         $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntsArr['idTopic']); 
                                         
@@ -130,9 +128,9 @@
                                                 $replytext = wordwrap($reply,16, "\n", true);
                                                 $reply =  preg_split('/\s+/', $replytext);
                                                ?>
-                                              <td> <?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a></td> </td>
-                                              <td> <?php echo $franchiseeDetArr1['szName']?> </td>
-                                              <td> <?php echo  $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $ReplyTime;?></td>
+<!--                                              <td> <?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a></td> </td>-->
+<!--                                              <td> <?php echo $franchiseeDetArr1['szName']?> </td>-->
+<!--                                              <td> <?php echo  $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $ReplyTime;?></td>-->
                                         
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">
