@@ -165,12 +165,17 @@ class Webservices_Controller extends CI_Controller
             $drugtype = '';
             if(!empty($jsondata->$drugtypevar)){
                 $drugtype = '';
-                foreach ($jsondata->$drugtypevar as $key=>$value){
-                    $drugtype .= $value.',';
+                if(count($jsondata->$drugtypevar)>'1'){
+                    foreach ($jsondata->$drugtypevar as $key=>$value){
+                        $drugtype .= $value.',';
+                    }
+                    if(!empty($drugtype)){
+                        $drugtype = substr($drugtype,0,-1);
+                    }
+                }else{
+                    $drugtype = $jsondata->$drugtypevar;
                 }
-                if(!empty($drugtype)){
-                    $drugtype = substr($drugtype,0,-1);
-                }
+
             }
             $dataArr['drugtype'.$i] = $drugtype;
             $dataArr['pos1read'.$i] = !empty($jsondata->$pos1readvar) ? $jsondata->$pos1readvar : "";
@@ -269,6 +274,21 @@ class Webservices_Controller extends CI_Controller
         echo json_encode($responsedata);
     }
 
+    function getsossitesbyfranchiseeid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['siteid'] = !empty($jsondata->siteid) ? $jsondata->siteid : "";
+        $sosformdata = $this->Webservices_Model->getsossitesbyfranchiseeid($data['siteid']);
+        if(!empty($sosformdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$sosformdata);
+            header('Content-Type: application/json');
+        }else{
+                $responsedata = array("code" => 201,"message"=>'No site found');
+                header('Content-Type: application/json');
+        }
+        echo json_encode($responsedata);
+    }
+
     function getclientsites(){
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['clientid'] = !empty($jsondata->clientid) ? $jsondata->clientid : "";
@@ -360,7 +380,7 @@ class Webservices_Controller extends CI_Controller
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
         $data['status'] = $jsondata->status == '1' ? true : false;
-        $franchiseesosdata = $this->Webservices_Model->getfranchiseesosformdata($data['franchiseeid'],$data['status']);
+        $franchiseesosdata = $this->Webservices_Model->getfranchiseesosformdata($data['franchiseeid']);
         if(!empty($franchiseesosdata[0]))
         {
             $responsedata = array("code" => 200,"dataarr"=>$franchiseesosdata);
@@ -453,6 +473,7 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['benzo'] = !empty($jsondata->benzo) ? $jsondata->benzo : "";
         $data['coc']['collectorone'] = !empty($jsondata->collectorone) ? $jsondata->collectorone : "";
         $data['coc']['collectorsignone'] = !empty($jsondata->collectorsignone) ? $jsondata->collectorsignone : "";
+        $data['coc']['commentscol1'] = !empty($jsondata->commentscol1) ? $jsondata->commentscol1 : "";
         $data['coc']['collectortwo'] = !empty($jsondata->collectortwo) ? $jsondata->collectortwo : "";
         $data['coc']['collectorsigntwo'] = !empty($jsondata->collectorsigntwo) ? $jsondata->collectorsigntwo : "";
         $data['coc']['comments'] = !empty($jsondata->comments) ? $jsondata->comments : "";

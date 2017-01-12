@@ -27,7 +27,7 @@ class Form_Management_Model extends Error_Model {
     } 
      public function getsosFormDetailsByClientId($idClient)
     {
-        $whereAry = array('Clientid' => $idClient);
+        $whereAry = array('Clientid' => $idClient,'Status'=>'1');
         $this->db->select('*');
         $this->db->from(__DBC_SCHEMATA_SOS_FORM__);
         $this->db->where($whereAry); 

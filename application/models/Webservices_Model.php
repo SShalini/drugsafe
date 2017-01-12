@@ -78,7 +78,7 @@ class Webservices_Model extends Error_Model
 
     function getclientdetails($franchiseeid, $parent = 0)
     {
-        $array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent);
+        $array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent,__DBC_SCHEMATA_USERS__.'.isDeleted'=>'0');
         $query = $this->db->select(__DBC_SCHEMATA_USERS__ . '.id, szName, szEmail')
             ->from(__DBC_SCHEMATA_USERS__)
             ->join(__DBC_SCHEMATA_CLIENT__, __DBC_SCHEMATA_CLIENT__ . '.clientId = ' . __DBC_SCHEMATA_USERS__ . '.id')
@@ -89,6 +89,22 @@ class Webservices_Model extends Error_Model
             return $row;
         } else {
             $this->addError("usernotexist", "User does not exist.");
+        }
+    }
+
+    function getsossitesbyfranchiseeid($clientid = 0){
+        $array = array('Clientid' => (int)$clientid,'Status'=>'0');
+        $query = $this->db->select('id')
+            ->from(__DBC_SCHEMATA_SOS_FORM__)
+            ->where($array)
+            ->get();
+        /*$q = $this->db->last_query();
+        echo $q;*/
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
         }
     }
 
@@ -176,9 +192,9 @@ class Webservices_Model extends Error_Model
                                 if ($i == $newval) {
                                     $newupdate = true;
                                     $this->db->insert(__DBC_SCHEMATA_DONER__, $donerAry);
-//                                    $q1 = $this->db->last_query();
-//                                    echo 'q1 '.$q1.'<br />';
-//                                    echo $data['result' . $i].'----'.$data['drug' . $i].'-----'.$data['alcohol' . $i];
+                                    /*$q1 = $this->db->last_query();
+                                    echo 'q1 '.$q1.'<br />';
+                                    echo $data['result' . $i].'----'.$data['drug' . $i].'-----'.$data['alcohol' . $i];*/
                                     if (($this->db->affected_rows() > 0) && (($data['result' . $i] == '1') || ($data['drug' . $i] == '1') || ($data['alcohol' . $i] == '1'))) {
                                         $donerid = $this->db->insert_id();
                                         $cocdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
@@ -210,7 +226,7 @@ class Webservices_Model extends Error_Model
                                             ->update(__DBC_SCHEMATA_DONER__, $donerAry);
                                         /*$q4 = $this->db->last_query();
                                         echo 'q4 '.$q4.'<br />';*/
-                                        if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drugnewcounter' . $i] == '1') || ($data['doneralcohol' . $i] == '1'))) {
+                                        if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drug' . $i] == '1') || ($data['alcohol' . $i] == '1'))) {
                                             $cocdateupdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
                                             $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdateupdatearr);
                                             /*$q5 = $this->db->last_query();
@@ -241,7 +257,7 @@ class Webservices_Model extends Error_Model
                                 ->update(__DBC_SCHEMATA_DONER__, $donerAry);
                             /*$q7 = $this->db->last_query();
                             echo 'q7 '.$q7.'<br />';*/
-                            if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drugnewcounter' . $i] == '1') || ($data['doneralcohol' . $i] == '1'))) {
+                            if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drug' . $i] == '1') || ($data['alcohol' . $i] == '1'))) {
                                 $cocdateupdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
                                 $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdateupdatearr);
                                 /*$q8 = $this->db->last_query();
@@ -448,13 +464,13 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getfranchiseesosformdata($franchiseeid, $status = false)
+    function getfranchiseesosformdata($franchiseeid)
     {
         $resultarr = array();
         $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
         if (!empty($franchiseeclientsarr)) {
             foreach ($franchiseeclientsarr as $franchiseeclient) {
-                $clientsosdataarr = $this->getclientsosformdata($franchiseeclient['clientId'], $status);
+                $clientsosdataarr = $this->getclientsosformdata($franchiseeclient['clientId']);
 
                 if (!empty($clientsosdataarr)) {
                     foreach ($clientsosdataarr as $key => $val) {
@@ -484,13 +500,13 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getclientsosformdata($clientid, $status = false)
+    function getclientsosformdata($clientid)
     {
         $resultarr = array();
         $clientsitesarr = $this->getclientsites($clientid);
         if (!empty($clientsitesarr)) {
             foreach ($clientsitesarr as $clientsite) {
-                $sosdataarr = $this->getsosformdata($clientsite['userid'], $status);
+                $sosdataarr = $this->getsosformdata($clientsite['userid']);
                 if (!empty($sosdataarr)) {
                     array_push($resultarr, $sosdataarr);
                 }
@@ -507,9 +523,9 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getsosformdata($siteid, $status = false)
+    function getsosformdata($siteid)
     {
-        $whereAry = 'sos.Clientid =' . (int)$siteid . ($status ? ' AND sos.Status = 0' : '');
+        $whereAry = 'sos.Clientid =' . (int)$siteid . ' AND sos.Status = 0';
         $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
                                                 sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                                 sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
@@ -569,7 +585,7 @@ class Webservices_Model extends Error_Model
                                     coc.cocdate, coc.drugtest, coc.dob, coc.employeetype, coc.contractor, coc.idtype, coc.idnumber, coc.donorsign,
                                     coc.voidtime, coc.sampletempc, coc.tempreadtime, 
                                     coc.intect, coc.intectexpiry, coc.visualcolor, coc.creatinine,coc.otherintegrity,coc.hudration,coc.devicename as cocdevice,coc.lotno,coc.lotexpiry,coc.cocain,
-                                    coc.amp,coc.mamp,coc.thc, coc.opiates, coc.benzo, coc.collectorone, coc.collectorsignone, coc.collectortwo, coc.collectorsigntwo, coc.comments,
+                                    coc.amp,coc.mamp,coc.thc, coc.opiates, coc.benzo, coc.collectorone, coc.collectorsignone, coc.commentscol1, coc.collectortwo, coc.collectorsigntwo, coc.comments,
                                     coc.onsitescreeningrepo, coc.receiverone, coc.receiveronesign, coc.receiveronedate, coc.receiveronetime,coc.receiveroneseal,
                                     coc.receiveronelabel, coc.receivertwo, coc.receivertwosign, coc.receivertwodate, coc.receivertwotime, coc.receivertwoseal, coc.receivertwolabel,
                                     coc.reference,coc.devicesrno,coc.cutoff,coc.donwaittime,coc.dontest1,coc.dontesttime1,coc.dontest2,coc.dontesttime2,coc.donordecdate,coc.donordecsign')
@@ -647,6 +663,7 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['donordecsign'])), 'donordecsign', 'Donor declaration signature', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorone'])), 'collectorone', 'Collector 1 Name Number', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorsignone'])), 'collectorsignone', 'Collector 1 Sign', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['commentscol1'])), 'commentscol1', 'Comments', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collectortwo'])), 'collectortwo', 'Collector 2 Name Number', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorsigntwo'])), 'collectorsigntwo', 'Collector 2 Sign', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['comments'])), 'comments', 'Comments', false);
@@ -697,6 +714,7 @@ class Webservices_Model extends Error_Model
                 'benzo' => $data['benzo'],
                 'collectorone' => $data['collectorone'],
                 'collectorsignone' => $data['collectorsignone'],
+                'commentscol1' => $data['commentscol1'],
                 'collectortwo' => $data['collectortwo'],
                 'collectorsigntwo' => $data['collectorsigntwo'],
                 'comments' => $data['comments'],

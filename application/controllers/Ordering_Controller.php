@@ -100,23 +100,18 @@ class Ordering_Controller extends CI_Controller {
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
         if (!$is_user_login) {
-            ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
-            die;
+            redirect(base_url('/admin/admin_login'));
         }
         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
             $franchiseId = $_SESSION['drugsafe_user']['id'];
         }
          if ($_SESSION['drugsafe_user']['iRole'] == '5') {
             $operationManagrrId = $_SESSION['drugsafe_user']['id'];
-        
         }
         $searchAry = '';
        
         if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
             $id = $_POST['szSearchClRecord2'];
-           
-           
         }
         if($id>0)
             {
