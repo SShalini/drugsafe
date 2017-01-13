@@ -100,7 +100,7 @@
                                     if(!empty($cmntDataArr)){
                                      $i = 0;
                                        foreach($cmntDataArr as $cmntData)
-                                        {  
+                                        { 
                                        
                                           $textwithoutP=str_ireplace('<p>',' ',$cmntData['szCmnt']);
                                            $newtextwithoutP=str_ireplace('</p>',' ',$textwithoutP);  
@@ -129,21 +129,19 @@
                                                ?>
                                               
                                               
-                                              <td><?php echo $x['0']; ?>... <a href="javascript:void(0);" onclick="showComment('<?php echo $newtextwithoutP ;?>');" >Read more</a></td>
+                                              <td><?php echo $x['0']; ?>... <a href="javascript:void(0);" onclick="showComment('<?php echo $cmntData['id'] ;?>');" >Read more</a></td>
                                                <?php 
                                                 $reply = $replyData['szReply'];
                                                 $replytext = wordwrap($reply,16, "\n", true);
                                                 $reply =  preg_split('/\s+/', $replytext);
                                                ?>
-<!--                                              <td> <?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a></td> </td>-->
-<!--                                              <td> <?php echo $franchiseeDetArr1['szName']?> </td>-->
-<!--                                              <td> <?php echo  $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $ReplyTime;?></td>-->
+
                                         
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveComment('<?php echo $cmntData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-check"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Unapprove" onclick="unapproveReply(<?php echo $cmntData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Unapprove" onclick="unapproveComment(<?php echo $cmntData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-times" aria-hidden="true"></i>
                                                 </a>
                                                 </td>
@@ -181,16 +179,14 @@
                                                 $newtext = wordwrap($text, 8, "\n", true);
                                                 $x =  preg_split('/\s+/', $newtext);
                                                ?>
-<!--                                              <td> <?php echo $x['0']; ?>... <a onclick="showComment('<?php echo $cmntsArr['szCmnt'];?>');" href="javascript:void(0);">Read more</a></td>-->
+
                                                <?php 
                                                 $reply = $replyData['szReply'];
                                                 $replytext = wordwrap($reply,16, "\n", true);
                                                 $reply =  preg_split('/\s+/', $replytext);
                                                ?>
-                                          <td><?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a> </td>
-<!--                                              <td> <?php echo $franchiseeDetArr1['szName']?> </td>-->
-<!--                                              <td> <?php echo  $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $ReplyTime;?></td>-->
-                                        
+                                          <td><?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">Read more</a> </td>
+
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-check"></i> 

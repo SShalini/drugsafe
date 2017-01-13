@@ -92,3 +92,19 @@ margin-bottom: 16px;
 .mdl_align{
   text-align: center;    
 }
+.text_clr{
+     color: #1bbc9b;
+     margin-top: 10px;  
+     margin-bottom : 1px;  
+     text-align: center;   
+}
+.text_cmnt{
+     color: #1bbc9b;
+     margin-top: 10px;  
+     margin-bottom : 1px;
+     text-align: center;   
+     
+}
+.cmntDetais{
+       text-align: right; 
+}

@@ -177,7 +177,7 @@ class Forum_Controller extends CI_Controller {
              $this->pagination->initialize($config);
             
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
-                $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
+               $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
                $categoriesListAray =$this->Forum_Model->viewCategoriesList();
                $count = $this->Admin_Model->getnotification();
 
@@ -527,7 +527,7 @@ class Forum_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-              $replyDataArr = $this->Forum_Model->getAllReply();
+              $replyDataArr = $this->Forum_Model->getAllReply(false,2);
               $cmntDataArr = $this->Forum_Model->getAllCommentsByTopicId(false,1); 
                $count = $this->Admin_Model->getnotification();
 
@@ -549,13 +549,13 @@ class Forum_Controller extends CI_Controller {
         public function showCommentData()
         {
             $data['mode'] = '__COMMENT_POPUP__';
-            $data['szComment'] = $this->input->post('szComment');
+            $data['idComment'] = $this->input->post('idComment');
             $this->load->view('admin/admin_ajax_functions',$data);
         }
         public function showReplyData()
         {
             $data['mode'] = '__SHOW_REPLY_POPUP__';
-            $data['szReply'] = $this->input->post('szReply');
+            $data['idReply'] = $this->input->post('idReply');
             $this->load->view('admin/admin_ajax_functions',$data);
         }
         public function approveReplyAlert()
@@ -641,6 +641,34 @@ class Forum_Controller extends CI_Controller {
             $data['val'] = $this->input->post('val');
             $this->Forum_Model->updateReply($data['idReply'],$data['val']);
             $this->load->view('admin/admin_ajax_functions',$data);
-        } 
+        }
+         public function approveCommentAlert()
+        {
+            $data['mode'] = '__APPROVE_COMMENT_POPUP__';
+            $data['idComment'] = $this->input->post('idComment');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+         public function approveCommentConfirmation()
+    {
+        
+        $data['mode'] = '__COMMENT_APPROVE_CONFIRM_POPUP__';
+        $data['idComment'] = $this->input->post('idComment');
+        $this->Forum_Model->updateCommentapproval($data['idComment']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+     public function unapproveCommentAlert()
+        {
+            $data['mode'] = '__UNAPPROVE_COMMENT_POPUP__';
+            $data['idComment'] = $this->input->post('idComment');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+         public function unapproveCommentConfirmation()
+    {
+        
+        $data['mode'] = '__COMMENT_UNAPPROVE_CONFIRM_POPUP__';
+        $data['idComment'] = $this->input->post('idComment');
+        $this->Forum_Model->updateCommentUnapproval($data['idComment']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
     }      
 ?>

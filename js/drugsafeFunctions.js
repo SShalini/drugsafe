@@ -815,11 +815,11 @@ jQuery('#travel').html(res);
     });
 
 }
-  function showComment(szComment)
-{ alert(szComment);
+  function showComment(idComment)
+{ 
   
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/showCommentData", {szComment: szComment,}, function (result) {
+    $.post(__BASE_URL__ + "/forum/showCommentData", {idComment: idComment}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -831,11 +831,11 @@ jQuery('#travel').html(res);
 
     });
 }
-function showReply(szReply)
+function showReply(idReply)
 {
    
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/showReplyData", {szReply: szReply,}, function (result) {
+    $.post(__BASE_URL__ + "/forum/showReplyData", {idReply: idReply}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -1129,6 +1129,38 @@ function approveCommentConfirmation(idComment) {
             if (res == 'SUCCESS') {
                 $("#popup_box").html(result_ary[1]);
                 $('#approveCommentConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
+    function unapproveComment(idComment)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/unapproveCommentAlert", {idComment:idComment,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#unapproveCommentAlert').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function unapproveCommentConfirmation(idComment) {
+
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#unapproveCommentAlert').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/forum/unapproveCommentConfirmation", {idComment: idComment}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#unapproveCommentConfirmation').modal("show");
             }
             jQuery('#loader').attr('style', 'display:none');
 

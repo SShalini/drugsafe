@@ -162,7 +162,11 @@
                                                    <?php if($commentsData['idCmnters']==$_SESSION['drugsafe_user']['id'] ){ ?>
                                                   <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
                                                   <li><a onclick="cmntDelete(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
-                                                   <?php }?>
+                                                   <?php }
+                                                     if($_SESSION['drugsafe_user']['id']==1 ){ 
+                                                   ?>
+                                                   <li><a onclick="cmntDelete(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
+                                                     <?php }?>
                                                 </ul>
                                               </div> 
                                             <?php }?>
@@ -202,32 +206,39 @@
                                                         <div class="media-body">
                                                             
                                                                <div class="row">
+                                                                   <div class="col-md-1"></div>
                                                                     <div class="col-md-4 todo-comment-head">
-                                                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="todo-comment-username"><b style="color: #1bbc9b"><?php echo $franchiseeDetArr1['szName']?></b> </span> &nbsp; <span class="todo-comment-date"><?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?></span>
+                                                                    <span class="todo-comment-username"><b style="color: #1bbc9b"><?php echo $franchiseeDetArr1['szName']?></b> </span> &nbsp; <span class="todo-comment-date"><?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?></span>
 <!--                                                              <button class="todo-comment-btn btn btn-circle btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
                                                               <span class="caret"></span></button>-->
                                                                  </div>  
                                                                      <?php if( $forumTopicDataAry['0']['isClosed']==0){?>
-                                                                <?php if($replyData['idReplier']==$_SESSION['drugsafe_user']['id'] ){ ?>    
+                                                              <?php if($replyData['idReplier']==$_SESSION['drugsafe_user']['id'] || $_SESSION['drugsafe_user']['id']==1){ ?>  
                                                             <div class="dropdown col-md-3">
                                                               <button class="todo-comment-btn btn btn-circle btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown">Action
                                                                 <span class="caret"></span></button>
                                                                 <ul class="dropdown-menu">
-                                                            
+                                                           <?php if($replyData['idReplier']==$_SESSION['drugsafe_user']['id'] ){ ?>   
                                                             <li><a onclick="replyEditAlert(<?php echo $replyData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
                                                             <li><a onclick="replyDelete(<?php echo $replyData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
-                                                            
+                                                             <?php }
+                                                               if($_SESSION['drugsafe_user']['id']==1 && $replyData['idReplier']!=1 ){   ?>
+                                                             <li><a onclick="replyDelete(<?php echo $replyData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
+                                                               <?php }?>
                                                                 </ul>
                                                         </div> 
-                                                                    <?php }?>
                                                                    
+                                                             <?php }?>      
                                                                      <?php }?>
                                                                
                                                                    </div>
                                                             <div class="row">
+                                                                <div class="col-md-1"></div>
+                                                                <div class="col-md-9">
                                                                 <p class="todo-text-color">
-                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo $replyData['szReply'] ?>
+                                                                        <?php echo $replyData['szReply'] ?>
                                                                 </p>
+                                                                </div>
                                                                 </div>
                                                         </div>
                                                 </div>

@@ -386,14 +386,30 @@ class Forum_Model extends Error_Model {
    function insertComents($idTopic)
         {
         $date = date('Y-m-d H:i:s');
-       $dataAry = array(
+         if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                 
+                   $dataAry = array(
+                                'szCmnt' => $_POST['replyData']['szForumLongDiscription'],
+                                'idTopic' => $idTopic,
+				'cmntDate' => $date,
+                                'idCmnters' => $_SESSION['drugsafe_user']['id'],
+                                 'isAdminApproved' =>'1',
+                                  'isApproved' => '1',
+                
+                            );
+           
+              } else{
+                              $dataAry = array(
                                 'szCmnt' => $_POST['replyData']['szForumLongDiscription'],
                                 'idTopic' => $idTopic,
 				'cmntDate' => $date,
                                 'idCmnters' => $_SESSION['drugsafe_user']['id'],
                                 'isApproved' => '0',
+                                'isAdminApproved' =>'0',
                 
                             );
+              }
+     
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_COMMENTS__, $dataAry);
             
             if($this->db->affected_rows() > 0)
@@ -405,14 +421,37 @@ class Forum_Model extends Error_Model {
                 return false;
              }
         }   
-         public function getAllCommentsByTopicId($idTopic='',$flag='')
+         public function getAllCommentsByCmntId($idCmnt)
+        {
+              
+           
+              $whereAry = array('id='=>$idCmnt);   
+           
+          
+            $this->db->where($whereAry); 
+            $this->db->select('id,idCmnters,szCmnt,cmntDate,idTopic');
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_COMMENTS__);
+
+            if($query->num_rows() > 0)
+            {
+             $row =   $query->result_array();
+                return $row['0'];
+               
+            }
+            else
+            {
+                    return array();
+            }
+        }
+        public function getAllCommentsByTopicId($idTopic='',$flag='')
         {
               
             if($flag==1){
-              $whereAry = array('isApproved='=> '0');   
+              $whereAry = array('isApproved='=> '0','idCmnters!='=> '1');
+              
             }
             else{
-                 $whereAry = array('idTopic='=> $idTopic);  
+                $whereAry = array('idTopic='=> $idTopic,'isAdminApproved='=> '1');  
             }
           
             $this->db->where($whereAry); 
@@ -429,17 +468,34 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }
+        
             function insertReply($idCmnt,$Reply)
         {		
             $date = date('Y-m-d H:i:s');
-            $dataAry = array(
+             if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                 
+                  $dataAry = array(
+                                'idCmnt' => $idCmnt,
+                                'szReply' => $Reply,
+                                'isApproved' => '1',
+                                'isAdminApproved' =>'1',
+				'dtReplyOn' => $date,
+                                'idReplier' =>$_SESSION['drugsafe_user']['id'],
+                                
+                            );
+           
+              } else{
+                               $dataAry = array(
                                 'idCmnt' => $idCmnt,
                                 'szReply' => $Reply,
                                 'isApproved' => '0',
+                                'isAdminApproved' =>'0',
 				'dtReplyOn' => $date,
                                 'idReplier' =>$_SESSION['drugsafe_user']['id'],
-                                'isAdminApproved' =>'0',
+                                
                             );
+              }
+           
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_REPLY__, $dataAry);
             
             if($this->db->affected_rows() > 0)
@@ -451,13 +507,18 @@ class Forum_Model extends Error_Model {
                 return false;
              }
             }   
-             public function getAllReplyByCmntsId($idCmnt,$flag='0')
+             public function getAllReplyByCmntsId($id,$flag='0')
         {
                  if($flag==1){
-                   $whereAry = array('idCmnt='=> $idCmnt);
+                   $whereAry = array('idCmnt='=> $id);
                        
-                 }else{
-                      $whereAry = array('idCmnt='=> $idCmnt,'isAdminApproved='=> '1');
+                 }
+                 elseif($flag==2){
+                      $whereAry = array('id='=> $id);
+                 }
+                   else  
+                     {
+                      $whereAry = array('idCmnt='=> $id,'isAdminApproved='=> '1');
                       
                  }
                
@@ -465,7 +526,8 @@ class Forum_Model extends Error_Model {
             $this->db->where($whereAry); 
             $this->db->select('id,idCmnt,szReply,isApproved,dtReplyOn,idReplier');
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_REPLY__);
-
+//  $sql = $this->db->last_query($query);
+//  print_r($sql);die;
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -515,6 +577,10 @@ class Forum_Model extends Error_Model {
             if($flag==1){
                 $whereAry = array('id='=> $idReply);   
             }
+            elseif($flag==2){
+               
+                  $whereAry = array('isApproved='=> '0','idReplier!='=> '1'); 
+            }
             else{
                 $whereAry = array('isApproved='=> '0');   
             }
@@ -539,6 +605,73 @@ class Forum_Model extends Error_Model {
 
         $dataAry = array(
             'isAdminApproved' => '1',
+            'isApproved' => '1'
+        );
+
+        $whereAry = array('id ' => (int)$idReply);
+
+        $this->db->where($whereAry);
+
+        $this->db->update(__DBC_SCHEMATA_FORUM_REPLY__, $dataAry);
+
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+     public function updateCommentapproval($idComment)
+    {
+
+        $dataAry = array(
+            'isAdminApproved' => '1',
+            'isApproved' => '1'
+        );
+
+        $whereAry = array('id ' => (int)$idComment);
+
+        $this->db->where($whereAry);
+
+        $this->db->update(__DBC_SCHEMATA_FORUM_COMMENTS__, $dataAry);
+
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+     public function updateCommentUnapproval($idComment)
+    {
+
+        $dataAry = array(
+            'isAdminApproved' => '0',
+            'isApproved' => '1'
+        );
+
+        $whereAry = array('id ' => (int)$idComment);
+
+        $this->db->where($whereAry);
+
+      $this->db->update(__DBC_SCHEMATA_FORUM_COMMENTS__, $dataAry);
+
+    
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    
+      public function updateReplyUnapproval($idReply)
+    {
+
+        $dataAry = array(
+            'isAdminApproved' => '0',
             'isApproved' => '1'
         );
 

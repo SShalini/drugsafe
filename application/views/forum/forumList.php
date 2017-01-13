@@ -83,7 +83,7 @@
                                   foreach($forumDataSearchAray as $forumDataSearchList)
                                   {
                                       $selected = ($forumDataSearchList['szForumTitle'] == $_POST['szSearchforumTitle'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$forumDataSearchList['szForumTitle'].'" >'.$forumDataSearchList['szForumTitle'].'</option>';
+                                      echo '<option value="'.$forumDataSearchList['szForumTitle'].'" '.$selected.'>'.$forumDataSearchList['szForumTitle'].'</option>';
                                   }
                                   ?>
                               </select>
