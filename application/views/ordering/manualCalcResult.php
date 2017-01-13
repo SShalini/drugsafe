@@ -1,4 +1,3 @@
-
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php
@@ -18,202 +17,320 @@
             $this->session->unset_userdata('drugsafe_user_message');
         }
         ?>
-        
+
         <div id="page_content" class="row">
             <div class="col-md-12">
-               <ul class="page-breadcrumb breadcrumb">
-                 
+                <ul class="page-breadcrumb breadcrumb">
+
                     <li>
-                        <a href="<?php echo __BASE_URL__;?>/ordering/sitesRecord">Home</a>
+                        <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                    
+
                     <li>
                         <span class="active">Automatic Calculated Result</span>
                     </li>
                 </ul>
-                
-                <div class="portlet light bordered about-text" id="user_info">
-                    <?php 
-                            $DrugtestidArr  = array_map('intval', str_split($Drugtestid));
-                           if(in_array(1, $DrugtestidArr)||in_array(2, $DrugtestidArr)||in_array(3, $DrugtestidArr)){
-                           $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));  
-                         ?>    
-                      <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-equalizer font-red-sunglo"></i>
-                <span class="caption-subject font-red-sunglo bold uppercase">
-                 
-                    <?php 
-                       echo "Automatic Calculated Result";
 
-                   ?>
-                    &nbsp; &nbsp;
+                <div class="portlet light bordered about-text" id="user_info">
+                    <?php
+                    $DrugtestidArr = array_map('intval', str_split($Drugtestid));
+                    if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
+                        $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));
+
+                        ?>
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-equalizer font-red-sunglo"></i>
+                                <span class="caption-subject font-red-sunglo bold uppercase">
+                 
+                    <?php
+                    echo "Automatic Calculated Result";
+
+                    ?>
+                                    &nbsp; &nbsp;
      
                 </span>
-            </div>
-            
-        </div>
-        <div class="portlet-body alert">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <?php $Val1=$countDoner*__RRP_1__;
-                              $Val2=$countDoner*__RRP_2__;
-                              $Val3=$countDoner*__RRP_3__;
-                        ?>
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Total :</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php $ValTotal=$Val1+$Val2+$Val3;echo $ValTotal;?> </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Royalty fees:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php $Royaltyfees=$ValTotal*0.1;echo $Royaltyfees; ?> </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>GST:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php $GST = $ValTotal*0.1;echo $GST; ?> </p>
-                        </div>
-                    </div>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Total  before Royalty and Inc GST:</lable>
                         </div>
-                        <div class="col-sm-2">
-                            <p>$<?php $TotalbeforeRoyalty=$ValTotal+$Royaltyfees-$GST;echo $TotalbeforeRoyalty; ?> </p>
+                        <div class="portlet-body alert">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <?php
+                                        $ValTotal = 0;
+                                        if (in_array(1, $DrugtestidArr)) {
+                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_1__, 2, '.', '');
+                                        }
+                                        if (in_array(2, $DrugtestidArr)) {
+                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_2__, 2, '.', '');
+                                        }
+                                        if (in_array(3, $DrugtestidArr)) {
+                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
+                                        }
+                                        /*$Val1=$countDoner*__RRP_1__;
+                                              $Val2=$countDoner*__RRP_2__;
+                                              $Val3=$countDoner*__RRP_3__;*/
+                                        //echo $Val1.'---'.$Val2.'---'.$Val3.'---'.$countDoner;
+                                        ?>
+                                        <div class="col-sm-8 text-info bold">
+                                            <lable>Total :</lable>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p>$<?php //$ValTotal=$Val1+$Val2+$Val3;
+                                                echo number_format($ValTotal, 2, '.', ','); ?> </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8 text-info bold">
+                                            <lable>Royalty fees:</lable>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p>$<?php $Royaltyfees = $ValTotal * 0.1;
+                                                $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
+                                                echo number_format($Royaltyfees, 2, '.', ',');?> </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8 text-info bold">
+                                            <lable>GST:</lable>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p>$<?php $GST = $ValTotal * 0.1;
+                                                $GST = number_format($GST, 2, '.', '');
+                                                echo number_format($GST, 2, '.', ',');?> </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-8 text-info bold">
+                                            <lable>Total before Royalty and Inc GST:</lable>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p>$<?php $TotalbeforeRoyalty = $ValTotal + $GST;
+                                                $TotalbeforeRoyalty = number_format($TotalbeforeRoyalty, 2, '.', '');
+                                                echo number_format($TotalbeforeRoyalty, 2, '.', ',');?> </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-8 text-info bold">
+                                            <lable>Total after royalty and Inc GST:</lable>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p>$<?php $TotalafterRoyalty = $ValTotal - $Royaltyfees + $GST;
+                                               $TotalafterRoyalty = number_format($TotalafterRoyalty, 2, '.', '');
+                                                echo number_format($TotalafterRoyalty, 2, '.', ',');?> </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-8 text-info bold">
+                                            <lable>Net Total after royalty and exl GST:</lable>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <p>$<?php $NetTotal = $ValTotal - $Royaltyfees;
+                                                $NetTotal = number_format($NetTotal, 2, '.', '');
+                                                echo number_format($NetTotal, 2, '.', ',');?></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
-                    </div>
-               
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Total  after royalty and Inc GST:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php $TotalafterRoyalty=$ValTotal+$GST;echo $TotalbeforeRoyalty; ?> </p>
-                        </div>
-                    </div>
-                     <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Net Total after royalty and exl GST:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php $NetTotal =$ValTotal-$Royaltyfees;echo $NetTotal; ?></p>
-                        </div>
-                    </div>
-                    
-                </div>
-              
-             </div>
-            
-        </div>
-                           <?php }?>
-        <div class="portlet-title">
-            <div class="caption">
-                <i class="icon-equalizer font-red-sunglo"></i>
-                <span class="caption-subject font-red-sunglo bold uppercase">
+                    <?php } ?>
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-equalizer font-red-sunglo"></i>
+                            <span class="caption-subject font-red-sunglo bold uppercase">
                  
-                    <?php 
-                       echo "Manual Calculations Result";
+                    <?php
+                    echo "Manual Calculations Result";
 
-                   ?>
-                    &nbsp; &nbsp;
-<!--                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Manual Cal Data" onclick="editOperationManagerDetails('<?php echo $operationManagerAray['id'];?>','2');" href="javascript:void(0);">
+                    ?>
+                                &nbsp; &nbsp;
+                                <!--                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Manual Cal Data" onclick="editOperationManagerDetails('<?php echo $operationManagerAray['id']; ?>','2');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 
                     </a>-->
                 </span>
-            </div>
-            
-        </div>
-        <div class="portlet-body alert">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Total "Other Trevenu Streams:</lable>
                         </div>
-                        <div class="col-sm-2">
-                            <p>$<?php 
-                            $mobileScreen = $data['mobileScreenBasePrice']*$data['mobileScreenHr'];
-                            
-                            $travel = $data['travelBasePrice']*$data['travelHr'];
-                         
-                            $TotalTrevenu = $data['urineNata']+$data['nataLabCnfrm']+$data['oralFluidNata']+$data['SyntheticCannabinoids']+$data['labScrenning']+$data['RtwScrenning']+$mobileScreen+$travel;
-                            
-                            
-                            echo $TotalTrevenu;?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Royalty fees:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php $Royaltyfees = ( $TotalTrevenu*0.1);
-                            echo $Royaltyfees;?></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>GST:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php 
-                            $GST=($TotalTrevenu*0.1);
-                            echo $GST;?></p>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Total  before Royalty and Inc GST:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php
-                            $Total1=  $TotalTrevenu+$GST;
-                            echo $Total1; ?></p>
-                        </div>
                     </div>
-               
-             
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Total  after royalty and Inc GST:</lable>
-                        </div>
-                        <div class="col-sm-2">
-                            <p>$<?php 
-                          $Total2=  $TotalTrevenu-$Royaltyfees+$GST;
-                            echo $Total2;?></p>
-                        </div>
-                    </div>
-                  
+                    <div class="portlet-body alert">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total "Other Trevenu Streams:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $mobileScreen = $data['mobileScreenBasePrice'] * $data['mobileScreenHr'];
 
-                    <div class="row">
-                        <div class="col-sm-8 text-info bold">
-                            <lable>Net Total after royalty and exl GST:</lable>
+                                            $travel = $data['travelBasePrice'] * $data['travelHr'];
+
+                                            $TotalTrevenu = $data['urineNata'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $travel;
+
+
+                                            $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
+                                            echo number_format($TotalTrevenu, 2, '.', ',');?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Royalty fees:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php $RoyaltyfeesManual = ($TotalTrevenu * 0.1);
+                                            $RoyaltyfeesManual=  number_format($RoyaltyfeesManual, 2, '.', '');
+                                            echo number_format($RoyaltyfeesManual, 2, '.', ',');?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $GSTmanual = ($TotalTrevenu * 0.1);
+                                            $GSTmanual = number_format($GSTmanual, 2, '.', '');
+                                            echo number_format($GSTmanual, 2, '.', ',');?></p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total before Royalty and Inc GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $Total1 = $TotalTrevenu + $GSTmanual;
+                                            $Total1 = number_format($Total1, 2, '.', '');
+                                            echo number_format($Total1, 2, '.', ',');?></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total after royalty and Inc GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $Total2 = $TotalTrevenu - $RoyaltyfeesManual + $GSTmanual;
+                                            $Total2 = number_format($Total2, 2, '.', '');
+                                            echo number_format($Total2, 2, '.', ',');?></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Net Total after royalty and exl GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php echo number_format($TotalTrevenu - $GSTmanual, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </div>
-                        <div class="col-sm-2">
-                            <p>$<?php echo $Total1-$Total2;?></p>
-                        </div>
+
                     </div>
-                    
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-equalizer font-red-sunglo"></i>
+                            <span class="caption-subject font-red-sunglo bold uppercase">
+
+                    <?php
+                    echo "Proforma Invoice Totals";
+
+                    ?>
+                                &nbsp; &nbsp;
+                                <!--                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Manual Cal Data" onclick="editOperationManagerDetails('<?php echo $operationManagerAray['id']; ?>','2');" href="javascript:void(0);">
+                        <i class="fa fa-pencil"></i>
+                    </a>-->
+                </span>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body alert">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total Invoice amount:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $totalinvoiceAmt = $ValTotal + $TotalTrevenu;
+                                            echo number_format($totalinvoiceAmt, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total Royalty fees:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $totalRoyalty = $Royaltyfees + $RoyaltyfeesManual;
+                                            echo number_format($totalRoyalty, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $totalGst = $GST + $GSTmanual;
+                                            echo number_format($totalGst, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total before Royalty and Inc GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $totalRoyaltyBefore = $Total1 + $TotalbeforeRoyalty;
+                                            echo number_format($totalRoyaltyBefore, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total after royalty and Inc GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
+                                            echo number_format($totalRoyaltyAfter, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Net Total after royalty and exl GST:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php echo number_format($totalinvoiceAmt - $totalGst, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
-              
-             </div>
-            
-        </div>
-                </div>
-               
+
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                      <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/ordering/manualcalform">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
@@ -24,10 +24,13 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">System calculation</span>
                             </div>
-                            <div class="actions">
-                                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                </div>
-                            </div>
+                                <!--<div class="actions">
+                                    <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                        <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php /*echo __BASE_URL__."ordering/sitesRecord";*/?>');">
+                                            &nbsp;Back
+                                        </button>
+                                    </div>
+                                </div>-->
                         </div>  
                          <div class="portlet-body">
                        
@@ -51,7 +54,7 @@
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> <?php echo __FRANCHISEE_OWNER_PRICE_1__ ?> </td>
                                         <td> $<?php echo __RRP_1__ ?> </td>
-                                     <td> $<?php $Val1=$countDoner*__RRP_1__; echo $Val1; ?>  </td> 
+                                     <td> $<?php $Val1=$countDoner*__RRP_1__; echo number_format($Val1,2,'.',','); ?>  </td>
                                     </tr>
                                <?php }?> 
                                      <?php if(in_array(2, $DrugtestidArr)){?>
@@ -60,7 +63,7 @@
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> <?php echo __FRANCHISEE_OWNER_PRICE_2__ ?> </td>
                                         <td> $<?php echo __RRP_2__ ?> </td>
-                                    <td> $<?php $Val2=$countDoner*__RRP_2__; echo $Val2; ?>  </td> 
+                                    <td> $<?php $Val2=$countDoner*__RRP_2__; echo number_format($Val2,2,'.',','); ?>  </td>
                                     </tr>
                                <?php }?> 
                                      <?php if(in_array(3, $DrugtestidArr)){?>
@@ -69,39 +72,39 @@
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> <?php echo __FRANCHISEE_OWNER_PRICE_3__ ?> </td>
                                         <td> $<?php echo __RRP_3__ ?> </td>
-                                       <td> $<?php $Val3=$countDoner*__RRP_3__; echo $Val3; ?>  </td> 
+                                       <td> $<?php $Val3=$countDoner*__RRP_3__; echo number_format($Val3,2,'.',',');?>  </td>
                                    
                                     </tr>
                                       <?php }?> 
                                      <tr>
                                          <td colspan="4">Total</td>
                                        
-                                    <td>$<?php $ValTotal=$Val1+$Val2+$Val3;echo $ValTotal; ?> </td> 
+                                    <td>$<?php $ValTotal=$Val1+$Val2+$Val3;echo number_format($ValTotal,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
                                          <td colspan="4">Royalty fees</td>
                                        
-                                     <td>$<?php $Royaltyfees=$ValTotal*0.1;echo $Royaltyfees; ?> </td> 
+                                     <td>$<?php $Royaltyfees=$ValTotal*0.1;echo number_format($Royaltyfees,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
                                          <td colspan="4">GST</td>
                                        
-                                    <td>$<?php $GST = $ValTotal*0.1;echo $GST; ?> </td> 
+                                    <td>$<?php $GST = $ValTotal*0.1;echo number_format($GST,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
                                          <td colspan="4">Total  before Royalty and Inc GST</td>
                                        
-                                    <td>$<?php $TotalbeforeRoyalty=$ValTotal+$Royaltyfees-$GST;echo $TotalbeforeRoyalty; ?> </td> 
+                                    <td>$<?php $TotalbeforeRoyalty=$ValTotal+$GST;echo number_format($TotalbeforeRoyalty,2,'.',','); ?> </td>
                                     </tr> 
                                     <tr>
                                          <td colspan="4">Total  after royalty and Inc GST</td>
                                        
-                                       <td>$<?php $TotalafterRoyalty=$ValTotal+$GST;echo $TotalbeforeRoyalty; ?> </td> 
+                                       <td>$<?php $TotalafterRoyalty=$ValTotal-$Royaltyfees+$GST;echo number_format($TotalafterRoyalty,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
                                          <td colspan="4">Net Total after royalty and exl GST</td>
                                        
-                                     <td>$<?php $NetTotal =$ValTotal-$Royaltyfees;echo $NetTotal; ?> </td> 
+                                     <td>$<?php $NetTotal =$ValTotal-$Royaltyfees;echo number_format($NetTotal,2,'.',','); ?> </td>
                                     </tr> 
                                     
                                     

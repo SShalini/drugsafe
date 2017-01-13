@@ -152,7 +152,7 @@
                                     <tr>
                                         <td> CL-<?php echo $sosRormDetailsData['Clientid']; ?> </td>
                                         <td> <?php echo $userDataAry['szName'] ?> </td>
-                                        <td> <?php echo $sosRormDetailsData['testdate']; ?> </td>
+                                        <td> <?php echo date('d/m/Y',strtotime($sosRormDetailsData['testdate']));; ?> </td>
                                         <td> <?php echo $sosRormDetailsData['ServiceCommencedOn']; ?> </td>
                                         <td> <?php echo $sosRormDetailsData['ServiceConcludedOn']; ?> </td>
                                         <td> 

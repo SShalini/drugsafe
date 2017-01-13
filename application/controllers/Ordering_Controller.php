@@ -74,7 +74,7 @@ class Ordering_Controller extends CI_Controller {
                 if( $this->Ordering_Model->insertCalulatedData($data))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>Calculations Data added successfully.</h3> </strong> ";
+                    $szMessage['content'] = "<strong><h3>Calculations saved successfully.</h3> </strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     
                 $data['idsite'] = $idsite;
