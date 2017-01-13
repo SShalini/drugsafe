@@ -5,19 +5,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Ordering_Model extends Error_Model {
    
     function insertCalulatedData($data)
-        {	
+    {	
+        
            $travel = $data['travelHr']*$data['travelBasePrice'];
            $mobileScreen = $data['mobileScreenBasePrice']*$data['mobileScreenHr'];
             
             $dataAry = array(
+                                'sosid' => $data['sosid'],
                                 'urineNata' => $data['urineNata'],
                                 'nataLabCnfrm' => $data['nataLabCnfrm'],
                                 'oralFluidNata'=>$data['oralFluidNata'],
                                 'SyntheticCannabinoids' => $data['SyntheticCannabinoids'],
                                 'labScrenning' => $data['labScrenning'],
 				'RtwScrenning' => $data['RtwScrenning'],
-                                'mobileScreen' => $mobileScreen,
-                                'travel ' => $travel,
+                                'mobileScreenBasePrice'=>$data['mobileScreenBasePrice'],
+                                'mobileScreenHr' => $data['mobileScreenHr'],
+                                'travelBasePrice' => $data['travelBasePrice'],
+				'travelHr' => $data['travelHr'],
                                 'travelType' => $data['travelType']
           
                             );
@@ -71,5 +75,51 @@ class Ordering_Model extends Error_Model {
                     return array();
             }
         } 
+        public function getManualCalculationBySosId($sisId = 0)
+        {
+            $whereAry = array('sosid' => $this->sql_real_escape_string(trim($sisId)));
+            $this->db->select('*');
+            $this->db->where($whereAry);
+            $query = $this->db->get(__DBC_SCHEMATA_MANUAL_CAL__);
+            
+            $sql = $this->db->last_query();
+            //print_r($sql);die();
+            
+
+        if ($query->num_rows() > 0) {
+           $row = $query->result_array();
+            return $row[0];
+        } else {
+           return array();
+        }
+   }
+   function updateCalulatedData($data,$manualCalId)
+    {	
+        $dataAry = array(
+                            'urineNata' => $data['urineNata'],
+                            'nataLabCnfrm' => $data['nataLabCnfrm'],
+                            'oralFluidNata'=>$data['oralFluidNata'],
+                            'SyntheticCannabinoids' => $data['SyntheticCannabinoids'],
+                            'labScrenning' => $data['labScrenning'],
+			    'RtwScrenning' => $data['RtwScrenning'],
+                            'mobileScreenBasePrice'=>$data['mobileScreenBasePrice'],
+                            'mobileScreenHr' => $data['mobileScreenHr'],
+                            'travelBasePrice' => $data['travelBasePrice'],
+			    'travelHr' => $data['travelHr'],
+                            'travelType' => $data['travelType']
+          
+                        );
+	$this->db->where('id',(int)$manualCalId);
+        $queyUpdate=$this->db->update(__DBC_SCHEMATA_MANUAL_CAL__, $dataAry);
+        
+        if($queyUpdate)
+        { 
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 ?>
