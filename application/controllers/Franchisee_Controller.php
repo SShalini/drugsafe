@@ -644,7 +644,8 @@ class Franchisee_Controller extends CI_Controller
            
         
         }
-        if(!empty($_POST['szSearchClRecord2'])){
+      
+        if(!empty($_POST)){
            $_POST['szSearchClRecord2']= $_POST['szSearchClRecord2'];  
         }
         else{
