@@ -527,7 +527,8 @@ class Forum_Controller extends CI_Controller {
                 header("Location:" . __BASE_URL__ . "/admin/admin_login");
                 die;
             }
-              $replyDataArr = $this->Forum_Model->getAllReply(); 
+              $replyDataArr = $this->Forum_Model->getAllReply();
+              $cmntDataArr = $this->Forum_Model->getAllCommentsByTopicId(false,1); 
                $count = $this->Admin_Model->getnotification();
 
                   
@@ -537,6 +538,7 @@ class Forum_Controller extends CI_Controller {
                     $data['pageName'] = "Forum";
                     $data['subpageName'] = "Reply Approval";
                     $data['notification'] = $count;
+                    $data['cmntDataArr'] = $cmntDataArr;
                     $data['data'] = $data;
            
  

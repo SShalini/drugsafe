@@ -572,6 +572,12 @@ class Franchisee_Controller extends CI_Controller
           
                    $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
                  if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                     if(!empty($idFr && $idClient)){
+                          $config['total_rows'] = count( $this->Franchisee_Model->getAllClientDetails(true,$idFr,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$idClient,2));
+                     }
+                     else{
+                         
+                     
                      if(!empty($idFr)){
                        $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$idFr));   
                      }
@@ -581,6 +587,7 @@ class Franchisee_Controller extends CI_Controller
                        $idFrSession = $this->session->userdata('id');
                        $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId,$operationManagrrId,$limit,$offset,$searchAry,$idFrSession));
 
+                     }
                      }
                 }
                     else{
@@ -592,6 +599,13 @@ class Franchisee_Controller extends CI_Controller
             
         $this->pagination->initialize($config);
           if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                if(!empty($idFr && $idClient)){
+                     $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$idClient,2); 
+                }
+                else{
+                    
+              
+               
               if(!empty($idFr)){
                  $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,false);     
               }
@@ -604,6 +618,7 @@ class Franchisee_Controller extends CI_Controller
               $id = $this->session->userdata('id');
               $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$id,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,false);   
           }
+            }
         }
         else{
             $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$franchiseId,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$idClient,1);    

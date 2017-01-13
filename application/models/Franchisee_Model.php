@@ -234,8 +234,12 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                   if($flag==1){
                         $searchq = 'clientId = '.(int)$id; 
                   }
+                  elseif($flag==2)
+                      {
+                       $searchq = array('clientId' => $id,'franchiseeId=' => $franchiseId);  
+                  }
                   else{
-                       $searchq = 'franchiseeId = '.(int)$id;  
+                      $searchq = 'franchiseeId = '.(int)$id;  
                   }
                     
                  

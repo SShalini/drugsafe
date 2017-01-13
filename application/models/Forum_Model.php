@@ -10,9 +10,9 @@ class Forum_Model extends Error_Model {
                     
             if(!empty($searchAry)){
                        
+                 $whereAry = array('szName='=> $searchAry);
+                 $this->db->where($whereAry);
                 
-                 $this->db->where("(szName LIKE '%$searchAry%')");
-                   
                 }
                  
             
@@ -405,12 +405,18 @@ class Forum_Model extends Error_Model {
                 return false;
              }
         }   
-         public function getAllCommentsByTopicId($idTopic)
+         public function getAllCommentsByTopicId($idTopic='',$flag='')
         {
-               $whereAry = array('idTopic='=> $idTopic);  
-           
+              
+            if($flag==1){
+              $whereAry = array('isApproved='=> '0');   
+            }
+            else{
+                 $whereAry = array('idTopic='=> $idTopic);  
+            }
+          
             $this->db->where($whereAry); 
-            $this->db->select('id,idCmnters,szCmnt,cmntDate');
+            $this->db->select('id,idCmnters,szCmnt,cmntDate,idTopic');
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_COMMENTS__);
 
             if($query->num_rows() > 0)

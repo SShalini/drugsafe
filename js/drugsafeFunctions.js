@@ -816,8 +816,8 @@ jQuery('#travel').html(res);
 
 }
   function showComment(szComment)
-{
-    
+{ alert(szComment);
+  
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/showCommentData", {szComment: szComment,}, function (result) {
         var result_ary = result.split("||||");
@@ -833,7 +833,7 @@ jQuery('#travel').html(res);
 }
 function showReply(szReply)
 {
-    
+   
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/showReplyData", {szReply: szReply,}, function (result) {
         var result_ary = result.split("||||");
@@ -1102,5 +1102,37 @@ function Viewexcelfrstockreqlist(productCode) {
       
     });
 }
+function approveComment(idComment)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/approveCommentAlert", {idComment:idComment,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#approveCommentAlert').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function approveCommentConfirmation(idComment) {
+
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#approveCommentAlert').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/forum/approveCommentConfirmation", {idComment: idComment}, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#approveCommentConfirmation').modal("show");
+            }
+            jQuery('#loader').attr('style', 'display:none');
+
+        });
+    }
 
 

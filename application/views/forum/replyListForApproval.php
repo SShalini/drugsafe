@@ -56,7 +56,7 @@
                         </div>
                         <?php
                         
-                        if(!empty($replyDataArr))
+                        if(!empty($replyDataArr)||!empty($cmntDataArr))
                         {
                             
                       
@@ -95,10 +95,69 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     <?php
-                                       $i = 0;
+                                    if(!empty($cmntDataArr)){
+                                     $i = 0;
+                                       foreach($cmntDataArr as $cmntData)
+                                        {  
+                                       
+                                          $textwithoutP=str_ireplace('<p>',' ',$cmntData['szCmnt']);
+                                           $newtextwithoutP=str_ireplace('</p>',' ',$textwithoutP);  
+                                       
+                                    
+                                        $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntData['idTopic']); 
+                                        
+//                                        $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$replyData['idReplier']);
+                                          
+//                                            $splitTimeStamp = explode(" ",$replyData['dtReplyOn']);
+//                                            $date1 = $splitTimeStamp[0];
+//                                            $time1 = $splitTimeStamp[1];
+//                                            $ReplyTime=  date("g:i a", strtotime($time1));
+//                                            $date= explode('-', $date1);
+//                                            $monthNum  = $date['1'];
+//                                            $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+//                                            $monthName = $dateObj->format('M'); 
+                                        ?>
+                                        <tr>
+                                          
+                                              <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
+                                              <?php 
+                                                $text = $cmntsArr['szCmnt'];
+                                                $newtext = wordwrap($text, 8, "\n", true);
+                                                $x =  preg_split('/\s+/', $newtext);
+                                               ?>
+                                              
+                                              
+                                              <td><?php echo $x['0']; ?>... <a href="javascript:void(0);" onclick="showComment('<?php echo $newtextwithoutP ;?>');" >Read more</a></td>
+                                               <?php 
+                                                $reply = $replyData['szReply'];
+                                                $replytext = wordwrap($reply,16, "\n", true);
+                                                $reply =  preg_split('/\s+/', $replytext);
+                                               ?>
+<!--                                              <td> <?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a></td> </td>-->
+<!--                                              <td> <?php echo $franchiseeDetArr1['szName']?> </td>-->
+<!--                                              <td> <?php echo  $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $ReplyTime;?></td>-->
+                                        
+                                                <td>
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveComment('<?php echo $cmntData['id'];?>');" href="javascript:void(0);">
+                                                    <i class="fa fa-check"></i> 
+                                                </a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Unapprove" onclick="unapproveReply(<?php echo $cmntData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                </a>
+                                                </td>
+                                      
+                                        </tr>
+                                        <?php
+                                        $i++;
+                                        }   
+                                    }
+                                   if(!empty($replyDataArr)){
+                                      $i = 0;
+                                      
                                        foreach($replyDataArr as $replyData)
-                                        { 
+                                        {
                                        
                                         $cmntsArr =$this->Forum_Model->viewCmntListByCmntId($replyData['idCmnt']); 
                                         $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntsArr['idTopic']); 
@@ -122,13 +181,13 @@
                                                 $newtext = wordwrap($text, 8, "\n", true);
                                                 $x =  preg_split('/\s+/', $newtext);
                                                ?>
-                                              <td> <?php echo $x['0']; ?>... <a onclick="showComment('<?php echo $cmntsArr['szCmnt'];?>');" href="javascript:void(0);">Read more</a></td>
+<!--                                              <td> <?php echo $x['0']; ?>... <a onclick="showComment('<?php echo $cmntsArr['szCmnt'];?>');" href="javascript:void(0);">Read more</a></td>-->
                                                <?php 
                                                 $reply = $replyData['szReply'];
                                                 $replytext = wordwrap($reply,16, "\n", true);
                                                 $reply =  preg_split('/\s+/', $replytext);
                                                ?>
-<!--                                              <td> <?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a></td> </td>-->
+                                          <td><?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['szReply'];?>');" href="javascript:void(0);">Read more</a> </td>
 <!--                                              <td> <?php echo $franchiseeDetArr1['szName']?> </td>-->
 <!--                                              <td> <?php echo  $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $ReplyTime;?></td>-->
                                         
@@ -144,7 +203,9 @@
                                         </tr>
                                         <?php
                                         $i++;
-                                        }
+                                        }  
+                                    }
+                                       
                                    ?>
                                         
                                 </tbody>
