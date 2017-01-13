@@ -815,11 +815,29 @@ jQuery('#travel').html(res);
     });
 
 }
-  function showComment(idComment)
-{ 
-  
+function editCalcForm(idsite,Drugtestid,sosid,manualCalId) {
+
+    $.post(__BASE_URL__ + "/ordering/editCalcForm", {idsite: idsite,Drugtestid : Drugtestid,sosid:sosid,manualCalId:manualCalId}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/ordering/" + ar_result[1];
+
+    });
+
+}
+function viewCalcDetails(idsite,Drugtestid,sosid) {
+
+    $.post(__BASE_URL__ + "/ordering/viewCalc", {idsite: idsite,Drugtestid : Drugtestid,sosid:sosid}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/ordering/" + ar_result[1];
+
+    });
+
+}
+  function showComment(szComment)
+{
+    
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/showCommentData", {idComment: idComment}, function (result) {
+    $.post(__BASE_URL__ + "/forum/showCommentData", {szComment: szComment,}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -831,11 +849,11 @@ jQuery('#travel').html(res);
 
     });
 }
-function showReply(idReply)
+function showReply(szReply)
 {
-   
+    
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/showReplyData", {idReply: idReply}, function (result) {
+    $.post(__BASE_URL__ + "/forum/showReplyData", {szReply: szReply,}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -1102,69 +1120,20 @@ function Viewexcelfrstockreqlist(productCode) {
       
     });
 }
-function approveComment(idComment)
-{
-    jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/approveCommentAlert", {idComment:idComment,}, function (result) {
-        var result_ary = result.split("||||");
-        var res = result_ary[0].trim(" ");
-        if (res == 'SUCCESS') {
-            $("#popup_box").html(result_ary[1]);
-            $('#approveCommentAlert').modal("show");
-             jQuery('#loader').attr('style', 'display:none');
-        }
-       
+function calcDetailspdf(idsite,Drugtestid,sosid) {
+     $.post(__BASE_URL__ + "/ordering/calcDetailspdf", {idsite: idsite,Drugtestid : Drugtestid,sosid:sosid}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/ordering/" + ar_result[1];
+        window.open(URL,'_blank');
 
     });
 }
-function approveCommentConfirmation(idComment) {
+function backSiteRecord(freanchId) {
 
-        $('.modal-backdrop').remove();
-        $('#static').modal("hide");
-        $('#approveCommentAlert').modal("hide");
-        jQuery('#loader').attr('style', 'display:block');
-        $.post(__BASE_URL__ + "/forum/approveCommentConfirmation", {idComment: idComment}, function (result) {
-            var result_ary = result.split("||||");
-            var res = result_ary[0].trim(" ");
-            if (res == 'SUCCESS') {
-                $("#popup_box").html(result_ary[1]);
-                $('#approveCommentConfirmation').modal("show");
-            }
-            jQuery('#loader').attr('style', 'display:none');
-
-        });
-    }
-    function unapproveComment(idComment)
-{
-    jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/unapproveCommentAlert", {idComment:idComment,}, function (result) {
-        var result_ary = result.split("||||");
-        var res = result_ary[0].trim(" ");
-        if (res == 'SUCCESS') {
-            $("#popup_box").html(result_ary[1]);
-            $('#unapproveCommentAlert').modal("show");
-             jQuery('#loader').attr('style', 'display:none');
-        }
-       
+    $.post(__BASE_URL__ + "/ordering/siteRecordpage", {freanchId: freanchId}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/ordering/" + ar_result[1];
 
     });
+
 }
-function unapproveCommentConfirmation(idComment) {
-
-        $('.modal-backdrop').remove();
-        $('#static').modal("hide");
-        $('#unapproveCommentAlert').modal("hide");
-        jQuery('#loader').attr('style', 'display:block');
-        $.post(__BASE_URL__ + "/forum/unapproveCommentConfirmation", {idComment: idComment}, function (result) {
-            var result_ary = result.split("||||");
-            var res = result_ary[0].trim(" ");
-            if (res == 'SUCCESS') {
-                $("#popup_box").html(result_ary[1]);
-                $('#unapproveCommentConfirmation').modal("show");
-            }
-            jQuery('#loader').attr('style', 'display:none');
-
-        });
-    }
-
-
