@@ -122,19 +122,17 @@
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
                                       <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
-                                         <?php   $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$id);
-                                         ?>
-                                            <option value="">Franchisee Name</option>
-                                           <?php 
+                                        
+                                          
+                                           <option value="">Franchisee Name</option>
+                                          
+                                          <?php
                                          foreach($searchOptionArr as $searchOptionList)
                                           { 
-                                             
+                                            
                                                 $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : ''); 
                                                  echo '<option value="'.$searchOptionList['id'].'"' . $selected . ' >'.$searchOptionList['szName'].'</option>';
-                                       
-                                             
-                                             
-                                          }
+                                           }
                                           ?>
                                       </select>
                                   </div>

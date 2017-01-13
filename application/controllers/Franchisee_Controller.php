@@ -644,8 +644,12 @@ class Franchisee_Controller extends CI_Controller
            
         
         }
-        
-        
+        if(!empty($_POST['szSearchClRecord2'])){
+           $_POST['szSearchClRecord2']= $_POST['szSearchClRecord2'];  
+        }
+        else{
+        $_POST['szSearchClRecord2']=$id;
+        }
         $data['clientAry'] = $clientAray;
         $data['id'] = $id;
         $data['flag'] = $flag;
