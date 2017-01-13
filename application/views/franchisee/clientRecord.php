@@ -45,17 +45,19 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <?php
-                           if(!empty($_POST['szSearchClRecord2'])){
-                               $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchClRecord2']);
+                          if(!empty($clientAry)){
+                              
+                         
+                             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientAry['0']['franchiseeId']);
                           ?>
                      <li>
                            <a onclick=""
-                               href="javascript:void(0);"><?php echo $userDataAry['szName'] ; ?></a>
+                               href="javascript:void(0);"><?php echo $franchiseeDetArr1['szName'] ; ?></a>
                      
                         <i class="fa fa-circle"></i>
                     </li>
-                           <?php }?>
-                   
+                           
+                          <?php }?>
                       <?php  } ?>
                  
                     <li>
@@ -92,6 +94,8 @@
                    <?php } ?>
                     <?php
                     if($_SESSION['drugsafe_user']['iRole'] == '1'){
+                        
+                       
                      ?>
                       <div class="row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/franchisee/clientRecord" name="szSearchClientRecord" method="post">
@@ -102,6 +106,9 @@
                                           <option value="">Client Id</option>
                                           <?php
                                           $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
+                                          
+                                         
+                                         
                                           foreach($searchOptionArr as $searchOptionList)
                                           {
                                               $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
@@ -115,14 +122,18 @@
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
                                       <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
-                                         
-                                           <option value="">Franchisee Name</option>
-                                          
-                                          <?php
+                                         <?php   $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$id);
+                                         ?>
+                                            <option value="">Franchisee Name</option>
+                                           <?php 
                                          foreach($searchOptionArr as $searchOptionList)
-                                          {
-                                              $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$searchOptionList['id'].'"' . $selected . ' >'.$searchOptionList['szName'].'</option>';
+                                          { 
+                                             
+                                                $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : ''); 
+                                                 echo '<option value="'.$searchOptionList['id'].'"' . $selected . ' >'.$searchOptionList['szName'].'</option>';
+                                       
+                                             
+                                             
                                           }
                                           ?>
                                       </select>
@@ -137,6 +148,7 @@
                                           foreach($clientlistArr as $clientList)
                                           {
                                               $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                              
                                               echo '<option value="'.$clientList['id'].'"' . $selected . ' >'.$clientList['szName'].'</option>';
                                           }
                                           ?>
@@ -151,7 +163,7 @@
                     
                       <?php
                    
-                      if (!empty($clientAry)) {
+                      if (!empty($clientAry)) { 
                       ?>  
                     <div class="portlet-title">
                         <div class="caption">
@@ -188,6 +200,7 @@
                                 <?php
                                 $i = 0;
                                 foreach ($clientAry as $clientData) {
+                                 
                                     ?>
                                     <tr>
                                         <td> CL-<?php echo $clientData['id']; ?> </td>

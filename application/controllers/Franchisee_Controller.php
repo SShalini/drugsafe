@@ -647,6 +647,7 @@ class Franchisee_Controller extends CI_Controller
         
         
         $data['clientAry'] = $clientAray;
+        $data['id'] = $id;
         $data['flag'] = $flag;
         $data['clientlistArr'] = $clientlistArr;
         $data['pageName'] = "Client_Record";
