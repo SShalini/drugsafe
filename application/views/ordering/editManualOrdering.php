@@ -24,7 +24,7 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">System calculation</span>
                             </div>
-                                <div class="actions">
+                                 <div class="actions">
                                 <a onclick="backSiteRecord('<?php echo $freanchId;?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                 Back </a>
@@ -129,10 +129,9 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="portlet-body">
                        
-                            <form class="form-horizontal" id="orderingData" action="<?php echo __BASE_URL__?>/ordering/calform" name="orderingData" method="post">
+                            <form class="form-horizontal" id="orderingData" action="<?php echo __BASE_URL__?>/ordering/editcalform" name="orderingData" method="post">
                                 <div class="form-body">
                                     <div class="form-group <?php if(form_error('orderingData[urineNata]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label"> Urine NATA Laboratory screening</label>
@@ -265,11 +264,12 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
+                                              
                                        <div class="form-group <?php if(form_error('orderingData[mobileScreen]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label font-green-meadow text "><b>Total</b> </label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                                <label class="col-md-4 control-label" id="mobileScreen" value=" "  name="orderingData[mobileScreen]"></label>
+                                                <label class="col-md-4 control-label  " id="mobileScreen"  name="orderingData[mobileScreen]"><?php echo $_POST['orderingData']['mobileScreenBasePrice'] * $_POST['orderingData']['mobileScreenHr'] ;?></label>
                                                 
                                             </div>
                                              <?php
@@ -354,7 +354,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                               
-                                                <label class="col-md-4 control-label  " id="travel" value=""  name="orderingData[travel]"></label>
+                                                <label class="col-md-4 control-label  " id="travel" value=""  name="orderingData[travel]"><?php echo $_POST['orderingData']['travelBasePrice'] * $_POST['orderingData']['travelHr'] ;?></label>
                                                 
                                             </div>
                                              <?php

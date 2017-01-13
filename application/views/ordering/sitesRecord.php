@@ -24,13 +24,11 @@
             $this->session->unset_userdata('drugsafe_user_message');
         }
         ?>
-        
+       
         <div id="page_content" class="row">
             <div class="col-md-12">
                <ul class="page-breadcrumb breadcrumb">
                    
-                   
-                 
                    <li>
                         <a href="<?php echo __BASE_URL__;?>/ordering/sitesRecord">Home</a>
                         <i class="fa fa-circle"></i>
@@ -158,12 +156,30 @@
                                         <td> 
                                         
                                     <?php $drugtestidArr = explode(',', $sosRormDetailsData['Drugtestid']);
-                                  $drugtestArr= implode('', $drugtestidArr);
-                                 
+                                    $drugtestArr= implode('', $drugtestidArr);
+                                    $manualCalcDetails=$this->Ordering_Model->getManualCalculationBySosId($sosRormDetailsData['id']);
+                                    if(empty($manualCalcDetails))
+                                    {
+                                        ?>
+                                        <a class="btn btn-circle btn-icon-only btn-default" id="viewCalcForm" title="generate Form" onclick="viewCalcform(<?php echo $sosRormDetailsData['Clientid'];?>,<?php echo $drugtestArr;?>,<?php echo $sosRormDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </a>  
+                                         <?php
+                                    }
+                                    else
+                                    {
+                                        ?>
+                                        <a class="btn btn-circle btn-icon-only btn-default" id="editCalcForm" title="Edit Calc Form" onclick="editCalcForm(<?php echo $sosRormDetailsData['Clientid'];?>,<?php echo $drugtestArr;?>,<?php echo $sosRormDetailsData['id'];?>,<?php echo $manualCalcDetails['id'];?>);" href="javascript:void(0);"></i>
+                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>  
+                                        <a class="btn btn-circle btn-icon-only btn-default" id="viewDetils" title="View Calc Details" onclick="viewCalcDetails(<?php echo $sosRormDetailsData['Clientid'];?>,<?php echo $drugtestArr;?>,<?php echo $sosRormDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </a>  
+                                        <?php
+                                        
+                                    }
                                     ?>
-                                          <a class="btn btn-circle btn-icon-only btn-default" id="viewCalcForm" title="View  Calc Form" onclick="viewCalcform(<?php echo $sosRormDetailsData['Clientid'];?>,<?php echo $drugtestArr;?>,<?php echo $sosRormDetailsData['id'];?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>  
+                                        
                                     
                                     </td> 
                                     </tr>
