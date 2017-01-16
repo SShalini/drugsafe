@@ -1151,7 +1151,7 @@ function commentEditAlert(idComment) {
     });
 }
 function commentEditConfirmation(idComment) {
-var val = CKEDITOR.instances.szComment.getData()
+var val = CKEDITOR.instances.szComment.getData();
 
     $('.modal-backdrop').remove();
     $('#static').modal("hide");

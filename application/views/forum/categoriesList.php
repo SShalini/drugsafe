@@ -73,7 +73,8 @@
                                   foreach($categoriesListAray as $categoriesItem)
                                   {
                                       $selected = ($categoriesItem['szName'] == $_POST['szSearchCtName'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$categoriesItem['szName'].'" '.$selected.' >'.$categoriesItem['szName'].'</option>';
+                                  
+                                       echo '<option value="'.$categoriesItem['szName'].'"' . $selected . ' >'.$categoriesItem['szName'].'</option>';
                                   }
                                   ?>
                               </select>
