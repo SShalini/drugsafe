@@ -257,7 +257,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             if(!empty($productCode)){
                $searchq = "szProductCode LIKE '%$productCode%'";
             }
-            if(!empty($FrName && $productCode)){
+            if(!empty($FrName) && !empty($productCode)){
                $searchq = array('szName' => $FrName,'szProductCode' => $productCode);
             }
            
@@ -295,7 +295,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             if(!empty($productCode)){
                $searchq = "szProductCode LIKE '%$productCode%'";
             }
-            if(!empty($FrName && $productCode)){
+            if(!empty($FrName) && !empty($productCode)){
                $searchq = array('szName' => $FrName,'szProductCode' => $productCode);
             }
            $this->db->select( '*');  
