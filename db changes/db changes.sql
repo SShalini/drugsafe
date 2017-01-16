@@ -25,3 +25,15 @@ ALTER TABLE `tbl_manual_calc` ADD `mobileScreenHr` INT NOT NULL AFTER `mobileScr
 ALTER TABLE `tbl_manual_calc` ADD `travelBasePrice` INT NOT NULL AFTER `mobileScreenHr`, ADD `travelHr` INT NOT NULL AFTER `travelBasePrice`;
 ALTER TABLE `fo_cmnt` ADD `isAdminApproved` TINYINT NOT NULL AFTER `isApproved`;
 ALTER TABLE `ds_sos` CHANGE `RepresentativeSignatureTime` `RepresentativeSignatureTime` VARCHAR( 15 ) NOT NULL ;
+
+ALTER TABLE `ds_sos` CHANGE `TotalDonarScreeningUrine` `TotalDonarScreeningUrine` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `TotalDonarScreeningOral` `TotalDonarScreeningOral` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `ExtraUsed` `ExtraUsed` VARCHAR( 150 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `NegativeResultUrine` `NegativeResultUrine` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `NegativeResultOral` `NegativeResultOral` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `FurtherTestUrine` `FurtherTestUrine` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `FurtherTestOral` `FurtherTestOral` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `TotalAlcoholScreening` `TotalAlcoholScreening` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `NegativeAlcohol` `NegativeAlcohol` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `PositiveAlcohol` `PositiveAlcohol` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `ds_sos` CHANGE `Refusals` `Refusals` DECIMAL( 10, 2 ) NOT NULL ;
