@@ -1,7 +1,5 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Franchisee_Controller extends CI_Controller
 {
 
@@ -116,7 +114,8 @@ class Franchisee_Controller extends CI_Controller
                 $this->session->unset_userdata('idclient');
                 $this->session->unset_userdata('flag');
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . $url);
+                redirect(base_url($url));
+                //header("Location:" . __BASE_URL__ . $url);
             }
         }
         }
@@ -142,7 +141,8 @@ class Franchisee_Controller extends CI_Controller
                 $this->session->unset_userdata('idclient');
                 $this->session->unset_userdata('flag');
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . $url);
+                redirect(base_url($url));
+                //header("Location:" . __BASE_URL__ . $url);
             }
         }
 
@@ -445,9 +445,10 @@ class Franchisee_Controller extends CI_Controller
                     $szMessage['content'] = "<strong><h3>Client details successfully updated.</h3></strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . $url);
+                    redirect(base_url($url));
+                    //header("Location:" . __BASE_URL__ . $url);
 
-                    die;
+                    //die;
                 }
             } 
            }
@@ -472,9 +473,10 @@ class Franchisee_Controller extends CI_Controller
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                    
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . $url);
+                       redirect(base_url($url));
+                    /*header("Location:" . __BASE_URL__ . $url);
 
-                    die;
+                    die;*/
                 }
             }
            }
@@ -525,7 +527,6 @@ class Franchisee_Controller extends CI_Controller
             }
          if(!empty($clientAray)){
            $this->session->set_userdata('id', $id);
-           ob_end_clean();
             redirect(base_url('/franchisee/clientRecord'));
            
          }   
@@ -572,7 +573,7 @@ class Franchisee_Controller extends CI_Controller
           
                    $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
                  if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                     if(!empty($idFr && $idClient)){
+                     if(!empty($idFr) && !empty($idClient)){
                           $config['total_rows'] = count( $this->Franchisee_Model->getAllClientDetails(true,$idFr,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$idClient,2));
                      }
                      else{
