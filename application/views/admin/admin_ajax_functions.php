@@ -1052,7 +1052,7 @@ if($mode == '__EDIT_COMMENT_POPUP__')
                     <h4 class="modal-title">Reply</h4><br>
                 </div>-->
            
-                  <form action=""  id="commentData" name="replyData" method="post" class="form-horizontal  ">
+                  <form action=""  id="commentData" name="commentData" method="post" class="form-horizontal  ">
                        <div class="form-body ">
                             <p class="alert alert-info mdl_align" ><i class="fa fa-pencil"></i> Comment Edit</p>
                           
@@ -1062,7 +1062,7 @@ if($mode == '__EDIT_COMMENT_POPUP__')
                                         <div class="col-md-8">
                                             <div class="input-group">
                                                
-                                                <textarea  name="commentData[szComment]" id="szComment" class="form-control"    rows="7" cols="250"  placeholder="Reply" onfocus="remove_formError(this.id,'true')" ><?php echo $szComment ;?></textarea>
+                                                <textarea  name="commentData[szComment]" id="szComment" class=" ckeditor" rows="7" cols="250"  placeholder="Reply" onfocus="remove_formError(this.id,'true')" ><?php echo $szComment ;?></textarea>
                                               
                                             </div>
                                               <?php
@@ -1087,7 +1087,7 @@ CKEDITOR.replace( 'szComment' );
 </script>
 
     <?php
-}if($mode == '__EDIT_REPLY_POPUP_CONFIRM__')
+}if($mode == '__EDIT_COMMENT_POPUP_CONFIRM__')
 {
     echo "SUCCESS||||";
     ?>
@@ -1110,4 +1110,52 @@ CKEDITOR.replace( 'szComment' );
     
     <?php
 }
+if($mode == '__DELETE_TOPIC_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="deleteTopic" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Delete TOopic </h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Topic?</p>
+                </div>
+                <div class="modal-footer">
+                   
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="topicDeleteConfirmation('<?php echo $idTopic;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__DELETE_TOPIC_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="topicDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Deleted Topic</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Topic has been successfully deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/viewForum/" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+
   ?>

@@ -146,11 +146,24 @@
                                             <td> <a class="btn btn-circle btn-icon-only btn-default" title="View Topic Details" onclick="viewTopicDetails('<?php echo $forumTopicData['id'];?>','<?php echo $forumTopicData['idForum'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-eye"></i> 
                                              </a>
-                                            <?php if($forumTopicData['isClosed']==0 && $forumTopicData['idUser']==$_SESSION['drugsafe_user']['id'] ){ ?>
+                                            <?php if($forumTopicData['isClosed']==0   ){ 
+                                                if($forumTopicData['idUser']==$_SESSION['drugsafe_user']['id'] || $_SESSION['drugsafe_user']['id']==1)
+                                                {
+                                                ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" title=" Topic Close" onclick="closeTopic('<?php echo $forumTopicData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-times-circle"></i> 
                                              </a>
-                                            <?php }?>   
+                                            <?php 
+                                                }
+                                                }
+                                                if($forumTopicData['idUser']==$_SESSION['drugsafe_user']['id'] || $_SESSION['drugsafe_user']['id']==1)
+                                                {
+                                                ?>
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Delete Topic Details" onclick="deleteTopicDetails('<?php echo $forumTopicData['id'];?>');" href="javascript:void(0);">
+                                                    <i class="fa fa-trash"></i> 
+                                             </a>
+                                                 <?php 
+                                                } ?>
                                             </td>
                                      
                                         </tr>

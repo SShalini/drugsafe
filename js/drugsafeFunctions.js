@@ -1151,8 +1151,8 @@ function commentEditAlert(idComment) {
     });
 }
 function commentEditConfirmation(idComment) {
-     var val=jQuery('#szComment').val();
-     alert(val);
+var val = CKEDITOR.instances.szComment.getData()
+
     $('.modal-backdrop').remove();
     $('#static').modal("hide");
     $('#commentEdit').modal("hide");
@@ -1235,3 +1235,64 @@ function unapproveCommentConfirmation(idComment) {
 
         });
     }
+ 
+function deleteTopicDetails(idTopic) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/topicDeleteAlert", {idTopic: idTopic}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#deleteTopic').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function replyDeleteConfirmation(idTopic) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#deleteTopic').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/replyDeleteConfirmation", {idTopic: idTopic}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#topicDeleteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+function deleteTopicDetails(idTopic) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/deleteTopicAlert", {idTopic: idTopic}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#deleteTopic').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function topicDeleteConfirmation(idTopic) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#deleteTopic').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/forum/topicDeleteConfirmation", {idTopic: idTopic}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#topicDeleteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}

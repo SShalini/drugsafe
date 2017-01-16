@@ -682,11 +682,24 @@ class Forum_Controller extends CI_Controller {
         }
         public function commentEditConfirmation()
         {
-            $data['mode'] = '__EDIT_REPLY_POPUP_CONFIRM__';
+            $data['mode'] = '__EDIT_COMMENT_POPUP_CONFIRM__';
             $data['idComment'] = $this->input->post('idComment');
             $data['val'] = $this->input->post('val');
             $this->Forum_Model->updateComment($data['idComment'],$data['val']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
+            public function deleteTopicAlert()
+        {
+            $data['mode'] = '__DELETE_TOPIC_POPUP__';
+            $data['idTopic'] = $this->input->post('idTopic');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function topicDeleteConfirmation()
+        {
+            $data['mode'] = '__DELETE_TOPIC_POPUP_CONFIRM__';
+            $data['idTopic'] = $this->input->post('idTopic');
+            $this->Forum_Model->deleteTopic($data['idTopic']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        } 
     }      
 ?>
