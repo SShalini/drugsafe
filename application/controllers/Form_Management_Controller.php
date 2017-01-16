@@ -69,8 +69,9 @@ class Form_Management_Controller extends CI_Controller
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('formManagement/formViewByFr');
                 $this->load->view('layout/admin_footer');
-            }
-            $data['clientlistArr'] = $clientlistArr;
+            } 
+            else{
+                 $data['clientlistArr'] = $clientlistArr;
             $data['userDataAry']=$userDataAry;
             $data['data'] = $data;
             $data['szMetaTagTitle'] = "Form Management";
@@ -80,6 +81,8 @@ class Form_Management_Controller extends CI_Controller
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/formViewByCl'); 
             $this->load->view('layout/admin_footer');
+            }
+           
            
         }
         elseif ($_POST['szSearchClRecord']) 
@@ -106,7 +109,8 @@ class Form_Management_Controller extends CI_Controller
                 $this->load->view('formManagement/formViewByCl'); 
                 $this->load->view('layout/admin_footer');
             }
-            $data['franchiseeDataAry'] = $franchiseeDataAry;
+            else{
+                $data['franchiseeDataAry'] = $franchiseeDataAry;
             $data['childClientDetailsAray']=$childClientDetailsAray;
             $data['data'] = $data;
             $data['szMetaTagTitle'] = "Form Management";
@@ -115,7 +119,9 @@ class Form_Management_Controller extends CI_Controller
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/formViewBySite'); 
-            $this->load->view('layout/admin_footer');
+            $this->load->view('layout/admin_footer'); 
+            }
+           
         } 
         elseif ($_POST['szSearchClRecord2']) 
         {
@@ -141,7 +147,8 @@ class Form_Management_Controller extends CI_Controller
                 $this->load->view('formManagement/formViewBySite'); 
                 $this->load->view('layout/admin_footer');
             }
-            $data['sosRormDetailsAry'] = $sosRormDetailsAry;
+            else{
+              $data['sosRormDetailsAry'] = $sosRormDetailsAry;
             $data['data'] = $data;
             $data['notification'] = $count;
             $data['szMetaTagTitle'] = "Form Management";
@@ -149,7 +156,9 @@ class Form_Management_Controller extends CI_Controller
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/formViewBySite'); 
-            $this->load->view('layout/admin_footer');
+            $this->load->view('layout/admin_footer');   
+            }
+           
         } 
         else 
         {

@@ -204,18 +204,13 @@ class Forum_Model extends Error_Model {
           
             if(!empty($searchAry)){
                    $whereAry = array('szForumTitle' => $searchAry,'idCategory' => $idCategory);
-        $this->db->where($whereAry);      
-               
-                 
-                   
-                }
+                   $this->db->where($whereAry);      
+           }
                 else{
                     $whereAry = array('idCategory' => $idCategory);
-        $this->db->where($whereAry);
+                    $this->db->where($whereAry);
                      
                 }
-                
-            
             $this->db->select('*');
         
             $this->db->limit($limit, $offset);

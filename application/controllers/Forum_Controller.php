@@ -95,7 +95,6 @@ class Forum_Controller extends CI_Controller {
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                      $this->session->unset_userdata('idForum');
                     redirect(base_url('/forum/forumList'));
-                    die;
                 }
             }
         }
