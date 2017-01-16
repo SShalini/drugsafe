@@ -89,7 +89,7 @@
                                          foreach($searchOptionArr as $searchOptionList)
                                           {
                                               $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$searchOptionList['id'].'" >'.$searchOptionList['szName'].'</option>';
+                                              echo '<option value="'.$searchOptionList['id'].'"' . $selected . '>'.$searchOptionList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>

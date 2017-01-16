@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/categoriesList">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                        
@@ -45,7 +45,7 @@
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Reply List</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Comment/Reply List</span>
                             </div>
                             <?php 
                             if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
@@ -127,7 +127,7 @@
                                                 $newtext = wordwrap($text, 8, "\n", true);
                                                 $x =  preg_split('/\s+/', $newtext);
                                                ?>
-                                              
+                                            
                                               
                                               <td><?php echo $x['0']; ?>... <a href="javascript:void(0);" onclick="showComment('<?php echo $cmntData['id'] ;?>');" >Read more</a></td>
                                                <?php 

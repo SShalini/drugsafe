@@ -37,7 +37,7 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/categoriesList">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                      
@@ -163,7 +163,7 @@
                                                   <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
                                                   <li><a onclick="cmntDelete(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
                                                    <?php }
-                                                     if($_SESSION['drugsafe_user']['id']==1 ){ 
+                                                      if($_SESSION['drugsafe_user']['id']==1 && $commentsData['idCmnters']!=1 ){   ?>
                                                    ?>
                                                    <li><a onclick="cmntDelete(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
                                                      <?php }?>
@@ -294,8 +294,8 @@ if(form_error('replyData[szForumLongDiscription]')){?>
     </div>
 </div><script>
 CKEDITOR.replace( 'szForumLongDiscription' );
-$(document).ready(function() {
-   CKEDITOR.config.removePlugins = 'Save,Print,Preview,Find,About,Maximize,ShowBlocks,Bold';
-});
+
+
 </script>
+
 <div id="popup_box"></div>

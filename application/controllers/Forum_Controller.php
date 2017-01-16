@@ -517,7 +517,7 @@ class Forum_Controller extends CI_Controller {
         $this->Forum_Model->insertReply($data['idCmnt'],$data['val']);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-     function Replylist()
+     function approvallist()
         {
            $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -532,11 +532,11 @@ class Forum_Controller extends CI_Controller {
                $count = $this->Admin_Model->getnotification();
 
                   
-                    $data['szMetaTagTitle'] = "Reply Approval";
+                    $data['szMetaTagTitle'] = "Comment/Reply Approval";
                     $data['replyDataArr'] = $replyDataArr;
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Forum";
-                    $data['subpageName'] = "Reply Approval";
+                    $data['subpageName'] = "Comment/Reply Approval";
                     $data['notification'] = $count;
                     $data['cmntDataArr'] = $cmntDataArr;
                     $data['data'] = $data;

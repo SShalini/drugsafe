@@ -28,14 +28,22 @@
         <div id="page_content" class="row">
             <div class="col-md-12">
                   <ul class="page-breadcrumb breadcrumb">
-                    <li>
-                        <a onclick="viewForm('1');" href="javascript:void(0);" >Home</a>
-                        <i class="fa fa-circle"></i>
-                    </li>
-                   
+                       <ul class="page-breadcrumb breadcrumb">
+                      <?php if($_SESSION['drugsafe_user']['iRole'] == '5'){ ?>
                         <li>
-                            <span class="active">Select Franchisee</span>
+                            <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList">Home</a>
+                            <i class="fa fa-circle"></i>
                         </li>
+                      <?php } else{?>
+                         <li>
+                            <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                      <?php }?>
+                        <li>
+                            <span class="active">Franchisee List</span>
+                        </li>
+                    </ul>
                    
                 </ul>
                 <div class="portlet light bordered">

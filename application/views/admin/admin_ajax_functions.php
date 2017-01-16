@@ -572,12 +572,12 @@ if($mode == '__COMMENT_POPUP__')
                      <h4 class="text_cmnt"><b> Topic - <?php echo $TopicsArr['szTopicTitle']?>  </b></h4>
                 </div>
                   <div class="modal-body">
-                      <p class="alert alert-success"> <?php  echo $cmntDataArr['szCmnt'] ;?> </p>
+                      <h4 class="alert alert-success"> <?php  echo $cmntDataArr['szCmnt'] ;?> </h4>
                                <span class="todo-comment-username cmntDetais"><?php echo $franchiseeDetArr1['szName']?></span> &nbsp; <span class="todo-comment-date"><?php echo $NewdateComment['2'];?> <?php echo $CmntmonthName;?>  <?php  echo $NewdateComment['0'];?> at <?php echo $Cmnttime;?></span>
                 </div>
                
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
@@ -632,7 +632,7 @@ if($mode == '__SHOW_REPLY_POPUP__')
                 </div>
                
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
@@ -679,7 +679,7 @@ if($mode == '__REPLY_APPROVE_CONFIRM_POPUP__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been successfully approved.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
@@ -726,7 +726,7 @@ if($mode == '__REPLY_UNAPPROVE_CONFIRM_POPUP__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been successfully unapproved.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
@@ -983,7 +983,7 @@ if($mode == '__COMMENT_APPROVE_CONFIRM_POPUP__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been successfully approved.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
@@ -1029,7 +1029,7 @@ if($mode == '__COMMENT_UNAPPROVE_CONFIRM_POPUP__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been successfully unapproved.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/forum/Replylist" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>

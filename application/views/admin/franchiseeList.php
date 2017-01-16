@@ -36,10 +36,17 @@
             <div id="page_content" class="row">
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
+                      <?php if($_SESSION['drugsafe_user']['iRole'] == '5'){ ?>
                         <li>
                             <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
+                      <?php } else{?>
+                         <li>
+                            <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                      <?php }?>
                         <li>
                             <span class="active">Franchisee List</span>
                         </li>

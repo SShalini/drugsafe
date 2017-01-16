@@ -39,9 +39,17 @@
                         <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                      <?php } else {?>
+                      <?php } 
+                      elseif($_SESSION['drugsafe_user']['iRole'] == '5'){ ?>
+                             <li>
+                          <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList">Home</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <?php  
+                    }
+                    else {?>
                      <li>
-                        <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord">Home</a>
+                         <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <?php
