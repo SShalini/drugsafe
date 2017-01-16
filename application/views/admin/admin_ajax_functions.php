@@ -1042,7 +1042,7 @@ if($mode == '__COMMENT_UNAPPROVE_CONFIRM_POPUP__')
 if($mode == '__EDIT_COMMENT_POPUP__')
 { 
     echo "SUCCESS||||";
-    
+  
     ?>
     <div id="commentEdit" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
@@ -1062,7 +1062,7 @@ if($mode == '__EDIT_COMMENT_POPUP__')
                                         <div class="col-md-8">
                                             <div class="input-group">
                                                
-                                                <textarea  name="commentData[szComment]" id="szComment" class="form-control"  value="<?php echo $szComment ;?>"  rows="7" cols="250"  placeholder="Reply" onfocus="remove_formError(this.id,'true')" ><?php echo $szComment ;?></textarea>
+                                                <textarea  name="commentData[szComment]" id="szComment" class="form-control"    rows="7" cols="250"  placeholder="Reply" onfocus="remove_formError(this.id,'true')" ><?php echo $szComment ;?></textarea>
                                               
                                             </div>
                                               <?php

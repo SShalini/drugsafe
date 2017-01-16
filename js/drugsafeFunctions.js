@@ -1152,6 +1152,7 @@ function commentEditAlert(idComment) {
 }
 function commentEditConfirmation(idComment) {
      var val=jQuery('#szComment').val();
+     alert(val);
     $('.modal-backdrop').remove();
     $('#static').modal("hide");
     $('#commentEdit').modal("hide");

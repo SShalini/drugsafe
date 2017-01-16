@@ -645,6 +645,27 @@ class Forum_Model extends Error_Model {
         }
 
     }
+     public function updateComment($idComment,$val)
+    {
+
+        $dataAry = array(
+            'szCmnt' => $val,
+        );
+
+        $whereAry = array('id ' => (int)$idComment);
+
+        $this->db->where($whereAry);
+
+        $this->db->update(__DBC_SCHEMATA_FORUM_COMMENTS__, $dataAry);
+
+
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
      public function updateCommentUnapproval($idComment)
     {
 
