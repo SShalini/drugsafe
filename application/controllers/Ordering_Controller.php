@@ -87,6 +87,7 @@ class Ordering_Controller extends CI_Controller {
                 $data['szMetaTagTitle'] = "Ordering";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Ordering";
+                $data['freanchId']=$freanchId;
                 $data['subpageName'] = "Sites_Record";
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('ordering/manualCalcResult');
@@ -240,6 +241,7 @@ class Ordering_Controller extends CI_Controller {
                 $data['data'] = $data_validate;
                 $data['szMetaTagTitle'] = "Ordering";
                 $data['is_user_login'] = $is_user_login;
+                $data['freanchId']=$freanchId;
                 $data['pageName'] = "Ordering";
                 $data['subpageName'] = "Sites_Record";
                 $this->load->view('layout/admin_header', $data);

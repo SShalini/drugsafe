@@ -116,7 +116,7 @@
                            <?php     
                             }
                             
-                            if(in_array(4, $DrugtestidArr)||in_array(5, $DrugtestidArr)){
+                           // if(in_array(4, $DrugtestidArr)||in_array(5, $DrugtestidArr)){
                         ?><hr>
                         
                         <div class="portlet-title">
@@ -375,7 +375,7 @@
                                     </div>
                                 </div>   
                             </form>
-                            <?php }?>
+                            <?php // }?>
                 </div>
             </div> 
         </div>

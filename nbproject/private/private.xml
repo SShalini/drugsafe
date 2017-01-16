@@ -3,10 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/drugsafe/js/drugsafeFunctions.js</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Forum_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Forum_Model.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/forum/replyListForApproval.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/ordering/manualOrdering.php</file>
         </group>
     </open-files>
 </project-private>

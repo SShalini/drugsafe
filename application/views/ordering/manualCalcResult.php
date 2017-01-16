@@ -43,14 +43,17 @@
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">
-                 
-                    <?php
-                    echo "Automatic Calculated Result";
-
-                    ?>
-                                    &nbsp; &nbsp;
-     
-                </span>
+                                    Automatic Calculated Result
+                                </span>
+                            </div>
+                            <div class="actions">
+                                <a onclick="calcDetailspdf('<?php echo $idsite;?>','<?php echo $Drugtestid;?>','<?php echo $sosid;?>')" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                                
+                                 <a onclick="backSiteRecord('<?php echo $freanchId;?>')" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                Back </a>
                             </div>
 
                         </div>
