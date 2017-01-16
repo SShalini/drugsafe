@@ -600,7 +600,7 @@ class Franchisee_Controller extends CI_Controller
             
         $this->pagination->initialize($config);
           if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                if(!empty($idFr && $idClient)){
+                if(!empty($idFr) && !empty($idClient)){
                      $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$operationManagrrId,$config['per_page'],$this->uri->segment(3),$searchAry,$idClient,2); 
                 }
                 else{
