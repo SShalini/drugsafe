@@ -502,13 +502,13 @@ class Forum_Controller extends CI_Controller {
             }
 
     }
-     public function replyToCmnt()
-        {
-            $data['mode'] = '__REPLY_POPUP__';
-            $data['idCmnt'] = $this->input->post('idCmnt');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function replyToCmntConfirmation()
+    public function replyToCmnt()
+    {
+        $data['mode'] = '__REPLY_POPUP__';
+        $data['idCmnt'] = $this->input->post('idCmnt');
+        $this->load->view('admin/admin_ajax_functions',$data);
+    }
+    public function replyToCmntConfirmation()
     {
         
         $data['mode'] = '__REPLY_CONFIRM_POPUP__';
@@ -517,8 +517,8 @@ class Forum_Controller extends CI_Controller {
         $this->Forum_Model->insertReply($data['idCmnt'],$data['val']);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-     function approvallist()
-        {
+    function approvallist()
+    {
            $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if(!$is_user_login)
@@ -592,15 +592,15 @@ class Forum_Controller extends CI_Controller {
             $data['idReply'] = $this->input->post('idReply');
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-         public function unapproveReplyConfirmation()
-    {
-        
-        $data['mode'] = '__REPLY_UNAPPROVE_CONFIRM_POPUP__';
-        $data['idReply'] = $this->input->post('idReply');
-        $this->Forum_Model->updateReplyUnapproval($data['idReply']);
-        $this->load->view('admin/admin_ajax_functions', $data);
-    }
-          public function cmntDeleteAlert()
+        public function unapproveReplyConfirmation()
+        {
+         
+            $data['mode'] = '__REPLY_UNAPPROVE_CONFIRM_POPUP__';
+            $data['idReply'] = $this->input->post('idReply');
+            $this->Forum_Model->updateReplyUnapproval($data['idReply']);
+            $this->load->view('admin/admin_ajax_functions', $data);
+        }
+        public function cmntDeleteAlert()
         {
             $data['mode'] = '__DELETE_COMMENT_POPUP__';
             $data['idCmnt'] = $this->input->post('idCmnt');
