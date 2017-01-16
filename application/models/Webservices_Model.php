@@ -78,7 +78,7 @@ class Webservices_Model extends Error_Model
 
     function getclientdetails($franchiseeid, $parent = 0)
     {
-        $array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent,__DBC_SCHEMATA_USERS__.'.isDeleted'=>'0');
+        $array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent, __DBC_SCHEMATA_USERS__ . '.isDeleted' => '0');
         $query = $this->db->select(__DBC_SCHEMATA_USERS__ . '.id, szName, szEmail')
             ->from(__DBC_SCHEMATA_USERS__)
             ->join(__DBC_SCHEMATA_CLIENT__, __DBC_SCHEMATA_CLIENT__ . '.clientId = ' . __DBC_SCHEMATA_USERS__ . '.id')
@@ -92,8 +92,9 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getsossitesbyfranchiseeid($clientid = 0){
-        $array = array('Clientid' => (int)$clientid,'Status'=>'0');
+    function getsossitesbyfranchiseeid($clientid = 0)
+    {
+        $array = array('Clientid' => (int)$clientid, 'Status' => '0');
         $query = $this->db->select('id')
             ->from(__DBC_SCHEMATA_SOS_FORM__)
             ->where($array)
@@ -111,7 +112,7 @@ class Webservices_Model extends Error_Model
     function addsosdata($data)
     {
         $data['testdate'] = $this->formatdate($data['sosdate']);
-        if($data['status'] == '1'){
+        if ($data['status'] == '1') {
             $this->set_fieldReq(sanitize_all_html_input(trim($data['testdate'])), 'testdate', 'Date', true, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['site'])), 'site', 'Site', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['drugtest'])), 'drugtest', 'Drug to be tested', true);
@@ -128,9 +129,10 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['posalcres'])), 'posalcres', 'Positive Alcohol Results', true, __VLD_CASE_NUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['refusals'])), 'refusals', 'Refusals', true, __VLD_CASE_NUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true, __VLD_CASE_NUMERIC__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', false);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Respresentative', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['nominedec'])), 'nominedec', 'Nominated Client Respresentative signature time', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Signature', true);
         }
         if ($this->error) {
@@ -159,7 +161,7 @@ class Webservices_Model extends Error_Model
                 'Comments' => $data['comments'],
                 'ClientRepresentative' => $data['nominated'],
                 'RepresentativeSignature' => $data['sign'],
-                'RepresentativeSignatureTime' => date('Y-m-d'),
+                'RepresentativeSignatureTime' => $data['nominedec'],
                 'Status' => $data['status']
             );
             if ($data['update'] == '1') {
@@ -219,7 +221,7 @@ class Webservices_Model extends Error_Model
                                         array_push($failarr, $message);
                                     }
                                 } else {
-                                    if($oldupdate && !$newupdate){
+                                    if ($oldupdate && !$newupdate) {
                                         $oldupdate = false;
                                         $weherecocarr = array('id' => (int)$data['iddonor' . $i]);
                                         $this->db->where($weherecocarr)
@@ -610,7 +612,7 @@ class Webservices_Model extends Error_Model
         $data['intectexpiry'] = $this->formatdate($data['intectexpiry']);
         $data['lotexpiry'] = $this->formatdate($data['lotexpiry']);
         $data['receiveronedate'] = $this->formatdate($data['receiveronedate']);
-        if(!empty($data['receivertwodate'])){
+        if (!empty($data['receivertwodate'])) {
             $data['receivertwodate'] = $this->formatdate($data['receivertwodate']);
         }
         $data['donordecdate'] = $this->formatdate($data['donordecdate']);
@@ -624,7 +626,7 @@ class Webservices_Model extends Error_Model
             }
         }
         $data['drugtest'] = $drugtestdata;
-        if($data['status'] == '1'){
+        if ($data['status'] == '1') {
             $this->set_fieldReq(sanitize_all_html_input(trim($data['cocdate'])), 'cocdate', 'Date', true, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['drugtest'])), 'drugtest', 'Drug to be tested', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['dob'])), 'dob', 'DOB', true);
@@ -659,7 +661,7 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['thc'])), 'thc', 'THC', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['opiates'])), 'opiates', 'Opiates', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['benzo'])), 'benzo', 'Benzo', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['donordecdate'])), 'donordecdate', 'Donor declaration date', true,__VLD_CASE_DATE__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['donordecdate'])), 'donordecdate', 'Donor declaration date', true, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['donordecsign'])), 'donordecsign', 'Donor declaration signature', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorone'])), 'collectorone', 'Collector 1 Name Number', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorsignone'])), 'collectorsignone', 'Collector 1 Sign', true);
@@ -726,7 +728,7 @@ class Webservices_Model extends Error_Model
                 'receiveronelabel' => $data['receiveronelabel'],
                 'receiveronesign' => $data['receiveronesign'],
                 'receivertwo' => $data['receivertwo'],
-                'receivertwodate' => (!empty($data['receivertwodate'])?date('Y-m-d', strtotime($data['receivertwodate'])):date('Y-m-d')),
+                'receivertwodate' => (!empty($data['receivertwodate']) ? date('Y-m-d', strtotime($data['receivertwodate'])) : date('Y-m-d')),
                 'receivertwotime' => $data['receivertwotime'],
                 'receivertwoseal' => $data['receivertwoseal'],
                 'receivertwolabel' => $data['receivertwolabel'],
@@ -770,7 +772,7 @@ class Webservices_Model extends Error_Model
                         $this->addError("successcomplete", "COC data saved successfully");
                         return true;
                     }
-                }elseif($data['status'] == '0'){
+                } elseif ($data['status'] == '0') {
                     $this->addError("success", "COC data saved successfully");
                     return true;
                 } else {
@@ -808,6 +810,30 @@ class Webservices_Model extends Error_Model
             return true;
         } else {
             $this->addError("error", "Something went wrong. Please try again.");
+            return false;
+        }
+    }
+
+    function delcoc($cocid)
+    {
+        $whereAry = 'id =' . (int)$cocid;
+        $query = $this->db->where($whereAry)
+            ->delete(__DBC_SCHEMATA_COC_FORM__);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function deldonor($donorid)
+    {
+        $whereAry = 'id =' . (int)$donorid;
+        $query = $this->db->where($whereAry)
+            ->delete(__DBC_SCHEMATA_DONER__);
+        if ($query) {
+            return true;
+        } else {
             return false;
         }
     }

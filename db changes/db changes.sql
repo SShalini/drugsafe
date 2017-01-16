@@ -23,5 +23,5 @@ ALTER TABLE `tbl_manual_calc` DROP `mobileScreen`, DROP `travel`;
 ALTER TABLE `tbl_manual_calc` ADD `mobileScreenBasePrice` INT NOT NULL AFTER `RtwScrenning`;
 ALTER TABLE `tbl_manual_calc` ADD `mobileScreenHr` INT NOT NULL AFTER `mobileScreenBasePrice`;
 ALTER TABLE `tbl_manual_calc` ADD `travelBasePrice` INT NOT NULL AFTER `mobileScreenHr`, ADD `travelHr` INT NOT NULL AFTER `travelBasePrice`;
-
 ALTER TABLE `fo_cmnt` ADD `isAdminApproved` TINYINT NOT NULL AFTER `isApproved`;
+ALTER TABLE `ds_sos` CHANGE `RepresentativeSignatureTime` `RepresentativeSignatureTime` VARCHAR( 15 ) NOT NULL ;

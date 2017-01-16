@@ -138,6 +138,7 @@ class Webservices_Controller extends CI_Controller
         $dataArr['breathtest'] = !empty($jsondata->breathtest) ? $jsondata->breathtest : "0";
         $dataArr['comments'] = !empty($jsondata->comments) ? $jsondata->comments : "";
         $dataArr['nominated'] = !empty($jsondata->nominated) ? $jsondata->nominated : "";
+        $dataArr['nominedec'] = !empty($jsondata->nominedec) ? $jsondata->nominedec : "";
         $dataArr['sign'] = !empty($jsondata->sign) ? $jsondata->sign : "";
         $dataArr['update'] = !empty($jsondata->update) ? $jsondata->update : "";
         $dataArr['donercountpre'] = !empty($jsondata->donercountpre) ? $jsondata->donercountpre : "";
@@ -229,6 +230,8 @@ class Webservices_Controller extends CI_Controller
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['breathtest']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominated'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['nominated']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominedec'])){
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['nominedec']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sign'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['sign']);
             }elseif(!empty($sosdatares['totalcoccount'][0]['totalcoc'])){
@@ -698,6 +701,36 @@ class Webservices_Controller extends CI_Controller
             }else{
                 $responsedata = array("code" => 111,"message"=>"Bad Request.");
             }
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function delcoc(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['cocid'] = !empty($jsondata->cocid) ? $jsondata->cocid : "0";
+        $delstatus = $this->Webservices_Model->delcoc($data['cocid']);
+        if($delstatus)
+        {
+            $responsedata = array("code" => 200,"message"=>"COC form cancelled successfully.");
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Some error occured while cancelling COC form. Please try again.");
+
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function deldonor(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['donorid'] = !empty($jsondata->donorid) ? $jsondata->donorid : "0";
+        $delstatus = $this->Webservices_Model->deldonor($data['donorid']);
+        if($delstatus)
+        {
+            $responsedata = array("code" => 200,"message"=>"Donor deleted successfully.");
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Some error occured while deleting Donor. Please try again.");
+
         }
         header('Content-Type: application/json');
         echo json_encode($responsedata);
