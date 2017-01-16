@@ -20,7 +20,7 @@ class Forum_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
             $this->load->library('form_validation');
@@ -45,8 +45,7 @@ class Forum_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3> Forum Category added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                   
-                    header("Location:" . __BASE_URL__ . "/forum/categoriesList");
+                  redirect(base_url('/forum/categoriesList'));
                     die;
                 }
             }
@@ -69,7 +68,7 @@ class Forum_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+              redirect(base_url('/admin/admin_login'));
                 die;
             }
             $this->load->library('form_validation');
@@ -95,7 +94,7 @@ class Forum_Controller extends CI_Controller {
                     $szMessage['content'] = "<strong><h3> Forum Topic added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                      $this->session->unset_userdata('idForum');
-                    header("Location:" . __BASE_URL__ . "/forum/forumList");
+                    redirect(base_url('/forum/forumList'));
                     die;
                 }
             }
@@ -116,7 +115,7 @@ class Forum_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
            
@@ -150,7 +149,7 @@ class Forum_Controller extends CI_Controller {
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idCategory');
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/forum/categoriesList");
+                        redirect(base_url('/forum/categoriesList'));
                     die;
                 }
             }
@@ -164,7 +163,7 @@ class Forum_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
              $searchAry = $_POST['szSearchCtName'];
@@ -237,7 +236,7 @@ class Forum_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
              $idCategory = $this->session->userdata('idCategory');
@@ -290,7 +289,7 @@ class Forum_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
             $this->load->library('form_validation');
@@ -320,7 +319,7 @@ class Forum_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3> Forum Data added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                    header("Location:" . __BASE_URL__ . "/forum/forumList");
+                    redirect(base_url('/forum/forumList'));
                     die;
                 }
             }
@@ -342,7 +341,7 @@ class Forum_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
            
@@ -381,7 +380,7 @@ class Forum_Controller extends CI_Controller {
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('id');
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/forum/forumList");
+                        redirect(base_url('/forum/forumList'));
                     die;
                 }
             }
@@ -405,7 +404,7 @@ class Forum_Controller extends CI_Controller {
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
          $searchAry = '';
@@ -461,7 +460,7 @@ class Forum_Controller extends CI_Controller {
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
   
@@ -496,7 +495,8 @@ class Forum_Controller extends CI_Controller {
                         $szMessage['content'] = "<strong><h3> Comments Posted successfully.</h3></strong>";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/forum/viewTopicDetails");
+                       
+                        redirect(base_url('/forum/viewTopicDetails'));
                     die;
                 }
             }
@@ -524,7 +524,7 @@ class Forum_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
               $replyDataArr = $this->Forum_Model->getAllReply(false,2);

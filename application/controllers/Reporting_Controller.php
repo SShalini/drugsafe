@@ -20,11 +20,11 @@ class Reporting_Controller extends CI_Controller
         $is_user_login = is_user_login($this);
         if ($is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
-            die;
+            redirect(base_url('/admin/franchiseeList'));
+             die;
         } else {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+             redirect(base_url('/admin/admin_login'));
             die;
         }
     }
@@ -53,7 +53,7 @@ class Reporting_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+             redirect(base_url('/admin/admin_login'));
             die;
         }
 
@@ -138,7 +138,7 @@ class Reporting_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+             redirect(base_url('/admin/admin_login'));
             die;
         }
         $count = $this->Admin_Model->getnotification();
@@ -607,7 +607,7 @@ function excelstockassignlistData()
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+           redirect(base_url('/admin/admin_login'));
             die;
         }
 
@@ -660,7 +660,7 @@ function excelstockassignlistData()
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+           redirect(base_url('/admin/admin_login'));
             die;
         }
         $searchAryData = $_POST['szSearchProdCode'];

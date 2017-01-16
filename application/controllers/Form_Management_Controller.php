@@ -21,11 +21,11 @@ class Form_Management_Controller extends CI_Controller
         $is_user_login = is_user_login($this);
         if ($is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+            redirect(base_url('/admin/franchiseeList'));
             die;
         } else {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+              redirect(base_url('/admin/admin_login'));
             die;
         }
     }
@@ -47,7 +47,7 @@ class Form_Management_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+             redirect(base_url('/admin/admin_login'));
             die;
         }
           $count = $this->Admin_Model->getnotification();
@@ -185,7 +185,7 @@ class Form_Management_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
         $count = $this->Admin_Model->getnotification();
@@ -375,7 +375,7 @@ class Form_Management_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
        
@@ -407,7 +407,7 @@ class Form_Management_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
        $DonorDetailsAry = $this->Form_Management_Model->getActiveDonorDetailsBySosId($idsos);
@@ -443,7 +443,7 @@ class Form_Management_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+              redirect(base_url('/admin/admin_login'));
             die;
         }
        $cocFormDetailsAry = $this->Form_Management_Model->getCocFormDetailsByCocId($idcoc);

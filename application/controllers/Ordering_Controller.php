@@ -33,7 +33,7 @@ class Ordering_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
             $freanchId = $this->session->userdata('freanchId');
@@ -178,7 +178,7 @@ class Ordering_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }
             $freanchId = $this->session->userdata('freanchId');

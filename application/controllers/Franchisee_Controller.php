@@ -24,11 +24,11 @@ class Franchisee_Controller extends CI_Controller
 
         if ($is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/franchisee/dashboard");
+            redirect(base_url('/franchisee/dashboard'));
             die;
         } else {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+             redirect(base_url('/admin/admin_login'));
             die;
         }
     }
@@ -40,7 +40,7 @@ class Franchisee_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
 
@@ -79,7 +79,7 @@ class Franchisee_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
 
@@ -168,7 +168,7 @@ class Franchisee_Controller extends CI_Controller
     {
         logout($this);
         ob_end_clean();
-        header("Location:" . __BASE_URL__ . "/admin/admin_login");
+        redirect(base_url('/admin/admin_login'));
         die();
     }
 
@@ -210,7 +210,7 @@ class Franchisee_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+           redirect(base_url('/admin/admin_login'));
             die;
         }
          $idfranchisee = $this->session->userdata('idfranchisee');
@@ -330,7 +330,7 @@ class Franchisee_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+           redirect(base_url('/admin/admin_login'));
             die;
         }
          $idClient = $this->session->userdata('idClient');
@@ -505,7 +505,7 @@ class Franchisee_Controller extends CI_Controller
         $count = $this->Admin_Model->getnotification();
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
        
@@ -526,8 +526,8 @@ class Franchisee_Controller extends CI_Controller
          if(!empty($clientAray)){
            $this->session->set_userdata('id', $id);
            ob_end_clean();
-            echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/franchisee/clientRecord';</script>";
-           exit();  
+            redirect(base_url('/franchisee/clientRecord'));
+           
          }   
         }
        
@@ -550,7 +550,7 @@ class Franchisee_Controller extends CI_Controller
         $count = $this->Admin_Model->getnotification();
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
@@ -679,7 +679,7 @@ class Franchisee_Controller extends CI_Controller
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+           redirect(base_url('/admin/admin_login'));
             die;
         }
          $searchAry = '';

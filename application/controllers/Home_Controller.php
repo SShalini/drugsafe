@@ -17,25 +17,25 @@ class Home_Controller extends CI_Controller {
                 if($_SESSION['drugsafe_user']['iRole']=='5')
                 {
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+                      redirect(base_url('/admin/franchiseeList'));
                     die;
                 }
                 elseif($_SESSION['drugsafe_user']['iRole']=='1'){
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                      redirect(base_url('/admin/operationManagerList'));
                     die;
                 }
                 else
                 {
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
+                      redirect(base_url('/franchisee/clientRecord'));
                     die;
                 }
             }
             else
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }
 	}

@@ -23,25 +23,26 @@ class Admin_Controller extends CI_Controller {
                 if($_SESSION['drugsafe_user']['iRole']=='5')
                 {
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+                     redirect(base_url('/admin/franchiseeList'));
+                  
                     die;
                 }
                 elseif($_SESSION['drugsafe_user']['iRole']=='1'){
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                     redirect(base_url('/admin/operationManagerList'));
                     die;
                 }
                 else
                 {
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
+                     redirect(base_url('/franchisee/clientRecord'));
                     die;
                 }
             }
             else
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
 
@@ -76,26 +77,16 @@ class Admin_Controller extends CI_Controller {
                       if($user_session[iRole]=='1')
                       {
                         ob_end_clean();
-                          /*echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
-        exit();*/
                           redirect(base_url('/admin/operationManagerList'));
-//                        header("Location:".__BASE_URL__."/admin/operationManagerList");
-                        //die;
                       }
                        elseif($user_session[iRole]=='5')
                            {
                         ob_end_clean();
-                               echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/franchiseeList';</script>";
-                               exit();
-                        /*header("Location:".__BASE_URL__."/admin/franchiseeList");
-                        die; */
+                         redirect(base_url('/admin/franchiseeList'));
                           }
                       else{
                         ob_end_clean();
-                          echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/franchisee/clientRecord';</script>";
-                          exit();
-                        /*header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
-                        die; */
+                          redirect(base_url('/franchisee/clientRecord'));
                       }
                     }
            
@@ -114,7 +105,7 @@ class Admin_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
         $user_session = $this->session->userdata('drugsafe_user');
@@ -132,10 +123,7 @@ class Admin_Controller extends CI_Controller {
         {
             logout($this);
             ob_end_clean();
-            echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/admin_login';</script>";
-            exit();
-            /*header("Location:" . __BASE_URL__ . "/admin/admin_login");
-            die();*/
+              redirect(base_url('/admin/admin_login'));
         }
         function changePassword()
         {
@@ -146,7 +134,7 @@ class Admin_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }
 		
@@ -163,15 +151,17 @@ class Admin_Controller extends CI_Controller {
 
                        if($_SESSION['drugsafe_user']['iRole']==5){
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+                           redirect(base_url('/admin/franchiseeList'));
+                        
                         die;                 
                       } elseif($_SESSION['drugsafe_user']['iRole']==2){
-                        ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
+                             redirect(base_url('/franchisee/clientRecord'));
+                       
                         die;
                         } else{
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
+                           redirect(base_url('/admin/operationManagerList'));
+                      
                         die;
                         }
                     }
@@ -194,7 +184,7 @@ class Admin_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
         }
         $idOperationManager = $this->input->post('idOperationManager');
@@ -212,7 +202,7 @@ class Admin_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }
             $validate= $this->input->post('addFranchisee');
@@ -230,9 +220,8 @@ class Admin_Controller extends CI_Controller {
                     ob_end_clean();
                     $this->session->unset_userdata('idOperationManager');
                     $this->session->unset_userdata('flag');
-                    echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/franchiseeList';</script>";
-                    exit();
-                   
+                       redirect(base_url('/admin/franchiseeList'));
+                  
                 }
             }
            
@@ -266,7 +255,7 @@ class Admin_Controller extends CI_Controller {
             {
 //                echo 'fr4';
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }
 //            echo 'fr5';
@@ -324,13 +313,13 @@ class Admin_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }elseif($_SESSION['drugsafe_user']['iRole']!='1')
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/franchisee/clientRecord");
-                die;
+                   redirect(base_url('/franchisee/clientRecord'));
+             
             }
               $searchAry = '';
             if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
@@ -465,16 +454,14 @@ class Admin_Controller extends CI_Controller {
                         ob_end_clean();
                         $this->session->unset_userdata('idOperationManager');
                         $this->session->unset_userdata('idfranchisee');
-                        echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/franchiseeList';</script>";
-                        exit();
+                           redirect(base_url('/admin/franchiseeList'));
+                       
                         
                     }
                 }
                     $data['szMetaTagTitle'] = "Edit Franchisee Details ";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
-//                    $data['countryAry'] = $countryAry;
-//                    $data['stateAry'] = $stateAry;
                     $data['validate'] = $validate;
                     $data['idfranchisee'] = $idfranchisee;
                     $data['idOperationManager'] = $idOperationManager;
@@ -509,8 +496,8 @@ class Admin_Controller extends CI_Controller {
         if($is_user_login)
         {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
-            die;
+           redirect(base_url('/admin/admin_login'));
+          die;
         }
         
         $data_validate=$this->input->post('drugSafeForgotPassword');
@@ -539,7 +526,7 @@ class Admin_Controller extends CI_Controller {
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     $this->session->userdata('drugsafe_user_message');
                     ob_end_clean();
-                    header("Location:" .__BASE_URL__. "/admin/admin_login");
+                    redirect(base_url('/admin/admin_login'));
                     die;
                 }
             }
@@ -562,7 +549,7 @@ class Admin_Controller extends CI_Controller {
         if($is_user_login)
         {
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+             redirect(base_url('/admin/franchiseeList'));
             die;
         }
         //echo " Hello";
@@ -596,7 +583,7 @@ class Admin_Controller extends CI_Controller {
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                    redirect(base_url('/admin/admin_login'));
                     die;
                 }
                 else
@@ -606,7 +593,7 @@ class Admin_Controller extends CI_Controller {
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                      redirect(base_url('/admin/admin_login'));
                     die;
                 }
 
@@ -619,7 +606,7 @@ class Admin_Controller extends CI_Controller {
             $szMessage['content'] = "<strong><h3> Your Password Key is wrong. Please reset your password again.</h3></strong>";
             $this->session->set_userdata('drugsafe_user_message', $szMessage);
             ob_end_clean();
-            header("Location:" . __BASE_URL__ . "/admin/admin_login");
+            redirect(base_url('/admin/admin_login'));
             die;
         }
         $data['szMetaTagTitle'] = "Admin Forgot Password";
@@ -643,10 +630,9 @@ class Admin_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3>New operation manager added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                    echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
-                    exit();
-                    /*header("Location:" . __BASE_URL__ . "/admin/operationManagerList");
-                    die;*/
+                       redirect(base_url('/admin/operationManagerList'));
+                    
+                   
                 }
             }
            
@@ -707,12 +693,11 @@ class Admin_Controller extends CI_Controller {
                         if($flag==1){
                         $this->session->unset_userdata('flag'); 
                         $this->session->unset_userdata('idOperationManager');
-                         echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/admin/operationManagerList';</script>";
-                          exit();
+                           redirect(base_url('/admin/operationManagerList'));
+                        
                         }else{
                           $this->session->unset_userdata('flag');
-                           echo "<script type='text/javascript'>window.location.href = '".__BASE_URL__."/franchisee/franchiseeRecord';</script>";
-                       exit();
+                             redirect(base_url('/franchisee/franchiseeRecord'));
                         }
                     }
                 }

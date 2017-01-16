@@ -19,15 +19,14 @@ class StockMgt_Controller extends CI_Controller {
             if($is_user_login)
             {
   
-                   
-                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                   redirect(base_url('/stock_management/modelstockvalue')); 
                     die;
 
             }
             else
             {
-                ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+             ob_end_clean();
+             redirect(base_url('/admin/admin_login')); 
                 die;
             }
 
@@ -56,7 +55,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
           
@@ -129,7 +128,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
             $idfranchisee = $this->session->userdata('idfranchisee');
@@ -194,19 +193,19 @@ class StockMgt_Controller extends CI_Controller {
                     if($idCategory==1){
                     $drActive= $idCategory;   
                     $this->session->set_userdata('drugsafe_tab_status', $drActive); 
-                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                     redirect(base_url('/stock_management/modelstockvalue'));
                     die;
                     }
                     elseif($idCategory==2){
                     $mrActive= $idCategory                  ; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
-                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                    redirect(base_url('/stock_management/modelstockvalue'));
                     die;  
                     }
                     else{
                     $conActive= $idCategory                  ; 
                     $this->session->set_userdata('drugsafe_tab_status', $conActive);
-                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                    redirect(base_url('/stock_management/modelstockvalue'));
                     die;  
                     }
                 }
@@ -232,7 +231,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
             $idfranchisee = $this->session->userdata('idfranchisee');
@@ -297,19 +296,19 @@ class StockMgt_Controller extends CI_Controller {
                         
                     $drActive= $idCategory;   
                     $this->session->set_userdata('drugsafe_tab_status', $drActive); 
-                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                      redirect(base_url('/stock_management/modelstockvalue'));
                     die;
                     }
                     elseif($idCategory==2){
                     $mrActive= $idCategory                  ; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
-                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                     redirect(base_url('/stock_management/modelstockvalue'));
                     die;  
                     }
                     else{
                     $conActive= $idCategory; 
                     $this->session->set_userdata('drugsafe_tab_status', $conActive);
-                    header("Location:" . __BASE_URL__ . "/stock_management/modelstockvalue");
+                     redirect(base_url('/stock_management/modelstockvalue'));
                     die;  
                     }
                 }
@@ -334,7 +333,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
           
@@ -375,7 +374,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
             $idfranchisee = $this->session->userdata('idfranchisee');
@@ -442,19 +441,19 @@ class StockMgt_Controller extends CI_Controller {
                     if($idCategory==1){
                     $drActive= $idCategory;   
                     $this->session->set_userdata('drugsafe_tab_status', $drActive); 
-                    header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
+                    redirect(base_url('/stock_management/productstockqty'));
                     die;
                     }
                     elseif($idCategory==2){
                     $mrActive= $idCategory                  ; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
-                    header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
+                      redirect(base_url('/stock_management/productstockqty'));
                     die;  
                     }
                     else{
                     $conActive= $idCategory; 
                     $this->session->set_userdata('drugsafe_tab_status', $conActive);
-                    header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
+                       redirect(base_url('/stock_management/productstockqty'));
                     die;  
                     }
                 }
@@ -484,7 +483,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
             $idfranchisee = $this->session->userdata('idfranchisee');
@@ -570,13 +569,13 @@ class StockMgt_Controller extends CI_Controller {
                         
                     $drActive= $idCategory;   
                     $this->session->set_userdata('drugsafe_tab_status', $drActive); 
-                    header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
+                     redirect(base_url('/stock_management/productstockqty'));
                     die;
                     }
                     else{
                     $mrActive= $idCategory; 
                     $this->session->set_userdata('drugsafe_tab_status', $mrActive);
-                    header("Location:" . __BASE_URL__ . "/stock_management/productstockqty");
+                      redirect(base_url('/stock_management/productstockqty'));
                     die;  
                     }
                 }
@@ -691,7 +690,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }
             
@@ -752,7 +751,7 @@ class StockMgt_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
             

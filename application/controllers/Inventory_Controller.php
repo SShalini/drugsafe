@@ -22,7 +22,7 @@ class Inventory_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                  redirect(base_url('/admin/admin_login'));
                 die;
             }
             $this->load->library('form_validation');
@@ -49,8 +49,8 @@ class Inventory_Controller extends CI_Controller {
                 {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3> Marketing Material added successfully.</h3></strong>";
-                    $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                    header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                     redirect(base_url('/inventory/marketingMaterialList'));
                     die;
                 }
             }
@@ -62,7 +62,7 @@ class Inventory_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
             $this->load->library('form_validation');
@@ -94,7 +94,7 @@ class Inventory_Controller extends CI_Controller {
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong><h3>Drug Test Kit added successfully.</h3></strong>";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                        header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
+                         redirect(base_url('/inventory/drugTestKitList'));
                         die;
                     }
                 }
@@ -106,7 +106,7 @@ class Inventory_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+               redirect(base_url('/admin/admin_login'));
                 die;
             }
             $this->load->library('form_validation');
@@ -134,7 +134,8 @@ class Inventory_Controller extends CI_Controller {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3>Consumables added successfully.</h3> </strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                    header("Location:" . __BASE_URL__ . "/inventory/consumablesList");
+                     redirect(base_url('/inventory/consumablesList'));
+                  
                     die;
                 }
             }
@@ -159,7 +160,7 @@ class Inventory_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                 redirect(base_url('/admin/admin_login'));
                 die;
             }
            
@@ -200,8 +201,8 @@ class Inventory_Controller extends CI_Controller {
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/inventory/drugTestKitList");
-                    die;
+                         redirect(base_url('/inventory/drugTestKitList'));
+                        die;
                    
                 }
 
@@ -246,7 +247,7 @@ class Inventory_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+               redirect(base_url('/admin/admin_login'));
                 die;
             }
              $searchAry = $_POST['szSearchProdCode'];
@@ -283,7 +284,7 @@ class Inventory_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
             
@@ -347,7 +348,7 @@ class Inventory_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+               redirect(base_url('/admin/admin_login'));
                 die;
             }
             
@@ -386,7 +387,7 @@ class Inventory_Controller extends CI_Controller {
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
                         ob_end_clean();
-                        header("Location:" . __BASE_URL__ . "/inventory/marketingMaterialList");
+                          redirect(base_url('/inventory/marketingMaterialList'));
                         die;
                 }
 
@@ -412,7 +413,7 @@ class Inventory_Controller extends CI_Controller {
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+                redirect(base_url('/admin/admin_login'));
                 die;
             }
             
@@ -451,7 +452,7 @@ class Inventory_Controller extends CI_Controller {
                     $this->session->unset_userdata('idProduct');
                     $this->session->unset_userdata('flag');
                     ob_end_clean();
-                    header("Location:" . __BASE_URL__ . "/inventory/ConsumablesList");
+                    redirect(base_url('/inventory/ConsumablesList'));
                     die;
                 }
 
@@ -464,7 +465,7 @@ class Inventory_Controller extends CI_Controller {
             if(!$is_user_login)
             {
                 ob_end_clean();
-                header("Location:" . __BASE_URL__ . "/admin/admin_login");
+               redirect(base_url('/admin/admin_login'));
                 die;
             }
             $searchAry = $_POST['szSearchProdCode'];
