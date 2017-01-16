@@ -542,9 +542,10 @@ if($mode == '__COMMENT_POPUP__')
         <div class="modal-dialog">
             <div class="modal-content">
                 <?php   $cmntDataArr = $this->Forum_Model->getAllCommentsByCmntId($idComment);
+                
                   $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntDataArr['idTopic']); 
                    $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$cmntDataArr['idCmnters']);
-                   
+                 
                    
                     $splitTime = explode(" ",$cmntDataArr['cmntDate']);
                     $Cmntdate = $splitTime[0];
@@ -1038,4 +1039,75 @@ if($mode == '__COMMENT_UNAPPROVE_CONFIRM_POPUP__')
     <?php
 }
 
+if($mode == '__EDIT_COMMENT_POPUP__')
+{ 
+    echo "SUCCESS||||";
+    
+    ?>
+    <div id="commentEdit" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+<!--                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Reply</h4><br>
+                </div>-->
+           
+                  <form action=""  id="commentData" name="replyData" method="post" class="form-horizontal  ">
+                       <div class="form-body ">
+                            <p class="alert alert-info mdl_align" ><i class="fa fa-pencil"></i> Comment Edit</p>
+                          
+                           <hr>
+                         <div class="form-group <?php if(form_error('commentData[szComment]')){?>has-error<?php }?>">
+                                        <label class="col-md-1 control-label"> </label>
+                                        <div class="col-md-8">
+                                            <div class="input-group">
+                                               
+                                                <textarea  name="commentData[szComment]" id="szComment" class="form-control"  value="<?php echo $szComment ;?>"  rows="7" cols="250"  placeholder="Reply" onfocus="remove_formError(this.id,'true')" ><?php echo $szComment ;?></textarea>
+                                              
+                                            </div>
+                                              <?php
+                                            if(form_error('commentData[szComment]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('commentData[szComment]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+
+                        </div>
+                        
+                      </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="commentEditConfirmation('<?php echo $idComment;?>'); return false;" class="btn green">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+CKEDITOR.replace( 'szComment' );
+</script>
+
+    <?php
+}if($mode == '__EDIT_REPLY_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="commentEditConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Edit Comment </h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been edited successfully .</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/viewTopicDetails" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
   ?>

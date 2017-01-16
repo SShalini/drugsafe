@@ -431,7 +431,8 @@ class Forum_Model extends Error_Model {
             $this->db->where($whereAry); 
             $this->db->select('id,idCmnters,szCmnt,cmntDate,idTopic');
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_COMMENTS__);
-
+// $sql = $this->db->last_query($query);
+// print_r($sql);die;
             if($query->num_rows() > 0)
             {
              $row =   $query->result_array();

@@ -160,11 +160,11 @@
                                                 <ul class="dropdown-menu">
                                                   <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Reply &nbsp;</a></li>
                                                    <?php if($commentsData['idCmnters']==$_SESSION['drugsafe_user']['id'] ){ ?>
-                                                  <li><a onclick="replyToCmntsAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
+                                                  <li><a onclick="commentEditAlert(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Edit &nbsp;</a></li>
                                                   <li><a onclick="cmntDelete(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
                                                    <?php }
                                                       if($_SESSION['drugsafe_user']['id']==1 && $commentsData['idCmnters']!=1 ){   ?>
-                                                   ?>
+                                                   
                                                    <li><a onclick="cmntDelete(<?php echo $commentsData['id'];?>);" href="javascript:void(0);">&nbsp; Delete &nbsp;</a></li>
                                                      <?php }?>
                                                 </ul>
@@ -292,10 +292,9 @@ if(form_error('replyData[szForumLongDiscription]')){?>
             </div> 
         </div>
     </div>
-</div><script>
+</div>
+<script>
 CKEDITOR.replace( 'szForumLongDiscription' );
-
-
 </script>
 
 <div id="popup_box"></div>

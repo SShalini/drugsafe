@@ -550,6 +550,7 @@ class Forum_Controller extends CI_Controller {
         {
             $data['mode'] = '__COMMENT_POPUP__';
             $data['idComment'] = $this->input->post('idComment');
+         
             $this->load->view('admin/admin_ajax_functions',$data);
         }
         public function showReplyData()
@@ -670,5 +671,22 @@ class Forum_Controller extends CI_Controller {
         $this->Forum_Model->updateCommentUnapproval($data['idComment']);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
+    
+     public function commentEditData()
+        {
+            $data['mode'] = '__EDIT_COMMENT_POPUP__';
+            $data['idComment'] = $this->input->post('idComment');
+            $commentArr = $this->Forum_Model->viewCmntListByCmntId($data['idComment']);
+            $data['szComment'] = $commentArr['szCmnt'];
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function commentEditConfirmation()
+        {
+            $data['mode'] = '__EDIT_REPLY_POPUP_CONFIRM__';
+            $data['idComment'] = $this->input->post('idComment');
+            $data['val'] = $this->input->post('val');
+            $this->Forum_Model->updateComment($data['idComment'],$data['val']);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
     }      
 ?>

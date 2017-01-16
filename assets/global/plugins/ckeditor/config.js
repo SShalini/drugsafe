@@ -11,8 +11,8 @@
 
 CKEDITOR.editorConfig = function (config) {
 
-config.removePlugins = 'elementspath,save,image,flash,iframe,smiley,tabletools,find,pagebreak,templates,about,maximize,showblocks,newpage,language';
+config.removePlugins = 'elementspath,save,image,flash,iframe,anchor,tabletools,find,pagebreak,templates,about,maximize,showblocks,newpage,language';
 
-config.removeButtons = 'Copy,Cut,Paste,Undo,Redo,Print,Form,Radio Button,TextField,Textarea,Button,SelectAll,NumberedList,BulletedList,CreateDiv,Table,PasteText,PasteFromWord,Select,HiddenField';
+config.removeButtons = 'Copy,Cut,Paste,Undo,Redo,Print,Form,TextField,RadioButton,Checkbox,Textarea,Button,SelectAll,NumberedList,BulletedList,CreateDiv,Table,PasteText,PasteFromWord,Select,HiddenField';
 
 };
