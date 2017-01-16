@@ -360,7 +360,7 @@ class Forum_Model extends Error_Model {
                 return false;
              }
         } 
-   public function viewTopicList($idForum,$idTopic='',$flag='0')
+   public function viewTopicList($idForum,$idTopic='',$flag='0',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
         {
            
             if($flag==1){
@@ -371,6 +371,7 @@ class Forum_Model extends Error_Model {
             }
             $this->db->where($whereAry); 
             $this->db->select('id,szTopicTitle,szTopicDescreption,idForum,idUser,dtCreatedOn,isClosed');
+              $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_TOPIC__);
 //sss
             if($query->num_rows() > 0)

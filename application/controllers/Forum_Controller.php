@@ -169,7 +169,7 @@ class Forum_Controller extends CI_Controller {
              $searchAry = $_POST['szSearchCtName'];
 //             print_r($searchAry);die;
              
-             $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
+             $config['base_url'] = __BASE_URL__ . "/forum/categoriesList/";
              $config['total_rows'] = count($this->Forum_Model->viewCategoriesList($limit,$offset,$searchAry));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
@@ -242,7 +242,7 @@ class Forum_Controller extends CI_Controller {
              $idCategory = $this->session->userdata('idCategory');
              $searchAry = $_POST['szSearchforumTitle'];
              
-             $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
+             $config['base_url'] = __BASE_URL__ . "/forum/forumList/";
              $config['total_rows'] = count($this->Forum_Model->viewForumDataList($limit,$offset,$searchAry,$idCategory));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
@@ -410,23 +410,23 @@ class Forum_Controller extends CI_Controller {
          $searchAry = '';
          
          // handle pagination
-        $searchAry = $_POST['szSearchforumTitle'];
-        $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
-        $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($idForum,$limit,$offset,$searchAry));
+      
+        $config['base_url'] = __BASE_URL__ . "/forum/viewForum/";
+        $config['total_rows'] = count($this->Forum_Model->viewTopicList($idForum,false,false,$limit,$offset));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
 
         $this->pagination->initialize($config);
       
-       $forumDetailsAry = $this->Forum_Model->getForumDetailsByForumId($idForum,$config['per_page'],$this->uri->segment(3),$searchAry);
-       $forumDataSearchAray =$this->Forum_Model->getForumDetailsByForumId($idForum);
+       $forumDetailsAry = $this->Forum_Model->getForumDetailsByForumId($idForum);
+//       $forumDataSearchAray =$this->Forum_Model->getForumDetailsByForumId($idForum);
        $count = $this->Admin_Model->getnotification();
   
-       $forumTopicDataAry =$this->Forum_Model->viewTopicList($idForum);
+       $forumTopicDataAry =$this->Forum_Model->viewTopicList($idForum,false,false,$config['per_page'],$this->uri->segment(3));
    
         $data['forumTopicDataAry'] = $forumTopicDataAry;
         $data['forumDetailsAry'] = $forumDetailsAry;
-        $data['forumDataSearchAray'] = $forumDataSearchAray;
+//        $data['forumDataSearchAray'] = $forumDataSearchAray;
         $data['pageName'] = "Forum";
         $data['subpageName'] = "Forum_List";
         $data['szMetaTagTitle'] = "Forum Details List";
