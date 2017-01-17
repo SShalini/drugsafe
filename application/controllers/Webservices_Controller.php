@@ -145,6 +145,7 @@ class Webservices_Controller extends CI_Controller
         $dataArr['donercountpost'] = !empty($jsondata->donercountpost) ? $jsondata->donercountpost : "";
         $dataArr['newdonerids'] = !empty($jsondata->newdonerids) ? $jsondata->newdonerids : "";
         $dataArr['idsos'] = !empty($jsondata->idsos) ? $jsondata->idsos : "";
+        $dataArr['cocstat'] = !empty($jsondata->cocstat) ? $jsondata->cocstat : "0";
         for($i=1;$i<=$dataArr['donercount'];$i++){
             $namevar = 'name'.$i;
             $resultvar = 'result'.$i;
@@ -537,6 +538,27 @@ class Webservices_Controller extends CI_Controller
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donorsign'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['donorsign']);
 
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['devicesrno'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['devicesrno']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['cutoff'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['cutoff']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donwaittime'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donwaittime']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontest1'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontest1']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontesttime1'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontesttime1']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontest2'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontest2']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontesttime2'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontesttime2']);
+
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['voidtime'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['voidtime']);
 
@@ -594,6 +616,12 @@ class Webservices_Controller extends CI_Controller
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['benzo'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['benzo']);
 
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donordecdate'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donordecdate']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donordecsign'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donordecsign']);
+
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['collectorone'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['collectorone']);
 
@@ -626,33 +654,6 @@ class Webservices_Controller extends CI_Controller
 
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['receiveronesign'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['receiveronesign']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['devicesrno'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['devicesrno']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['cutoff'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['cutoff']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donwaittime'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donwaittime']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontest1'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontest1']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontesttime1'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontesttime1']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontest2'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontest2']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['dontesttime2'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['dontesttime2']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donordecdate'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donordecdate']);
-
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donordecsign'])){
-                $responsedata = array("code" => 201,"message"=>$errorMsgArr['donordecsign']);
 
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['error'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['error']);

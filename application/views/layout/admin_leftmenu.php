@@ -159,40 +159,46 @@
 
                 </li>
             <?php } ?>
-                  <li class="nav-item start <?php if (trim($pageName) == 'Form_Management') { ?>active open<?php } ?>">
+                  <!--<li class="nav-item start <?php /*if (trim($pageName) == 'Form_Management') { */?>active open<?php /*} */?>">
                     <a onclick="viewForm('1');" href="javascript:void(0);" class="nav-link nav-toggle">
                         <i class="fa fa-file-text" aria-hidden="true"></i>
                         <span class="title">Form Management</span>
                         <span class="selected"></span>
                     </a>
-                </li>
+                </li>-->
                
            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
                 
-                  <li class="nav-item start <?php if (trim($pageName) == 'Ordering') { ?>active open<?php } ?>">
+                  <!--<li class="nav-item start <?php /*if (trim($pageName) == 'Ordering') { */?>active open<?php /*} */?>">
                     <a href="javascript:void(0);" class="nav-link nav-toggle">
                         <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                        <span class="title">Ordering </span>
+                        <span class="title">Proforma Invoice </span>
                         <span class="arrow"></span>
                     </a>
-                    <ul class="sub-menu" <?php if ($subpageName == 'Ordering') { ?> style="display: block;" <?php } ?> >
+                    <ul class="sub-menu" <?php /*if ($subpageName == 'Ordering') { */?> style="display: block;" <?php /*} */?> >
                        
-                        <li class="nav-item  <?php if ($subpageName == 'Sites_Record') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord">
+                        <li class="nav-item  <?php /*if ($subpageName == 'Sites_Record') { */?> active open <?php /*} */?>">
+                            <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/ordering/sitesRecord">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
-                                <span class="title">Sites Record</span>
+                                <span class="title">View Invoice</span>
                             </a>
                         </li>
 
                     </ul>
 
-                </li>
+                </li>-->
+               <li class="nav-item start <?php if (trim($pageName) == 'Ordering') { ?>active open<?php } ?>">
+                   <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord" class="nav-link nav-toggle">
+                       <i class="fa fa-file-text" aria-hidden="true"></i>
+                       <span class="title">Proforma Invoice </span>
+                   </a>
+               </li>
            
          
            <?php } ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
-                    <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                    <i class="fa fa-building" aria-hidden="true"></i>
                     <span class="title">Forum </span>
                     <span class="arrow"></span>
                 </a>
