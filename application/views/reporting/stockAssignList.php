@@ -121,8 +121,8 @@
                                         <th> Product Code</th>
                                         <th> Cost Per Item</th>
                                         <th> Total Cost For Quantity Assign</th>
-                                        <th>Quantity Assign By</th>
-                                        <th>Quantity Updated By</th>
+<!--                                        <th>Quantity Assign By</th>
+                                        <th>Quantity Updated By</th>-->
                                         <th> Quantity Assigned</th>
                                         <th> Quantity Adjusted</th>
                                         <th> Available Quantity</th>
@@ -164,7 +164,7 @@
                                                     }
                                                     ?>
                                                 </td>
-                                                <td>
+<!--                                                <td>
                                                     <?php
                                                     if ($qtyAssignDataArr['szAssignBy']) {
                                                         $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $qtyAssignDataArr['szAssignBy']);
@@ -186,7 +186,7 @@
                                                     }
 
                                                     ?>
-                                                </td>
+                                                </td>-->
                                                 <td> <?php echo $allQtyAssignData['szQuantityAssigned']; ?> </td>
                                                 <td> <?php echo $allQtyAssignData['quantityDeducted']; ?> </td>
                                                 <td> <?php echo $allQtyAssignData['szTotalAvailableQty']; ?> </td>

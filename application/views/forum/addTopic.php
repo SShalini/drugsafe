@@ -1,28 +1,27 @@
 <div class="page-content-wrapper">
-        <div class="page-content">
-            <div id="page_content" class="row">
-                
-                <div class="col-md-12">
-                     <ul class="page-breadcrumb breadcrumb">
-                        <li>
-                            <a href="<?php echo __BASE_URL__;?>">Home</a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                        <li>
-                            <span class="active">Add Topic</span>
-                        </li>
-                    </ul>
-                    <div class="portlet light bordered">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Add Topic</span>
-                            </div>
-                            <div class="actions">
-                                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                </div>
+    <div class="page-content">
+        <div id="page_content" class="row">
+            <div class="col-md-12">
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                       <a href="<?php echo __BASE_URL__;?>">Home</a>
+                       <i class="fa fa-circle"></i>
+                    </li>
+                    <li>
+                       <span class="active">Add Topic</span>
+                    </li>
+                </ul>
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-equalizer font-red-sunglo"></i>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Add Topic</span>
+                        </div>
+                        <div class="actions">
+                            <div class="btn-group btn-group-devided" data-toggle="buttons">
                             </div>
                         </div>
+                    </div>
                         <div class="portlet-body">
                             <form class="form-horizontal" id="forumData" action="<?php echo __BASE_URL__?>/forum/addTopic" name="forumData" method="post">
                                 <div class="form-body">
@@ -39,7 +38,6 @@
                                             if(form_error('forumData[szTopicTitle]')){?>
                                             <span class="help-block pull-left"><span><?php echo form_error('forumData[szTopicTitle]');?></span>
                                             </span><?php }?>
-                                           
                                         </div>
                                     </div>
                                

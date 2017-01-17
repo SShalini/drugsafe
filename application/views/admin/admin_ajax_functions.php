@@ -479,7 +479,7 @@ if($mode == '__REPLY_POPUP__')
            
                   <form action=""  id="replyData" name="replyData" method="post" class="form-horizontal  ">
                        <div class="form-body ">
-                            <p class="alert alert-info mdl_align" ><i class="fa fa-bell"></i> Please Type your reply below the given box.</p>
+                            <p class="alert alert-info mdl_align" ><i class="fa fa-reply"></i> Please Type your reply below the given box.</p>
                           
                            <hr>
                          <div class="form-group <?php if(form_error('replyData[szReply]')){?>has-error<?php }?>">

@@ -192,7 +192,7 @@
            <?php } ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                    <i class="fa fa-folder-open-o" aria-hidden="true"></i>
                     <span class="title">Forum </span>
                     <span class="arrow"></span>
                 </a>
@@ -201,7 +201,7 @@
 
                       <li class="nav-item  <?php if ($subpageName == 'Categories') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/categoriesList">
-                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <i class="fa fa-list" aria-hidden="true"></i>
                             <span class="title">Categories List</span>
                         </a>
                     </li>
