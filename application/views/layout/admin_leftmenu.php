@@ -196,6 +196,39 @@
 
 
            <?php } ?>
+                <?php if ($_SESSION['drugsafe_user']['iRole'] == 2) { ?>
+            <li class="nav-item start <?php if (trim($pageName) == 'Orders') { ?>active open<?php } ?>">
+                <a href="javascript:void(0);" class="nav-link nav-toggle">
+                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                    <span class="title">Orders </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu" <?php if ($subpageName == 'Orders') { ?> style="display: block;" <?php } ?> >
+                    <li class="nav-item  <?php if ($subpageName == 'Drug_Test_Kit') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/drugtestkit">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">Drug Test Kit </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item  <?php if ($subpageName == 'Marketing_Material') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/marketingmaterial">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">Marketing Material </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  <?php if ($subpageName == 'Consumables') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/consumables">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">Consumables </span>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+            </li>
+           <?php } ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-building" aria-hidden="true"></i>

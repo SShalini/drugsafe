@@ -30,31 +30,31 @@ class Order_Controller extends CI_Controller {
              $searchAry = $_POST['szSearchProdCode'];
              
              $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
-             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry));
+             $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry,2));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
              $this->pagination->initialize($config);
             
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
-               $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3),$searchAry);
-            $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList();
+               $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3),$searchAry,2);
+               $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList(false,false,false,2);
                $count = $this->Admin_Model->getnotification();
 
                     $data['drugTestKitAray'] = $drugTestKitAray;
-                    $data['szMetaTagTitle'] = " Drug Test Kit List";
+                    $data['szMetaTagTitle'] = " Drug Test Kit ";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Inventory";
-                    $data['subpageName'] = "Drug_Test_Kit_List";
+                    $data['pageName'] = "Orders";
+                    $data['subpageName'] = "Drug_Test_Kit";
                     $data['notification'] = $count;
                     $data['data'] = $data;
-            $data['drugtestkitlist'] = $drugTestKitListAray;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
  
             $this->load->view('layout/admin_header',$data);
-            $this->load->view('inventory/drugTestKitList');
+            $this->load->view('order/orderDrugTestKit');
             $this->load->view('layout/admin_footer');
         }
-        function marketingmateriallist()
+        function marketingmaterial()
         {
            $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -67,22 +67,22 @@ class Order_Controller extends CI_Controller {
             
              $searchAry = $_POST['szSearchProductCode'];
              $config['base_url'] = __BASE_URL__ . "/inventory/marketingmateriallist/";
-             $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset));
+             $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset,2));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
              $this->pagination->initialize($config);
             
              $idfranchisee = $_SESSION['drugsafe_user']['id'];
-             $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($searchAry,$config['per_page'],$this->uri->segment(3));
-            $marketingMaterialListAray =$this->Inventory_Model->viewMarketingMaterialList();
+             $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($searchAry,$config['per_page'],$this->uri->segment(3),2);
+            $marketingMaterialListAray =$this->Inventory_Model->viewMarketingMaterialList(false,false,false,2);
              $count = $this->Admin_Model->getnotification();
              
              
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
-                    $data['szMetaTagTitle'] = "Marketing Material List";
+                    $data['szMetaTagTitle'] = "Marketing Material";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Inventory";
-                    $data['subpageName'] = "Marketing_Material_List";
+                    $data['pageName'] = "Orders";
+                    $data['subpageName'] = "Marketing_Material";
                     $data['notification'] = $count;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
@@ -133,7 +133,7 @@ class Order_Controller extends CI_Controller {
     
  
     
-        function consumableslist()
+        function consumables()
         {
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -145,26 +145,26 @@ class Order_Controller extends CI_Controller {
             }
             $searchAry = $_POST['szSearchProdCode'];
             $config['base_url'] = __BASE_URL__ . "/inventory/consumableslist/";
-            $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry));
+            $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry,2));
             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
             $this->pagination->initialize($config);
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
-               $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry);
-               $consumableslistAry =$this->Inventory_Model->viewConsumablesList();
+               $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry,2);
+               $consumableslistAry =$this->Inventory_Model->viewConsumablesList(false,false,false,2);
                $count = $this->Admin_Model->getnotification();
 
                     $data['consumablesAray'] = $consumablesAray;
-                    $data['szMetaTagTitle'] = " Consumables List";
+                    $data['szMetaTagTitle'] = " Consumables";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Inventory";
-                    $data['subpageName'] = "Consumables_List";
+                    $data['pageName'] = "Orders";
+                    $data['subpageName'] = "Consumables";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['consumableslist'] = $consumableslistAry;
  
             $this->load->view('layout/admin_header',$data);
-            $this->load->view('inventory/consumablesList');
+            $this->load->view('order/orderConsumables');
             $this->load->view('layout/admin_footer');
         }  
     }      

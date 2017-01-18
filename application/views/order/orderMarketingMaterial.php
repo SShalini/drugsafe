@@ -65,7 +65,7 @@
                           
                             ?>
                           <div class="row">
-                              <form class="form-horizontal" id="szSearchMarketingMaterialList" action="<?=__BASE_URL__?>/inventory/marketingmateriallist" name="szSearchMarketingMaterialList" method="post">
+                              <form class="form-horizontal" id="szSearchMarketingMaterialList" action="<?=__BASE_URL__?>/order/marketingmaterial" name="szSearchMarketingMaterialList" method="post">
                           <div class="search col-md-3">
 <!--                            <input type="text" name="szSearchProductCode" id="szSearchProductCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProductCode'])?><!--">-->
                               <select class="form-control custom-select" name="szSearchProductCode" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
@@ -94,15 +94,9 @@
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
                                         <th>  Expiry Date</th>
-                                       <?php
-                                        if($_SESSION['drugsafe_user']['iRole']==1){
-                                        ?>
-                                        <th> Actions </th>
-                                       <?php }else{?>
-                                        <th>  Model Stock Value</th>
-                                        <th>  Available Stock Quantity</th>
+                                     
                                         <th>  Action</th>
-                                       <?php }?> 
+                                     
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -123,34 +117,18 @@
                                             <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                             <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                             <td>$<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                            <td><?php 
-                                            $date= $marketingMaterialData['dtExpiredOn'];
-                                            $dtExpiredOn = date("d-m-Y", strtotime($date)); 
-                                            echo $dtExpiredOn;?> </td>
-                                            <?php
-                                           if($_SESSION['drugsafe_user']['iRole']==1){
-                                             ?>
                                             <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Marketing Material Details" onclick="editMarketingDetails('<?php echo $marketingMaterialData['id'];?>','2');" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
-                                                </a>
+						<input type="number"min="1"  class="form-control btn-xs " name="order_customer_name">
+					   </td>
+                                            <td>
+                                              
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="MarketingMaterialStatus" title="Delete Marketing Material Details" onclick="productDeleteAlert(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
 
                                                 </a>
   
                                             </td>
-                                             <?php }else{?>
-                                            <td><?php echo($marketingMaterialDataArr['szModelStockVal'] > 0 ?$marketingMaterialDataArr['szModelStockVal'] : 'N/A')?></td>
-                                            <td><?php echo($marketingMaterialData['szQuantity'] > 0 ? $marketingMaterialData['szQuantity'] : 'N/A')?></td>
-                                           <td>          
-                                              <a class="btn btn-circle btn-icon-only btn-default" id="marketingMaterialStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $marketingMaterialData['iProductId'];?>','2');" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
-                                              </a>
-                                          </td> 
-                                        <?php } 
-                                        
-                                        ?> 
+                                          
                                         </tr>
                                         <?php
                                         $i++;

@@ -92,7 +92,7 @@
                                             
                                               
                                                 $text = $cmntData['szCmnt'];
-                                              if(strlen($text)>50){
+                                                 if(strlen($text)>50){
                                                   $text=substr($text,0,50) . '...';
                                                   $text .=  '<a  onclick="showComment('.$cmntData['id'].');" href="javascript:void(0);" >Read more</a>';
                                               }
@@ -133,14 +133,20 @@
                                               <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
                                              
 
-                                               <?php 
-                                                $reply = $replyData['szReply'];
-                                                $replytext = wordwrap($reply,60, "\n", true);
-                                                $reply =  preg_split('/\s+/', $replytext);
+                                           <?php 
+                                            
+                                              
+                                                $replytext = $replyData['szReply'];
+                                                 if(strlen($replytext)>50){
+                                                  $replytext=substr($text,0,50) . '...';
+                                                  $replytext .=  '<a  onclick="showReply('.$replyData['id'].');" href="javascript:void(0);" >Read more</a>';
+                                              }
+                                             
                                                ?>
-                                          <td><?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">Read more</a> </td>
-
-                                                <td>
+                                            
+                                              
+                                              <td><?php echo $replytext;  ?></td>
+                                         <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-check"></i> 
                                                 </a>

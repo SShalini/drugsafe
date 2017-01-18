@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Inventory_Model extends Error_Model {
+class Order_Model extends Error_Model {
     var $id;
     var $szName;
     var $szEmail;

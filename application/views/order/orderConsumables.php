@@ -67,7 +67,7 @@
                             ?>
                         
                           <div class="row">
-                           <form class="form-horizontal" id="szSearchConsumablesList" action="<?=__BASE_URL__?>/inventory/consumableslist " name="szSearchConsumablesList" method="post">
+                           <form class="form-horizontal" id="szSearchConsumablesList" action="<?=__BASE_URL__?>/order/consumables " name="szSearchConsumablesList" method="post">
                           <div class="search col-md-3">
 <!--                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProdCode'])?><!--">-->
                               <select class="form-control custom-select" name="szSearchProdCode" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
@@ -95,17 +95,9 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
-                                        <th>  Expiry Date</th>
-                                            <?php
-                                        if($_SESSION['drugsafe_user']['iRole']==1){
-                                        ?>
+                                        <th style="width:60px;">  Quantity</th>
                                         <th> Actions </th>
-                                       <?php }else{?>
-                                        <th>  Model Stock Value</th>
-                                        <th>  Available Stock Quantity</th>
-                                        <th>  Action</th>
-                                       <?php }?> 
-                                        
+                                      
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -128,33 +120,14 @@
                                             <td> <?php echo $consumablesData['szProductCode']?> </td>
                                             <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                             <td> $<?php echo $consumablesData['szProductCost'];?> </td>
-                                             <td><?php 
-                                            $date= $consumablesData['dtExpiredOn'];
-                                            $dtExpiredOn = date("d-m-Y", strtotime($date)); 
-                                            echo $dtExpiredOn;?> </td>
-                                            <?php
-                                           if($_SESSION['drugsafe_user']['iRole']==1){
-                                             ?>
+                                             <td>
+						<input type="number"min="1"  class="form-control btn-xs " name="order_customer_name">
+					   </td>
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Consumable Details" onclick="editConsumables('<?php echo $consumablesData['id'];?>','3');" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
+                                                    <i class="fa fa-cart-plus"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="ConsumablesStatus" title="Delete Consumable Details" onclick="productDeleteAlert(<?php echo $consumablesData['id'];?>,'3');" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                                </a>
-                                                </td>
-                                        <?php }else{?>
-                                          <td><?php echo($consumablesDataArr['szModelStockVal'] > 0 ? $consumablesDataArr['szModelStockVal'] : 'N/A')?></td>
-                                          <td><?php echo($consumablesData['szQuantity'] > 0 ? $consumablesData['szQuantity'] : 'N/A')?></td>
-                                          <td>          
-                                              <a class="btn btn-circle btn-icon-only btn-default" id="ConsumablesStatus" title="Request Quantity" onclick="requestQuantityAlert('<?php echo $consumablesData['iProductId'];?>','3');" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
-                                              </a>
-                                          </td> 
-                                        <?php } 
-                                        
-                                        ?> 
-                                      
+                                              
                                         </tr>
                                         <?php
                                         $i++;
