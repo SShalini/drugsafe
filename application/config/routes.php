@@ -96,6 +96,11 @@ $route['forum/(:any)'] = "Forum_Controller/$1";
 $route['forum/(:any)/(:any)'] = "Forum_Controller/$1/$2";
 $route['forum/(:any)/(:any)/(:any)'] = "Forum_Controller/$1/$2/$3";
 
+$route['order'] = "Order_Controller";
+$route['order/(:any)'] = "Order_Controller/$1";
+$route['order/(:any)/(:any)'] = "Order_Controller/$1/$2";
+$route['order/(:any)/(:any)/(:any)'] = "Order_Controller/$1/$2/$3";
+
 
 $route['webservices'] = "Webservices_Controller";
 $route['webservices/(:any)'] = "Webservices_Controller/$1";

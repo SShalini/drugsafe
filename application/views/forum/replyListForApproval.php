@@ -62,26 +62,6 @@
                       
                             ?>
                         
-                          <div class="row">
-                           <form class="form-horizontal" id="szSearchforumData" action="<?=__BASE_URL__?>/forum/forumList " name="szSearchforumData" method="post">
-                          <div class="search col-md-3">
-<!--                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProdCode'])?><!--">-->
-                              <select class="form-control custom-select" name="szSearchforumTitle" id="szSearchforumTitle" onfocus="remove_formError(this.id,'true')">
-                                  <option value="">Forum Title</option>
-                                  <?php
-                                  foreach($replyDataArr as $replyData)
-                                  {
-                                      $selected = ($forumDataSearchList['szForumTitle'] == $_POST['szSearchforumTitle'] ? 'selected="selected"' : '');
-                                      echo '<option value="'.$forumDataSearchList['szForumTitle'].'" >'.$forumDataSearchList['szForumTitle'].'</option>';
-                                  }
-                                  ?>
-                              </select>
-                          </div>
-                               <div class="col-md-1">
-                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
-                               </div>
-                           </form>
-                          </div>
                     <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
@@ -101,42 +81,24 @@
                                      $i = 0;
                                        foreach($cmntDataArr as $cmntData)
                                         { 
-                                       
-                                          $textwithoutP=str_ireplace('<p>',' ',$cmntData['szCmnt']);
-                                           $newtextwithoutP=str_ireplace('</p>',' ',$textwithoutP);  
-                                       
-                                    
+                                      
                                         $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntData['idTopic']); 
-                                        
-//                                        $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$replyData['idReplier']);
-                                          
-//                                            $splitTimeStamp = explode(" ",$replyData['dtReplyOn']);
-//                                            $date1 = $splitTimeStamp[0];
-//                                            $time1 = $splitTimeStamp[1];
-//                                            $ReplyTime=  date("g:i a", strtotime($time1));
-//                                            $date= explode('-', $date1);
-//                                            $monthNum  = $date['1'];
-//                                            $dateObj   = DateTime::createFromFormat('!m', $monthNum);
-//                                            $monthName = $dateObj->format('M'); 
+
                                         ?>
                                         <tr>
                                           
                                               <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
                                               <?php 
-                                                $text = $cmntsArr['szCmnt'];
-                                                $newtext = wordwrap($text, 8, "\n", true);
+                                            
+                                              
+                                                $text = $cmntData['szCmnt'];
+                                                $newtext = wordwrap($text,60, "\n", true);
                                                 $x =  preg_split('/\s+/', $newtext);
                                                ?>
                                             
                                               
-                                              <td><?php echo $x['0']; ?>... <a href="javascript:void(0);" onclick="showComment('<?php echo $cmntData['id'] ;?>');" >Read more</a></td>
-                                               <?php 
-                                                $reply = $replyData['szReply'];
-                                                $replytext = wordwrap($reply,16, "\n", true);
-                                                $reply =  preg_split('/\s+/', $replytext);
-                                               ?>
-
-                                        
+                                              <td><?php echo $x['0'];  ?>...<a  onclick="showComment('<?php echo $cmntData['id'] ;?>');" href="javascript:void(0);" >Read more</a></td>
+                                         
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveComment('<?php echo $cmntData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-check"></i> 
@@ -160,29 +122,16 @@
                                         $cmntsArr =$this->Forum_Model->viewCmntListByCmntId($replyData['idCmnt']); 
                                         $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntsArr['idTopic']); 
                                         
-                                        $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$replyData['idReplier']);
-                                          
-                                            $splitTimeStamp = explode(" ",$replyData['dtReplyOn']);
-                                            $date1 = $splitTimeStamp[0];
-                                            $time1 = $splitTimeStamp[1];
-                                            $ReplyTime=  date("g:i a", strtotime($time1));
-                                            $date= explode('-', $date1);
-                                            $monthNum  = $date['1'];
-                                            $dateObj   = DateTime::createFromFormat('!m', $monthNum);
-                                            $monthName = $dateObj->format('M'); 
+                                       
                                         ?>
                                         <tr>
                                           
                                               <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
-                                              <?php 
-                                                $text = $cmntsArr['szCmnt'];
-                                                $newtext = wordwrap($text, 8, "\n", true);
-                                                $x =  preg_split('/\s+/', $newtext);
-                                               ?>
+                                             
 
                                                <?php 
                                                 $reply = $replyData['szReply'];
-                                                $replytext = wordwrap($reply,16, "\n", true);
+                                                $replytext = wordwrap($reply,60, "\n", true);
                                                 $reply =  preg_split('/\s+/', $replytext);
                                                ?>
                                           <td><?php echo $reply['0'];?>...<a onclick="showReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">Read more</a> </td>
@@ -216,21 +165,7 @@
                             echo "Not Found";
                         }
                         ?>
-                        <?php  if(!empty($forumDataAray)){?>
-		<div class="row">
-                  
-                    <div class="col-md-7 col-sm-7">
-                        <div class="dataTables_paginate paging_bootstrap_full_number">
-                            <?php echo $this->pagination->create_links();?>
-                        </div>
-                    </div>
-	    	
-                 
-            </div>
-    	<?php }?>
-                
-           
-                        
+   
                     </div>
                 </div>
             </div> 

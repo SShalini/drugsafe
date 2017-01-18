@@ -88,7 +88,7 @@
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th> Id </th>
+                                                <th> Sr No </th>
                                                 <th> Category Name</th>
                                                 <th> Category Descreption</th>
                                                 <th> Actions </th>
@@ -96,12 +96,14 @@
                                         </thead>
                                         <tbody>
                                             <?php
+                                            
+                                            
                                                $i = 0;
                                                 foreach($categoriesAray as $categoriesData)
-                                                {  
+                                                {   $i++;
                                                     ?>
                                                 <tr>
-                                                    <td> <?php echo $categoriesData['id']?> </td>
+                                                    <td> <?php echo $i ;?> </td>
                                                     <td> <?php echo $categoriesData['szName'];?> </td>
                                                     <td> <?php echo $categoriesData['szDiscription'];?> </td>
 
@@ -127,7 +129,8 @@
 
                                                 </tr>
                                                 <?php
-                                                $i++;
+                                               
+                                                
                                                 }
                                            ?>
 

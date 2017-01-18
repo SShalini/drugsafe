@@ -625,9 +625,11 @@ if($mode == '__SHOW_REPLY_POPUP__')
                 </div>
                 
                 <div>
-                     <h4 class="text_cmnt"><b> Comment  <?php echo $cmntDataArr['szCmnt']?>  </b></h4>
+                      <h4 class="text_cmnt"><b> Comment </b></h4>
+                      <h4 class="text_cmntData"><?php echo $cmntDataArr['szCmnt']?>  </h4>
                 </div>
                   <div class="modal-body">
+                      <div class="text_cmnt"><h4><b> Reply </b></h4></div>
                       <p class="alert alert-success">  <?php  echo $replyDataArr['0']['szReply'] ;?></p>
                       <span class="todo-comment-username"><?php echo $franchiseeDetArr1['szName']?> </span> &nbsp; <span class="todo-comment-date"><?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?></span>
                 </div>
@@ -791,7 +793,7 @@ if($mode == '__DELETE_COMMENT_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Reply</h4>
+                    <h4 class="modal-title">Delete Comment</h4>
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Comment?</p>

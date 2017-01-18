@@ -537,7 +537,7 @@ class Forum_Model extends Error_Model {
         }
           public function deleteReply($idReply)
 	{
-		 
+		
                 $this->db->where('id', $idReply);
 		if($query = $this->db->delete(__DBC_SCHEMATA_FORUM_REPLY__))
                 {
