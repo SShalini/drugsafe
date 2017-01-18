@@ -38,7 +38,7 @@
                         </li>
                        
                         <li>
-                            <span class="active">Reply List</span>
+                            <span class="active">Comment/Reply List</span>
                         </li>
                     </ul>
                     <div class="portlet light bordered">
