@@ -201,7 +201,7 @@
                                                          
                                                             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$replyData['idReplier']);
                                                            ?>
-                                                 <div class="media">
+                                                 <div class="media replyoncomment">
                                                        
                                                         <div class="media-body">
                                                             

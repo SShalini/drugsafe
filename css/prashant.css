@@ -31,6 +31,7 @@ body .logo img {
 }
 .collapse-sec{background-image: url("/assets/global/img/portlet-expand-icon-white.png"); width: 14px}
 .collapse-sec.collapsed{background-image: url("/assets/global/img/portlet-collapse-icon-white.png");}
+.media.replyoncomment, .media.replyoncomment .media-body{overflow: visible}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;
@@ -41,4 +42,3 @@ body .logo img {
     height: auto;
   }
 }
-

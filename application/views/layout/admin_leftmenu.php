@@ -193,8 +193,8 @@
                        <span class="title">Proforma Invoice </span>
                    </a>
                </li>
-           
-         
+
+
            <?php } ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
