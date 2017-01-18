@@ -1236,7 +1236,7 @@ function unapproveCommentConfirmation(idComment) {
         });
     }
  
-function deleteTopicDetails(idTopic) {
+/*function deleteTopicDetails(idTopic) {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/topicDeleteAlert", {idTopic: idTopic}, function (result) {
         var result_ary = result.split("||||");
@@ -1265,7 +1265,7 @@ function replyDeleteConfirmation(idTopic) {
         jQuery('#loader').attr('style', 'display:none');
 
     }); 
-}
+}*/
 function deleteTopicDetails(idTopic) {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/deleteTopicAlert", {idTopic: idTopic}, function (result) {
