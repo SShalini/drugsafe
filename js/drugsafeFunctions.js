@@ -1236,36 +1236,6 @@ function unapproveCommentConfirmation(idComment) {
         });
     }
  
-/*function deleteTopicDetails(idTopic) {
-    jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/topicDeleteAlert", {idTopic: idTopic}, function (result) {
-        var result_ary = result.split("||||");
-        var res = result_ary[0].trim(" ");
-        if (res == 'SUCCESS') {
-            $("#popup_box").html(result_ary[1]);
-            $('#deleteTopic').modal("show");
-        }
-        jQuery('#loader').attr('style', 'display:none');
-
-    });
-}
-function replyDeleteConfirmation(idTopic) {
-
-    $('.modal-backdrop').remove();
-    $('#static').modal("hide");
-    $('#deleteTopic').modal("hide");
-    jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/replyDeleteConfirmation", {idTopic: idTopic}, function (result) {
-        var result_ary = result.split("||||");
-        var res = result_ary[0].trim(" ");
-        if (res == 'SUCCESS') {
-            $("#popup_box").html(result_ary[1]);
-            $('#topicDeleteConfirmation').modal("show");
-        }
-        jQuery('#loader').attr('style', 'display:none');
-
-    }); 
-}*/
 function deleteTopicDetails(idTopic) {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/deleteTopicAlert", {idTopic: idTopic}, function (result) {
@@ -1281,9 +1251,6 @@ function deleteTopicDetails(idTopic) {
 }
 function topicDeleteConfirmation(idTopic) {
 
-    $('.modal-backdrop').remove();
-    $('#static').modal("hide");
-    $('#deleteTopic').modal("hide");
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/topicDeleteConfirmation", {idTopic: idTopic}, function (result) {
         var result_ary = result.split("||||");
@@ -1291,6 +1258,30 @@ function topicDeleteConfirmation(idTopic) {
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
             $('#topicDeleteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+
+function placeOrder(idProduct,flag) {
+    var val = $("#order_quantity").val();
+    $.post(__BASE_URL__ + "/order/placeOrderData", {idProduct: idProduct,val:val,flag:flag}, function (result) {
+        ar_result = result.split('||||');
+        if(ar_result[0] == 'SUCCESS'){
+           placeOrderConfirmation(); 
+        }
+
+    });
+}
+   function placeOrderConfirmation() {
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/order/placeOrder", function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#orderplaceconfirmation').modal("show");
         }
         jQuery('#loader').attr('style', 'display:none');
 

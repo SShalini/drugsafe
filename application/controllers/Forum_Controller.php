@@ -334,16 +334,16 @@ class Forum_Controller extends CI_Controller {
         }
         
         public function editForum() {
-            $count = $this->Admin_Model->getnotification();
-            $is_user_login = is_user_login($this);
-             $validate = $this->input->post('forumData');
+            
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
                 redirect(base_url('/admin/admin_login'));
                 die;
             }
-           
+            $count = $this->Admin_Model->getnotification();
+            $is_user_login = is_user_login($this);
+            $validate = $this->input->post('forumData');
             $id = $this->session->userdata('id');
             $forumDataAry = $this->Forum_Model->getForumDetailsById($id);
             

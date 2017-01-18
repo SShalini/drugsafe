@@ -382,7 +382,7 @@ class Admin_Controller extends CI_Controller {
      	}
       	echo $result;           
   	}
-              function getFranchiseeByOperationManager($operationManagerId='')
+       function getFranchiseeByOperationManager($operationManagerId='')
  	{  
             if(trim($operationManagerId) != '')
             {
@@ -410,6 +410,7 @@ class Admin_Controller extends CI_Controller {
   	}
         function editfranchiseedata()
         {
+            
            
             $idfranchisee = $this->input->post('idfranchisee');
             $idOperationManager = $this->input->post('idOperationManager');
@@ -427,6 +428,14 @@ class Admin_Controller extends CI_Controller {
         
         public function editFranchisee()
         {
+          $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
             $idOperationManager = $this->session->userdata('idOperationManager');
             $idfranchisee = $this->session->userdata('idfranchisee');
             $count = $this->Admin_Model->getnotification();
@@ -454,7 +463,7 @@ class Admin_Controller extends CI_Controller {
                         ob_end_clean();
                         $this->session->unset_userdata('idOperationManager');
                         $this->session->unset_userdata('idfranchisee');
-                           redirect(base_url('/admin/franchiseeList'));
+                        redirect(base_url('/admin/franchiseeList'));
                        
                         
                     }
@@ -619,6 +628,14 @@ class Admin_Controller extends CI_Controller {
     }
      function addOperationManager()
 	{
+          $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
             $validate= $this->input->post('addOperationManager'); 
 
             $count = $this->Admin_Model->getnotification();
@@ -665,6 +682,14 @@ class Admin_Controller extends CI_Controller {
         
         public function edit_Operation_Manager()
         {
+             $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
             $idOperationManager = $this->session->userdata('idOperationManager');
             $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();

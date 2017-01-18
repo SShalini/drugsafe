@@ -29,7 +29,7 @@ class Order_Controller extends CI_Controller {
             }
              $searchAry = $_POST['szSearchProdCode'];
              
-             $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
+             $config['base_url'] = __BASE_URL__ . "/order/drugtestkit/";
              $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry,2));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
@@ -48,6 +48,7 @@ class Order_Controller extends CI_Controller {
                     $data['subpageName'] = "Drug_Test_Kit";
                     $data['notification'] = $count;
                     $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['drugtestkitlist'] = $drugTestKitListAray;
  
             $this->load->view('layout/admin_header',$data);
@@ -66,7 +67,7 @@ class Order_Controller extends CI_Controller {
             }
             
              $searchAry = $_POST['szSearchProductCode'];
-             $config['base_url'] = __BASE_URL__ . "/inventory/marketingmateriallist/";
+             $config['base_url'] = __BASE_URL__ . "/order/marketingmaterial/";
              $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset,2));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
@@ -86,7 +87,7 @@ class Order_Controller extends CI_Controller {
                     $data['notification'] = $count;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
-            $data['marketingMaterialListAray'] = $marketingMaterialListAray;
+                    $data['marketingMaterialListAray'] = $marketingMaterialListAray;
  
             $this->load->view('layout/admin_header',$data);
             $this->load->view('inventory/marketingMaterialList');
@@ -144,7 +145,7 @@ class Order_Controller extends CI_Controller {
                 die;
             }
             $searchAry = $_POST['szSearchProdCode'];
-            $config['base_url'] = __BASE_URL__ . "/inventory/consumableslist/";
+            $config['base_url'] = __BASE_URL__ . "/order/consumables/";
             $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry,2));
             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
             $this->pagination->initialize($config);
@@ -166,6 +167,41 @@ class Order_Controller extends CI_Controller {
             $this->load->view('layout/admin_header',$data);
             $this->load->view('order/orderConsumables');
             $this->load->view('layout/admin_footer');
-        }  
+        } 
+           function placeOrderData()
+        {
+            
+             $idProduct = $this->input->post('idProduct');
+             $quantity = $this->input->post('val');
+             $flag = $this->input->post('flag');
+     
+             
+             $this->session->set_userdata('flag',$flag);
+             
+             if($quantity>0){
+             $this->Order_Model->InsertOrder($idProduct,$quantity);
+              echo "SUCCESS||||";
+              echo "placeOrderConfirmation";
+             }
+             else{
+                $szMessage['type'] = "error";
+                $szMessage['content'] = "<strong><h3>Please Enter the Quantity.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/drugtestkit'));
+             } 
+        }
+        
+         public function placeOrder()
+        {
+            $flag = $this->session->userdata('flag');
+            $data['mode'] = '__PLACE_ORDER_POPUP_CONFIRM__';
+            $data['flag'] = $flag;
+            $this->load->view('admin/admin_ajax_functions',$data);   
+           
+          
+        } 
+        
+        
     }      
 ?>

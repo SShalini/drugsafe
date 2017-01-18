@@ -46,7 +46,23 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
                             </div>
-                        </div>
+                      
+                         <div class="actions">
+                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                    <i class="fa fa-cart-arrow-down"></i>
+                                   
+                                </a>
+                             <?php  $totalOrdersArr =$this->Order_Model->getOrdersList();
+                             
+                                               $count=0;
+                                               foreach($totalOrdersArr as $totalOrdersData){
+
+                                                  $count++; 
+
+                                                }?>
+                              <span class="badge badge-danger"><?php echo $count;?></span>
+                            </div>
+                          </div>
                         <?php
                         
                         if(!empty($drugTestKitAray))
@@ -106,10 +122,10 @@
                                                     <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
                                                     <td>
-                                                         <input type="number"min="1"  class="form-control btn-xs " name="order_quantity" id="order_quantity" value="">
+                                                         <input type="number"min="1"  class="form-control btn-xs " name="order_quantity" id="order_quantity" >
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-circle btn-icon-only btn-default" title="Place an Order" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                                        <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
                                                             <i class="fa fa-cart-plus"></i> 
                                                         </a>
                                                     </td>

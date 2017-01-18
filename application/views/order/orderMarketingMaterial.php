@@ -32,11 +32,11 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/inventory/marketingmateriallist">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Marketing Material List</span>
+                            <span class="active">Marketing Material</span>
                         </li>
                     </ul>
                     <div class="portlet light bordered">
@@ -45,17 +45,21 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Marketing Material</span>
                             </div>
-                             <?php 
-                            if($_SESSION['drugsafe_user']['iRole']==1){
-                            ?>
-                            <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addMarketingMaterial');">
-                                        &nbsp;Add Marketing Material
-                                    </button>
-                                </div>
-                        </div>
-                           <?php }?>       
+                             <div class="actions">
+                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                    <i class="fa fa-cart-arrow-down"></i>
+                                   
+                                </a>
+                                 <?php  $totalOrdersArr =$this->Order_Model->getOrdersList();
+                             
+                                               $count=0;
+                                               foreach($totalOrdersArr as $totalOrdersData){
+
+                                                  $count++; 
+
+                                                }?>
+                              <span class="badge badge-danger"><?php echo $count;?></span>
+                            </div>
                             
                         </div>
                         <?php
@@ -94,7 +98,6 @@
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
                                         <th>  Expiry Date</th>
-                                     
                                         <th>  Action</th>
                                      
                                     </tr>
@@ -118,11 +121,11 @@
                                             <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                             <td>$<?php echo $marketingMaterialData['szProductCost'];?> </td>
                                             <td>
-						<input type="number"min="1"  class="form-control btn-xs " name="order_customer_name">
+						<input type="number"min="1"  class="form-control btn-xs " name="order_quantity" id="order_quantity" >
 					   </td>
                                             <td>
                                               
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="MarketingMaterialStatus" title="Delete Marketing Material Details" onclick="productDeleteAlert(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="MarketingMaterialStatus" title="Add To Cart" onclick="placeOrder(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>
 
                                                 </a>

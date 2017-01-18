@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/inventory/consumableslist">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
@@ -46,18 +46,21 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Consumables</span>
                             </div>
-                            <?php 
-                            if($_SESSION['drugsafe_user']['iRole']==1){
-                            ?>
-                            <div class="actions">
-                            <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>inventory/addConsumables');">
-                                        &nbsp;Add Consumables
-                                    </button>
-                                </div>
-                        </div>
-                            <?php }?>    
-                           
+                             <div class="actions">
+                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                    <i class="fa fa-cart-arrow-down"></i>
+                                   
+                                </a>
+                                 <?php  $totalOrdersArr =$this->Order_Model->getOrdersList();
+                     
+                                    $count=0;
+                                    foreach($totalOrdersArr as $totalOrdersData){
+   
+                                       $count++; 
+
+                                     }?>
+                              <span class="badge badge-danger"><?php echo $count;?></span>
+                            </div>
                         </div>
                         <?php
                         
@@ -121,10 +124,10 @@
                                             <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                             <td> $<?php echo $consumablesData['szProductCost'];?> </td>
                                              <td>
-						<input type="number"min="1"  class="form-control btn-xs " name="order_customer_name">
+						<input type="number"min="1"  class="form-control btn-xs " name="order_quantity" id="order_quantity" >
 					   </td>
                                                 <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Consumable Details" onclick="editConsumables('<?php echo $consumablesData['id'];?>','3');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $consumablesData['id'];?>','3');" href="javascript:void(0);">
                                                     <i class="fa fa-cart-plus"></i> 
                                                 </a>
                                               

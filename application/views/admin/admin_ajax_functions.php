@@ -1119,7 +1119,7 @@ if($mode == '__DELETE_TOPIC_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete TOopic </h4>
+                    <h4 class="modal-title">Delete Topic </h4>
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Topic?</p>
@@ -1150,6 +1150,48 @@ if($mode == '__DELETE_TOPIC_POPUP_CONFIRM__')
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__;?>/forum/viewForum/" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if($mode == '__PLACE_ORDER_POPUP_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="orderplaceconfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Place Order</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Your Order has been successfully placed.</p>
+                </div>
+                <div class="modal-footer">
+                    <?php if($flag==1){
+                    $this->session->unset_userdata('quantity');
+                    $this->session->unset_userdata('flag');
+                    $this->session->unset_userdata('idProduct');
+
+                    ?>
+                    <a href="<?php echo __BASE_URL__;?>/order/drugtestkit/" class="btn dark btn-outline">Close</a>
+                    <?php } if($flag==2){
+                     $this->session->unset_userdata('quantity');
+                     $this->session->unset_userdata('flag');
+                     $this->session->unset_userdata('idProduct');
+                        ?>
+                    <a href="<?php echo __BASE_URL__;?>/order/marketingmaterial/" class="btn dark btn-outline">Close</a>
+                    <?php } if($flag==3){
+                    $this->session->unset_userdata('quantity');
+                    $this->session->unset_userdata('flag');
+                    $this->session->unset_userdata('idProduct');
+                        ?>
+                    <a href="<?php echo __BASE_URL__;?>/order/consumables/" class="btn dark btn-outline">Close</a>
+                    <?php }?>
                 </div>
             </div>
         </div>
