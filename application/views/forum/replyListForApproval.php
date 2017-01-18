@@ -92,12 +92,16 @@
                                             
                                               
                                                 $text = $cmntData['szCmnt'];
-                                                $newtext = wordwrap($text,60, "\n", true);
-                                                $x =  preg_split('/\s+/', $newtext);
+                                              if(strlen($text)>50){
+                                                  $text=substr($text,0,50) . '...';
+                                                  $text .=  '<a  onclick="showComment('.$cmntData['id'].');" href="javascript:void(0);" >Read more</a>';
+                                              }
+                                                //$newtext = wordwrap($text,60, "\n", true);
+                                                //$x =  preg_split('/\s+/', $newtext);
                                                ?>
                                             
                                               
-                                              <td><?php echo $x['0'];  ?>...<a  onclick="showComment('<?php echo $cmntData['id'] ;?>');" href="javascript:void(0);" >Read more</a></td>
+                                              <td><?php echo $text;  ?></td>
                                          
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveComment('<?php echo $cmntData['id'];?>');" href="javascript:void(0);">
