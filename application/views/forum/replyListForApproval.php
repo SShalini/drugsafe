@@ -88,20 +88,26 @@
                                         <tr>
                                           
                                               <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
-                                              <?php 
-                                            
-                                              
-                                                $text = $cmntData['szCmnt'];
-                                                 if(strlen($text)>50){
-                                                  $text=substr($text,0,50) . '...';
-                                                  $text .=  '<a  onclick="showComment('.$cmntData['id'].');" href="javascript:void(0);" >Read more</a>';
+                                              <?php
+
+                                              $retval = $cmntData['szCmnt'];
+                                              $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $cmntData['szCmnt']);
+                                              $string = str_replace("\n", " ", $string);
+                                              $array = explode(" ", $string);
+                                              if (count($array)<=15)
+                                              {
+                                                  $retval = $string;
                                               }
-                                                //$newtext = wordwrap($text,60, "\n", true);
-                                                //$x =  preg_split('/\s+/', $newtext);
+                                              else
+                                              {
+                                                  array_splice($array, 15);
+                                                  $retval = implode(" ", $array)." ...";
+                                                  $retval .= '<a onclick="showComment('.$cmntData['id'].');" href="javascript:void(0);" >Read more</a>';
+                                              }
                                                ?>
                                             
                                               
-                                              <td><?php echo $text;  ?></td>
+                                              <td><?php echo $retval;  ?></td>
                                          
                                                 <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveComment('<?php echo $cmntData['id'];?>');" href="javascript:void(0);">
@@ -133,15 +139,21 @@
                                               <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
                                              
 
-                                           <?php 
-                                            
-                                              
-                                                $replytext = $replyData['szReply'];
-                                                 if(strlen($replytext)>50){
-                                                  $replytext=substr($text,0,50) . '...';
-                                                  $replytext .=  '<a  onclick="showReply('.$replyData['id'].');" href="javascript:void(0);" >Read more</a>';
-                                              }
-                                             
+                                           <?php
+                                           $replytext = $replyData['szReply'];
+                                           $replystring = preg_replace('/(?<=\S,)(?=\S)/', ' ', $replyData['szReply']);
+                                           $replystring = str_replace("\n", " ", $replystring);
+                                           $arrayrep = explode(" ", $replystring);
+                                           if (count($arrayrep)<=15)
+                                           {
+                                               $replytext = $replystring;
+                                           }
+                                           else
+                                           {
+                                               array_splice($arrayrep, 15);
+                                               $replytext = implode(" ", $arrayrep)." ...";
+                                               $replytext .= '<a onclick="showReply('.$replyData['id'].');" href="javascript:void(0);" >Read more</a>';
+                                           }
                                                ?>
                                             
                                               
