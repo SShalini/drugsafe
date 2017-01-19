@@ -58,7 +58,7 @@
                                                   $count++; 
 
                                                 }?>
-                              <span class="badge badge-danger"><?php echo $count;?></span>
+                             <span class="badge badge-danger" onclick="redirect_url('<?php echo base_url(); ?>order/orderList');"><?php echo $count;?></span>
                             </div>
                             
                         </div>
@@ -97,19 +97,18 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
-                                        <th>  Expiry Date</th>
+                                        <th style="width:60px;">  Quantity</th>
                                         <th>  Action</th>
                                      
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                       $i = 0;
+                                        $i = 1;
                                         foreach($marketingMaterialAray as $marketingMaterialData)
                                         {
                                              $idfranchisee = $_SESSION['drugsafe_user']['id'];
-                                             $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
-                                             //$marketingMaterialQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
+                                            
                                           
                                         ?>
                                         <tr>
@@ -121,15 +120,12 @@
                                             <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                             <td>$<?php echo $marketingMaterialData['szProductCost'];?> </td>
                                             <td>
-						<input type="number"min="1"  class="form-control btn-xs " name="order_quantity" id="order_quantity" >
+						 <input type="number"min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
 					   </td>
                                             <td>
-                                              
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="MarketingMaterialStatus" title="Add To Cart" onclick="placeOrder(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
-
-                                                </a>
-  
+                                               <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $marketingMaterialData['id'];?>','<?php echo $i;?>','2');" href="javascript:void(0);">
+                                                            <i class="fa fa-cart-plus"></i> 
+                                                 </a>
                                             </td>
                                           
                                         </tr>

@@ -9,6 +9,7 @@ class Order_Controller extends CI_Controller {
             $this->load->model('Error_Model');
             $this->load->model('Order_Model');
             $this->load->model('Admin_Model');
+            $this->load->model('Forum_Model');
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
             $this->load->model('StockMgt_Model');
@@ -40,7 +41,7 @@ class Order_Controller extends CI_Controller {
                $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3),$searchAry,2);
                $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList(false,false,false,2);
                $count = $this->Admin_Model->getnotification();
-
+               $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['szMetaTagTitle'] = " Drug Test Kit ";
                     $data['is_user_login'] = $is_user_login;
@@ -50,7 +51,7 @@ class Order_Controller extends CI_Controller {
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['drugtestkitlist'] = $drugTestKitListAray;
- 
+                    $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('order/orderDrugTestKit');
             $this->load->view('layout/admin_footer');
@@ -65,7 +66,7 @@ class Order_Controller extends CI_Controller {
                 redirect(base_url('/admin/admin_login'));
                 die;
             }
-            
+             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
              $searchAry = $_POST['szSearchProductCode'];
              $config['base_url'] = __BASE_URL__ . "/order/marketingmaterial/";
              $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset,2));
@@ -88,47 +89,12 @@ class Order_Controller extends CI_Controller {
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
                     $data['marketingMaterialListAray'] = $marketingMaterialListAray;
- 
+                    $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header',$data);
-            $this->load->view('inventory/marketingMaterialList');
+            $this->load->view('order/orderMarketingMaterial');
             $this->load->view('layout/admin_footer');
         }
     
-  
- 
-        function uploadProfileImage()
-        {
-            
-            $output_dir = __APP_PATH_PRODUCT_IMAGES__;
-            
-            $ret = array();
-            $RandomNum   = time();
-            $ImageName      = str_replace(' ','-',strtolower($_FILES['myfile']['name']));
-            $ImageType      = $_FILES['myfile']['type']; //"image/png", image/jpeg etc.
-            $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
-            $ImageExt       = str_replace('.','',$ImageExt);
-            $ImageName      = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
-            if($ImageName > 10)
-            {
-                $ImageName=substr($ImageName,0,10);
-            }
-            if(strlen($ImageName)>20)
-            {
-                $ImageName=substr_replace($ImageName,'',20);
-            }
-            $NewImageName = 'Drug_product_'.$ImageName.'-'.$RandomNum.'.'.$ImageExt;
-            move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.'/'. $NewImageName);
-//       	 	 echo $output_dir. $NewImageName;
-            $randomNum=rand().time();
-            $ret['name']= $NewImageName;
-            $ret['rand_num']= $randomNum;
-            $ret['img_div']= '<div id="photoDiv_'.$randomNum.'"><img class="" src="'.__BASE_USER_PRODUCT_IMAGES_URL__.'/'.$NewImageName.'" width="60" height="60" alt="Product  Image" />
-                                   <a href="javascript:void(0);" id="remove_btn_'.$randomNum.'" class="btn red-intense btn-sm" onclick="removeIncidentPhoto();">Remove</a>
-                           </div>';
-           
-            echo json_encode($ret);
-        }
-
         function consumables()
         {
             $is_user_login = is_user_login($this);
@@ -145,11 +111,12 @@ class Order_Controller extends CI_Controller {
             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
             $this->pagination->initialize($config);
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
-          
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry,3);
                $consumableslistAry =$this->Inventory_Model->viewConsumablesList(false,false,false,3);
                $count = $this->Admin_Model->getnotification();
 
+                $data['commentnotification'] = $commentReplyNotiCount; 
                     $data['consumablesAray'] = $consumablesAray;
                     $data['szMetaTagTitle'] = " Consumables";
                     $data['is_user_login'] = $is_user_login;
@@ -164,11 +131,12 @@ class Order_Controller extends CI_Controller {
             $this->load->view('layout/admin_footer');
         } 
            function placeOrderData()
-        {
-            
+        { 
              $idProduct = $this->input->post('idProduct');
              $quantity = $this->input->post('val');
-        
+             $flag = $this->input->post('flag');
+             $this->session->set_userdata('flag',$flag);
+             
              if($quantity>0){
              $this->Order_Model->InsertOrder($idProduct,$quantity);
               echo "SUCCESS||||";
@@ -185,8 +153,8 @@ class Order_Controller extends CI_Controller {
         
          public function placeOrder()
         {
+            $flag = $this->session->userdata('flag');
             $data['mode'] = '__PLACE_ORDER_POPUP_CONFIRM__';
-            $data['flag'] = $flag;
             $this->load->view('admin/admin_ajax_functions',$data);   
            
           
@@ -210,7 +178,7 @@ class Order_Controller extends CI_Controller {
              $this->pagination->initialize($config);
             
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
-          
+               $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
               
                $totalOrdersAray =$this->Order_Model->getOrdersList($config['per_page'],$this->uri->segment(3),$searchAry);
                $totalOrdersSearchAray =$this->Order_Model->getOrdersList();
@@ -227,7 +195,7 @@ class Order_Controller extends CI_Controller {
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['drugtestkitlist'] = $drugTestKitListAray;
- 
+                    $data['commentnotification'] = $commentReplyNotiCount; 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('order/cartOrderValuelist');
             $this->load->view('layout/admin_footer');
@@ -293,6 +261,7 @@ class Order_Controller extends CI_Controller {
             redirect(base_url('/admin/admin_login'));
             die;
         }
+        $this->session->unset_userdata('orderid');
         $franchiseeid = $this->session->userdata('idfranchisee');
         $totalOrdersAray =$this->Order_Model->getOrdersListByFranchisee($franchiseeid);
          
@@ -302,16 +271,18 @@ class Order_Controller extends CI_Controller {
          $price =  ($totalOrdersData['quantity'])*($productDataArr['szProductCost']);
          $TotalPrice +=$price;
         }
-        if($this->Order_Model->InsertOrderSuccess($totalOrdersAray['0']['franchiseeid'],$TotalPrice))
+        if($idorder=$this->Order_Model->InsertOrderSuccess($totalOrdersAray['0']['franchiseeid'],$TotalPrice))
         {
             foreach($totalOrdersAray as $totalOrdersData){
-          $queryInsert= $this->Order_Model->InsertOrderDetails($totalOrdersData);
+          $queryInsert= $this->Order_Model->InsertOrderDetails($totalOrdersData,$idorder);
                }
                if($queryInsert){
+
                 $szMessage['type'] = "success";
                 $szMessage['content'] = "<strong><h3>Your Order has been successfully placed.</h3></strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 ob_end_clean();
+                $this->session->unset_userdata('idfranchisee');
                 redirect(base_url('/order/ordersuccess'));   
                }
              
@@ -329,12 +300,16 @@ class Order_Controller extends CI_Controller {
             redirect(base_url('/admin/admin_login'));
             die;
         }
-                    $data['totalOrdersSearchAray'] = $totalOrdersSearchAray;     
-                    $data['totalOrdersAray'] = $totalOrdersAray;
-                    $data['szMetaTagTitle'] = " Drug Test Kit ";
+        $orderid = $this->session->userdata('orderid');
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($orderid);
+       $count = $this->Admin_Model->getnotification();
+        $data['commentnotification'] = $commentReplyNotiCount; 
+                    $data['totalOrdersDetailsAray'] = $totalOrdersDetailsAray;     
+                    $data['orderid'] = $orderid;
+                    $data['szMetaTagTitle'] = "Order Details";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Orders";
-                    $data['subpageName'] = "Drug_Test_Kit";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;

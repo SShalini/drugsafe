@@ -59,8 +59,26 @@
                                     <div class="portlet green-meadow box">
                                         <div class="portlet-title">
                                                 <div class="caption">
-                                                        <i class="fa fa-cogs "></i>Order #
+                                                       <div> <i class="fa fa-cogs "></i> Order #0000<?php echo $orderid?></div>
                                                 </div>
+                                            <div class="actions">
+                                                <?php  $totalOrdersAray = $this->Order_Model->getOrderByOrderId($orderid); 
+                                                $splitTimeStamp = explode(" ",$totalOrdersAray['createdon']);
+                                                             $date1 = $splitTimeStamp[0];
+                                                             $time1 = $splitTimeStamp[1];
+                                                           
+                                                           $x=  date("g:i a", strtotime($time1));
+                                                     
+                                                          $date= explode('-', $date1);
+                                                        
+                                                          
+                                                          $monthNum  = $date['1'];
+                                                         
+                                                          $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                                                          $monthName = $dateObj->format('M'); ?>
+                                      <span class="todo-comment-date"><?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?></span>
+                                </div>
+                            </div>
                                         </div>
                                             <div class="portlet-body">
                                                     <div class="table-responsive">
@@ -73,198 +91,60 @@
                                                                     <th>  Cost</th>
                                                                     <th>  Quantity</th>
                                                                     <th>  Price</th>
-                                                                  
                                                              </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                    <td>
-                                                                            <a href="javascript:;">
-                                                                            Product 1 </a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <span class="label label-sm label-success">
-                                                                            Available
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             2
-                                                                    </td>
-                                                                    <td>
-                                                                             2.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             4%
-                                                                    </td>
-                                                                    <td>
-                                                                             0.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             691.00$
-                                                                    </td>
-                                                            </tr>
-                                                            <tr>
-                                                                    <td>
-                                                                            <a href="javascript:;">
-                                                                            Product 1 </a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <span class="label label-sm label-success">
-                                                                            Available
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             2
-                                                                    </td>
-                                                                    <td>
-                                                                             2.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             4%
-                                                                    </td>
-                                                                    <td>
-                                                                             0.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             691.00$
-                                                                    </td>
-                                                            </tr>
-                                                            <tr>
-                                                                    <td>
-                                                                            <a href="javascript:;">
-                                                                            Product 1 </a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <span class="label label-sm label-success">
-                                                                            Available
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             2
-                                                                    </td>
-                                                                    <td>
-                                                                             2.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             4%
-                                                                    </td>
-                                                                    <td>
-                                                                             0.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             691.00$
-                                                                    </td>
-                                                            </tr>
-                                                            <tr>
-                                                                    <td>
-                                                                            <a href="javascript:;">
-                                                                            Product 1 </a>
-                                                                    </td>
-                                                                    <td>
-                                                                            <span class="label label-sm label-success">
-                                                                            Available
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             345.50$
-                                                                    </td>
-                                                                    <td>
-                                                                             2
-                                                                    </td>
-                                                                    <td>
-                                                                             2.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             4%
-                                                                    </td>
-                                                                    <td>
-                                                                             0.00$
-                                                                    </td>
-                                                                    <td>
-                                                                             691.00$
-                                                                    </td>
-                                                            </tr>
-                                                            </tbody>
-                                                            </table>
+                                                             </thead>
+                                        <tbody>
+                                            <?php
+                                           
+                                                $priceTotal = 0;
+                                                foreach($totalOrdersDetailsAray as $totalOrdersDetailsData)
+                                                {   
+                                                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
+                                                 $price = ($totalOrdersDetailsData['quantity'])*($productDataArr['szProductCost']);
+                                                 $priceTotal +=$price; 
+                                                   ?>
+                                                <tr>
+                                                    <td>
+                                                        <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $productDataArr['szProductImage']; ?>" width="60" height="60"/>    
+                                                    </td>
+                                                    <td><?php echo $productDataArr['szProductCode']?> </td>
+                                                    <td> <?php echo $productDataArr['szProductDiscription'];?> </td>
+                                                    <td> $<?php echo $productDataArr['szProductCost'];?> </td>
+                                                   <td> <?php echo $totalOrdersDetailsData['quantity'];?> </td>
+                                                   <td> $<?php echo $price;?> </td>
+                                                   
+                                                </tr>
+                                                 
+                                            <?php  }
+                                            
+                                             
+                                           ?>
+
+                                        </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                                </div>
+                                 </div>
+                            </div>
+                            <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="well">
+                                                    <div class="row static-info align-reverse">
+                                                            <div class="col-md-8 name">
+                                                                     Sub Total:
+                                                            </div>
+                                                            <div class="col-md-3 value">
+                                                                     $<?php echo $priceTotal;?>
+                                                            </div>
                                                     </div>
+                                                    
                                             </div>
                                     </div>
-                                                    </div>
-										</div>
-										<div class="row">
-											<div class="col-md-6">
-											</div>
-											<div class="col-md-6">
-												<div class="well">
-													<div class="row static-info align-reverse">
-														<div class="col-md-8 name">
-															 Sub Total:
-														</div>
-														<div class="col-md-3 value">
-															 $1,124.50
-														</div>
-													</div>
-													<div class="row static-info align-reverse">
-														<div class="col-md-8 name">
-															 Shipping:
-														</div>
-														<div class="col-md-3 value">
-															 $40.50
-														</div>
-													</div>
-													<div class="row static-info align-reverse">
-														<div class="col-md-8 name">
-															 Grand Total:
-														</div>
-														<div class="col-md-3 value">
-															 $1,260.00
-														</div>
-													</div>
-													<div class="row static-info align-reverse">
-														<div class="col-md-8 name">
-															 Total Paid:
-														</div>
-														<div class="col-md-3 value">
-															 $1,260.00
-														</div>
-													</div>
-													<div class="row static-info align-reverse">
-														<div class="col-md-8 name">
-															 Total Refunded:
-														</div>
-														<div class="col-md-3 value">
-															 $0.00
-														</div>
-													</div>
-													<div class="row static-info align-reverse">
-														<div class="col-md-8 name">
-															 Total Due:
-														</div>
-														<div class="col-md-3 value">
-															 $1,124.50
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+                            </div>
+                    </div>
 
                         </div>
                    

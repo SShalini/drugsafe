@@ -149,16 +149,7 @@
                             </div>
                         
                        
-                             <?php
-                            
-                        }
-                        else
-                        {
-                            echo "Not Found";
-                        }
-                        ?>
-                                    
-                                    
+                             
                           <input id="count" class="form-control" type="hidden"
                                                value="<?php echo $count; ?>" name="count">
                            <div class="row ">
@@ -192,18 +183,16 @@
                         </div>
                      </form>
                     </div>
-                        <?php  if(!empty($drugTestKitAray)){?>
-		<div class="row">
-                  
-                    <div class="col-md-7 col-sm-7">
-                        <div class="dataTables_paginate paging_bootstrap_full_number">
-                            <?php echo $this->pagination->create_links();?>
-                        </div>
-                    </div>
-	    	
-                 
-            </div>
-    	<?php }?>
+    <?php
+                            
+                        }
+                        else
+                        {
+                            echo "Not Found";
+                        }
+                        ?>
+                                    
+                                
                </div>
                 </div>
             </div> 

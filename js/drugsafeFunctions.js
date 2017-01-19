@@ -1264,9 +1264,9 @@ function topicDeleteConfirmation(idTopic) {
     }); 
 }
 
-function placeOrder(idProduct,flag) {
-    var val = $("#order_quantity"+flag).val();
-    $.post(__BASE_URL__ + "/order/placeOrderData", {idProduct: idProduct,val:val}, function (result) {
+function placeOrder(idProduct,inc,flag) {
+    var val = $("#order_quantity"+inc).val();
+    $.post(__BASE_URL__ + "/order/placeOrderData", {idProduct: idProduct,val:val,flag:flag}, function (result) {
         ar_result = result.split('||||');
         if(ar_result[0] == 'SUCCESS'){
            placeOrderConfirmation(); 

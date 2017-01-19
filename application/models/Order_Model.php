@@ -148,18 +148,21 @@ class Order_Model extends Error_Model {
 	    $this->db->insert(__DBC_SCHEMATA_ORDER__, $dataAry); 
             if($this->db->affected_rows() > 0)
             {
-             return true;
+                $id_order = (int)$this->db->insert_id();
+             return $id_order;
             }
             else
             {
                 return false;
             }
         }
-     function InsertOrderDetails($totalOrdersData)
+     function InsertOrderDetails($totalOrdersData,$idorder)
         { 
-          $orderDataArr = $this->Order_Model->getOrderDetailsByFrId($totalOrdersData['franchiseeid']);
+          
+          $orderid = $idorder;
+          
                 $dataAry = array(
-                                'orderid' => $orderDataArr['id'],
+                                'orderid' => $orderid,
                                 'productid' => $totalOrdersData['productid'],
 				'quantity' => $totalOrdersData['quantity'],
                                 'dispatched' => '0',
@@ -169,7 +172,8 @@ class Order_Model extends Error_Model {
             
              $this->db->where('franchiseeid', $totalOrdersData['franchiseeid']);
 	     if($query = $this->db->delete(__DBC_SCHEMATA_CART__))
-                {
+                { 
+                 $this->session->set_userdata('orderid', $orderid);
                     return true;
                 }
                 else
@@ -203,6 +207,43 @@ class Order_Model extends Error_Model {
                 return array();
             }
         }  
-        
+       public function getOrderDetailsByOrderId($orderId)
+        {
+          
+            $whereAry = array('orderid=' => $orderId);
+            $this->db->select('productid,quantity');
+            $this->db->from(__DBC_SCHEMATA_ORDER_DETAILS__);
+            $this->db->where($whereAry);
+            $query = $this->db->get();
+          
+            if($query->num_rows() > 0)
+            {
+                return  $query->result_array();
+                   
+            }
+            else
+            {
+                return array();
+            }
+        }     
+          public function getOrderByOrderId($orderId)
+        {
+          
+            $whereAry = array('id=' => $orderId);
+            $this->db->select('createdon');
+            $this->db->from(__DBC_SCHEMATA_ORDER__);
+            $this->db->where($whereAry);
+            $query = $this->db->get();
+          
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                 return  $row['0']; 
+            }
+            else
+            {
+                return array();
+            }
+        }     
    }
 ?>

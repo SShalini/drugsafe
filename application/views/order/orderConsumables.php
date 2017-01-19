@@ -105,7 +105,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                       $i = 0;
+                                       $i = 1;
                                         foreach($consumablesAray as $consumablesData)
                                         {  
                                              $idfranchisee = $_SESSION['drugsafe_user']['id'];
@@ -122,12 +122,12 @@
                                             <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                             <td> $<?php echo $consumablesData['szProductCost'];?> </td>
                                              <td>
-						<input type="number"min="1"  class="form-control btn-xs " name="order_quantity" id="order_quantity" >
+						 <input type="number"min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
 					   </td>
                                                 <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $consumablesData['id'];?>','3');" href="javascript:void(0);">
-                                                    <i class="fa fa-cart-plus"></i> 
-                                                </a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $consumablesData['id'];?>','<?php echo $i;?>','2');" href="javascript:void(0);">
+                                                            <i class="fa fa-cart-plus"></i> 
+                                                 </a>
                                               
                                         </tr>
                                         <?php
