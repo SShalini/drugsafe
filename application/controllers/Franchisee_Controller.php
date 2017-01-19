@@ -8,6 +8,7 @@ class Franchisee_Controller extends CI_Controller
         parent::__construct();
 
         $this->load->model('Error_Model');
+        $this->load->model('Forum_Model');
         $this->load->model('Admin_Model');
         $this->load->model('Franchisee_Model');
         $this->load->library('pagination');
@@ -83,6 +84,7 @@ class Franchisee_Controller extends CI_Controller
 
         
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $validate = $this->input->post('clientData');
         $reqppearr = $this->input->post('req_ppe');
    
@@ -152,6 +154,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Add Client";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['franchiseeAray'] = $franchiseeAray;
         $data['validate'] = $validate;
         $data['idfranchisee'] = $idfranchisee;
@@ -242,6 +245,7 @@ class Franchisee_Controller extends CI_Controller
     
         $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idfranchisee);
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $frdata = array();
 
         foreach ($clientAray as $cldata) {
@@ -259,6 +263,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Client List";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
 
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientList');
@@ -327,6 +332,7 @@ class Franchisee_Controller extends CI_Controller
     {
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
@@ -373,6 +379,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Client Details";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
 
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientDetails');
@@ -400,6 +407,7 @@ class Franchisee_Controller extends CI_Controller
     public function editClient()
     {
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $idClient = $this->session->userdata('idClient');
         $flag = $this->session->userdata('flag');
         $idfranchisee = $this->session->userdata('idfranchisee');
@@ -494,6 +502,7 @@ class Franchisee_Controller extends CI_Controller
             $data['parentClient'] = $parentClient;
             $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
             $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
 
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/editClient');
@@ -505,6 +514,7 @@ class Franchisee_Controller extends CI_Controller
       
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         if (!$is_user_login) {
             ob_end_clean();
             redirect(base_url('/admin/admin_login'));
@@ -539,6 +549,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Client Record";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
 
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientRecordByFr');
@@ -549,6 +560,7 @@ class Franchisee_Controller extends CI_Controller
       
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         if (!$is_user_login) {
             ob_end_clean();
             redirect(base_url('/admin/admin_login'));
@@ -660,7 +672,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Client Record";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
-
+        $data['commentnotification'] = $commentReplyNotiCount;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientRecord');
         $this->load->view('layout/admin_footer');

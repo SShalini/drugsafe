@@ -7,6 +7,7 @@ class Inventory_Controller extends CI_Controller {
             parent::__construct();
            
             $this->load->model('Error_Model');
+            $this->load->model('Forum_Model');
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
@@ -18,6 +19,7 @@ class Inventory_Controller extends CI_Controller {
         public function addMarketingMaterial() 
         {
            $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -35,6 +37,7 @@ class Inventory_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Add Marketing Material";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";
@@ -58,6 +61,7 @@ class Inventory_Controller extends CI_Controller {
         public function addDrugTestKit() 
         {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -76,6 +80,7 @@ class Inventory_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Add Product";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";
@@ -102,6 +107,7 @@ class Inventory_Controller extends CI_Controller {
         }
        public function addConsumables() {
            $count = $this->Admin_Model->getnotification();
+           $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -119,6 +125,7 @@ class Inventory_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Add Consumables";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";
@@ -156,6 +163,7 @@ class Inventory_Controller extends CI_Controller {
         
         public function editDrugTestKit() {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -186,6 +194,7 @@ class Inventory_Controller extends CI_Controller {
                 $data['subpageName'] = "Drug_Test_Kit_List";
                 $_POST['productData']=$productDataAry;
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('inventory/editDrugTestKit');
                 $this->load->view('layout/admin_footer');
@@ -263,6 +272,7 @@ class Inventory_Controller extends CI_Controller {
                $drugTestKitAray =$this->Inventory_Model->viewDrugTestKitList($config['per_page'],$this->uri->segment(3),$searchAry);
             $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList();
                $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['szMetaTagTitle'] = " Drug Test Kit List";
@@ -270,6 +280,7 @@ class Inventory_Controller extends CI_Controller {
                     $data['pageName'] = "Inventory";
                     $data['subpageName'] = "Drug_Test_Kit_List";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['data'] = $data;
             $data['drugtestkitlist'] = $drugTestKitListAray;
  
@@ -299,14 +310,14 @@ class Inventory_Controller extends CI_Controller {
              $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($searchAry,$config['per_page'],$this->uri->segment(3));
             $marketingMaterialListAray =$this->Inventory_Model->viewMarketingMaterialList();
              $count = $this->Admin_Model->getnotification();
-             
-             
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
                     $data['szMetaTagTitle'] = "Marketing Material List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";
                     $data['subpageName'] = "Marketing_Material_List";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
             $data['marketingMaterialListAray'] = $marketingMaterialListAray;
@@ -344,6 +355,7 @@ class Inventory_Controller extends CI_Controller {
         
         public function editMarketingMaterial() {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -368,6 +380,7 @@ class Inventory_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             {
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Edit Product";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";
@@ -409,6 +422,7 @@ class Inventory_Controller extends CI_Controller {
         
          public function editConsumables() {
             $count = $this->Admin_Model->getnotification();
+             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -433,6 +447,7 @@ class Inventory_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             {
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Edit Product";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Inventory";
@@ -478,6 +493,7 @@ class Inventory_Controller extends CI_Controller {
                $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry);
                $consumableslistAry =$this->Inventory_Model->viewConsumablesList();
                $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 
                     $data['consumablesAray'] = $consumablesAray;
                     $data['szMetaTagTitle'] = " Consumables List";
@@ -485,6 +501,7 @@ class Inventory_Controller extends CI_Controller {
                     $data['pageName'] = "Inventory";
                     $data['subpageName'] = "Consumables_List";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['data'] = $data;
                     $data['consumableslist'] = $consumableslistAry;
  

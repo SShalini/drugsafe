@@ -8,6 +8,7 @@ class Form_Management_Controller extends CI_Controller
         parent::__construct();
         $this->load->library('pagination');
         $this->load->model('Error_Model');
+        $this->load->model('Forum_Model');
         $this->load->model('Admin_Model');
         $this->load->model('Franchisee_Model');
         $this->load->model('Inventory_Model');
@@ -51,20 +52,24 @@ class Form_Management_Controller extends CI_Controller
             die;
         }
           $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
           $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
         
         if($_POST['szSearchFrRecord'])
         {
              $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchFrRecord']);
             $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$_POST['szSearchFrRecord']);
             $this->session->set_userdata('szSearchFrRecord',$_POST['szSearchFrRecord']);
             if(empty($clientlistArr))
             {  
                 $count = $this->Admin_Model->getnotification();
+                $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                 $data['searchOptionArr']=$searchOptionArr;
                 $data['data'] = $data;
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['notfound']="Not Found";
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('formManagement/formViewByFr');
@@ -78,6 +83,7 @@ class Form_Management_Controller extends CI_Controller
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Form_Management";
             $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/formViewByCl'); 
             $this->load->view('layout/admin_footer');
@@ -87,6 +93,7 @@ class Form_Management_Controller extends CI_Controller
         }
         elseif ($_POST['szSearchClRecord']) 
         {   $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchClRecord']);
             $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearchClRecord'],false,false,false,false);
             $this->session->set_userdata('szSearchClRecord',$_POST['szSearchClRecord']);
@@ -94,6 +101,7 @@ class Form_Management_Controller extends CI_Controller
             if(empty($childClientDetailsAray))
             {
                 $count = $this->Admin_Model->getnotification();
+                $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                 $szSearchFrRecord = $this->session->userdata('szSearchFrRecord');
                 $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchFrRecord);
                 $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$szSearchFrRecord);
@@ -104,6 +112,7 @@ class Form_Management_Controller extends CI_Controller
                 $data['szMetaTagTitle'] = "Form Management";
                 $data['is_user_login'] = $is_user_login;
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['pageName'] = "Form_Management";
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('formManagement/formViewByCl'); 
@@ -116,6 +125,7 @@ class Form_Management_Controller extends CI_Controller
             $data['szMetaTagTitle'] = "Form Management";
             $data['is_user_login'] = $is_user_login;
             $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/formViewBySite'); 
@@ -126,10 +136,12 @@ class Form_Management_Controller extends CI_Controller
         elseif ($_POST['szSearchClRecord2']) 
         {
               $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($_POST['szSearchClRecord2']);
             if(empty($sosRormDetailsAry))
             {
                   $count = $this->Admin_Model->getnotification();
+                $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                 $szSearchClRecord = $this->session->userdata('szSearchClRecord');
                 $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchClRecord);
                 $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($szSearchClRecord,false,false,false,false);
@@ -139,6 +151,7 @@ class Form_Management_Controller extends CI_Controller
                 $data['value'] = $value;
                 $data['data'] = $data;
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['notfound']="Not Found";
                 $data['szMetaTagTitle'] = "Form Management";
                 $data['is_user_login'] = $is_user_login;
@@ -151,6 +164,7 @@ class Form_Management_Controller extends CI_Controller
               $data['sosRormDetailsAry'] = $sosRormDetailsAry;
             $data['data'] = $data;
             $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
             $data['szMetaTagTitle'] = "Form Management";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Form_Management";
@@ -163,10 +177,12 @@ class Form_Management_Controller extends CI_Controller
         else 
         {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $data['searchOptionArr']=$searchOptionArr;
             $data['data'] = $data;
             $data['szMetaTagTitle'] = "Form Management";
             $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Form_Management";
             $this->load->view('layout/admin_header', $data);
@@ -198,6 +214,7 @@ class Form_Management_Controller extends CI_Controller
             die;
         }
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $idsite = $this->session->userdata('idsite');
         $idClient = $this->session->userdata('idClient');
         $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetails($idClient,1);
@@ -207,6 +224,7 @@ class Form_Management_Controller extends CI_Controller
         $data['idsite'] = $idsite;
         $data['data'] = $data;
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['szMetaTagTitle'] = "Form Management";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Form_Management";
@@ -380,6 +398,8 @@ class Form_Management_Controller extends CI_Controller
     }
     function cocFormDetails()
     {
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -390,6 +410,7 @@ class Form_Management_Controller extends CI_Controller
        
         
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['szMetaTagTitle'] = "Form Management";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Form_Management";
@@ -412,6 +433,8 @@ class Form_Management_Controller extends CI_Controller
          function ViewDonorDetails()
     {
         $idsos = $this->session->userdata('idsos');
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -422,6 +445,7 @@ class Form_Management_Controller extends CI_Controller
        $DonorDetailsAry = $this->Form_Management_Model->getActiveDonorDetailsBySosId($idsos);
         
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['idsos'] = $idsos;
         $data['szMetaTagTitle'] = "Donor Details";
         $data['DonorDetailsAry'] = $DonorDetailsAry;
@@ -448,6 +472,8 @@ class Form_Management_Controller extends CI_Controller
     {
         $idcoc = $this->session->userdata('idcoc');
          $idsos = $this->session->userdata('idsos');
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -458,6 +484,7 @@ class Form_Management_Controller extends CI_Controller
        $cocFormDetailsAry = $this->Form_Management_Model->getCocFormDetailsByCocId($idcoc);
        
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['idcoc'] = $idcoc;
         $data['idsos'] = $idsos;
         $data['szMetaTagTitle'] = "Donor Details";

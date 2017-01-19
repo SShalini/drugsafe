@@ -7,6 +7,7 @@ class Admin_Controller extends CI_Controller {
             parent::__construct();
            
             $this->load->model('Error_Model');
+        $this->load->model('Forum_Model');
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
@@ -128,6 +129,7 @@ class Admin_Controller extends CI_Controller {
         function changePassword()
         {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
              
             // redirect to dashboard if already logged in
@@ -172,7 +174,7 @@ class Admin_Controller extends CI_Controller {
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Profile";
             $data['notification'] = $count;
-
+            $data['commentnotification'] = $commentReplyNotiCount;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('admin/changePassword');
         $this->load->view('layout/admin_footer');
@@ -209,6 +211,7 @@ class Admin_Controller extends CI_Controller {
             $idOperationManager = $this->session->userdata('idOperationManager');
             $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($this->Admin_Model->validateUsersData($validate,array(),false,false,$flag))
             {
               
@@ -232,6 +235,7 @@ class Admin_Controller extends CI_Controller {
                     $data['flag'] = $flag;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
           
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/addFranchisee');
@@ -250,6 +254,7 @@ class Admin_Controller extends CI_Controller {
 //            echo 'fr2';
             // redirect to dashboard if already logged in
            $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 //            echo 'fr3';
             if(!$is_user_login)
             {
@@ -296,6 +301,7 @@ class Admin_Controller extends CI_Controller {
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['franchiseeAray'] = $franchiseeAray;
                     $data['allfranchisee'] = $searchOptionArr;
          
@@ -309,6 +315,7 @@ class Admin_Controller extends CI_Controller {
 
             // redirect to dashboard if already logged in
            $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         
             if(!$is_user_login)
             {
@@ -351,6 +358,7 @@ class Admin_Controller extends CI_Controller {
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['operationManagerAray'] = $operationManagerAray;
                     $data['allOperationManager'] = $searchOptionArr;
                     
@@ -439,6 +447,7 @@ class Admin_Controller extends CI_Controller {
             $idOperationManager = $this->session->userdata('idOperationManager');
             $idfranchisee = $this->session->userdata('idfranchisee');
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($idfranchisee >0)
             {
                 
@@ -477,6 +486,7 @@ class Admin_Controller extends CI_Controller {
                     $_POST['addFranchisee'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/editFranchisee');
             $this->load->view('layout/admin_footer');
@@ -639,6 +649,7 @@ class Admin_Controller extends CI_Controller {
             $validate= $this->input->post('addOperationManager'); 
 
             $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($this->Admin_Model->validateUsersData($validate))
             {
               
@@ -658,6 +669,7 @@ class Admin_Controller extends CI_Controller {
                     $data['validate'] = $validate;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
             
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/addOperationManager');
@@ -693,6 +705,7 @@ class Admin_Controller extends CI_Controller {
             $idOperationManager = $this->session->userdata('idOperationManager');
             $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($idOperationManager >0)
             {
                 
@@ -733,6 +746,7 @@ class Admin_Controller extends CI_Controller {
                     $_POST['editOperationManager'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                     $data['flag'] = $flag;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/editOperationManager');

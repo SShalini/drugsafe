@@ -7,6 +7,7 @@ class StockMgt_Controller extends CI_Controller {
             parent::__construct();
            
             $this->load->model('Error_Model');
+        $this->load->model('Forum_Model');
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
@@ -49,6 +50,7 @@ class StockMgt_Controller extends CI_Controller {
         function modelstockvalue()
         {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
         
             // redirect to franchisee list if already logged in
@@ -104,6 +106,7 @@ class StockMgt_Controller extends CI_Controller {
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/modelStockValue');
@@ -124,6 +127,7 @@ class StockMgt_Controller extends CI_Controller {
         {
             $is_user_login = is_user_login($this);
              $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             // redirect to franchisee list if already logged in
             if(!$is_user_login)
             {
@@ -177,6 +181,7 @@ class StockMgt_Controller extends CI_Controller {
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Add_Model_Stock_Value";
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/addModelStockValue');
@@ -225,6 +230,7 @@ class StockMgt_Controller extends CI_Controller {
         function editmodelstockvalue()
         {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
 
             // redirect to dashboard if already logged in
@@ -274,7 +280,7 @@ class StockMgt_Controller extends CI_Controller {
                 $data['productDataAry'] = $productDataAry;
                 $data['franchiseeArr'] = $franchiseeArr;
                 $data['notification'] = $count;
-                
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Edit Model Stock Value";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Edit_Model_Stock_Value";
@@ -329,6 +335,7 @@ class StockMgt_Controller extends CI_Controller {
         {
             $is_user_login = is_user_login($this);
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             // redirect to franchisee list if already logged in
             if(!$is_user_login)
             {
@@ -352,6 +359,7 @@ class StockMgt_Controller extends CI_Controller {
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Inventory";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/productStockMgt');
             $this->load->view('layout/admin_footer');
@@ -370,6 +378,7 @@ class StockMgt_Controller extends CI_Controller {
         {
             $is_user_login = is_user_login($this);
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             // redirect to franchisee list if already logged in
             if(!$is_user_login)
             {
@@ -426,6 +435,7 @@ class StockMgt_Controller extends CI_Controller {
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Add_Product_Stock_Quantity";
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
            $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/addProductStockQty');
             $this->load->view('layout/admin_footer');
@@ -479,6 +489,7 @@ class StockMgt_Controller extends CI_Controller {
             
             $is_user_login = is_user_login($this);
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             // redirect to dashboard if already logged in
             if(!$is_user_login)
             {
@@ -548,6 +559,7 @@ class StockMgt_Controller extends CI_Controller {
                  $data['franchiseeArr'] = $franchiseeArr;
                  
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Edit Model Stock Value";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Edit_Product_Stock_Quantity";
@@ -696,6 +708,7 @@ class StockMgt_Controller extends CI_Controller {
             
             
                 $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/stockreqlist/";
                 $config['total_rows'] = count($this->StockMgt_Model->getQtyRequestFrId($limit,$offset));
                 $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
@@ -725,6 +738,7 @@ class StockMgt_Controller extends CI_Controller {
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Stock_Request";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['data'] = $data;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('stockManagement/reqQtyfranchiseeList');
@@ -759,6 +773,7 @@ class StockMgt_Controller extends CI_Controller {
         
             $idfranchisee = $this->session->userdata('idfranchisee'); 
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                 $config['base_url'] = __BASE_URL__ . "/stock_management/viewproductlist/";
                 $config['total_rows'] = count($this->StockMgt_Model->getRequestQtyList($searchAry,$idfranchisee,$limit,$offset));
                 $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
@@ -777,6 +792,7 @@ class StockMgt_Controller extends CI_Controller {
             $data['franchiseeArr'] = $franchiseeArr;
             $data['pageName'] = "Stock_Request";
             $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
             $data['szMetaTagTitle'] = "Requested Product List";
             $data['is_user_login'] = $is_user_login;
          

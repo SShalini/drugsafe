@@ -8,6 +8,7 @@ class Reporting_Controller extends CI_Controller
         parent::__construct();
         $this->load->library('pagination');
         $this->load->model('Error_Model');
+        $this->load->model('Forum_Model');
         $this->load->model('Admin_Model');
         $this->load->model('Franchisee_Model');
         $this->load->model('Inventory_Model');
@@ -75,6 +76,7 @@ class Reporting_Controller extends CI_Controller
        
            
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $config['base_url'] = __BASE_URL__ . "/reporting/allstockreqlist/";
         
          if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
@@ -109,6 +111,7 @@ class Reporting_Controller extends CI_Controller
         $data['pageName'] = "Reporting";
         $data['subpageName'] = "All_Stock_Requests";
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['data'] = $data;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('reporting/stockRequestList');
@@ -142,6 +145,7 @@ class Reporting_Controller extends CI_Controller
             die;
         }
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
        
           $searchAry = '';
           if(!empty($_POST['szSearch'])&&!empty($_POST['szSearch2'])){
@@ -188,6 +192,7 @@ class Reporting_Controller extends CI_Controller
         $data['pageName'] = "Reporting";
         $data['subpageName'] = "Stock_Assignments";
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['data'] = $data;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('reporting/stockAssignList');

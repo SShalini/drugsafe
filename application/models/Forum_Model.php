@@ -378,7 +378,7 @@ class Forum_Model extends Error_Model {
             {
                     return array();
             }
-        }   
+        }
    function insertComents($idTopic)
         {
         $date = date('Y-m-d H:i:s');
@@ -749,6 +749,13 @@ class Forum_Model extends Error_Model {
             return false;
         }
 
+    }
+
+    function commentReplyNotifications(){
+        $replyArr = $this->getAllReply(false,2);
+        $commentArr = $this->getAllCommentsByTopicId(false,1);
+        $totalNotificationCount = count($replyArr)+count($commentArr);
+        return$totalNotificationCount;
     }
 }
 ?>

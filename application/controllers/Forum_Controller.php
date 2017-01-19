@@ -16,6 +16,7 @@ class Forum_Controller extends CI_Controller {
         }
 	public function addCategory() {
            $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -30,6 +31,7 @@ class Forum_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Add Category";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Forum";
@@ -61,6 +63,7 @@ class Forum_Controller extends CI_Controller {
         }
         public function addTopic() {
               $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
               $is_user_login = is_user_login($this);
               $idForum = $this->session->userdata('idForum');
               $value = $this->input->post('forumData');
@@ -78,6 +81,7 @@ class Forum_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['szMetaTagTitle'] = "Add Topic";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Forum";
@@ -110,6 +114,7 @@ class Forum_Controller extends CI_Controller {
         
         public function editCategory() {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
             if (!$is_user_login) {
@@ -134,6 +139,7 @@ class Forum_Controller extends CI_Controller {
                 $data['subpageName'] = "Categories";
                 $_POST['forumData']= $CategoryDataAry;
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('forum/editCategory');
                 $this->load->view('layout/admin_footer');
@@ -178,6 +184,7 @@ class Forum_Controller extends CI_Controller {
                $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
                $categoriesListAray =$this->Forum_Model->viewCategoriesList();
                $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 
                     $data['categoriesAray'] = $categoriesAray;
                     $data['szMetaTagTitle'] = " Categories List";
@@ -185,6 +192,7 @@ class Forum_Controller extends CI_Controller {
                     $data['pageName'] = "Forum";
                     $data['subpageName'] = "Forum_List";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['data'] = $data;
                     $data['categoriesListAray'] = $categoriesListAray;
  
@@ -252,6 +260,7 @@ class Forum_Controller extends CI_Controller {
                $forumDataAray =$this->Forum_Model->viewForumDataList($config['per_page'],$this->uri->segment(3),$searchAry,$idCategory);
                $forumDataSearchAray =$this->Forum_Model->viewForumDataList(false,false,false,$idCategory);
                $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 
                     $data['forumDataAray'] = $forumDataAray;
                     $data['szMetaTagTitle'] = " Forum List";
@@ -260,6 +269,7 @@ class Forum_Controller extends CI_Controller {
                     $data['pageName'] = "Forum";
                     $data['subpageName'] = "Forum_List";
                     $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
                     $data['data'] = $data;
             $data['forumDataSearchAray'] = $forumDataSearchAray;
  
@@ -281,6 +291,7 @@ class Forum_Controller extends CI_Controller {
          public function addforum() 
         {
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
              $validate = $this->input->post('forumData');
              $idCategory = $this->session->userdata('idCategory');
              $flag = $this->session->userdata('flag');
@@ -301,6 +312,7 @@ class Forum_Controller extends CI_Controller {
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $data['idCategory'] = $idCategory;
                 $data['flag'] = $flag;
                 $data['szMetaTagTitle'] = "Add Forum Data";
@@ -342,6 +354,7 @@ class Forum_Controller extends CI_Controller {
                 die;
             }
             $count = $this->Admin_Model->getnotification();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             $validate = $this->input->post('forumData');
             $id = $this->session->userdata('id');
@@ -365,6 +378,7 @@ class Forum_Controller extends CI_Controller {
                 $data['subpageName'] = "Forum_List";
                 $_POST['forumData']= $forumDataAry;
                 $data['notification'] = $count;
+                $data['commentnotification'] = $commentReplyNotiCount;
                 $this->load->view('layout/admin_header',$data);
                 $this->load->view('forum/editForum');
                 $this->load->view('layout/admin_footer');
@@ -420,7 +434,7 @@ class Forum_Controller extends CI_Controller {
        $forumDetailsAry = $this->Forum_Model->getForumDetailsByForumId($idForum);
 //       $forumDataSearchAray =$this->Forum_Model->getForumDetailsByForumId($idForum);
        $count = $this->Admin_Model->getnotification();
-  
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
        $forumTopicDataAry =$this->Forum_Model->viewTopicList($idForum,false,false,$config['per_page'],$this->uri->segment(3));
    
         $data['forumTopicDataAry'] = $forumTopicDataAry;
@@ -431,8 +445,7 @@ class Forum_Controller extends CI_Controller {
         $data['szMetaTagTitle'] = "Forum Details List";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
-
-        
+            $data['commentnotification'] = $commentReplyNotiCount;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('forum/viewForum');
         $this->load->view('layout/admin_footer');
@@ -529,7 +542,7 @@ class Forum_Controller extends CI_Controller {
               $replyDataArr = $this->Forum_Model->getAllReply(false,2);
               $cmntDataArr = $this->Forum_Model->getAllCommentsByTopicId(false,1); 
                $count = $this->Admin_Model->getnotification();
-
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                   
                     $data['szMetaTagTitle'] = "Comment/Reply Approval";
                     $data['replyDataArr'] = $replyDataArr;
@@ -537,6 +550,7 @@ class Forum_Controller extends CI_Controller {
                     $data['pageName'] = "Forum";
                     $data['subpageName'] = "Comment/Reply Approval";
                     $data['notification'] = $count;
+                    $data['commentnotification'] = $commentReplyNotiCount;
                     $data['cmntDataArr'] = $cmntDataArr;
                     $data['data'] = $data;
            

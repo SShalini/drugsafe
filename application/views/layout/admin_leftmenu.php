@@ -167,26 +167,8 @@
                     </a>
                 </li>-->
                
-           <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
-                
-                  <!--<li class="nav-item start <?php /*if (trim($pageName) == 'Ordering') { */?>active open<?php /*} */?>">
-                    <a href="javascript:void(0);" class="nav-link nav-toggle">
-                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                        <span class="title">Proforma Invoice </span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu" <?php /*if ($subpageName == 'Ordering') { */?> style="display: block;" <?php /*} */?> >
-                       
-                        <li class="nav-item  <?php /*if ($subpageName == 'Sites_Record') { */?> active open <?php /*} */?>">
-                            <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/ordering/sitesRecord">
-                                <i class="fa fa-ge" aria-hidden="true"></i>
-                                <span class="title">View Invoice</span>
-                            </a>
-                        </li>
+           <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole'] == 2) { ?>
 
-                    </ul>
-
-                </li>-->
                <li class="nav-item start <?php if (trim($pageName) == 'Ordering') { ?>active open<?php } ?>">
                    <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord" class="nav-link nav-toggle">
                        <i class="fa fa-file-text" aria-hidden="true"></i>
@@ -233,6 +215,7 @@
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-building" aria-hidden="true"></i>
                     <span class="title">Forum </span>
+                    <?php if($commentnotification > '0' && $_SESSION['drugsafe_user']['iRole'] == 1){?><span class="badge badge-danger"><?php echo $commentnotification; ?></span><?php } ?>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu" <?php if ($subpageName == 'Forum') { ?> style="display: block;" <?php } ?> >
@@ -249,6 +232,7 @@
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/approvallist">
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                             <span class="title"> Approval</span>
+                            <?php if($commentnotification > '0'){?><span class="badge badge-danger"><?php echo $commentnotification; ?></span><?php } ?>
                         </a>
                     </li>
                   <?php }?> 

@@ -9,6 +9,7 @@ class Ordering_Controller extends CI_Controller
         parent::__construct();
 
         $this->load->model('Ordering_Model');
+        $this->load->model('Forum_Model');
         $this->load->model('Error_Model');
         $this->load->model('Admin_Model');
         $this->load->model('Franchisee_Model');
@@ -34,6 +35,7 @@ class Ordering_Controller extends CI_Controller
     public function calform()
     {
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -66,6 +68,7 @@ class Ordering_Controller extends CI_Controller
             $data['idsite'] = $idsite;
             $data['Drugtestid'] = $Drugtestid;
             $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
             $data['szMetaTagTitle'] = "Ordering";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Ordering";
@@ -103,34 +106,33 @@ class Ordering_Controller extends CI_Controller
     {
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
-
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 
         if (!$is_user_login) {
             redirect(base_url('/admin/admin_login'));
         }
+        $id = 0;
         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
-            $franchiseId = $_SESSION['drugsafe_user']['id'];
+            $id = $_SESSION['drugsafe_user']['id'];
         }
         if ($_SESSION['drugsafe_user']['iRole'] == '5') {
             $operationManagrrId = $_SESSION['drugsafe_user']['id'];
         }
-
         $searchAry = '';
         $idFreanch = $this->session->userdata('idFreanch');
         if ($idFreanch) {
             $_POST['szSearchClRecord2'] = $idFreanch;
             $this->session->unset_userdata('idFreanch');
         }
-
+        if($id>0){
+            $_POST['szSearchClRecord2'] = $id;
+        }
         if (isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])) {
             $id = $_POST['szSearchClRecord2'];
         }
         $this->session->set_userdata('freanchId', $id);
-
-
         if ($id > 0) {
             $childclientAray = $this->Ordering_Model->getAllChClientDetails($config['per_page'], $this->uri->segment(3), $id);
-
             $i = 0;
             $sosRormDetailsAry = array();
             foreach ($childclientAray as $childclientData) {
@@ -152,6 +154,7 @@ class Ordering_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Sites Record";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('ordering/sitesRecord');
         $this->load->view('layout/admin_footer');
@@ -175,6 +178,7 @@ class Ordering_Controller extends CI_Controller
     public function editcalform()
     {
         $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -214,6 +218,7 @@ class Ordering_Controller extends CI_Controller
             $data['idsite'] = $idsite;
             $data['Drugtestid'] = $Drugtestid;
             $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
             $data['freanchId'] = $freanchId;
             $data['szMetaTagTitle'] = "Ordering";
             $data['is_user_login'] = $is_user_login;
@@ -261,6 +266,9 @@ class Ordering_Controller extends CI_Controller
 
     function viewCalcDetails()
     {
+        $is_user_login = is_user_login($this);
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $freanchId = $this->session->userdata('freanchId');
         $Drugtestid = $this->session->userdata('Drugtestid');
         $idsite = $this->session->userdata('idsite');
@@ -271,6 +279,7 @@ class Ordering_Controller extends CI_Controller
         $data['Drugtestid'] = $Drugtestid;
         $data['sosid'] = $sosid;
         $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
         $data['data'] = $data;
         $data['freanchId'] = $freanchId;
         $data['szMetaTagTitle'] = "Ordering";
