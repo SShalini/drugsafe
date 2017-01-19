@@ -1172,26 +1172,7 @@ if($mode == '__PLACE_ORDER_POPUP_CONFIRM__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Your Order has been successfully placed.</p>
                 </div>
                 <div class="modal-footer">
-                    <?php /*if($flag==1){
-                    $this->session->unset_userdata('quantity');
-                    $this->session->unset_userdata('flag');
-                    $this->session->unset_userdata('idProduct');
-
-                    */?><!--
-                    <a href="<?php /*echo __BASE_URL__;*/?>/order/drugtestkit/" class="btn dark btn-outline">Close</a>
-                    <?php /*} if($flag==2){
-                     $this->session->unset_userdata('quantity');
-                     $this->session->unset_userdata('flag');
-                     $this->session->unset_userdata('idProduct');
-                        */?>
-                    <a href="<?php /*echo __BASE_URL__;*/?>/order/marketingmaterial/" class="btn dark btn-outline">Close</a>
-                    --><?php /*} if($flag==3){
-                    $this->session->unset_userdata('quantity');
-                    $this->session->unset_userdata('flag');
-                    $this->session->unset_userdata('idProduct');
-                        */?>
                     <a data-dismiss="modal" class="btn dark btn-outline">Close</a>
-                   <!-- --><?php /*}*/?>
                 </div>
             </div>
         </div>
@@ -1199,5 +1180,50 @@ if($mode == '__PLACE_ORDER_POPUP_CONFIRM__')
     
     <?php
 }
-
+if($mode == '__DELETE_ORDER_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="DeleteOrder" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Delete Order</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Order?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="DeleteOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__DELETE_ORDER_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="DeleteOrderConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Deleted Order</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Order has been successfully deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/order/orderList" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
   ?>

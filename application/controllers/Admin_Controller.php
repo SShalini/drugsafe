@@ -7,7 +7,7 @@ class Admin_Controller extends CI_Controller {
             parent::__construct();
            
             $this->load->model('Error_Model');
-        $this->load->model('Forum_Model');
+            $this->load->model('Forum_Model');
             $this->load->model('Admin_Model');
             $this->load->model('Franchisee_Model');
             $this->load->model('Inventory_Model');
@@ -669,7 +669,7 @@ class Admin_Controller extends CI_Controller {
                     $data['validate'] = $validate;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
-        $data['commentnotification'] = $commentReplyNotiCount;
+                    $data['commentnotification'] = $commentReplyNotiCount;
             
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/addOperationManager');

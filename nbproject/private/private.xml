@@ -3,8 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Reporting_Controller.php</file>
-            <file>file:/C:/xampp/htdocs/drugsafe/application/views/forum/forumList.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/order/orderConsumables.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/order/cartOrderValuelist.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/admin/operationManagerList.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Inventory_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/admin/franchiseeList.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/controllers/Order_Controller.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/order/orderMarketingMaterial.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/models/Inventory_Model.php</file>
+            <file>file:/C:/xampp/htdocs/drugsafe/application/views/order/orderDrugTestKit.php</file>
         </group>
     </open-files>
 </project-private>

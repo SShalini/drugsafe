@@ -75,6 +75,8 @@ define("__APP_PATH_PRODUCT_IMAGES__", __APP_PATH__ . "/product_img");
 define("__DBC_SCHEMATA_USERS__", "ds_user"); 
 define("__DBC_SCHEMATA_SITES__", "ds_sites");
 define("__DBC_SCHEMATA_CART__", "ds_cart");
+define("__DBC_SCHEMATA_ORDER_DETAILS__", "ds_order_details");
+define("__DBC_SCHEMATA_ORDER__", "ds_orders");
 define("__DBC_SCHEMATA_DONER__", "ds_doner");
 define( "__DBC_SCHEMATA_COUNTRY__", "tbl_countries");
 define( "__DBC_SCHEMATA_STATE__", "tbl_states");

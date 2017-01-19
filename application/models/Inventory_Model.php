@@ -128,7 +128,7 @@ class Inventory_Model extends Error_Model {
                     return array();
             }
         }
-         public function viewMarketingMaterialList($searchAry= '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
+         public function viewMarketingMaterialList($searchAry= '',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$flag='0')
         {
             $searchAry = trim($searchAry);
             if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5 || $flag==2){
@@ -191,10 +191,10 @@ class Inventory_Model extends Error_Model {
                     return false;
                 }	
 	}
-  public function viewConsumablesList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry ='')
+  public function viewConsumablesList($limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry ='',$flag='0')
         {
             $searchAry = trim($searchAry);
-            if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5 || $flag==2)
+            if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5 || $flag==3)
             {
                 if(!empty($searchAry)){
                     $whereAry = array('isDeleted=' => '0','szProductCategory' => '3');

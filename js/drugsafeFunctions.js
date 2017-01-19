@@ -1266,7 +1266,7 @@ function topicDeleteConfirmation(idTopic) {
 
 function placeOrder(idProduct,flag) {
     var val = $("#order_quantity"+flag).val();
-    $.post(__BASE_URL__ + "/order/placeOrderData", {idProduct: idProduct,val:val,flag:flag}, function (result) {
+    $.post(__BASE_URL__ + "/order/placeOrderData", {idProduct: idProduct,val:val}, function (result) {
         ar_result = result.split('||||');
         if(ar_result[0] == 'SUCCESS'){
            placeOrderConfirmation(); 
@@ -1286,4 +1286,43 @@ function placeOrder(idProduct,flag) {
         jQuery('#loader').attr('style', 'display:none');
 
     }); 
+}
+
+function DeleteOrder(idOrder) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/DeleteOrderAlert", {idOrder:idOrder}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#DeleteOrder').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function DeleteOrderConfirmation(idOrder) {
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#DeleteOrder').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/OrderDeleteConfirmation", {idOrder: idOrder}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#DeleteOrderConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+function checkOutOrder(idfranchisee) {
+
+    $.post(__BASE_URL__ + "/order/checkOutOrderData", {idfranchisee: idfranchisee}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/order/" + ar_result[1];
+
+    });
+
 }

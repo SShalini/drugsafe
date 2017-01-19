@@ -128,12 +128,7 @@ class Order_Controller extends CI_Controller {
            
             echo json_encode($ret);
         }
-     
-    
-      
-    
- 
-    
+
         function consumables()
         {
             $is_user_login = is_user_login($this);
@@ -146,13 +141,13 @@ class Order_Controller extends CI_Controller {
             }
             $searchAry = $_POST['szSearchProdCode'];
             $config['base_url'] = __BASE_URL__ . "/order/consumables/";
-            $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry,2));
+            $config['total_rows'] = count($this->Inventory_Model->viewConsumablesList($limit,$offset,$searchAry,3));
             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
             $this->pagination->initialize($config);
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
           
-               $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry,2);
-               $consumableslistAry =$this->Inventory_Model->viewConsumablesList(false,false,false,2);
+               $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry,3);
+               $consumableslistAry =$this->Inventory_Model->viewConsumablesList(false,false,false,3);
                $count = $this->Admin_Model->getnotification();
 
                     $data['consumablesAray'] = $consumablesAray;
@@ -173,11 +168,7 @@ class Order_Controller extends CI_Controller {
             
              $idProduct = $this->input->post('idProduct');
              $quantity = $this->input->post('val');
-             $flag = $this->input->post('flag');
-     
-             
-             $this->session->set_userdata('flag',$flag);
-             
+        
              if($quantity>0){
              $this->Order_Model->InsertOrder($idProduct,$quantity);
               echo "SUCCESS||||";
@@ -194,14 +185,165 @@ class Order_Controller extends CI_Controller {
         
          public function placeOrder()
         {
-            $flag = $this->session->userdata('flag');
             $data['mode'] = '__PLACE_ORDER_POPUP_CONFIRM__';
             $data['flag'] = $flag;
             $this->load->view('admin/admin_ajax_functions',$data);   
            
           
         } 
+       function orderList()
+        {
+           $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
+             $searchAry = $_POST['szSearchProdCode'];
+             
+             $config['base_url'] = __BASE_URL__ . "/order/orderList/";
+             $config['total_rows'] = count($this->Order_Model->getOrdersList($limit,$offset,$searchAry));
+             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
+
+             $this->pagination->initialize($config);
+            
+               $idfranchisee = $_SESSION['drugsafe_user']['id'];
+          
+              
+               $totalOrdersAray =$this->Order_Model->getOrdersList($config['per_page'],$this->uri->segment(3),$searchAry);
+               $totalOrdersSearchAray =$this->Order_Model->getOrdersList();
+               
+               $count = $this->Admin_Model->getnotification();
+
+                    $data['totalOrdersSearchAray'] = $totalOrdersSearchAray;     
+                    $data['totalOrdersAray'] = $totalOrdersAray;
+                    $data['szMetaTagTitle'] = " Drug Test Kit ";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Orders";
+                    $data['subpageName'] = "Drug_Test_Kit";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('order/cartOrderValuelist');
+            $this->load->view('layout/admin_footer');
+        } 
+        public function DeleteOrderAlert()
+    {
+        $data['mode'] = '__DELETE_ORDER_POPUP__';
+        $data['idOrder'] = $this->input->post('idOrder');
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+
+    public function OrderDeleteConfirmation()
+    {    
+        $data['mode'] = '__DELETE_ORDER_CONFIRM__';
+        $data['idOrder'] = $this->input->post('idOrder');
+        $this->Order_Model->deleteOrder($data['idOrder']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+ 
+     public function updateCartData()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $count = $_POST['count'];
+         
+        for ($i = 1; $i <= $count; $i++)
+        {
+         $quantity =  $_POST['order_quantity'.$i];
+         $orderId =  $_POST['order_id'.$i];
+         $orderUpdate =$this->Order_Model->updateOrder($quantity,$orderId); 
+        }
+        if($orderUpdate){
+                $szMessage['type'] = "success";
+                $szMessage['content'] = "<strong><h3>Your Cart has been successfully updated.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/orderList'));
+        }
+               
+    }
+       function checkOutOrderData()
+        {
+           $idfranchisee = $this->input->post('idfranchisee');
+           $this->session->set_userdata('idfranchisee', $idfranchisee);
         
-        
+              echo "SUCCESS||||";
+              echo "checkOutOrder";
+            
+        }
+        public function checkOutOrder()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $franchiseeid = $this->session->userdata('idfranchisee');
+        $totalOrdersAray =$this->Order_Model->getOrdersListByFranchisee($franchiseeid);
+         
+        $TotalPrice = 0;
+        foreach($totalOrdersAray as $totalOrdersData){
+         $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersData['productid']);
+         $price =  ($totalOrdersData['quantity'])*($productDataArr['szProductCost']);
+         $TotalPrice +=$price;
+        }
+        if($this->Order_Model->InsertOrderSuccess($totalOrdersAray['0']['franchiseeid'],$TotalPrice))
+        {
+            foreach($totalOrdersAray as $totalOrdersData){
+          $queryInsert= $this->Order_Model->InsertOrderDetails($totalOrdersData);
+               }
+               if($queryInsert){
+                $szMessage['type'] = "success";
+                $szMessage['content'] = "<strong><h3>Your Order has been successfully placed.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/ordersuccess'));   
+               }
+             
+       }
+            
+    }
+    
+        public function ordersuccess()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+                    $data['totalOrdersSearchAray'] = $totalOrdersSearchAray;     
+                    $data['totalOrdersAray'] = $totalOrdersAray;
+                    $data['szMetaTagTitle'] = " Drug Test Kit ";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Orders";
+                    $data['subpageName'] = "Drug_Test_Kit";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('order/successOrder');
+            $this->load->view('layout/admin_footer'); 
+               
+    }
     }      
 ?>

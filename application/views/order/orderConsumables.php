@@ -59,7 +59,7 @@
                                        $count++; 
 
                                      }?>
-                              <span class="badge badge-danger"><?php echo $count;?></span>
+                              <span class="badge badge-danger" onclick="redirect_url('<?php echo base_url(); ?>order/orderList');"><?php echo $count;?></span>
                             </div>
                         </div>
                         <?php
@@ -110,9 +110,7 @@
                                         {  
                                              $idfranchisee = $_SESSION['drugsafe_user']['id'];
                                           
-                                            $consumablesDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$consumablesData['iProductId']);
                                             
-                                              
                                            // $drugTestKitQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
                                         
                                             ?>
