@@ -47,7 +47,7 @@
                                 <span class="caption-subject font-red-sunglo bold uppercase">Consumables</span>
                             </div>
                              <div class="actions">
-                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="redirect_url('<?php echo base_url(); ?>order/orderList');" href="javascript:void(0);">
                                     <i class="fa fa-cart-arrow-down"></i>
                                    
                                 </a>

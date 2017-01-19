@@ -163,24 +163,17 @@
                             </div>
                         
                         
-                         <div class="row Ckbtn">
-                          <div class="col-md-8">
+                         <div class="row  Ckbtn">
+                          <div class="col-md-6">
                               </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                            <button type="submit" class="btn green-meadow" name="submit"><i class="fa fa-cart-arrow-down"></i> Update Cart</button>  
                             &nbsp;
                              <button type="button" onclick="redirect_url('<?php echo base_url();?>order/drugtestkit');" class="btn green-meadow"><i class="fa fa-cart-arrow-down"></i> Continue Ordering</button>   
-                            </div>
+                             &nbsp;
+                              <button type="button" onclick="checkOutOrder('<?php echo $totalOrdersAray['0']['franchiseeid'];?>'); return false;" class="btn green-meadow"><i class="fa fa-check"></i> Checkout</button>   </div>
                             </div>
                        
-                            <div class="row Ckbtn">
-                                <div class="col-md-8">
-                              </div>
-                              <div class="col-md-2">
-                                <button type="button" onclick="checkOutOrder('<?php echo $totalOrdersAray['0']['franchiseeid'];?>'); return false;" class="btn green-meadow"><i class="fa fa-check"></i> Checkout</button>   
-                              </div> 
-                            
-                        </div>
                      </form>
                     </div>
     <?php

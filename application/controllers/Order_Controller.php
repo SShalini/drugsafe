@@ -220,10 +220,9 @@ class Order_Controller extends CI_Controller {
 
                     $data['totalOrdersSearchAray'] = $totalOrdersSearchAray;     
                     $data['totalOrdersAray'] = $totalOrdersAray;
-                    $data['szMetaTagTitle'] = " Drug Test Kit ";
+                    $data['szMetaTagTitle'] = " Order List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Orders";
-                    $data['subpageName'] = "Drug_Test_Kit";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;

@@ -1166,10 +1166,10 @@ if($mode == '__PLACE_ORDER_POPUP_CONFIRM__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Place Order</h4>
+                    <h4 class="modal-title">Success</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Your Order has been successfully placed.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Your Item has been successfully added to cart.</p>
                 </div>
                 <div class="modal-footer">
                     <?php  $flag = $this->session->userdata('flag');
