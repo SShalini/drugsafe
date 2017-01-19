@@ -127,7 +127,7 @@
                                                     <td>
                                                          <input type="number"min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" value="<?php echo $totalOrdersData['quantity'];?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>
-                                                   <td> <?php echo $price;?> </td>
+                                                   <td> $<?php echo $price;?> </td>
                                                     <td>
                                                         <a class="btn btn-circle btn-icon-only btn-default" title="Remove From Cart" onclick="DeleteOrder('<?php echo $totalOrdersData['id'];?>');" href="javascript:void(0);">
                                                             <i class="fa fa-times"></i> 
@@ -158,7 +158,7 @@
                             <div class="col-md-4">
                             <lable> &nbsp;&nbsp;<b>Total Price :</b></lable>
                             &nbsp;
-                             <?php echo $TotalPrice?>
+                             $<?php echo $TotalPrice?>
                             </div>
                             </div>
                         
