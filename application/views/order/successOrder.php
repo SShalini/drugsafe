@@ -41,17 +41,7 @@
                                     Order Details
                                 </span>
                             </div>
-                             <div class="actions">
-                                <a onclick="calcDetailspdf('<?php echo $idsite;?>','<?php echo $Drugtestid;?>','<?php echo $sosid;?>')" href="javascript:void(0);" 
-                                   class=" btn green-meadow">
-                                <i class="fa fa-file-pdf-o"></i> View Pdf </a>
-                                
-                                 <a onclick="backSiteRecord('<?php echo $freanchId;?>')" href="javascript:void(0);" 
-                                   class=" btn green-meadow">
-                                Back </a>
-                            </div>
-                         
-
+                
                         </div>
                         <div class="portlet-body alert">
                            <div class="row">
@@ -144,6 +134,15 @@
                                             </div>
                                     </div>
                             </div>
+                     <div class="row">
+                          <div class="col-md-9">
+                              </div>
+                            <div class="col-md-3">
+                          
+                             <button type="button" onclick="redirect_url('<?php echo base_url();?>order/drugtestkit');" class="btn green-meadow"><i class="fa fa-cart-arrow-down"></i> Continue Ordering</button>   
+                            </div>
+                            </div>
+                       
                     </div>
 
                         </div>
