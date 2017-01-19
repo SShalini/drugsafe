@@ -103,7 +103,7 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                               $i = 0;
+                                               $i = 1;
                                                 foreach($drugTestKitAray as $drugTestKitData)
                                                 {  
                                                      $idfranchisee = $_SESSION['drugsafe_user']['id'];
@@ -122,10 +122,10 @@
                                                     <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
                                                     <td>
-                                                         <input type="number"min="1"  class="form-control btn-xs " name="order_quantity" id="order_quantity" >
+                                                         <input type="number"min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','1');" href="javascript:void(0);">
+                                                        <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','<?php echo $i;?>');" href="javascript:void(0);">
                                                             <i class="fa fa-cart-plus"></i> 
                                                         </a>
                                                     </td>

@@ -1172,26 +1172,26 @@ if($mode == '__PLACE_ORDER_POPUP_CONFIRM__')
                     <p class="alert alert-success"><i class="fa fa-check"></i> Your Order has been successfully placed.</p>
                 </div>
                 <div class="modal-footer">
-                    <?php if($flag==1){
+                    <?php /*if($flag==1){
                     $this->session->unset_userdata('quantity');
                     $this->session->unset_userdata('flag');
                     $this->session->unset_userdata('idProduct');
 
-                    ?>
-                    <a href="<?php echo __BASE_URL__;?>/order/drugtestkit/" class="btn dark btn-outline">Close</a>
-                    <?php } if($flag==2){
+                    */?><!--
+                    <a href="<?php /*echo __BASE_URL__;*/?>/order/drugtestkit/" class="btn dark btn-outline">Close</a>
+                    <?php /*} if($flag==2){
                      $this->session->unset_userdata('quantity');
                      $this->session->unset_userdata('flag');
                      $this->session->unset_userdata('idProduct');
-                        ?>
-                    <a href="<?php echo __BASE_URL__;?>/order/marketingmaterial/" class="btn dark btn-outline">Close</a>
-                    <?php } if($flag==3){
+                        */?>
+                    <a href="<?php /*echo __BASE_URL__;*/?>/order/marketingmaterial/" class="btn dark btn-outline">Close</a>
+                    --><?php /*} if($flag==3){
                     $this->session->unset_userdata('quantity');
                     $this->session->unset_userdata('flag');
                     $this->session->unset_userdata('idProduct');
-                        ?>
-                    <a href="<?php echo __BASE_URL__;?>/order/consumables/" class="btn dark btn-outline">Close</a>
-                    <?php }?>
+                        */?>
+                    <a data-dismiss="modal" class="btn dark btn-outline">Close</a>
+                   <!-- --><?php /*}*/?>
                 </div>
             </div>
         </div>
