@@ -78,8 +78,8 @@ class Order_Controller extends CI_Controller {
              $marketingMaterialAray =$this->Inventory_Model->viewMarketingMaterialList($searchAry,$config['per_page'],$this->uri->segment(3),2);
             $marketingMaterialListAray =$this->Inventory_Model->viewMarketingMaterialList(false,false,false,2);
              $count = $this->Admin_Model->getnotification();
-             
-             
+
+
                     $data['marketingMaterialAray'] = $marketingMaterialAray;
                     $data['szMetaTagTitle'] = "Marketing Material";
                     $data['is_user_login'] = $is_user_login;
@@ -94,7 +94,7 @@ class Order_Controller extends CI_Controller {
             $this->load->view('order/orderMarketingMaterial');
             $this->load->view('layout/admin_footer');
         }
-    
+
         function consumables()
         {
             $is_user_login = is_user_login($this);
@@ -158,7 +158,7 @@ class Order_Controller extends CI_Controller {
             $this->load->view('admin/admin_ajax_functions',$data);   
            
           
-        } 
+        }
        function orderList()
         {
            $is_user_login = is_user_login($this);

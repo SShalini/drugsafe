@@ -736,4 +736,86 @@ class Webservices_Controller extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($responsedata);
     }
+
+    function getallprodbycatid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['catid'] = !empty($jsondata->catid) ? $jsondata->catid : "0";
+        $prodarr = $this->Webservices_Model->getallprodbycatid($data['catid']);
+        if($prodarr)
+        {
+            $responsedata = array("code" => 200,"prodarr"=>$prodarr);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No product found.");
+
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getallcategories(){
+        $catarr = $this->Webservices_Model->getallcategories();
+        if($catarr)
+        {
+            $responsedata = array("code" => 200,"catarr"=>$catarr);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No product category found.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function addtocart(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['cart']['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
+        $data['cart']['productid'] = !empty($jsondata->productid) ? $jsondata->productid : "";
+        $data['cart']['quantity'] = !empty($jsondata->quantity) ? $jsondata->quantity : "";
+        $cartAditionStatus = $this->Webservices_Model->addtocart($data['cart']);
+        $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+        if($cartAditionStatus)
+        {
+            $responsedata = array("code" => 200,"message"=>"Your cart updated successfully.");
+        }else{
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['franchiseeid'])){
+                $responsedata = array("code" => 201,"message"=>"Something wrong with franchisee. Please logout and try again.");
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['productid'])){
+                $responsedata = array("code" => 201,"message"=>"Something wrong with this product. Please logout and try again.");
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['quantity'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['quantity']);
+            }else{
+                $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+            }
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function emptycart(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
+        $cartStatus = $this->Webservices_Model->emptycart($data);
+        if($cartStatus){
+            $responsedata = array("code" => 200,"message"=>"No product is in your cart.");
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function deleteitemfromcart(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['cart']['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
+        $data['cart']['productid'] = !empty($jsondata->productid) ? $jsondata->productid : "";
+        $cartStatus = $this->Webservices_Model->deleteitemfromcart($data['cart']);
+        $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+        if($cartStatus){
+            $responsedata = array("code" => 200,"message"=>"Product successfully deleted from your cart.");
+        }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['cartproductid'])){
+            $responsedata = array("code" => 201,"message"=>$errorMsgArr['cartproductid']);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
 }

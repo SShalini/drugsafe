@@ -849,4 +849,123 @@ class Webservices_Model extends Error_Model
         }
     }
 
+    function getallprodbycatid($catid)
+    {
+        $array = array('szProductCategory' => (int)$catid, 'isDeleted' => '0');
+        $query = $this->db->select('id, szProductCode, szProductDiscription, szProductCost')
+            ->from(__DBC_SCHEMATA_PRODUCT__)
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    function getallcategories()
+    {
+        $array = array('isDeleted' => '0');
+        $query = $this->db->select('id, szName, szDiscription')
+            ->from(__DBC_SCHEMATA_PRODUCT_CATEGORY__)
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    function checkproductexistincart($franchiseeid,$productid){
+        $array = array('franchiseeid' => (int)$franchiseeid,'productid'=>(int)$productid);
+        $query = $this->db->select('id, quantity')
+            ->from(__DBC_SCHEMATA_CART__)
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    function addtocart($data){
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['franchiseeid'])), 'franchiseeid', 'Franchisee', true, __VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['productid'])), 'productid', 'Product', true, __VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['quantity'])), 'quantity', 'Quantity', true, __VLD_CASE_NUMERIC__);
+        if ($this->error) {
+            return false;
+        }else{
+            $cartitemarr = array(
+                'franchiseeid' => (int)$data['franchiseeid'],
+                'productid' => (int)$data['productid'],
+                'quantity' => (int)$data['quantity'],
+                'addedon' => date('Y-m-d h:i:s')
+            );
+            $prodExistInCart = $this->checkproductexistincart((int)$data['franchiseeid'],(int)$data['productid']);
+            if(!empty($prodExistInCart)){
+                $quantity = $prodExistInCart[0]['quantity']+(int)$data['quantity'];
+                $updatearr = array('quantity' => (int)$quantity);
+                $whereAry = array('id' => (int)$prodExistInCart[0]['id']);
+                $this->db->where($whereAry)
+                    ->update(__DBC_SCHEMATA_CART__, $updatearr);
+                if ($this->db->affected_rows() > 0) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                $this->db->insert(__DBC_SCHEMATA_CART__, $cartitemarr);
+                if ($this->db->affected_rows() > 0) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
+        }
+    }
+
+    function emptycart($data){
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['franchiseeid'])), 'franchiseeid', 'Franchisee', true, __VLD_CASE_NUMERIC__);
+        if ($this->error) {
+            return false;
+        }else {
+            $whereAry = 'franchiseeid =' . (int)$data['franchiseeid'];
+            $query = $this->db->where($whereAry)
+                ->delete(__DBC_SCHEMATA_CART__);
+            if ($query) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    function deleteitemfromcart($data){
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['franchiseeid'])), 'franchiseeid', 'Franchisee', true, __VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['productid'])), 'productid', 'Product', true, __VLD_CASE_NUMERIC__);
+        if ($this->error) {
+            return false;
+        }else {
+            $prodExistInCart = $this->checkproductexistincart((int)$data['franchiseeid'],(int)$data['productid']);
+            if(!empty($prodExistInCart)){
+                $whereAry = 'franchiseeid =' . (int)$data['franchiseeid'].' AND productid = '.(int)$data['productid'];
+                $query = $this->db->where($whereAry)
+                    ->delete(__DBC_SCHEMATA_CART__);
+                if ($query) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }else{
+                $this->addError( 'cartproductid', "Product does not exist in your cart." );
+                return false;
+            }
+        }
+    }
 } 
