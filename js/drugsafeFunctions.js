@@ -1271,6 +1271,9 @@ function placeOrder(idProduct,inc,flag) {
         if(ar_result[0] == 'SUCCESS'){
            placeOrderConfirmation(); 
         }
+         if(ar_result[0] == 'ERROR'){
+           placeOrderErrorConfirmation(); 
+        }
 
     });
 }
@@ -1282,6 +1285,19 @@ function placeOrder(idProduct,inc,flag) {
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
             $('#orderplaceconfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+ function placeOrderErrorConfirmation() {
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/order/placeOrderErrorConfirmation", function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#placeOrderErrorConfirmation').modal("show");
         }
         jQuery('#loader').attr('style', 'display:none');
 

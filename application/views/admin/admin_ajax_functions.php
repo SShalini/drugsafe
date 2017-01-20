@@ -1584,5 +1584,46 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
     
     <?php
 }
+if($mode == '__PLACE_ORDER_POPUP_ERROR_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="placeOrderErrorConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Error</span> </h4>
+                        </div>
+                 
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greate than zero or less than hundred.</p>
+                </div>
+                <div class="modal-footer">
+                    <?php  $flag = $this->session->userdata('flag');
+                    if($flag==1){
+                    $this->session->unset_userdata('orderid');
+                    
+                     ?>
+                     <a href="<?php echo __BASE_URL__;?>/order/drugtestkit" class="btn dark btn-outline">Close</a>
+                    <?php } if($flag==2){
+                        $this->session->unset_userdata('orderid');
+                    ?>
+                      <a href="<?php echo __BASE_URL__;?>/order/marketingmaterial" class="btn dark btn-outline">Close</a>
+                    <?php } if($flag==3){
+                        $this->session->unset_userdata('orderid');
+                    ?>
+                       <a href="<?php echo __BASE_URL__;?>/order/consumables" class="btn dark btn-outline">Close</a>
+                   <?php }  ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
 
   ?>

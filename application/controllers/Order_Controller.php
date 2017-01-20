@@ -170,17 +170,14 @@ class Order_Controller extends CI_Controller {
              $flag = $this->input->post('flag');
              $this->session->set_userdata('flag',$flag);
         
-             if($quantity>0){
+             if(($quantity>0) && ($quantity<100)){
              $this->Order_Model->InsertOrder($idProduct,$quantity);
               echo "SUCCESS||||";
               echo "placeOrderConfirmation";
              }
              else{
-                $szMessage['type'] = "error";
-                $szMessage['content'] = "<strong><h3>Please Enter the Quantity.</h3></strong> ";
-                $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                ob_end_clean();
-                redirect(base_url('/order/drugtestkit'));
+              echo "ERROR||||";
+              echo "placeOrderErrorConfirmation";
              } 
         }
         
@@ -188,6 +185,15 @@ class Order_Controller extends CI_Controller {
         {
             $flag = $this->session->userdata('flag');
             $data['mode'] = '__PLACE_ORDER_POPUP_CONFIRM__';
+            $this->load->view('admin/admin_ajax_functions',$data);   
+           
+          
+        }
+        
+         public function placeOrderErrorConfirmation()
+        {
+            $flag = $this->session->userdata('flag');
+            $data['mode'] = '__PLACE_ORDER_POPUP_ERROR_CONFIRM__';
             $this->load->view('admin/admin_ajax_functions',$data);   
            
           
