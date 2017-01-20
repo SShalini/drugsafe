@@ -51,8 +51,9 @@
                 
                         </div>
                       <div class="row">
-                      <form id="orderSearchForm" id="orderSearchForm" method="post">
+                      <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/order/view_order_list" method="post">
                 <div class="row">
+                    
                     <div class="col-md-3">
                        
                         <div class="form-group ">
@@ -61,8 +62,8 @@
                                           <?php
                                           foreach($allFrDetailsSearchAray as $allFrDetailsSearchList)
                                           {
-                                              $selected = ($allFrDetailsSearchList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allFrDetailsSearchList['id'].'" >'.$allFrDetailsSearchList['szName'].'</option>';
+                                              $selected = ($allFrDetailsSearchList['franchiseeid'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$allFrDetailsSearchList['franchiseeid'].'" >'.$allFrDetailsSearchList['szName'].'</option>';
                                           }
                                           ?>
                            </select>
@@ -79,7 +80,7 @@
                                           <?php
                                           foreach($validOrdersDetailsSearchAray as $validOrdersDetailsSearchList)
                                           {
-                                              $selected = ($validOrdersDetailsSearchList['orderid'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
+                                              $selected = ($validOrdersDetailsSearchList['orderid'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
                                               echo '<option value="'.$validOrdersDetailsSearchList['orderid'].'" >#0000'.$validOrdersDetailsSearchList['orderid'].'</option>';
                                           }
                                           ?>
@@ -95,9 +96,9 @@
                               <select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Status</option>
                                                 
-                                                        <option value="0" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("0") ? "selected" : ""); ?>>Ordered</option>
-                                                        <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("1") ? "selected" : ""); ?>>Pending</option>
-                                                        <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("2") ? "selected" : ""); ?>>Canceled</option>
+                                                        <option value="0" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("0") ? "selected" : ""); ?>>Ordered</option>
+                                                        <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("1") ? "selected" : ""); ?>>Pending</option>
+                                                        <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>Canceled</option>
                              </select>
                             
                            
@@ -109,11 +110,11 @@
 
                 </div>
                 <div class="row">
- <div class="col-md-3">
+          <div class="col-md-3">
                          <div class="form-group ">
                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
                                           
-                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('productData[dtExpiredOn]'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('szSearch4'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch4">
                                                <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
                                                </span>
@@ -134,7 +135,7 @@
                          <div class="form-group ">
                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
                                           
-                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('productData[dtExpiredOn]'); ?>" readonly placeholder="End Order Date" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('szSearch5'); ?>" readonly placeholder="End Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch5">
                                                <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
                                                </span>
@@ -152,7 +153,7 @@
                            </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <button class="btn green-meadow uppercase bold" type="button" onclick="getOrderSearch();"><i
+                             <button class="btn green-meadow" type="submit" ><i
                                     class="fa fa-search"></i> Search
                             </button>
                             &nbsp;

@@ -361,8 +361,10 @@ class Order_Controller extends CI_Controller {
             redirect(base_url('/admin/admin_login'));
             die;
         }
-       $validOrdersDetailsAray = $this->Order_Model->getallValidOrderId();
-       $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderId();
+        
+         $searchAry = $_POST;
+       $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+       $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
      
        

@@ -257,16 +257,59 @@ class Order_Model extends Error_Model {
             }
         }
          
-         public function getallValidOrderId()
+         public function getallValidOrderDetails($searchAry=array())
     {
-        $whereAry = array('validorder=' => '1');
+       
+         if(!empty($searchAry))
+        {
+             
+            foreach($searchAry as $key=>$searchData)
+            {
+                $searchQuery='validorder = 1';
+                
+                  if($key == 'szSearch1'){
+                    if(!empty ($searchData)){
+                        $searchQuery .="
+                            AND franchiseeid = ".(int)($searchData);
+                    }
+                }
+                if($key == 'szSearch2'){
+                    if(!empty ($searchData)){
+                        $searchQuery .="
+                        AND 
+                         orderid = ".(int)($searchData);
+                    }
+                }
+                if($searchData != '')
+                {
+                    if($key =='szSearch3')
+                    {
+                        $searchQuery .="
+                       AND
+                            status = ".(int)($searchData);
+                              
+                    }
+                    
+                   
+                    }
+                }
+                  
+                   $this->db->where($searchQuery);
+            }
+            else{
+               $whereAry = array('validorder=' => '1');
+                $this->db->where($whereAry);
+            }
+
+       
         $this->db->distinct();
         $this->db->select('franchiseeid,price,orderid,createdon,status');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
-        $this->db->where($whereAry);
+       
         $query = $this->db->get();
-
+//     $sql = $this->db->last_query($query);
+//print_r($sql);die;
         if ($query->num_rows() > 0) {
             return $query->result_array();
           
@@ -280,7 +323,7 @@ class Order_Model extends Error_Model {
     {
         $whereAry = array('validorder=' => '1');
         $this->db->distinct();
-        $this->db->select('szName');
+        $this->db->select('szName,franchiseeid');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_user', 'ds_orders.franchiseeid = ds_user.id');
         $this->db->where($whereAry);
