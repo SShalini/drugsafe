@@ -63,7 +63,7 @@
                                           foreach($allFrDetailsSearchAray as $allFrDetailsSearchList)
                                           {
                                               $selected = ($allFrDetailsSearchList['franchiseeid'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allFrDetailsSearchList['franchiseeid'].'" >'.$allFrDetailsSearchList['szName'].'</option>';
+                                              echo '<option value="'.$allFrDetailsSearchList['franchiseeid'].'"'.$selected.' >'.$allFrDetailsSearchList['szName'].'</option>';
                                           }
                                           ?>
                            </select>
@@ -81,7 +81,7 @@
                                           foreach($validOrdersDetailsSearchAray as $validOrdersDetailsSearchList)
                                           {
                                               $selected = ($validOrdersDetailsSearchList['orderid'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$validOrdersDetailsSearchList['orderid'].'" >#0000'.$validOrdersDetailsSearchList['orderid'].'</option>';
+                                              echo '<option value="'.$validOrdersDetailsSearchList['orderid'].'" '.$selected.' >#0000'.$validOrdersDetailsSearchList['orderid'].'</option>';
                                           }
                                           ?>
                            </select>

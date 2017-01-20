@@ -306,7 +306,6 @@ class Forum_Controller extends CI_Controller {
             $this->form_validation->set_rules('forumData[szForumTitle]', 'Forum Title', 'required');
             $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Discription', 'required');
             $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Discription', 'required');
-            $this->form_validation->set_rules('forumData[szforumImage]', 'Forum Image', 'required');
             $this->form_validation->set_rules('forumData[idCategory]', 'category ', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
@@ -366,7 +365,6 @@ class Forum_Controller extends CI_Controller {
             $this->form_validation->set_rules('forumData[szForumTitle]', 'Forum Title', 'required');
             $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Discription', 'required');
             $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Discription', 'required');
-            $this->form_validation->set_rules('forumData[szforumImage]', 'Forum Image', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)

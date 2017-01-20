@@ -257,7 +257,7 @@ class Order_Model extends Error_Model {
             }
         }
          
-         public function getallValidOrderDetails($searchAry=array())
+ public function getallValidOrderDetails($searchAry=array())
     {
         $searchQuery = 'validorder = 1';
          if(!empty($searchAry))
@@ -335,12 +335,13 @@ class Order_Model extends Error_Model {
                 }
                   
         }
-     $this->db->where($searchQuery);
+        $this->db->where($searchQuery);
         $this->db->distinct();
         $this->db->select('franchiseeid,price,orderid,createdon,status');
+        $this->db->order_by("orderid", "desc");
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
-       
+     
         $query = $this->db->get();
 // $sql = $this->db->last_query();
 // print_r($sql);die;

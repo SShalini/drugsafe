@@ -76,7 +76,11 @@
                                             ?>
                                         <tr>
                                             <td>
+                                                <?php if(!empty( $forumDetailsData['szforumImage'])){?>
                                                 <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $forumDetailsData['szforumImage']; ?>" width="60" height="60"/>    
+                                                <?php } else{?>
+                                                 <img class="file_preview_image" src="<?php echo __BASE_URL__; ?>/images/no-image-available.png" width="60" height="60"/>    
+                                                <?php }?> 
                                             </td>
                                          
                                             <td> <?php echo $forumDetailsData['szForumLongDiscription'];?> </td>
