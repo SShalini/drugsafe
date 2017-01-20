@@ -1424,7 +1424,7 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                     <div class="portlet green-meadow box">
                             <div class="portlet-title">
                                     <div class="caption">
-                                            <i class="fa fa-cogs"></i>View Order Details
+                                            <i class="fa fa-cogs"></i> Order Info
 
                                     </div>
                                    
@@ -1533,7 +1533,7 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
 	              <div class="portlet green-meadow box">
                             <div class="portlet-title">
                                     <div class="caption">
-                                            <i class="fa fa-cogs"></i>Order Products Details
+                                            <i class="fa fa-cogs"></i> Products Info
 
                                     </div>
                                   

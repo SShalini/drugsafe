@@ -118,7 +118,7 @@
                                                     <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
                                                     <td>
-                                                         <input type="number"min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
+                                                         <input type="number"min="1"  class="form-control btn-xs " max="100" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','<?php echo $i;?>','1');" href="javascript:void(0);">

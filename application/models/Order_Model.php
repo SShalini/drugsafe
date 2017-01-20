@@ -259,17 +259,57 @@ class Order_Model extends Error_Model {
          
          public function getallValidOrderDetails($searchAry=array())
     {
-       
+        $searchQuery = 'validorder = 1';
          if(!empty($searchAry))
         {
-             
+            
             foreach($searchAry as $key=>$searchData)
-            {
-                $searchQuery='validorder = 1';
-                
-                  if($key == 'szSearch1'){
+            { 
+                if($key == 'szSearch4' || $key == 'szSearch5')
+                {
+                    if(!empty($searchData))
+                    {
+                         $searchData = $this->getSqlFormattedDate($searchData);
+                      
+                    }
+                    if(!empty($searchData))
+                    {
+                        if($key == 'szSearch4')
+                        {
+                            $startcreatedon=$searchData;
+                            $searchQuery .="
+                                AND
+                                    createdon >= '".$searchData." 00:00:00'
+                                ";
+                        }
+                    }
+                    
+                    if($key == 'szSearch5')
+                    { 
+                        if(!empty($searchData))
+                        {
+                            $endcreatedon=$searchData;
+                            if($endcreatedon != '')
+                            {
+                                if(strtotime($startcreatedon) > strtotime($endcreatedon))
+                                {
+                                    $this->addError("szSearch5","To Date should be greater than From Date.");
+                                    return false;
+                                }
+                            }
+                            $searchQuery .="
+                                AND
+                                    createdon <= '".$searchData." 23:59:59'
+                                ";
+                        }
+                    }
+                    
+                         
+                }
+
+                 if($key == 'szSearch1'){
                     if(!empty ($searchData)){
-                        $searchQuery .="
+                        $searchQuery.="
                             AND franchiseeid = ".(int)($searchData);
                     }
                 }
@@ -294,22 +334,16 @@ class Order_Model extends Error_Model {
                     }
                 }
                   
-                   $this->db->where($searchQuery);
-            }
-            else{
-               $whereAry = array('validorder=' => '1');
-                $this->db->where($whereAry);
-            }
-
-       
+        }
+     $this->db->where($searchQuery);
         $this->db->distinct();
         $this->db->select('franchiseeid,price,orderid,createdon,status');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
        
         $query = $this->db->get();
-//     $sql = $this->db->last_query($query);
-//print_r($sql);die;
+// $sql = $this->db->last_query();
+// print_r($sql);die;
         if ($query->num_rows() > 0) {
             return $query->result_array();
           
@@ -338,5 +372,12 @@ class Order_Model extends Error_Model {
             return array();
         }
     } 
+    function getSqlFormattedDate($unFormatted_date)
+{
+    $dateAry=explode('-', $unFormatted_date);
+    $formattedDate=$dateAry['2'].'-'.$dateAry['1'].'-'.$dateAry['0'];
+    return $formattedDate;
+    
+}
    }
 ?>

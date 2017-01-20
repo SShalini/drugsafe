@@ -110,20 +110,26 @@
 
                 </div>
                 <div class="row">
-          <div class="col-md-3">
-                         <div class="form-group ">
+                <div class="col-md-3">
+                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
                                           
-                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('szSearch4'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch4">
+                                           <input type="text" id="szSearch4" class="form-control" value="<?php echo set_value('szSearch4'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch4">
                                                <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
                                                </span>
                                        </div>
                                        <!-- /input-group -->
                                      <?php
-                               if(form_error('productData[dtExpiredOn]')){?>
-                               <span class="help-block pull-left"><span><?php echo form_error('productData[dtExpiredOn]');?></span>
-                             </span><?php }?>  
+                               if(form_error('szSearch4')){?>
+                               <span class="help-block pull-left"><span><?php echo form_error('szSearch4');?></span>
+                             </span><?php }?> 
+                                         <?php if (!empty($arErrorMessages['szSearch4'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szSearch4']; ?>
+                                            </span>
+                                        <?php } ?>
                           </div>
                         
                     </div>
@@ -132,21 +138,26 @@
                          
                            </div>
                     <div class="col-md-3">
-                         <div class="form-group ">
+                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                            <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
                                           
-                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('szSearch5'); ?>" readonly placeholder="End Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch5">
+                                           <input type="text" id="szSearch5" class="form-control" value="<?php echo set_value('szSearch5'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch5">
                                                <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
                                                </span>
                                        </div>
                                        <!-- /input-group -->
                                      <?php
-                               if(form_error('productData[dtExpiredOn]')){?>
-                               <span class="help-block pull-left"><span><?php echo form_error('productData[dtExpiredOn]');?></span>
-                             </span><?php }?>  
+                               if(form_error('szSearch5')){?>
+                               <span class="help-block pull-left"><span><?php echo form_error('szSearch5');?></span>
+                             </span><?php }?> 
+                                         <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szSearch5']; ?>
+                                            </span>
+                                        <?php } ?>
                           </div>
-                        
                     </div>
                     <div class="col-md-1">
                         

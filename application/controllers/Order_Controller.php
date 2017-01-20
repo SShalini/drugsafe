@@ -363,6 +363,7 @@ class Order_Controller extends CI_Controller {
         }
         
          $searchAry = $_POST;
+         
        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
@@ -376,9 +377,9 @@ class Order_Controller extends CI_Controller {
                     $data['pageName'] = "Orders";
                     $data['notification'] = $count;
                     $data['data'] = $data;
-                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
                     $data['drugtestkitlist'] = $drugTestKitListAray;
- 
+
             $this->load->view('layout/admin_header',$data);
             $this->load->view('order/viewOrderDetails');
             $this->load->view('layout/admin_footer'); 
