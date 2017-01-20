@@ -1600,24 +1600,13 @@ if($mode == '__PLACE_ORDER_POPUP_ERROR_CONFIRM__')
                  
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greate than zero or less than hundred.</p>
+                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greater than zero and less than hundred.</p>
                 </div>
                 <div class="modal-footer">
-                    <?php  $flag = $this->session->userdata('flag');
-                    if($flag==1){
+                    <?php 
                     $this->session->unset_userdata('orderid');
-                    
-                     ?>
-                     <a href="<?php echo __BASE_URL__;?>/order/drugtestkit" class="btn dark btn-outline">Close</a>
-                    <?php } if($flag==2){
-                        $this->session->unset_userdata('orderid');
                     ?>
-                      <a href="<?php echo __BASE_URL__;?>/order/marketingmaterial" class="btn dark btn-outline">Close</a>
-                    <?php } if($flag==3){
-                        $this->session->unset_userdata('orderid');
-                    ?>
-                       <a href="<?php echo __BASE_URL__;?>/order/consumables" class="btn dark btn-outline">Close</a>
-                   <?php }  ?>
+                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
