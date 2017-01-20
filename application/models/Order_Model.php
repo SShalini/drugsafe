@@ -241,7 +241,7 @@ class Order_Model extends Error_Model {
         {
           
             $whereAry = array('id=' => $orderId);
-            $this->db->select('createdon');
+            $this->db->select('createdon,franchiseeid,status,price');
             $this->db->from(__DBC_SCHEMATA_ORDER__);
             $this->db->where($whereAry);
             $query = $this->db->get();
@@ -264,6 +264,25 @@ class Order_Model extends Error_Model {
         $this->db->select('franchiseeid,price,orderid,createdon,status');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+        $this->db->where($whereAry);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+          
+            }
+         
+        else {
+            return array();
+        }
+    } 
+      public function getallValidOrderFrId()
+    {
+        $whereAry = array('validorder=' => '1');
+        $this->db->distinct();
+        $this->db->select('szName');
+        $this->db->from(__DBC_SCHEMATA_ORDER__);
+        $this->db->join('ds_user', 'ds_orders.franchiseeid = ds_user.id');
         $this->db->where($whereAry);
         $query = $this->db->get();
 

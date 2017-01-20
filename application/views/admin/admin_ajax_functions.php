@@ -1429,14 +1429,34 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                     </div>
                                    
                             </div>
+                        <?php 
+                         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
+                        
+                          $splitTimeStamp = explode(" ",$OrdersDetailsAray['createdon']);
+                                                             $date1 = $splitTimeStamp[0];
+                                                             $time1 = $splitTimeStamp[1];
+                                                           
+                                                           $x=  date("g:i a", strtotime($time1));
+                                                     
+                                                          $date= explode('-', $date1);
+                                                        
+                                                          
+                                                          $monthNum  = $date['1'];
+                                                         
+                                                          $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                                                          $monthName = $dateObj->format('M');
+                         
+                         
+                         
+                        ?>
                             <div class="portlet-body">
                                     <div class="row static-info">
                                             <div class="col-md-5 name">
                                                      Order #:
                                             </div>
                                             <div class="col-md-7 value">
-                                                     12313232 <span class="label label-info label-sm">
-                                                    Email confirmation was sent </span>
+                                                    #0000<?php echo $idOrder ;?>
                                             </div>
                                     </div>
                                     <div class="row static-info">
@@ -1444,32 +1464,67 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                                      Order Date & Time:
                                             </div>
                                             <div class="col-md-7 value">
-                                                     Dec 27, 2013 7:16:25 PM
+                                                      <?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?>
                                             </div>
                                     </div>
                                     <div class="row static-info">
                                             <div class="col-md-5 name">
                                                      Order Status:
                                             </div>
-                                            <div class="col-md-7 value">
-                                                    <span class="label label-success">
-                                                    Closed </span>
+                                         <?php if($OrdersDetailsAray['status']==0){?>
+                                          <div class="col-md-7 value">
+                                                    <span class="label label-sm label-warning">
+                                                    Ordered </span>
                                             </div>
+                                       
+                                        <?php
+                                    }
+                                    if($OrdersDetailsAray['status']==1){
+                                        ?>
+                                           <div class="col-md-7 value">
+                                                    <span class="label label-sm label-success">
+                                                    Pending </span>
+                                            </div>
+                                       
+                                        <?php
+                                    }
+                                  if($OrdersDetailsAray['status']==2){
+                                        ?>
+                                           <div class="col-md-7 value">
+                                                    <span class="label label-sm label--info">
+                                                    Dispatched </span>
+                                            </div>
+                                       
+                                        <?php
+                                    }
+                                   
+                                   if($OrdersDetailsAray['status']==3){
+                                        ?>
+                                           <div class="col-md-7 value">
+                                                    <span class="label label-sm label-danger">
+                                                    Canceled </span>
+                                            </div>
+                                       
+                                        <?php
+                                    }
+
+                                    ?>
+                                         
                                     </div>
                                     <div class="row static-info">
                                             <div class="col-md-5 name">
                                                      Grand Total:
                                             </div>
                                             <div class="col-md-7 value">
-                                                     $175.25
+                                                   $<?php echo $OrdersDetailsAray['price'];?>
                                             </div>
                                     </div>
                                     <div class="row static-info">
                                             <div class="col-md-5 name">
-                                                     Payment Information:
+                                                     Franchisee:
                                             </div>
                                             <div class="col-md-7 value">
-                                                     Credit Card
+                                                    <?php echo $franchiseeDetArr1['szName']?>
                                             </div>
                                     </div>
                             </div>
@@ -1483,55 +1538,44 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                     </div>
                                   
                             </div>
+                          <?php  $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+                        ?>
                             <div class="portlet-body">
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Order #:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                     12313232 <span class="label label-info label-sm">
-                                                    Email confirmation was sent </span>
-                                            </div>
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Order Date & Time:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                     Dec 27, 2013 7:16:25 PM
-                                            </div>
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Order Status:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                    <span class="label label-success">
-                                                    Closed </span>
-                                            </div>
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Grand Total:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                     $175.25
-                                            </div>
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Payment Information:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                     Credit Card
-                                            </div>
-                                    </div>
+                                     <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Product Code </th>
+                                                <th> Product Cost</th>
+                                                <th> Quantity</th>
+                                                <th> Total Price </th>
+                                                <th> Dispatched Quantity </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                       
+                                        foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
+                                            $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);?>
+                                                <tr>
+                                                    <td> <?php echo $productDataArr['szProductCode'] ;?> </td>
+                                                    <td> $<?php echo $productDataArr['szProductCost'];?> </td>
+                                                    <td> <?php echo $totalOrdersDetailsData['quantity'];?> </td>
+                                                     <td> $<?php echo ($totalOrdersDetailsData['quantity'])*($productDataArr['szProductCost']); ?> </td>
+                                                      <td> <?php echo $categoriesData['szDiscription'];?> </td>
+
+                                                </tr>
+                                        <?php }?>     
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                     </div>										
                 </div>
                
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

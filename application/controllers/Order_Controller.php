@@ -361,9 +361,14 @@ class Order_Controller extends CI_Controller {
             redirect(base_url('/admin/admin_login'));
             die;
         }
-       $validOrdersDetailsAray = $this->Order_Model->getallValidOrderId($orderid);
+       $validOrdersDetailsAray = $this->Order_Model->getallValidOrderId();
+       $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderId();
+       $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+     
        
-                    $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;    
+                    $data['validOrdersDetailsAray'] = $validOrdersDetailsAray; 
+                     $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray; 
+                    $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;  
                     $data['szMetaTagTitle'] = "Order Details";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Orders";

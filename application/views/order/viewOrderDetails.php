@@ -1,3 +1,10 @@
+<script type='text/javascript'>
+    $(function() {
+      $("#szSearch1").customselect();
+       $("#szSearch2").customselect();
+      $("#szSearch3").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php
@@ -43,95 +50,107 @@
                             </div>
                 
                         </div>
-                    <div class="row">
+                      <div class="row">
                       <form id="orderSearchForm" id="orderSearchForm" method="post">
-
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                        
-                        <div class="form-group input-group customerlist">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-dot-circle-o"></i>
-                                </span>
-                            <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                        <div class="form-group ">
+                           <select class="form-control custom-select" name="szSearch1" id="szSearch1" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
-                                          foreach($allfranchisee as $franchiseeIdList)
+                                          foreach($allFrDetailsSearchAray as $allFrDetailsSearchList)
                                           {
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div
-                            class="form-group <?php if ($kOrder->arErrorMessages['order_number'] != '') { ?> has-error <?php } ?>">
-
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="searchArr[order_number]" id="enddt"
-                                       placeholder="Order Number"
-                                       value="<?php echo $_POST['searchArr']['order_number'] ?>">
-                                <?php if ($kOrder->arErrorMessages['order_number'] != '') { ?>
-                                    <span
-                                        class="help-block"><?php echo $kOrder->arErrorMessages['order_number']; ?></span>
-                                <?php } ?>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Franchisee Name</option>
-                                          <?php
-                                          foreach($allfranchisee as $franchiseeIdList)
-                                          {
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
+                                              $selected = ($allFrDetailsSearchList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$allFrDetailsSearchList['id'].'" >'.$allFrDetailsSearchList['szName'].'</option>';
                                           }
                                           ?>
                            </select>
                         </div>
                     </div>
+                    <div class="col-md-1">
+                         
+                           </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                           <select class="form-control custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Order No</option>
+                                          <?php
+                                          foreach($validOrdersDetailsSearchAray as $validOrdersDetailsSearchList)
+                                          {
+                                              $selected = ($validOrdersDetailsSearchList['orderid'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$validOrdersDetailsSearchList['orderid'].'" >#0000'.$validOrdersDetailsSearchList['orderid'].'</option>';
+                                          }
+                                          ?>
+                           </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                       
+                           </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            
+                              <select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
+                                                <option value=''>Status</option>
+                                                
+                                                        <option value="0" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("0") ? "selected" : ""); ?>>Ordered</option>
+                                                        <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("1") ? "selected" : ""); ?>>Pending</option>
+                                                        <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("2") ? "selected" : ""); ?>>Canceled</option>
+                             </select>
+                            
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        
+                           </div>
 
                 </div>
                 <div class="row">
-
-                    <div class="col-md-4">
-                        <div
-                            class="form-group <?php if ($kOrder->arErrorMessages['startcreatedon'] != '') { ?> has-error <?php } ?>">
-                            <div class="form-group" data-date="<?php echo date('d/m/Y') ?>"
-                                 data-date-format="dd/mm/yyyy">
-                                <input type="text" class="form-control date1" name="searchArr[startcreatedon]"
-                                       id="enddt" placeholder="Start Order Date"
-                                       value="<?php echo $_POST['searchArr']['startcreatedon'] ?>">
-                                <?php if ($kOrder->arErrorMessages['startcreatedon'] != '') { ?>
-                                    <span
-                                        class="help-block"><?php echo $kOrder->arErrorMessages['startcreatedon']; ?></span>
-                                <?php } ?>
-                            </div>
-                        </div>
+ <div class="col-md-3">
+                         <div class="form-group ">
+                           <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
+                                          
+                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('productData[dtExpiredOn]'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                               <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                       </div>
+                                       <!-- /input-group -->
+                                     <?php
+                               if(form_error('productData[dtExpiredOn]')){?>
+                               <span class="help-block pull-left"><span><?php echo form_error('productData[dtExpiredOn]');?></span>
+                             </span><?php }?>  
+                          </div>
+                        
                     </div>
-
-                    <div class="col-md-4">
-                        <div
-                            class="form-group <?php if ($kOrder->arErrorMessages['endcreatedon'] != '') { ?> has-error <?php } ?>">
-                            <div class="form-group" data-date="<?php echo date('d/m/Y') ?>"
-                                 data-date-format="dd/mm/yyyy">
-                                <input type="text" class="form-control date1" name="searchArr[endcreatedon]"
-                                       id="endcreatedon" placeholder="End Order Date"
-                                       value="<?php echo $_POST['searchArr']['endcreatedon'] ?>">
-                                <?php if ($kOrder->arErrorMessages['endcreatedon'] != '') { ?>
-                                    <span
-                                        class="help-block"><?php echo $kOrder->arErrorMessages['endcreatedon']; ?></span>
-                                <?php } ?>
-                            </div>
-                        </div>
+                   
+                       <div class="col-md-1">
+                         
+                           </div>
+                    <div class="col-md-3">
+                         <div class="form-group ">
+                           <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
+                                          
+                                           <input type="text" id="dtExpiredOn" class="form-control" value="<?php echo set_value('productData[dtExpiredOn]'); ?>" readonly placeholder="End Order Date" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                               <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                       </div>
+                                       <!-- /input-group -->
+                                     <?php
+                               if(form_error('productData[dtExpiredOn]')){?>
+                               <span class="help-block pull-left"><span><?php echo form_error('productData[dtExpiredOn]');?></span>
+                             </span><?php }?>  
+                          </div>
+                        
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-1">
+                        
+                           </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <button class="btn green-meadow uppercase bold" type="button" onclick="getOrderSearch();"><i
                                     class="fa fa-search"></i> Search
@@ -149,7 +168,7 @@
                     </div>
                         <div class="portlet-body alert">
                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
+                            <div>
                                     <div class="portlet green-meadow box">
                                             <div class="portlet-title">
                                                     <div class="caption">
