@@ -6,10 +6,15 @@ if($mode == '__DELETE_FRANCHISEE_POPUP__')
     <div id="clientStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Franchisee Records</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Franchisee Records</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Deleting this franchisee record will delete all the client records (main client and site records) associated with this client ?</p>
                 </div>
@@ -29,10 +34,15 @@ if($mode == '__DELETE_FRANCHISEE_CONFIRM__')
     <div id="clientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Franchisee</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Franchisee Records</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Franchisee has been successfully deleted.</p>
                 </div>
@@ -55,7 +65,11 @@ if($mode == '__DELETE_CLIENT_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Client Records</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Client Records</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Client?</p>
@@ -77,10 +91,15 @@ if($mode == '__DELETE_CLIENT_CONFIRM__')
     <div id="clientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Client Records</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Client Records</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully deleted.</p>
                 </div>
@@ -101,9 +120,13 @@ if($mode == '__DELETE_PRODUCT_POPUP__')
     <div id="productStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Product</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Product</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Product?</p>
@@ -125,9 +148,13 @@ if($mode == '__DELETE_PRODUCT_POPUP_CONFIRM__')
     <div id="productStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Product</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Product</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Products has been successfully deleted.</p>
@@ -205,7 +232,7 @@ if($mode == '__REQUEST_QUANTITY_POPUP_CONFIRM__')
                     <div class="modal-title">
                        <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase"> Request Quantity</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Requested Quantity</span> </h4>
                         </div>
                    
                 </div>
@@ -309,7 +336,7 @@ if($mode == '__ALLOT_QUANTITY_POPUP_CONFIRM__')
                     <div class="modal-title">
                        <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase"> Allot Quantity</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase"> Alloted Quantity</span> </h4>
                         </div>
                     </div>
                 </div>
@@ -333,7 +360,11 @@ if($mode == '__DELETE_OPERATION_MANAGER_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Operation Manager Records</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Operation Manager</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Deleting this operation manager record will delete all the franchisee and client records (main client and site records) associated with this operation manager ?</p>
@@ -354,10 +385,15 @@ if($mode == '__DELETE_OPERATION_MANAGER_CONFIRM__')
     <div id="operationManagerStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Operation Manager</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Operation Manager</span> </h4>
+                        </div>
+                 
                 </div>
+                
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Operation Manager has been successfully deleted.</p>
                 </div>
@@ -379,7 +415,11 @@ if($mode == '__DELETE_CATEGORY_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Category</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Category</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Category?</p>
@@ -401,10 +441,16 @@ if($mode == '__DELETE_CATEGORY_POPUP_CONFIRM__')
     <div id="categoryStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Category</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Category</span> </h4>
+                        </div>
+                 
                 </div>
+              
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Category has been successfully deleted.</p>
                 </div>
@@ -424,10 +470,15 @@ if($mode == '__DELETE_FORUM_POPUP__')
     <div id="forumStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Forum</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Forum</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Forum?</p>
                 </div>
@@ -448,10 +499,15 @@ if($mode == '__DELETE_FORUM_POPUP_CONFIRM__')
     <div id="forumStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Forum</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Forum</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Forum has been successfully deleted.</p>
                 </div>
@@ -516,10 +572,15 @@ if($mode == '__REPLY_POPUP__')
     <div id="replyStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Reply To Comment</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Reply To Comment</span> </h4>
+                        </div>
+                 
                 </div>
+             
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been posted successfully .</p>
                 </div>
@@ -652,7 +713,11 @@ if($mode == '__APPROVE_REPLY_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Approve Reply</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Approve Reply</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to approved this reply?</p>
@@ -674,10 +739,15 @@ if($mode == '__REPLY_APPROVE_CONFIRM_POPUP__')
     <div id="approveReplyConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Approve Reply</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Approved Reply</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been successfully approved.</p>
                 </div>
@@ -699,7 +769,11 @@ if($mode == '__UNAPPROVE_REPLY_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Unapprove Reply</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Unapprove Reply</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to unapproved this reply?</p>
@@ -721,10 +795,15 @@ if($mode == '__REPLY_UNAPPROVE_CONFIRM_POPUP__')
     <div id="unapproveReplyConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Unapprove Reply</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Unapproved Reply</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been successfully unapproved.</p>
                 </div>
@@ -744,10 +823,15 @@ if($mode == '__DELETE_REPLY_POPUP__')
     <div id="replyDelete" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Reply</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Reply</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Reply?</p>
                 </div>
@@ -768,10 +852,15 @@ if($mode == '__DELETE_REPLY_POPUP_CONFIRM__')
     <div id="replyDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Reply</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Comment</span> </h4>
+                        </div>
+                 
                 </div>
+                
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Reply has been successfully deleted.</p>
                 </div>
@@ -791,10 +880,15 @@ if($mode == '__DELETE_COMMENT_POPUP__')
     <div id="cmntDelete" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Comment</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Comment</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Comment?</p>
                 </div>
@@ -815,10 +909,15 @@ if($mode == '__DELETE_COMMENT_POPUP_CONFIRM__')
     <div id="cmntDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Comment</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Comment</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Comment has been successfully deleted.</p>
                 </div>
@@ -837,11 +936,16 @@ if($mode == '__TOPIC_CLOSE_POPUP__')
     ?>
     <div id="closeTopic" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content"> <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Topic Close</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Close Topic</span> </h4>
+                        </div>
+                 
                 </div>
+                
+               
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to close the selected Topic?</p>
                 </div>
@@ -862,10 +966,15 @@ if($mode == '__TOPIC_CLOSE_POPUP_CONFIRM__')
     <div id="closeTopicConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                  <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Close Topic</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Closed Topic</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Topic has been successfully closed.</p>
                 </div>
@@ -933,8 +1042,13 @@ if($mode == '__EDIT_REPLY_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Edit Reply </h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Edit Reply</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Reply has been edited successfully .</p>
                 </div>
@@ -954,9 +1068,13 @@ if($mode == '__APPROVE_COMMENT_POPUP__')
     <div id="approveCommentAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+               <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Approve Comment</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Approve Comment</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to approved this comment?</p>
@@ -978,10 +1096,15 @@ if($mode == '__COMMENT_APPROVE_CONFIRM_POPUP__')
     <div id="approveCommentConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Approve Comment</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Approved Comment</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been successfully approved.</p>
                 </div>
@@ -1002,8 +1125,13 @@ if($mode == '__UNAPPROVE_COMMENT_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Unapprove Comment</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Unapprove Comment</span> </h4>
+                        </div>
+                 
                 </div>
+             
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to unapproved this Comment?</p>
                 </div>
@@ -1026,8 +1154,12 @@ if($mode == '__COMMENT_UNAPPROVE_CONFIRM_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Unapprove Comment</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Unapproved Comment</span> </h4>
+                        </div>
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been successfully unapproved.</p>
                 </div>
@@ -1094,10 +1226,15 @@ CKEDITOR.replace( 'szComment' );
     <div id="commentEditConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Edit Comment </h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Comment Edit</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been edited successfully .</p>
                 </div>
@@ -1117,9 +1254,13 @@ if($mode == '__DELETE_TOPIC_POPUP__')
     <div id="deleteTopic" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Topic </h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Topic</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Topic?</p>
@@ -1141,10 +1282,15 @@ if($mode == '__DELETE_TOPIC_POPUP_CONFIRM__')
     <div id="topicDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Topic</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Topic</span> </h4>
+                        </div>
+                 
                 </div>
+             
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Topic has been successfully deleted.</p>
                 </div>
@@ -1164,9 +1310,13 @@ if($mode == '__PLACE_ORDER_POPUP_CONFIRM__')
     <div id="orderplaceconfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Success</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Success</span> </h4>
+                        </div>
+                 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Your Item has been successfully added to cart.</p>
@@ -1203,8 +1353,13 @@ if($mode == '__DELETE_ORDER_POPUP__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Delete Order</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Order</span> </h4>
+                        </div>
+                 
                 </div>
+              
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Order?</p>
                 </div>
@@ -1224,10 +1379,15 @@ if($mode == '__DELETE_ORDER_CONFIRM__')
     <div id="DeleteOrderConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Deleted Order</h4>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Order</span> </h4>
+                        </div>
+                 
                 </div>
+               
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Order has been successfully deleted.</p>
                 </div>
@@ -1240,4 +1400,145 @@ if($mode == '__DELETE_ORDER_CONFIRM__')
     
     <?php
 }
+if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+
+
+<div id="viewOrder" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+               
+                   <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Order Details</span> </h4>
+                        </div>
+                 
+                </div>
+               
+                  <div class="modal-body">
+                  
+                    <div class="portlet green-meadow box">
+                            <div class="portlet-title">
+                                    <div class="caption">
+                                            <i class="fa fa-cogs"></i>View Order Details
+
+                                    </div>
+                                   
+                            </div>
+                            <div class="portlet-body">
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Order #:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     12313232 <span class="label label-info label-sm">
+                                                    Email confirmation was sent </span>
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Order Date & Time:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     Dec 27, 2013 7:16:25 PM
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Order Status:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                    <span class="label label-success">
+                                                    Closed </span>
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Grand Total:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     $175.25
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Payment Information:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     Credit Card
+                                            </div>
+                                    </div>
+                            </div>
+                    </div>
+                      <hr>
+	              <div class="portlet green-meadow box">
+                            <div class="portlet-title">
+                                    <div class="caption">
+                                            <i class="fa fa-cogs"></i>Order Products Details
+
+                                    </div>
+                                  
+                            </div>
+                            <div class="portlet-body">
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Order #:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     12313232 <span class="label label-info label-sm">
+                                                    Email confirmation was sent </span>
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Order Date & Time:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     Dec 27, 2013 7:16:25 PM
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Order Status:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                    <span class="label label-success">
+                                                    Closed </span>
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Grand Total:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     $175.25
+                                            </div>
+                                    </div>
+                                    <div class="row static-info">
+                                            <div class="col-md-5 name">
+                                                     Payment Information:
+                                            </div>
+                                            <div class="col-md-7 value">
+                                                     Credit Card
+                                            </div>
+                                    </div>
+                            </div>
+                    </div>										
+                </div>
+               
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/forum/approvallist" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <?php
+}
+
   ?>

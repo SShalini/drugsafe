@@ -713,6 +713,7 @@ class Forum_Controller extends CI_Controller {
             $data['idTopic'] = $this->input->post('idTopic');
             $this->Forum_Model->deleteTopic($data['idTopic']);
             $this->load->view('admin/admin_ajax_functions',$data);
-        } 
+        }
+        
     }      
 ?>

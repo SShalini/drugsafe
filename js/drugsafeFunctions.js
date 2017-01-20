@@ -1326,3 +1326,19 @@ function checkOutOrder(idfranchisee) {
     });
 
 }
+ function view_order_details(idOrder)
+{
+    
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/viewOrderData", {idOrder: idOrder,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#viewOrder').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}

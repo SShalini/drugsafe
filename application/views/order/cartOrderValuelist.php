@@ -49,7 +49,7 @@
                       
                          <div class="actions">
                                 <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="" href="javascript:void(0);">
-                                    <i class="fa fa-cart-arrow-down"></i>
+                                    <i class="icon-basket"></i>
                                    
                                 </a>
                              <?php  $totalOrdersArr =$this->Order_Model->getOrdersList();

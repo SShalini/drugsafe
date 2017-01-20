@@ -174,6 +174,17 @@ class Order_Model extends Error_Model {
 	     if($query = $this->db->delete(__DBC_SCHEMATA_CART__))
                 { 
                  $this->session->set_userdata('orderid', $orderid);
+                  $updatedataAry = array(
+                                'validorder' => '1',
+                            );
+                  $this->db->where('id',(int)$orderid);
+             if($this->db->update(__DBC_SCHEMATA_ORDER__, $updatedataAry))
+             {
+               return true;  
+             }
+             else{
+                 return false; 
+             }
                     return true;
                 }
                 else
@@ -244,6 +255,26 @@ class Order_Model extends Error_Model {
             {
                 return array();
             }
-        }     
+        }
+         
+         public function getallValidOrderId()
+    {
+        $whereAry = array('validorder=' => '1');
+        $this->db->distinct();
+        $this->db->select('franchiseeid,price,orderid,createdon,status');
+        $this->db->from(__DBC_SCHEMATA_ORDER__);
+        $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+        $this->db->where($whereAry);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+          
+            }
+         
+        else {
+            return array();
+        }
+    } 
    }
 ?>

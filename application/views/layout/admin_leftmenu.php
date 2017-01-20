@@ -182,7 +182,7 @@
             <li class="nav-item start <?php if (trim($pageName) == 'Orders') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                    <span class="title">Orders </span>
+                    <span class="title">Ordering </span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu" <?php if ($subpageName == 'Orders') { ?> style="display: block;" <?php } ?> >
@@ -206,6 +206,24 @@
                         </a>
                     </li>
 
+
+                </ul>
+
+            </li>
+           <?php } else { ?>
+            <li class="nav-item start <?php if (trim($pageName) == 'Orders') { ?>active open<?php } ?>">
+                <a href="javascript:void(0);" class="nav-link nav-toggle">
+                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                    <span class="title">Manage Order </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu" <?php if ($subpageName == 'Orders') { ?> style="display: block;" <?php } ?> >
+                    <li class="nav-item  <?php if ($subpageName == 'View_Order_List') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/view_order_list">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">View Order List</span>
+                        </a>
+                    </li>
 
                 </ul>
 

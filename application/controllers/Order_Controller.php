@@ -335,6 +335,7 @@ class Order_Controller extends CI_Controller {
         $orderid = $this->session->userdata('orderid');
         $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($orderid);
      
+     
                     $data['totalOrdersDetailsAray'] = $totalOrdersDetailsAray;     
                     $data['orderid'] = $orderid;
                     $data['szMetaTagTitle'] = "Order Details";
@@ -350,5 +351,37 @@ class Order_Controller extends CI_Controller {
             $this->load->view('layout/admin_footer'); 
                
     }
+     public function view_order_list()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+       $validOrdersDetailsAray = $this->Order_Model->getallValidOrderId($orderid);
+       
+                    $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;    
+                    $data['szMetaTagTitle'] = "Order Details";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Orders";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+ 
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('order/viewOrderDetails');
+            $this->load->view('layout/admin_footer'); 
+               
+    }
+     public function viewOrderData()
+        {
+            $data['mode'] = '__VIEW_ORDER_DETAILS_POPUP__';
+            $data['idOrder'] = $this->input->post('idOrder');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
     }      
 ?>
