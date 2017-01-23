@@ -95,10 +95,9 @@
                             
                               <select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Status</option>
-                                                
-                                                        <option value="0" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("0") ? "selected" : ""); ?>>Ordered</option>
-                                                        <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("1") ? "selected" : ""); ?>>Pending</option>
-                                                        <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>Canceled</option>
+                                                <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("1") ? "selected" : ""); ?>>Ordered</option>
+                                                <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>Pending</option>
+                                                <option value="3" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("3") ? "selected" : ""); ?>>Canceled</option>
                              </select>
                             
                            
@@ -112,7 +111,7 @@
                 <div class="row">
                 <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
-                           <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
+                           <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" >
                                           
                                            <input type="text" id="szSearch4" class="form-control" value="<?php echo set_value('szSearch4'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch4">
                                                <span class="input-group-addon">
@@ -139,7 +138,7 @@
                            </div>
                     <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
-                           <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" >
+                           <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" >
                                           
                                            <input type="text" id="szSearch5" class="form-control" value="<?php echo set_value('szSearch5'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch5">
                                                <span class="input-group-addon">
@@ -260,21 +259,21 @@
                                                                        <?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?>
                                                                     </td>
                                                         <td>
-                                     <?php if($validOrdersDetailsData['status']==0){?>
+                                     <?php if($validOrdersDetailsData['status']==1){?>
                                        
                                         <a title="Order Status" class="label label-sm label-warning">
                                             Ordered
                                         </a>
                                         <?php
                                     }
-                                    if($validOrdersDetailsData['status']==1){
+                                    if($validOrdersDetailsData['status']==2){
                                         ?>
                                         <a title="Order Status" class="label label-sm label-success">
                                             Pending
                                         </a>
                                         <?php
                                     }
-                                  if($validOrdersDetailsData['status']==2){
+                                  if($validOrdersDetailsData['status']==3){
                                         ?>
                                         <a title="Order Status" class="label label-sm label-info">
                                             Dispatched
@@ -282,7 +281,7 @@
                                         <?php
                                     }
                                    
-                                   if($validOrdersDetailsData['status']==3){
+                                   if($validOrdersDetailsData['status']==4){
                                         ?>
                                         <a title="Order Status" class="label label-sm label-danger">
                                             Canceled

@@ -101,7 +101,8 @@
                                                     <td> <?php echo $productDataArr['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                    <td> <?php echo $totalOrdersDetailsData['quantity'];?> </td>
-                                                   <td> $<?php echo $price;?> </td>
+                                                 
+                                                   <td> $<?php echo number_format($price, 2, '.', ',');;?> </td>
                                                    
                                                 </tr>
                                                  

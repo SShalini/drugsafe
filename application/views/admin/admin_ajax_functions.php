@@ -1471,7 +1471,7 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                             <div class="col-md-5 name">
                                                      Order Status:
                                             </div>
-                                         <?php if($OrdersDetailsAray['status']==0){?>
+                                         <?php if($OrdersDetailsAray['status']==1){?>
                                           <div class="col-md-7 value">
                                                     <span class="label label-sm label-warning">
                                                     Ordered </span>
@@ -1479,7 +1479,7 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                        
                                         <?php
                                     }
-                                    if($OrdersDetailsAray['status']==1){
+                                    if($OrdersDetailsAray['status']==2){
                                         ?>
                                            <div class="col-md-7 value">
                                                     <span class="label label-sm label-success">
@@ -1488,7 +1488,7 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                        
                                         <?php
                                     }
-                                  if($OrdersDetailsAray['status']==2){
+                                  if($OrdersDetailsAray['status']==3){
                                         ?>
                                            <div class="col-md-7 value">
                                                     <span class="label label-sm label--info">
@@ -1498,7 +1498,7 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                         <?php
                                     }
                                    
-                                   if($OrdersDetailsAray['status']==3){
+                                   if($OrdersDetailsAray['status']==4){
                                         ?>
                                            <div class="col-md-7 value">
                                                     <span class="label label-sm label-danger">
@@ -1516,7 +1516,8 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                                      Grand Total:
                                             </div>
                                             <div class="col-md-7 value">
-                                                   $<?php echo $OrdersDetailsAray['price'];?>
+                                                 $<?php 
+                                                echo number_format($OrdersDetailsAray['price'], 2, '.', ','); ?> 
                                             </div>
                                     </div>
                                     <div class="row static-info">
@@ -1561,7 +1562,9 @@ if($mode == '__VIEW_ORDER_DETAILS_POPUP__')
                                                     <td> <?php echo $productDataArr['szProductCode'] ;?> </td>
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                     <td> <?php echo $totalOrdersDetailsData['quantity'];?> </td>
-                                                     <td> $<?php echo ($totalOrdersDetailsData['quantity'])*($productDataArr['szProductCost']); ?> </td>
+                                                    <td> $<?php 
+                                                   echo number_format(($totalOrdersDetailsData['quantity'])*($productDataArr['szProductCost']), 2, '.', ','); ?> 
+                                                      </td>
                                                       <td> <?php echo $categoriesData['szDiscription'];?> </td>
 
                                                 </tr>

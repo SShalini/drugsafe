@@ -142,7 +142,7 @@ class Order_Model extends Error_Model {
           $dataAry = array(
                                 'franchiseeid' => $franchiseeId,
                                 'price' => $Price,
-				'status' => '0',
+				'status' => '1',
                                 'createdon' => $date,
                             );
 	    $this->db->insert(__DBC_SCHEMATA_ORDER__, $dataAry); 
@@ -375,7 +375,7 @@ class Order_Model extends Error_Model {
     } 
     function getSqlFormattedDate($unFormatted_date)
 {
-    $dateAry=explode('-', $unFormatted_date);
+    $dateAry=explode('/', $unFormatted_date);
     $formattedDate=$dateAry['2'].'-'.$dateAry['1'].'-'.$dateAry['0'];
     return $formattedDate;
     
