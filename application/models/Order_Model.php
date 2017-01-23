@@ -380,5 +380,34 @@ class Order_Model extends Error_Model {
     return $formattedDate;
     
 }
+ public function updateOrderByOrderId($orderId,$flag='0')
+	{
+     $date = date('Y-m-d H:i:s');
+     if($flag==2){
+       $dataAry = array(
+			'status' => '2',
+                        'dispatchedon' => $date
+                );   
+     }
+     if($flag==3){
+        $dataAry = array(
+			'status' => '3',
+                        'canceledon' => $date
+            
+                );  
+     }
+		 
+                $this->db->where('id', $orderId);
+                 
+		if($query = $this->db->update(__DBC_SCHEMATA_ORDER__, $dataAry))
+                        
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
    }
 ?>

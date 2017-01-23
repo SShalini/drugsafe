@@ -1039,7 +1039,6 @@ function replyEditConfirmation(idReply) {
     $('#replyEdit').modal("hide");
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/replyEditConfirmation", {idReply: idReply,val:val}, function (result) {
-       
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -1358,4 +1357,58 @@ function checkOutOrder(idfranchisee) {
 
     });
 }
+ function edit_order_details(idOrder)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/editOrderData", {idOrder: idOrder,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#editOrder').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+     
+    });
+}
+function CancelOrderConfirmation(idOrder) {
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#editOrder').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/cancelOrderConfirmation", {idOrder: idOrder}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#cancelOrderConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
 
+    }); 
+}
+function deliverOrderConfirmation(idOrder) {
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#editOrder').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/deliverOrderConfirmation", {idOrder: idOrder}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#deliverOrderConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+
+ function view_order_details_pdf(idOrder) {
+    $.post(__BASE_URL__ + "/order/view_order_details", {idOrder:idOrder}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/order/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}

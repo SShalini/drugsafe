@@ -397,5 +397,161 @@ class Order_Controller extends CI_Controller {
             $data['idOrder'] = $this->input->post('idOrder');
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-    }      
+          public function editOrderData()
+        {
+            $data['mode'] = '__EDIT_ORDER_DETAILS_POPUP__';
+            $data['idOrder'] = $this->input->post('idOrder');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        
+          public function cancelOrderConfirmation()
+        {
+            $data['mode'] = '__CANCEL_ORDER_CONFIRM_DETAILS_POPUP__';
+            $data['idOrder'] = $this->input->post('idOrder');
+            $this->Order_Model->updateOrderByOrderId($data['idOrder'],3);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+           public function deliverOrderConfirmation()
+        {
+            $data['mode'] = '__DELIVER_ORDER_CONFIRM_DETAILS_POPUP__';
+            $data['idOrder'] = $this->input->post('idOrder');
+            $this->Order_Model->updateOrderByOrderId($data['idOrder'],2);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+     function view_order_details()
+    {
+        $idOrder = $this->input->post('idOrder');
+        
+        $this->session->set_userdata('idOrder', $idOrder);
+        echo "SUCCESS||||";
+        echo "pdforderdetails";
+    }
+
+    public function pdforderdetails()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe stock request report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Stock Request Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+
+        $pdf->AddPage();
+
+        $idOrder = $this->session->userdata('idOrder');
+        $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
+                        
+                          $splitTimeStamp = explode(" ",$OrdersDetailsAray['createdon']);
+                                                             $date1 = $splitTimeStamp[0];
+                                                             $time1 = $splitTimeStamp[1];
+                                                           
+                                                           $x=  date("g:i a", strtotime($time1));
+                                                     
+                                                          $date= explode('-', $date1);
+                                                        
+                                                          
+                                                          $monthNum  = $date['1'];
+                                                         
+                                                          $dateObj   = DateTime::createFromFormat('!m', $monthNum);
+                                                          $monthName = $dateObj->format('M');
+                     if($OrdersDetailsAray['status']==1){
+                                        
+                                              $status = Ordered;
+                                   }
+                                    if($OrdersDetailsAray['status']==2){
+                                       
+                                          
+                                          $status = Dispatched;            
+                                    }
+                                  if($OrdersDetailsAray['status']==3){
+                                      
+                                         
+                                         $status = Canceled;                          
+                                    }
+                                   
+                                   if($OrdersDetailsAray['status']==4){
+                                      
+                                                $status = Pending;        
+                                    }
+
+                                  
+                         
+                         
+        $html = '<a style="text-align:center;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+<br />            
+<div><label style="font-size:18px;color:red;margin-bottom:5px;"><b>Order Info
+            </b></label></div>
+            <div>
+                <lable>Order# :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>#0000' . $idOrder . '</lable>  
+            </div>
+            <div>
+                <lable> Order Date & Time :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>$' .$date['2'].$monthName .  $date['0'].' at ' .$x . '</lable>  
+            </div>
+            <div>
+                <lable>Order Status :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>' .$status . '</lable>  
+            </div>
+             <div>
+                <lable>Franchisee :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>' . $franchiseeDetArr1['szName'] . '</lable>  
+            </div>
+         
+            <br />
+            <div><label style="font-size:18px;color:red;margin-bottom:15px;"><b>Products Info   
+            </b></label></div>
+            <div>
+         
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>Product Code</b> </th>
+                                        <th> <b>Product Cost</b> </th>
+                                        <th> <b>Quantity</b> </th>
+                                        <th style="width:150px"><b>Total Price</b> </th>
+                                        <th style="width:170px"> <b>Dispatched Quantity</b> </th>
+                                   
+                                    </tr>';
+            $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+            if ($totalOrdersDetailsAray) {
+             $i = 0;
+             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
+                $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
+              
+                $html .= '<tr>
+                                            <td> ' . $productDataArr['szProductCode'] . ' </td>
+                                            <td> $' . $productDataArr['szProductCost'] . '</td>
+                                            <td> ' .  $totalOrdersDetailsData['quantity'] . ' </td>
+                                            <td> $' . number_format(($totalOrdersDetailsData['quantity'])*($productDataArr['szProductCost']), 2, '.', ','). ' </td>
+                                             <td>' ._. ' </td>
+                                
+                                        </tr>';
+            }
+        }
+        $i++;
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+                
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        error_reporting(E_ALL);
+        $this->session->unset_userdata('idsite');
+        $this->session->unset_userdata('Drugtestid');
+        $this->session->unset_userdata('sosid');
+        ob_end_clean();
+        $pdf->Output('view_order_details.pdf', 'I');
+    }
+
+        
+        }      
 ?>

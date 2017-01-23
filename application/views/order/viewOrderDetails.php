@@ -269,41 +269,47 @@
                                     if($validOrdersDetailsData['status']==2){
                                         ?>
                                         <a title="Order Status" class="label label-sm label-success">
-                                            Pending
+                                             Dispatched
                                         </a>
                                         <?php
                                     }
                                   if($validOrdersDetailsData['status']==3){
                                         ?>
-                                        <a title="Order Status" class="label label-sm label-info">
-                                            Dispatched
+                                        <a title="Order Status" class="label label-sm label-danger">
+                                         Canceled   
                                         </a>
                                         <?php
                                     }
                                    
                                    if($validOrdersDetailsData['status']==4){
                                         ?>
-                                        <a title="Order Status" class="label label-sm label-danger">
-                                            Canceled
+                                        <a title="Order Status" class="label label-sm label-info">
+                                            Pending
                                         </a>
                                         <?php
                                     }
 
                                     ?></td>
-                                    
-                                                                    <td>
-                                                                         <a class="btn btn-circle btn-icon-only btn-default" title="View Order Details" onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid'];?>')" href="javascript:void(0);">
-                                                                         <i class="fa fa-eye"></i> 
-                                                                      </a>
-                                                                    </td>
-                                                                    <td>
-                                                                      <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>);" href="javascript:void(0);">
-                                                                         <i class="fa fa-pencil"></i> 
-                                                                      </a>
-                                                                    </td>
-                                                                    
-                                                            </tr>
-                                                          <?php
+
+                                        <td>
+                                             <a class="btn btn-circle btn-icon-only btn-default" title="View Order Details" onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid'];?>')" href="javascript:void(0);">
+                                             <i class="fa fa-eye"></i> 
+                                          </a>
+                                        </td>
+                                        <td>
+                                            <?php  if($validOrdersDetailsData['status']==1){?>
+                                          <a class="btn btn-circle btn-icon-only btn-default" title="Edit Order Details" onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid'];?>);" href="javascript:void(0);">
+                                             <i class="fa fa-pencil"></i> 
+                                          </a>
+                                            <?php } else {?>
+                                            <a class="btn btn-circle btn-icon-only btn-default" title="View Pdf" onclick="view_order_details_pdf(<?php echo $validOrdersDetailsData['orderid'];?>);" href="javascript:void(0);">
+                                             <i class="fa fa-file-pdf-o"></i> 
+                                          </a>
+                                            <?php } ?>
+                                        </td>
+
+                                </tr>
+                              <?php
                                          
                                               }
                                             
