@@ -10,7 +10,7 @@ if($mode == '__DELETE_FRANCHISEE_POPUP__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Franchisee Records</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Franchisee Record</span> </h4>
                         </div>
                  
                 </div>
@@ -38,7 +38,7 @@ if($mode == '__DELETE_FRANCHISEE_CONFIRM__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Franchisee Records</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Franchisee Record</span> </h4>
                         </div>
                  
                 </div>
@@ -67,7 +67,7 @@ if($mode == '__DELETE_CLIENT_POPUP__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Client Records</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Client Record</span> </h4>
                         </div>
                  
                 </div>
@@ -95,7 +95,7 @@ if($mode == '__DELETE_CLIENT_CONFIRM__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Client Records</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Client Record</span> </h4>
                         </div>
                  
                 </div>
