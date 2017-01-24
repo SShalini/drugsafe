@@ -50,6 +50,11 @@
                             </div>
                 
                         </div>
+                         <?php
+                        
+                        if(!empty($validOrdersDetailsAray))
+                        {
+                           ?>
                       <div class="row">
                       <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/order/view_order_list" method="post">
                 <div class="row">
@@ -134,8 +139,7 @@
                     </div>
                    
                        <div class="col-md-1">
-                         
-                           </div>
+                       </div>
                     <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                            <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" >
@@ -177,6 +181,7 @@
 
             </form>   
                     </div>
+                    
                         <div class="portlet-body alert">
                        <div class="row">
                             <div>
@@ -324,7 +329,7 @@
                             </div>
                     </div>
                             </div>
-                          
+                        <?php } else { echo"Not Found"; }?>   
                
                     </div>
 
