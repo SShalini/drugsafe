@@ -111,7 +111,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                 <input id="szEmail" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szEmail']; ?>"
@@ -134,7 +134,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                 <input id="szContactNumber" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szContactNumber']; ?>"
@@ -157,7 +157,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-users"></i>
                                                 </span>
                                                 <input id="szNoOfSites" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szNoOfSites']; ?>"
@@ -229,7 +229,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                 <input id="szEmail" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szEmail']; ?>"
@@ -252,7 +252,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                 <input id="szContactNumber" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szContactNumber']; ?>"
@@ -283,7 +283,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-male"></i>
                                                 </span>
                                                 <select class="form-control " name="clientData[operationManagerId]" id="operationManagerId" Placeholder="Operation Manager" onchange="getFranchiseeListing(this.value);"  onfocus="remove_formError(this.id,'true')">
                                                     <option value=''>Select</option>
@@ -316,7 +316,7 @@
                                          <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-male"></i>
                                                 </span>
                                                 <div id="franchisee_container">
                                                   <?php if(empty($validate['operationManagerId'])){?>
@@ -371,7 +371,7 @@
                                             <div class="col-md-6">
                                                 <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-male"></i>
                                                 </span>
                                                     <select class="form-control" name="clientData[franchiseeId]"
                                                             id="franchiseeId" Placeholder="State"
@@ -446,7 +446,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                 <input id="szContactEmail" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szContactEmail']; ?>"
@@ -469,7 +469,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                 <input id="szContactPhone" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szContactPhone']; ?>"
@@ -492,7 +492,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-mobile-phone"></i>
                                                 </span>
                                                 <input id="szContactMobile" class="form-control" type="text"
                                                        value="<?php echo $_POST['clientData']['szContactMobile']; ?>"
@@ -516,7 +516,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                             <input id="szAddress" class="form-control" type="text"
                                                    value="<?php echo $_POST['clientData']['szAddress']; ?>"
@@ -537,7 +537,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag"></i>
                                                 </span>
                                          <input id="szCountry" class="form-control read-only" type="text"
                                                    value="Australia"
@@ -559,7 +559,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag-checkered"></i>
                                                 </span>
                                             <select class="form-control " name="clientData[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
@@ -592,7 +592,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-building"></i>
                                                 </span>
                                             <input id="szCity" class="form-control" type="text"
                                                    value="<?php echo $_POST['clientData']['szCity']; ?>"
@@ -614,7 +614,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-area-chart"></i>
                                                 </span>
                                             <input id="szZipCode" class="form-control" type="text"
                                                    value="<?php echo $_POST['clientData']['szZipCode']; ?>"
@@ -685,7 +685,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                             <input id="sp_mobile" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['sp_mobile']; ?>"
@@ -708,7 +708,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                             <input id="sp_email" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['sp_email']; ?>"
@@ -759,7 +759,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                             <input id="iis_mobile" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['iis_mobile']; ?>"
@@ -782,7 +782,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                             <input id="iis_email" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['iis_email']; ?>"
@@ -833,7 +833,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                             <input id="rlr_mobile" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['rlr_mobile']; ?>"
@@ -856,7 +856,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                             <input id="rlr_email" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['rlr_email']; ?>"
@@ -907,7 +907,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                             <input id="orlr_mobile" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['orlr_mobile']; ?>"
@@ -930,7 +930,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                             <input id="orlr_email" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['orlr_email']; ?>"
@@ -1001,7 +1001,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                             <input id="psc_phone" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['psc_phone']; ?>"
@@ -1024,7 +1024,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-mobile-phone"></i>
                                                 </span>
                                                             <input id="psc_mobile" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['psc_mobile']; ?>"
@@ -1075,7 +1075,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                             <input id="ssc_phone" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['ssc_phone']; ?>"
@@ -1098,7 +1098,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-mobile-phone"></i>
                                                 </span>
                                                             <input id="ssc_mobile" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['ssc_mobile']; ?>"
@@ -1124,7 +1124,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-code"></i>
                                                 </span>
                                                             <textarea name="clientData[instructions]" id="instructions"
                                                                       class="form-control"
@@ -1148,7 +1148,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-users"></i>
                                                 </span>
                                                             <input id="site_people" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['site_people']; ?>"
@@ -1171,7 +1171,7 @@
                                                     <div class="col-md-6">
                                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-users"></i>
                                                 </span>
                                                             <input id="test_count" class="form-control" type="text"
                                                                    value="<?php echo $_POST['clientData']['test_count']; ?>"
@@ -1588,7 +1588,7 @@
                                                         <div class="col-md-6">
                                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-users"></i>
                                                 </span>
                                         <input id="specify_contact" class="form-control div1"
                                                type="text"

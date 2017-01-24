@@ -30,7 +30,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                             <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-header"></i>
                                             </span>
                                             <input id="szForumTitle" class="form-control" type="text" value="<?php echo set_value('forumData[szForumTitle]'); ?>" placeholder="Forum Title" onfocus="remove_formError(this.id,'true')" name="forumData[szForumTitle]">
                                         </div>
@@ -47,7 +47,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                             <span class="input-group-addon">
-                                            <i class="fa fa-user"></i>
+                                            <i class="fa fa-list"></i>
                                             </span>
                                                 <select class="form-control" name="forumData[idCategory]"
                                                         id="idCategory" Placeholder="Forum Category"
@@ -83,7 +83,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                             <span class="input-group-addon">
-                                            <i class="fa fa-user"></i>
+                                            <i class="fa fa-file-text"></i>
                                             </span>
                                              <textarea  name="forumData[szForumDiscription]" id="szForumDiscription" class="form-control"  value=""  rows="5" placeholder="Forum Description" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('forumData[szForumDiscription]'); ?></textarea>
 

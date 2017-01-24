@@ -54,7 +54,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                 <input id="szEmail" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szEmail'] ;?>" placeholder="Email" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szEmail]">
                                             </div>
@@ -72,7 +72,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                 <input id="szContactNumber" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szContactNumber'] ;?>" placeholder="Contact Number" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szContactNumber]">
                                             </div>
@@ -90,7 +90,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                                 <input id="szAddress" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szAddress'] ;?>" placeholder="Address" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szAddress]">
                                             </div>
@@ -109,7 +109,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag"></i>
                                                 </span>
                                            <input id="szCountry" class="form-control read-only" type="text"
                                                    value="Australia"
@@ -132,7 +132,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag-checkered"></i>
                                                 </span>
                                             <select class="form-control " name="editOperationManager[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
@@ -164,7 +164,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-building"></i>
                                                 </span>
                                                 <input id="szCity" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szCity'] ;?>" placeholder="City" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szCity]">
                                             </div>
@@ -183,7 +183,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-area-chart"></i>
                                                 </span>
                                                 <input id="szZipCode" class="form-control" type="text" value="<?php echo $_POST['editOperationManager']['szZipCode'] ;?>" placeholder="ZIP/Postal Code" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szZipCode]">
                                             </div>

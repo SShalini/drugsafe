@@ -791,12 +791,33 @@ function editConsumables(idProduct,flag) {
 
     });
 }
+function calTotalFCO() {
+ var Val1=jQuery('#FCOBasePrice').val();
+ var Val2=jQuery('#FCOHr').val();
+ var res= Val1*Val2;
+
+jQuery('#FCOTotal').html(res);
+}
 function calTotal() {
  var Val1=jQuery('#mobileScreenBasePrice').val();
  var Val2=jQuery('#mobileScreenHr').val();
  var res= Val1*Val2;
 
 jQuery('#mobileScreen').html(res);
+}
+function calTotalCallOut() {
+ var Val1=jQuery('#CallOutBasePrice').val();
+ var Val2=jQuery('#CallOutHr').val();
+ var res= Val1*Val2;
+
+jQuery('#CallOutTotal').html(res);
+}
+function calTotalDC() {
+ var Val1=jQuery('#DCmobileScreenBasePrice').val();
+ var Val2=jQuery('#DCmobileScreenHr').val();
+ var res= Val1*Val2;
+
+jQuery('#DCmobileScreenTotal').html(res);
 }
 function calTotalTravel() {
  
@@ -1165,7 +1186,6 @@ var val = CKEDITOR.instances.szComment.getData();
             $('#commentEditConfirmation').modal("show");
         }
         jQuery('#loader').attr('style', 'display:none');
-
     }); 
 }
 

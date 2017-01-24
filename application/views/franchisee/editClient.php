@@ -113,7 +113,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-envelope"></i>
                                         </span>
                                         <input id="szEmail" class="form-control" type="text" value="<?php echo $_POST['clientData']['szEmail'] ;?>" placeholder="Primary Email" onfocus="remove_formError(this.id,'true')" name="clientData[szEmail]">
                                     </div>
@@ -131,7 +131,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="szContactNumber" class="form-control" type="text" value="<?php echo $_POST['clientData']['szContactNumber'] ;?>" placeholder="Primary Phone" onfocus="remove_formError(this.id,'true')" name="clientData[szContactNumber]">
                                     </div>
@@ -149,7 +149,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-users"></i>
                                         </span>
                                         <input id="szNoOfSites" class="form-control" type="text" value="<?php echo $_POST['clientData']['szNoOfSites'] ;?>" placeholder="No Of Sites" onfocus="remove_formError(this.id,'true')" name="clientData[szNoOfSites]">
                                     </div>
@@ -186,7 +186,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-users"></i>
                                         </span>
                                         <input id="per_form_complete" class="form-control" type="text" value="<?php echo $_POST['clientData']['per_form_complete'] ;?>" placeholder="Name of Person Completing Form" onfocus="remove_formError(this.id,'true')" name="clientData[per_form_complete]">
                                     </div>
@@ -206,7 +206,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-envelope"></i>
                                         </span>
                                         <input id="szEmail" class="form-control" type="text" value="<?php echo $_POST['clientData']['szEmail'] ;?>" placeholder="Company Email" onfocus="remove_formError(this.id,'true')" name="clientData[szEmail]">
                                     </div>
@@ -224,7 +224,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="szContactNumber" class="form-control" type="text" value="<?php echo $_POST['clientData']['szContactNumber'] ;?>" placeholder="Company Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[szContactNumber]">
                                     </div>
@@ -316,7 +316,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-envelope"></i>
                                         </span>
                                         <input id="szContactEmail" class="form-control" type="text" value="<?php echo $_POST['clientData']['szContactEmail'] ;?>" placeholder="Contact Email" onfocus="remove_formError(this.id,'true')" name="clientData[szContactEmail]">
                                     </div>
@@ -334,7 +334,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="szContactPhone" class="form-control" type="text" value="<?php echo $_POST['clientData']['szContactPhone'] ;?>" placeholder="Contact Phone" onfocus="remove_formError(this.id,'true')" name="clientData[szContactPhone]">
                                     </div>
@@ -352,7 +352,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-mobile-phone"></i>
                                         </span>
                                         <input id="szContactMobile" class="form-control" type="text" value="<?php echo $_POST['clientData']['szContactMobile'] ;?>" placeholder="Contact Mobile" onfocus="remove_formError(this.id,'true')" name="clientData[szContactMobile]">
                                     </div>
@@ -370,7 +370,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-home"></i>
                                         </span>
                                         <input id="szAddress" class="form-control" type="text" value="<?php echo $_POST['clientData']['szAddress'] ;?>" placeholder="Address" onfocus="remove_formError(this.id,'true')" name="clientData[szAddress]">
                                     </div>
@@ -387,7 +387,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag"></i>
                                                 </span>
                                             <input id="szCountry" class="form-control read-only" type="text"
                                                    value="Australia"
@@ -409,7 +409,7 @@
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag"></i>
                                                 </span>
                                             <select class="form-control " name="clientData[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
@@ -441,7 +441,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-building"></i>
                                         </span>
                                         <input id="szCity" class="form-control" type="text" value="<?php echo $_POST['clientData']['szCity'] ;?>" placeholder="City" onfocus="remove_formError(this.id,'true')" name="clientData[szCity]">
                                     </div>
@@ -460,7 +460,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-area-chart"></i>
                                         </span>
                                         <input id="szZipCode" class="form-control" type="text" value="<?php echo $_POST['clientData']['szZipCode'] ;?>" placeholder="ZIP/Postal Code" onfocus="remove_formError(this.id,'true')" name="clientData[szZipCode]">
                                     </div>
@@ -519,7 +519,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="sp_mobile" class="form-control" type="text" value="<?php echo $_POST['clientData']['sp_mobile'] ;?>" placeholder="Contact Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[sp_mobile]">
                                     </div>
@@ -537,7 +537,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-envelope"></i>
                                         </span>
                                         <input id="sp_email" class="form-control" type="text" value="<?php echo $_POST['clientData']['sp_email'] ;?>" placeholder="Contact Email" onfocus="remove_formError(this.id,'true')" name="clientData[sp_email]">
                                     </div>
@@ -576,7 +576,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="iis_mobile" class="form-control" type="text" value="<?php echo $_POST['clientData']['iis_mobile'] ;?>" placeholder="Contact Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[iis_mobile]">
                                     </div>
@@ -594,7 +594,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-envelope"></i>
                                         </span>
                                         <input id="iis_email" class="form-control" type="text" value="<?php echo $_POST['clientData']['iis_email'] ;?>" placeholder="Contact Email" onfocus="remove_formError(this.id,'true')" name="clientData[iis_email]">
                                     </div>
@@ -633,7 +633,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="rlr_mobile" class="form-control" type="text" value="<?php echo $_POST['clientData']['rlr_mobile'] ;?>" placeholder="Contact Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[rlr_mobile]">
                                     </div>
@@ -651,7 +651,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-envelope"></i>
                                         </span>
                                         <input id="rlr_email" class="form-control" type="text" value="<?php echo $_POST['clientData']['rlr_email'] ;?>" placeholder="Contact Email" onfocus="remove_formError(this.id,'true')" name="clientData[rlr_email]">
                                     </div>
@@ -690,7 +690,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="orlr_mobile" class="form-control" type="text" value="<?php echo $_POST['clientData']['orlr_mobile'] ;?>" placeholder="Contact Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[orlr_mobile]">
                                     </div>
@@ -708,7 +708,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-envelope"></i>
                                         </span>
                                         <input id="orlr_email" class="form-control" type="text" value="<?php echo $_POST['clientData']['orlr_email'] ;?>" placeholder="Contact Email" onfocus="remove_formError(this.id,'true')" name="clientData[orlr_email]">
                                     </div>
@@ -768,7 +768,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="psc_phone" class="form-control" type="text" value="<?php echo $_POST['clientData']['psc_phone'] ;?>" placeholder="Landline Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[psc_phone]">
                                     </div>
@@ -786,7 +786,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-mobile"></i>
                                         </span>
                                         <input id="psc_mobile" class="form-control" type="text" value="<?php echo $_POST['clientData']['psc_mobile'] ;?>" placeholder="Mobile Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[psc_mobile]">
                                     </div>
@@ -825,7 +825,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-phone"></i>
                                         </span>
                                         <input id="ssc_phone" class="form-control" type="text" value="<?php echo $_POST['clientData']['ssc_phone'] ;?>" placeholder="Landline Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[ssc_phone]">
                                     </div>
@@ -843,7 +843,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-mobile-phone"></i>
                                         </span>
                                         <input id="ssc_mobile" class="form-control" type="text" value="<?php echo $_POST['clientData']['ssc_mobile'] ;?>" placeholder="Mobile Phone Number" onfocus="remove_formError(this.id,'true')" name="clientData[ssc_mobile]">
                                     </div>
@@ -863,7 +863,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-users"></i>
                                         </span>
                                         <textarea  name="clientData[instructions]" id="instructions" class="form-control"  value="<?php echo $_POST['clientData']['ssc_mobile'] ;?>"  rows="5" placeholder=" Any special instruction for DrugSafe staff " onfocus="remove_formError(this.id,'true')" ><?php echo set_value('clientData[instructions]'); ?></textarea>
                                     </div>
@@ -881,7 +881,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-users"></i>
                                         </span>
                                         <input id="site_people" class="form-control" type="text" value="<?php echo $_POST['clientData']['site_people'] ;?>" placeholder="People on site" onfocus="remove_formError(this.id,'true')" name="clientData[site_people]">
                                     </div>
@@ -899,7 +899,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-users"></i>
                                         </span>
                                         <input id="test_count" class="form-control" type="text" value="<?php echo $_POST['clientData']['test_count'] ;?>" placeholder="Test Count" onfocus="remove_formError(this.id,'true')" name="clientData[test_count]">
                                     </div>
@@ -1128,7 +1128,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-users"></i>
                                         </span>
                                         <input id="specify_contact" class="form-control div1" type="text" value="<?php echo $_POST['clientData']['specify_contact'] ;?>" placeholder="Specify Contact" onfocus="remove_formError(this.id,'true')" name="clientData[specify_contact]">
                                     </div>
@@ -1156,11 +1156,16 @@
                                  <div class="form-actions">
                                  <div class="row">
                                     <div class="col-md-offset-3 col-md-4">
+                                        <?php   if(($_SESSION['drugsafe_user']['iRole']=='1') || ($_SESSION['drugsafe_user']['iRole']=='5')){ ?>
                                         <?php if($flag==1){?> 
                                          <a href="<?=__BASE_URL__?>/franchisee/viewClientDetails" class="btn default uppercase" type="button">Cancel</a>
                                         <?php } else {?> 
                                           <a href="<?=__BASE_URL__?>/franchisee/clientList" class="btn default uppercase" type="button">Cancel</a>
                                         <?php } ?> 
+                                          <?php }?>
+                                            <?php   if($_SESSION['drugsafe_user']['iRole']=='2') { ?>
+                                           <a href="<?=__BASE_URL__?>/franchisee/clientRecord" class="btn default uppercase" type="button">Cancel</a>
+                                            <?php }?>
                                         <input type="submit" class="btn green-meadow" value="SAVE" name="clientData[submit]">
                                     </div>
                                  </div>

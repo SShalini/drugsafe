@@ -31,7 +31,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-tags"></i>
                                                 </span>
                                                 <input id="szProductCode" class="form-control" type="text" value="<?php echo set_value('productData[szProductCode]'); ?>" placeholder="Product Code" onfocus="remove_formError(this.id,'true')" name="productData[szProductCode]">
                                             </div>
@@ -48,7 +48,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="szProductCost" class="form-control" type="text" value="<?php echo set_value('productData[szProductCost]'); ?>" placeholder="Product Cost" onfocus="remove_formError(this.id,'true')" name="productData[szProductCost]">
                                             </div>
@@ -63,7 +63,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-file-text"></i>
                                                 </span>
                                                   <textarea  name="productData[szProductDiscription]" id="szProductDiscription" class="form-control"  value=""  rows="5" placeholder="Product Description" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('productData[szProductDiscription]'); ?></textarea>
                                                
@@ -79,7 +79,7 @@
                                             <div class="col-md-3">
                                                     <div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
                                                          <span class="input-group-addon">
-                                                         <i class="fa fa-user"></i>
+                                                         <i class="fa fa-times"></i>
                                                          </span>
                                                         <?php 
                                                          $date=$_POST['productData']['dtExpiredOn'];

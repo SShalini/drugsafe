@@ -60,7 +60,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                             <input id="szEmail" class="form-control" type="text"
                                                    value="<?php echo $_POST['addOperationManager']['szEmail']; ?>"
@@ -81,7 +81,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                             <input id="szContactNumber" class="form-control" type="text"
                                                    value="<?php echo $_POST['addOperationManager']['szContactNumber']; ?>"
@@ -104,7 +104,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                             <input id="szAddress" class="form-control" type="text"
                                                    value="<?php echo $_POST['addOperationManager']['szAddress']; ?>"
@@ -126,7 +126,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag"></i>
                                                 </span>
                                            <input id="szCountry" class="form-control read-only" type="text"
                                                    value="Australia" readonly
@@ -149,7 +149,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag-checkered"></i>
                                                 </span>
                                             <select class="form-control " name="addOperationManager[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
@@ -182,7 +182,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-building"></i>
                                                 </span>
                                             <input id="szCity" class="form-control" type="text"
                                                    value="<?php echo $_POST['addOperationManager']['szCity']; ?>"
@@ -204,7 +204,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-area-chart"></i>
                                                 </span>
                                             <input id="szZipCode" class="form-control" type="text"
                                                    value="<?php echo $_POST['addOperationManager']['szZipCode']; ?>"

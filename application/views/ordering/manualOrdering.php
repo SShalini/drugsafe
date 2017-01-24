@@ -117,9 +117,11 @@
                             }
                             
                            // if(in_array(4, $DrugtestidArr)||in_array(5, $DrugtestidArr)){
-                        ?><hr>
+                        ?>
                         
-                        <div class="portlet-title">
+                       
+                       
+                          <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Other Revenue stream (Manual Entry)</span>
@@ -130,10 +132,193 @@
                             </div>
                         </div>
                         
+                         
                         <div class="portlet-body">
-                       
-                            <form class="form-horizontal" id="orderingData" action="<?php echo __BASE_URL__?>/ordering/calform" name="orderingData" method="post">
-                                <div class="form-body">
+                        <form class="form-horizontal" id="orderingData" action="<?php echo __BASE_URL__?>/ordering/calform" name="orderingData" method="post">
+                                <div class="form-body"> 
+                                    <div class="portlet-title">
+                            <div class="caption">
+                             
+                                <span class="caption-subject font-red-sunglo bold uppercase">On Site Testing</span>
+                            </div>
+                            <div class="actions">
+                                <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                </div>
+                            </div>
+                        </div>
+                     
+                           <hr>
+                          <div class="text align-center font-green-meadow">
+                                              Single Field Collection Officer (FCO)
+                          </div>
+                                <hr>
+                          <div class="form-group <?php if(form_error('orderingData[FCOBasePrice]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label">Base Price (BP/hr)</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="FCOBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[FCOBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[FCOBasePrice]"  onblur="calTotalFCO()">
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[FCOBasePrice]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[FCOBasePrice]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                       
+                                    </div>
+                                     <div class="form-group <?php if(form_error('orderingData[FCOHr]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label ">Hours </label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="FCOHr" class="form-control" type="text" value="<?php echo set_value('orderingData[FCOHr]'); ?>" onblur="calTotalFCO()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[FCOHr]">
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[FCOHr]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[FCOHr]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                       <div class="form-group <?php if(form_error('orderingData[FCOTotal]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label font-green-meadow text "><b>Total</b> </label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <label class="col-md-4 control-label" id="FCOTotal" value=" "  name="orderingData[FCOTotal]"></label>
+                                                
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[FCOTotal]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[FCOTotal]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                      <div class="form-group <?php if(form_error('orderingData[SyntheticCannabinoids]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label"> Synthetic Cannabinoids screening</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="SyntheticCannabinoids" class="form-control" type="text" value="<?php echo set_value('orderingData[SyntheticCannabinoids]'); ?>" placeholder="Synthetic Cannabinoids screening" onfocus="remove_formError(this.id,'true')" name="orderingData[SyntheticCannabinoids]">
+                                            </div>
+                                            <?php
+                                            if(form_error('orderingData[SyntheticCannabinoids]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[SyntheticCannabinoids]');?></span>
+                                            </span><?php }?>
+                                           
+                                        </div>
+                                    </div>
+                                    <hr>
+                             <div class="text align-center font-green-meadow">
+                                             Mobile Clinic
+                             </div>
+                                    <hr>
+                                        <div class="form-group <?php if(form_error('orderingData[mobileScreenBasePrice]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label">Base Price (BP/hr)</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="mobileScreenBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenBasePrice]"  onblur="calTotal()">
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[mobileScreenBasePrice]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[mobileScreenBasePrice]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                       
+                                    </div>
+                                     <div class="form-group <?php if(form_error('orderingData[mobileScreenHr]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label ">Hours </label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="mobileScreenHr" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenHr]'); ?>" onblur="calTotal()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenHr]">
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[mobileScreenHr]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[mobileScreenHr]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                       <div class="form-group <?php if(form_error('orderingData[mobileScreen]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label font-green-meadow text "><b>Total</b> </label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <label class="col-md-4 control-label" id="mobileScreen" value=" "  name="orderingData[mobileScreen]"></label>
+                                                
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[mobileScreen]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[mobileScreen]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                       <div class="text align-center font-green-meadow">
+                                             Call Out (including an alcohol & drug screen)
+                                       </div>
+                                    <hr>
+                                      <div class="form-group <?php if(form_error('orderingData[CallOutBasePrice]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label">Base Price (BP/hr)</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="CallOutBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutBasePrice]"  onblur="calTotalCallOut()">
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[CallOutBasePrice]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[CallOutBasePrice]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                       
+                                    </div>
+                                     <div class="form-group <?php if(form_error('orderingData[CallOutHr]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label ">Hours </label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="CallOutHr" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutHr]'); ?>" onblur="calTotalCallOut()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutHr]">
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[CallOutHr]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[CallOutHr]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                       <div class="form-group <?php if(form_error('orderingData[CallOutTotal]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label font-green-meadow text "><b>Total</b> </label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <label class="col-md-4 control-label" id="CallOutTotal" value=" "  name="orderingData[CallOutTotal]"></label>
+                                                
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[CallOutTotal]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[CallOutTotal]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                     <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject font-red-sunglo bold uppercase">Laboratory Testing</span>
+                            </div>
+                            
+                        </div>
+                                    <hr>
                                     <div class="form-group <?php if(form_error('orderingData[urineNata]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label"> Urine NATA Laboratory screening</label>
                                         <div class="col-md-5">
@@ -181,38 +366,49 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
-                                     <div class="form-group <?php if(form_error('orderingData[SyntheticCannabinoids]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label"> Synthetic Cannabinoids or Designer Drugs, per sample </label>
+                                    <hr>
+                                     <div class="text align-center font-green-meadow">
+                                             Synthetic Cannabinoids or Designer Drugs, per sample.</div>
+                                     <hr>
+                                     <div class="form-group <?php if(form_error('orderingData[laboratoryScreening]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label"> Laboratory screening </label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="SyntheticCannabinoids" class="form-control" type="text" value="<?php echo set_value('orderingData[SyntheticCannabinoids]'); ?>" placeholder="Synthetic Cannabinoids" onfocus="remove_formError(this.id,'true')" name="orderingData[SyntheticCannabinoids]">
+                                                <input id="laboratoryScreening" class="form-control" type="text" value="<?php echo set_value('orderingData[laboratoryScreening]'); ?>" placeholder="Laboratory Screening" onfocus="remove_formError(this.id,'true')" name="orderingData[laboratoryScreening]">
                                             </div>
                                              <?php
-                                            if(form_error('orderingData[SyntheticCannabinoids]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[SyntheticCannabinoids]');?></span>
+                                            if(form_error('orderingData[laboratoryScreening]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[laboratoryScreening]');?></span>
                                             </span><?php }?>
                                         </div>
                                     </div>
-                                    
-                                   
-                                     <div class="form-group <?php if(form_error('orderingData[labScrenning]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label">Laboratory screening</label>
+                                 
+                                     <div class="form-group <?php if(form_error('orderingData[laboratoryConfirmation]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label">Laboratory confirmation</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="labScrenning" class="form-control" type="text" value="<?php echo set_value('orderingData[labScrenning]'); ?>" placeholder="Laboratory screening" onfocus="remove_formError(this.id,'true')" name="orderingData[labScrenning]">
+                                                <input id="laboratoryConfirmation" class="form-control" type="text" value="<?php echo set_value('orderingData[laboratoryConfirmation]'); ?>" placeholder="Laboratory Confirmation" onfocus="remove_formError(this.id,'true')" name="orderingData[laboratoryConfirmation]">
                                             </div>
                                              <?php
-                                            if(form_error('orderingData[labScrenning]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[labScrenning]');?></span>
+                                            if(form_error('orderingData[laboratoryConfirmation]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[laboratoryConfirmation]');?></span>
                                             </span><?php }?>
                                         </div>
                                     </div>
+                                    <hr>
+                                     <div class="portlet-title">
+                            <div class="caption">
+                                <span class="caption-subject font-red-sunglo bold uppercase">Other testing services</span>
+                            </div>
+                            
+                        </div>
+                                    <hr>
                                      <div class="form-group <?php if(form_error('orderingData[RtwScrenning]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label">Return to work (RTW) screening</label>
                                         <div class="col-md-5">
@@ -229,52 +425,52 @@
                                         </div>
                                     </div>
                                   
-                                      
+                                      <hr>
                                             <div class="text align-center font-green-meadow">
                                                Drugsafe Communiies mobile clinic screening</div>
                                                <hr>
                                      
-                                     <div class="form-group <?php if(form_error('orderingData[mobileScreenBasePrice]')){?>has-error<?php }?>">
+                                     <div class="form-group <?php if(form_error('orderingData[DCmobileScreenBasePrice]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label">Base Price (BP/hr)</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="mobileScreenBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenBasePrice]"  onblur="calTotal()">
+                                                <input id="DCmobileScreenBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[DCmobileScreenBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[DCmobileScreenBasePrice]"  onblur="calTotalDC()">
                                             </div>
                                              <?php
-                                            if(form_error('orderingData[mobileScreenBasePrice]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[mobileScreenBasePrice]');?></span>
+                                            if(form_error('orderingData[DCmobileScreenBasePrice]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[DCmobileScreenBasePrice]');?></span>
                                             </span><?php }?>
                                         </div>
                                        
                                     </div>
-                                     <div class="form-group <?php if(form_error('orderingData[mobileScreenHr]')){?>has-error<?php }?>">
+                                     <div class="form-group <?php if(form_error('orderingData[DCmobileScreenHr]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label ">Hours </label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                <input id="mobileScreenHr" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenHr]'); ?>" onblur="calTotal()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenHr]">
+                                                <input id="DCmobileScreenHr" class="form-control" type="text" value="<?php echo set_value('orderingData[DCmobileScreenHr]'); ?>" onblur="calTotalDC()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[DCmobileScreenHr]">
                                             </div>
                                              <?php
-                                            if(form_error('orderingData[mobileScreenHr]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[mobileScreenHr]');?></span>
+                                            if(form_error('orderingData[DCmobileScreenHr]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[DCmobileScreenHr]');?></span>
                                             </span><?php }?>
                                         </div>
                                     </div>
-                                       <div class="form-group <?php if(form_error('orderingData[mobileScreen]')){?>has-error<?php }?>">
+                                       <div class="form-group <?php if(form_error('orderingData[DCmobileScreenTotal]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label font-green-meadow text "><b>Total</b> </label>
                                         <div class="col-md-5">
                                             <div class="input-group">
-                                                <label class="col-md-4 control-label" id="mobileScreen" value=" "  name="orderingData[mobileScreen]"></label>
+                                                <label class="col-md-4 control-label" id="DCmobileScreenTotal" value=" "  name="orderingData[DCmobileScreenTotal]"></label>
                                                 
                                             </div>
                                              <?php
-                                            if(form_error('orderingData[mobileScreen]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[mobileScreen]');?></span>
+                                            if(form_error('orderingData[DCmobileScreenTotal]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[DCmobileScreenTotal]');?></span>
                                             </span><?php }?>
                                         </div>
                                     </div>
@@ -363,6 +559,22 @@
                                             </span><?php }?>
                                         </div>
                                         <input id="sosid" class="form-control" type="hidden" value="<?php echo $sosid ?>"   name="orderingData[sosid]">
+                                    </div>
+                                               <hr>
+                                       <div class="form-group <?php if(form_error('orderingData[cancellationFee]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label">Cancellation Fee</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="cancellationFee" class="form-control" type="text" value="<?php echo set_value('orderingData[cancellationFee]'); ?>" placeholder="Cancellation Fee" onfocus="remove_formError(this.id,'true')" name="orderingData[cancellationFee]">
+                                            </div>
+                                             <?php
+                                            if(form_error('orderingData[cancellationFee]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('orderingData[cancellationFee]');?></span>
+                                            </span><?php }?>
+                                        </div>
                                     </div>
                                     <div class="form-actions">
                                     <div class="row">

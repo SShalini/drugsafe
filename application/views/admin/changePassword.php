@@ -17,7 +17,7 @@
                                         <div class="col-md-4">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-key"></i>
                                                 </span>
                                                  <input type="password" name="drugsafeChangePassword[szOldPassword]" id="szOldPassword" class="form-control input-square-right required" onfocus="remove_formError(this.id,'true')" placeholder="Current Password" > 
                                             </div>
@@ -36,7 +36,7 @@
                                                             <div class="col-md-4">
                                                                  <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-key"></i>
                                                 </span>
                                                 <input type="password" name="drugsafeChangePassword[szPassword]" id="szPassword" class="form-control input-square-right required" placeholder="New Password" onfocus="remove_formError(this.id,'true')"> 
                                             </div>
@@ -55,7 +55,7 @@
                                                             <div class="col-md-4">
                                                                    <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-key"></i>
                                                 </span>
                                                   <input type="password" name="drugsafeChangePassword[szConfirmPassword]" id="szConfirmPassword" onfocus="remove_formError(this.id,'true')"  class="form-control input-square-right required re-match" placeholder="Confirm Password" > 
                                             </div>

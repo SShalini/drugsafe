@@ -67,7 +67,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-envelope"></i>
                                                 </span>
                                                 <input id="szEmail" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szEmail'] ;?>" placeholder="Email" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szEmail]">
                                             </div>
@@ -85,7 +85,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                 <input id="szContactNumber" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szContactNumber'] ;?>" placeholder="Contact Number" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szContactNumber]">
                                             </div>
@@ -107,7 +107,7 @@
                                             <div class="col-md-5">
                                                 <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-male"></i>
                                                 </span>
                                                     <select class="form-control" name="addFranchisee[operationManagerId]"
                                                             id="franchiseeId" Placeholder="Operation Manager"
@@ -146,7 +146,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                                 <input id="szAddress" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szAddress'] ;?>" placeholder="Address" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szAddress]">
                                             </div>
@@ -165,7 +165,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag"></i>
                                                 </span>
                                             <select class="form-control read-only " name="addFranchisee[szCountry]" id="szCountry"
                                                     Placeholder="Country" readonly onfocus="remove_formError(this.id,'true')">
@@ -190,7 +190,7 @@
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-flag-checkered"></i>
                                                 </span>
                                             <select class="form-control " name="addFranchisee[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
@@ -222,7 +222,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-building"></i>
                                                 </span>
                                                 <input id="szCity" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szCity'] ;?>" placeholder="City" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szCity]">
                                             </div>
@@ -241,7 +241,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-area-chart"></i>
                                                 </span>
                                                 <input id="szZipCode" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szZipCode'] ;?>" placeholder="ZIP/Postal Code" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szZipCode]">
                                             </div>
