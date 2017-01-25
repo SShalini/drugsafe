@@ -125,10 +125,11 @@
                                             <div class="well">
                                                     <div class="row static-info align-reverse">
                                                             <div class="col-md-8 name">
-                                                                     Sub Total:
+                                                                     Total Price:
                                                             </div>
                                                             <div class="col-md-3 value">
-                                                                     $<?php echo $priceTotal;?>
+                                                                $<?php echo number_format($priceTotal, 2, '.', ',');;?> 
+                                                                     
                                                             </div>
                                                     </div>
                                                     

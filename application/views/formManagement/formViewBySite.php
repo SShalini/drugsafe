@@ -40,7 +40,7 @@
             <div class="col-md-12">
                  <ul class="page-breadcrumb breadcrumb">
                    <li>
-                        <a onclick="viewForm('1');" href="javascript:void(0);" >Home</a>
+                          <a href="<?php echo __BASE_URL__; ?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
                       <li>

@@ -13,6 +13,7 @@ class Franchisee_Controller extends CI_Controller
         $this->load->model('Franchisee_Model');
         $this->load->library('pagination');
         $this->load->model('StockMgt_Model');
+         $this->load->model('Inventory_Model');
         $this->load->model('Form_Management_Model');
     }
 

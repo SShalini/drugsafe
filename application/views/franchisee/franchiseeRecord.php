@@ -240,17 +240,58 @@
                                         <td> <?php echo $franchiseeData['szEmail']; ?> </td>
                                         <td> <?php echo $franchiseeData['szContactNumber']; ?> </td>
                                         <td><?php echo $franchiseeData['szCity']; ?> </td>
-                                     <td>
-<!--                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>,'','');" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                        
+                                          <td>
 
-                                                </a>-->
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>);" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-<!--                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client List" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>-->
+
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-cube" aria-hidden="true"></i>
+                                                </a>
+                                               <?php 
+                                                $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList(false,false,false,1);
+                                                
+                                         if(!empty($drugTestKitListAray)){
+                                            foreach($drugTestKitListAray as $drugTestKitListData)
+                                            {
+                                                $drugTestKitDataArr[$drugTestKitListData['id']] = $this->StockMgt_Model->getStockValueDetailsByProductId($franchiseeData['id'],$drugTestKitListData['id']);   
+                                               
+                                            }
+                                          $emptyArr = false;
+                                           foreach($drugTestKitDataArr as $key => $val) {
+                                           if(empty($val)){
+                                             $emptyArr = true;
+                                          }
+                                            }
+                                            
+                                            if($emptyArr != true){
+                                         
+                                    ?>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="viewProductStockMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                                                </a>
+                                        <?php } }
+                                                $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
+                                                
+                                                if(empty($clientDetailsAray)){
+                                               ?>
+                                               <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Franchisee" onclick="franchiseeDelete(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                </a>
+                                                 <?php 
+                                                }
+                                               ?>
+                                            </td> 
+                                        
+                                        
+<!--                                     <td>
+
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>);" href="javascript:void(0);">
+                                                    <i class="fa fa-pencil"></i> 
+                                                </a>
+
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>
@@ -270,7 +311,7 @@
                                                ?>
                                                 
                                                 
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </tr>
                                     <?php

@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/formManagement/viewform">Home</a>
+                             <a href="<?php echo __BASE_URL__; ?>">Home</a>
                         </li>
                         <li>
                             <i class="fa fa-circle"></i>

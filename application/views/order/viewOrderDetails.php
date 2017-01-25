@@ -50,11 +50,7 @@
                             </div>
                 
                         </div>
-                         <?php
                         
-                        if(!empty($validOrdersDetailsAray))
-                        {
-                           ?>
                       <div class="row">
                       <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/order/view_order_list" method="post">
                 <div class="row">
@@ -101,7 +97,7 @@
                               <select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Status</option>
                                                 <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("1") ? "selected" : ""); ?>>Ordered</option>
-                                                <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>Pending</option>
+                                                <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>Dispatched</option>
                                                 <option value="3" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("3") ? "selected" : ""); ?>>Canceled</option>
                              </select>
                             
@@ -181,7 +177,11 @@
 
             </form>   
                     </div>
-                    
+                    <?php
+                        
+                        if(!empty($validOrdersDetailsAray))
+                        {
+                           ?> 
                         <div class="portlet-body alert">
                        <div class="row">
                             <div>

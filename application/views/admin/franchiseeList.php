@@ -43,7 +43,7 @@
                         </li>
                       <?php } else{?>
                          <li>
-                            <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList">Home</a>
+                              <a href="<?php echo __BASE_URL__; ?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
                       <?php }?>
