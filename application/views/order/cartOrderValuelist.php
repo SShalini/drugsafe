@@ -37,14 +37,14 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                            <span class="active">Order List </span>
+                            <span class="active">Cart</span>
                         </li>
                     </ul>
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Order List </span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Cart </span>
                             </div>
                       
                          <div class="actions">

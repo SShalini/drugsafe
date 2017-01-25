@@ -48,8 +48,8 @@
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">
-                              <h2>  <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $forumDetailsAry['0']['szForumTitle']?></span></h2>
+                               <i class="icon-equalizer font-red-sunglo"></i>
+                                <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $forumDetailsAry['0']['szForumTitle']?></span>
                             </div>
                            
                         </div>

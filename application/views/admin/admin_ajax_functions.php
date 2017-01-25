@@ -1355,17 +1355,17 @@ if($mode == '__DELETE_ORDER_POPUP__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Order</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Remove Product</span> </h4>
                         </div>
                  
                 </div>
               
                 <div class="modal-body">
-                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Order?</p>
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to remove the selected Product?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="DeleteOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                    <button type="button" onclick="DeleteOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn red"><i class="fa fa-times"></i> Remove</button>
                 </div>
             </div>
         </div>
@@ -1383,13 +1383,13 @@ if($mode == '__DELETE_ORDER_CONFIRM__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Order</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Removed Product</span> </h4>
                         </div>
                  
                 </div>
                
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Order has been successfully deleted.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Product has been successfully removed.</p>
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__;?>/order/orderList" class="btn dark btn-outline">Close</a>
