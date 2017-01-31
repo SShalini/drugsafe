@@ -470,8 +470,8 @@ function ViewAssignReportingPdfData()
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
          $this->session->unset_userdata('$flag');
-          $this->session->unset_userdata('productCode');
-           $this->session->unset_userdata('franchiseeName');
+         $this->session->unset_userdata('productCode');
+         $this->session->unset_userdata('franchiseeName');
         $pdf->Output('stock-assignment-report.pdf', 'I');
     }
 function excelstockassignlistData()
@@ -1021,6 +1021,93 @@ function excelfr_stockassignlist_Data()
          $this->session->unset_userdata('productCode');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
+    }
+       public function inventoryReport()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        
+         $searchAry = $_POST;
+         
+//       $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+//       $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+//       $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+     
+       
+//                    $data['validOrdersDetailsAray'] = $validOrdersDetailsAray; 
+//                     $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray; 
+//                    $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;  
+                    $data['szMetaTagTitle'] = "Order Details";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Orders";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('reporting/inventoryReport');
+            $this->load->view('layout/admin_footer'); 
+               
+    }
+    
+       public function viewOrderReport()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        
+         $searchAry = $_POST;
+        
+                    $data['szMetaTagTitle'] = "Order Details";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Orders";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('reporting/View_Order_Report');
+            $this->load->view('layout/admin_footer'); 
+               
+    }
+           public function xero()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        
+         $searchAry = $_POST;
+        
+                    $data['szMetaTagTitle'] = "Order Details";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Orders";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('reporting/xero');
+            $this->load->view('layout/admin_footer'); 
+               
     }
 }
 ?>

@@ -19,6 +19,7 @@ class Inventory_Model extends Error_Model {
                                 'szProductDiscription'=>$_POST['productData']['szProductDiscription'],
                                 'szProductCost' => $_POST['productData']['szProductCost'],
                                 'szProductCategory' => $_POST['productData']['szProductCategory'],
+                                'szAvailableQuantity' => $_POST['productData']['szAvailableQuantity'],
 				'dtCreatedOn' => $date,
                                 'dtExpiredOn' => $dtExpiredOn
                             );
@@ -63,6 +64,7 @@ class Inventory_Model extends Error_Model {
                                 'szProductCode' => $_POST['productData']['szProductCode'],
                                 'szProductDiscription'=>$_POST['productData']['szProductDiscription'],
                                 'szProductCost' => $_POST['productData']['szProductCost'],
+                                'szAvailableQuantity' => $_POST['productData']['szAvailableQuantity'],
                                 'dtExpiredOn' => $dtExpiredOn,
                                 'szProductCategory' => $_POST['productData']['szProductCategory'],
                             );

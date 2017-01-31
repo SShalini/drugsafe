@@ -74,6 +74,22 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
+                                     <div class="form-group <?php if(form_error('productData[szAvailableQuantity]')){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label"> Available Quantity</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-cubes"></i>
+                                                </span>
+                                                 <input id="szAvailableQuantity" class="form-control" type="text" value="<?php echo set_value('productData[szAvailableQuantity]'); ?>" placeholder="Available Quantity" onfocus="remove_formError(this.id,'true')" name="productData[szAvailableQuantity]">
+                                              
+                                            </div>
+                                              <?php
+                                            if(form_error('productData[szAvailableQuantity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('productData[szAvailableQuantity]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
                                    <div class="form-group <?php if(form_error('productData[dtExpiredOn]')){?>has-error<?php }?>">
                                              <label class="col-md-3 control-label">Expiry Date</label>
                                             <div class="col-md-3">

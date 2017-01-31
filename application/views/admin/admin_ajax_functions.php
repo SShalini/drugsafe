@@ -1631,123 +1631,13 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Order Details</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Edit Order </span> </h4>
                         </div>
                  
                 </div>
                
                   <div class="modal-body">
                   
-                    <div class="portlet green-meadow box">
-                            <div class="portlet-title">
-                                    <div class="caption">
-                                            <i class="fa fa-cogs"></i> Order Info
-
-                                    </div>
-                                   
-                            </div>
-                        <?php 
-                         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
-                         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
-                        
-                          $splitTimeStamp = explode(" ",$OrdersDetailsAray['createdon']);
-                                                             $date1 = $splitTimeStamp[0];
-                                                             $time1 = $splitTimeStamp[1];
-                                                           
-                                                           $x=  date("g:i a", strtotime($time1));
-                                                     
-                                                          $date= explode('-', $date1);
-                                                        
-                                                          
-                                                          $monthNum  = $date['1'];
-                                                         
-                                                          $dateObj   = DateTime::createFromFormat('!m', $monthNum);
-                                                          $monthName = $dateObj->format('M');
-                         
-                         
-                         
-                        ?>
-                            <div class="portlet-body">
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Order #:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                    #0000<?php echo $idOrder ;?>
-                                            </div>
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Order Date & Time:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                      <?php echo $date['2'];?> <?php echo $monthName;?>  <?php  echo $date['0'];?> at <?php echo $x;?>
-                                            </div>
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Order Status:
-                                            </div>
-                                         <?php if($OrdersDetailsAray['status']==1){?>
-                                          <div class="col-md-7 value">
-                                                    <span class="label label-sm label-warning">
-                                                    Ordered </span>
-                                            </div>
-                                       
-                                        <?php
-                                    }
-                                    if($OrdersDetailsAray['status']==2){
-                                        ?>
-                                           <div class="col-md-7 value">
-                                                    <span class="label label-sm label-success">
-                                                    Dispatched </span>
-                                            </div>
-                                       
-                                        <?php
-                                    }
-                                  if($OrdersDetailsAray['status']==3){
-                                        ?>
-                                           <div class="col-md-7 value">
-                                                    <span class="label label-sm label-danger">
-                                                    Canceled </span>
-                                            </div>
-                                       
-                                        <?php
-                                    }
-                                   
-                                   if($OrdersDetailsAray['status']==4){
-                                        ?>
-                                           <div class="col-md-7 value">
-                                                    <span class="label label-sm label-info">
-                                                     Pending</span>
-                                            </div>
-                                       
-                                        <?php
-                                    }
-
-                                    ?>
-                                         
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Total Price:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                 $<?php 
-                                                echo number_format($OrdersDetailsAray['price'], 2, '.', ','); ?> 
-                                            </div>
-                                    </div>
-                                    <div class="row static-info">
-                                            <div class="col-md-5 name">
-                                                     Franchisee:
-                                            </div>
-                                            <div class="col-md-7 value">
-                                                    <?php echo $franchiseeDetArr1['szName']?>
-                                            </div>
-                                    </div>
-                            </div>
-                    </div>
-                      <hr>
 	              <div class="portlet green-meadow box">
                             <div class="portlet-title">
                                     <div class="caption">
@@ -1759,45 +1649,95 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                           <?php  $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
                         ?>
                             <div class="portlet-body">
+                                  <form class="form-horizontal" id="dispatchProduct" action="<?= __BASE_URL__ ?>/order/dispatchProductData" name="dispatchProduct" method="post">
+                            <div class="form-body">
                                      <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th> Product Code </th>
                                                 <th> Product Cost</th>
-                                                <th> Quantity</th>
+                                                <th> Ordered</th>
+                                                <th> Available</th>
+                                                <th> Dispatch Qty</th>
                                                 <th> Total Price </th>
-                                                <th> Dispatched Quantity </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                       
+                                            $i = 1;
+                                              $count=0;
                                         foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
-                                            $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);?>
+                                            $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
+                                              $count++ ;?>
                                                 <tr>
                                                     <td> <?php echo $productDataArr['szProductCode'] ;?> </td>
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                     <td> <?php echo $totalOrdersDetailsData['quantity'];?> </td>
-                                                    <td> $<?php 
-                                                   echo number_format(($totalOrdersDetailsData['quantity'])*($productDataArr['szProductCost']), 2, '.', ','); ?> 
+                                                    <td> <?php echo $productDataArr['szAvailableQuantity'];?> </td>
+                                                      <td>
+                                                         <input type="number"min="1"  class="form-control btn-xs " max="100" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" onblur="calTotalPrice('<?php echo $productDataArr['szProductCost'];?>','<?php echo $i;?> ')">
                                                       </td>
-                                                      <td> <?php echo $categoriesData['szDiscription'];?> </td>
-
+                                                      <td> 
+                                                        $<label class ="lab<?php echo $i;?>" name="total_price<?php echo $i;?>" value=""  id="total_price<?php echo $i;?>" ></label>
+                                                      </td>
+                                                    
+                                                    
                                                 </tr>
-                                        <?php }?>     
-
+                                                
+                                             <input id="orderId" class="form-control" type="hidden"
+                                               value="<?php echo $totalOrdersDetailsData['orderid']; ?>" name="order_id<?php echo $i;?>" id="order_id<?php echo $i;?>">
+                                            
+                                            
+                                            
+                                            <input id="ProductId" class="form-control" type="hidden"
+                                               value="<?php echo $productDataArr['id']; ?>" name="product_id<?php echo $i;?>" id="product_id<?php echo $i;?>">
+                                               <?php
+                                             $i++;
+                                              }
+                                            
+                                             
+                                           ?>
+                                            
                                         </tbody>
                                     </table>
+                                          <div class="row">
+                                    <div class="col-md-6">
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="well">
+                                                    <div class="row static-info align-reverse">
+                                                            <div class="col-md-8 name portlet_list_title">
+                                                                     Total Price:
+                                                            </div>
+                                                            <div class="col-md-4 value">
+                                                              <input id="total" class="form-control" type="hidden"
+                                                               value="0" name="total" id="total" > 
+                                                               $<label  name="finaltotal" value=""  id="finaltotal" ></label>
+                                                                     
+                                                            </div>
+                                                    </div>
+                                                    
+                                            </div>
+                                    </div>
+                               </div>
                                 </div>
+                                
+                                 </div>
+                                       <input id="count" class="form-control" type="hidden"
+                                               value="<?php echo $count; ?>" name="count">
+                                       
+                       <div class="modal-footer">                 
+                      <button type="submit" class="btn green" name="submit"><i class="icon-basket"></i> Dispatch Order</button>
+                      <button type="button" onclick="deliverOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn green-meadow"><i class="fa fa-shopping-cart"></i>  Pending Order</button>
+                      <button type="button" onclick="CancelOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn red"><i class="fa fa-times"></i> Cancel Order</button>
+                      </div>
+                                       </form>
                             </div>
                     </div>										
                 </div>
                
-                <div class="modal-footer">
-                     <button type="button" onclick="deliverOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn green-meadow"><i class="icon-basket"></i>  Deliver Order</button>
-                    <button type="button" onclick="CancelOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn red"><i class="fa fa-times"></i> Cancel Order</button>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -1846,12 +1786,12 @@ if($mode == '__DELIVER_ORDER_CONFIRM_DETAILS_POPUP__')
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                      <div class="caption">
                              <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Deliver Order</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Pending Order</span> </h4>
                         </div>
                  
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Ordered Quantity has been delivered successfully.</p>
+                    <p class="alert alert-success"><i class="fa fa-exclamation-triangle"></i> Ordered Quantity has been in pending state.</p>
                 </div>
                 <div class="modal-footer">
                     <?php 
@@ -1865,4 +1805,32 @@ if($mode == '__DELIVER_ORDER_CONFIRM_DETAILS_POPUP__')
     
     <?php
 }
+if($mode == '__DISPATCH_ORDER_CONFIRM_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="deliverOrderConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                     <div class="caption">
+                             <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Dispatch Order</span> </h4>
+                        </div>
+                 
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Ordered Quantity has been dispatched successfully.</p>
+                </div>
+                <div class="modal-footer">
+                    <?php 
+                  
+                    ?>
+                    <a href="<?php echo __BASE_URL__;?>/order/view_order_list" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php }  
   ?>

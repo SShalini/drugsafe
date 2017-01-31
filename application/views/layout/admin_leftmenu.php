@@ -128,6 +128,24 @@
                                 <span class="title">Stock Assignments</span>
                             </a>
                         </li>
+                        <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/inventoryReport">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Inventory Report</span>
+                            </a>
+                        </li>
+                         <li class="nav-item  <?php if ($subpageName == 'View_Order_Report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/viewOrderReport">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">View Order Report</span>
+                            </a>
+                        </li>
+                         <li class="nav-item  <?php if ($subpageName == 'Xero') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/xero">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Xero</span>
+                            </a>
+                        </li>
 
                     </ul>
 
@@ -154,7 +172,9 @@
                                 <span class="title">Stock Assignments</span>
                             </a>
                         </li>
-
+                      
+                         
+                       
                     </ul>
 
                 </li>

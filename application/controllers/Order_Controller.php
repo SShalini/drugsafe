@@ -374,9 +374,14 @@ class Order_Controller extends CI_Controller {
        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
      
-       
-                    $data['validOrdersDetailsAray'] = $validOrdersDetailsAray; 
-                     $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray; 
+        $this->load->library('form_validation');
+            $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
+            $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
+            
+            $this->form_validation->set_message('required', '{field} is required');
+            if ($this->form_validation->run() == FALSE)
+            {  
+                    $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray; 
                     $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;  
                     $data['szMetaTagTitle'] = "Order Details";
                     $data['is_user_login'] = $is_user_login;
@@ -385,11 +390,31 @@ class Order_Controller extends CI_Controller {
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
                     $data['drugtestkitlist'] = $drugTestKitListAray;
+                    
+                     $this->load->view('layout/admin_header',$data);
+                     $this->load->view('order/viewOrderDetails');
+                     $this->load->view('layout/admin_footer'); 
 
-            $this->load->view('layout/admin_header',$data);
-            $this->load->view('order/viewOrderDetails');
-            $this->load->view('layout/admin_footer'); 
+            }
+            else
+            {
+                    $data['validOrdersDetailsAray'] = $validOrdersDetailsAray; 
+                    $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray; 
+                    $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;  
+                    $data['szMetaTagTitle'] = "Order Details";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Orders";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+                    
+                     $this->load->view('layout/admin_header',$data);
+                     $this->load->view('order/viewOrderDetails');
+                     $this->load->view('layout/admin_footer'); 
+           
                
+    }
     }
      public function viewOrderData()
         {
@@ -550,7 +575,61 @@ class Order_Controller extends CI_Controller {
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');
     }
-
+     public function dispatchProductData()
+    {
+        
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $count = $_POST['count'];
+        $total_price = 0;
+        for ($i = 1; $i <= $count; $i++)
+        {
+         $quantity =  $_POST['order_quantity'.$i];
+     
+         $total_price += $_POST['total_price'.$i];
+         $orderId =  $_POST['order_id'.$i];
+         $productId =  $_POST['product_id'.$i];
+         $productDataArr = $this->Inventory_Model->getProductDetailsById($productId);
+         if($productDataArr['szAvailableQuantity']< $quantity)
+         {
+                $szMessage['type'] = "error";
+                $szMessage['content'] = "<strong><h3>Dispatch Quantity must be less than available quantity.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/view_order_list'));
+         }else{
+              if(!empty($quantity)){
+         $orderDispatch =$this->Order_Model->dispatchOrder($quantity,$orderId,$productId); 
+         }
+         }
+        
+        }
+        
+        if($orderDispatch){
+            $totalPrice = $_POST['total'];
+             if($this->Order_Model->orderFinalUpdate($_POST['order_id1'],$totalPrice)) 
+             {
+               $szMessage['type'] = "success";
+                $szMessage['content'] = "<strong><h3>Your Cart has been successfully updated.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/view_order_list'));
+             }
+        }
+        else{
+                $szMessage['type'] = "error";
+                $szMessage['content'] = "<strong><h3>Dispatch Quantity field can't be empty.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/view_order_list'));
+        }
+               
+    }
         
         }      
 ?>

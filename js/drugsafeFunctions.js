@@ -1432,3 +1432,14 @@ function deliverOrderConfirmation(idOrder) {
 
     });
 }
+function calTotalPrice(prodcost,inc) {
+ 
+ var Val1=jQuery('#order_quantity'+inc).val();
+ var res= Val1*prodcost;
+ 
+jQuery('#total_price'+inc).html(res);
+var finaltotal = jQuery('#total').val();
+finaltotal = parseFloat(finaltotal)+parseFloat(res);
+jQuery('#finaltotal').html(finaltotal);
+jQuery('#total').val(finaltotal);
+}

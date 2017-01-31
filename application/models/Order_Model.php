@@ -222,7 +222,7 @@ class Order_Model extends Error_Model {
         {
           
             $whereAry = array('orderid=' => $orderId);
-            $this->db->select('productid,quantity');
+            $this->db->select('orderid,productid,quantity');
             $this->db->from(__DBC_SCHEMATA_ORDER_DETAILS__);
             $this->db->where($whereAry);
             $query = $this->db->get();
@@ -306,6 +306,7 @@ class Order_Model extends Error_Model {
                     
                          
                 }
+             
 
                  if($key == 'szSearch1'){
                     if(!empty ($searchData)){
@@ -385,7 +386,7 @@ class Order_Model extends Error_Model {
      $date = date('Y-m-d H:i:s');
      if($flag==2){
        $dataAry = array(
-			'status' => '2',
+			'status' => '4',
                         'dispatchedon' => $date
                 );   
      }
@@ -398,6 +399,47 @@ class Order_Model extends Error_Model {
      }
 		 
                 $this->db->where('id', $orderId);
+                 
+		if($query = $this->db->update(__DBC_SCHEMATA_ORDER__, $dataAry))
+                        
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+         public function dispatchOrder($quantity,$orderId,$productid)
+	{ 
+            
+		$dataAry = array(
+			'dispatched' => $quantity
+                );
+                 $whereAry = array('orderid=' => $orderId,'productid' => $productid);
+                $this->db->where($whereAry);
+                 
+		if($query = $this->db->update(__DBC_SCHEMATA_ORDER_DETAILS__, $dataAry))
+                        
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+         public function orderFinalUpdate($orderId,$price)
+	{ 
+             
+            $date = date('Y-m-d H:i:s');
+		$dataAry = array(
+			'status' => '2',
+                        'price' => $price,
+                        'dispatchedon' => $date
+                );
+                 $whereAry = array('id=' => $orderId);
+                $this->db->where($whereAry);
                  
 		if($query = $this->db->update(__DBC_SCHEMATA_ORDER__, $dataAry))
                         

@@ -53,11 +53,10 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th> Id.</th>
+                                        <th> #</th>
+                                        <th> Order Number</th>
                                         <th> Franchisee</th>
-                                        <th> Email</th>
-                                        <th> Contact No. </th>
-                                        <th> Address </th>
+                                        <th> Order Date</th>
                                         <th> Quantity Requests </th>
                                     </tr>
                                 </thead>
@@ -81,11 +80,10 @@
                                            
                                         ?>
                                         <tr>
-                                            <td> FR-<?php echo $frReqQtyArayData['id'];?> </td>
+                                            <td> <?php echo $frReqQtyArayData['id'];?> </td>
                                             <td> <?php echo $frReqQtyArayData['szName']?> </td>
-                                            <td> <?php echo $frReqQtyArayData['szEmail'];?> </td>
-                                            <td> <?php echo $frReqQtyArayData['szContactNumber'];?> </td>
-                                            <td> <?php echo $frReqQtyArayData['szCity'];?> </td>
+                                            <td> <?php echo $frReqQtyArayData['szName']?> </td>
+                                            <td> <?php echo $frReqQtyArayData['szName']?> </td>
                                            <td>
                                                 
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="quantityStatus" title="View Quantity Requests" onclick="ViewReqProductList(<?php echo $frReqQtyArayData['id'];?>);" href="javascript:void(0);"></i>

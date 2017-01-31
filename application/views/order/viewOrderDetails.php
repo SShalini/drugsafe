@@ -91,26 +91,7 @@
                     <div class="col-md-1">
                        
                            </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            
-                              <select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Status</option>
-                                                <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("1") ? "selected" : ""); ?>>Ordered</option>
-                                                <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>Dispatched</option>
-                                                <option value="3" <?php echo (sanitize_post_field_value($_POST['szSearch3']) == trim("3") ? "selected" : ""); ?>>Canceled</option>
-                             </select>
-                            
-                           
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                        
-                           </div>
-
-                </div>
-                <div class="row">
-                <div class="col-md-3">
+                     <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                            <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" >
                                           
@@ -134,13 +115,16 @@
                         
                     </div>
                    
-                       <div class="col-md-1">
-                       </div>
+                
+                </div>
+                <div class="row">
+               
+                    
                     <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                            <div class="input-group input-medium date date-picker" data-date-format="dd/mm/yyyy" >
                                           
-                                           <input type="text" id="szSearch5" class="form-control" value="<?php echo set_value('szSearch5'); ?>" readonly placeholder="Start Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch5">
+                                           <input type="text" id="szSearch5" class="form-control" value="<?php echo set_value('szSearch5'); ?>" readonly placeholder="End Order Date" onfocus="remove_formError(this.id,'true')" name="szSearch5">
                                                <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
                                                </span>
@@ -158,9 +142,8 @@
                                         <?php } ?>
                           </div>
                     </div>
-                    <div class="col-md-1">
-                        
-                           </div>
+                     <div class="col-md-1">
+                       </div>
                     <div class="col-md-3">
                         <div class="form-group">
                              <button class="btn green-meadow" type="submit" ><i
@@ -178,8 +161,8 @@
             </form>   
                     </div>
                     <?php
-                        
-                        if(!empty($validOrdersDetailsAray))
+                         if(!empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
+                        if(!empty($validOrdersDetailsAray)&& !empty($_POST['szSearch2']||$_POST['szSearch1']) ) 
                         {
                            ?> 
                         <div class="portlet-body alert">
@@ -329,7 +312,7 @@
                             </div>
                     </div>
                             </div>
-                        <?php } else { echo"Not Found"; }?>   
+                         <?php } else { echo"Not Found"; } }?>   
                
                     </div>
 

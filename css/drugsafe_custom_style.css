@@ -121,3 +121,17 @@ margin-bottom: 16px;
 .Ckbtn{
      margin-top: 20px;  
 }
+.Text_blur{
+  color: grey;  
+}
+.Text{
+  color: #1bbc9b;  
+}
+.Total_align{
+  text-align: right;
+padding: 4px 28px;  
+}
+.Text_align{
+  text-align: right;
+margin-bottom: 10px;
+}
