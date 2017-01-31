@@ -97,9 +97,6 @@ class Webservices_Controller extends CI_Controller
         echo json_encode($responsedata);
     }
 
-    /**
-     *
-     */
     function addsosdata(){
         $jsondata = json_decode(file_get_contents("php://input"));
         $dataArr['sosdate'] = !empty($jsondata->sosdate) ? $jsondata->sosdate : "";
@@ -136,6 +133,7 @@ class Webservices_Controller extends CI_Controller
         $dataArr['devicename'] = !empty($jsondata->devicename) ? $jsondata->devicename : "";
         $dataArr['extraused'] = !empty($jsondata->extraused) ? $jsondata->extraused : "";
         $dataArr['breathtest'] = !empty($jsondata->breathtest) ? $jsondata->breathtest : "";
+        $dataArr['collsign'] = !empty($jsondata->collsign) ? $jsondata->collsign : "";
         $dataArr['comments'] = !empty($jsondata->comments) ? $jsondata->comments : "";
         $dataArr['nominated'] = !empty($jsondata->nominated) ? $jsondata->nominated : "";
         $dataArr['nominedec'] = !empty($jsondata->nominedec) ? $jsondata->nominedec : "";
@@ -229,6 +227,8 @@ class Webservices_Controller extends CI_Controller
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['extraused']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['breathtest'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['breathtest']);
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['collsign'])){
+                $responsedata = array("code" => 203, "message"=>$errorMsgArr['collsign']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominated'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['nominated']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominedec'])){
@@ -456,10 +456,11 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['contractor'] = !empty($jsondata->contractor) ? $jsondata->contractor : "";
         $data['coc']['idtype'] = !empty($jsondata->idtype) ? $jsondata->idtype : "";
         $data['coc']['idnumber'] = !empty($jsondata->idnumber) ? $jsondata->idnumber : "";
+        $data['coc']['lastweekq'] = !empty($jsondata->lastweekq) ? $jsondata->lastweekq : "";
         $data['coc']['donorsign'] = !empty($jsondata->donorsign) ? $jsondata->donorsign : "";
-        $data['coc']['voidtime'] = !empty($jsondata->voidtime) ? $jsondata->voidtime : "";
+        $data['coc']['voidtime'] = trim($jsondata->voidtime) == ':' ? "":$jsondata->voidtime;
         $data['coc']['sampletempc'] = !empty($jsondata->sampletempc) ? $jsondata->sampletempc : "";
-        $data['coc']['tempreadtime'] = !empty($jsondata->tempreadtime) ? $jsondata->tempreadtime : "";
+        $data['coc']['tempreadtime'] = trim($jsondata->tempreadtime) == ':' ? "":$jsondata->tempreadtime;
         $data['coc']['intect'] = !empty($jsondata->intect) ? $jsondata->intect : "";
         $data['coc']['intectexpiry'] = !empty($jsondata->intectexpiry) ? $jsondata->intectexpiry : "";
         $data['coc']['visualcolor'] = !empty($jsondata->visualcolor) ? $jsondata->visualcolor : "";
@@ -485,13 +486,13 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['receiverone'] = !empty($jsondata->receiverone) ? $jsondata->receiverone : "";
         $data['coc']['receiveronesign'] = !empty($jsondata->receiveronesign) ? $jsondata->receiveronesign : "";
         $data['coc']['receiveronedate'] = !empty($jsondata->receiveronedate) ? $jsondata->receiveronedate : "";
-        $data['coc']['receiveronetime'] = !empty($jsondata->receiveronetime) ? $jsondata->receiveronetime : "";
+        $data['coc']['receiveronetime'] = trim($jsondata->receiveronetime) == ': AM' || trim($jsondata->receiveronetime) == ': PM'? "":$jsondata->receiveronetime;
         $data['coc']['receiveroneseal'] = !empty($jsondata->receiveroneseal) ? $jsondata->receiveroneseal : "";
         $data['coc']['receiveronelabel'] = !empty($jsondata->receiveronelabel) ? $jsondata->receiveronelabel : "";
         $data['coc']['receivertwo'] = !empty($jsondata->receivertwo) ? $jsondata->receivertwo : "";
         $data['coc']['receivertwosign'] = !empty($jsondata->receivertwosign) ? $jsondata->receivertwosign : "";
         $data['coc']['receivertwodate'] = !empty($jsondata->receivertwodate) ? $jsondata->receivertwodate : "";
-        $data['coc']['receivertwotime'] = !empty($jsondata->receivertwotime) ? $jsondata->receivertwotime : "";
+        $data['coc']['receivertwotime'] = trim($jsondata->receivertwotime) == ': AM' || trim($jsondata->receivertwotime) == ': PM' ? "":$jsondata->receivertwotime;
         $data['coc']['receivertwoseal'] = !empty($jsondata->receivertwoseal) ? $jsondata->receivertwoseal : "";
         $data['coc']['receivertwolabel'] = !empty($jsondata->receivertwolabel) ? $jsondata->receivertwolabel : "";
         $data['coc']['reference'] = (!empty($jsondata->reference) ? $jsondata->reference : "");
@@ -500,10 +501,10 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['devicesrno'] = !empty($jsondata->devicesrno) ? $jsondata->devicesrno : "";
         $data['coc']['cutoff'] = !empty($jsondata->cutoff) ? $jsondata->cutoff : "";
         $data['coc']['donwaittime'] = !empty($jsondata->donwaittime) ? $jsondata->donwaittime : "";
-        $data['coc']['dontest1'] = !empty($jsondata->dontest1) ? $jsondata->dontest1 : "";
-        $data['coc']['dontesttime1'] = !empty($jsondata->dontesttime1) ? $jsondata->dontesttime1 : "";
-        $data['coc']['dontest2'] = !empty($jsondata->dontest2) ? $jsondata->dontest2 : "";
-        $data['coc']['dontesttime2'] = !empty($jsondata->dontesttime2) ? $jsondata->dontesttime2 : "";
+        $data['coc']['dontest1'] = $jsondata->dontest1;
+        $data['coc']['dontesttime1'] = trim($jsondata->dontesttime1) == ':' ? "":$jsondata->dontesttime1;
+        $data['coc']['dontest2'] = $jsondata->dontest2;
+        $data['coc']['dontesttime2'] = trim($jsondata->dontesttime2) == ':' ? "":$jsondata->dontesttime2;
         $data['coc']['donordecdate'] = !empty($jsondata->donordecdate) ? $jsondata->donordecdate : "";
         $data['coc']['donordecsign'] = !empty($jsondata->donordecsign) ? $jsondata->donordecsign : "";
         $donordata = $this->Webservices_Model->addcocdata($data['coc']);
@@ -534,6 +535,9 @@ class Webservices_Controller extends CI_Controller
 
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['idnumber'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['idnumber']);
+
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['lastweekq'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['lastweekq']);
 
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['donorsign'])){
                 $responsedata = array("code" => 201,"message"=>$errorMsgArr['donorsign']);
@@ -812,6 +816,85 @@ class Webservices_Controller extends CI_Controller
             $responsedata = array("code" => 200,"message"=>"Product successfully deleted from your cart.");
         }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['cartproductid'])){
             $responsedata = array("code" => 201,"message"=>$errorMsgArr['cartproductid']);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getfranchiseecartitems(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "0";
+        $franchiseeCartArr = $this->Webservices_Model->getfranchiseecartitems($data['franchiseeid']);
+        if(!empty($franchiseeCartArr)){
+            $responsedata = array("code" => 200,"cartarr"=>$franchiseeCartArr);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No product found.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function updatecart(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $dataArr['totcartitems'] = !empty($jsondata->totcartitems) ? $jsondata->totcartitems : "0";
+        for($i=1;$i<=$dataArr['totcartitems'];$i++){
+            $cartidvar = 'cartid'.$i;
+            $qtyvar = 'qty'.$i;
+            $dataArr['cartid'.$i] = !empty($jsondata->$cartidvar) ? $jsondata->$cartidvar : "0";
+            $dataArr['qty'.$i] = !empty($jsondata->$qtyvar) ? $jsondata->$qtyvar : "0";
+        }
+
+        if($dataArr['totcartitems']>'0'){
+            $updatecartstatus = $this->Webservices_Model->updatecart($dataArr);
+            if($updatecartstatus){
+                $responsedata = array("code" => 200,"message"=>"Cart updated successfully.");
+            }else{
+                $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+            }
+            header('Content-Type: application/json');
+            echo json_encode($responsedata);
+        }
+    }
+
+    function addorder(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $dataArr['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "0";
+        $dataArr['totalprice'] = !empty($jsondata->totalprice) ? $jsondata->totalprice : "0";
+
+        $orderstatus = $this->Webservices_Model->addorder($dataArr);
+        if($orderstatus){
+            $responsedata = array("code" => 200,"message"=>"Your order has been placed successfully.");
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+
+    }
+
+    function getorderdetails(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $orderid = !empty($jsondata->orderid) ? $jsondata->orderid : "0";
+        $orderdetailsArr = $this->Webservices_Model->getorderdetails($orderid);
+        if(!empty($orderdetailsArr))
+        {
+            $responsedata = array("code" => 200,"orderdetailsArr"=>$orderdetailsArr);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No order found.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function canceldonorcoc(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $donorid = !empty($jsondata->donorid) ? $jsondata->donorid : "0";
+        $changestatus = $this->Webservices_Model->canceldonorcoc($donorid);
+        if($changestatus)
+        {
+            $responsedata = array("code" => 200,"message"=>"COC form cancelled successfully.");
         }else{
             $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
         }

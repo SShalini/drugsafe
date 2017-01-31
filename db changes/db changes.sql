@@ -37,3 +37,30 @@ ALTER TABLE `ds_sos` CHANGE `TotalAlcoholScreening` `TotalAlcoholScreening` DECI
 ALTER TABLE `ds_sos` CHANGE `NegativeAlcohol` `NegativeAlcohol` DECIMAL( 10, 2 ) NOT NULL ;
 ALTER TABLE `ds_sos` CHANGE `PositiveAlcohol` `PositiveAlcohol` DECIMAL( 10, 2 ) NOT NULL ;
 ALTER TABLE `ds_sos` CHANGE `Refusals` `Refusals` DECIMAL( 10, 2 ) NOT NULL ;
+
+ALTER TABLE `ds_orders` ADD `validorder` TINYINT(1) NOT NULL AFTER `XeroIDnumber`;
+ALTER TABLE `tbl_product` CHANGE `szProductCost` `szProductCost` DECIMAL(10,2) NOT NULL;
+ALTER TABLE `ds_orders` CHANGE `paidon` `completedon` DATETIME NOT NULL;
+
+CREATE TABLE IF NOT EXISTS `ds_usedsoskit` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+  `prodid` int(11) NOT NULL,
+  `sosid` int(11) NOT NULL,
+  `quantity` int(5) NOT NULL,
+  `used` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;
+
+ALTER TABLE `ds_sos` ADD `collsign` VARCHAR(255) NOT NULL AFTER `Comments`;
+ALTER TABLE `ds_coc` ADD `lastweekq` VARCHAR( 255 ) NOT NULL AFTER `idnumber` ;
+
+ALTER TABLE `ds_sos` CHANGE `TotalDonarScreeningUrine` `TotalDonarScreeningUrine` VARCHAR( 10 ) NOT NULL ,
+CHANGE `TotalDonarScreeningOral` `TotalDonarScreeningOral` VARCHAR( 10 ) NOT NULL ,
+CHANGE `NegativeResultUrine` `NegativeResultUrine` VARCHAR( 10 ) NOT NULL ,
+CHANGE `NegativeResultOral` `NegativeResultOral` VARCHAR( 10 ) NOT NULL ,
+CHANGE `FurtherTestUrine` `FurtherTestUrine` VARCHAR( 10 ) NOT NULL ,
+CHANGE `FurtherTestOral` `FurtherTestOral` VARCHAR( 10 ) NOT NULL ,
+CHANGE `TotalAlcoholScreening` `TotalAlcoholScreening` VARCHAR( 10 ) NOT NULL ,
+CHANGE `NegativeAlcohol` `NegativeAlcohol` VARCHAR( 10 ) NOT NULL ,
+CHANGE `PositiveAlcohol` `PositiveAlcohol` VARCHAR( 10 ) NOT NULL ,
+CHANGE `Refusals` `Refusals` VARCHAR( 10 ) NOT NULL ;

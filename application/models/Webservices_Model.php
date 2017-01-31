@@ -131,7 +131,8 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Respresentative', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['collsign'])), 'collsign', 'Collector Signature', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Respresentative', true,__VLD_CASE_NAME__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['nominedec'])), 'nominedec', 'Nominated Client Respresentative signature time', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Signature', true);
         }
@@ -159,6 +160,7 @@ class Webservices_Model extends Error_Model
                 'ExtraUsed' => $data['extraused'],
                 'BreathTesting' => $data['breathtest'],
                 'Comments' => $data['comments'],
+                'collsign' => $data['collsign'],
                 'ClientRepresentative' => $data['nominated'],
                 'RepresentativeSignature' => $data['sign'],
                 'RepresentativeSignatureTime' => $data['nominedec'],
@@ -531,7 +533,7 @@ class Webservices_Model extends Error_Model
         $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
                                                 sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                                 sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
-                                                sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
+                                                sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.collsign, sos.ClientRepresentative,
                                                 sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId')
             ->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos')
             ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'sos.Clientid = client.clientId')
@@ -583,8 +585,8 @@ class Webservices_Model extends Error_Model
                                     sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                     sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
                                     sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
-                                    sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, donor.donerName, donor.cocid, 
-                                    coc.cocdate, coc.drugtest, coc.dob, coc.employeetype, coc.contractor, coc.idtype, coc.idnumber, coc.donorsign,
+                                    sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, donor.donerName,donor.drug,donor.alcoholreading1,donor.alcoholreading2, donor.cocid, 
+                                    coc.cocdate, coc.drugtest, coc.dob, coc.employeetype, coc.contractor, coc.idtype, coc.idnumber, coc.lastweekq, coc.donorsign,
                                     coc.voidtime, coc.sampletempc, coc.tempreadtime, 
                                     coc.intect, coc.intectexpiry, coc.visualcolor, coc.creatinine,coc.otherintegrity,coc.hudration,coc.devicename as cocdevice,coc.lotno,coc.lotexpiry,coc.cocain,
                                     coc.amp,coc.mamp,coc.thc, coc.opiates, coc.benzo, coc.collectorone, coc.collectorsignone, coc.commentscol1, coc.collectortwo, coc.collectorsigntwo, coc.comments,
@@ -627,16 +629,17 @@ class Webservices_Model extends Error_Model
         if (!empty($data['receivertwodate'])) {
             $data['receivertwodate'] = $this->formatdate($data['receivertwodate']);
         }
-        $drugtestdata = '';
+        $drugtestdata1 = '';
+        $drugtestdata2 = '';
         if (!empty($data['drugtest'])) {
             if (!empty($data['drugtest'][0])) {
-                $drugtestdata = $data['drugtest'][0];
+                $drugtestdata1 = $data['drugtest'][0];
             }
             if (!empty($data['drugtest'][1])) {
-                $drugtestdata = $drugtestdata . ',' . $data['drugtest'][1];
+                $drugtestdata2 = $data['drugtest'][1];
             }
         }
-        $data['drugtest'] = $drugtestdata;
+        $data['drugtest'] = $drugtestdata1 . ',' . $drugtestdata2;
         if ($data['status'] == '1') {
             $this->set_fieldReq(sanitize_all_html_input(trim($data['cocdate'])), 'cocdate', 'Date', true, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['drugtest'])), 'drugtest', 'Drug to be tested', true);
@@ -645,33 +648,34 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['contractor'])), 'contractor', 'Contractor Details', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['idtype'])), 'idtype', 'ID Type', true, __VLD_CASE_NUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['idnumber'])), 'idnumber', 'ID Number', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['lastweekq'])), 'lastweekq', 'Answer for the question - Have you taken any medication, drugs or other non-prescription agents in last week?', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['donorsign'])), 'donorsign', 'Donor Signature', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['devicesrno'])), 'devicesrno', 'Device Serial#', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['cutoff'])), 'cutoff', 'Cut off level', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['donwaittime'])), 'donwaittime', 'Wait time', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontest1'])), 'dontest1', 'Test 1', true,__VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontesttime1'])), 'dontesttime1', 'Test 1 time', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontest2'])), 'dontest2', 'Test 2', true,__VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontesttime2'])), 'dontesttime2', 'Test 2 time', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['voidtime'])), 'voidtime', 'Void Time', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['sampletempc'])), 'sampletempc', 'Sample Temp C', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['tempreadtime'])), 'tempreadtime', 'Temp Read Time within 4 min', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['devicesrno'])), 'devicesrno', 'Device Serial#', ($drugtestdata1 == '1' || $drugtestdata2 == '1'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['cutoff'])), 'cutoff', 'Cut off level', ($drugtestdata1 == '1' || $drugtestdata2 == '1'?true:false), __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['donwaittime'])), 'donwaittime', 'Wait time', ($drugtestdata1 == '1' || $drugtestdata2 == '1'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontest1'])), 'dontest1', 'Test 1', ($drugtestdata1 == '1' || $drugtestdata2 == '1'?true:false),__VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontesttime1'])), 'dontesttime1', 'Test 1 time', ($drugtestdata1 == '1' || $drugtestdata2 == '1'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontest2'])), 'dontest2', 'Test 2', ($drugtestdata1 == '1' || $drugtestdata2 == '1'?true:false),__VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['dontesttime2'])), 'dontesttime2', 'Test 2 time', ($drugtestdata1 == '1' || $drugtestdata2 == '1'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['voidtime'])), 'voidtime', 'Void Time', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['sampletempc'])), 'sampletempc', 'Sample Temp C', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false), __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['tempreadtime'])), 'tempreadtime', 'Temp Read Time within 4 min', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
             $this->set_fieldReq(sanitize_all_html_input(trim($data['intect'])), 'intect', 'Intect 7 Lot. No.', false, __VLD_CASE_NUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['intectexpiry'])), 'intectexpiry', 'Intect 7 Expiry', false,__VLD_CASE_DATE__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['visualcolor'])), 'visualcolor', 'Visual Color', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['creatinine'])), 'creatinine', 'Creatinine', true,__VLD_CASE_NUMERIC__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['visualcolor'])), 'visualcolor', 'Visual Color', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['creatinine'])), 'creatinine', 'Creatinine', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false),__VLD_CASE_DIGITS__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['otherintegrity'])), 'otherintegrity', 'Other Integrity', false);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['hudration'])), 'hudration', 'Hydration', false, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['reference'])), 'reference', 'Reference', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['lotno'])), 'lotno', 'Lot No.', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['lotexpiry'])), 'lotexpiry', 'Lot Expiry', true, __VLD_CASE_DATE__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['cocain'])), 'cocain', 'Cocain', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['amp'])), 'amp', 'AMP', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['mamp'])), 'mamp', 'MAMP', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['thc'])), 'thc', 'THC', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['opiates'])), 'opiates', 'Opiates', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['benzo'])), 'benzo', 'Benzo', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['hudration'])), 'hudration', 'Hydration', false, __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['reference'])), 'reference', 'Reference', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false), __VLD_CASE_NUMERIC__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['lotno'])), 'lotno', 'Lot No.', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false), __VLD_CASE_NUMERIC__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['lotexpiry'])), 'lotexpiry', 'Lot Expiry', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false), __VLD_CASE_DATE__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['cocain'])), 'cocain', 'Cocain', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['amp'])), 'amp', 'AMP', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['mamp'])), 'mamp', 'MAMP', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['thc'])), 'thc', 'THC', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['opiates'])), 'opiates', 'Opiates', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['benzo'])), 'benzo', 'Benzo', ($drugtestdata1 == '2' || $drugtestdata2 == '2'?true:false));
             $this->set_fieldReq(sanitize_all_html_input(trim($data['donordecdate'])), 'donordecdate', 'Donor declaration date', true, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['donordecsign'])), 'donordecsign', 'Donor declaration signature', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collectorone'])), 'collectorone', 'Collector 1 Name/Number', true);
@@ -705,6 +709,7 @@ class Webservices_Model extends Error_Model
                 'contractor' => $data['contractor'],
                 'idtype' => $data['idtype'],
                 'idnumber' => $data['idnumber'],
+                'lastweekq' => $data['lastweekq'],
                 'donorsign' => $data['donorsign'],
                 'voidtime' => $data['voidtime'],
                 'sampletempc' => $data['sampletempc'],
@@ -966,6 +971,172 @@ class Webservices_Model extends Error_Model
                 $this->addError( 'cartproductid', "Product does not exist in your cart." );
                 return false;
             }
+        }
+    }
+
+    function getfranchiseecartitems($franchiseeid){
+        $whereAry = 'cart.franchiseeid =' . (int)$franchiseeid . ' AND product.isDeleted = 0';
+        $query = $this->db->select('cart.id, cart.franchiseeid, cart.productid, cart.quantity, product.szProductCode, product.szProductDiscription, product.szProductCost')
+            ->from(__DBC_SCHEMATA_CART__ . ' as cart')
+            ->join(__DBC_SCHEMATA_PRODUCT__ . ' as product', 'product.id = cart.productid')
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+        }
+    }
+
+    function updatecart($data){
+        $checkcount = 0;
+        if($data['totcartitems']>'0'){
+            for($i=1;$i<=$data['totcartitems'];$i++){
+                if($data['cartid'.$i]>'0' && $data['qty'.$i]>'0'){
+                    $cartqtyupdate = array(
+                        'quantity' => (int)$data['qty'.$i]
+                    );
+                    $whereAry = array('id' => (int)$data['cartid'.$i]);
+                    $updateq = $this->db->where($whereAry)
+                                        ->update(__DBC_SCHEMATA_CART__, $cartqtyupdate);
+                    if ($updateq) {
+                        $checkcount++;
+                    }
+                }
+            }
+        }
+        if($data['totcartitems'] > '0' && $checkcount == $data['totcartitems']){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function addorder($data){
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['franchiseeid'])), 'franchiseeid', 'Franchisee', true, __VLD_CASE_NUMERIC__);
+        $this->set_fieldReq(sanitize_all_html_input(trim($data['totalprice'])), 'totalprice', 'Total Price', true, __VLD_CASE_NUMERIC__);
+        if ($this->error) {
+            return false;
+        }else {
+            $orderdataArr = array(
+                'franchiseeid' => (int)$data['franchiseeid'],
+                'price' => (int)$data['totalprice'],
+                'createdon' => date('Y-m-d h:i:s')
+            );
+            $this->db->insert(__DBC_SCHEMATA_ORDER__, $orderdataArr);
+            if ($this->db->affected_rows() > 0) {
+                $orderid = (int)$this->db->insert_id();
+                $frenchiseecartArr = $this->getfranchiseecartitems((int)$data['franchiseeid']);
+                if(!empty($frenchiseecartArr)){
+                    $checkcount = 0;
+                    $count = 0;
+                    foreach ($frenchiseecartArr as $cartitems){
+                        if($this->addOrderDetails((int)$orderid,(int)$cartitems['productid'],(int)$cartitems['quantity'])){
+                            $checkcount++;
+                        }
+                        $count++;
+                    }
+                    if($count == $checkcount){
+                        if($this->emptycart($data)){
+                            if($this->markOrderVerified($orderid)){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        }else{
+                            return false;
+                        }
+                    }else{
+                        return false;
+                    }
+                }else{
+                    $this->deleteOrder($orderid);
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+    }
+
+    function addOrderDetails($orderid,$productid,$quantity){
+        $orderdetailArr = array(
+            'orderid' => (int)$orderid,
+            'productid' => (int)$productid,
+            'quantity' => (int)$quantity
+        );
+        $this->db->insert(__DBC_SCHEMATA_ORDER_DETAILS__, $orderdetailArr);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function markOrderVerified($orderid){
+        $orderdataArr = array(
+            'createdon' => date('Y-m-d h:i:s'),
+            'validorder' => 1
+        );
+        $whereAry = array('id' => (int)$orderid);
+        $this->db->where($whereAry)
+                ->update(__DBC_SCHEMATA_ORDER__, $orderdataArr);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function deleteOrder($orderid){
+        $whereAry = 'id =' . (int)$orderid;
+        $query = $this->db->where($whereAry)
+            ->delete(__DBC_SCHEMATA_ORDER__);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getorderdetails($orderid){
+        $whereAry = 'ord.id = '.(int)$orderid.' AND ord.validorder = 1 AND product.isDeleted = 0 AND cat.isDeleted = 0';
+        $query = $this->db->select('ord.id, ord.franchiseeid, ord.price, ord.status, ord.createdon, ord.completedon, ord.dispatchedon,
+                                    ord.canceledon, ord.xeroprocessed, ord.XeroIDnumber, orddet.quantity, product.szProductCode, 
+                                    product.szProductDiscription, product.szProductCost, product.dtExpiredOn, cat.szName, cat.szDiscription')
+            ->from(__DBC_SCHEMATA_ORDER__ . ' as ord')
+            ->join(__DBC_SCHEMATA_ORDER_DETAILS__ . ' as orddet', 'ord.id = orddet.orderid')
+            ->join(__DBC_SCHEMATA_PRODUCT__ . ' as product', 'product.id = orddet.productid')
+            ->join(__DBC_SCHEMATA_PRODUCT_CATEGORY__ . ' as cat', 'cat.id = product.szProductCategory')
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No order found.");
+            return false;
+        }
+    }
+
+    function canceldonorcoc($donorid){
+        $donorupdate = array(
+            'result' => '0',
+            'drug' => '',
+            'alcoholreading1' => '',
+            'alcoholreading2' => '',
+            'lab' => '',
+            'cocid'=>'0',
+            'cocstatus'=>'0'
+        );
+        $whereAry = array('id' => (int)$donorid);
+        $updateq = $this->db->where($whereAry)
+            ->update(__DBC_SCHEMATA_DONER__, $donorupdate);
+        if($updateq){
+            return true;
+        }else{
+            return false;
         }
     }
 } 

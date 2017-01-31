@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Order_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Webservices_Model.php" afterPath="$PROJECT_DIR$/application/models/Webservices_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db changes/db changes.sql" afterPath="$PROJECT_DIR$/db changes/db changes.sql" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
     <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default" />
@@ -28,21 +28,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="970" column="2" selection-start-line="970" selection-start-column="2" selection-end-line="970" selection-end-column="2" />
+            <state relative-caret-position="370">
+              <caret line="667" column="135" selection-start-line="667" selection-start-column="135" selection-end-line="667" selection-end-column="135" />
               <folding>
+                <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#set_szPassword#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#checkUserExist#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="e#8785#21462#0#PHP" expanded="false" />
+                <element signature="e#8976#21653#0#PHP" expanded="false" />
                 <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getcocdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getcocidbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -50,48 +50,61 @@
                 <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#getsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="e#33459#33644#0#PHP" expanded="false" />
-                <element signature="e#33567#33644#0#PHP" expanded="false" />
-                <element signature="n#addcocdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="e#34971#42163#0#PHP" expanded="false" />
+                <element signature="e#33734#33919#0#PHP" expanded="false" />
+                <element signature="e#33842#33919#0#PHP" expanded="false" />
                 <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getallcategories#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#checkproductexistincart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#addtocart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#emptycart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#deleteitemfromcart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getfranchiseecartitems#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#addorder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#addOrderDetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#markOrderVerified#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#deleteOrder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getorderdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Order_Controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
+      <file leaf-file-name="Error_Model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Error_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="148" column="31" selection-start-line="148" selection-start-column="31" selection-end-line="148" selection-end-column="31" />
+            <state relative-caret-position="100">
+              <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="219">
+              <caret line="117" column="32" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="427">
-              <caret line="814" column="14" selection-start-line="814" selection-start-column="14" selection-end-line="814" selection-end-column="14" />
+            <state relative-caret-position="608">
+              <caret line="501" column="84" selection-start-line="501" selection-start-column="84" selection-end-line="501" selection-end-column="84" />
               <folding>
+                <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="e#4496#4514#0#PHP" expanded="false" />
-                <element signature="n#addsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -100,15 +113,31 @@
                 <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#deldonor#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getallprodbycatid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getallcategories#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#addtocart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <marker date="1484825158808" expanded="false" signature="41060:41587" ph="..." />
+                <element signature="n#emptycart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#deleteitemfromcart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getfranchiseecartitems#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#updatecart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#addorder#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#getorderdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#canceldonorcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db changes.sql" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1105">
+              <caret line="65" column="53" selection-start-line="65" selection-start-column="53" selection-end-line="65" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -143,7 +172,6 @@
         <option value="$PROJECT_DIR$/application/views/ordering/manualOrdering.php" />
         <option value="$PROJECT_DIR$/application/models/Reporting_Model.php" />
         <option value="$PROJECT_DIR$/temp/constants.php" />
-        <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/application/models/Ordering_Model.php" />
         <option value="$PROJECT_DIR$/application/views/forum/viewTopicDetails.php" />
         <option value="$PROJECT_DIR$/css/prashant.css" />
@@ -166,9 +194,10 @@
         <option value="$PROJECT_DIR$/application/controllers/Forum_Controller.php" />
         <option value="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" />
         <option value="$PROJECT_DIR$/application/models/Order_Model.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
+        <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/application/models/Webservices_Model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
       </list>
     </option>
   </component>
@@ -182,7 +211,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1378" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -240,20 +269,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="temp" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="js" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -282,119 +297,7 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ordering" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -405,7 +308,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../drugsafeapp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../apocom" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -550,20 +453,27 @@
       <workItem from="1484625242084" duration="14886000" />
       <workItem from="1484711411616" duration="18890000" />
       <workItem from="1484741498560" duration="971000" />
-      <workItem from="1484797934795" duration="23521000" />
+      <workItem from="1484797934795" duration="27246000" />
+      <workItem from="1484883950786" duration="17169000" />
+      <workItem from="1485143482279" duration="3652000" />
+      <workItem from="1485194116687" duration="24000" />
+      <workItem from="1485229879315" duration="586000" />
+      <workItem from="1485235614342" duration="1456000" />
+      <workItem from="1485316087594" duration="11299000" />
+      <workItem from="1485755538720" duration="4305000" />
+      <workItem from="1485834635294" duration="4708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="536069000" />
+    <option name="totallyTimeSpent" value="582993000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16764276" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16740088" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -571,6 +481,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -649,7 +560,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
           <caret line="127" column="63" selection-start-line="127" selection-start-column="63" selection-end-line="127" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -699,7 +609,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
           <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -738,18 +647,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="97" selection-start-line="31" selection-start-column="97" selection-end-line="31" selection-end-column="97" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_8.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="241" column="9" selection-start-line="241" selection-start-column="9" selection-end-line="241" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -764,13 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/error_log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -792,7 +686,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3451">
           <caret line="203" column="81" selection-start-line="203" selection-start-column="67" selection-end-line="203" selection-end-column="81" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -800,9 +693,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="549">
           <caret line="1199" column="9" selection-start-line="1199" selection-start-column="9" selection-end-line="1199" selection-end-column="9" />
-          <folding>
-            <element signature="e#6#1223#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -810,7 +700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="402">
           <caret line="1282" column="48" selection-start-line="1282" selection-start-column="48" selection-end-line="1282" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -818,7 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="127" column="141" selection-start-line="127" selection-start-column="141" selection-end-line="127" selection-end-column="141" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -826,7 +714,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="130" column="25" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -834,7 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="72" column="2" selection-start-line="72" selection-start-column="2" selection-end-line="72" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -842,7 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14824">
           <caret line="872" column="50" selection-start-line="872" selection-start-column="50" selection-end-line="872" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -850,7 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
           <caret line="741" column="0" selection-start-line="741" selection-start-column="0" selection-end-line="741" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -858,7 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-236">
           <caret line="102" column="27" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -866,7 +749,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1581">
           <caret line="93" column="20" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -874,7 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -882,7 +763,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2482">
           <caret line="146" column="52" selection-start-line="146" selection-start-column="37" selection-end-line="146" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -890,7 +770,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -898,7 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13158">
           <caret line="774" column="56" selection-start-line="774" selection-start-column="41" selection-end-line="774" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -906,27 +784,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="706" column="56" selection-start-line="706" selection-start-column="41" selection-end-line="706" selection-end-column="56" />
-          <folding>
-            <element signature="n#index#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#admin_login#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#dashboard#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#logout#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#changePassword#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addFranchiseeData#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addFranchisee#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#welweb#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#franchiseeList#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#operationManagerList#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getStatesByCountry#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getFranchiseeByOperationManager#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#editfranchiseedata#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#editFranchisee#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#deleteFranchiseeAlert#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#deleteFranchiseeConfirmation#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#admin_forgotPassword#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#adminPassword_Recover#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#deleteOperationManagerConfirmation#0;n#Admin_Controller#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -934,9 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1836">
           <caret line="143" column="85" selection-start-line="143" selection-start-column="73" selection-end-line="143" selection-end-column="85" />
-          <folding>
-            <element signature="e#1741#9023#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -944,18 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="266" column="30" selection-start-line="266" selection-start-column="30" selection-end-line="266" selection-end-column="30" />
-          <folding>
-            <element signature="n#viewcalform#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#calform#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#sitesRecord#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#editCalcForm#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#editcalform#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#viewCalc#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#viewCalcDetails#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#calcDetailspdf#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#pdfcalculationdetails#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#siteRecordpage#0;n#Ordering_Controller#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -963,15 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
-          <folding>
-            <element signature="n#index#0;n#Franchisee_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#dashboard#0;n#Franchisee_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addClientData#0;n#Franchisee_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#logout#0;n#Franchisee_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getStatesByCountryClient#0;n#Franchisee_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#viewClientData#0;n#Franchisee_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#clientList#0;n#Franchisee_Controller#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -979,7 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="50" selection-start-line="12" selection-start-column="50" selection-end-line="12" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -987,7 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="543" column="59" selection-start-line="543" selection-start-column="44" selection-end-line="543" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -995,15 +826,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="188" column="101" selection-start-line="188" selection-start-column="101" selection-end-line="188" selection-end-column="101" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="102" column="8" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1011,29 +833,101 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="149" column="13" selection-start-line="149" selection-start-column="13" selection-end-line="149" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/error_log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="445" column="39" selection-start-line="445" selection-start-column="39" selection-end-line="445" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" column="53" selection-start-line="65" selection-start-column="53" selection-end-line="65" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="117" column="32" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Error_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="94" column="91" selection-start-line="94" selection-start-column="24" selection-end-line="94" selection-end-column="91" />
+        <state relative-caret-position="100">
+          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="667" column="135" selection-start-line="667" selection-start-column="135" selection-end-line="667" selection-end-column="135" />
+          <folding>
+            <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szPassword#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#checkUserExist#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="e#8976#21653#0#PHP" expanded="false" />
+            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocidbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="e#33734#33919#0#PHP" expanded="false" />
+            <element signature="e#33842#33919#0#PHP" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallcategories#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addtocart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addOrderDetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#markOrderVerified#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteOrder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="814" column="14" selection-start-line="814" selection-start-column="14" selection-end-line="814" selection-end-column="14" />
+        <state relative-caret-position="608">
+          <caret line="501" column="84" selection-start-line="501" selection-start-column="84" selection-end-line="501" selection-end-column="84" />
           <folding>
+            <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="e#4496#4514#0#PHP" expanded="false" />
-            <element signature="n#addsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -1042,62 +936,20 @@
             <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#deldonor#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getallcategories#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#addtocart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <marker date="1484825158808" expanded="false" signature="41060:41587" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="148" column="31" selection-start-line="148" selection-start-column="31" selection-end-line="148" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="970" column="2" selection-start-line="970" selection-start-column="2" selection-end-line="970" selection-end-column="2" />
-          <folding>
-            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#set_szPassword#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#checkUserExist#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="e#8785#21462#0#PHP" expanded="false" />
-            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getcocdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getcocidbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="e#33459#33644#0#PHP" expanded="false" />
-            <element signature="e#33567#33644#0#PHP" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="e#34971#42163#0#PHP" expanded="false" />
-            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getallcategories#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#checkproductexistincart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#updatecart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#canceldonorcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
