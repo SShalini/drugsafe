@@ -161,8 +161,8 @@
             </form>   
                     </div>
                     <?php
-                         if(!empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
-                        if(!empty($validOrdersDetailsAray)&& !empty($_POST['szSearch2']||$_POST['szSearch1']) ) 
+                        if(!empty($validOrdersDetailsAray) || !empty($_POST['szSearch2']||$_POST['szSearch1']) )
+                        if(!empty($validOrdersDetailsAray)) 
                         {
                            ?> 
                         <div class="portlet-body alert">
@@ -312,7 +312,16 @@
                             </div>
                     </div>
                             </div>
-                         <?php } else { echo"Not Found"; } }?>   
+                        <?php } else {
+                           if(!empty($arErrorMessages['szSearch4'] || $arErrorMessages['szSearch5']))
+                           {
+                               
+                           }
+                           else{
+                            echo "Not Found";    
+                           }
+                           
+                            }?>   
                
                     </div>
 
