@@ -113,21 +113,50 @@ class Webservices_Model extends Error_Model
     {
         $data['testdate'] = $this->formatdate($data['sosdate']);
         if ($data['status'] == '1' || $data['cocstat'] == '1') {
+            $drgtestitemcount = strlen($data['drugtest']);
+            $alc = false;
+            $oral = false;
+            $urine = false;
+            $UZ = false;
+            if($drgtestitemcount == 1){
+                if($data['drugtest'] == '1'){
+                    $alc = true;
+                }elseif($data['drugtest'] == '2'){
+                    $oral = true;
+                }elseif($data['drugtest'] == '3'){
+                    $urine = true;
+                }elseif($data['drugtest'] == '4'){
+                    $UZ = true;
+                }
+            }elseif($drgtestitemcount > 1){
+                $drgtestarr = explode(',',$data['drugtest']);
+                foreach ($drgtestarr as $key=>$value){
+                    if($value == '1'){
+                        $alc = true;
+                    }elseif($value == '2'){
+                        $oral = true;
+                    }elseif($value == '3'){
+                        $urine = true;
+                    }elseif($value == '4'){
+                        $UZ = true;
+                    }
+                }
+            }
             $this->set_fieldReq(sanitize_all_html_input(trim($data['testdate'])), 'testdate', 'Date', true, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['site'])), 'site', 'Site', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['drugtest'])), 'drugtest', 'Drug to be tested', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['servicecomm'])), 'servicecomm', 'Service commenced', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['servicecon'])), 'servicecon', 'Service concluded', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['totscreenu'])), 'totscreenu', 'Total Donor Screenings/Collections Urine', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['totscreeno'])), 'totscreeno', 'Total Donor Screenings/Collections Oral', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['negresu'])), 'negresu', 'Negative Results Urine', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['negreso'])), 'negreso', 'Negative Results Oral', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['furtestu'])), 'furtestu', 'Results Requiring Further Testing Urine', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['furtesto'])), 'furtesto', 'Results Requiring Further Testing Oral', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['totalcscreen'])), 'totalcscreen', 'Total No Alcohol Screen', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['negalcres'])), 'negalcres', 'Negative Alcohol Results', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['posalcres'])), 'posalcres', 'Positive Alcohol Results', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['refusals'])), 'refusals', 'Refusals', true, __VLD_CASE_NUMERIC__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['totscreenu'])), 'totscreenu', 'Total Donor Screenings/Collections Urine', ($urine || $UZ?true:false), __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['totscreeno'])), 'totscreeno', 'Total Donor Screenings/Collections Oral', $oral, __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['negresu'])), 'negresu', 'Negative Results Urine', ($urine || $UZ?true:false), __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['negreso'])), 'negreso', 'Negative Results Oral', $oral, __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['furtestu'])), 'furtestu', 'Results Requiring Further Testing Urine', ($urine || $UZ?true:false), __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['furtesto'])), 'furtesto', 'Results Requiring Further Testing Oral', $oral, __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['totalcscreen'])), 'totalcscreen', 'Total No Alcohol Screen', $alc, __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['negalcres'])), 'negalcres', 'Negative Alcohol Results', $alc, __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['posalcres'])), 'posalcres', 'Positive Alcohol Results', $alc, __VLD_CASE_DIGITS__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['refusals'])), 'refusals', 'Refusals', true, __VLD_CASE_DIGITS__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true);
@@ -214,12 +243,12 @@ class Webservices_Model extends Error_Model
                                             /*$q3 = $this->db->last_query();
                                             echo 'q3 '.$q3.'<br />';*/
                                             if (!($this->db->affected_rows() > 0)) {
-                                                $message = "Some error occurred while1 adding " . $data['name' . $i] . " donor.";
+                                                $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
                                                 array_push($failarr, $message);
                                             }
                                         }
                                     } elseif (!($this->db->affected_rows() > 0)) {
-                                        $message = "Some error occurred while2 adding " . $data['name' . $i] . " donor.";
+                                        $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
                                         array_push($failarr, $message);
                                     }
                                 } else {
@@ -244,12 +273,12 @@ class Webservices_Model extends Error_Model
                                                 /*$q6 = $this->db->last_query();
                                                 echo 'q6 '.$q6.'<br />';*/
                                                 if (!($this->db->affected_rows() > 0)) {
-                                                    $message = "Some error occurred while3 adding " . $data['name' . $i] . " donor.";
+                                                    $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
                                                     array_push($failarr, $message);
                                                 }
                                             }
                                         } /*elseif (!($this->db->affected_rows() > 0)) {
-                                            $message = "Some error occurred while4 adding " . $data['name' . $i] . " donor.";
+                                            $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
                                             array_push($failarr, $message);
                                         }*/
                                     }
@@ -275,12 +304,12 @@ class Webservices_Model extends Error_Model
                                     /*$q9 = $this->db->last_query();
                                     echo 'q9 '.$q9.'<br />';*/
                                     if (!($this->db->affected_rows() > 0)) {
-                                        $message = "Some error occurred while5 adding " . $data['name' . $i] . " donor.";
+                                        $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
                                         array_push($failarr, $message);
                                     }
                                 }
                             }/* elseif (!($this->db->affected_rows() > 0)) {
-                                $message = "Some error occurred while6 adding " . $data['name' . $i] . " donor.";
+                                $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
                                 array_push($failarr, $message);
                             }*/
                         }
@@ -325,12 +354,26 @@ class Webservices_Model extends Error_Model
                                         ->update(__DBC_SCHEMATA_DONER__, $updatearr);
 
                                     if (!($this->db->affected_rows() > 0)) {
-                                        $message = "Some error occurred while7 adding " . $data['name' . $i] . " donor.";
+                                        $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
                                         array_push($failarr, $message);
                                     }
                                 }
                             } elseif (!($this->db->affected_rows() > 0)) {
-                                $message = "Some error occurred while adding8 " . $data['name' . $i] . " donor.";
+                                $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
+                                array_push($failarr, $message);
+                            }
+                        }
+                    }
+                    for ($dc = 1; $dc <= $data['kitcount']; $dc++) {
+                        if ($data['kit' . $dc]>'0') {
+                            $kitAry = array(
+                                'prodid' => $data['kit' . $dc],
+                                'sosid' => (int)$sosid,
+                                'quantity' => $data['kitqty' . $dc]
+                            );
+                            $this->db->insert(__DBC_SCHEMATA_USED_KITS__, $kitAry);
+                            if (!($this->db->affected_rows() > 0)) {
+                                $message = "Some error occurred while adding " . $data['kit' . $dc]. " product.";
                                 array_push($failarr, $message);
                             }
                         }

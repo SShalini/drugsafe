@@ -64,3 +64,5 @@ CHANGE `TotalAlcoholScreening` `TotalAlcoholScreening` VARCHAR( 10 ) NOT NULL ,
 CHANGE `NegativeAlcohol` `NegativeAlcohol` VARCHAR( 10 ) NOT NULL ,
 CHANGE `PositiveAlcohol` `PositiveAlcohol` VARCHAR( 10 ) NOT NULL ,
 CHANGE `Refusals` `Refusals` VARCHAR( 10 ) NOT NULL ;
+
+ALTER TABLE `tbl_product` ADD `szAvailableQuantity` INT(6) NOT NULL AFTER `szProductDiscription`;

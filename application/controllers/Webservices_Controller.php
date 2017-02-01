@@ -120,16 +120,16 @@ class Webservices_Controller extends CI_Controller
         $dataArr['servicecomm'] = !empty($jsondata->servicecomm) ? $jsondata->servicecomm : "";
         $dataArr['donercount'] = !empty($jsondata->donercount) ? $jsondata->donercount : "1";
         $dataArr['servicecon'] = !empty($jsondata->servicecon) ? $jsondata->servicecon : "";
-        $dataArr['totscreenu'] = !empty($jsondata->totscreenu) ? $jsondata->totscreenu : "";
-        $dataArr['totscreeno'] = !empty($jsondata->totscreeno) ? $jsondata->totscreeno : "";
-        $dataArr['negresu'] = !empty($jsondata->negresu) ? $jsondata->negresu : "";
-        $dataArr['negreso'] = !empty($jsondata->negreso) ? $jsondata->negreso : "";
-        $dataArr['furtestu'] = !empty($jsondata->furtestu) ? $jsondata->furtestu : "";
-        $dataArr['furtesto'] = !empty($jsondata->furtesto) ? $jsondata->furtesto : "";
-        $dataArr['totalcscreen'] = !empty($jsondata->totalcscreen) ? $jsondata->totalcscreen : "";
-        $dataArr['negalcres'] = !empty($jsondata->negalcres) ? $jsondata->negalcres : "";
-        $dataArr['posalcres'] = !empty($jsondata->posalcres) ? $jsondata->posalcres : "";
-        $dataArr['refusals'] = !empty($jsondata->refusals) ? $jsondata->refusals : "";
+        $dataArr['totscreenu'] = $jsondata->totscreenu;
+        $dataArr['totscreeno'] = $jsondata->totscreeno;
+        $dataArr['negresu'] = $jsondata->negresu;
+        $dataArr['negreso'] = $jsondata->negreso;
+        $dataArr['furtestu'] = $jsondata->furtestu;
+        $dataArr['furtesto'] = $jsondata->furtesto;
+        $dataArr['totalcscreen'] = $jsondata->totalcscreen;
+        $dataArr['negalcres'] = $jsondata->negalcres;
+        $dataArr['posalcres'] = $jsondata->posalcres;
+        $dataArr['refusals'] = $jsondata->refusals;
         $dataArr['devicename'] = !empty($jsondata->devicename) ? $jsondata->devicename : "";
         $dataArr['extraused'] = !empty($jsondata->extraused) ? $jsondata->extraused : "";
         $dataArr['breathtest'] = !empty($jsondata->breathtest) ? $jsondata->breathtest : "";
@@ -144,6 +144,7 @@ class Webservices_Controller extends CI_Controller
         $dataArr['newdonerids'] = !empty($jsondata->newdonerids) ? $jsondata->newdonerids : "";
         $dataArr['idsos'] = !empty($jsondata->idsos) ? $jsondata->idsos : "";
         $dataArr['cocstat'] = !empty($jsondata->cocstat) ? $jsondata->cocstat : "0";
+        $dataArr['kitcount'] = !empty($jsondata->kitcount) ? $jsondata->kitcount : "1";
         for($i=1;$i<=$dataArr['donercount'];$i++){
             $namevar = 'name'.$i;
             $resultvar = 'result'.$i;
@@ -181,6 +182,14 @@ class Webservices_Controller extends CI_Controller
             $dataArr['pos1read'.$i] = !empty($jsondata->$pos1readvar) ? $jsondata->$pos1readvar : "";
             $dataArr['pos2read'.$i] = !empty($jsondata->$pos2readvar) ? $jsondata->$pos2readvar : "";
         }
+
+        for($dc=1;$dc<=$dataArr['kitcount'];$dc++){
+            $prodvar = 'kit'.$dc;
+            $qtyvar = 'kitqty'.$dc;
+            $dataArr['kit'.$dc] = !empty($jsondata->$prodvar) ? $jsondata->$prodvar : "";
+            $dataArr['kitqty'.$dc] = !empty($jsondata->$qtyvar) ? $jsondata->$qtyvar : "0";
+        }
+
         if(($dataArr['furtestu']>0) || ($dataArr['furtesto']>0)){
             $dataArr['furthertestreq'] = '1';
         }else{

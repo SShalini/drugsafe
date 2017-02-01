@@ -78,6 +78,7 @@ define("__DBC_SCHEMATA_CART__", "ds_cart");
 define("__DBC_SCHEMATA_ORDER_DETAILS__", "ds_order_details");
 define("__DBC_SCHEMATA_ORDER__", "ds_orders");
 define("__DBC_SCHEMATA_DONER__", "ds_doner");
+define("__DBC_SCHEMATA_USED_KITS__", "ds_usedsoskit");
 define( "__DBC_SCHEMATA_COUNTRY__", "tbl_countries");
 define( "__DBC_SCHEMATA_STATE__", "tbl_states");
 define( "__DBC_SCHEMATA_FRANCHISEE__", "tbl_franchisee");
