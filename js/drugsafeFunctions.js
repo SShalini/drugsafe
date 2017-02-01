@@ -1434,12 +1434,40 @@ function deliverOrderConfirmation(idOrder) {
 }
 function calTotalPrice(prodcost,inc) {
  
- var Val1=jQuery('#order_quantity'+inc).val();
- var res= Val1*prodcost;
- 
-jQuery('#total_price'+inc).html(res);
-var finaltotal = jQuery('#total').val();
-finaltotal = parseFloat(finaltotal)+parseFloat(res);
-jQuery('#finaltotal').html(finaltotal);
-jQuery('#total').val(finaltotal);
+ var totalprodcount = $('#totalprodcount').val();
+    var total = 0.00;
+    for(var i=1;i<=totalprodcount;i++){
+        if($('#order_quantity'+i).val()){
+            var prodqty = parseInt($('#order_quantity'+i).val());
+            var prodprice = parseFloat($('#order_prod_price'+i).val()).toFixed(2);
+            total = total+(prodprice*prodqty);
+        }
+    }
+$('#finaltotal').html(parseFloat(total).toFixed(2));
+$('#total').val(parseFloat(total).toFixed(2));
+}
+function getProductCodeListByCategory(szCategory) {
+    $.post(__BASE_URL__ + "/reporting/getProductCodeListByCategory", {szCategory: szCategory}, function (result) {
+        if (result != '') {
+            $("#szSearch3").html(result);
+        }
+    });
+}
+
+function ViewpdfFrInventoryReport(prodCategory,productCode) {
+    $.post(__BASE_URL__ + "/reporting/ViewpdfFrInventoryReportData", {prodCategory: prodCategory,productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ViewexcelFrInventoryReport(prodCategory,productCode) {
+    $.post(__BASE_URL__ + "/reporting/ViewexcelFrInventoryReportData", {prodCategory: prodCategory,productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+      window.open(URL,'_blank');
+     
+      
+    });
 }

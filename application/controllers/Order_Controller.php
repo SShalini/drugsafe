@@ -374,7 +374,7 @@ class Order_Controller extends CI_Controller {
        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
      
-        $this->load->library('form_validation');
+           $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
             $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
             
@@ -577,7 +577,6 @@ class Order_Controller extends CI_Controller {
     }
      public function dispatchProductData()
     {
-        
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -585,8 +584,57 @@ class Order_Controller extends CI_Controller {
             redirect(base_url('/admin/admin_login'));
             die;
         }
+       if($_POST['pending']==1){
+           
         $count = $_POST['count'];
+        $franchiseeId = $_POST['franchiseeId'];
         $total_price = 0;
+        for ($i = 1; $i <= $count; $i++)
+        {
+         $quantity =  $_POST['order_quantity'.$i];
+         $total_price += $_POST['total_price'.$i];
+         $orderId =  $_POST['order_id'.$i];
+         $productId =  $_POST['product_id'.$i];
+         $productDataArr = $this->Inventory_Model->getProductDetailsById($productId);
+         $szAvailableQuantity = $productDataArr['szAvailableQuantity'];
+         if($szAvailableQuantity < $quantity)
+         {
+                $szMessage['type'] = "error";
+                $szMessage['content'] = "<strong><h3>Dispatch Quantity must be less than available quantity.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/view_order_list'));
+         }else{
+         $orderPending =$this->Order_Model->pendingOrder($quantity,$orderId,$productId,$szAvailableQuantity,$franchiseeId); 
+         }
+        
+        }
+        
+            $totalPrice = $_POST['total'];
+             if($this->Order_Model->orderPendingUpdate($_POST['order_id1'],$totalPrice)) 
+             {
+               $szMessage['type'] = "success";
+                $szMessage['content'] = "<strong><h3>Your Cart has been successfully updated.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/view_order_list'));
+             }
+       
+                $szMessage['type'] = "error";
+                $szMessage['content'] = "<strong><h3>Dispatch Quantity field can't be empty.</h3></strong> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                ob_end_clean();
+                redirect(base_url('/order/view_order_list'));
+      
+               
+    }  
+      
+       else{
+           
+          $count = $_POST['count'];
+        $franchiseeId = $_POST['franchiseeId'];
+        $total_price = 0;
+        $countOrderDispatch = 0;
         for ($i = 1; $i <= $count; $i++)
         {
          $quantity =  $_POST['order_quantity'.$i];
@@ -595,7 +643,8 @@ class Order_Controller extends CI_Controller {
          $orderId =  $_POST['order_id'.$i];
          $productId =  $_POST['product_id'.$i];
          $productDataArr = $this->Inventory_Model->getProductDetailsById($productId);
-         if($productDataArr['szAvailableQuantity']< $quantity)
+         $szAvailableQuantity = $productDataArr['szAvailableQuantity'];
+         if($szAvailableQuantity < $quantity)
          {
                 $szMessage['type'] = "error";
                 $szMessage['content'] = "<strong><h3>Dispatch Quantity must be less than available quantity.</h3></strong> ";
@@ -603,14 +652,16 @@ class Order_Controller extends CI_Controller {
                 ob_end_clean();
                 redirect(base_url('/order/view_order_list'));
          }else{
-              if(!empty($quantity)){
-         $orderDispatch =$this->Order_Model->dispatchOrder($quantity,$orderId,$productId); 
+             
+          if(!empty($quantity)){
+              
+         $orderDispatch =$this->Order_Model->dispatchOrder($quantity,$orderId,$productId,$szAvailableQuantity,$franchiseeId); 
+         $countOrderDispatch = count($orderDispatch);
          }
          }
         
         }
-        
-        if($orderDispatch){
+        if($countOrderDispatch == $count){
             $totalPrice = $_POST['total'];
              if($this->Order_Model->orderFinalUpdate($_POST['order_id1'],$totalPrice)) 
              {
@@ -629,7 +680,8 @@ class Order_Controller extends CI_Controller {
                 redirect(base_url('/order/view_order_list'));
         }
                
-    }
-        
-        }      
+    }  
+       }
+       
+     }      
 ?>

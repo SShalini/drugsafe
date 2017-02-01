@@ -144,7 +144,7 @@ class Forum_Model extends Error_Model {
                                 'szForumDiscription' => $data['szForumDiscription'],
 				'szForumLongDiscription' => $data['szForumLongDiscription'],
                                 'szforumImage' => $data['szforumImage'],
-                                'dtUpdatedOn' => $date,                
+                                'dtCreatedOn' => $date,                
                             );
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_DATA__, $dataAry);
             
@@ -756,6 +756,135 @@ class Forum_Model extends Error_Model {
         $commentArr = $this->getAllCommentsByTopicId(false,1);
         $totalNotificationCount = count($replyArr)+count($commentArr);
         return$totalNotificationCount;
+    }
+   
+        public function getTodayForumList()
+        {
+               $todayStartDate = date("Y-m-d");
+               $todayEndDate = date("Y-m-d 23:59:59");
+               $whereAry = "dtCreatedOn >= '" . $todayStartDate." 00:00:00' AND dtCreatedOn <= '" . $todayStartDate." 23:59:59'";
+          
+               $this->db->where($whereAry); 
+           
+            $this->db->select('id,szForumTitle,idCategory');
+        
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_DATA__);
+//      $sql = $this->db->last_query($query);
+//   print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+               return $query->result_array();
+                
+            }
+            else
+            {   
+                    return array();
+            }
+        } 
+        function sendEmail()
+    {
+            
+            $replace_ary = array();
+            $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+            $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
+         
+            createEmail($this, '__FORUM_NOTIFICATION__', $replace_ary, 'fawada@mobileconnekt.com.au', '', __CUSTOMER_SUPPORT_EMAIL__, '', __CUSTOMER_SUPPORT_EMAIL__,'',1);
+          
+        
+            return true;
+        
+
+    }  
+     public function getTodayTopicList()
+        {
+               $todayStartDate = date("Y-m-d");
+               $todayEndDate = date("Y-m-d 23:59:59");
+               $whereAry = "dtCreatedOn >= '" . $todayStartDate." 00:00:00' AND dtCreatedOn <= '" . $todayStartDate." 23:59:59'";
+          
+               $this->db->where($whereAry); 
+           
+            $this->db->select('id,szTopicTitle,idForum,idUser');
+        
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_TOPIC__);
+
+            if($query->num_rows() > 0)
+            {
+               return $query->result_array();
+                
+            }
+            else
+            {   
+                    return array();
+            }
+        }
+         public function getTodayCommentList()
+        {
+               $todayStartDate = date("Y-m-d");
+               $todayEndDate = date("Y-m-d 23:59:59");
+               $whereAry = "cmntDate >= '" . $todayStartDate." 00:00:00' AND cmntDate <= '" . $todayStartDate." 23:59:59'";
+          
+               $this->db->where($whereAry); 
+           
+            $this->db->select('id,idCmnters,szCmnt,cmntDate,idTopic');
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_COMMENTS__);
+//      $sql = $this->db->last_query($query);
+//   print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+               return $query->result_array();
+                
+            }
+            else
+            {   
+                    return array();
+            }
+        } 
+    public function getTodayReplyList()
+        {
+               $todayStartDate = date("Y-m-d");
+               $todayEndDate = date("Y-m-d 23:59:59");
+               $whereAry = "dtReplyOn >= '" . $todayStartDate." 00:00:00' AND dtReplyOn <= '" . $todayStartDate." 23:59:59'";
+          
+               $this->db->where($whereAry); 
+           
+            $this->db->select('id,idCmnt,szReply,idReplier');
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_REPLY__);
+//      $sql = $this->db->last_query($query);
+//   print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+               return $query->result_array();
+                
+            }
+            else
+            {   
+                    return array();
+            }
+        } 
+           public function getTopicDetailsbyTopicId($idTopic)
+    {
+
+        $whereAry = array('id ' => (int)$idTopic);
+        $this->db->select('id,szTopicTitle,idForum,idUser');
+        $this->db->where($whereAry);
+
+       
+         $query = $this->db->get(__DBC_SCHEMATA_FORUM_TOPIC__);
+//      $sql = $this->db->last_query($query);
+//   print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+             $row =   $query->result_array();
+                return $row['0'];
+                
+            }
+            else
+            {   
+                    return array();
+            }
+
     }
 }
 ?>

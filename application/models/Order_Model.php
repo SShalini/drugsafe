@@ -222,7 +222,7 @@ class Order_Model extends Error_Model {
         {
           
             $whereAry = array('orderid=' => $orderId);
-            $this->db->select('orderid,productid,quantity');
+            $this->db->select('orderid,productid,quantity,dispatched');
             $this->db->from(__DBC_SCHEMATA_ORDER_DETAILS__);
             $this->db->where($whereAry);
             $query = $this->db->get();
@@ -344,8 +344,7 @@ class Order_Model extends Error_Model {
         $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
      
         $query = $this->db->get();
-// $sql = $this->db->last_query();
-// print_r($sql);die;
+
         if ($query->num_rows() > 0) {
             return $query->result_array();
           
@@ -410,7 +409,7 @@ class Order_Model extends Error_Model {
                     return false;
                 }	
 	}
-         public function dispatchOrder($quantity,$orderId,$productid)
+         public function dispatchOrder($quantity,$orderId,$productid,$szAvailableQuantity,$franchiseeId)
 	{ 
             
 		$dataAry = array(
@@ -422,12 +421,40 @@ class Order_Model extends Error_Model {
 		if($query = $this->db->update(__DBC_SCHEMATA_ORDER_DETAILS__, $dataAry))
                         
                 {
+                    $availableQuantity = $szAvailableQuantity-$quantity;
+                   $dataAry = array(
+			'szAvailableQuantity' => $availableQuantity
+                ); 
+                 $whereAry = array('id' => $productid);
+                $this->db->where($whereAry);
+                 
+                if($query = $this->db->update(__DBC_SCHEMATA_PRODUCT__, $dataAry)){
+                 
+                   $prodQuantity =  $this->StockMgt_Model->getProductQtyDetailsById($franchiseeId,$productid);
+                  $Quantity = $prodQuantity['szQuantity']+$quantity;
+                   $dataAry = array(
+			'szQuantity' => $Quantity
+                ); 
+                 $whereAry = array('iFranchiseeId' => $franchiseeId,'iProductId' => $productid);
+                 $this->db->where($whereAry);
+                 if($this->db->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry)) {
+                  return true;
+                } 
+                else{
+                   return false;  
+                }
                     return true;
                 }
                 else
                 {
                     return false;
-                }	
+                }
+                return true;
+                }
+                
+                else{
+                   return false;  
+                }
 	}
          public function orderFinalUpdate($orderId,$price)
 	{ 
@@ -451,5 +478,251 @@ class Order_Model extends Error_Model {
                     return false;
                 }	
 	}
+         public function pendingOrder($quantity,$orderId,$productid,$szAvailableQuantity,$franchiseeId)
+	{ 
+            
+		$dataAry = array(
+			'dispatched' => $quantity
+                );
+                 $whereAry = array('orderid=' => $orderId,'productid' => $productid);
+                $this->db->where($whereAry);
+                 
+		if($query = $this->db->update(__DBC_SCHEMATA_ORDER_DETAILS__, $dataAry))
+                        
+                {
+                    $availableQuantity = $szAvailableQuantity-$quantity;
+                   $dataAry = array(
+			'szAvailableQuantity' => $availableQuantity
+                ); 
+                 $whereAry = array('id' => $productid);
+                $this->db->where($whereAry);
+                 
+                if($query = $this->db->update(__DBC_SCHEMATA_PRODUCT__, $dataAry)){
+                 
+                   $prodQuantity =  $this->StockMgt_Model->getProductQtyDetailsById($franchiseeId,$productid);
+                  $Quantity = $prodQuantity['szQuantity']+$quantity;
+                   $dataAry = array(
+			'szQuantity' => $Quantity
+                ); 
+                 $whereAry = array('iFranchiseeId' => $franchiseeId,'iProductId' => $productid);
+                 $this->db->where($whereAry);
+                 if($this->db->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry)) {
+                  return true;
+                } 
+                else{
+                   return false;  
+                }
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                return true;
+                }
+                
+                else{
+                   return false;  
+                }
+	}
+         public function orderPendingUpdate($orderId,$price)
+	{ 
+             
+            $date = date('Y-m-d H:i:s');
+		$dataAry = array(
+			'status' => '4',
+                        'price' => $price
+                );
+                 $whereAry = array('id=' => $orderId);
+                $this->db->where($whereAry);
+                 
+		if($query = $this->db->update(__DBC_SCHEMATA_ORDER__, $dataAry))
+                        
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+      public function getallPendingValidOrderFrId()
+    { 
+        $whereAry = "validorder LIKE '%1%' OR status LIKE '%4%' OR status LIKE '%1%'";
+        $this->db->distinct();
+        $this->db->select('szName,franchiseeid');
+        $this->db->from(__DBC_SCHEMATA_ORDER__);
+        $this->db->join('ds_user', 'ds_orders.franchiseeid = ds_user.id');
+        $this->db->where($whereAry);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+          
+            }
+         
+        else {
+            return array();
+        }
+    }
+    public function getallValidPendingOrderDetails($searchAry=array())
+    {
+         $searchQuery = "validorder LIKE '%1%' AND status != '3' AND dispatched LIKE '%0%' ";
+         if(!empty($searchAry))
+        {
+            
+            foreach($searchAry as $key=>$searchData)
+            { 
+
+                 if($key == 'szSearch1'){
+                    if(!empty ($searchData)){
+                        $searchQuery.="
+                            AND franchiseeid = ".(int)($searchData);
+                    }
+                }
+                if($key == 'szSearch2'){
+                    if(!empty ($searchData)){
+                        $searchQuery .="
+                        AND 
+                         szProductCategory = ".(int)($searchData);
+                    }
+                }
+                if($searchData != '')
+                {
+                    if($key =='szSearch3')
+                    {
+                        $searchQuery .="
+                       AND
+                             productid = ".(int)($searchData);
+                              
+                    }
+                    
+                   
+                    }
+                }
+                  
+        }
+        $this->db->where($searchQuery);
+        $this->db->distinct();
+       $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
+        $this->db->order_by("orderid", "desc");
+        $this->db->from(__DBC_SCHEMATA_ORDER__);
+        $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+        $this->db->join('tbl_product', 'ds_order_details.productid = tbl_product.id');
+        
+        
+        $query = $this->db->get();
+//$sql = $this->db->last_query($query);
+//print_r($sql);die;
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+          
+            }
+         
+        else {
+            return array();
+        }
+    } 
+     public function getCategoryDetailsById($id)
+    { 
+        $whereAry = array('id' => $id) ;
+        $this->db->select('szName');
+        $this->db->from(__DBC_SCHEMATA_PRODUCT_CATEGORY__);
+        $this->db->where($whereAry);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+          return $row['0'];
+            }
+         
+        else {
+            return array();
+        }
+    }
+     public function getallValidPendingOrderFrDetails($searchAry=array())
+    {
+         $franchiseeid = $_SESSION['drugsafe_user']['id'];
+         $searchQuery = "validorder LIKE '%1%'AND franchiseeid LIKE '%$franchiseeid%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
+         if(!empty($searchAry))
+        {  
+             foreach($searchAry as $key=>$searchData)
+            { 
+                if($key == 'szSearch2'){
+                    if(!empty ($searchData)){
+                        $searchQuery .="
+                        AND 
+                         szProductCategory = ".(int)($searchData);
+                    }
+                }
+                if($searchData != '')
+                {
+                    if($key =='szSearch3')
+                    {
+                        $searchQuery .="
+                       AND
+                             productid = ".(int)($searchData);
+                              
+                    }
+                    
+                   
+                    }
+                }
+        }      
+       
+        $this->db->where($searchQuery);
+        $this->db->distinct();
+        $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
+        $this->db->order_by("orderid", "desc");
+        $this->db->from(__DBC_SCHEMATA_ORDER__);
+        $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+        $this->db->join('tbl_product', 'ds_order_details.productid = tbl_product.id');
+        
+        
+        $query = $this->db->get();
+//$sql = $this->db->last_query($query);
+//print_r($sql);die;
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+          
+            }
+         
+        else {
+            return array();
+        }
+    } 
+     public function getValidPendingOdrFrDetailsForPdf($productCode='',$prodCategory='')
+        {
+        $franchiseeid = $_SESSION['drugsafe_user']['id'];
+          if(!empty($prodCategory)){
+               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%'";
+            }
+            if(!empty($productCode)){
+               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' ";
+            }
+            if(!empty($prodCategory) && !empty($productCode)){
+               $searchq = array('szProductCategory' => $prodCategory,'productid' => $productCode,'franchiseeid ' =>$franchiseeid);
+            }
+            $this->db->where($searchq);
+           $this->db->distinct();
+           $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
+           $this->db->order_by("orderid", "desc");
+           $this->db->from(__DBC_SCHEMATA_ORDER__);
+           $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+           $this->db->join('tbl_product', 'ds_order_details.productid = tbl_product.id');  
+            
+            $query = $this->db->get();
+//$sql = $this->db->last_query($query);
+// print_r($sql);die;
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
+    
    }
 ?>

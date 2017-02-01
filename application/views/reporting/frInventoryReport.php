@@ -48,36 +48,38 @@
                                     Inventory Report
                                 </span>
                             </div>
-                
+                    <?php
+                            if(!empty($validPendingOrderFrDetailsAray))
+                        { 
+                           $this->session->unset_userdata('productCode');
+                           $this->session->unset_userdata('prodCategory');
+           
+                                
+                           
+                            ?>
+                          
+                            <div class="actions">
+                               
+                                 <a onclick="ViewpdfFrInventoryReport('<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                                
+                               <a onclick="ViewexcelFrInventoryReport('<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                    <i class="fa fa-file-excel-o"></i> View Xls </a>
+                                    
+                            </div>
+                            <?php
+                        }
+                            ?>
+                       
                         </div>
                         
                     <div class="row">
-                      <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/inventoryReport" method="post">
+                      <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/frInventoryReport" method="post">
                 
                     
-                    <div class="col-md-3">
-                       
-                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
-                            <select class="form-control custom-select" name="szSearch1" id="szSearch1" onchange="remove_formError(this.id,'true')">
-                                          <option value="">Franchisee Name</option>
-                                          <?php
-                                          foreach($allFrPendingDetailsSearchAray as $allFrPendingDetailsSearchList)
-                                          {
-                                              $selected = ($allFrPendingDetailsSearchList['franchiseeid'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allFrPendingDetailsSearchList['franchiseeid'].'"'.$selected.' >'.$allFrPendingDetailsSearchList['szName'].'</option>';
-                                          }
-                                          ?>
-                           </select>
-                             <?php
-                               if(form_error('szSearch1')){?>
-                               <span class="help-block pull-left"><span><?php echo form_error('szSearch1');?></span>
-                             </span><?php }?> 
-                        </div>
-                    </div>
-                    <div class="col-md-1">
-                         
-                           </div>
-
+                  
                                       <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             
@@ -114,8 +116,8 @@
             </form>  
                       </div>
                 <?php
-                        if(!empty($validPendingOrdersDetailsAray) || !empty($_POST['szSearch2']||$_POST['szSearch1']) ){
-                        if(!empty($validPendingOrdersDetailsAray)) 
+                       if(!empty($_POST['szSearch2'])){
+                        if(!empty($validPendingOrderFrDetailsAray)) 
                         {
                            ?>      
                     <div class="row">
@@ -142,10 +144,10 @@
                             </thead>
                             <tbody>
                                      <?php         $i = 0;
-                                                foreach($validPendingOrdersDetailsAray as $validPendingOrdersDetailsData)
+                                                foreach($validPendingOrderFrDetailsAray as $validPendingOrderFrDetailsData)
                                                 { 
                                                     $i++ ;
-                                                   $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrdersDetailsData['szProductCategory']));
+                                                   $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
                                                    ?>
                             <tr>
                                     <td><?php echo $i; ?> </td>
@@ -153,10 +155,10 @@
                                          <?php echo $productcatAry['szName'];?> 
                                     </td>
                                     <td>
-                                         <?php echo $validPendingOrdersDetailsData['szProductCode'] ;?>
+                                         <?php echo $validPendingOrderFrDetailsData['szProductCode'] ;?>
                                     </td>
-                                    <td>  <?php echo $validPendingOrdersDetailsData['szAvailableQuantity'] ;?> </td>
-                                     <td>  <?php echo $validPendingOrdersDetailsData['quantity'] ;?> </td>
+                                    <td>  <?php echo $validPendingOrderFrDetailsData['szAvailableQuantity'] ;?> </td>
+                                     <td>  <?php echo $validPendingOrderFrDetailsData['quantity'] ;?> </td>
                                     
 
                                 </tr>
@@ -174,8 +176,8 @@
                           
                             echo "Not Found";    
                            }
-                           
-                            }?> 
+                       }
+                            ?> 
                   </div>
    
                    

@@ -205,7 +205,7 @@
                                                                              Order Details
                                                                     </th>
                                                                     <th>
-                                                                             Edit OrderDelivery Docket
+                                                                             Edit Order
                                                                     </th>
                                                                      <th>
                                                                           Delivery Docket

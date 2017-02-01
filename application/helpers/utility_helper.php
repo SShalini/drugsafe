@@ -214,7 +214,7 @@ function sortArray($arrData, $p_sort_field, $p_sort_type = false ,$secondory_sor
 		return $newData;
 	}
 }
-function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_to, $id_player=0, $from=__CUSTOMER_SUPPORT_EMAIL__,$pdf='')
+function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_to, $id_player=0, $from=__CUSTOMER_SUPPORT_EMAIL__,$pdf='',$flag='')
 { 
     
     $emailCMSAry = $obj->Admin_Model->getEmailTemplateDetailsByTitle($email_template);
@@ -229,12 +229,155 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
     }
     else
     {
-        $subject = $emailCMSAry['subject'];
-        $message .= $emailCMSAry['sectionDescription'];
+        if($flag==1){
+      
+         $subject = $emailCMSAry['subject'];
+         
+        
+         $topicList = $obj->Forum_Model->getTodayTopicList();
+        $commentList = $obj->Forum_Model->getTodayCommentList();
+      
+          $message .= '
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b"><b> Dear Fawada, </b></p></div>
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Below are the following forum details,</p></div>';
+      
+         
+          $message .= '
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Topics</b></p></div>
+            
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>#</b> </th>
+                                        <th> <b>Topic</b> </th>
+                                        <th> <b>Forum</b> </th>
+                                        <th style="width:150px"><b>Franchisee</b> </th>
+                                       
+                                    </tr>';
+        if ($topicList) {
+            $i = 0;
+            foreach ($topicList as $topicData) {
+                 $i++;
+                $franchiseeArr = $obj->Admin_Model->getAdminDetailsByEmailOrId('', $topicData['idUser']);
+                 $forumList = $obj->Forum_Model->getForumDetailsByForumId($topicData['idForum']);
+                 
+               $message .= '<tr>
+                                             <td> ' . $i . ' </td>
+                                            <td> ' . $topicData['szTopicTitle'] . '</td>
+                                            <td> ' . $forumList['0']['szForumTitle'] . ' </td>
+                                            <td>' . $franchiseeArr['szName'] . ' </td>
+                                           
+                                            
+                                
+                                        </tr>';
+            }
+        }
+       
+       $message .= '
+                         </table>
+                        </div>
+                      
+                       <hr style=" margin-top:25px; "> ';
+          
+          $message .= '
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Comments</b></p></div>
+            
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>#</b> </th>
+                                        <th> <b>Comment</b> </th>
+                                        <th> <b>Topic</b> </th>
+                                        <th style="width:150px"><b>Forum</b> </th>
+                                        <th style="width:150px"><b>Commenter</b> </th>
+                                       
+                                    </tr>';
+      
+             if ($commentList) {
+            $i = 0;
+            foreach ($commentList as $commentData) {
+          
+        
+                 $i++;
+                $franchiseeArr = $obj->Admin_Model->getAdminDetailsByEmailOrId('', $commentData['idCmnters']);
+                
+                 $TopicDetails = $obj->Forum_Model->getTopicDetailsbyTopicId($commentData['idTopic']);
+                  $forumList = $obj->Forum_Model->getForumDetailsByForumId($TopicDetails['idForum']);
+               $message .= '<tr>
+                                            <td> ' . $i . ' </td>
+                                            <td> ' . $commentData['szCmnt'] . '</td>
+                                            <td> ' . $TopicDetails['szTopicTitle'] . '</td>
+                                            <td> ' . $forumList['0']['szForumTitle'] . ' </td>
+                                            <td>' . $franchiseeArr['szName'] . ' </td>
+                                            
+                                
+                                        </tr>';
+            }
+        }
+       
+       $message .= '
+                            </table>
+                        </div>
+                      
+                       <hr style=" margin-top:25px; "> ';
+           $message .= '
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Reply</b></p></div>
+            
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>#</b> </th>
+                                        <th> <b>Reply</b> </th>
+                                        <th> <b>Comment</b> </th>
+                                        <th style="width:150px"><b>Topic</b> </th>
+                                        <th style="width:150px"><b>Forum</b> </th>
+                                        <th style="width:150px"><b>Replier</b> </th>
+                                       
+                                    </tr>';
+        $ReplyList = $obj->Forum_Model->getTodayReplyList();
+             if ($ReplyList) {
+            $i = 0;
+            foreach ($ReplyList as $ReplyData) {
+          
+        
+                 $i++;
+                 $commentDetails = $obj->Forum_Model->getAllCommentsByCmntId($ReplyData['idCmnt']);
+                $franchiseeArr = $obj->Admin_Model->getAdminDetailsByEmailOrId('', $ReplyData['idReplier']);
+                
+                 $TopicDetailsData = $obj->Forum_Model->getTopicDetailsbyTopicId($commentDetails['idTopic']);
+                 $forumListData = $obj->Forum_Model->getForumDetailsByForumId($TopicDetailsData['idForum']);
+                 
+               $message .= '<tr>
+                                            <td> ' . $i . ' </td>
+                                            <td> ' . $ReplyData['szReply'] . '</td>
+                                            <td> ' . $commentDetails['szCmnt'] . '</td>
+                                            <td> ' . $TopicDetailsData['szTopicTitle'] . '</td>
+                                            <td> ' . $forumListData['0']['szForumTitle'] . ' </td>
+                                            <td>' . $franchiseeArr['szName'] . ' </td>
+                                            
+                                
+                                        </tr>';
+            }
+        }
+       
+       $message .= '
+                            </table>
+                        </div>
+                      
+                       <hr style=" margin-top:25px; "> ';
+  
+         $message .= $emailCMSAry['sectionDescription'];  
+       
+        }
+        else{
+          $subject = $emailCMSAry['subject'];
+          $message .= $emailCMSAry['sectionDescription'];  
+        }
+        
     }
     
 
-    if (count($replace_ary) > 0)
+    if(count($replace_ary) > 0)
     {
         foreach ($replace_ary as $replace_key => $replace_value)
         {
@@ -242,18 +385,24 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
             $subject= str_replace($replace_key, $replace_value, $subject);
         }
     }
-
     ob_start();
     $obj->load->view('layout/email_footer');
     $message .= ob_get_clean();
     
-    sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player);
+    if($flag==1){
+         sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player,'fawada089@gmail.com'); 
+         
+    }
+    else{
+       sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player);   
+    }
+  
 }
 
 function sendEmail($obj,$to,$from,$subject,$message,$attach_file='',$id_player,$cc='',$bcc='')
 {
 	// Get a reference to the controller object
-    //
+   
     $CI = get_instance();
 
     $CI->load->library('CI_PHPMailer');

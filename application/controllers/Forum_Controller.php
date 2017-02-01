@@ -713,6 +713,31 @@ class Forum_Controller extends CI_Controller {
             $this->Forum_Model->deleteTopic($data['idTopic']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-        
+          function sendEmail()
+        {
+           $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                redirect(base_url('/admin/admin_login'));
+                die;
+            }
+           
+               $sendEmailAray =  $this->Forum_Model->sendEmail();
+      
+                if($sendEmailAray)
+                {
+                 
+                        $szMessage['type'] = "success";
+                        $szMessage['content'] = "<strong><h3> Email has been sent successfully.</h3></strong>";
+                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                        ob_end_clean();
+                        redirect(base_url('/admin/operationManagerList'));
+                    die;
+                    
+                }
+                   
+        } 
     }      
 ?>

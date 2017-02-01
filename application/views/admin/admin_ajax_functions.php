@@ -1647,6 +1647,8 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                   
                             </div>
                           <?php  $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+                              $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                          
                         ?>
                             <div class="portlet-body">
                                   <form class="form-horizontal" id="dispatchProduct" action="<?= __BASE_URL__ ?>/order/dispatchProductData" name="dispatchProduct" method="post">
@@ -1675,9 +1677,18 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                     <td> <?php echo $totalOrdersDetailsData['quantity'];?> </td>
                                                     <td> <?php echo $productDataArr['szAvailableQuantity'];?> </td>
-                                                      <td>
-                                                         <input type="number"min="1"  class="form-control btn-xs " max="100" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" onblur="calTotalPrice('<?php echo $productDataArr['szProductCost'];?>','<?php echo $i;?> ')">
+                                                    <?php if($totalOrdersDetailsData['dispatched']!=0){?>
+                                                     <td>
+                                                         <input type="number"min="1"  class="form-control btn-xs read-only" readonly max="100" value="<?php echo $totalOrdersDetailsData['dispatched']; ?>" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" onblur="calTotalPrice('<?php echo $productDataArr['szProductCost'];?>','<?php echo $i;?> ')">
+                                                         <input type="hidden" name="order_prod_price<?php echo $i;?>" id="order_prod_price<?php echo $i;?>" value="<?php echo $productDataArr['szProductCost'];?>" />
                                                       </td>
+                                                    <?php } else { ?>
+                                                      <td>
+                                                          <input type="number"min="1"  class="form-control btn-xs "  max="100" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" onblur="calTotalPrice('<?php echo $productDataArr['szProductCost'];?>','<?php echo $i;?> ')">
+                                                          <input type="hidden" name="order_prod_price<?php echo $i;?>" id="order_prod_price<?php echo $i;?>" value="<?php echo $productDataArr['szProductCost'];?>" />
+                                                      </td>
+                                                      
+                                                       <?php } ?>
                                                       <td> 
                                                         $<label class ="lab<?php echo $i;?>" name="total_price<?php echo $i;?>" value=""  id="total_price<?php echo $i;?>" ></label>
                                                       </td>
@@ -1698,7 +1709,7 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                             
                                              
                                            ?>
-                                            
+                                            <input type="hidden" name="totalprodcount" id="totalprodcount" value="<?php echo $count;?>" />
                                         </tbody>
                                     </table>
                                           <div class="row">
@@ -1724,12 +1735,15 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                 </div>
                                 
                                  </div>
+                                       <input  class="form-control" type="hidden"
+                                               value="<?php echo $ordersDetailsAray['franchiseeid']?>" name="franchiseeId" id="franchiseeId" > 
                                        <input id="count" class="form-control" type="hidden"
                                                value="<?php echo $count; ?>" name="count">
                                        
                        <div class="modal-footer">                 
                       <button type="submit" class="btn green" name="submit"><i class="icon-basket"></i> Dispatch Order</button>
-                      <button type="button" onclick="deliverOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn green-meadow"><i class="fa fa-shopping-cart"></i>  Pending Order</button>
+                      <button type="submit" class="btn green-meadow" name="pending" value="1"><i class="fa fa-shopping-cart"></i> Pending Order</button>
+<!--                      <button type="button" onclick="pendingOrder('<?php echo $idOrder;?>'); return false;" class="btn green-meadow"><i class="fa fa-shopping-cart"></i>  Pending Order</button>-->
                       <button type="button" onclick="CancelOrderConfirmation('<?php echo $idOrder;?>'); return false;" class="btn red"><i class="fa fa-times"></i> Cancel Order</button>
                       </div>
                                        </form>

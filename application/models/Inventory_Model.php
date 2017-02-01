@@ -238,6 +238,25 @@ class Inventory_Model extends Error_Model {
             {
                     return array();
             }
-        }      
+        }    
+          public function getProductByCategory($idCategory)
+        {
+        
+            $whereAry = array('szProductCategory' => (int)$idCategory);
+            $this->db->select('*');
+            $this->db->from(__DBC_SCHEMATA_PRODUCT__);
+            $this->db->where($whereAry);
+            $query = $this->db->get();
+          
+            if($query->num_rows() > 0)
+            {
+               return $query->result_array();
+              
+            }
+            else
+            {
+                return array();
+            }
+        }
 }
 ?>

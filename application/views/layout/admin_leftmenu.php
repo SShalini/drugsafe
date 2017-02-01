@@ -172,9 +172,13 @@
                                 <span class="title">Stock Assignments</span>
                             </a>
                         </li>
-                      
-                         
-                       
+                        <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frInventoryReport">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Inventory Report</span>
+                            </a>
+                        </li>
+                  
                     </ul>
 
                 </li>
@@ -271,6 +275,13 @@
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                             <span class="title"> Approval</span>
                             <?php if($commentnotification > '0'){?><span class="badge badge-danger"><?php echo $commentnotification; ?></span><?php } ?>
+                        </a>
+                    </li>
+                     <li class="nav-item  <?php if ($subpageName == 'Send Notification') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/sendEmail">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            <span class="title"> Send Notification</span>
+                           
                         </a>
                     </li>
                   <?php }?> 
