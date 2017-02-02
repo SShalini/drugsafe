@@ -315,6 +315,30 @@ class Webservices_Model extends Error_Model
                         }
                     }
                 }
+
+                if($data['kitcount'] > '0' && $data['totalkitcount'] == '0'){
+                    for ($dc = 1; $dc <= $data['kitcount']; $dc++) {
+                        $this->savekits($data['kit'.$dc],$sosid,$data['kitqty'.$dc],$failarr);
+                    }
+                }elseif ($data['kitcount'] > '0' && $data['totalkitcount'] > '0'){
+                    $newkits = (int)$data['totalkitcount']-(int)$data['oldkitcount'];
+                    for ($dc = 1; $dc <= $data['kitcount']; $dc++) {
+                        if($newkits>'0'){
+                            $newkitarr = explode(',',$data['newkitids']);
+                            foreach ($newkitarr as $key=>$val){
+                                if($dc == $val){
+                                    $this->savekits($data['kit'.$dc],$sosid,$data['kitqty'.$dc],$failarr);
+                                    break;
+                                }else{
+                                    $this->updatesavedkits($data['kit'.$dc],$data['kitid'.$dc],$data['kitqty'.$dc]);
+                                }
+                            }
+                        }else{
+                            $this->updatesavedkits($data['kit'.$dc],$data['kitid'.$dc],$data['kitqty'.$dc]);
+                        }
+                    }
+
+                }
                 $datacocarr = $this->getcocdonorsbysosid($sosid);
                 if ($data['formtype'] == '1' && !empty($datacocarr)) {
                     if ($datacocarr['totalcoc'] > '1') {
@@ -365,18 +389,7 @@ class Webservices_Model extends Error_Model
                         }
                     }
                     for ($dc = 1; $dc <= $data['kitcount']; $dc++) {
-                        if ($data['kit' . $dc]>'0') {
-                            $kitAry = array(
-                                'prodid' => $data['kit' . $dc],
-                                'sosid' => (int)$sosid,
-                                'quantity' => $data['kitqty' . $dc]
-                            );
-                            $this->db->insert(__DBC_SCHEMATA_USED_KITS__, $kitAry);
-                            if (!($this->db->affected_rows() > 0)) {
-                                $message = "Some error occurred while adding " . $data['kit' . $dc]. " product.";
-                                array_push($failarr, $message);
-                            }
-                        }
+                        $this->savekits($data['kit'.$dc],$sosid,$data['kitqty'.$dc],$failarr);
                     }
                     $datacocarr = $this->getcocdonorsbysosid($sosid);
                     if ($data['formtype'] == '1' && !empty($datacocarr)) {
@@ -394,6 +407,31 @@ class Webservices_Model extends Error_Model
                 }
             }
         }
+    }
+
+    function savekits($prodid,$sosid,$qty,$failarr){
+        if ($prodid>'0') {
+            $kitAry = array(
+                'prodid' => (int)$prodid,
+                'sosid' => (int)$sosid,
+                'quantity' => (int)$qty
+            );
+            $this->db->insert(__DBC_SCHEMATA_USED_KITS__, $kitAry);
+            if (!($this->db->affected_rows() > 0)) {
+                $message = "Some error occurred while adding product.";
+                array_push($failarr, $message);
+            }
+        }
+    }
+
+    function updatesavedkits($prodid,$kitid,$qty){
+        $kitAry = array(
+            'prodid' => (int)$prodid,
+            'quantity' => (int)$qty
+        );
+        $whereAry = array('id' => (int)$kitid);
+        $this->db->where($whereAry)
+            ->update(__DBC_SCHEMATA_USED_KITS__, $kitAry);
     }
 
     function formatdate($date)
@@ -1181,5 +1219,91 @@ class Webservices_Model extends Error_Model
         }else{
             return false;
         }
+    }
+
+    function getSavedKitsBySosid($sosid){
+        $array = array('sosid' => (int)$sosid,'used'=>'0');
+        $query = $this->db->select('id, prodid, quantity, used')
+            ->from(__DBC_SCHEMATA_USED_KITS__)
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No kits found.");
+        }
+    }
+
+    function delUsedKit($kitid)
+    {
+        $whereAry = 'id =' . (int)$kitid;
+        $query = $this->db->where($whereAry)
+            ->delete(__DBC_SCHEMATA_USED_KITS__);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function inventoryCheck($franchiseeid,$sosid){
+        $usedKitarr = $this->getSavedKitsBySosid($sosid);
+        if(!empty($usedKitarr)){
+            $counter = 0;
+            $checkCount = 0;
+            foreach ($usedKitarr as $kit){
+                $counter++;
+                $availInvArr = $this->getFranchiseeInventory($franchiseeid,$kit['prodid']);
+                if(!empty($availInvArr) && ($availInvArr[0]['szQuantity'] > $kit['quantity'])){
+                    if($this->adjustFranchiseeInventory($availInvArr[0]['id'],$kit['quantity'])){
+                        $this->markKitStatusUsed($kit['id']);
+                        $checkCount++;
+                    }
+                }
+            }
+            if($checkCount == $counter){
+                if($this->marksoscomplete($sosid)){
+                    return true;
+                }
+            }else{
+                return false;
+            }
+        }
+    }
+
+    function getFranchiseeInventory($franchiseeid,$prodid){
+        $array = array('iFranchiseeId' => (int)$franchiseeid, 'iProductId'=>(int)$prodid);
+        $query = $this->db->select('id, szQuantity')
+            ->from(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__)
+            ->where($array)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+        }
+    }
+
+    function adjustFranchiseeInventory($id,$qty){
+        $whereAry = array('id' => (int)$id);
+        $this->db->where($whereAry)
+                    ->set('szQuantity', 'szQuantity-'.(int)$qty, FALSE)
+                    ->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function markKitStatusUsed($id){
+        $stockAry = array(
+            'used' => '1'
+        );
+        $whereAry = array('id' => (int)$id);
+        $this->db->where($whereAry)
+            ->update(__DBC_SCHEMATA_USED_KITS__, $stockAry);
     }
 } 

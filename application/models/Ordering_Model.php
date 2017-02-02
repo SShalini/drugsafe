@@ -15,13 +15,21 @@ class Ordering_Model extends Error_Model {
                                 'nataLabCnfrm' => $data['nataLabCnfrm'],
                                 'oralFluidNata'=>$data['oralFluidNata'],
                                 'SyntheticCannabinoids' => $data['SyntheticCannabinoids'],
-                                'labScrenning' => $data['labScrenning'],
+                                'labScrenning' => $data['laboratoryScreening'],
 				'RtwScrenning' => $data['RtwScrenning'],
-                                'mobileScreenBasePrice'=>$data['mobileScreenBasePrice'],
-                                'mobileScreenHr' => $data['mobileScreenHr'],
+                                'mobileScreenBasePrice'=>$data['DCmobileScreenBasePrice'],
+                                'mobileScreenHr' => $data['DCmobileScreenHr'],
                                 'travelBasePrice' => $data['travelBasePrice'],
 				'travelHr' => $data['travelHr'],
-                                'travelType' => $data['travelType']
+                                'travelType' => $data['travelType'],
+                'fcobp' => $data['FCOBasePrice'],
+                'fcohr' => $data['FCOHr'],
+                'mcbp' => $data['mobileScreenBasePrice'],
+                'mchr' => $data['mobileScreenHr'],
+                'cobp' => $data['CallOutBasePrice'],
+                'cohr' => $data['CallOutHr'],
+                'labconf' => $data['laboratoryConfirmation'],
+                'cancelfee' => $data['cancellationFee']
           
                             );
 	$query=    $this->db->insert(__DBC_SCHEMATA_MANUAL_CAL__, $dataAry);

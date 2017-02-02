@@ -145,6 +145,9 @@ class Webservices_Controller extends CI_Controller
         $dataArr['idsos'] = !empty($jsondata->idsos) ? $jsondata->idsos : "";
         $dataArr['cocstat'] = !empty($jsondata->cocstat) ? $jsondata->cocstat : "0";
         $dataArr['kitcount'] = !empty($jsondata->kitcount) ? $jsondata->kitcount : "1";
+        $dataArr['oldkitcount'] = !empty($jsondata->oldkitcount) ? $jsondata->oldkitcount : "0";
+        $dataArr['totalkitcount'] = !empty($jsondata->totalkitcount) ? $jsondata->totalkitcount : "0";
+        $dataArr['newkitids'] = !empty($jsondata->newkitids) ? $jsondata->newkitids : "";
         for($i=1;$i<=$dataArr['donercount'];$i++){
             $namevar = 'name'.$i;
             $resultvar = 'result'.$i;
@@ -186,8 +189,10 @@ class Webservices_Controller extends CI_Controller
         for($dc=1;$dc<=$dataArr['kitcount'];$dc++){
             $prodvar = 'kit'.$dc;
             $qtyvar = 'kitqty'.$dc;
+            $kitidvar = 'kitid'.$dc;
             $dataArr['kit'.$dc] = !empty($jsondata->$prodvar) ? $jsondata->$prodvar : "";
             $dataArr['kitqty'.$dc] = !empty($jsondata->$qtyvar) ? $jsondata->$qtyvar : "0";
+            $dataArr['kitid'.$dc] = !empty($jsondata->$kitidvar) ? $jsondata->$kitidvar : "0";
         }
 
         if(($dataArr['furtestu']>0) || ($dataArr['furtesto']>0)){
@@ -906,6 +911,49 @@ class Webservices_Controller extends CI_Controller
             $responsedata = array("code" => 200,"message"=>"COC form cancelled successfully.");
         }else{
             $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getsavedkitsbysosid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['sosid'] = !empty($jsondata->sosid) ? $jsondata->sosid : "0";
+        $kitarr = $this->Webservices_Model->getSavedKitsBySosid($data['sosid']);
+        if($kitarr)
+        {
+            $responsedata = array("code" => 200,"kitarr"=>$kitarr);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No product found.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function delusedkit(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['kitid'] = !empty($jsondata->kitid) ? $jsondata->kitid : "0";
+        $delstatus = $this->Webservices_Model->delUsedKit($data['kitid']);
+        if($delstatus)
+        {
+            $responsedata = array("code" => 200,"message"=>"selected product removed successfully.");
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Some error occured while deleting selected product. Please try again.");
+
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function testcompletebyinventorycheck(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "0";
+        $data['sosid'] = !empty($jsondata->sosid) ? $jsondata->sosid : "0";
+        $inventoryStatus = $this->Webservices_Model->inventoryCheck($data['franchiseeid'],$data['sosid']);
+        if($inventoryStatus){
+            $responsedata = array("code" => 200,"message"=>"Your inventory updated successfully.");
+        }else{
+            $responsedata = array("code" => 201,"message"=>"Your inventory don't have sufficient amount of products to complete this test. Please upgrade your inventory and try again.");
         }
         header('Content-Type: application/json');
         echo json_encode($responsedata);

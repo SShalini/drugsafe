@@ -58,9 +58,10 @@ define("__FRANCHISEE_OWNER_PRICE_1__", 16.5);
 define("__FRANCHISEE_OWNER_PRICE_2__", 19.95);
 define("__FRANCHISEE_OWNER_PRICE_3__", 0);
 
-define("__RRP_1__", 39.50);
-define("__RRP_2__", 49.50);
-define("__RRP_3__", 5.50);
+define("__RRP_1__", 75.00);
+define("__RRP_2__", 75.00);
+define("__RRP_3__", 5.00);
+define("__RRP_4__", 75.00);
 
 define("__MIN_DROP_DOWN_LIMIT__", 5);
 define("__PAGINATION_RECORD_LIMIT__", 20);

@@ -66,3 +66,23 @@ CHANGE `PositiveAlcohol` `PositiveAlcohol` VARCHAR( 10 ) NOT NULL ,
 CHANGE `Refusals` `Refusals` VARCHAR( 10 ) NOT NULL ;
 
 ALTER TABLE `tbl_product` ADD `szAvailableQuantity` INT(6) NOT NULL AFTER `szProductDiscription`;
+
+ALTER TABLE `tbl_manual_calc` ADD `fcobp` DECIMAL( 10, 2 ) NOT NULL AFTER `travelType` ,
+ADD `fcohr` INT( 2 ) NOT NULL AFTER `fcobp` ,
+ADD `mcbp` DECIMAL( 10, 2 ) NOT NULL AFTER `fcohr` ,
+ADD `mchr` INT( 2 ) NOT NULL AFTER `mcbp` ,
+ADD `cobp` DECIMAL( 10, 2 ) NOT NULL AFTER `mchr` ,
+ADD `cohr` INT( 2 ) NOT NULL AFTER `cobp` ,
+ADD `labconf` DECIMAL( 10, 2 ) NOT NULL AFTER `cohr` ,
+ADD `cancelfee` DECIMAL( 10, 2 ) NOT NULL AFTER `labconf` ;
+
+ALTER TABLE `tbl_manual_calc` CHANGE `urineNata` `urineNata` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `nataLabCnfrm` `nataLabCnfrm` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `oralFluidNata` `oralFluidNata` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `SyntheticCannabinoids` `SyntheticCannabinoids` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `labScrenning` `labScrenning` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `RtwScrenning` `RtwScrenning` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `mobileScreenBasePrice` `mobileScreenBasePrice` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `mobileScreenHr` `mobileScreenHr` INT( 2 ) NOT NULL ,
+CHANGE `travelBasePrice` `travelBasePrice` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `travelType` `travelType` INT( 2 ) NOT NULL ;

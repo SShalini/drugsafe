@@ -166,15 +166,17 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-sm-8 text-info bold">
-                                        <lable>Total "Other Trevenu Streams:</lable>
+                                        <lable>Total Other revenue Streams:</lable>
                                     </div>
                                     <div class="col-sm-2">
                                         <p>$<?php
                                             $mobileScreen = $data['mobileScreenBasePrice'] * $data['mobileScreenHr'];
-
+                                            $DcmobileScreen = $data['DCmobileScreenBasePrice'] * $data['DCmobileScreenHr'];
+                                            $calloutprice = $data['CallOutBasePrice'] * $data['CallOutHr'];
+                                            $fcoprice = $data['FCOBasePrice'] * $data['FCOBasePrice'];
                                             $travel = $data['travelBasePrice'] * $data['travelHr'];
 
-                                            $TotalTrevenu = $data['urineNata'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $travel;
+                                            $TotalTrevenu = $data['urineNata'] + $data['laboratoryConfirmation']+$data['cancellationFee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
 
 
                                             $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');

@@ -39,7 +39,6 @@
                                 <tr>
                                     <th>System calculation is as follows</th>
                                     <th> No of Donors</th>
-                                    <th>Franchisee Owner Price</th>
                                     <th> RRP </th>
                                     <th> $ value </th>
                                     
@@ -50,8 +49,7 @@
                                     <tr>
                                         <td>URINE AS/NZA 4308/2001</td>
                                         <td> <?php echo $countDoner ?> </td>
-                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_1__ ?> </td>
-                                        <td> $<?php echo __RRP_1__ ?> </td>
+                                        <td> $<?php echo number_format(__RRP_1__,2,'.',','); ?> </td>
                                      <td> $<?php $Val1=$countDoner*__RRP_1__; echo number_format($Val1,2,'.',','); ?>  </td>
                                     </tr>
                                <?php }?> 
@@ -59,8 +57,7 @@
                                     <tr>
                                         <td>Oral Fluid AS 4760/2006</td>
                                         <td> <?php echo $countDoner ?> </td>
-                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_2__ ?> </td>
-                                        <td> $<?php echo __RRP_2__ ?> </td>
+                                        <td> $<?php echo number_format(__RRP_2__,2,'.',','); ?> </td>
                                     <td> $<?php $Val2=$countDoner*__RRP_2__; echo number_format($Val2,2,'.',','); ?>  </td>
                                     </tr>
                                <?php }?> 
@@ -68,39 +65,47 @@
                                     <tr>
                                         <td>Alcohol</td>
                                         <td> <?php echo $countDoner ?> </td>
-                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_3__ ?> </td>
-                                        <td> $<?php echo __RRP_3__ ?> </td>
+                                        <td> $<?php echo number_format(__RRP_3__,2,'.',','); ?> </td>
                                        <td> $<?php $Val3=$countDoner*__RRP_3__; echo number_format($Val3,2,'.',',');?>  </td>
                                    
                                     </tr>
-                                      <?php }?> 
-                                     <tr>
-                                         <td colspan="4">Total</td>
+                                      <?php }?>
+                               <?php if(in_array(4, $DrugtestidArr)){?>
+                                   <tr>
+                                       <td>AS/NZA 4308:2008</td>
+                                       <td> <?php echo $countDoner ?> </td>
+                                       <td> $<?php echo number_format(__RRP_4__,2,'.',','); ?> </td>
+                                       <td> $<?php $Val4=$countDoner*__RRP_4__; echo number_format($Val4,2,'.',',');?>  </td>
+
+                                   </tr>
+                               <?php }?>
+                               <tr>
+                                         <td colspan="3">Total</td>
                                        
-                                    <td>$<?php $ValTotal=$Val1+$Val2+$Val3;echo number_format($ValTotal,2,'.',','); ?> </td>
+                                    <td>$<?php $ValTotal=$Val1+$Val2+$Val3+$Val4;echo number_format($ValTotal,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">Royalty fees</td>
+                                         <td colspan="3">Royalty fees</td>
                                        
                                      <td>$<?php $Royaltyfees=$ValTotal*0.1;echo number_format($Royaltyfees,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">GST</td>
+                                         <td colspan="3">GST</td>
                                        
                                     <td>$<?php $GST = $ValTotal*0.1;echo number_format($GST,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">Total  before Royalty and Inc GST</td>
+                                         <td colspan="3">Total  before Royalty and Inc GST</td>
                                        
                                     <td>$<?php $TotalbeforeRoyalty=$ValTotal+$GST;echo number_format($TotalbeforeRoyalty,2,'.',','); ?> </td>
                                     </tr> 
                                     <tr>
-                                         <td colspan="4">Total  after royalty and Inc GST</td>
+                                         <td colspan="3">Total  after royalty and Inc GST</td>
                                        
                                        <td>$<?php $TotalafterRoyalty=$ValTotal-$Royaltyfees+$GST;echo number_format($TotalafterRoyalty,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">Net Total after royalty and exl GST</td>
+                                         <td colspan="3">Net Total after royalty and exl GST</td>
                                        
                                      <td>$<?php $NetTotal =$ValTotal-$Royaltyfees;echo number_format($NetTotal,2,'.',','); ?> </td>
                                     </tr> 
@@ -157,9 +162,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
-                                                <input id="FCOBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[FCOBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[FCOBasePrice]"  onblur="calTotalFCO()">
+                                                <input id="FCOBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[FCOBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[FCOBasePrice]"  onblur="calcombinetotalprice('FCOBasePrice','FCOHr',2,'FCOTotal')">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[FCOBasePrice]')){?>
@@ -173,9 +178,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-clock-o"></i>
                                                 </span>
-                                                <input id="FCOHr" class="form-control" type="text" value="<?php echo set_value('orderingData[FCOHr]'); ?>" onblur="calTotalFCO()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[FCOHr]">
+                                                <input id="FCOHr" class="form-control" type="text" value="<?php echo set_value('orderingData[FCOHr]'); ?>" onblur="calcombinetotalprice('FCOBasePrice','FCOHr',2,'FCOTotal')" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[FCOHr]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[FCOHr]')){?>
@@ -202,7 +207,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
+                                                    <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="SyntheticCannabinoids" class="form-control" type="text" value="<?php echo set_value('orderingData[SyntheticCannabinoids]'); ?>" placeholder="Synthetic Cannabinoids screening" onfocus="remove_formError(this.id,'true')" name="orderingData[SyntheticCannabinoids]">
                                             </div>
@@ -223,9 +228,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
-                                                <input id="mobileScreenBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenBasePrice]"  onblur="calTotal()">
+                                                <input id="mobileScreenBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenBasePrice]"  onblur="calcombinetotalprice('mobileScreenBasePrice','mobileScreenHr',1,'mobileScreen');">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[mobileScreenBasePrice]')){?>
@@ -239,9 +244,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-clock-o"></i>
                                                 </span>
-                                                <input id="mobileScreenHr" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenHr]'); ?>" onblur="calTotal()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenHr]">
+                                                <input id="mobileScreenHr" class="form-control" type="text" value="<?php echo set_value('orderingData[mobileScreenHr]'); ?>" onblur="calcombinetotalprice('mobileScreenBasePrice','mobileScreenHr',1,'mobileScreen');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[mobileScreenHr]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[mobileScreenHr]')){?>
@@ -254,7 +259,6 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <label class="col-md-4 control-label" id="mobileScreen" value=" "  name="orderingData[mobileScreen]"></label>
-                                                
                                             </div>
                                              <?php
                                             if(form_error('orderingData[mobileScreen]')){?>
@@ -272,9 +276,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
-                                                <input id="CallOutBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutBasePrice]"  onblur="calTotalCallOut()">
+                                                <input id="CallOutBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutBasePrice]"  onblur="calcombinetotalprice('CallOutBasePrice','CallOutHr',3,'CallOutTotal');">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[CallOutBasePrice]')){?>
@@ -288,9 +292,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-clock-o"></i>
                                                 </span>
-                                                <input id="CallOutHr" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutHr]'); ?>" onblur="calTotalCallOut()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutHr]">
+                                                <input id="CallOutHr" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutHr]'); ?>" onblur="calcombinetotalprice('CallOutBasePrice','CallOutHr',3,'CallOutTotal');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutHr]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[CallOutHr]')){?>
@@ -324,7 +328,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
+                                                    <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="urineNata" class="form-control" type="text" value="<?php echo set_value('orderingData[urineNata]'); ?>" placeholder="Urine NATA Laboratory screening" onfocus="remove_formError(this.id,'true')" name="orderingData[urineNata]">
                                             </div>
@@ -341,7 +345,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="nataLabCnfrm" class="form-control" type="text" value="<?php echo set_value('orderingData[nataLabCnfrm]'); ?>" placeholder="NATA Laboratory confirmation" onfocus="remove_formError(this.id,'true')" name="orderingData[nataLabCnfrm]">
                                             </div>
@@ -356,7 +360,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="oralFluidNata" class="form-control" type="text" value="<?php echo set_value('orderingData[oralFluidNata]'); ?>" placeholder="Oral Fluid NATA Laboratory confirmation" onfocus="remove_formError(this.id,'true')" name="orderingData[oralFluidNata]">
                                             </div>
@@ -375,7 +379,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="laboratoryScreening" class="form-control" type="text" value="<?php echo set_value('orderingData[laboratoryScreening]'); ?>" placeholder="Laboratory Screening" onfocus="remove_formError(this.id,'true')" name="orderingData[laboratoryScreening]">
                                             </div>
@@ -391,7 +395,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="laboratoryConfirmation" class="form-control" type="text" value="<?php echo set_value('orderingData[laboratoryConfirmation]'); ?>" placeholder="Laboratory Confirmation" onfocus="remove_formError(this.id,'true')" name="orderingData[laboratoryConfirmation]">
                                             </div>
@@ -414,7 +418,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="RtwScrenning" class="form-control" type="text" value="<?php echo set_value('orderingData[RtwScrenning]'); ?>" placeholder="Return to work screening" onfocus="remove_formError(this.id,'true')" name="orderingData[RtwScrenning]">
                                             </div>
@@ -435,9 +439,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
-                                                <input id="DCmobileScreenBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[DCmobileScreenBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[DCmobileScreenBasePrice]"  onblur="calTotalDC()">
+                                                <input id="DCmobileScreenBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[DCmobileScreenBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[DCmobileScreenBasePrice]"  onblur="calcombinetotalprice('DCmobileScreenBasePrice','DCmobileScreenHr',1,'DCmobileScreenTotal');">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[DCmobileScreenBasePrice]')){?>
@@ -451,9 +455,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-clock-o"></i>
                                                 </span>
-                                                <input id="DCmobileScreenHr" class="form-control" type="text" value="<?php echo set_value('orderingData[DCmobileScreenHr]'); ?>" onblur="calTotalDC()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[DCmobileScreenHr]">
+                                                <input id="DCmobileScreenHr" class="form-control" type="text" value="<?php echo set_value('orderingData[DCmobileScreenHr]'); ?>" onblur="calcombinetotalprice('DCmobileScreenBasePrice','DCmobileScreenHr',1,'DCmobileScreenTotal');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[DCmobileScreenHr]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[DCmobileScreenHr]')){?>
@@ -485,14 +489,14 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-truck"></i>
                                                 </span>
                                                   <select class="form-control " name="orderingData[travelType]" id="travelType"
                                                     Placeholder="Travel" onfocus="remove_formError(this.id,'true')"  onchange="showHideTextboxForCalc()">
                                                 <option value=''>Select</option>
                                                 
-                                                        <option  value="1" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == "1" ? "selected" : ""); ?>>Drugsafe Communiies</option>
-                                                        <option  value="2" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == "2" ? "selected" : ""); ?>>Marketing Material Communiies</option>
+                                                        <option  value="1" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == "1" ? "selected" : ""); ?>>When >100km return trip from DSC base.</option>
+                                                        <option  value="2" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == "2" ? "selected" : ""); ?>>When >100km return trip from MC base. Includes tester.</option>
                                                         
                                                        
                                                   
@@ -519,9 +523,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
-                                                <input id="travelBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[travelBasePrice]'); ?>" onblur="calTotalTravel()" placeholder=" Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[travelBasePrice]">
+                                                <input id="travelBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[travelBasePrice]'); ?>" onblur="calcombinetotalprice('travelBasePrice','travelHr',1,'travel');" placeholder=" Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[travelBasePrice]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[travelBasePrice]')){?>
@@ -535,9 +539,9 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-clock-o"></i>
                                                 </span>
-                                                <input id="travelHr" class="form-control" type="text" value="<?php echo set_value('orderingData[travelHr]'); ?>" onblur="calTotalTravel()" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[travelHr]">
+                                                <input id="travelHr" class="form-control" type="text" value="<?php echo set_value('orderingData[travelHr]'); ?>" onblur="calcombinetotalprice('travelBasePrice','travelHr',1,'travel');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[travelHr]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[travelHr]')){?>
@@ -566,7 +570,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dollar"></i>
                                                 </span>
                                                 <input id="cancellationFee" class="form-control" type="text" value="<?php echo set_value('orderingData[cancellationFee]'); ?>" placeholder="Cancellation Fee" onfocus="remove_formError(this.id,'true')" name="orderingData[cancellationFee]">
                                             </div>
@@ -579,7 +583,7 @@
                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                            <a href="<?= __BASE_URL__ ?>/ordering/sitesRecord" class="btn default uppercase"
+                                            <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord" class="btn default uppercase"
                                            type="button">Cancel</a>
                                             <input type="submit" class="btn green-meadow" value="SAVE" name="orderingData[submit]">
                                         </div>

@@ -39,7 +39,6 @@
                                 <tr>
                                     <th>System calculation is as follows</th>
                                     <th> No of Donors</th>
-                                    <th>Franchisee Owner Price</th>
                                     <th> RRP </th>
                                     <th> $ value </th>
                                     
@@ -50,8 +49,7 @@
                                     <tr>
                                         <td>URINE AS/NZA 4308/2001</td>
                                         <td> <?php echo $countDoner ?> </td>
-                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_1__ ?> </td>
-                                        <td> $<?php echo __RRP_1__ ?> </td>
+                                        <td> $<?php echo number_format(__RRP_1__,2,'.',','); ?> </td>
                                      <td> $<?php $Val1=$countDoner*__RRP_1__; echo number_format($Val1,2,'.',','); ?>  </td>
                                     </tr>
                                <?php }?> 
@@ -59,8 +57,7 @@
                                     <tr>
                                         <td>Oral Fluid AS 4760/2006</td>
                                         <td> <?php echo $countDoner ?> </td>
-                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_2__ ?> </td>
-                                        <td> $<?php echo __RRP_2__ ?> </td>
+                                        <td> $<?php echo number_format(__RRP_2__,2,'.',','); ?> </td>
                                     <td> $<?php $Val2=$countDoner*__RRP_2__; echo number_format($Val2,2,'.',','); ?>  </td>
                                     </tr>
                                <?php }?> 
@@ -68,16 +65,24 @@
                                     <tr>
                                         <td>Alcohol</td>
                                         <td> <?php echo $countDoner ?> </td>
-                                        <td> <?php echo __FRANCHISEE_OWNER_PRICE_3__ ?> </td>
-                                        <td> $<?php echo __RRP_3__ ?> </td>
+                                        <td> $<?php echo number_format(__RRP_3__,2,'.',','); ?> </td>
                                        <td> $<?php $Val3=$countDoner*__RRP_3__; echo number_format($Val3,2,'.',',');?>  </td>
                                    
                                     </tr>
-                                      <?php }?> 
+                                      <?php }?>
+                               <?php if(in_array(4, $DrugtestidArr)){?>
+                                   <tr>
+                                       <td>AS/NZA 4308:2008</td>
+                                       <td> <?php echo $countDoner ?> </td>
+                                       <td> $<?php echo number_format(__RRP_4__,2,'.',','); ?> </td>
+                                       <td> $<?php $Val4=$countDoner*__RRP_4__; echo number_format($Val4,2,'.',',');?>  </td>
+
+                                   </tr>
+                               <?php }?>
                                      <tr>
                                          <td colspan="4">Total</td>
                                        
-                                    <td>$<?php $ValTotal=$Val1+$Val2+$Val3;echo number_format($ValTotal,2,'.',','); ?> </td>
+                                    <td>$<?php $ValTotal=$Val1+$Val2+$Val3+$Val4;echo number_format($ValTotal,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
                                          <td colspan="4">Royalty fees</td>

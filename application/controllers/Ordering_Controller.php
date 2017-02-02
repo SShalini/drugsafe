@@ -52,40 +52,52 @@ class Ordering_Controller extends CI_Controller
         $this->load->library('form_validation');
           if(!empty($data['FCOBasePrice']) || !empty($data['FCOHr'])){
         $this->form_validation->set_rules('orderingData[FCOBasePrice]', 'Base Price', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[FCOHr]', 'Hours', 'required|greater_than[2]|numeric');
+        $this->form_validation->set_rules('orderingData[FCOHr]', 'Hours', 'required|greater_than[1]|numeric');
           }
-           $this->form_validation->set_rules('orderingData[SyntheticCannabinoids]', 'Synthetic Cannabinoids Screening', 'required|numeric');
+        if(!empty($data['SyntheticCannabinoids'])){
+            $this->form_validation->set_rules('orderingData[SyntheticCannabinoids]', 'Synthetic Cannabinoids Screening', 'required|numeric');
+        }
          if(!empty($data['mobileScreenBasePrice']) || !empty($data['mobileScreenHr'])){
         $this->form_validation->set_rules('orderingData[mobileScreenBasePrice]', 'Base Price', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[mobileScreenHr]', 'Hours', 'required|greater_than[2]|numeric');   
+        $this->form_validation->set_rules('orderingData[mobileScreenHr]', 'Hours', 'required|numeric');
          }
           if(!empty($data['CallOutBasePrice']) || !empty($data['CallOutHr'])){
         $this->form_validation->set_rules('orderingData[CallOutBasePrice]', 'Base Price', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[CallOutHr]', 'Hours', 'required|greater_than[3]|numeric');   
+        $this->form_validation->set_rules('orderingData[CallOutHr]', 'Hours', 'required|greater_than[2]|numeric');
          }
-         
-        $this->form_validation->set_rules('orderingData[urineNata]', 'Urine NATA Laboratory screening', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[nataLabCnfrm]', 'NATA Laboratory confirmation', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[oralFluidNata]', 'Oral Fluid NATA Laboratory confirmation', 'required|numeric');
-        
-        $this->form_validation->set_rules('orderingData[laboratoryScreening]', 'Laboratory Screening', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[laboratoryConfirmation]', 'Laboratory Confirmation', 'required|numeric');
-
-        $this->form_validation->set_rules('orderingData[RtwScrenning]', 'Return to work  screening', 'required|numeric');
-        
+        if(!empty($data['urineNata'])){
+            $this->form_validation->set_rules('orderingData[urineNata]', 'Urine NATA Laboratory screening', 'required|numeric');
+        }
+        if(!empty($data['nataLabCnfrm'])){
+            $this->form_validation->set_rules('orderingData[nataLabCnfrm]', 'NATA Laboratory confirmation', 'required|numeric');
+        }
+        if(!empty($data['oralFluidNata'])){
+            $this->form_validation->set_rules('orderingData[oralFluidNata]', 'Oral Fluid NATA Laboratory confirmation', 'required|numeric');
+        }
+        if(!empty($data['laboratoryScreening'])){
+            $this->form_validation->set_rules('orderingData[laboratoryScreening]', 'Laboratory Screening', 'required|numeric');
+        }
+        if(!empty($data['laboratoryConfirmation'])){
+            $this->form_validation->set_rules('orderingData[laboratoryConfirmation]', 'Laboratory Confirmation', 'required|numeric');
+        }
+        if(!empty($data['RtwScrenning'])){
+            $this->form_validation->set_rules('orderingData[RtwScrenning]', 'Return to work  screening', 'required|numeric');
+        }
         if(!empty($data['DCmobileScreenBasePrice']) || !empty($data['DCmobileScreenHr'])){
         $this->form_validation->set_rules('orderingData[DCmobileScreenBasePrice]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[DCmobileScreenHr]', 'Hours', 'required|numeric');
         }
-        
-      
-        $this->form_validation->set_rules('orderingData[travelType]', 'Travel Type', 'required');
+        if(!empty($data['travelType'])){
+            $this->form_validation->set_rules('orderingData[travelType]', 'Travel Type', 'required');
+        }
+
          if(!empty($data['travelBasePrice']) || !empty($data['travelHr'])){
         $this->form_validation->set_rules('orderingData[travelBasePrice]', ' Travel Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[travelHr]', 'Travel Hours', 'required|numeric');
          }
-        $this->form_validation->set_rules('orderingData[cancellationFee]', 'Cancellation Fee', 'required|numeric');
-
+        if(!empty($data['cancellationFee'])){
+            $this->form_validation->set_rules('orderingData[cancellationFee]', 'Cancellation Fee', 'required|numeric');
+        }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
             $data['sosid'] = $sosid;

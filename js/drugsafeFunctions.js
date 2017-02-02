@@ -791,6 +791,17 @@ function editConsumables(idProduct,flag) {
 
     });
 }
+function calcombinetotalprice(id1,id2,mintime,showlabid) {
+    var baseprice = $('#'+id1).val();
+    var totaltime = $('#'+id2).val();
+    var finalprice = 0;
+    if(totaltime >= mintime){
+        finalprice = parseFloat(baseprice)*parseInt(totaltime);
+    }else {
+        finalprice = parseFloat(baseprice)*parseInt(mintime);
+    }
+    $('#'+showlabid).html('$'+parseFloat(finalprice).toFixed(2));
+}
 function calTotalFCO() {
  var Val1=jQuery('#FCOBasePrice').val();
  var Val2=jQuery('#FCOHr').val();
