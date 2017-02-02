@@ -1647,7 +1647,7 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                   
                             </div>
                           <?php  $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
-                              $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                           
                           
                         ?>
                             <div class="portlet-body">
@@ -1671,27 +1671,34 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                               $count=0;
                                         foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
                                             $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
-                                              $count++ ;?>
+                                              $count++ ; 
+                                              $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                                              ?>
                                                 <tr>
                                                     <td> <?php echo $productDataArr['szProductCode'] ;?> </td>
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                     <td> <?php echo $totalOrdersDetailsData['quantity'];?> </td>
                                                     <td> <?php echo $productDataArr['szAvailableQuantity'];?> </td>
-                                                    <?php if($totalOrdersDetailsData['dispatched']!=0){?>
+                                                    <?php if($totalOrdersDetailsData['dispatched']!=0){
+                                                    $price = $productDataArr['szProductCost'] * $totalOrdersDetailsData['dispatched'] ?>
                                                      <td>
                                                          <input type="number"min="1"  class="form-control btn-xs read-only" readonly max="100" value="<?php echo $totalOrdersDetailsData['dispatched']; ?>" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" onblur="calTotalPrice('<?php echo $productDataArr['szProductCost'];?>','<?php echo $i;?> ')">
                                                          <input type="hidden" name="order_prod_price<?php echo $i;?>" id="order_prod_price<?php echo $i;?>" value="<?php echo $productDataArr['szProductCost'];?>" />
+                                                      </td>
+                                                      <td> 
+                                                        $<?php echo $price;?>
                                                       </td>
                                                     <?php } else { ?>
                                                       <td>
                                                           <input type="number"min="1"  class="form-control btn-xs "  max="100" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" onblur="calTotalPrice('<?php echo $productDataArr['szProductCost'];?>','<?php echo $i;?> ')">
                                                           <input type="hidden" name="order_prod_price<?php echo $i;?>" id="order_prod_price<?php echo $i;?>" value="<?php echo $productDataArr['szProductCost'];?>" />
                                                       </td>
-                                                      
-                                                       <?php } ?>
                                                       <td> 
                                                         $<label class ="lab<?php echo $i;?>" name="total_price<?php echo $i;?>" value=""  id="total_price<?php echo $i;?>" ></label>
                                                       </td>
+                                                      
+                                                       <?php } ?>
+                                                      
                                                     
                                                     
                                                 </tr>

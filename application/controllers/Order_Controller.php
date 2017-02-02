@@ -614,7 +614,7 @@ class Order_Controller extends CI_Controller {
              if($this->Order_Model->orderPendingUpdate($_POST['order_id1'],$totalPrice)) 
              {
                $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3>Your Cart has been successfully updated.</h3></strong> ";
+                $szMessage['content'] = "<strong><h3>Your Order has been in pending state.</h3></strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 ob_end_clean();
                 redirect(base_url('/order/view_order_list'));
@@ -666,7 +666,7 @@ class Order_Controller extends CI_Controller {
              if($this->Order_Model->orderFinalUpdate($_POST['order_id1'],$totalPrice)) 
              {
                $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3>Your Cart has been successfully updated.</h3></strong> ";
+                $szMessage['content'] = "<strong><h3>Your Order has been successfully dispatched.</h3></strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 ob_end_clean();
                 redirect(base_url('/order/view_order_list'));

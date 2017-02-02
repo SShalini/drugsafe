@@ -1440,9 +1440,11 @@ function calTotalPrice(prodcost,inc) {
         if($('#order_quantity'+i).val()){
             var prodqty = parseInt($('#order_quantity'+i).val());
             var prodprice = parseFloat($('#order_prod_price'+i).val()).toFixed(2);
+            pertotal = (prodprice*prodqty);
             total = total+(prodprice*prodqty);
         }
     }
+ $('#total_price'+inc).html(parseFloat(pertotal).toFixed(2));
 $('#finaltotal').html(parseFloat(total).toFixed(2));
 $('#total').val(parseFloat(total).toFixed(2));
 }
