@@ -161,8 +161,7 @@
             </form>   
                     </div>
                     <?php
-                        if(!empty($validOrdersDetailsAray) || !empty($_POST['szSearch2'])||!empty($_POST['szSearch1'] ||  !empty($_POST['szSearch4']) || !empty($_POST['szSearch5'])) )
-                        if(!empty($validOrdersDetailsAray)) 
+                        if(!empty($validOrdersDetailsAray) || !empty($_POST['szSearch2'])||!empty($_POST['szSearch1']) ||  !empty($_POST['szSearch4']) || !empty($_POST['szSearch5']) )
                         {
                            ?> 
                         <div class="portlet-body alert">
