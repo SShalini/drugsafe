@@ -723,6 +723,36 @@ class Order_Model extends Error_Model {
                     return array();
             }
         }
+         public function getValidPendingOdrDetailsForPdf($franchiseeid,$productCode='',$prodCategory='')
+        {
+          
+          if(!empty($prodCategory)){
+               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%'";
+            }
+            if(!empty($productCode)){
+               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' ";
+            }
+            if(!empty($prodCategory) && !empty($productCode)){
+               $searchq = array('szProductCategory' => $prodCategory,'productid' => $productCode,'franchiseeid ' =>$franchiseeid);
+            }
+            $this->db->where($searchq);
+           $this->db->distinct();
+           $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
+           $this->db->order_by("orderid", "desc");
+           $this->db->from(__DBC_SCHEMATA_ORDER__);
+           $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+           $this->db->join('tbl_product', 'ds_order_details.productid = tbl_product.id');  
+            
+            $query = $this->db->get();
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
     
    }
 ?>

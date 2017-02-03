@@ -48,7 +48,31 @@
                                     Inventory Report
                                 </span>
                             </div>
-                
+                             <?php
+                            if(!empty($validPendingOrdersDetailsAray))
+                        { 
+                           $this->session->unset_userdata('franchiseeId');
+                           $this->session->unset_userdata('productCode');
+                           $this->session->unset_userdata('prodCategory');
+           
+                                
+                           
+                            ?>
+                          
+                            <div class="actions">
+                               
+                                 <a onclick="ViewpdfInventoryReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                                
+                               <a onclick="ViewexcelInventoryReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                    <i class="fa fa-file-excel-o"></i> View Xls </a>
+                                    
+                            </div>
+                            <?php
+                        }
+                            ?>
                         </div>
                         
                     <div class="row">
@@ -114,7 +138,7 @@
             </form>  
                       </div>
                 <?php
-                        if(!empty($validPendingOrdersDetailsAray) || !empty($_POST['szSearch2']||$_POST['szSearch1']) ){
+                        if(!empty($validPendingOrdersDetailsAray) || !empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
                         if(!empty($validPendingOrdersDetailsAray)) 
                         {
                            ?>      

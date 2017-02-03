@@ -1484,3 +1484,21 @@ function ViewexcelFrInventoryReport(prodCategory,productCode) {
       
     });
 }
+
+function ViewpdfInventoryReport(franchiseeId,prodCategory,productCode) {
+    $.post(__BASE_URL__ + "/reporting/ViewpdfInventoryReportData", {franchiseeId : franchiseeId,prodCategory: prodCategory,productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ViewexcelInventoryReport(franchiseeId,prodCategory,productCode) {
+    $.post(__BASE_URL__ + "/reporting/ViewexcelInventoryReportData", {franchiseeId : franchiseeId,prodCategory: prodCategory,productCode:productCode}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+      window.open(URL,'_blank');
+     
+      
+    });
+}

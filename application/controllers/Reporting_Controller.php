@@ -1047,9 +1047,9 @@ function excelfr_stockassignlist_Data()
                     $data['validOrdersDetailsAray'] = $validOrdersDetailsAray; 
                     $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray; 
                     $data['allFrPendingDetailsSearchAray'] = $allFrPendingDetailsSearchAray;  
-                    $data['szMetaTagTitle'] = "Order Details";
+                    $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Orders";
+                     $data['pageName'] = "Reporting";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
@@ -1064,9 +1064,9 @@ function excelfr_stockassignlist_Data()
                     $data['validPendingOrdersDetailsAray'] = $validPendingOrdersDetailsAray; 
                     $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray; 
                     $data['allFrPendingDetailsSearchAray'] = $allFrPendingDetailsSearchAray;  
-                    $data['szMetaTagTitle'] = "Order Details";
+                    $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Orders";
+                     $data['pageName'] = "Reporting";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
@@ -1359,6 +1359,183 @@ function excelfr_stockassignlist_Data()
             $i = 2;
             $x=0;
             foreach($allReqOrderAray as $item){
+                 $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($item['szProductCategory']));
+                 $x++;
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $productcatAry['szName']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szAvailableQuantity']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['quantity']);
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+     function ViewpdfInventoryReportData()
+        {
+          
+            $prodCategory = $this->input->post('prodCategory');
+            $productCode = $this->input->post('productCode');
+            $franchiseeId = $this->input->post('franchiseeId');
+          
+            
+                $this->session->set_userdata('franchiseeId',$franchiseeId);
+                $this->session->set_userdata('productCode',$productCode);
+                $productCode = $this->input->post('productCode');
+               
+                
+                echo "SUCCESS||||";
+                echo "ViewpdfInventoryReport";
+            
+ 
+        }
+    public function ViewpdfInventoryReport()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe inventory report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Inventory Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+        $pdf->AddPage();
+        
+        $franchiseeId = $this->session->userdata('franchiseeId');
+        $productCode = $this->session->userdata('productCode');
+        $prodCategory = $this->session->userdata('prodCategory');
+        
+            
+           $reqOrderAray = $this->Order_Model->getValidPendingOdrDetailsForPdf($franchiseeId,$productCode,$prodCategory);  
+     
+      
+        $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Request Report</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>  #</b> </th>
+                                        <th> <b>Category</b> </th>
+                                        <th> <b>Product Code </b> </th>
+                                        <th style="width:150px"><b> In Stock  </b> </th>
+                                        <th style="width:170px"> <b>Requested</b> </th>
+                                   
+                                    </tr>';
+        if ($reqOrderAray) {
+            
+            $i = 0;
+            foreach ($reqOrderAray as $reqOrderData) {
+                $i++;
+              
+                 $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($reqOrderData['szProductCategory']));
+                $html .= '<tr>
+                                            <td> ' . $i . ' </td>
+                                            <td> ' . $productcatAry['szName'] . '</td>
+                                            <td> ' . $reqOrderData['szProductCode'] . ' </td>
+                                            <td>' . $reqOrderData['szAvailableQuantity'] . ' </td>
+                                               <td>' . $reqOrderData['quantity'] . ' </td>
+                                
+                                        </tr>';
+            }
+        }
+        
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+       
+        $pdf->Output('stock-request-report.pdf', 'I');
+    }
+    function ViewexcelInventoryReportData()
+        {
+              $prodCategory = $this->input->post('prodCategory');
+            $productCode = $this->input->post('productCode');
+           $franchiseeId = $this->input->post('franchiseeId');
+          
+            
+                $this->session->set_userdata('franchiseeId',$franchiseeId);
+                $this->session->set_userdata('productCode',$productCode);
+                $productCode = $this->input->post('productCode');
+                
+                echo "SUCCESS||||";
+                echo "ViewexcelInventoryReport";
+            
+ 
+        }
+    public function ViewexcelInventoryReport()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Inventory Report';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', '#');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Category');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', ' In Stock ');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Requested');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $franchiseeId = $this->session->userdata('productCode');
+        $prodCategory = $this->session->userdata('prodCategory');
+        $productCode = $this->session->userdata('franchiseeId');
+        
+            
+          $reqOrderAray = $this->Order_Model->getValidPendingOdrDetailsForPdf($franchiseeId,$productCode,$prodCategory);  
+        if(!empty($reqOrderAray)){
+            $i = 2;
+            $x=0;
+            foreach($reqOrderAray as $item){
                  $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($item['szProductCategory']));
                  $x++;
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
