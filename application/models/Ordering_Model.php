@@ -103,19 +103,28 @@ class Ordering_Model extends Error_Model {
    function updateCalulatedData($data,$manualCalId)
     {	
         $dataAry = array(
-                            'urineNata' => $data['urineNata'],
-                            'nataLabCnfrm' => $data['nataLabCnfrm'],
-                            'oralFluidNata'=>$data['oralFluidNata'],
-                            'SyntheticCannabinoids' => $data['SyntheticCannabinoids'],
-                            'labScrenning' => $data['labScrenning'],
-			    'RtwScrenning' => $data['RtwScrenning'],
-                            'mobileScreenBasePrice'=>$data['mobileScreenBasePrice'],
-                            'mobileScreenHr' => $data['mobileScreenHr'],
-                            'travelBasePrice' => $data['travelBasePrice'],
-			    'travelHr' => $data['travelHr'],
-                            'travelType' => $data['travelType']
-          
-                        );
+                          
+                                 'sosid' => $data['sosid'],
+                                'urineNata' => $data['urineNata'],
+                                'nataLabCnfrm' => $data['nataLabCnfrm'],
+                                'oralFluidNata'=>$data['oralFluidNata'],
+                                'SyntheticCannabinoids' => $data['SyntheticCannabinoids'],
+                                'labScrenning' => $data['labScrenning'],
+				'RtwScrenning' => $data['RtwScrenning'],
+                                'mobileScreenBasePrice'=>$data['mobileScreenBasePrice'],
+                                'mobileScreenHr' => $data['mobileScreenHr'],
+                                'travelBasePrice' => $data['travelBasePrice'],
+				'travelHr' => $data['travelHr'],
+                                'travelType' => $data['travelType'],
+                'fcobp' => $data['fcobp'],
+                'fcohr' => $data['fcohr'],
+                'mcbp' => $data['mcbp'],
+                'mchr' => $data['mchr'],
+                'cobp' => $data['cobp'],
+                'cohr' => $data['cohr'],
+                'labconf' => $data['labconf'],
+                'cancelfee' => $data['cancelfee']
+                   );
 	$this->db->where('id',(int)$manualCalId);
         $queyUpdate=$this->db->update(__DBC_SCHEMATA_MANUAL_CAL__, $dataAry);
         
