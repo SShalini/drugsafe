@@ -85,7 +85,31 @@
                                     </span>
                                     <?php }?>
                                 </div>
+                                 </div>
+                                   <div
+                                        class="form-group <?php if (!empty($arErrorMessages['abn'])) { ?>has-error<?php } ?>">
+                                        <label class="col-md-4 control-label">ABN</label>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="abn" class="form-control" type="text"
+                                                       value="<?php echo $_POST['clientData']['abn']; ?>"
+                                                       placeholder="ABN"
+                                                       onfocus="remove_formError(this.id,'true')"
+                                                       name="clientData[abn]">
+                                            </div>
+                                            <?php if (!empty($arErrorMessages['abn'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['abn']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
 
+
+                                    </div>
 
                             </div>
                             <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
@@ -161,6 +185,42 @@
                                 <?php }?>
                                 </div>
                             </div>
+                              <div class="form-group <?php if (!empty($arErrorMessages['industry']) != '') { ?>has-error<?php } ?>">
+                                    <label class="col-md-4 control-label">Industry</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-industry"></i>
+                                                </span>
+                                            <select class="form-control " name="clientData[industry]" id="industry"
+                                                    Placeholder="Industry" onfocus="remove_formError(this.id,'true')">
+                                                <option value=''>Select</option>
+
+                                                <option value="Agriculture, Forestry and Fishing" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Agriculture, Forestry and Fishing") ? "selected" : ""); ?>>Agriculture, Forestry and Fishing </option>
+                                                <option value="Mining" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Mining") ? "selected" : ""); ?>>Mining </option>
+                                                <option value="Manufacturing" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Manufacturing") ? "selected" : ""); ?>>Manufacturing </option>
+                                                <option value="Electricity, Gas and Water Supply" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Electricity, Gas and Water Supply") ? "selected" : ""); ?>>Electricity, Gas and Water Supply </option>
+                                                <option value="Construction" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Construction") ? "selected" : ""); ?> >Construction</option>
+                                                <option value="Wholesale Trade" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Wholesale Trade") ? "selected" : ""); ?>>Wholesale Trade </option>
+                                                <option value="Transport and Storage " <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Transport and Storage ") ? "selected" : ""); ?>>Transport and Storage </option>
+                                                <option value="Communication Services" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Communication Services") ? "selected" : ""); ?>>Communication Services </option>
+                                                <option value="Property and Business Services" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Property and Business Services") ? "selected" : ""); ?>>Property and Business Services </option>
+                                                <option value="Government Administration and Defence" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Government Administration and Defence") ? "selected" : ""); ?>>Government Administration and Defence</option>
+                                                <option value="Education" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Education") ? "selected" : ""); ?>>Education  </option>
+                                                <option value="Health and Community Services" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Health and Community Services") ? "selected" : ""); ?>>Health and Community Services </option>
+                                                 <option value="Other" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Other") ? "selected" : ""); ?>>Other</option>
+
+                                            </select>
+                                        </div>
+                                        <?php if (!empty($arErrorMessages['industry'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['industry']; ?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+
+                                </div>
                             <?php } else{?>
                              <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label">Company Name</label>

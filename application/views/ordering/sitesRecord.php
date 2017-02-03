@@ -119,8 +119,8 @@
                                                 <th> Id.</th>
                                                 <th> Client Name</th>
                                                 <th> Test Date</th>
-                                                <th> Service Commenced On</th>
-                                                <th> Service Concluded On</th>
+                                                <th> Service Commenced </th>
+                                                <th> Service Concluded </th>
                                                 <th> Action</th>
 
                                             </tr>

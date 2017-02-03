@@ -53,6 +53,8 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 'szContactPhone' => $data['szContactPhone'],
                 'szContactMobile' => $data['szContactMobile'],
                 'szNoOfSites' => $data['szNoOfSites'],
+                'abn' => $data['abn'],
+                'industry' => $data['industry'],
                 
                 
             );
@@ -476,6 +478,8 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 
                 'clientType' => $clientType,
                 'szLastUpdatedBy' => $UpdatedBy,
+                 'abn' => $data['abn'],
+                 'industry' => $data['industry'],
                 'szBusinessName' => $data['szBusinessName'],
                 'szContactEmail' => $data['szContactEmail'],
                 'szContactPhone' => $data['szContactPhone'],

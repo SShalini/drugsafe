@@ -212,7 +212,7 @@ class Admin_Controller extends CI_Controller {
             $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            if($this->Admin_Model->validateUsersData($validate,array(),false,false,$flag))
+            if($this->Admin_Model->validateUsersData($validate,array(),false,false,$flag,2))
             {
               
                 if($this->Admin_Model->insertUserDetails($validate))
@@ -462,7 +462,7 @@ class Admin_Controller extends CI_Controller {
                     $userDataAry = $data_validate;
                 }
                 
-                if($this->Admin_Model->validateUsersData($data_validate,array(), $idfranchisee,false,1))
+                if($this->Admin_Model->validateUsersData($data_validate,array(), $idfranchisee,false,1,2))
                 {
                     if($this->Admin_Model->updateUsersDetails($data_validate,$idfranchisee))
                     {

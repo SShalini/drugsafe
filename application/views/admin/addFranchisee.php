@@ -54,6 +54,30 @@
                                         <?php } ?>
                                     </div>
                                 </div>
+                                 <div
+                                        class="form-group <?php if (!empty($arErrorMessages['abn'])) { ?>has-error<?php } ?>">
+                                        <label class="col-md-3 control-label">ABN</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                                <input id="abn" class="form-control" type="text"
+                                                       value="<?php echo $_POST['addFranchisee']['abn']; ?>"
+                                                       placeholder="ABN"
+                                                       onfocus="remove_formError(this.id,'true')"
+                                                       name="addFranchisee[abn]">
+                                            </div>
+                                            <?php if (!empty($arErrorMessages['abn'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['abn']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+
+
+                                    </div>
                                 <div class="form-group <?php if (!empty($arErrorMessages['szEmail']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-3 control-label"> Email</label>
                                     <div class="col-md-5">

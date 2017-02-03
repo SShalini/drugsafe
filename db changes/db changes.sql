@@ -86,3 +86,11 @@ CHANGE `mobileScreenBasePrice` `mobileScreenBasePrice` DECIMAL( 10, 2 ) NOT NULL
 CHANGE `mobileScreenHr` `mobileScreenHr` INT( 2 ) NOT NULL ,
 CHANGE `travelBasePrice` `travelBasePrice` DECIMAL( 10, 2 ) NOT NULL ,
 CHANGE `travelType` `travelType` INT( 2 ) NOT NULL ;
+
+
+ALTER TABLE `tbl_client` ADD `industry` VARCHAR(100) NOT NULL AFTER `szNoOfSites`;
+ALTER TABLE `tbl_client` ADD `abn` bigint(15) NOT NULL AFTER `industry`;
+
+
+
+ALTER TABLE `ds_user` ADD `abn` BIGINT(15) NOT NULL AFTER `szName`;

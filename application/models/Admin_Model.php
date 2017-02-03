@@ -82,6 +82,10 @@ class Admin_Model extends Error_Model
     {
         $this->data['szZipCode'] = $this->validateInput($value,__VLD_CASE_DIGITS__, "szZipCode", "ZIP/Postal Code", 4,4, $flag);
     }
+    function set_abn($value, $flag = true)
+    {
+        $this->data['abn'] = $this->validateInput($value,__VLD_CASE_DIGITS__, "abn", "ABN",11,11, $flag);
+    }
 
     function set_szAddress($value, $flag = true)
     {
@@ -90,6 +94,10 @@ class Admin_Model extends Error_Model
    function set_szNoOfSites($value, $flag = true)
     {
         $this->data['szNoOfSites'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "szNoOfSites", "No Of Sites", false, false, $flag);
+    }
+    function set_industry($value, $flag = true)
+    {
+        $this->data['industry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "industry", "Industry", false, false, $flag);
     }
      function set_franchiseeId($value, $flag = true)
     {
@@ -231,12 +239,15 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-    function validateUsersData($data, $arExclude = array(),$idUser = 0, $forgotpass = FALSE,$flag=0)
+    function validateUsersData($data, $arExclude = array(),$idUser = 0, $forgotpass = FALSE,$flag=0,$flag2='')
     {
         if (!empty($data)) {
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Name", true);
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Email Address" ,true);
             if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Contact Number", true);
+            if($flag2==2){
+            if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);  
+            }
             if($flag==1){
             if (!in_array('operationManagerId', $arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])), true);  
             }
@@ -341,6 +352,7 @@ class Admin_Model extends Error_Model
         $dataAry = array(
 
             'szName' => $data['szName'],
+             'abn' => $data['abn'],
             'szEmail' => $data['szEmail'],
             'szPassword' => encrypt($szNewPassword),
             'szContactNumber' => $data['szContactNumber'],
@@ -653,6 +665,7 @@ class Admin_Model extends Error_Model
 
             'szName' => $data['szName'],
             'szEmail' => $data['szEmail'],
+              'abn' => $data['abn'],
             'szContactNumber' => $data['szContactNumber'],
             'szCountry' => $data['szCountry'],
             'szState' => $data['szState'],
@@ -753,6 +766,7 @@ class Admin_Model extends Error_Model
   {
         if (!empty($data)) {
             if (!in_array('szBusinessName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szBusinessName'])),"szBusinessName","Business Name",true);
+           if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", true);
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Primary Email address", true);
             if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Primary Phone Number", true);
@@ -766,6 +780,7 @@ class Admin_Model extends Error_Model
             if(!in_array('franchiseeId',$arExclude)) $this->set_franchiseeId(sanitize_all_html_input(trim($data['franchiseeId'])),true);
             if(!in_array('operationManagerId',$arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])),true);
             if(!in_array('szNoOfSites',$arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])),true);
+             if(!in_array('industry',$arExclude)) $this->set_industry(sanitize_all_html_input(trim($data['industry'])),true);
           
             if($this->error == false )
             {
