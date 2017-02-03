@@ -16,6 +16,7 @@ class Ordering_Controller extends CI_Controller
         $this->load->model('Inventory_Model');
         $this->load->model('Form_Management_Model');
         $this->load->model('StockMgt_Model');
+        $this->load->model('Webservices_Model');
         $this->load->library('pagination');
 
     }
@@ -403,8 +404,12 @@ class Ordering_Controller extends CI_Controller
         $Drugtestid = $this->session->userdata('Drugtestid');
         $idsite = $this->session->userdata('idsite');
         $sosid = $this->session->userdata('sosid');
+        $FrenchiseeDataArr = $this->Webservices_Model->getuserhierarchybysiteid($idsite);
+        $siteDataArr = $this->Webservices_Model->getuserdetails($idsite);
+        $clientDataArr = $this->Webservices_Model->getuserdetails($FrenchiseeDataArr[0]['clientType']);
         $data = $this->Ordering_Model->getManualCalculationBySosId($sosid);
         $DrugtestidArr = array_map('intval', str_split($Drugtestid));
+        $testDate = $this->Webservices_Model->getsosformdatabysosid($sosid);
         $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));
         $ValTotal = 0;
         if (in_array(1, $DrugtestidArr)) {
@@ -420,16 +425,16 @@ class Ordering_Controller extends CI_Controller
             $ValTotal = number_format($ValTotal + $countDoner * __RRP_4__, 2, '.', '');
         }
 
-        $Royaltyfees = $ValTotal * 0.1;
-        $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
+        //$Royaltyfees = $ValTotal * 0.1;
+        //$Royaltyfees = number_format($Royaltyfees, 2, '.', '');
         $GST = $ValTotal * 0.1;
         $GST = number_format($GST, 2, '.', '');
         $TotalbeforeRoyalty = $ValTotal + $GST;
         $TotalbeforeRoyalty = number_format($TotalbeforeRoyalty, 2, '.', '');
-        $TotalafterRoyalty = $ValTotal - $Royaltyfees + $GST;
-        $TotalafterRoyalty = number_format($TotalafterRoyalty, 2, '.', '');
-        $NetTotal = $ValTotal - $Royaltyfees;
-        $NetTotal = number_format($NetTotal, 2, '.', '');
+        //$TotalafterRoyalty = $ValTotal - $Royaltyfees + $GST;
+        //$TotalafterRoyalty = number_format($TotalafterRoyalty, 2, '.', '');
+        //$NetTotal = $ValTotal - $Royaltyfees;
+        //$NetTotal = number_format($NetTotal, 2, '.', '');
         $mobileScreen = $data['mobileScreenBasePrice'] * $data['mobileScreenHr'];
         $DcmobileScreen = $data['DCmobileScreenBasePrice'] * $data['DCmobileScreenHr'];
         $calloutprice = $data['CallOutBasePrice'] * $data['CallOutHr'];
@@ -438,83 +443,94 @@ class Ordering_Controller extends CI_Controller
 
         $TotalTrevenu = $data['urineNata'] + $data['laboratoryConfirmation']+$data['cancellationFee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
         $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
-        $RoyaltyfeesManual = ($TotalTrevenu * 0.1);
-        $RoyaltyfeesManual = number_format($RoyaltyfeesManual, 2, '.', '');
+        //$RoyaltyfeesManual = ($TotalTrevenu * 0.1);
+        //$RoyaltyfeesManual = number_format($RoyaltyfeesManual, 2, '.', '');
         $GSTmanual = ($TotalTrevenu * 0.1);
         $GSTmanual = number_format($GSTmanual, 2, '.', '');
         $Total1 = $TotalTrevenu + $GSTmanual;
         $Total1 = number_format($Total1, 2, '.', '');
-        $Total2 = $TotalTrevenu - $RoyaltyfeesManual + $GSTmanual;
-        $Total2 = number_format($Total2, 2, '.', '');
-        $totalRoyalty = $Royaltyfees + $RoyaltyfeesManual;
+        //$Total2 = $TotalTrevenu - $RoyaltyfeesManual + $GSTmanual;
+        //$Total2 = number_format($Total2, 2, '.', '');
+        //$totalRoyalty = $Royaltyfees + $RoyaltyfeesManual;
         $totalGst = $GST + $GSTmanual;
         $totalinvoiceAmt = $ValTotal + $TotalTrevenu;
         $totalRoyaltyBefore = $Total1 + $TotalbeforeRoyalty;
-        $totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
-        $html = '<a style="text-align:center;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-<br />            
-<div><label style="font-size:18px;color:red;margin-bottom:5px;"><b>Automatic Calculated Result
-            </b></label></div>
-            <div>
-                <lable>Total :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>$' . $ValTotal . '</lable>  
-            </div>
-            <div>
-                <lable>Royalty fees :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>$' . number_format($Royaltyfees, 2, '.', ',') . '</lable>  
-            </div>
-            <div>
-                <lable>GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>$' . number_format($GST, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Total before Royalty and Inc GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>$' . number_format($TotalbeforeRoyalty, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Total after royalty and Inc GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>$' . number_format($TotalafterRoyalty, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Net Total after royalty and exl GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>$' . number_format($NetTotal, 2, '.', ',') . '</lable>  
-            </div>
-            <br />
-            <div><label style="font-size:18px;color:red;margin-bottom:15px;"><b>Manual Calculations Result    
-            </b></label></div>
-            <div>
-                <lable>Total "Other Trevenu Streams :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($TotalTrevenu, 2, '.', ',') . '</lable>  
-            </div>
-            <div>
-                <lable>Royalty fees :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($RoyaltyfeesManual, 2, '.', ',') . '</lable>  
-            </div>
-            <div>
-                <lable>GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($GSTmanual, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Total before Royalty and Inc GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($Total1, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Total after royalty and Inc GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable> $' . number_format($Total2, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Net Total after royalty and exl GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable> $' . number_format($TotalTrevenu - $GSTmanual, 2, '.', ',') . '</lable>  
-            </div>
-            <br />
-            <div><label style="font-size:18px;color:red;margin-bottom:15px;"><b>Proforma Invoice Totals     
-            </b></label></div>
-            <div>
-                <lable>Total Invoice amount :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($totalinvoiceAmt, 2, '.', ',') . '</lable>  
-            </div>
-            <div>
-                <lable>Total Royalty fees :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($totalRoyalty, 2, '.', ',') . '</lable>  
-            </div>
-            <div>
-                <lable>GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($totalGst, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Total before Royalty and Inc GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<lable>$' . number_format($totalRoyaltyBefore, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Total after royalty and Inc GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <lable>$' . number_format($totalRoyaltyAfter, 2, '.', ',') . '</lable>  
-            </div>
-             <div>
-                <lable>Net Total after royalty and exl GST :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <lable>$' . number_format($totalinvoiceAmt - $totalGst, 2, '.', ',') . '</lable>  
-            </div>';
+        //$totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
+        $html = '<div class="wraper">
+        <table cellpadding="5px">
+    <tr>
+        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> '.$FrenchiseeDataArr[0]['szAddress'].', '.$FrenchiseeDataArr[0]['szZipCode'].', '.$FrenchiseeDataArr[0]['szState'].', '.$FrenchiseeDataArr[0]['szCountry'].'</td>
+    </tr>
+    <tr>
+        <td align="right"><b>Phone:</b> '.$FrenchiseeDataArr[0]['szContactNumber'].'</td>
+    </tr>
+    <tr>
+        <td align="right"><b>Email:</b> '.$FrenchiseeDataArr[0]['szEmail'].'</td>
+    </tr>
+    <tr>
+        <td align="right"><b>ABN:</b> '.$FrenchiseeDataArr[0]['szAddress'].'</td>
+    </tr>
+</table>
+<br />
+<h2 style="text-align: center">Proforma Invoice</h2>
+<br />
+<table cellpadding="5px">
+    <tr>
+        <td width="350" align="left"><b>Business Name:</b> '.$clientDataArr[0]['szName'].'</td><td width="350" align="left"><b>Company Name:</b> '.$siteDataArr[0]['szName'].'</td>
+    </tr>
+    <tr>
+        <td width="350" align="left"><b>Business Address:</b> '.$clientDataArr[0]['szAddress'].', '.$clientDataArr[0]['szZipCode'].', '.$clientDataArr[0]['szState'].', '.$clientDataArr[0]['szCountry'].'</td><td width="350" align="left"><b>Company Address:</b> '.$siteDataArr[0]['szAddress'].', '.$siteDataArr[0]['szZipCode'].', '.$siteDataArr[0]['szState'].', '.$siteDataArr[0]['szCountry'].'</td>
+    </tr>
+    <tr>
+        <td width="350" align="left"><b>ABN:</b> </td><td width="350" align="left"><b>Test Date:</b> '.date('d/m/Y',strtotime($testDate[0]['testdate'])).'</td>
+    </tr>
+    <tr>
+       <td width="350"> </td><td width="350" align="left"><b>No of Donors Tested:</b> '.$countDoner.'</td>
+    </tr>
+</table>
+<br />
+<h3 style="color:dark red">System Calculated Result</h3>
+<br />
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="550" align="left"><b>Total (Excluding GST):</b></td><td width="150" align="right">$'.number_format($ValTotal,2,'.',',').'</td>
+    </tr>
+    <tr>
+        <td width="550" align="left"><b>GST (10%):</b></td><td width="150" align="right">$'.number_format($GST, 2, '.', ',').'</td>
+    </tr>
+    <tr>
+        <td width="550" align="left"><b>Total (Including GST):</b></td><td width="150" align="right">$'.number_format($TotalbeforeRoyalty, 2, '.', ',').'</td>
+    </tr>
+</table>
+<br />
+<h3 style="color:dark red">Other Revenue Stream Calculation Result</h3>
+<br />
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="550" align="left"><b>Total (Excluding GST):</b></td><td width="150" align="right">$'.number_format($TotalTrevenu,2,'.',',').'</td>
+    </tr>
+    <tr>
+        <td width="550" align="left"><b>GST (10%):</b></td><td width="150" align="right">$'.number_format($GSTmanual, 2, '.', ',').'</td>
+    </tr>
+    <tr>
+        <td width="550" align="left"><b>Total (Including GST):</b></td><td width="150" align="right">$'.number_format($Total1, 2, '.', ',').'</td>
+    </tr>
+</table>
+<br />
+<h3 style="color:dark red">Proforma Invoice Totals</h3>
+<br />
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="550" align="left"><b>Total (Excluding GST):</b></td><td width="150" align="right">$'.number_format($totalinvoiceAmt, 2, '.', ',').'</td>
+    </tr>
+    <tr>
+        <td width="550" align="left"><b>GST (10%):</b></td><td width="150" align="right">$'.number_format($totalGst, 2, '.', ',').'</td>
+    </tr>
+    <tr>
+        <td width="550" align="left"><b>Total (Including GST):</b></td><td width="150" align="right">$'.number_format($totalRoyaltyBefore, 2, '.', ',').'</td>
+    </tr>
+</table>
+        </div>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
         error_reporting(E_ALL);

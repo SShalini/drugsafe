@@ -629,10 +629,25 @@ class Webservices_Model extends Error_Model
         }
     }
 
+    function getsosformdatabysosid($sosid){
+        $whereAry = 'id =' . (int)$sosid;
+        $query = $this->db->select('testdate')
+            ->from(__DBC_SCHEMATA_SOS_FORM__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
     function getuserdetails($userid)
     {
         $array = array('id' => (int)$userid, 'isDeleted' => 0);
-        $query = $this->db->select('id, szName, szEmail, iRole')
+        $query = $this->db->select('id, szName, szEmail, iRole, szContactNumber, szAddress, szZipCode, szState, szCountry')
             ->from(__DBC_SCHEMATA_USERS__)
             ->where($array)
             ->get();
@@ -884,7 +899,7 @@ class Webservices_Model extends Error_Model
     function getuserhierarchybysiteid($siteid)
     {
         $whereAry = 'client.clientId =' . (int)$siteid . ' AND user.isDeleted = 0';
-        $query = $this->db->select('client.franchiseeId, user.szName')
+        $query = $this->db->select('client.franchiseeId, client.clientType, user.szName, user.szAddress, user.szContactNumber, user.szEmail, user.szZipCode, user.szState, user.szCountry')
             ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'client.franchiseeId = user.id')
             ->where($whereAry)

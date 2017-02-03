@@ -1673,6 +1673,7 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                             $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
                                               $count++ ; 
                                               $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                                            $price = 0.00;
                                               ?>
                                                 <tr>
                                                     <td> <?php echo $productDataArr['szProductCode'] ;?> </td>
@@ -1686,7 +1687,7 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                                          <input type="hidden" name="order_prod_price<?php echo $i;?>" id="order_prod_price<?php echo $i;?>" value="<?php echo $productDataArr['szProductCost'];?>" />
                                                       </td>
                                                       <td> 
-                                                        $<?php echo $price;?>
+                                                        $<?php echo number_format($price,2,'.',',');?>
                                                       </td>
                                                     <?php } else { ?>
                                                       <td>
@@ -1731,7 +1732,7 @@ if($mode == '__EDIT_ORDER_DETAILS_POPUP__')
                                                             <div class="col-md-4 value">
                                                               <input id="total" class="form-control" type="hidden"
                                                                value="0" name="total" id="total" > 
-                                                               $<label  name="finaltotal" value=""  id="finaltotal" ></label>
+                                                               $<label  name="finaltotal" value=""  id="finaltotal" ><?php echo number_format($price,2,'.',',');?></label>
                                                                      
                                                             </div>
                                                     </div>
