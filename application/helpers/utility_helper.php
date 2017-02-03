@@ -239,9 +239,9 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
       
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b"><b> Dear Fawada, </b></p></div>
-            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Below are the following forum details,</p></div>';
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Below are the forum details,</p></div>';
       
-         
+          if ($topicList) {
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Topics</b></p></div>
             
@@ -254,7 +254,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                                         <th style="width:150px"><b>Franchisee</b> </th>
                                        
                                     </tr>';
-        if ($topicList) {
+       
             $i = 0;
             foreach ($topicList as $topicData) {
                  $i++;
@@ -271,14 +271,15 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                                 
                                         </tr>';
             }
-        }
+        
        
        $message .= '
                          </table>
                         </div>
                       
                        <hr style=" margin-top:25px; "> ';
-          
+          }
+          if ($commentList) {
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Comments</b></p></div>
             
@@ -293,7 +294,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                                        
                                     </tr>';
       
-             if ($commentList) {
+             
             $i = 0;
             foreach ($commentList as $commentData) {
           
@@ -313,14 +314,17 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                                 
                                         </tr>';
             }
-        }
+       
        
        $message .= '
                             </table>
                         </div>
                       
                        <hr style=" margin-top:25px; "> ';
-           $message .= '
+        }
+         $ReplyList = $obj->Forum_Model->getTodayReplyList();
+             if ($ReplyList) {
+       $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Reply</b></p></div>
             
             <div class= "table-responsive" >
@@ -334,8 +338,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                                         <th style="width:150px"><b>Replier</b> </th>
                                        
                                     </tr>';
-        $ReplyList = $obj->Forum_Model->getTodayReplyList();
-             if ($ReplyList) {
+       
             $i = 0;
             foreach ($ReplyList as $ReplyData) {
           
@@ -358,14 +361,14 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                                 
                                         </tr>';
             }
-        }
+       
        
        $message .= '
                             </table>
                         </div>
                       
                        <hr style=" margin-top:25px; "> ';
-  
+   }
          $message .= $emailCMSAry['sectionDescription'];  
        
         }
