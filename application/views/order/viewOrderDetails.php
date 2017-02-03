@@ -161,7 +161,7 @@
             </form>   
                     </div>
                     <?php
-                        if(!empty($validOrdersDetailsAray) || !empty($_POST['szSearch2']||$_POST['szSearch1']) )
+                        if(!empty($validOrdersDetailsAray) || !empty($_POST['szSearch2'])||!empty($_POST['szSearch1']) )
                         if(!empty($validOrdersDetailsAray)) 
                         {
                            ?> 
@@ -321,7 +321,7 @@
                     </div>
                             </div>
                         <?php } else {
-                           if(!empty($arErrorMessages['szSearch4'] || $arErrorMessages['szSearch5']))
+                           if(!empty($arErrorMessages['szSearch4']) || !empty($arErrorMessages['szSearch5']))
                            {
                                
                            }

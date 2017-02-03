@@ -416,6 +416,9 @@ class Ordering_Controller extends CI_Controller
         if (in_array(3, $DrugtestidArr)) {
             $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
         }
+        if (in_array(4, $DrugtestidArr)) {
+            $ValTotal = number_format($ValTotal + $countDoner * __RRP_4__, 2, '.', '');
+        }
 
         $Royaltyfees = $ValTotal * 0.1;
         $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
@@ -428,8 +431,12 @@ class Ordering_Controller extends CI_Controller
         $NetTotal = $ValTotal - $Royaltyfees;
         $NetTotal = number_format($NetTotal, 2, '.', '');
         $mobileScreen = $data['mobileScreenBasePrice'] * $data['mobileScreenHr'];
+        $DcmobileScreen = $data['DCmobileScreenBasePrice'] * $data['DCmobileScreenHr'];
+        $calloutprice = $data['CallOutBasePrice'] * $data['CallOutHr'];
+        $fcoprice = $data['FCOBasePrice'] * $data['FCOBasePrice'];
         $travel = $data['travelBasePrice'] * $data['travelHr'];
-        $TotalTrevenu = $data['urineNata'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $travel;
+
+        $TotalTrevenu = $data['urineNata'] + $data['laboratoryConfirmation']+$data['cancellationFee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
         $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
         $RoyaltyfeesManual = ($TotalTrevenu * 0.1);
         $RoyaltyfeesManual = number_format($RoyaltyfeesManual, 2, '.', '');
