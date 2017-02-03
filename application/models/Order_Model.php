@@ -694,14 +694,16 @@ class Order_Model extends Error_Model {
      public function getValidPendingOdrFrDetailsForPdf($productCode='',$prodCategory='')
         {
         $franchiseeid = $_SESSION['drugsafe_user']['id'];
-          if(!empty($prodCategory)){
-               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%'";
+        if(!empty($prodCategory)){
+               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
             }
             if(!empty($productCode)){
-               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' ";
+               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
             }
             if(!empty($prodCategory) && !empty($productCode)){
-               $searchq = array('szProductCategory' => $prodCategory,'productid' => $productCode,'franchiseeid ' =>$franchiseeid);
+                
+                $searchq = "szProductCategory LIKE '%$prodCategory%' AND productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
+             
             }
             $this->db->where($searchq);
            $this->db->distinct();
@@ -725,15 +727,17 @@ class Order_Model extends Error_Model {
         }
          public function getValidPendingOdrDetailsForPdf($franchiseeid,$productCode='',$prodCategory='')
         {
-          
+
           if(!empty($prodCategory)){
-               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%'";
+               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
             }
             if(!empty($productCode)){
-               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' ";
+               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
             }
             if(!empty($prodCategory) && !empty($productCode)){
-               $searchq = array('szProductCategory' => $prodCategory,'productid' => $productCode,'franchiseeid ' =>$franchiseeid);
+                
+                $searchq = "szProductCategory LIKE '%$prodCategory%' AND productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
+             
             }
             $this->db->where($searchq);
            $this->db->distinct();
