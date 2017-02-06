@@ -468,7 +468,7 @@ class Ordering_Controller extends CI_Controller
         <td align="right"><b>Email:</b> '.$FrenchiseeDataArr[0]['szEmail'].'</td>
     </tr>
     <tr>
-        <td align="right"><b>ABN:</b> '.$FrenchiseeDataArr[0]['szAddress'].'</td>
+        <td align="right"><b>ABN:</b> '.$FrenchiseeDataArr[0]['abn'].'</td>
     </tr>
 </table>
 <br />
@@ -482,7 +482,7 @@ class Ordering_Controller extends CI_Controller
         <td width="350" align="left"><b>Business Address:</b> '.$clientDataArr[0]['szAddress'].', '.$clientDataArr[0]['szZipCode'].', '.$clientDataArr[0]['szState'].', '.$clientDataArr[0]['szCountry'].'</td><td width="350" align="left"><b>Company Address:</b> '.$siteDataArr[0]['szAddress'].', '.$siteDataArr[0]['szZipCode'].', '.$siteDataArr[0]['szState'].', '.$siteDataArr[0]['szCountry'].'</td>
     </tr>
     <tr>
-        <td width="350" align="left"><b>ABN:</b> </td><td width="350" align="left"><b>Test Date:</b> '.date('d/m/Y',strtotime($testDate[0]['testdate'])).'</td>
+        <td width="350" align="left"><b>ABN:</b> '.$clientDataArr[0]['abn'].'</td><td width="350" align="left"><b>Test Date:</b> '.date('d/m/Y',strtotime($testDate[0]['testdate'])).'</td>
     </tr>
     <tr>
        <td width="350"> </td><td width="350" align="left"><b>No of Donors Tested:</b> '.$countDoner.'</td>

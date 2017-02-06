@@ -90,14 +90,6 @@ CHANGE `travelType` `travelType` INT( 2 ) NOT NULL ;
 
 ALTER TABLE `tbl_client` ADD `industry` VARCHAR(100) NOT NULL AFTER `szNoOfSites`;
 ALTER TABLE `tbl_client` ADD `abn` bigint(15) NOT NULL AFTER `industry`;
-
-
-
 ALTER TABLE `ds_user` ADD `abn` BIGINT(15) NOT NULL AFTER `szName`;
 
-ALTER TABLE `tbl_client` ADD `industry` VARCHAR(100) NOT NULL AFTER `szNoOfSites`;
-ALTER TABLE `tbl_client` ADD `abn` VARCHAR(100) NOT NULL AFTER `industry`;
-
-
-
-ALTER TABLE `ds_user` ADD `abn` VARCHAR(100) NOT NULL AFTER `szName`;
+ALTER TABLE `ds_user` CHANGE `abn` `abn` BIGINT(12) NOT NULL;

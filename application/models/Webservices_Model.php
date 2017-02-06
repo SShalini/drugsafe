@@ -647,7 +647,7 @@ class Webservices_Model extends Error_Model
     function getuserdetails($userid)
     {
         $array = array('id' => (int)$userid, 'isDeleted' => 0);
-        $query = $this->db->select('id, szName, szEmail, iRole, szContactNumber, szAddress, szZipCode, szState, szCountry')
+        $query = $this->db->select('id, szName, abn, szEmail, iRole, szContactNumber, szAddress, szZipCode, szState, szCountry')
             ->from(__DBC_SCHEMATA_USERS__)
             ->where($array)
             ->get();
@@ -899,7 +899,7 @@ class Webservices_Model extends Error_Model
     function getuserhierarchybysiteid($siteid)
     {
         $whereAry = 'client.clientId =' . (int)$siteid . ' AND user.isDeleted = 0';
-        $query = $this->db->select('client.franchiseeId, client.clientType, user.szName, user.szAddress, user.szContactNumber, user.szEmail, user.szZipCode, user.szState, user.szCountry')
+        $query = $this->db->select('client.franchiseeId, client.clientType, user.szName, user.abn, user.szAddress, user.szContactNumber, user.szEmail, user.szZipCode, user.szState, user.szCountry')
             ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'client.franchiseeId = user.id')
             ->where($whereAry)
