@@ -24,6 +24,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                                 'szPassword'=>encrypt($szNewPassword),
                                 'szContactNumber' => $data['szContactNumber'],
                                 'szCountry' => $data['szCountry'],
+                                'abn' => $data['abn'],
                                 'szState' => $data['szState'],
                                 'szCity' => $data['szCity'],
                                 'szZipCode' => $data['szZipCode'],
@@ -53,7 +54,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 'szContactPhone' => $data['szContactPhone'],
                 'szContactMobile' => $data['szContactMobile'],
                 'szNoOfSites' => $data['szNoOfSites'],
-                'abn' => $data['abn'],
                 'industry' => $data['industry'],
                 
                 
@@ -446,6 +446,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                                'szName' => $data['szName'],
                                 'szEmail' => $data['szEmail'],
                                 'szContactNumber' => $data['szContactNumber'],
+                                'abn' => $data['abn'],
                                 'szCountry' => $data['szCountry'],
                                 'szState' => $data['szState'],
                                 'szCity' => $data['szCity'],
@@ -478,7 +479,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 
                 'clientType' => $clientType,
                 'szLastUpdatedBy' => $UpdatedBy,
-                 'abn' => $data['abn'],
                  'industry' => $data['industry'],
                 'szBusinessName' => $data['szBusinessName'],
                 'szContactEmail' => $data['szContactEmail'],
