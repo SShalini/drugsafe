@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Order_Model.php" afterPath="$PROJECT_DIR$/application/models/Order_Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php" afterPath="$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" afterPath="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db changes/db changes.sql" afterPath="$PROJECT_DIR$/db changes/db changes.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/order/viewOrderDetails.php" afterPath="$PROJECT_DIR$/application/views/order/viewOrderDetails.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php" afterPath="$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
     <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default" />
@@ -31,8 +29,8 @@
       <file leaf-file-name="Order_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="691" column="64" selection-start-line="691" selection-start-column="29" selection-end-line="691" selection-end-column="64" />
+            <state relative-caret-position="-327">
+              <caret line="358" column="35" selection-start-line="358" selection-start-column="20" selection-end-line="358" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -48,25 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="1726" column="165" selection-start-line="1726" selection-start-column="69" selection-end-line="1726" selection-end-column="165" />
-              <folding>
-                <element signature="n#ViewpdfInventoryReportData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#ViewexcelInventoryReportData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#ViewexcelInventoryReport#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="viewOrderDetailsReport.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3364">
-              <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+            <state relative-caret-position="221">
+              <caret line="97" column="204" selection-start-line="97" selection-start-column="147" selection-end-line="97" selection-end-column="204" />
               <folding />
             </state>
           </provider>
@@ -82,23 +66,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="viewOrderDetails.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="viewOrderDetails.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
-              <folding>
-                <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-              </folding>
+            <state relative-caret-position="103">
+              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin_ajax_functions.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin_ajax_functions.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="1575" column="132" selection-start-line="1575" selection-start-column="132" selection-end-line="1575" selection-end-column="132" />
+            <state relative-caret-position="164">
+              <caret line="1558" column="48" selection-start-line="1558" selection-start-column="48" selection-end-line="1558" selection-end-column="73" />
               <folding>
                 <element signature="e#100705#100711#0#HTML" expanded="true" />
                 <element signature="e#101972#101978#0#HTML" expanded="true" />
@@ -195,15 +177,15 @@
         <option value="$PROJECT_DIR$/application/controllers/Ordering_Controller.php" />
         <option value="$PROJECT_DIR$/application/models/Inventory_Model.php" />
         <option value="$PROJECT_DIR$/css/drugsafe_custom_style.css" />
-        <option value="$PROJECT_DIR$/application/views/order/viewOrderDetails.php" />
         <option value="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
-        <option value="$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php" />
         <option value="$PROJECT_DIR$/js/drugsafeFunctions.js" />
         <option value="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" />
         <option value="$PROJECT_DIR$/application/models/Order_Model.php" />
         <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php" />
+        <option value="$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php" />
+        <option value="$PROJECT_DIR$/application/views/order/viewOrderDetails.php" />
       </list>
     </option>
   </component>
@@ -579,12 +561,12 @@
       <workItem from="1486093939883" duration="19109000" />
       <workItem from="1486352724891" duration="25715000" />
       <workItem from="1486439677682" duration="643000" />
-      <workItem from="1486440820657" duration="22451000" />
+      <workItem from="1486440820657" duration="23875000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="696548000" />
+    <option name="totallyTimeSpent" value="697972000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1370" height="744" extended-state="0" />
@@ -1023,36 +1005,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="691" column="64" selection-start-line="691" selection-start-column="29" selection-end-line="691" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="185" column="32" selection-start-line="185" selection-start-column="32" selection-end-line="185" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
-          <folding>
-            <element signature="n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3364">
-          <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1085,10 +1041,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-327">
+          <caret line="358" column="35" selection-start-line="358" selection-start-column="20" selection-end-line="358" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="1575" column="132" selection-start-line="1575" selection-start-column="132" selection-end-line="1575" selection-end-column="132" />
+        <state relative-caret-position="164">
+          <caret line="1558" column="48" selection-start-line="1558" selection-start-column="48" selection-end-line="1558" selection-end-column="73" />
           <folding>
             <element signature="e#100705#100711#0#HTML" expanded="true" />
             <element signature="e#101972#101978#0#HTML" expanded="true" />
@@ -1104,6 +1068,22 @@
             <marker date="1486467646546" expanded="false" signature="67211:68331" ph="..." />
             <marker date="1486467646546" expanded="false" signature="79489:80725" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="97" column="204" selection-start-line="97" selection-start-column="147" selection-end-line="97" selection-end-column="204" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="103">
+          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

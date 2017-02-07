@@ -83,7 +83,7 @@
                                             <?php
                                             foreach ($validOrdersDetailsSearchAray as $validOrdersDetailsSearchList) {
                                                 $selected = ($validOrdersDetailsSearchList['orderid'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                                echo '<option value="' . $validOrdersDetailsSearchList['orderid'] . '" ' . $selected . ' >#0000' . $validOrdersDetailsSearchList['orderid'] . '</option>';
+                                                echo '<option value="' . $validOrdersDetailsSearchList['orderid'] . '" ' . $selected . ' >#' .sprintf('%08d', $validOrdersDetailsSearchList['orderid'])  . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -254,7 +254,7 @@
                                                             <tr>
                                                                 <td><?php echo $i; ?> </td>
                                                                 <td>
-                                                                    #0000<?php echo $validOrdersDetailsData['orderid']; ?>
+                                                                    #<?php echo sprintf('%08d', $validOrdersDetailsData['orderid']); ?>
                                                                 </td>
                                                                 <td>
                                                                     <?php echo $franchiseeDetArr1['szName']; ?>
