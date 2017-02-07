@@ -229,7 +229,7 @@ class Order_Controller extends CI_Controller
         $data['notification'] = $count;
         $data['data'] = $data;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
-        $data['drugtestkitlist'] = $drugTestKitListAray;
+        //$data['drugtestkitlist'] = $drugTestKitListAray;
 
         $this->load->view('layout/admin_header', $data);
         $this->load->view('order/cartOrderValuelist');
@@ -328,7 +328,7 @@ class Order_Controller extends CI_Controller
 
     public function ordersuccess()
     {
-
+        $count = $this->Admin_Model->getnotification();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -348,7 +348,7 @@ class Order_Controller extends CI_Controller
         $data['notification'] = $count;
         $data['data'] = $data;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
-        $data['drugtestkitlist'] = $drugTestKitListAray;
+        //$data['drugtestkitlist'] = $drugTestKitListAray;
 
         $this->load->view('layout/admin_header', $data);
         $this->load->view('order/successOrder');
@@ -358,7 +358,7 @@ class Order_Controller extends CI_Controller
 
     public function view_order_list()
     {
-
+        $count = $this->Admin_Model->getnotification();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -387,7 +387,7 @@ class Order_Controller extends CI_Controller
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
-            $data['drugtestkitlist'] = $drugTestKitListAray;
+            //$data['drugtestkitlist'] = $drugTestKitListAray;
 
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetails');
@@ -403,7 +403,7 @@ class Order_Controller extends CI_Controller
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
-            $data['drugtestkitlist'] = $drugTestKitListAray;
+            //$data['drugtestkitlist'] = $drugTestKitListAray;
 
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetails');
@@ -703,6 +703,65 @@ class Order_Controller extends CI_Controller
             $this->load->view('admin/admin_ajax_functions', $data);
         }else{
             return false;
+        }
+    }
+
+    public function view_order_report()
+    {
+        $count = $this->Admin_Model->getnotification();
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+
+        $searchAry = $_POST;
+
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
+        $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
+
+        $this->form_validation->set_message('required', '{field} is required');
+        if ($this->form_validation->run() == FALSE) {
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "Orders_Report";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+            //$data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('order/viewOrderDetailsReport');
+            $this->load->view('layout/admin_footer');
+
+        } else {
+            $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "Orders_Report";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+            //$data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('order/viewOrderDetailsReport');
+            $this->load->view('layout/admin_footer');
+
+
         }
     }
 }

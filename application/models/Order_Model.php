@@ -337,11 +337,11 @@ class Order_Model extends Error_Model {
                   
         }
         $this->db->where($searchQuery);
-        $this->db->distinct();
-        $this->db->select('franchiseeid,price,orderid,createdon,status');
+        $this->db->select('ds_orders.franchiseeid,ds_orders.price,ds_orders.dispatched_price,ds_orders.last_changed,ds_orders.dispatchedon,ds_orders.canceledon,ds_orders.XeroIDnumber,ds_orders.xeroprocessed,ds_order_details.orderid,ds_orders.createdon,ds_orders.status,ds_order_details.productid,ds_order_details.quantity,ds_order_details.dispatched, COUNT(ds_order_details.orderid) as totalproducts');
         $this->db->order_by("orderid", "desc");
         $this->db->from(__DBC_SCHEMATA_ORDER__);
-        $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+        $this->db->join(__DBC_SCHEMATA_ORDER_DETAILS__.' as ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+        $this->db->group_by('ds_order_details.orderid');
      
         $query = $this->db->get();
 

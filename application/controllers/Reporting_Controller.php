@@ -1563,5 +1563,192 @@ function excelfr_stockassignlist_Data()
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
+
+    function ViewpdfOrderReportData()
+    {
+
+        $szSearch1 = $this->input->post('szSearch1');
+        $szSearch2 = $this->input->post('szSearch2');
+        $szSearch4 = $this->input->post('szSearch4');
+        $szSearch5 = $this->input->post('szSearch5');
+        $this->session->set_userdata('szSearch1',$szSearch1);
+        $this->session->set_userdata('szSearch2',$szSearch2);
+        $this->session->set_userdata('szSearch4',$szSearch4);
+        $this->session->set_userdata('szSearch5',$szSearch5);
+        echo "SUCCESS||||";
+        echo "ViewpdfOrderReport";
+
+
+    }
+    public function ViewpdfOrderReport()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe orders report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Orders Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+        $pdf->AddPage();
+        $searchAry['szSearch1'] = $this->session->userdata('szSearch1');
+        $searchAry['szSearch2'] = $this->session->userdata('szSearch2');
+        $searchAry['szSearch4'] = $this->session->userdata('szSearch4');
+        $searchAry['szSearch5'] = $this->session->userdata('szSearch5');
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+
+
+        $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Orders Report</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>  #</b> </th>
+                                        <th> <b>Franchisee</b> </th>
+                                        <th> <b>Order date </b> </th>
+                                        <th ><b> Order#  </b> </th>
+                                        <th > <b>No. of products</b> </th>
+                                   <th ><b> Order cost </b> </th>
+                                        <th > <b>Xero Invoice No.</b> </th>
+                                    </tr>';
+        if ($validOrdersDetailsAray) {
+
+            $i = 0;
+            foreach ($validOrdersDetailsAray as $reqOrderData) {
+                $i++;
+                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $reqOrderData['franchiseeid']);
+                $html .= '<tr>
+                                            <td> ' . $i . ' </td>
+                                            <td> ' . $franchiseeDetArr1['szName'] . '</td>
+                                            <td> ' . date('d M Y',strtotime($reqOrderData['createdon'])) . ' at '.date('h:i A',strtotime($reqOrderData['createdon'])).' </td>
+                                            <td>#' . sprintf('%08d', $reqOrderData['orderid']) . ' </td>
+                                               <td>' . $reqOrderData['totalproducts'] . ' </td>
+                                            <td>$' . ($reqOrderData['price']>0?$reqOrderData['price']:'0.00') . ' </td>
+                                               <td>' . (!empty($reqOrderData['XeroIDnumber'])?$reqOrderData['XeroIDnumber']:'N/A'). ' </td>
+                                        </tr>';
+            }
+        }
+
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+
+        $pdf->Output('orders-report.pdf', 'I');
+    }
+
+    function ViewexcelOrderReportData()
+    {
+        $szSearch1 = $this->input->post('szSearch1');
+        $szSearch2 = $this->input->post('szSearch2');
+        $szSearch4 = $this->input->post('szSearch4');
+        $szSearch5 = $this->input->post('szSearch5');
+        $this->session->set_userdata('szSearch1',$szSearch1);
+        $this->session->set_userdata('szSearch2',$szSearch2);
+        $this->session->set_userdata('szSearch4',$szSearch4);
+        $this->session->set_userdata('szSearch5',$szSearch5);
+        echo "SUCCESS||||";
+        echo "ViewexcelOrdersReport";
+
+
+    }
+    public function ViewexcelOrdersReport()
+    {
+        $this->load->library('excel');
+        $filename = 'DrugSafe';
+        $title = 'Orders Report';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($title);
+        $this->excel->getActiveSheet()->setCellValue('A1', '#');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Order date');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Order#');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'No. of products');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Order cost');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Xero Invoice No.');
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $searchAry['szSearch1'] = $this->session->userdata('szSearch1');
+        $searchAry['szSearch2'] = $this->session->userdata('szSearch2');
+        $searchAry['szSearch4'] = $this->session->userdata('szSearch4');
+        $searchAry['szSearch5'] = $this->session->userdata('szSearch5');
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        if(!empty($validOrdersDetailsAray)){
+            $i = 2;
+            $x=0;
+            foreach($validOrdersDetailsAray as $item){
+                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $item['franchiseeid']);
+                $x++;
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeDetArr1['szName']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, date('d M Y',strtotime($item['createdon'])) . ' at '.date('h:i A',strtotime($item['createdon'])));
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, '#'.sprintf('%08d', $item['orderid']));
+                $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['totalproducts']);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
+                $this->excel->getActiveSheet()->setCellValue('G'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
 }
 ?>

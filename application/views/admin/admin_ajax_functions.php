@@ -1556,7 +1556,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     Order #:
                                 </div>
                                 <div class="col-md-7 value">
-                                    #0000<?php echo $idOrder; ?>
+                                    #<?php echo sprintf('%08d', $idOrder); ?>
                                 </div>
                             </div>
                             <div class="row static-info">

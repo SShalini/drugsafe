@@ -1692,3 +1692,20 @@ function viewAgentEmployeeDetails(idAgent) {
 
     });
 }
+function ViewpdfOrderReport(szSearch1,szSearch2,szSearch4,szSearch5) {
+    $.post(__BASE_URL__ + "/reporting/ViewpdfOrderReportData", {szSearch1 : szSearch1,szSearch2: szSearch2,szSearch4:szSearch4,szSearch5:szSearch5}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ViewexcelOrderReport(szSearch1,szSearch2,szSearch4,szSearch5) {
+    $.post(__BASE_URL__ + "/reporting/ViewexcelOrderReportData", {szSearch1 : szSearch1,szSearch2: szSearch2,szSearch4:szSearch4,szSearch5:szSearch5}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+
+    });
+}
