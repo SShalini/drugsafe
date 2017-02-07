@@ -241,7 +241,7 @@ class Order_Model extends Error_Model {
         {
           
             $whereAry = array('id=' => $orderId);
-            $this->db->select('createdon,franchiseeid,status,price');
+            $this->db->select('createdon,franchiseeid,status,price,dispatched_price');
             $this->db->from(__DBC_SCHEMATA_ORDER__);
             $this->db->where($whereAry);
             $query = $this->db->get();
@@ -757,6 +757,44 @@ class Order_Model extends Error_Model {
                     return array();
             }
         }
-    
+
+    function dispatchsingleprod($ordid,$prodid,$qty){
+        $statusarr = array('dispatched' => (int)$qty);
+        $conditionarr = array('orderid' => (int)$ordid,'productid'=>$prodid);
+        $this->db->where($conditionarr)
+            ->update(__DBC_SCHEMATA_ORDER_DETAILS__, $statusarr);
+        if ($this->db->affected_rows() > 0) {
+            if($this->adjustFranchisorInventory($prodid,$qty)){
+                return true;
+            }else{
+                return false;
+            }
+        } else {
+            $this->addError("error", "Something went wrong. Please try again.");
+            return false;
+        }
+    }
+
+    function changesdispatchstatus($ordid, $status, $price=0.00){
+        $statusarr4 = array('status' => (int)$status,'last_changed'=>date('Y-m-d h:i:s'),'dispatched_price'=>(float)$price);
+        $statusarr2 = array('status' => (int)$status,'dispatchedon'=>date('Y-m-d h:i:s'),'dispatched_price'=>(float)$price);
+        $conditionarr = array('id' => (int)$ordid);
+        $this->db->where($conditionarr)
+            ->update(__DBC_SCHEMATA_ORDER__, ($status == '2'?$statusarr2:$statusarr4));
+        return true;
+    }
+
+    function adjustFranchisorInventory($prodid,$qty){
+        $whereAry = array('id' => (int)$prodid);
+        $this->db->where($whereAry)
+            ->set('szAvailableQuantity', 'szAvailableQuantity-'.(int)$qty, FALSE)
+            ->update(__DBC_SCHEMATA_PRODUCT__);
+        if ($this->db->affected_rows() > 0) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
    }
 ?>

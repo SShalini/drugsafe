@@ -93,3 +93,5 @@ ALTER TABLE `tbl_client` ADD `abn` bigint(15) NOT NULL AFTER `industry`;
 ALTER TABLE `ds_user` ADD `abn` BIGINT(15) NOT NULL AFTER `szName`;
 
 ALTER TABLE `ds_user` CHANGE `abn` `abn` BIGINT(12) NOT NULL;
+ALTER TABLE `ds_orders` ADD `last_changed` DATETIME NOT NULL AFTER `createdon`;
+ALTER TABLE `ds_orders` ADD `dispatched_price` DECIMAL( 10, 2 ) NOT NULL AFTER `price`;

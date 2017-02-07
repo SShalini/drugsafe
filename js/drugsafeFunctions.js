@@ -1418,6 +1418,116 @@ function CancelOrderConfirmation(idOrder) {
 
     }); 
 }
+
+function changeordstatus(ordid,prodcount,status) {
+    var counter = 0;
+    var check = 0;
+    var nonchangeable = 0;
+    if(status == '1'){
+        calTotalPrice();
+        $('.err').hide();
+        for(var j=1;j<=prodcount;j++){
+            if(!$('#order_quantity' + j).val()){
+                $('#orddiperr'+j).html('Dispatch quantity must be greater than 0.');
+                $('#orddiperr'+j).show();
+                return false;
+            }
+        }
+    }
+    var proceedcounter = 0;
+    for(var k=1;k<=prodcount;k++){
+        if (validatedispprod(k)) {
+            proceedcounter++;
+        }else{
+            return false;
+        }
+    }
+    if(prodcount == proceedcounter){
+        for(var i=1;i<=prodcount;i++){
+            var isdispid = $('#isdispid'+i).val();
+            if(isdispid == '0') {
+                if($('#order_quantity' + i).val()>0) {
+                    counter++;
+                    var prodid = $('#ordprodid' + i).val();
+                    var qty = $('#order_quantity' + i).val();
+                    $.post(__BASE_URL__ + "/order/dispatchsingleprod", {
+                        ordid: ordid,
+                        prodid: prodid,
+                        qty: qty
+                    }, function (result) {
+                        if (result == 'SUCCESS') {
+                            check++;
+                        } else {
+                            alert('Something went wrong. Please try again.');
+                            return false;
+                        }
+                    });
+                }
+            }else{
+                nonchangeable++;
+            }
+        }
+    }
+
+    setTimeout(function () {
+        if(status == '1'){
+            if((check == counter)||(nonchangeable == prodcount)){
+                var price = $('#totalprice').val();
+                $.post(__BASE_URL__ + "/order/dispatchfinal", {
+                    ordid: ordid,
+                    price: price
+                }, function (result) {
+                    var result_ary = result.split("||||");
+                    var res = result_ary[0].trim(" ");
+                    if (res == 'SUCCESS') {
+                        $("#popup_box").html(result_ary[1]);
+                        $('#editOrder').modal("hide");
+                        $('#dispatchprodsucess').modal("show");
+                    }
+                });
+            }
+        }else if(status == '0'){
+            if((check == counter)||(nonchangeable == prodcount)){
+                $.post(__BASE_URL__ + "/order/dispatchpending", {
+                    ordid: ordid
+                }, function (result) {
+                    var result_ary = result.split("||||");
+                    var res = result_ary[0].trim(" ");
+                    if (res == 'SUCCESS') {
+                        $("#popup_box").html(result_ary[1]);
+                        $('#editOrder').modal("hide");
+                        $('#orderstatchanged').modal("show");
+                    }
+                });
+            }
+        }
+    },500);
+
+}
+
+function validatedispprod(id) {
+    var ordqtyid = $('#ordqtyid'+id).val();
+    var availqtyid = $('#availqtyid'+id).val();
+    var dispatch_quantity = $('#order_quantity'+id).val();
+    var isdispid = $('#isdispid'+id).val();
+    if(dispatch_quantity > 0 && isdispid == '0'){
+        if(parseInt(dispatch_quantity) > parseInt(ordqtyid)){
+            $('#orddiperr'+id).html('Dispatch quantity must be less than or equal to ordered quantity.');
+            $('#orddiperr'+id).show();
+            return false;
+        }else if(parseInt(dispatch_quantity) > parseInt(availqtyid)){
+            $('#orddiperr'+id).html('Dispatch quantity must be less than or equal to available quantity.');
+            $('#orddiperr'+id).show();
+            return false;
+        }else {
+            $('#orddiperr'+id).hide();
+            return true;
+        }
+    }else{
+        return true;
+    }
+}
+
 function deliverOrderConfirmation(idOrder) {
     $('.modal-backdrop').remove();
     $('#static').modal("hide");
@@ -1443,22 +1553,26 @@ function deliverOrderConfirmation(idOrder) {
 
     });
 }
-function calTotalPrice(prodcost,inc) {
+function calTotalPrice() {
  
  var totalprodcount = $('#totalprodcount').val();
     var total = 0.00;
     for(var i=1;i<=totalprodcount;i++){
-        if($('#order_quantity'+i).val()){
-            var prodqty = parseInt($('#order_quantity'+i).val());
-            var prodprice = parseFloat($('#order_prod_price'+i).val()).toFixed(2);
+        var pertotal = 0.00;
+        var ordqtyval = ($('#order_quantity'+i).val()?$('#order_quantity'+i).val():0);
+        var ordprodprice = ($('#order_prod_price'+i).val()?$('#order_prod_price'+i).val():0.00);
+        //if($('#order_quantity'+i).val()){
+            var prodqty = parseInt(ordqtyval);
+            var prodprice = parseFloat(ordprodprice).toFixed(2);
             pertotal = (prodprice*prodqty);
             total = total+(prodprice*prodqty);
-        }
+            $('#total_price'+i).html('$'+parseFloat(pertotal).toFixed(2));
+        //}
     }
- $('#total_price'+inc).html(parseFloat(pertotal).toFixed(2));
-$('#finaltotal').html(parseFloat(total).toFixed(2));
-$('#total').val(parseFloat(total).toFixed(2));
+    $('#finaltotal').html('$'+parseFloat(total).toFixed(2));
+    $('#totalprice').val(parseFloat(total).toFixed(2));
 }
+
 function getProductCodeListByCategory(szCategory) {
     $.post(__BASE_URL__ + "/reporting/getProductCodeListByCategory", {szCategory: szCategory}, function (result) {
         if (result != '') {
