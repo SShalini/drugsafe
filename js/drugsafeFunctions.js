@@ -1616,3 +1616,79 @@ function ViewexcelInventoryReport(franchiseeId,prodCategory,productCode) {
       
     });
 }
+function addAgentEmployeeDetails(idclient,flag) {
+   
+    $.post(__BASE_URL__ + "/franchisee/addAgentEmployeeData", {idclient:idclient,flag:flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
+
+    });
+}
+function editAgentEmployeeDetails(idAgent,flag) {
+
+    $.post(__BASE_URL__ + "/franchisee/editAgentEmployeeData", {
+        idAgent: idAgent,
+        flag: flag,
+    }, function (result) {
+
+        ar_result = result.split('||||');
+
+        window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
+
+    });
+}
+function viewClientAgentDetails(idClient,flag) {
+
+    $.post(__BASE_URL__ + "/franchisee/viewClientAgentDetailsData", {
+        idClient: idClient,
+        flag: flag,
+    }, function (result) {
+
+        ar_result = result.split('||||');
+
+        window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
+
+    });
+}
+function agentDelete(id_agent) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/agentDeleteAlert", {id_agent: id_agent}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#agentStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function agentDeleteConfirmation(id_agent) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#agentStatus').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/agentDeleteConfirmation", {id_agent: id_agent}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#agentStatusConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function viewAgentEmployeeDetails(idAgent) {
+
+    $.post(__BASE_URL__ + "/franchisee/viewAgentEmployeeDetailsData", {
+        idAgent: idAgent,
+    }, function (result) {
+
+        ar_result = result.split('||||');
+
+        window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
+
+    });
+}

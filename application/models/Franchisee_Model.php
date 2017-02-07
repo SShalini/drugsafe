@@ -16,7 +16,14 @@ class Franchisee_Model extends Error_Model {
 function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         {  
             $szNewPassword = create_login_password();
+            
             $date=date('Y-m-d');
+            if(!empty($data['abn'])){
+           $abn = $data['abn'];  
+        }
+        else{
+          $abn = '';     
+        }
             $dataAry = array(
 
                                 'szName' => $data['szName'],
@@ -24,7 +31,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                                 'szPassword'=>encrypt($szNewPassword),
                                 'szContactNumber' => $data['szContactNumber'],
                                 'szCountry' => $data['szCountry'],
-                                'abn' => $data['abn'],
+                                'abn' => $abn,
                                 'szState' => $data['szState'],
                                 'szCity' => $data['szCity'],
                                 'szZipCode' => $data['szZipCode'],
@@ -207,7 +214,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
          public function getAllClientDetails($parent=false,$franchiseId='',$operationManagrrId='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '',$id=0,$flag=0)
         {
              if(!empty($operationManagrrId)){
-            $whereAry = array('operationManagerId=' => $operationManagrrId,'clientType='=>'0'); 
+            $whereAry = array('operationManagerId=' => $operationManagrrId,'clientType='=>'0','clientType='=>'0'); 
             $searchq = '';
             if($id > '0'){
                 $searchq = 'clientId = '.(int)$id;
@@ -359,28 +366,22 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
 
         if($query->num_rows() > 0)
         {
-            return $query->result_array();
+        return $query->result_array();
         }
         return false;
     }
          public function viewClientDetails($idClient)
         {
-//            $searchAry = trim($searchAry);
+
             $whereAry = array('clientId' => $idClient,'isDeleted=' => '0');
             
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
             
-//             if(!empty($searchAry)){
-//               $this->db->where('isDeleted','0');
-//               $this->db->where('clientId',$idClient);
-//               $this->db->where("(clientId LIKE '%$searchAry%' OR szName LIKE '%$searchAry%' OR szEmail LIKE '%$searchAry%')");
-//     
-//            }
-//            else{
+
                $this->db->where($whereAry); 
-//            }
+
             
             
             $this->db->where($whereAry);
@@ -752,5 +753,227 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 }
                 return false;
    	}
+  function insertAgentDetails($data,$clientId='')
+        {  
+            $szNewPassword = create_login_password();
+            $date=date('Y-m-d');
+            if(!empty($data['abn'])){
+           $abn = $data['abn'];  
+        }
+        else{
+          $abn = '';     
+        }
+            $dataAry = array(
+
+                                'szName' => $data['szName'],
+                                'szEmail' => $data['szEmail'],
+                                'szPassword'=>encrypt($szNewPassword),
+                                'szContactNumber' => $data['szContactNumber'],
+                                'szCountry' => $data['szCountry'],
+                                'abn' => $abn,
+                                'szState' => $data['szState'],
+                                'szCity' => $data['szCity'],
+                                'szZipCode' => $data['szZipCode'],
+                                'szAddress' => $data['szAddress'],
+                                'iRole' => '4',
+                                'iActive' => '1',
+                                'dtCreatedOn' => $date
+            );
+             $this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
+            
+             $id_agent = (int)$this->db->insert_id();
+             $CreatedBy=$_SESSION['drugsafe_user']['id'];
+             $franchiseeId=$_SESSION['drugsafe_user']['id'];
+            
+            $clientAry=array(
+                'franchiseeId' => $franchiseeId,
+                'agentId' => $id_agent,
+                'clientType' => $clientId,
+                'szCreatedBy' => $CreatedBy,
+                'szBusinessName' => $data['szBusinessName'],
+                'industry' => $data['industry'],
+              
+            );
+        
+            if($this->db->affected_rows() > 0)
+               {
+                
+                $this->db->insert(__DBC_SCHEMATA_CLIENT__, $clientAry);
+             
+                
+                if($this->db->affected_rows() > 0)
+                {
+                    if(empty($clientType)){
+                   $replace_ary = array();
+                   $id_player = (int)$this->db->insert_id();
+                   $replace_ary['szName']=$data['szName'];
+                   $replace_ary['szEmail']=$data['szEmail'];
+                   $replace_ary['szPassword']=$szNewPassword;
+                   $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+                   $replace_ary['Link']=__BASE_URL__."/franchisee/addAgentEmployee";
+                 
+                   createEmail($this,'__ADD_NEW_AGENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
+                
+                    }
+                  
+                   return true;
+               }
+               return false;
+                              }
+
+               else
+               {
+                   return false;
+             }
+        }   
+          public function viewAgentDetails($idClient=0,$limit = __PAGINATION_RECORD_LIMIT__,$offset= 0,$searchAry = '',$id=0)
+        {
+            
+            $whereAry = array('clientType' => $idClient,'isDeleted=' =>'0','agentId !=' => '0');
+            
+            $searchq = '';
+            if($id > '0'){
+                $searchq = 'agentId = '.(int)$id;
+            }
+            $this->db->select('*');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.agentId = ds_user.id');
+            
+        
+             if(!empty($searchq)){
+              $whereAry = array('clientType' => $idClient,'isDeleted=' =>'0','agentId !=' => '0');
+               $this->db->where($searchq);
+     
+            }
+            else{
+               $this->db->where($whereAry); 
+            }
+            
+           
+            
+            
+            $this->db->limit($limit, $offset);
+           $query = $this->db->get();
+
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                return $row;
+            }
+            else
+            {
+                    return array();
+            }
+        }
+         public function updateAgentDetails($data,$idAgent=0)
+    {
+       
+        $date=date('Y-m-d');
+            if(!empty($data['abn'])){
+           $abn = $data['abn'];  
+        }
+        else{
+          $abn = '';     
+        }
+            $dataAry = array(
+
+                                'szName' => $data['szName'],
+                                'szEmail' => $data['szEmail'],
+                                'szPassword'=>encrypt($szNewPassword),
+                                'szContactNumber' => $data['szContactNumber'],
+                                'szCountry' => $data['szCountry'],
+                                'abn' => $abn,
+                                'szState' => $data['szState'],
+                                'szCity' => $data['szCity'],
+                                'szZipCode' => $data['szZipCode'],
+                                'szAddress' => $data['szAddress'],
+                                'iRole' => '4',
+                                'iActive' => '1',
+                                'dtUpdatedOn' => $date
+            );
+           
+                $whereAry = array('id' => (int)$idAgent);
+
+                $this->db->where($whereAry);
+
+                $queyUpdate=$this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+                
+          
+        
+            if($queyUpdate)
+               {
+              $UpdatedBy=$_SESSION['drugsafe_user']['id'];
+           
+             $franchiseeId=$_SESSION['drugsafe_user']['id'];
+            
+            $clientAry=array(
+               
+                'szLastUpdatedBy' => $UpdatedBy,
+                'szBusinessName' => $data['szBusinessName'],
+                'industry' => $data['industry'],
+              
+            );
+                
+                $whereAry = array('agentId' => (int)$idAgent);
+                $this->db->where($whereAry);
+                $query=$this->db->update(__DBC_SCHEMATA_CLIENT__, $clientAry);
+              
+                if($query)
+                { 
+                     return true;
+                    
+                }
+                else{
+                    return false;
+                }
+               return true;
+               }
+               else
+               {
+                   return false;
+             }
+    }
+        
+      public function deleteAgent($id_agent)
+	{
+		$dataAry = array(
+			'isDeleted' => '1'
+                );  
+                $this->db->where('id', $id_agent);
+                 
+		if($query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}  
+          public function viewAgentEmployeeDetails($idAgent)
+        {
+
+            $whereAry = array('agentId' => $idAgent,'isDeleted=' => '0');
+            
+            $this->db->select('*');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.agentId = ds_user.id');
+            
+
+               $this->db->where($whereAry); 
+
+            $query = $this->db->get();
+       
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                return $row[0];
+            }
+            else
+            {
+                    return array();
+            }
+        }
+        
 }
 ?>

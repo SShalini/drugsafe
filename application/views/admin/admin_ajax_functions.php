@@ -2057,5 +2057,56 @@ if ($mode == '__DISPATCH_ORDER_CONFIRM_POPUP__') {
             </div>
         </div>
     </div>
-<?php }
-?>
+
+<?php }  
+if($mode == '__DELETE_AGENT_POPUP__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="agentStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+             
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Agent</span> </h4>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Agent?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="agentDeleteConfirmation('<?php echo $id_agent;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__DELETE_AGENT_CONFIRM__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="agentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Agent</span> </h4>
+                </div>
+           
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Agent has been successfully deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/franchisee/viewClientAgentDetails" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+  ?>

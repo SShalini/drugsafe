@@ -325,51 +325,7 @@
                     if (!empty($clientAry)) {
 
                         ?>
-                    
-                        
-        <div class="tabbable tabbable-tabdrop">
-            <ul class="nav nav-tabs">
-              <?php 
-        
-            if(!empty($_SESSION['drugsafe_tab_status']))
-            {
-                if($_SESSION['drugsafe_tab_status']==1){
-                  $drActive ='active'; 
-                }
-                 elseif($_SESSION['drugsafe_tab_status']==2){
-                  $mrActive ='active'; 
-                }
-                else {
-                  $conActive ='active';   
-                }
-           $this->session->unset_userdata('drugsafe_tab_status');
-            }
-        else {
-               $drActive ='active'; 
-     
- }
-            ?>
-                <li class=" <?php echo $drActive?> ">
-                        <a href="#tab1" data-toggle="tab">Site Record</a>
-                </li>
-               
-                 <li class="<?php echo $conActive?>">
-                        <a href="#tab2" data-toggle="tab">Agent/Employee Record</a>
-                </li>
-            </ul>
-                 <div class="tab-content">
-                     <div class="tab-pane <?php echo $drActive?>" id="tab1">
-                        <div id="page_content" class="row">
-                            <div class="col-md-12">
-                                <div class="portlet light bordered">
-<!--                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="icon-equalizer font-red-sunglo"></i>
-                                            <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
-                                        </div>
-                                       </div>-->
-                                       
-                           <div class="row">
+       <div class="row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/franchisee/clientRecord" name="szSearchClientRecord" method="post">
 <!--                        
                                   <div class="search col-md-3">
@@ -418,7 +374,50 @@
                                       <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
                            </form>
-                          </div>
+                          </div>             
+                        
+        <div class="tabbable tabbable-tabdrop">
+            <ul class="nav nav-tabs">
+              <?php 
+        
+            if(!empty($_SESSION['drugsafe_tab_status']))
+            {
+                if($_SESSION['drugsafe_tab_status']==1){
+                  $drActive ='active'; 
+                }
+               if($_SESSION['drugsafe_tab_status']==2){
+                  
+                  $mrActive ='active'; 
+                }
+               
+           $this->session->unset_userdata('drugsafe_tab_status');
+            }
+        else {
+               $drActive ='active'; 
+     
+ }
+            ?>
+                <li class=" <?php echo $drActive?> ">
+                        <a href="#tab1" data-toggle="tab">Site Record</a>
+                </li>
+               
+                 <li class="<?php echo $mrActive?>">
+                        <a href="#tab2" data-toggle="tab">Agent/Employee Record</a>
+                </li>
+            </ul>
+                 <div class="tab-content">
+                     <div class="tab-pane <?php echo $drActive?>" id="tab1">
+                        <div id="page_content" class="row">
+                            <div class="col-md-12">
+                                <div class="portlet light bordered">
+<!--                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-equalizer font-red-sunglo"></i>
+                                            <span class="caption-subject font-red-sunglo bold uppercase">Drug Test Kit</span>
+                                        </div>
+                                       </div>-->
+                                       
+                           
                     <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
@@ -519,12 +518,7 @@
 
                                                 </a>
                                           <?php }} ?>
-                                            <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
-                                               title="Add Agent/Employee"
-                                               onclick="addAgentEmployeeDetails(<?php echo $clientData['id']; ?>);"
-                                               href="javascript:void(0);"></i>
-                                                <i class="fa fa-plus" aria-hidden="true"></i>
-                                            </a>
+                                            
                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data"
                                                onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
                                                href="javascript:void(0);">
@@ -563,7 +557,7 @@
 
                     } else {
                         echo "Not Found";
-                    } }
+                    } 
                     ?>
          <?php 
          
@@ -577,130 +571,153 @@
     <div id="page_content" class="row">
         <div class="col-md-12">
             <div class="portlet light bordered">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-equalizer font-red-sunglo"></i>
-                        <span class="caption-subject font-red-sunglo bold uppercase">Marketing Material</span>
-                    </div>
-               
+              
+                <?php   if (!empty($clientAry)) {
 
-                </div>
-                <?php
-
-                if(!empty($marketingMaterialAray))
-                {
-                    ?>
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th> Image </th>
-                                <th> Product Code</th>
-                                <th> Descreption</th>
-                                <th> Cost</th>
-                                <th> Quantity </th>
-<!--                                <th>Quantity Assign By </th>
-                                <th>Quantity Updated By  </th>-->
-                                <th> Action </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                               $i = 0;
-                                foreach($marketingMaterialAray as $marketingMaterialData)
-                                {  
-                                     $idfranchisee = $franchiseeArr['id'];
-                                        if($_SESSION['drugsafe_user']['iRole']==5){
-                                               $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
-                                              $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
-                                              $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
-                                              $qtyUpdateData1Arr =end($qtyUpdateDataArr);
-                                        } else
-                                            {
-                                            $marketingMaterialDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$marketingMaterialData['id']);
-                                            $qtyAssignDataArr = $this->StockMgt_Model->getQtyAssignTrackingDetailsById($idfranchisee,$marketingMaterialData['id']);
-                                              $qtyUpdateDataArr = $this->StockMgt_Model->getQtyUpdateTrackingDetailsById($idfranchisee,$marketingMaterialData['id']);
-                                              $qtyUpdateData1Arr =end($qtyUpdateDataArr);
-                                        }
-
-                                   
-                                                             
-                                    ?>
+                        ?>        
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
                                 <tr>
-                                   <td>
-                                        <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $marketingMaterialData['szProductImage']; ?>" width="60" height="60"/>
-
-                                    </td>
-                                    <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
-                                    <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
-                                    <td> $<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                       <?php  if($_SESSION['drugsafe_user']['iRole']==5){?>
-                                        <td><?php echo($marketingMaterialData['szQuantity'] > 0 ? $marketingMaterialData['szQuantity'] : 'N/A')?></td>
-                                       <?php } else { ?> 
-                                        <td><?php echo($marketingMaterialDataArr['szQuantity'] > 0 ? $marketingMaterialDataArr['szQuantity'] : 'N/A')?></td>
-                                       <?php }?>
-<!--                                        <td>
-                                        <?php 
-                                        if($qtyAssignDataArr['szAssignBy'])
-                                        {
-                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyAssignDataArr['szAssignBy']);
-                                            echo $franchiseeDetArr['szName'];
-                                        }
-                                        else
-                                        {
-                                           echo "N.A";
-                                        }
-
-                                        ?> 
-                                    </td>-->
-
-<!--                                        <td>
-                                             <?php 
-                                        if($qtyUpdateData1Arr['szLastUpdatedBy'])
-                                        {
-                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$qtyUpdateData1Arr['szLastUpdatedBy']);
-                                            echo $franchiseeDetArr['szName'];
-                                        }
-                                        else
-                                        {
-                                           echo "N.A";
-                                        }
-
-                                        ?> 
-                                    </td>-->
-                                     
-                                    <td>
-                                         <?php if(empty($marketingMaterialDataArr['szQuantity']) && ($marketingMaterialDataArr['szQuantity'] != '0')){?>
+                                    <th> Id.</th>
+                                    <th> Name</th>
+                                    <th> Email</th>
+                                    <?php
+                                    if($_SESSION['drugsafe_user']['iRole']=='1')
+                                    {
+                                        ?>
+                                         <th> Franchisee</th>
+                                        <?php
                                         
-                                        <a class="btn btn-circle btn-icon-only btn-default" title="Add Model Stock Value" onclick="addProductStockQuantity(<?php echo $marketingMaterialData['id'];?>);" href="javascript:void(0);">
-                                            <i class="fa fa-plus"></i> 
-                                        </a>
-                                        <?php }else{?>
-                                         <a class="btn btn-circle btn-icon-only btn-default" title="Adjust Quantity" onclick="editProductStockQuantity(<?php echo $marketingMaterialData['id'];?>,'1');" href="javascript:void(0);">
-                                            <i class="fa fa-minus"></i> 
-                                        </a>
-                                         <a class="btn btn-circle btn-icon-only btn-default" title=" Add More Product Stock Quantity" onclick="editProductStockQuantity(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);">
-                                            <i class="fa fa-plus"></i> 
-                                        </a>
-                                        <?php }?>
-                                    </td>
-                                  
+                                    }
+                                    ?>
+                                    
+                                    <th> No. of sites</th>
+                                    <th> Contact No.</th>
+                                    <th> Created By</th>
+                                    <th> Updated By</th>
+                                    <th> Actions</th>
                                 </tr>
+                                </thead>
+                                <tbody>
                                 <?php
-                                $i++;
+                                $i = 0;
+                                foreach ($clientAry as $clientData) {
+                                    ?>
+                                    <tr>
+                                        <td> CL-<?php echo $clientData['id']; ?> </td>
+                                        <td> <?php echo $clientData['szName'] ?> </td>
+                                        <td> <?php echo $clientData['szEmail']; ?> </td>
+                                        <?php
+                                         if($_SESSION['drugsafe_user']['iRole']=='1')
+                                         {
+                                            ?>
+                                            <td>
+                                            <?php 
+                                              $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientData['franchiseeId']);
+                                              echo $franchiseeDetArr['szName'];
+                                            ?>
+                                            </td>  
+                                            <?php
+                                         }
+                                        ?>
+                                       
+                                        <td>
+                                            <?php
+                                                $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($clientData['id']);
+                                                echo count($childClientDetailsAray);
+                                            ?>
+                                            
+
+                                        </td>
+                                        <td> <?php echo $clientData['szContactNumber']; ?> </td>
+                                       
+                                        <td>
+                                        <?php
+                                        if($clientData['szCreatedBy'])
+                                        {
+                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientData['szCreatedBy']);
+                                            echo $franchiseeDetArr['szName'];
+                                        }
+                                        ?>
+                                        
+                                        </td>
+                                        <td>
+                                            <?php 
+                                            if($clientData['szLastUpdatedBy'])
+                                            {
+                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$clientData['szLastUpdatedBy']);
+                                                echo $franchiseeDetArr['szName'];
+                                            }
+                                            else
+                                            {
+                                               echo "N.A";
+                                            }
+                                           
+                                            ?> 
+                                        </td>
+                                       
+                                        <td>
+                                             <?php
+                                            if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                            ?>
+                                            <?php
+                                            if ($clientData['clientType'] == '0') {
+                                          if($clientData['szNoOfSites'] > count($childClientDetailsAray)){
+                                                ?>
+                                            
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
+                                               title="Add Agent/Employee"
+                                               onclick="addAgentEmployeeDetails(<?php echo $clientData['id']; ?>,'2');"
+                                               href="javascript:void(0);"></i>
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </a>
+                                          <?php }} ?>
+                                           
+                                            <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data"
+                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
+                                               href="javascript:void(0);">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <?php }?>
+                                            <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
+                                               title="View Client Details"
+                                               onclick="viewClientAgentDetails(<?php echo $clientData['id']; ?>,'2');"
+                                               href="javascript:void(0);"></i>
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                             <?php
+                                             if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                                 if(empty($childClientDetailsAray)) {
+                                             ?>
+                                            <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
+                                               title="Delete Client"
+                                               onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
+                                               href="javascript:void(0);"></i>
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
+
+                                             <?php } }?>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                     $i++;
                                 }
-                           ?>
-                        </tbody>
-                    </table>
-                </div>
-                     <?php
-  
-                }
-                else
-                {
-                    echo "Not Found";
-                }
-                ?>
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                         </div>
+                        <?php
+
+                    } else {
+                        echo "Not Found";
+                    } }
+                    ?>
+         <?php 
+         
+             ?>
 
             </div>
         </div>
@@ -711,10 +728,7 @@
 <div id="popup_box"></div>       
  </div>
  </div>
-                    
-                    
-                    
-               
+
 		<div class="row">
                   <?php if(!empty($clientAry)){?>
                     <div class="col-md-7 col-sm-7">

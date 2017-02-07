@@ -649,7 +649,7 @@ class Admin_Controller extends CI_Controller {
             $validate= $this->input->post('addOperationManager'); 
 
             $count = $this->Admin_Model->getnotification();
-        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($this->Admin_Model->validateUsersData($validate))
             {
               
@@ -746,7 +746,7 @@ class Admin_Controller extends CI_Controller {
                     $_POST['editOperationManager'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
+                    $data['commentnotification'] = $commentReplyNotiCount;
                     $data['flag'] = $flag;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/editOperationManager');
@@ -766,4 +766,5 @@ class Admin_Controller extends CI_Controller {
             $this->Admin_Model->deleteOperationManagerDetails($data['idOperationManager']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }  
-} ?>
+}
+?>

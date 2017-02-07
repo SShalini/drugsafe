@@ -132,11 +132,10 @@ class Franchisee_Controller extends CI_Controller
             $reqppval .= $reqpp.',';
         }
         $reqppval = substr($reqppval, 0,-1);
-                   }
-                   
+        }  
             if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee,$reqppval)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3> Site added successfully.</h3></strong>";
+                $szMessage['content'] = "<strong><h3> Client added successfully.</h3></strong>";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                 ob_end_clean();
@@ -148,9 +147,7 @@ class Franchisee_Controller extends CI_Controller
                 //header("Location:" . __BASE_URL__ . $url);
             }
         }
-
         }
-      
         $data['pageName'] = "Client_Record";
         $data['szMetaTagTitle'] = "Add Client";
         $data['is_user_login'] = $is_user_login;
@@ -493,11 +490,11 @@ class Franchisee_Controller extends CI_Controller
              $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
              $data['req_ppe_ary'] = $req_ppe_ary;  
             }
-        
-
+    
             $data['szMetaTagTitle'] = "Edit Client Details ";
             $data['pageName'] = "Client_Record";
             $data['flag'] = $flag;
+            $data['idClient'] = $idClient;
             $_POST['clientData'] = $userDataAry;
             $data['idfranchisee'] = $idfranchisee;
             $data['parentClient'] = $parentClient;
@@ -734,6 +731,289 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('franchisee/franchiseeRecord');
         $this->load->view('layout/admin_footer');
        
+    }
+    
+    function addAgentEmployeeData()
+    {
+
+        $idclient = $this->input->post('idclient');
+        $flag = $this->input->post('flag');
+
+        $this->session->set_userdata('idclient', $idclient);
+      
+        $this->session->set_userdata('flag', $flag);
+
+      
+        echo "SUCCESS||||";
+        echo "addAgentEmployee";
+    }
+
+    function addAgentEmployee()
+    {
+       $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+
+        
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $validate = $this->input->post('clientData');
+      
+       
+        $flag = $this->session->userdata('flag');
+        $idclient = $this->session->userdata('idclient');
+
+              if ($this->Admin_Model->validateAgentData($validate, array())) {
+                 
+                   
+            if ($this->Franchisee_Model->insertAgentDetails($validate,$idclient)) {
+                
+         
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<strong><h3>Agent/Employee Record added successfully.</h3></strong> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    
+                    if($flag==2){
+                    $mrActive= $flag;   
+                    $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+                     $this->session->unset_userdata('idclient');
+                     $this->session->unset_userdata('flag');
+                     redirect(base_url('/franchisee/clientRecord'));
+                    die;
+                    }
+                     if($flag==3){
+                     
+                     $this->session->unset_userdata('idclient');
+                     $this->session->unset_userdata('flag');
+                     redirect(base_url('/franchisee/viewClientAgentDetails'));
+                    die;
+                    }
+           
+            }
+        }
+        $data['pageName'] = "Client_Record";
+        $data['szMetaTagTitle'] = "Add Agent";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+        $data['validate'] = $validate;
+        $data['idclient'] = $idclient;
+        $data['flag'] = $flag;
+        $data['szParentId'] = $idclient;
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('franchisee/addAgent');
+        $this->load->view('layout/admin_footer');
+    }
+     function editAgentEmployeeData()
+    {
+        $idAgent = $this->input->post('idAgent');
+        $flag = $this->input->post('flag');
+
+
+        if ($idAgent > 0) {
+            $this->session->set_userdata('idAgent', $idAgent);
+            $this->session->set_userdata('flag', $flag);
+            echo "SUCCESS||||";
+            echo "editAgentEmployee";
+        }
+    }
+
+    public function editAgentEmployee()
+    {
+        
+         $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
+        
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $idAgent = $this->session->userdata('idAgent');
+        $flag = $this->session->userdata('flag');
+        
+   
+        if ($idAgent > 0) {
+
+            $data_validate = $this->input->post('clientData');
+           
+            if (empty($data_validate)) {
+                
+             $userDataAry = $this->Franchisee_Model->viewAgentEmployeeDetails($idAgent);
+             
+             
+            } else {
+                $userDataAry = $data_validate;
+            }
+           
+                if ($this->Admin_Model->validateAgentData($data_validate, array(),$idAgent,1)) {
+            
+                if ($this->Franchisee_Model->updateAgentDetails( $data_validate,$idAgent)) {
+
+
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<strong><h3>Client details successfully updated.</h3></strong> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    ob_end_clean();
+                     $this->session->unset_userdata('flag');
+                     redirect(base_url('/franchisee/viewAgentEmployeeDetails'));
+                    die;
+                  
+                }
+            } 
+           
+        
+        
+
+            $data['szMetaTagTitle'] = "Edit Client Details ";
+            $data['pageName'] = "Client_Record";
+            $data['flag'] = $flag;
+            $data['idAgent'] = $idAgent;
+            $_POST['clientData'] = $userDataAry;
+            $data['idfranchisee'] = $idfranchisee;
+            $data['parentClient'] = $parentClient;
+            $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+            $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('franchisee/editAgent');
+            $this->load->view('layout/admin_footer');
+       }
+    }
+     function viewClientAgentDetailsData()
+    {
+
+        $idClient = $this->input->post('idClient');
+         $flag = $this->input->post('flag');
+        {
+            $this->session->set_userdata('idClient', $idClient);
+            $this->session->set_userdata('flag', $flag);
+            echo "SUCCESS||||";
+            echo "viewClientAgentDetails";
+        }
+    }
+
+    function viewClientAgentDetails()
+    {
+        $is_user_login = is_user_login($this);
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+           redirect(base_url('/admin/admin_login'));
+            die;
+        }
+         $idClient = $this->session->userdata('idClient');
+         if(isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])){
+            $id = $_POST['szSearchClRecord'];
+        }
+        if(isset($_POST['szSearchClRecord1']) && !empty($_POST['szSearchClRecord1'])){
+            $id = $_POST['szSearchClRecord1'];
+        }
+        if(isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])){
+            $id = $_POST['szSearchClRecord2'];
+        }
+        $config['base_url'] = __BASE_URL__ . "/franchisee/viewClientDetails/";
+        $config['total_rows'] = count( $this->Franchisee_Model->viewAgentDetails($idClient,$limit,$offset,$searchAry,$id));
+        $config['per_page'] =__PAGINATION_RECORD_LIMIT__;
+
+        $this->pagination->initialize($config);
+        
+        $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
+        $agentDetailsAray = $this->Franchisee_Model->viewAgentDetails($idClient,$config['per_page'],$this->uri->segment(3),$searchAry,$id);
+        $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
+
+        $agentSearchDetailsAray = $this->Franchisee_Model->viewAgentDetails($idClient);
+       
+        if ($clientDetailsAray['clientType'] > 0) {
+            $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
+            $data['ParentOfChild'] = $parentClientDetArr;
+        }
+        if (!empty($clientFranchiseeArr)) {
+            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientFranchiseeArr[0]['franchiseeId']);
+            $data['franchiseeArr'] = $franchiseeDetArr;
+        }
+
+        $data['agentSearchDetailsAray'] = $agentSearchDetailsAray;
+        $data['idClient'] = $idClient;
+        $data['pageName'] = "Client_Record";
+        $data['clientDetailsAray'] = $clientDetailsAray;
+        $data['agentDetailsAray'] = $agentDetailsAray;
+        $data['szMetaTagTitle'] = "Client Details";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('franchisee/viewAgentDetails');
+        $this->load->view('layout/admin_footer');
+    }
+     public function agentDeleteAlert()
+    {
+        $data['mode'] = '__DELETE_AGENT_POPUP__';
+        $data['id_agent'] = $this->input->post('id_agent');
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+
+    public function agentDeleteConfirmation()
+    {
+        
+        $data['mode'] = '__DELETE_AGENT_CONFIRM__';
+        $data['id_agent'] = $this->input->post('id_agent');
+        $this->Franchisee_Model->deleteAgent($data['id_agent']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+      function viewAgentEmployeeDetailsData()
+    {
+
+        $idAgent = $this->input->post('idAgent');
+         $flag = $this->input->post('flag');
+        {
+            $this->session->set_userdata('idAgent', $idAgent);
+            $this->session->set_userdata('flag', $flag);
+            echo "SUCCESS||||";
+            echo "viewAgentEmployeeDetails";
+        }
+    }
+
+    function viewAgentEmployeeDetails()
+    {
+        $is_user_login = is_user_login($this);
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+           redirect(base_url('/admin/admin_login'));
+            die;
+        }
+         $idAgent = $this->session->userdata('idAgent');
+   
+        $agentEmployeeDetailsAray = $this->Franchisee_Model->viewAgentEmployeeDetails($idAgent);
+      
+
+       
+        $data['agentEmployeeDetailsAray'] = $agentEmployeeDetailsAray;
+        $data['pageName'] = "Client_Record";
+        $data['szMetaTagTitle'] = "Client Details";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('franchisee/viewAgentEmployeeDetails');
+        $this->load->view('layout/admin_footer');
     }
 }
 ?>

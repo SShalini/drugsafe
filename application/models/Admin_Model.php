@@ -239,13 +239,13 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-    function validateUsersData($data, $arExclude = array(),$idUser = 0, $forgotpass = FALSE,$flag=0,$flag2='')
+    function validateUsersData($data, $arExclude = array(),$idUser = 0, $forgotpass = FALSE,$flag=0,$flag2=0)
     {
         if (!empty($data)) {
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Name", true);
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Email Address" ,true);
             if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Contact Number", true);
-            if($flag2==2){
+            if($flag2 == 2){
             if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);  
             }
             if($flag==1){
@@ -310,13 +310,19 @@ class Admin_Model extends Error_Model
             return false;
         }
     }
-      public function checkBusinessNameExists($szBusinessName = false, $idClient = 0)
+      public function checkBusinessNameExists($szBusinessName = false, $idClient = 0,$flag='0')
     {
         $szBusinessName = trim($szBusinessName);
 
     
         if ((int)$idClient > 0) {
-            $result = $this->db->get_where(__DBC_SCHEMATA_CLIENT__, array('szBusinessName' => $szBusinessName,'clientId!=' => (int)$idClient));
+            if($flag==1){
+                $result = $this->db->get_where(__DBC_SCHEMATA_CLIENT__, array('szBusinessName' => $szBusinessName,'agentId!=' => (int)$idClient));  
+            }
+            else{
+                  $result = $this->db->get_where(__DBC_SCHEMATA_CLIENT__, array('szBusinessName' => $szBusinessName,'clientId!=' => (int)$idClient));
+            }
+          
         } else {
             $result = $this->db->get_where(__DBC_SCHEMATA_CLIENT__, array('szBusinessName' => $szBusinessName));
         }
@@ -348,11 +354,18 @@ class Admin_Model extends Error_Model
     function insertUserDetails($data,$id=0)
     {
         $szNewPassword = create_login_password();
+        if(!empty($data['abn'])){
+           $abn = $data['abn'];  
+        }
+        else{
+          $abn = '';     
+        }
         $date = date('Y-m-d');
         $dataAry = array(
 
             'szName' => $data['szName'],
-             'abn' => $data['abn'],
+            
+            'abn' => $abn,
             'szEmail' => $data['szEmail'],
             'szPassword' => encrypt($szNewPassword),
             'szContactNumber' => $data['szContactNumber'],
@@ -997,4 +1010,44 @@ class Admin_Model extends Error_Model
             }
             return false;
         }
-}?>
+        
+       
+   function validateAgentData($data, $arExclude=array(),$idAgent='0')
+  {
+        if (!empty($data)) {
+            if (!in_array('szBusinessName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szBusinessName'])),"szBusinessName","Business Name",true);
+           if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);
+            if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", true);
+            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Primary Email address", true);
+            if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Primary Phone Number", true);
+            if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
+            if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
+            if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
+            if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
+             if(!in_array('industry',$arExclude)) $this->set_industry(sanitize_all_html_input(trim($data['industry'])),true);
+          
+            if($this->error == false )
+            {
+                 if ($this->checkUserExists($data['szEmail'], $idAgent)) {
+                    $this->addError('szEmail', "Someone already registered with entered email address.");
+                    return false;
+                }
+                if ($this->checkBusinessNameExists($data['szBusinessName'],$idAgent,1)) {
+                  
+                    $this->addError('szBusinessName', "Business Name must be unique.");
+                    return false;
+                }
+                
+            }
+            
+           
+            if ($this->error == true)
+                return false;
+            else
+                return true;
+        }
+        return false;
+    
+  }
+        
+                }?>
