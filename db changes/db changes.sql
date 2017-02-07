@@ -95,3 +95,4 @@ ALTER TABLE `ds_user` ADD `abn` BIGINT(15) NOT NULL AFTER `szName`;
 ALTER TABLE `ds_user` CHANGE `abn` `abn` BIGINT(12) NOT NULL;
 ALTER TABLE `ds_orders` ADD `last_changed` DATETIME NOT NULL AFTER `createdon`;
 ALTER TABLE `ds_orders` ADD `dispatched_price` DECIMAL( 10, 2 ) NOT NULL AFTER `price`;
+ALTER TABLE `ds_orders` CHANGE `last_changed` `last_changed` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;

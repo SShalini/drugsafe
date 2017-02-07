@@ -384,7 +384,7 @@ if ($mode == '__ALLOT_QUANTITY_POPUP_CONFIRM__') {
                     </div>
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Quantity has been assigned successfully .
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Product quantities have been alloted successfully.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -1564,10 +1564,37 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     Order Date & Time:
                                 </div>
                                 <div class="col-md-7 value">
-                                    <?php echo $date['2']; ?> <?php echo $monthName; ?>  <?php echo $date['0']; ?>
-                                    at <?php echo $x; ?>
+                                    <?php echo date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon'])); ?>
                                 </div>
                             </div>
+                            <?php if ($OrdersDetailsAray['status'] == 2) { ?>
+                                <div class="row static-info">
+                                    <div class="col-md-5 name">
+                                        Dispatched Date & Time:
+                                    </div>
+                                    <div class="col-md-7 value">
+                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['dispatchedon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['dispatchedon'])); ?>
+                                    </div>
+                                </div>
+                            <?php }if ($OrdersDetailsAray['status'] == 3) {?>
+                                <div class="row static-info">
+                                    <div class="col-md-5 name">
+                                        Cancelled Date & Time:
+                                    </div>
+                                    <div class="col-md-7 value">
+                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon'])); ?>
+                                    </div>
+                                </div>
+                            <?php } if($OrdersDetailsAray['last_changed']){?>
+                                <div class="row static-info">
+                                    <div class="col-md-5 name">
+                                        Last updated Date & Time:
+                                    </div>
+                                    <div class="col-md-7 value">
+                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['last_changed'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['last_changed'])); ?>
+                                    </div>
+                                </div>
+                            <?php } ?>
                             <div class="row static-info">
                                 <div class="col-md-5 name">
                                     Order Status:
@@ -1928,13 +1955,13 @@ if($mode == '__PRODUCT_DISPATCHED_SUCCESSFULLY__'){
                     <button type="button" onclick="redirect_url('<?php echo __BASE_URL__; ?>/order/view_order_list');" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Order Dispatched</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Ordered Quantities Alloted</span></h4>
                     </div>
 
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Order dispatched successfully.
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Product quantities have been alloted successfully.
                     </p>
                 </div>
                 <div class="modal-footer">

@@ -241,7 +241,7 @@ class Order_Model extends Error_Model {
         {
           
             $whereAry = array('id=' => $orderId);
-            $this->db->select('createdon,franchiseeid,status,price,dispatched_price');
+            $this->db->select('createdon,franchiseeid,status,price,dispatched_price,last_changed,dispatchedon,canceledon');
             $this->db->from(__DBC_SCHEMATA_ORDER__);
             $this->db->where($whereAry);
             $query = $this->db->get();

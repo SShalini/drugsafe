@@ -95,19 +95,19 @@
             </li>
            <?php } ?>
             <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole']==5) { ?>
-                <li class="nav-item  <?php if ($pageName == 'Stock_Request') { ?> active open <?php } ?>">
-                    <a class="nav-link " href="<?php echo __BASE_URL__; ?>/stock_management/stockreqlist">
+                <!--<li class="nav-item  <?php /*if ($pageName == 'Stock_Request') { */?> active open <?php /*} */?>">
+                    <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/stock_management/stockreqlist">
                         <i class="fa fa-mail-forward" aria-hidden="true"></i>
-                        <span class="title">Stock Request</span>
+                        <span class="title">Stock Request</span>-->
                         <!-- BEGIN NOTIFICATION  -->
 
-                        <span class="badge badge-danger"><?php echo $notification; ?></span>
+                        <!--<span class="badge badge-danger"><?php /*echo $notification; */?></span>
 
-                    </a>
+                    </a>-->
                     <!-- END NOTIFICATION  -->
 
 
-                </li>
+<!--                </li>-->
                 <li class="nav-item start <?php if (trim($pageName) == 'Reporting') { ?>active open<?php } ?>">
                     <a href="javascript:void(0);" class="nav-link nav-toggle">
                         <i class="fa fa-list-alt" aria-hidden="true"></i>
@@ -115,14 +115,14 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
-                        <li class="nav-item  <?php if ($subpageName == 'All_Stock_Requests') { ?> active open <?php } ?>">
+                        <!--<li class="nav-item  <?php /*if ($subpageName == 'All_Stock_Requests') { */?> active open <?php /*} */?>">
                            <a class="nav-link nav-toggle"  onclick="viewstockreqlistData('1');" href="javascript:void(0);">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">All Stock Requests</span>
                             </a>
                         </li>
 
-                        <li class="nav-item  <?php if ($subpageName == 'Stock_Assignments') { ?> active open <?php } ?>">
+                        <li class="nav-item  <?php /*if ($subpageName == 'Stock_Assignments') { */?> active open <?php /*} */?>">
                            <a class="nav-link nav-toggle"  onclick="viewStockAssignList('1');" href="javascript:void(0);">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Stock Assignments</span>
@@ -133,7 +133,7 @@
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Inventory Report</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="nav-item  <?php if ($subpageName == 'Orders_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/view_order_report">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
@@ -165,14 +165,14 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
-                        <li class="nav-item  <?php if ($subpageName == 'Franchisee_Stock_Requests') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frstockreqlist">
+                        <!--<li class="nav-item  <?php /*if ($subpageName == 'Franchisee_Stock_Requests') { */?> active open <?php /*} */?>">
+                            <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/reporting/frstockreqlist">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title"> Stock Requests</span>
                             </a>
                         </li>
 
-                        <li class="nav-item  <?php if ($subpageName == 'Franchisee_Stock_Assignments') { ?> active open <?php } ?>">
+                        <li class="nav-item  <?php /*if ($subpageName == 'Franchisee_Stock_Assignments') { */?> active open <?php /*} */?>">
                              <a class="nav-link nav-toggle"  onclick="viewFrStockAssignList('1');" href="javascript:void(0);">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Stock Assignments</span>
@@ -183,7 +183,7 @@
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Inventory Report</span>
                             </a>
-                        </li>
+                        </li>-->
                   
                     </ul>
 
