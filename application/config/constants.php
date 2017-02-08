@@ -91,6 +91,7 @@ define("__DBC_SCHEMATA_FORUM_COMMENTS__", "fo_cmnt");
 define("__DBC_SCHEMATA_FORUM_REPLY__", "fo_reply");
 define("__DBC_SCHEMATA_FORUM_DATA__", "fo_data");
 define( "__DBC_SCHEMATA_CLIENT__", "tbl_client");
+define( "__DBC_SCHEMATA_INDUSTRIES__", "ds_industries");
 define( "__DBC_SCHEMATA_PRODUCT__", "tbl_product");
 define( "__DBC_SCHEMATA_MANUAL_CAL__", "tbl_manual_calc");
 define( "__DBC_SCHEMATA_PRODUCT_CATEGORY__", "tbl_product_category");

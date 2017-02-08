@@ -792,7 +792,7 @@ class Admin_Model extends Error_Model
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
             if(!in_array('franchiseeId',$arExclude)) $this->set_franchiseeId(sanitize_all_html_input(trim($data['franchiseeId'])),true);
             if(!in_array('operationManagerId',$arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])),true);
-            if(!in_array('szNoOfSites',$arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])),true);
+             if(!in_array('szNoOfSites',$arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])),true);
              if(!in_array('industry',$arExclude)) $this->set_industry(sanitize_all_html_input(trim($data['industry'])),true);
           
             if($this->error == false )
@@ -1049,5 +1049,16 @@ class Admin_Model extends Error_Model
         return false;
     
   }
-        
+        public function viewAllIndustryList()
+    {
+        $this->db->select('id,szName');
+        $query = $this->db->get(__DBC_SCHEMATA_INDUSTRIES__);
+
+        if ($query->num_rows() > 0) {
+           return $query->result_array();
+          
+        } else {
+           return array();
+        }
+   } 
                 }?>
