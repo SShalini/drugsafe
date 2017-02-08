@@ -95,7 +95,7 @@
                                                 <?php
                                                 foreach ($validOrdersDetailsSearchAray as $validOrdersDetailsSearchList) {
                                                     $selected = ($validOrdersDetailsSearchList['orderid'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                                    echo '<option value="' . $validOrdersDetailsSearchList['orderid'] . '" ' . $selected . ' >#' . sprintf('%08d', $validOrdersDetailsSearchList['orderid']) . '</option>';
+                                                    echo '<option value="' . $validOrdersDetailsSearchList['orderid'] . '" ' . $selected . ' >#' . sprintf(__FORMAT_NUMBER__, $validOrdersDetailsSearchList['orderid']) . '</option>';
                                                 }
                                                 ?>
                                             </select>
@@ -272,7 +272,7 @@
                                                             at <?php echo $x; ?>
                                                         </td>
                                                         <td>
-                                                            #<?php echo sprintf('%08d', $validOrdersDetailsData['orderid']); ?>
+                                                            #<?php echo sprintf(__FORMAT_NUMBER__, $validOrdersDetailsData['orderid']); ?>
                                                         </td>
                                                         <td>
                                                             <?php echo $validOrdersDetailsData['totalproducts']; ?>

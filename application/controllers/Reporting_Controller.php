@@ -1631,7 +1631,7 @@ function excelfr_stockassignlist_Data()
                                             <td> ' . $i . ' </td>
                                             <td> ' . $franchiseeDetArr1['szName'] . '</td>
                                             <td> ' . date('d M Y',strtotime($reqOrderData['createdon'])) . ' at '.date('h:i A',strtotime($reqOrderData['createdon'])).' </td>
-                                            <td>#' . sprintf('%08d', $reqOrderData['orderid']) . ' </td>
+                                            <td>#' . sprintf(__FORMAT_NUMBER__, $reqOrderData['orderid']) . ' </td>
                                                <td>' . $reqOrderData['totalproducts'] . ' </td>
                                             <td>$' . ($reqOrderData['price']>0?$reqOrderData['price']:'0.00') . ' </td>
                                                <td>' . (!empty($reqOrderData['XeroIDnumber'])?$reqOrderData['XeroIDnumber']:'N/A'). ' </td>
@@ -1725,7 +1725,7 @@ function excelfr_stockassignlist_Data()
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeDetArr1['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, date('d M Y',strtotime($item['createdon'])) . ' at '.date('h:i A',strtotime($item['createdon'])));
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, '#'.sprintf('%08d', $item['orderid']));
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, '#'.sprintf(__FORMAT_NUMBER__, $item['orderid']));
                 $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['totalproducts']);
                 $this->excel->getActiveSheet()->setCellValue('F'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
                 $this->excel->getActiveSheet()->setCellValue('G'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
