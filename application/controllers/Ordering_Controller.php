@@ -18,7 +18,7 @@ class Ordering_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->model('Webservices_Model');
         $this->load->library('pagination');
-test;
+
     }
 
     function viewcalform()
