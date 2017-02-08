@@ -593,7 +593,7 @@
                                     }
                                     ?>
                                     
-                                    <th> No. of sites</th>
+                                    <th> No. of agent</th>
                                     <th> Contact No.</th>
                                     <th> Created By</th>
                                     <th> Updated By</th>
@@ -625,8 +625,8 @@
                                        
                                         <td>
                                             <?php
-                                                $childClientDetailsAray =$this->Franchisee_Model->viewChildClientDetails($clientData['id']);
-                                                echo count($childClientDetailsAray);
+                                                $agentSearchDetailsAray = $this->Franchisee_Model->viewAgentDetails($clientData['id']);
+                                                echo count($agentSearchDetailsAray);
                                             ?>
                                             
 
