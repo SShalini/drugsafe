@@ -118,6 +118,7 @@
                     <?php
                     if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
                     {
+                        
                     if (!empty($allfranchisee)) {
                         
                       
@@ -161,15 +162,17 @@
 						$i = 1;
 						foreach($allfranchisee as $allfranchiseeData)
 						{
+                                                    
                                                     $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData);
                                                     
-						    $getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
+						    //$getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
+                                                     $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData);
                                                     $id=array();
                                                     foreach($getClientDeatils as $getClientData)
                                                     {   
-                                                        array_push($id, $getClientData['id']);
+                                                        array_push($id, $getClientData['clientId']);
                                                     }
-													
+							                      						
                                                     $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
                                                     $sosId=array();
                                                     foreach($getSosDetails as $getSosData)

@@ -1790,11 +1790,12 @@ function excelfr_stockassignlist_Data()
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         $searchAry['szFranchisee'] = $this->session->userdata('szFranchisee');
-        $getClientDeatils=$this->Webservices_Model->getclientdetails($searchAry['szFranchisee']);
+         $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$searchAry['szFranchisee']);
+        //$getClientDeatils=$this->Webservices_Model->getclientdetails($searchAry['szFranchisee']);
         $id=array();
         foreach($getClientDeatils as $getClientData)
         {   
-            array_push($id, $getClientData['id']);
+            array_push($id, $getClientData['clientId']);
         }
         $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
         $sosId=array();
@@ -1968,11 +1969,13 @@ function excelfr_stockassignlist_Data()
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         $searchAry['szFranchisee'] = $this->session->userdata('szFranchisee');
-        $getClientDeatils=$this->Webservices_Model->getclientdetails($searchAry['szFranchisee']);
+        //$getClientDeatils=$this->Webservices_Model->getclientdetails($searchAry['szFranchisee']);
+        
+        $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$searchAry['szFranchisee']);
         $id=array();
         foreach($getClientDeatils as $getClientData)
         {   
-            array_push($id, $getClientData['id']);
+            array_push($id, $getClientData['clientId']);
         }
         $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
         $sosId=array();
@@ -2082,11 +2085,13 @@ function excelfr_stockassignlist_Data()
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szFranchisee']!='')
         {
             $searchAry =$_POST; 
-            $getClientDeatils=$this->Webservices_Model->getclientdetails($_POST['szFranchisee']);
+            //$getClientDeatils=$this->Webservices_Model->getclientdetails($_POST['szFranchisee']);
+            $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $_POST['szFranchisee']);
+            
             $id=array();
             foreach($getClientDeatils as $getClientData)
             {   
-                array_push($id, $getClientData['id']);
+                array_push($id, $getClientData['clientId']);
             }
             $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
             $sosId=array();
@@ -2154,11 +2159,12 @@ function excelfr_stockassignlist_Data()
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $idfranchisee!='')
         {
             $searchAry =$_POST; 
-            $getClientDeatils=$this->Webservices_Model->getclientdetails($idfranchisee);
+            
+            $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $idfranchisee);
             $id=array();
             foreach($getClientDeatils as $getClientData)
             {   
-                array_push($id, $getClientData['id']);
+                array_push($id, $getClientData['clientId']);
             }
             $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
             $sosId=array();
@@ -2180,7 +2186,7 @@ function excelfr_stockassignlist_Data()
             $data['subpageName'] = "revenue_generate";
             $data['notification'] = $count;
             $data['data'] = $data;
-			$data['idfranchisee'] =$idfranchisee;
+	     $data['idfranchisee'] =$idfranchisee;
             $data['allfranchisee'] = $searchOptionArr;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
             //$data['drugtestkitlist'] = $drugTestKitListAray;
@@ -2224,12 +2230,14 @@ function excelfr_stockassignlist_Data()
         {
             $searchAry =$_POST; 
             $getSosDetails=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
+            
             $franchiseeId=array();
             foreach($getSosDetails as $getSosData)
             {   
                 array_push($franchiseeId, $getSosData['franchiseeId']);
             }
             $franchiseeId = array_unique($franchiseeId);
+            
         }
 	
        
@@ -2294,9 +2302,9 @@ function excelfr_stockassignlist_Data()
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetTitle('Drug-safe Revenue Generate');
+        $pdf->SetTitle('Drug-safe Revenue Summery');
         $pdf->SetAuthor('Drug-safe');
-        $pdf->SetSubject('Revenue Generate PDF');
+        $pdf->SetSubject('Revenue Summery PDF');
         $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
         $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 // set image scale factor
@@ -2344,11 +2352,12 @@ function excelfr_stockassignlist_Data()
             foreach ($allfranchisee as $allfranchiseeData) {
                  $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData);
                                                     
-						    $getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
+						    //$getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
+                                                    $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData);
                                                     $id=array();
                                                     foreach($getClientDeatils as $getClientData)
                                                     {   
-                                                        array_push($id, $getClientData['id']);
+                                                        array_push($id, $getClientData['clientId']);
                                                     }
 													
                                                     $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
@@ -2447,7 +2456,7 @@ function excelfr_stockassignlist_Data()
     {
         $this->load->library('excel');
         $filename = 'DrugSafe';
-        $title = 'Revenue Generate';
+        $title = 'Revenue Summery';
         $file = $filename . '-' . $title ; //save our workbook as this file name
 
 
@@ -2498,11 +2507,11 @@ function excelfr_stockassignlist_Data()
             foreach ($allfranchisee as $allfranchiseeData) {
                  $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData);
                                                     
-						    $getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
+						   $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData);
                                                     $id=array();
                                                     foreach($getClientDeatils as $getClientData)
                                                     {   
-                                                        array_push($id, $getClientData['id']);
+                                                        array_push($id, $getClientData['clientId']);
                                                     }
 													
                                                     $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);

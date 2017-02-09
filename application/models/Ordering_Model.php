@@ -72,7 +72,7 @@ class Ordering_Model extends Error_Model {
            $this->db->limit($limit, $offset);
            $query = $this->db->get();
                 
-       
+        
         
        
             if($query->num_rows() > 0)
