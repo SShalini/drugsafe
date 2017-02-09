@@ -795,6 +795,24 @@ class Order_Model extends Error_Model {
             return false;
         }
     }
-
+        public function getManualCalcStartToEndDate($searchAry=array(),$sosId)
+        {
+            $dtStart = $this->getSqlFormattedDate($searchAry['dtStart']);
+            $dtEnd = $this->getSqlFormattedDate($searchAry['dtEnd']);
+            $this->db->where_in('sosid', $sosId);
+            $this->db->from(__DBC_SCHEMATA_MANUAL_CAL__);
+            $this->db->where('dtCreatedOn >=', $dtStart);
+            $this->db->where('dtCreatedOn <=', $dtEnd);
+            $query = $this->db->get();
+            //echo $sql = $this->db->last_query(); die();
+            if ($query->num_rows() > 0) 
+            {
+                return $query->result_array();
+            }
+            else 
+            {
+                return array();
+            }
+        } 
    }
 ?>

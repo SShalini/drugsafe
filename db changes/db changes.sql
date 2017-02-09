@@ -96,3 +96,10 @@ ALTER TABLE `ds_user` CHANGE `abn` `abn` BIGINT(12) NOT NULL;
 ALTER TABLE `ds_orders` ADD `last_changed` DATETIME NOT NULL AFTER `createdon`;
 ALTER TABLE `ds_orders` ADD `dispatched_price` DECIMAL( 10, 2 ) NOT NULL AFTER `price`;
 ALTER TABLE `ds_orders` CHANGE `last_changed` `last_changed` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+/*Shalni*/
+ALTER TABLE `tbl_client` ADD `agentId` INT(11) NOT NULL AFTER `clientId`;
+
+/* swapnil changes 08-02-2017*/
+ALTER TABLE `tbl_manual_calc` ADD `dtCreatedOn` DATE NOT NULL AFTER `cancelfee`;
+ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;

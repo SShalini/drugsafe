@@ -8,12 +8,19 @@ class Order_Controller extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('Error_Model');
+        
         $this->load->model('Order_Model');
+        $this->load->model('StockMgt_Model');
+        $this->load->library('pagination');
+        $this->load->model('Ordering_Model');
+        $this->load->model('Forum_Model');
+        $this->load->model('Error_Model');
         $this->load->model('Admin_Model');
         $this->load->model('Franchisee_Model');
         $this->load->model('Inventory_Model');
+        $this->load->model('Form_Management_Model');
         $this->load->model('StockMgt_Model');
+        $this->load->model('Webservices_Model');
         $this->load->library('pagination');
 
 
@@ -764,5 +771,10 @@ class Order_Controller extends CI_Controller
 
         }
     }
+    
+    
+	
+	
+    
 }
 ?>

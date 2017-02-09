@@ -125,5 +125,47 @@ class Form_Management_Model extends Error_Model {
             return array();
         }
     } 
+    public function getsosFormDetailsByMultipleClientId($id)
+    {
+        $whereAry = array('Status'=>'1');
+        
+        $this->db->where_in('Clientid', $id);
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_SOS_FORM__);
+        $this->db->where($whereAry); 
+        $query = $this->db->get();
+       $sql = $this->db->last_query($query);
+      
+        if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+                return $row;
+        } else {
+            return array();
+        }
+    } 
+    public function getAllsosFormDetails($searchAry=array())
+    {
+        
+        $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+        $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_SOS_FORM__,'tbl_client');
+        $this->db->join('ds_sos', 'tbl_manual_calc.sosid = ds_sos.id');
+        $this->db->join('tbl_client', 'ds_sos.Clientid = tbl_client.clientId');
+        $this->db->where('dtCreatedOn >=', $dtStart);
+        $this->db->where('dtCreatedOn <=', $dtEnd);
+        $this->db->where('clientType','0');
+        //$this->db->where('status', '1');
+        $query = $this->db->get();
+        // echo $sql = $this->db->last_query(); die();
+
+        if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+                return $row;
+        } else {
+            return array();
+        
+        }
+    } 
 }
 ?>

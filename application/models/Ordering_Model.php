@@ -8,6 +8,7 @@ class Ordering_Model extends Error_Model {
         
            $travel = $data['travelHr']*$data['travelBasePrice'];
            $mobileScreen = $data['mobileScreenBasePrice']*$data['mobileScreenHr'];
+           $dtCreatedOn=date("Y-m-d");
             
             $dataAry = array(
                                 'sosid' => $data['sosid'],
@@ -29,7 +30,8 @@ class Ordering_Model extends Error_Model {
                 'cobp' => $data['CallOutBasePrice'],
                 'cohr' => $data['CallOutHr'],
                 'labconf' => $data['laboratoryConfirmation'],
-                'cancelfee' => $data['cancellationFee']
+                'cancelfee' => $data['cancellationFee'],
+                'dtCreatedOn' => $dtCreatedOn
           
                             );
 	$query=    $this->db->insert(__DBC_SCHEMATA_MANUAL_CAL__, $dataAry);
@@ -84,6 +86,7 @@ class Ordering_Model extends Error_Model {
         } 
         public function getManualCalculationBySosId($sisId = 0)
         {
+           
             $whereAry = array('sosid' => $this->sql_real_escape_string(trim($sisId)));
             $this->db->select('*');
             $this->db->where($whereAry);
@@ -102,6 +105,7 @@ class Ordering_Model extends Error_Model {
    }
    function updateCalulatedData($data,$manualCalId)
     {	
+       $dtUpdatedOn=date('Y-m-d');
         $dataAry = array(
                           
                                  'sosid' => $data['sosid'],
@@ -123,7 +127,9 @@ class Ordering_Model extends Error_Model {
                 'cobp' => $data['cobp'],
                 'cohr' => $data['cohr'],
                 'labconf' => $data['labconf'],
-                'cancelfee' => $data['cancelfee']
+                'cancelfee' => $data['cancelfee'],
+                'dtUpdatedOn' => $dtUpdatedOn
+                
                    );
 	$this->db->where('id',(int)$manualCalId);
         $queyUpdate=$this->db->update(__DBC_SCHEMATA_MANUAL_CAL__, $dataAry);

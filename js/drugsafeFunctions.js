@@ -1709,3 +1709,37 @@ function ViewexcelOrderReport(szSearch1,szSearch2,szSearch4,szSearch5) {
 
     });
 }
+function ViewpdfRevenueGenerate(dtStart,dtEnd,szFranchisee) {
+    $.post(__BASE_URL__ + "/reporting/ViewpdfofRevenueGenerate", {dtStart : dtStart,dtEnd: dtEnd,szFranchisee: szFranchisee}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ViewexcelRevenueGenerate(dtStart,dtEnd,szFranchisee) {
+    $.post(__BASE_URL__ + "/reporting/ViewexcelofRevenueGenerate", {dtStart : dtStart,dtEnd: dtEnd,szFranchisee: szFranchisee}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+
+    });
+}
+function ViewpdfRevenueSummery(dtStart,dtEnd) {
+    $.post(__BASE_URL__ + "/reporting/ViewpdfofRevenueSummery", {dtStart : dtStart,dtEnd: dtEnd}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ViewexcelRevenueSummery(dtStart,dtEnd) {
+    $.post(__BASE_URL__ + "/reporting/ViewexcelofRevenueSummery", {dtStart : dtStart,dtEnd: dtEnd}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+
+    });
+}

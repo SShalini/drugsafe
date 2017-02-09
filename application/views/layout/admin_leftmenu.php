@@ -140,6 +140,18 @@
                                 <span class="title">Orders Report</span>
                             </a>
                         </li>
+                        <li class="nav-item  <?php if ($subpageName == 'revenue_generate') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_generate">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Revenue Generate</span>
+                            </a>
+                        </li>
+                         <li class="nav-item  <?php if ($subpageName == 'revenue_summery') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Revenue Summery</span>
+                            </a>
+                        </li>
 <!--                         <li class="nav-item  <?php if ($subpageName == 'View_Order_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/viewOrderReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
@@ -165,25 +177,12 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
-                        <!--<li class="nav-item  <?php /*if ($subpageName == 'Franchisee_Stock_Requests') { */?> active open <?php /*} */?>">
-                            <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/reporting/frstockreqlist">
+                        <li class="nav-item  <?php if ($subpageName == 'revenue_generate') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/franchisee_revenue_generate">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
-                                <span class="title"> Stock Requests</span>
+                                <span class="title">Revenue Generate</span>
                             </a>
                         </li>
-
-                        <li class="nav-item  <?php /*if ($subpageName == 'Franchisee_Stock_Assignments') { */?> active open <?php /*} */?>">
-                             <a class="nav-link nav-toggle"  onclick="viewFrStockAssignList('1');" href="javascript:void(0);">
-                                <i class="fa fa-ge" aria-hidden="true"></i>
-                                <span class="title">Stock Assignments</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frInventoryReport">
-                                <i class="fa fa-ge" aria-hidden="true"></i>
-                                <span class="title">Inventory Report</span>
-                            </a>
-                        </li>-->
                   
                     </ul>
 

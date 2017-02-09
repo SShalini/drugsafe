@@ -8,6 +8,9 @@ class Ordering_Controller extends CI_Controller
     {
         parent::__construct();
 
+        $this->load->model('Order_Model');
+        $this->load->model('StockMgt_Model');
+        $this->load->library('pagination');
         $this->load->model('Ordering_Model');
         $this->load->model('Forum_Model');
         $this->load->model('Error_Model');
@@ -473,7 +476,8 @@ class Ordering_Controller extends CI_Controller
 </table>
 <br />
 <h2 style="text-align: center">Proforma Invoice</h2>
-<br />
+<p style="text-align: center">Invoice id: #'.sprintf(__FORMAT_NUMBER__, $data['id']).'</p>
+<br>
 <table cellpadding="5px">
     <tr>
         <td width="350" align="left"><b>Business Name:</b> '.$clientDataArr[0]['szName'].'</td><td width="350" align="left"><b>Company Name:</b> '.$siteDataArr[0]['szName'].'</td>
