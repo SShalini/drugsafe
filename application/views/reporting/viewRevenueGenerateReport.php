@@ -162,9 +162,9 @@
                         </div>
                     </div>
                     <?php
+                    if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
+                    {
                     if (!empty($getManualCalcStartToEndDate)) {
-                        
-                       
                     ?>
                     <div class="portlet-body alert">
                         <div class="row">
@@ -315,6 +315,7 @@
                 {
                     echo "<h4>No record found</h4>";
                 }
+                    }
                 ?>
 
             </div>

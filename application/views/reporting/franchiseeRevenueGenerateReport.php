@@ -131,6 +131,8 @@
                         </div>
                     </div>
                     <?php
+                    if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
+                    {
                     if (!empty($getManualCalcStartToEndDate)) {
                         
                        
@@ -284,6 +286,7 @@
                 {
                     echo "<h4>No record found</h4>";
                 }
+                    }
                 ?>
 
             </div>

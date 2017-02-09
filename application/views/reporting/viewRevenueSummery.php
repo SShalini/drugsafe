@@ -116,6 +116,8 @@
                         </div>
                     </div>
                     <?php
+                    if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
+                    {
                     if (!empty($allfranchisee)) {
                         
                       
@@ -264,6 +266,7 @@
                 {
                     echo "<h4>No record found</h4>";
                 }
+                    }
                 ?>
 
             </div>
