@@ -689,7 +689,7 @@
                                             </a>
                                              <?php
                                              if($_SESSION['drugsafe_user']['iRole'] == '2'){
-                                                 if(empty($childClientDetailsAray)) {
+                                                 if(empty($agentSearchDetailsAray)) {
                                              ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="Delete Client"

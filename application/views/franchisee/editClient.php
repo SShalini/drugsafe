@@ -195,21 +195,18 @@
                                             <select class="form-control " name="clientData[industry]" id="industry"
                                                     Placeholder="Industry" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
-
-                                                <option value="Agriculture, Forestry and Fishing" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Agriculture, Forestry and Fishing") ? "selected" : ""); ?>>Agriculture, Forestry and Fishing </option>
-                                                <option value="Mining" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Mining") ? "selected" : ""); ?>>Mining </option>
-                                                <option value="Manufacturing" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Manufacturing") ? "selected" : ""); ?>>Manufacturing </option>
-                                                <option value="Electricity, Gas and Water Supply" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Electricity, Gas and Water Supply") ? "selected" : ""); ?>>Electricity, Gas and Water Supply </option>
-                                                <option value="Construction" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Construction") ? "selected" : ""); ?> >Construction</option>
-                                                <option value="Wholesale Trade" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Wholesale Trade") ? "selected" : ""); ?>>Wholesale Trade </option>
-                                                <option value="Transport and Storage " <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Transport and Storage ") ? "selected" : ""); ?>>Transport and Storage </option>
-                                                <option value="Communication Services" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Communication Services") ? "selected" : ""); ?>>Communication Services </option>
-                                                <option value="Property and Business Services" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Property and Business Services") ? "selected" : ""); ?>>Property and Business Services </option>
-                                                <option value="Government Administration and Defence" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Government Administration and Defence") ? "selected" : ""); ?>>Government Administration and Defence</option>
-                                                <option value="Education" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Education") ? "selected" : ""); ?>>Education  </option>
-                                                <option value="Health and Community Services" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Health and Community Services") ? "selected" : ""); ?>>Health and Community Services </option>
-                                                 <option value="Other" <?php echo (sanitize_post_field_value($_POST['clientData']['industry']) == trim("Other") ? "selected" : ""); ?>>Other</option>
-
+                                                  <?php
+                                                      
+                                                       $industryListArr =$this->Admin_Model->viewAllIndustryList();
+                                                        if (!empty($industryListArr)) {
+                                                            foreach ($industryListArr as $industryList) { echo $industryList;
+                                                                ?>
+                                                                <option
+                                                                    value="<?php echo $industryList['id'];?>" <?php echo(sanitize_post_field_value($_POST['clientData']['industry']) == trim($industryList['id']) ? "selected" : ""); ?>><?php echo trim($industryList['szName']); ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
                                             </select>
                                         </div>
                                         <?php if (!empty($arErrorMessages['industry'])) { ?>

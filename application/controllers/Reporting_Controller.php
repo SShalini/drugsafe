@@ -1027,7 +1027,7 @@ function excelfr_stockassignlist_Data()
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-       public function inventoryReport()
+      public function inventoryReport()
     {
 
         $is_user_login = is_user_login($this);
@@ -1400,7 +1400,7 @@ function excelfr_stockassignlist_Data()
             
                 $this->session->set_userdata('franchiseeId',$franchiseeId);
                 $this->session->set_userdata('productCode',$productCode);
-                $productCode = $this->input->post('productCode');
+                $this->session->set_userdata('prodCategory',$prodCategory);
                
                 
                 echo "SUCCESS||||";
@@ -1488,7 +1488,7 @@ function excelfr_stockassignlist_Data()
             
                 $this->session->set_userdata('franchiseeId',$franchiseeId);
                 $this->session->set_userdata('productCode',$productCode);
-                $productCode = $this->input->post('productCode');
+                 $this->session->set_userdata('prodCategory',$prodCategory);
                 
                 echo "SUCCESS||||";
                 echo "ViewexcelInventoryReport";
@@ -2589,6 +2589,88 @@ function excelfr_stockassignlist_Data()
         $objWriter->save('php://output');
     }    
     
+      public function clientcomparisonReport()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        
+         $searchAry = $_POST;
+        
+                    $data['szMetaTagTitle'] = "Client Comparison Report";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Client_Comparison_Report";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('reporting/clientCmpReport');
+            $this->load->view('layout/admin_footer'); 
+               
+    }
+      function getClientListByFrId($idFranchisee='')
+ 	{ 
+            if(trim($idFranchisee) != '')
+            {
+                $_POST['idFranchisee'] = $idFranchisee; 
+            }
+            
+            $clientAry = $this->Franchisee_Model->viewClientList(true,$_POST['idFranchisee']);
+         
+            
+      	if(!empty($clientAry))
+     	{
+          $Product = "Client Name";
+        	$result = "<select class=\"form-control required\" id=\"szSearch2\" name=\"szSearch2\" placeholder=\"Client Name\" value=\"\" onfocus=\"remove_formError(this.id,'true')\" onchange=\"getSiteListByClientIdData(this.value,'true')\">";
+               
+              $result .= "<option value=''>".$Product ."</option>";
+          	foreach ($clientAry as $clientDetails)
+          	{
+             	$result .= "<option value='".$clientDetails['id']."'>".$clientDetails['szName']."</option>";
+         	}
+         	$result .= "</select>";
+     	}
+     	else
+     	{
+     		$result = "<input type=\"text\" class=\"form-control required\" id=\"szSearch2\" name=\"szSearch2\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\" onchange=\"getSiteListByClientIdData(this.value,'true')\">";
+     	}
+      	echo $result;           
+  	}
+         function getSiteListByClientId($idClient='')
+ 	{ 
+            if(trim($idClient) != '')
+            {
+                $_POST['idClient'] = $idClient; 
+            }
+            
+            $siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['idClient']);
+        
+            
+      	if(!empty($siteAry))
+     	{
+          $Product = "Company Name/site";
+        	$result = "<select class=\"form-control required\" id=\"szSearch3\" name=\"szSearch3\" placeholder=\"Company Name/site\" onfocus=\"remove_formError(this.id,'true')\">";
+               
+              $result .= "<option value=''>".$Product ."</option>";
+          	foreach ($siteAry as $siteDetails)
+          	{
+             	$result .= "<option value='".$siteDetails['id']."'>".$siteDetails['szName']."</option>";
+         	}
+         	$result .= "</select>";
+     	}
+     	else
+     	{
+     		$result = "<input type=\"text\" class=\"form-control required\" id=\"szSearch2\" name=\"szSearch3\" placeholder=\"Company Name/site\" onfocus=\"remove_formError(this.id,'true')\">";
+     	}
+      	echo $result;           
+  	} 
 
 }
 ?>

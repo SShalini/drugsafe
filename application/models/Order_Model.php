@@ -567,7 +567,8 @@ class Order_Model extends Error_Model {
     }
     public function getallValidPendingOrderDetails($searchAry=array())
     {
-         $searchQuery = "validorder LIKE '%1%' AND status != '3' AND dispatched LIKE '%0%' ";
+       
+        $searchQuery = 'validorder = 1 AND status != 3 AND status !=2'  ;
          if(!empty($searchAry))
         {
             
@@ -604,7 +605,7 @@ class Order_Model extends Error_Model {
         }
         $this->db->where($searchQuery);
         $this->db->distinct();
-       $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
+        $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
         $this->db->order_by("orderid", "desc");
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
@@ -727,7 +728,7 @@ class Order_Model extends Error_Model {
         }
          public function getValidPendingOdrDetailsForPdf($franchiseeid,$productCode='',$prodCategory='')
         {
-
+ 
           if(!empty($prodCategory)){
                $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
             }
@@ -739,6 +740,7 @@ class Order_Model extends Error_Model {
                 $searchq = "szProductCategory LIKE '%$prodCategory%' AND productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
              
             }
+           
             $this->db->where($searchq);
            $this->db->distinct();
            $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
@@ -748,6 +750,8 @@ class Order_Model extends Error_Model {
            $this->db->join('tbl_product', 'ds_order_details.productid = tbl_product.id');  
             
             $query = $this->db->get();
+//          $sql = $this->db->last_query($query);
+//         print_r($sql);die;
             if($query->num_rows() > 0)
             {
                 return $query->result_array();

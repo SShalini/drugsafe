@@ -134,6 +134,13 @@
                                 <span class="title">Inventory Report</span>
                             </a>
                         </li>-->
+                        
+                         <li class="nav-item  <?php if ($subpageName == 'Client_Comparison_Report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/clientcomparisonReport">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Client Comparison Report</span>
+                            </a>
+                        </li>
                         <li class="nav-item  <?php if ($subpageName == 'Orders_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/view_order_report">
                                 <i class="fa fa-ge" aria-hidden="true"></i>

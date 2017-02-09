@@ -160,8 +160,6 @@ class Admin_Model extends Error_Model
     }
     }
 
-   
-
     public function adminLoginUser($validate)
     {
         $whereAry = array('szEmail' => $validate['szEmail'], 'szPassword' => encrypt($validate['szPassword']),'isDeleted=' => '0','iActive=' => '1');
@@ -779,7 +777,7 @@ class Admin_Model extends Error_Model
   {
         if (!empty($data)) {
             if (!in_array('szBusinessName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szBusinessName'])),"szBusinessName","Business Name",true);
-           if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);
+            if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", true);
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Primary Email address", true);
             if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Primary Phone Number", true);
@@ -1061,4 +1059,6 @@ class Admin_Model extends Error_Model
            return array();
         }
    } 
-                }?>
+            
+  
+        }?>

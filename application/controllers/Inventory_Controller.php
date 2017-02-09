@@ -113,7 +113,7 @@ class Inventory_Controller extends CI_Controller {
                 }
             }
         }
-       public function addConsumables() {
+        public function addConsumables() {
            $count = $this->Admin_Model->getnotification();
            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);

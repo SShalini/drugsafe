@@ -160,7 +160,10 @@
                                           In Stock  
                                     </th>
                                     <th>
-                                         Requested
+                                         Requested 
+                                    </th>
+                                    <th>
+                                         Alloted
                                     </th>
                                   
                             </thead>
@@ -181,7 +184,9 @@
                                     </td>
                                     <td>  <?php echo $validPendingOrdersDetailsData['szAvailableQuantity'] ;?> </td>
                                      <td>  <?php echo $validPendingOrdersDetailsData['quantity'] ;?> </td>
-                                    
+                                     <td>
+                                         <?php echo $validPendingOrdersDetailsData['dispatched'];?> 
+                                    </td>
 
                                 </tr>
                               <?php

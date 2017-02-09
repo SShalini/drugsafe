@@ -1743,3 +1743,17 @@ function ViewexcelRevenueSummery(dtStart,dtEnd) {
 
     });
 }
+function getClientListByFrIdData(idFranchisee) {
+    $.post(__BASE_URL__ + "/reporting/getClientListByFrId", {idFranchisee: idFranchisee}, function (result) {
+        if (result != '') {
+            $("#szSearch2").html(result);
+        }
+    });
+}
+function getSiteListByClientIdData(idClient) {
+    $.post(__BASE_URL__ + "/reporting/getSiteListByClientId", {idClient: idClient}, function (result) {
+        if (result != '') {
+            $("#szSearch3").html(result);
+        }
+    });
+}
