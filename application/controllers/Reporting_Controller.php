@@ -1833,6 +1833,8 @@ function excelfr_stockassignlist_Data()
             foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
                 $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                 $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+                $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
+                $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
                 $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
                 if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
                     $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
@@ -1873,7 +1875,7 @@ function excelfr_stockassignlist_Data()
                             <td> #' . sprintf(__FORMAT_NUMBER__, $getManualCalcData['id']) . '</td>
                             <td> ' . date("d-m-Y", strtotime($getManualCalcData['dtCreatedOn'])).' </td>
                             <td>CL-' . $getClientDetails['id'] . ' </td>
-                            <td>' . $getClientDetails['szName'] . ' </td>
+                            <td>' . $userDataAry['szName'] . ' </td>
                             <td>$' . number_format($ValTotal, 2, '.', ',') . ' </td>
                             <td>$' .$Royaltyfees. ' </td>
                             <td>$'.$NetTotal.'</td>
@@ -1998,6 +2000,8 @@ function excelfr_stockassignlist_Data()
             foreach($getManualCalcStartToEndDate as $getManualCalcData){
                 $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                 $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+                $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
+                $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
                 $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
                 if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
                     $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
@@ -2036,7 +2040,7 @@ function excelfr_stockassignlist_Data()
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, '#'.sprintf(__FORMAT_NUMBER__, $getManualCalcData['id']));
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, date("d-m-Y", strtotime($getManualCalcData['dtCreatedOn'])));
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, 'Cl-'.$getClientDetails['id']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i,$getClientDetails['szName']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i,$userDataAry['szName']);
                 $this->excel->getActiveSheet()->setCellValue('F'.$i,'$'.number_format($ValTotal, 2, '.', ','));
                 $this->excel->getActiveSheet()->setCellValue('G'.$i,'$'.$Royaltyfees);
                 $this->excel->getActiveSheet()->setCellValue('H'.$i,'$'.$NetTotal);

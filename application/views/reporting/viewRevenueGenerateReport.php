@@ -218,6 +218,8 @@
                                                 foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
                                                     $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                                                     $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+                                                    $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
+                                                    $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
                                                     $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
                                                     if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
                                                          $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
@@ -260,7 +262,7 @@
                                                            
                                                         </td>
                                                         <td>
-                                                            <?php echo $getClientDetails['szName'];?>
+                                                            <?php echo $userDataAry['szName'] ?>
                                                         </td>
                                                         <td>
                                                          $<?php  echo number_format($ValTotal, 2, '.', ','); ?>
