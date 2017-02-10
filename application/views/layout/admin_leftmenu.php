@@ -128,12 +128,13 @@
                                 <span class="title">Stock Assignments</span>
                             </a>
                         </li>
+						-->
                         <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/inventoryReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Inventory Report</span>
                             </a>
-                        </li>-->
+                        </li>
                         
                          <li class="nav-item  <?php if ($subpageName == 'Client_Comparison_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/clientcomparisonReport">

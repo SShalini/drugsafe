@@ -51,7 +51,7 @@
 
                                                 <input type="text" id="dtStart" class="form-control"
                                                        value="<?php echo set_value('dtStart'); ?>" readonly
-                                                       placeholder="Start Order Date"
+                                                       placeholder="Start Revenue Date"
                                                        onfocus="remove_formError(this.id,'true')" name="dtStart">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
@@ -82,7 +82,7 @@
 
                                                 <input type="text" id="szSearch5" class="form-control"
                                                        value="<?php echo set_value('dtEnd'); ?>" readonly
-                                                       placeholder="End Order Date"
+                                                       placeholder="End Revenue Date"
                                                        onfocus="remove_formError(this.id,'true')" name="dtEnd">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
