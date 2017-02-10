@@ -262,7 +262,7 @@ define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
  *
  *
  */
-	define( "__VLD_CASE_FILE_NAME__", "FILE_NAME" );
+define( "__VLD_CASE_FILE_NAME__", "FILE_NAME" );
 /**Digit format**/
 define("__FORMAT_NUMBER__",'%08d');
 /**

@@ -96,7 +96,14 @@
                             <p><?php echo $operationManagerAray['szCity'];?></p>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ZIP/Postal Code:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $operationManagerAray['szZipCode'];?></p>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Country:</lable>
@@ -107,6 +114,14 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ABN:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $operationManagerAray['abn'];?></p>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Email Id:</lable>
@@ -132,14 +147,7 @@
                             <p><?php echo $operationManagerAray['szState'];?></p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>ZIP/Postal Code:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $operationManagerAray['szZipCode'];?></p>
-                        </div>
-                    </div>
+                    
 
                 </div>
               
