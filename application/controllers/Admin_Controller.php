@@ -6,7 +6,7 @@ class Admin_Controller extends CI_Controller {
 	{
             parent::__construct();
            
-            $this->load->model('Order_Model');
+        $this->load->model('Order_Model');
         $this->load->model('StockMgt_Model');
         $this->load->library('pagination');
         $this->load->model('Ordering_Model');

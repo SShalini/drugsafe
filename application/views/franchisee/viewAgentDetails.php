@@ -193,7 +193,14 @@
                     ?>
                 </div>
                 <div class="col-md-6">
-                    
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ABN:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['abn'];?></p>
+                        </div>
+                    </div>
                      <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Contact Name:</lable>
@@ -275,7 +282,7 @@
                         if($clientDetailsAray['szNoOfSites'] > $count){
                         ?>
                         <button class="btn btn-sm green-meadow"  onclick="addAgentEmployeeDetails(<?php echo  $clientDetailsAray['id']; ?>,'3');">
-                        &nbsp;Add Agent/Employee
+                        &nbsp; Add Agent/Employee
                         </button>
                         <?php
                         }
@@ -460,8 +467,7 @@
             </div>
     	<?php }?>
         </div>
-    </div>           
-      
+    </div>     
 </div>
 </div>
 </div>

@@ -225,8 +225,16 @@
                 <div class="col-md-6">
                      <?php
                     if($clientDetailsAray['clientType']=='0')
-                    {
+                    { 
                         ?>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ABN:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $clientDetailsAray['abn'];?></p>
+                        </div>
+                    </div>
                      <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Contact Name:</lable>

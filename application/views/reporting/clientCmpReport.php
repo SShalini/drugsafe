@@ -104,7 +104,7 @@
                        <div class="col-md-3">
                        <div class="form-group ">
                            <div id="szSearch2">
-                            <input type="text" class="form-control" id="szSearch2" name="szSearch2" placeholder="Company Name/site" value="" onfocus="remove_formError(this.id,'true')" onchange="getSiteListByClientIdData(this.value);">
+                            <input type="text" class="form-control" id="szSearch2" name="szSearch2" placeholder="Client Name" value="" onfocus="remove_formError(this.id,'true')" onchange="getSiteListByClientIdData(this.value);">
                             </div>
                         </div>
                     </div>
