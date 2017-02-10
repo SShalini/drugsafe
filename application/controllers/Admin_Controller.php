@@ -545,7 +545,6 @@ class Admin_Controller extends CI_Controller {
 
                 if($this->Admin_Model->sendNewPasswordToAdmin($data_validate['szEmail']))
                 {
-
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3> Please check your email to recover your password.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
