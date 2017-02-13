@@ -604,16 +604,17 @@ class Order_Model extends Error_Model {
                   
         }
         $this->db->where($searchQuery);
-        $this->db->distinct();
-        $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
-        $this->db->order_by("orderid", "desc");
-        $this->db->from(__DBC_SCHEMATA_ORDER__);
-        $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
-        $this->db->join('tbl_product', 'ds_order_details.productid = tbl_product.id');
-        
+        $this->db->select('ds_orders.franchiseeid, ds_orders.price, ds_order_details.orderid, ds_orders.createdon, ds_order_details.dispatched as dispatched, ds_orders.status, tbl_product.szProductCategory, tbl_product.id as productid, tbl_product.szProductCode, ds_order_details.quantity as quantity');
+        $this->db->from(__DBC_SCHEMATA_ORDER__.' as ds_orders');
+        $this->db->join(__DBC_SCHEMATA_ORDER_DETAILS__.' as ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+        $this->db->join(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__.' as prodstock', 'prodstock.iFranchiseeId = ds_orders.franchiseeid');
+        $this->db->join(__DBC_SCHEMATA_PRODUCT__.' as tbl_product', 'ds_order_details.productid = tbl_product.id');
+
+        $this->db->group_by("ds_order_details.productid");
+        $this->db->order_by("ds_order_details.orderid", "desc");
         
         $query = $this->db->get();
-//$sql = $this->db->last_query($query);
+        $q = $this->db->last_query();
 //print_r($sql);die;
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -817,6 +818,58 @@ class Order_Model extends Error_Model {
             {
                 return array();
             }
-        } 
+        }
+
+        function  getorderdanddispatchval($franchiseeid,$prodid){
+
+            $searchQuery = 'validorder = 1 AND status != 3 AND status !=2'  ;
+
+                if($franchiseeid>0){
+                    $searchQuery.="
+                    AND ds_orders.franchiseeid = ".(int)($franchiseeid);
+                }
+                if($prodid>0)
+                {
+                    $searchQuery .="
+               AND
+                     ds_order_details.productid = ".(int)($prodid);
+
+                }
+            $this->db->where($searchQuery);
+            $this->db->select('SUM(ds_order_details.dispatched) as dispatched, ds_order_details.productid, SUM(ds_order_details.quantity) as quantity');
+            $this->db->from(__DBC_SCHEMATA_ORDER__.' as ds_orders');
+            $this->db->join(__DBC_SCHEMATA_ORDER_DETAILS__.' as ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+            $this->db->group_by('ds_order_details.productid');
+            $query = $this->db->get();
+            /*$q = $this->db->last_query();
+            echo $q;*/
+//print_r($sql);die;
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+
+            }
+
+            else {
+                return array();
+            }
+        }
+
+        function getProductDetsByfranchiseeid($franchiseeid,$catid=0,$prodcode=0){
+            $whereAry = 'prodstock.iFranchiseeId =' . (int)$franchiseeid .' AND prod.isDeleted = 0 '.($catid>0?' AND prod.szProductCategory = '.(int)$catid:'').($prodcode>0?' AND prod.id = '.(int)$prodcode:'') ;
+            $query = $this->db->select('prodstock.szQuantity, prodstock.iFranchiseeId, prod.id, prod.szProductCode, prod.szProductDiscription, prod.szProductCategory')
+                ->from(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__. ' as prodstock')
+                ->join(__DBC_SCHEMATA_PRODUCT__ . ' as prod', 'prod.id = prodstock.iProductId')
+                ->where($whereAry)
+                ->get();
+            /*$q = $this->db->last_query();
+            die($q);*/
+            if ($query->num_rows() > 0) {
+                $row = $query->result_array();
+                return $row;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        }
    }
 ?>

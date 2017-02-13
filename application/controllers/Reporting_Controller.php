@@ -1038,10 +1038,14 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-           $searchAry = $_POST; 
-           $validPendingOrdersDetailsAray = $this->Order_Model->getallValidPendingOrderDetails($searchAry);
+        $count = $this->Admin_Model->getnotification();
+           $searchAry = $_POST;
+           $franchiseeid = $_POST['szSearch1'];
+           $catid = $_POST['szSearch2'];
+           $prodcode = $_POST['szSearch3'];
+           //$validPendingOrdersDetailsAray = $this->Order_Model->getallValidPendingOrderDetails($searchAry);
            $allFrPendingDetailsSearchAray = $this->Order_Model->getallPendingValidOrderFrId();
-           
+        $validPendingOrdersDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($franchiseeid,$catid,$prodcode);
           $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch1', 'Franchisee Name ', 'required');
             $this->form_validation->set_rules('szSearch2', 'Product Category', 'required');
@@ -1058,7 +1062,6 @@ function excelfr_stockassignlist_Data()
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
-                    $data['drugtestkitlist'] = $drugTestKitListAray;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('reporting/inventoryReport');
@@ -1075,7 +1078,6 @@ function excelfr_stockassignlist_Data()
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
-                    $data['drugtestkitlist'] = $drugTestKitListAray;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('reporting/inventoryReport');
@@ -1446,20 +1448,20 @@ function excelfr_stockassignlist_Data()
         $prodCategory = $this->session->userdata('prodCategory');
         
             
-           $reqOrderAray = $this->Order_Model->getValidPendingOdrDetailsForPdf($franchiseeId,$productCode,$prodCategory);  
+           $reqOrderAray = $this->Order_Model->getProductDetsByfranchiseeid($franchiseeId,$prodCategory,$productCode);
      
       
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Request Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Inventory Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
                                         <th style="width:80px"><b>  #</b> </th>
                                         <th> <b>Category</b> </th>
-                                        <th> <b>Product Code </b> </th>
-                                        <th style="width:150px"><b> In Stock  </b> </th>
-                                        <th style="width:170px"> <b>Requested</b> </th>
-                                        <th style="width:170px"> <b>Alloted</b> </th>
+                                        <th style="width:130px"> <b>Product Code </b> </th>
+                                        <th style="width:120px"><b> In Stock  </b> </th>
+                                        <th style="width:120px"> <b>Requested</b> </th>
+                                        <th style="width:120px"> <b>Alloted</b> </th>
                                    
                                     </tr>';
         if ($reqOrderAray) {
@@ -1469,15 +1471,30 @@ function excelfr_stockassignlist_Data()
                 $i++;
               
                  $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($reqOrderData['szProductCategory']));
+                $availprodqty = $this->Order_Model->getorderdanddispatchval($reqOrderData['iFranchiseeId'],$reqOrderData['id']);
                 $html .= '<tr>
                                             <td> ' . $i . ' </td>
                                             <td> ' . $productcatAry['szName'] . '</td>
                                             <td> ' . $reqOrderData['szProductCode'] . ' </td>
-                                            <td>' . $reqOrderData['szAvailableQuantity'] . ' </td>
-                                               <td>' . $reqOrderData['quantity'] . ' </td>
-                                                     <td>' . $reqOrderData['dispatched'] . ' </td>
+                                            <td>' . $reqOrderData['szQuantity'] . ' </td>';
+                                        if(!empty($availprodqty)) {
+                                            $printzero = true;
+                                            foreach ($availprodqty as $requestedqty) {
+                                                if ($requestedqty['productid'] == $reqOrderData['id']) {
+                                                    $html .='<td>'.$requestedqty['quantity'].'</td>
+                                                    <td>'.$requestedqty['dispatched'].'</td>';
+                                                    $printzero = false;
+                                                }
+                                            }
+                                            if($printzero) {
+                                                $html .= '<td>0</td>
+                                                <td>0</td>';
+                                           }
+                                        }else{
+                                            $html .= '<td>0</td><td>0</td>';
+                                        }
                                 
-                                        </tr>';
+                                        $html .='</tr>';
             }
         }
         
@@ -1553,19 +1570,35 @@ function excelfr_stockassignlist_Data()
         $franchiseeId = $this->session->userdata('franchiseeId');
         
             
-          $reqOrderAray = $this->Order_Model->getValidPendingOdrDetailsForPdf($franchiseeId,$productCode,$prodCategory);  
+          $reqOrderAray = $this->Order_Model->getProductDetsByfranchiseeid($franchiseeId,$prodCategory,$productCode);
         if(!empty($reqOrderAray)){
             $i = 2;
             $x=0;
             foreach($reqOrderAray as $item){
                  $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($item['szProductCategory']));
+                $availprodqty = $this->Order_Model->getorderdanddispatchval($item['iFranchiseeId'],$item['id']);
                  $x++;
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $productcatAry['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szAvailableQuantity']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['quantity']);
-                $this->excel->getActiveSheet()->setCellValue('F'.$i,$item['dispatched']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szQuantity']);
+                if(!empty($availprodqty)) {
+                    $printzero = true;
+                    foreach ($availprodqty as $requestedqty) {
+                        if ($requestedqty['productid'] == $item['id']) {
+                            $this->excel->getActiveSheet()->setCellValue('E' . $i, $requestedqty['quantity']);
+                            $this->excel->getActiveSheet()->setCellValue('F' . $i, $requestedqty['dispatched']);
+                            $printzero = false;
+                        }
+                    }
+                    if($printzero){
+                        $this->excel->getActiveSheet()->setCellValue('E' . $i, 0);
+                        $this->excel->getActiveSheet()->setCellValue('F' . $i, 0);
+                    }
+                }else{
+                    $this->excel->getActiveSheet()->setCellValue('E' . $i, 0);
+                    $this->excel->getActiveSheet()->setCellValue('F' . $i, 0);
+                }
 
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);

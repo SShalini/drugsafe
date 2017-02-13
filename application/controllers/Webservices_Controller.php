@@ -273,7 +273,8 @@ class Webservices_Controller extends CI_Controller
     function getsosformdatabysiteid(){
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['siteid'] = !empty($jsondata->siteid) ? $jsondata->siteid : "";
-        $sosformdata = $this->Webservices_Model->getsosformdata($data['siteid']);
+        $data['status'] = !empty($jsondata->status) ? $jsondata->status : "0";
+        $sosformdata = $this->Webservices_Model->getsosformdata($data['siteid'],$data['status']);
         if(!empty($sosformdata))
         {
             $responsedata = array("code" => 200,"dataarr"=>$sosformdata);
@@ -919,9 +920,9 @@ class Webservices_Controller extends CI_Controller
     function getsavedkitsbysosid(){
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['sosid'] = !empty($jsondata->sosid) ? $jsondata->sosid : "0";
-        $kitarr = $this->Webservices_Model->getSavedKitsBySosid($data['sosid']);
-        if($kitarr)
-        {
+        $data['used'] = !empty($jsondata->used) ? $jsondata->used : "0";
+        $kitarr = $this->Webservices_Model->getSavedKitsBySosid($data['sosid'],$data['used']);
+        if($kitarr){
             $responsedata = array("code" => 200,"kitarr"=>$kitarr);
         }else{
             $responsedata = array("code" => 201,"message"=>"No product found.");
@@ -956,6 +957,49 @@ class Webservices_Controller extends CI_Controller
             $responsedata = array("code" => 201,"message"=>"Your inventory don't have sufficient amount of products to complete this test. Please upgrade your inventory and try again.");
         }
         header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getclientdetailsbyclientid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['clientid'] = !empty($jsondata->clientid) ? $jsondata->clientid : "0";
+        $clientdata = $this->Webservices_Model->getclientdetailsbyclientid($data['clientid']);
+        if(!empty($clientdata)){
+            $responsedata = array("code" => 200,"dataarr"=>$clientdata);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No record found.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getsosformdatabysosid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['sosid'] = !empty($jsondata->sosid) ? $jsondata->sosid : "";
+        $sosformdata = $this->Webservices_Model->getsosformdatabysosid($data['sosid']);
+        if(!empty($sosformdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$sosformdata);
+            header('Content-Type: application/json');
+        }else{
+            $responsedata = array("code" => 201,"message"=>'No site found');
+            header('Content-Type: application/json');
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getcocdatabycocid(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['cocid'] = !empty($jsondata->cocid) ? $jsondata->cocid : "";
+        $cocformdata = $this->Webservices_Model->getcocdatabycocid($data['cocid']);
+        if(!empty($cocformdata))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$cocformdata);
+            header('Content-Type: application/json');
+        }else{
+            $responsedata = array("code" => 201,"message"=>'No site found');
+            header('Content-Type: application/json');
+        }
         echo json_encode($responsedata);
     }
 }

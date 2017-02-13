@@ -523,6 +523,24 @@ class Webservices_Model extends Error_Model
         }
     }
 
+    function getclientdetailsbyclientid($clientid){
+        $whereAry = array('client.clientId' => (int)$clientid, 'user.isDeleted' => '0');
+        $query = $this->db->select('client.id, user.id as userid, user.szName,
+                                     user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode,
+                                     user.szCity, user.szState, user.szCountry, client.clientType, client.franchiseeId')
+            ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
+            ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = client.clientId')
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
     function getclientsites($clientid)
     {
         $whereAry = array('client.clientType' => (int)$clientid, 'user.isDeleted' => '0');
@@ -532,7 +550,7 @@ class Webservices_Model extends Error_Model
                                      site.ssc_mobile, site.ssc_phone, site.instructions, site.site_people, site.test_count, site.initial_testing_req,
                                      site.site_visit, site.ongoing_testing_req, site.onsite_service, site.start_time, site.power_access,
                                      site.randomisation, site.risk_assessment, site.req_comp_induction,
-                                     site.req_ppe, site.paperwork, site.specify_contact, user.id as userid, user.szName,
+                                     site.req_ppe, site.paperwork, site.specify_contact, client.clientId, user.id as userid, user.szName,
                                      user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode,
                                      user.szCity, user.szState, user.szCountry')
             ->from(__DBC_SCHEMATA_SITES__ . ' as site')
@@ -608,9 +626,9 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getsosformdata($siteid)
+    function getsosformdata($siteid, $status =0)
     {
-        $whereAry = 'sos.Clientid =' . (int)$siteid . ' AND sos.Status = 0';
+        $whereAry = 'sos.Clientid =' . (int)$siteid . ' AND sos.Status = '.(int)$status;
         $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
                                                 sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                                 sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
@@ -619,6 +637,7 @@ class Webservices_Model extends Error_Model
             ->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos')
             ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'sos.Clientid = client.clientId')
             ->where($whereAry)
+            ->order_by("sos.testdate","DESC")
             ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -631,7 +650,7 @@ class Webservices_Model extends Error_Model
 
     function getsosformdatabysosid($sosid){
         $whereAry = 'id =' . (int)$sosid;
-        $query = $this->db->select('testdate')
+        $query = $this->db->select('*')
             ->from(__DBC_SCHEMATA_SOS_FORM__)
             ->where($whereAry)
             ->get();
@@ -1236,10 +1255,11 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getSavedKitsBySosid($sosid){
-        $array = array('sosid' => (int)$sosid,'used'=>'0');
-        $query = $this->db->select('id, prodid, quantity, used')
-            ->from(__DBC_SCHEMATA_USED_KITS__)
+    function getSavedKitsBySosid($sosid,$used = 0){
+        $array = array('sosid' => (int)$sosid,'used'=>(int)$used);
+        $query = $this->db->select('kits.id, kits.prodid, kits.quantity, kits.used, prods.szProductCode')
+            ->from(__DBC_SCHEMATA_USED_KITS__.' as kits')
+            ->join(__DBC_SCHEMATA_PRODUCT__.' as prods','kits.prodid = prods.id')
             ->where($array)
             ->get();
         if ($query->num_rows() > 0) {
@@ -1320,5 +1340,20 @@ class Webservices_Model extends Error_Model
         $whereAry = array('id' => (int)$id);
         $this->db->where($whereAry)
             ->update(__DBC_SCHEMATA_USED_KITS__, $stockAry);
+    }
+
+    function getcocdatabycocid($cocid){
+        $whereAry = 'id =' . (int)$cocid;
+        $query = $this->db->select('*')
+            ->from(__DBC_SCHEMATA_COC_FORM__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
     }
 } 

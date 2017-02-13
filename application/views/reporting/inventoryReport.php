@@ -173,6 +173,7 @@
                                                 { 
                                                     $i++ ;
                                                    $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrdersDetailsData['szProductCategory']));
+                                                   $availprodqty = $this->Order_Model->getorderdanddispatchval($validPendingOrdersDetailsData['iFranchiseeId'],$validPendingOrdersDetailsData['id']);
                                                    ?>
                             <tr>
                                     <td><?php echo $i; ?> </td>
@@ -182,11 +183,27 @@
                                     <td>
                                          <?php echo $validPendingOrdersDetailsData['szProductCode'] ;?>
                                     </td>
-                                    <td>  <?php echo $validPendingOrdersDetailsData['szAvailableQuantity'] ;?> </td>
-                                     <td>  <?php echo $validPendingOrdersDetailsData['quantity'] ;?> </td>
-                                     <td>
-                                         <?php echo $validPendingOrdersDetailsData['dispatched'];?> 
-                                    </td>
+                                    <td>  <?php echo $validPendingOrdersDetailsData['szQuantity'] ;?> </td>
+                                <?php
+                                                    if(!empty($availprodqty)) {
+                                                        $printzero = true;
+                                                        foreach ($availprodqty as $requestedqty) {
+                                                            if ($requestedqty['productid'] == $validPendingOrdersDetailsData['id']) { ?>
+                                                                <td>  <?php echo $requestedqty['quantity']; ?> </td>
+                                                                <td>
+                                                                    <?php echo $requestedqty['dispatched']; ?>
+                                                                </td>
+                                                            <?php $printzero = false; }
+                                                        }
+                                                        if($printzero) { ?>
+                                                            <td>0</td>
+                                                            <td>0</td>
+                                                         <?php }
+                                                    }else{
+                                                        echo '<td>0</td><td>0</td>';
+                                                    } ?>
+
+
 
                                 </tr>
                               <?php
