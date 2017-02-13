@@ -121,7 +121,7 @@
                     <div class="col-md-1"></div>
 					<div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szIndustry']) != '') { ?>has-error<?php } ?>">
-                            <div id='szSearch3'>
+                            <div id='szProductCode'>
 							<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
                                 <option value="">Product Code</option>
                                     <?php
