@@ -1576,7 +1576,7 @@ function calTotalPrice() {
 function getProductCodeListByCategory(szCategory) {
     $.post(__BASE_URL__ + "/reporting/getProductCodeListByCategory", {szCategory: szCategory}, function (result) {
         if (result != '') {
-            $("#szSearch3").html(result);
+            $("#szProductCode").html(result);
         }
     });
 }
