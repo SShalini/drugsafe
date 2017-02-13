@@ -1742,6 +1742,24 @@ function ViewexcelRevenueSummery(dtStart,dtEnd) {
 
 
     });
+
+}
+function industryReportPdf(dtStart,dtEnd,szIndustry,szTestType) {
+    
+    $.post(__BASE_URL__ + "/reporting/industryReportPdf", {dtStart : dtStart,dtEnd: dtEnd,szIndustry : szIndustry,szTestType : szTestType}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function industryReportXls(dtStart,dtEnd,szIndustry,szTestType) {
+    $.post(__BASE_URL__ + "/reporting/industryReportOfXls", {dtStart : dtStart,dtEnd: dtEnd,szIndustry : szIndustry,szTestType : szTestType}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+    });
+
 }
 function getClientListByFrIdData(idFranchisee) {
     $.post(__BASE_URL__ + "/reporting/getClientListByFrId", {idFranchisee: idFranchisee}, function (result) {
@@ -1756,4 +1774,5 @@ function getSiteListByClientIdData(idClient) {
             $("#szSearch3").html(result);
         }
     });
+
 }
