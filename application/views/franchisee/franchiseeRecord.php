@@ -226,7 +226,7 @@
                                     <th> Name</th>
                                     <th> Email</th>
                                     <th> Contact No</th>
-                                    <th>Address</th>
+                                    <th> Address</th>
                                     <th> Actions</th>
                                 </tr>
                                 </thead>

@@ -279,7 +279,7 @@
                                                 </a>
                                           <?php }} ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data"
-                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
+                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>','1');"
                                                href="javascript:void(0);">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
@@ -662,10 +662,7 @@
                                              <?php
                                             if($_SESSION['drugsafe_user']['iRole'] == '2'){
                                             ?>
-                                            <?php
-                                            if ($clientData['clientType'] == '0') {
-                                          if($clientData['szNoOfSites'] > count($childClientDetailsAray)){
-                                                ?>
+                                           
                                             
                                               <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="Add Agent/Employee"
@@ -673,10 +670,10 @@
                                                href="javascript:void(0);"></i>
                                                 <i class="fa fa-plus" aria-hidden="true"></i>
                                             </a>
-                                          <?php }} ?>
+                                         
                                            
                                             <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data"
-                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>');"
+                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__;?>','2');"
                                                href="javascript:void(0);">
                                                 <i class="fa fa-pencil"></i>
                                             </a>

@@ -178,23 +178,32 @@
                 </li>
             <?php }
             else { ?>
-                <li class="nav-item start <?php if (trim($pageName) == 'Reporting') { ?>active open<?php } ?>">
-                    <a href="javascript:void(0);" class="nav-link nav-toggle">
-                        <i class="fa fa-list-alt" aria-hidden="true"></i>
-                        <span class="title">Reporting </span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
-                        <li class="nav-item  <?php if ($subpageName == 'revenue_generate') { ?> active open <?php } ?>">
+                  <li class="nav-item start <?php if (trim($pageName) == 'Reporting') { ?>active open<?php } ?>">
+                <a href="javascript:void(0);" class="nav-link nav-toggle">
+                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                    <span class="title">Reporting </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
+                    <li class="nav-item  <?php if ($subpageName == 'revenue_generate') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/franchisee_revenue_generate">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Revenue Generate</span>
                             </a>
                         </li>
-                  
-                    </ul>
+                    <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frInventoryReport">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Inventory Report</span>
+                            </a>
+                   </li>
 
-                </li>
+                </ul>
+
+            </li>
+                
+                
+              
             <?php } ?>
                   <!--<li class="nav-item start <?php /*if (trim($pageName) == 'Form_Management') { */?>active open<?php /*} */?>">
                     <a onclick="viewForm('1');" href="javascript:void(0);" class="nav-link nav-toggle">

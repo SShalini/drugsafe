@@ -456,6 +456,17 @@ class Franchisee_Controller extends CI_Controller
                     $szMessage['content'] = "<strong><h3>Client details successfully updated.</h3></strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
+                     if($flag==2){
+                    $mrActive= $flag;   
+                    $this->session->set_userdata('drugsafe_tab_status', $mrActive);
+                     $this->session->unset_userdata('idClient');
+                      $this->session->unset_userdata('idfranchisee');
+                       $this->session->unset_userdata('url');
+                     $this->session->unset_userdata('flag');
+                     redirect(base_url('/franchisee/clientRecord'));
+                    die;
+                    }
+                    
                     redirect(base_url($url));
                     //header("Location:" . __BASE_URL__ . $url);
 

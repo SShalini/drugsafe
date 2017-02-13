@@ -1481,22 +1481,23 @@ function excelfr_stockassignlist_Data()
     }
     function ViewexcelInventoryReportData()
         {
-              $prodCategory = $this->input->post('prodCategory');
-            $productCode = $this->input->post('productCode');
+           $prodCategory = $this->input->post('prodCategory');
+           $productCode = $this->input->post('productCode');
            $franchiseeId = $this->input->post('franchiseeId');
           
             
                 $this->session->set_userdata('franchiseeId',$franchiseeId);
                 $this->session->set_userdata('productCode',$productCode);
-                 $this->session->set_userdata('prodCategory',$prodCategory);
+                $this->session->set_userdata('prodCategory',$prodCategory);
                 
                 echo "SUCCESS||||";
                 echo "ViewexcelInventoryReport";
             
  
         }
-    public function ViewexcelInventoryReport()
+   public function ViewexcelInventoryReport()
     {
+       
         $this->load->library('excel');
         $filename = 'Report';
         $title = 'Inventory Report';
@@ -1505,22 +1506,24 @@ function excelfr_stockassignlist_Data()
 
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
-        $this->excel->getActiveSheet()->setCellValue('A1', '#');
+        $this->excel->getActiveSheet()->setCellValue('A1', ' #');
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
+       
+        
         $this->excel->getActiveSheet()->setCellValue('B1', 'Category');
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Product Code');
+        
+         $this->excel->getActiveSheet()->setCellValue('C1', 'Product Code');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
 
-        $this->excel->getActiveSheet()->setCellValue('D1', ' In Stock ');
+        $this->excel->getActiveSheet()->setCellValue('D1', 'In Stock');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -1530,24 +1533,23 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $franchiseeId = $this->session->userdata('productCode');
+         $franchiseeId = $this->session->userdata('franchiseeId');
+        $productCode = $this->session->userdata('productCode');
         $prodCategory = $this->session->userdata('prodCategory');
-        $productCode = $this->session->userdata('franchiseeId');
-        
-            
-          $reqOrderAray = $this->Order_Model->getValidPendingOdrDetailsForPdf($franchiseeId,$productCode,$prodCategory);  
+        $reqOrderAray = $this->Order_Model->getValidPendingOdrDetailsForPdf($franchiseeId,$productCode,$prodCategory);  
+       
+
         if(!empty($reqOrderAray)){
-            $i = 2;
-            $x=0;
+            $i = 1;
             foreach($reqOrderAray as $item){
-                 $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($item['szProductCategory']));
-                 $x++;
-                $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
+              $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($item['szProductCategory']));
+              
+                $this->excel->getActiveSheet()->setCellValue('A'.$i,$i);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $productcatAry['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szProductCode']);
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szAvailableQuantity']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['quantity']);
-
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['quantity']);
+              
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
@@ -1564,6 +1566,9 @@ function excelfr_stockassignlist_Data()
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+         $this->session->unset_userdata('franchiseeId');
+         $this->session->unset_userdata('productCode');
+         $this->session->unset_userdata('prodCategory');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
