@@ -1044,11 +1044,16 @@ function excelfr_stockassignlist_Data()
            $catid = $_POST['szSearch2'];
            $prodcode = $_POST['szSearch3'];
            //$validPendingOrdersDetailsAray = $this->Order_Model->getallValidPendingOrderDetails($searchAry);
-           $allFrPendingDetailsSearchAray = $this->Order_Model->getallPendingValidOrderFrId();
-        $validPendingOrdersDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($franchiseeid,$catid,$prodcode);
-          $this->load->library('form_validation');
+            $allFrPendingDetailsSearchAray = $this->Order_Model->getallPendingValidOrderFrId();
+            $validPendingOrdersDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($franchiseeid,$catid,$prodcode);
+            $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch1', 'Franchisee Name ', 'required');
             $this->form_validation->set_rules('szSearch2', 'Product Category', 'required');
+            if($_POST['szSearch3'])
+            {
+                $productAry = $this->Inventory_Model->getProductByCategory(trim($catid));
+               
+            }
             
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
@@ -1061,6 +1066,7 @@ function excelfr_stockassignlist_Data()
                      $data['pageName'] = "Reporting";
                     $data['notification'] = $count;
                     $data['data'] = $data;
+                    $data['productAry']=$productAry;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
 
             $this->load->view('layout/admin_header',$data);
@@ -1077,6 +1083,7 @@ function excelfr_stockassignlist_Data()
                     $data['pageName'] = "Reporting";
                     $data['notification'] = $count;
                     $data['data'] = $data;
+                    $data['productAry']=$productAry;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
 
             $this->load->view('layout/admin_header',$data);
