@@ -129,6 +129,12 @@
                             </a>
                         </li>
 						-->
+						 <li class="nav-item  <?php if ($subpageName == 'industry_report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_industry_report">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Industry Report</span>
+                            </a>
+                        </li>
                         <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/inventoryReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
@@ -160,6 +166,7 @@
                                 <span class="title">Revenue Summery</span>
                             </a>
                         </li>
+						
 <!--                         <li class="nav-item  <?php if ($subpageName == 'View_Order_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/viewOrderReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
