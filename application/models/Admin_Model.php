@@ -1047,13 +1047,29 @@ class Admin_Model extends Error_Model
         return false;
     
   }
-        public function viewAllIndustryList()
+    public function viewAllIndustryList()
     {
         $this->db->select('id,szName');
         $query = $this->db->get(__DBC_SCHEMATA_INDUSTRIES__);
 
         if ($query->num_rows() > 0) {
            return $query->result_array();
+          
+        } else {
+           return array();
+        }
+   } 
+    public function getIndustryNameByid($id)
+    {
+        $this->db->select('szName');
+        $this->db->where('id',$id);
+        $query = $this->db->get(__DBC_SCHEMATA_INDUSTRIES__);
+       
+         //echo $sql = $this->db->last_query();die();
+
+        if ($query->num_rows() > 0) {
+           $row = $query->result_array();
+            return $row[0];
           
         } else {
            return array();

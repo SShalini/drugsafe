@@ -271,10 +271,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
              if (!empty($searchq)) {
                $this->db->where($searchq);
                }
-            
             $query = $this->db->get();
-//$sql = $this->db->last_query($query);
-// print_r($sql);die;
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -297,14 +294,11 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             if(!empty($FrName) && !empty($productCode)){
                $searchq = array('szName' => $FrName,'szProductCode' => $productCode);
             }
-           $this->db->select( '*');  
-      
+            $this->db->select( '*');  
             $this->db->from(__DBC_SCHEMATA_REQUEST_QUANTITY__);
-           
-           
-             $this->db->join('ds_user','tbl_stock_request.iFranchiseeId = ds_user.id');
-             $this->db->join('tbl_product','tbl_stock_request.iProductId = tbl_product.id');   
-             if (!empty($searchq)) {
+            $this->db->join('ds_user','tbl_stock_request.iFranchiseeId = ds_user.id');
+            $this->db->join('tbl_product','tbl_stock_request.iProductId = tbl_product.id');   
+            if (!empty($searchq)) {
                $this->db->where($searchq);
                } 
          
@@ -321,5 +315,42 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
                     return array();
             }
         }
+        public function getSosAndClientDetils($searchAry=array())
+        {
+      
+            if($searchAry['szIndustry']!='')
+            {
+                $this->db->where('industry',$searchAry['szIndustry']);
+            }
+            $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+            $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+            
+            $this->db->select('*');
+            $this->db->from('ds_sos');
+            $this->db->join('tbl_client', 'tbl_client.clientId = ds_sos.Clientid');
+            $this->db->where('testdate >=', $dtStart);
+            $this->db->where('testdate <=', $dtEnd);
+            $this->db->where('clientType!=', '0');
+            $this->db->where('status', '1');
+            $this->db->group_by('industry');
+            $this->db->select_sum('TotalAlcoholScreening', 'totalAlcohol');
+            $this->db->select_sum('TotalDonarScreeningUrine','totalDonarUrine');
+            $this->db->select_sum('TotalDonarScreeningOral','totalDonarOral');
+            $this->db->select_sum('NegativeResultUrine','totalNegativeUrine');
+            $this->db->select_sum('NegativeResultOral','totalNegativeOral');
+            $this->db->select_sum('NegativeAlcohol','totalNegativeAlcohol');
+            $this->db->select_sum('PositiveAlcohol','totalPositiveAlcohol');
+            $query = $this->db->get();
+            //echo $sql = $this->db->last_query();die();
+
+        if ($query->num_rows() > 0) {
+             return $query->result_array();
+               
+        } else {
+            return array();
+        
+        }
+    } 
+		
 }
 ?>
