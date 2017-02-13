@@ -1070,7 +1070,7 @@ function excelfr_stockassignlist_Data()
                     $data['allFrPendingDetailsSearchAray'] = $allFrPendingDetailsSearchAray;  
                     $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
-                     $data['pageName'] = "Reporting";
+                    $data['pageName'] = "Reporting";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
