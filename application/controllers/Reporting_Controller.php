@@ -10,6 +10,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->library('pagination');
         $this->load->model('Ordering_Model');
+	$this->load->model('Reporting_Model');
         $this->load->model('Forum_Model');
         $this->load->model('Error_Model');
         $this->load->model('Admin_Model');
@@ -18,7 +19,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->model('Form_Management_Model');
         $this->load->model('StockMgt_Model');
         $this->load->model('Webservices_Model');
-        $this->load->library('pagination');
+        
     }
 
     public function index()
@@ -2636,15 +2637,14 @@ function excelfr_stockassignlist_Data()
             die;
         }
         
-         $searchAry = $_POST;
-        
-                    $data['szMetaTagTitle'] = "Client Comparison Report";
-                    $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Client_Comparison_Report";
-                    $data['notification'] = $count;
-                    $data['data'] = $data;
-                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
-                    $data['drugtestkitlist'] = $drugTestKitListAray;
+        $searchAry = $_POST;
+        $data['szMetaTagTitle'] = "Client Comparison Report";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Client_Comparison_Report";
+        $data['notification'] = $count;
+        $data['data'] = $data;
+        $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+        $data['drugtestkitlist'] = $drugTestKitListAray;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('reporting/clientCmpReport');
@@ -2707,6 +2707,416 @@ function excelfr_stockassignlist_Data()
      	}
       	echo $result;           
   	} 
+    public function view_industry_report()
+    {
+        $count = $this->Admin_Model->getnotification();
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
+        {
+            $searchArray=$_POST;
+            $getSosAndClientDetils=$this->Reporting_Model->getSosAndClientDetils($searchArray);
+        }
+        $allIndustry=$this->Admin_Model->viewAllIndustryList();
+	$this->load->library('form_validation');
+        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
+        $this->form_validation->set_message('required', '{field} is required');
+        if ($this->form_validation->run() == FALSE) {
+            $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
+            $data['szMetaTagTitle'] = "Industry Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "industry_report";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['searchAry'] = $_POST;
+            $data['allIndustry'] =$allIndustry;
+            $data['getSosAndClientDetils']=$getSosAndClientDetils;
+	    $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/viewIndustryReort');
+            $this->load->view('layout/admin_footer');
+
+        } else {
+            
+            $data['szMetaTagTitle'] = "Industry Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "industry_report";
+            $data['notification'] = $count;
+            $data['searchAry'] = $_POST;
+            $data['allIndustry'] =$allIndustry;
+	    $data['getSosAndClientDetils']=$getSosAndClientDetils;
+            $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/viewIndustryReort');
+            $this->load->view('layout/admin_footer');
+        }
+    }
+    function industryReportPdf()
+   {
+        $dtStart = $this->input->post('dtStart');
+        $dtEnd = $this->input->post('dtEnd');
+        $szIndustry = $this->input->post('szIndustry');
+        $szTestType = $this->input->post('szTestType');
+        $this->session->set_userdata('dtStart',$dtStart);
+        $this->session->set_userdata('dtEnd',$dtEnd);
+        $this->session->set_userdata('szIndustry',$szIndustry);
+        $this->session->set_userdata('szTestType',$szTestType);
+        echo "SUCCESS||||";
+        echo "industryReportOfPdf";
+    }
+    public function industryReportOfPdf()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe stock request report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Stock Request Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+        $pdf->AddPage();
+        
+        $searchArray['dtStart'] = $this->session->userdata('dtStart');
+        $searchArray['dtEnd'] = $this->session->userdata('dtEnd');
+        $searchArray['szIndustry'] = $this->session->userdata('szIndustry');
+        $searchArray['szTestType'] = $this->session->userdata('szTestType');
+        
+            
+          $getSosAndClientDetils=$this->Reporting_Model->getSosAndClientDetils($searchArray); 
+       
+      
+        $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Industry Report</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                            <thead>
+                                    <tr>
+                                        <th></th>
+					<th></th>';
+					foreach($getSosAndClientDetils as $getSosAndClientData)
+					{
+					    $industryname=$this->Admin_Model->getIndustryNameByid($getSosAndClientData['industry']);
+					    $html .='<td>'.$industryname['szName'].'</td>';
+					}
+                                $html .=   '</tr>
+                            </thead>';
+			    if($searchArray['szTestType']=='' || $searchArray['szTestType']=='A')
+			    {
+			    $html .='<tbody>
+					<tr>
+                                            <td>Alchohol</td>
+                                            <td>Total Donors</td>';
+					    foreach($getSosAndClientDetils as $getSosAndClientData)
+					    {
+						$html .='<td>'.$getSosAndClientData['totalAlcohol'].'</td>';
+					    }
+                                
+                               $html .= '</tr>
+                                        <tr>
+				            <td></td>
+                                            <td>Positive Result</td>';
+				            foreach($getSosAndClientDetils as $getSosAndClientData)
+				            {
+				                $html .='<td>'.$getSosAndClientData['totalPositiveAlcohol'].'</td>';
+			                    }
+			        $html .='</tr>
+			                <tr>
+				            <td></td>
+                                            <td>Negative Result</td>';
+				            foreach($getSosAndClientDetils as $getSosAndClientData)
+				            {
+				                $html .='<td>'.$getSosAndClientData['totalNegativeAlcohol'].'</td>';
+				            }
+				$html .='</tr>
+                                    </tbody>';
+			    }
+			    if($searchArray['szTestType']=='' || $searchArray['szTestType']=='U')
+			    {
+			    $html .='<tbody>
+					<tr>
+                                            <td>Urine AS/NZA 4308:2001/ As/NZA 4308:2008</td>
+                                            <td>Total Donors</td>';
+					    foreach($getSosAndClientDetils as $getSosAndClientData)
+					    {
+						$html .='<td>'.$getSosAndClientData['totalDonarUrine'].'</td>';
+					    }
+                                $html .='</tr>
+                                        <tr>
+					    <td></td>
+                                            <td>Positive Result</td>';
+					    foreach($getSosAndClientDetils as $getSosAndClientData )
+					    {
+						$totalNegativeUrine=$getSosAndClientData['totalDonarUrine'] -  $getSosAndClientData['totalNegativeUrine'];
+						$html .='<td>'.$totalNegativeUrine.'</td>';
+					    }
+				$html .='</tr>
+					<tr>
+					    <td></td>
+                                            <td>Negative Result</td>';
+					    foreach($getSosAndClientDetils as $getSosAndClientData)
+					    {
+						$html .='<td>'.$getSosAndClientData['totalNegativeUrine'].'</td>';
+					    }
+				$html .='</tr>
+                                    </tbody>';
+			    }
+			    if($searchArray['szTestType']=='' || $searchArray['szTestType']=='O')
+			    {
+			    $html .='<tbody>
+					<tr>
+                                            <td>Oral Fluid AS 4760:2006</td>
+                                            <td>Total Donors</td>';
+                                            foreach($getSosAndClientDetils as $getSosAndClientData)
+					    {
+						$html .='<td>'.$getSosAndClientData['totalDonarOral'].'</td>';
+					    }
+                               $html .='</tr>
+                                        <tr>
+					    <td></td>
+                                            <td>Positive Result</td>';
+					    foreach($getSosAndClientDetils as $getSosAndClientData)
+					    {
+                                                $totalPositiveOral=$getSosAndClientData['totalDonarOral'] -  $getSosAndClientData['totalNegativeOral'];
+						$html .='<td>'.$totalPositiveOral.'</td>';
+					    }
+					$html .='</tr>
+						<tr>
+						   <td></td>
+                                                    <td>Negative Result</td>';
+						    foreach($getSosAndClientDetils as $getSosAndClientData)
+						    {
+                                                        $html .='<td>'.$getSosAndClientData['totalNegativeOral'].'</td>';
+						    }
+						    $html .='</tr>
+                                    </tbody>';
+			    }
+		$i++;
+                $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+       
+          $this->session->unset_userdata('productCode');
+           $this->session->unset_userdata('franchiseeName');
+        $pdf->Output('stock-request-report.pdf', 'I');
+    }
+     function industryReportOfXls()
+    {
+        $dtStart = $this->input->post('dtStart');
+        $dtEnd = $this->input->post('dtEnd');
+        $szIndustry = $this->input->post('szIndustry');
+        $szTestType = $this->input->post('szTestType');
+        $this->session->set_userdata('dtStart',$dtStart);
+        $this->session->set_userdata('dtEnd',$dtEnd);
+        $this->session->set_userdata('szIndustry',$szIndustry);
+        $this->session->set_userdata('szTestType',$szTestType);
+        
+        echo "SUCCESS||||";
+        echo "industryReportXls";
+
+
+    }
+    public function industryReportXls()
+    {
+        $this->load->library('excel');
+        $filename = 'DrugSafe';
+        $title = 'Industry Report';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+        $searchArray['dtStart'] = $this->session->userdata('dtStart');
+        $searchArray['dtEnd'] = $this->session->userdata('dtEnd');
+        $searchArray['szIndustry'] = $this->session->userdata('szIndustry');
+        $searchArray['szTestType'] = $this->session->userdata('szTestType');
+        $alphabet = array('B','C','D','E','F','G','H','I','J','K','L','M','N');
+        $getSosAndClientDetils=$this->Reporting_Model->getSosAndClientDetils($searchArray);
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($title);
+        $this->excel->getActiveSheet()->setCellValue('A1', '');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', '');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $j=1;
+        $k = 1;
+        foreach($getSosAndClientDetils as $getSosAndClientData)
+        {
+            
+            $industryname=$this->Admin_Model->getIndustryNameByid($getSosAndClientData['industry']);
+            $alphaobj = $alphabet[$j];
+            $this->excel->getActiveSheet()->setCellValue($alphaobj.$k, $industryname['szName']);
+            $this->excel->getActiveSheet()->getStyle($alphaobj.$k)->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle($alphaobj.$k)->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle($alphaobj.$k)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $j++;
+        }
+        
+        if (!empty($getSosAndClientDetils)) {
+           
+            if($searchArray['szTestType']=='' || $searchArray['szTestType']=='A')
+            {
+                $j=1;
+                $this->excel->getActiveSheet()->setCellValue('A2','Alchohol');
+                $this->excel->getActiveSheet()->setCellValue('B2','Total Donors');
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=2;
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$getSosAndClientData['totalAlcohol']);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A3','');
+                $this->excel->getActiveSheet()->setCellValue('B3','Positive Result');
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=3;
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$getSosAndClientData['totalPositiveAlcohol']);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A4','');
+                $this->excel->getActiveSheet()->setCellValue('B4','Negative Result');
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=4;
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$getSosAndClientData['totalNegativeAlcohol']);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A5','');
+                $this->excel->getActiveSheet()->setCellValue('B5','');
+                $this->excel->getActiveSheet()->setCellValue('C5','');
+                $this->excel->getActiveSheet()->setCellValue('D5','');
+                    
+                }
+                if($searchArray['szTestType']=='' || $searchArray['szTestType']=='U')
+                {
+                     $this->excel->getActiveSheet()->setCellValue('A6','Urine AS/NZA 4308:2001/ As/NZA 4308:2008');
+                $this->excel->getActiveSheet()->setCellValue('B6','Total Donors');
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=6;
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$getSosAndClientData['totalDonarUrine']);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A7','');
+                $this->excel->getActiveSheet()->setCellValue('B7','Positive Result');
+                $totalPositiveUrine='';
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=7;
+                    $alphaobj = $alphabet[$j];
+                    $totalPositiveUrine=$getSosAndClientData['totalDonarUrine'] -  $getSosAndClientData['totalNegativeUrine'];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$totalPositiveUrine);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A8','');
+                $this->excel->getActiveSheet()->setCellValue('B8','Negative Result');
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=8;
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$getSosAndClientData['totalNegativeUrine']);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A9','');
+                $this->excel->getActiveSheet()->setCellValue('B9','');
+                $this->excel->getActiveSheet()->setCellValue('C9','');
+                $this->excel->getActiveSheet()->setCellValue('D9','');
+                    
+                }
+                                                   
+                if($searchArray['szTestType']=='' || $searchArray['szTestType']=='O')
+                {
+                    $this->excel->getActiveSheet()->setCellValue('A10','Oral Fluid AS 4760:2006');
+                $this->excel->getActiveSheet()->setCellValue('B10','Total Donors');
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=10;
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$getSosAndClientData['totalDonarOral']);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A11','');
+                $this->excel->getActiveSheet()->setCellValue('B11','Positive Result');
+                 $j=1;
+                 $totalPositiveOral='';
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=11;
+                    $alphaobj = $alphabet[$j];
+                    $totalPositiveOral= $getSosAndClientData['totalDonarOral'] -  $getSosAndClientData['totalNegativeOral'];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$totalPositiveOral);
+                    $j++;
+                }
+                $this->excel->getActiveSheet()->setCellValue('A12','');
+                $this->excel->getActiveSheet()->setCellValue('B12','Negative Result');
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $k=12;
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$getSosAndClientData['totalNegativeOral']);
+                    $j++;
+                }
+                    
+                }
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+               
+                $j=1;
+                foreach($getSosAndClientDetils as $getSosAndClientData)
+                {  
+                    $alphaobj = $alphabet[$j];
+                    $this->excel->getActiveSheet()->getColumnDimension($alphaobj)->setAutoSize(TRUE);
+                    $j++;
+                }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }    
+    
 
 }
 ?>
