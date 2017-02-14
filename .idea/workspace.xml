@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/drugsafe.iml" afterPath="$PROJECT_DIR$/.idea/drugsafe.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Webservices_Model.php" afterPath="$PROJECT_DIR$/application/models/Webservices_Model.php" />
+    <list default="true" id="0397bcab-b43b-453d-9cea-95bd4ff1e331" name="Default" comment="Rejected commit: Default">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" afterPath="$PROJECT_DIR$/application/views/layout/admin_leftmenu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Webservices_Model.php" afterPath="$PROJECT_DIR$/application/models/Webservices_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/drugsafe.iml" afterPath="$PROJECT_DIR$/.idea/drugsafe.iml" />
     </list>
     <list id="240e62f9-e39c-4c85-9f8d-10bf79adc5c1" name="Rejected commit: Default" comment="Rejected commit: Default" />
     <list id="2e7029f9-c62b-4ee9-a0f0-42c2cbf4327f" name="Rejected commit: Default (2)" comment="Rejected commit: Default" />
@@ -34,8 +34,8 @@
       <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="35" column="69" lean-forward="true" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
+            <state relative-caret-position="493">
+              <caret line="35" column="69" lean-forward="false" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
               <folding>
                 <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -76,33 +76,42 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="admin_leftmenu.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2414">
+              <caret line="142" column="24" lean-forward="false" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="viewIndustryReort.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/reporting/viewIndustryReort.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2363">
+              <caret line="139" column="100" lean-forward="false" selection-start-line="139" selection-start-column="86" selection-end-line="139" selection-end-column="100" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prashant.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css/prashant.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="328">
+              <caret line="34" column="34" lean-forward="false" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Reporting_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-163">
-              <caret line="1598" column="78" lean-forward="false" selection-start-line="1598" selection-start-column="78" selection-end-line="1598" selection-end-column="78" />
-              <folding>
-                <element signature="n#ViewReqReportingPdfData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#pdfstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelstockreqlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#ViewAssignReportingPdfData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#pdfstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelstockassignlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#frstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#frstockassignlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#frstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#pdffrstockreqlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#pdffrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelfrstockreqlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelfrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#pdf_fr_stockassignlist_Data#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#pdf_fr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelfr_stockassignlist_Data#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#excelfr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#ViewexcelInventoryReportData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-              </folding>
+            <state relative-caret-position="27302">
+              <caret line="1606" column="78" lean-forward="false" selection-start-line="1606" selection-start-column="78" selection-end-line="1606" selection-end-column="78" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,8 +119,8 @@
       <file leaf-file-name="Order_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="869" column="64" lean-forward="true" selection-start-line="869" selection-start-column="64" selection-end-line="869" selection-end-column="64" />
+            <state relative-caret-position="11662">
+              <caret line="869" column="64" lean-forward="false" selection-start-line="869" selection-start-column="64" selection-end-line="869" selection-end-column="64" />
               <folding>
                 <element signature="n#getCategoryDetailsById#0;n#Order_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getallValidPendingOrderFrDetails#0;n#Order_Model#0;n#!!top" expanded="false" />
@@ -129,18 +138,8 @@
       <file leaf-file-name="Inventory_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Inventory_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1497">
+            <state relative-caret-position="4437">
               <caret line="261" column="0" lean-forward="false" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StockMgt_Model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="227" column="81" lean-forward="true" selection-start-line="227" selection-start-column="81" selection-end-line="227" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -149,9 +148,11 @@
       <file leaf-file-name="inventoryReport.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reporting/inventoryReport.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="201" column="53" lean-forward="false" selection-start-line="201" selection-start-column="53" selection-end-line="201" selection-end-column="53" />
-              <folding />
+            <state relative-caret-position="3519">
+              <caret line="207" column="53" lean-forward="false" selection-start-line="207" selection-start-column="53" selection-end-line="207" selection-end-column="53" />
+              <folding>
+                <marker date="1486986493131" expanded="true" signature="6683:6684" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -159,9 +160,11 @@
       <file leaf-file-name="drugsafeFunctions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="1606" column="0" lean-forward="true" selection-start-line="1606" selection-start-column="0" selection-end-line="1606" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="27302">
+              <caret line="1606" column="0" lean-forward="false" selection-start-line="1606" selection-start-column="0" selection-end-line="1606" selection-end-column="0" />
+              <folding>
+                <marker date="1486986493380" expanded="true" signature="60520:60792" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -169,8 +172,8 @@
       <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="630" column="88" lean-forward="true" selection-start-line="630" selection-start-column="8" selection-end-line="630" selection-end-column="88" />
+            <state relative-caret-position="1802">
+              <caret line="630" column="88" lean-forward="false" selection-start-line="630" selection-start-column="8" selection-end-line="630" selection-end-column="88" />
               <folding>
                 <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -256,7 +259,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/models/Error_Model.php" />
         <option value="$PROJECT_DIR$/live/application/config/constants.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/clientDetails.php" />
         <option value="$PROJECT_DIR$/application/views/layout/login_footer.php" />
@@ -273,7 +275,6 @@
         <option value="$PROJECT_DIR$/application/models/Reporting_Model.php" />
         <option value="$PROJECT_DIR$/temp/constants.php" />
         <option value="$PROJECT_DIR$/application/views/forum/viewTopicDetails.php" />
-        <option value="$PROJECT_DIR$/css/prashant.css" />
         <option value="$PROJECT_DIR$/assets/global/plugins/bootstrap/css/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/error_log" />
         <option value="$PROJECT_DIR$/application/views/forum/replyListForApproval.php" />
@@ -307,6 +308,8 @@
         <option value="$PROJECT_DIR$/application/views/reporting/inventoryReport.php" />
         <option value="$PROJECT_DIR$/application/models/Order_Model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
+        <option value="$PROJECT_DIR$/application/views/reporting/viewIndustryReort.php" />
+        <option value="$PROJECT_DIR$/css/prashant.css" />
       </list>
     </option>
   </component>
@@ -338,7 +341,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -376,6 +378,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="db changes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -471,6 +487,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -545,24 +562,6 @@
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\whiz16\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\xampp\htdocs\drugsafe" />
-          <option name="myCopyRoot" value="C:\xampp\htdocs\drugsafe" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\xampp\htdocs\drugsafe" />
-          <option name="myCopyRoot" value="C:\xampp\htdocs\drugsafe" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -658,12 +657,13 @@
       <workItem from="1486631918768" duration="5880000" />
       <workItem from="1486698600132" duration="6289000" />
       <workItem from="1486794857891" duration="33000" />
-      <workItem from="1486958282838" duration="17977000" />
+      <workItem from="1486958282838" duration="20491000" />
+      <workItem from="1487044617963" duration="1000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="745832000" />
+    <option name="totallyTimeSpent" value="748347000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -678,7 +678,7 @@
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19878604" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20182094" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -757,20 +757,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="4" column="90023" lean-forward="false" selection-start-line="4" selection-start-column="90023" selection-end-line="4" selection-end-column="90023" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/prashant.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="33" column="56" lean-forward="false" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_0.php" />
     <entry file="file://$PROJECT_DIR$/application/views/forum/viewTopicDetails.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -1031,19 +1017,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="142" column="32" lean-forward="true" selection-start-line="142" selection-start-column="32" selection-end-line="142" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="520">
           <caret line="297" column="56" lean-forward="false" selection-start-line="297" selection-start-column="56" selection-end-line="297" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1051,22 +1028,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12021">
           <caret line="872" column="34" lean-forward="true" selection-start-line="872" selection-start-column="34" selection-end-line="872" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
-          <caret line="227" column="81" lean-forward="true" selection-start-line="227" selection-start-column="81" selection-end-line="227" selection-end-column="81" />
-          <folding />
+          <caret line="227" column="81" lean-forward="false" selection-start-line="227" selection-start-column="81" selection-end-line="227" selection-end-column="81" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="630" column="88" lean-forward="true" selection-start-line="630" selection-start-column="8" selection-end-line="630" selection-end-column="88" />
+        <state relative-caret-position="1802">
+          <caret line="630" column="88" lean-forward="false" selection-start-line="630" selection-start-column="8" selection-end-line="630" selection-end-column="88" />
           <folding>
             <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -1123,7 +1098,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Inventory_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1497">
+        <state relative-caret-position="4437">
           <caret line="261" column="0" lean-forward="false" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
           <folding />
         </state>
@@ -1131,16 +1106,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="1606" column="0" lean-forward="true" selection-start-line="1606" selection-start-column="0" selection-end-line="1606" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="27302">
+          <caret line="1606" column="0" lean-forward="false" selection-start-line="1606" selection-start-column="0" selection-end-line="1606" selection-end-column="0" />
+          <folding>
+            <marker date="1486986493380" expanded="true" signature="60520:60792" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="35" column="69" lean-forward="true" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
+        <state relative-caret-position="493">
+          <caret line="35" column="69" lean-forward="false" selection-start-line="35" selection-start-column="69" selection-end-line="35" selection-end-column="69" />
           <folding>
             <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -1182,8 +1159,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="869" column="64" lean-forward="true" selection-start-line="869" selection-start-column="64" selection-end-line="869" selection-end-column="64" />
+        <state relative-caret-position="11662">
+          <caret line="869" column="64" lean-forward="false" selection-start-line="869" selection-start-column="64" selection-end-line="869" selection-end-column="64" />
           <folding>
             <element signature="n#getCategoryDetailsById#0;n#Order_Model#0;n#!!top" expanded="false" />
             <element signature="n#getallValidPendingOrderFrDetails#0;n#Order_Model#0;n#!!top" expanded="false" />
@@ -1199,38 +1176,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reporting/inventoryReport.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="201" column="53" lean-forward="false" selection-start-line="201" selection-start-column="53" selection-end-line="201" selection-end-column="53" />
-          <folding />
+        <state relative-caret-position="3519">
+          <caret line="207" column="53" lean-forward="false" selection-start-line="207" selection-start-column="53" selection-end-line="207" selection-end-column="53" />
+          <folding>
+            <marker date="1486986493131" expanded="true" signature="6683:6684" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-163">
-          <caret line="1598" column="78" lean-forward="false" selection-start-line="1598" selection-start-column="78" selection-end-line="1598" selection-end-column="78" />
-          <folding>
-            <element signature="n#ViewReqReportingPdfData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#pdfstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelstockreqlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#ViewAssignReportingPdfData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#pdfstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelstockassignlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#frstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#frstockassignlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#frstockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#pdffrstockreqlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#pdffrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelfrstockreqlistData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelfrstockreqlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#pdf_fr_stockassignlist_Data#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#pdf_fr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelfr_stockassignlist_Data#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#excelfr_stockassignlist#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#ViewexcelInventoryReportData#0;n#Reporting_Controller#0;n#!!top" expanded="false" />
-          </folding>
+        <state relative-caret-position="27302">
+          <caret line="1606" column="78" lean-forward="false" selection-start-line="1606" selection-start-column="78" selection-end-line="1606" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2414">
+          <caret line="142" column="24" lean-forward="false" selection-start-line="142" selection-start-column="24" selection-end-line="142" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/viewIndustryReort.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2363">
+          <caret line="139" column="100" lean-forward="false" selection-start-line="139" selection-start-column="86" selection-end-line="139" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/prashant.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="34" column="34" lean-forward="false" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>

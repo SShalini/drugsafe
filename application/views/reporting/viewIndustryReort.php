@@ -50,7 +50,7 @@
                                   action="<?= __BASE_URL__ ?>/reporting/view_industry_report" method="post">
                                 <div class="row">
                                    
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['dtStart']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
@@ -80,7 +80,7 @@
 
                                     </div>
                                     
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div
                                             class="form-group <?php if (!empty($arErrorMessages['dtEnd']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -109,7 +109,7 @@
                                             <?php } ?>
                                         </div>
                                     </div>
-                                     <div class="search col-md-4">
+                                     <div class="search col-md-3">
                                      <div class="form-group <?php if (!empty($arErrorMessages['szIndustry']) != '') { ?>has-error<?php } ?>">
                                       <select class="form-control custom-select" name="szIndustry" id="szIndustry" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Industry</option>
@@ -135,27 +135,29 @@
                                             <?php } ?>
                                     </div>
                                   </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szTestType']) != '') { ?>has-error<?php } ?>">
+                                            <select class="form-control custom-select drugtypeselect" name="szTestType" id="szTestType" onfocus="remove_formError(this.id,'true')">
+                                                <option value="">Select</option>
+                                                <option value="A" <?php if($_POST['szTestType'] == 'A') echo"selected"; ?>>Alcohol</option>
+                                                <option value="U" <?php if($_POST['szTestType'] == 'U') echo"selected"; ?>>Urine AS/NZA 4308:2001/ As/NZA 4308:2008</option>
+                                                <option value="O" <?php if($_POST['szTestType'] == 'O') echo"selected"; ?>>Oral Fluid AS 4760:2006</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                <div class="row">
-                                     <div class="col-md-4">
-                                     <div class="form-group <?php if (!empty($arErrorMessages['szTestType']) != '') { ?>has-error<?php } ?>">
-                                        <select class="form-control custom-select" name="szTestType" id="szTestType" onfocus="remove_formError(this.id,'true')">
-                                             <option value="">Select</option>
-                                            <option value="A" <?php if($_POST['szTestType'] == 'A') echo"selected"; ?>>Alcohol</option>
-                                            <option value="U" <?php if($_POST['szTestType'] == 'U') echo"selected"; ?>>Urine AS/NZA 4308:2001/ As/NZA 4308:2008</option>
-                                            <option value="O" <?php if($_POST['szTestType'] == 'O') echo"selected"; ?>>Oral Fluid AS 4760:2006</option>
-                                        </select> 
-                                    </div>
-                                  </div>
-                                     <div class="col-md-3">
+                                    <div class="col-md-1">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i
-                                                    class="fa fa-search"></i> Search
+                                                        class="fa fa-search"></i>
                                             </button>
                                             &nbsp;
                                         </div>
                                     </div>
-                                 </div>
+                                    </div>
+                                <!--<div class="row">
+
+
+                                 </div>-->
                              </form>
                         </div>
                     </div>

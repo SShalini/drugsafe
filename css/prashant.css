@@ -32,6 +32,7 @@ body .logo img {
 .collapse-sec{background-image: url("/assets/global/img/portlet-expand-icon-white.png"); width: 14px}
 .collapse-sec.collapsed{background-image: url("/assets/global/img/portlet-collapse-icon-white.png");}
 .media.replyoncomment, .media.replyoncomment .media-body{overflow: visible}
+.drugtypeselect a span{width:100px}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;
