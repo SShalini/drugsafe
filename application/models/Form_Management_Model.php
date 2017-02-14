@@ -155,10 +155,10 @@ class Form_Management_Model extends Error_Model {
         $this->db->where('dtCreatedOn >=', $dtStart);
         $this->db->where('dtCreatedOn <=', $dtEnd);
         $this->db->where('clientType !=', '0');
-        
-        //$this->db->where('status', '1');
+        $this->db->where('status', '1');
+        $this->db->group_by('franchiseeId');
         $query = $this->db->get();
-        // echo $sql = $this->db->last_query(); die();
+        //echo $sql = $this->db->last_query(); die();
 
         if ($query->num_rows() > 0) {
              $row = $query->result_array();

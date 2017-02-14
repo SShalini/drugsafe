@@ -163,10 +163,10 @@
 						foreach($allfranchisee as $allfranchiseeData)
 						{
                                                     
-                                                    $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData);
+                                                    $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
 						    //$getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
-                                                     $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData);
+                                                     $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData['franchiseeId']);
                                                     $id=array();
                                                     foreach($getClientDeatils as $getClientData)
                                                     {   
@@ -184,7 +184,7 @@
                                                     {
                                                         $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
                                                     }
-													$totalRevenu='';
+						    $totalRevenu='';
                                                     $totalRoyaltyfees='';
                                                     $totalNetProfit='';
 						    foreach ($getManualCalcStartToEndDate as $getManualCalcData) {

@@ -2297,15 +2297,8 @@ function excelfr_stockassignlist_Data()
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
         {
             $searchAry =$_POST; 
-            $getSosDetails=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
-            
-            $franchiseeId=array();
-            foreach($getSosDetails as $getSosData)
-            {   
-                array_push($franchiseeId, $getSosData['franchiseeId']);
-            }
-            $franchiseeId = array_unique($franchiseeId);
-            
+            $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
+            //print_r($franchiseeId);die();
         }
 	
        
