@@ -2145,8 +2145,8 @@ function excelfr_stockassignlist_Data()
         $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
-        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szFranchisee']!='')
         {
             $searchAry =$_POST; 
@@ -2308,8 +2308,8 @@ function excelfr_stockassignlist_Data()
        
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
-        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
        
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
@@ -2804,8 +2804,8 @@ function excelfr_stockassignlist_Data()
         }
         $allIndustry=$this->Admin_Model->viewAllIndustryList();
 	$this->load->library('form_validation');
-        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Industry date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Industry date', 'required');
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
             $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
