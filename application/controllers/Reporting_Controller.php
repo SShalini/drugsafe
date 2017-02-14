@@ -2370,13 +2370,7 @@ function excelfr_stockassignlist_Data()
         $pdf->AddPage();
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
-        
-            $allfranchisee=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
-            
-       
-        
-
-
+        $allfranchisee=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Revenue Generate</b></p></div>
             <div class= "table-responsive" >

@@ -78,6 +78,12 @@
                                         <?php
                                         foreach ($allFrDetailsSearchAray as $allFrDetailsSearchList) {
                                             $selected = ($allFrDetailsSearchList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
+                                            if($allFrDetailsSearchList['id'] == $_POST['szSearch1']){ ?>
+                                        <script type="text/javascript">
+                                            setTimeout(function(){getClientListByFrIdData('<?php echo $_POST['szSearch1'];?>');},1000);
+                                        
+                                        </script>
+                                            <?php }
                                             echo '<option value="' . $allFrDetailsSearchList['id'] . '"' . $selected . ' >' . $allFrDetailsSearchList['szName'] . '</option>';
                                         }
                                         ?>
@@ -105,6 +111,12 @@
                                             }
                                             ?>
                                         </select>
+                                        <?php
+                                    if (form_error('szSearch2')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('szSearch2'); ?></span>
+                                        </span><?php } ?>
                                     </div>
                                 </div>
                             </div>
@@ -125,6 +137,12 @@
                                             }
                                             ?>
                                         </select>
+                                        <?php
+                                    if (form_error('szSearch3')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('szSearch3'); ?></span>
+                                        </span><?php } ?>
                                     </div>
                                 </div>
                             </div>
