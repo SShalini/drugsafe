@@ -350,7 +350,32 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             return array();
         
         }
-    } 
-		
+    }
+
+    function getcomparisonrecord($siteid,$drugtype,$compparm=1){
+         $groupbystr = 'MONTH(testdate)';
+         if($compparm == 2){
+             $groupbystr = 'YEAR(testdate)';
+         }
+         $wherestr = " Clientid = ".(int)$siteid." AND Drugtestid LIKE '%".$drugtype."%'";
+       $query = $this->db->select('MONTHNAME(testdate) as month, YEAR(testdate) as year')
+            ->select_sum('TotalAlcoholScreening', 'totalAlcohol')
+            ->select_sum('TotalDonarScreeningUrine','totalDonarUrine')
+            ->select_sum('TotalDonarScreeningOral','totalDonarOral')
+            ->select_sum('NegativeResultUrine','totalNegativeUrine')
+            ->select_sum('NegativeResultOral','totalNegativeOral')
+            ->select_sum('NegativeAlcohol','totalNegativeAlcohol')
+            ->select_sum('PositiveAlcohol','totalPositiveAlcohol')
+            ->from(__DBC_SCHEMATA_SOS_FORM__)
+            ->where($wherestr)
+            ->group_by($groupbystr)
+            ->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+
+        }
+    }
 }
 ?>

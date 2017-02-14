@@ -1576,7 +1576,9 @@ function calTotalPrice() {
 function getProductCodeListByCategory(szCategory) {
     $.post(__BASE_URL__ + "/reporting/getProductCodeListByCategory", {szCategory: szCategory}, function (result) {
         if (result != '') {
+            $("#szProductCode").empty();
             $("#szProductCode").html(result);
+            $("#szSearch3").customselect();
         }
     });
 }
@@ -1762,17 +1764,44 @@ function industryReportXls(dtStart,dtEnd,szIndustry,szTestType) {
 
 }
 function getClientListByFrIdData(idFranchisee) {
-    $.post(__BASE_URL__ + "/reporting/getClientListByFrId", {idFranchisee: idFranchisee}, function (result) {
-        if (result != '') {
-            $("#szSearch2").html(result);
-        }
-    });
+    if(idFranchisee>0){
+        $.post(__BASE_URL__ + "/reporting/getClientListByFrId", {idFranchisee: idFranchisee}, function (result) {
+            if (result != '') {
+                $("#clientname").empty();
+                $("#clientname").html(result);
+                $("#sitename").empty();
+                $("#sitename").html('<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,\'true\')"><option value="">Company Name/site</option></select>');
+                $("#szSearch2").customselect();
+                $("#szSearch3").customselect();
+            }
+        });
+    }
 }
 function getSiteListByClientIdData(idClient) {
-    $.post(__BASE_URL__ + "/reporting/getSiteListByClientId", {idClient: idClient}, function (result) {
-        if (result != '') {
-            $("#szSearch3").html(result);
-        }
+    if(idClient>0){
+        $.post(__BASE_URL__ + "/reporting/getSiteListByClientId", {idClient: idClient}, function (result) {
+            if (result != '') {
+                $("#sitename").empty();
+                $("#sitename").html(result);
+                $("#szSearch3").customselect();
+            }
+        });
+    }
+}
+function comparisonReportPdf(dtStart,dtEnd,szIndustry,szTestType) {
+
+    $.post(__BASE_URL__ + "/reporting/industryReportPdf", {dtStart : dtStart,dtEnd: dtEnd,szIndustry : szIndustry,szTestType : szTestType}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function comparisonReportXls(dtStart,dtEnd,szIndustry,szTestType) {
+    $.post(__BASE_URL__ + "/reporting/industryReportOfXls", {dtStart : dtStart,dtEnd: dtEnd,szIndustry : szIndustry,szTestType : szTestType}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
     });
 
 }

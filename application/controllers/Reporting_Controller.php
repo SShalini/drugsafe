@@ -1156,23 +1156,20 @@ function excelfr_stockassignlist_Data()
             }
             
             $productAry = $this->Inventory_Model->getProductByCategory(trim($_POST['szCategory']));
-            
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearch3\" name=\"szSearch3\" placeholder=\"Product Code\" onfocus=\"remove_formError(this.id,'true')\">";
       	if(!empty($productAry))
      	{
-          $Product = "Product Category";
-        	$result = "<select class=\"form-control required\" id=\"szSearch3\" name=\"szSearch3\" placeholder=\"Product Code\" onfocus=\"remove_formError(this.id,'true')\">";
-               
-              $result .= "<option value=''>".$Product ."</option>";
+              $result .= "<option value=''>Product Code</option>";
           	foreach ($productAry as $productDetails)
           	{
              	$result .= "<option value='".$productDetails['id']."'>".$productDetails['szProductCode']."</option>";
          	}
-         	$result .= "</select>";
      	}
      	else
      	{
-     		$result = "<input type=\"text\" class=\"form-control required\" id=\"szSearch3\" name=\"szSearch3\" placeholder=\"Product Code\" onfocus=\"remove_formError(this.id,'true')\">";
+            $result .= "<option value=''>Product Code</option>";
      	}
+        $result .= "</select>";
       	echo $result;           
   	}
           public function frInventoryReport()
@@ -2676,21 +2673,70 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-        
-        $searchAry = $_POST;
-        $data['szMetaTagTitle'] = "Client Comparison Report";
-        $data['is_user_login'] = $is_user_login;
-        $data['pageName'] = "Client_Comparison_Report";
-        $data['notification'] = $count;
-        $data['data'] = $data;
-        $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
-        $data['drugtestkitlist'] = $drugTestKitListAray;
+        $count = $this->Admin_Model->getnotification();
+        $clientarr = array();
+        $sitearr = array();
+        $franchiseeid = (isset($_POST['szSearch1'])?$_POST['szSearch1']:'');
+        $clientid = (isset($_POST['szSearch2'])?$_POST['szSearch2']:'');
+        $siteid = (isset($_POST['szSearch3'])?$_POST['szSearch3']:'');
+        $testtype = (isset($_POST['szSearch4'])?$_POST['szSearch4']:'');
+        $drugtesttype = ($testtype == 'A'?'1':($testtype=='O'?'2':($testtype=='U'?'3':($testtype=='AZ'?'4':'5'))));
+        $comparetype = (isset($_POST['szSearch5'])?$_POST['szSearch5']:'');
+        if(!empty($clientid)){
+            $clientarr = $this->Webservices_Model->getclientdetails($franchiseeid);
+        }
+        if(!empty($siteid)){
+            $sitearr = $this->Webservices_Model->getclientdetails($franchiseeid,$clientid);
+        }
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('szSearch1', 'Franchisee Name ', 'required');
+        $this->form_validation->set_rules('szSearch2', 'Client Name', 'required');
+        $this->form_validation->set_rules('szSearch3', 'Company Name/Site ', 'required');
+        $this->form_validation->set_rules('szSearch4', 'Test Type', 'required');
+        $this->form_validation->set_rules('szSearch5', 'Compare Data ', 'required');
+        $this->form_validation->set_message('required', '{field} is required');
+        if ($this->form_validation->run() == FALSE){
+
+            $data['szMetaTagTitle'] = "Client Comparison Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Client_Comparison_Report";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['err'] = true;
+            $data['clientarr'] = $clientarr;
+            $data['sitearr'] = $sitearr;
+            $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('reporting/clientCmpReport');
-            $this->load->view('layout/admin_footer'); 
-               
-    }
+            $this->load->view('layout/admin_footer');
+        }
+        else {
+            $comparisonResultArr = $this->Reporting_Model->getcomparisonrecord($siteid,$drugtesttype,$comparetype);
+            $data['szMetaTagTitle'] = "Client Comparison Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Client_Comparison_Report";
+            $data['notification'] = $count;
+            $data['compareresultarr'] = $comparisonResultArr;
+            $data['data'] = $data;
+            $data['err'] = false;
+            $data['drugtesttype'] = $drugtesttype;
+            $data['clientarr'] = $clientarr;
+            $data['sitearr'] = $sitearr;
+            $data['testtype'] = $testtype;
+            $data['comparetype'] = $comparetype;
+            $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('reporting/clientCmpReport');
+            $this->load->view('layout/admin_footer');
+        }
+
+
+
+
+
+
+        }
       function getClientListByFrId($idFranchisee='')
  	{ 
             if(trim($idFranchisee) != '')
@@ -2699,24 +2745,21 @@ function excelfr_stockassignlist_Data()
             }
             
             $clientAry = $this->Franchisee_Model->viewClientList(true,$_POST['idFranchisee']);
-         
-            
+
+        $result = '<select class="form-control custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
       	if(!empty($clientAry))
      	{
-          $Product = "Client Name";
-        	$result = "<select class=\"form-control required\" id=\"szSearch2\" name=\"szSearch2\" placeholder=\"Client Name\" value=\"\" onfocus=\"remove_formError(this.id,'true')\" onchange=\"getSiteListByClientIdData(this.value,'true')\">";
-               
-              $result .= "<option value=''>".$Product ."</option>";
+              $result .= "<option value=''>Client Name</option>";
           	foreach ($clientAry as $clientDetails)
           	{
              	$result .= "<option value='".$clientDetails['id']."'>".$clientDetails['szName']."</option>";
          	}
-         	$result .= "</select>";
      	}
      	else
      	{
-     		$result = "<input type=\"text\" class=\"form-control required\" id=\"szSearch2\" name=\"szSearch2\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\" onchange=\"getSiteListByClientIdData(this.value,'true')\">";
+     	    $result .= "<option value=''>Client Name</option>";
      	}
+        $result .= "</select>";
       	echo $result;           
   	}
          function getSiteListByClientId($idClient='')
@@ -2727,24 +2770,21 @@ function excelfr_stockassignlist_Data()
             }
             
             $siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['idClient']);
-        
-            
+
+        $result = '<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,\'true\')">';
       	if(!empty($siteAry))
      	{
-          $Product = "Company Name/site";
-        	$result = "<select class=\"form-control required\" id=\"szSearch3\" name=\"szSearch3\" placeholder=\"Company Name/site\" onfocus=\"remove_formError(this.id,'true')\">";
-               
-              $result .= "<option value=''>".$Product ."</option>";
+              $result .= "<option value=''>Company Name/site</option>";
           	foreach ($siteAry as $siteDetails)
           	{
              	$result .= "<option value='".$siteDetails['id']."'>".$siteDetails['szName']."</option>";
          	}
-         	$result .= "</select>";
      	}
      	else
      	{
-     		$result = "<input type=\"text\" class=\"form-control required\" id=\"szSearch2\" name=\"szSearch3\" placeholder=\"Company Name/site\" onfocus=\"remove_formError(this.id,'true')\">";
+            $result .= "<option value=''>Company Name/site</option>";
      	}
+        $result .= "</select>";
       	echo $result;           
   	} 
     public function view_industry_report()
