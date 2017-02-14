@@ -2148,8 +2148,8 @@ function excelfr_stockassignlist_Data()
         $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
-        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szFranchisee']!='')
         {
             $searchAry =$_POST; 
@@ -2298,14 +2298,11 @@ function excelfr_stockassignlist_Data()
         {
             $searchAry =$_POST; 
             $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
-            //print_r($franchiseeId);die();
         }
-	
-       
-        $this->load->library('form_validation');
+	$this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
-        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
        
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
@@ -2317,11 +2314,8 @@ function excelfr_stockassignlist_Data()
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['searchAry'] = $_POST;
-			
-            $data['allfranchisee'] = $franchiseeId;
+	    $data['allfranchisee'] = $franchiseeId;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
-            //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummery');
             $this->load->view('layout/admin_footer');
@@ -2337,8 +2331,6 @@ function excelfr_stockassignlist_Data()
             $data['searchAry'] = $_POST;
 	    $data['allfranchisee'] = $searchOptionArr;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
-            //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummery');
             $this->load->view('layout/admin_footer');
@@ -2381,13 +2373,8 @@ function excelfr_stockassignlist_Data()
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         
-            $getSosDetails=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
-            $franchiseeId=array();
-            foreach($getSosDetails as $getSosData)
-            {   
-                array_push($franchiseeId, $getSosData['franchiseeId']);
-            }
-            $allfranchisee = array_unique($franchiseeId);
+            $allfranchisee=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
+            
        
         
 
@@ -2411,10 +2398,10 @@ function excelfr_stockassignlist_Data()
             $totalRoyaltyfees='';
             $totalNetProfit='';
             foreach ($allfranchisee as $allfranchiseeData) {
-                 $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData);
+                 $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
 						    //$getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
-                                                    $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData);
+                                                    $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData['franchiseeId']);
                                                     $id=array();
                                                     foreach($getClientDeatils as $getClientData)
                                                     {   
@@ -2551,13 +2538,8 @@ function excelfr_stockassignlist_Data()
        
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
-         $getSosDetails=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
-            $franchiseeId=array();
-            foreach($getSosDetails as $getSosData)
-            {   
-                array_push($franchiseeId, $getSosData['franchiseeId']);
-            }
-            $allfranchisee = array_unique($franchiseeId);
+         $allfranchisee=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
+            
             if (!empty($allfranchisee)) {
 
             $i = 2;
@@ -2566,9 +2548,9 @@ function excelfr_stockassignlist_Data()
             $totalRoyaltyfees='';
             $totalNetProfit='';
             foreach ($allfranchisee as $allfranchiseeData) {
-                 $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData);
+                 $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
-						   $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData);
+						   $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData['franchiseeId']);
                                                     $id=array();
                                                     foreach($getClientDeatils as $getClientData)
                                                     {   
