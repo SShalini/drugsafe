@@ -129,7 +129,7 @@
                                   <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
                                   <div class="search col-md-3">
                                       <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
-                                      <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                                      <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onblur="remove_formError(this.id,'true')" onchange="getClientListByFrId(this.value);">
                                         
                                           
                                            <option value="">Franchisee Name</option>
@@ -147,7 +147,7 @@
                 
                                 <div class="col-md-1" style="text-align: center; padding: 5px 0px;"></div>
                                   <div class="search col-md-3">
-                                                               
+                                        <div id='szClient'>                         
                                       <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Client Name</option>
                                           <?php
@@ -159,6 +159,7 @@
                                           }
                                           ?>
                                       </select>
+                                            </div>
                                   </div>
                               
                                   <div class="col-md-1">

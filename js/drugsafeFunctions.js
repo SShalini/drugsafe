@@ -1805,3 +1805,13 @@ function comparisonReportXls(dtStart,dtEnd,szIndustry,szTestType) {
     });
 
 }
+
+function getClientListByFrId(idFranchisee) {
+    $.post(__BASE_URL__ + "/franchisee/getClientListByFrIdData", {idFranchisee: idFranchisee}, function (result) {
+        if (result != '') {
+            $("#szClient").empty();
+            $("#szClient").html(result);
+            $("#szSearchClRecord1").customselect();
+        }
+    });
+}

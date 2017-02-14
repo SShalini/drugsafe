@@ -594,7 +594,14 @@ class Franchisee_Controller extends CI_Controller
             $idClient = $_POST['szSearchClRecord1'];
         }
          // handle pagination
-          
+        if($_POST['szSearchClRecord1'])
+            {
+                  $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr);     
+               
+            }  
+        
+        
+        
                    $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
                  if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                      if(!empty($idFr) && !empty($idClient)){
@@ -1029,5 +1036,31 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('franchisee/viewAgentEmployeeDetails');
         $this->load->view('layout/admin_footer');
     }
-}
+  function getClientListByFrIdData($idFranchisee='')
+ 	{  
+            if(trim($idFranchisee) != '')
+            {
+                $_POST['idFranchisee'] = $idFranchisee; 
+            }
+       
+           $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $_POST['idFranchisee']);
+          
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearchClRecord1\" name=\"szSearchClRecord1\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\">";
+      	if(!empty($clientAray))
+     	{
+              $result .= "<option value=''>Client Name</option>";
+          	foreach ($clientAray as $clientDetails)
+          	{
+             	$result .= "<option value='".$clientDetails['id']."'>".$clientDetails['szName']."</option>";
+         	}
+     	}
+     	else
+     	{
+            $result .= "<option value=''>Client Name</option>";
+     	}
+        $result .= "</select>";
+      	echo $result;           
+  	}
+    
+        }
 ?>
