@@ -94,7 +94,7 @@
 
             </li>
            <?php } ?>
-            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole']==5) { ?>
+            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
                 <!--<li class="nav-item  <?php /*if ($pageName == 'Stock_Request') { */?> active open <?php /*} */?>">
                     <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/stock_management/stockreqlist">
                         <i class="fa fa-mail-forward" aria-hidden="true"></i>
@@ -183,7 +183,7 @@
 
                 </li>
             <?php }
-            else { ?>
+             if ($_SESSION['drugsafe_user']['iRole'] == 2 ) { ?>?>
                   <li class="nav-item start <?php if (trim($pageName) == 'Reporting') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>

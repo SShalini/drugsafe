@@ -1023,7 +1023,7 @@ function excelfr_stockassignlist_Data()
 
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
-        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
          $this->session->unset_userdata('productCode');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
@@ -1038,7 +1038,7 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-        $count = $this->Admin_Model->getnotification();
+           $count = $this->Admin_Model->getnotification();
            $searchAry = $_POST;
            $franchiseeid = $_POST['szSearch1'];
            $catid = $_POST['szSearch2'];

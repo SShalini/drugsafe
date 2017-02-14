@@ -239,10 +239,8 @@ class Franchisee_Controller extends CI_Controller
         $config['total_rows'] = count($this->Franchisee_Model->viewClientList(true, $franchiseId,$limit,$offset,$searchAry,$id));
         $config['per_page'] =__PAGINATION_RECORD_LIMIT__;
 
-
         $this->pagination->initialize($config);
 
-     
         $clientAray = $this->Franchisee_Model->viewClientList(true,$idfranchisee,$config['per_page'],$this->uri->segment(3),$searchAry,$id);
         $clientlistArr = $this->Franchisee_Model->viewClientList(true,$idfranchisee);
     
