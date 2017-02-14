@@ -2340,12 +2340,10 @@ function excelfr_stockassignlist_Data()
     }
     function ViewpdfofRevenueSummery()
     {
-
         $dtStart = $this->input->post('dtStart');
         $dtEnd = $this->input->post('dtEnd');
         $this->session->set_userdata('dtStart',$dtStart);
         $this->session->set_userdata('dtEnd',$dtEnd);
-       
         echo "SUCCESS||||";
         echo "ViewpdfRevenueSummery";
     }
@@ -2360,12 +2358,12 @@ function excelfr_stockassignlist_Data()
         $pdf->SetSubject('Revenue Summery PDF');
         $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
         $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-// set image scale factor
+        // set image scale factor
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
         $pdf->SetDisplayMode('real', 'default');
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
-// set default monospaced font
+        // set default monospaced font
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
