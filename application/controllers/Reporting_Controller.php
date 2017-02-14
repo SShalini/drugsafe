@@ -2716,6 +2716,7 @@ function excelfr_stockassignlist_Data()
         }
         else {
             $comparisonResultArr = $this->Reporting_Model->getcomparisonrecord($siteid,$drugtesttype,$comparetype);
+            $userdataarr = $this->Webservices_Model->getfranchiseeclientsitebysiteid($siteid);
             $data['szMetaTagTitle'] = "Client Comparison Report";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Client_Comparison_Report";
@@ -2723,6 +2724,7 @@ function excelfr_stockassignlist_Data()
             $data['compareresultarr'] = $comparisonResultArr;
             $data['data'] = $data;
             $data['err'] = false;
+            $data['userdataarr'] = $userdataarr;
             $data['drugtesttype'] = $drugtesttype;
             $data['clientarr'] = $clientarr;
             $data['sitearr'] = $sitearr;
@@ -3198,8 +3200,216 @@ function excelfr_stockassignlist_Data()
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
-    }    
-    
+    }
+    function comparisonReportPdf(){
+        $siteid = $this->input->post('siteid');
+        $testtype = $this->input->post('testtype');
+        $comparetype = $this->input->post('comparetype');
+        $this->session->set_userdata('siteid',$siteid);
+        $this->session->set_userdata('testtype',$testtype);
+        $this->session->set_userdata('comparetype',$comparetype);
+        echo "SUCCESS||||";
+        echo "comparisonReportOfPdf";
+    }
+    public function comparisonReportOfPdf()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe client comparison report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Stock Request Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+        $pdf->AddPage();
 
+        $siteid = $this->session->userdata('siteid');
+        $testtype = $this->session->userdata('testtype');
+        $comparetype = $this->session->userdata('comparetype');
+
+        $compareresultarr=$this->Reporting_Model->getcomparisonrecord($siteid,$testtype,$comparetype);
+        $userdataarr = $this->Webservices_Model->getfranchiseeclientsitebysiteid($siteid);
+        $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Client Comparison Report</b></p></div>';
+        if(!empty($userdataarr)){
+            $html .=  '<div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                            <tr>
+                            <th><b>Franchisee Name:</b></th><td>'.(!empty($userdataarr['franchiseename'])?$userdataarr['franchiseename']:'').'</td>
+                            <th><b>Client Name:</b></th><td>'.(!empty($userdataarr['clientname'])?$userdataarr['clientname']:'').'</td>
+                            <th><b>Company Name/site:</b></th><td>'.(!empty($userdataarr['sitename'])?$userdataarr['sitename']:'').'</td>
+                            </tr>
+                            </table>
+                            </div>';
+        }
+        $html .=  '<div class= "table-responsive" >
+                            <table border="1" cellpadding="5">';
+        if(!empty($compareresultarr)){
+            $html .='<thead>
+                                                <tr>
+                                                    <th><b>'.($comparetype == 1 ?'Month' : 'Year').'</b></th>
+                                                    <th><b>Test Type</b></th>
+                                                    <th><b>Total Donors Screenings/Collection at Clients sites</b></th>
+                                                    <th><b>Positive Test Result</b></th>
+                                                    <th><b>Negative Test Result</b></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>';
+            foreach ($compareresultarr as $comparisondata){
+                $html .= '<tr>
+                            <td>
+                                '.($comparetype == 1 ? $comparisondata['month'] : $comparisondata['year']).'
+                            </td>
+                            <td>'.($testtype == '1'?'Alcohol':($testtype == '3'?'Urine AS/NZA 4308:2001':($testtype == '2'?'Oral Fluid AS 4760:2006':($testtype=='4'?'As/NZA 4308:2008':'')))).'</td>
+                            <td>'.($testtype == '1'?$comparisondata['totalAlcohol']:($testtype == '3'?$comparisondata['totalDonarUrine']:($testtype == '2'?$comparisondata['totalDonarOral']:($testtype=='4'?$comparisondata['totalDonarUrine']:'0')))).'</td>
+                            <td>'.($testtype == '1'?$comparisondata['totalPositiveAlcohol']:($testtype == '3'?($comparisondata['totalDonarUrine']-$comparisondata['totalNegativeUrine']):($testtype == '2'?($comparisondata['totalDonarOral']-$comparisondata['totalNegativeOral']):($testtype=='4'?($comparisondata['totalDonarUrine']-$comparisondata['totalNegativeUrine']):'0')))).'</td>
+                            <td>'.($testtype == '1'?$comparisondata['totalNegativeAlcohol']:($testtype == '3'?$comparisondata['totalNegativeUrine']:($testtype == '2'?$comparisondata['totalNegativeOral']:($testtype=='4'?$comparisondata['totalNegativeUrine']:'0')))).'</td>
+                        </tr>';
+            }
+        }else{
+            $html .= '<tr><td>No data found.</td></tr>';
+        }
+        $html .= '</table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+
+        $this->session->unset_userdata('siteid');
+        $this->session->unset_userdata('testtype');
+        $this->session->unset_userdata('comparetype');
+        $pdf->Output('client-comparison-report.pdf', 'I');
+    }
+    function comparisonReportOfXls()
+    {
+        $siteid = $this->input->post('siteid');
+        $testtype = $this->input->post('testtype');
+        $comparetype = $this->input->post('comparetype');
+        $this->session->set_userdata('siteid',$siteid);
+        $this->session->set_userdata('testtype',$testtype);
+        $this->session->set_userdata('comparetype',$comparetype);
+
+        echo "SUCCESS||||";
+        echo "comparisonReportXls";
+    }
+    public function comparisonReportXls()
+    {
+        $this->load->library('excel');
+        $filename = 'DrugSafe';
+        $title = 'Client Comparison Report';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+        $siteid = $this->session->userdata('siteid');
+        $testtype = $this->session->userdata('testtype');
+        $comparetype = $this->session->userdata('comparetype');
+
+        $compareresultarr=$this->Reporting_Model->getcomparisonrecord($siteid,$testtype,$comparetype);
+        $userdataarr = $this->Webservices_Model->getfranchiseeclientsitebysiteid($siteid);
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($title);
+        if(!empty($compareresultarr)) {
+            $this->excel->getActiveSheet()->setCellValue('A1', 'Franchisee Name:');
+            $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('B1', (!empty($userdataarr['franchiseename'])?$userdataarr['franchiseename']:''));
+            $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(false);
+            $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('C1', 'Client Name:');
+            $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('D1', (!empty($userdataarr['clientname'])?$userdataarr['clientname']:''));
+            $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(false);
+            $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('E1', 'Company Name/site:');
+            $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('F1', (!empty($userdataarr['sitename'])?$userdataarr['sitename']:''));
+            $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(false);
+            $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->mergeCells('A2:F2');
+
+            $this->excel->getActiveSheet()->setCellValue('A3', '#');
+            $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('B3', ($comparetype == 1 ? 'Month' : 'Year'));
+            $this->excel->getActiveSheet()->getStyle('B3')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('B3')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('B3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('C3', 'Test Type');
+            $this->excel->getActiveSheet()->getStyle('C3')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('C3')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('C3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('D3', 'Total Donors Screenings/Collection at Clients sites');
+            $this->excel->getActiveSheet()->getStyle('D3')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('D3')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('D3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('E3', 'Positive Test Result');
+            $this->excel->getActiveSheet()->getStyle('E3')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('E3')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+            $this->excel->getActiveSheet()->setCellValue('F3', 'Negative Test Result');
+            $this->excel->getActiveSheet()->getStyle('F3')->getFont()->setSize(13);
+            $this->excel->getActiveSheet()->getStyle('F3')->getFont()->setBold(true);
+            $this->excel->getActiveSheet()->getStyle('F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+            $x = 4;
+            foreach ($compareresultarr as $comparisondata) {
+                $this->excel->getActiveSheet()->setCellValue('A'.$x, $x-3);
+                $this->excel->getActiveSheet()->setCellValue('B'.$x, ($comparetype == 1 ? $comparisondata['month'] : $comparisondata['year']));
+                $this->excel->getActiveSheet()->setCellValue('C'.$x, ($testtype == '1'?'Alcohol':($testtype == '3'?'Urine AS/NZA 4308:2001':($testtype == '2'?'Oral Fluid AS 4760:2006':($testtype=='4'?'As/NZA 4308:2008':'')))));
+                $this->excel->getActiveSheet()->setCellValue('D'.$x, ($testtype == '1'?$comparisondata['totalAlcohol']:($testtype == '3'?$comparisondata['totalDonarUrine']:($testtype == '2'?$comparisondata['totalDonarOral']:($testtype=='4'?$comparisondata['totalDonarUrine']:'0')))));
+                $this->excel->getActiveSheet()->setCellValue('E'.$x,($testtype == '1'?$comparisondata['totalPositiveAlcohol']:($testtype == '3'?($comparisondata['totalDonarUrine']-$comparisondata['totalNegativeUrine']):($testtype == '2'?($comparisondata['totalDonarOral']-$comparisondata['totalNegativeOral']):($testtype=='4'?($comparisondata['totalDonarUrine']-$comparisondata['totalNegativeUrine']):'0')))));
+                $this->excel->getActiveSheet()->setCellValue('F'.$x,($testtype == '1'?$comparisondata['totalNegativeAlcohol']:($testtype == '3'?$comparisondata['totalNegativeUrine']:($testtype == '2'?$comparisondata['totalNegativeOral']:($testtype=='4'?$comparisondata['totalNegativeUrine']:'0')))));
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $x++;
+            }
+        }else{
+            $this->excel->getActiveSheet()->mergeCells('A2:F2');
+            $this->excel->getActiveSheet()->setCellValue('A2','No data found.');
+        }
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
 }
 ?>

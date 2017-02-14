@@ -1356,4 +1356,17 @@ class Webservices_Model extends Error_Model
             return false;
         }
     }
+
+    function getfranchiseeclientsitebysiteid($siteid){
+        $data = array();
+        $sitedetarr = $this->getclientdetailsbyclientid($siteid);
+        if(!empty($sitedetarr)){
+            $data['sitename'] = $sitedetarr[0]['szName'];
+            $clientarr = $this->getuserdetails($sitedetarr[0]['clientType']);
+            $data['clientname'] = (!empty($clientarr[0]['szName'])?$clientarr[0]['szName']:'');
+            $franchiseearr = $this->getuserdetails($sitedetarr[0]['franchiseeId']);
+            $data['franchiseename'] = (!empty($franchiseearr[0]['szName'])?$franchiseearr[0]['szName']:'');
+        }
+        return $data;
+    }
 } 

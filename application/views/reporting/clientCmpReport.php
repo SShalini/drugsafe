@@ -207,6 +207,18 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
+                                        <?php if(!empty($userdataarr)){ ?>
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-bordered table-striped">
+                                                    <tr>
+                                                    <th>Franchisee Name:</th><td><?php echo (!empty($userdataarr['franchiseename'])?$userdataarr['franchiseename']:'');?></td>
+                                                    <th>Client Name:</th><td><?php echo (!empty($userdataarr['clientname'])?$userdataarr['clientname']:'');?></td>
+                                                    <th>Company Name/site:</th><td><?php echo (!empty($userdataarr['sitename'])?$userdataarr['sitename']:'');?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                       <?php }?>
+
                                         <div class="table-responsive">
                                             <table class="table table-hover table-bordered table-striped">
                                                 <thead>

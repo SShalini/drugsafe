@@ -1788,17 +1788,16 @@ function getSiteListByClientIdData(idClient) {
         });
     }
 }
-function comparisonReportPdf(dtStart,dtEnd,szIndustry,szTestType) {
-
-    $.post(__BASE_URL__ + "/reporting/industryReportPdf", {dtStart : dtStart,dtEnd: dtEnd,szIndustry : szIndustry,szTestType : szTestType}, function (result) {
+function comparisonReportPdf(siteid,testtype,comparetype) {
+    $.post(__BASE_URL__ + "/reporting/comparisonReportPdf", {siteid : siteid,testtype: testtype,comparetype : comparetype}, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
         window.open(URL,'_blank');
 
     });
 }
-function comparisonReportXls(dtStart,dtEnd,szIndustry,szTestType) {
-    $.post(__BASE_URL__ + "/reporting/industryReportOfXls", {dtStart : dtStart,dtEnd: dtEnd,szIndustry : szIndustry,szTestType : szTestType}, function (result) {
+function comparisonReportXls(siteid,testtype,comparetype) {
+    $.post(__BASE_URL__ + "/reporting/comparisonReportOfXls", {siteid : siteid,testtype: testtype,comparetype : comparetype}, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
         window.open(URL,'_blank');

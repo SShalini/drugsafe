@@ -109,7 +109,7 @@
                                             <?php } ?>
                                         </div>
                                     </div>
-                                     <div class="search col-md-3">
+                                     <div class="search col-md-3 industryselect">
                                      <div class="form-group <?php if (!empty($arErrorMessages['szIndustry']) != '') { ?>has-error<?php } ?>">
                                       <select class="form-control custom-select" name="szIndustry" id="szIndustry" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Industry</option>
