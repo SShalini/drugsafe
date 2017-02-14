@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Reporting_Controller extends CI_Controller
 {
-   
+    
     function __construct()
     {
         parent::__construct();
@@ -1065,7 +1065,7 @@ function excelfr_stockassignlist_Data()
                     $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Reporting";
-                    $data['subpageName'] = "Inventory_Report";
+                      $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['productAry']=$productAry;
@@ -1083,7 +1083,7 @@ function excelfr_stockassignlist_Data()
                     $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Reporting";
-                    $data['subpageName'] = "Inventory_Report";
+                      $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['productAry']=$productAry;
@@ -2148,8 +2148,8 @@ function excelfr_stockassignlist_Data()
         $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
-        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szFranchisee']!='')
         {
             $searchAry =$_POST; 
@@ -2311,8 +2311,8 @@ function excelfr_stockassignlist_Data()
        
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
-        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
        
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
