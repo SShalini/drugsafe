@@ -1082,7 +1082,7 @@ function excelfr_stockassignlist_Data()
                     $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Reporting";
-                    $data['subpageName'] = "Inventory_Reporttest";
+                    $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['productAry']=$productAry;
