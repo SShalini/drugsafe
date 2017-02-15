@@ -67,7 +67,7 @@
                     <form name="orderSearchForm" id="orderSearchForm"
                           action="<?= __BASE_URL__ ?>/reporting/clientcomparisonReport" method="post">
                         <div class="row">
-
+                        <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
                             <div class="col-md-3">
                                 <?php $allFrDetailsSearchAray = $this->Admin_Model->viewFranchiseeList(); ?>
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
@@ -97,6 +97,13 @@
                                 </div>
                             </div>
                             <div class="col-md-1"></div>
+                            <?php }elseif($_SESSION['drugsafe_user']['iRole'] == 2){?>
+                            <input type="hidden" name="szSearch1" value="<?php echo $_SESSION['drugsafe_user']['id'];?>" />
+                            <script type="text/javascript">
+                                setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>');},1000);
+
+                            </script>
+                        <?php } ?>
                             <div class="col-md-3">
                                 <div class="form-group ">
                                     <div id="clientname">
@@ -111,13 +118,13 @@
                                             }
                                             ?>
                                         </select>
-                                        <?php
+                                    </div>
+                                    <?php
                                     if (form_error('szSearch2')) {
                                         ?>
                                         <span class="help-block pull-left">
                                         <span><?php echo form_error('szSearch2'); ?></span>
                                         </span><?php } ?>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -137,17 +144,23 @@
                                             }
                                             ?>
                                         </select>
-                                        <?php
+
+                                    </div>
+                                    <?php
                                     if (form_error('szSearch3')) {
                                         ?>
                                         <span class="help-block pull-left">
                                         <span><?php echo form_error('szSearch3'); ?></span>
                                         </span><?php } ?>
-                                    </div>
                                 </div>
                             </div>
+
+                        <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
                         </div>
                         <div class="row">
+                            <?php }else{?>
+                                <div class="col-md-1"></div>
+                            <?php }?>
                             <div class="col-md-3">
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
 
@@ -176,9 +189,14 @@
 
                                 </div>
                             </div>
+                            <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
                             <div class="col-md-1">
 
                             </div>
+                            <?php }else{?>
+                        </div>
+                                <div class="row">
+                            <?php }?>
                             <div class="col-md-3">
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
 

@@ -3254,9 +3254,6 @@ function excelfr_stockassignlist_Data()
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
         error_reporting(E_ALL);
 
-        $this->session->unset_userdata('siteid');
-        $this->session->unset_userdata('testtype');
-        $this->session->unset_userdata('comparetype');
         $pdf->Output('client-comparison-report.pdf', 'I');
     }
     function comparisonReportOfXls()

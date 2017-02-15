@@ -183,7 +183,7 @@
 
                 </li>
             <?php }
-             if ($_SESSION['drugsafe_user']['iRole'] == 2 ) { ?>?>
+             if ($_SESSION['drugsafe_user']['iRole'] == 2 ) { ?>
                   <li class="nav-item start <?php if (trim($pageName) == 'Reporting') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
@@ -197,6 +197,12 @@
                                 <span class="title">Revenue Generate</span>
                             </a>
                         </li>
+                    <li class="nav-item  <?php if ($subpageName == 'Client_Comparison_Report') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/clientcomparisonReport">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">Client Comparison</span>
+                        </a>
+                    </li>
                     <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frInventoryReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
