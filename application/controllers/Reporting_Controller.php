@@ -1029,7 +1029,7 @@ function excelfr_stockassignlist_Data()
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-      public function inventoryReport()
+    public function inventoryReport()
     {
 
         $is_user_login = is_user_login($this);
@@ -1092,8 +1092,6 @@ function excelfr_stockassignlist_Data()
             $this->load->view('layout/admin_header',$data);
             $this->load->view('reporting/inventoryReport');
             $this->load->view('layout/admin_footer'); 
-           
-               
     }
      
                
@@ -2222,8 +2220,8 @@ function excelfr_stockassignlist_Data()
         $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
-        $this->form_validation->set_rules('dtStart', 'Start Order date ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'End Order date', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $idfranchisee!='')
         {
             $searchAry =$_POST; 
@@ -2307,7 +2305,7 @@ function excelfr_stockassignlist_Data()
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
             $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
-            $data['szMetaTagTitle'] = "Revenue Summery";
+            $data['szMetaTagTitle'] = "Revenue Summary";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
             $data['subpageName'] = "revenue_summery";
@@ -2322,7 +2320,7 @@ function excelfr_stockassignlist_Data()
 
         } else {
             
-            $data['szMetaTagTitle'] = "Revenue Summery";
+            $data['szMetaTagTitle'] = "Revenue Summary";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
             $data['subpageName'] = "revenue_summery";
@@ -2353,9 +2351,9 @@ function excelfr_stockassignlist_Data()
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetTitle('Drug-safe Revenue Summery');
+        $pdf->SetTitle('Drug-safe Revenue Summary');
         $pdf->SetAuthor('Drug-safe');
-        $pdf->SetSubject('Revenue Summery PDF');
+        $pdf->SetSubject('Revenue Summary PDF');
         $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
         $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
         // set image scale factor
@@ -2372,7 +2370,7 @@ function excelfr_stockassignlist_Data()
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         $allfranchisee=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Revenue Generate</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Revenue Summary</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -2496,7 +2494,7 @@ function excelfr_stockassignlist_Data()
     {
         $this->load->library('excel');
         $filename = 'DrugSafe';
-        $title = 'Revenue Summery';
+        $title = 'Revenue Summary';
         $file = $filename . '-' . $title ; //save our workbook as this file name
 
 
@@ -2669,7 +2667,8 @@ function excelfr_stockassignlist_Data()
 
             $data['szMetaTagTitle'] = "Client Comparison Report";
             $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Client_Comparison_Report";
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "industry_report";
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['err'] = true;
@@ -2686,7 +2685,8 @@ function excelfr_stockassignlist_Data()
             $userdataarr = $this->Webservices_Model->getfranchiseeclientsitebysiteid($siteid);
             $data['szMetaTagTitle'] = "Client Comparison Report";
             $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Client_Comparison_Report";
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "industry_report";
             $data['notification'] = $count;
             $data['compareresultarr'] = $comparisonResultArr;
             $data['data'] = $data;
