@@ -12,7 +12,7 @@
                     </li>
 
                     <li>
-                        <span class="active">Revenue Summery</span>
+                        <span class="active">Revenue Summary</span>
                     </li>
                 </ul>
 
@@ -22,7 +22,7 @@
                         <div class="caption">
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase">
-                                    Revenue Summery
+                                    Revenue Summary
                                 </span>
                         </div>
                         <?php if(!empty($allfranchisee)){?>
