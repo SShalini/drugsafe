@@ -100,7 +100,7 @@
                                 <tr>
 
                                     <th style="width:200px"> Forum Title</th>
-                                    <th style="width:500px"> Short Descreption </th>
+                                    <th style="width:500px"> Short Description </th>
                                      <th style="width:100px"> Total Topics </th>
                                     <th> Actions </th>
 

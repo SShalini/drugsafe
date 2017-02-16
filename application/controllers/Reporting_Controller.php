@@ -2412,6 +2412,10 @@ function excelfr_stockassignlist_Data()
             $totalRevenu='';
             $totalRoyaltyfees='';
             $totalNetProfit='';
+            
+                $allfranchiseeTotalRevenue='';
+                $allfranchiseetotalRoyaltyfees='';
+                $allfranchiseetotalNetProfit='';
             foreach ($allfranchisee as $allfranchiseeData) {
                  $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
@@ -2475,8 +2479,22 @@ function excelfr_stockassignlist_Data()
                                                         $totalNetProfit=$totalNetProfit+$NetTotal;
 														$totalNetProfit = number_format($totalNetProfit, 2, '.', '');
                                                         $totalNetProfit = number_format($totalNetProfit, 2, '.', ',');
+                                                      
+                                                   
                                                         
 						   }
+                                                    $allfranchiseeTotalRevenue=$allfranchiseeTotalRevenue+$totalRevenu;
+                                                    $allfranchiseeTotalRevenue = number_format($allfranchiseeTotalRevenue, 2, '.', '');
+                                                    $allfranchiseeTotalRevenue=number_format($allfranchiseeTotalRevenue, 2, '.', ',');
+                                                     
+                                                    $allfranchiseetotalRoyaltyfees=$allfranchiseetotalRoyaltyfees+$totalRoyaltyfees;
+                                                    $allfranchiseetotalRoyaltyfees = number_format($allfranchiseetotalRoyaltyfees, 2, '.', '');
+                                                    $allfranchiseetotalRoyaltyfees=number_format($allfranchiseetotalRoyaltyfees, 2, '.', ',');
+                                                    
+                                                    $allfranchiseetotalNetProfit=$allfranchiseetotalNetProfit+$totalNetProfit;
+                                                    $allfranchiseetotalNetProfit = number_format($allfranchiseetotalNetProfit, 2, '.', '');
+                                                    $allfranchiseetotalNetProfit=number_format($allfranchiseetotalNetProfit, 2, '.', ',');
+                                                    
                 
                 $i++;
                 $html .= '<tr>
@@ -2489,6 +2507,14 @@ function excelfr_stockassignlist_Data()
                         </tr>';
             }
             
+             $html.='<tr>
+                    
+                    <td></td>
+                    <td>Total</td>
+                    <td>$'.$allfranchiseeTotalRevenue.'</td>
+                    <td>$'.$allfranchiseetotalRoyaltyfees.'</td>
+                    <td>$'.$allfranchiseetotalNetProfit.'</td>
+                   </tr>'; 
         }
 
         $html .= '
@@ -2562,6 +2588,11 @@ function excelfr_stockassignlist_Data()
             $totalRevenu='';
             $totalRoyaltyfees='';
             $totalNetProfit='';
+            
+              $allfranchiseeTotalRevenue='';
+                $allfranchiseetotalRoyaltyfees='';
+                $allfranchiseetotalNetProfit='';
+                
             foreach ($allfranchisee as $allfranchiseeData) {
                  $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
@@ -2626,6 +2657,18 @@ function excelfr_stockassignlist_Data()
                                                         $totalNetProfit = number_format($totalNetProfit, 2, '.', ',');
                                                         
 						   }
+                                                   $allfranchiseeTotalRevenue=$allfranchiseeTotalRevenue+$totalRevenu;
+                                                    $allfranchiseeTotalRevenue = number_format($allfranchiseeTotalRevenue, 2, '.', '');
+                                                    $allfranchiseeTotalRevenue=number_format($allfranchiseeTotalRevenue, 2, '.', ',');
+                                                     
+                                                    $allfranchiseetotalRoyaltyfees=$allfranchiseetotalRoyaltyfees+$totalRoyaltyfees;
+                                                    $allfranchiseetotalRoyaltyfees = number_format($allfranchiseetotalRoyaltyfees, 2, '.', '');
+                                                    $allfranchiseetotalRoyaltyfees=number_format($allfranchiseetotalRoyaltyfees, 2, '.', ',');
+                                                    
+                                                    $allfranchiseetotalNetProfit=$allfranchiseetotalNetProfit+$totalNetProfit;
+                                                    $allfranchiseetotalNetProfit = number_format($allfranchiseetotalNetProfit, 2, '.', '');
+                                                    $allfranchiseetotalNetProfit=number_format($allfranchiseetotalNetProfit, 2, '.', ',');
+                                                    
                 $x++;
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i,$getAdmindetails['szName']);
@@ -2641,6 +2684,10 @@ function excelfr_stockassignlist_Data()
                 
                 $i++;
             }
+            $this->excel->getActiveSheet()->setCellValue('B'.$i,Total);
+            $this->excel->getActiveSheet()->setCellValue('C'.$i,'$'.$allfranchiseeTotalRevenue);
+            $this->excel->getActiveSheet()->setCellValue('D'.$i,'$'.$allfranchiseetotalRoyaltyfees);
+            $this->excel->getActiveSheet()->setCellValue('E'.$i,'$'.$allfranchiseetotalNetProfit);
             
             
         }

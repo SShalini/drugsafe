@@ -273,7 +273,7 @@
                                                   <tr>
                                                      
                                                      <td></td>
-                                                     <td>Total</td>
+                                                     <td><b>Total</b></td>
                                                      <td>
                                                         <?php echo $allfranchiseeTotalRevenue;?>
                                                      </td>
