@@ -16,7 +16,7 @@
                     <div class="portlet light bordered">
                          <?php 
                              $DrugtestidArr  = array_map('intval', str_split($Drugtestid));
-                            if(in_array(1, $DrugtestidArr)||in_array(2, $DrugtestidArr)||in_array(3, $DrugtestidArr)){
+                            if(in_array(1, $DrugtestidArr)||in_array(2, $DrugtestidArr)||in_array(3, $DrugtestidArr)||in_array(4, $DrugtestidArr)){
                            $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));  
                          ?>     
                             <div class="portlet-title">
@@ -37,10 +37,10 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>System calculation is as follows</th>
+                                    <th>System Calculation</th>
                                     <th> No of Donors</th>
                                     <th> RRP </th>
-                                    <th> $ value </th>
+                                    <th> $ Value </th>
                                     
                                 </tr>
                                 </thead>

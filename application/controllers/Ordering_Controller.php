@@ -492,7 +492,7 @@ class Ordering_Controller extends CI_Controller
     </tr>
 </table>
 <br />
-<h3 style="color:dark red">System Calculated Result</h3>
+<h3 style="color:black">System Calculated Result</h3>
 <br />
 <table border="1px" cellpadding="5px">
     <tr>
@@ -506,7 +506,7 @@ class Ordering_Controller extends CI_Controller
     </tr>
 </table>
 <br />
-<h3 style="color:dark red">Other Revenue Stream Calculation Result</h3>
+<h3 style="color:black">Other Revenue Stream Calculation Result</h3>
 <br />
 <table border="1px" cellpadding="5px">
     <tr>
@@ -520,7 +520,7 @@ class Ordering_Controller extends CI_Controller
     </tr>
 </table>
 <br />
-<h3 style="color:dark red">Proforma Invoice Totals</h3>
+<h3 style="color:black">Proforma Invoice Totals</h3>
 <br />
 <table border="1px" cellpadding="5px">
     <tr>

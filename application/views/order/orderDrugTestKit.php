@@ -108,11 +108,11 @@
                                             <?php
                                                $i = 1;
                                                 foreach($drugTestKitAray as $drugTestKitData)
-                                                {  
+                                                { 
                                                     $idfranchisee = $_SESSION['drugsafe_user']['id'];
                                           
-                                                   $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitData['iProductId']);
-                                            
+                                                   $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitData['id']);
+                                                   $modelStockDataAry = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
 
                                                 
                                                    ?>
@@ -128,7 +128,7 @@
                                                     $dtExpiredOn = date("d-m-Y", strtotime($date)); 
                                                     echo $dtExpiredOn;?> </td>
                                                      <td><?php echo($drugTestKitDataArr['szModelStockVal'] > 0 ? $drugTestKitDataArr['szModelStockVal'] : 'N/A')?></td>
-                                                    <td><?php echo($drugTestKitData['szQuantity'] > 0 ? $drugTestKitData['szQuantity'] : 'N/A')?></td>
+                                                    <td><?php echo($modelStockDataAry['szQuantity'] > 0 ? $modelStockDataAry['szQuantity'] : 'N/A')?></td>
                                          
                                                     <td>
                                                          <input type="number"min="1"  class="form-control btn-xs " max="100" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >

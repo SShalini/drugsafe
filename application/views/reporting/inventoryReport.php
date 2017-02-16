@@ -169,9 +169,7 @@
                                     <th>
                                          Requested 
                                     </th>
-                                    <th>
-                                         Alloted
-                                    </th>
+                                  
                                   
                             </thead>
                             <tbody>
@@ -190,24 +188,22 @@
                                     <td>
                                          <?php echo $validPendingOrdersDetailsData['szProductCode'] ;?>
                                     </td>
-                                    <td>  <?php echo $validPendingOrdersDetailsData['szQuantity'] ;?> </td>
+                                   <td>  <?php echo $validPendingOrdersDetailsData['szAvailableQuantity'] ;?> </td>
                                 <?php
                                                     if(!empty($availprodqty)) {
                                                         $printzero = true;
                                                         foreach ($availprodqty as $requestedqty) {
                                                             if ($requestedqty['productid'] == $validPendingOrdersDetailsData['id']) { ?>
                                                                 <td>  <?php echo $requestedqty['quantity']; ?> </td>
-                                                                <td>
-                                                                    <?php echo $requestedqty['dispatched']; ?>
-                                                                </td>
+                                                               
                                                             <?php $printzero = false; }
                                                         }
                                                         if($printzero) { ?>
                                                             <td>0</td>
-                                                            <td>0</td>
+                                                            
                                                          <?php }
                                                     }else{
-                                                        echo '<td>0</td><td>0</td>';
+                                                        echo '<td>0</td>';
                                                     } ?>
 
 

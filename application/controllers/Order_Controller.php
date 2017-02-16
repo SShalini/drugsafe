@@ -520,7 +520,7 @@ class Order_Controller extends CI_Controller
 
         $html = '<a style="text-align:center;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
 <br />            
-<div><label style="font-size:18px;color:red;margin-bottom:5px;"><b>Order Info
+<div><label style="font-size:18px;color:black;margin-bottom:5px;"><b>Order Info
             </b></label></div>
             <div>
                 <lable>Order# :</lable>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <lable>#0000' . $idOrder . '</lable>  
@@ -536,7 +536,7 @@ class Order_Controller extends CI_Controller
             </div>
          
             <br />
-            <div><label style="font-size:18px;color:red;margin-bottom:15px;"><b>Products Info   
+            <div><label style="font-size:18px;color:black;margin-bottom:15px;"><b>Products Info   
             </b></label></div>
             <div>
          

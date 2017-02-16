@@ -674,7 +674,7 @@ class Order_Model extends Error_Model {
        
         $this->db->where($searchQuery);
         $this->db->distinct();
-        $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
+        $this->db->select('productid,franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
         $this->db->order_by("orderid", "desc");
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
@@ -709,7 +709,7 @@ class Order_Model extends Error_Model {
             }
             $this->db->where($searchq);
            $this->db->distinct();
-           $this->db->select('franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
+           $this->db->select('productid,franchiseeid,price,orderid,createdon,dispatched,status,szProductCategory,szProductCode,szAvailableQuantity,quantity');
            $this->db->order_by("orderid", "desc");
            $this->db->from(__DBC_SCHEMATA_ORDER__);
            $this->db->join('ds_order_details', 'ds_orders.id = ds_order_details.orderid');
@@ -856,7 +856,7 @@ class Order_Model extends Error_Model {
 
         function getProductDetsByfranchiseeid($franchiseeid,$catid=0,$prodcode=0){
             $whereAry = 'prodstock.iFranchiseeId =' . (int)$franchiseeid .' AND prod.isDeleted = 0 '.($catid>0?' AND prod.szProductCategory = '.(int)$catid:'').($prodcode>0?' AND prod.id = '.(int)$prodcode:'') ;
-            $query = $this->db->select('prodstock.szQuantity, prodstock.iFranchiseeId, prod.id, prod.szProductCode, prod.szProductDiscription, prod.szProductCategory')
+            $query = $this->db->select('prodstock.szQuantity, prodstock.iFranchiseeId, prod.id, prod.szProductCode, prod.szProductDiscription, prod.szProductCategory,prod.szAvailableQuantity')
                 ->from(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__. ' as prodstock')
                 ->join(__DBC_SCHEMATA_PRODUCT__ . ' as prod', 'prod.id = prodstock.iProductId')
                 ->where($whereAry)

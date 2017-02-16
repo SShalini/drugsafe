@@ -250,7 +250,7 @@ function ViewReqReportingPdfData()
        
       
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Request Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Request Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -419,7 +419,7 @@ function ViewAssignReportingPdfData()
         
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Assignment Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Assignment Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -737,7 +737,7 @@ function excelstockassignlistData()
          $productCode = $this->session->userdata('productCode');
         $frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails($productCode, false, false, $franchiseeId);
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Request Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Request Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -874,7 +874,7 @@ function excelfrstockreqlistData()
         $frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails($productCode, false, false, $franchiseeId);
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Assignment Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Assignment Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -1285,7 +1285,7 @@ function excelfr_stockassignlist_Data()
        
       
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Stock Request Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Request Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -1294,7 +1294,7 @@ function excelfr_stockassignlist_Data()
                                         <th> <b>Product Code </b> </th>
                                         <th style="width:150px"><b> In Stock  </b> </th>
                                         <th style="width:170px"> <b>Requested</b> </th>
-                                        <th style="width:170px"> <b>Alloted</b> </th>
+                                       
                                    
                                     </tr>';
         if ($allReqOrderAray) {
@@ -1304,13 +1304,29 @@ function excelfr_stockassignlist_Data()
                 $i++;
               
                  $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($allReqOrderData['szProductCategory']));
-                $html .= '<tr>
+                 $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($allReqOrderData['franchiseeid'],$allReqOrderData['szProductCategory'],$allReqOrderData['productid']);
+                 $html .= '<tr>
                                             <td> ' . $i . ' </td>
                                             <td> ' . $productcatAry['szName'] . '</td>
-                                            <td> ' . $allReqOrderData['szProductCode'] . ' </td>
-                                            <td>' . $allReqOrderData['szAvailableQuantity'] . ' </td>
-                                               <td>' . $allReqOrderData['quantity'] . ' </td>
-                                                    <td>' . $allReqOrderData['dispatched'] . ' </td>
+                                            <td> ' . $allReqOrderData['szProductCode'] . ' </td>';
+                                           
+                                                if(!empty($validPendingOrdersQtyDetailsAray)) {
+                                           $printzero = true;
+                                               foreach ($validPendingOrdersQtyDetailsAray as $qtyData) {
+                                                   $html .= '<td>' . $qtyData['szQuantity'] . ' </td>';
+                                                    $printzero = false;
+                                                }
+                                           
+                                            if($printzero) {
+                                                $html .= '<td>0</td>
+                                               ';
+                                           }
+                                        }else{
+                                            $html .= '<td>0</td>';
+                                        }
+                                          
+                                        $html .= '<td>' . $allReqOrderData['quantity'] . ' </td>
+                                             
                                                     
                                 
                                         </tr>';
@@ -1470,7 +1486,7 @@ function excelfr_stockassignlist_Data()
      
       
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Inventory Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Inventory Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -1479,7 +1495,7 @@ function excelfr_stockassignlist_Data()
                                         <th style="width:130px"> <b>Product Code </b> </th>
                                         <th style="width:120px"><b> In Stock  </b> </th>
                                         <th style="width:120px"> <b>Requested</b> </th>
-                                        <th style="width:120px"> <b>Alloted</b> </th>
+                                       
                                    
                                     </tr>';
         if ($reqOrderAray) {
@@ -1494,22 +1510,22 @@ function excelfr_stockassignlist_Data()
                                             <td> ' . $i . ' </td>
                                             <td> ' . $productcatAry['szName'] . '</td>
                                             <td> ' . $reqOrderData['szProductCode'] . ' </td>
-                                            <td>' . $reqOrderData['szQuantity'] . ' </td>';
+                                            <td>' . $reqOrderData['szAvailableQuantity'] . ' </td>';
                                         if(!empty($availprodqty)) {
                                             $printzero = true;
                                             foreach ($availprodqty as $requestedqty) {
                                                 if ($requestedqty['productid'] == $reqOrderData['id']) {
                                                     $html .='<td>'.$requestedqty['quantity'].'</td>
-                                                    <td>'.$requestedqty['dispatched'].'</td>';
+                                                   ';
                                                     $printzero = false;
                                                 }
                                             }
                                             if($printzero) {
                                                 $html .= '<td>0</td>
-                                                <td>0</td>';
+                                               ';
                                            }
                                         }else{
-                                            $html .= '<td>0</td><td>0</td>';
+                                            $html .= '<td>0</td>';
                                         }
                                 
                                         $html .='</tr>';
@@ -1578,11 +1594,7 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Alloted');
-        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
+       
         $productCode = $this->session->userdata('productCode');
         $prodCategory = $this->session->userdata('prodCategory');
         $franchiseeId = $this->session->userdata('franchiseeId');
@@ -1599,23 +1611,23 @@ function excelfr_stockassignlist_Data()
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $productcatAry['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szQuantity']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szAvailableQuantity']);
                 if(!empty($availprodqty)) {
                     $printzero = true;
                     foreach ($availprodqty as $requestedqty) {
                         if ($requestedqty['productid'] == $item['id']) {
                             $this->excel->getActiveSheet()->setCellValue('E' . $i, $requestedqty['quantity']);
-                            $this->excel->getActiveSheet()->setCellValue('F' . $i, $requestedqty['dispatched']);
+                           
                             $printzero = false;
                         }
                     }
                     if($printzero){
                         $this->excel->getActiveSheet()->setCellValue('E' . $i, 0);
-                        $this->excel->getActiveSheet()->setCellValue('F' . $i, 0);
+                       
                     }
                 }else{
                     $this->excel->getActiveSheet()->setCellValue('E' . $i, 0);
-                    $this->excel->getActiveSheet()->setCellValue('F' . $i, 0);
+                   
                 }
 
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
@@ -1623,7 +1635,7 @@ function excelfr_stockassignlist_Data()
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
-                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+             
                 $i++;
             }
         }
@@ -1886,7 +1898,7 @@ function excelfr_stockassignlist_Data()
 
 
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Revenue Generate</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Revenue Generate</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -2383,7 +2395,7 @@ function excelfr_stockassignlist_Data()
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         $allfranchisee=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Revenue Summary</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Revenue Summary</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -2869,7 +2881,7 @@ function excelfr_stockassignlist_Data()
        
       
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Industry Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Industry Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                             <thead>
@@ -3220,7 +3232,7 @@ function excelfr_stockassignlist_Data()
         $compareresultarr=$this->Reporting_Model->getcomparisonrecord($siteid,$testtype,$comparetype);
         $userdataarr = $this->Webservices_Model->getfranchiseeclientsitebysiteid($siteid);
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Client Comparison Report</b></p></div>';
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Client Comparison Report</b></p></div>';
         if(!empty($userdataarr)){
             $html .=  '<div class= "table-responsive" >
                             <table border="1" cellpadding="5">

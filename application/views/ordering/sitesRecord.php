@@ -108,6 +108,9 @@
                                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
                                     $drugtestidArr = explode(',', $sosRormDetailsData['Drugtestid']);
                                     $drugtestArr = implode('', $drugtestidArr);
+                                    if(empty($drugtestArr)){
+                                      $drugtestArr = '0';  
+                                    }
                                     $manualCalcDetails = $this->Ordering_Model->getManualCalculationBySosId($sosRormDetailsData['id']);
                                     if ((!empty($manualCalcDetails) && $_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '2')) {
                                         if ($j == 0) { ?>
@@ -116,11 +119,13 @@
                                             <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                             <tr>
+                                                <th>Proforma Invoice #</th>
                                                 <th> Id.</th>
                                                 <th> Client Name</th>
                                                 <th> Test Date</th>
                                                 <th> Service Commenced </th>
                                                 <th> Service Concluded </th>
+                                                <th> Proforma Invoice Date</th>
                                                 <th> Action</th>
 
                                             </tr>
@@ -129,11 +134,13 @@
                                         <?php }
                                         ?>
                                         <tr>
+                                              <td> </td>
                                             <td> CL-<?php echo $sosRormDetailsData['Clientid']; ?> </td>
                                             <td> <?php echo $userDataAry['szName'] ?> </td>
                                             <td> <?php echo date('d/m/Y', strtotime($sosRormDetailsData['testdate']));; ?> </td>
                                             <td> <?php echo $sosRormDetailsData['ServiceCommencedOn']; ?> </td>
                                             <td> <?php echo $sosRormDetailsData['ServiceConcludedOn']; ?> </td>
+                                            <td> </td>
                                             <td>
 
                                                 <?php

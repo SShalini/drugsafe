@@ -135,7 +135,8 @@ class StockMgt_Model extends Error_Model
         $whereAry = array('iProductId' => $id, 'iFranchiseeId' => $idfranchisee);
         $this->db->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_MODEL_STOCK_VALUE__);
-
+//        $sql = $this->db->last_query($query);
+//              print_r($sql);die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row[0];

@@ -230,7 +230,7 @@
                <li class="nav-item start <?php if (trim($pageName) == 'Ordering') { ?>active open<?php } ?>">
                    <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord" class="nav-link nav-toggle">
                        <i class="fa fa-file-text" aria-hidden="true"></i>
-                       <span class="title">Proforma Invoice #</span>
+                       <span class="title">Proforma Invoice </span>
                    </a>
                </li>
 

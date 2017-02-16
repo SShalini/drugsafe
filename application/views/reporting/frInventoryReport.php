@@ -144,7 +144,7 @@
                                           In Stock  
                                     </th>
                                     <th>
-                                         Requested
+                                         Ordered
                                     </th>
                                   
                             </thead>
@@ -154,6 +154,7 @@
                                                 { 
                                                     $i++ ;
                                                    $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
+                                                   $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($validPendingOrderFrDetailsData['franchiseeid'],$validPendingOrderFrDetailsData['szProductCategory'],$validPendingOrderFrDetailsData['productid']);
                                                    ?>
                             <tr>
                                     <td><?php echo $i; ?> </td>
@@ -163,7 +164,22 @@
                                     <td>
                                          <?php echo $validPendingOrderFrDetailsData['szProductCode'] ;?>
                                     </td>
-                                    <td>  <?php echo $validPendingOrderFrDetailsData['szAvailableQuantity'] ;?> </td>
+                                          <?php
+                                                    if(!empty($validPendingOrdersQtyDetailsAray)) {
+                                                        $printzero = true;
+                                                        foreach ($validPendingOrdersQtyDetailsAray as $qtyData) {?>
+                                                           
+                                                                <td>  <?php echo $qtyData['szQuantity']; ?> </td>
+                                                               
+                                                            <?php $printzero = false; }
+                                                       
+                                                        ?>
+                                                          
+                                                         <?php 
+                                                }  else {
+                                                        echo '<td>0</td>';
+                                                    } ?>
+                                   
                                      <td>  <?php echo $validPendingOrderFrDetailsData['quantity'] ;?> </td>
                                     
 

@@ -274,7 +274,7 @@ class Form_Management_Controller extends CI_Controller
         
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Form Management Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Form Management Report</b></p></div>
         
                         <div>
                              <lable><b>Requesting Client :</b> '.$sosRormDetailsAry['szName'].'</lable>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp;  &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <lable><b>City :</b> '.$sosRormDetailsAry['szCity'].'</lable>  

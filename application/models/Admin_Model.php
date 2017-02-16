@@ -84,12 +84,8 @@ class Admin_Model extends Error_Model
     }
     function set_abn($value, $flag = true)
     {
-        if(is_numeric($value)){
-        $this->data['abn'] = $this->validateInput($value,__VLD_CASE_DIGITS__, "abn", "ABN",11,11, $flag,1);
-        }
-        else{
            $this->data['abn'] = $this->validateInput($value,__VLD_CASE_DIGITS__, "abn", "ABN",11,11, $flag); 
-        }
+        
     }
 
     function set_szAddress($value, $flag = true)

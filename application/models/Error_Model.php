@@ -78,7 +78,7 @@
             return "<div class='$class'>$msg</div>";
         }
 		
-		function validateInput( $value, $validation, $error_field, $error_message, $min_length = false, $max_length = false, $required = false,$flag='0' )
+		function validateInput( $value, $validation, $error_field, $error_message, $min_length = false, $max_length = false, $required = false)
 		{
             
 			if(!is_array($value)) $value = trim( $value );
@@ -147,13 +147,13 @@
 							if( $min_length !== false && strlen( (string)$value ) < $min_length )
 							{
 								$error = true;
-								$this->addError( $error_field, $szErrorMessage . " must be " . $min_length . " digits long." );
+								$this->addError( $error_field, $szErrorMessage . " must contain " . $min_length . " digits only." );
 								return false;
 							}
 							if( $max_length !== false && strlen( (string)$value ) > $max_length )
 							{
 								$error = true;
-								$this->addError( $error_field, $szErrorMessage . " must not be long more than " . $max_length . " digits." );
+								$this->addError( $error_field, $szErrorMessage . " must contain " . $max_length . " digits only." );
 								return false;
 							}
 						}
@@ -172,12 +172,9 @@
                                                             
 								$error = true;
 								
-                                                                if($flag == 1){
-                                                            $this->addError( $error_field, $szErrorMessage . " must be " . $min_length . " digits only" );
-                                                                }
-                                                                 else{
+                                                              
                                                               $this->addError( $error_field, $szErrorMessage . " must be " . $min_length . " digits" );
-                                                              }
+                                                           
 								
 								return false;
 							}
