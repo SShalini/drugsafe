@@ -37,7 +37,6 @@
                             </div>
                         <?php } ?>
                     </div>
-                    
                     <div class="portlet-body totalpr alert">
                         <div class="row">
                             <form name="revenueSearchForm" id="revenueSearchForm"
@@ -73,7 +72,9 @@
                                         </div>
 
                                     </div>
-                                    
+                                      <div class="col-md-1">
+                                        
+                                    </div>
                                     <div class="col-md-3">
                                         <div
                                             class="form-group <?php if (!empty($arErrorMessages['dtEnd']) != '') { ?>has-error<?php } ?>">
@@ -103,10 +104,13 @@
                                             <?php } ?>
                                         </div>
                                     </div>
+                                      <div class="col-md-1">
+                                        
+                                    </div>
                                      <div class="col-md-3">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i
-                                                    class="fa fa-search"></i> Search
+                                                    class="fa fa-search"></i> 
                                             </button>
                                             &nbsp;
                                         </div>
@@ -129,7 +133,7 @@
                                 <div class="portlet green-meadow box">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-users"></i>Revenue Summery
+                                            <i class="fa fa-users"></i>Revenue Summary
 
                                         </div>
 

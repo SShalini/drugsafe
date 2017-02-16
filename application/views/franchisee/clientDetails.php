@@ -175,7 +175,7 @@
                             <lable>Company Phone Number:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $clientDetailsAray['szEmail'];?></p>
+                            <p><?php echo $clientDetailsAray['szContactNumber'];?></p>
                         </div>
                     </div>
                    
@@ -218,6 +218,46 @@
                                     ?>
                             </div>
                         </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Industry:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <?php if($clientDetailsAray['industry']==1){
+                               $value = 'Agriculture, Forestry and Fishing';
+                            }
+                            if($clientDetailsAray['industry']==2){
+                               $value = 'Mining';
+                            }
+                            if($clientDetailsAray['industry']==3){
+                               $value = 'Manufacturing';
+                            }
+                            if($clientDetailsAray['industry']==4){
+                               $value = 'Electricity, Gas and Water Supply';
+                            }if($clientDetailsAray['industry']==5){
+                               $value = 'Construction';
+                            }if($clientDetailsAray['industry']==6){
+                               $value = 'Wholesale Trade';
+                            }if($clientDetailsAray['industry']==7){
+                               $value = 'Transport and Storage';
+                            }if($clientDetailsAray['industry']==8){
+                               $value = 'Communication Services';
+                            }if($clientDetailsAray['industry']==9){
+                               $value = 'Agriculture, Property and Business Services';
+                            }if($clientDetailsAray['industry']==10){
+                               $value = 'Agriculture, Government Administration and Defence';
+                            }if($clientDetailsAray['industry']==11){
+                               $value = 'Education';
+                            }
+                            if($clientDetailsAray['industry']==12){
+                               $value = 'Health and Community Services';
+                            }if($clientDetailsAray['industry']==13){
+                               $value = 'Other';
+                            }  ?>
+                            
+                            <p><?php echo $value;?></p>
+                        </div>
+                    </div>
                         <?php
                     }
                     ?>
@@ -568,7 +608,7 @@
                     </div>
                       <div class="row">
                         <div class="col-sm-6 text-style bold">
-                            <lable>Type of service like on-site:</lable>
+                            <lable>Type of service preferred on-site:</lable>
                         </div>
                         <div class="col-sm-6">
                              <p><?php if($userDataAry['onsite_service']==0)  echo "Mobile Clinic ";  else echo "In-house";?></p>
@@ -576,7 +616,7 @@
                     </div>
                        <div class="row">
                         <div class="col-sm-6 text-style bold">
-                            <lable>Access to power for Mobile:</lable>
+                            <lable>Access to power for our Mobile:</lable>
                         </div>
                         <div class="col-sm-6">
                             <p><?php if($userDataAry['power_access']==0)  echo "Yes";  else echo "No";?></p>
@@ -584,7 +624,7 @@
                     </div>
                          <div class="row">
                         <div class="col-sm-6 text-style bold">
-                            <lable>People required to complete an induction:</lable>
+                            <lable>Our people required to complete an induction:</lable>
                         </div>
                         <div class="col-sm-6">
                             <p><?php if($userDataAry['req_comp_induction']==0)  echo "Yes";  else echo "No";?></p>
@@ -653,7 +693,7 @@
                     </div>
                           <div class="row">
                        <div class="col-sm-6 text-style bold">
-                            <lable>Preffered start time:</lable>
+                            <lable>Preferred start time:</lable>
                         </div>
                         <div class="col-sm-6">
                             <p><?php echo $userDataAry['start_time'];?></p>
@@ -661,7 +701,7 @@
                     </div>
                           <div class="row">
                        <div class="col-sm-6 text-style bold">
-                            <lable>Risk assessment:</lable>
+                            <lable>Risk assessment required:</lable>
                         </div>
                         <div class="col-sm-6">
                            <p><?php if($userDataAry['risk_assessment']==0)  echo "Yes";  else echo "No";?></p>

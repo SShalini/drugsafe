@@ -97,6 +97,9 @@
                                                 <th> Product Code</th>
                                                 <th>  Descreption</th>
                                                 <th>  Cost</th>
+                                                 <th>  Expiry Date</th>
+                                                 <th>  Model Stock Value</th>
+                                                  <th>  Available Stock Quantity</th>
                                                 <th style="width:60px;">  Quantity</th>
                                                 <th>  Action</th>
                                             </tr>
@@ -106,7 +109,10 @@
                                                $i = 1;
                                                 foreach($drugTestKitAray as $drugTestKitData)
                                                 {  
-                                                     $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                                    $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                          
+                                                   $drugTestKitDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$drugTestKitData['iProductId']);
+                                            
 
                                                 
                                                    ?>
@@ -117,6 +123,13 @@
                                                     <td><?php echo $drugTestKitData['szProductCode']?> </td>
                                                     <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
+                                                    <td><?php 
+                                                    $date= $drugTestKitData['dtExpiredOn'];
+                                                    $dtExpiredOn = date("d-m-Y", strtotime($date)); 
+                                                    echo $dtExpiredOn;?> </td>
+                                                     <td><?php echo($drugTestKitDataArr['szModelStockVal'] > 0 ? $drugTestKitDataArr['szModelStockVal'] : 'N/A')?></td>
+                                                    <td><?php echo($drugTestKitData['szQuantity'] > 0 ? $drugTestKitData['szQuantity'] : 'N/A')?></td>
+                                         
                                                     <td>
                                                          <input type="number"min="1"  class="form-control btn-xs " max="100" name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>

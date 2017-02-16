@@ -10,7 +10,7 @@ class Order_Model extends Error_Model {
     
 	  function InsertOrder($idProduct,$quantity)
         {		
-           $date = date('Y-m-d H:i:s');
+           $date = date('Y-m-d h:i:s');
             $CheckOrderExistArr = $this->CheckOrderExist($idProduct);
             
               if(!empty($CheckOrderExistArr)){
@@ -138,7 +138,7 @@ class Order_Model extends Error_Model {
    function InsertOrderSuccess($franchiseeId,$Price)
         { 
         
-          $date = date('Y-m-d H:i:s');
+         $date = date('Y-m-d h:i:s');
           $dataAry = array(
                                 'franchiseeid' => $franchiseeId,
                                 'price' => $Price,
@@ -382,7 +382,7 @@ class Order_Model extends Error_Model {
 }
  public function updateOrderByOrderId($orderId,$flag='0')
 	{
-     $date = date('Y-m-d H:i:s');
+    $date = date('Y-m-d h:i:s');
      if($flag==2){
        $dataAry = array(
 			'status' => '4',
@@ -459,7 +459,7 @@ class Order_Model extends Error_Model {
          public function orderFinalUpdate($orderId,$price)
 	{ 
              
-            $date = date('Y-m-d H:i:s');
+            $date = date('Y-m-d h:i:s');
 		$dataAry = array(
 			'status' => '2',
                         'price' => $price,
@@ -528,7 +528,7 @@ class Order_Model extends Error_Model {
          public function orderPendingUpdate($orderId,$price)
 	{ 
              
-            $date = date('Y-m-d H:i:s');
+           $date = date('Y-m-d h:i:s');
 		$dataAry = array(
 			'status' => '4',
                         'price' => $price

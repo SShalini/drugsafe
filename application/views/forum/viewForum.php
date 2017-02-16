@@ -136,7 +136,7 @@
                                             <td> <?php echo $forumTopicData['szTopicTitle'];?> </td> 
                                             <?php if($forumTopicData['isClosed']==1)
                                             {?>
-                                                  <td style="color: #e73d4a">Close</td> 
+                                                  <td style="color: #e73d4a">Closed</td> 
                                        <?php      }
                                             else{ ?>
                                              <td style="color: #1bbc9b">Open</td>  

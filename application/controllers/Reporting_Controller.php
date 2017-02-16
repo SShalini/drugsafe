@@ -1183,7 +1183,18 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
+           $count = $this->Admin_Model->getnotification();
+           $searchAry = $_POST;
+           $catid = $_POST['szSearch2'];
+           $prodcode = $_POST['szSearch3'];
            
+                $validPendingOrderFrDetailsAray = $this->Order_Model->getallValidPendingOrderFrDetails($searchAry);
+           
+            if($_POST['szSearch3'])
+            {
+                $productAry = $this->Inventory_Model->getProductByCategory(trim($catid));
+               
+            }
         
             $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch2', 'Product Category', 'required');
@@ -1199,8 +1210,9 @@ function excelfr_stockassignlist_Data()
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
                     $data['drugtestkitlist'] = $drugTestKitListAray;
-
-            $this->load->view('layout/admin_header',$data);
+                   $data['productAry']=$productAry;
+  
+                   $this->load->view('layout/admin_header',$data);
             $this->load->view('reporting/frInventoryReport');
             $this->load->view('layout/admin_footer'); 
             }
@@ -1214,6 +1226,7 @@ function excelfr_stockassignlist_Data()
                     $data['pageName'] = "Orders";
                     $data['notification'] = $count;
                     $data['data'] = $data;
+                     $data['productAry']=$productAry;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
                     $data['drugtestkitlist'] = $drugTestKitListAray;
 
@@ -1675,16 +1688,16 @@ function excelfr_stockassignlist_Data()
 
 
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:red"><b>Orders Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Orders Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
                                         <th style="width:80px"><b>  #</b> </th>
                                         <th> <b>Franchisee</b> </th>
-                                        <th> <b>Order date </b> </th>
-                                        <th ><b> Order#  </b> </th>
-                                        <th > <b>No. of products</b> </th>
-                                   <th ><b> Order cost </b> </th>
+                                        <th> <b>Order Date </b> </th>
+                                        <th ><b> Order #  </b> </th>
+                                        <th > <b>No. of Products</b> </th>
+                                   <th ><b> Order Cost </b> </th>
                                         <th > <b>Xero Invoice No.</b> </th>
                                     </tr>';
         if ($validOrdersDetailsAray) {
@@ -1752,22 +1765,22 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Order date');
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Order Date');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('D1', 'Order#');
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Order #');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'No. of products');
+        $this->excel->getActiveSheet()->setCellValue('E1', 'No. of Products');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Order cost');
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Order Cost');
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

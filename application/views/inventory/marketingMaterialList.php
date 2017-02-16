@@ -91,12 +91,14 @@
                                     <tr>
                                         <th> Image </th>
                                         <th> Product Code</th>
-                                        <th>  Descreption</th>
+                                        <th>  Description</th>
                                         <th>  Cost</th>
                                         <th>  Expiry Date</th>
+                                                                           
                                        <?php
                                         if($_SESSION['drugsafe_user']['iRole']==1){
                                         ?>
+                                         <th>  Avaliable Quantity</th>  
                                         <th> Actions </th>
                                        <?php }else{?>
                                         <th>  Model Stock Value</th>
@@ -127,6 +129,7 @@
                                             $date= $marketingMaterialData['dtExpiredOn'];
                                             $dtExpiredOn = date("d-m-Y", strtotime($date)); 
                                             echo $dtExpiredOn;?> </td>
+                                              <td><?php echo $marketingMaterialData['szAvailableQuantity'];?> </td>
                                             <?php
                                            if($_SESSION['drugsafe_user']['iRole']==1){
                                              ?>

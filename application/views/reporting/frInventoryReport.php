@@ -78,8 +78,7 @@
                     <div class="row">
                       <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/frInventoryReport" method="post">
                 
-                    
-                  
+                 
                                       <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             
@@ -96,17 +95,24 @@
                            
                         </div>
                     </div>
-                    <div class="col-md-1">
-                       
-                           </div>
-                     <div class="col-md-3" >
-                          
-                        <div class="form-group ">
-                           <div id="szSearch3">
-                            <input type="text" class="form-control" id="szSearch3" name="szSearch3" placeholder="Product Code" value="" onfocus="remove_formError(this.id,'true')">
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col-md-1"></div>
+			<div class="col-md-3">
+                        <div class="form-group <?php if (!empty($arErrorMessages['szIndustry']) != '') { ?>has-error<?php } ?>">
+                            <div id='szProductCode'>
+							<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
+                                <option value="">Product Code</option>
+                                    <?php
+                                    foreach($productAry as $productData)
+                                    {
+                                        $selected = ($productData['id'] == $_POST['szSearch3'] ? 'selected="selected"' : '');
+                                         echo '<option value="'.$productData['id'].'"' . $selected . ' >'.$productData['szProductCode'].'</option>';
+                                    }
+                                    ?>
+                            </select>
+                         </div>
+			  </div>
+                                  </div>
+                    
 
                 <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>

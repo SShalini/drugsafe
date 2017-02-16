@@ -844,7 +844,7 @@ if ($mode == '__UNAPPROVE_REPLY_POPUP__') {
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        unapproved this reply?</p>
+                        unapprove this reply?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -1585,7 +1585,8 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                         <?php echo date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon'])); ?>
                                     </div>
                                 </div>
-                            <?php } if($OrdersDetailsAray['last_changed']){?>
+                             <?php } if($OrdersDetailsAray['last_changed']){?>
+<!--                            
                                 <div class="row static-info">
                                     <div class="col-md-5 name">
                                         Last updated Date & Time:
@@ -1593,7 +1594,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     <div class="col-md-7 value">
                                         <?php echo date('d M Y',strtotime($OrdersDetailsAray['last_changed'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['last_changed'])); ?>
                                     </div>
-                                </div>
+                                </div>-->
                             <?php } ?>
                             <div class="row static-info">
                                 <div class="col-md-5 name">

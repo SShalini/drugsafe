@@ -93,12 +93,14 @@
                                     <tr>
                                         <th> Image </th>
                                         <th> Product Code</th>
-                                        <th>  Descreption</th>
+                                        <th>  Description</th>
                                         <th>  Cost</th>
-                                        <th>  Expiry Date</th>
+                                         <th>  Expiry Date</th>
+                                         
                                         <?php
                                           if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                                         ?>
+                                         <th>  Avaliable Quantity</th>
                                         <th> Actions </th>
                                        <?php }else{?>
                                         <th>  Model Stock Value</th>
@@ -131,6 +133,7 @@
                                             $date= $drugTestKitData['dtExpiredOn'];
                                             $dtExpiredOn = date("d-m-Y", strtotime($date)); 
                                             echo $dtExpiredOn;?> </td>
+                                             <td> <?php echo $drugTestKitData['szAvailableQuantity'];?> </td>
                                             <?php
                                            if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                                              ?>

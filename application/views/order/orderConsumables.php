@@ -98,6 +98,9 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
+                                        <th>  Expiry Date</th>
+                                        <th>  Model Stock Value</th>
+                                         <th>  Available Stock Quantity</th>
                                         <th style="width:60px;">  Quantity</th>
                                         <th> Actions </th>
                                       
@@ -108,8 +111,9 @@
                                        $i = 1;
                                         foreach($consumablesAray as $consumablesData)
                                         {  
-                                             $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                            $idfranchisee = $_SESSION['drugsafe_user']['id'];
                                           
+                                            $consumablesDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$consumablesData['iProductId']);
                                             
                                            // $drugTestKitQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
                                         
@@ -121,7 +125,14 @@
                                             <td> <?php echo $consumablesData['szProductCode']?> </td>
                                             <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                             <td> $<?php echo $consumablesData['szProductCost'];?> </td>
-                                             <td>
+                                             <td><?php 
+                                            $date= $consumablesData['dtExpiredOn'];
+                                            $dtExpiredOn = date("d-m-Y", strtotime($date)); 
+                                            echo $dtExpiredOn;?> </td>
+                                             <td><?php echo($consumablesDataArr['szModelStockVal'] > 0 ? $consumablesDataArr['szModelStockVal'] : 'N/A')?></td>
+                                             <td><?php echo($consumablesData['szQuantity'] > 0 ? $consumablesData['szQuantity'] : 'N/A')?></td>
+                                         
+                                            <td>
 						 <input type="number"min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" max="100" id="order_quantity<?php echo $i;?>" >
 					   </td>
                                                 <td>

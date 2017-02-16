@@ -68,7 +68,7 @@
                                   action="<?= __BASE_URL__ ?>/order/view_order_report" method="post">
                                 <div class="row">
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
 
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch1" id="szSearch1"
@@ -83,11 +83,9 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
+                                   &nbsp;
 
-                                    </div>
-
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch2" id="szSearch2"
                                                     onfocus="remove_formError(this.id,'true')">
@@ -101,12 +99,9 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
-
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div
-                                            class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
+                                    &nbsp;
+                                    <div class="col-md-2">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
 
@@ -134,13 +129,11 @@
                                         </div>
 
                                     </div>
+                                <div class="col-md-1">
+                                       
+                                    </div>
 
-
-                                </div>
-                                <div class="row">
-
-
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <div
                                             class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -169,12 +162,13 @@
                                             <?php } ?>
                                         </div>
                                     </div>
-                                    <div class="col-md-1">
+                                   <div class="col-md-1">
+                                       
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-1">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i
-                                                    class="fa fa-search"></i> Search
+                                                    class="fa fa-search"></i> 
                                             </button>
                                             &nbsp;
                                             <!--<button class="btn red uppercase bold" type="button" onclick="resetClientSearch();"><i class="fa fa-refresh"></i>Reset</button>-->
@@ -219,16 +213,16 @@
                                                         Franchisee
                                                     </th>
                                                     <th>
-                                                        Order date
+                                                        Order Date
                                                     </th>
                                                     <th>
-                                                        Order#
+                                                        Order #
                                                     </th>
                                                     <th>
                                                         No. of products
                                                     </th>
                                                     <th>
-                                                        Order cost
+                                                        Order Cost
                                                     </th>
                                                     <th>
                                                         Order Details

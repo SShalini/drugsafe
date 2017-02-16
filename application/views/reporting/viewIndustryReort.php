@@ -138,7 +138,7 @@
                                     <div class="col-md-2 drugtypeselect">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szTestType']) != '') { ?>has-error<?php } ?>">
                                             <select class="form-control custom-select" name="szTestType" id="szTestType" onfocus="remove_formError(this.id,'true')">
-                                                <option value="">Select</option>
+                                                <option value="">Test Type</option>
                                                 <option value="A" <?php if($_POST['szTestType'] == 'A') echo"selected"; ?>>Alcohol</option>
                                                 <option value="U" <?php if($_POST['szTestType'] == 'U') echo"selected"; ?>>Urine AS/NZA 4308:2001/ As/NZA 4308:2008</option>
                                                 <option value="O" <?php if($_POST['szTestType'] == 'O') echo"selected"; ?>>Oral Fluid AS 4760:2006</option>

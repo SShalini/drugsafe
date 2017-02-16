@@ -32,7 +32,7 @@ class Forum_Controller extends CI_Controller {
             }
             $this->load->library('form_validation');
             $this->form_validation->set_rules('forumData[szCategoryName]', 'Category Name', 'required');
-            $this->form_validation->set_rules('forumData[szCategoryDiscription]', 'Category Discription', 'required');
+            $this->form_validation->set_rules('forumData[szCategoryDiscription]', 'Category Description', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
@@ -82,7 +82,7 @@ class Forum_Controller extends CI_Controller {
             }
             $this->load->library('form_validation');
             $this->form_validation->set_rules('forumData[szTopicTitle]', 'Topic Title', 'required');
-            $this->form_validation->set_rules('forumData[szTopicDiscription]', 'Topic Discription', 'required');
+            $this->form_validation->set_rules('forumData[szTopicDiscription]', 'Topic Description', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
@@ -134,7 +134,7 @@ class Forum_Controller extends CI_Controller {
          
             $this->load->library('form_validation');
             $this->form_validation->set_rules('forumData[szName]', 'Category Name', 'required');
-            $this->form_validation->set_rules('forumData[szDiscription]', 'Category Discription', 'required');
+            $this->form_validation->set_rules('forumData[szDiscription]', 'Category Description', 'required');
              $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
@@ -310,8 +310,8 @@ class Forum_Controller extends CI_Controller {
             }
             $this->load->library('form_validation');
             $this->form_validation->set_rules('forumData[szForumTitle]', 'Forum Title', 'required');
-            $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Discription', 'required');
-            $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Discription', 'required');
+            $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Description', 'required');
+            $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Description', 'required');
             $this->form_validation->set_rules('forumData[idCategory]', 'category ', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
@@ -370,8 +370,8 @@ class Forum_Controller extends CI_Controller {
          
             $this->load->library('form_validation');
             $this->form_validation->set_rules('forumData[szForumTitle]', 'Forum Title', 'required');
-            $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Discription', 'required');
-            $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Discription', 'required');
+            $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Description', 'required');
+            $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Description', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)

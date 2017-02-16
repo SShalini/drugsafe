@@ -88,9 +88,9 @@
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th> Sr No </th>
+                                                <th> No </th>
                                                 <th> Category Name</th>
-                                                <th> Category Descreption</th>
+                                                <th> Category Description</th>
                                                 <th> Actions </th>
                                             </tr>
                                         </thead>

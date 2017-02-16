@@ -97,6 +97,9 @@
                                         <th> Product Code</th>
                                         <th>  Descreption</th>
                                         <th>  Cost</th>
+                                        <th>  Expiry Date</th>
+                                        <th>  Model Stock Value</th>
+                                        <th>  Available Stock Quantity</th>
                                         <th style="width:60px;">  Quantity</th>
                                         <th>  Action</th>
                                      
@@ -107,7 +110,8 @@
                                         $i = 1;
                                         foreach($marketingMaterialAray as $marketingMaterialData)
                                         {
-                                             $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                              $idfranchisee = $_SESSION['drugsafe_user']['id'];
+                                             $marketingMaterialDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$marketingMaterialData['iProductId']);
                                             
                                           
                                         ?>
@@ -119,6 +123,13 @@
                                             <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                             <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                             <td>$<?php echo $marketingMaterialData['szProductCost'];?> </td>
+                                             <td><?php 
+                                            $date= $marketingMaterialData['dtExpiredOn'];
+                                            $dtExpiredOn = date("d-m-Y", strtotime($date)); 
+                                            echo $dtExpiredOn;?> </td>
+                                            <td><?php echo($marketingMaterialDataArr['szModelStockVal'] > 0 ?$marketingMaterialDataArr['szModelStockVal'] : 'N/A')?></td>
+                                            <td><?php echo($marketingMaterialData['szQuantity'] > 0 ? $marketingMaterialData['szQuantity'] : 'N/A')?></td>
+                                           
                                             <td>
 						 <input type="number" max="100" min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
 					   </td>

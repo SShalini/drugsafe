@@ -463,7 +463,8 @@ class Order_Controller extends CI_Controller
     {
         ob_start();
         $this->load->library('Pdf');
-        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->addPage('L');
+        $pdf = new Pdf('L', 'mm', 'A10', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetTitle('Drug-safe Order Details');
         $pdf->SetAuthor('Drug-safe');

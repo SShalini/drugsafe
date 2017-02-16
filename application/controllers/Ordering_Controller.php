@@ -120,7 +120,7 @@ class Ordering_Controller extends CI_Controller
         } else {
             if ($this->Ordering_Model->insertCalulatedData($data)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3>Calculations saved successfully.</h3> </strong> ";
+                $szMessage['content'] = "<strong>Proforma Invoice saved successfully.</strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                 $data['idsite'] = $idsite;
@@ -309,7 +309,7 @@ class Ordering_Controller extends CI_Controller
         } else {
             if ($this->Ordering_Model->updateCalulatedData($data_validate, $manualCalId)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3>Calculations update successfully.</h3> </strong> ";
+                $szMessage['content'] = "<strong>Proforma Invoice update successfully.</strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                 $data['idsite'] = $idsite;

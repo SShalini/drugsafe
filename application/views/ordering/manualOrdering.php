@@ -37,17 +37,17 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>System calculation is as follows</th>
+                                    <th>System calculation</th>
                                     <th> No of Donors</th>
                                     <th> RRP </th>
-                                    <th> $ value </th>
+                                    <th> $ Value </th>
                                     
                                 </tr>
                                 </thead>
                                 <tbody>
                                <?php if(in_array(1, $DrugtestidArr)){?>
                                     <tr>
-                                        <td>URINE AS/NZA 4308/2001</td>
+                                        <td>Alcohol</td>
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> $<?php echo number_format(__RRP_1__,2,'.',','); ?> </td>
                                      <td> $<?php $Val1=$countDoner*__RRP_1__; echo number_format($Val1,2,'.',','); ?>  </td>
@@ -55,7 +55,7 @@
                                <?php }?> 
                                      <?php if(in_array(2, $DrugtestidArr)){?>
                                     <tr>
-                                        <td>Oral Fluid AS 4760/2006</td>
+                                        <td>URINE AS/NZA 4308/2001 </td>
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> $<?php echo number_format(__RRP_2__,2,'.',','); ?> </td>
                                     <td> $<?php $Val2=$countDoner*__RRP_2__; echo number_format($Val2,2,'.',','); ?>  </td>
@@ -63,7 +63,7 @@
                                <?php }?> 
                                      <?php if(in_array(3, $DrugtestidArr)){?>
                                     <tr>
-                                        <td>Alcohol</td>
+                                        <td>Oral Fluid AS 4760/2006 </td>
                                         <td> <?php echo $countDoner ?> </td>
                                         <td> $<?php echo number_format(__RRP_3__,2,'.',','); ?> </td>
                                        <td> $<?php $Val3=$countDoner*__RRP_3__; echo number_format($Val3,2,'.',',');?>  </td>

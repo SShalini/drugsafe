@@ -152,7 +152,7 @@
                                      <div class="col-md-3">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i
-                                                    class="fa fa-search"></i> Search
+                                                    class="fa fa-search"></i> 
                                             </button>
                                             &nbsp;
                                         </div>
@@ -251,7 +251,7 @@
                                                     <tr>
                                                         <td> <?php echo $i;?></td>
                                                         <td>
-                                                            #<?php echo sprintf(__FORMAT_NUMBER__, $getManualCalcData['id']);?>
+                                                           <?php echo sprintf(__FORMAT_NUMBER__, $getManualCalcData['id']);?>
                                                         </td>
                                                         <td>
                                                             <?php echo  date("d-m-Y", strtotime($getManualCalcData['dtCreatedOn']));?>
@@ -286,7 +286,7 @@
                                                      <td></td>
                                                      <td></td>
                                                      <td></td>
-                                                     <td>Total</td>
+                                                     <td><b>Total</b></td>
                                                      <td>
                                                         $<?php 
                                                             $totalRevenu = number_format($totalRevenu, 2, '.', '');

@@ -124,7 +124,7 @@
                                      <div class="col-md-3">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i
-                                                    class="fa fa-search"></i> Search
+                                                    class="fa fa-search"></i> 
                                             </button>
                                             &nbsp;
                                         </div>
