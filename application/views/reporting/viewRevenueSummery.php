@@ -164,6 +164,9 @@
                                                 <tbody>
                                                 <?php
 						$i = 1;
+                                                $allfranchiseeTotalRevenue='';
+                                                $allfranchiseetotalRoyaltyfees='';
+                                                $allfranchiseetotalNetProfit='';
 						foreach($allfranchisee as $allfranchiseeData)
 						{
                                                     
@@ -191,6 +194,7 @@
 						    $totalRevenu='';
                                                     $totalRoyaltyfees='';
                                                     $totalNetProfit='';
+                                                   
 						    foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
                                                         $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
@@ -219,7 +223,7 @@
                                                         $NetTotal = number_format($NetTotal, 2, '.', ',');
                                                             
                                                         $totalRevenu=$totalRevenu+$ValTotal;
-														$totalRevenu = number_format($totalRevenu, 2, '.', '');
+							$totalRevenu = number_format($totalRevenu, 2, '.', '');
                                                         $totalRevenu=number_format($totalRevenu, 2, '.', ',');
 														
                                                         $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
@@ -229,8 +233,20 @@
                                                         $totalNetProfit=$totalNetProfit+$NetTotal;
 														$totalNetProfit = number_format($totalNetProfit, 2, '.', '');
                                                         $totalNetProfit = number_format($totalNetProfit, 2, '.', ',');
-                                                        
+                                                       
 						   }
+                                                   echo $totalRevenu;
+                                                    $allfranchiseeTotalRevenue=$allfranchiseeTotalRevenue+$totalRevenu;
+                                                    $allfranchiseeTotalRevenue = number_format($allfranchiseeTotalRevenue, 2, '.', '');
+                                                    $allfranchiseeTotalRevenue=number_format($allfranchiseeTotalRevenue, 2, '.', ',');
+                                                     
+                                                    $allfranchiseetotalRoyaltyfees=$allfranchiseetotalRoyaltyfees+$totalRoyaltyfees;
+                                                    $allfranchiseetotalRoyaltyfees = number_format($allfranchiseetotalRoyaltyfees, 2, '.', '');
+                                                    $allfranchiseetotalRoyaltyfees=number_format($allfranchiseetotalRoyaltyfees, 2, '.', ',');
+                                                    
+                                                    $allfranchiseetotalNetProfit=$allfranchiseetotalNetProfit+$totalNetProfit;
+                                                    $allfranchiseetotalNetProfit = number_format($allfranchiseetotalNetProfit, 2, '.', '');
+                                                    $allfranchiseetotalNetProfit=number_format($allfranchiseetotalNetProfit, 2, '.', ',');
                                                     ?>
                                                     <tr>
                                                         <td> <?php echo $i++;?></td>
@@ -252,12 +268,22 @@
                                                  </tr>
                                                 
                                                     <?php
-
-                                                }
-												
-
-
-                                                ?>
+                                                 }
+						?>
+                                                  <tr>
+                                                     
+                                                     <td></td>
+                                                     <td>Total</td>
+                                                     <td>
+                                                        <?php echo $allfranchiseeTotalRevenue;?>
+                                                     </td>
+                                                     <td>
+                                                      <?php echo $allfranchiseetotalRoyaltyfees;?>
+                                                     </td>
+                                                     <td>
+                                                         <?php echo $allfranchiseetotalNetProfit;?>
+                                                     </td>
+                                                 </tr>
                                                   
                                                 </tbody>
                                             </table>
