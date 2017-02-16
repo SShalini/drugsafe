@@ -268,7 +268,7 @@
                                                      ?>
                                                     <tbody>
                                                     <tr>
-                                                        <td>Urine AS/NZA 4308:2001/ As/NZA 4308:2008</td>
+                                                        <td>Urine AS/NZA 4308:2001 or As/NZA 4308:2008</td>
                                                         <td>Total Donors</td>
                                                         <?php
                                                         foreach($getSosAndClientDetils as $getSosAndClientData)

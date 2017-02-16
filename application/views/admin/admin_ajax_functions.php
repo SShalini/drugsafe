@@ -1631,7 +1631,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     ?>
                                     <div class="col-md-7 value">
                                                     <span class="label label-sm label-info">
-                                                    Pending </span>
+                                                     </span>
                                     </div>
 
                                     <?php
@@ -1894,10 +1894,10 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             <div class="col-md-6">
                                                 <div class="well">
                                                     <div class="row static-info align-reverse totalpr">
-                                                        <div class="col-md-8 name portlet_list_title">
+                                                        <div class="col-md-6 name portlet_list_title">
                                                             Total Price:
                                                         </div>
-                                                        <div class="col-md-4 value">
+                                                        <div class="col-md-6 value">
                                                             <input id="totalprice" class="form-control" type="hidden"
                                                                    value="<?php echo number_format($price, 2, '.', ''); ?>" name="totalprice">
                                                             <label name="finaltotal" value=""
@@ -1922,11 +1922,11 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             onclick="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','1');"
                                             class="btn green" name="submit"><i class="icon-basket"></i> Dispatch Order
                                     </button>
-                                    <button type="button"
+<!--                                    <button type="button"
                                             onclick="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','0');"
                                             class="btn green-meadow" name="pending" value="1"><i
                                             class="fa fa-shopping-cart"></i> Pending Order
-                                    </button>
+                                    </button>-->
                                     <!--                      <button type="button" onclick="pendingOrder('<?php echo $idOrder; ?>'); return false;" class="btn green-meadow"><i class="fa fa-shopping-cart"></i>  Pending Order</button>-->
                                     <button type="button"
                                             onclick="CancelOrderConfirmation('<?php echo $idOrder; ?>'); return false;"

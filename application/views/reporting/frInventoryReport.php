@@ -49,8 +49,8 @@
                                 </span>
                             </div>
                     <?php
-                            if(!empty($validPendingOrderFrDetailsAray))
-                        { 
+                            if(!empty($_POST['szSearch2'])){
+                         
                            $this->session->unset_userdata('productCode');
                            $this->session->unset_userdata('prodCategory');
            
