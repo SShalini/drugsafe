@@ -235,7 +235,7 @@
                                                         $totalNetProfit = number_format($totalNetProfit, 2, '.', ',');
                                                        
 						   }
-                                                   echo $totalRevenu;
+                                                   
                                                     $allfranchiseeTotalRevenue=$allfranchiseeTotalRevenue+$totalRevenu;
                                                     $allfranchiseeTotalRevenue = number_format($allfranchiseeTotalRevenue, 2, '.', '');
                                                     $allfranchiseeTotalRevenue=number_format($allfranchiseeTotalRevenue, 2, '.', ',');
