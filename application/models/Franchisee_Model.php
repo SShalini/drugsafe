@@ -1025,7 +1025,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             $dataAry = array('clientType' => $data['szClient'] );
             $this->db->where('agentId',$idAgent);
             $queyUpdate=$this->db->update(__DBC_SCHEMATA_CLIENT__, $dataAry);
-            //echo $sql = $this->db->last_query(); die();
             if($queyUpdate)
             {
                 return true;

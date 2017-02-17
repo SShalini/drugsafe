@@ -28,6 +28,31 @@
                                 </div>
                         </div>
                         </div>
+                        <div class="row">
+                              <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
+                    
+                                  
+                                  <div class="search col-md-3">
+                                        <div id='szClient'>                         
+                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Client Name</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientList)
+                                          {
+                                              $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                              
+                                              echo '<option value="'.$clientList['id'].'"' . $selected . ' >'.$clientList['szName'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                            </div>
+                                  </div>
+                              
+                                  <div class="col-md-1">
+                                      <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                  </div>
+                           </form>
+                          </div>
                         <?php
                         
                         if(!empty($agentRecordArray))
