@@ -58,7 +58,7 @@ class Webservices_Model extends Error_Model
 
     function set_szPassword($value, $flag = true)
     {
-        $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", 5, false, $flag);
+        $this->data['szPassword'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szPassword", "Password", false, false, $flag);
     }
 
     function checkUserExist($emailid)
@@ -161,9 +161,9 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['collsign'])), 'collsign', 'Collector Signature', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Respresentative', true,__VLD_CASE_NAME__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['nominedec'])), 'nominedec', 'Nominated Client Respresentative signature time', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Signature', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Representative', true,__VLD_CASE_NAME__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['nominedec'])), 'nominedec', 'Nominated Client Representative signature time', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Nominated Client Representative signature', true);
         }
         if ($this->error) {
             return false;

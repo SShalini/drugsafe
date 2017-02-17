@@ -39,7 +39,7 @@ class Webservices_Controller extends CI_Controller
                 header('Content-Type: application/json');
 
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['szPassword'])){
-                $responsedata = array("code" => 202,"message"=>$errorMsgArr['szPassword']);
+                $responsedata = array("code" => 202,"message"=>"Wrong credentials");
                 header('Content-Type: application/json');
             }else{
                 $responsedata = array("code" => 111,"message"=>"Bad Request.");
@@ -937,7 +937,7 @@ class Webservices_Controller extends CI_Controller
         $delstatus = $this->Webservices_Model->delUsedKit($data['kitid']);
         if($delstatus)
         {
-            $responsedata = array("code" => 200,"message"=>"selected product removed successfully.");
+            $responsedata = array("code" => 200,"message"=>"Selected product removed successfully.");
         }else{
             $responsedata = array("code" => 201,"message"=>"Some error occured while deleting selected product. Please try again.");
 
@@ -997,7 +997,7 @@ class Webservices_Controller extends CI_Controller
             $responsedata = array("code" => 200,"dataarr"=>$cocformdata);
             header('Content-Type: application/json');
         }else{
-            $responsedata = array("code" => 201,"message"=>'No site found');
+            $responsedata = array("code" => 201,"message"=>'No COC form recorded for this donor.');
             header('Content-Type: application/json');
         }
         echo json_encode($responsedata);
