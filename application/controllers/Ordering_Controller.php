@@ -387,7 +387,7 @@ class Ordering_Controller extends CI_Controller
     {
         ob_start();
         $this->load->library('Pdf');
-        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetTitle('Drug-safe stock request report');
         $pdf->SetAuthor('Drug-safe');
@@ -401,7 +401,7 @@ class Ordering_Controller extends CI_Controller
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
 
-        $pdf->AddPage();
+        $pdf->AddPage('L');
 
         $Drugtestid = $this->session->userdata('Drugtestid');
         $idsite = $this->session->userdata('idsite');
@@ -460,6 +460,7 @@ class Ordering_Controller extends CI_Controller
         //$totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
         $html = '<div class="wraper">
         <table cellpadding="5px">
+       
     <tr>
         <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> '.$FrenchiseeDataArr[0]['szAddress'].', '.$FrenchiseeDataArr[0]['szZipCode'].', '.$FrenchiseeDataArr[0]['szState'].', '.$FrenchiseeDataArr[0]['szCountry'].'</td>
     </tr>
@@ -474,21 +475,21 @@ class Ordering_Controller extends CI_Controller
     </tr>
 </table>
 <br />
-<h2 style="text-align: center">Proforma Invoice</h2>
+<h2 style="text-align: center;">Proforma Invoice</h2>
 <p style="text-align: center">Invoice id: #'.sprintf(__FORMAT_NUMBER__, $data['id']).'</p>
 <br>
 <table cellpadding="5px">
     <tr>
-        <td width="350" align="left"><b>Business Name:</b> '.$clientDataArr[0]['szName'].'</td><td width="350" align="left"><b>Company Name:</b> '.$siteDataArr[0]['szName'].'</td>
+        <td width="50%" align="left" font-size="20"><b>Business Name:</b> '.$clientDataArr[0]['szName'].'</td><td width="50%" align="right"><b>Company Name:</b> '.$siteDataArr[0]['szName'].'</td>
     </tr>
     <tr>
-        <td width="350" align="left"><b>Business Address:</b> '.$clientDataArr[0]['szAddress'].', '.$clientDataArr[0]['szZipCode'].', '.$clientDataArr[0]['szState'].', '.$clientDataArr[0]['szCountry'].'</td><td width="350" align="left"><b>Company Address:</b> '.$siteDataArr[0]['szAddress'].', '.$siteDataArr[0]['szZipCode'].', '.$siteDataArr[0]['szState'].', '.$siteDataArr[0]['szCountry'].'</td>
+        <td width="50%" align="left"><b>Business Address:</b> '.$clientDataArr[0]['szAddress'].', '.$clientDataArr[0]['szZipCode'].', '.$clientDataArr[0]['szState'].', '.$clientDataArr[0]['szCountry'].'</td><td width="50%" align="right"><b>Company Address:</b> '.$siteDataArr[0]['szAddress'].', '.$siteDataArr[0]['szZipCode'].', '.$siteDataArr[0]['szState'].', '.$siteDataArr[0]['szCountry'].'</td>
     </tr>
     <tr>
-        <td width="350" align="left"><b>ABN:</b> '.$clientDataArr[0]['abn'].'</td><td width="350" align="left"><b>Test Date:</b> '.date('d/m/Y',strtotime($testDate[0]['testdate'])).'</td>
+        <td width="50%" align="left"><b>ABN:</b> '.$clientDataArr[0]['abn'].'</td><td width="50%" align="right"><b>Test Date:</b> '.date('d/m/Y',strtotime($testDate[0]['testdate'])).'</td>
     </tr>
     <tr>
-       <td width="350"> </td><td width="350" align="left"><b>No of Donors Tested:</b> '.$countDoner.'</td>
+       <td width="50%"> </td><td width="50%" align="right"><b>No of Donors Tested:</b> '.$countDoner.'</td>
     </tr>
 </table>
 <br />
@@ -496,13 +497,13 @@ class Ordering_Controller extends CI_Controller
 <br />
 <table border="1px" cellpadding="5px">
     <tr>
-        <td width="550" align="left"><b>Total (Excluding GST):</b></td><td width="150" align="right">$'.number_format($ValTotal,2,'.',',').'</td>
+        <td width="80%" align="left"><b>Total (Excluding GST):</b></td><td width="20%" align="right">$'.number_format($ValTotal,2,'.',',').'</td>
     </tr>
     <tr>
-        <td width="550" align="left"><b>GST (10%):</b></td><td width="150" align="right">$'.number_format($GST, 2, '.', ',').'</td>
+        <td width="80%" align="left"><b>GST (10%):</b></td><td width="20%" align="right">$'.number_format($GST, 2, '.', ',').'</td>
     </tr>
     <tr>
-        <td width="550" align="left"><b>Total (Including GST):</b></td><td width="150" align="right">$'.number_format($TotalbeforeRoyalty, 2, '.', ',').'</td>
+        <td width="80%" align="left"><b>Total (Including GST):</b></td><td width="20%" align="right">$'.number_format($TotalbeforeRoyalty, 2, '.', ',').'</td>
     </tr>
 </table>
 <br />
@@ -510,13 +511,13 @@ class Ordering_Controller extends CI_Controller
 <br />
 <table border="1px" cellpadding="5px">
     <tr>
-        <td width="550" align="left"><b>Total (Excluding GST):</b></td><td width="150" align="right">$'.number_format($TotalTrevenu,2,'.',',').'</td>
+        <td width="80%" align="left"><b>Total (Excluding GST):</b></td><td width="20%" align="right">$'.number_format($TotalTrevenu,2,'.',',').'</td>
     </tr>
     <tr>
-        <td width="550" align="left"><b>GST (10%):</b></td><td width="150" align="right">$'.number_format($GSTmanual, 2, '.', ',').'</td>
+        <td width="80%" align="left"><b>GST (10%):</b></td><td width="20%" align="right">$'.number_format($GSTmanual, 2, '.', ',').'</td>
     </tr>
     <tr>
-        <td width="550" align="left"><b>Total (Including GST):</b></td><td width="150" align="right">$'.number_format($Total1, 2, '.', ',').'</td>
+        <td width="80%" align="left"><b>Total (Including GST):</b></td><td width="20%" align="right">$'.number_format($Total1, 2, '.', ',').'</td>
     </tr>
 </table>
 <br />
@@ -524,13 +525,13 @@ class Ordering_Controller extends CI_Controller
 <br />
 <table border="1px" cellpadding="5px">
     <tr>
-        <td width="550" align="left"><b>Total (Excluding GST):</b></td><td width="150" align="right">$'.number_format($totalinvoiceAmt, 2, '.', ',').'</td>
+        <td width="80%" align="left"><b>Total (Excluding GST):</b></td><td width="20%" align="right">$'.number_format($totalinvoiceAmt, 2, '.', ',').'</td>
     </tr>
     <tr>
-        <td width="550" align="left"><b>GST (10%):</b></td><td width="150" align="right">$'.number_format($totalGst, 2, '.', ',').'</td>
+        <td width="80%" align="left"><b>GST (10%):</b></td><td width="20%" align="right">$'.number_format($totalGst, 2, '.', ',').'</td>
     </tr>
     <tr>
-        <td width="550" align="left"><b>Total (Including GST):</b></td><td width="150" align="right">$'.number_format($totalRoyaltyBefore, 2, '.', ',').'</td>
+        <td width="80%" align="left"><b>Total (Including GST):</b></td><td width="20%" align="right">$'.number_format($totalRoyaltyBefore, 2, '.', ',').'</td>
     </tr>
 </table>
         </div>';

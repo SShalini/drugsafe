@@ -777,10 +777,11 @@ class Franchisee_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
+            $allIndustry=$this->Admin_Model->viewAllIndustryList();
 		
 		
 		$this->load->library('form_validation');
-        $this->form_validation->set_rules('agentData[szBusinessName]', 'Business Name', 'required|is_unique['.__DBC_SCHEMATA_CLIENT__.'.szBusinessName]');
+                $this->form_validation->set_rules('agentData[szBusinessName]', 'Business Name', 'required|is_unique['.__DBC_SCHEMATA_CLIENT__.'.szBusinessName]');
 		$this->form_validation->set_rules('agentData[abn]', 'Business Name', 'required');
 		$this->form_validation->set_rules('agentData[abn]', 'ABN', 'required|min_length[11]');
 		$this->form_validation->set_rules('agentData[szName]', 'Contact Name', 'required');
@@ -797,6 +798,7 @@ class Franchisee_Controller extends CI_Controller
             $data['pageName'] = "Agent_Record";
             $data['szMetaTagTitle'] = "Add Agent";
             $data['is_user_login'] = $is_user_login;
+            $data['allIndustry']=$allIndustry;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/addAgent');
             $this->load->view('layout/admin_footer');
@@ -836,7 +838,7 @@ class Franchisee_Controller extends CI_Controller
                redirect(base_url('/admin/admin_login'));
                 die;
             }
-        
+         $allIndustry=$this->Admin_Model->viewAllIndustryList();
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $idAgent = $this->session->userdata('idAgent');
@@ -871,6 +873,7 @@ class Franchisee_Controller extends CI_Controller
             $_POST['agentData'] = $agentDataArray;
             $data['idfranchisee'] = $idfranchisee;
             $data['parentClient'] = $parentClient;
+			$data['allIndustry']=$allIndustry;
             $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
             $data['notification'] = $count;
             $data['commentnotification'] = $commentReplyNotiCount;

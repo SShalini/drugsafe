@@ -138,8 +138,8 @@ class Order_Model extends Error_Model {
    function InsertOrderSuccess($franchiseeId,$Price)
         { 
         
-         $date = date('Y-m-d h:i:s');
-          $dataAry = array(
+            $date = date('Y-m-d H:i:s');
+            $dataAry = array(
                                 'franchiseeid' => $franchiseeId,
                                 'price' => $Price,
 				'status' => '1',

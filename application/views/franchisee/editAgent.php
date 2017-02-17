@@ -21,6 +21,7 @@
                         </li>
                     
                 </ul>
+				
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -154,25 +155,16 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-industry"></i>
                                                 </span>
-                                            <select class="form-control " name="agentData[industry]" id="industry"
-                                                    Placeholder="Industry" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-
-                                                <option value="Agriculture, Forestry and Fishing" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Agriculture, Forestry and Fishing") ? "selected" : ""); ?>>Agriculture, Forestry and Fishing </option>
-                                                <option value="Mining" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Mining") ? "selected" : ""); ?>>Mining </option>
-                                                <option value="Manufacturing" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Manufacturing") ? "selected" : ""); ?>>Manufacturing </option>
-                                                <option value="Electricity, Gas and Water Supply" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Electricity, Gas and Water Supply") ? "selected" : ""); ?>>Electricity, Gas and Water Supply </option>
-                                                <option value="Construction" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Construction") ? "selected" : ""); ?> >Construction</option>
-                                                <option value="Wholesale Trade" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Wholesale Trade") ? "selected" : ""); ?>>Wholesale Trade </option>
-                                                <option value="Transport and Storage " <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Transport and Storage ") ? "selected" : ""); ?>>Transport and Storage </option>
-                                                <option value="Communication Services" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Communication Services") ? "selected" : ""); ?>>Communication Services </option>
-                                                <option value="Property and Business Services" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Property and Business Services") ? "selected" : ""); ?>>Property and Business Services </option>
-                                                <option value="Government Administration and Defence" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Government Administration and Defence") ? "selected" : ""); ?>>Government Administration and Defence</option>
-                                                <option value="Education" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Education") ? "selected" : ""); ?>>Education  </option>
-                                                <option value="Health and Community Services" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Health and Community Services") ? "selected" : ""); ?>>Health and Community Services </option>
-                                                 <option value="Other" <?php echo (sanitize_post_field_value($_POST['agentData']['industry']) == trim("Other") ? "selected" : ""); ?>>Other</option>
-
-                                            </select>
+                                             <select class="form-control custom-select" name="agentData[industry]" id="szIndustry" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Select</option>
+                                          <?php
+                                          foreach($allIndustry as $industryList)
+                                          {
+                                              $selected = ($industryList['id'] == $_POST['agentData']['industry'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$industryList['id'].'"' . $selected . ' >'.$industryList['szName'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
                                         </div>
                                         <?php
                                             if(form_error('agentData[industry]')){?>

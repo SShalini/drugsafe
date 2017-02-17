@@ -266,35 +266,35 @@
                                                                 <td>
                                                                     <?php if ($validOrdersDetailsData['status'] == 1) { ?>
 
-                                                                        <a title="Order Status"
+                                                                        <p title="Order Status"
                                                                            class="label label-sm label-warning">
                                                                             Ordered
-                                                                        </a>
+                                                                        </p>
                                                                         <?php
                                                                     }
                                                                     if ($validOrdersDetailsData['status'] == 2) {
                                                                         ?>
-                                                                        <a title="Order Status"
+                                                                        <p title="Order Status"
                                                                            class="label label-sm label-success">
                                                                             Dispatched
-                                                                        </a>
+                                                                        </p>
                                                                         <?php
                                                                     }
                                                                     if ($validOrdersDetailsData['status'] == 3) {
                                                                         ?>
-                                                                        <a title="Order Status"
+                                                                        <p title="Order Status"
                                                                            class="label label-sm label-danger">
                                                                             Canceled
-                                                                        </a>
+                                                                        </p>
                                                                         <?php
                                                                     }
 
                                                                     if ($validOrdersDetailsData['status'] == 4) {
                                                                         ?>
-                                                                        <a title="Order Status"
+                                                                        <p title="Order Status"
                                                                            class="label label-sm label-info">
                                                                             Pending
-                                                                        </a>
+                                                                        </p>
                                                                         <?php
                                                                     }
 

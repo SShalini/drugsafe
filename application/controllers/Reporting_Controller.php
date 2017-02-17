@@ -1475,7 +1475,7 @@ function excelfr_stockassignlist_Data()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-        $pdf->AddPage();
+        $pdf->AddPage('L');
         
         $franchiseeId = $this->session->userdata('franchiseeId');
         $productCode = $this->session->userdata('productCode');
@@ -1490,11 +1490,11 @@ function excelfr_stockassignlist_Data()
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        <th style="width:80px"><b>  #</b> </th>
-                                        <th> <b>Category</b> </th>
-                                        <th style="width:130px"> <b>Product Code </b> </th>
-                                        <th style="width:120px"><b> In Stock  </b> </th>
-                                        <th style="width:120px"> <b>Requested</b> </th>
+                                        <th width="10%"><b>  #</b> </th>
+                                        <th width="23%"> <b>Category</b> </th>
+                                        <th width="22%"> <b>Product Code </b> </th>
+                                        <th width="23%"><b> In Stock  </b> </th>
+                                        <th width="22%"> <b>Requested</b> </th>
                                        
                                    
                                     </tr>';
@@ -1691,7 +1691,7 @@ function excelfr_stockassignlist_Data()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-        $pdf->AddPage();
+        $pdf->AddPage('L');
         $searchAry['szSearch1'] = $this->session->userdata('szSearch1');
         $searchAry['szSearch2'] = $this->session->userdata('szSearch2');
         $searchAry['szSearch4'] = $this->session->userdata('szSearch4');
@@ -1704,13 +1704,13 @@ function excelfr_stockassignlist_Data()
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        <th style="width:80px"><b>  #</b> </th>
-                                        <th> <b>Franchisee</b> </th>
-                                        <th> <b>Order Date </b> </th>
-                                        <th ><b> Order #  </b> </th>
-                                        <th > <b>No. of Products</b> </th>
-                                   <th ><b> Order Cost </b> </th>
-                                        <th > <b>Xero Invoice No.</b> </th>
+                                        <th width="10%"><b>  #</b> </th>
+                                        <th  width="15%"> <b>Franchisee</b> </th>
+                                        <th  width="25%"> <b>Order Date </b> </th>
+                                        <th  width="10%"><b> Order #  </b> </th>
+                                        <th  width="10%"> <b>No. of Products</b> </th>
+                                   <th  width="10%"><b> Order Cost </b> </th>
+                                        <th  width="15%"> <b>Xero Invoice No.</b> </th>
                                     </tr>';
         if ($validOrdersDetailsAray) {
 
@@ -1873,7 +1873,7 @@ function excelfr_stockassignlist_Data()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-        $pdf->AddPage();
+        $pdf->AddPage('L');
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         $searchAry['szFranchisee'] = $this->session->userdata('szFranchisee');
@@ -1902,14 +1902,14 @@ function excelfr_stockassignlist_Data()
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        <th style="width:80px"><b>  #</b> </th>
-                                        <th> <b>Proforma Invoice #</b> </th>
-                                        <th> <b>Proforma Invoice Date </b> </th>
-                                        <th ><b> Client Id  </b> </th>
-                                        <th > <b>Client Name</b> </th>
-                                   <th ><b> Total Revenue </b> </th>
-                                        <th > <b>Royalty Fees</b> </th>
-                                        <th > <b>Net Profit</b> </th>
+                                        <th width="5%"><b>  #</b> </th>
+                                        <th width="13%"> <b>Proforma Invoice #</b> </th>
+                                        <th width="14%"> <b>Proforma Invoice Date </b> </th>
+                                        <th width="13%" ><b> Client Id  </b> </th>
+                                        <th width="14%" > <b>Client Name</b> </th>
+                                        <th width="13%"><b> Total Revenue </b> </th>
+                                        <th width="14%"> <b>Royalty Fees</b> </th>
+                                        <th width="13%"> <b>Net Profit</b> </th>
                                     </tr>';
         if ($getManualCalcStartToEndDate) {
 
@@ -1973,7 +1973,7 @@ function excelfr_stockassignlist_Data()
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>Total</td>
+                    <td><b>Total</b></td>
                     <td>$'.$totalRevenu.'</td>
                     <td>$'.$totalRoyaltyfees.'</td>
                     <td>$'.$totalNetProfit.'</td>
@@ -2390,7 +2390,7 @@ function excelfr_stockassignlist_Data()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-        $pdf->AddPage('L', 'A4');
+        $pdf->AddPage('L');
         //$pdf->AddPage();
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
@@ -2398,15 +2398,16 @@ function excelfr_stockassignlist_Data()
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Revenue Summary</b></p></div>
             <div class= "table-responsive" >
-                            <table border="1" cellpadding="5">
+                            <table align="center" border="1" cellpadding="5" >
                                     <tr>
-                                        <th style="width:80px"><b>  #</b> </th>
-                                        <th> <b>Franchisee Name </b> </th>
-                                        <th> <b>Total Revenue </b> </th>
-                                        <th ><b> Royalty Fees </b> </th>
-                                        <th > <b>Net Profit</b> </th>
+                                        <th width="10%"><b>  #</b> </th>
+                                        <th width="22%"> <b>Franchisee Name </b> </th>
+                                        <th width="22%"> <b>Total Revenue </b> </th>
+                                        <th width="22%"><b> Royalty Fees </b> </th>
+                                        <th width="23%"> <b>Net Profit</b> </th>
                                     </tr>';
         if ($allfranchisee) {
+			
 
             $i = 0;
             $totalRevenu='';
@@ -2510,7 +2511,7 @@ function excelfr_stockassignlist_Data()
              $html.='<tr>
                     
                     <td></td>
-                    <td>Total</td>
+                    <td><b>Total</b></td>
                     <td>$'.$allfranchiseeTotalRevenue.'</td>
                     <td>$'.$allfranchiseetotalRoyaltyfees.'</td>
                     <td>$'.$allfranchiseetotalNetProfit.'</td>
@@ -2740,7 +2741,7 @@ function excelfr_stockassignlist_Data()
             $data['szMetaTagTitle'] = "Client Comparison Report";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
-            $data['subpageName'] = "industry_report";
+            $data['subpageName'] = "Client_Comparison_Report";
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['err'] = true;
@@ -2758,7 +2759,7 @@ function excelfr_stockassignlist_Data()
             $data['szMetaTagTitle'] = "Client Comparison Report";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
-            $data['subpageName'] = "industry_report";
+              $data['subpageName'] = "Client_Comparison_Report";
             $data['notification'] = $count;
             $data['compareresultarr'] = $comparisonResultArr;
             $data['data'] = $data;
@@ -2916,7 +2917,7 @@ function excelfr_stockassignlist_Data()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-        $pdf->AddPage();
+        $pdf->AddPage('L');
         
         $searchArray['dtStart'] = $this->session->userdata('dtStart');
         $searchArray['dtEnd'] = $this->session->userdata('dtEnd');
@@ -2976,7 +2977,7 @@ function excelfr_stockassignlist_Data()
 			    {
 			    $html .='<tbody>
 					<tr>
-                                            <td>Urine AS/NZA 4308:2001/ As/NZA 4308:2008</td>
+                                            <td>Urine AS/NZA 4308:2001 or As/NZA 4308:2008</td>
                                             <td>Total Donors</td>';
 					    foreach($getSosAndClientDetils as $getSosAndClientData)
 					    {
@@ -3018,10 +3019,10 @@ function excelfr_stockassignlist_Data()
                                             <td>Positive Result</td>';
 					    foreach($getSosAndClientDetils as $getSosAndClientData)
 					    {
-                                                $totalPositiveOral=$getSosAndClientData['totalDonarOral'] -  $getSosAndClientData['totalNegativeOral'];
-						$html .='<td>'.$totalPositiveOral.'</td>';
+                            $totalPositiveOral=$getSosAndClientData['totalDonarOral'] -  $getSosAndClientData['totalNegativeOral'];
+						    $html .='<td>'.$totalPositiveOral.'</td>';
 					    }
-					$html .='</tr>
+					    $html .='</tr>
 						<tr>
 						   <td></td>
                                                     <td>Negative Result</td>';
@@ -3143,7 +3144,7 @@ function excelfr_stockassignlist_Data()
                 }
                 if($searchArray['szTestType']=='' || $searchArray['szTestType']=='U')
                 {
-                     $this->excel->getActiveSheet()->setCellValue('A6','Urine AS/NZA 4308:2001/ As/NZA 4308:2008');
+                     $this->excel->getActiveSheet()->setCellValue('A6','Urine AS/NZA 4308:2001 or As/NZA 4308:2008');
                 $this->excel->getActiveSheet()->setCellValue('B6','Total Donors');
                 $j=1;
                 foreach($getSosAndClientDetils as $getSosAndClientData)
@@ -3270,7 +3271,7 @@ function excelfr_stockassignlist_Data()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-        $pdf->AddPage();
+        $pdf->AddPage('L');
 
         $siteid = $this->session->userdata('siteid');
         $testtype = $this->session->userdata('testtype');
