@@ -35,17 +35,17 @@
                         </div>
                         </div>
                         <div class="row">
-                              <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
+                              <form class="form-horizontal" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
                     
                                   
                                   <div class="search col-md-3">
                                         <div id='szClient'>                         
-                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
+                                      <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Client Name</option>
                                           <?php
                                           foreach($clientlistArr as $clientList)
                                           {
-                                              $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                              $selected = ($clientList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
                                               
                                               echo '<option value="'.$clientList['id'].'"' . $selected . ' >'.$clientList['szName'].'</option>';
                                           }

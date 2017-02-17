@@ -974,20 +974,19 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                     return array();
             }
         }
-         public function getAgentData($searchAry = '',$id=0)
+         public function getAgentData($clientId = '',$id=0)
         {
             
-            $whereAry = array('isDeleted=' =>'0','agentId !=' => '0');
-            
-            $searchq = '';
-            if($id > '0'){
-                $searchq = 'agentId = '.(int)$id;
+            if($clientId)
+            {
+                 $this->db->where('clientType',$clientId);
             }
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.agentId = ds_user.id');
             $this->db->where('isDeleted','0');
             $this->db->where('agentId !=','0');
+            $this->db->order_by("clientType", "asc");
             $query = $this->db->get();
            
             if($query->num_rows() > 0)

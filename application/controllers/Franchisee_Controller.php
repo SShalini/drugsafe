@@ -1065,7 +1065,16 @@ class Franchisee_Controller extends CI_Controller
         }
         $franchiseId = $_SESSION['drugsafe_user']['id'];
         $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,$franchiseId);
-        $agentRecordArray= $this->Franchisee_Model->getAgentData();
+        $clientId=$_POST['szSearchClRecord'];
+        if(!empty($clientId)){
+            
+            $agentRecordArray= $this->Franchisee_Model->getAgentData($clientId);
+        }
+        else{
+            
+            $agentRecordArray= $this->Franchisee_Model->getAgentData();
+        }
+        
         $data['pageName'] = "Agent_Record";
         $data['szMetaTagTitle'] = "Agent Record";
         $data['is_user_login'] = $is_user_login;
