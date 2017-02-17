@@ -2374,7 +2374,7 @@ function excelfr_stockassignlist_Data()
     {
         ob_start();
         $this->load->library('Pdf');
-        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetTitle('Drug-safe Revenue Summary');
         $pdf->SetAuthor('Drug-safe');
@@ -2390,7 +2390,8 @@ function excelfr_stockassignlist_Data()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-        $pdf->AddPage();
+        $pdf->AddPage('L', 'A4');
+        //$pdf->AddPage();
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         $allfranchisee=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
@@ -2404,7 +2405,6 @@ function excelfr_stockassignlist_Data()
                                         <th> <b>Total Revenue </b> </th>
                                         <th ><b> Royalty Fees </b> </th>
                                         <th > <b>Net Profit</b> </th>
-                                  
                                     </tr>';
         if ($allfranchisee) {
 
