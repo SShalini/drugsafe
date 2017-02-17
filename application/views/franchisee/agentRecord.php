@@ -1,3 +1,9 @@
+<script type='text/javascript'>
+    $(function() {
+
+       $("#szSearchClientname").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
         <div class="page-content">
           
