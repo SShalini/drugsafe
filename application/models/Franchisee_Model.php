@@ -753,7 +753,8 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 }
                 return false;
    	}
-  function insertAgentDetails($data,$clientId='')
+        
+        function insertAgentDetails($data)
         {  
             $szNewPassword = create_login_password();
             $date=date('Y-m-d');
@@ -788,7 +789,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             $clientAry=array(
                 'franchiseeId' => $franchiseeId,
                 'agentId' => $id_agent,
-                'clientType' => $clientId,
                 'szCreatedBy' => $CreatedBy,
                 'szBusinessName' => $data['szBusinessName'],
                 'industry' => $data['industry'],
@@ -825,7 +825,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                {
                    return false;
              }
-        }   
+        }  
           public function viewAgentDetails($idClient=0,$limit = __PAGINATION_RECORD_LIMIT__,$offset= 0,$searchAry = '',$id=0)
         {
             
@@ -917,7 +917,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 $whereAry = array('agentId' => (int)$idAgent);
                 $this->db->where($whereAry);
                 $query=$this->db->update(__DBC_SCHEMATA_CLIENT__, $clientAry);
-              
+                //die($sql=$this->db->last_query());
                 if($query)
                 { 
                      return true;
@@ -936,13 +936,15 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         
       public function deleteAgent($id_agent)
 	{
+          
 		$dataAry = array(
 			'isDeleted' => '1'
                 );  
                 $this->db->where('id', $id_agent);
-                 
-		if($query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry))
+                $query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+                if($query)
                 {
+                   
                     return true;
                 }
                 else
@@ -952,16 +954,14 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
 	}  
           public function viewAgentEmployeeDetails($idAgent)
         {
-
+           
             $whereAry = array('agentId' => $idAgent,'isDeleted=' => '0');
             
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.agentId = ds_user.id');
             
-
-               $this->db->where($whereAry); 
-
+            $this->db->where($whereAry); 
             $query = $this->db->get();
        
             if($query->num_rows() > 0)
@@ -974,6 +974,65 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                     return array();
             }
         }
-        
-}
+         public function getAgentData($searchAry = '',$id=0)
+        {
+            
+            $whereAry = array('isDeleted=' =>'0','agentId !=' => '0');
+            
+            $searchq = '';
+            if($id > '0'){
+                $searchq = 'agentId = '.(int)$id;
+            }
+            $this->db->select('*');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.agentId = ds_user.id');
+            $this->db->where('isDeleted','0');
+            $this->db->where('agentId !=','0');
+            $query = $this->db->get();
+           
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                return $row;
+            }
+            else
+            {
+                    return array();
+            }
+        }
+         public function getAgentDataById($agentId)
+        {
+             ;
+            $this->db->select('*');
+            $this->db->from(__DBC_SCHEMATA_CLIENT__);
+            $this->db->where('agentId',$agentId);
+           // echo $sql=$this->db->last_query(); die();
+            $query = $this->db->get();
+
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                return $row[0];
+            }
+            else
+            {
+                    return array();
+            }
+        }
+         public function assignAgentClient($data,$idAgent)
+	{
+           
+            $dataAry = array('clientType' => $data['szClient'] );
+            $this->db->where('agentId',$idAgent);
+            $queyUpdate=$this->db->update(__DBC_SCHEMATA_CLIENT__, $dataAry);
+            //echo $sql = $this->db->last_query(); die();
+            if($queyUpdate)
+            {
+                return true;
+            }
+            else
+            {   return false;
+            }	
+	}
+    }
 ?>

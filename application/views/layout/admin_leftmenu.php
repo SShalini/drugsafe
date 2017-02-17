@@ -61,7 +61,20 @@
                       <?php   } ?>
                     
             </li>
-            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1  ) { ?>
+           <?php
+            if ($_SESSION['drugsafe_user']['iRole'] == 2 ) { ?>
+                <li class="nav-item start <?php if (trim($pageName) == 'Agent_Record') { ?>active open<?php } ?>">
+                <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord" class="nav-link nav-toggle">
+                     <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    <span class="title">Agent Record</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+                
+                
+              
+            <?php } ?>
+        <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole']==2) { ?>
             <li class="nav-item start <?php if (trim($pageName) == 'Inventory') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cubes" aria-hidden="true"></i>

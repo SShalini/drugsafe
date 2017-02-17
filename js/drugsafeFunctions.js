@@ -695,30 +695,7 @@ function requestQuantityAlert(idProduct,flag)
 
     });
 }
-    function allotQuantityConfirmation(idProduct) {
-      var value = jQuery("#allotQuantityForm").serialize(); 
-      var newValue = value+"&idProduct="+idProduct;
-        $('.modal-backdrop').remove();
-        $('#static').modal("hide");
-        $('#allotQuantityStatus').modal("hide");
-        jQuery('#loader').attr('style', 'display:block');
-        $.post(__BASE_URL__ + "/stock_management/allotReqQtyConfirmation",newValue, function (result) {
-            var result_ary = result.split("||||");
-            var res = result_ary[0].trim(" ");
-            if (res == 'SUCCESS') {  
-                $("#popup_box").html(result_ary[1]);
-                $('#allotQuantityStatusConfirmation').modal("show");
-                jQuery('#loader').attr('style', 'display:none');
-            }else{
-                $("#popup_box").html(result);
-                $('#allotQuantityStatus').modal("show");
-                jQuery('#loader').attr('style', 'display:block');
-            }
-           
-            
-
-        });
-    }
+    
     function ViewReqProductList(idfranchisee) {
     $.post(__BASE_URL__ + "/stock_management/viewproductlistData", {idfranchisee: idfranchisee}, function (result) {
         ar_result = result.split('||||');
@@ -1813,4 +1790,72 @@ function getClientListByFrId(idFranchisee) {
             $("#szSearchClRecord1").customselect();
         }
     });
+}
+function assignClientAgent(agentId) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/assignClientAgent", {agentId: agentId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#assignClientPopupform').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function assignClientConfirmation(idAgent) {
+      var value = jQuery("#assignClient").serialize(); 
+      var newValue = value+"&idAgent="+idAgent;
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#assignClientPopupform').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/franchisee/assignClientAgentConfirmation",newValue, function (result) {
+            
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {  
+                $("#popup_box").html(result_ary[1]);
+                $('#clientAgentStatusConfirmation').modal("show");
+                jQuery('#loader').attr('style', 'display:none');
+            }else{
+                $("#popup_box").html(result);
+                $('#assignClientPopupform').modal("show");
+                jQuery('#loader').attr('style', 'display:block');
+            }
+           
+            
+
+        });
+    }
+    function agentEmployeeDelete(agentId) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/deleteAgentEmployeeAlert", {agentId: agentId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#agetDelete').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function agentEmployeeDeleteConfirmation(agentId) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#agetDelete').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/deleteAgentEmployeeConfirmation", {agentId: agentId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#agetDeleteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
 }

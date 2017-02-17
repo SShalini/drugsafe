@@ -771,5 +771,6 @@ class Admin_Controller extends CI_Controller {
             $this->Admin_Model->deleteOperationManagerDetails($data['idOperationManager']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }  
+         
 }
 ?>

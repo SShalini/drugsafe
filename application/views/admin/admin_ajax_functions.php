@@ -2137,4 +2137,153 @@ if($mode == '__DELETE_AGENT_CONFIRM__')
     
     <?php
 }
+if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="assignClientPopupform" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="modal-title">
+                        <div class="caption">
+                            <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span class="caption-subject font-red-sunglo bold uppercase"> Assign Client</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="assignClient" name="assignClient" method="post"
+                          class="form-horizontal form-row-sepe">
+                        <div class="form-body">
+                            <div
+                                class="form-group <?php if (form_error('assignClient[szClient]')) { ?>has-error<?php } ?>">
+                                <label class="control-label col-md-4">Client</label>
+                                <div class="col-md-5">
+                                   <div class="search">
+                                        <div id='szClient'>                         
+                                      <select class="form-control custom-select" name="assignClient[szClient]" id="szClient" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Client Name</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientList)
+                                          {
+                                              $selected = ($clientList['id'] == $_POST['szClient'] ? 'selected="selected"' : '');
+                                              
+                                              echo '<option value="'.$clientList['id'].'"' . $selected . ' >'.$clientList['szName'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                            </div>
+                                  </div>
+                                    <?php
+                                    if (form_error('allotQuantity[szReqQuantity]')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('allotQuantity[szReqQuantity]'); ?></span>
+                                        </span><?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="assignClientConfirmation('<?php echo $agentId; ?>'); return false;"
+                            class="btn green">Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__ASSIGN_CLIENT_POPUP_CONFIRMATION__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="clientAgentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Client Assign Confirmation</span> </h4>
+                </div>
+           
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully assign.</p>
+                </div>
+               <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/franchisee/agentRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if ($mode == '__DELETE_AGENT_EMPLOYE_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="agetDelete" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Delete Agent/Employee Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        delete the selected Agent/Employee Record?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="agentEmployeeDeleteConfirmation('<?php echo $agentId; ?>'); return false;"
+                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if ($mode == '___DELETE_AGENT_EMPLOYE_CONFIRM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="agetDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span
+                                class="caption-subject font-red-sunglo bold uppercase">Deleted Agent/Employee Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Agent/Employee has been successfully
+                        deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
   ?>

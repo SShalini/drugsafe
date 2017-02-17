@@ -104,13 +104,6 @@
                 <?php }?>
                 </span>
             </div>
-            <!--<div class="actions">
-                <div class="btn-group btn-group-devided" data-toggle="buttons">
-                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php /*echo base_url();*/?>franchisee/clientList');">
-                        &nbsp;Client List
-                    </button>
-                </div>
-            </div>-->
         </div>
         <div class="portlet-body alert">
             <div class="row">
@@ -369,6 +362,7 @@
                         </thead>
                         <tbody>
                            <?php
+						 
                                        $i = 0;
                                         foreach($agentDetailsAray as $agentDetailsData)
                                         {
