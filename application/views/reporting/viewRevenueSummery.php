@@ -167,39 +167,22 @@
                                                 $allfranchiseeTotalRevenue='';
                                                 $allfranchiseetotalRoyaltyfees='';
                                                 $allfranchiseetotalNetProfit='';
+												
 						foreach($allfranchisee as $allfranchiseeData)
 						{
-                                                    
+                                                    $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$allfranchiseeData['franchiseeId']);
                                                     $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
-						    //$getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
-                                                     $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData['franchiseeId']);
-                                                    $id=array();
-                                                    foreach($getClientDeatils as $getClientData)
-                                                    {   
-                                                        array_push($id, $getClientData['clientId']);
-                                                    }
-							                      						
-                                                    $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
-                                                    $sosId=array();
-                                                    foreach($getSosDetails as $getSosData)
-                                                    {   
-                                                        array_push($sosId, $getSosData['id']);
-                                                    }
-													
-                                                    if(!empty($sosId))
-                                                    {
-                                                        $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
-                                                    }
 						    $totalRevenu='';
                                                     $totalRoyaltyfees='';
                                                     $totalNetProfit='';
-                                                   
+													
+                                                
 						    foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
-                                                        $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
-                                                        $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
-                                                        $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
+                                                       
+                                                        $DrugtestidArr = array_map('intval', str_split($getManualCalcData['Drugtestid']));
+                                                        
                                                         if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
                                                             $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
                                                         }

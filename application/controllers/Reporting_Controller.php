@@ -2176,9 +2176,9 @@ function excelfr_stockassignlist_Data()
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szFranchisee']!='')
         {
             $searchAry =$_POST; 
-            //$getClientDeatils=$this->Webservices_Model->getclientdetails($_POST['szFranchisee']);
-            $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $_POST['szFranchisee']);
             
+            $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$_POST['szFranchisee']);
+            /*$getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $_POST['szFranchisee']);
             $id=array();
             foreach($getClientDeatils as $getClientData)
             {   
@@ -2190,10 +2190,13 @@ function excelfr_stockassignlist_Data()
             {   
                 array_push($sosId, $getSosData['id']);
             }
+           
             if(!empty($sosId))
             {
                 $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
             }
+             
+             */
         }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
@@ -2317,10 +2320,11 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
+		
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
         {
             $searchAry =$_POST; 
-            $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
+	    $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
         }
 	$this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
@@ -2336,6 +2340,7 @@ function excelfr_stockassignlist_Data()
             $data['subpageName'] = "revenue_summery";
             $data['notification'] = $count;
             $data['data'] = $data;
+            $data['getSummeryManualCalcStartToEndDate']=$getSummeryManualCalcStartToEndDate;
             $data['searchAry'] = $_POST;
 	    $data['allfranchisee'] = $franchiseeId;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
@@ -2352,7 +2357,8 @@ function excelfr_stockassignlist_Data()
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['searchAry'] = $_POST;
-	    $data['allfranchisee'] = $searchOptionArr;
+	        $data['allfranchisee'] = $searchOptionArr;
+			$data['getSummeryManualCalcStartToEndDate']=$getSummeryManualCalcStartToEndDate;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummery');

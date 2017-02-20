@@ -377,5 +377,54 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
 
         }
     }
+        function getAllRevenueManualalc($searchAry=array(),$franchiseeId)
+        {
+           
+            $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+            $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+            $whereAry = array('clientType!='=>'0','status='=>'1'); 
+            $query=$this->db->select( '*')
+                            ->from(__DBC_SCHEMATA_CLIENT__)
+                            ->join(__DBC_SCHEMATA_SOS_FORM__, __DBC_SCHEMATA_SOS_FORM__ . '.Clientid = ' . __DBC_SCHEMATA_CLIENT__ . '.clientId')
+                            ->join(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_MANUAL_CAL__ . '.sosid = ' . __DBC_SCHEMATA_SOS_FORM__ . '.id')
+                            ->where($whereAry)
+                            ->where('franchiseeId',$franchiseeId)
+                            ->where('dtCreatedOn >=', $dtStart)
+                            ->where('dtCreatedOn <=', $dtEnd)
+                            ->get();
+            //echo $sql=$this->db->last_query();die();
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                return array();
+            }
+        }
+	function getSummeryRevenueManualalc($searchAry=array(),$franchiseeId)
+        {
+        
+            $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+            $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+            $whereAry = array('clientType!='=>'0','status='=>'1'); 
+            $query=$this->db->select( '*')
+                            ->from(__DBC_SCHEMATA_CLIENT__)
+                            ->join(__DBC_SCHEMATA_SOS_FORM__, __DBC_SCHEMATA_SOS_FORM__ . '.Clientid = ' . __DBC_SCHEMATA_CLIENT__ . '.clientId')
+                            ->join(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_MANUAL_CAL__ . '.sosid = ' . __DBC_SCHEMATA_SOS_FORM__ . '.id')
+                            ->where($whereAry)
+                            ->where('dtCreatedOn >=', $dtStart)
+                            ->where('dtCreatedOn <=', $dtEnd)
+                            ->get();
+	  //echo $sql=$this->db->last_query();die();
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                return array();
+            }
+        }
 }
 ?>
