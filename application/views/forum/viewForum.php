@@ -1,7 +1,5 @@
-
 <div class="page-content-wrapper">
-        <div class="page-content">
-          
+    <div class="page-content">
              <?php 
             if(!empty($_SESSION['drugsafe_user_message']))
             {

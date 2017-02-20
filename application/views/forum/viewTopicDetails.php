@@ -1,4 +1,3 @@
-
 <div class="page-content-wrapper">
         <div class="page-content">
           
@@ -261,11 +260,11 @@
     echo "";
  } ?>
 
-    <?php if( $forumTopicDataAry['0']['isClosed']==0){?>
    <div class="row reply-editor">
     <form class="form-horizontal" id="replyData" action="<?=__BASE_URL__?>/forum/viewTopicDetails " name="replyData" method="post">
    <div class="form-group <?php if(form_error('replyData[szForumLongDiscription]')){?>has-error<?php }?>">
    
+    <?php if( $forumTopicDataAry['0']['isClosed']==0){?>
     <div class="col-md-12">
       <div class="input-group">
 
@@ -283,18 +282,17 @@ if(form_error('replyData[szForumLongDiscription]')){?>
         <div class="col-md-1">
    <input type="submit" class="btn green-meadow" value="SAVE" name="replyData[submit]">
         </div>
+         <?php }?>
     </form>
    </div>
-    <?php }?>
-         
-                    </div>
+   
                 </div>
-            </div> 
-        </div>
+            </div>
+        </div> 
     </div>
 </div>
 <script>
 CKEDITOR.replace( 'szForumLongDiscription' );
 </script>
-
+</div>
 <div id="popup_box"></div>
