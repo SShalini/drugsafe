@@ -117,6 +117,10 @@ class Admin_Model extends Error_Model
     {
         $this->data['site_people'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "site_people", "People on site", false, false, $flag);
     }
+    function set_szReginalName($value, $flag = true)
+    {
+        $this->data['szReginalName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szReginalName", "Reginal Name", false, false, $flag);
+    }
     function validateUserData($data, $arExclude = array())
     {
         if (!empty($data)) {
@@ -254,6 +258,7 @@ class Admin_Model extends Error_Model
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
+            //if (!in_array('szReginalName', $arExclude)) $this->set_szReginalName(sanitize_all_html_input(trim($data['szReginalName'])), true);
             if ($this->error == false && $this->data['szEmail'] != '') {
 
 
@@ -359,18 +364,28 @@ class Admin_Model extends Error_Model
         else{
           $abn = '';     
         }
-        $date = date('Y-m-d');
-        $dataAry = array(
-
+        
+        $reginolDataAry =array(
+             'stateId'=> $data['szState'],
+             'reginolCode'=> $data['reginolCode'],
+             'reginolName'=> $data['szReginalName']
+         );
+         $query=$this->db->insert(__DBC_SCHEMATA_REGINOL__, $reginolDataAry);
+        
+ 
+        if ($this->db->affected_rows() > 0) {
+            $reginolId=$this->db->insert_id();
+            $date = date('Y-m-d');
+            $dataAry = array(
             'szName' => $data['szName'],
-            
             'abn' => $abn,
             'szEmail' => $data['szEmail'],
             'szPassword' => encrypt($szNewPassword),
             'szContactNumber' => $data['szContactNumber'],
             'szCountry' => $data['szCountry'],
-            'szState' => $data['szState'],
             'szCity' => $data['szCity'],
+            'userCode' => $data['reginolCode'],
+            'reginolId' => $reginolId,
             'szZipCode' => $data['szZipCode'],
             'szAddress' => $data['szAddress'],
             'iRole' => $data['iRole'],
@@ -378,12 +393,8 @@ class Admin_Model extends Error_Model
             'dtCreatedOn' => $date
         );
         $query=$this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
-        
-        
- 
-        if ($this->db->affected_rows() > 0) {
-
-             if($data['iRole']==2){
+            
+            if($data['iRole']==2){
             $id_franchisee = (int)$this->db->insert_id();
             $franchiseeAry=array(
             'franchiseeId' => $id_franchisee,
@@ -672,7 +683,17 @@ class Admin_Model extends Error_Model
 
     public function updateUsersDetails($data,$id = 0)
     {
-        $date = date('Y-m-d');
+        $ReginolData=array(
+           'reginolCode'=>$data['reginolCode'],
+           'stateId'=>$data['szState'],
+           'reginolName'=>$data['szReginalName']
+        );
+         $this->db->where('id',$data['reginolid']);
+        $queyUpdate=$this->db->update(__DBC_SCHEMATA_REGINOL__, $ReginolData);
+        
+            if ($queyUpdate) {
+                
+                $date = date('Y-m-d');
         $dataAry = array(
 
             'szName' => $data['szName'],
@@ -680,7 +701,6 @@ class Admin_Model extends Error_Model
               'abn' => $data['abn'],
             'szContactNumber' => $data['szContactNumber'],
             'szCountry' => $data['szCountry'],
-            'szState' => $data['szState'],
             'szCity' => $data['szCity'],
             'szZipCode' => $data['szZipCode'],
             'szAddress' => $data['szAddress'],
@@ -693,9 +713,7 @@ class Admin_Model extends Error_Model
 
             $this->db->where($whereAry);
 
-       $queyUpdate =  $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
-
-            if ($queyUpdate) {
+            $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
                  $OmAry=array(
                 
                 'operationManagerId' => $data['operationManagerId'],
@@ -1076,6 +1094,176 @@ class Admin_Model extends Error_Model
            return array();
         }
    } 
+    public function getReginolCode($stateId)
+    {
+        $this->db->select('*');
+        $this->db->where('stateId',$stateId);
+         $this->db->select_max('reginolCode', 'reginolCodeMax');
+        $query = $this->db->get(__DBC_SCHEMATA_REGINOL__);
+        //$sql=$this->db->last_query();
+        if ($query->num_rows() > 0) {
+           $row = $query->result_array();
+            return $row[0];
+          
+        } else {
+           return array();
+        }
+   } 
+    public function getstateIdByResinolId($resinolId)
+    {
+        $this->db->select('*');
+        $this->db->where('id',$resinolId);
+        $query = $this->db->get(__DBC_SCHEMATA_REGINOL__);
+        //$sql=$this->db->last_query();
+        if ($query->num_rows() > 0) {
+           $row = $query->result_array();
+            return $row[0];
+          
+        } else {
+           return array();
+        }
+   } 
+    function getAllStateByCountryId($countryId)
+    {
+        $this->db->select('*');
+        $this->db->where('country_id',$countryId);
+        $query = $this->db->get(__DBC_SCHEMATA_STATE__);
+        //echo $sql=$this->db->last_query();die();
+        if ($query->num_rows() > 0) {
+           $row = $query->result_array();
+            return $row;
+          
+        } else {
+           return array();
+        }
+   } 
+    function insertOpertionDetails($data,$id=0)
+    {
+        $szNewPassword = create_login_password();
+        if(!empty($data['abn'])){
+           $abn = $data['abn'];  
+        }
+        else{
+          $abn = '';     
+        }
+        $date = date('Y-m-d');
+            $dataAry = array(
+            'szName' => $data['szName'],
+            'abn' => $abn,
+            'szEmail' => $data['szEmail'],
+            'szPassword' => encrypt($szNewPassword),
+            'szContactNumber' => $data['szContactNumber'],
+            'szCountry' => $data['szCountry'],
+            'szCity' => $data['szCity'],
+            'szZipCode' => $data['szZipCode'],
+            'szAddress' => $data['szAddress'],
+            'iRole' => $data['iRole'],
+            'iActive' => '1',
+            'dtCreatedOn' => $date
+        );
+        $query=$this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
+       
+        
+ 
+        if ($this->db->affected_rows() > 0) {
+            $operationalId=$this->db->insert_id();
+             $operationalDataAry =array(
+             'stateId'=> $data['szState'],
+             'operationId'=> $operationalId
+         );
+         $query=$this->db->insert(__DBC_SCHEMATA_OPERATION_STATE_MAPING__, $operationalDataAry);
+            
+            
+            if($data['iRole']==2){
+            $id_franchisee = (int)$this->db->insert_id();
+            $franchiseeAry=array(
+            'franchiseeId' => $id_franchisee,
+            'operationManagerId' => $data['operationManagerId'],
+            );
+            $this->db->insert(__DBC_SCHEMATA_FRANCHISEE__, $franchiseeAry);
+         }
+            $id_player = (int)$id_franchisee;
+            $replace_ary = array();
+            $replace_ary['szName'] = $data['szName'];
+            $replace_ary['szEmail'] = $data['szEmail'];
+            $replace_ary['szPassword'] = $szNewPassword;
+            $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+            $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
+           if($data['iRole']==2){
+            createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+            
+           }
+           if($data['iRole']==5){
+             createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+           }
+           
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+     public function getStateByOperationid($operationId = 0)
+    {
+       
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_OPERATION_STATE_MAPING__);
+        $this->db->where('operationId',$operationId);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            return array();
+        }
+    }
+    public function updateOperationDetails($data,$id = 0)
+    {
+        $operationStateAry=array(
+           'stateId'=>$data['szState']
+        );
+         $this->db->where('operationId',$id);
+        $queyUpdate=$this->db->update(__DBC_SCHEMATA_OPERATION_STATE_MAPING__, $operationStateAry);
+        
+            if ($queyUpdate) {
+                
+                $date = date('Y-m-d');
+        $dataAry = array(
+
+            'szName' => $data['szName'],
+            'szEmail' => $data['szEmail'],
+            'abn' => $data['abn'],
+            'szContactNumber' => $data['szContactNumber'],
+            'szCountry' => $data['szCountry'],
+            'szCity' => $data['szCity'],
+            'szZipCode' => $data['szZipCode'],
+            'szAddress' => $data['szAddress'],
+            'iRole' => $data['iRole'],
+            'dtUpdatedOn' => $date
+        );
+
+        if ($id> 0) {
+            $whereAry = array('id' => (int)$id);
+
+            $this->db->where($whereAry);
+
+            $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+                 $OmAry=array(
+                
+                'operationManagerId' => $data['operationManagerId'],
+                   );
+                $whereAry = array('franchiseeId' => (int)$id);
+                $this->db->where($whereAry);
+                $this->db->update(__DBC_SCHEMATA_FRANCHISEE__, $OmAry);
+                 return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
             
   
         }?>

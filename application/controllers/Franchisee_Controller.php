@@ -781,37 +781,40 @@ class Franchisee_Controller extends CI_Controller
 		
 		
 		$this->load->library('form_validation');
-                $this->form_validation->set_rules('agentData[szBusinessName]', 'Business Name', 'required|is_unique['.__DBC_SCHEMATA_CLIENT__.'.szBusinessName]');
-		$this->form_validation->set_rules('agentData[abn]', 'Business Name', 'required');
-		$this->form_validation->set_rules('agentData[abn]', 'ABN', 'required|min_length[11]');
-		$this->form_validation->set_rules('agentData[szName]', 'Contact Name', 'required');
-		$this->form_validation->set_rules('agentData[szEmail]', 'Primary Email', 'required');
-        $this->form_validation->set_rules('agentData[szContactNumber]', 'Primary Phone', 'required'); 
-        $this->form_validation->set_rules('agentData[industry]', 'Industry', 'required'); 	
-        $this->form_validation->set_rules('agentData[szAddress]', 'Address', 'required'); 
-        $this->form_validation->set_rules('agentData[szState]', 'State', 'required'); 
-		$this->form_validation->set_rules('agentData[szCity]', 'City', 'required');
-        $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|min_length[4]'); 		
-        $this->form_validation->set_message('required', '{field} is required');
-        if ($this->form_validation->run() == FALSE)
-        { 
-            $data['pageName'] = "Agent_Record";
-            $data['szMetaTagTitle'] = "Add Agent";
-            $data['is_user_login'] = $is_user_login;
-            $data['allIndustry']=$allIndustry;
-            $this->load->view('layout/admin_header', $data);
-            $this->load->view('franchisee/addAgent');
-            $this->load->view('layout/admin_footer');
-        }
-        else
-        {
+                $this->form_validation->set_rules('agentData[szBusinessName]', 'Business Name', 'required|is_unique['.__DBC_SCHEMATA_CLIENT__.'.szBusinessName]|alpha_dash_space');
+                $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
+                $this->form_validation->set_rules('agentData[abn]', 'ABN', 'required|abn_numeric|abn_length');
+		$this->form_validation->set_rules('agentData[szName]', 'Contact Name', 'required|alpha_dash_space');
+		$this->form_validation->set_rules('agentData[szEmail]', 'Primary Email', 'required|valid_email');
+                $this->form_validation->set_rules('agentData[szContactNumber]', 'Primary Phone', 'required|valid_phone_number'); 
+                $this->form_validation->set_rules('agentData[industry]', 'Industry', 'required'); 	
+                $this->form_validation->set_rules('agentData[szAddress]', 'Address', 'required'); 
+                $this->form_validation->set_rules('agentData[szCity]', 'City', 'required');
+                $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
+                $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
+                $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
+                $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
+                $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
+                $this->form_validation->set_message('required', '{field} is required');
+                if ($this->form_validation->run() == FALSE)
+                { 
+                    $data['pageName'] = "Agent_Record";
+                    $data['szMetaTagTitle'] = "Add Agent";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['allIndustry']=$allIndustry;
+                    $this->load->view('layout/admin_header', $data);
+                    $this->load->view('franchisee/addAgent');
+                    $this->load->view('layout/admin_footer');
+                }
+                else
+                {
 			
-            if($this->Franchisee_Model->insertAgentDetails($_POST['agentData']))
-            {
-		redirect(base_url('/franchisee/agentRecord'));
-                die;
-            }
-        }
+                    if($this->Franchisee_Model->insertAgentDetails($_POST['agentData']))
+                    {
+		        redirect(base_url('/franchisee/agentRecord'));
+                        die;
+                    }
+                }
     }
      function editAgentEmployeeData()
     {
@@ -851,19 +854,22 @@ class Franchisee_Controller extends CI_Controller
                 $agentDataArray = $data_validate;
             }
         } 
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('agentData[szBusinessName]', 'Business Name', 'required');
-	    $this->form_validation->set_rules('agentData[abn]', 'Business Name', 'required');
-            $this->form_validation->set_rules('agentData[abn]', 'ABN', 'required|min_length[11]');
-	    $this->form_validation->set_rules('agentData[szName]', 'Contact Name', 'required');
-	    $this->form_validation->set_rules('agentData[szEmail]', 'Primary Email', 'required');
-            $this->form_validation->set_rules('agentData[szContactNumber]', 'Primary Phone', 'required'); 
-            $this->form_validation->set_rules('agentData[industry]', 'Industry', 'required'); 	
-            $this->form_validation->set_rules('agentData[szAddress]', 'Address', 'required'); 
-            $this->form_validation->set_rules('agentData[szState]', 'State', 'required'); 
-	    $this->form_validation->set_rules('agentData[szCity]', 'City', 'required');
-            $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|min_length[4]|max_length[4]'); 		
-            $this->form_validation->set_message('required', '{field} is required');
+                $this->load->library('form_validation');
+                $this->form_validation->set_rules('agentData[szBusinessName]', 'Business Name', 'required|alpha_dash_space');
+                $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
+                $this->form_validation->set_rules('agentData[abn]', 'ABN', 'required|abn_numeric|abn_length');
+		$this->form_validation->set_rules('agentData[szName]', 'Contact Name', 'required|alpha_dash_space');
+		$this->form_validation->set_rules('agentData[szEmail]', 'Primary Email', 'required|valid_email');
+                $this->form_validation->set_rules('agentData[szContactNumber]', 'Primary Phone', 'required|valid_phone_number'); 
+                $this->form_validation->set_rules('agentData[industry]', 'Industry', 'required'); 	
+                $this->form_validation->set_rules('agentData[szAddress]', 'Address', 'required'); 
+                $this->form_validation->set_rules('agentData[szCity]', 'City', 'required');
+                $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
+                $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
+                $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
+                $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
+                $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
+                $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE)
         { 
             $data['szMetaTagTitle'] = "Edit Client Details ";
@@ -1193,7 +1199,7 @@ class Franchisee_Controller extends CI_Controller
           
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-        
+       
     
         }
 ?>

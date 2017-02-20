@@ -69,11 +69,15 @@
                                       <select class="form-control custom-select" name="szFranchisee" id="szFranchisee" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
-                                          foreach($allfranchisee as $franchiseeIdList)
-                                          {
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szFranchisee'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
-                                          }
+                                            if(!empty($allfranchisee))
+                                            {
+                                                foreach($allfranchisee as $franchiseeIdList)
+                                                {
+                                                    $selected = ($franchiseeIdList['id'] == $_POST['szFranchisee'] ? 'selected="selected"' : '');
+                                                    echo '<option value="'.$franchiseeIdList['id'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
+                                                } 
+                                            }
+                                          
                                           ?>
                                       </select>
                                           <?php

@@ -105,6 +105,8 @@ define("__DBC_SCHEMATA_REQUEST_QUANTITY__", "tbl_stock_request");
 define("__DBC_SCHEMATA_SOS_FORM__", "ds_sos");
 define("__DBC_SCHEMATA_COC_FORM__", "ds_coc");
 define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
+define("__DBC_SCHEMATA_REGINOL__", "tbl_reginol");
+define("__DBC_SCHEMATA_OPERATION_STATE_MAPING__", "tbl_operation_state_maping");
 
 /**
  * Validate an int, uses is_numeric
@@ -265,6 +267,7 @@ define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
 define( "__VLD_CASE_FILE_NAME__", "FILE_NAME" );
 /**Digit format**/
 define("__FORMAT_NUMBER__",'%08d');
+define("__REGINOL_CODE__",'%03d');
 /**
  * Validate Image is selected and type
  *

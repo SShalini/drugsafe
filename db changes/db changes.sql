@@ -103,3 +103,9 @@ ALTER TABLE `tbl_client` ADD `agentId` INT(11) NOT NULL AFTER `clientId`;
 /* swapnil changes 08-02-2017*/
 ALTER TABLE `tbl_manual_calc` ADD `dtCreatedOn` DATE NOT NULL AFTER `cancelfee`;
 ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;
+
+/* swapnil changes 20-02-2017*/
+ALTER TABLE `ds_user` CHANGE `szState` `userCode` VARCHAR(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+ALTER TABLE `ds_user` ADD `reginolId` INT NOT NULL AFTER `userCode`;
+
+CREATE TABLE `drugsafe`.`tbl_operation_state_maping` ( `id` INT NOT NULL AUTO_INCREMENT , `operationId` INT NOT NULL , `stateId` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

@@ -1859,3 +1859,18 @@ function agentEmployeeDeleteConfirmation(agentId) {
 
     }); 
 }
+function getReginolCode(stateId) {
+    if(stateId>0){
+        $.post(__BASE_URL__ + "/admin/getReginolCode", {stateId: stateId}, function (result) {
+            if (result != '') {
+                $("#reginolFiled").empty();
+                $("#reginolFiled").html(result);
+            }
+        });
+    }
+    else
+    {
+         $("#reginolFiled").empty();
+    }
+   
+}

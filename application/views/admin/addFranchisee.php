@@ -13,6 +13,7 @@
                         <span class="active">Add Franchisee</span>
                     </li>
                 </ul>
+                
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -28,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="portlet-body">
+                   <div class="portlet-body">
                         <form class="form-horizontal" id="addfranchisee"
                               action="<?= __BASE_URL__ ?>/admin/addFranchisee" name="addfranchisee" method="post">
                             <div class="form-body">
@@ -231,19 +232,18 @@
                                                 <i class="fa fa-flag-checkered"></i>
                                                 </span>
                                             <select class="form-control " name="addFranchisee[szState]" id="szState"
-                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')" onchange="getReginolCode(this.value);">
                                                 <option value=''>Select</option>
-                                                
-                                                        <option value="Australian Capital Territory" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Australian Capital Territory") ? "selected" : ""); ?>>Australian Capital Territory</option>
-                                                        <option value="New South Wales" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("New South Wales") ? "selected" : ""); ?>>New South Wales</option>
-                                                        <option value="Northern Territory" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Northern Territory") ? "selected" : ""); ?>>Northern Territory</option>
-                                                        <option value="Queensland" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Queensland") ? "selected" : ""); ?>>Queensland</option>
-                                                        <option value="South Australia" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("South Australia") ? "selected" : ""); ?> >South Australia</option>
-                                                        <option value="Tasmania" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Tasmania") ? "selected" : ""); ?>>Tasmania</option>
-                                                        <option value="Victoria" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Victoria") ? "selected" : ""); ?>>Victoria</option>
-                                                        <option value="Western Australia" <?php echo (sanitize_post_field_value($_POST['addFranchisee']['szState']) == trim("Western Australia") ? "selected" : ""); ?>>Western Australia </option>
-                                                       
-                                                  
+                                                 <?php
+                                                if(!empty($getAllStates))
+                                                {
+                                                    foreach($getAllStates as $getAllStatesData)
+                                                    {
+                                                        $selected = ($getAllStatesData['id'] == $_POST['addFranchisee']['szState'] ? 'selected="selected"' : '');
+                                                        echo '<option value="'.$getAllStatesData['id'].'"' . $selected . ' >'.$getAllStatesData['name'].'</option>';
+                                                    } 
+                                                } 
+                                            ?>
                                             </select>
                                         </div>
                                         <?php if (!empty($arErrorMessages['szState'])) { ?>
@@ -277,6 +277,46 @@
                                     </div>
 
                                 </div>
+                                <div class="reginolFiled" id="reginolFiled">
+                                <?php
+                                if($_POST['addFranchisee']['iReginolCode'] !='')
+                                {
+                                  ?>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Reginol code</label>
+                                            <div class="col-md-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-area-chart"></i>
+                                                    </span>
+                                                    <input id="iReginolCode" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['iReginolCode']; ?>" placeholder="Reginol Code" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iReginolCode]"  readonly>
+                                                </div>
+                                            </div>
+                                    </div>
+                                   <input id="reginolCode" class="form-control" type="hidden" value="<?php echo $_POST['addFranchisee']['reginolCode']; ?>"  name="addFranchisee[reginolCode]">
+                                   <div class="form-group <?php if (!empty($arErrorMessages['szReginalName']) != '') { ?>has-error<?php } ?>">
+                                        <label class="col-md-3 control-label">Reginol Name</label>
+                                            <div class="col-md-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-area-chart"></i>
+                                                    </span>
+                                                    <input id="szReginalName" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szReginalName']; ?>" placeholder="Reginal Name" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szReginalName]">
+                                                </div>
+                                                <?php if (!empty($arErrorMessages['szReginalName'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szReginalName']; ?>
+                                            </span>
+                                        <?php } ?>
+                                            </div>
+                                    </div>
+                                   <?php
+                                }
+                                
+                                ?>
+                                
+                                </div>
                                 <div
                                     class="form-group <?php if (!empty($arErrorMessages['szZipCode']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-3 control-label">ZIP/Postal Code</label>
@@ -300,6 +340,7 @@
                                     </div>
 
                                 </div>
+                                
 
                             </div>
                             <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role"

@@ -142,7 +142,6 @@
                                     </div>
 
                                 </div>
-
                                 <div
                                     class="form-group <?php if (!empty($arErrorMessages['szState']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-3 control-label">State</label>
@@ -154,17 +153,16 @@
                                             <select class="form-control " name="addOperationManager[szState]" id="szState"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')">
                                                 <option value=''>Select</option>
-                                                
-                                                        <option value="Australian Capital Territory" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("Australian Capital Territory") ? "selected" : ""); ?>>Australian Capital Territory</option>
-                                                        <option value="New South Wales" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("New South Wales") ? "selected" : ""); ?>>New South Wales</option>
-                                                        <option value="Northern Territory" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("Northern Territory") ? "selected" : ""); ?>>Northern Territory</option>
-                                                        <option value="Queensland" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("Queensland") ? "selected" : ""); ?>>Queensland</option>
-                                                        <option value="South Australia" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("South Australia") ? "selected" : ""); ?> >South Australia</option>
-                                                        <option value="Tasmania" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("Tasmania") ? "selected" : ""); ?>>Tasmania</option>
-                                                        <option value="Victoria" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("Victoria") ? "selected" : ""); ?>>Victoria</option>
-                                                        <option value="Western Australia" <?php echo (sanitize_post_field_value($_POST['addOperationManager']['szState']) == trim("Western Australia") ? "selected" : ""); ?>>Western Australia </option>
-                                                       
-                                                  
+                                                 <?php
+                                                if(!empty($getAllStates))
+                                                {
+                                                    foreach($getAllStates as $getAllStatesData)
+                                                    {
+                                                        $selected = ($getAllStatesData['id'] == $_POST['addOperationManager']['szState'] ? 'selected="selected"' : '');
+                                                        echo '<option value="'.$getAllStatesData['id'].'"' . $selected . ' >'.$getAllStatesData['name'].'</option>';
+                                                    } 
+                                                } 
+                                            ?>
                                             </select>
                                         </div>
                                         <?php if (!empty($arErrorMessages['szState'])) { ?>

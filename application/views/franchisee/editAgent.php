@@ -213,37 +213,6 @@
                                     </div>
 
                                 </div>
-
-                                <div class="form-group <?php if(form_error('agentData[szState]')){?>has-error<?php }?>">
-                                    <label class="col-md-4 control-label">State</label>
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-flag-checkered"></i>
-                                                </span>
-                                            <select class="form-control " name="agentData[szState]" id="szState"
-                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-
-                                                <option value="Australian Capital Territory" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("Australian Capital Territory") ? "selected" : ""); ?>>Australian Capital Territory</option>
-                                                <option value="New South Wales" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("New South Wales") ? "selected" : ""); ?>>New South Wales</option>
-                                                <option value="Northern Territory" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("Northern Territory") ? "selected" : ""); ?>>Northern Territory</option>
-                                                <option value="Queensland" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("Queensland") ? "selected" : ""); ?>>Queensland</option>
-                                                <option value="South Australia" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("South Australia") ? "selected" : ""); ?> >South Australia</option>
-                                                <option value="Tasmania" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("Tasmania") ? "selected" : ""); ?>>Tasmania</option>
-                                                <option value="Victoria" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("Victoria") ? "selected" : ""); ?>>Victoria</option>
-                                                <option value="Western Australia" <?php echo (sanitize_post_field_value($_POST['agentData']['szState']) == trim("Western Australia") ? "selected" : ""); ?>>Western Australia </option>
-
-
-                                            </select>
-                                        </div>
-                                      <?php
-                                            if(form_error('agentData[szState]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szState]');?></span>
-                                            </span><?php }?>
-                                    </div>
-
-                                </div>
                                 <div
                                     class="form-group <?php if(form_error('agentData[szCity]')){?>has-error<?php }?>">
                                     <label class="col-md-4 control-label"> City</label>

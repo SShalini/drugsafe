@@ -214,10 +214,12 @@ class Admin_Controller extends CI_Controller {
                 die;
             }
             $validate= $this->input->post('addFranchisee');
+            //print_r($validate);die();
             $idOperationManager = $this->session->userdata('idOperationManager');
+            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
             $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
-        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($this->Admin_Model->validateUsersData($validate,array(),false,false,$flag,2))
             {
               
@@ -239,6 +241,7 @@ class Admin_Controller extends CI_Controller {
                     $data['pageName'] = "Franchisee_List";
                     $data['validate'] = $validate;
                     $data['flag'] = $flag;
+                    $data['getAllStates'] = $getAllStates;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
@@ -424,12 +427,8 @@ class Admin_Controller extends CI_Controller {
   	}
         function editfranchiseedata()
         {
-            
-           
             $idfranchisee = $this->input->post('idfranchisee');
             $idOperationManager = $this->input->post('idOperationManager');
-           
-            
             if($idfranchisee>0)
             {
                 $this->session->set_userdata('idfranchisee',$idfranchisee);
@@ -450,6 +449,7 @@ class Admin_Controller extends CI_Controller {
                redirect(base_url('/admin/admin_login'));
                 die;
             }
+            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
             $idOperationManager = $this->session->userdata('idOperationManager');
             $idfranchisee = $this->session->userdata('idfranchisee');
             $count = $this->Admin_Model->getnotification();
@@ -459,13 +459,30 @@ class Admin_Controller extends CI_Controller {
                 
                   
                 $data_validate = $this->input->post('addFranchisee');
+                $reginolIdArray = $this->Admin_Model->getUserDetailsByEmailOrId('',$idfranchisee);
+                $clientDetailsAray = $this->Franchisee_Model->getClientCountId($idfranchisee);
+                if(!empty($clientDetailsAray))
+                {
+                    $stateReginolClass="stateReginolhidden";
+                }
+                $reginolId=$reginolIdArray['reginolId'];
                 if(empty($data_validate))
                 {
                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idfranchisee);
+                    $getResinolData = $this->Admin_Model->getstateIdByResinolId($userDataAry['reginolId']);
+                    $szStateId=$getResinolData['stateId'];
+                    $iReginolCode=sprintf(__REGINOL_CODE__,$getResinolData['reginolCode']);
+                    $reginolCode=$getResinolData['reginolCode'];
+                    $resinolName=$getResinolData['reginolName'];
+                    
                 }
                 else
                 {
                     $userDataAry = $data_validate;
+                    $szStateId=$data_validate['szState'];
+                    $iReginolCode=$data_validate['iReginolCode'];
+                    $resinolName=$data_validate['szReginalName'];
+                    $reginolCode=$data_validate['reginolCode'];
                 }
                 
                 if($this->Admin_Model->validateUsersData($data_validate,array(), $idfranchisee,false,1,2))
@@ -490,12 +507,19 @@ class Admin_Controller extends CI_Controller {
                     $data['idfranchisee'] = $idfranchisee;
                     $data['idOperationManager'] = $idOperationManager;
                     $_POST['addFranchisee'] = $userDataAry;
+                    $_POST['addFranchisee']['szState'] =$szStateId;
+                    $_POST['addFranchisee']['iReginolCode'] =$iReginolCode;
+                    $_POST['addFranchisee']['reginolCode'] =$reginolCode;
+                    $_POST['addFranchisee']['szReginalName'] =$resinolName;
+                    $data['getAllStates']=$getAllStates;
+                    $data['stateReginolClass']=$stateReginolClass;
+                    $data['reginolId']=$reginolId;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-            $this->load->view('layout/admin_header',$data);
-            $this->load->view('admin/editFranchisee');
-            $this->load->view('layout/admin_footer');
+                    $data['commentnotification'] = $commentReplyNotiCount;
+                    $this->load->view('layout/admin_header',$data);
+                    $this->load->view('admin/editFranchisee');
+                    $this->load->view('layout/admin_footer');
             }
         }
  
@@ -652,13 +676,14 @@ class Admin_Controller extends CI_Controller {
                 die;
             }
             $validate= $this->input->post('addOperationManager'); 
-
+            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
             $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+           
             if($this->Admin_Model->validateUsersData($validate))
             {
               
-                if($this->Admin_Model->insertUserDetails($validate))
+                if($this->Admin_Model->insertOpertionDetails($validate))
                 {
                     $szMessage['type'] = "success";
                     $szMessage['content'] = "<strong><h3>New operation manager added successfully.</h3></strong>";
@@ -674,6 +699,7 @@ class Admin_Controller extends CI_Controller {
                     $data['validate'] = $validate;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
+                    $data['getAllStates']=$getAllStates;
                     $data['commentnotification'] = $commentReplyNotiCount;
             
             $this->load->view('layout/admin_header',$data);
@@ -707,27 +733,34 @@ class Admin_Controller extends CI_Controller {
                redirect(base_url('/admin/admin_login'));
                 die;
             }
+            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
             $idOperationManager = $this->session->userdata('idOperationManager');
             $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($idOperationManager >0)
             {
-                
-                  
                 $data_validate = $this->input->post('editOperationManager');
                 if(empty($data_validate))
                 {
                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idOperationManager);
+                    if(!empty($userDataAry))
+                    {
+                         $getStateIdByOperationId=$this->Admin_Model->getStateByOperationid($userDataAry['id']);
+                         $stateId=$getStateIdByOperationId['stateId'];
+                    }
                 }
                 else
                 {
                     $userDataAry = $data_validate;
+                    $stateId=$userDataAry['szState'];
+                   
+                    
                 }
                 
                 if($this->Admin_Model->validateUsersData($data_validate,array(), $idOperationManager))
                 {
-                    if($this->Admin_Model->updateUsersDetails($data_validate,$idOperationManager))
+                    if($this->Admin_Model->updateOperationDetails($data_validate,$idOperationManager))
                     {
                         $szMessage['type'] = "success";
                         $szMessage['content'] = "<strong><h3> Operation Manager data successfully updated.<h3></strong> ";
@@ -751,6 +784,8 @@ class Admin_Controller extends CI_Controller {
                     $_POST['editOperationManager'] = $userDataAry;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
+                    $_POST['editOperationManager']['szState']=$stateId;
+                    $data['getAllStates']=$getAllStates;
                     $data['commentnotification'] = $commentReplyNotiCount;
                     $data['flag'] = $flag;
             $this->load->view('layout/admin_header',$data);
@@ -771,6 +806,46 @@ class Admin_Controller extends CI_Controller {
             $this->Admin_Model->deleteOperationManagerDetails($data['idOperationManager']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }  
+        function getReginolCode()
+        {
+            $idfranchisee = $this->session->userdata('idfranchisee');
+            $stateId = $this->input->post('stateId');
+           $getReginolCode=$this->Admin_Model->getReginolCode($stateId);
+           if($getReginolCode['reginolCodeMax']==''){
+               $iReginolCode=sprintf(__REGINOL_CODE__,'1');
+               $reginolCode='1';
+             }
+           else{
+                $iReginolCode=$getReginolCode['reginolCodeMax']+1;
+                $iReginolCode=sprintf(__REGINOL_CODE__,$iReginolCode);
+                $reginolCode=$getReginolCode['reginolCodeMax']+1;
+           }
+           ?>
+           <div class="form-group">
+                <label class="col-md-3 control-label">Reginol code</label>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                             <i class="fa fa-area-chart"></i>
+                        </span>
+                        <input id="iReginolCode" class="form-control" type="text" value="<?php echo $iReginolCode ?>" placeholder="Reginol Code" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iReginolCode]"  readonly>
+                    </div>
+                 </div>
+            </div>
+             <input id="reginolCode" class="form-control" type="hidden" value="<?php echo $reginolCode ?>"  name="addFranchisee[reginolCode]">
+            <div class="form-group <?php if (!empty($arErrorMessages['szReginalName']) != '') { ?>has-error<?php } ?>">
+                <label class="col-md-3 control-label">Reginol Name</label>
+                     <div class="col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-area-chart"></i>
+                            </span>
+                            <input id="szReginalName" class="form-control" type="text" value="" placeholder="Reginal Name" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szReginalName]">
+                        </div>
+                    </div>
+            </div>
+           <?php
+        }
          
 }
 ?>

@@ -1591,5 +1591,63 @@ class CI_Form_validation {
 		$this->error_string = '';
 		return $this;
 	}
+        function alpha_dash_space($str)
+        {
+            if (! preg_match('/^[a-zA-Z\s]+$/', $str)) 
+            {
+                return FALSE;
+            } 
+            else 
+            {
+                return TRUE;
+            }
+        }
+        function valid_phone_number($str)
+        {
+            if (! preg_match('/^[0-9]{10}$/', $str)) 
+            {
+                return FALSE;
+            } 
+            else 
+            {
+                return TRUE;
+            }
+        }
+        function abn_numeric($str)
+        {
+            if (!preg_match('/^[0-9]*$/', $str)) 
+            {
+                return FALSE;
+            } 
+            else 
+            {
+                return TRUE;
+            }
+        }
+        function abn_length($str)
+        {
+            if (! preg_match('/^[0-9]{11}$/', $str))  
+            {
+                return FALSE;
+            } 
+            else 
+            {
+                return TRUE;
+            }
+        }
+        function zipCode_legth($str)
+        {
+            if (! preg_match('/^[0-9]{4}$/', $str))  
+            {
+                return FALSE;
+            } 
+            else 
+            {
+                return TRUE;
+            }
+        }
+
+
+
 
 }
