@@ -19,7 +19,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -32,8 +31,16 @@
       <file leaf-file-name="admin_leftmenu.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state relative-caret-position="5797">
+              <caret line="341" column="0" selection-start-line="341" selection-start-column="0" selection-end-line="341" selection-end-column="0" />
+||||||| .r431
+            <state relative-caret-position="3145">
+              <caret line="185" column="57" lean-forward="false" selection-start-line="185" selection-start-column="57" selection-end-line="185" selection-end-column="57" />
+=======
             <state relative-caret-position="3366">
               <caret line="198" column="57" lean-forward="false" selection-start-line="198" selection-start-column="57" selection-end-line="198" selection-end-column="57" />
+>>>>>>> .r432
               <folding />
             </state>
           </provider>
@@ -42,8 +49,16 @@
       <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state relative-caret-position="544">
+              <caret line="90" column="44" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+||||||| .r431
+            <state relative-caret-position="544">
+              <caret line="90" column="44" lean-forward="false" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+=======
             <state relative-caret-position="223">
               <caret line="1003" column="5" lean-forward="true" selection-start-line="1003" selection-start-column="5" selection-end-line="1003" selection-end-column="5" />
+>>>>>>> .r432
               <folding>
                 <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -84,6 +99,11 @@
           </provider>
         </entry>
       </file>
+<<<<<<< .mine
+      <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="false">
+||||||| .r431
+      <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="true">
+=======
       <file leaf-file-name="Admin_Controller.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -105,10 +125,19 @@
         </entry>
       </file>
       <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="false">
+>>>>>>> .r432
         <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+            <state relative-caret-position="306">
+              <caret line="181" column="56" selection-start-line="181" selection-start-column="56" selection-end-line="181" selection-end-column="56" />
+||||||| .r431
+            <state relative-caret-position="459">
+              <caret line="164" column="116" lean-forward="false" selection-start-line="164" selection-start-column="116" selection-end-line="164" selection-end-column="116" />
+=======
             <state relative-caret-position="176">
               <caret line="1372" column="32" lean-forward="false" selection-start-line="1372" selection-start-column="13" selection-end-line="1372" selection-end-column="32" />
+>>>>>>> .r432
               <folding>
                 <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -158,6 +187,16 @@
                 <element signature="n#getcocdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseeclientsitebysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Admin_Controller.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="260">
+              <caret line="436" column="17" selection-start-line="436" selection-start-column="17" selection-end-line="436" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -220,7 +259,6 @@
         <option value="$PROJECT_DIR$/application/views/forum/replyListForApproval.php" />
         <option value="$PROJECT_DIR$/application/views/order/orderDrugTestKit.php" />
         <option value="$PROJECT_DIR$/application/views/ordering/sitesRecord.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Admin_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/Form_Management_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/Inventory_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
@@ -252,6 +290,7 @@
         <option value="$PROJECT_DIR$/application/models/Webservices_Model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
         <option value="$PROJECT_DIR$/db changes/db changes.sql" />
+        <option value="$PROJECT_DIR$/application/controllers/Admin_Controller.php" />
       </list>
     </option>
   </component>
@@ -268,6 +307,16 @@
     <option name="width" value="1378" />
     <option name="height" value="744" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
@@ -283,6 +332,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< .mine
+      <pane id="Scope" />
+||||||| .r431
+      <pane id="Scratches" />
+      <pane id="Scope" />
+=======
+>>>>>>> .r432
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -290,8 +346,31 @@
               <option name="myItemId" value="drugsafe" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+<<<<<<< .mine
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+||||||| .r431
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -305,34 +384,9 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="db changes" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
+=======
             <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
+>>>>>>> .r432
               <option name="myItemId" value="application" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -351,6 +405,119 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< .mine
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+||||||| .r431
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reporting" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+=======
               <option name="myItemId" value="views" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -413,10 +580,16 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+>>>>>>> .r432
         </subPane>
       </pane>
+<<<<<<< .mine
+      <pane id="Scratches" />
+||||||| .r431
+=======
       <pane id="Scope" />
       <pane id="Scratches" />
+>>>>>>> .r432
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -431,12 +604,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
-      <config-file value="" />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
@@ -450,10 +617,6 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="PhpSpecConfigurationType" factoryName="PHPSpec">
-      <PhpTestRunnerSettings />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
       <node-interpreter>project</node-interpreter>
       <node-options />
@@ -464,7 +627,7 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run" />
+      <command value="run-script" />
       <scripts />
       <node-interpreter value="project" />
       <envs />
@@ -488,26 +651,8 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration" cleanupOnStartRun="true">
-    <configuration>C:\Users\whiz16\AppData\Roaming\Subversion</configuration>
+    <configuration>C:\Users\WHIZ 18\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\xampp\htdocs\drugsafe" />
-          <option name="myCopyRoot" value="C:\xampp\htdocs\drugsafe" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="C:\xampp\htdocs\drugsafe" />
-          <option name="myCopyRoot" value="C:\xampp\htdocs\drugsafe" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -612,11 +757,18 @@
       <workItem from="1487303213666" duration="2574000" />
       <workItem from="1487567751418" duration="19649000" />
       <workItem from="1487653664705" duration="2987000" />
+      <workItem from="1487656359191" duration="821000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< .mine
+    <option name="totallyTimeSpent" value="786619000" />
+||||||| .r431
+    <option name="totallyTimeSpent" value="785798000" />
+=======
     <option name="totallyTimeSpent" value="810827000" />
+>>>>>>> .r432
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -629,9 +781,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="1" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+<<<<<<< .mine
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21659325" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+||||||| .r431
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21699545" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22306526" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> .r432
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -710,185 +868,172 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/forum/replyListForApproval.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="130" column="25" lean-forward="false" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ordering/sitesRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1581">
-          <caret line="93" column="20" lean-forward="false" selection-start-line="93" selection-start-column="20" selection-end-line="93" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/forum/replyListForApproval.php" />
+    <entry file="file://$PROJECT_DIR$/application/views/ordering/sitesRecord.php" />
     <entry file="file://$PROJECT_DIR$/application/controllers/Home_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Welcome.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/StockMgt_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13158">
-          <caret line="774" column="56" lean-forward="false" selection-start-line="774" selection-start-column="41" selection-end-line="774" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="143" column="85" lean-forward="false" selection-start-line="143" selection-start-column="73" selection-end-line="143" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/StockMgt_Controller.php" />
+    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php" />
     <entry file="file://$PROJECT_DIR$/application/controllers/Franchisee_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="10" column="42" lean-forward="false" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Error_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
-          <caret line="80" column="17" lean-forward="false" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ordering/autoOrdering.php">
+    <entry file="file://$PROJECT_DIR$/application/views/ordering/autoOrdering.php" />
+    <entry file="file://$PROJECT_DIR$/live/application/libraries/tcpdf/examples/example_011.php" />
+    <entry file="file://$PROJECT_DIR$/application/views/ordering/editManualOrdering.php" />
+    <entry file="file://$PROJECT_DIR$/application/views/ordering/manualOrdering.php" />
+    <entry file="file://$PROJECT_DIR$/application/controllers/Forum_Controller.php" />
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2601">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/live/application/libraries/tcpdf/examples/example_011.php">
+||||||| .r431
+    <entry file="file://$PROJECT_DIR$/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="125" column="0" lean-forward="false" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ordering/editManualOrdering.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="135" column="30" lean-forward="false" selection-start-line="135" selection-start-column="30" selection-end-line="135" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ordering/manualOrdering.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1751">
-          <caret line="68" column="109" lean-forward="false" selection-start-line="68" selection-start-column="109" selection-end-line="68" selection-end-column="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Forum_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12342">
-          <caret line="726" column="62" lean-forward="false" selection-start-line="726" selection-start-column="53" selection-end-line="726" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
+=======
+>>>>>>> .r432
     <entry file="file://$PROJECT_DIR$/application/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/hooks.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/config/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Franchisee_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2482">
-          <caret line="146" column="57" lean-forward="false" selection-start-line="146" selection-start-column="57" selection-end-line="146" selection-end-column="57" />
+          <caret line="146" column="57" selection-start-line="146" selection-start-column="57" selection-end-line="146" selection-end-column="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ordering/manualCalcResult.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="404">
-          <caret line="178" column="345" lean-forward="false" selection-start-line="172" selection-start-column="44" selection-end-line="178" selection-end-column="345" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ordering/viewCalcDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="171" column="99" lean-forward="false" selection-start-line="171" selection-start-column="99" selection-end-line="171" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/error_log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Forum_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="794" column="24" lean-forward="false" selection-start-line="794" selection-start-column="24" selection-end-line="794" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Ordering_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="477" column="8" lean-forward="false" selection-start-line="477" selection-start-column="8" selection-end-line="477" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Ordering_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="55" lean-forward="false" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/ordering/manualCalcResult.php" />
+    <entry file="file://$PROJECT_DIR$/application/views/ordering/viewCalcDetails.php" />
+    <entry file="file://$PROJECT_DIR$/error_log" />
+    <entry file="file://$PROJECT_DIR$/application/models/Forum_Model.php" />
+    <entry file="file://$PROJECT_DIR$/application/controllers/Ordering_Controller.php" />
+    <entry file="file://$PROJECT_DIR$/application/models/Ordering_Model.php" />
     <entry file="file://$PROJECT_DIR$/css/drugsafe_custom_style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
-          <caret line="138" column="8" lean-forward="false" selection-start-line="138" selection-start-column="8" selection-end-line="138" selection-end-column="8" />
+          <caret line="138" column="8" selection-start-line="138" selection-start-column="8" selection-end-line="138" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Inventory_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
-          <caret line="20" column="58" lean-forward="false" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="58" />
+          <caret line="20" column="58" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="58" />
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="97" column="106" selection-start-line="97" selection-start-column="106" selection-end-line="97" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php" />
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="265" column="25" selection-start-line="265" selection-start-column="8" selection-end-line="265" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+||||||| .r431
+    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="97" column="106" lean-forward="false" selection-start-line="97" selection-start-column="106" selection-end-line="97" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6086">
+          <caret line="358" column="35" lean-forward="false" selection-start-line="358" selection-start-column="20" selection-end-line="358" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="265" column="25" lean-forward="false" selection-start-line="265" selection-start-column="8" selection-end-line="265" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+=======
+>>>>>>> .r432
     <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
-          <caret line="1558" column="73" lean-forward="false" selection-start-line="1558" selection-start-column="73" selection-end-line="1558" selection-end-column="73" />
+          <caret line="1558" column="73" selection-start-line="1558" selection-start-column="73" selection-end-line="1558" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php" />
+    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php" />
+    <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php" />
+||||||| .r431
+    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="256" column="105" lean-forward="false" selection-start-line="256" selection-start-column="105" selection-end-line="256" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3791">
+          <caret line="223" column="56" lean-forward="false" selection-start-line="223" selection-start-column="56" selection-end-line="223" selection-end-column="56" />
         </state>
       </provider>
     </entry>
@@ -899,48 +1044,66 @@
         </state>
       </provider>
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/application/models/StockMgt_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="227" column="81" lean-forward="false" selection-start-line="227" selection-start-column="81" selection-end-line="227" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> .r432
     <entry file="file://$PROJECT_DIR$/application/models/Inventory_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4437">
-          <caret line="261" column="0" lean-forward="false" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
+          <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11662">
-          <caret line="869" column="64" lean-forward="false" selection-start-line="869" selection-start-column="64" selection-end-line="869" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/inventoryReport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="107" column="71" lean-forward="true" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php" />
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/inventoryReport.php" />
     <entry file="file://$PROJECT_DIR$/css/prashant.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="35" column="46" lean-forward="false" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
+          <caret line="35" column="46" selection-start-line="35" selection-start-column="46" selection-end-line="35" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/viewIndustryReort.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="111" column="79" lean-forward="false" selection-start-line="111" selection-start-column="65" selection-end-line="111" selection-end-column="79" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/viewIndustryReort.php" />
     <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30192">
-          <caret line="1799" column="59" lean-forward="false" selection-start-line="1799" selection-start-column="38" selection-end-line="1799" selection-end-column="59" />
+          <caret line="1799" column="59" selection-start-line="1799" selection-start-column="38" selection-end-line="1799" selection-end-column="59" />
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
+    <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php" />
+    <entry file="file://$PROJECT_DIR$/application/views/admin/addOperationManager.php" />
+||||||| .r431
+    <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48365">
+          <caret line="3269" column="5" lean-forward="false" selection-start-line="3269" selection-start-column="5" selection-end-line="3269" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Reporting_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6426">
+          <caret line="378" column="5" lean-forward="false" selection-start-line="378" selection-start-column="5" selection-end-line="378" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/addOperationManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2499">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+=======
     <entry file="file://$PROJECT_DIR$/application/controllers/Reporting_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48365">
@@ -971,51 +1134,61 @@
         </state>
       </provider>
     </entry>
+>>>>>>> .r432
     <entry file="file://$PROJECT_DIR$/application/views/layout/admin_header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2023">
-          <caret line="119" column="88" lean-forward="false" selection-start-line="119" selection-start-column="82" selection-end-line="119" selection-end-column="88" />
+          <caret line="119" column="88" selection-start-line="119" selection-start-column="82" selection-end-line="119" selection-end-column="88" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/helpers/utility_helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="22" column="45" lean-forward="false" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="45" />
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1349">
-          <caret line="986" column="43" lean-forward="false" selection-start-line="986" selection-start-column="28" selection-end-line="986" selection-end-column="43" />
+          <caret line="986" column="43" selection-start-line="986" selection-start-column="28" selection-end-line="986" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/admin/admin_login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-650">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/clientCmpReport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="180" column="49" lean-forward="true" selection-start-line="180" selection-start-column="49" selection-end-line="180" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reporting/clientCmpReport.php" />
     <entry file="file://$PROJECT_DIR$/application/views/layout/admin_leftmenu.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state relative-caret-position="5797">
+          <caret line="341" column="0" selection-start-line="341" selection-start-column="0" selection-end-line="341" selection-end-column="0" />
+||||||| .r431
+        <state relative-caret-position="3145">
+          <caret line="185" column="57" lean-forward="false" selection-start-line="185" selection-start-column="57" selection-end-line="185" selection-end-column="57" />
+=======
         <state relative-caret-position="3366">
           <caret line="198" column="57" lean-forward="false" selection-start-line="198" selection-start-column="57" selection-end-line="198" selection-end-column="57" />
+>>>>>>> .r432
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state relative-caret-position="544">
+          <caret line="90" column="44" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+||||||| .r431
+        <state relative-caret-position="544">
+          <caret line="90" column="44" lean-forward="false" selection-start-line="90" selection-start-column="44" selection-end-line="90" selection-end-column="44" />
+=======
         <state relative-caret-position="-35">
           <caret line="256" column="105" lean-forward="false" selection-start-line="256" selection-start-column="105" selection-end-line="256" selection-end-column="105" />
           <folding />
@@ -1034,6 +1207,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2490">
           <caret line="358" column="0" lean-forward="true" selection-start-line="358" selection-start-column="0" selection-end-line="358" selection-end-column="0" />
+>>>>>>> .r432
           <folding>
             <element signature="n#drugtestkit#0;n#Order_Controller#0;n#!!top" expanded="false" />
             <element signature="n#marketingmaterial#0;n#Order_Controller#0;n#!!top" expanded="false" />
@@ -1071,8 +1245,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< .mine
+        <state relative-caret-position="306">
+          <caret line="181" column="56" selection-start-line="181" selection-start-column="56" selection-end-line="181" selection-end-column="56" />
+||||||| .r431
+        <state relative-caret-position="459">
+          <caret line="164" column="116" lean-forward="false" selection-start-line="164" selection-start-column="116" selection-end-line="164" selection-end-column="116" />
+=======
         <state relative-caret-position="176">
           <caret line="1372" column="32" lean-forward="false" selection-start-line="1372" selection-start-column="13" selection-end-line="1372" selection-end-column="32" />
+>>>>>>> .r432
           <folding>
             <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -1125,6 +1307,17 @@
         </state>
       </provider>
     </entry>
+<<<<<<< .mine
+    <entry file="file://$PROJECT_DIR$/application/controllers/Admin_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="436" column="17" selection-start-line="436" selection-start-column="17" selection-end-line="436" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+||||||| .r431
+=======
     <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
@@ -1176,5 +1369,6 @@
         </state>
       </provider>
     </entry>
+>>>>>>> .r432
   </component>
 </project>
