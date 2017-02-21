@@ -102,14 +102,29 @@ ALTER TABLE `tbl_client` ADD `agentId` INT(11) NOT NULL AFTER `clientId`;
 
 /* swapnil changes 08-02-2017*/
 ALTER TABLE `tbl_manual_calc` ADD `dtCreatedOn` DATE NOT NULL AFTER `cancelfee`;
-<<<<<<< .mine
 ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;
+ALTER TABLE `ds_orders` CHANGE `status` `status` TINYINT( 1 ) NOT NULL DEFAULT '1';
 
-ALTER TABLE `ds_orders` CHANGE `status` `status` TINYINT( 1 ) NOT NULL DEFAULT '1';=======
-ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;
 
 /* swapnil changes 20-02-2017*/
 ALTER TABLE `ds_user` CHANGE `szState` `userCode` VARCHAR(25) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
 ALTER TABLE `ds_user` ADD `reginolId` INT NOT NULL AFTER `userCode`;
-
 CREATE TABLE `drugsafe`.`tbl_operation_state_maping` ( `id` INT NOT NULL AUTO_INCREMENT , `operationId` INT NOT NULL , `stateId` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+/* swapnil changes 21-02-2017 */
+INSERT INTO `tbl_states` (`id`, `name`, `country_id`) VALUES
+(1, 'Australian Capital Territory', 101),
+(2, 'New South Wales', 101),
+(3, 'Northern Territory', 101),
+(4, 'Queensland', 101),
+(5, 'South Australia', 101),
+(6, 'Tasmania', 101),
+(7, 'Victoria', 101),
+(8, 'Western Australia', 101);
+
+CREATE TABLE `tbl_reginol` (
+  `id` int(11) NOT NULL,
+  `stateId` int(11) NOT NULL,
+  `reginolCode` int(11) NOT NULL,
+  `reginolName` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
