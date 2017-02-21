@@ -1859,9 +1859,10 @@ function agentEmployeeDeleteConfirmation(agentId) {
 
     }); 
 }
-function getReginolCode(stateId) {
+function getReginolCode(stateId,idfranchisee) {
+    
     if(stateId>0){
-        $.post(__BASE_URL__ + "/admin/getReginolCode", {stateId: stateId}, function (result) {
+        $.post(__BASE_URL__ + "/admin/getReginolCode", {stateId: stateId,idfranchisee:idfranchisee}, function (result) {
             if (result != '') {
                 $("#reginolFiled").empty();
                 $("#reginolFiled").html(result);

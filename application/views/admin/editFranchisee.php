@@ -214,7 +214,7 @@
                                                 <i class="fa fa-flag-checkered"></i>
                                                 </span>
                                             <select class="form-control " name="addFranchisee[szState]" id="szState"
-                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')" onchange="getReginolCode(this.value);">
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')" onchange="getReginolCode(this.value,<?php echo $idfranchisee;?>);">
                                                 <option value=''>Select</option>
                                                 <?php
                                                 if(!empty($getAllStates))
