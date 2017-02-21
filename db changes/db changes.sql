@@ -102,6 +102,10 @@ ALTER TABLE `tbl_client` ADD `agentId` INT(11) NOT NULL AFTER `clientId`;
 
 /* swapnil changes 08-02-2017*/
 ALTER TABLE `tbl_manual_calc` ADD `dtCreatedOn` DATE NOT NULL AFTER `cancelfee`;
+<<<<<<< .mine
+ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;
+
+ALTER TABLE `ds_orders` CHANGE `status` `status` TINYINT( 1 ) NOT NULL DEFAULT '1';=======
 ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;
 
 /* swapnil changes 20-02-2017*/

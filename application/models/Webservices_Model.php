@@ -1218,7 +1218,7 @@ class Webservices_Model extends Error_Model
     function getorderdetails($orderid){
         $whereAry = 'ord.id = '.(int)$orderid.' AND ord.validorder = 1 AND product.isDeleted = 0 AND cat.isDeleted = 0';
         $query = $this->db->select('ord.id, ord.franchiseeid, ord.price, ord.status, ord.createdon, ord.completedon, ord.dispatchedon,
-                                    ord.canceledon, ord.xeroprocessed, ord.XeroIDnumber, orddet.quantity, product.szProductCode, 
+                                    ord.canceledon, ord.xeroprocessed, ord.XeroIDnumber, orddet.quantity, orddet.dispatched, product.szProductCode, 
                                     product.szProductDiscription, product.szProductCost, product.dtExpiredOn, cat.szName, cat.szDiscription')
             ->from(__DBC_SCHEMATA_ORDER__ . ' as ord')
             ->join(__DBC_SCHEMATA_ORDER_DETAILS__ . ' as orddet', 'ord.id = orddet.orderid')
@@ -1368,5 +1368,20 @@ class Webservices_Model extends Error_Model
             $data['franchiseename'] = (!empty($franchiseearr[0]['szName'])?$franchiseearr[0]['szName']:'');
         }
         return $data;
+    }
+
+    function getfranchiseeorders($franchiseeid){
+        $array = array('franchiseeid' => (int)$franchiseeid,'validorder'=>1);
+        $query = $this->db->select('id, price, status, createdon, dispatchedon, canceledon')
+            ->from(__DBC_SCHEMATA_ORDER__)
+            ->where($array)
+            ->order_by('id','DESC')
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
+        }
     }
 } 

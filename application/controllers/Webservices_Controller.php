@@ -248,7 +248,7 @@ class Webservices_Controller extends CI_Controller
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominedec'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['nominedec']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sign'])){
-                $responsedata = array("code" => 203, "message"=>$errorMsgArr['sign']);
+                $responsedata = array("code" => 203, "message"=>"Nominated Client Representative signature required.");
             }elseif(!empty($sosdatares['totalcoccount'][0]['totalcoc'])){
                 $coccount = (int)$sosdatares['totalcoccount'][0]['totalcoc'];
                 $cocid = (int)$sosdatares['cocid'][0]['cocid'];
@@ -792,7 +792,7 @@ class Webservices_Controller extends CI_Controller
         $errorMsgArr = $this->Webservices_Model->arErrorMessages;
         if($cartAditionStatus)
         {
-            $responsedata = array("code" => 200,"message"=>"Your cart updated successfully.");
+            $responsedata = array("code" => 200,"message"=>"Product successfully added to your cart.");
         }else{
             if(!empty($errorMsgArr) && !empty($errorMsgArr['franchiseeid'])){
                 $responsedata = array("code" => 201,"message"=>"Something wrong with franchisee. Please logout and try again.");
@@ -828,7 +828,7 @@ class Webservices_Controller extends CI_Controller
         $cartStatus = $this->Webservices_Model->deleteitemfromcart($data['cart']);
         $errorMsgArr = $this->Webservices_Model->arErrorMessages;
         if($cartStatus){
-            $responsedata = array("code" => 200,"message"=>"Product successfully deleted from your cart.");
+            $responsedata = array("code" => 200,"message"=>"Product successfully removed from your cart.");
         }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['cartproductid'])){
             $responsedata = array("code" => 201,"message"=>$errorMsgArr['cartproductid']);
         }else{
@@ -1001,5 +1001,18 @@ class Webservices_Controller extends CI_Controller
             header('Content-Type: application/json');
         }
         echo json_encode($responsedata);
+    }
+
+    function getfranchiseeorders(){
+            $jsondata = json_decode(file_get_contents("php://input"));
+            $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "0";
+            $franchiseeOrderArr = $this->Webservices_Model->getfranchiseeorders($data['franchiseeid']);
+            if(!empty($franchiseeOrderArr)){
+                $responsedata = array("code" => 200,"orderarr"=>$franchiseeOrderArr);
+            }else{
+                $responsedata = array("code" => 201,"message"=>"No order found.");
+            }
+            header('Content-Type: application/json');
+            echo json_encode($responsedata);
     }
 }
