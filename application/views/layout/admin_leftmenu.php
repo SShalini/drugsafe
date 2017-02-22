@@ -20,21 +20,21 @@
 
 
             <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
-             <li class="nav-item start <?php if (trim($pageName) == 'Region_Manager_List') { ?>active open<?php } ?>">
-                    <a href="<?php echo __BASE_URL__; ?>/admin/regionManagerList" class="nav-link nav-toggle">
-                        <i class="fa fa-flag" aria-hidden="true"></i>
-                        <span class="title">Region Code</span>
-                        <span class="selected"></span>
-                    </a>
-                </li>
-             <li class="nav-item start <?php if (trim($pageName) == 'Operation_Manager_List') { ?>active open<?php } ?>">
+             
+            <li class="nav-item start <?php if (trim($pageName) == 'Operation_Manager_List') { ?>active open<?php } ?>">
                     <a href="<?php echo __BASE_URL__; ?>/admin/operationManagerList" class="nav-link nav-toggle">
                         <i class="fa fa-male" aria-hidden="true"></i>
                         <span class="title">Operation Manager</span>
                         <span class="selected"></span>
                     </a>
+            </li>
+            <li class="nav-item start <?php if (trim($pageName) == 'Region_Manager_List') { ?>active open<?php } ?>">
+                    <a href="<?php echo __BASE_URL__; ?>/admin/regionManagerList" class="nav-link nav-toggle">
+                        <i class="fa fa-flag" aria-hidden="true"></i>
+                        <span class="title">Region List</span>
+                        <span class="selected"></span>
+                    </a>
                 </li>
-            
             <li class="nav-item start <?php if (trim($pageName) == 'Franchisee_List') { ?>active open<?php } ?>">
                     <a href="<?php echo __BASE_URL__; ?>/admin/franchiseeList" class="nav-link nav-toggle">
                         <i class="fa fa-bank" aria-hidden="true"></i>

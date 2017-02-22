@@ -279,43 +279,44 @@
                                 </div>
                                 <div class="reginolFiled" id="reginolFiled">
                                 <?php
-                                if($_POST['addFranchisee']['iReginolCode'] !='')
+                                if($_POST['addFranchisee']['szRegionName'] !='')
                                 {
                                   ?>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label">Reginol code</label>
+                                    
+                                    <div class="form-group <?php if (!empty($arErrorMessages['szRegionName']) != '') { ?>has-error<?php } ?>">
+                                        <label class="col-md-3 control-label">Region Name</label>
                                             <div class="col-md-5">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        <i class="fa fa-area-chart"></i>
+                                                        <i class="fa fa-flag-checkered"></i>
                                                     </span>
-                                                    <input id="iReginolCode" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['iReginolCode']; ?>" placeholder="Reginol Code" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iReginolCode]"  readonly>
-                                                </div>
-                                            </div>
-                                    </div>
-                                   <input id="reginolCode" class="form-control" type="hidden" value="<?php echo $_POST['addFranchisee']['reginolCode']; ?>"  name="addFranchisee[reginolCode]">
-                                   <div class="form-group <?php if (!empty($arErrorMessages['szReginalName']) != '') { ?>has-error<?php } ?>">
-                                        <label class="col-md-3 control-label">Reginol Name</label>
-                                            <div class="col-md-5">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-area-chart"></i>
-                                                    </span>
-                                                    <input id="szReginalName" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szReginalName']; ?>" placeholder="Reginal Name" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szReginalName]">
-                                                </div>
-                                                <?php if (!empty($arErrorMessages['szReginalName'])) { ?>
+                                                    <select class="form-control " name="addFranchisee[szRegionName]" id="szRegionName" Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">
+                                                    <option value=''>Select</option>
+                                                    <?php
+                                                    if(!empty($getReginolCode))
+                                                    {
+                                                        foreach($getReginolCode as $getReginolCodeData)
+                                                        {
+                                                            $selected = ($getReginolCodeData['id'] == $_POST['addFranchisee']['szRegionName'] ? 'selected="selected"' : '');
+                                                            echo '<option value="'.$getReginolCodeData['id'].'"' . $selected . ' >'.$getReginolCodeData['regionName'].'</option>';
+                                                        } 
+                                                    } 
+                                            ?>
+                                            </select>
+                                        </div>
+                                        <?php if (!empty($arErrorMessages['szRegionName'])) { ?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szReginalName']; ?>
+                                                <?php echo $arErrorMessages['szRegionName']; ?>
                                             </span>
                                         <?php } ?>
-                                            </div>
                                     </div>
+
+                                </div>
                                    <?php
                                 }
                                 
                                 ?>
-                                
                                 </div>
                                 <div
                                     class="form-group <?php if (!empty($arErrorMessages['szZipCode']) != '') { ?>has-error<?php } ?>">

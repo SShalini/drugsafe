@@ -53,7 +53,7 @@
                                                         <a class="btn btn-circle btn-icon-only btn-default" title="Edit Region Data" onclick="editRegionDetails('<?php echo $getAllRegionData['id'];?>');" href="javascript:void(0);">
                                                             <i class="fa fa-pencil"></i> 
                                                         </a>
-                                                        <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Region" onclick="franchiseeDelete(<?php echo $getAllRegionData['id'];?>);" href="javascript:void(0);"></i>
+                                                        <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Region" onclick="regionDelete(<?php echo $getAllRegionData['id'];?>);" href="javascript:void(0);"></i>
                                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                         </a>
                                                     <?php

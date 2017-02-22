@@ -10,37 +10,37 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
-                        <span class="active">Add Region</span>
+                        <span class="active">edit Region</span>
                     </li>
                 </ul>
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-equalizer font-red-sunglo"></i>
-                            <span class="caption-subject font-red-sunglo bold uppercase">Add Region</span>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Edit Region</span>
                         </div>
                     </div>
-                   <div class="portlet-body">
+                    <div class="portlet-body">
                         <form class="form-horizontal" id="addfranchisee"
-                              action="<?= __BASE_URL__ ?>/admin/addRegion" name="addRegion" method="post">
+                              action="<?= __BASE_URL__ ?>/admin/editRegion" name="editRegion" method="post">
                             <div class="form-body">
                                 <div
-                                    class="form-group <?php if(form_error('addRegion[szState]')){?>has-error<?php }?>">
+                                    class="form-group <?php if(form_error('editRegion[stateId]')){?>has-error<?php }?>">
                                     <label class="col-md-3 control-label">State</label>
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-flag-checkered"></i>
                                                 </span>
-                                            <select class="form-control " name="addRegion[szState]" id="szState"
-                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')" onchange="addRegionCode(this.value);">
+                                            <select class="form-control " name="editRegion[stateId]" id="stateId"
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')" onchange="editRegionCode(this.value);">
                                                 <option value=''>Select</option>
                                                  <?php
                                                 if(!empty($getAllStates))
                                                 {
                                                     foreach($getAllStates as $getAllStatesData)
                                                     {
-                                                        $selected = ($getAllStatesData['id'] == $_POST['addRegion']['szState'] ? 'selected="selected"' : '');
+                                                        $selected = ($getAllStatesData['id'] == $_POST['editRegion']['stateId'] ? 'selected="selected"' : '');
                                                         echo '<option value="'.$getAllStatesData['id'].'"' . $selected . ' >'.$getAllStatesData['name'].'</option>';
                                                     } 
                                                 } 
@@ -48,14 +48,14 @@
                                             </select>
                                         </div>
                                         <?php
-                                            if(form_error('addRegion[szState]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('addRegion[szState]');?></span>
+                                            if(form_error('editRegion[stateId]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('editRegion[stateId]');?></span>
                                             </span><?php }?>
                                     </div>
 
                                 </div>
                                 <div
-                                    class="form-group <?php if(form_error('addRegion[szState]')){?>has-error<?php }?>">
+                                    class="form-group <?php if(form_error('editRegion[regionName]')){?>has-error<?php }?>">
                                     <label class="col-md-3 control-label"> Region Name</label>
                                     <div class="col-md-5">
                                         <div class="input-group">
@@ -63,13 +63,13 @@
                                                 <i class="fa fa-building"></i>
                                                 </span>
                                             <input id="szCity" class="form-control" type="text"
-                                                   value="<?php echo $_POST['addRegion']['szRegionName']; ?>"
+                                                   value="<?php echo $_POST['editRegion']['regionName']; ?>"
                                                    placeholder="Region Name" onfocus="remove_formError(this.id,'true')"
-                                                   name="addRegion[szRegionName]"> 
+                                                   name="editRegion[regionName]"> 
                                         </div>
                                         <?php
-                                            if(form_error('addRegion[szRegionName]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('addRegion[szRegionName]');?></span>
+                                            if(form_error('editRegion[regionName]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('editRegion[regionName]');?></span>
                                             </span><?php }?>
                                     </div>
 
@@ -84,10 +84,10 @@
                                                 <i class="fa fa-area-chart"></i>
                                                 </span>
                                             <input id="iRegionCode" class="form-control" type="text"
-                                                   value="<?php echo $_POST['addRegion']['iRegionCode']; ?>"
+                                                   value="<?php echo $_POST['editRegion']['regionCode']; ?>"
                                                    placeholder="Region Code"
                                                    onfocus="remove_formError(this.id,'true')"
-                                                   name="addRegion[iRegionCode]" readonly>
+                                                   name="editRegion[regionCode]" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -97,9 +97,9 @@
                                 <div class="row">
 
                                     <div class="col-md-offset-3 col-md-4">
-                                        <a href="<?=__BASE_URL__?>/admin/regionManagerList" class="btn default uppercase" type="button">Cancel</a>
+                                      <a href="<?=__BASE_URL__?>/admin/regionManagerList" class="btn default uppercase" type="button">Cancel</a>
                                         <input type="submit" class="btn green-meadow" value="SAVE"
-                                               name="addRegion[submit]">
+                                               name="editRegion[submit]">
                                     </div>
                                 </div>
                             </div>

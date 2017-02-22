@@ -1891,3 +1891,88 @@ function addRegionCode(stateId) {
     }
    
 }
+function editRegionCode(stateId) {
+    
+    if(stateId>0){
+        $.post(__BASE_URL__ + "/admin/editRegionCode", {stateId: stateId}, function (result) {
+            if (result != '') {
+                $("#Region").empty();
+                $("#Region").html(result);
+            }
+        });
+    }
+    else
+    {
+         $("#Region").empty();
+    }
+   
+}
+function editRegionDetails(idRegion) {
+    
+    $.post(__BASE_URL__ + "/admin/editRegionDetails", {idRegion: idRegion}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/admin/" + ar_result[1];
+
+    });
+}
+function regionDelete(regionId) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/admin/regionDeleteeAlert", {regionId: regionId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#regionDelete').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function regionDeleteConfirmation(regionId) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#regionDelete').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/admin/deleteRegionConfirmation", {regionId: regionId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#regionDeleteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+function franchiseeStatus(idfranchisee,status) {
+    
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/admin/franchiseeStatus", {idfranchisee: idfranchisee,status:status}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#franchiseeStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function franchiseeStatusConfirmation(idfranchisee,status) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#franchiseeStatus').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/admin/franchiseeStatusConfirmation", {idfranchisee: idfranchisee,status:status}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#franchiseeStatusConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}

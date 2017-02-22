@@ -45,3 +45,9 @@ body .logo img {
   }
 }
 .stateReginolhidden{display:none;}
+.fa.fa-circle.enable {
+    color: green;
+}
+.fa.fa-circle.disabled {
+    color: red;
+}

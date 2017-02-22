@@ -1159,7 +1159,7 @@ if ($mode == '__APPROVE_COMMENT_POPUP__') {
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        approve this comment?</p>
+                        approved this comment?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -1218,7 +1218,7 @@ if ($mode == '__UNAPPROVE_COMMENT_POPUP__') {
 
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        unapprove this Comment?</p>
+                        unapproved this Comment?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -2279,6 +2279,142 @@ if ($mode == '___DELETE_AGENT_EMPLOYE_CONFIRM__') {
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+  
+if ($mode == '__DELETE_REGION_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="regionDelete" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Delete Region Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        delete the selected Region?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="regionDeleteConfirmation('<?php echo $regionId; ?>'); return false;"
+                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if ($mode == '___DELETE_REGION_CONFIRM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="regionDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span
+                                class="caption-subject font-red-sunglo bold uppercase">Deleted Region Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Region has been successfully
+                        deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/admin/regionManagerList" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+if ($mode == '__FRANCHISEE_STATUS_POPUP__') {
+    echo "SUCCESS||||";
+    if($status==1){
+        $statusMsg="Enable";
+    }
+    else{
+         $statusMsg="Disabled";
+    }
+    ?>
+    <div id="franchiseeStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $statusMsg;?> Franchisee</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to <?php echo $statusMsg;?>  the selected Franchisee?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="franchiseeStatusConfirmation('<?php echo $idfranchisee; ?>',<?php echo $status;?>); return false;"
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> <?php echo $statusMsg;?>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if ($mode == '__FRANCHISEE_STATUS_CONFIRM__') {
+    echo "SUCCESS||||";
+    if($status==1){
+        $statusMsg="Enable";
+    }
+    else{
+         $statusMsg="Disabled";
+    }
+    ?>
+    <div id="franchiseeStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span
+                                class="caption-subject font-red-sunglo bold uppercase"><?php echo $statusMsg;?> Franchisee</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Franchisee has been successfully
+                        <?php echo $statusMsg;?>.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/admin/franchiseeList" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>

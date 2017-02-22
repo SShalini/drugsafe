@@ -32,7 +32,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                                 'szContactNumber' => $data['szContactNumber'],
                                 'szCountry' => $data['szCountry'],
                                 'abn' => $abn,
-                                'szState' => $data['szState'],
                                 'szCity' => $data['szCity'],
                                 'szZipCode' => $data['szZipCode'],
                                 'szAddress' => $data['szAddress'],
@@ -878,7 +877,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
 
                                 'szName' => $data['szName'],
                                 'szEmail' => $data['szEmail'],
-                                'szPassword'=>encrypt($szNewPassword),
                                 'szContactNumber' => $data['szContactNumber'],
                                 'szCountry' => $data['szCountry'],
                                 'abn' => $abn,

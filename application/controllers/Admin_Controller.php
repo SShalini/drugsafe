@@ -214,7 +214,10 @@ class Admin_Controller extends CI_Controller {
                 die;
             }
             $validate= $this->input->post('addFranchisee');
-            //print_r($validate);die();
+            if($validate['szState']) {
+               $getReginolCode=$this->Admin_Model->getRegionByStateId($validate['szState']);
+            }
+            
             $idOperationManager = $this->session->userdata('idOperationManager');
             $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
             $flag = $this->session->userdata('flag');
@@ -244,7 +247,8 @@ class Admin_Controller extends CI_Controller {
                     $data['getAllStates'] = $getAllStates;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
-        $data['commentnotification'] = $commentReplyNotiCount;
+                    $data['getReginolCode']=$getReginolCode;
+                   $data['commentnotification'] = $commentReplyNotiCount;
           
             $this->load->view('layout/admin_header',$data);
             $this->load->view('admin/addFranchisee');
@@ -810,40 +814,39 @@ class Admin_Controller extends CI_Controller {
         {
             $idfranchisee = $this->session->userdata('idfranchisee');
             $stateId = $this->input->post('stateId');
-           $getReginolCode=$this->Admin_Model->getReginolCode($stateId);
-           if($getReginolCode['reginolCodeMax']==''){
-               $iReginolCode=sprintf(__REGINOL_CODE__,'1');
-               $reginolCode='1';
-             }
-           else{
-                $iReginolCode=$getReginolCode['reginolCodeMax']+1;
-                $iReginolCode=sprintf(__REGINOL_CODE__,$iReginolCode);
-                $reginolCode=$getReginolCode['reginolCodeMax']+1;
-           }
-           ?>
-           <div class="form-group">
-                <label class="col-md-3 control-label">Reginal code</label>
+            $getReginolCode=$this->Admin_Model->getRegionByStateId($stateId);
+            ?>
+            <div class="form-group <?php if (!empty($arErrorMessages['szRegionName']) != '') { ?>has-error<?php } ?>">
+                <label class="col-md-3 control-label">Region Name</label>
                 <div class="col-md-5">
                     <div class="input-group">
                         <span class="input-group-addon">
-                             <i class="fa fa-area-chart"></i>
-                        </span>
-                        <input id="iReginolCode" class="form-control" type="text" value="<?php echo $iReginolCode ?>" placeholder="Reginol Code" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iReginolCode]"  readonly>
-                    </div>
-                 </div>
-            </div>
-             <input id="reginolCode" class="form-control" type="hidden" value="<?php echo $reginolCode ?>"  name="addFranchisee[reginolCode]">
-            <div class="form-group <?php if (!empty($arErrorMessages['szReginalName']) != '') { ?>has-error<?php } ?>">
-                <label class="col-md-3 control-label">Reginal Name</label>
-                     <div class="col-md-5">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <i class="fa fa-area-chart"></i>
-                            </span>
-                            <input id="szReginalName" class="form-control" type="text" value="" placeholder="Reginal Name" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szReginalName]">
-                        </div>
-                    </div>
-            </div>
+                            <i class="fa fa-flag-checkered"></i>
+                         </span>
+                                            <select class="form-control " name="addFranchisee[szRegionName]" id="szRegionName"
+                                                    Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">
+                                                <option value=''>Select</option>
+                                                 <?php
+                                                if(!empty($getReginolCode))
+                                                {
+                                                    foreach($getReginolCode as $getReginolCodeData)
+                                                    {
+                                                        $selected = ($getReginolCodeData['id'] == $_POST['addFranchisee']['szRegionName'] ? 'selected="selected"' : '');
+                                                        echo '<option value="'.$getReginolCodeData['id'].'"' . $selected . ' >'.$getReginolCodeData['regionName'].'</option>';
+                                                    } 
+                                                } 
+                                            ?>
+                                            </select>
+                                        </div>
+                                        <?php if (!empty($arErrorMessages['szRegionName'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szRegionName']; ?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+
+                                </div>
            <?php
         }
         function regionManagerList()
@@ -925,6 +928,128 @@ class Admin_Controller extends CI_Controller {
             </div>
            <?php
         }
+        function editRegionDetails()
+        {
+            $idRegion = $this->input->post('idRegion');
+           
+            if($idRegion>0)
+            {
+                $this->session->set_userdata('idRegion',$idRegion);
+                echo "SUCCESS||||";
+                echo "editRegion";
+            }
+            
+        }
+        
+        public function editRegion()
+        {
+          $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
+            $data_validate = $this->input->post('editRegion');
+            $idRegion = $this->session->userdata('idRegion');
+            if(empty($data_validate))
+            {
+                 $getRegionData = $this->Admin_Model->getRegionById($idRegion);
+            }
+            else
+            {
+                $getRegionData = $data_validate;
+            }
+           
+            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
+            $idRegion = $this->session->userdata('idRegion');
+           
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('editRegion[stateId]', 'State', 'required');
+            $this->form_validation->set_rules('editRegion[regionName]', 'Region Name', 'required');
+           
+            
+            if ($this->form_validation->run() == FALSE)
+            { 
+                    $_POST['editRegion']=$getRegionData;
+                    $data['szMetaTagTitle'] = "Edit Region ";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Region_Manager_List";
+                    $_POST['addFranchisee'] = $userDataAry;
+                    $data['getAllStates']=$getAllStates;
+                    $this->load->view('layout/admin_header',$data);
+                    $this->load->view('admin/editRegion');
+                    $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+                
+	        if($this->Admin_Model->updateRegion($data_validate,$idRegion))
+                {
+		    redirect(base_url('admin/regionManagerList/'));
+                    die;
+                }
+            }
+         }
+         function editRegionCode()
+        {
+           
+            $stateId = $this->input->post('stateId');
+            $getRegionCode=$this->Admin_Model->getRegionCode($stateId);
+            if($getRegionCode['regionCodeMax']==''){
+               $regionCode=$stateId*100;
+            }
+            else
+               {
+                $regionCode=$getRegionCode['regionCodeMax']+1;
+            }
+           ?>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Region Code</label>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-area-chart"></i>
+                        </span>
+                        <input id="regionCode" class="form-control" type="text" value="<?php echo $regionCode;?>" placeholder="Region Code" onfocus="remove_formError(this.id,'true')" name="editRegion[regionCode]" readonly>
+                    </div>
+                </div>
+            </div>
+           <?php
+        }
+        public function regionDeleteeAlert()
+        {
+            $data['mode'] = '__DELETE_REGION_POPUP__';
+            $data['regionId'] = $this->input->post('regionId');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function deleteRegionConfirmation()
+        {
+            $data['mode'] = '___DELETE_REGION_CONFIRM__';
+            $data['regionId'] = $this->input->post('regionId');
+            $this->Admin_Model->deleteRegion($data['regionId']);
+          
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function franchiseeStatus()
+        {
+            $data['mode'] = '__FRANCHISEE_STATUS_POPUP__';
+            $data['idfranchisee'] = $this->input->post('idfranchisee');
+            $data['status'] = $this->input->post('status');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function franchiseeStatusConfirmation()
+        {
+            $idfranchisee=$this->input->post('idfranchisee');
+            $status=$this->input->post('status');
+            $data['mode'] = '__FRANCHISEE_STATUS_CONFIRM__';
+            $data['idfranchisee'] = $idfranchisee;
+            $data['status'] = $status;
+            $this->Admin_Model->updateFranchiseeStatus($idfranchisee,$status);
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+ 
          
 }
 ?>

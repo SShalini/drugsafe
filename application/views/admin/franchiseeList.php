@@ -175,11 +175,35 @@
                                             <td> <?php echo $franchiseeData['szContactNumber'];?> </td>
                                             <td> <?php echo $franchiseeData['szCity'];?> </td>
                                            <td>
+                                                <?php 
+                                               if($franchiseeData['iActive']=='0')
+                                                {
+                                                   ?>
+                                                    <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Enable  Franchisee" onclick="franchiseeStatus(<?php echo $franchiseeData['id'];?>,'1');" href="javascript:void(0);"></i>
+                                                        <i class="fa fa-circle disabled" aria-hidden="true"></i>
+ 
+                                                    </a>
+                                                   <?php
+                                               }
+                                               else
+                                               {
+                                                   ?>
+                                                    <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Disabled  Franchisee" onclick="franchiseeStatus(<?php echo $franchiseeData['id'];?>,'0');" href="javascript:void(0);"></i>
+                                                       <i class="fa fa-circle enable" aria-hidden="true"></i>
+
+                                                    </a>
+                                                   <?php 
+                                               }
+                                               ?>
 <!--                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>,'','','1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>-->
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
+                                               <?php 
+                                               if($franchiseeData['iActive']=='1')
+                                                {
+                                                   ?>
+                                                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
 <!--                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client List" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
@@ -222,6 +246,10 @@
                                                  <?php 
                                                 }
                                                ?>
+                                                   <?php
+                                                }
+                                                ?>
+                                                
                                             </td>
                                         </tr>
                                         <?php 

@@ -365,17 +365,7 @@ class Admin_Model extends Error_Model
           $abn = '';     
         }
         
-        $reginolDataAry =array(
-             'stateId'=> $data['szState'],
-             'reginolCode'=> $data['reginolCode'],
-             'reginolName'=> $data['szReginalName']
-         );
-         $query=$this->db->insert(__DBC_SCHEMATA_REGINOL__, $reginolDataAry);
-        
- 
-        if ($this->db->affected_rows() > 0) {
-            $reginolId=$this->db->insert_id();
-            $date = date('Y-m-d');
+        $date = date('Y-m-d');
             $dataAry = array(
             'szName' => $data['szName'],
             'abn' => $abn,
@@ -384,8 +374,6 @@ class Admin_Model extends Error_Model
             'szContactNumber' => $data['szContactNumber'],
             'szCountry' => $data['szCountry'],
             'szCity' => $data['szCity'],
-            'userCode' => $data['reginolCode'],
-            'reginolId' => $reginolId,
             'szZipCode' => $data['szZipCode'],
             'szAddress' => $data['szAddress'],
             'iRole' => $data['iRole'],
@@ -393,6 +381,9 @@ class Admin_Model extends Error_Model
             'dtCreatedOn' => $date
         );
         $query=$this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
+        if ($this->db->affected_rows() > 0) {
+           
+           
             
             if($data['iRole']==2){
             $id_franchisee = (int)$this->db->insert_id();
@@ -1114,7 +1105,7 @@ class Admin_Model extends Error_Model
     {
         $this->db->select('*');
         $this->db->where('id',$resinolId);
-        $query = $this->db->get(__DBC_SCHEMATA_REGINOL__);
+        $query = $this->db->get(__DBC_SCHEMATA_REGION__);
         //$sql=$this->db->last_query();
         if ($query->num_rows() > 0) {
            $row = $query->result_array();
@@ -1285,11 +1276,110 @@ class Admin_Model extends Error_Model
                 ->from(__DBC_SCHEMATA_STATE__)
                 ->join(__DBC_SCHEMATA_REGION__, __DBC_SCHEMATA_REGION__ . '.stateId = ' . __DBC_SCHEMATA_STATE__ . '.id')
                 ->get();
+      
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
         return false;
     }
-            
+    function getRegionById($id = 0)
+    {
+        $query=$this->db->select('*')
+                ->from(__DBC_SCHEMATA_REGION__)
+                ->where('id',$id)
+                ->get();
+        if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+            return $row[0];
+        }
+        return false;
+    }
+    function getRegionByStateId($id = 0)
+    {
+        $query=$this->db->select('*')
+                ->from(__DBC_SCHEMATA_REGION__)
+                ->where('stateid',$id)
+                ->get();
+        if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+            return $row;
+        }
+        return false;
+    }
+    function updateRegion($data,$idRegion)
+    {
+        $dataAry = array(
+            'stateId' => $data['stateId'],
+            'regionName' =>  $data['regionName'],
+            'regionCode' =>  $data['regionCode']
+        );
+        
+        $this->db->where('id',$idRegion);
+        $query=$this->db->update(__DBC_SCHEMATA_REGION__, $dataAry);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }  
+    
+     function deleteRegion($idRegion)
+    {
+       
+        $this->db->where('id', $idRegion);
+        $query=$this->db->delete(__DBC_SCHEMATA_REGION__);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }  
+    
+    function getAllUserFranchiseesId($idfranchisee)
+    {
+        $query=$this->db->select('*')
+                ->from(__DBC_SCHEMATA_CLIENT__)
+                ->where('franchiseeId',$idfranchisee)
+                ->get();
+        if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+            return $row;
+        }
+        return false;
+    }
+    function updateClientByFranchisee($idfranchisee,$status)
+    {
+        $dataAry = array(
+            'iActive' => $status
+        );
+        $this->db->where('id',$idfranchisee);
+        $query=$this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }  
+    function updateFranchiseeStatus($idfranchisee,$status)
+    {
+        $dataAry = array(
+            'iActive' => $status
+        );
+        $getClientDetails= $this->Admin_Model->getAllUserFranchiseesId($idfranchisee);
+        $this->db->where('id',$idfranchisee);
+        $query=$this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+        if ($query) {
+            if($getClientDetails)
+            {
+                foreach($getClientDetails as $getClientData)
+                {
+                    $this->Admin_Model->updateClientByFranchisee($getClientData['clientId'],$status);
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }  
   
         }?>
