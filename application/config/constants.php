@@ -105,7 +105,7 @@ define("__DBC_SCHEMATA_REQUEST_QUANTITY__", "tbl_stock_request");
 define("__DBC_SCHEMATA_SOS_FORM__", "ds_sos");
 define("__DBC_SCHEMATA_COC_FORM__", "ds_coc");
 define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
-define("__DBC_SCHEMATA_REGINOL__", "tbl_reginol");
+define("__DBC_SCHEMATA_REGION__", "tbl_region");
 define("__DBC_SCHEMATA_OPERATION_STATE_MAPING__", "tbl_operation_state_maping");
 
 /**

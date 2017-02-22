@@ -822,7 +822,7 @@ class Admin_Controller extends CI_Controller {
            }
            ?>
            <div class="form-group">
-                <label class="col-md-3 control-label">Reginol code</label>
+                <label class="col-md-3 control-label">Reginal code</label>
                 <div class="col-md-5">
                     <div class="input-group">
                         <span class="input-group-addon">
@@ -834,7 +834,7 @@ class Admin_Controller extends CI_Controller {
             </div>
              <input id="reginolCode" class="form-control" type="hidden" value="<?php echo $reginolCode ?>"  name="addFranchisee[reginolCode]">
             <div class="form-group <?php if (!empty($arErrorMessages['szReginalName']) != '') { ?>has-error<?php } ?>">
-                <label class="col-md-3 control-label">Reginol Name</label>
+                <label class="col-md-3 control-label">Reginal Name</label>
                      <div class="col-md-5">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -843,6 +843,85 @@ class Admin_Controller extends CI_Controller {
                             <input id="szReginalName" class="form-control" type="text" value="" placeholder="Reginal Name" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szReginalName]">
                         </div>
                     </div>
+            </div>
+           <?php
+        }
+        function regionManagerList()
+        {
+            $is_user_login = is_user_login($this);
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                redirect(base_url('/admin/admin_login'));
+                die;
+            }
+            $getAllRegion=$this->Admin_Model->getAllRegion();
+            $data['szMetaTagTitle'] = "Region List";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Region_Manager_List";
+            $data['getAllRegion']=$getAllRegion;
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('admin/regionList');
+            $this->load->view('layout/admin_footer');
+        }
+         function addRegion()
+        {
+            $is_user_login = is_user_login($this);
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+                redirect(base_url('/admin/admin_login'));
+                die;
+            }
+            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
+            $data=$_POST['addRegion'];
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('addRegion[szState]', 'State', 'required');
+            $this->form_validation->set_rules('addRegion[szRegionName]', 'Region Name', 'required');
+           
+            
+            if ($this->form_validation->run() == FALSE)
+            { 
+                $data['szMetaTagTitle'] = "add Region";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "Region_Manager_List";
+                $data['getAllStates']=$getAllStates;
+                $this->load->view('layout/admin_header',$data);
+                $this->load->view('admin/addRegion');
+                $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+	        if($this->Admin_Model->insertRegion($data))
+                {
+		    redirect(base_url('admin/regionManagerList/'));
+                    die;
+                }
+            }
+        }
+         function addRegionCode()
+        {
+           
+            $stateId = $this->input->post('stateId');
+            $getRegionCode=$this->Admin_Model->getRegionCode($stateId);
+            if($getRegionCode['regionCodeMax']==''){
+               $regionCode=$stateId*100;
+            }
+            else
+               {
+                $regionCode=$getRegionCode['regionCodeMax']+1;
+            }
+           ?>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Region Code</label>
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-area-chart"></i>
+                        </span>
+                        <input id="iRegionCode" class="form-control" type="text" value="<?php echo $regionCode;?>" placeholder="Region Code" onfocus="remove_formError(this.id,'true')" name="addRegion[iRegionCode]" readonly>
+                    </div>
+                </div>
             </div>
            <?php
         }

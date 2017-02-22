@@ -113,18 +113,18 @@ CREATE TABLE `drugsafe`.`tbl_operation_state_maping` ( `id` INT NOT NULL AUTO_IN
 
 /* swapnil changes 21-02-2017 */
 INSERT INTO `tbl_states` (`id`, `name`, `country_id`) VALUES
-(1, 'Australian Capital Territory', 101),
-(2, 'New South Wales', 101),
-(3, 'Northern Territory', 101),
-(4, 'Queensland', 101),
-(5, 'South Australia', 101),
-(6, 'Tasmania', 101),
-(7, 'Victoria', 101),
-(8, 'Western Australia', 101);
+(2, 'Australian Capital Territory', 101),
+(3, 'New South Wales', 101),
+(4, 'Northern Territory', 101),
+(5, 'Queensland', 101),
+(6, 'South Australia', 101),
+(7, 'Tasmania', 101),
+(8, 'Victoria', 101),
+(9, 'Western Australia', 101);
 
-CREATE TABLE `tbl_reginol` (
+CREATE TABLE `tbl_region` (
   `id` int(11) NOT NULL,
   `stateId` int(11) NOT NULL,
-  `reginolCode` int(11) NOT NULL,
-  `reginolName` varchar(255) NOT NULL
+  `regionCode` int(11) NOT NULL,
+  `regionName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

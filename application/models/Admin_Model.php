@@ -1095,12 +1095,12 @@ class Admin_Model extends Error_Model
            return array();
         }
    } 
-    public function getReginolCode($stateId)
+    public function getRegionCode($stateId)
     {
         $this->db->select('*');
         $this->db->where('stateId',$stateId);
-         $this->db->select_max('reginolCode', 'reginolCodeMax');
-        $query = $this->db->get(__DBC_SCHEMATA_REGINOL__);
+         $this->db->select_max('regionCode', 'regionCodeMax');
+        $query = $this->db->get(__DBC_SCHEMATA_REGION__);
         //$sql=$this->db->last_query();
         if ($query->num_rows() > 0) {
            $row = $query->result_array();
@@ -1264,6 +1264,31 @@ class Admin_Model extends Error_Model
         } else {
             return false;
         }
+    }
+    public function insertRegion($data)
+    {
+         $regionAry=array(
+           'stateId'=>$data['szState'],
+           'regionCode'=>$data['iRegionCode'],
+           'regionName'=>$data['szRegionName'],
+        );
+        
+        if ($query = $this->db->insert(__DBC_SCHEMATA_REGION__, $regionAry)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function getAllRegion()
+    {
+        $query=$this->db->select('*')
+                ->from(__DBC_SCHEMATA_REGION__)
+                ->join(__DBC_SCHEMATA_STATE__, __DBC_SCHEMATA_STATE__ . '.id = ' . __DBC_SCHEMATA_REGION__ . '.stateId')
+                ->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
     }
             
   

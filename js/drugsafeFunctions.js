@@ -1875,3 +1875,19 @@ function getReginolCode(stateId,idfranchisee) {
     }
    
 }
+function addRegionCode(stateId) {
+    
+    if(stateId>0){
+        $.post(__BASE_URL__ + "/admin/addRegionCode", {stateId: stateId}, function (result) {
+            if (result != '') {
+                $("#Region").empty();
+                $("#Region").html(result);
+            }
+        });
+    }
+    else
+    {
+         $("#Region").empty();
+    }
+   
+}
