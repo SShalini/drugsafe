@@ -1282,8 +1282,8 @@ class Admin_Model extends Error_Model
     function getAllRegion()
     {
         $query=$this->db->select('*')
-                ->from(__DBC_SCHEMATA_REGION__)
-                ->join(__DBC_SCHEMATA_STATE__, __DBC_SCHEMATA_STATE__ . '.id = ' . __DBC_SCHEMATA_REGION__ . '.stateId')
+                ->from(__DBC_SCHEMATA_STATE__)
+                ->join(__DBC_SCHEMATA_REGION__, __DBC_SCHEMATA_REGION__ . '.stateId = ' . __DBC_SCHEMATA_STATE__ . '.id')
                 ->get();
         if ($query->num_rows() > 0) {
             return $query->result_array();

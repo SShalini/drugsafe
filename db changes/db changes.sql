@@ -128,3 +128,5 @@ CREATE TABLE `tbl_region` (
   `regionCode` int(11) NOT NULL,
   `regionName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `tbl_region` ADD `assign` TINYINT NOT NULL AFTER `regionName`;
