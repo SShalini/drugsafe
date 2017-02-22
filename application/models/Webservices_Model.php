@@ -507,7 +507,7 @@ class Webservices_Model extends Error_Model
         $query = $this->db->select('client.id, client.clientId, client.szBusinessName, client.szContactEmail, client.szContactPhone, 
         client.szContactMobile, user.szName,
                                      user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode,
-                                     user.szCity, user.szState, user.szCountry')
+                                     user.szCity, user.szCountry')
             ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = client.clientId')
             ->where($whereAry)
@@ -527,7 +527,7 @@ class Webservices_Model extends Error_Model
         $whereAry = array('client.clientId' => (int)$clientid, 'user.isDeleted' => '0');
         $query = $this->db->select('client.id, user.id as userid, user.szName,
                                      user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode,
-                                     user.szCity, user.szState, user.szCountry, client.clientType, client.franchiseeId')
+                                     user.szCity, user.szCountry, client.clientType, client.franchiseeId')
             ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = client.clientId')
             ->where($whereAry)
@@ -552,7 +552,7 @@ class Webservices_Model extends Error_Model
                                      site.randomisation, site.risk_assessment, site.req_comp_induction,
                                      site.req_ppe, site.paperwork, site.specify_contact, client.clientId, user.id as userid, user.szName,
                                      user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode,
-                                     user.szCity, user.szState, user.szCountry')
+                                     user.szCity, user.szCountry')
             ->from(__DBC_SCHEMATA_SITES__ . ' as site')
             ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'client.id = site.siteid')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = client.clientId')
@@ -666,7 +666,7 @@ class Webservices_Model extends Error_Model
     function getuserdetails($userid)
     {
         $array = array('id' => (int)$userid, 'isDeleted' => 0);
-        $query = $this->db->select('id, szName, abn, szEmail, iRole, szContactNumber, szAddress, szZipCode, szState, szCountry')
+        $query = $this->db->select('id, szName, abn, szEmail, iRole, szContactNumber, szAddress, szZipCode, szCountry')
             ->from(__DBC_SCHEMATA_USERS__)
             ->where($array)
             ->get();
@@ -918,7 +918,7 @@ class Webservices_Model extends Error_Model
     function getuserhierarchybysiteid($siteid)
     {
         $whereAry = 'client.clientId =' . (int)$siteid . ' AND user.isDeleted = 0';
-        $query = $this->db->select('client.franchiseeId, client.clientType, user.szName, user.abn, user.szAddress, user.szContactNumber, user.szEmail, user.szZipCode, user.szState, user.szCountry')
+        $query = $this->db->select('client.franchiseeId, client.clientType, user.szName, user.abn, user.szAddress, user.szContactNumber, user.szEmail, user.szZipCode, user.szCountry')
             ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'client.franchiseeId = user.id')
             ->where($whereAry)
@@ -1024,7 +1024,7 @@ class Webservices_Model extends Error_Model
                 'franchiseeid' => (int)$data['franchiseeid'],
                 'productid' => (int)$data['productid'],
                 'quantity' => (int)$data['quantity'],
-                'addedon' => date('Y-m-d h:i:s')
+                'addedon' => date('Y-m-d H:i:s')
             );
             $prodExistInCart = $this->checkproductexistincart((int)$data['franchiseeid'],(int)$data['productid']);
             if(!empty($prodExistInCart)){
@@ -1137,7 +1137,7 @@ class Webservices_Model extends Error_Model
             $orderdataArr = array(
                 'franchiseeid' => (int)$data['franchiseeid'],
                 'price' => (int)$data['totalprice'],
-                'createdon' => date('Y-m-d h:i:s')
+                'createdon' => date('Y-m-d H:i:s')
             );
             $this->db->insert(__DBC_SCHEMATA_ORDER__, $orderdataArr);
             if ($this->db->affected_rows() > 0) {
@@ -1191,7 +1191,7 @@ class Webservices_Model extends Error_Model
 
     function markOrderVerified($orderid){
         $orderdataArr = array(
-            'createdon' => date('Y-m-d h:i:s'),
+            'createdon' => date('Y-m-d H:i:s'),
             'validorder' => 1
         );
         $whereAry = array('id' => (int)$orderid);
