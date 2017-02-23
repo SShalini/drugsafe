@@ -674,7 +674,6 @@ class Ordering_Controller extends CI_Controller
             $data['mode'] = '___DELETE_DISCOUNT_CONFIRM__';
             $data['idDiscount'] = $this->input->post('idDiscount');
             $this->Ordering_Model->deleteDiscount($data['idDiscount']);
-          
             $this->load->view('admin/admin_ajax_functions',$data);
         }
     
