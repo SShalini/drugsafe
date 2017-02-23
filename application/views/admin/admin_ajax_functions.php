@@ -2511,4 +2511,66 @@ if ($mode == '__FRANCHISEE_STATUS_CONFIRM__') {
 
     <?php
 }
+if ($mode == '__DELETE_DISCOUNT_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="discountDelete" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Delete Discount Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        delete the selected Discount?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="discountDeleteConfirmation('<?php echo $idDiscount; ?>'); return false;"
+                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if ($mode == '___DELETE_DISCOUNT_CONFIRM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="discountDeleteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span
+                                class="caption-subject font-red-sunglo bold uppercase">Deleted Discount Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Discount has been successfully
+                        deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/ordering/discountPercentage" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
   ?>

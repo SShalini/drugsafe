@@ -247,11 +247,27 @@
                
            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole'] == 2) { ?>
 
-               <li class="nav-item start <?php if (trim($pageName) == 'Ordering') { ?>active open<?php } ?>">
+               <li class="nav-item start <?php if (trim($pageName) == 'proforma_invoice') { ?>active open<?php } ?>">
                    <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord" class="nav-link nav-toggle">
                        <i class="fa fa-file-text" aria-hidden="true"></i>
                        <span class="title">Proforma Invoice </span>
+                       <span class="arrow"></span>
                    </a>
+                   <ul class="sub-menu" <?php if ($subpageName == 'proforma_invoice') { ?> style="display: block;" <?php } ?> >
+                    <li class="nav-item  <?php if ($subpageName == 'view_proforma_invoice') { ?> active open <?php } ?>">
+                        <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord" class="nav-link nav-toggle">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">View Proforma Invoice </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  <?php if ($subpageName == 'discount_percentage') { ?> active open <?php } ?>">
+                        <a class="nav-link " href="<?php echo __BASE_URL__; ?>/ordering/discountPercentage">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">Discount Percentage</span>
+                        </a>
+                    </li>
+                    </ul>
+                   
                </li>
 
 

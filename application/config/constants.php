@@ -108,6 +108,7 @@ define("__DBC_SCHEMATA_STOCK_REQ_TRACKING__", "tbl_stock_assign_tracking");
 define("__DBC_SCHEMATA_REGION__", "tbl_region");
 define("__DBC_SCHEMATA_OPERATION_STATE_MAPING__", "tbl_operation_state_maping");
 define("__DBC_SCHEMATA_AGENT_FRANCHISEE__", "ds_agentmapping");
+define("__DBC_SCHEMATA_DISCOUNT__", "tbl_discount");
 
 /**
  * Validate an int, uses is_numeric

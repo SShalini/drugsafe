@@ -301,9 +301,8 @@ class Admin_Controller extends CI_Controller {
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
                 $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email,$opId));
                 $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-              
-            
-                 $this->pagination->initialize($config);
+               
+                $this->pagination->initialize($config);
                
                  $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email,$opId);
                  $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
@@ -314,7 +313,7 @@ class Admin_Controller extends CI_Controller {
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
                     $data['notification'] = $count;
-            $data['commentnotification'] = $commentReplyNotiCount;
+                    $data['commentnotification'] = $commentReplyNotiCount;
                     $data['franchiseeAray'] = $franchiseeAray;
                     $data['allfranchisee'] = $searchOptionArr;
          
@@ -322,15 +321,12 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('admin/franchiseeList');
             $this->load->view('layout/admin_footer');
         }
-            function operationManagerList()
+        function operationManagerList()
         {
            $is_user_login = is_user_login($this);
-
-            // redirect to dashboard if already logged in
            $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-        
-            if(!$is_user_login)
+           $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+           if(!$is_user_login)
             {
                 ob_end_clean();
                   redirect(base_url('/admin/admin_login'));
@@ -371,7 +367,7 @@ class Admin_Controller extends CI_Controller {
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['data'] = $data;
                     $data['notification'] = $count;
-            $data['commentnotification'] = $commentReplyNotiCount;
+                    $data['commentnotification'] = $commentReplyNotiCount;
                     $data['operationManagerAray'] = $operationManagerAray;
                     $data['allOperationManager'] = $searchOptionArr;
                     
@@ -473,7 +469,7 @@ class Admin_Controller extends CI_Controller {
                 if(empty($data_validate))
                 {
                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idfranchisee);
-                    $getResinolData = $this->Admin_Model->getstateIdByResinolId($userDataAry['reginolId']);
+                    //$getResinolData = $this->Admin_Model->getstateIdByResinolId($userDataAry['reginolId']);
                     $szStateId=$getResinolData['stateId'];
                     $iReginolCode=sprintf(__REGINOL_CODE__,$getResinolData['reginolCode']);
                     $reginolCode=$getResinolData['reginolCode'];
@@ -867,7 +863,7 @@ class Admin_Controller extends CI_Controller {
             $this->load->view('admin/regionList');
             $this->load->view('layout/admin_footer');
         }
-         function addRegion()
+        function addRegion()
         {
             $is_user_login = is_user_login($this);
             if(!$is_user_login)

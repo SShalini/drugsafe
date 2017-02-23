@@ -188,8 +188,8 @@ class Ordering_Controller extends CI_Controller
         
         $data['childclientAray'] = $childclientAray;
         $data['sosRormDetailsAry'] = $sosRormDetailsAry;
-        $data['pageName'] = "Ordering";
-        $data['subpageName'] = "Sites_Record";
+        $data['pageName'] = "proforma_invoice";
+        $data['subpageName'] = "view_proforma_invoice";
         $data['szMetaTagTitle'] = "Sites Record";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
@@ -552,6 +552,132 @@ class Ordering_Controller extends CI_Controller
         echo "SUCCESS||||";
         echo "sitesRecord";
     }
+    function discountPercentage()
+    {
+        $is_user_login = is_user_login($this);
+        if(!$is_user_login)
+        {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $getAllDiscountAry=$this->Ordering_Model->getAllDiscounPercentage();
+        $data['szMetaTagTitle'] = "Discount Percentage List";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "proforma_invoice";
+        $data['subpageName'] = "discount_percentage";
+        $data['getAllDiscountAry']=$getAllDiscountAry;
+        $this->load->view('layout/admin_header',$data);
+        $this->load->view('ordering/discountList');
+        $this->load->view('layout/admin_footer');
+    }
+    function createDiscount()
+    {
+        $is_user_login = is_user_login($this);
+        if(!$is_user_login)
+        {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+            }
+            $data = $this->input->post('createDiscount');
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('createDiscount[percentage]', 'Discount Percentage', 'required|is_numeric|maximumCheck');
+            $this->form_validation->set_rules('createDiscount[description]', 'Description', 'required');
+            $this->form_validation->set_message('maximumCheck', ' %s field must be less than 100.');
+           
+            
+            if ($this->form_validation->run() == FALSE)
+            { 
+                $data['szMetaTagTitle'] = "create Discount";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "proforma_invoice";
+                $data['subpageName'] = "discount_percentage";
+                $this->load->view('layout/admin_header',$data);
+                $this->load->view('ordering/createDiscount');
+                $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+                if($this->Ordering_Model->insertDiscount($data))
+                {
+		    redirect(base_url('ordering/discountPercentage/'));
+                    die;
+                }
+            }
+        }
+        function editDiscountDetails()
+        {
+            $idDiscount = $this->input->post('idDiscount');
+           
+            if($idDiscount>0)
+            {
+                $this->session->set_userdata('idDiscount',$idDiscount);
+                echo "SUCCESS||||";
+                echo "editDiscount";
+            }
+            
+        }
+        
+        public function editDiscount()
+        {
+          $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
+            $data_validate = $this->input->post('editDiscount');
+            $idDiscount = $this->session->userdata('idDiscount');
+            if(empty($data_validate))
+            {
+                 $getDiscountData = $this->Ordering_Model->getDiscountById($idDiscount);
+            }
+            else
+            {
+                $getDiscountData = $data_validate;
+            }
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('editDiscount[percentage]', 'Discount Percentage', 'required|is_numeric|maximumCheck');
+            $this->form_validation->set_rules('editDiscount[description]', 'Description', 'required');
+            $this->form_validation->set_message('maximumCheck', ' %s field must be less than 100.');
+             if ($this->form_validation->run() == FALSE)
+            { 
+                $data['szMetaTagTitle'] = "Edit Discount";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "proforma_invoice";
+                $data['subpageName'] = "discount_percentage";
+	        $_POST['editDiscount']=$getDiscountData;
+                $this->load->view('layout/admin_header',$data);
+                $this->load->view('ordering/editDiscount');
+                $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+                if($this->Ordering_Model->updateDiscount($data_validate,$idDiscount))
+                {
+		    redirect(base_url('ordering/discountPercentage/'));
+                    die;
+                }
+            }
+         }
+        public function discountDeleteeAlert()
+        {
+            $data['mode'] = '__DELETE_DISCOUNT_POPUP__';
+            $data['idDiscount'] = $this->input->post('idDiscount');
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+        public function deletediscountConfirmation()
+        {
+            $data['mode'] = '___DELETE_DISCOUNT_CONFIRM__';
+            $data['idDiscount'] = $this->input->post('idDiscount');
+            $this->Ordering_Model->deleteDiscount($data['idDiscount']);
+          
+            $this->load->view('admin/admin_ajax_functions',$data);
+        }
+    
 }
 
 ?>

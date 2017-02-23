@@ -1646,6 +1646,15 @@ class CI_Form_validation {
                 return TRUE;
             }
         }
+        function maximumCheck($num)
+        {
+            if ($num > 100){
+                return FALSE;
+            }
+            else{
+                return TRUE;
+            }
+         }
 
 
 

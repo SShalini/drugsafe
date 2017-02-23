@@ -143,5 +143,72 @@ class Ordering_Model extends Error_Model {
             return false;
         }
     }
+    function getAllDiscounPercentage()
+    {
+        $query=$this->db->select('*')
+                        ->from(__DBC_SCHEMATA_DISCOUNT__)
+                        ->get();
+         if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+            return $row;
+        }
+        return false;
+    }
+    function getDiscountById($id)
+    {
+        $query=$this->db->select('*')
+                        ->from(__DBC_SCHEMATA_DISCOUNT__)
+                        ->where('id',$id)
+                        ->get();
+         if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+            return $row['0'];
+        }
+        return false;
+    }
+    function insertDiscount($data)
+    {
+        $dataAry = 
+                array(
+                        'percentage' => $data['percentage'],
+                        'description' => $data['description']
+                     );
+	$query=    $this->db->insert(__DBC_SCHEMATA_DISCOUNT__, $dataAry);
+
+        if($this->db->affected_rows() > 0){
+	    return true;
+        }
+        else{
+            return false;
+        }
+    }
+    function updateDiscount($data,$idDiscount)
+    {
+        $dataAry = array(
+            'percentage' => $data['percentage'],
+            'description' => $data['description']
+        );
+        
+        $this->db->where('id',$idDiscount);
+        $query=$this->db->update(__DBC_SCHEMATA_DISCOUNT__, $dataAry);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }  
+    
+     function deleteDiscount($idDiscount)
+    {
+       
+        $this->db->where('id', $idDiscount);
+        $query=$this->db->delete(__DBC_SCHEMATA_DISCOUNT__);
+      // echo $sql=$this->db->last_query();die();
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }  
 }
 ?>

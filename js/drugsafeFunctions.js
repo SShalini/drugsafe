@@ -33,8 +33,6 @@ function redirect_url(page_url) {
         return false;
     }
 }
-
-
 function ajaxKeyUpLogin(selector, event) {
     if (event.keyCode == '13') {
         userLogin();
@@ -2000,6 +1998,44 @@ function franchiseeStatusConfirmation(idfranchisee,status) {
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
             $('#franchiseeStatusConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+function editDiscountDetails(idDiscount) {
+    
+    $.post(__BASE_URL__ + "/ordering/editDiscountDetails", {idDiscount: idDiscount}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/ordering/" + ar_result[1];
+
+    });
+}
+function discountDelete(idDiscount) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/ordering/discountDeleteeAlert", {idDiscount: idDiscount}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#discountDelete').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function discountDeleteConfirmation(idDiscount) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#discountDelete').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/ordering/deletediscountConfirmation", {idDiscount: idDiscount}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#discountDeleteConfirmation').modal("show");
         }
         jQuery('#loader').attr('style', 'display:none');
 
