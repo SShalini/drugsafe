@@ -80,7 +80,8 @@ class Webservices_Controller extends CI_Controller
         $jsondata = json_decode(file_get_contents("php://input"));
         $franchiseeid = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
         $parentid = !empty($jsondata->parentid) ? $jsondata->parentid : "0";
-        $userDetailsArr = $this->Webservices_Model->getclientdetails($franchiseeid,$parentid);
+        $agentid = !empty($jsondata->agentid) ? $jsondata->agentid : "0";
+        $userDetailsArr = $this->Webservices_Model->getclientdetails($franchiseeid,$parentid,$agentid);
         if(!empty($userDetailsArr))
         {
             $responsedata = array("code" => 200,
@@ -91,7 +92,7 @@ class Webservices_Controller extends CI_Controller
                 "dataarr"=>$userDetailsArr);
             header('Content-Type: application/json');
         }else{
-                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                $responsedata = array("code" => 111,"message"=>$userDetailsArr);
                 header('Content-Type: application/json');
         }
         echo json_encode($responsedata);
@@ -403,6 +404,29 @@ class Webservices_Controller extends CI_Controller
         if(!empty($franchiseesosdata[0]))
         {
             $responsedata = array("code" => 200,"dataarr"=>$franchiseesosdata);
+            header('Content-Type: application/json');
+        }else{
+            $errorMsgArr = $this->Webservices_Model->arErrorMessages;
+            if(!empty($errorMsgArr) && !empty($errorMsgArr['norecord'])){
+                $responsedata = array("code" => 201,"message"=>$errorMsgArr['norecord']);
+                header('Content-Type: application/json');
+
+            }else{
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
+                header('Content-Type: application/json');
+            }
+        }
+        echo json_encode($responsedata);
+    }
+
+    function getagentsosdata(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['agentid'] = !empty($jsondata->agentid) ? $jsondata->agentid : "";
+        $data['status'] = $jsondata->status == '1' ? true : false;
+        $agentsosdata = $this->Webservices_Model->getagentsosformdata($data['agentid']);
+        if(!empty($agentsosdata[0]))
+        {
+            $responsedata = array("code" => 200,"dataarr"=>$agentsosdata);
             header('Content-Type: application/json');
         }else{
             $errorMsgArr = $this->Webservices_Model->arErrorMessages;
@@ -1014,5 +1038,18 @@ class Webservices_Controller extends CI_Controller
             }
             header('Content-Type: application/json');
             echo json_encode($responsedata);
+    }
+
+    function getagentfranchisee(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['agentid'] = !empty($jsondata->agentid) ? $jsondata->agentid : "0";
+        $agentArr = $this->Webservices_Model->getagentfranchisee($data['agentid']);
+        if(!empty($agentArr)){
+            $responsedata = array("code" => 200,"franchiseeid"=>$agentArr[0]['franchiseeid']);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No data found.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
     }
 }

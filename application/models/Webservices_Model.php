@@ -21,7 +21,9 @@ class Webservices_Model extends Error_Model
             if ($this->checkUserExist($data['szEmail'])) {
                 if ($data['szrole'] == 'fr') {
                     $role = "`iRole` = '2'";
-                } else {
+                } elseif($data['szrole'] == 'ag') {
+                    $role = "`iRole` = '6'";
+                }else {
                     $role = "(`iRole` = '3'
                     OR `iRole` = '4')";
                 }
@@ -76,19 +78,23 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getclientdetails($franchiseeid, $parent = 0)
+    function getclientdetails($franchiseeid, $parent = 0, $agent= 0)
     {
-        $array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent, __DBC_SCHEMATA_USERS__ . '.isDeleted' => '0');
+        $array = __DBC_SCHEMATA_CLIENT__ . '.franchiseeId = '.(int)$franchiseeid.' AND '.__DBC_SCHEMATA_USERS__ .'.isDeleted = 0 '.($agent > 0 && $parent == 0?' AND '.__DBC_SCHEMATA_CLIENT__ . '.agentId = '.(int)$agent:($agent > 0 && $parent > 0?' AND '.__DBC_SCHEMATA_CLIENT__ . '.clientType = '.(int)$parent:' AND '.__DBC_SCHEMATA_CLIENT__ . '.clientType = '.(int)$parent));
+        //$array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent, __DBC_SCHEMATA_USERS__ . '.isDeleted' => '0');
         $query = $this->db->select(__DBC_SCHEMATA_USERS__ . '.id, szName, szEmail')
             ->from(__DBC_SCHEMATA_USERS__)
             ->join(__DBC_SCHEMATA_CLIENT__, __DBC_SCHEMATA_CLIENT__ . '.clientId = ' . __DBC_SCHEMATA_USERS__ . '.id')
             ->where($array)
             ->get();
+        $q = $this->db->last_query();
+        /*echo $q;*/
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
         } else {
             $this->addError("usernotexist", "User does not exist.");
+            return $q;
         }
     }
 
@@ -579,6 +585,42 @@ class Webservices_Model extends Error_Model
                     foreach ($clientsosdataarr as $key => $val) {
                         $clientsosdataarr[$key][0]['parentclientid'] = $franchiseeclient['clientId'];
                         $clientdetarr = $this->getuserdetails($franchiseeclient['clientId']);
+                        if (!empty($clientdetarr)) {
+                            $clientsosdataarr[$key][0]['clientname'] = $clientdetarr[0]['szName'];
+                        }
+                        $sitedetarr = $this->getuserdetails($clientsosdataarr[$key][0]['Clientid']);
+                        if (!empty($sitedetarr)) {
+                            $clientsosdataarr[$key][0]['sitename'] = $sitedetarr[0]['szName'];
+                        }
+                    }
+                    array_push($resultarr, $clientsosdataarr);
+                }
+            }
+
+            if (!empty($resultarr)) {
+                return $resultarr;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getagentsosformdata($agentid)
+    {
+        $resultarr = array();
+        $agentclientsarr = $this->getagentclients($agentid);
+        if (!empty($agentclientsarr)) {
+            foreach ($agentclientsarr as $agentclient) {
+                $clientsosdataarr = $this->getclientsosformdata($agentclient['clientId']);
+
+                if (!empty($clientsosdataarr)) {
+                    foreach ($clientsosdataarr as $key => $val) {
+                        $clientsosdataarr[$key][0]['parentclientid'] = $agentclient['clientId'];
+                        $clientdetarr = $this->getuserdetails($agentclient['clientId']);
                         if (!empty($clientdetarr)) {
                             $clientsosdataarr[$key][0]['clientname'] = $clientdetarr[0]['szName'];
                         }
@@ -1381,6 +1423,38 @@ class Webservices_Model extends Error_Model
             $row = $query->result_array();
             return $row;
         } else {
+            return false;
+        }
+    }
+
+    function getagentclients($agentid){
+        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND client.agentId = '.(int)$agentid;
+        $query = $this->db->select('user.id, user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry, client.clientId')
+            ->from(__DBC_SCHEMATA_USERS__.' as user')
+            ->join(__DBC_SCHEMATA_CLIENT__.' as client','user.id = client.clientId')
+            ->where($whereAry)
+            ->order_by('user.id','DESC')
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getagentfranchisee($agentid){
+        $whereAry = 'agentid = '.(int)$agentid;
+        $query = $this->db->select('*')
+            ->from(__DBC_SCHEMATA_AGENT_FRANCHISEE__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
             return false;
         }
     }

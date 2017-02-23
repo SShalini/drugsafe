@@ -767,7 +767,6 @@ class Franchisee_Controller extends CI_Controller
         }
         $allIndustry = $this->Admin_Model->viewAllIndustryList();
 
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('agentData[szBusinessName]', 'Name', 'required|alpha_dash_space');
         $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
