@@ -2573,4 +2573,340 @@ if ($mode == '___DELETE_DISCOUNT_CONFIRM__') {
 
     <?php
 }
+if ($mode == '__DELETE_PROSPECT_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="prospectStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Delete Prospect Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Deleting this Prospect
+                        record will delete all the meeting notes associated with this
+                        Prospect ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="deleteProspectConfirmation('<?php echo $prospectId; ?>'); return false;"
+                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if ($mode == '__DELETE_PROSPECT_CONFIRM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="prospectStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span
+                                class="caption-subject font-red-sunglo bold uppercase">Deleted Prospect Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Prospect has been successfully
+                        deleted.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
+    echo "SUCCESS||||";
+    ?>
+  
+    <div id="editProspectStatus" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="modal-title">
+                        <div class="caption">
+                            <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span class="caption-subject font-red-sunglo bold uppercase">Change Prospect Status</span></h4>
+                        </div>
+                    </div>
+                </div>
+                  <div class="modal-body">
+                         <form action="" id="changeStatus" name="changeStatus" method="post"
+                          class="form-horizontal form-row-sepe">
+                        <div class="form-body">
+                            <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getAllProspectDetails();
+                            
+                            ?>
+                            <div
+                                class="form-group <?php if (form_error('changeStatus[szClient]')) { ?>has-error<?php } ?>">
+                                <label class="control-label col-md-4"> Status</label>
+                                <div class="col-md-5">
+                                   <div class="search">
+                                        <div id='changeStatus'>                         
+                                      <select class="form-control " name="changeStatus[status]" id="changeStatus"
+                                                    Placeholder="Status" onfocus="remove_formError(this.id,'true')">
+                                          
+                                                <option value=''>Status</option>
+                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Newly Added</option>
+                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected" : ""); ?>>In Progress</option>
+                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected" : ""); ?>>Completed</option>
+                                               
+                                            </select>
+                                            </div>
+                                  </div>
+                                    <?php
+                                    if (form_error('changeStatus[status]')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('changeStatus[status]'); ?></span>
+                                        </span><?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                  <div class="portlet green-meadow box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i> Status Change Info
+
+                            </div>
+
+                        </div>
+                       <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getProspectStatusDetails($idProspect,1);
+                            ?>
+                        <div class="portlet-body">
+                                <div class="portlet-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th> Sr No</th>
+                                        <th> Status</th>
+                                        <th> Updated By</th>
+                                        <th> Updated On</th
+                                         
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $i=0;
+                                    foreach ($prospectStatusDetailsAry as $prospectStatusDetailsData) {
+                                      
+                                          $i++;
+                                     ?>
+                                        <tr>
+                                            <td> <?php echo $i; ?> </td>
+                                            <td>
+                                            <?php if ($prospectStatusDetailsData['status'] == 1) { ?>
+
+                                                <p title="Order Status"
+                                                   class="label label-sm label-warning">
+                                                    Newly Added
+                                                </p>
+                                                <?php
+                                            }
+                                            if ($prospectStatusDetailsData['status'] == 3) {
+                                                ?>
+                                                <p title="Order Status"
+                                                   class="label label-sm label-success">
+                                                    Completed
+                                                </p>
+                                                <?php
+                                            }
+
+                                            if ($prospectStatusDetailsData['status'] == 2) {
+                                                ?>
+                                                <p title="Order Status"
+                                                   class="label label-sm label-info">
+                                                     In Progress
+                                                </p>
+                                                <?php
+                                            }
+
+                                           ?></td>
+                                        <td>
+                                            <?php 
+                                             if($prospectStatusDetailsData['szUpdatedBy'])
+                                            {
+                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$prospectStatusDetailsData['szUpdatedBy']);
+                                                echo $franchiseeDetArr['szName'];
+                                            }
+                                            else
+                                            {
+                                               echo "N/A";
+                                            }
+                                           
+                                            ?> 
+                                         </td>
+                                         <td>  <?php
+                                        if($prospectStatusDetailsData['dtUpdatedOn']== '0000-00-00 00:00:00')
+                                        {
+                                          echo "N/A"; 
+                                        }
+                                        else{
+                                             echo date('d M Y',strtotime($prospectStatusDetailsData['dtUpdatedOn'])) . ' at '.date('h:i A',strtotime($prospectStatusDetailsData['dtUpdatedOn']));   
+                                          
+                                        }
+                                        ?> </td>
+                                    
+
+                                        </tr>
+                                        
+                                    <?php } ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                           
+                        </div>
+                    </div>
+              
+                 
+
+                </div>
+               
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="editProspectStatusConfirmation('<?php echo $idProspect; ?>'); return false;"
+                            class="btn green">Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__PROSPECT_STATUS_EDIT_POPUP_CONFIRMATION__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="editProspectStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Change Status Confirmation</span> </h4>
+                </div>
+           
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Status has been changed successfully .</p>
+                </div>
+               <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/prospect/view_prospect_details" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+if ($mode == '__SHOW_MEETING_DESCRIPTION_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+
+
+    <div id="showDescription" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <?php $descriptionDataArr = $this->Prospect_Model->getMettingDetailsById($idMeetingNote);
+
+                ?>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Meeting Description</span></h4>
+                    </div>
+
+                </div>
+
+               
+                <div class="modal-body">
+                    <p class="alert alert-success"> <?php echo $descriptionDataArr['szDescription'] ?> </p>
+                   
+                   
+                </div>
+
+                <div class="modal-footer">
+                    <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <?php
+}
+if ($mode == '__IMPORT_CSV_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+      <div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                   <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Import Prospects</span></h4>
+                    </div>
+                   
+                </div>
+                <form name="ProductimportForm" id="ProductimportForm" method="post" action="<?= __BASE_URL__ ?>/prospect/importCsvData" class="form-horizontal"
+                      enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="portlet-body form">
+                            <!-- BEGIN FORM-->
+                            <div class="col-md-7">
+                                <div class="input-group">
+                                    <input autocomplete="off" type="file" name="impcustomers" id='impcustomers'
+                                           onfocus="remove_formError(this.id,'true')">
+                                    <br>
+                                     <span id="error" class="err"></span>
+                                     <br>
+                                    <input type="hidden" name="importcustomers" value="1"/>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                   <br> 
+                    <div class="modal-footer">
+                         <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
+                        <input type="button" name="pricesimport" value="Import" onclick="import_csv_popup_confirmation()" class="btn green"/>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <?php
+}        
   ?>
