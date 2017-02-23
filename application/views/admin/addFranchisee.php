@@ -29,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-                   <div class="portlet-body">
+                    <div class="portlet-body">
                         <form class="form-horizontal" id="addfranchisee"
                               action="<?= __BASE_URL__ ?>/admin/addFranchisee" name="addfranchisee" method="post">
                             <div class="form-body">

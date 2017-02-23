@@ -214,6 +214,7 @@ class Admin_Controller extends CI_Controller {
                 die;
             }
             $validate= $this->input->post('addFranchisee');
+            
             if($validate['szState']) {
                $getReginolCode=$this->Admin_Model->getRegionByStateId($validate['szState']);
             }
@@ -225,7 +226,9 @@ class Admin_Controller extends CI_Controller {
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($this->Admin_Model->validateUsersData($validate,array(),false,false,$flag,2))
             {
-              
+                $this->load->library('form_validation');
+                $this->form_validation->set_rules('addFranchisee[szRegionName]', 'Region Name', 'required');
+                
                 if($this->Admin_Model->insertUserDetails($validate))
                 {
                     $szMessage['type'] = "success";
