@@ -77,6 +77,13 @@
                     <span class="selected"></span>
                 </a>
             </li>
+           <li class="nav-item start <?php if (trim($pageName) == 'Prospect_Record') { ?>active open<?php } ?>">
+                <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="nav-link nav-toggle">
+                     <i class="fa fa-files-o" aria-hidden="true"></i>
+                    <span class="title">Prospect Record</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
                 
                 
               
