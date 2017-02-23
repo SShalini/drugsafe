@@ -142,6 +142,13 @@ function editFranchiseeDetails(idfranchisee,idOperationManager) {
 
     });
 }
+function editProspectDetails(idProspect,flag) {
+    $.post(__BASE_URL__ + "/prospect/editProspectData", {idProspect: idProspect,flag:flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/prospect/" + ar_result[1];
+
+    });
+}
 function editOperationManagerDetails(idOperationManager,flag) {
     $.post(__BASE_URL__ + "/admin/editOperationManagerData", {idOperationManager: idOperationManager,flag: flag}, function (result) {
         ar_result = result.split('||||');
@@ -2040,4 +2047,157 @@ function discountDeleteConfirmation(idDiscount) {
         jQuery('#loader').attr('style', 'display:none');
 
     }); 
+}
+
+function prospectDelete(prospectId) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/prospect/deleteprospectAlert", {prospectId: prospectId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#prospectStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function deleteProspectConfirmation(prospectId) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#prospectStatus').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/prospect/deleteProspectConfirmation", {prospectId: prospectId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#prospectStatusConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
+function viewProspect(idProspect) {
+
+    $.post(__BASE_URL__ + "/prospect/viewProspectData", {idProspect: idProspect}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/prospect/" + ar_result[1];
+
+    });
+}
+function addMeetingNotesData(idProspect,flag) {
+
+    $.post(__BASE_URL__ + "/prospect/addMeetingNotesData",{idProspect: idProspect,flag:flag}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/prospect/" + ar_result[1];
+
+    });
+}
+function viewMeetingNotes(idMeetingNotes) {
+
+    $.post(__BASE_URL__ + "/prospect/viewMeetingNotesData", {idMeetingNotes: idMeetingNotes}, function (result) {
+        ar_result = result.split('||||');
+        window.location = __BASE_URL__ + "/prospect/" + ar_result[1];
+
+    });
+}
+function editProspectStatus(idProspect) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/prospect/editProspectStatusData", {idProspect: idProspect}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#editProspectStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function editProspectStatusConfirmation(idProspect) {
+      var value = jQuery("#changeStatus").serialize(); 
+      var newValue = value+"&idProspect="+idProspect;
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#editProspectStatus').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/prospect/editProspectStatusConfirm",newValue, function (result) {
+            
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {  
+                $("#popup_box").html(result_ary[1]);
+                $('#editProspectStatusConfirmation').modal("show");
+                jQuery('#loader').attr('style', 'display:none');
+            }else{
+                $("#popup_box").html(result);
+                $('#editProspectStatus').modal("show");
+                jQuery('#loader').attr('style', 'display:block');
+            }
+           
+            
+
+        });
+    }
+     function showDescription(idMeetingNote)
+{
+    
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/prospect/showDescriptionData", {idMeetingNote: idMeetingNote,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#showDescription').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function export_csv_report(prospectId,status) {
+    $.post(__BASE_URL__ + "/prospect/exportProspectCsvData", {prospectId: prospectId,status:status}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
+      window.open(URL,'_blank');
+    });
+}
+function import_csv_popup() {
+      
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/prospect/import_csv_popup_alert", function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+         if (res == 'SUCCESS') {  
+                $("#popup_box").html(result_ary[1]);
+                $('#static').modal("show");
+                jQuery('#loader').attr('style', 'display:none');
+            }
+        
+    });
+}
+
+function import_csv_popup_confirmation() {
+  var file =document.getElementById("impcustomers").value
+  if(!file){
+    $('#error').html('Please select a csv file.');
+     $('#error').show();
+     return false;    
+  }
+  else{
+   var fileExtention = (/[.]/.exec(file)) ? /[^.]+$/.exec(file) : undefined;
+  if(fileExtention=='csv'){
+    $("#ProductimportForm").submit();   
+  }
+  else{
+        
+     $('#error').html('Invalid file uploaded. Only .csv file is allowed. Please try again.');
+     $('#error').show();
+     return false; 
+  }
+     
+  }
+
 }
