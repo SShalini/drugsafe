@@ -14,7 +14,7 @@ class Franchisee_Model extends Error_Model {
 	}
         
 function insertClientDetails($data,$franchiseeId='',$reqppval=0)
-        {  
+{  
             $szNewPassword = create_login_password();
             
             $date=date('Y-m-d');
@@ -464,7 +464,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                                 'szContactNumber' => $data['szContactNumber'],
                                 'abn' => $data['abn'],
                                 'szCountry' => $data['szCountry'],
-                                'szState' => $data['szState'],
                                 'szCity' => $data['szCity'],
                                 'szZipCode' => $data['szZipCode'],
                                 'szAddress' => $data['szAddress'],
@@ -1049,5 +1048,27 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             {   return false;
             }	
 	}
+        function getStateByFranchiseeId($id)
+        {
+            $query=$this->db->select('regionId')
+                            ->where('id',$id)
+                            ->from(__DBC_SCHEMATA_USERS__)
+                            ->get();
+            if($query->num_rows() > 0)
+            {
+                 $row = $query->result_array();
+                 $getRegionDetails=$this->Admin_Model->getstateIdByResinolId($row['0']['regionId']);
+                 if(!empty($getRegionDetails))
+                 {
+                      $getStateDetails=$this->Admin_Model->getStateById($getRegionDetails['stateId']);
+                      return $getStateDetails;
+                 }
+            }
+            else
+            {
+                    return array();
+            }
+            
+        }
     }
 ?>

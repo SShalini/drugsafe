@@ -612,35 +612,19 @@
 
                                 </div>
 
-                                <div class="form-group <?php if (!empty($arErrorMessages['szState']) != '') { ?>has-error<?php } ?>">
+                                <div class="form-group">
                                     <label class="col-md-4 control-label">State</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-flag-checkered"></i>
-                                                </span>
-                                            <select class="form-control " name="clientData[szState]" id="szState"
-                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-
-                                                <option value="Australian Capital Territory" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Australian Capital Territory") ? "selected" : ""); ?>>Australian Capital Territory</option>
-                                                <option value="New South Wales" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("New South Wales") ? "selected" : ""); ?>>New South Wales</option>
-                                                <option value="Northern Territory" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Northern Territory") ? "selected" : ""); ?>>Northern Territory</option>
-                                                <option value="Queensland" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Queensland") ? "selected" : ""); ?>>Queensland</option>
-                                                <option value="South Australia" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("South Australia") ? "selected" : ""); ?> >South Australia</option>
-                                                <option value="Tasmania" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Tasmania") ? "selected" : ""); ?>>Tasmania</option>
-                                                <option value="Victoria" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Victoria") ? "selected" : ""); ?>>Victoria</option>
-                                                <option value="Western Australia" <?php echo (sanitize_post_field_value($_POST['clientData']['szState']) == trim("Western Australia") ? "selected" : ""); ?>>Western Australia </option>
-
-
-                                            </select>
-                                        </div>
-                                        <?php if (!empty($arErrorMessages['szState'])) { ?>
-                                            <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szState']; ?>
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-map-marker"></i>
                                             </span>
-                                        <?php } ?>
+                                            <div class="form-control">
+                                                 <?php echo $getState['name'] ;?>
+                                            </div>
+                                             
+                                        </div>
+                                      
                                     </div>
 
                                 </div>

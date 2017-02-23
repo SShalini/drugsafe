@@ -331,7 +331,7 @@
                             <lable>State:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $clientDetailsAray['szState'];?></p>
+                            <p><?php echo $getState['name'];?></p>
                         </div>
                     </div>
                     <div class="row">

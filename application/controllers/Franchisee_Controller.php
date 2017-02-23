@@ -101,6 +101,8 @@ class Franchisee_Controller extends CI_Controller
         $idclient = $this->session->userdata('idclient');
 
         $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false, false, false);
+        $franchiseId = $_SESSION['drugsafe_user']['id'];
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
         if (!empty($idclient)) {
             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idclient);
             $data['clientDetailsAray'] = $franchiseeDetArr1;
@@ -161,6 +163,7 @@ class Franchisee_Controller extends CI_Controller
         $data['franchiseeAray'] = $franchiseeAray;
         $data['validate'] = $validate;
         $data['idfranchisee'] = $idfranchisee;
+        $data['getState']=$getState;
         $data['flag'] = $flag;
         $data['szParentId'] = $idclient;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
@@ -242,6 +245,7 @@ class Franchisee_Controller extends CI_Controller
 
         $clientAray = $this->Franchisee_Model->viewClientList(true, $idfranchisee, $config['per_page'], $this->uri->segment(3), $searchAry, $id);
         $clientlistArr = $this->Franchisee_Model->viewClientList(true, $idfranchisee);
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($idfranchisee);
 
         $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idfranchisee);
         $count = $this->Admin_Model->getnotification();
@@ -263,6 +267,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Client List";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['getState']=$getState;
         $data['commentnotification'] = $commentReplyNotiCount;
 
         $this->load->view('layout/admin_header', $data);
@@ -356,8 +361,11 @@ class Franchisee_Controller extends CI_Controller
 
 
         $this->pagination->initialize($config);
-
+        
+        
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
+        $franchiseId = $clientDetailsAray['franchiseeId'];
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, $config['per_page'], $this->uri->segment(3), $searchAry, $id);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
@@ -378,6 +386,7 @@ class Franchisee_Controller extends CI_Controller
         $data['childClientDetailsAray'] = $childClientDetailsAray;
         $data['szMetaTagTitle'] = "Client Details";
         $data['is_user_login'] = $is_user_login;
+        $data['getState']=$getState;
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
 
@@ -413,6 +422,8 @@ class Franchisee_Controller extends CI_Controller
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
+        $franchiseId = $_SESSION['drugsafe_user']['id'];
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
 
         if (!empty($clientDetailsAray['clientType'])) {
             $franchiseeDetArr2 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
@@ -510,6 +521,7 @@ class Franchisee_Controller extends CI_Controller
             $_POST['clientData'] = $userDataAry;
             $data['idfranchisee'] = $idfranchisee;
             $data['parentClient'] = $parentClient;
+            $data['getState']=$getState;
             $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
             $data['notification'] = $count;
             $data['commentnotification'] = $commentReplyNotiCount;
@@ -765,6 +777,8 @@ class Franchisee_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
+        $franchiseId = $_SESSION['drugsafe_user']['id'];
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
         $allIndustry = $this->Admin_Model->viewAllIndustryList();
 
         $this->load->library('form_validation');
@@ -786,6 +800,7 @@ class Franchisee_Controller extends CI_Controller
             $data['szMetaTagTitle'] = "Add Agent";
             $data['is_user_login'] = $is_user_login;
             $data['allIndustry'] = $allIndustry;
+            $data['getState']=$getState;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/addAgent');
             $this->load->view('layout/admin_footer');
@@ -824,6 +839,7 @@ class Franchisee_Controller extends CI_Controller
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $idAgent = $this->session->userdata('idAgent');
         $franchiseId = $_SESSION['drugsafe_user']['id'];
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
         if ($idAgent > 0) {
             $data_validate = $this->input->post('agentData');
             if (empty($data_validate)) {
@@ -860,6 +876,7 @@ class Franchisee_Controller extends CI_Controller
             $data['idAgent'] = $idAgent;
             $_POST['agentData'] = $agentDataArray;
             $data['notification'] = $count;
+            $data['getState']=$getState;
             $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/editAgent');

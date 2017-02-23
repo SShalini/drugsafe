@@ -449,9 +449,10 @@ class Admin_Controller extends CI_Controller {
                redirect(base_url('/admin/admin_login'));
                 die;
             }
-            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
+            
             $idOperationManager = $this->session->userdata('idOperationManager');
             $idfranchisee = $this->session->userdata('idfranchisee');
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($idfranchisee);
             $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($idfranchisee >0)
@@ -469,20 +470,10 @@ class Admin_Controller extends CI_Controller {
                 if(empty($data_validate))
                 {
                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$idfranchisee);
-                    //$getResinolData = $this->Admin_Model->getstateIdByResinolId($userDataAry['reginolId']);
-                    $szStateId=$getResinolData['stateId'];
-                    $iReginolCode=sprintf(__REGINOL_CODE__,$getResinolData['reginolCode']);
-                    $reginolCode=$getResinolData['reginolCode'];
-                    $resinolName=$getResinolData['reginolName'];
-                    
                 }
                 else
                 {
                     $userDataAry = $data_validate;
-                    $szStateId=$data_validate['szState'];
-                    $iReginolCode=$data_validate['iReginolCode'];
-                    $resinolName=$data_validate['szReginalName'];
-                    $reginolCode=$data_validate['reginolCode'];
                 }
                 
                 if($this->Admin_Model->validateUsersData($data_validate,array(), $idfranchisee,false,1,2))
@@ -507,13 +498,9 @@ class Admin_Controller extends CI_Controller {
                     $data['idfranchisee'] = $idfranchisee;
                     $data['idOperationManager'] = $idOperationManager;
                     $_POST['addFranchisee'] = $userDataAry;
-                    $_POST['addFranchisee']['szState'] =$szStateId;
-                    $_POST['addFranchisee']['iReginolCode'] =$iReginolCode;
-                    $_POST['addFranchisee']['reginolCode'] =$reginolCode;
-                    $_POST['addFranchisee']['szReginalName'] =$resinolName;
-                    $data['getAllStates']=$getAllStates;
                     $data['stateReginolClass']=$stateReginolClass;
                     $data['reginolId']=$reginolId;
+                    $data['getState']=$getState;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
                     $data['commentnotification'] = $commentReplyNotiCount;

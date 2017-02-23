@@ -254,7 +254,6 @@ class Admin_Model extends Error_Model
             if($flag==1){
             if (!in_array('operationManagerId', $arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])), true);  
             }
-            if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
@@ -384,14 +383,7 @@ class Admin_Model extends Error_Model
         $query=$this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
         if ($this->db->affected_rows() > 0) {
            
-           $resionData=array(
-               'assign' => '1'
-           );
-           $this->db->where('id',$data['szRegionName']);
-           $this->db->update(__DBC_SCHEMATA_REGION__, $resionData);
-          
-            
-            if($data['iRole']==2){
+          if($data['iRole']==2){
             $id_franchisee = (int)$this->db->insert_id();
             $franchiseeAry=array(
             'franchiseeId' => $id_franchisee,
@@ -399,6 +391,12 @@ class Admin_Model extends Error_Model
             );
             $this->db->insert(__DBC_SCHEMATA_FRANCHISEE__, $franchiseeAry);
          }
+             $resionData=array(
+               'assign' => '1'
+           );
+           $this->db->where('id',$data['szRegionName']);
+           $this->db->update(__DBC_SCHEMATA_REGION__, $resionData);
+           
             $id_player = (int)$id_franchisee;
             $replace_ary = array();
             $replace_ary['szName'] = $data['szName'];
@@ -678,25 +676,14 @@ class Admin_Model extends Error_Model
     /*
   * Get User Details By Email or Id
   */
-
     public function updateUsersDetails($data,$id = 0)
     {
-        $ReginolData=array(
-           'reginolCode'=>$data['reginolCode'],
-           'stateId'=>$data['szState'],
-           'reginolName'=>$data['szReginalName']
-        );
-         $this->db->where('id',$data['reginolid']);
-        $queyUpdate=$this->db->update(__DBC_SCHEMATA_REGINOL__, $ReginolData);
-        
-            if ($queyUpdate) {
-                
-                $date = date('Y-m-d');
+        $date = date('Y-m-d H:i:s');
         $dataAry = array(
 
             'szName' => $data['szName'],
             'szEmail' => $data['szEmail'],
-              'abn' => $data['abn'],
+             'abn' => $data['abn'],
             'szContactNumber' => $data['szContactNumber'],
             'szCountry' => $data['szCountry'],
             'szCity' => $data['szCity'],
@@ -711,7 +698,9 @@ class Admin_Model extends Error_Model
 
             $this->db->where($whereAry);
 
-            $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+       $queyUpdate =  $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+
+            if ($queyUpdate) {
                  $OmAry=array(
                 
                 'operationManagerId' => $data['operationManagerId'],
@@ -727,7 +716,6 @@ class Admin_Model extends Error_Model
             return false;
         }
     }
-
     public function deletefranchisee($idfranchisee)
     {
        $clientAray = $this->Franchisee_Model->viewClientList(false,$idfranchisee, true, false, false);
@@ -801,7 +789,6 @@ class Admin_Model extends Error_Model
             if (!in_array('szContactEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szContactEmail'])),"szContactEmail","Contact Email address", false);
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
-            if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
@@ -946,8 +933,6 @@ class Admin_Model extends Error_Model
                 if(!in_array('per_form_complete',$arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['per_form_complete'])),"per_form_complete","Name of Person Completing Form",true);
                 if(!in_array('szEmail',$arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Company Email",true);
                 if(!in_array('szContactNumber',$arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Company Phone Number",true);
-               
-                if(!in_array('szState',$arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])),true);
                 if(!in_array('szCity',$arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])),true);
                 if(!in_array('szZipCode',$arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])),true);
                 if(!in_array('szAddress',$arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])),true);
@@ -1313,6 +1298,7 @@ class Admin_Model extends Error_Model
         }
         return false;
     }
+    
     function updateRegion($data,$idRegion)
     {
         $dataAry = array(
@@ -1320,7 +1306,6 @@ class Admin_Model extends Error_Model
             'regionName' =>  $data['regionName'],
             'regionCode' =>  $data['regionCode']
         );
-        
         $this->db->where('id',$idRegion);
         $query=$this->db->update(__DBC_SCHEMATA_REGION__, $dataAry);
         if ($query) {
@@ -1387,6 +1372,19 @@ class Admin_Model extends Error_Model
         } else {
             return false;
         }
-    }  
+    }
+    function getStateById($id)
+    {
+        $this->db->select('*');
+        $this->db->where('id',$id);
+        $query = $this->db->get(__DBC_SCHEMATA_STATE__);
+        if ($query->num_rows() > 0) {
+           $row = $query->result_array();
+            return $row['0'];
+          
+        } else {
+           return array();
+        }
+   } 
   
         }?>
