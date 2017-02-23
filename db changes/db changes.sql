@@ -136,4 +136,3 @@ CREATE TABLE IF NOT EXISTS `ds_agentmapping` (
   `agentid` int(6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-ALTER TABLE `tbl_region` ADD `assign` TINYINT NOT NULL AFTER `regionName`;
