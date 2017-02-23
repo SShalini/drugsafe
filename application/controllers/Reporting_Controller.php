@@ -124,7 +124,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/stockRequestList');
         $this->load->view('layout/admin_footer');
     }
-   function stockassignlistData()
+    function stockassignlistData()
         {
             $flag = $this->input->post('flag');
             
@@ -205,7 +205,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('reporting/stockAssignList');
         $this->load->view('layout/admin_footer');
     }
-function ViewReqReportingPdfData()
+    function ViewReqReportingPdfData()
         {
             $franchiseeName = $this->input->post('franchiseeName');
             $productCode = $this->input->post('productCode');
@@ -290,7 +290,7 @@ function ViewReqReportingPdfData()
            $this->session->unset_userdata('franchiseeName');
         $pdf->Output('stock-request-report.pdf', 'I');
     }
-function excelstockreqlistData()
+    function excelstockreqlistData()
         {
             $franchiseeName = $this->input->post('franchiseeName');
             $productCode = $this->input->post('productCode');
@@ -373,7 +373,7 @@ function excelstockreqlistData()
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-function ViewAssignReportingPdfData()
+    function ViewAssignReportingPdfData()
         {
             $franchiseeName = $this->input->post('franchiseeName');
             $productCode = $this->input->post('productCode');
@@ -481,7 +481,7 @@ function ViewAssignReportingPdfData()
          $this->session->unset_userdata('franchiseeName');
         $pdf->Output('stock-assignment-report.pdf', 'I');
     }
-function excelstockassignlistData()
+    function excelstockassignlistData()
         {
             $franchiseeName = $this->input->post('franchiseeName');
             $productCode = $this->input->post('productCode');
