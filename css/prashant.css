@@ -34,6 +34,7 @@ body .logo img {
 .media.replyoncomment, .media.replyoncomment .media-body{overflow: visible}
 .drugtypeselect .custom-select a span{width:120px}
 .industryselect .custom-select a span{width:220px}
+.modal-custom-heading{font-weight: 500; color: #16997E}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;

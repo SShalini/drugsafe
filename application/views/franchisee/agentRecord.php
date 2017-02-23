@@ -6,7 +6,12 @@
 </script>
 <div class="page-content-wrapper">
         <div class="page-content">
-          
+            <?php if(isset($_SESSION['addagentsucess'])){ ?>
+                <div class="alert alert-success">
+                    <?php echo $_SESSION['addagentsucess'];
+                    unset($_SESSION['addagentsucess']);?>
+                </div>
+            <?php }?>
              <div id="page_content" class="row">
                 <div class="col-md-12">
                     <ul class="page-breadcrumb breadcrumb">
@@ -41,13 +46,13 @@
                                   <div class="search col-md-3">
                                         <div id='szClient'>                         
                                       <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Client Name</option>
+                                          <option value="">Agent/Employee Name</option>
                                           <?php
-                                          foreach($clientlistArr as $clientList)
+                                          foreach($agentListArray as $agentList)
                                           {
-                                              $selected = ($clientList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
+                                              $selected = ($agentList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
                                               
-                                              echo '<option value="'.$clientList['id'].'"' . $selected . ' >'.$clientList['szName'].'</option>';
+                                              echo '<option value="'.$agentList['id'].'"' . $selected . ' >'.$agentList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
@@ -69,12 +74,9 @@
                                 <thead>
                                     <tr>
                                         <th> Id </th>
-                                        <th> Client Name </th>
-                                        <th> Contact Name</th>
+                                        <th> Agent/Employee Name </th>
                                         <th> Contact Email</th>
-                                        <th>Contact Phone Number</th>
-                                        <th>Created By</th>
-                                        <th>Updated By</th>
+                                        <th> Contact Number</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -87,51 +89,13 @@
                                             ?>
                                         <tr>
                                             <td>AG-<?php echo $agentRecordData['id'];?></td>
-                                            <td>
-                                                <?php 
-                                                if($agentRecordData['clientType']!='0')
-                                                {
-                                                    $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($agentRecordData['clientType']);
-                                                    echo $clientDetailsAray['szName'];
-                                                }
-                                                else
-                                                {
-                                                    echo "N/A";
-                                                }
-                                                 
-                                            ?>
-                                            </td>
-                                            <td> <?php echo $agentRecordData['szName']?> </td>
+                                            <td><?php echo $agentRecordData['szName'];?></td>
                                             <td> <?php echo $agentRecordData['szEmail'];?> </td>
-                                            <td> <?php echo $agentRecordData['szContactNumber'];?> </td>
-                                            <td>
-                                                <?php
-                                                    if($agentRecordData['szCreatedBy'])
-                                                    {
-                                                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$agentRecordData['szCreatedBy']);
-                                                        echo $franchiseeDetArr['szName'];
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td>
-                                            <?php 
-                                            if($agentRecordData['szLastUpdatedBy'])
-                                            {
-                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$agentRecordData['szLastUpdatedBy']);
-                                                echo $franchiseeDetArr['szName'];
-                                            }
-                                            else
-                                            {
-                                               echo "N/A";
-                                            }
-                                           
-                                            ?> 
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Agent" onclick="editAgentEmployeeDetails('<?php echo $agentRecordData['agentId']; ?>');" href="javascript:void(0);">
+                                            <td> <?php echo $agentRecordData['szContactNumber'];?> </td><td>
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Agent" onclick="editAgentEmployeeDetails('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="assign Client" onclick="assignClientAgent('<?php echo $agentRecordData['agentId']; ?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="assign Client" onclick="assignClientAgent('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                     <i class="fa fa-tasks"></i> 
                                                 </a>
 						<?php

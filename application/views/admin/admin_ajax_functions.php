@@ -2148,33 +2148,64 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
                     <div class="modal-title">
                         <div class="caption">
                             <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span class="caption-subject font-red-sunglo bold uppercase"> Assign Client</span></h4>
+                                <span class="caption-subject font-red-sunglo bold uppercase"> Agent-Client Assignment</span></h4>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
+                    <h4 class="modal-custom-heading"><i class="fa fa-users"></i> Assigned Clients</h4><hr>
+                    <div class="table-reposnsive">
+                        <?php if(!empty($agentAssignedClientDetails)){?>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <th>#</th>
+                                <th>Client Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Action</th>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $clcount = 1;
+                                foreach ($agentAssignedClientDetails as $agentclients){?>
+                                    <tr><td><?php echo $clcount;?></td>
+                                        <td><?php echo $agentclients['szName'];?></td>
+                                        <td><?php echo $agentclients['szEmail'];?></td>
+                                        <td><?php echo $agentclients['szContactNumber'];?></td>
+                                        <td><a class="btn btn-circle btn-icon-only btn-default" title="Unassign Client" onclick="unassignclient('<?php echo $agentclients['agentclientid'];?>');" href="javascript:void(0);">
+                                                <i class="fa fa-times"></i>
+                                            </a></td>
+                                    </tr>
+                                    <?php $clcount++; }
+                                ?>
+                                </tbody>
+                            </table>
+                        <?php }else{
+                            echo '</p>No client is assigned to this agent/employee.</p>';
+                        } ?>
+                    </div>
+                    <hr/>
+                    <h4 class="modal-custom-heading"><i class="fa fa-plus"></i> Assign More Clients</h4><hr>
                     <form action="" id="assignClient" name="assignClient" method="post"
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
                             <div
-                                class="form-group <?php if (form_error('assignClient[szClient]')) { ?>has-error<?php } ?>">
+                                    class="form-group <?php if (form_error('assignClient[szClient]')) { ?>has-error<?php } ?>">
                                 <label class="control-label col-md-4">Client</label>
                                 <div class="col-md-5">
-                                   <div class="search">
-                                        <div id='szClient'>                         
-                                      <select class="form-control custom-select" name="assignClient[szClient]" id="szClient" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Client Name</option>
-                                          <?php
-                                          foreach($clientlistArr as $clientList)
-                                          {
-                                              $selected = ($clientList['id'] == $_POST['szClient'] ? 'selected="selected"' : '');
-                                              
-                                              echo '<option value="'.$clientList['id'].'"' . $selected . ' >'.$clientList['szName'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
-                                            </div>
-                                  </div>
+                                    <div class="search">
+                                        <div id='szClient'>
+                                            <select class="form-control custom-select" name="assignClient[szClient]" id="szClient" onfocus="remove_formError(this.id,'true')">
+                                                <option value="">Client Name</option>
+                                                <?php
+                                                foreach($clientlistArr as $clientList)
+                                                {
+                                                    echo '<option value="'.$clientList['id'].'" >'.$clientList['szName'].'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <?php
                                     if (form_error('allotQuantity[szReqQuantity]')) {
                                         ?>
@@ -2190,13 +2221,14 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
-                            onclick="assignClientConfirmation('<?php echo $agentId; ?>'); return false;"
-                            class="btn green">Submit
+                            onclick="assignClientConfirmation('<?php echo $agentId; ?>');"
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>
         </div>
     </div>
+    <div id="popup_box_level1"></div>
     <?php
 }
 if($mode == '__ASSIGN_CLIENT_POPUP_CONFIRMATION__')
@@ -2213,7 +2245,7 @@ if($mode == '__ASSIGN_CLIENT_POPUP_CONFIRMATION__')
                 </div>
            
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully assign.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully assigned.</p>
                 </div>
                <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__;?>/franchisee/agentRecord" class="btn dark btn-outline">Close</a>
@@ -2279,6 +2311,63 @@ if ($mode == '___DELETE_AGENT_EMPLOYE_CONFIRM__') {
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+if ($mode == '__UNASSIGN_CLIENT_CONFIRMATION_POPUP_FORM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="unassignclient" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Unassign Client From Agent/Employee Record</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        unassign the selected client from this agent/employee record?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="confirmedUnassign('<?php echo $agentclientid; ?>');"
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Unassign
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if($mode == '__UNASSIGNED_CLIENT_SUCCESS__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="confirmedUnassign" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span  class="caption-subject font-red-sunglo bold uppercase">Client Unassigned</span> </h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected client has been successfully unassigned from this agent.</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn dark btn-outline" href="<?php echo __BASE_URL__;?>/franchisee/agentRecord">Close</a>
                 </div>
             </div>
         </div>

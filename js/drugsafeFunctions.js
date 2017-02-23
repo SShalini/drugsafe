@@ -1603,11 +1603,10 @@ function addAgentEmployeeDetails(idclient,flag) {
 
     });
 }
-function editAgentEmployeeDetails(idAgent,flag) {
+function editAgentEmployeeDetails(idAgent) {
 
     $.post(__BASE_URL__ + "/franchisee/editAgentEmployeeData", {
-        idAgent: idAgent,
-        flag: flag,
+        idAgent: idAgent
     }, function (result) {
 
         ar_result = result.split('||||');
@@ -1804,19 +1803,49 @@ function assignClientAgent(agentId) {
 
     });
 }
+
+function unassignclient(agentclientid) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/unassignclient", {agentclientid: agentclientid}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box_level1").html(result_ary[1]);
+            $('#unassignclient').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+function confirmedUnassign(id) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/confirmedUnassign", {id: id}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $('#unassignclient').modal('hide');
+            $('.modal-backdrop').remove();
+            $("#popup_box_level1").empty();
+            $("#popup_box_level1").html(result_ary[1]);
+            $('#confirmedUnassign').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
 function assignClientConfirmation(idAgent) {
       var value = jQuery("#assignClient").serialize(); 
       var newValue = value+"&idAgent="+idAgent;
-        $('.modal-backdrop').remove();
+        /*$('.modal-backdrop').remove();
         $('#static').modal("hide");
-        $('#assignClientPopupform').modal("hide");
+        $('#assignClientPopupform').modal("hide");*/
         jQuery('#loader').attr('style', 'display:block');
         $.post(__BASE_URL__ + "/franchisee/assignClientAgentConfirmation",newValue, function (result) {
             
             var result_ary = result.split("||||");
             var res = result_ary[0].trim(" ");
             if (res == 'SUCCESS') {  
-                $("#popup_box").html(result_ary[1]);
+                $("#popup_box_level1").html(result_ary[1]);
                 $('#clientAgentStatusConfirmation').modal("show");
                 jQuery('#loader').attr('style', 'display:none');
             }else{

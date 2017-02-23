@@ -10,162 +10,123 @@
                     <li>
                         <span class="active">Add Agent/Employee</span>
                     </li>
-                    
+
                 </ul>
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="icon-equalizer font-red-sunglo"></i>
-                           
-                                <span class="caption-subject font-red-sunglo bold uppercase">Add Agent/Employee</span>
-                          
+
+                            <span class="caption-subject font-red-sunglo bold uppercase">Add Agent/Employee</span>
+
                         </div>
                     </div>
-                    <?php// echo validation_errors(); ?>
+                    <?php // echo validation_errors(); ?>
                     <div class="portlet-body">
                         <form class="form-horizontal" id="agentData"
-                              action="<?php echo __BASE_URL__ ?>/franchisee/addAgentEmployee" name="agentData" method="post">
-                         
+                              action="<?php echo __BASE_URL__ ?>/franchisee/addAgentEmployee" name="agentData"
+                              method="post">
+
                             <div class="form-body">
-                                
-                                    <div
-                                        class="form-group <?php if(form_error('agentData[szBusinessName]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label"> Business Name</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <input id="szBusinessName" class="form-control" type="text"
-                                                       value="<?php echo $_POST['agentData']['szBusinessName']; ?>"
-                                                       placeholder="Business Name"
-                                                       onfocus="remove_formError(this.id,'true')"
-                                                       name="agentData[szBusinessName]">
-                                            </div>
-                                           <?php
-                                            if(form_error('agentData[szBusinessName]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szBusinessName]');?></span>
-                                            </span><?php }?>
-                                        </div>
 
-
-                                    </div>
                                 <div
-                                        class="form-group <?php if(form_error('agentData[abn]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label">ABN</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <input id="abn" class="form-control" type="text"
-                                                       value="<?php echo $_POST['agentData']['abn']; ?>"
-                                                       placeholder="ABN"
-                                                       onfocus="remove_formError(this.id,'true')"
-                                                       name="agentData[abn]">
-                                            </div>
-                                             <?php
-                                            if(form_error('agentData[abn]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[abn]');?></span>
-                                            </span><?php }?>
-                                        </div>
-
-
-                                    </div>
-                                    <div
-                                        class="form-group <?php if(form_error('agentData[szName]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label"> Contact Name</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <input id="szName" class="form-control" type="text"
-                                                       value="<?php echo $_POST['agentData']['szName']; ?>"
-                                                       placeholder="Contact Name"
-                                                       onfocus="remove_formError(this.id,'true')"
-                                                       name="agentData[szName]">
-                                            </div>
-                                           <?php
-                                            if(form_error('agentData[szName]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szName]');?></span>
-                                            </span><?php }?>
-                                        </div>
-
-
-                                    </div>
-
-                                    <div
-                                        class="form-group <?php if(form_error('agentData[szEmail]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label"> Primary Email</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-envelope"></i>
-                                                </span>
-                                                <input id="szEmail" class="form-control" type="text"
-                                                       value="<?php echo $_POST['agentData']['szEmail']; ?>"
-                                                       placeholder="Primary Email"
-                                                       onfocus="remove_formError(this.id,'true')"
-                                                       name="agentData[szEmail]">
-                                            </div>
-                                            <?php
-                                            if(form_error('agentData[szEmail]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szEmail]');?></span>
-                                            </span><?php }?>
-                                        </div>
-
-                                    </div>
-                                    <div
-                                        class="form-group <?php if(form_error('agentData[szContactNumber]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label">Primary Phone</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-phone"></i>
-                                                </span>
-                                                <input id="szContactNumber" class="form-control" type="text"
-                                                       value="<?php echo $_POST['agentData']['szContactNumber']; ?>"
-                                                       placeholder="Primary Phone"
-                                                       onfocus="remove_formError(this.id,'true')"
-                                                       name="agentData[szContactNumber]">
-                                            </div>
-                                             <?php
-                                            if(form_error('agentData[szContactNumber]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szContactNumber]');?></span>
-                                            </span><?php }?>
-                                        </div>
-
-                                    </div>
-                              
-                                 <div class="form-group <?php if(form_error('agentData[industry]')){?>has-error<?php }?>">
-                                    <label class="col-md-4 control-label">Industry</label>
+                                        class="form-group <?php if (form_error('agentData[szBusinessName]')) { ?>has-error<?php } ?>">
+                                    <label class="col-md-4 control-label">Name</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-industry"></i>
+                                                <i class="fa fa-user"></i>
                                                 </span>
-                                             <select class="form-control custom-select" name="agentData[industry]" id="szIndustry" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Select</option>
-                                          <?php
-                                          foreach($allIndustry as $industryList)
-                                          {
-                                              $selected = ($industryList['id'] == $_POST['agentData']['industry'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$industryList['id'].'"' . $selected . ' >'.$industryList['szName'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
+                                            <input id="szBusinessName" class="form-control" type="text"
+                                                   value="<?php echo $_POST['agentData']['szBusinessName']; ?>"
+                                                   placeholder="Name"
+                                                   onfocus="remove_formError(this.id,'true')"
+                                                   name="agentData[szBusinessName]">
                                         </div>
-                                         <?php
-                                            if(form_error('agentData[industry]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[industry]');?></span>
-                                            </span><?php }?>
+                                        <?php
+                                        if (form_error('agentData[szBusinessName]')) {
+                                            ?>
+                                            <span class="help-block pull-left">
+                                            <span><?php echo form_error('agentData[szBusinessName]'); ?></span>
+                                            </span><?php } ?>
+                                    </div>
+
+
+                                </div>
+                                <div
+                                        class="form-group <?php if (form_error('agentData[abn]')) { ?>has-error<?php } ?>">
+                                    <label class="col-md-4 control-label">ABN</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                                </span>
+                                            <input id="abn" class="form-control" type="text"
+                                                   value="<?php echo $_POST['agentData']['abn']; ?>"
+                                                   placeholder="ABN"
+                                                   onfocus="remove_formError(this.id,'true')"
+                                                   name="agentData[abn]">
+                                        </div>
+                                        <?php
+                                        if (form_error('agentData[abn]')) {
+                                            ?>
+                                            <span class="help-block pull-left">
+                                            <span><?php echo form_error('agentData[abn]'); ?></span>
+                                            </span><?php } ?>
+                                    </div>
+
+
+                                </div>
+
+                                <div
+                                        class="form-group <?php if (form_error('agentData[szEmail]')) { ?>has-error<?php } ?>">
+                                    <label class="col-md-4 control-label"> Email</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                                </span>
+                                            <input id="szEmail" class="form-control" type="text"
+                                                   value="<?php echo $_POST['agentData']['szEmail']; ?>"
+                                                   placeholder="Email"
+                                                   onfocus="remove_formError(this.id,'true')"
+                                                   name="agentData[szEmail]">
+                                        </div>
+                                        <?php
+                                        if (form_error('agentData[szEmail]')) {
+                                            ?>
+                                            <span class="help-block pull-left">
+                                            <span><?php echo form_error('agentData[szEmail]'); ?></span>
+                                            </span><?php } ?>
                                     </div>
 
                                 </div>
-     
                                 <div
-                                    class="form-group <?php if(form_error('agentData[szAddress]')){?>has-error<?php }?>">
+                                        class="form-group <?php if (form_error('agentData[szContactNumber]')) { ?>has-error<?php } ?>">
+                                    <label class="col-md-4 control-label">Contact No.</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                                </span>
+                                            <input id="szContactNumber" class="form-control" type="text"
+                                                   value="<?php echo $_POST['agentData']['szContactNumber']; ?>"
+                                                   placeholder="Contact No."
+                                                   onfocus="remove_formError(this.id,'true')"
+                                                   name="agentData[szContactNumber]">
+                                        </div>
+                                        <?php
+                                        if (form_error('agentData[szContactNumber]')) {
+                                            ?>
+                                            <span class="help-block pull-left">
+                                            <span><?php echo form_error('agentData[szContactNumber]'); ?></span>
+                                            </span><?php } ?>
+                                    </div>
+
+                                </div>
+
+                                <div
+                                        class="form-group <?php if (form_error('agentData[szAddress]')) { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label">Address</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -178,23 +139,25 @@
                                                    name="agentData[szAddress]">
                                         </div>
                                         <?php
-                                            if(form_error('agentData[szAddress]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szAddress]');?></span>
-                                            </span><?php }?>
+                                        if (form_error('agentData[szAddress]')) {
+                                            ?>
+                                            <span class="help-block pull-left">
+                                            <span><?php echo form_error('agentData[szAddress]'); ?></span>
+                                            </span><?php } ?>
                                     </div>
                                 </div>
-                                 
-                                   <div class="form-group <?php if (!empty($arErrorMessages['szCountry']) != '') { ?>has-error<?php } ?>">
+
+                                <div class="form-group <?php if (!empty($arErrorMessages['szCountry']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label">Country</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-flag"></i>
                                                 </span>
-                                         <input id="szCountry" class="form-control read-only" type="text"
+                                            <input id="szCountry" class="form-control read-only" type="text"
                                                    value="Australia"
                                                    placeholder="Country" onfocus="remove_formError(this.id,'true')"
-                                                   name="agentData[szCountry]" readonly> 
+                                                   name="agentData[szCountry]" readonly>
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">
@@ -206,7 +169,7 @@
 
                                 </div>
                                 <div
-                                    class="form-group <?php if(form_error('agentData[szCity]')){?>has-error<?php }?>">
+                                        class="form-group <?php if (form_error('agentData[szCity]')) { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label"> City</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -219,14 +182,16 @@
                                                    name="agentData[szCity]">
                                         </div>
                                         <?php
-                                            if(form_error('agentData[szCity]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szCity]');?></span>
-                                            </span><?php }?>
+                                        if (form_error('agentData[szCity]')) {
+                                            ?>
+                                            <span class="help-block pull-left">
+                                            <span><?php echo form_error('agentData[szCity]'); ?></span>
+                                            </span><?php } ?>
                                     </div>
 
                                 </div>
                                 <div
-                                    class="form-group <?php if(form_error('agentData[szZipCode]')){?>has-error<?php }?>">
+                                        class="form-group <?php if (form_error('agentData[szZipCode]')) { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label">ZIP/Postal Code</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -239,22 +204,26 @@
                                                    onfocus="remove_formError(this.id,'true')"
                                                    name="agentData[szZipCode]">
                                         </div>
-                                         <?php
-                                            if(form_error('agentData[szZipCode]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szZipCode]');?></span>
-                                            </span><?php }?>
+                                        <?php
+                                        if (form_error('agentData[szZipCode]')) {
+                                            ?>
+                                            <span class="help-block pull-left">
+                                            <span><?php echo form_error('agentData[szZipCode]'); ?></span>
+                                            </span><?php } ?>
                                     </div>
 
                                 </div>
 
-                               
+
                                 <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role"
                                        onfocus="remove_formError(this.id,'true')" name="agentData[iRole]">
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                            <a href="<?=__BASE_URL__?>/franchisee/agentRecord" class="btn default uppercase" type="button">Cancel</a>
-                                            <input type="submit" class="btn green-meadow" value="SAVE" name="agentData[submit]">
+                                            <a href="<?= __BASE_URL__ ?>/franchisee/agentRecord"
+                                               class="btn default uppercase" type="button">Cancel</a>
+                                            <input type="submit" class="btn green-meadow" value="SAVE"
+                                                   name="agentData[submit]">
                                         </div>
                                     </div>
                                 </div>

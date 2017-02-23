@@ -130,3 +130,10 @@ CREATE TABLE `tbl_region` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `tbl_region` ADD `assign` TINYINT NOT NULL AFTER `regionName`;
+CREATE TABLE IF NOT EXISTS `ds_agentmapping` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `franchiseeid` int(6) NOT NULL,
+  `agentid` int(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+ALTER TABLE `tbl_region` ADD `assign` TINYINT NOT NULL AFTER `regionName`;

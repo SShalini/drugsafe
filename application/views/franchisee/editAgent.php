@@ -38,22 +38,22 @@
                             <div class="form-body">
                                 
                                     <div
-                                        class="form-group <?php if(form_error('agentData[szBusinessName]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label"> Business Name</label>
+                                        class="form-group <?php if(form_error('agentData[szName]')){?>has-error<?php }?>">
+                                        <label class="col-md-4 control-label">Name</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
                                                 <input id="szBusinessName" class="form-control" type="text"
-                                                       value="<?php echo set_value('agentData[szBusinessName]'); ?>"
-                                                       placeholder="Business Name"
+                                                       value="<?php echo set_value('agentData[szName]'); ?>"
+                                                       placeholder="Name"
                                                        onfocus="remove_formError(this.id,'true')"
-                                                       name="agentData[szBusinessName]">
+                                                       name="agentData[szName]">
                                             </div>
                                             <?php
-                                            if(form_error('agentData[szBusinessName]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szBusinessName]');?></span>
+                                            if(form_error('agentData[szName]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szName]');?></span>
                                             </span><?php }?>
                                         </div>
 
@@ -83,29 +83,6 @@
 
                                     </div>
                                     <div
-                                        class="form-group <?php if(form_error('agentData[szName]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label"> Contact Name</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                <input id="szName" class="form-control" type="text"
-                                                       value="<?php echo set_value('agentData[szName]'); ?>"
-                                                       placeholder="Contact Name"
-                                                       onfocus="remove_formError(this.id,'true')"
-                                                       name="agentData[szName]">
-                                            </div>
-                                         <?php
-                                            if(form_error('agentData[szName]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szName]');?></span>
-                                            </span><?php }?>
-                                        </div>
-
-
-                                    </div>
-
-                                    <div
                                         class="form-group  <?php if(form_error('agentData[szEmail]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label"> Primary Email</label>
                                         <div class="col-md-6">
@@ -128,7 +105,7 @@
                                     </div>
                                     <div
                                         class="form-group  <?php if(form_error('agentData[szContactNumber]')){?>has-error<?php }?>">
-                                        <label class="col-md-4 control-label">Primary Phone</label>
+                                        <label class="col-md-4 control-label">Contact No.</label>
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
@@ -141,39 +118,14 @@
                                                        name="agentData[szContactNumber]">
                                             </div>
                                            <?php
-                                            if(form_error('agentData[szEmail]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szEmail]');?></span>
+                                            if(form_error('agentData[szContactNumber]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szContactNumber]');?></span>
                                             </span><?php }?>
                                         </div>
 
                                     </div>
                               
-                                 <div class="form-group <?php if(form_error('agentData[industry]')){?>has-error<?php }?>">
-                                    <label class="col-md-4 control-label">Industry</label>
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-industry"></i>
-                                                </span>
-                                             <select class="form-control custom-select" name="agentData[industry]" id="szIndustry" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Select</option>
-                                          <?php
-                                          foreach($allIndustry as $industryList)
-                                          {
-                                              $selected = ($industryList['id'] == $_POST['agentData']['industry'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$industryList['id'].'"' . $selected . ' >'.$industryList['szName'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
-                                        </div>
-                                        <?php
-                                            if(form_error('agentData[industry]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[industry]');?></span>
-                                            </span><?php }?>
-                                    </div>
 
-                                </div>
-     
                                 <div
                                     class="form-group <?php if(form_error('agentData[szAddress]')){?>has-error<?php }?>">
                                     <label class="col-md-4 control-label">Address</label>
@@ -254,10 +206,6 @@
                                     </div>
 
                                 </div>
-
-                               
-                                <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role"
-                                       onfocus="remove_formError(this.id,'true')" name="agentData[iRole]">
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">

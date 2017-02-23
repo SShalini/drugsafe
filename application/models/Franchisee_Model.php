@@ -209,7 +209,23 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                     return array();
             }
         }
-        
+
+        function getfranchiseeagentclients($franchiseeid,$agentid=0){
+            $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND client.franchiseeId = '.(int)$franchiseeid.($agentid>0?' AND client.agentId = '.(int)$agentid:' AND client.agentId = 0').' AND client.clientType = 0';
+            $query = $this->db->select('user.id, user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry, client.id as agentclientid')
+                ->from(__DBC_SCHEMATA_USERS__.' as user')
+                ->join(__DBC_SCHEMATA_CLIENT__.' as client','user.id = client.clientId')
+                ->where($whereAry)
+                ->order_by('user.id','DESC')
+                ->get();
+            if ($query->num_rows() > 0) {
+                $row = $query->result_array();
+                return $row;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        }
          public function getAllClientDetails($parent=false,$franchiseId='',$operationManagrrId='',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0,$searchAry = '',$id=0,$flag=0)
         {
              if(!empty($operationManagrrId)){
@@ -756,16 +772,14 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         function insertAgentDetails($data)
         {  
             $szNewPassword = create_login_password();
-            $date=date('Y-m-d');
+            $date=date('Y-m-d H:i:s');
+            $abn = '';
             if(!empty($data['abn'])){
-           $abn = $data['abn'];  
-        }
-        else{
-          $abn = '';     
-        }
+                $abn = $data['abn'];
+            }
             $dataAry = array(
 
-                                'szName' => $data['szName'],
+                                'szName' => $data['szBusinessName'],
                                 'szEmail' => $data['szEmail'],
                                 'szPassword'=>encrypt($szNewPassword),
                                 'szContactNumber' => $data['szContactNumber'],
@@ -774,29 +788,24 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                                 'szCity' => $data['szCity'],
                                 'szZipCode' => $data['szZipCode'],
                                 'szAddress' => $data['szAddress'],
-                                'iRole' => '4',
+                                'iRole' => '6',
                                 'iActive' => '1',
                                 'dtCreatedOn' => $date
             );
              $this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
             
              $id_agent = (int)$this->db->insert_id();
-             $CreatedBy=$_SESSION['drugsafe_user']['id'];
              $franchiseeId=$_SESSION['drugsafe_user']['id'];
             
             $clientAry=array(
-                'franchiseeId' => $franchiseeId,
-                'agentId' => $id_agent,
-                'szCreatedBy' => $CreatedBy,
-                'szBusinessName' => $data['szBusinessName'],
-                'industry' => $data['industry'],
-              
+                'franchiseeid' => $franchiseeId,
+                'agentid' => $id_agent
             );
         
             if($this->db->affected_rows() > 0)
                {
                 
-                $this->db->insert(__DBC_SCHEMATA_CLIENT__, $clientAry);
+                $this->db->insert(__DBC_SCHEMATA_AGENT_FRANCHISEE__, $clientAry);
              
                 
                 if($this->db->affected_rows() > 0)
@@ -804,11 +813,10 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                     if(empty($clientType)){
                    $replace_ary = array();
                    $id_player = (int)$this->db->insert_id();
-                   $replace_ary['szName']=$data['szName'];
+                   $replace_ary['szName']=$data['szBusinessName'];
                    $replace_ary['szEmail']=$data['szEmail'];
                    $replace_ary['szPassword']=$szNewPassword;
                    $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
-                   $replace_ary['Link']=__BASE_URL__."/franchisee/addAgentEmployee";
                  
                    createEmail($this,'__ADD_NEW_AGENT__', $replace_ary,$data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__,$id_player , __CUSTOMER_SUPPORT_EMAIL__);
                 
@@ -863,71 +871,41 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                     return array();
             }
         }
-         public function updateAgentDetails($data,$idAgent=0)
-    {
-       
-        $date=date('Y-m-d');
-            if(!empty($data['abn'])){
-           $abn = $data['abn'];  
-        }
-        else{
-          $abn = '';     
-        }
-            $dataAry = array(
 
-                                'szName' => $data['szName'],
-                                'szEmail' => $data['szEmail'],
-                                'szContactNumber' => $data['szContactNumber'],
-                                'szCountry' => $data['szCountry'],
-                                'abn' => $abn,
-                                'szCity' => $data['szCity'],
-                                'szZipCode' => $data['szZipCode'],
-                                'szAddress' => $data['szAddress'],
-                                'iRole' => '4',
-                                'iActive' => '1',
-                                'dtUpdatedOn' => $date
+        function updateUserdata($userid,$dataArr){
+            $date=date('Y-m-d H:i:s');
+            $recordAry = array(
+
+                'szName' => $dataArr['szName'],
+                'szEmail' => $dataArr['szEmail'],
+                'szContactNumber' => $dataArr['szContactNumber'],
+                'szCountry' => $dataArr['szCountry'],
+                'abn' => $dataArr['abn'],
+                'szCity' => $dataArr['szCity'],
+                'szZipCode' => $dataArr['szZipCode'],
+                'szAddress' => $dataArr['szAddress'],
+                'dtUpdatedOn' => $date
             );
-           
-                $whereAry = array('id' => (int)$idAgent);
 
-                $this->db->where($whereAry);
+            $whereAry = array('id' => (int)$userid,'isDeleted'=>0);
 
-                $queyUpdate=$this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
-                
-          
-        
-            if($queyUpdate)
-               {
-              $UpdatedBy=$_SESSION['drugsafe_user']['id'];
-           
-             $franchiseeId=$_SESSION['drugsafe_user']['id'];
-            
-            $clientAry=array(
-               
-                'szLastUpdatedBy' => $UpdatedBy,
-                'szBusinessName' => $data['szBusinessName'],
-                'industry' => $data['industry'],
-              
-            );
-                
-                $whereAry = array('agentId' => (int)$idAgent);
-                $this->db->where($whereAry);
-                $query=$this->db->update(__DBC_SCHEMATA_CLIENT__, $clientAry);
-                //die($sql=$this->db->last_query());
-                if($query)
-                { 
-                     return true;
-                    
-                }
-                else{
-                    return false;
-                }
-               return true;
-               }
-               else
-               {
-                   return false;
-             }
+            $this->db->where($whereAry);
+
+            $queyUpdate=$this->db->update(__DBC_SCHEMATA_USERS__, $recordAry);
+            if($queyUpdate){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+    public function updateAgentDetails($data,$idAgent){
+        $updateAgent = $this->updateUserdata($idAgent,$data);
+        if($updateAgent){
+            return true;
+        }else{
+               return false;
+         }
     }
         
       public function deleteAgent($id_agent)
@@ -970,7 +948,50 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                     return array();
             }
         }
-         public function getAgentData($clientId = '',$id=0)
+
+    function getUserdetails($userid=0,$isdeleted=0,$isactive=1){
+        $whereAry = 'isDeleted = '.$isdeleted.' AND iActive = ' .$isactive.($userid>0?' AND id = '.(int)$userid:'');
+        $query = $this->db->select('id,szName,abn,szEmail,szContactNumber,szAddress,szZipCode,szCity,userCode,reginolId,szCountry,iRole,szIPAddress,dtCreatedOn,dtUpdatedOn')
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+        function getAgentrecord($franchiseeid,$agentid=0){
+            $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND client.franchiseeId = '.(int)$franchiseeid.($agentid>0?' AND user.id = '.(int)$agentid:'');
+            $query = $this->db->select('user.id, user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry, client.id as agentclientid')
+                ->from(__DBC_SCHEMATA_USERS__.' as user')
+                ->join(__DBC_SCHEMATA_AGENT_FRANCHISEE__.' as agent','user.id = agent.agentid')
+                ->join(__DBC_SCHEMATA_CLIENT__.' as client','agent.franchiseeid = client.franchiseeId')
+                ->group_by('agent.agentid')
+                ->where($whereAry)
+                ->order_by('user.id','DESC')
+                ->get();
+            if ($query->num_rows() > 0) {
+                $row = $query->result_array();
+                return $row;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        }
+
+    function unassignClient($id){
+        $recordarr = array(
+            'agentId' => 0
+        );
+        $whereAry = array('id' => (int)$id);
+        $this->db->where($whereAry)
+            ->update(__DBC_SCHEMATA_CLIENT__, $recordarr);
+    }
+    public function getAgentData($clientId = '',$id=0)
         {
             
             if($clientId)
@@ -1016,9 +1037,9 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
          public function assignAgentClient($data,$idAgent)
 	{
-           
-            $dataAry = array('clientType' => $data['szClient'] );
-            $this->db->where('agentId',$idAgent);
+           $wherearr = array('clientId'=>$data['szClient'],'franchiseeId'=>$data['franchiseeId']);
+            $dataAry = array('agentId' => $idAgent );
+            $this->db->where($wherearr);
             $queyUpdate=$this->db->update(__DBC_SCHEMATA_CLIENT__, $dataAry);
             if($queyUpdate)
             {
