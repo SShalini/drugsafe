@@ -378,12 +378,18 @@ class Admin_Model extends Error_Model
             'szAddress' => $data['szAddress'],
             'iRole' => $data['iRole'],
             'iActive' => '1',
+            'regionId' => $data['szRegionName'],
             'dtCreatedOn' => $date
         );
         $query=$this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
         if ($this->db->affected_rows() > 0) {
            
-           
+           $resionData=array(
+               'assign' => '1'
+           );
+           $this->db->where('id',$data['szRegionName']);
+           $this->db->update(__DBC_SCHEMATA_REGION__, $resionData);
+          
             
             if($data['iRole']==2){
             $id_franchisee = (int)$this->db->insert_id();
@@ -1299,6 +1305,7 @@ class Admin_Model extends Error_Model
         $query=$this->db->select('*')
                 ->from(__DBC_SCHEMATA_REGION__)
                 ->where('stateid',$id)
+                ->where('assign','0')
                 ->get();
         if ($query->num_rows() > 0) {
              $row = $query->result_array();

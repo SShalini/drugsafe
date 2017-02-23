@@ -20,6 +20,7 @@
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase">Add Franchisee</span>
                         </div>
+                        <?php echo validation_errors(); ?>
                         <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
                                 <button class="btn btn-sm green-meadow"
@@ -255,31 +256,9 @@
                                     </div>
 
                                 </div>
-                                <div
-                                    class="form-group <?php if (!empty($arErrorMessages['szCity']) != '') { ?>has-error<?php } ?>">
-                                    <label class="col-md-3 control-label"> City</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-building"></i>
-                                                </span>
-                                            <input id="szCity" class="form-control" type="text"
-                                                   value="<?php echo $_POST['addFranchisee']['szCity']; ?>"
-                                                   placeholder="City" onfocus="remove_formError(this.id,'true')"
-                                                   name="addFranchisee[szCity]"> 
-                                        </div>
-                                        <?php if (!empty($arErrorMessages['szCity'])) { ?>
-                                            <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szCity']; ?>
-                                            </span>
-                                        <?php } ?>
-                                    </div>
-
-                                </div>
                                 <div class="reginolFiled" id="reginolFiled">
                                 <?php
-                                if($_POST['addFranchisee']['szRegionName'] !='')
+                                if($_POST['addFranchisee']['szState'] !='')
                                 {
                                   ?>
                                     
@@ -318,6 +297,29 @@
                                 
                                 ?>
                                 </div>
+                                <div
+                                    class="form-group <?php if (!empty($arErrorMessages['szCity']) != '') { ?>has-error<?php } ?>">
+                                    <label class="col-md-3 control-label"> City</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-building"></i>
+                                                </span>
+                                            <input id="szCity" class="form-control" type="text"
+                                                   value="<?php echo $_POST['addFranchisee']['szCity']; ?>"
+                                                   placeholder="City" onfocus="remove_formError(this.id,'true')"
+                                                   name="addFranchisee[szCity]"> 
+                                        </div>
+                                        <?php if (!empty($arErrorMessages['szCity'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['szCity']; ?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+
+                                </div>
+                                
                                 <div
                                     class="form-group <?php if (!empty($arErrorMessages['szZipCode']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-3 control-label">ZIP/Postal Code</label>
