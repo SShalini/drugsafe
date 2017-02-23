@@ -107,6 +107,11 @@ $route['webservices/(:any)'] = "Webservices_Controller/$1";
 $route['webservices/(:any)/(:any)'] = "Webservices_Controller/$1/$2";
 $route['webservices/(:any)/(:any)/(:any)'] = "Webservices_Controller/$1/$2/$3";
 
+$route['prospect'] = "Prospect_Controller";
+$route['prospect/(:any)'] = "Prospect_Controller/$1";
+$route['prospect/(:any)/(:any)'] = "Prospect_Controller/$1/$2";
+$route['prospect/(:any)/(:any)/(:any)'] = "Prospect_Controller/$1/$2/$3";
+
 $route['404_override'] = 'Error_Controller';
 $route['error'] = "Error_Controller";
 $route['translate_uri_dashes'] = FALSE;
