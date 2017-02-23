@@ -147,5 +147,6 @@ CREATE TABLE `tbl_discount` (
 ALTER TABLE `tbl_discount` ADD PRIMARY KEY (`id`);
 ALTER TABLE `tbl_discount` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `ds_user` ADD `franchiseCide` INT(50) NOT NULL AFTER `regionId`;
-ALTER TABLE `ds_user` CHANGE `franchiseCide` `franchiseCode` INT(50) NOT NULL;
+ALTER TABLE `ds_user` ADD `franchiseCide` INT(6) NOT NULL AFTER `regionId`;
+ALTER TABLE `ds_user` CHANGE `franchiseCide` `franchiseCode` INT(6) NOT NULL;
+ALTER TABLE `tbl_client` ADD `clientCode` INT(6) NOT NULL AFTER `clientType`;
