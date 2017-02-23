@@ -38,7 +38,7 @@ public function prospectRecord()
            
         $config['base_url'] = __BASE_URL__ . "/prospect/prospectRecord/";
         $config['total_rows'] = count($this->Prospect_Model->getAllProspectDetails($szBusinessName,$status));
-        $config['per_page'] = 1;
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
                
             $this->pagination->initialize($config);
            
@@ -208,7 +208,7 @@ public function deleteProspectConfirmation()
               
               $config['base_url'] = __BASE_URL__ . "/prospect/view_prospect_details/";
               $config['total_rows'] = count($this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect,$meetingNoteCreatedBy));
-              $config['per_page'] = 1;
+              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
                
             $this->pagination->initialize($config);
               $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect,$meetingNoteCreatedBy,$config['per_page'],$this->uri->segment(3));

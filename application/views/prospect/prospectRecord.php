@@ -129,8 +129,7 @@
                                     {   $i = 0;
                                         foreach($prospectDetailsAry as $prospectDetailsData)
                                         {
-                                         $StatusDetailsByMaxIdAry = $this->Prospect_Model->getProspectStatusDetails($prospectDetailsData['id']);
-                                         $prospectStatusDetgetStatusDetailsByStatusIdailsAry = $this->Prospect_Model->getStatusDetailsByStatusId($StatusDetailsByMaxIdAry['MAX(id)']);
+                                        
                                         
                                            $i++;
                                         ?>
@@ -187,7 +186,7 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="prospectsView" title="View Prospect Details" onclick="viewProspect(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-                                               <?php $prospectDetailsByProspectsIdAry = $this->Prospect_Model->getProspectDetailsByProspectsId($prospectDetailsData['szName']);
+                                               <?php $prospectDetailsByProspectsIdAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($prospectDetailsData['id']);
                                                if(empty($prospectDetailsByProspectsIdAry)) {
                                                ?> 
                                                <a class="btn btn-circle btn-icon-only btn-default" id="ProspectStatus" title="Delete Prospect Record" onclick="prospectDelete(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);"></i>
