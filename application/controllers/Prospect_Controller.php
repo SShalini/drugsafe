@@ -24,9 +24,8 @@ class Prospect_Controller extends CI_Controller
         
     }
 
-    function prospectRecord()
+public function prospectRecord()
    {
-        
        $is_user_login = is_user_login($this);
        // redirect to dashboard if already logged in
        if (!$is_user_login) {
@@ -34,24 +33,46 @@ class Prospect_Controller extends CI_Controller
            redirect(base_url('/admin/admin_login'));
            die;
        }
+       
+       if($_SESSION['drugsafe_user']['iRole']==1){
+         if(!empty($_POST['szSearch3']))
+         {
+           $id = $_POST['szSearch3'];   
+         }
+         else{
+           $id = $this->session->userdata('id');  
+         }
+       }
+       if($_SESSION['drugsafe_user']['iRole']==2){
+        
+           $id = $_SESSION['drugsafe_user']['id'];  
+        
+       }
            $szBusinessName = $_POST['szSearch1'];
            $status = $_POST['szSearch2'];
-           
+        
         $config['base_url'] = __BASE_URL__ . "/prospect/prospectRecord/";
-        $config['total_rows'] = count($this->Prospect_Model->getAllProspectDetails($szBusinessName,$status));
+        $config['total_rows'] = count($this->Prospect_Model->getAllProspectDetails($id,$szBusinessName,$status));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
                
             $this->pagination->initialize($config);
            
            
-        $prospectDetailsAry = $this->Prospect_Model->getAllProspectDetails($szBusinessName,$status, $config['per_page'],$this->uri->segment(3));
-        $prospectDetailsSearchAry = $this->Prospect_Model->getAllProspectDetails();
+        $prospectDetailsAry = $this->Prospect_Model->getAllProspectDetails($id,$szBusinessName,$status, $config['per_page'],$this->uri->segment(3));
+        $prospectDetailsSearchAry = $this->Prospect_Model->getAllProspectDetails($id);
 
+        if (!empty($_POST)) {
+            $_POST['szSearch3'] = $_POST['szSearchClRecord2'];
+        } else {
+            $_POST['szSearch3'] = $id;
+        }
+        
        $data['prospectDetailsSearchAry'] = $prospectDetailsSearchAry;
        $data['prospectDetailsAry'] = $prospectDetailsAry;
        $data['szMetaTagTitle'] = "Prospect Record";
        $data['is_user_login'] = $is_user_login;
        $data['pageName'] = "Prospect_Record";
+       $data['id'] = $id;
 
        $this->load->view('layout/admin_header', $data);
        $this->load->view('prospect/prospectRecord');
@@ -68,9 +89,7 @@ public function addprospect()
         die;
     }
      $validate= $this->input->post('addprospect');
-     $franchiseId = $_SESSION['drugsafe_user']['id'];
-        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
-    
+   
      if($this->Prospect_Model->validateProspectData($validate,array(),false))
             {
               
@@ -80,7 +99,11 @@ public function addprospect()
                     $szMessage['content'] = "<strong><h3>New prospect added successfully.</h3></strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
-                       redirect(base_url('/prospect/prospectRecord'));
+                   if($_SESSION['drugsafe_user']['iRole'] == '1'){ 
+                       redirect(base_url('/prospect/franchiseeProspectRecord'));
+                   } else{
+                       redirect(base_url('/prospect/prospectRecord'));  
+                   }
                   
                 }
             }
@@ -90,7 +113,6 @@ public function addprospect()
     $data['is_user_login'] = $is_user_login;
     $data['pageName'] = "Prospect_Record";
      $data['validate'] = $validate;
-     $data['getState']=$getState;
      $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
     
     $this->load->view('layout/admin_header', $data);
@@ -420,10 +442,11 @@ public function deleteProspectConfirmation()
       }
        function exportProspectCsvData()
         {
+            $franchiseeId = $this->input->post('franchiseeId');
             $prospectId = $this->input->post('prospectId');
             $status = $this->input->post('status');
           
-            
+                $this->session->set_userdata('franchiseeId',$franchiseeId);
                 $this->session->set_userdata('prospectId',$prospectId);
                 $this->session->set_userdata('status',$status);
                
@@ -441,8 +464,21 @@ public function deleteProspectConfirmation()
 
         ini_set('max_execution_time', 5000);
         header( 'Content-type: text/html; charset=utf-8' );
-
-        $prospectDetailsAry = $this->Prospect_Model->getAllProspectDetails($szBusinessName,$status);
+        
+        $szBusinessName = $this->session->userdata('prospectId');
+        $status = $this->session->userdata('status');
+        $franchiseeId = $this->session->userdata('franchiseeId');
+        if(!empty($franchiseeId)){
+           $id = $franchiseeId;    
+        }
+        
+        if($_SESSION['drugsafe_user']['iRole']==2){
+           $id = $_SESSION['drugsafe_user']['id'];  
+       }
+       if($_SESSION['drugsafe_user']['iRole']==2){
+           $id = $_SESSION['drugsafe_user']['id'];  
+       }
+        $prospectDetailsAry = $this->Prospect_Model->getAllProspectDetails($id,$szBusinessName,$status);
         
         $data[0]['Sr No.'] ='Sr No.';
         $data[0]['business_name'] ='Business Name';
@@ -585,15 +621,15 @@ public function deleteProspectConfirmation()
                $_POST['prospectAry']['szZipCode'] = $worksheet[14];
                $_POST['prospectAry']['dt_last_updated_meeting'] = $worksheet[15];
                  
-            if($this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1)){
-              
-            $query =  $this->Prospect_Model->insertProspectData($_POST['prospectAry'],1);  
-          }
-          else{
-         
-              $count++; 
-               continue;
-          }    
+            $validation=$this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1);
+                if($validation)
+                {
+                     $query =  $this->Prospect_Model->insertProspectData($_POST['prospectAry'],1); 
+                }
+                else
+                {
+                    $count++;
+                }
             }
          
           if($query){
@@ -625,8 +661,71 @@ public function deleteProspectConfirmation()
      }
 
       }
-      
-      
+    function franchiseeProspectRecord()
+    {
+
+        $is_user_login = is_user_login($this);
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+
+        $searchAry = '';
+
+        if (isset($_POST['szSearchFrRecord']) && !empty($_POST['szSearchFrRecord'])) {
+            $id = $_POST['szSearchFrRecord'];
+        }
+
+        if ($id > 0) {
+            if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                $prospectAray = $this->Prospect_Model->getAllProspectDetails($id);
+              
+            } else {
+                $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                $prospectAray = $this->Prospect_Model->getAllClientDetails(true, false, $operationManagerId, false, false, false, $id);
+            }
+            if (!empty($prospectAray)) {
+                $this->session->set_userdata('id', $id);
+                redirect(base_url('/prospect/prospectRecord'));
+
+            }
+        }
+
+        $data['prospectAray'] = $prospectAray;
+        $data['pageName'] = "Prospect_Record";
+        $data['szMetaTagTitle'] = "Prospect Record";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('prospect/showProspectByFranchisee');
+        $this->load->view('layout/admin_footer');
+    }
+   
+    function getProspecttListByFrIdData($idFranchisee = '')
+    {
+        if (trim($idFranchisee) != '') {
+            $_POST['idFranchisee'] = $idFranchisee;
+        }
+
+        $prospectAray = $this->Prospect_Model->getAllProspectDetailsByFrId($_POST['idFranchisee']);
+
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearch1\" name=\"szSearch1\" placeholder=\"Business Name\" onfocus=\"remove_formError(this.id,'true')\">";
+        if (!empty($prospectAray)) {
+            $result .= "<option value=''>Business Name</option>";
+            foreach ($prospectAray as $prospectDetails) {
+                $result .= "<option value='" . $prospectDetails['id'] . "'>" . $prospectDetails['szBusinessName'] . "</option>";
+            }
+        } else {
+            $result .= "<option value=''>Business Name</option>";
+        }
+        $result .= "</select>";
+        echo $result;
+    }    
       
       
       

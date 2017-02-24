@@ -2656,7 +2656,7 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                          <form action="" id="changeStatus" name="changeStatus" method="post"
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
-                            <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getAllProspectDetails();
+                            <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getAllProspectDetails(false);
                             
                             ?>
                             <div

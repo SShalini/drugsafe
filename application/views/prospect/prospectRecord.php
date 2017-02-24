@@ -1,6 +1,7 @@
 <script type='text/javascript'>
     $(function() {
         $("#szSearchname").customselect();
+         $("#szSearchfr").customselect();
          $("#szSearchStatus").customselect();
     });
 </script>  
@@ -60,7 +61,7 @@
                             ?>
                        
                                 &nbsp; &nbsp;
-                                  <a onclick="export_csv_report('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);"
+                                  <a onclick="export_csv_report('<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> Export CSV</a>
                                      <?php
@@ -75,16 +76,31 @@
                             </div>
                         </div>
                       <?php
-                        if(!empty($prospectDetailsAry))
+                        if(!empty($_POST))
                         { 
                     
                             ?>
                        
                          <div class="row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospectRecord" name="szSearchField" method="post">
-
+                              <?php if($_SESSION['drugsafe_user']['iRole']==1) {?>
                                   <div class="search col-md-3">
-                                   
+                                   <?php $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false); ?>
+                                      <select class="form-control custom-select" name="szSearch3" id="szSearchfr" onfocus="remove_formError(this.id,'true')" onchange="getProspectListByFrId(this.value);">
+                                          <option value="">Franchisee</option>
+                                          <?php
+                                          foreach($searchOptionArr as $searchOptionList)
+                                          {
+                                              $selected = ($searchOptionList['id'] == $_POST['szSearch3'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$searchOptionList['id'].'"' . $selected . ' >'.$searchOptionList['szName'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="search col-md-1"> </div>
+                             <?php }?>
+                                  <div class="search col-md-3">
+                                     <div id='szClient'>
                                       <select class="form-control custom-select" name="szSearch1" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Business Name</option>
                                           <?php
@@ -95,6 +111,7 @@
                                           }
                                           ?>
                                       </select>
+                                           </div>
                                   </div>
                                   <div class="search col-md-1"> </div>
                                 <div class="search col-md-3">
@@ -120,7 +137,14 @@
                            </div>
                            </form>
                           </div>
-                        
+                          <?php
+                        }
+                            ?>
+                          <?php
+                        if(!empty($prospectDetailsAry))
+                        { 
+                    
+                            ?>
                              <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">

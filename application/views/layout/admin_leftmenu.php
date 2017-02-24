@@ -82,12 +82,22 @@
                 
               
             <?php } ?>
+            
              <li class="nav-item start <?php if (trim($pageName) == 'Prospect_Record') { ?>active open<?php } ?>">
-                <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="nav-link nav-toggle">
+                <?php  if ($_SESSION['drugsafe_user']['iRole'] == '1' ||$_SESSION['drugsafe_user']['iRole'] == '5') { ?>
+                  <a href="<?php echo __BASE_URL__; ?>/prospect/franchiseeProspectRecord" class="nav-link nav-toggle">
                      <i class="fa fa-files-o" aria-hidden="true"></i>
                     <span class="title">Prospect Record</span>
                     <span class="selected"></span>
                 </a>
+               <?php   } else{?>
+                      <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="nav-link nav-toggle">
+                     <i class="fa fa-files-o" aria-hidden="true"></i>
+                    <span class="title">Prospect Record</span>
+                    <span class="selected"></span>
+                </a>
+                      <?php   } ?>
+               
             </li>
         <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole']==2) { ?>
             <li class="nav-item start <?php if (trim($pageName) == 'Inventory') { ?>active open<?php } ?>">

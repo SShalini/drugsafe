@@ -180,6 +180,51 @@
                                     </div>
 
                                 </div>
+                                       <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){ 
+                               ?>
+                                             <div
+                                            class="form-group <?php if (!empty($arErrorMessages['iFranchiseeId'])) { ?>has-error<?php } ?>">
+                                            <label class="col-md-4 control-label">Franchisee</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-male"></i>
+                                                </span>
+                                                    <select class="form-control" name="editProspect[iFranchiseeId]"
+                                                            id="iFranchiseeId" Placeholder="Franchisee"
+                                                            onfocus="remove_formError(this.id,'true')">
+                                                        <option value=''>Select</option>
+                                                        <?php
+                                                     $franchiseeAray =$this->Admin_Model->viewFranchiseeList(false,false);
+                                             
+                                                        if (!empty($franchiseeAray)) {
+                                                            foreach ($franchiseeAray as $franchiseeDetails) {
+                                                                ?>
+                                                                <option
+                                                                    value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['editProspect']['iFranchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                <?php if (!empty($arErrorMessages['iFranchiseeId'])) { ?>
+                                                    <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                        <?php echo $arErrorMessages['iFranchiseeId']; ?>
+                                            </span>
+                                                <?php } ?>
+                                            </div>
+
+                                        </div>
+                                    <?php   
+                                   }
+                                   else{?>
+                                       <input id="iFranchiseeId" class="form-control" type="hidden"
+                                           value="<?php echo $idfranchisee; ?>"
+                                           name="clientData[iFranchiseeId]">
+                                       <?php
+                                   }?>
                                   <div class="subCaption">
                                         <i class="icon-equalizer font-green-meadow"></i>
                                         <span

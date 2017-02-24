@@ -22,6 +22,11 @@ class Prospect_Model extends Error_Model
     {
         $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCity", "City", false, false, $flag);
     }
+        function set_iFranchiseeId($value, $flag = true)
+    {
+        $this->data['iFranchiseeId'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "iFranchiseeId", "Franchisee", false, false, $flag);
+    }
+    
     function set_szCountry($value, $flag = true)
     {
         $this->data['szCountry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCountry", "Country", false, false, $flag);
@@ -45,26 +50,9 @@ class Prospect_Model extends Error_Model
         $this->data['industry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "industry", "Industry", false, false, $flag);
     }
 
-     function getAllProspectDetails($szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+     function getAllProspectDetails($franchiseeId,$szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
-      if($_SESSION['drugsafe_user']['id']==1){
-       $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
-      if((!empty($szBusinessName)) || (!empty($status)))
-      {
-            $array = ' isDeleted = 0 '.($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
-    
-      }
-       else{
-       $array = array( 'isDeleted' => '0');
-         } 
-         $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
-            ->from(__DBC_SCHEMATA_PROSPECT__)
-           ->order_by("id","desc") 
-           ->limit($limit, $offset)
-            ->where($array)
-            ->get();
-      } 
-      else if($_SESSION['drugsafe_user']['iRole']==5){
+      if($_SESSION['drugsafe_user']['iRole']==5){
       $operationManagerId =  $_SESSION['drugsafe_user']['id'];
       if((!empty($szBusinessName)) || (!empty($status)))
       {
@@ -83,14 +71,17 @@ class Prospect_Model extends Error_Model
             ->get();
       }
       else{
-      $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
-      if((!empty($szBusinessName)) || (!empty($status)))
+          if($franchiseeId){
+              $franchiseeid  = $franchiseeId; 
+          }
+         
+      if((!empty($szBusinessName)) || (!empty($status )) || (!empty($franchiseeId)))
       {
-            $array = 'iFranchiseeId =' . (int)$franchiseeid .' AND isDeleted = 0 '.($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
+            $array = 'isDeleted = 0 '.($franchiseeId>0?' AND iFranchiseeId = '.(int)$franchiseeId:'').($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
     
       }
        else{
-       $array = array('iFranchiseeId' => (int)$franchiseeid, 'isDeleted' => '0');
+       $array = array('isDeleted' => '0');
          } 
            $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
             ->from(__DBC_SCHEMATA_PROSPECT__)
@@ -137,6 +128,9 @@ class Prospect_Model extends Error_Model
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
+             if($data['iFranchiseeId']){
+                if (!in_array('iFranchiseeId', $arExclude)) $this->set_iFranchiseeId(sanitize_all_html_input(trim($data['iFranchiseeId'])), true);
+            }
             if($flag==1){
                 if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);   
             }
@@ -150,7 +144,7 @@ class Prospect_Model extends Error_Model
                     $this->addError('szEmail', "Someone already registered with entered email address.");
                     return false;
                 }
-                if ($this->checkBusinessNameExists($data['szBusinessName'],$idProspect)) {
+                if ($this->checkBusinessNameExists($data['szBusinessName'],$idUser)) {
                     $this->addError('szBusinessName', "Business Name must be unique.");
                     return false;
                 }
@@ -167,6 +161,13 @@ class Prospect_Model extends Error_Model
     
   }
       function insertProspectData($data,$flag='0'){
+          
+          if(empty($data['iFranchiseeId'])){
+             $data['iFranchiseeId']  =  $_SESSION['drugsafe_user']['id'];  
+          }
+          else{
+             $data['iFranchiseeId'] =$data['iFranchiseeId']; 
+          }
       $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
        $date = date('Y-m-d H:i:s');
        if($flag==1){
@@ -233,7 +234,7 @@ class Prospect_Model extends Error_Model
                              
       
        $whereAry = array(
-                'iFranchiseeId' => (int)$franchiseeid,
+                'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
                 'szContactNo' => $data['szContactNo'],
@@ -255,7 +256,7 @@ class Prospect_Model extends Error_Model
        }
        else{
         $whereAry = array(
-                'iFranchiseeId' => (int)$franchiseeid,
+                'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
                 'szContactNo' => $data['szContactNo'],
@@ -297,8 +298,8 @@ class Prospect_Model extends Error_Model
     function getProspectDetailsByProspectsId($prospectsId)
     {
         
-       $array = array('id' => (int)$prospectsId, 'isDeleted' => '0');
-        $query = $this->db->select('id,szName,szEmail,szContactNo,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
+        $array = array('id' => (int)$prospectsId, 'isDeleted' => '0');
+        $query = $this->db->select('id,szName,iFranchiseeId,szEmail,szContactNo,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
             ->from(__DBC_SCHEMATA_PROSPECT__)
             ->where($array)
             ->get();
@@ -339,12 +340,18 @@ class Prospect_Model extends Error_Model
         }
     }
      function updateProspectDetails($data,$prospectId){
+         if(empty($data['iFranchiseeId'])){
+             $data['iFranchiseeId']  =  $_SESSION['drugsafe_user']['id'];  
+          }
+          else{
+             $data['iFranchiseeId'] =$data['iFranchiseeId']; 
+          }
          $failarr = array();
          $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
          $date = date('Y-m-d H:i:s');
             $dataAry = array(
                 
-                'iFranchiseeId' => (int)$franchiseeid,
+                'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
                 'szContactNo' => $data['szContactNo'],
@@ -562,7 +569,7 @@ class Prospect_Model extends Error_Model
         $szBusinessName = trim($szBusinessName);
 
     
-        if ((int)$idClient > 0) {
+        if ((int)$id > 0) {
             if($flag==1){
                 $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName,'id!=' => (int)$id));  
             }
@@ -571,7 +578,7 @@ class Prospect_Model extends Error_Model
             }
           
         } else {
-            $result = $this->db->get_where(__DBC_SCHEMATA_CLIENT__, array('szBusinessName' => $szBusinessName));
+            $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName));
         }
 
         if ($result->num_rows() > 0) {
@@ -628,5 +635,25 @@ class Prospect_Model extends Error_Model
                     return false;
                 }	
 	}
+  function getAllProspectDetailsByFrId($franchiseeId)
+    {
+      
+       $array = array('iFranchiseeId' => (int)$franchiseeId, 'isDeleted' => '0');
+        
+           $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+            ->from(__DBC_SCHEMATA_PROSPECT__)
+           ->order_by("id","desc") 
+           ->limit($limit, $offset)
+            ->where($array)
+            ->get();
+    
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
+        }
+    }
 }
 ?>

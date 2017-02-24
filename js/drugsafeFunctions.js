@@ -1795,6 +1795,15 @@ function getClientListByFrId(idFranchisee) {
         }
     });
 }
+function getProspectListByFrId(idFranchisee) {
+    $.post(__BASE_URL__ + "/prospect/getProspecttListByFrIdData", {idFranchisee: idFranchisee}, function (result) {
+        if (result != '') {
+            $("#szClient").empty();
+            $("#szClient").html(result);
+            $("#szSearch1").customselect();
+        }
+    });
+}
 function assignClientAgent(agentId) {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/franchisee/assignClientAgent", {agentId: agentId}, function (result) {
@@ -2157,8 +2166,8 @@ function editProspectStatusConfirmation(idProspect) {
 
     });
 }
-function export_csv_report(prospectId,status) {
-    $.post(__BASE_URL__ + "/prospect/exportProspectCsvData", {prospectId: prospectId,status:status}, function (result) {
+function export_csv_report(franchiseeId,prospectId,status) {
+    $.post(__BASE_URL__ + "/prospect/exportProspectCsvData", {franchiseeId:franchiseeId,prospectId: prospectId,status:status}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
       window.open(URL,'_blank');
