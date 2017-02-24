@@ -151,7 +151,6 @@ class Prospect_Model extends Error_Model
                
             }
         
-           
             if ($this->error == true)
                 return false;
             else

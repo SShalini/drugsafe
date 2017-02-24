@@ -733,9 +733,6 @@ public function deleteProspectConfirmation()
         $result .= "</select>";
         echo $result;
     }    
-      
-      
-      
-    
+ 
 }
 ?>

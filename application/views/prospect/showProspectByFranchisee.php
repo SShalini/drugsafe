@@ -51,6 +51,14 @@
                             <i class="icon-equalizer font-green-meadow"></i>
                             <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related prospects.</span>
                         </div>
+                             <div class="actions">
+                                <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>prospect/addprospect');">
+                                        &nbsp;Add New Prospect 
+                                    </button>
+                                </div>
+                                 
+                            </div>
                       </div>
                       <div class="row">
                              <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/prospect/franchiseeProspectRecord" name="szSearchClientRecord" method="post">
