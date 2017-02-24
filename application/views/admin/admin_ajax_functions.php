@@ -2792,7 +2792,7 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="editProspectStatusConfirmation('<?php echo $idProspect; ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>
@@ -2881,17 +2881,44 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                     <div class="modal-body">
                         <div class="portlet-body form">
                             <!-- BEGIN FORM-->
-                            <div class="col-md-7">
+                            <div class="col-md-12">
+                              
                                 <div class="input-group">
+                                      <div class="row">
+                                      <div class="col-md-6">
                                     <input autocomplete="off" type="file" name="impcustomers" id='impcustomers'
                                            onfocus="remove_formError(this.id,'true')">
+                                    </div>
+                                           <div class="col-md-6">
+                                          
+                                                    <select class="form-control" name="addprospect[iFranchiseeId]"
+                                                            id="iFranchiseeId" Placeholder="Franchisee"
+                                                            onfocus="remove_formError(this.id,'true')">
+                                                        <option value=''>Select</option>
+                                                        <?php
+                                                     $franchiseeAray =$this->Admin_Model->viewFranchiseeList(false,false);
+                                             
+                                                        if (!empty($franchiseeAray)) {
+                                                            foreach ($franchiseeAray as $franchiseeDetails) {
+                                                                ?>
+                                                                <option
+                                                                    value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['addprospect']['iFranchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
+                                                                <?php
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                              
+
+                                        </div>
                                     <br>
                                      <span id="error" class="err"></span>
                                      <br>
                                     <input type="hidden" name="importcustomers" value="1"/>
 
                                 </div>
-
+                                </div>
                             </div>
 
                         </div>

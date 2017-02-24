@@ -177,8 +177,8 @@
                                         <?php } ?>
                                     </div>
                                     </div>
-                              <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){
-                               ?>
+                                  <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){
+                                  ?>
                                              <div
                                             class="form-group <?php if (!empty($arErrorMessages['iFranchiseeId'])) { ?>has-error<?php } ?>">
                                             <label class="col-md-4 control-label">Franchisee</label>

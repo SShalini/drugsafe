@@ -24,7 +24,7 @@
                             </div>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>admin/operationManagerList');">
+                                    <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>prospect/prospectRecord');">
                                         &nbsp; Prospect List
                                     </button>
                                 </div>
