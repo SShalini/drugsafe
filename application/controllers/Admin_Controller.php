@@ -532,7 +532,7 @@ class Admin_Controller extends CI_Controller {
             }
         }
  
-         public function deleteFranchiseeAlert()
+        public function deleteFranchiseeAlert()
         {
             $data['mode'] = '__DELETE_FRANCHISEE_POPUP__';
             $data['idfranchisee'] = $this->input->post('idfranchisee');
