@@ -97,7 +97,7 @@
                                       </select>
                                   </div>
                                   <div class="search col-md-1"> </div>
-                                 <div class="search col-md-3">
+                                <div class="search col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchStatus" onfocus="remove_formError(this.id,'true')">
                                          

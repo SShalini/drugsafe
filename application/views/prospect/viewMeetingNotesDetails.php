@@ -15,7 +15,7 @@
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
-                    ?>
+                   ?>
                         <div class="alert alert-danger">
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>

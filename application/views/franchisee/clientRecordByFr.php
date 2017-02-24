@@ -86,9 +86,7 @@
                             <?php if(!empty($_POST['szSearchFrRecord'])){
                                     if(empty($clientAray)){echo "Not Found";}}?>
                         </div>
-                        
-                     
- 
+           
                 </div>
             </div>
         </div>
