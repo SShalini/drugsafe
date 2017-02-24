@@ -38,6 +38,15 @@
                               <a href="<?php echo __BASE_URL__; ?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
+                        <?php if($_SESSION['drugsafe_user']['iRole']==1){
+                            $userArray = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearch3']);?>
+                         <li>
+                           
+                             <a href="<?php echo __BASE_URL__; ?>/prospect/franchiseeProspectRecord"><?php echo $userArray['szName'];?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                             
+                        <?php } ?>
                         <li>
                             <span class="active">Prospect Record</span>
                         </li>
