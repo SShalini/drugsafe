@@ -1050,6 +1050,29 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             return false;
         }
     }
+
+    function getStateByFranchiseeId($id)
+    {
+        $query=$this->db->select('regionId')
+            ->where('id',$id)
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->get();
+        if($query->num_rows() > 0)
+        {
+            $row = $query->result_array();
+            $getRegionDetails=$this->Admin_Model->getstateIdByResinolId($row['0']['regionId']);
+            if(!empty($getRegionDetails))
+            {
+                $getStateDetails=$this->Admin_Model->getStateById($getRegionDetails['stateId']);
+                return $getStateDetails;
+            }
+        }
+        else
+        {
+            return array();
+        }
+
+    }
 }
 
 ?>

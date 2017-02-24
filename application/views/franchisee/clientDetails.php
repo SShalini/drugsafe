@@ -1,8 +1,6 @@
 <script type='text/javascript'>
     $(function() {
-       
         $("#szSearchname").customselect();
-        
     });
 </script>
 <div class="page-content-wrapper">
@@ -116,9 +114,21 @@
             <div class="row">
                 <div class="col-md-6">
                      <?php
+                     if($clientDetailsAray['id']>0){
+                         $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientDetailsAray['id']);
+                     }
                     if($clientDetailsAray['clientType']=='0')
                     {
+
                         ?>
+                        <div class="row">
+                            <div class="col-sm-4 text-info bold">
+                                <lable>Client Code:</lable>
+                            </div>
+                            <div class="col-sm-8">
+                                <p><?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?></p>
+                            </div>
+                        </div>
                      <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable> Business Name:</lable>
@@ -154,6 +164,14 @@
                      <?php
                     }else{
                     ?>
+                        <div class="row">
+                            <div class="col-sm-4 text-info bold">
+                                <lable>Site Code:</lable>
+                            </div>
+                            <div class="col-sm-8">
+                                <p><?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?></p>
+                            </div>
+                        </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Company Name:</lable>
@@ -218,46 +236,6 @@
                                     ?>
                             </div>
                         </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Industry:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <?php if($clientDetailsAray['industry']==1){
-                               $value = 'Agriculture, Forestry and Fishing';
-                            }
-                            if($clientDetailsAray['industry']==2){
-                               $value = 'Mining';
-                            }
-                            if($clientDetailsAray['industry']==3){
-                               $value = 'Manufacturing';
-                            }
-                            if($clientDetailsAray['industry']==4){
-                               $value = 'Electricity, Gas and Water Supply';
-                            }if($clientDetailsAray['industry']==5){
-                               $value = 'Construction';
-                            }if($clientDetailsAray['industry']==6){
-                               $value = 'Wholesale Trade';
-                            }if($clientDetailsAray['industry']==7){
-                               $value = 'Transport and Storage';
-                            }if($clientDetailsAray['industry']==8){
-                               $value = 'Communication Services';
-                            }if($clientDetailsAray['industry']==9){
-                               $value = 'Agriculture, Property and Business Services';
-                            }if($clientDetailsAray['industry']==10){
-                               $value = 'Agriculture, Government Administration and Defence';
-                            }if($clientDetailsAray['industry']==11){
-                               $value = 'Education';
-                            }
-                            if($clientDetailsAray['industry']==12){
-                               $value = 'Health and Community Services';
-                            }if($clientDetailsAray['industry']==13){
-                               $value = 'Other';
-                            }  ?>
-                            
-                            <p><?php echo $value;?></p>
-                        </div>
-                    </div>
                         <?php
                     }
                     ?>
@@ -342,6 +320,48 @@
                             <p><?php echo $clientDetailsAray['szZipCode'];?></p>
                         </div>
                     </div>
+                    <?php if($clientDetailsAray['clientType']=='0'){?>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Industry:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <?php if($clientDetailsAray['industry']==1){
+                                $value = 'Agriculture, Forestry and Fishing';
+                            }
+                            if($clientDetailsAray['industry']==2){
+                                $value = 'Mining';
+                            }
+                            if($clientDetailsAray['industry']==3){
+                                $value = 'Manufacturing';
+                            }
+                            if($clientDetailsAray['industry']==4){
+                                $value = 'Electricity, Gas and Water Supply';
+                            }if($clientDetailsAray['industry']==5){
+                                $value = 'Construction';
+                            }if($clientDetailsAray['industry']==6){
+                                $value = 'Wholesale Trade';
+                            }if($clientDetailsAray['industry']==7){
+                                $value = 'Transport and Storage';
+                            }if($clientDetailsAray['industry']==8){
+                                $value = 'Communication Services';
+                            }if($clientDetailsAray['industry']==9){
+                                $value = 'Agriculture, Property and Business Services';
+                            }if($clientDetailsAray['industry']==10){
+                                $value = 'Agriculture, Government Administration and Defence';
+                            }if($clientDetailsAray['industry']==11){
+                                $value = 'Education';
+                            }
+                            if($clientDetailsAray['industry']==12){
+                                $value = 'Health and Community Services';
+                            }if($clientDetailsAray['industry']==13){
+                                $value = 'Other';
+                            }  ?>
+
+                            <p><?php echo $value;?></p>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div> 
                 
              </div>
@@ -865,6 +885,7 @@
                         <thead>
                             <tr>
                                 <th> Id </th>
+                                <th>Site Code</th>
 				<th> Company Name </th>
                                 <th> Company Email </th>
                                 <th>Company Phone Number</th>
@@ -878,10 +899,11 @@
                                        $i = 0;
                                         foreach($childClientDetailsAray as $childClientDetailsData)
                                         {
-                                           
+                                            $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($childClientDetailsData['id']);
                                         ?>
                                         <tr>
                                             <td> CL-<?php echo $childClientDetailsData['id'];?> </td>
+                                            <td><?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?></td>
                                             <td> <?php echo $childClientDetailsData['szName']?> </td>
                                             <td> <?php echo $childClientDetailsData['szEmail'];?> </td>
                                              <td> <?php echo $childClientDetailsData['szContactNumber'];?> </td>

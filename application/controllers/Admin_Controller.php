@@ -109,7 +109,6 @@ class Admin_Controller extends CI_Controller {
         public function dashboard() {
 
             $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
             if (!$is_user_login) {
                 ob_end_clean();
                 redirect(base_url('/admin/admin_login'));

@@ -1,10 +1,6 @@
 <script type='text/javascript'>
     $(function() {
-//        $("#szSearch").customselect();
         $("#szSearchname").customselect();
-//        $("#szSearchemail").customselect();
-//        $("#szSearchOperationmanager").customselect();
-
     });
 </script>
 <div class="page-content-wrapper">
@@ -145,6 +141,7 @@
                                 <thead>
                                     <tr>
                                         <th> Id.</th>
+                                        <th> Franchisee Code</th>
                                         <th> Name</th>
                                         <th> Email</th>
                                         <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
@@ -163,10 +160,11 @@
                                         {
                                             $operationManagerId = $this->Franchisee_Model->getOperationManagerId($franchiseeData['id']);
                                             $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operationManagerId['operationManagerId']);
-                                           
+                                           $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($franchiseeData['id']);
                                          ?>
                                         <tr>
                                             <td> FR-<?php echo $franchiseeData['id'];?> </td>
+                                            <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?> </td>
                                             <td> <?php echo $franchiseeData['szName']?> </td>
                                             <td> <?php echo $franchiseeData['szEmail'];?> </td>
                                              <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
