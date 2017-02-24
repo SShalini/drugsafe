@@ -312,9 +312,12 @@ class Prospect_Model extends Error_Model
      public function deleteProspectRecord($prospectId)
     {
        $mettingsDetailsSearchAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
-       foreach($mettingsDetailsSearchAry as $meetingData){
+       if(!empty($mettingsDetailsSearchAry)){
+         foreach($mettingsDetailsSearchAry as $meetingData){
         $this->deleteMeeting($meetingData['id']);  
+       }   
        }
+      
         $dataAry = array(
             'isDeleted' => '1'
         );

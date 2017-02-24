@@ -583,7 +583,7 @@ public function deleteProspectConfirmation()
                  
             if($this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1)){
               
-            $q =  $this->Prospect_Model->insertProspectData($_POST['prospectAry'],1);  
+            $query =  $this->Prospect_Model->insertProspectData($_POST['prospectAry'],1);  
           }
           else{
          
@@ -592,7 +592,7 @@ public function deleteProspectConfirmation()
           }    
             }
          
-          if($q){
+          if($query){
                     $szMessage['type'] = "success";
                     $szMessage['content'] = $count."<strong> Prospect Record imported successfully.</strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
