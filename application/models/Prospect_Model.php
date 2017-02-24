@@ -103,7 +103,7 @@ class Prospect_Model extends Error_Model
      
        
    
-//       $q = $this->db->last_query();
+//     $q = $this->db->last_query();
 //        echo $q; die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -278,6 +278,7 @@ class Prospect_Model extends Error_Model
             if (!($this->db->affected_rows() > 0)) {
                 $message = "Some error occurred while adding product.";
                 array_push($failarr, $message);
+                return false;
             }
             else{
                 $prospectId = (int)$this->db->insert_id();

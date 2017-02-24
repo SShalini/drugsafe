@@ -24,8 +24,9 @@ class Prospect_Controller extends CI_Controller
         
     }
 
-public function prospectRecord()
+    function prospectRecord()
    {
+        
        $is_user_login = is_user_login($this);
        // redirect to dashboard if already logged in
        if (!$is_user_login) {
@@ -67,6 +68,8 @@ public function addprospect()
         die;
     }
      $validate= $this->input->post('addprospect');
+     $franchiseId = $_SESSION['drugsafe_user']['id'];
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
     
      if($this->Prospect_Model->validateProspectData($validate,array(),false))
             {
@@ -87,6 +90,7 @@ public function addprospect()
     $data['is_user_login'] = $is_user_login;
     $data['pageName'] = "Prospect_Record";
      $data['validate'] = $validate;
+     $data['getState']=$getState;
      $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
     
     $this->load->view('layout/admin_header', $data);

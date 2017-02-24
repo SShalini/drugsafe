@@ -217,27 +217,30 @@ class Admin_Controller extends CI_Controller {
             if($validate['szState']) {
                $getReginolCode=$this->Admin_Model->getRegionByStateId($validate['szState']);
             }
-            
             $idOperationManager = $this->session->userdata('idOperationManager');
             $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
             $flag = $this->session->userdata('flag');
             $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            if($this->Admin_Model->validateUsersData($validate,array(),false,false,$flag,2))
-            {
-                if($this->Admin_Model->insertUserDetails($validate))
-                {
-                    $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>New franchisee added successfully.</h3></strong> ";
-                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                    ob_end_clean();
-                    $this->session->unset_userdata('idOperationManager');
-                    $this->session->unset_userdata('flag');
-                       redirect(base_url('/admin/franchiseeList'));
-                  
-                }
-            }
-           
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('addFranchisee[szName]', 'Name', 'required|alpha_dash_space');
+            $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
+            $this->form_validation->set_rules('addFranchisee[abn]', 'ABN', 'required|abn_numeric|abn_length');
+            $this->form_validation->set_rules('addFranchisee[operationManagerId]', 'Operation Manager', 'required');
+            $this->form_validation->set_rules('addFranchisee[szRegionName]', 'Region Name', 'required');
+            $this->form_validation->set_rules('addFranchisee[szEmail]', 'Email', 'required|is_unique[' . __DBC_SCHEMATA_USERS__ . '.szEmail]|valid_email');
+            $this->form_validation->set_rules('addFranchisee[szContactNumber]', 'Contact No.', 'required|valid_phone_number');
+            $this->form_validation->set_rules('addFranchisee[szAddress]', 'Address', 'required');
+            $this->form_validation->set_rules('addFranchisee[szCity]', 'City', 'required');
+            $this->form_validation->set_rules('addFranchisee[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
+            $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
+            $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
+            $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
+            $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
+            $this->form_validation->set_message('required', '{field} is required');
+            
+            if ($this->form_validation->run() == FALSE)
+            { 
                     $data['idOperationManager'] = $idOperationManager;
                     $data['szMetaTagTitle'] = "Add Franchisee";
                     $data['pageName'] = "Franchisee_List";
@@ -247,11 +250,25 @@ class Admin_Controller extends CI_Controller {
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
                     $data['getReginolCode']=$getReginolCode;
-                   $data['commentnotification'] = $commentReplyNotiCount;
-          
-            $this->load->view('layout/admin_header',$data);
-            $this->load->view('admin/addFranchisee');
-            $this->load->view('layout/admin_footer');
+                    $data['commentnotification'] = $commentReplyNotiCount;
+                    $this->load->view('layout/admin_header',$data);
+                    $this->load->view('admin/addFranchisee');
+                    $this->load->view('layout/admin_footer');
+            }
+            else
+            {
+	        if($this->Admin_Model->insertUserDetails($validate))
+                {
+		    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<strong><h3>New franchisee added successfully.</h3></strong> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    ob_end_clean();
+                    $this->session->unset_userdata('idOperationManager');
+                    $this->session->unset_userdata('flag');
+                    redirect(base_url('/admin/franchiseeList'));
+                    die;
+                }
+            }
         }  
         function welweb(){
             $responsedata = array("code" => 200,"message"=>"Webservice Working sucessfully.");
