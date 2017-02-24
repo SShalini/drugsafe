@@ -212,7 +212,7 @@
                                                     }
                                                      ?> </td>
                                            <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="addMeetingNotes" title="Add Meeting Notes" onclick="addMeetingNotesData('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="addMeetingNote" title="Add Meeting Notes" onclick="addMeetingNotesData('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>
