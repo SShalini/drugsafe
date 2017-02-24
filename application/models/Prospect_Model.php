@@ -115,6 +115,7 @@ class Prospect_Model extends Error_Model
     function validateProspectData($data, $arExclude = array(), $idUser=0,$flag='0')
   {
         if (!empty($data)) {
+            $this->error = FALSE;
             if($data['szContactEmail']=='N/A')
             {
                $data['szContactEmail']=''; 
