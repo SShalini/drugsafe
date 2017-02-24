@@ -588,6 +588,8 @@ class Franchisee_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
+         $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, $operationManagerAray['id']);
+
         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
             $franchiseId = $_SESSION['drugsafe_user']['id'];
         }
@@ -681,6 +683,7 @@ class Franchisee_Controller extends CI_Controller
         } else {
             $_POST['szSearchClRecord2'] = $id;
         }
+        $data['searchOptionArr']=$searchOptionArr;
         $data['clientAry'] = $clientAray;
         $data['id'] = $id;
         $data['flag'] = $flag;
