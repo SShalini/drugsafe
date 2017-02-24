@@ -22,6 +22,10 @@ class Prospect_Model extends Error_Model
     {
         $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCity", "City", false, false, $flag);
     }
+    function set_szCountry($value, $flag = true)
+    {
+        $this->data['szCountry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCountry", "Country", false, false, $flag);
+    }
 
     function set_szZipCode($value, $flag = true)
     {
@@ -43,6 +47,42 @@ class Prospect_Model extends Error_Model
 
      function getAllProspectDetails($szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
+      if($_SESSION['drugsafe_user']['id']==1){
+       $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
+      if((!empty($szBusinessName)) || (!empty($status)))
+      {
+            $array = ' isDeleted = 0 '.($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
+    
+      }
+       else{
+       $array = array( 'isDeleted' => '0');
+         } 
+         $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+            ->from(__DBC_SCHEMATA_PROSPECT__)
+           ->order_by("id","desc") 
+           ->limit($limit, $offset)
+            ->where($array)
+            ->get();
+      } 
+      else if($_SESSION['drugsafe_user']['iRole']==5){
+      $operationManagerId =  $_SESSION['drugsafe_user']['id'];
+      if((!empty($szBusinessName)) || (!empty($status)))
+      {
+            $array = 'operationManagerId =' . (int)$operationManagerId .' AND isDeleted = 0 '.($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
+    
+      }
+       else{
+       $array = array('operationManagerId' => (int)$operationManagerId, 'isDeleted' => '0');
+         } 
+            $query = $this->db->select('prospect.id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+            ->from(__DBC_SCHEMATA_PROSPECT__. ' as prospect' )
+            ->join(__DBC_SCHEMATA_FRANCHISEE__, prospect . '.iFranchiseeId = ' . __DBC_SCHEMATA_FRANCHISEE__ . '.franchiseeId')
+            ->order_by("id","desc") 
+            ->limit($limit, $offset)
+            ->where($array)
+            ->get();
+      }
+      else{
       $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
       if((!empty($szBusinessName)) || (!empty($status)))
       {
@@ -52,12 +92,15 @@ class Prospect_Model extends Error_Model
        else{
        $array = array('iFranchiseeId' => (int)$franchiseeid, 'isDeleted' => '0');
          } 
-       $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+           $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("id","desc") 
            ->limit($limit, $offset)
             ->where($array)
             ->get();
+      }
+     
+     
        
    
 //       $q = $this->db->last_query();
@@ -69,9 +112,21 @@ class Prospect_Model extends Error_Model
             return false;
         }
     }
-    function validateProspectData($data, $arExclude = array(), $idUser=0)
+    function validateProspectData($data, $arExclude = array(), $idUser=0,$flag='0')
   {
         if (!empty($data)) {
+            if($data['szContactEmail']=='N/A')
+            {
+               $data['szContactEmail']=''; 
+            }
+            if($data['szContactPhone']=='N/A')
+            {
+               $data['szContactPhone']=''; 
+            }
+            if($data['szContactMobile']=='N/A')
+            {
+               $data['szContactMobile']=''; 
+            }
             if (!in_array('szBusinessName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szBusinessName'])),"szBusinessName","Business Name",true);
             if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", true);
@@ -81,24 +136,24 @@ class Prospect_Model extends Error_Model
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
+            if($flag==1){
+                if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);   
+            }
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
-             if(!in_array('industry',$arExclude)) $this->set_industry(sanitize_all_html_input(trim($data['industry'])),true);
-          
+            if(!in_array('industry',$arExclude)) $this->set_industry(sanitize_all_html_input(trim($data['industry'])),true);
+      
             if($this->error == false )
             {
                  if ($this->checkProspectExists($data['szEmail'], $idUser)) {
                     $this->addError('szEmail', "Someone already registered with entered email address.");
                     return false;
                 }
-                if ($this->checkBusinessNameExists($data['szBusinessName'],$idClient)) {
+                if ($this->checkBusinessNameExists($data['szBusinessName'],$idProspect)) {
                     $this->addError('szBusinessName', "Business Name must be unique.");
                     return false;
                 }
-                if ($this->data['szNoOfSites'] < $data['szOldNoOfSites']) {
-                $this->addError('szNoOfSites', "No Of Sites must be greater than or equal to Previous no of sites");
-                return false;
-                }
+               
             }
             
            
@@ -112,87 +167,86 @@ class Prospect_Model extends Error_Model
   }
       function insertProspectData($data,$flag='0'){
       $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
-       $date = date('Y-m-d h:i:s');
+       $date = date('Y-m-d H:i:s');
        if($flag==1){
-          
-           $meetingDateTime = $this->getSqlFormattedDate($data['15']);
+           $meetingDateTime = $this->getSqlFormattedDate($data['dt_last_updated_meeting']);
          
-           if($data['6']== 'Agriculture, Forestry and Fishing'){
+           if($data['industry']== 'Agriculture, Forestry and Fishing'){
                                $value = '1';
                             }
-                            if($data['6']=='Mining'){
+                            if($data['industry']=='Mining'){
                                $value = '2';
                             }
-                            if($data['6']=='Manufacturing'){
+                            if($data['industry']=='Manufacturing'){
                                $value = '3';
                             }
-                            if($data['6']=='Electricity, Gas and Water Supply'){
+                            if($data['industry']=='Electricity, Gas and Water Supply'){
                                $value = '4';
-                            }if($data['6']=='Construction'){
+                            }if($data['industry']=='Construction'){
                                $value = '5';
-                            }if($data['6']=='Wholesale Trade'){
+                            }if($data['industry']=='Wholesale Trade'){
                                $value = '6';
-                            }if($data['6']=='Transport and Storage'){
+                            }if($data['industry']=='Transport and Storage'){
                                $value = '7';
-                            }if($data['6']=='Communication Services'){
+                            }if($data['industry']=='Communication Services'){
                                $value = '8';
-                            }if($data['6']=='Agriculture, Property and Business Services'){
+                            }if($data['industry']=='Agriculture, Property and Business Services'){
                                $value = '9';
-                            }if($data['6']=='Agriculture, Government Administration and Defence'){
+                            }if($data['industry']=='Agriculture, Government Administration and Defence'){
                                $value = '10';
-                            }if($data['6']=='Education'){
+                            }if($data['industry']=='Education'){
                                $value = '11';
                             }
-                            if($data['6']=='Health and Community Services'){
+                            if($data['industry']=='Health and Community Services'){
                                $value = '12';
-                            }if($data['6']=='Other'){
+                            }if($data['industry']=='Other'){
                                $value = '13';
                             }  
-                      if($data['7']=='In Progress') {
+                      if($data['status']=='In Progress') {
                           $status = '2'; 
                       }  
-                      elseif($data['7']=='Completed') {
+                      elseif($data['status']=='Completed') {
                           $status = '3'; 
                       }  
                      else {
                           $status = '1'; 
                       }  
-                    if($data['8']=='N/A'){
-                     $data['8'] = '';
+                    if($data['szContactEmail']=='N/A'){
+                     $data['szContactEmail'] = '';
                     }  
                     else{
-                       $data['8'] = $data['8'];  
+                       $data['szContactEmail'] = $data['szContactEmail'];  
                     }
-                     if($data['10']=='N/A'){
-                     $data['10'] = '';
+                     if($data['szContactMobile']=='N/A'){
+                     $data['szContactMobile'] = '';
                     }  
                     else{
-                       $data['10'] = $data['10'];  
+                       $data['szContactMobile'] = $data['szContactMobile'];  
                     }
-                     if($data['9']=='N/A'){
-                     $data['9'] = '';
+                     if($data['szContactPhone']=='N/A'){
+                     $data['szContactPhone'] = '';
                     }  
                     else{
-                       $data['9'] = $data['9'];  
+                       $data['szContactPhone'] = $data['szContactPhone'];  
                     }
                              
       
        $whereAry = array(
                 'iFranchiseeId' => (int)$franchiseeid,
-                'szName' => $data['2'],
-                'szEmail' => $data['4'],
-                'szContactNo' => $data['5'],
+                'szName' => $data['szName'],
+                'szEmail' => $data['szEmail'],
+                'szContactNo' => $data['szContactNo'],
                 'dtCreatedOn' =>$date,
                 'isDeleted' =>'0',
-                'szCountry' => $data['13'],
-                'abn' => $data['3'], 
-                'szCity' => $data['12'],
-                'szZipCode' => $data['14'],
-                'szAddress' => $data['11'],
-                'szBusinessName' => $data['1'],
-                'szContactEmail' => $data['8'],
-                'szContactPhone' => $data['10'],
-                'szContactMobile' => $data['9'],
+                'szCountry' => $data['szCountry'],
+                'abn' => $data['abn'], 
+                'szCity' => $data['szCity'],
+                'szZipCode' => $data['szZipCode'],
+                'szAddress' => $data['szAddress'],
+                'szBusinessName' => $data['szBusinessName'],
+                'szContactEmail' => $data['szContactEmail'],
+                'szContactPhone' => $data['szContactPhone'],
+                'szContactMobile' => $data['szContactMobile'],
                 'industry' => $value,
                 'status' => $status,
                'dt_last_updated_meeting' => $meetingDateTime
@@ -257,6 +311,10 @@ class Prospect_Model extends Error_Model
     }
      public function deleteProspectRecord($prospectId)
     {
+       $mettingsDetailsSearchAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
+       foreach($mettingsDetailsSearchAry as $meetingData){
+        $this->deleteMeeting($meetingData['id']);  
+       }
         $dataAry = array(
             'isDeleted' => '1'
         );
@@ -270,7 +328,7 @@ class Prospect_Model extends Error_Model
      function updateProspectDetails($data,$prospectId){
          $failarr = array();
          $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
-         $date = date('Y-m-d h:i:s');
+         $date = date('Y-m-d H:i:s');
             $dataAry = array(
                 
                 'iFranchiseeId' => (int)$franchiseeid,
@@ -305,7 +363,7 @@ class Prospect_Model extends Error_Model
     }
      function insertMeetingNotes($data,$idProspect){
        
-        $date = date('Y-m-d h:i:s');
+        $date = date('Y-m-d H:i:s');
         $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
             $whereAry = array(
                 'idProspect' => (int)$idProspect,
@@ -328,7 +386,7 @@ class Prospect_Model extends Error_Model
             }
         
     }
-     function getAllMeetingDetailsByProspectsId($prospectsId,$meetingNoteCreatedBy='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+     function getAllMeetingDetailsByProspectsId($prospectsId,$meetingNoteCreatedBy='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$flag='')
     { 
        if($meetingNoteCreatedBy > 0){
          $array = array('idProspect' => (int)$prospectsId,'szCreatedBy' => (int)$meetingNoteCreatedBy,);   
@@ -337,14 +395,29 @@ class Prospect_Model extends Error_Model
             $array = array('idProspect' => (int)$prospectsId);
        }
        
-       $query = $this->db->select('id,szDescription,dtCreatedOn,szCreatedBy')
+     
+          
+       if($flag==1){
+          $query = $this->db->select('szCreatedBy')
+           ->distinct('szCreatedBy')
+            ->from(__DBC_SCHEMATA_MEETINGS_NOTE__)
+            ->where($array)
+             ->limit($limit, $offset)
+            ->order_by("id","desc")
+            ->get();
+       }
+       else{
+           $query = $this->db->select('id,szDescription,dtCreatedOn,szCreatedBy')
+       
             ->from(__DBC_SCHEMATA_MEETINGS_NOTE__)
             ->where($array)
                ->limit($limit, $offset)
             ->order_by("id","desc")
-            ->get();
-        /*$q = $this->db->last_query();
-        echo $q;*/
+            ->get(); 
+       }
+        
+//        $q = $this->db->last_query();
+//        echo $q; die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
@@ -403,7 +476,7 @@ class Prospect_Model extends Error_Model
     
          function updateProspectStatus($data,$prospectsId)
     { 
-        $date = date('Y-m-d h:i:s');
+        $date = date('Y-m-d H:i:s');
         $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
             $whereAry = array(
                 'prospectId' => (int)$prospectsId,
@@ -516,6 +589,18 @@ class Prospect_Model extends Error_Model
  
    return $formattedDate;  
 }
-
+ public function deleteMeeting($meetingId)
+	{   
+          
+                $this->db->where('id', $meetingId);
+		if($query = $this->db->delete(__DBC_SCHEMATA_MEETINGS_NOTE__))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
 }
 ?>

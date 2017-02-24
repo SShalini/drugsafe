@@ -2189,10 +2189,10 @@ function import_csv_popup_confirmation() {
   else{
    var fileExtention = (/[.]/.exec(file)) ? /[^.]+$/.exec(file) : undefined;
   if(fileExtention=='csv'){
+    $('.error').hide();
     $("#ProductimportForm").submit();   
   }
-  else{
-        
+  else{   
      $('#error').html('Invalid file uploaded. Only .csv file is allowed. Please try again.');
      $('#error').show();
      return false; 

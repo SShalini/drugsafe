@@ -52,17 +52,33 @@
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>prospect/addprospect');">
                                         &nbsp;Add New Prospect 
                                     </button>
-                                </div> &nbsp; &nbsp;
+                                </div>
+                                 <?php
+                        if(!empty($prospectDetailsAry))
+                        { 
+                    
+                            ?>
+                       
+                                &nbsp; &nbsp;
                                   <a onclick="export_csv_report('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> Export CSV</a>
+                                     <?php
+                        }
+                    
+                            ?>
+                       
                                   &nbsp; &nbsp;
                                   <a onclick="import_csv_popup()" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                     <i class="fa fa-reply"></i> Import CSV</a>  
                             </div>
                         </div>
-                     
+                      <?php
+                        if(!empty($prospectDetailsAry))
+                        { 
+                    
+                            ?>
                        
                          <div class="row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospectRecord" name="szSearchField" method="post">
@@ -104,11 +120,7 @@
                            </div>
                            </form>
                           </div>
-                         <?php
-                        if(!empty($prospectDetailsAry))
-                        { 
-                    
-                            ?>
+                        
                              <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">

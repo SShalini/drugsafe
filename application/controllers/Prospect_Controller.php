@@ -212,7 +212,7 @@ public function deleteProspectConfirmation()
                
             $this->pagination->initialize($config);
               $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect,$meetingNoteCreatedBy,$config['per_page'],$this->uri->segment(3));
-              $mettingsDetailsSearchAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
+              $mettingsDetailsSearchAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect,false,false,false,1);
               
               
              
@@ -562,15 +562,39 @@ public function deleteProspectConfirmation()
             fclose($handle);
           }
           array_shift($arrResult);
- 
+          $count =0;
             foreach ($arrResult as $worksheet) {
                 
-            $q =  $this->Prospect_Model->insertProspectData($worksheet,1);
-               
+               $_POST['prospectAry']['szBusinessName'] = $worksheet[1];
+               $_POST['prospectAry']['szName'] = $worksheet[2];
+               $_POST['prospectAry']['abn'] = $worksheet[3];
+               $_POST['prospectAry']['szEmail'] = $worksheet[4]; 
+               $_POST['prospectAry']['szContactNo'] = $worksheet[5]; 
+               $_POST['prospectAry']['industry'] = $worksheet[6]; 
+               $_POST['prospectAry']['status'] = $worksheet[7]; 
+               $_POST['prospectAry']['szContactEmail'] = $worksheet[8]; 
+               $_POST['prospectAry']['szContactMobile'] = $worksheet[9]; 
+               $_POST['prospectAry']['szContactPhone'] = $worksheet[10];
+               $_POST['prospectAry']['szAddress'] = $worksheet[11];
+               $_POST['prospectAry']['szCity'] = $worksheet[12];
+               $_POST['prospectAry']['szCountry'] = $worksheet[13];
+               $_POST['prospectAry']['szZipCode'] = $worksheet[14];
+               $_POST['prospectAry']['dt_last_updated_meeting'] = $worksheet[15];
+                 
+            if($this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1)){
+              
+            $q =  $this->Prospect_Model->insertProspectData($_POST['prospectAry'],1);  
+          }
+          else{
+         
+              $count++; 
+               continue;
+          }    
             }
+         
           if($q){
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Meeting Notes added successfully.</h3></strong>";
+                    $szMessage['content'] = $count."<strong><h3> Prospect Record imported successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
                     }  
@@ -585,7 +609,7 @@ public function deleteProspectConfirmation()
           $this->load->view('admin/admin_ajax_functions',$data);
           $errmsg = "Invalid file uploaded. Only .csv file is allowed. Please try again.";
     }
-}
+     }
 
       }
       
