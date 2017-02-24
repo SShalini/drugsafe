@@ -311,12 +311,20 @@ class Prospect_Model extends Error_Model
     }
      public function deleteProspectRecord($prospectId)
     {
+       $prospectStatusAry = $this->Prospect_Model->getProspectStatusDetails($idProspect,1);
+       if(!empty($prospectStatusAry))
+       {
+        foreach($prospectStatusAry as $prospectData){
+        $this->deleteStatus($prospectData['id']);  
+       }      
+       }
        $mettingsDetailsSearchAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
        if(!empty($mettingsDetailsSearchAry)){
          foreach($mettingsDetailsSearchAry as $meetingData){
         $this->deleteMeeting($meetingData['id']);  
        }   
        }
+       
       
         $dataAry = array(
             'isDeleted' => '1'
@@ -597,6 +605,19 @@ class Prospect_Model extends Error_Model
           
                 $this->db->where('id', $meetingId);
 		if($query = $this->db->delete(__DBC_SCHEMATA_MEETINGS_NOTE__))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }	
+	}
+         public function deleteStatus($prospectId)
+	{   
+          
+                $this->db->where('prospectId', $prospectId);
+		if($query = $this->db->delete(__DBC_SCHEMATA_STATUS__))
                 {
                     return true;
                 }
