@@ -88,7 +88,9 @@ public function addprospect()
         redirect(base_url('/admin/admin_login'));
         die;
     }
-     $validate= $this->input->post('addprospect');
+    $franchiseId = $_SESSION['drugsafe_user']['id'];
+    $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+    $validate= $this->input->post('addprospect');
    
      if($this->Prospect_Model->validateProspectData($validate,array(),false))
             {
@@ -113,6 +115,7 @@ public function addprospect()
     $data['is_user_login'] = $is_user_login;
     $data['pageName'] = "Prospect_Record";
      $data['validate'] = $validate;
+     $data['getState']=$getState;
      $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
     
     $this->load->view('layout/admin_header', $data);
