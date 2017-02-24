@@ -314,12 +314,8 @@ class Admin_Model extends Error_Model
                 );
                 $this->db->insert(__DBC_SCHEMATA_FRANCHISEE__, $franchiseeAry);
             }
-            $regionData = array(
-                'assign' => '1'
-            );
-            $this->db->where('id', $data['szRegionName']);
-            $this->db->update(__DBC_SCHEMATA_REGION__, $regionData);
-            if ($this->db->affected_rows() > 0) {
+
+            if ($this->assignUnassignRegionCode($data['szRegionName'],true)) {
                 $usercodecode = '';
                 $lastfrcode = $this->getmaxfranchiseecodeByregionId($data['szRegionName']);
                 if (!empty($lastfrcode)) {
@@ -328,17 +324,16 @@ class Admin_Model extends Error_Model
                         $usercodecode = $regioncode['regionCode'] . '-' . sprintf('%02d', (int)$lastfrcode['maxfrcode'] + 1);
                     }
                 }
-                $franchiseeCodeGen = array('franchiseCode' => (int)$lastfrcode['maxfrcode'] + 1,
-                    'userCode' => $usercodecode);
-                $this->db->where('id', $id_franchisee);
-                $this->db->update(__DBC_SCHEMATA_USERS__, $franchiseeCodeGen);
+                if($this->updateusercodes((int)$id_franchisee,$usercodecode,(int)$lastfrcode['maxfrcode'] + 1)){
+                    if($this->assignUnassignRegionCode($data['szRegionName'],true)){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }else{
+                    return false;
+                }
             }
-             $resionData = array(
-                 'assign' => '1'
-             );
-           $this->db->where('id', $data['szRegionName']);
-           $this->db->update(__DBC_SCHEMATA_REGION__, $resionData);
-
             $id_player = (int)$id_franchisee;
             $replace_ary = array();
             $replace_ary['szName'] = $data['szName'];
@@ -687,7 +682,41 @@ class Admin_Model extends Error_Model
                 $whereAry = array('franchiseeId' => (int)$id);
                 $this->db->where($whereAry);
                 $this->db->update(__DBC_SCHEMATA_FRANCHISEE__, $OmAry);
-                return true;
+                if($data['editable'] == '1'){
+                    $franchiseeDets = $this->getUserDetailsByEmailOrId('',$id);
+                    if(!empty($franchiseeDets) && $franchiseeDets['iRole']=='2'){
+                        if($this->assignUnassignRegionCode($franchiseeDets['regionId'],false)){
+                            $usercodecode = '';
+                            $lastfrcode = $this->getmaxfranchiseecodeByregionId($data['szRegionName']);
+                            if (!empty($lastfrcode)) {
+                                $regioncode = $this->getRegionById($data['szRegionName']);
+                                if (!empty($regioncode)) {
+                                    $usercodecode = $regioncode['regionCode'] . '-' . sprintf('%02d', (int)$lastfrcode['maxfrcode'] + 1);
+                                }
+                            }
+                            if($this->updateusercodes((int)$id,$usercodecode,(int)$lastfrcode['maxfrcode'] + 1)){
+                                if($this->updateregionid((int)$id,$data['szRegionName'])){
+                                    if($this->assignUnassignRegionCode($data['szRegionName'],true)){
+                                        return true;
+                                    }else{
+                                        return false;
+                                    }
+                                }else{
+                                    return false;
+                                }
+                            }else{
+                                return false;
+                            }
+                        }else{
+                            return false;
+                        }
+                    }else{
+                        return true;
+                    }
+                }else{
+                    return true;
+                }
+
             } else {
                 return false;
             }
@@ -1335,16 +1364,17 @@ class Admin_Model extends Error_Model
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
+        }else{
+            return false;
         }
-        return false;
     }
 
-    function getRegionByStateId($id = 0)
+    function getRegionByStateId($id = 0,$assign=0)
     {
         $query = $this->db->select('*')
             ->from(__DBC_SCHEMATA_REGION__)
             ->where('stateid', $id)
-            ->where('assign', '0')
+            ->where('assign', $assign)
             ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -1391,8 +1421,9 @@ class Admin_Model extends Error_Model
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
+        }else{
+            return false;
         }
-        return false;
     }
 
     function updateClientByFranchisee($idfranchisee, $status)
@@ -1443,4 +1474,54 @@ class Admin_Model extends Error_Model
         }
     }
 
+    function getstatebyregionid($regionid){
+        $wherearr = 'region.id = '.(int)$regionid;
+        $query = $this->db->select('state.id, state.name')
+                ->from(__DBC_SCHEMATA_STATE__.' as state')
+                ->join(__DBC_SCHEMATA_REGION__.' as region','region.stateId = state.id')
+                ->where($wherearr)
+                ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return array();
+        }
+    }
+
+    function assignUnassignRegionCode($regionid,$assign=true){
+        $regionData = array(
+            'assign' => ($assign?'1':'0')
+        );
+       $query = $this->db->where('id', $regionid)
+                        ->update(__DBC_SCHEMATA_REGION__, $regionData);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function updateusercodes($userid,$usercode,$franchiseecode=0){
+        $CodeGen = array('franchiseCode' => (int)$franchiseecode,
+            'userCode' => $usercode);
+        $query = $this->db->where('id', $userid)
+                        ->update(__DBC_SCHEMATA_USERS__, $CodeGen);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function updateregionid($userid,$regionid){
+        $CodeGen = array('regionId' => (int)$regionid);
+        $query = $this->db->where('id', $userid)
+            ->update(__DBC_SCHEMATA_USERS__, $CodeGen);
+        if($query){
+            return true;
+        }else{
+            return false;
+        }
+    }
 } ?>

@@ -11,7 +11,6 @@
                        <li>
                          <?php  
                           $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$idOperationManager);
-                        
                          ?>
                          <a onclick="viewFranchisee(<?php echo $operationManagerDetArr['id'];?>);;" href="javascript:void(0);"><?php echo $operationManagerDetArr['szName'];?></a>
                         <i class="fa fa-circle"></i>
@@ -204,22 +203,103 @@
                                     </div>
 
                                 </div>
-                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">State</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-map-marker"></i>
-                                            </span>
-                                            <div class="form-control">
-                                                 <?php echo $getState['name'] ;?>
-                                            </div>
-                                             
-                                        </div>
-                                      
-                                    </div>
 
-                                </div>
+                                    <div
+                                            class="form-group <?php if (!empty($arErrorMessages['szState']) != '') { ?>has-error<?php } ?>">
+                                        <label class="col-md-3 control-label">State</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-flag-checkered"></i>
+                                                </span>
+                                                <?php
+                                                $checkEditableArr = $this->Admin_Model->getAllUserFranchiseesId($_POST['addFranchisee']['id']);
+                                                $selectedstateid = $this->Admin_Model->getstatebyregionid($_POST['addFranchisee']['regionId']);
+                                                $selectedregionid[0] = $this->Admin_Model->getregionbyid($_POST['addFranchisee']['regionId']);
+                                                if(!empty($checkEditableArr)){ ?>
+                                                    <div class="form-control">
+                                                        <?php echo $getState['name'] ; ?>
+                                                        <input type="hidden" name="addFranchisee[szState]" value="<?php echo $getState['id'] ;?>" />
+                                                    </div>
+                                                <?php }else{
+                                                ?>
+                                                <select class="form-control " name="addFranchisee[szState]" id="szState"
+                                                        Placeholder="State" onfocus="remove_formError(this.id,'true')" onchange="getReginolCode(this.value);">
+                                                    <option value=''>Select</option>
+                                                    <?php
+
+                                                    if(!empty($getAllStates))
+                                                    {
+                                                        foreach($getAllStates as $getAllStatesData)
+                                                        {
+                                                            $selected = ($getAllStatesData['id'] == $selectedstateid[0]['id'] ? 'selected="selected"' : '');
+                                                            echo '<option value="'.$getAllStatesData['id'].'"' . $selected . ' >'.$getAllStatesData['name'].'</option>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <?php } ?>
+                                            </div>
+                                            <?php if (!empty($arErrorMessages['szState'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szState']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                                    <div class="reginolFiled" id="reginolFiled">
+                                            <div class="form-group <?php if (!empty($arErrorMessages['szRegionName']) != '') { ?>has-error<?php } ?>">
+                                                <label class="col-md-3 control-label">Region Name</label>
+                                                <div class="col-md-5">
+                                                    <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-map-marker"></i>
+                                                    </span>
+                                                        <?php if(!empty($checkEditableArr)){ ?>
+                                                            <div class="form-control">
+                                                                <?php echo $selectedregionid[0]['regionName'] ;?>
+                                                                <input type="hidden" name="addFranchisee[szRegionName]" value="<?php echo $selectedregionid[0]['id'] ;?>" />
+                                                            </div>
+                                                            <input type="hidden" name="addFranchisee[editable]" value="0" />
+                                                            <?php }else{?>
+                                                            <input type="hidden" name="addFranchisee[editable]" value="1" />
+                                                            <?php
+                                                            $getReginolCode = $this->Admin_Model->getRegionByStateId($selectedstateid[0]['id']);
+
+                                                            if(!empty($getReginolCode) && !empty($selectedregionid)){
+                                                                $getReginolCode = array_merge($getReginolCode,$selectedregionid);
+                                                            }elseif(empty($getReginolCode) && !empty($selectedregionid)){
+                                                                $getReginolCode = $selectedregionid;
+                                                            }
+                                                            ?>
+                                                        <select class="form-control " name="addFranchisee[szRegionName]" id="szRegionName" Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">
+                                                            <option value=''>Select</option>
+                                                            <?php
+                                                            if(!empty($getReginolCode))
+                                                            {
+                                                                foreach($getReginolCode as $getReginolCodeData)
+                                                                {
+                                                                    $selected = ($getReginolCodeData['id'] ==  $selectedregionid[0]['id'] || $getReginolCodeData['id'] == $_POST['addFranchisee']['szRegionName'] ? 'selected="selected"' : '');
+                                                                    echo '<option value="'.$getReginolCodeData['id'].'"' . $selected . ' >'.$getReginolCodeData['regionName'].'</option>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                        <?php } ?>
+                                                    </div>
+                                                    <?php if (!empty($arErrorMessages['szRegionName'])) { ?>
+                                                        <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                            <?php echo $arErrorMessages['szRegionName']; ?>
+                                            </span>
+                                                    <?php } ?>
+                                                </div>
+
+                                            </div>
+
+                                    </div>
                                  <div class="form-group <?php if(!empty($arErrorMessages['szCity'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> City</label>
                                         <div class="col-md-5">

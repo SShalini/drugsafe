@@ -86,6 +86,17 @@
         <div class="portlet-body alert">
             <div class="row">
                 <div class="col-md-6">
+                    <?php
+                    $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($franchiseeArr['id']);
+                    ?>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Franchisee Code:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?></p>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Name:</lable>

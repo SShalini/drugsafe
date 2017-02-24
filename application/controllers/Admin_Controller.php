@@ -469,6 +469,7 @@ class Admin_Controller extends CI_Controller {
             $idOperationManager = $this->session->userdata('idOperationManager');
             $idfranchisee = $this->session->userdata('idfranchisee');
             $getState=$this->Franchisee_Model->getStateByFranchiseeId($idfranchisee);
+            $getAllStates=$this->Admin_Model->getAllStateByCountryId('101');
             $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             if($idfranchisee >0)
@@ -476,6 +477,9 @@ class Admin_Controller extends CI_Controller {
                 
                   
                 $data_validate = $this->input->post('addFranchisee');
+                if($data_validate['szState']) {
+                    $getReginolCode=$this->Admin_Model->getRegionByStateId($data_validate['szState']);
+                }
                 $reginolIdArray = $this->Admin_Model->getUserDetailsByEmailOrId('',$idfranchisee);
                 $clientDetailsAray = $this->Franchisee_Model->getClientCountId($idfranchisee);
                 if(!empty($clientDetailsAray))
@@ -517,6 +521,8 @@ class Admin_Controller extends CI_Controller {
                     $data['stateReginolClass']=$stateReginolClass;
                     $data['reginolId']=$reginolId;
                     $data['getState']=$getState;
+                    $data['getAllStates'] = $getAllStates;
+                    $data['getReginolCode']=$getReginolCode;
                     $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
                     $data['notification'] = $count;
                     $data['commentnotification'] = $commentReplyNotiCount;
@@ -536,6 +542,10 @@ class Admin_Controller extends CI_Controller {
         {
             $data['mode'] = '__DELETE_FRANCHISEE_CONFIRM__';
             $data['idfranchisee'] = $this->input->post('idfranchisee');
+            $franchiseeDets = $this->Admin_Model->getUserDetailsByEmailOrId('',$data['idfranchisee']);
+            if(!empty($franchiseeDets) && $franchiseeDets['iRole']=='2') {
+                $this->Admin_Model->assignUnassignRegionCode($franchiseeDets['regionId'], false);
+            }
             $this->Admin_Model->deletefranchisee($data['idfranchisee']);
             $this->Admin_Model->deletemodelStockValue($data['idfranchisee']);
             $this->Admin_Model->deleteProductStockQuantity($data['idfranchisee']);
@@ -820,7 +830,7 @@ class Admin_Controller extends CI_Controller {
                 <div class="col-md-5">
                     <div class="input-group">
                         <span class="input-group-addon">
-                            <i class="fa fa-flag-checkered"></i>
+                            <i class="fa fa-map-marker"></i>
                          </span>
                                             <select class="form-control " name="addFranchisee[szRegionName]" id="szRegionName"
                                                     Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">

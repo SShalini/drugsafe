@@ -919,11 +919,11 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
 
     function getAgentrecord($franchiseeid, $agentid = 0)
     {
-        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND client.franchiseeId = ' . (int)$franchiseeid . ($agentid > 0 ? ' AND user.id = ' . (int)$agentid : '');
-        $query = $this->db->select('user.id, user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry, client.id as agentclientid')
+        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . ($agentid > 0 ? ' AND user.id = ' . (int)$agentid : '');
+        $query = $this->db->select('user.id, user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry')
             ->from(__DBC_SCHEMATA_USERS__ . ' as user')
             ->join(__DBC_SCHEMATA_AGENT_FRANCHISEE__ . ' as agent', 'user.id = agent.agentid')
-            ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'agent.franchiseeid = client.franchiseeId')
+            //->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'agent.franchiseeid = client.franchiseeId')
             ->group_by('agent.agentid')
             ->where($whereAry)
             ->order_by('user.id', 'DESC')
