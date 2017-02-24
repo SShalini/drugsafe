@@ -118,7 +118,7 @@ public function addprospect()
      $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
     
     $this->load->view('layout/admin_header', $data);
-    $this->load->view('prospect/addprospect');
+    $this->load->view('prospect/addProspect');
     $this->load->view('layout/admin_footer');
 
 }

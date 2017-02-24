@@ -134,8 +134,8 @@ class Form_Management_Model extends Error_Model {
         $this->db->from(__DBC_SCHEMATA_SOS_FORM__);
         $this->db->where($whereAry); 
         $query = $this->db->get();
-       $sql = $this->db->last_query($query);
-      
+       /*$sql = $this->db->last_query($query);
+      echo $sql;*/
         if ($query->num_rows() > 0) {
              $row = $query->result_array();
                 return $row;

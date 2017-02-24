@@ -2252,9 +2252,9 @@ function excelfr_stockassignlist_Data()
         $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $idfranchisee!='')
         {
-            $searchAry =$_POST; 
-            
-            $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $idfranchisee);
+            $searchAry =$_POST;
+            $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$idfranchisee);
+            /*$getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $idfranchisee);
             $id=array();
             foreach($getClientDeatils as $getClientData)
             {   
@@ -2269,7 +2269,7 @@ function excelfr_stockassignlist_Data()
             if(!empty($sosId))
             {
                 $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
-            }
+            }*/
         }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
