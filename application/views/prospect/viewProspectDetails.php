@@ -36,7 +36,7 @@
                         <i class="fa fa-circle"></i>
                     </li>
                    <li>
-                        <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord"><?php echo $prospectDetailsAry['szName'];?>'s</a>
+                        <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord"><?php echo $prospectDetailsAry['szName'];?></a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>

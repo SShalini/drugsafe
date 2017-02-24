@@ -202,6 +202,7 @@ public function deleteProspectConfirmation()
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Prospect_Record";
                     $_POST['editProspect'] = $prospectDataAry;
+                    $_POST['flag'] = $flag;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/editProspect');
@@ -290,6 +291,8 @@ public function deleteProspectConfirmation()
                 $data['szMetaTagTitle'] = "Add Meeting Notes";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Prospect_Record";
+                $data['flag'] = $flag;
+                $data['idProspect'] = $idProspect;
                 
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('prospect/addMeetingNotes');

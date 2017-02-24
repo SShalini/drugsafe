@@ -7,6 +7,16 @@
                        <a href="<?php echo __BASE_URL__;?>">Home</a>
                        <i class="fa fa-circle"></i>
                     </li>
+                     <li>
+                         <?php
+                          $prospectDetailsAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
+                         if($flag==1){?>
+                        <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord"><?php echo  $prospectDetailsAry['szName'];?></a>
+                         <?php } else {?>
+                         <a href="<?php echo __BASE_URL__;?>/prospect/view_prospect_details"><?php echo  $prospectDetailsAry['szName'];?></a>
+                         <?php }?>
+                        <i class="fa fa-circle"></i>
+                       </li>
                     <li>
                        <span class="active">Add Meeting Note</span>
                     </li>
@@ -46,8 +56,14 @@
                                     <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-4">
-                                             <a href="<?= __BASE_URL__ ?>/prospect/prospectRecord" class="btn default uppercase"
+                                              <?php if($flag==1){?>
+                                 <a href="<?= __BASE_URL__ ?>/prospect/prospectRecord" class="btn default uppercase"
                                            type="button">Cancel</a>
+                                   <?php } else {?>
+                                         <a href="<?= __BASE_URL__ ?>/prospect/view_prospect_details" class="btn default uppercase"
+                                           type="button">Cancel</a>
+                              
+                                 <?php }?>
                                             <input type="submit" class="btn green-meadow" value="SAVE" name="meetingNotesData[submit]">
                                         </div>
                                     </div>
