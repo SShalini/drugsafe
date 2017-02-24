@@ -594,15 +594,24 @@ public function deleteProspectConfirmation()
          
           if($q){
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = $count."<strong><h3> Prospect Record imported successfully.</h3></strong>";
+                    $szMessage['content'] = $count."<strong> Prospect Record imported successfully.</strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
-                    }  
+                    }
+                    else{
+                     $szMessage['type'] = "error";
+                    $szMessage['content'] = $count."<strong> Sorry, there was an error while importing your file.</strong>";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);  
+                    redirect(base_url('/prospect/prospectRecord'));
+               
+                    }
 
         } else {
-            $errorFlag = true;
-            $sucessFlag = false;
-            $errmsg = "Sorry, there was an error uploading your file.";
+                    $szMessage['type'] = "danger";
+                    $szMessage['content'] = $count."<strong><h3> Sorry, there was an error While importing your file..</h3></strong>";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);  
+                    redirect(base_url('/prospect/prospectRecord'));
+           
         }
     }else{ 
           $data['mode'] = '__IMPORT_CSV_POPUP__';
