@@ -150,7 +150,7 @@ class Prospect_Model extends Error_Model
                 }
                
             }
-            
+        
            
             if ($this->error == true)
                 return false;
@@ -168,9 +168,10 @@ class Prospect_Model extends Error_Model
           else{
              $data['iFranchiseeId'] =$data['iFranchiseeId']; 
           }
-      $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
+     
        $date = date('Y-m-d H:i:s');
        if($flag==1){
+            $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
            $meetingDateTime = $this->getSqlFormattedDate($data['dt_last_updated_meeting']);
          
            if($data['industry']== 'Agriculture, Forestry and Fishing'){
@@ -234,7 +235,7 @@ class Prospect_Model extends Error_Model
                              
       
        $whereAry = array(
-                'iFranchiseeId' => (int)$data['iFranchiseeId'],
+                'iFranchiseeId' => (int)$franchiseeid,
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
                 'szContactNo' => $data['szContactNo'],

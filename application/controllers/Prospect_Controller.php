@@ -62,7 +62,7 @@ public function prospectRecord()
         $prospectDetailsSearchAry = $this->Prospect_Model->getAllProspectDetails($id);
 
         if (!empty($_POST)) {
-            $_POST['szSearch3'] = $_POST['szSearchClRecord2'];
+            $_POST['szSearch3'] = $_POST['szSearch3'];
         } else {
             $_POST['szSearch3'] = $id;
         }
@@ -89,7 +89,6 @@ public function addprospect()
         die;
     }
     $franchiseId = $_SESSION['drugsafe_user']['id'];
-    $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
     $validate= $this->input->post('addprospect');
    
      if($this->Prospect_Model->validateProspectData($validate,array(),false))
@@ -637,12 +636,18 @@ public function deleteProspectConfirmation()
          
           if($query){
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = $count."<strong> Prospect Record imported successfully.</strong>";
+                    if ($count==0){
+                       $szMessage['content'] = $count."<strong> Prospect Record imported successfully and.</strong>";   
+                    }
+                    else{
+                        $szMessage['content'] = "<strong> Prospect Record imported successfully , but" .$count. " row is not inserted because of invalid data. </strong>";  
+                    }
+                  
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
                     }
                     else{
-                     $szMessage['type'] = "error";
+                     $szMessage['type'] = "danger";
                     $szMessage['content'] = $count."<strong> Sorry, there was an error while importing your file.</strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
@@ -651,15 +656,11 @@ public function deleteProspectConfirmation()
 
         } else {
                     $szMessage['type'] = "danger";
-                    $szMessage['content'] = $count."<strong><h3> Sorry, there was an error While importing your file..</h3></strong>";
+                    $szMessage['content'] = "<strong><h3> Sorry, there was an error While importing your file..</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
            
         }
-    }else{ 
-          $data['mode'] = '__IMPORT_CSV_POPUP__';
-          $this->load->view('admin/admin_ajax_functions',$data);
-          $errmsg = "Invalid file uploaded. Only .csv file is allowed. Please try again.";
     }
      }
 

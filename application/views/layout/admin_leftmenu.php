@@ -87,13 +87,13 @@
                 <?php  if ($_SESSION['drugsafe_user']['iRole'] == '1' ||$_SESSION['drugsafe_user']['iRole'] == '5') { ?>
                   <a href="<?php echo __BASE_URL__; ?>/prospect/franchiseeProspectRecord" class="nav-link nav-toggle">
                      <i class="fa fa-files-o" aria-hidden="true"></i>
-                    <span class="title">Prospect Record</span>
+                    <span class="title">Sales CRM</span>
                     <span class="selected"></span>
                 </a>
                <?php   } else{?>
                       <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="nav-link nav-toggle">
                      <i class="fa fa-files-o" aria-hidden="true"></i>
-                    <span class="title">Prospect Record</span>
+                    <span class="title">Sales CRM</span>
                     <span class="selected"></span>
                 </a>
                       <?php   } ?>
