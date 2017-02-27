@@ -70,18 +70,18 @@
                             ?>
                        
                                 &nbsp; &nbsp;
-                                  <!--<a onclick="export_csv_report('<?php /*echo $_POST['szSearch3'];*/?>','<?php /*echo $_POST['szSearch1'];*/?>','<?php /*echo $_POST['szSearch2'];*/?>')" href="javascript:void(0);"
+                                  <a onclick="export_csv_report('<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
-                                    <i class="fa fa-file-excel-o"></i> Export CSV</a>-->
+                                    <i class="fa fa-file-excel-o"></i> Export CSV</a>
                                      <?php
                         }
                     
                             ?>
                        
                                   &nbsp; &nbsp;
-                                  <!--<a onclick="import_csv_popup()" href="javascript:void(0);"
+                                  <a onclick="import_csv_popup()" href="javascript:void(0);"
                                    class=" btn green-meadow">
-                                    <i class="fa fa-reply"></i> Import CSV</a>-->
+                                    <i class="fa fa-reply"></i> Import CSV</a>
                             </div>
                         </div>
                       <?php
@@ -221,23 +221,31 @@
                                                     }
                                                      ?> </td>
                                            <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="addMeetingNote" title="Add Meeting Notes" onclick="addMeetingNotesData('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="addMeetingNote" title="Add Meeting Notes" onclick="addMeetingNotesData('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Data" id="editProspectDetails" onclick="editProspectDetails('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="prospectsView" title="View Prospect Details" onclick="viewProspect(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="prospectsView" title="View Prospect Details" onclick="viewProspect(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                <?php $prospectDetailsByProspectsIdAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($prospectDetailsData['id']);
                                                if(empty($prospectDetailsByProspectsIdAry)) {
                                                ?> 
-                                               <a class="btn btn-circle btn-icon-only btn-default" id="ProspectStatus" title="Delete Prospect Record" onclick="prospectDelete(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                               <a class="btn btn-circle btn-icon-only btn-default" id="ProspectStatus" title="Delete Prospect Record" onclick="prospectDelete(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
-                                               <?php }?> 
+                                               <?php }
+                                               if($_SESSION['drugsafe_user']['iRole']==1){
+                                               ?> 
+                                               <a class="btn btn-circle btn-icon-only btn-default" id="changeToClient" title ="Change to Client" onclick="changeToClient('<?php echo $prospectDetailsData['id'];?>')" href="javascript:void(0);" >
+                                                <i class="fa fa-bars"></i> 
+                                                </a>
+                                                 <?php
+                                                  }
+                                               ?>  
                                             </td>
                                         </tr>
                                         <?php 
@@ -268,13 +276,9 @@
             </div>
     	<?php }?>
                 
-           
-        </div>
-    </div>
-    
-                        
+                             </div>
+                         </div>
                     </div>
-                 
                 </div>
             </div> 
         </div>

@@ -251,6 +251,7 @@ class Prospect_Model extends Error_Model
                 'szContactMobile' => $data['szContactMobile'],
                 'industry' => $value,
                 'status' => $status,
+                'szCreatedBy' => (int)$_SESSION['drugsafe_user']['id'],
                'dt_last_updated_meeting' => $meetingDateTime
             );    
        }
@@ -271,6 +272,7 @@ class Prospect_Model extends Error_Model
                 'szContactEmail' => $data['szContactEmail'],
                 'szContactPhone' => $data['szContactPhone'],
                 'szContactMobile' => $data['szContactMobile'],
+                'szCreatedBy' => (int)$_SESSION['drugsafe_user']['id'],
                 'industry' => $data['industry'],
                 'status' => '1'
             );   
@@ -350,7 +352,6 @@ class Prospect_Model extends Error_Model
          $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
          $date = date('Y-m-d H:i:s');
             $dataAry = array(
-                
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
@@ -364,6 +365,7 @@ class Prospect_Model extends Error_Model
                 'szContactEmail' => $data['szContactEmail'],
                 'szContactPhone' => $data['szContactPhone'],
                 'szContactMobile' => $data['szContactMobile'],
+                'szCreatedBy' => $_SESSION['drugsafe_user']['id'],
                 'industry' => $data['industry'],
                 'dtUpdatedOn' =>$date,
                 'isDeleted' =>'0'
@@ -651,6 +653,20 @@ class Prospect_Model extends Error_Model
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
+        } else {
+            return false;
+        }
+    }
+     public function changeToClient($idProspect)
+    {
+       
+        $dataAry = array(
+            'szConvertToClient' => '1'
+        );
+        $this->db->where('id', $idProspect);
+
+        if ($query = $this->db->update(__DBC_SCHEMATA_PROSPECT__, $dataAry)) {
+            return true;
         } else {
             return false;
         }

@@ -591,7 +591,7 @@ public function deleteProspectConfirmation()
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     if(isset($_POST["importcustomers"]) && ($_POST["importcustomers"] == '1')) {
-
+    
     $customerImport = TRUE;
     if($imageFileType == 'csv'){
         if (move_uploaded_file($_FILES["impcustomers"]["tmp_name"], $target_file)) {
@@ -625,8 +625,9 @@ public function deleteProspectConfirmation()
                $_POST['prospectAry']['szCountry'] = $worksheet[13];
                $_POST['prospectAry']['szZipCode'] = $worksheet[14];
                $_POST['prospectAry']['dt_last_updated_meeting'] = $worksheet[15];
+               $_POST['prospectAry']['ifranchiseeId'] = $_POST["ifranchiseeId"];
                  
-            $validation=$this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1);
+              $validation=$this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1);
                 if($validation)
                 {
                      $query =  $this->Prospect_Model->insertProspectData($_POST['prospectAry'],1); 
@@ -634,10 +635,11 @@ public function deleteProspectConfirmation()
                 else
                 {
                     $count++;
+                    continue;
                 }
             }
-         
-          if($query){
+        
+                   if($query){
                     $szMessage['type'] = "success";
                     if ($count==0){
                        $szMessage['content'] = $count."<strong> Prospect Record imported successfully and.</strong>";   
@@ -650,24 +652,24 @@ public function deleteProspectConfirmation()
                     redirect(base_url('/prospect/prospectRecord'));
                     }
                     else{
-                     $szMessage['type'] = "danger";
-                    $szMessage['content'] = $count."<strong> Sorry, there was an error while importing your file.</strong>";
+                     $szMessage['type'] = "error";
+                    $szMessage['content'] = "<strong> Sorry, there was an error while importing your file.</strong>" .$count . "<strong> rows not inserted </strong>" ;
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
                
                     }
 
         } else {
-                    $szMessage['type'] = "danger";
-                    $szMessage['content'] = "<strong><h3> Sorry, there was an error While importing your file..</h3></strong>";
+                    $szMessage['type'] = "error";
+                    $szMessage['content'] = "<strong><h3> Sorry, there was an error While importing your file.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
            
         }
-    }
-     }
-
+        
+       }
       }
+     }
     function franchiseeProspectRecord()
     {
 
@@ -733,6 +735,21 @@ public function deleteProspectConfirmation()
         $result .= "</select>";
         echo $result;
     }    
+ public function changeToClientAlert()
+ {
+    $data['mode'] = '__CHANGE_TO_CLIENT__';
+    $prospectId= $this->input->post('prospectId');
+    $data['prospectId'] = $this->input->post('prospectId');
+    $this->load->view('admin/admin_ajax_functions',$data);   
+ }
+ public function changeToClientConfirmation()
+ {
+    $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION__';
+    $prospectId= $this->input->post('prospectId');
+    $data['prospectId'] = $this->input->post('prospectId');
+    $this->Prospect_Model->changeToClient($_POST['prospectId']);
+    $this->load->view('admin/admin_ajax_functions',$data);   
+ }
  
 }
 ?>

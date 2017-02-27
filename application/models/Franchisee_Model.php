@@ -1073,6 +1073,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
 
     }
+    
 }
 
 ?>

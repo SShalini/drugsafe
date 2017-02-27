@@ -2865,7 +2865,7 @@ if ($mode == '__SHOW_MEETING_DESCRIPTION_POPUP__') {
 if ($mode == '__IMPORT_CSV_POPUP__') {
     echo "SUCCESS||||";
     ?>
-      <div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="static" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -2876,22 +2876,42 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                     </div>
                    
                 </div>
+                 <div class="modal-body">
                 <form name="ProductimportForm" id="ProductimportForm" method="post" action="<?= __BASE_URL__ ?>/prospect/importCsvData" class="form-horizontal"
                       enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="portlet-body form">
-                            <!-- BEGIN FORM-->
-                            <div class="col-md-12">
-                              
-                                <div class="input-group">
+                   <div class="form-body">
+                                <div  class="form-group ">
+                                      <label class="col-md-3 control-label"> </label>
+                                    <div class="col-md-5">
+                                        
+                                            <div class="input-group">
                                       <div class="row">
-                                      <div class="col-md-6">
+                                      <div class="col-md-12">
                                     <input autocomplete="off" type="file" name="impcustomers" id='impcustomers'
                                            onfocus="remove_formError(this.id,'true')">
                                     </div>
-                                           <div class="col-md-6">
-                                          
-                                                    <select class="form-control" name="addprospect[iFranchiseeId]"
+                                   </div>
+                                    </div>
+                                    </div>
+
+                                </div>
+                                 <div class="row">
+                                     <div class="col-md-3">
+                                       <span></span>    
+                                     </div>
+                                     <div class="col-md-5">
+                                       <span id="error" class="err"></span>    
+                                     </div>
+                                   
+                                     </div>
+                                     <br>
+                                    <input type="hidden" name="importcustomers" value="1"/>
+                <?php if(($_SESSION['drugsafe_user']['iRole']==5) || ($_SESSION['drugsafe_user']['iRole']==1)) {?>
+                                <div class="form-group " >
+                                    <label class="col-md-3 control-label">Franchisee</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                                 <select class="form-control" name="addprospect[iFranchiseeId]"
                                                             id="iFranchiseeId" Placeholder="Franchisee"
                                                             onfocus="remove_formError(this.id,'true')">
                                                         <option value=''>Select</option>
@@ -2908,32 +2928,94 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                                                         }
                                                         ?>
                                                     </select>
-                                                </div>
-                                              
-
                                         </div>
-                                    <br>
-                                     <span id="error" class="err"></span>
-                                     <br>
-                                    <input type="hidden" name="importcustomers" value="1"/>
+                                       
+                                    </div>
 
                                 </div>
-                                </div>
+                                      <div class="row">
+                                     <div class="col-md-3">
+                                       <span></span>    
+                                     </div>
+                                     <div class="col-md-5">
+                                       <span id="err" class="err"></span>    
+                                     </div>
+                                   
+                                     </div>
+                                     <input type="hidden" id ="adminOrOp" name="adminOrOp" value="1"/>
+                <?php }?>
                             </div>
-
+                     
                         </div>
 
-                    </div>
-                   <br> 
+                     
                     <div class="modal-footer">
                          <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                         <input type="button" name="pricesimport" value="Import" onclick="import_csv_popup_confirmation()" class="btn green"/>
                     </div>
                 </form>
+                 </div>
             </div>
 
         </div>
     </div>
     <?php
-}        
+}  if ($mode == '__CHANGE_TO_CLIENT__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="changeToClientStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Change To Client</span>
+                        </h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i>  Are you sure you want to
+                        change  the selected Prospect to Client?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="changeToClientConfirmation('<?php echo $prospectId; ?>'); return false;"
+                            class="btn green"><i class="fa fa-check"></i> Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}   
+ if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION__') {
+
+    echo "SUCCESS||||";
+    ?>
+    <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Change To Client Confirmation</span> </h4>
+                </div>
+           
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i>Selected Prospect has been successfully changed to Client .</p>
+                </div>
+               <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <?php
+}
+   
   ?>

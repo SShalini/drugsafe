@@ -2190,6 +2190,14 @@ function import_csv_popup() {
 
 function import_csv_popup_confirmation() {
   var file =document.getElementById("impcustomers").value
+  var adminOrOp = $("#adminOrOp").val();
+  if(adminOrOp) {
+  var ifranchiseeId = $("#iFranchiseeId").val();
+  if(!ifranchiseeId){
+   $('#err').html('Please select a franchisee.');
+   $('#err').show();
+     return false;  
+}}
   if(!file){
     $('#error').html('Please select a csv file.');
      $('#error').show();
@@ -2206,7 +2214,34 @@ function import_csv_popup_confirmation() {
      $('#error').show();
      return false; 
   }
-     
   }
+}
+function changeToClient(prospectId) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/prospect/changeToClientAlert", {prospectId: prospectId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#changeToClientStatus').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
 
+    });
+}
+function changeToClientConfirmation(prospectId) {
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#changeToClientStatus').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/prospect/changeToClientConfirmation", {prospectId: prospectId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#changeToClientStatusConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
 }
