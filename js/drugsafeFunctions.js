@@ -2189,7 +2189,7 @@ function import_csv_popup() {
 }
 
 function import_csv_popup_confirmation() {
-  var file =document.getElementById("impcustomers").value
+  var file =document.getElementById("imp_prospects").value
   var adminOrOp = $("#adminOrOp").val();
   if(adminOrOp) {
   var ifranchiseeId = $("#iFranchiseeId").val();
@@ -2207,7 +2207,7 @@ function import_csv_popup_confirmation() {
    var fileExtention = (/[.]/.exec(file)) ? /[^.]+$/.exec(file) : undefined;
   if(fileExtention=='csv'){
     $('.error').hide();
-    $("#ProductimportForm").submit();   
+    $("#ProspectimportForm").submit();   
   }
   else{   
      $('#error').html('Invalid file uploaded. Only .csv file is allowed. Please try again.');
@@ -2244,4 +2244,13 @@ function changeToClientConfirmation(prospectId) {
         jQuery('#loader').attr('style', 'display:none');
 
     }); 
+}
+function getAgentListByFrId(idFranchisee) {
+    $.post(__BASE_URL__ + "/franchisee/getAgentListByFrIdData", {idFranchisee: idFranchisee}, function (result) {
+        if (result != '') {
+            $("#szAgent").empty();
+            $("#szAgent").html(result);
+            $("#szSearchClRecord").customselect();
+        }
+    });
 }

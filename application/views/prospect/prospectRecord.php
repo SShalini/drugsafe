@@ -38,7 +38,9 @@
                               <a href="<?php echo __BASE_URL__; ?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                        <?php if($_SESSION['drugsafe_user']['iRole']==1){
+                        <?php
+                        if(!empty($_POST['szSearch3'])){
+                        if($_SESSION['drugsafe_user']['iRole']==1){
                             $userArray = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearch3']);?>
                          <li>
                            
@@ -46,7 +48,7 @@
                             <i class="fa fa-circle"></i>
                         </li>
                              
-                        <?php } ?>
+                        <?php }} ?>
                         <li>
                             <span class="active">Prospect Record</span>
                         </li>
@@ -240,7 +242,7 @@
                                                <?php }
                                                if($_SESSION['drugsafe_user']['iRole']==1){
                                                ?> 
-                                               <a class="btn btn-circle btn-icon-only btn-default" id="changeToClient" title ="Change to Client" onclick="changeToClient('<?php echo $prospectDetailsData['id'];?>')" href="javascript:void(0);" >
+                                               <a class="btn btn-circle btn-icon-only btn-default" id="changeToClient" title ="Convert to Client" onclick="changeToClient('<?php echo $prospectDetailsData['id'];?>')" href="javascript:void(0);" >
                                                 <i class="fa fa-bars"></i> 
                                                 </a>
                                                  <?php

@@ -160,7 +160,7 @@ class Prospect_Model extends Error_Model
     
   }
       function insertProspectData($data,$flag='0'){
-          
+       
           if(empty($data['iFranchiseeId'])){
              $data['iFranchiseeId']  =  $_SESSION['drugsafe_user']['id'];  
           }
@@ -170,7 +170,7 @@ class Prospect_Model extends Error_Model
      
        $date = date('Y-m-d H:i:s');
        if($flag==1){
-            $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
+          
            $meetingDateTime = $this->getSqlFormattedDate($data['dt_last_updated_meeting']);
          
            if($data['industry']== 'Agriculture, Forestry and Fishing'){
@@ -234,7 +234,7 @@ class Prospect_Model extends Error_Model
                              
       
        $whereAry = array(
-                'iFranchiseeId' => (int)$franchiseeid,
+                'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
                 'szContactNo' => $data['szContactNo'],

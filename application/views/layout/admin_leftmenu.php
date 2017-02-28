@@ -81,7 +81,15 @@
                 
                 
               
-            <?php } ?>
+            <?php } else { ?>
+             <li class="nav-item start <?php if (trim($pageName) == 'Agent_Record') { ?>active open<?php } ?>">
+                <a href="<?php echo __BASE_URL__; ?>/franchisee/viewAgentEmpByfranchisee" class="nav-link nav-toggle">
+                     <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    <span class="title">Agent Record</span>
+                    <span class="selected"></span>
+                </a>
+            </li>
+             <?php }  ?>
             
              <li class="nav-item start <?php if (trim($pageName) == 'Prospect_Record') { ?>active open<?php } ?>">
                 <?php  if ($_SESSION['drugsafe_user']['iRole'] == '1' ||$_SESSION['drugsafe_user']['iRole'] == '5') { ?>

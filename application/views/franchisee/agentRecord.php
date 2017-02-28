@@ -1,6 +1,6 @@
 <script type='text/javascript'>
     $(function() {
-
+       $("#szSearchAgentRecord").customselect();
        $("#szSearchClientname").customselect();
     });
 </script>
@@ -41,10 +41,32 @@
                         </div>
                         <div class="row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
-                    
+                           <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
+                                  <div class="search col-md-3">
+                                                           
+                                      <select class="form-control custom-select" name="szSearchAgentRecord" id="szSearchAgentRecord" onfocus="remove_formError(this.id,'true')" onchange="getAgentListByFrId(this.value);">
+                                          <option value="">Franchisee Name</option>
+                                           <?php
+                                           if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                                            $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
+                                            }
+                                            else{
+                                                    $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                                                     $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
+                                            }
+                                            foreach($searchOptionArr as $searchOptionList)
+                                                            {
+                                                $selected = ($searchOptionList['id'] == $_POST['szSearchAgentRecord'] ? 'selected="selected"' : '');
+                                                echo '<option value="'.$searchOptionList['id'].'" ' . $selected . '>'.$searchOptionList['szName'].'</option>';
+                                            }
+                                          ?>
+                                      </select>
+                                    </div>
+                                   <div class=" col-md-1"> </div>
+                             <?php }?>
                                   
                                   <div class="search col-md-3">
-                                        <div id='szClient'>                         
+                                        <div id='szAgent'>                         
                                       <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Agent/Employee Name</option>
                                           <?php

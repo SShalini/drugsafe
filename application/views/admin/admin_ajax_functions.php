@@ -2877,7 +2877,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                    
                 </div>
                  <div class="modal-body">
-                <form name="ProductimportForm" id="ProductimportForm" method="post" action="<?= __BASE_URL__ ?>/prospect/importCsvData" class="form-horizontal"
+                <form name="ProspectimportForm" id="ProspectimportForm" method="post" action="<?= __BASE_URL__ ?>/prospect/importCsvData" class="form-horizontal"
                       enctype="multipart/form-data">
                    <div class="form-body">
                                 <div  class="form-group ">
@@ -2887,7 +2887,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                                             <div class="input-group">
                                       <div class="row">
                                       <div class="col-md-12">
-                                    <input autocomplete="off" type="file" name="impcustomers" id='impcustomers'
+                                    <input autocomplete="off" type="file" name="imp_prospects" id='imp_prospects'
                                            onfocus="remove_formError(this.id,'true')">
                                     </div>
                                    </div>
@@ -2905,13 +2905,13 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                                    
                                      </div>
                                      <br>
-                                    <input type="hidden" name="importcustomers" value="1"/>
-                <?php if(($_SESSION['drugsafe_user']['iRole']==5) || ($_SESSION['drugsafe_user']['iRole']==1)) {?>
+                                    <input type="hidden" name="importProspects" value="1"/>
+                                   <?php if(($_SESSION['drugsafe_user']['iRole']==5) || ($_SESSION['drugsafe_user']['iRole']==1)) {?>
                                 <div class="form-group " >
                                     <label class="col-md-3 control-label">Franchisee</label>
                                     <div class="col-md-8">
                                         <div class="input-group">
-                                                 <select class="form-control" name="addprospect[iFranchiseeId]"
+                                                 <select class="form-control" name="iFranchiseeId"
                                                             id="iFranchiseeId" Placeholder="Franchisee"
                                                             onfocus="remove_formError(this.id,'true')">
                                                         <option value=''>Select</option>
@@ -2922,7 +2922,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                                                             foreach ($franchiseeAray as $franchiseeDetails) {
                                                                 ?>
                                                                 <option
-                                                                    value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['addprospect']['iFranchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
+                                                                    value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['iFranchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
                                                                 <?php
                                                             }
                                                         }
@@ -2946,7 +2946,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                 <?php }?>
                             </div>
                      
-                        </div>
+                       
 
                      
                     <div class="modal-footer">
@@ -2970,7 +2970,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Change To Client</span>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Convert To Client</span>
                         </h4>
                     </div>
 
@@ -2978,7 +2978,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
 
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i>  Are you sure you want to
-                        change  the selected Prospect to Client?</p>
+                        convert  the selected Prospect to Client?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -3002,11 +3002,11 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Change To Client Confirmation</span> </h4>
+                                <span  class="caption-subject font-red-sunglo bold uppercase">Convert To Client Confirmation</span> </h4>
                 </div>
            
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i>Selected Prospect has been successfully changed to Client .</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i>Selected Prospect has been successfully converted to Client .</p>
                 </div>
                <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord" class="btn dark btn-outline">Close</a>

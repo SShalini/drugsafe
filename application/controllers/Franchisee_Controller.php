@@ -1051,12 +1051,34 @@ class Franchisee_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
-        $franchiseId = $_SESSION['drugsafe_user']['id'];
+        if($_SESSION['drugsafe_user']['iRole']==1){
+           if(!empty($_POST['szSearchAgentRecord']))
+         {
+           $franchiseId = $_POST['szSearchAgentRecord'];   
+         }
+         else{
+           $franchiseId = $this->session->userdata('id');  
+         }  
+      
+         
+         
+          if (!empty($_POST)) {
+            $_POST['szSearchAgentRecord'] = $_POST['szSearchAgentRecord'];
+        } else {
+            $_POST['szSearchAgentRecord'] = $franchiseId;
+        }
+          
+        }
+        else{
+           $franchiseId = $_SESSION['drugsafe_user']['id'];  
+        }
+       
         $agentListArray = $this->Franchisee_Model->getAgentrecord($franchiseId);
         $agentId = $_POST['szSearchClRecord'];
+        
         if (!empty($agentId)) {
 
-            $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId, $agentId);
+            $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId,$agentId);
         } else {
             $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId);
         }
@@ -1064,6 +1086,7 @@ class Franchisee_Controller extends CI_Controller
         $data['pageName'] = "Agent_Record";
         $data['szMetaTagTitle'] = "Agent Record";
         $data['is_user_login'] = $is_user_login;
+        $data['franchiseId'] = $franchiseId;
         $data['agentRecordArray'] = $agentRecordArray;
         $data['agentListArray'] = $agentListArray;
         $this->load->view('layout/admin_header', $data);
@@ -1229,8 +1252,70 @@ class Franchisee_Controller extends CI_Controller
 
         $this->load->view('admin/admin_ajax_functions', $data);
     }
+   function viewAgentEmpByfranchisee()
+    {
 
+        $is_user_login = is_user_login($this);
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
 
+        $searchAry = '';
+
+        if (isset($_POST['szSearchFrRecord']) && !empty($_POST['szSearchFrRecord'])) {
+            $id = $_POST['szSearchFrRecord'];
+        }
+
+        if ($id > 0) {
+            if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                  $recordArr = $this->Franchisee_Model->getAgentrecord($id, $idAgent);
+              
+            } else {
+                $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                $prospectAray = $this->Prospect_Model->getAllClientDetails(true, false, $operationManagerId, false, false, false, $id);
+            }
+            if (!empty($recordArr)) {
+                $this->session->set_userdata('id', $id);
+                redirect(base_url('/franchisee/agentRecord'));
+
+            }
+        }
+
+        $data['recordArr'] = $recordArr;
+        $data['pageName'] = "Agent_Record";
+        $data['szMetaTagTitle'] = "Agent Record";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('franchisee/viewAgentEmpByFr');
+        $this->load->view('layout/admin_footer');
+    }
+  function getAgentListByFrIdData($idFranchisee = '')
+    {
+        if (trim($idFranchisee) != '') {
+            $_POST['idFranchisee'] = $idFranchisee;
+        }
+ 
+         $agentListArray = $this->Franchisee_Model->getAgentrecord($_POST['idFranchisee']);
+
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearchClRecord\" name=\"szSearchClientname\" placeholder=\"Agent/Employee Name\" onfocus=\"remove_formError(this.id,'true')\">";
+        if (!empty($agentListArray)) {
+            $result .= "<option value=''>Agent/Employee Name</option>";
+            foreach ($agentListArray as $agentDetails) {
+                $result .= "<option value='" . $agentDetails['id'] . "'>" . $agentDetails['szName'] . "</option>";
+            }
+        } else {
+            $result .= "<option value=''>Agent/Employee Name</option>";
+        }
+        $result .= "</select>";
+        echo $result;
+    }    
 }
 
 ?>

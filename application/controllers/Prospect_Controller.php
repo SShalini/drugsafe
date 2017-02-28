@@ -283,7 +283,7 @@ public function deleteProspectConfirmation()
                 die;
             }
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('meetingNotesData[szDiscription]', 'Meeting Topic Description', 'required');
+            $this->form_validation->set_rules('meetingNotesData[szDiscription]', 'Meeting Description', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
@@ -398,7 +398,7 @@ public function deleteProspectConfirmation()
                                    <div class="search">
                                         <div id='changeStatus'>                         
                                        <select class="form-control " name="changeStatus[status]" id="szState"
-                                                    Placeholder="Status" onfocus="remove_formError(this.id,'true')">
+                                               Placeholder="Status" onfocus="remove_formError(this.id,'true')">
                                           
                                                 <option value=''>Select</option>
                                                 <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("1") ? "selected" : ""); ?>>Newly Added</option>
@@ -418,7 +418,103 @@ public function deleteProspectConfirmation()
                             </div>
                         </div>
                     </form>
+            <div class="portlet green-meadow box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i> Status Change Info
 
+                            </div>
+
+                        </div>
+                       <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getProspectStatusDetails($idProspect,1);
+                            ?>
+                        <div class="portlet-body">
+                                <div class="portlet-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th> Sr No</th>
+                                        <th> Status</th>
+                                        <th> Updated By</th>
+                                        <th> Updated On</th
+                                         
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $i=0;
+                                    foreach ($prospectStatusDetailsAry as $prospectStatusDetailsData) {
+                                      
+                                          $i++;
+                                     ?>
+                                        <tr>
+                                            <td> <?php echo $i; ?> </td>
+                                            <td>
+                                            <?php if ($prospectStatusDetailsData['status'] == 1) { ?>
+
+                                                <p title="Order Status"
+                                                   class="label label-sm label-warning">
+                                                    Newly Added
+                                                </p>
+                                                <?php
+                                            }
+                                            if ($prospectStatusDetailsData['status'] == 3) {
+                                                ?>
+                                                <p title="Order Status"
+                                                   class="label label-sm label-success">
+                                                    Completed
+                                                </p>
+                                                <?php
+                                            }
+
+                                            if ($prospectStatusDetailsData['status'] == 2) {
+                                                ?>
+                                                <p title="Order Status"
+                                                   class="label label-sm label-info">
+                                                     In Progress
+                                                </p>
+                                                <?php
+                                            }
+
+                                           ?></td>
+                                        <td>
+                                            <?php 
+                                             if($prospectStatusDetailsData['szUpdatedBy'])
+                                            {
+                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$prospectStatusDetailsData['szUpdatedBy']);
+                                                echo $franchiseeDetArr['szName'];
+                                            }
+                                            else
+                                            {
+                                               echo "N/A";
+                                            }
+                                           
+                                            ?> 
+                                         </td>
+                                         <td>  <?php
+                                        if($prospectStatusDetailsData['dtUpdatedOn']== '0000-00-00 00:00:00')
+                                        {
+                                          echo "N/A"; 
+                                        }
+                                        else{
+                                             echo date('d M Y',strtotime($prospectStatusDetailsData['dtUpdatedOn'])) . ' at '.date('h:i A',strtotime($prospectStatusDetailsData['dtUpdatedOn']));   
+                                          
+                                        }
+                                        ?> </td>
+                                    
+
+                                        </tr>
+                                        
+                                    <?php } ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                           
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -585,16 +681,15 @@ public function deleteProspectConfirmation()
       }
 
     public function importCsvData(){
-    $customerImport = false;
+   
     $target_dir = __APP_PATH__."/uploads/";
-    $target_file = $target_dir . basename($_FILES["impcustomers"]["name"]);
-    $uploadOk = 1;
+    $target_file = $target_dir . basename($_FILES["imp_prospects"]["name"]);
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-    if(isset($_POST["importcustomers"]) && ($_POST["importcustomers"] == '1')) {
+    if($_POST["importProspects"] == '1') {
     
-    $customerImport = TRUE;
     if($imageFileType == 'csv'){
-        if (move_uploaded_file($_FILES["impcustomers"]["tmp_name"], $target_file)) {
+      
+        if (move_uploaded_file($_FILES["imp_prospects"]["tmp_name"], $target_file)) {
             
            $File =$target_file;
 
@@ -625,7 +720,7 @@ public function deleteProspectConfirmation()
                $_POST['prospectAry']['szCountry'] = $worksheet[13];
                $_POST['prospectAry']['szZipCode'] = $worksheet[14];
                $_POST['prospectAry']['dt_last_updated_meeting'] = $worksheet[15];
-               $_POST['prospectAry']['ifranchiseeId'] = $_POST["ifranchiseeId"];
+               $_POST['prospectAry']['iFranchiseeId'] = $_POST['iFranchiseeId'];
                  
               $validation=$this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1);
                 if($validation)
@@ -642,7 +737,7 @@ public function deleteProspectConfirmation()
                    if($query){
                     $szMessage['type'] = "success";
                     if ($count==0){
-                       $szMessage['content'] = $count."<strong> Prospect Record imported successfully and.</strong>";   
+                       $szMessage['content'] = "<strong> Prospect Record imported successfully.</strong>";   
                     }
                     else{
                         $szMessage['content'] = "<strong> Prospect Record imported successfully , but" .$count. " row is not inserted because of invalid data. </strong>";  
