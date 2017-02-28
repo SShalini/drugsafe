@@ -3030,7 +3030,7 @@ if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase"> Assign Client Details</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase"> Assigned Client Details</span></h4>
                     </div>
 
                 </div>

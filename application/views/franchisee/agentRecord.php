@@ -138,7 +138,7 @@
                                                 <?php
                                                 } ?>
                                                  <a class="btn btn-circle btn-icon-only btn-default" title="View Agent Details" onclick="ViewAgentDetails('<?php echo $agentRecordData['id']; ?>','<?php echo $agentRecordData['franchiseeid']; ?>');" href="javascript:void(0);">
-                                                        <i class="fa fa-eye"></i> 
+                                                        <i class="fa fa-eye-slash"></i> 
                                                  </a>
                                                 <?php
                                                  if($_SESSION['drugsafe_user']['iRole']==1)

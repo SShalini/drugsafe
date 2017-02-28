@@ -606,6 +606,12 @@ public function deleteProspectConfirmation()
            {
                foreach ($prospectDetailsAry as $prospectDetailsData)
                {
+                   if($prospectDetailsData['dt_last_updated_meeting']=='0000-00-00 00:00:00'){
+                     $meetingVal = "N/A";  
+                   }
+                   else{
+                     $meetingVal = date('d/m/Y',  strtotime($prospectDetailsData['dt_last_updated_meeting'])). ' at '.date('h:i A',strtotime($prospectDetailsData['dt_last_updated_meeting'])); 
+                   }
                      if($prospectDetailsData['industry']==1){
                                $value = 'Agriculture, Forestry and Fishing';
                             }
@@ -654,7 +660,7 @@ public function deleteProspectConfirmation()
                        $data[$i]['szCity'] =$prospectDetailsData['szCity'];
                         $data[$i]['szCountry'] =$prospectDetailsData['szCountry'];
                        $data[$i]['szZipCode'] =$prospectDetailsData['szZipCode'];
-                       $data[$i]['dt_last_updated_meeting'] =date('d/m/Y',  strtotime($prospectDetailsData['dt_last_updated_meeting'])). ' at '.date('h:i A',strtotime($prospectDetailsData['dt_last_updated_meeting']));   ; 
+                       $data[$i]['dt_last_updated_meeting'] = $meetingVal ; 
                       
                        $i++;
 
@@ -740,7 +746,7 @@ public function deleteProspectConfirmation()
                        $szMessage['content'] = "<strong> Prospect Record imported successfully.</strong>";   
                     }
                     else{
-                        $szMessage['content'] = "<strong> Prospect Record imported successfully , but" .$count. " row is not inserted because of invalid data. </strong>";  
+                        $szMessage['content'] = "<strong> Prospect Record imported successfully , but &nbsp;".$count. " row is not inserted because of invalid data. </strong>";  
                     }
                   
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
@@ -748,7 +754,7 @@ public function deleteProspectConfirmation()
                     }
                     else{
                      $szMessage['type'] = "error";
-                    $szMessage['content'] = "<strong> Sorry, there was an error while importing your file.</strong>" .$count . "<strong> rows not inserted </strong>" ;
+                    $szMessage['content'] = "<strong> Sorry, there was an error while importing your file.</strong> &nbsp;" .$count . "<strong> rows not inserted </strong>" ;
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
                

@@ -573,14 +573,14 @@ class Prospect_Model extends Error_Model
     
         if ((int)$id > 0) {
             if($flag==1){
-                $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName,'id!=' => (int)$id));  
+                $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName,'id!=' => (int)$id,'isDeleted !=' => '1'));  
             }
             else{
-                  $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName,'id!=' => (int)$id));
+                  $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName,'id!=' => (int)$id,'isDeleted !=' => '1'));
             }
           
         } else {
-            $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName));
+            $result = $this->db->get_where(__DBC_SCHEMATA_PROSPECT__, array('szBusinessName' => $szBusinessName,'isDeleted !=' => '1'));
         }
 
         if ($result->num_rows() > 0) {
