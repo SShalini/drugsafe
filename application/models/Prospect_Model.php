@@ -128,7 +128,7 @@ class Prospect_Model extends Error_Model
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
-             if($data['iFranchiseeId']){
+             if($flag==2){
                 if (!in_array('iFranchiseeId', $arExclude)) $this->set_iFranchiseeId(sanitize_all_html_input(trim($data['iFranchiseeId'])), true);
             }
             if($flag==1){

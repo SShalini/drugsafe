@@ -90,8 +90,13 @@ public function addprospect()
     }
     $franchiseId = $_SESSION['drugsafe_user']['id'];
     $validate= $this->input->post('addprospect');
-   
-     if($this->Prospect_Model->validateProspectData($validate,array(),false))
+   if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){
+       $validateData =  $this->Prospect_Model->validateProspectData($validate,array(),false,2) ;  
+  
+     } else{
+        $validateData = $this->Prospect_Model->validateProspectData($validate,array(),false);
+     }
+     if($validateData)
             {
               
                 if($this->Prospect_Model->insertProspectData($validate))
@@ -176,9 +181,14 @@ public function deleteProspectConfirmation()
                 {
                     $prospectDataAry = $data_validate;
                 }
-               
-                if($this->Prospect_Model->validateProspectData($data_validate,array(),$idProspect))
-                {
+                if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){
+              $validateData =  $this->Prospect_Model->validateProspectData($data_validate,array(),$idProspect,2) ;  
+  
+                } else{
+                   $validateData = $this->Prospect_Model->validateProspectData($data_validate,array(),$idProspect);
+                }
+           if($validateData)
+             {
                     if($this->Prospect_Model->updateProspectDetails($data_validate,$idProspect))
                     {
                         $szMessage['type'] = "success";
