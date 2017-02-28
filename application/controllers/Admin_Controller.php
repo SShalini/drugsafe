@@ -282,7 +282,7 @@ class Admin_Controller extends CI_Controller {
            $is_user_login = is_user_login($this);
 //            echo 'fr2';
             // redirect to dashboard if already logged in
-           $count = $this->Admin_Model->getnotification();
+            $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 //            echo 'fr3';
             if(!$is_user_login)
@@ -298,31 +298,24 @@ class Admin_Controller extends CI_Controller {
         }
 //        die('fr6');
             $searchAry = '';
-            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-                $id = $_POST['szSearch'];
-            }
-            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
-                $id = $_POST['szSearch1'];
-            }
+          
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
-                $id = $_POST['szSearch2'];
+                $szName = $_POST['szSearch2'];
             }
-            if(isset($_POST['szSearch3']) && !empty($_POST['szSearch3'])){
-                $id = $_POST['szSearch3'];
-            }
+           
            
          
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
-                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$name,$email,$opId));
+                $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId,false,false,$id,$szName,$email,$opId));
                 $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
                
                 $this->pagination->initialize($config);
                
-                 $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$name,$email,$opId);
-                 $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
-                
+                 $franchiseeAray =$this->Admin_Model->viewFranchiseeList($searchAry,$operationManagerId, $config['per_page'],$this->uri->segment(3),$id,$szName,$email,$opId);
+                 $searchOptionArr =$this->Admin_Model->viewDistinctFranchiseeList($operationManagerId);
+               
                     $data['szMetaTagTitle'] = "Franchisee List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Franchisee_List";
@@ -354,29 +347,23 @@ class Admin_Controller extends CI_Controller {
              
             }
               $searchAry = '';
-            if(isset($_POST['szSearch']) && !empty($_POST['szSearch'])){
-                $id = $_POST['szSearch'];
-            }
-            if(isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])){
-                $id = $_POST['szSearch1'];
-            }
+            
             if(isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])){
-                $id = $_POST['szSearch2'];
+                $name = $_POST['szSearch2'];
             }
           
              // handle pagination
           
                 $config['base_url'] = __BASE_URL__ . "/admin/operationManagerList/";
-                $config['total_rows'] = count($this->Admin_Model->viewOperationManagerList($searchAry,false,false,$id,$name,$email));
+                $config['total_rows'] = count($this->Admin_Model->viewOperationManagerList($searchAry,false,false,$name));
                 $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
               
             
                 $this->pagination->initialize($config);
                
-                $operationManagerAray =$this->Admin_Model->viewOperationManagerList($searchAry, $config['per_page'],$this->uri->segment(3),$id,$name,$email);
-                $searchOptionArr =$this->Admin_Model->viewOperationManagerList();
+                $operationManagerAray =$this->Admin_Model->viewOperationManagerList($searchAry, $config['per_page'],$this->uri->segment(3),$name);
+                $searchOptionArr =$this->Admin_Model->viewDistinctOperationManagerList();
           
-                  
                     $data['szMetaTagTitle'] = "Operation Manager List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Operation_Manager_List";
@@ -501,7 +488,7 @@ class Admin_Controller extends CI_Controller {
                     if($this->Admin_Model->updateUsersDetails($data_validate,$idfranchisee))
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3>Franchisee data successfully updated</h3>.</strong> ";
+                        $szMessage['content'] = "<strong><h3>Franchisee data successfully updated.</h3></strong> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         ob_end_clean();
                         $this->session->unset_userdata('idOperationManager');

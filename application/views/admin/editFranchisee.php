@@ -343,7 +343,7 @@
                               
                                   if($_SESSION['drugsafe_user']['iRole']=='5'){
                                         ?>
-                                     <input id="operationManagerId" class="form-control" type="text"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
+                                     <input id="operationManagerId" class="form-control" type="hidden"value="<?php echo $idOperationManager; ?>" name="addFranchisee[operationManagerId]">
                                   <?php }?>
                                      <div class="form-actions">
                                     <div class="row">

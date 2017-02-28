@@ -391,40 +391,31 @@ class Admin_Model extends Error_Model
         if (!empty($operationManagerId)) {
             $whereAry = array('operationManagerId=' => $operationManagerId, 'isDeleted=' => '0', 'iRole' => '2');
         } else {
-            $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '2' );
         }
-        $searchq = '';
-        if ($id > '0') {
-            $searchq = 'franchiseeId = ' . (int)$id;
-        }
+       
+      
         if (!empty($name)) {
-            $searchq = "szName LIKE '%$name%'";
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '2', 'szName' =>$name );
         }
-        if (!empty($email)) {
-            $searchq = "szEmail LIKE '%$email%'";
-        }
+       
         if (!empty($opId)) {
-            $searchq = "operationManagerId LIKE '%$opId%'";
+             $whereAry = array('isDeleted=' => '0', 'iRole' => '2', 'operationManagerId' =>$opId );
+         
         }
-
 
         $this->db->select('*');
         $this->db->from('tbl_franchisee');
         $this->db->join('ds_user', 'tbl_franchisee.franchiseeId = ds_user.id');
 
-        if (!empty($searchq)) {
-            $whereAry = array('isDeleted=' => '0', 'iRole' => '2');
-            $this->db->where($searchq);
-        } else {
             $this->db->where($whereAry);
-        }
+       
 
         $this->db->order_by($sortBy, $orderBy);
         $this->db->limit($limit, $offset);
         $this->db->order_by("franchiseeId", "asc");
         $query = $this->db->get();
-//$sql = $this->db->last_query($query);
-//print_r($sql);die;
+
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -432,7 +423,35 @@ class Admin_Model extends Error_Model
             return array();
         }
     }
+     public function viewDistinctFranchiseeList($operationManagerId = 0)
+    {
 
+        if (!empty($operationManagerId)) {
+            $whereAry = array('operationManagerId=' => $operationManagerId, 'isDeleted=' => '0', 'iRole' => '2');
+        } else {
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '2' );
+        }
+      
+        $this->db->select('szName');
+        $this->db->distinct('szName');
+        $this->db->from('tbl_franchisee');
+        $this->db->join('ds_user', 'tbl_franchisee.franchiseeId = ds_user.id');
+
+        $this->db->where($whereAry);
+       
+
+        $this->db->order_by($sortBy, $orderBy);
+        $this->db->limit($limit, $offset);
+        $this->db->order_by("franchiseeId", "asc");
+        $query = $this->db->get();
+
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
     public function getoperationManagerId($id = 0)
     {
         $whereAry = array('franchiseeId' => $this->sql_real_escape_string(trim($id)));
@@ -450,36 +469,21 @@ class Admin_Model extends Error_Model
         }
     }
 
-    public function viewOperationManagerList($searchAry = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $id = 0, $name = '', $email = '')
-    {
-        $searchAry = trim($searchAry);
-        $searchDataAry = explode("-", $searchAry);
-        $searchDataAry[0] = strtolower($searchDataAry[0]);
-        if ($searchDataAry[0] == 'om') {
-            $search = $searchDataAry[1];
-        } else {
-            $search = $searchDataAry[0];
-        }
-        $whereAry = array('isDeleted=' => '0', 'iRole' => '5');
-        $searchq = '';
-        if ($id > '0') {
-            $searchq = 'id = ' . (int)$id;
-        }
+    public function viewOperationManagerList($searchAry = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$name = '')
+    { 
+   
         if (!empty($name)) {
-            $searchq = "szName LIKE '%$name%'";
+             $whereAry = array('isDeleted=' => '0', 'iRole' => '5','szName=' =>$name);
+           
         }
-        if (!empty($email)) {
-            $searchq = "szEmail LIKE '%$email%'";
+        else{
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '5'); 
         }
+        
         $this->db->select('*');
-        if (!empty($searchq)) {
-            $whereAry = array('isDeleted=' => '0', 'iRole' => '5');
-            $this->db->where($searchq);
-
-        } else {
+        
             $this->db->where($whereAry);
-        }
-
+       
         $this->db->order_by($sortBy, $orderBy);
         $this->db->limit($limit, $offset);
         $this->db->order_by("id", "asc");
@@ -493,7 +497,27 @@ class Admin_Model extends Error_Model
             return array();
         }
     }
+ public function viewDistinctOperationManagerList()
+    {
+       
+        $this->db->select('szName');
+         $this->db->distinct('szName');
+            $whereAry = array('isDeleted=' => '0', 'iRole' => '5');
+            
+            $this->db->where($whereAry);
+      
 
+        $this->db->order_by($sortBy, $orderBy);
+        $this->db->limit($limit, $offset);
+        $this->db->order_by("id", "asc");
+        $query = $this->db->get(__DBC_SCHEMATA_USERS__);
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
     public function checkPasswordRecoveryExist($passwordKey)
     {
         $passwordKey = $this->sql_real_escape_string(trim($passwordKey));

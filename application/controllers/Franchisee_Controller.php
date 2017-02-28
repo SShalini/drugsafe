@@ -718,12 +718,7 @@ class Franchisee_Controller extends CI_Controller
         }
         $count = $this->Admin_Model->getnotification();
         $searchAry = '';
-        if (isset($_POST['szSearch']) && !empty($_POST['szSearch'])) {
-            $email = $_POST['szSearch'];
-        }
-        if (isset($_POST['szSearch1']) && !empty($_POST['szSearch1'])) {
-            $id = $_POST['szSearch1'];
-        }
+       
         if (isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])) {
             $name = $_POST['szSearch2'];
         }
@@ -739,12 +734,13 @@ class Franchisee_Controller extends CI_Controller
 
         $operationManagerAray = $this->Franchisee_Model->getOperationManagerDetailsById($idOperationManager);
         $franchiseeAray = $this->Admin_Model->viewFranchiseeList($searchAry, $operationManagerAray['id'], $config['per_page'], $this->uri->segment(3), $id, $name, $email);
-        $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, $operationManagerAray['id']);
+       $searchOptionArr =$this->Admin_Model->viewDistinctFranchiseeList($operationManagerAray['id']);
+        
 
         $data['allfranchisee'] = $searchOptionArr;
         $data['operationManagerAray'] = $operationManagerAray;
         $data['franchiseeAray'] = $franchiseeAray;
-//        $data['idOperationManager'] = $idOperationManager;
+        $data['idOperationManager'] = $idOperationManager;
         $data['pageName'] = "Franchisee_Record";
         $data['szMetaTagTitle'] = "Franchisee List";
         $data['is_user_login'] = $is_user_login;

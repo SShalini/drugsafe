@@ -68,68 +68,22 @@
                             ?>
                          <div class="row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/admin/franchiseeList" name="szSearchField" method="post">
-<!--                          <div class="search col-md-2">
-                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
-                              <select class="form-control custom-select" name="szSearch1" id="szSearch" onfocus="remove_formError(this.id,'true')">
-                                  <option value="">Franchisee Id</option>
-                                  <?php
-                                      foreach($allfranchisee as $franchiseeIdList)
-                                      {
-                                          $selected = ($franchiseeIdList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                          echo '<option value="'.$franchiseeIdList['id'].'" >FR-'.$franchiseeIdList['id'].'</option>';
-                                      }
-                                  ?>
-                              </select>
-                          </div>
-                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
-<!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+
+
                                   <div class="search col-md-3">
-                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
+                                   
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
                                           foreach($allfranchisee as $franchiseeIdList)
                                           {
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
+                                              $selected = ($franchiseeIdList['szName'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$franchiseeIdList['szName'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
                                   </div>
-<!--                                  <?php if($_SESSION['drugsafe_user']['iRole']==1){?> 
-                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
-                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
-                                  <div class="search col-md-2">
-                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?/*//=sanitize_post_field_value($_POST['szSearch'])*/?>">
-                                      <select class="form-control custom-select" name="szSearch3" id="szSearchOperationmanager" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Operation Manager</option>
-                                          <?php
-                                          foreach($allfranchisee as $franchiseeIdList)
-                                          {  
-                                              $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $franchiseeIdList['operationManagerId']);
-                                         
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch3'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'" >'.$operationManagerDetArr['szName'].'</option>';
-                                         
-                                          }
-                                          ?>
-                                      </select>
-                                  </div>
-                                  <?php }?>
-                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
-                                  <div class="search col-md-2">
-                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
-                                      <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Franchisee Email</option>
-                                          <?php
-                                          foreach($allfranchisee as $franchiseeIdList)
-                                          {
-                                              $selected = ($franchiseeIdList['id'] == $_POST['szSearch'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['id'].'" >'.$franchiseeIdList['szEmail'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
-                                  </div>-->
+
                                   <div class="col-md-1">
                                   <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
@@ -173,31 +127,7 @@
                                             <td> <?php echo $franchiseeData['szContactNumber'];?> </td>
                                             <td> <?php echo $franchiseeData['szCity'];?> </td>
                                            <td>
-                                            <!--    <?php 
-                                               if($franchiseeData['iActive']=='0')
-                                                {
-                                                   ?>
-                                                    <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Enable  Franchisee" onclick="franchiseeStatus(<?php echo $franchiseeData['id'];?>,'1');" href="javascript:void(0);"></i>
-                                                        <i class="fa fa-circle disabled" aria-hidden="true"></i>
- 
-                                                    </a>
-                                                   <?php
-                                               }
-                                               else
-                                               {
-                                                   ?>
-                                                    <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Disabled  Franchisee" onclick="franchiseeStatus(<?php echo $franchiseeData['id'];?>,'0');" href="javascript:void(0);"></i>
-                                                       <i class="fa fa-circle enable" aria-hidden="true"></i>
-
-                                                    </a>
-                                                   <?php 
-                                               }
-                                               ?>
-                                            -->
-<!--                                                <a class="btn btn-circle btn-icon-only btn-default" id="userAdd" title="Add Client" onclick="addClientData(<?php echo $franchiseeData['id'];?>,'','','1');" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-plus" aria-hidden="true"></i>
-
-                                                </a>-->
+                                            
                                                <?php 
                                                if($franchiseeData['iActive']=='1')
                                                 {
@@ -205,9 +135,7 @@
                                                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-<!--                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Client List" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>-->
+
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>
@@ -236,7 +164,7 @@
                                         <?php } }
                                                 $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
                                                 
-                                              // print_r($clientDetailsAray);
+                                              
                                                 if(empty($clientDetailsAray)){
                                                ?>  
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Franchisee" onclick="franchiseeDelete(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
