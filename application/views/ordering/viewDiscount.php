@@ -56,18 +56,18 @@
             <div class="row">
                 <div class="col-md-12">
                      <div class="row">
-                        <div class="col-sm-4 text-info bold">
+                        <div class="col-sm-2 text-info bold">
                             <lable>  Description:</lable>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <p><?php echo $getAllDiscountAry['description'];?></p>
                         </div>
                     </div>
                      <div class="row">
-                        <div class="col-sm-4 text-info bold">
+                        <div class="col-sm-2 text-info bold">
                             <lable> Discount:</lable>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <p><?php echo $getAllDiscountAry['percentage'];?>%</p>
                         </div>
                     </div>
