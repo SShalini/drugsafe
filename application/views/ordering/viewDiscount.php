@@ -36,13 +36,7 @@
                 <span class="caption-subject font-red-sunglo bold uppercase">
               
                      Percentage Details
-                  
-                    &nbsp; &nbsp;
-                   <?php  if($_SESSION['drugsafe_user']['iRole']=='2'){?>
-                  <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
-                    <i class="fa fa-pencil"></i> 
-                  </a> 
-                <?php }?>
+               
                 </span>
             </div>
             <div class="actions">
