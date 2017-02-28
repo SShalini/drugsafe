@@ -223,6 +223,7 @@ class Admin_Controller extends CI_Controller {
             $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $this->load->library('form_validation');
+        $this->form_validation->set_rules('addFranchisee[sztype]', 'Franchisee Type', 'required');
             $this->form_validation->set_rules('addFranchisee[szName]', 'Name', 'required|alpha_dash_space|is_unique[' . __DBC_SCHEMATA_USERS__ . '.szName]');
             $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
             $this->form_validation->set_rules('addFranchisee[abn]', 'ABN', 'required|abn_numeric|abn_length');

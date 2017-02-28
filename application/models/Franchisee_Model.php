@@ -1095,7 +1095,104 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             $this->addError("norecord", "No record found.");
             return false;
         }
-    } 
+    }
+
+    function getMappedNonCorpFranchisee($clientid,$corpfranchiseeid)
+    {
+        $wherestr = 'clientid = '.(int)$clientid.' AND corpfrid = '.(int)$corpfranchiseeid;
+        $query=$this->db->select('*')
+            ->where($wherestr)
+            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__)
+            ->get();
+        if($query->num_rows() > 0)
+        {
+            $row = $query->result_array();
+            return $row;
+        }
+        else
+        {
+            return array();
+        }
+    }
+
+    function getNonCorpFranchisee()
+    {
+        $wherestr = 'iRole = 2 AND franchiseetype = 0 AND iActive = 1 AND isDeleted = 0';
+        $query=$this->db->select('*')
+            ->where($wherestr)
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->get();
+        if($query->num_rows() > 0)
+        {
+            $row = $query->result_array();
+            return $row;
+        }
+        else
+        {
+            return array();
+        }
+    }
+
+    function MapClientToFranchisee($clientid,$corpfranchisee,$franchiseeid){
+        $flag = false;
+        $checkClientMappedOrNotArr = $this->getMappedNonCorpFranchisee($clientid,$corpfranchisee);
+        if(!empty($checkClientMappedOrNotArr)){
+            $updateWhere = 'clientid = '.(int)$clientid.' AND corpfrid = '.(int)$corpfranchisee;
+            $dataAry = array('franchiseeid' => $franchiseeid);
+            $this->db->where($updateWhere);
+            $queyUpdate = $this->db->update(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
+            if ($queyUpdate) {
+                $flag = true;
+            } else {
+                $flag = false;
+            }
+        }else{
+            $dataAry = array('franchiseeid' => $franchiseeid,
+                'corpfrid' => $corpfranchisee,
+                'clientid' => $clientid);
+            $this->db->insert(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
+            if ($this->db->affected_rows() > 0) {
+                $flag = true;
+            }else{
+                $flag = false;
+            }
+        }
+        if($flag && $this->switchClientFranchisee($clientid,$franchiseeid)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    function switchClientFranchisee($clientid,$franchiseeid){
+        $updateWhere = 'clientId = '.(int)$clientid;
+        $dataAry = array('franchiseeId' => $franchiseeid);
+        $this->db->where($updateWhere);
+        $queyUpdate = $this->db->update(__DBC_SCHEMATA_CLIENT__, $dataAry);
+        if ($queyUpdate) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getMappedFranchisees($franchiseeid)
+    {
+        $wherestr = 'corpfrid = '.(int)$franchiseeid;
+        $query=$this->db->select('*')
+            ->where($wherestr)
+            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__.' as corpfr')
+            ->get();
+        if($query->num_rows() > 0)
+        {
+            $row = $query->result_array();
+            return $row;
+        }
+        else
+        {
+            return array();
+        }
+    }
 }
 
 ?>

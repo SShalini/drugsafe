@@ -93,7 +93,7 @@ class Admin_Model extends Error_Model
     public function adminLoginUser($validate)
     {
         $whereAry = array('szEmail' => $validate['szEmail'], 'szPassword' => encrypt($validate['szPassword']), 'isDeleted=' => '0', 'iActive=' => '1');
-        $this->db->select('id,szName,szEmail,szPassword,iRole');
+        $this->db->select('id,szName,szEmail,szPassword,iRole,franchiseetype');
         $this->db->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
         if ($query->num_rows() > 0) {
@@ -102,6 +102,7 @@ class Admin_Model extends Error_Model
             $adminAry['szName'] = $row[0]['szName'];
             $adminAry['szEmail'] = $row[0]['szEmail'];
             $adminAry['iRole'] = $row[0]['iRole'];
+            $adminAry['sztype'] = $row[0]['franchiseetype'];
 
             $this->session->set_userdata('drugsafe_user', $adminAry);
 
@@ -281,6 +282,7 @@ class Admin_Model extends Error_Model
 
     function insertUserDetails($data, $id = 0)
     {
+        $flag = false;
         $szNewPassword = create_login_password();
         if (!empty($data['abn'])) {
             $abn = $data['abn'];
@@ -302,6 +304,7 @@ class Admin_Model extends Error_Model
             'iRole' => $data['iRole'],
             'iActive' => '1',
             'regionId' => $data['szRegionName'],
+            'franchiseetype' => ($data['sztype']=='1'?'1':'0'),
             'dtCreatedOn' => $date
         );
         $this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
@@ -314,51 +317,82 @@ class Admin_Model extends Error_Model
                 );
                 $this->db->insert(__DBC_SCHEMATA_FRANCHISEE__, $franchiseeAry);
             }
-
-            if ($this->assignUnassignRegionCode($data['szRegionName'],true)) {
-                $usercodecode = '';
-                $lastfrcode = $this->getmaxfranchiseecodeByregionId($data['szRegionName']);
-                if (!empty($lastfrcode)) {
-                    $regioncode = $this->getRegionById($data['szRegionName']);
-                    if (!empty($regioncode)) {
-                        $usercodecode = $regioncode['regionCode'] . '-' . sprintf('%02d', (int)$lastfrcode['maxfrcode'] + 1);
-                    }
-                }
-                if($this->updateusercodes((int)$id_franchisee,$usercodecode,(int)$lastfrcode['maxfrcode'] + 1)){
-                    if($this->assignUnassignRegionCode($data['szRegionName'],true)){
-                        return true;
+            if($data['sztype']=='1'){
+                $getlastcode = $this->getmaxCorpfranchiseecode();
+                if(!empty($getlastcode)){
+                    $usercodecode = '100-' . sprintf('%02d', (int)$getlastcode['maxfrcode'] + 1);
+                    if($this->updateusercodes((int)$id_franchisee,$usercodecode,(int)$getlastcode['maxfrcode'] + 1)){
+                        $flag = true;
                     }else{
-                        return false;
+                        $flag = false;
                     }
-                }else{
-                    return false;
+                }
+            }else{
+                if ($this->assignUnassignRegionCode($data['szRegionName'],true)) {
+                    $usercodecode = '';
+                    $lastfrcode = $this->getmaxfranchiseecodeByregionId($data['szRegionName']);
+                    if (!empty($lastfrcode)) {
+                        $regioncode = $this->getRegionById($data['szRegionName']);
+                        if (!empty($regioncode)) {
+                            $usercodecode = $regioncode['regionCode'] . '-' . sprintf('%02d', (int)$lastfrcode['maxfrcode'] + 1);
+                        }
+                    }
+                    if($this->updateusercodes((int)$id_franchisee,$usercodecode,(int)$lastfrcode['maxfrcode'] + 1)){
+                        if($this->assignUnassignRegionCode($data['szRegionName'],true)){
+                            $flag = true;
+                        }else{
+                            $flag = false;
+                        }
+                    }else{
+                        $flag = false;
+                    }
                 }
             }
-            $id_player = (int)$id_franchisee;
-            $replace_ary = array();
-            $replace_ary['szName'] = $data['szName'];
-            $replace_ary['szEmail'] = $data['szEmail'];
-            $replace_ary['szPassword'] = $szNewPassword;
-            $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
-            $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
-            if ($data['iRole'] == 2) {
-                createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+            if($flag){
+                $id_player = (int)$id_franchisee;
+                $replace_ary = array();
+                $replace_ary['szName'] = $data['szName'];
+                $replace_ary['szEmail'] = $data['szEmail'];
+                $replace_ary['szPassword'] = $szNewPassword;
+                $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+                $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
+                if ($data['iRole'] == 2) {
+                    createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
 
-            }
-            if ($data['iRole'] == 5) {
-                createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
-            }
+                }
+                if ($data['iRole'] == 5) {
+                    createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                }
 
-            return true;
+                return true;
+            }else{
+                return false;
+            }
         } else {
             return false;
         }
 
     }
 
-    function getmaxfranchiseecodeByregionId($regionid)
+    function getmaxfranchiseecodeByregionId($regionid,$franchiseetype=0)
     {
-        $whereAry = 'regionId = ' . (int)$regionid;
+        $whereAry = 'regionId = ' . (int)$regionid.' AND franchiseetype = '.(int)$franchiseetype;
+        $query = $this->db->select('MAX(franchiseCode) as maxfrcode')
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            $this->addError("norecord", "No franchisee code found.");
+            return false;
+        }
+    }
+
+    function getmaxCorpfranchiseecode()
+    {
+        $whereAry = 'franchiseetype = 1';
         $query = $this->db->select('MAX(franchiseCode) as maxfrcode')
             ->from(__DBC_SCHEMATA_USERS__)
             ->where($whereAry)

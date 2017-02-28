@@ -1850,9 +1850,6 @@ function confirmedUnassign(id) {
 function assignClientConfirmation(idAgent) {
       var value = jQuery("#assignClient").serialize(); 
       var newValue = value+"&idAgent="+idAgent;
-        /*$('.modal-backdrop').remove();
-        $('#static').modal("hide");
-        $('#assignClientPopupform').modal("hide");*/
         jQuery('#loader').attr('style', 'display:block');
         $.post(__BASE_URL__ + "/franchisee/assignClientAgentConfirmation",newValue, function (result) {
             
@@ -2283,6 +2280,43 @@ function ViewAgentDetails(idAgent,franchiseeid) {
      $.post(__BASE_URL__ + "/franchisee/ViewAgentDetailsData", {idAgent: idAgent,franchiseeid:franchiseeid}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
+
+    });
+}
+
+function assignfranchiseeClient(clientid) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/assignfranchiseeClient", {clientid: clientid}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#assignfrClientPopupform').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+
+function assignFranchiseeClientConfirmation(clientid) {
+    var value = jQuery("#assignClient").serialize();
+    var newValue = value+"&clientid="+clientid;
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/assignFranchiseeClientConfirmation",newValue, function (result) {
+
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box_level1").html(result_ary[1]);
+            $('#clientFrAssignmentStatusConfirmation').modal("show");
+            jQuery('#loader').attr('style', 'display:none');
+        }else{
+            $("#popup_box").html(result);
+            $('#assignfrClientPopupform').modal("show");
+            jQuery('#loader').attr('style', 'display:block');
+        }
+
+
 
     });
 }

@@ -74,7 +74,8 @@ define("__APP_PATH_LOGS__", __APP_PATH__ . "/application/logs");
 define("__BASE_USER_PRODUCT_IMAGES_URL__", __BASE_URL__ . "/product_img");
 define("__APP_PATH_PRODUCT_IMAGES__", __APP_PATH__ . "/product_img");
 
-define("__DBC_SCHEMATA_USERS__", "ds_user"); 
+define("__DBC_SCHEMATA_USERS__", "ds_user");
+define("__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__", "ds_corpfrmapping");
 define("__DBC_SCHEMATA_SITES__", "ds_sites");
 define("__DBC_SCHEMATA_CART__", "ds_cart");
 define("__DBC_SCHEMATA_ORDER_DETAILS__", "ds_order_details");

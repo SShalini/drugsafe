@@ -150,3 +150,13 @@ ALTER TABLE `tbl_discount` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `ds_user` ADD `franchiseCide` INT(6) NOT NULL AFTER `regionId`;
 ALTER TABLE `ds_user` CHANGE `franchiseCide` `franchiseCode` INT(6) NOT NULL;
 ALTER TABLE `tbl_client` ADD `clientCode` INT(6) NOT NULL AFTER `clientType`;
+
+CREATE TABLE IF NOT EXISTS `ds_corpfrmapping` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `corpfrid` int(6) NOT NULL,
+  `franchiseeid` int(6) NOT NULL,
+  `clientid` int(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `ds_user` ADD `franchiseetype` TINYINT(1) NOT NULL DEFAULT '0' AFTER `franchiseCode`;

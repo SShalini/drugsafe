@@ -34,6 +34,26 @@
                               action="<?= __BASE_URL__ ?>/admin/addFranchisee" name="addfranchisee" method="post">
                             <div class="form-body">
                                 <div
+                                        class="form-group <?php if(form_error('addFranchisee[sztype]')){?>has-error<?php }?>">
+                                    <label class="col-md-3 control-label">Franchisee Type</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-child"></i>
+                                                </span>
+                                            <select class="form-control" name="addFranchisee[sztype]" id="sztype">
+                                                <option value="">Select Franchisee Type</option>
+                                                <option value="0" <?php echo ($_POST['addFranchisee']['sztype'] == '0'?'selected="selected"':'');?>>Non Corporate</option>
+                                                <option value="1" <?php echo ($_POST['addFranchisee']['sztype'] == '1'?'selected="selected"':'');?>>Corporate</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                        if(form_error('addFranchisee[sztype]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('addFranchisee[sztype]');?></span>
+                                            </span><?php }?>
+                                    </div>
+                                </div>
+                                <div
                                     class="form-group <?php if(form_error('addFranchisee[szName]')){?>has-error<?php }?>">
                                     <label class="col-md-3 control-label"> Name</label>
                                     <div class="col-md-5">
@@ -59,7 +79,7 @@
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-ticket"></i>
                                                 </span>
                                                 <input id="abn" class="form-control" type="text"
                                                        value="<?php echo $_POST['addFranchisee']['abn']; ?>"

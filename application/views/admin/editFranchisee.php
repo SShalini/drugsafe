@@ -41,6 +41,31 @@
                         <div class="portlet-body">
                             <form class="form-horizontal" id="addFranchisee" action="<?=__BASE_URL__?>/admin/editFranchisee" name="addFranchisee" method="post">
                                 <div class="form-body">
+                                    <div
+                                            class="form-group <?php if(!empty($arErrorMessages['sztype'])){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label">Franchisee Type</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-child"></i>
+                                                </span>
+                                                <select class="form-control" name="addFranchisee[sztype]" id="sztype" disabled="disabled">
+                                                    <?php
+                                                    if(!isset($_POST['addFranchisee']['sztype'])){
+                                                        $_POST['addFranchisee']['sztype'] = $_POST['addFranchisee']['franchiseetype'];
+                                                    }
+                                                    ?>
+                                                    <option value="">Select Franchisee Type</option>
+                                                    <option value="0" <?php echo ($_POST['addFranchisee']['sztype'] == '0'?'selected="selected"':'');?>>Non Corporate</option>
+                                                    <option value="1" <?php echo ($_POST['addFranchisee']['sztype'] == '1'?'selected="selected"':'');?>>Corporate</option>
+                                                </select>
+                                            </div>
+                                            <?php
+                                            if(!empty($arErrorMessages['sztype'])){?>
+                                                <span class="help-block pull-left"><span><?php echo $arErrorMessages['sztype'];?></span>
+                                                </span><?php }?>
+                                        </div>
+                                    </div>
                                     <div class="form-group <?php if(!empty($arErrorMessages['szName'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Name</label>
                                         <div class="col-md-5">

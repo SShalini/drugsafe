@@ -2207,10 +2207,10 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
                                         </div>
                                     </div>
                                     <?php
-                                    if (form_error('allotQuantity[szReqQuantity]')) {
+                                    if (form_error('assignClient[szClient]')) {
                                         ?>
                                         <span class="help-block pull-left">
-                                        <span><?php echo form_error('allotQuantity[szReqQuantity]'); ?></span>
+                                        <span><?php echo form_error('assignClient[szClient]'); ?></span>
                                         </span><?php } ?>
                                 </div>
                             </div>
@@ -3098,5 +3098,122 @@ if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
     </div>
 
     <?php
-}   
+}
+if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="assignfrClientPopupform" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="modal-title">
+                        <div class="caption">
+                            <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span class="caption-subject font-red-sunglo bold uppercase"> Franchisee-Client Assignment</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-custom-heading"><i class="fa fa-users"></i> Assigned Franchisee</h4><hr>
+                    <div class="table-reposnsive">
+                        <?php if(!empty($NonCorpFranchiseeArr)){?>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <th>#</th>
+                                <th>Franchisee Code</th>
+                                <th>Franchisee</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $clcount = 1;
+                                foreach ($NonCorpFranchiseeArr as $franchiseedet){?>
+                                    <tr><td><?php echo $clcount;?></td>
+                                        <td><?php echo $franchiseedet['userCode'];?></td>
+                                        <td><?php echo $franchiseedet['szName'];?></td>
+                                        <td><?php echo $franchiseedet['szEmail'];?></td>
+                                        <td><?php echo $franchiseedet['szContactNumber'];?></td>
+                                    </tr>
+                                    <?php $clcount++; }
+                                ?>
+                                </tbody>
+                            </table>
+                        <?php }else{
+                            echo '</p>No non-corporate franchisee is assigned to this client.</p>';
+                        } ?>
+                    </div>
+                    <hr/>
+                    <h4 class="modal-custom-heading"><i class="fa fa-plus"></i> Assign Franchisee</h4><hr>
+                    <form action="" id="assignClient" name="assignClient" method="post"
+                          class="form-horizontal form-row-sepe">
+                        <div class="form-body">
+                            <div
+                                    class="form-group <?php if (form_error('assignfrClient[szFranchisee]')) { ?>has-error<?php } ?>">
+                                <label class="control-label col-md-4">Franchisee</label>
+                                <div class="col-md-5">
+                                    <div class="search">
+                                        <div id='szClient'>
+                                            <select class="form-control custom-select" name="assignfrClient[szFranchisee]" id="szFranchisee" onfocus="remove_formError(this.id,'true')">
+                                                <option value="">Franchisee Name</option>
+                                                <?php
+                                                foreach($clientlistArr as $clientList)
+                                                {
+                                                    echo '<option value="'.$clientList['id'].'" >'.$clientList['szName'].'</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <?php
+                                    if (form_error('assignfrClient[szFranchisee]')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('assignfrClient[szFranchisee]'); ?></span>
+                                        </span><?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                    <button type="button"
+                            onclick="assignFranchiseeClientConfirmation('<?php echo $clientid; ?>');"
+                            class="btn green-meadow">Assign
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup_box_level1"></div>
+    <?php
+}
+if($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_CONFIRMATION__')
+{
+    echo "SUCCESS||||";
+    ?>
+    <div id="clientFrAssignmentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span  class="caption-subject font-red-sunglo bold uppercase">Franchisee Assignment Confirmation</span> </h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected franchisee has been successfully assigned to the chossen client.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
   ?>

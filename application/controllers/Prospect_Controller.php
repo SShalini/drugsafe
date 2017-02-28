@@ -756,7 +756,7 @@ public function deleteProspectConfirmation()
                        $szMessage['content'] = "<strong> Prospect Record imported successfully.</strong>";   
                     }
                     else{
-                        $szMessage['content'] = "<strong> Prospect Record imported successfully , but &nbsp;".$count. " row is not inserted because of invalid data. </strong>";  
+                        $szMessage['content'] = "<strong> Prospect Record imported successfully, except ".$count. " rows because of invalid data. </strong>";
                     }
                   
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
@@ -764,7 +764,7 @@ public function deleteProspectConfirmation()
                     }
                     else{
                      $szMessage['type'] = "error";
-                    $szMessage['content'] = "<strong> Sorry, there was an error while importing your file.</strong> &nbsp;" .$count . "<strong> rows not inserted </strong>" ;
+                    $szMessage['content'] = "<strong> Sorry, there was an error while importing data. Please try again.</strong>" ;
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
                

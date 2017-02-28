@@ -656,11 +656,44 @@ class Franchisee_Controller extends CI_Controller
             }
         } else {
             $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $idClient, 1);
+            /*if ($_SESSION['drugsafe_user']['iRole'] == '2') {
+                $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $idClient, 1);
+                if($_SESSION['drugsafe_user']['sztype']=='1'){
+                    $getmappedfrs = $this->Franchisee_Model->getMappedFranchisees($franchiseId);
+                    //print_r($getmappedfrs);
+                    if(!empty($getmappedfrs)){
+                        foreach ($getmappedfrs as $getmappedfr) {
+                            $newrecarr = $this->Franchisee_Model->getAllClientDetails(true, $getmappedfr['franchiseeid'], $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $idClient, 1);
+                            // print_r($newrecarr);
+                            if(!empty($newrecarr)){
+                                $clientAray = array_merge($clientAray,$newrecarr);
+                            }
+                        }
+
+                    }
+                }
+            }*/
         }
 
         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
             $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId);
-        }
+            /*if($_SESSION['drugsafe_user']['sztype']=='1'){
+                $getmappedfrs = $this->Franchisee_Model->getMappedFranchisees($franchiseId);
+                //print_r($getmappedfrs);
+                if(!empty($getmappedfrs)){
+                    foreach ($getmappedfrs as $getmappedfr) {
+                        $newrecarr = $this->Franchisee_Model->getAllClientDetails(true, $getmappedfr['franchiseeid']);
+                       // print_r($newrecarr);
+                        if(!empty($newrecarr)){
+                            $clientlistArr = array_merge($clientlistArr,$newrecarr);
+
+                        }
+                    }
+
+                }
+            }*/
+        }/*
+        print_r($clientlistArr);*/
         if ($_SESSION['drugsafe_user']['iRole'] == '5') {
             $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true, '', $operationManagrrId);
 
@@ -1230,9 +1263,13 @@ class Franchisee_Controller extends CI_Controller
             <?php
         } else {
 
-            $this->Franchisee_Model->assignAgentClient($data, $idAgent);
-            $data['mode'] = '__ASSIGN_CLIENT_POPUP_CONFIRMATION__';
-            $this->load->view('admin/admin_ajax_functions', $data);
+            if($this->Franchisee_Model->assignAgentClient($data, $idAgent)){
+                $data['mode'] = '__ASSIGN_CLIENT_POPUP_CONFIRMATION__';
+                $this->load->view('admin/admin_ajax_functions', $data);
+            }else{
+                return false;
+            }
+
         }
     }
 
@@ -1368,6 +1405,129 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/viewAgentDetails');
         $this->load->view('layout/admin_footer');
+    }
+
+    public function assignfranchiseeClient()
+    {
+        $data['mode'] = '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__';
+        $franchiseId = $_SESSION['drugsafe_user']['id'];
+        $clientid = $this->input->post('clientid');
+        $NonCorpFranchiseeArr = $this->Franchisee_Model->getMappedNonCorpFranchisee($clientid,$franchiseId);
+        $clientlistArr = $this->Franchisee_Model->getNonCorpFranchisee();
+        $data['NonCorpFranchiseeArr'] = $NonCorpFranchiseeArr;
+        $data['clientlistArr'] = $clientlistArr;
+        $data['clientid'] = $clientid;
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+
+    public function assignFranchiseeClientConfirmation()
+    {
+        $franchiseId = $_SESSION['drugsafe_user']['id'];
+        $clientid = $this->input->post('clientid');
+        $clientlistArr = $this->Franchisee_Model->getMappedNonCorpFranchisee($clientid,$franchiseId);
+        $data = $this->input->post('assignfrClient');
+        $data['franchiseeId'] = $franchiseId;
+        $NonCorpFranchiseeArr = $this->Franchisee_Model->getNonCorpFranchisee();
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('assignfrClient[szFranchisee]', 'Franchisee', 'required');
+        $this->form_validation->set_message('required', '{field} is required');
+        if ($this->form_validation->run() == FALSE) {
+            ?>
+            <div id="assignfrClientPopupform" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <div class="modal-title">
+                                <div class="caption">
+                                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                        <span class="caption-subject font-red-sunglo bold uppercase"> Franchisee-Client Assignment</span></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <h4 class="modal-custom-heading"><i class="fa fa-users"></i> Assigned Franchisee</h4><hr>
+                            <div class="table-reposnsive">
+                                <?php if(!empty($NonCorpFranchiseeArr)){?>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                        <th>#</th>
+                                        <th>Franchisee Code</th>
+                                        <th>Franchisee</th>
+                                        <th>Email</th>
+                                        <th>Contact</th>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $clcount = 1;
+                                        foreach ($NonCorpFranchiseeArr as $franchiseedet){?>
+                                            <tr><td><?php echo $clcount;?></td>
+                                                <td><?php echo $franchiseedet['userCode'];?></td>
+                                                <td><?php echo $franchiseedet['szName'];?></td>
+                                                <td><?php echo $franchiseedet['szEmail'];?></td>
+                                                <td><?php echo $franchiseedet['szContactNumber'];?></td>
+                                            </tr>
+                                            <?php $clcount++; }
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                <?php }else{
+                                    echo '</p>No non-corporate franchisee is assigned to this client.</p>';
+                                } ?>
+                            </div>
+                            <hr/>
+                            <h4 class="modal-custom-heading"><i class="fa fa-plus"></i> Assign Franchisee</h4><hr>
+                            <form action="" id="assignClient" name="assignClient" method="post"
+                                  class="form-horizontal form-row-sepe">
+                                <div class="form-body">
+                                    <div
+                                            class="form-group <?php if (form_error('assignfrClient[szFranchisee]')) { ?>has-error<?php } ?>">
+                                        <label class="control-label col-md-4">Franchisee</label>
+                                        <div class="col-md-5">
+                                            <div class="search">
+                                                <div id='szClient'>
+                                                    <select class="form-control custom-select" name="assignfrClient[szFranchisee]" id="szFranchisee" onfocus="remove_formError(this.id,'true')">
+                                                        <option value="">Franchisee Name</option>
+                                                        <?php
+                                                        foreach($clientlistArr as $clientList)
+                                                        {
+                                                            echo '<option value="'.$clientList['id'].'" >'.$clientList['szName'].'</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            if (form_error('assignfrClient[szFranchisee]')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('assignfrClient[szFranchisee]'); ?></span>
+                                                </span><?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                            <button type="button"
+                                    onclick="assignFranchiseeClientConfirmation('<?php echo $clientid; ?>');"
+                                    class="btn green-meadow">Assign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="popup_box_level1"></div>
+            <?php
+        } else {
+
+            if($this->Franchisee_Model->MapClientToFranchisee($clientid,$franchiseId,$data['szFranchisee'])){
+                $data['mode'] = '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_CONFIRMATION__';
+                $this->load->view('admin/admin_ajax_functions', $data);
+            }
+        }
     }
 }
 

@@ -102,14 +102,14 @@
                             <p><?php echo $recordArr['0']['szAddress'];?></p>
                         </div>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>State:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $recordArr['0']['szState'];?></p>
+                            <p><?php /*echo $recordArr['0']['szState'];*/?></p>
                         </div>
-                    </div>
+                    </div>-->
                    
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
