@@ -53,7 +53,7 @@
                         </div>
                         <div class="row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
-                           <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
+                           <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){?>
                                   <div class="search col-md-3">
                                                            
                                       <select class="form-control custom-select" name="szSearchAgentRecord" id="szSearchAgentRecord" onfocus="remove_formError(this.id,'true')" onchange="getAgentListByFrId(this.value);">
@@ -84,9 +84,9 @@
                                           <?php
                                           foreach($agentListArray as $agentList)
                                           {
-                                              $selected = ($agentList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
+                                              $selected = ($agentList['szName'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
                                               
-                                              echo '<option value="'.$agentList['id'].'"' . $selected . ' >'.$agentList['szName'].'</option>';
+                                              echo '<option value="'.$agentList['szName'].'"' . $selected . ' >'.$agentList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>
@@ -148,15 +148,15 @@
                                                     </a>
 						<?php
 						
-                                        } if($_SESSION['drugsafe_user']['iRole']==2)
+                                        } if($_SESSION['drugsafe_user']['iRole']==2){
                                             $agentAssignedClientDetails = $this->Franchisee_Model->getfranchiseeagentclients($agentRecordData['franchiseeid'],$agentRecordData['id']);
                                         if(empty($agentAssignedClientDetails)){
-						{?>
+						?>
 						    <a class="btn btn-circle btn-icon-only btn-default" title=" Delete Agent" onclick="agentEmployeeDelete('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                         <i class="fa fa-trash"></i> 
                                                     </a>
 						<?php
-                                                }}
+                                        }}
 						?>
                                             </td>
                                         </tr>

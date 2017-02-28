@@ -917,9 +917,9 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
     }
 
-    function getAgentrecord($franchiseeid, $agentid = 0)
+    function getAgentrecord($franchiseeid, $agentName = 0)
     {
-        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . ($agentid > 0 ? ' AND user.id = ' . (int)$agentid : '');
+        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . (!empty($agentName) ? ' AND user.szName = ' . $agentName : '');
         $query = $this->db->select('user.id,agent.franchiseeid , user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry')
             ->from(__DBC_SCHEMATA_USERS__ . ' as user')
             ->join(__DBC_SCHEMATA_AGENT_FRANCHISEE__ . ' as agent', 'user.id = agent.agentid')
@@ -1074,7 +1074,28 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
 
     }
-    
+    function getdistinctAgentrecord($franchiseeid,$agentName = 0)
+    {
+        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . (!empty($agentName) ? ' AND user.szName = ' . $agentName : '');
+        $query = $this->db->select('user.szName')
+                            ->distinct('user.szName')
+                ->from(__DBC_SCHEMATA_USERS__ . ' as user')
+            ->join(__DBC_SCHEMATA_AGENT_FRANCHISEE__ . ' as agent', 'user.id = agent.agentid')
+            //->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'agent.franchiseeid = client.franchiseeId')
+            ->group_by('agent.agentid')
+            ->where($whereAry)
+            ->order_by('user.id', 'DESC')
+            ->get();
+        
+//       echo $sql=$this->db->last_query(); die();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    } 
 }
 
 ?>

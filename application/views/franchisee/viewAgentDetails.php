@@ -54,34 +54,8 @@
                               
                                 <span class="active">Details</span>
                             </li>
-                         <?php
+                   
                     
-                     ?>
-                     <?php
-                    if($_SESSION['drugsafe_user']['iRole'] == '5'){
-                     ?>
-                         <li>
-                            <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                         <?php
-                    }
-                     ?>
-                        <?php if($clientDetailsAray['clientType'] > '0'){?>
-                            <li>
-                                <a onclick="viewClientDetails(<?php echo $ParentOfChild['id'];?>);" href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
-                                <i class="fa fa-circle"></i>
-                            </li>
-                        <?php } ?>
-                        <li>
-                            <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
-                        </li>
-                        <?php if($clientDetailsAray['clientType'] == '0'){?>
-                            <li>
-                                <i class="fa fa-circle"></i>
-                                <span class="active">Agent/Employee</span>
-                            </li>
-                        <?php } ?>
                     </ul>
      <div class="portlet light bordered about-text" id="user_info">
         <div class="portlet-title">
@@ -90,15 +64,15 @@
                 <span class="caption-subject font-red-sunglo bold uppercase">
                 <?php
                       echo $recordArr['0']['szName']."'s Details";
-?>
-                    &nbsp; &nbsp;
-                   <?php  if($_SESSION['drugsafe_user']['iRole']=='2'){?>
-                  <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
-                    <i class="fa fa-pencil"></i> 
-                  </a> 
-                <?php }?>
+                ?>
+                    
                 </span>
             </div>
+            <div class="actions">
+             <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord"
+               class=" btn green-meadow">
+            Back </a>
+        </div>
         </div>
         
         <div class="portlet-body alert">

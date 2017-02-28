@@ -854,6 +854,7 @@ class Franchisee_Controller extends CI_Controller
                 $agentoriginaldata = $agentDataArray = $this->Franchisee_Model->getAgentrecord($franchiseId, $idAgent);
             }
         }
+      
         $this->load->library('form_validation');
         $this->form_validation->set_rules('agentData[szName]', 'Name', 'required|alpha_dash_space');
         $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
@@ -1051,7 +1052,7 @@ class Franchisee_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
-        if($_SESSION['drugsafe_user']['iRole']==1){
+        if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
            if(!empty($_POST['szSearchAgentRecord']))
          {
            $franchiseId = $_POST['szSearchAgentRecord'];   
@@ -1073,12 +1074,13 @@ class Franchisee_Controller extends CI_Controller
            $franchiseId = $_SESSION['drugsafe_user']['id'];  
         }
        
-        $agentListArray = $this->Franchisee_Model->getAgentrecord($franchiseId);
-        $agentId = $_POST['szSearchClRecord'];
+      $agentListArray = $this->Franchisee_Model->getdistinctAgentrecord($franchiseId);
+       
+        $agentName = $_POST['szSearchClRecord'];
         
         if (!empty($agentId)) {
 
-            $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId,$agentId);
+            $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId,$agentName);
         } else {
             $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId);
         }
@@ -1276,7 +1278,7 @@ class Franchisee_Controller extends CI_Controller
               
             } else {
                 $operationManagerId = $_SESSION['drugsafe_user']['id'];
-                $prospectAray = $this->Prospect_Model->getAllClientDetails(true, false, $operationManagerId, false, false, false, $id);
+                 $recordArr = $this->Franchisee_Model->getAgentrecord($id, $idAgent);
             }
             if (!empty($recordArr)) {
                 $this->session->set_userdata('id', $id);
@@ -1302,13 +1304,13 @@ class Franchisee_Controller extends CI_Controller
             $_POST['idFranchisee'] = $idFranchisee;
         }
  
-         $agentListArray = $this->Franchisee_Model->getAgentrecord($_POST['idFranchisee']);
+         $agentListArray = $this->Franchisee_Model->getdistinctAgentrecord($_POST['idFranchisee']);
 
         $result = "<select class=\"form-control custom-select required\" id=\"szSearchClRecord\" name=\"szSearchClientname\" placeholder=\"Agent/Employee Name\" onfocus=\"remove_formError(this.id,'true')\">";
         if (!empty($agentListArray)) {
             $result .= "<option value=''>Agent/Employee Name</option>";
             foreach ($agentListArray as $agentDetails) {
-                $result .= "<option value='" . $agentDetails['id'] . "'>" . $agentDetails['szName'] . "</option>";
+                $result .= "<option value='" . $agentDetails['szName'] . "'>" . $agentDetails['szName'] . "</option>";
             }
         } else {
             $result .= "<option value=''>Agent/Employee Name</option>";

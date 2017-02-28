@@ -34,7 +34,7 @@ public function prospectRecord()
            die;
        }
        
-       if($_SESSION['drugsafe_user']['iRole']==1){
+       if(($_SESSION['drugsafe_user']['iRole']==1) || ($_SESSION['drugsafe_user']['iRole']==5)){
          if(!empty($_POST['szSearch3']))
          {
            $id = $_POST['szSearch3'];   
@@ -789,7 +789,7 @@ public function deleteProspectConfirmation()
               
             } else {
                 $operationManagerId = $_SESSION['drugsafe_user']['id'];
-                $prospectAray = $this->Prospect_Model->getAllClientDetails(true, false, $operationManagerId, false, false, false, $id);
+                $prospectAray = $this->Prospect_Model->getAllProspectDetails($id);
             }
             if (!empty($prospectAray)) {
                 $this->session->set_userdata('id', $id);

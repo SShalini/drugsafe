@@ -40,7 +40,7 @@
                         </li>
                         <?php
                         if(!empty($_POST['szSearch3'])){
-                        if($_SESSION['drugsafe_user']['iRole']==1){
+                        if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){
                             $userArray = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearch3']);?>
                          <li>
                            
@@ -94,9 +94,15 @@
                        
                          <div class="row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospectRecord" name="szSearchField" method="post">
-                              <?php if($_SESSION['drugsafe_user']['iRole']==1) {?>
+                              <?php  if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5) {?>
                                   <div class="search col-md-2">
-                                   <?php $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false); ?>
+                                   <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
+                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false); 
+                                   }
+                                   if($_SESSION['drugsafe_user']['iRole']==5 ){
+                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']); 
+                                   }
+                                       ?>
                                       <select class="form-control custom-select" name="szSearch3" id="szSearchfr" onfocus="remove_formError(this.id,'true')" onchange="getProspectListByFrId(this.value);">
                                           <option value="">Franchisee</option>
                                           <?php
