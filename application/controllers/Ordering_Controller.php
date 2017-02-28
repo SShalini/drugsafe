@@ -676,7 +676,44 @@ class Ordering_Controller extends CI_Controller
             $this->Ordering_Model->deleteDiscount($data['idDiscount']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-    
+      function discountViewData()
+        {
+            $idDiscount = $this->input->post('idDiscount');
+           
+            if($idDiscount>0)
+            {
+                $this->session->set_userdata('idDiscount',$idDiscount);
+                echo "SUCCESS||||";
+                echo "discount_view";
+            }
+            
+        }
+        
+        public function discount_view()
+        {
+          $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if(!$is_user_login)
+            {
+                ob_end_clean();
+               redirect(base_url('/admin/admin_login'));
+                die;
+            }
+           
+            $idDiscount = $this->session->userdata('idDiscount');
+            $getAllDiscountAry=$this->Ordering_Model->getDiscountById($idDiscount);
+                    $data['szMetaTagTitle'] = "View Discount";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['getAllDiscountAry'] = $getAllDiscountAry;
+                    $data['pageName'] = "proforma_invoice";
+                    $data['subpageName'] = "discount_percentage";
+                  
+                
+                $this->load->view('layout/admin_header',$data);
+                $this->load->view('ordering/viewDiscount');
+                $this->load->view('layout/admin_footer');
+          
+         }
 }
 
 ?>

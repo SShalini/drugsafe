@@ -19,7 +19,18 @@
                             <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-						<li>
+                         <?php
+                        if(!empty($_POST['szSearchAgentRecord'])){
+                       
+                            $userArray = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchAgentRecord']);?>
+                         <li>
+                           
+                             <a href="<?php echo __BASE_URL__; ?>/franchisee/viewAgentEmpByfranchisee"><?php echo $userArray['szName'];?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                             
+                        <?php } ?>
+			<li>
                            Agent/Employee Record
                         </li>
                     </ul>
@@ -29,7 +40,7 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase"> Agent/Employee Record</span>
                             </div>
-                           
+                             <?php if($_SESSION['drugsafe_user']['iRole']==2){?>
                             <div class="actions">
                             <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>franchisee/addAgentEmployee');">
@@ -38,6 +49,7 @@
                                     </button>
                                 </div>
                         </div>
+                             <?php }?>
                         </div>
                         <div class="row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
@@ -107,27 +119,44 @@
                                        $i = 0;
                                      
                                         foreach($agentRecordArray as $agentRecordData)
-                                        {  
+                                        { 
                                             ?>
                                         <tr>
                                             <td>AG-<?php echo $agentRecordData['id'];?></td>
                                             <td><?php echo $agentRecordData['szName'];?></td>
                                             <td> <?php echo $agentRecordData['szEmail'];?> </td>
                                             <td> <?php echo $agentRecordData['szContactNumber'];?> </td><td>
+                                                 <?php
+						 if($_SESSION['drugsafe_user']['iRole']==2)
+						{?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Agent" onclick="editAgentEmployeeDetails('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="assign Client" onclick="assignClientAgent('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                     <i class="fa fa-tasks"></i> 
                                                 </a>
-						<?php
-						if($agentRecordData['clientType']=='0')
+                                                <?php
+                                                } ?>
+                                                 <a class="btn btn-circle btn-icon-only btn-default" title="View Agent Details" onclick="ViewAgentDetails('<?php echo $agentRecordData['id']; ?>','<?php echo $agentRecordData['franchiseeid']; ?>');" href="javascript:void(0);">
+                                                        <i class="fa fa-eye"></i> 
+                                                 </a>
+                                                <?php
+                                                 if($_SESSION['drugsafe_user']['iRole']==1)
 						{?>
-						    <a class="btn btn-circle btn-icon-only btn-default" title="assign Client" onclick="agentEmployeeDelete('<?php echo $agentRecordData['agentId']; ?>');" href="javascript:void(0);">
+						    <a class="btn btn-circle btn-icon-only btn-default" title="View Assign Client" onclick="ViewAssignClient('<?php echo $agentRecordData['id']; ?>','<?php echo $agentRecordData['franchiseeid']; ?>');" href="javascript:void(0);">
+                                                        <i class="fa fa-eye"></i> 
+                                                    </a>
+						<?php
+						
+                                        } if($_SESSION['drugsafe_user']['iRole']==2)
+                                            $agentAssignedClientDetails = $this->Franchisee_Model->getfranchiseeagentclients($agentRecordData['franchiseeid'],$agentRecordData['id']);
+                                        if(empty($agentAssignedClientDetails)){
+						{?>
+						    <a class="btn btn-circle btn-icon-only btn-default" title=" Delete Agent" onclick="agentEmployeeDelete('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                         <i class="fa fa-trash"></i> 
                                                     </a>
 						<?php
-						}
+                                                }}
 						?>
                                             </td>
                                         </tr>

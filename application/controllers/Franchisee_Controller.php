@@ -1316,6 +1316,60 @@ class Franchisee_Controller extends CI_Controller
         $result .= "</select>";
         echo $result;
     }    
+     public function ViewAssignClientData()
+      {
+           $data['mode'] = '__VIEW_ASSIGN_CLIENT_POPUP__';
+           $data['idAgent'] = $this->input->post('idAgent');
+           $data['franchiseeid'] = $this->input->post('franchiseeid');
+           $this->load->view('admin/admin_ajax_functions',$data);
+      }
+    function ViewAgentDetailsData()
+    {
+
+        
+        $idAgent = $this->input->post('idAgent');
+        $franchiseeid = $this->input->post('franchiseeid');
+        
+
+        $this->session->set_userdata('franchiseeid', $franchiseeid);
+        $this->session->set_userdata('idAgent', $idAgent);
+
+
+        echo "SUCCESS||||";
+        echo "view_agent_details";
+    }
+
+    function view_agent_details()
+    {
+
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+
+            $idAgent = $this->session->userdata('idAgent');
+            $franchiseeid = $this->session->userdata('franchiseeid');
+            
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseeid, $idAgent);
+     
+       
+        $data['recordArr'] = $recordArr;
+        $data['franchiseeid'] = $franchiseeid;
+        $data['pageName'] = "Agent_Record";
+        $data['szMetaTagTitle'] = "Agent Details";
+        $data['is_user_login'] = $is_user_login;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('franchisee/viewAgentDetails');
+        $this->load->view('layout/admin_footer');
+    }
 }
 
 ?>

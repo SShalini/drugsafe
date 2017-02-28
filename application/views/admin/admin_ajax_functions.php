@@ -3017,5 +3017,86 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
     
     <?php
 }
-   
+if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+
+
+    <div id="AssignClient" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+               
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase"> Assign Client Details</span></h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+               
+                    <div class="portlet green-meadow box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i> Assign Client Info
+
+                            </div>
+
+                        </div>
+                        <?php  $agentAssignedClientDetails = $this->Franchisee_Model->getfranchiseeagentclients($franchiseeid,$idAgent);
+                       
+                       ?>
+                        <div class="portlet-body">
+                            <?php 
+                        if(!empty($agentAssignedClientDetails)){
+                       ?>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th> #</th>
+                                        <th>Client Name</th>
+                                        <th> Email</th>
+                                        <th> Contact Number</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $i=0;
+                                    foreach ($agentAssignedClientDetails as $agentAssignedClientData) {
+                                       $i++;
+                                        ?>
+                                        <tr>
+                                            <td> <?php echo $i; ?> </td>
+                                            <td> <?php echo $agentAssignedClientData['szName']; ?> </td>
+                                            <td> <?php echo $agentAssignedClientData['szEmail']; ?> </td>
+                                            <td> <?php echo $agentAssignedClientData['szContactNumber']  ; ?>
+                                            </td>
+                                           
+
+                                        </tr>
+                                    <?php } ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                             <?php } else  { 
+                                 
+                            echo "No Record Found";     
+                            
+                             }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}   
   ?>
