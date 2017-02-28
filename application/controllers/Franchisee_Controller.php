@@ -846,7 +846,8 @@ class Franchisee_Controller extends CI_Controller
         if ($idAgent > 0) {
             $data_validate = $this->input->post('agentData');
             if (empty($data_validate)) {
-                $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseId, $idAgent);
+                $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseId,$idAgent);
+                
                 $agentDataArray = $recordArr[0];
                 //print_r($agentDataArray);
             } else {
@@ -854,7 +855,7 @@ class Franchisee_Controller extends CI_Controller
                 $agentoriginaldata = $agentDataArray = $this->Franchisee_Model->getAgentrecord($franchiseId, $idAgent);
             }
         }
-      
+   
         $this->load->library('form_validation');
         $this->form_validation->set_rules('agentData[szName]', 'Name', 'required|alpha_dash_space');
         $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
@@ -1078,9 +1079,9 @@ class Franchisee_Controller extends CI_Controller
        
         $agentName = $_POST['szSearchClRecord'];
         
-        if (!empty($agentId)) {
+        if (!empty($agentName)) {
 
-            $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId,$agentName);
+            $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId,false,$agentName);
         } else {
             $agentRecordArray = $this->Franchisee_Model->getAgentrecord($franchiseId);
         }
