@@ -51,7 +51,7 @@ class Forum_Controller extends CI_Controller {
                 if( $this->Forum_Model->insertCategory())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Forum Category added successfully.</h3></strong>";
+                    $szMessage['content'] = "<strong><h3> Category added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                   redirect(base_url('/forum/categoriesList'));
                     die;

@@ -787,7 +787,7 @@ if ($mode == '__APPROVE_REPLY_POPUP__') {
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        approved this reply?</p>
+                        approve this reply?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -1159,7 +1159,7 @@ if ($mode == '__APPROVE_COMMENT_POPUP__') {
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        approved this comment?</p>
+                        approve this comment?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -1218,7 +1218,7 @@ if ($mode == '__UNAPPROVE_COMMENT_POPUP__') {
 
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        unapproved this Comment?</p>
+                        unapprove this Comment?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>

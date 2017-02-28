@@ -10,7 +10,7 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
-                        <span class="active">edit Region</span>
+                        <span class="active">Edit Region</span>
                     </li>
                 </ul>
                 <div class="portlet light bordered">

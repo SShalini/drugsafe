@@ -80,7 +80,7 @@
                                           <tr>
                                                 <th> Image </th>
                                                 <th> Product Code</th>
-                                                <th>  Descreption</th>
+                                                <th>  Description</th>
                                                 <th>  Cost</th>
                                                 <th style="width:60px;">  Quantity</th>
                                                  <th >  Price</th>

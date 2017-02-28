@@ -48,7 +48,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-file-text"></i>
                                                 </span>
-                                                  <textarea  name="forumData[szDiscription]" id="szCategoryDiscription" class="form-control"  value=""  rows="5" placeholder="Category Discription" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('forumData[szDiscription]'); ?></textarea>
+                                                  <textarea  name="forumData[szDiscription]" id="szCategoryDiscription" class="form-control"  value=""  rows="5" placeholder="Category Description" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('forumData[szDiscription]'); ?></textarea>
                                             </div>
                                               <?php
                                             if(form_error('forumData[szDiscription]')){?>

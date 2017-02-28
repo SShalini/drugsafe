@@ -95,7 +95,7 @@
                                     <tr>
                                         <th> Image </th>
                                         <th> Product Code</th>
-                                        <th>  Descreption</th>
+                                        <th>  Description</th>
                                         <th>  Cost</th>
                                         <th>  Expiry Date</th>
                                         <th>  Model Stock Value</th>
