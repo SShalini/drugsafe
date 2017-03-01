@@ -163,3 +163,12 @@ ALTER TABLE `ds_user` ADD `franchiseetype` TINYINT(1) NOT NULL DEFAULT '0' AFTER
 
 ALTER TABLE `tbl_client` ADD `discountid` INT(6) NOT NULL AFTER `clientCode`;
 ALTER TABLE `tbl_discount` CHANGE `percentage` `percentage` DECIMAL(5,2) NOT NULL;
+
+INSERT INTO `tbl_states` (`id`, `name`, `country_id`) VALUES
+(2, 'NSW/ACT', 101),
+(3, 'VIC', 101),
+(4, 'QLD', 101),
+(5, 'SA', 101),
+(6, 'WA', 101),
+(7, 'TAS', 101),
+(8, 'NT', 101);
