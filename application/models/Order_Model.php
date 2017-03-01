@@ -763,13 +763,44 @@ class Order_Model extends Error_Model {
             }
         }
 
-    function dispatchsingleprod($ordid,$prodid,$qty){
+      function dispatchsingleprod($ordid,$prodid,$qty){
         $statusarr = array('dispatched' => (int)$qty);
         $conditionarr = array('orderid' => (int)$ordid,'productid'=>$prodid);
         $this->db->where($conditionarr)
             ->update(__DBC_SCHEMATA_ORDER_DETAILS__, $statusarr);
         if ($this->db->affected_rows() > 0) {
             if($this->adjustFranchisorInventory($prodid,$qty)){
+            $frIdByOrderId =  $this->getOrderByOrderId($ordid);
+           
+            
+           $prodQuantity =  $this->StockMgt_Model->getProductQtyDetailsById($frIdByOrderId['franchiseeid'],$prodid); 
+           if(empty($prodQuantity)){
+            $Quantity =$qty; 
+              $dataAry = array(
+                        'iFranchiseeId'=> $frIdByOrderId['franchiseeid'],
+                        'iProductId'=> $prodid,
+			'szQuantity' => $Quantity
+                ); 
+             $query =   $this->db->insert(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
+           }
+           else{
+                $Quantity = $prodQuantity['szQuantity']+$qty;
+                   $dataAry = array(
+			'szQuantity' => $Quantity
+                ); 
+                 $whereAry = array('iFranchiseeId' => $frIdByOrderId['franchiseeid'],'iProductId' => $prodid);
+                 $this->db->where($whereAry);
+                $query =  $this->db->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
+           }
+           if($query)
+                   {
+                  return true;
+                } 
+                else{
+                   return false;  
+                }
+                
+                
                 return true;
             }else{
                 return false;

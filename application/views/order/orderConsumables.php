@@ -114,7 +114,7 @@
                                             $idfranchisee = $_SESSION['drugsafe_user']['id'];
                                           
                                             $consumablesDataArr = $this->StockMgt_Model->getStockValueDetailsById($idfranchisee,$consumablesData['iProductId']);
-                                            
+                                            $modelStockDataAry = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$consumablesData['id']);
                                            // $drugTestKitQtyDataArr = $this->StockMgt_Model->getProductQtyDetailsById($idfranchisee,$drugTestKitData['id']);
                                         
                                             ?>
@@ -130,7 +130,7 @@
                                             $dtExpiredOn = date("d-m-Y", strtotime($date)); 
                                             echo $dtExpiredOn;?> </td>
                                              <td><?php echo($consumablesDataArr['szModelStockVal'] > 0 ? $consumablesDataArr['szModelStockVal'] : 'N/A')?></td>
-                                             <td><?php echo($consumablesData['szQuantity'] > 0 ? $consumablesData['szQuantity'] : 'N/A')?></td>
+                                             <td><?php echo($modelStockDataAry['szQuantity'] > 0 ? $modelStockDataAry['szQuantity'] : 'N/A')?></td>
                                          
                                             <td>
 						 <input type="number"min="1"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" max="100" id="order_quantity<?php echo $i;?>" >
