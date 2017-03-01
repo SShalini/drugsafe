@@ -1660,18 +1660,17 @@ class CI_Form_validation {
        
         function chekDuplicate($str,$field)
         {
-           
-              sscanf($field, '%[^.].%[^.]', $table, $field);
-              $data=array();
-              $data['str']=$str;
-              $data['table']=$table;
-              $data['field']=$field;
-              $chek=chekDuplicatehelper($data);
-              if($chek)
-              {
+            sscanf($field, '%[^.].%[^.]', $table, $field);
+            $data=array();
+            $data['str']=$str;
+            $data['table']=$table;
+            $data['field']=$field;
+            $chek=chekDuplicatehelper($data);
+            if($chek)
+            {
                 return FALSE;
-              }
-               else{
+            }
+            else{
                 return TRUE;
             }
         }
