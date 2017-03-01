@@ -817,13 +817,14 @@ class Franchisee_Controller extends CI_Controller
         $this->form_validation->set_rules('agentData[szBusinessName]', 'Name', 'required|alpha_dash_space');
         $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
         $this->form_validation->set_rules('agentData[abn]', 'ABN', 'required|abn_numeric|abn_length');
-        $this->form_validation->set_rules('agentData[szEmail]', 'Email', 'required|is_unique[' . __DBC_SCHEMATA_USERS__ . '.szEmail]|valid_email');
+        $this->form_validation->set_rules('agentData[szEmail]', 'Email', 'required|chekDuplicate['. __DBC_SCHEMATA_USERS__ . '.szEmail]|valid_email');
         $this->form_validation->set_rules('agentData[szContactNumber]', 'Contact No.', 'required|valid_phone_number');
         $this->form_validation->set_rules('agentData[szAddress]', 'Address', 'required');
         $this->form_validation->set_rules('agentData[szCity]', 'City', 'required');
         $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
         $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
         $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
+        $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
         $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
         $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
         $this->form_validation->set_message('required', '{field} is required');

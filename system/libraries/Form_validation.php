@@ -35,6 +35,8 @@
  * @since	Version 1.0.0
  * @filesource
  */
+
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
@@ -1655,8 +1657,26 @@ class CI_Form_validation {
                 return TRUE;
             }
          }
-
-
+       
+        function chekDuplicate($str,$field)
+        {
+           
+              sscanf($field, '%[^.].%[^.]', $table, $field);
+              $data=array();
+              $data['str']=$str;
+              $data['table']=$table;
+              $data['field']=$field;
+              $chek=chekDuplicatehelper($data);
+              if($chek)
+              {
+                return FALSE;
+              }
+               else{
+                return TRUE;
+            }
+        }
+        
+        
 
 
 }

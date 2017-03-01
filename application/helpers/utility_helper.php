@@ -19,7 +19,7 @@ function logout($obj)
 
 function is_user_login($obj)
 {
-   
+  
     return $obj->Admin_Model->checkUserExists();
 	
 }
@@ -622,5 +622,23 @@ function curl_get_file_contents($URL,$bGeoplugin=false)
     if ($contents) return $contents;
     else return FALSE;
  }
- 
+function chekDuplicatehelper($data)
+{
+    $ci =& get_instance();
+    $ci->load->database();
+    $ci->db->select('*');
+    $ci->db->where($data['field'], $data['str']);
+    $ci->db->where('isDeleted', '0');
+    $query=$ci->db->get($data['table']);
+   if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return true;
+    }
+    else {
+           
+            return false;
+        }
+	
+}
+
  ?>
