@@ -68,7 +68,7 @@
                                   action="<?= __BASE_URL__ ?>/order/view_order_report" method="post">
                                 <div class="row">
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
 
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch1" id="szSearch1"
@@ -83,9 +83,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                   &nbsp;
-
-                                    <div class="col-md-2">
+                                 <div class="col-md-1"> </div>
+                                    <div class="col-md-3">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch2" id="szSearch2"
                                                     onfocus="remove_formError(this.id,'true')">
@@ -99,8 +98,8 @@
                                             </select>
                                         </div>
                                     </div>
-                                    &nbsp;
-                                    <div class="col-md-2">
+                                  <div class="col-md-1"> </div>
+                                    <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
@@ -129,12 +128,11 @@
                                         </div>
 
                                     </div>
-                                <div class="col-md-1">
-                                       
+                               
                                     </div>
-
-                                    <div class="col-md-2">
-                                        <div
+                                     <div class="row">
+                                           <div class="col-md-3">
+                                      <div
                                             class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
@@ -160,8 +158,29 @@
                                                     <?php echo $arErrorMessages['szSearch5']; ?>
                                             </span>
                                             <?php } ?>
-                                        </div>
-                                    </div>
+                                        </div> 
+                                               </div>
+                                     <div class="col-md-1"> </div>
+                                     
+                                     <div class="col-md-3">
+                                <div class="form-group ">
+                                    <select class="form-control custom-select" name="szSearch3" id="szSearch3"
+                                            onblur="remove_formError(this.id,'true')">
+                                        <option value=''>Status</option>
+                                        <option value="1" <?php echo(sanitize_post_field_value($_POST['szSearch3']) == trim("1") ? "selected" : ""); ?>>
+                                            Ordered
+                                        </option>
+                                        <option value="2" <?php echo(sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>
+                                            Dispatched
+                                        </option>
+                                        <option value="3" <?php echo(sanitize_post_field_value($_POST['szSearch3']) == trim("3") ? "selected" : ""); ?>>
+                                           Canceled
+                                        </option>
+                                        
+                                    </select>
+                          
+                                </div>
+                               </div>
                                    <div class="col-md-1">
                                        
                                     </div>
@@ -175,15 +194,15 @@
                                         </div>
                                     </div>
 
-
-                                </div>
+                                  </div>
+                                
 
 
                             </form>
                         </div>
                     </div>
                     <?php
-                    if (!empty($validOrdersDetailsAray) || !empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) || !empty($_POST['szSearch4']) || !empty($_POST['szSearch5'])) {
+                    if ((!empty($validOrdersDetailsAray)) || (!empty($_POST['szSearch2'])) || (!empty($_POST['szSearch1'])) || (!empty($_POST['szSearch4'])) || (!empty($_POST['szSearch5']))|| (!empty($arErrorMessages['szSearch5'])) || (!empty($arErrorMessages['szSearch5']))) {
                     ?>
                     <div class="portlet-body alert">
                         <div class="row">
@@ -218,15 +237,18 @@
                                                     <th>
                                                         Order #
                                                     </th>
+                                                     <th>
+                                                       Status
+                                                    </th>
                                                     <th>
                                                         No. of products
                                                     </th>
                                                     <th>
                                                         Order Cost
                                                     </th>
-                                                    <th>
+<!--                                                    <th>
                                                         Order Details
-                                                    </th>
+                                                    </th>-->
                                                     <th>
                                                         Xero Invoice No.
                                                     </th>
@@ -238,6 +260,7 @@
 
                                                 $i = 0;
                                                 foreach ($validOrdersDetailsAray as $validOrdersDetailsData) {
+                                                 
                                                     $i++;
                                                     $productDataArr = $this->Inventory_Model->getProductDetailsById($validOrdersDetailsData['productid']);
                                                     $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $validOrdersDetailsData['franchiseeid']);
@@ -268,6 +291,34 @@
                                                         <td>
                                                             #<?php echo sprintf(__FORMAT_NUMBER__, $validOrdersDetailsData['orderid']); ?>
                                                         </td>
+                                                        
+                                                          <td>
+                                                                    <?php if ($validOrdersDetailsData['status'] == 1) { ?>
+
+                                                                        <p title="Order Status"
+                                                                           class="label label-sm label-warning">
+                                                                            Ordered
+                                                                        </p>
+                                                                        <?php
+                                                                    }
+                                                                    if ($validOrdersDetailsData['status'] == 2) {
+                                                                        ?>
+                                                                        <p title="Order Status"
+                                                                           class="label label-sm label-success">
+                                                                            Dispatched
+                                                                        </p>
+                                                                        <?php
+                                                                    }
+                                                                    if ($validOrdersDetailsData['status'] == 3) {
+                                                                        ?>
+                                                                        <p title="Order Status"
+                                                                           class="label label-sm label-danger">
+                                                                            Canceled
+                                                                        </p>
+                                                                        <?php
+                                                                    }
+
+                                                                    ?></td>
                                                         <td>
                                                             <?php echo $validOrdersDetailsData['totalproducts']; ?>
                                                         </td>
@@ -275,14 +326,14 @@
                                                            $<?php echo ($validOrdersDetailsData['price']>0?$validOrdersDetailsData['price']:'0.00'); ?>
                                                         </td>
 
-                                                        <td>
+<!--                                                        <td>
                                                             <a class="btn btn-circle btn-icon-only btn-default"
                                                                title="View Order Details"
                                                                onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
                                                                href="javascript:void(0);">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-                                                        </td>
+                                                        </td>-->
                                                         <td>
                                                             <?php echo (!empty($validOrdersDetailsData['XeroIDnumber'])?$validOrdersDetailsData['XeroIDnumber']:'N/A'); ?>
                                                         </td>

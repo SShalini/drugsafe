@@ -314,6 +314,12 @@ class Order_Model extends Error_Model {
                             AND franchiseeid = ".(int)($searchData);
                     }
                 }
+                 if($key == 'szSearch3'){
+                    if(!empty ($searchData)){
+                        $searchQuery.="
+                            AND status = ".(int)($searchData);
+                    }
+                }
                 if($key == 'szSearch2'){
                     if(!empty ($searchData)){
                         $searchQuery .="

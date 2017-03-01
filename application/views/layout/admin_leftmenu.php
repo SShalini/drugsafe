@@ -99,6 +99,7 @@
                     <span class="selected"></span>
                 </a>
                <?php   } if ($_SESSION['drugsafe_user']['iRole'] == '2') {?>
+                  <li class="nav-item start <?php if (trim($pageName) == 'Prospect_Record') { ?>active open<?php } ?>">
                       <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="nav-link nav-toggle">
                      <i class="fa fa-files-o" aria-hidden="true"></i>
                     <span class="title">Sales CRM</span>
