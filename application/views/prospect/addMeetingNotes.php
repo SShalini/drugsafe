@@ -36,13 +36,13 @@
                             <form class="form-horizontal" id="meetingNotesData" action="<?php echo __BASE_URL__?>/prospect/add_meeting_notes" name="meetingNotesData" method="post">
                                 <div class="form-body">
                                     <div class="form-group <?php if(form_error('meetingNotesData[szDiscription]')){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label">Meeting Description</label>
+                                        <label class="col-md-3 control-label">Meeting Note</label>
                                         <div class="col-md-5">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-file-text"></i>
                                                 </span>
-                                                 <textarea  name="meetingNotesData[szDiscription]" id="szDiscription" class="form-control"  value=""  rows="5" placeholder="Meeting Description" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('meetingNotesData[szTopicDiscription]'); ?></textarea>
+                                                 <textarea  name="meetingNotesData[szDiscription]" id="szDiscription" class="form-control"  value=""  rows="5" placeholder="Meeting Note" onfocus="remove_formError(this.id,'true')" ><?php echo set_value('meetingNotesData[szTopicDiscription]'); ?></textarea>
                                               
                                             </div>
                                               <?php
