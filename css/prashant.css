@@ -4,6 +4,12 @@ body .alert-info, body .alert-success {
   color: #1bbc9b;
 }
 
+body .alert-info, body .alert-success.meeting-note{
+  background-color: #fff;
+  border-color: #fff;
+  color: #666;
+}
+
 body .breadcrumb {
   color: #8E8F93;
 }
