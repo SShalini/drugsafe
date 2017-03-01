@@ -889,7 +889,7 @@ class Franchisee_Controller extends CI_Controller
         }
    
         $this->load->library('form_validation');
-          if ($agentoriginaldata[0]['szName'] != $data_validate['szName']) {
+        if ($agentoriginaldata[0]['szName'] != $data_validate['szName']) {
             $isuniqueName = '|chekDuplicate['. __DBC_SCHEMATA_USERS__ . '.szName]';
         } else {
             $isuniqueName = '';
