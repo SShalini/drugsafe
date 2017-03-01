@@ -81,7 +81,7 @@
                 
                 
               
-            <?php } else { ?>
+            <?php }  if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Agent_Record') { ?>active open<?php } ?>">
                 <a href="<?php echo __BASE_URL__; ?>/franchisee/viewAgentEmpByfranchisee" class="nav-link nav-toggle">
                      <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -90,15 +90,15 @@
                 </a>
             </li>
              <?php }  ?>
-            
+             <?php  if ($_SESSION['drugsafe_user']['iRole'] == '1') { ?>
              <li class="nav-item start <?php if (trim($pageName) == 'Prospect_Record') { ?>active open<?php } ?>">
-                <?php  if ($_SESSION['drugsafe_user']['iRole'] == '1' ||$_SESSION['drugsafe_user']['iRole'] == '5') { ?>
+               
                   <a href="<?php echo __BASE_URL__; ?>/prospect/franchiseeProspectRecord" class="nav-link nav-toggle">
                      <i class="fa fa-files-o" aria-hidden="true"></i>
                     <span class="title">Sales CRM</span>
                     <span class="selected"></span>
                 </a>
-               <?php   } else{?>
+               <?php   } if ($_SESSION['drugsafe_user']['iRole'] == '2') {?>
                       <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="nav-link nav-toggle">
                      <i class="fa fa-files-o" aria-hidden="true"></i>
                     <span class="title">Sales CRM</span>
@@ -140,7 +140,7 @@
 
             </li>
            <?php } ?>
-            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
+            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ||$_SESSION['drugsafe_user']['iRole'] == 5  ) { ?>
                 <!--<li class="nav-item  <?php /*if ($pageName == 'Stock_Request') { */?> active open <?php /*} */?>">
                     <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/stock_management/stockreqlist">
                         <i class="fa fa-mail-forward" aria-hidden="true"></i>
@@ -180,25 +180,28 @@
                                 <span class="title">Industry Report</span>
                             </a>
                         </li>
+                        <?php  if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
                         <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/inventoryReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Inventory Report</span>
                             </a>
                         </li>
-                        
+                        <?php }  ?>
                          <li class="nav-item  <?php if ($subpageName == 'Client_Comparison_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/clientcomparisonReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Client Comparison</span>
                             </a>
                         </li>
+                        <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
                         <li class="nav-item  <?php if ($subpageName == 'Orders_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/view_order_report">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Orders Report</span>
                             </a>
                         </li>
+                        <?php } ?>
                         <li class="nav-item  <?php if ($subpageName == 'revenue_generate') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_generate">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
@@ -211,7 +214,32 @@
                                 <span class="title">Revenue Summary</span>
                             </a>
                         </li>
-						
+                         <?php  if ($_SESSION['drugsafe_user']['iRole'] == 5) { ?>
+                        <li class="nav-item  <?php if ($subpageName == 'revenue_summery_client') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery_client">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Revenue Summary Client</span>
+                            </a>
+                        </li>
+                         <?php  } ?>	
+                        <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/sales_crm_detailed">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Sales CRM Summary </span>
+                            </a>
+                        </li>
+                        <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/sales_crm_detailed">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Sales CRM Detailed</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  <?php if ($subpageName == 'SOS_COC_Forms_Reports') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/sos_coc_forms_reports">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">SOS-COC Forms Reports</span>
+                            </a>
+                        </li>
 <!--                         <li class="nav-item  <?php if ($subpageName == 'View_Order_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/viewOrderReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
@@ -271,7 +299,8 @@
                     </a>
                 </li>-->
                
-           <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole'] == 2) { ?>
+   
+             <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole'] == 2 || $_SESSION['drugsafe_user']['iRole'] == 5) { ?>
 
                <li class="nav-item start <?php if (trim($pageName) == 'proforma_invoice') { ?>active open<?php } ?>">
                    <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord" class="nav-link nav-toggle">
@@ -286,12 +315,14 @@
                             <span class="title">View Proforma Invoice </span>
                         </a>
                     </li>
+                            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole'] == 2 ) { ?>
                             <li class="nav-item  <?php if ($subpageName == 'discount_percentage') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/ordering/discountPercentage">
                             <i class="fa fa-ge" aria-hidden="true"></i>
                             <span class="title">Discount Percentage</span>
                         </a>
                     </li>
+                            <?php } ?>
                     </ul>
                    
                </li>
@@ -330,7 +361,7 @@
                 </ul>
 
             </li>
-           <?php } else { ?>
+           <?php } if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
             <li class="nav-item start <?php if (trim($pageName) == 'Orders') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
