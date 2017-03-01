@@ -69,6 +69,7 @@
             </div>
             
         </div>
+                    
         <div class="portlet-body alert">
             <div class="row">
                 <div class="col-md-6">
@@ -130,7 +131,15 @@
                             <lable>State:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $operationManagerAray['szState'];?></p>
+                            <p><?php 
+                             $getStateIdByOperationId = $this->Admin_Model->getStateByOperationid($operationManagerAray['id']);
+                            if($getStateIdByOperationId)
+                            {
+                                $stateId = $getStateIdByOperationId['stateId'];
+                                
+                            }
+                            
+                            ?></p>
                         </div>
                     </div>
                   <div class="row">
@@ -222,7 +231,7 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th> Id.</th>
+                                    <th>franchisee code</th>
                                     <th> Name</th>
                                     <th> Email</th>
                                     <th> Contact No</th>
@@ -236,18 +245,15 @@
                                 foreach ($franchiseeAray as $franchiseeData) {
                                     ?>
                                     <tr>
-                                        <td>FR-<?php echo $franchiseeData['id']; ?> </td>
+                                        <td><?php echo $franchiseeData['userCode']; ?> </td>
                                         <td> <?php echo $franchiseeData['szName'] ?> </td>
                                         <td> <?php echo $franchiseeData['szEmail']; ?> </td>
                                         <td> <?php echo $franchiseeData['szContactNumber']; ?> </td>
                                         <td><?php echo $franchiseeData['szCity']; ?> </td>
-                                        
-                                          <td>
-
+                                            <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>,'1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>

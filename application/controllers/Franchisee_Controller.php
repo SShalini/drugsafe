@@ -769,7 +769,7 @@ class Franchisee_Controller extends CI_Controller
 
         $operationManagerAray = $this->Franchisee_Model->getOperationManagerDetailsById($idOperationManager);
         $franchiseeAray = $this->Admin_Model->viewFranchiseeList($searchAry, $operationManagerAray['id'], $config['per_page'], $this->uri->segment(3), $id, $name, $email);
-       $searchOptionArr =$this->Admin_Model->viewDistinctFranchiseeList($operationManagerAray['id']);
+        $searchOptionArr =$this->Admin_Model->viewDistinctFranchiseeList($operationManagerAray['id']);
         
 
         $data['allfranchisee'] = $searchOptionArr;
