@@ -855,7 +855,7 @@ class Admin_Controller extends CI_Controller
         $stateId = $this->input->post('stateId');
         $getRegionCode = $this->Admin_Model->getRegionCode($stateId);
         if ($getRegionCode['regionCodeMax'] == '') {
-            $regionCode = $stateId * 100;
+            $regionCode = $stateId * 100+1;
         } else {
             $regionCode = $getRegionCode['regionCodeMax'] + 1;
         }
