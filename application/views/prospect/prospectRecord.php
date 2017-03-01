@@ -151,7 +151,7 @@
                                         <option value="4" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("4") ? "selected" : ""); ?>>
                                           Non Convertible 
                                         </option>
-                                        <option value="5" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("4") ? "selected" : ""); ?>>
+                                        <option value="5" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("5") ? "selected" : ""); ?>>
                                           Contact Later 
                                         </option>
                                          <option value="6" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("6") ? "selected" : ""); ?>>
