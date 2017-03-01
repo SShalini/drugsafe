@@ -1661,21 +1661,18 @@ class CI_Form_validation {
         function chekDuplicate($str,$field)
         {
             sscanf($field, '%[^.].%[^.]', $table, $field);
-            $data=array();
-            $data['str']=$str;
-            $data['table']=$table;
-            $data['field']=$field;
-            $chek=chekDuplicatehelper($data);
-            if($chek)
-            {
-                return FALSE;
+            $ci =& get_instance();
+            $ci->load->database();
+            $ci->db->select('*');
+            $ci->db->where($field, $str);
+            $ci->db->where('isDeleted', '0');
+            $query=$ci->db->get($table);
+            if ($query->num_rows() > 0) {
+                $row = $query->result_array();
+                return false;
             }
-            else{
-                return TRUE;
+            else {
+                return true;
             }
         }
-        
-        
-
-
 }
