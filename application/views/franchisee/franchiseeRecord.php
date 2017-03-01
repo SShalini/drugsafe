@@ -136,6 +136,11 @@
                             if($getStateIdByOperationId)
                             {
                                 $stateId = $getStateIdByOperationId['stateId'];
+                                if($stateId)
+                                {
+                                    $stateData = $this->Admin_Model->getStateById($stateId);
+                                    echo $stateData['name'];
+                                }
                                 
                             }
                             
