@@ -286,7 +286,7 @@
                             <span class="title">View Proforma Invoice </span>
                         </a>
                     </li>
-                    <li class="nav-item  <?php if ($subpageName == 'discount_percentage') { ?> active open <?php } ?>">
+                            <li class="nav-item  <?php if ($subpageName == 'discount_percentage') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/ordering/discountPercentage">
                             <i class="fa fa-ge" aria-hidden="true"></i>
                             <span class="title">Discount Percentage</span>
