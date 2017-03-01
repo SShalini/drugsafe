@@ -33,10 +33,10 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-building"></i>
                                                 </span>
-                                            <input id="szCity" class="form-control" type="text"
+                                            <input id="szCity" class="form-control read-only" type="text"
                                                    value="<?php echo set_value('editDiscount[percentage]'); ?>"
                                                    placeholder="Discount Percentage" onfocus="remove_formError(this.id,'true')"
-                                                   name="editDiscount[percentage]"> 
+                                                   name="editDiscount[percentage]" readonly> 
                                         </div>
                                         <?php
                                             if(form_error('editDiscount[percentage]')){?>

@@ -8,13 +8,19 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">Discount Percentage List</span>
                             </div>
-                             <div class="actions">
+                            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
+                            <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>ordering/createDiscount');">
                                         &nbsp;Create Discount
                                     </button>
                                 </div>
                             </div>
+                            <?php
+                            
+                            }?>
+             
+                             
                         </div>
                         <?php
                         
@@ -29,7 +35,9 @@
                                         <th> #</th>
                                         <th> Discount Percentage</th>
                                         <th> Description</th>
+                                         <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
                                         <th> Action</th>
+                                         <?php }?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,6 +51,7 @@
                                             <td> <?php echo $i;?> </td>
                                             <td> <?php echo $getAllDiscountData['percentage']?>% </td>
                                             <td> <?php echo $getAllDiscountData['description'];?> </td>
+                                             <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
                                             <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Discount Data" onclick="editDiscountDetails('<?php echo $getAllDiscountData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
@@ -55,6 +64,8 @@
                                                 </a>
                                                 
                                             </td>
+                                        <?php } ?>
+                                            
                                         </tr>
                                         <?php 
                                         }
