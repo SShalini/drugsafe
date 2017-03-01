@@ -162,6 +162,17 @@
                         </div>
                     </div>
                      <?php
+                        $discountcode = $this->Franchisee_Model->getDiscountList($clientDetailsAray['discountid']);
+                        if(!empty($discountcode)){ ?>
+                            <div class="row">
+                                <div class="col-sm-4 text-info bold">
+                                    <lable>Discount:</lable>
+                                </div>
+                                <div class="col-sm-8">
+                                    <p><?php echo ($clientDetailsAray['discountid']>'0'?$discountcode[0]['percentage']:'0.00');?>%</p>
+                                </div>
+                            </div>
+                        <?php }
                     }else{
                     ?>
                         <div class="row">

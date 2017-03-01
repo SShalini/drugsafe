@@ -9,21 +9,20 @@ class Franchisee_Model extends Error_Model
     var $szPassword;
     var $data = array();
 
-	public function __construct()
-	{
-		parent::__construct();
-	}
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-function insertClientDetails($data,$franchiseeId='',$reqppval=0)
-{
-            $szNewPassword = create_login_password();
+    function insertClientDetails($data, $franchiseeId = '', $reqppval = 0)
+    {
+        $szNewPassword = create_login_password();
 
-            $date=date('Y-m-d');
-            if(!empty($data['abn'])){
-           $abn = $data['abn'];
-        }
-        else{
-          $abn = '';
+        $date = date('Y-m-d');
+        if (!empty($data['abn'])) {
+            $abn = $data['abn'];
+        } else {
+            $abn = '';
         }
         $dataAry = array(
 
@@ -52,12 +51,12 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         if (empty($clientType)) {
             $clientlastcode = $this->getmaxClientSiteCodeById($data['franchiseeId']);
             $nextclientcode = 0;
-            if(!empty($clientlastcode)){
-                $nextclientcode = (int)$clientlastcode['maxcode']+1;
+            if (!empty($clientlastcode)) {
+                $nextclientcode = (int)$clientlastcode['maxcode'] + 1;
             }
             $usercode = $this->getusercodebyuserid($data['franchiseeId']);
-            if(!empty($usercode)){
-                $clientcode = $usercode['userCode'].'-'.sprintf('%04d', (int)$nextclientcode);
+            if (!empty($usercode)) {
+                $clientcode = $usercode['userCode'] . '-' . sprintf('%04d', (int)$nextclientcode);
             }
             $clientAry = array(
                 'franchiseeId' => $data['franchiseeId'],
@@ -70,19 +69,20 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 'szContactMobile' => $data['szContactMobile'],
                 'szNoOfSites' => $data['szNoOfSites'],
                 'industry' => $data['industry'],
-                'clientCode' => (int)$nextclientcode
+                'clientCode' => (int)$nextclientcode,
+                'discountid' => (int)$data['discount']
 
 
             );
         } else {
-            $clientlastcode = $this->getmaxClientSiteCodeById($data['franchiseeId'],$clientType);
+            $clientlastcode = $this->getmaxClientSiteCodeById($data['franchiseeId'], $clientType);
             $nextclientcode = 0;
-            if(!empty($clientlastcode)){
-                $nextclientcode = (int)$clientlastcode['maxcode']+1;
+            if (!empty($clientlastcode)) {
+                $nextclientcode = (int)$clientlastcode['maxcode'] + 1;
             }
             $usercode = $this->getusercodebyuserid($clientType);
-            if(!empty($usercode)){
-                $clientcode = $usercode['userCode'].'-Site'.sprintf('%02d', (int)$nextclientcode);
+            if (!empty($usercode)) {
+                $clientcode = $usercode['userCode'] . '-Site' . sprintf('%02d', (int)$nextclientcode);
             }
             $clientAry = array(
 
@@ -183,6 +183,38 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             }
             return false;
         } else {
+            return false;
+        }
+    }
+
+    function getmaxClientSiteCodeById($franchiseeid, $clientid = 0)
+    {
+        $whereAry = 'franchiseeId = ' . (int)$franchiseeid . ($clientid > 0 ? ' AND clientType = ' . (int)$clientid : '');
+        $query = $this->db->select('MAX(clientCode) as maxcode')
+            ->from(__DBC_SCHEMATA_CLIENT__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            $this->addError("norecord", "No code found.");
+            return false;
+        }
+    }
+
+    function getusercodebyuserid($userid)
+    {
+        $whereAry = 'id = ' . (int)$userid;
+        $query = $this->db->select('userCode')
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            $this->addError("norecord", "No code found.");
             return false;
         }
     }
@@ -421,6 +453,10 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         return false;
     }
 
+    /*
+  * Get User Details By Email or Id
+  */
+
     public function viewClientDetails($idClient)
     {
 
@@ -447,23 +483,23 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
 
     public function updateClientDetails($idClient = 0, $data, $reqppval)
     {
-        $date=date('Y-m-d');
-        
-            $dataAry = array(                                  
-                               'szName' => $data['szName'],
-                                'szEmail' => $data['szEmail'],
-                                'szContactNumber' => $data['szContactNumber'],
-                                'abn' => $data['abn'],
-                                'szCountry' => $data['szCountry'],
-                                'szCity' => $data['szCity'],
-                                'szZipCode' => $data['szZipCode'],
-                                'szAddress' => $data['szAddress'],
-                                'iRole' => '3',
-                                'iActive' => '1',
-                                'dtUpdatedOn' => $date
-            );
-           
-                $whereAry = array('id' => (int)$idClient);
+        $date = date('Y-m-d');
+
+        $dataAry = array(
+            'szName' => $data['szName'],
+            'szEmail' => $data['szEmail'],
+            'szContactNumber' => $data['szContactNumber'],
+            'abn' => $data['abn'],
+            'szCountry' => $data['szCountry'],
+            'szCity' => $data['szCity'],
+            'szZipCode' => $data['szZipCode'],
+            'szAddress' => $data['szAddress'],
+            'iRole' => '3',
+            'iActive' => '1',
+            'dtUpdatedOn' => $date
+        );
+
+        $whereAry = array('id' => (int)$idClient);
 
         $this->db->where($whereAry);
 
@@ -489,8 +525,7 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
                 'szContactPhone' => $data['szContactPhone'],
                 'szContactMobile' => $data['szContactMobile'],
                 'szNoOfSites' => $data['szNoOfSites'],
-
-
+                'discountid' => $data['discount']
             );
         } else {
             $clientAry = array(
@@ -576,10 +611,6 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             return false;
         }
     }
-
-    /*
-  * Get User Details By Email or Id
-  */
 
     public function getClientDetailsId($id = 0)
     {
@@ -917,9 +948,9 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
     }
 
-    function getAgentrecord($franchiseeid, $agentId='0',$agentName = 0)
+    function getAgentrecord($franchiseeid, $agentId = '0', $agentName = 0)
     {
-        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . (!empty($agentName) ? ' AND user.szName = ' .'"'.$agentName.'"' : ''). ($agentId >0 ? ' AND user.id = ' . (int)$agentId : '');
+        $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . (!empty($agentName) ? ' AND user.szName = ' . '"' . $agentName . '"' : '') . ($agentId > 0 ? ' AND user.id = ' . (int)$agentId : '');
         $query = $this->db->select('user.id,agent.franchiseeid , user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry')
             ->from(__DBC_SCHEMATA_USERS__ . ' as user')
             ->join(__DBC_SCHEMATA_AGENT_FRANCHISEE__ . ' as agent', 'user.id = agent.agentid')
@@ -970,25 +1001,21 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
         function getStateByFranchiseeId($id)
         {
-            $query=$this->db->select('regionId')
-                            ->where('id',$id)
-                            ->from(__DBC_SCHEMATA_USERS__)
-                            ->get();
-            if($query->num_rows() > 0)
-            {
-                 $row = $query->result_array();
-                 $getRegionDetails=$this->Admin_Model->getstateIdByResinolId($row['0']['regionId']);
-                 if(!empty($getRegionDetails))
-                 {
-                      $getStateDetails=$this->Admin_Model->getStateById($getRegionDetails['stateId']);
-                      return $getStateDetails;
-                 }
+            $query = $this->db->select('regionId')
+                ->where('id', $id)
+                ->from(__DBC_SCHEMATA_USERS__)
+                ->get();
+            if ($query->num_rows() > 0) {
+                $row = $query->result_array();
+                $getRegionDetails = $this->Admin_Model->getstateIdByResinolId($row['0']['regionId']);
+                if (!empty($getRegionDetails)) {
+                    $getStateDetails = $this->Admin_Model->getStateById($getRegionDetails['stateId']);
+                    return $getStateDetails;
+                }
+            } else {
+                return array();
             }
-            else
-            {
-                    return array();
-            }
-            
+
         }
     }
 
@@ -1022,71 +1049,38 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
     }
 
-    function getmaxClientSiteCodeById($franchiseeid,$clientid=0){
-        $whereAry = 'franchiseeId = '.(int)$franchiseeid.($clientid>0?' AND clientType = '.(int)$clientid:'');
-        $query = $this->db->select('MAX(clientCode) as maxcode')
-            ->from(__DBC_SCHEMATA_CLIENT__)
-            ->where($whereAry)
-            ->get();
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
-            return $row[0];
-        } else {
-            $this->addError("norecord", "No code found.");
-            return false;
-        }
-    }
-
-    function getusercodebyuserid($userid){
-        $whereAry = 'id = '.(int)$userid;
-        $query = $this->db->select('userCode')
-            ->from(__DBC_SCHEMATA_USERS__)
-            ->where($whereAry)
-            ->get();
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
-            return $row[0];
-        } else {
-            $this->addError("norecord", "No code found.");
-            return false;
-        }
-    }
-
     function getStateByFranchiseeId($id)
     {
-        $query=$this->db->select('regionId')
-            ->where('id',$id)
+        $query = $this->db->select('regionId')
+            ->where('id', $id)
             ->from(__DBC_SCHEMATA_USERS__)
             ->get();
-        if($query->num_rows() > 0)
-        {
+        if ($query->num_rows() > 0) {
             $row = $query->result_array();
-            $getRegionDetails=$this->Admin_Model->getstateIdByResinolId($row['0']['regionId']);
-            if(!empty($getRegionDetails))
-            {
-                $getStateDetails=$this->Admin_Model->getStateById($getRegionDetails['stateId']);
+            $getRegionDetails = $this->Admin_Model->getstateIdByResinolId($row['0']['regionId']);
+            if (!empty($getRegionDetails)) {
+                $getStateDetails = $this->Admin_Model->getStateById($getRegionDetails['stateId']);
                 return $getStateDetails;
             }
-        }
-        else
-        {
+        } else {
             return array();
         }
 
     }
-    function getdistinctAgentrecord($franchiseeid,$agentName = 0)
+
+    function getdistinctAgentrecord($franchiseeid, $agentName = 0)
     {
         $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . (!empty($agentName) ? ' AND user.szName = ' . $agentName : '');
         $query = $this->db->select('user.szName')
-                            ->distinct('user.szName')
-                ->from(__DBC_SCHEMATA_USERS__ . ' as user')
+            ->distinct('user.szName')
+            ->from(__DBC_SCHEMATA_USERS__ . ' as user')
             ->join(__DBC_SCHEMATA_AGENT_FRANCHISEE__ . ' as agent', 'user.id = agent.agentid')
             //->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'agent.franchiseeid = client.franchiseeId')
             ->group_by('agent.agentid')
             ->where($whereAry)
             ->order_by('user.id', 'DESC')
             ->get();
-        
+
 //        echo $sql=$this->db->last_query(); die();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -1097,47 +1091,27 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
         }
     }
 
-    function getMappedNonCorpFranchisee($clientid,$corpfranchiseeid)
-    {
-        $wherestr = 'clientid = '.(int)$clientid.' AND corpfrid = '.(int)$corpfranchiseeid;
-        $query=$this->db->select('*')
-            ->where($wherestr)
-            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__)
-            ->get();
-        if($query->num_rows() > 0)
-        {
-            $row = $query->result_array();
-            return $row;
-        }
-        else
-        {
-            return array();
-        }
-    }
-
     function getNonCorpFranchisee()
     {
         $wherestr = 'iRole = 2 AND franchiseetype = 0 AND iActive = 1 AND isDeleted = 0';
-        $query=$this->db->select('*')
+        $query = $this->db->select('*')
             ->where($wherestr)
             ->from(__DBC_SCHEMATA_USERS__)
             ->get();
-        if($query->num_rows() > 0)
-        {
+        if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
-        }
-        else
-        {
+        } else {
             return array();
         }
     }
 
-    function MapClientToFranchisee($clientid,$corpfranchisee,$franchiseeid){
+    function MapClientToFranchisee($clientid, $corpfranchisee, $franchiseeid)
+    {
         $flag = false;
-        $checkClientMappedOrNotArr = $this->getMappedNonCorpFranchisee($clientid,$corpfranchisee);
-        if(!empty($checkClientMappedOrNotArr)){
-            $updateWhere = 'clientid = '.(int)$clientid.' AND corpfrid = '.(int)$corpfranchisee;
+        $checkClientMappedOrNotArr = $this->getMappedNonCorpFranchisee($clientid, $corpfranchisee);
+        if (!empty($checkClientMappedOrNotArr)) {
+            $updateWhere = 'clientid = ' . (int)$clientid . ' AND corpfrid = ' . (int)$corpfranchisee;
             $dataAry = array('franchiseeid' => $franchiseeid);
             $this->db->where($updateWhere);
             $queyUpdate = $this->db->update(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
@@ -1146,26 +1120,42 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
             } else {
                 $flag = false;
             }
-        }else{
+        } else {
             $dataAry = array('franchiseeid' => $franchiseeid,
                 'corpfrid' => $corpfranchisee,
                 'clientid' => $clientid);
             $this->db->insert(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
             if ($this->db->affected_rows() > 0) {
                 $flag = true;
-            }else{
+            } else {
                 $flag = false;
             }
         }
-        if($flag && $this->switchClientFranchisee($clientid,$franchiseeid)){
+        if ($flag && $this->switchClientFranchisee($clientid, $franchiseeid)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    function switchClientFranchisee($clientid,$franchiseeid){
-        $updateWhere = 'clientId = '.(int)$clientid;
+    function getMappedNonCorpFranchisee($clientid, $corpfranchiseeid)
+    {
+        $wherestr = 'clientid = ' . (int)$clientid . ' AND corpfrid = ' . (int)$corpfranchiseeid;
+        $query = $this->db->select('*')
+            ->where($wherestr)
+            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return array();
+        }
+    }
+
+    function switchClientFranchisee($clientid, $franchiseeid)
+    {
+        $updateWhere = 'clientId = ' . (int)$clientid;
         $dataAry = array('franchiseeId' => $franchiseeid);
         $this->db->where($updateWhere);
         $queyUpdate = $this->db->update(__DBC_SCHEMATA_CLIENT__, $dataAry);
@@ -1178,18 +1168,34 @@ function insertClientDetails($data,$franchiseeId='',$reqppval=0)
 
     function getMappedFranchisees($franchiseeid)
     {
-        $wherestr = 'corpfrid = '.(int)$franchiseeid;
-        $query=$this->db->select('*')
+        $wherestr = 'corpfrid = ' . (int)$franchiseeid;
+        $query = $this->db->select('*')
             ->where($wherestr)
-            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__.' as corpfr')
+            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__ . ' as corpfr')
             ->get();
-        if($query->num_rows() > 0)
-        {
+        if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
+        } else {
+            return array();
         }
-        else
-        {
+    }
+
+    function getDiscountList($discountid = 0)
+    {
+        if ($discountid > 0) {
+            $wherestr = 'id = ' . (int)$discountid;
+        }
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_DISCOUNT__);
+        if ($discountid > 0) {
+            $this->db->where($wherestr);
+        }
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
             return array();
         }
     }

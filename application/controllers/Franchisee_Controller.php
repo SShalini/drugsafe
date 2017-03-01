@@ -159,6 +159,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Add Client";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['discountarr'] = $this->Franchisee_Model->getDiscountList();
         $data['commentnotification'] = $commentReplyNotiCount;
         $data['franchiseeAray'] = $franchiseeAray;
         $data['validate'] = $validate;
@@ -517,6 +518,7 @@ class Franchisee_Controller extends CI_Controller
             $data['szMetaTagTitle'] = "Edit Client Details ";
             $data['pageName'] = "Client_Record";
             $data['flag'] = $flag;
+            $data['discountarr'] = $this->Franchisee_Model->getDiscountList();
             $data['idClient'] = $idClient;
             $_POST['clientData'] = $userDataAry;
             $data['idfranchisee'] = $idfranchisee;

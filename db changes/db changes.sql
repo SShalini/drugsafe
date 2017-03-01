@@ -160,3 +160,6 @@ CREATE TABLE IF NOT EXISTS `ds_corpfrmapping` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 ALTER TABLE `ds_user` ADD `franchiseetype` TINYINT(1) NOT NULL DEFAULT '0' AFTER `franchiseCode`;
+
+ALTER TABLE `tbl_client` ADD `discountid` INT(6) NOT NULL AFTER `clientCode`;
+ALTER TABLE `tbl_discount` CHANGE `percentage` `percentage` DECIMAL(5,2) NOT NULL;

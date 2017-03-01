@@ -53,7 +53,7 @@
                     <div class="portlet-body">
                         <form class="form-horizontal" id="clientData"
                               action="<?php echo __BASE_URL__ ?>/franchisee/addClient" name="clientData" method="post">
-                            <? php ?>
+
                             <div class="form-body">
                                 <?php if (empty($szParentId)) { ?>
                                     <div
@@ -231,6 +231,41 @@
                                     </div>
 
                                 </div>
+
+                                    <div class="form-group <?php if (!empty($arErrorMessages['discount']) != '') { ?>has-error<?php } ?>">
+                                        <label class="col-md-4 control-label">Discount</label>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-deviantart"></i>
+                                                </span>
+                                                <select class="form-control " name="clientData[discount]" id="discount"
+                                                         onfocus="remove_formError(this.id,'true')">
+
+                                                    <option value=''>Select</option>
+                                                    <?php
+                                                    //$industryListArr =$this->Admin_Model->viewAllIndustryList();
+                                                    if(!empty($discountarr))
+                                                    {
+                                                        foreach ($discountarr as $discountListDetails)
+                                                        {
+                                                            ?>
+                                                            <option value="<?php echo trim($discountListDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['discount']) == trim($industryListDetails['id']) ? "selected" : ""); ?>><?php echo trim($discountListDetails['percentage']); ?>%</option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <?php if (!empty($arErrorMessages['discount'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['discount']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
                                         <?php } else { ?>
                                     <div
                                         class="form-group <?php if (!empty($arErrorMessages['szName'])) { ?>has-error<?php } ?>">
