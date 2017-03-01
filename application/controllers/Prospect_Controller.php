@@ -746,7 +746,7 @@ public function deleteProspectConfirmation()
                 else
                 {
                     $count++;
-                    continue;
+                    //continue;
                 }
             }
         
