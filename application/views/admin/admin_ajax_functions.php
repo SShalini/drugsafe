@@ -2840,14 +2840,14 @@ if ($mode == '__SHOW_MEETING_DESCRIPTION_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Meeting Description</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Meeting Note</span></h4>
                     </div>
 
                 </div>
 
                
                 <div class="modal-body">
-                    <p class="alert alert-success"> <?php echo $descriptionDataArr['szDescription'] ?> </p>
+                    <p class="alert alert-success meeting-note"> <?php echo $descriptionDataArr['szDescription'] ?> </p>
                    
                    
                 </div>

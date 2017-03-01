@@ -54,26 +54,6 @@
                                     </div>
 
                                 </div>
-                                <div
-                                    class="form-group <?php if(form_error('addRegion[szState]')){?>has-error<?php }?>">
-                                    <label class="col-md-3 control-label"> Region Name</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-building"></i>
-                                                </span>
-                                            <input id="szCity" class="form-control" type="text"
-                                                   value="<?php echo $_POST['addRegion']['szRegionName']; ?>"
-                                                   placeholder="Region Name" onfocus="remove_formError(this.id,'true')"
-                                                   name="addRegion[szRegionName]"> 
-                                        </div>
-                                        <?php
-                                            if(form_error('addRegion[szRegionName]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('addRegion[szRegionName]');?></span>
-                                            </span><?php }?>
-                                    </div>
-
-                                </div>
                                 <div id="Region">
                                 <div
                                     class="form-group">
@@ -92,6 +72,27 @@
                                     </div>
                                 </div>
                                 </div>
+                                <div
+                                    class="form-group <?php if(form_error('addRegion[szRegionName]')){?>has-error<?php }?>">
+                                    <label class="col-md-3 control-label"> Region Name</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-building"></i>
+                                                </span>
+                                            <input id="szCity" class="form-control" type="text"
+                                                   value="<?php echo $_POST['addRegion']['szRegionName']; ?>"
+                                                   placeholder="Region Name" onfocus="remove_formError(this.id,'true')"
+                                                   name="addRegion[szRegionName]"> 
+                                        </div>
+                                        <?php
+                                            if(form_error('addRegion[szRegionName]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('addRegion[szRegionName]');?></span>
+                                            </span><?php }?>
+                                    </div>
+
+                                </div>
+                                
                             </div>
                             <div class="form-actions">
                                 <div class="row">

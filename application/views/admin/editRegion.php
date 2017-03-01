@@ -54,6 +54,24 @@
                                     </div>
 
                                 </div>
+                                <div id="Region">
+                                <div
+                                    class="form-group">
+                                    <label class="col-md-3 control-label">Region Code</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-area-chart"></i>
+                                                </span>
+                                            <input id="iRegionCode" class="form-control" type="text"
+                                                   value="<?php echo $_POST['editRegion']['regionCode']; ?>"
+                                                   placeholder="Region Code"
+                                                   onfocus="remove_formError(this.id,'true')"
+                                                   name="editRegion[regionCode]" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
                                 <div
                                     class="form-group <?php if(form_error('editRegion[regionName]')){?>has-error<?php }?>">
                                     <label class="col-md-3 control-label"> Region Name</label>
@@ -74,24 +92,7 @@
                                     </div>
 
                                 </div>
-                                <div id="Region">
-                                <div
-                                    class="form-group">
-                                    <label class="col-md-3 control-label">Region Code</label>
-                                    <div class="col-md-5">
-                                        <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-area-chart"></i>
-                                                </span>
-                                            <input id="iRegionCode" class="form-control" type="text"
-                                                   value="<?php echo $_POST['editRegion']['regionCode']; ?>"
-                                                   placeholder="Region Code"
-                                                   onfocus="remove_formError(this.id,'true')"
-                                                   name="editRegion[regionCode]" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>
+                                
                             </div>
                             <div class="form-actions">
                                 <div class="row">
