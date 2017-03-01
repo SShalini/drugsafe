@@ -34,12 +34,13 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
+            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
+            $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
@@ -125,12 +126,13 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
+            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+            $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
@@ -189,7 +191,7 @@ class Inventory_Controller extends CI_Controller {
            
             if ($productDataAry['szProductCode'] != $data_validate['szProductCode']) {
             $isunique = '|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]';
-        } else {
+            } else {
             $isunique = '';
         }
            
@@ -387,14 +389,20 @@ class Inventory_Controller extends CI_Controller {
             $flag = $this->session->userdata('flag');
          
             $productDataAry = $this->Inventory_Model->getProductDetailsById($idProduct);
-           
+            $data_validate = $this->input->post('productData');
+            if ($productDataAry['szProductCode'] != $data_validate['szProductCode']) {
+            $isunique = '|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]';
+            } else {
+            $isunique = '';
+        }
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
+            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required' .$isunique);
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+            $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
@@ -455,15 +463,22 @@ class Inventory_Controller extends CI_Controller {
             $flag = $this->session->userdata('flag');
          
             $productDataAry = $this->Inventory_Model->getProductDetailsById($idProduct);
+             $data_validate = $this->input->post('productData');
+            if ($productDataAry['szProductCode'] != $data_validate['szProductCode']) {
+            $isunique = '|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]';
+            } else {
+                $isunique = '';
+            }
            
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required');
+            $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required' .$isunique);
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
              $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
-             $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
+            $this->form_validation->set_message('required', '{field} is required');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -510,8 +525,7 @@ class Inventory_Controller extends CI_Controller {
             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
             $this->pagination->initialize($config);
             $idfranchisee = $_SESSION['drugsafe_user']['id'];
-          
-               $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry);
+          $consumablesAray =$this->Inventory_Model->viewConsumablesList($config['per_page'],$this->uri->segment(3),$searchAry);
                $consumableslistAry =$this->Inventory_Model->viewConsumablesList();
                $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
