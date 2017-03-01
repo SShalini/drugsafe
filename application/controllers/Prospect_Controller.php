@@ -293,7 +293,7 @@ public function deleteProspectConfirmation()
                 die;
             }
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('meetingNotesData[szDiscription]', 'Meeting Description', 'required');
+            $this->form_validation->set_rules('meetingNotesData[szDiscription]', 'Meeting Note filed', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
