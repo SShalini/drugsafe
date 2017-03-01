@@ -54,7 +54,7 @@
                        echo "Prospect Details";
 
                       if($_SESSION['drugsafe_user']['iRole']==2){
-                          if ($prospectDetailsAry['status'] != 4) { ?>
+                            if (($prospectDetailsData['status']== 1) || ($prospectDetailsData['status']== 2)|| ($prospectDetailsData['status']== 3)|| ($prospectDetailsData['status']== 5)) { ?>
                     &nbsp; &nbsp;
                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Data" onclick="editProspectDetails('<?php echo $prospectDetailsAry['id'];?>','2');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 

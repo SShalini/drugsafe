@@ -267,7 +267,7 @@
                                                      ?> </td>
                                            <td>
                                              <?php     if($_SESSION['drugsafe_user']['iRole']==2){
-                                               if ($prospectDetailsData['status']!= 4) { ?>
+                                               if (($prospectDetailsData['status']== 1) || ($prospectDetailsData['status']== 2)|| ($prospectDetailsData['status']== 3)|| ($prospectDetailsData['status']== 5)) { ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="addMeetingNote" title="Add Meeting Notes" onclick="addMeetingNotesData('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
@@ -281,7 +281,7 @@
                                                 </a>
                                                  <?php 
                                                   if($_SESSION['drugsafe_user']['iRole']==2){
-                                                      if ($prospectDetailsData['status'] != 4) { ?>
+                                                       if (($prospectDetailsData['status']== 1) || ($prospectDetailsData['status']== 2)|| ($prospectDetailsData['status']== 3)|| ($prospectDetailsData['status']== 5)) { ?>
                                                <?php $prospectDetailsByProspectsIdAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($prospectDetailsData['id']);
                                                if(empty($prospectDetailsByProspectsIdAry)) {
                                                ?> 
