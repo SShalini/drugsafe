@@ -1293,7 +1293,7 @@ function excelfr_stockassignlist_Data()
                                         <th> <b>Category</b> </th>
                                         <th> <b>Product Code </b> </th>
                                         <th style="width:150px"><b> In Stock  </b> </th>
-                                        <th style="width:170px"> <b>Requested</b> </th>
+                                        <th style="width:170px"> <b>Ordered</b> </th>
                                        
                                    
                                     </tr>';
@@ -1389,16 +1389,12 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Requested');
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Ordered');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Alloted');
-        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
+      
         $productCode = $this->session->userdata('productCode');
         $prodCategory = $this->session->userdata('prodCategory');
         
@@ -1415,14 +1411,14 @@ function excelfr_stockassignlist_Data()
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szProductCode']);
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szAvailableQuantity']);
                 $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['quantity']);
-                 $this->excel->getActiveSheet()->setCellValue('F'.$i,$item['dispatched']);
+                
 
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
-                 $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                
                 $i++;
             }
         }
@@ -1494,7 +1490,7 @@ function excelfr_stockassignlist_Data()
                                         <th width="23%"> <b>Category</b> </th>
                                         <th width="22%"> <b>Product Code </b> </th>
                                         <th width="23%"><b> In Stock  </b> </th>
-                                        <th width="22%"> <b>Requested</b> </th>
+                                        <th width="22%"> <b>Ordered</b> </th>
                                        
                                    
                                     </tr>';
@@ -1589,7 +1585,7 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Requested');
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Ordered');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

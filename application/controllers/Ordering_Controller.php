@@ -476,7 +476,7 @@ class Ordering_Controller extends CI_Controller
 </table>
 <br />
 <h2 style="text-align: center;">Proforma Invoice</h2>
-<p style="text-align: center">Invoice id: #'.sprintf(__FORMAT_NUMBER__, $data['id']).'</p>
+
 <br>
 <table cellpadding="5px">
     <tr>
