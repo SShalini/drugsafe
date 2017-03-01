@@ -293,12 +293,12 @@ public function deleteProspectConfirmation()
                 die;
             }
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('meetingNotesData[szDiscription]', 'Meeting Note filed', 'required');
+            $this->form_validation->set_rules('meetingNotesData[szDiscription]', 'Meeting Note', 'required');
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
             { 
                
-                $data['szMetaTagTitle'] = "Add Meeting Notes";
+                $data['szMetaTagTitle'] = "Add Meeting Note";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Prospect_Record";
                 $data['flag'] = $flag;
@@ -313,7 +313,7 @@ public function deleteProspectConfirmation()
                 if( $this->Prospect_Model->insertMeetingNotes($validate,$idProspect))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Meeting Notes added successfully.</h3></strong>";
+                    $szMessage['content'] = "<strong><h3> Meeting Note added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     if($flag==1){
                        $this->session->unset_userdata('idProspect');

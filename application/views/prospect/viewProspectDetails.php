@@ -53,11 +53,13 @@
                     <?php 
                        echo "Prospect Details";
 
-                   ?>
+                      if($_SESSION['drugsafe_user']['iRole']==2){
+                          if ($prospectDetailsAry['status'] != 4) { ?>
                     &nbsp; &nbsp;
                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Data" onclick="editProspectDetails('<?php echo $prospectDetailsAry['id'];?>','2');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 
                     </a>
+                          <?php } } ?>
                 </span>
             </div>
             
@@ -113,57 +115,101 @@
                             <p><?php echo $prospectDetailsAry['szCountry'];?></p>
                         </div>
                     </div>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Zip Code:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $prospectDetailsAry['szZipCode'];?></p>
+                        </div>
+                    </div>
                       <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Status:</lable>
                         </div>
-                        <div class="col-sm-8">
                             <?php
-                              
                                 if($prospectDetailsAry['status']==1) {
                                     ?>
-                                    <div class="col-md-7 value">
-                                                    <span class="label label-sm label-warning">
-                                                    Newly Added 
-                                            </span>
-                                          &nbsp; &nbsp;
-                           
-                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Status" onclick="editProspectStatus('<?php echo $prospectDetailsAry['id'];?>');" href="javascript:void(0);">
-                        <i class="fa fa-pencil"></i> 
-                    </a>
+                                   <div class="col-sm-8">
+                                    <span class="label label-sm label-warning">
+                                    Pre Discovery
+                                   </span>
+                                     &nbsp; &nbsp;
+                                   <?php  if($_SESSION['drugsafe_user']['iRole']==2){ ?>
+                                        <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Status" onclick="editProspectStatus('<?php echo $prospectDetailsAry['id'];?>');" href="javascript:void(0);">
+                                            <i class="fa fa-pencil"></i> 
+                                        </a>
+                                   <?php  } ?>
+                                    </div>
+         
+                                    <?php
+                                    }
+                                if($prospectDetailsAry['status']==2) {
+                                    ?>
+                                  <div class="col-sm-8">
+                                    <span class="label label-sm label-primary">
+                                  Discovery Meeting
+                                    </span>
+                                   &nbsp; &nbsp;
+                                      <?php  if($_SESSION['drugsafe_user']['iRole']==2){ ?>
+                                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Status" onclick="editProspectStatus('<?php echo $prospectDetailsAry['id'];?>');" href="javascript:void(0);">
+                                        <i class="fa fa-pencil"></i> 
+                                    </a>
+                                     </div>
+                                      <?php } ?>
+                                    <?php
+                                }
+                               
+                                if ($prospectDetailsAry['status'] ==3) {
+                                    ?>
+                                   <div class="col-sm-8">
+                                     <span class="label label-sm label-info">
+                                     In Progress  
+                                   </span>
+                                          <?php  if($_SESSION['drugsafe_user']['iRole']==2){ ?>
+                                  &nbsp; &nbsp;
+                                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Status" onclick="editProspectStatus('<?php echo $prospectDetailsAry['id'];?>');" href="javascript:void(0);">
+                                        <i class="fa fa-pencil"></i> 
+                                    </a>
+                                          <?php  } ?>
                                     </div>
 
                                     <?php
                                 }
-                                if($prospectDetailsAry['status']==3) {
+                          if ($prospectDetailsAry['status'] ==4) {
                                     ?>
-                                    <div class="col-md-7 value">
-                                    <span class="label label-sm label-success">
-                                   Completed 
-                                    </span>
-                                   &nbsp; &nbsp;
-                           
-                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Status" onclick="editProspectStatus('<?php echo $prospectDetailsAry['id'];?>');" href="javascript:void(0);">
-                        <i class="fa fa-pencil"></i> 
-                    </a>
-                                         </div>
+                                   <div class="col-sm-8">
+                                     <span class="label label-sm label-danger">
+                                    Non Convertible 
+                                   </span>
+                                 
+                                    </div>
 
                                     <?php
                                 }
-                               
-                                if ($prospectDetailsAry['status'] == 2) {
+                              if ($prospectDetailsAry['status'] ==5) {
                                     ?>
-                                    <div class="col-md-7 value">
-                                                    <span class="label label-sm label-info">
-                                             In Progress  
-                                                    
-                
-                                                    </span>
-                                          &nbsp; &nbsp;
-                           
-                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Status" onclick="editProspectStatus('<?php echo $prospectDetailsAry['id'];?>');" href="javascript:void(0);">
-                        <i class="fa fa-pencil"></i> 
-                    </a>
+                                   <div class="col-sm-8">
+                                     <span class="label label-sm label-info">
+                                     Contact Later   
+                                   </span>
+                                  &nbsp; &nbsp;
+                                     <?php  if($_SESSION['drugsafe_user']['iRole']==2){ ?>
+                                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Status" onclick="editProspectStatus('<?php echo $prospectDetailsAry['id'];?>');" href="javascript:void(0);">
+                                        <i class="fa fa-pencil"></i> 
+                                    </a>
+                                     <?php  } ?>
+                                    </div>
+
+                                    <?php
+                                }
+                               if ($prospectDetailsAry['status'] ==6) {
+                                    ?>
+                                   <div class="col-sm-8">
+                                     <span class="label label-sm label-success">
+                                     Closed Sale  
+                                   </span>
+                                
                                     </div>
 
                                     <?php
@@ -171,7 +217,7 @@
 
                                 ?>
                           
-                        </div>
+                       
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -259,12 +305,21 @@
                             <p><?php echo $prospectDetailsAry['szCity'];?></p>
                         </div>
                     </div>
+                   
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>Zip Code:</lable>
+                            <lable>No of Sites:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szZipCode'];?></p>
+                            <p><?php echo $prospectDetailsAry['szNoOfSites'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Lead Generation Channel:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $prospectDetailsAry['L_G_Channel'];?></p>
                         </div>
                     </div>
 
@@ -280,6 +335,9 @@
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $prospectDetailsAry['szName'];?>'s Meeting Notes</span>
                         </div>
+                         <?php  if($_SESSION['drugsafe_user']['iRole']==2){ 
+                      if (($prospectDetailsAry['status'] ==1)|| ($prospectDetailsAry['status'] ==2) ||($prospectDetailsAry['status'] ==3) || ($prospectDetailsAry['status'] ==5)) {
+                                    ?>
                         <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow"  onclick="addMeetingNotesData(<?php echo $prospectDetailsAry['id'];?>,'2');" href="javascript:void(0);">
@@ -287,13 +345,15 @@
                                     </button>
                                 </div>
                             </div>
+                         <?php  } } ?>
                     </div>
 
                     <?php
                   
                     if (!empty($mettingsDetailsAry)) {
-
+                     if($_SESSION['drugsafe_user']['iRole']!=2){
                         ?>
+                    
                      <div class="row">
                               <form class="form-horizontal" id="szSearchFranchiseeList" action="<?=__BASE_URL__?>/prospect/view_prospect_details" name="szSearchFranchiseeList" method="post">
                       <!--                          <div class="search col-md-3">
@@ -344,13 +404,14 @@
                                   </div>
                            </form>
                           </div>
+                     <?php }?>
                     <div class="row">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th> Sr No.</th>
-                                    <th> Description</th>
+                                    <th> Meeting Note</th>
                                     <th> Created By</th>
                                     <th> Date/Time</th> 
                                 </tr>

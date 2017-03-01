@@ -20,7 +20,11 @@ class Prospect_Model extends Error_Model
     }
     function set_szCity($value, $flag = true)
     {
-        $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCity", "City", false, false, $flag);
+        $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_NAME__, "szCity", "City", false, false, $flag);
+    }
+    function set_szNoOfSites($value, $flag = true)
+    {
+        $this->data['szNoOfSites'] = $this->validateInput($value, __VLD_CASE_NUMERIC__, "szNoOfSites", "No Of Sites", false, false, $flag);
     }
         function set_iFranchiseeId($value, $flag = true)
     {
@@ -48,6 +52,10 @@ class Prospect_Model extends Error_Model
       function set_industry($value, $flag = true)
     {
         $this->data['industry'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "industry", "Industry", false, false, $flag);
+    }
+     function set_L_G_Channel($value, $flag = true)
+    {
+        $this->data['L_G_Channel'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "L_G_Channel", "Lead Generation Channel", false, false, $flag);
     }
 
      function getAllProspectDetails($franchiseeId,$szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
@@ -83,7 +91,7 @@ class Prospect_Model extends Error_Model
        else{
        $array = array('isDeleted' => '0');
          } 
-           $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+           $query = $this->db->select('id,szName,dt_last_updated_status,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("id","desc") 
            ->limit($limit, $offset)
@@ -128,7 +136,9 @@ class Prospect_Model extends Error_Model
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
-             if($flag==2){
+            if (!in_array('L_G_Channel', $arExclude)) $this->set_L_G_Channel(sanitize_all_html_input(trim($data['L_G_Channel'])), true);
+            if (!in_array('szNoOfSites', $arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])), true); 
+            if($flag==2){
                 if (!in_array('iFranchiseeId', $arExclude)) $this->set_iFranchiseeId(sanitize_all_html_input(trim($data['iFranchiseeId'])), true);
             }
             if($flag==1){
@@ -239,6 +249,7 @@ class Prospect_Model extends Error_Model
                 'szEmail' => $data['szEmail'],
                 'szContactNo' => $data['szContactNo'],
                 'dtCreatedOn' =>$date,
+                'dtUpdatedOn' =>$date,
                 'isDeleted' =>'0',
                 'szCountry' => $data['szCountry'],
                 'abn' => $data['abn'], 
@@ -261,6 +272,7 @@ class Prospect_Model extends Error_Model
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
                 'szContactNo' => $data['szContactNo'],
+                'dtUpdatedOn' =>$date,
                 'dtCreatedOn' =>$date,
                 'isDeleted' =>'0',
                 'szCountry' => $data['szCountry'],
@@ -274,7 +286,10 @@ class Prospect_Model extends Error_Model
                 'szContactMobile' => $data['szContactMobile'],
                 'szCreatedBy' => (int)$_SESSION['drugsafe_user']['id'],
                 'industry' => $data['industry'],
-                'status' => '1'
+                'status' => '1',
+                'szNoOfSites' => $data['szNoOfSites'],
+                'dt_last_updated_status' => $date,
+                'L_G_Channel' => $data['L_G_Channel']
             );   
            }
            
@@ -290,7 +305,7 @@ class Prospect_Model extends Error_Model
                 'prospectId' => (int)$prospectId,
                 'status' => (int)'1',
                 'dtUpdatedOn' =>$date,
-                'szUpdatedBy' =>(int)$franchiseeid
+                'szUpdatedBy' =>(int)$data['iFranchiseeId']
             );
             $this->db->insert(__DBC_SCHEMATA_STATUS__, $whereAry);   
                return true; 
@@ -301,7 +316,7 @@ class Prospect_Model extends Error_Model
     {
         
         $array = array('id' => (int)$prospectsId, 'isDeleted' => '0');
-        $query = $this->db->select('id,szName,iFranchiseeId,szEmail,szContactNo,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
+        $query = $this->db->select('id,szName,L_G_Channel,szNoOfSites,iFranchiseeId,szEmail,szContactNo,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
             ->from(__DBC_SCHEMATA_PROSPECT__)
             ->where($array)
             ->get();
@@ -368,6 +383,8 @@ class Prospect_Model extends Error_Model
                 'szCreatedBy' => $_SESSION['drugsafe_user']['id'],
                 'industry' => $data['industry'],
                 'dtUpdatedOn' =>$date,
+                'szNoOfSites' => $data['szNoOfSites'],
+                'L_G_Channel' => $data['L_G_Channel'] ,
                 'isDeleted' =>'0'
             );
          
@@ -515,6 +532,7 @@ class Prospect_Model extends Error_Model
             else{
              $dataAry = array(
                 'status' => $data['status'],
+                'dt_last_updated_status' => $date
            
             ); 
           $whereAry = array('id' => (int)$prospectsId);

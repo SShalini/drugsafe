@@ -60,33 +60,36 @@
                                 <span class="caption-subject font-red-sunglo bold uppercase">Prospect Record</span>
                             </div>
                             <div class="actions">
+                               <?php if($_SESSION['drugsafe_user']['iRole']==2){ ?>
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow" onclick="redirect_url('<?php echo base_url();?>prospect/addprospect');">
                                         &nbsp;Add New Prospect 
                                     </button>
                                 </div>
+                               <?php } ?>
                                  <?php
                         if(!empty($prospectDetailsAry))
                         { 
                     
                             ?>
-                       
+                           
                                 &nbsp; &nbsp;
                                   <a onclick="export_csv_report('<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> Export CSV</a>
                                      <?php
-                        }
-                    
+                        } 
+                     if($_SESSION['drugsafe_user']['iRole']==2){
                             ?>
                        
                                   &nbsp; &nbsp;
                                   <a onclick="import_csv_popup()" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                     <i class="fa fa-reply"></i> Import CSV</a>
+                     <?php } ?>
                             </div>
                         </div>
-                      <?php
+                     <?php 
                         if(!empty($_POST))
                         { 
                     
@@ -137,13 +140,22 @@
                                          
                                         <option value=''>Status</option>
                                         <option value="1" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("1") ? "selected" : ""); ?>>
-                                            Newly Added
+                                            Pre Discovery 
                                         </option>
                                         <option value="2" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("2") ? "selected" : ""); ?>>
-                                          In Progress
+                                           Discovery Meeting
                                         </option>
                                         <option value="3" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("3") ? "selected" : ""); ?>>
-                                          Completed 
+                                          In Progress  
+                                        </option>
+                                        <option value="4" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("3") ? "selected" : ""); ?>>
+                                          Non Convertible 
+                                        </option>
+                                        <option value="5" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("3") ? "selected" : ""); ?>>
+                                          Contact Later 
+                                        </option>
+                                         <option value="6" <?php echo(sanitize_post_field_value($_POST['szSearch2']) == trim("3") ? "selected" : ""); ?>>
+                                         Closed Sale
                                         </option>
                                   
                                       </select>
@@ -172,7 +184,7 @@
                                         <th> Email</th>
                                         <th> Contact No </th>
                                         <th> Status </th>
-                                        <th> Meeting Date/Time </th>
+                                        <th> Status Updated Date/Time </th>
                                         <th> Actions </th>
                                     </tr>
                                 </thead>
@@ -196,20 +208,20 @@
 
                                                                         <p title="Order Status"
                                                                            class="label label-sm label-warning">
-                                                                            Newly Added
+                                                                            Pre Discovery 
                                                                         </p>
                                                                         <?php
                                                                     }
-                                                                    if ($prospectDetailsData['status'] == 3) {
+                                                                    if ($prospectDetailsData['status'] == 2) {
                                                                         ?>
                                                                         <p title="Order Status"
-                                                                           class="label label-sm label-success">
-                                                                            Completed
+                                                                           class="label label-sm label-primary">
+                                                                             Discovery Meeting
                                                                         </p>
                                                                         <?php
                                                                     }
                                                                    
-                                                                    if ($prospectDetailsData['status'] == 2) {
+                                                                    if ($prospectDetailsData['status'] == 3) {
                                                                         ?>
                                                                         <p title="Order Status"
                                                                            class="label label-sm label-info">
@@ -217,18 +229,45 @@
                                                                         </p>
                                                                         <?php
                                                                     }
+                                                                    if ($prospectDetailsData['status'] == 4) {
+                                                                        ?>
+                                                                        <p title="Order Status"
+                                                                           class="label label-sm label-danger">
+                                                                              Non Convertible
+                                                                        </p>
+                                                                        <?php
+                                                                    }
+                                                                    if ($prospectDetailsData['status'] == 5) {
+                                                                        ?>
+                                                                        <p title="Order Status"
+                                                                           class="label label-sm label-info">
+                                                                             Contact Later 
+                                                                        </p>
+                                                                        <?php
+                                                                    }
+                                                                  
+                                                                    if ($prospectDetailsData['status'] == 6) {
+                                                                        ?>
+                                                                        <p title="Order Status"
+                                                                           class="label label-sm label-success">
+                                                                             Closed Sale
+                                                                        </p>
+                                                                        <?php
+                                                                    }
 
                                                                     ?></td>
                                                         
                                                      <td>  <?php 
-                                                    if(($prospectDetailsData['dt_last_updated_meeting']) == '0000-00-00 00:00:00'){
+                                                    if(($prospectDetailsData['dt_last_updated_status']) == '0000-00-00 00:00:00'){
                                                       echo "N/A";  
                                                     }
                                                     else{
-                                                      echo date('d M Y',strtotime($prospectDetailsData['dt_last_updated_meeting'])) . ' at '.date('h:i A',strtotime($prospectDetailsData['dt_last_updated_meeting']));   
+                                                      echo date('d M Y',strtotime($prospectDetailsData['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($prospectDetailsData['dt_last_updated_status']));   
                                                     }
                                                      ?> </td>
                                            <td>
+                                             <?php     if($_SESSION['drugsafe_user']['iRole']==2){
+                                               if ($prospectDetailsData['status']!= 4) { ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="addMeetingNote" title="Add Meeting Notes" onclick="addMeetingNotesData('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
 
@@ -236,16 +275,20 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Data" id="editProspectDetails" onclick="editProspectDetails('<?php echo $prospectDetailsData['id'];?>','1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
+                                             <?php }} ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="prospectsView" title="View Prospect Details" onclick="viewProspect(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);">
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+                                                 <?php 
+                                                  if($_SESSION['drugsafe_user']['iRole']==2){
+                                                      if ($prospectDetailsData['status'] != 4) { ?>
                                                <?php $prospectDetailsByProspectsIdAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($prospectDetailsData['id']);
                                                if(empty($prospectDetailsByProspectsIdAry)) {
                                                ?> 
                                                <a class="btn btn-circle btn-icon-only btn-default" id="ProspectStatus" title="Delete Prospect Record" onclick="prospectDelete(<?php echo $prospectDetailsData['id'];?>);" href="javascript:void(0);">
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
-                                               <?php }
+                                                  <?php  } } }
                                                /*if($_SESSION['drugsafe_user']['iRole']==1){
                                                */?><!--
                                                <a class="btn btn-circle btn-icon-only btn-default" id="changeToClient" title ="Convert to Client" onclick="changeToClient('<?php /*echo $prospectDetailsData['id'];*/?>')" href="javascript:void(0);" >

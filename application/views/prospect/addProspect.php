@@ -144,6 +144,28 @@
                                     </div>
 
                                 </div>
+                                  <div
+                                        class="form-group <?php if (!empty($arErrorMessages['szNoOfSites'])) { ?>has-error<?php } ?>">
+                                        <label class="col-md-4 control-label">No Of Sites</label>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-users"></i>
+                                                </span>
+                                                <input id="szNoOfSites" class="form-control" type="text"
+                                                       value="<?php echo $_POST['addprospect']['szNoOfSites']; ?>"
+                                                       placeholder="No Of Sites"
+                                                       onfocus="remove_formError(this.id,'true')"
+                                                       name="addprospect[szNoOfSites]">
+                                            </div>
+                                            <?php if (!empty($arErrorMessages['szNoOfSites'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szNoOfSites']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
                               <div class="form-group <?php if (!empty($arErrorMessages['industry']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label">Industry</label>
                                     <div class="col-md-6">
@@ -176,7 +198,35 @@
                                             </span>
                                         <?php } ?>
                                     </div>
+                              </div>
+                                    <div class="form-group <?php if (!empty($arErrorMessages['industry']) != '') { ?>has-error<?php } ?>">
+                                    <label class="col-md-4 control-label">Lead Generation Channel</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-industry"></i>
+                                                </span>
+                                            <select class="form-control " name="addprospect[L_G_Channel]" id="L_G_Channel"
+                                                    Placeholder="L_G_Channel" onfocus="remove_formError(this.id,'true')">
+                                               
+                                                 <option value=''>Select</option>
+                                                 <option value="LinkedIn" <?php echo(sanitize_post_field_value($_POST['addprospect']['L_G_Channel']) == trim('LinkedIn') ? "selected" : ""); ?>>LinkedIn</option>
+                                                  <option value="Business Chamber" <?php echo(sanitize_post_field_value($_POST['addprospect']['L_G_Channel']) == trim('Business Chamber') ? "selected" : ""); ?>>Business Chamber</option>
+                                                   <option value="Business List" <?php echo(sanitize_post_field_value($_POST['addprospect']['L_G_Channel']) == trim('Business List') ? "selected" : ""); ?>>Business List</option>
+                                                    <option value="Industry Associations" <?php echo(sanitize_post_field_value($_POST['addprospect']['L_G_Channel']) == trim('Industry Associations') ? "selected" : ""); ?>>Industry Associations</option>
+                                                     <option value="Other" <?php echo(sanitize_post_field_value($_POST['addprospect']['L_G_Channel']) == trim('Other') ? "selected" : ""); ?>>Other</option>
+                                                               
+                                            </select>
+                                        </div>
+                                        <?php if (!empty($arErrorMessages['L_G_Channel'])) { ?>
+                                            <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                <?php echo $arErrorMessages['L_G_Channel']; ?>
+                                            </span>
+                                        <?php } ?>
                                     </div>
+                                    </div>
+                                    
                                   <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){
                                   ?>
                                              <div

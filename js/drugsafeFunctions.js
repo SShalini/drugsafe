@@ -2125,6 +2125,9 @@ function editProspectStatus(idProspect) {
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
             $('#editProspectStatus').modal("show");
+            $('#submit_val').attr('style','opacity:0.4');
+            $('#submit_val').removeAttr('onclick');
+
         }
         jQuery('#loader').attr('style', 'display:none');
 
@@ -2319,4 +2322,22 @@ function assignFranchiseeClientConfirmation(clientid) {
 
 
     });
+}
+
+function showSubmit(value) {
+    
+  var statusVal = $("#statusValue").val(); 
+  var idProspect = $("#idProspect").val(); 
+ if((statusVal==value)||(!value)){
+   $('#submit_val').attr('style','opacity:0.4');
+   $('#submit_val').removeAttr('onclick');  
+ }
+ else{
+    $('#submit_val').attr('style','opacity:1');
+    $("#submit_val").unbind("click");
+    $("#submit_val").click(function(){editProspectStatusConfirmation(idProspect);});
+    $('#submit_val span').text('save');
+           
+ 
+ }
 }

@@ -2665,13 +2665,20 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                 <div class="col-md-5">
                                    <div class="search">
                                         <div id='changeStatus'>                         
-                                      <select class="form-control " name="changeStatus[status]" id="changeStatus"
-                                                    Placeholder="Status" onfocus="remove_formError(this.id,'true')">
+                                      <select class="form-control " name="changeStatus[status]" id="changeStatusVal"
+                                                    Placeholder="Status" onfocus="remove_formError(this.id,'true')" onchange="showSubmit(this.value);">
                                           
                                                 <option value=''>Status</option>
-                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Newly Added</option>
-                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected" : ""); ?>>In Progress</option>
-                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected" : ""); ?>>Completed</option>
+                                                <?php if (($prospectStatusDetailsAry['0']['status']==3 )||($prospectStatusDetailsAry['0']['status']==4 )) {?>
+                                                <option value="1" disabled <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
+                                                <?php } else {?>
+                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
+                                                <?php } ?>
+                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected" : ""); ?>>Discovery Meeting</option>
+                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected" : ""); ?>>In Progress</option>
+                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("4") ? "selected" : ""); ?>>Non Convertible</option>
+                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("5") ? "selected" : ""); ?>>Contact Later</option>
+                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("6") ? "selected" : ""); ?>>Closed Sale</option>
                                                
                                             </select>
                                             </div>
@@ -2684,6 +2691,8 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                         </span><?php } ?>
                                 </div>
                             </div>
+                            <input type="hidden" name="statusValue" id='statusValue' value="<?php echo $prospectStatusDetailsAry['0']['status'];?>"/>
+                             <input type="hidden" name="idProspect" id='idProspect' value="<?php echo $idProspect;?>"/>
                         </div>
                     </form>
                   <div class="portlet green-meadow box">
@@ -2723,20 +2732,20 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
 
                                                 <p title="Order Status"
                                                    class="label label-sm label-warning">
-                                                    Newly Added
+                                                    Pre Discovery
                                                 </p>
                                                 <?php
                                             }
-                                            if ($prospectStatusDetailsData['status'] == 3) {
+                                            if ($prospectStatusDetailsData['status'] == 2) {
                                                 ?>
                                                 <p title="Order Status"
-                                                   class="label label-sm label-success">
-                                                    Completed
+                                                   class="label label-sm label-primary">
+                                                    Discovery Meeting
                                                 </p>
                                                 <?php
                                             }
 
-                                            if ($prospectStatusDetailsData['status'] == 2) {
+                                            if ($prospectStatusDetailsData['status'] == 3) {
                                                 ?>
                                                 <p title="Order Status"
                                                    class="label label-sm label-info">
@@ -2744,7 +2753,30 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                 </p>
                                                 <?php
                                             }
-
+                                           if ($prospectStatusDetailsData['status'] == 4) {
+                                                ?>
+                                                <p title="Order Status"
+                                                   class="label label-sm label-danger">
+                                                    Non Convertible
+                                                </p>
+                                                <?php
+                                            }
+                                            if ($prospectStatusDetailsData['status'] == 5) {
+                                                ?>
+                                                <p title="Order Status"
+                                                   class="label label-sm label-info">
+                                                    Contact Later
+                                                </p>
+                                                <?php
+                                            }
+                                            if ($prospectStatusDetailsData['status'] == 6) {
+                                                ?>
+                                                <p title="Order Status"
+                                                   class="label label-sm label-success">
+                                                    Closed Sale
+                                                </p>
+                                                <?php
+                                            }
                                            ?></td>
                                         <td>
                                             <?php 
@@ -2787,10 +2819,10 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                  
 
                 </div>
-               
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button"
+                    <?php if($prospectStatusDetailsAry['0']['status']==1)?>
+                    <button type="button" id="submit_val"
                             onclick="editProspectStatusConfirmation('<?php echo $idProspect; ?>'); return false;"
                             class="btn green-meadow">Submit
                     </button>
@@ -2847,11 +2879,11 @@ if ($mode == '__SHOW_MEETING_DESCRIPTION_POPUP__') {
 
                
                 <div class="modal-body">
-                    <p class="alert alert-success meeting-note"> <?php echo $descriptionDataArr['szDescription'] ?> </p>
                    
+                  <p> <?php echo $descriptionDataArr['szDescription'] ?> </p> 
                    
                 </div>
-
+ 
                 <div class="modal-footer">
                     <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                 </div>
