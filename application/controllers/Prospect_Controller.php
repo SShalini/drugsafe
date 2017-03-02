@@ -625,6 +625,12 @@ public function deleteProspectConfirmation()
                    else{
                      $meetingVal = date('d/m/Y',  strtotime($prospectDetailsData['dt_last_updated_meeting'])). ' at '.date('h:i A',strtotime($prospectDetailsData['dt_last_updated_meeting'])); 
                    }
+                    if($prospectDetailsData['dt_last_updated_status']=='0000-00-00 00:00:00'){
+                     $statusVal = "N/A";  
+                   }
+                   else{
+                     $statusVal = date('d/m/Y',  strtotime($prospectDetailsData['dt_last_updated_status'])). ' at '.date('h:i A',strtotime($prospectDetailsData['dt_last_updated_status'])); 
+                   }
                      if($prospectDetailsData['industry']==1){
                                $value = 'Agriculture, Forestry and Fishing';
                             }
@@ -676,6 +682,7 @@ public function deleteProspectConfirmation()
                        $data[$i]['L_G_Channel'] =$prospectDetailsData['L_G_Channel'];
                        $data[$i]['szNoOfSites'] =$prospectDetailsData['szNoOfSites'];
                        $data[$i]['dt_last_updated_meeting'] = $meetingVal ; 
+                        $data[$i]['dt_last_updated_status'] = $statusVal ; 
                       
                        $i++;
 
@@ -724,6 +731,7 @@ public function deleteProspectConfirmation()
           }
           array_shift($arrResult);
           $count =0;
+         
             foreach ($arrResult as $worksheet) {
                 
                $_POST['prospectAry']['szBusinessName'] = $worksheet[1];
@@ -740,7 +748,10 @@ public function deleteProspectConfirmation()
                $_POST['prospectAry']['szCity'] = $worksheet[12];
                $_POST['prospectAry']['szCountry'] = $worksheet[13];
                $_POST['prospectAry']['szZipCode'] = $worksheet[14];
-               $_POST['prospectAry']['dt_last_updated_meeting'] = $worksheet[15];
+               $_POST['prospectAry']['L_G_Channel'] = $worksheet[15];
+               $_POST['prospectAry']['szNoOfSites'] = $worksheet[16];
+               $_POST['prospectAry']['dt_last_updated_meeting'] = $worksheet[17];
+               $_POST['prospectAry']['dt_last_updated_status'] = $worksheet[18];
                $_POST['prospectAry']['iFranchiseeId'] = $_POST['iFranchiseeId'];
                  
               $validation=$this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1);

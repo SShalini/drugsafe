@@ -91,7 +91,7 @@ class Prospect_Model extends Error_Model
        else{
        $array = array('isDeleted' => '0');
          }
-         $query = $this->db->select('id,szName,dt_last_updated_status,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
+         $query = $this->db->select('id,szName,dt_last_updated_status,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("id","desc") 
            ->limit($limit, $offset)
@@ -182,7 +182,8 @@ class Prospect_Model extends Error_Model
        if($flag==1){
           
            $meetingDateTime = $this->getSqlFormattedDate($data['dt_last_updated_meeting']);
-         
+           $statusDateTime = $this->getSqlFormattedDate($data['dt_last_updated_status']);
+      
            if($data['industry']== 'Agriculture, Forestry and Fishing'){
                                $value = '1';
                             }
@@ -263,7 +264,10 @@ class Prospect_Model extends Error_Model
                 'industry' => $value,
                 'status' => $status,
                 'szCreatedBy' => (int)$_SESSION['drugsafe_user']['id'],
-               'dt_last_updated_meeting' => $meetingDateTime
+                'szNoOfSites' => $data['szNoOfSites'],
+                'L_G_Channel' => $data['L_G_Channel'],
+               'dt_last_updated_meeting' => $meetingDateTime,
+               'dt_last_updated_status' => $statusDateTime,
             );    
        }
        else{

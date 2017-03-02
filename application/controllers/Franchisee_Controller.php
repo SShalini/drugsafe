@@ -142,7 +142,7 @@ class Franchisee_Controller extends CI_Controller
                 }
                 if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee, $reqppval)) {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<h4><strong> Client added successfully.</strong></h4>";
+                    $szMessage['content'] = "<h4><strong> Site added successfully.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     ob_end_clean();

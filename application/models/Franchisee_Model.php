@@ -124,7 +124,7 @@ class Franchisee_Model extends Error_Model
                     }
 
                     $siteAry = array(
-                        'siteid' => $id_site,
+                        'siteid' => (int)$this->db->insert_id(),
                         'per_form_complete' => $data['per_form_complete'],
                         'sp_name' => $data['sp_name'],
                         'sp_mobile' => $data['sp_mobile'],

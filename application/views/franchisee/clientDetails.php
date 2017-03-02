@@ -67,10 +67,15 @@
                                 <a onclick="viewClientDetails(<?php echo $ParentOfChild['id'];?>);" href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
                                 <i class="fa fa-circle"></i>
                             </li>
+                            
                         <?php } ?>
                         <li>
                             <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
+                        <i class="fa fa-circle"></i>
                         </li>
+                        <li>
+                               Details
+                            </li>
                         <?php if($clientDetailsAray['clientType'] == '0'){?>
                             <li>
                                 <i class="fa fa-circle"></i>
@@ -289,7 +294,8 @@
                         </div>
                     </div>
                       <?php
-                    }else{
+                    }else{ 
+                      
                       $userDataAry = $this->Franchisee_Model->getSiteDetailsById($idClient);   
                     ?>
                      <div class="row">
