@@ -3041,12 +3041,37 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                     <p class="alert alert-success"><i class="fa fa-check"></i>Selected Prospect has been successfully converted to Client .</p>
                 </div>
                <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
     </div>
     
+    <?php
+}
+if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
+
+    echo "ERROR||||";
+    ?>
+    <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span  class="caption-subject font-red-sunglo bold uppercase">Convert To Client Confirmation</span> </h4>
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i>Something goes wrong. Selected Prospect has not been converted to Client. Please try again!</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php
 }
 if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {

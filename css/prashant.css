@@ -4,7 +4,7 @@ body .alert-info, body .alert-success {
   color: #1bbc9b;
 }
 
-body .alert-info, body .alert-success.meeting-note{
+body .alert-success.meeting-note{
   background-color: #fff;
   border-color: #fff;
   color: #666;
@@ -41,6 +41,19 @@ body .logo img {
 .drugtypeselect .custom-select a span{width:120px}
 .industryselect .custom-select a span{width:220px}
 .modal-custom-heading{font-weight: 500; color: #16997E}
+#loader {
+  display:    none;
+  position:   fixed;
+  z-index:    1000;
+  top:        0;
+  left:       0;
+  height:     100%;
+  width:      100%;
+  background: rgba( 255, 255, 255, .8 )
+  url('../images/loading.gif')
+  50% 50%
+  no-repeat;
+}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;

@@ -18,7 +18,7 @@ class Franchisee_Model extends Error_Model
     {
         $szNewPassword = create_login_password();
 
-        $date = date('Y-m-d');
+        $date = date('Y-m-d H:i:s');
         if (!empty($data['abn'])) {
             $abn = $data['abn'];
         } else {

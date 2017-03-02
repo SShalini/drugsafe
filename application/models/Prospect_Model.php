@@ -90,8 +90,8 @@ class Prospect_Model extends Error_Model
       }
        else{
        $array = array('isDeleted' => '0');
-         } 
-           $query = $this->db->select('id,szName,szNoOfSites,L_G_Channel,dt_last_updated_status,dt_last_updated_status,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+         }
+         $query = $this->db->select('id,szName,dt_last_updated_status,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("id","desc") 
            ->limit($limit, $offset)
@@ -677,17 +677,43 @@ class Prospect_Model extends Error_Model
     }
      public function changeToClient($idProspect)
     {
-       
-        $dataAry = array(
-            'szConvertToClient' => '1'
-        );
-        $this->db->where('id', $idProspect);
+       $prospectArr = $this->getProspectDetailsByProspectsId($idProspect);
+       if(!empty($prospectArr)){
+           /*print_r($prospectArr);
+           die;*/
+           $data['szName'] = $prospectArr['szName'];
+           $data['szEmail'] = $prospectArr['szEmail'];
+           $prospectArr['szContactNumber'] = $prospectArr['szContactNo'];
+           $data['szCountry'] = $prospectArr['szCountry'];
+           $data['abn'] = $prospectArr['abn'];
+           $data['szCity'] = $prospectArr['szCity'];
+           $data['szZipCode'] = $prospectArr['szZipCode'];
+           $data['szAddress'] = $prospectArr['szAddress'];
+           $prospectArr['franchiseeId'] = $prospectArr['iFranchiseeId'];
+           $data['szBusinessName'] = $prospectArr['szBusinessName'];
+           $data['szContactEmail'] = $prospectArr['szContactEmail'];
+           $data['szContactPhone'] = $prospectArr['szContactPhone'];
+           $data['szContactMobile'] = $prospectArr['szContactMobile'];
+           $data['szNoOfSites'] = $prospectArr['szNoOfSites'];
+           $data['industry'] = $prospectArr['industry'];
+           $prospectArr['discount'] = 0.00;
+           $prospectArr['szParentId'] = '';
+           if($this->Franchisee_Model->insertClientDetails($prospectArr,$prospectArr['franchiseeId'])){
+               $dataAry = array(
+                   'clientcreated' => '1'
+               );
+               $query = $this->db->where('id', $idProspect)
+                   ->update(__DBC_SCHEMATA_PROSPECT__, $dataAry);
 
-        if ($query = $this->db->update(__DBC_SCHEMATA_PROSPECT__, $dataAry)) {
-            return true;
-        } else {
-            return false;
-        }
+               if ($query) {
+                   return true;
+               } else {
+                   return false;
+               }
+           }else{
+               return false;
+           }
+       }
     }
 }
 ?>

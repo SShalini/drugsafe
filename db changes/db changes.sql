@@ -186,3 +186,5 @@ ALTER TABLE `tbl_prospect` ADD `szCreatedBy` INT(11) NOT NULL AFTER `dt_last_upd
 ALTER TABLE `tbl_prospect` ADD `L_G_Channel` VARCHAR(15) NOT NULL AFTER `status`, ADD `szNoOfSites` INT(11) NOT NULL AFTER `L_G_Channel`;
 ALTER TABLE `tbl_prospect` ADD `dt_last_updated_status` DATETIME NOT NULL AFTER `szCreatedBy`;
 ALTER TABLE `tbl_prospect` CHANGE `L_G_Channel` `L_G_Channel` VARCHAR(55) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+ALTER TABLE `tbl_prospect` ADD `szState` INT( 4 ) NOT NULL AFTER `szAddress` ;
+ALTER TABLE `tbl_prospect` ADD `clientcreated` TINYINT( 1 ) NOT NULL DEFAULT '0' AFTER `dt_last_updated_status` ;

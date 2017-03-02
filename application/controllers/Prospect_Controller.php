@@ -860,11 +860,12 @@ public function deleteProspectConfirmation()
  }
  public function changeToClientConfirmation()
  {
-    $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION__';
-    $prospectId= $this->input->post('prospectId');
-    $data['prospectId'] = $this->input->post('prospectId');
-    $this->Prospect_Model->changeToClient($_POST['prospectId']);
-    $this->load->view('admin/admin_ajax_functions',$data);   
+    if($this->Prospect_Model->changeToClient($this->input->post('prospectId'))){
+        $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION__';
+    }else{
+        $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__';
+    }
+     $this->load->view('admin/admin_ajax_functions',$data);
  }
  
 }

@@ -2248,6 +2248,9 @@ function changeToClientConfirmation(prospectId) {
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
             $('#changeToClientStatusConfirmation').modal("show");
+        }else if (res == 'ERROR') {
+            $("#popup_box").html(result_ary[1]);
+            $('#changeToClientStatusConfirmation').modal("show");
         }
         jQuery('#loader').attr('style', 'display:none');
 
