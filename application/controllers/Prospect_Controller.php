@@ -40,7 +40,7 @@ public function prospectRecord()
            $id = $_POST['szSearch3'];   
          }
          else{
-           $id = $this->session->userdata('id');  
+           $id = '';  
          }
        }
        if($_SESSION['drugsafe_user']['iRole']==2){

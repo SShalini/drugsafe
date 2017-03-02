@@ -272,13 +272,13 @@ class Franchisee_Model extends Error_Model
         }
     }
 
-    public function getAllClientDetails($parent = false, $franchiseId = '', $operationManagrrId = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $id = 0, $flag = 0)
+    public function getAllClientDetails($parent = false, $franchiseId = '', $operationManagrrId = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $ClientName = '', $flag = 0)
     {
         if (!empty($operationManagrrId)) {
             $whereAry = array('operationManagerId=' => $operationManagrrId, 'clientType=' => '0', 'clientType=' => '0');
             $searchq = '';
-            if ($id > '0') {
-                $searchq = 'clientId = ' . (int)$id;
+            if (!empty($ClientName)) {
+                $searchq = 'szName = ' .$ClientName;
             }
             $this->db->select('*');
             $this->db->from('tbl_franchisee');
@@ -300,16 +300,16 @@ class Franchisee_Model extends Error_Model
 
                 if ($_SESSION['drugsafe_user']['iRole'] == 1) {
                     if ($flag == 1) {
-                        $searchq = 'clientId = ' . (int)$id;
+                        $searchq = 'szName= ' .$ClientName;
                     } elseif ($flag == 2) {
-                        $searchq = array('clientId' => $id, 'franchiseeId=' => $franchiseId);
+                        $searchq = array('szName' => $ClientName, 'franchiseeId=' => $franchiseId);
                     } else {
                         $searchq = 'franchiseeId = ' . (int)$id;
                     }
 
 
                 } else {
-                    $searchq = 'clientId = ' . (int)$id;
+                    $searchq = 'szName = ' . $ClientName;
                 }
             }
 
@@ -1196,6 +1196,54 @@ class Franchisee_Model extends Error_Model
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
+        } else {
+            return array();
+        }
+    }
+      public function getAllDistinctClientDetails($parent = false, $franchiseId = '', $operationManagrrId = '')
+    {
+        if (!empty($operationManagrrId)) {
+            $whereAry = array('operationManagerId=' => $operationManagrrId, 'clientType=' => '0');
+            
+            $this->db->select('szName');
+            $this->db->distinct('szName');
+            $this->db->from('tbl_franchisee');
+            $this->db->join('tbl_client', 'tbl_franchisee.franchiseeId = tbl_client.franchiseeId');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+           
+            $this->db->where($whereAry);
+            $this->db->order_by("operationManagerId", "asc");
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+        } else {
+           
+            if ($franchiseId) {
+                $this->db->where('clientType', 0);
+            }
+            $whereAry = array('isDeleted=' => '0');
+
+
+             $this->db->select('szName');
+            $this->db->distinct('szName');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+
+          
+                $this->db->where($whereAry);
+         
+            $this->db->order_by("franchiseeId", "asc");
+            if ($parent) {
+                $this->db->where('clientType', 0);
+            }
+            if ($franchiseId) {
+                $this->db->where('franchiseeId', $franchiseId);
+            }
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+        }
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
         } else {
             return array();
         }

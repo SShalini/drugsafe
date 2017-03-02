@@ -131,9 +131,9 @@
                                             <option value="">Client Name</option>
                                             <?php
                                             foreach ($clientlistArr as $clientList) {
-                                                $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                                $selected = ($clientList['szName'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
 
-                                                echo '<option value="' . $clientList['id'] . '"' . $selected . ' >' . $clientList['szName'] . '</option>';
+                                                echo '<option value="' . $clientList['szName'] . '"' . $selected . ' >' . $clientList['szName'] . '</option>';
                                             }
                                             ?>
                                         </select>
