@@ -102,7 +102,7 @@ public function addprospect()
                 if($this->Prospect_Model->insertProspectData($validate))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>New prospect added successfully.</h3></strong> ";
+                    $szMessage['content'] = "<h4><strong>New prospect added successfully.</strong></h4> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
                    if($_SESSION['drugsafe_user']['iRole'] == '1'){ 
@@ -192,7 +192,7 @@ public function deleteProspectConfirmation()
                     if($this->Prospect_Model->updateProspectDetails($data_validate,$idProspect))
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3> Prospect data successfully updated.<h3></strong> ";
+                        $szMessage['content'] = "<h4><strong> Prospect data successfully updated.</strong></h4> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                       if($flag==1){
                         $this->session->unset_userdata('flag');
@@ -313,7 +313,7 @@ public function deleteProspectConfirmation()
                 if( $this->Prospect_Model->insertMeetingNotes($validate,$idProspect))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Meeting Note added successfully.</h3></strong>";
+                    $szMessage['content'] = "<h4><strong> Meeting Note added successfully.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     if($flag==1){
                        $this->session->unset_userdata('idProspect');
@@ -769,10 +769,10 @@ public function deleteProspectConfirmation()
                    if($query){
                     $szMessage['type'] = "success";
                     if ($count==0){
-                       $szMessage['content'] = "<strong> Prospect Record imported successfully.</strong>";   
+                       $szMessage['content'] = "<h4><strong> Prospect Record imported successfully.</strong></h4>";   
                     }
                     else{
-                        $szMessage['content'] = "<strong> Prospect Record imported successfully, except ".$count. " rows because of invalid data. </strong>";
+                        $szMessage['content'] = "<h4><strong> Prospect Record imported successfully, except ".$count. " rows because of invalid data. </strong></h4>";
                     }
                   
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
@@ -780,7 +780,7 @@ public function deleteProspectConfirmation()
                     }
                     else{
                      $szMessage['type'] = "error";
-                    $szMessage['content'] = "<strong> Sorry, there was an error while importing data. Please try again.</strong>" ;
+                    $szMessage['content'] = "<h4><strong> Sorry, there was an error while importing data. Please try again.</strong></h4>" ;
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
                
@@ -788,7 +788,7 @@ public function deleteProspectConfirmation()
 
         } else {
                     $szMessage['type'] = "error";
-                    $szMessage['content'] = "<strong><h3> Sorry, there was an error While importing your file.</h3></strong>";
+                    $szMessage['content'] = "<h4><strong> Sorry, there was an error While importing your file.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);  
                     redirect(base_url('/prospect/prospectRecord'));
            
