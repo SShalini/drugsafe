@@ -189,9 +189,7 @@ class Prospect_Model extends Error_Model
            else{
            $meetingDateTime = $this->getSqlFormattedDate($data['dt_last_updated_meeting']);    
            }
-            
-         
-     
+          
            if($data['industry']== 'Agriculture, Forestry and Fishing'){
                                $value = '1';
                             }
@@ -274,8 +272,8 @@ class Prospect_Model extends Error_Model
                     else{
                        $data['szContactPhone'] = $data['szContactPhone'];  
                     }
-                             
-      
+                     
+     
        $whereAry = array(
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
@@ -299,7 +297,7 @@ class Prospect_Model extends Error_Model
                 'szNoOfSites' => $data['szNoOfSites'],
                 'L_G_Channel' => $data['L_G_Channel'],
                'dt_last_updated_meeting' => $meetingDateTime,
-               'dt_last_updated_status' => $statusDateTime,
+               'dt_last_updated_status' => $statusDateTime
             );    
        }
        else{
@@ -652,13 +650,13 @@ class Prospect_Model extends Error_Model
     
     $time1DataAry = explode(' ',$timeDataAry['1']);
    if($time1DataAry=='AM'){
-    $formattedDate=$dateDataAry['2'].'-'.$dateDataAry['1'].'-'.$dateDataAry['0'].' '.$timeDataAry['0'].':'.$time1DataAry['0'].':'.'00';  
+    $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' '.$timeDataAry['0'].':'.$time1DataAry['0'].':'.'00';  
    
     }
    else{
        $value =$timeDataAry['0'] ;
        $time = 12+$value;
-       $formattedDate=$dateDataAry['2'].'-'.$dateDataAry['1'].'-'.$dateDataAry['0'].' '.$time.':'.$time1DataAry['0'].':'.'00';  
+       $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' '.$time.':'.$time1DataAry['0'].':'.'00';  
    
        
    }

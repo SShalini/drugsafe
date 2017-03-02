@@ -731,7 +731,7 @@ public function deleteProspectConfirmation()
           }
           array_shift($arrResult);
           $count =0;
-         
+        
             foreach ($arrResult as $worksheet) {
                 
                $_POST['prospectAry']['szBusinessName'] = $worksheet[1];
@@ -753,7 +753,7 @@ public function deleteProspectConfirmation()
                $_POST['prospectAry']['dt_last_updated_meeting'] = $worksheet[17];
                $_POST['prospectAry']['dt_last_updated_status'] = $worksheet[18];
                $_POST['prospectAry']['iFranchiseeId'] = $_POST['iFranchiseeId'];
-                 
+               
               $validation=$this->Prospect_Model->validateProspectData($_POST['prospectAry'],array(),false,false,1);
                 if($validation)
                 {
