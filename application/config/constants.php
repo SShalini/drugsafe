@@ -273,7 +273,7 @@ define("__DBC_SCHEMATA_MEETINGS_NOTE__", "tbl_meetings_note");
  */
 define( "__VLD_CASE_FILE_NAME__", "FILE_NAME" );
 /**Digit format**/
-define("__FORMAT_NUMBER__",'%08d');
+define("__FORMAT_NUMBER__",'%06d');
 define("__REGINOL_CODE__",'%03d');
 /**
  * Validate Image is selected and type

@@ -250,7 +250,7 @@
                                                         foreach ($discountarr as $discountListDetails)
                                                         {
                                                             ?>
-                                                            <option value="<?php echo trim($discountListDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['discount']) == trim($industryListDetails['id']) ? "selected" : ""); ?>><?php echo trim($discountListDetails['percentage']); ?>%</option>
+                                                            <option value="<?php echo trim($discountListDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['clientData']['discount']) == trim($discountListDetails['id']) ? "selected" : ""); ?>><?php echo trim($discountListDetails['percentage']); ?>%</option>
                                                             <?php
                                                         }
                                                     }

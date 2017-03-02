@@ -150,42 +150,50 @@
                             </thead>
                             <tbody>
                                      <?php         $i = 0;
-                                                foreach($validPendingOrderFrDetailsAray as $validPendingOrderFrDetailsData)
-                                                { 
-                                                    $i++ ;
-                                                   $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
-                                                   $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($validPendingOrderFrDetailsData['franchiseeid'],$validPendingOrderFrDetailsData['szProductCategory'],$validPendingOrderFrDetailsData['productid']);
-                                                   ?>
-                            <tr>
-                                    <td><?php echo $i; ?> </td>
-                                    <td>
-                                         <?php echo $productcatAry['szName'];?> 
-                                    </td>
-                                    <td>
-                                         <?php echo $validPendingOrderFrDetailsData['szProductCode'] ;?>
-                                    </td>
-                                          <?php
-                                                    if(!empty($validPendingOrdersQtyDetailsAray)) {
-                                                        $printzero = true;
-                                                        foreach ($validPendingOrdersQtyDetailsAray as $qtyData) {?>
-                                                           
-                                                                <td>  <?php echo $qtyData['szQuantity']; ?> </td>
-                                                               
-                                                            <?php $printzero = false; }
-                                                       
-                                                        ?>
-                                                          
-                                                         <?php 
-                                                }  else {
-                                                        echo '<td>0</td>';
-                                                    } ?>
-                                   
-                                     <td>  <?php echo $validPendingOrderFrDetailsData['quantity'] ;?> </td>
-                                    
+                                     $checkarr = array();
+                                                foreach($validPendingOrderFrDetailsAray as $validPendingOrderFrDetailsData) {
+                                                    if (!in_array($validPendingOrderFrDetailsData['productid'], $checkarr))
+                                                    {
+                                                        $i++;
+                                                    $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
+                                                    $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['szProductCategory'], $validPendingOrderFrDetailsData['productid']);
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $i; ?> </td>
+                                                        <td>
+                                                            <?php echo $productcatAry['szName']; ?>
+                                                        </td>
+                                                        <td>
+                                                            <?php echo $validPendingOrderFrDetailsData['szProductCode']; ?>
+                                                        </td>
+                                                        <?php
+                                                        if (!empty($validPendingOrdersQtyDetailsAray)) {
+                                                            $printzero = true;
+                                                            foreach ($validPendingOrdersQtyDetailsAray as $qtyData) { ?>
 
-                                </tr>
-                              <?php
-                                         
+                                                                <td>  <?php
+                                                                    echo $qtyData['szQuantity']; ?> </td>
+
+                                                                <?php $printzero = false;
+                                                            }
+
+                                                            ?>
+
+                                                            <?php
+                                                        } else {
+                                                            echo '<td>0</td>';
+                                                        } ?>
+
+                                                        <td>  <?php
+                                                            $prodqtyarr = $this->Order_Model->getTotalFrOrderdqty($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['productid']);
+                                                            //echo $validPendingOrderFrDetailsData['quantity'] ;
+                                                            echo $prodqtyarr[0]['quantity']; ?> </td>
+
+
+                                                    </tr>
+                                                    <?php
+                                                    array_push($checkarr, $validPendingOrderFrDetailsData['productid']);
+                                                }
                                               }
                                             
                                              

@@ -316,7 +316,7 @@
                             <span class="title">View Proforma Invoice </span>
                         </a>
                     </li>
-                            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 || $_SESSION['drugsafe_user']['iRole'] == 2 ) { ?>
+                            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
                             <li class="nav-item  <?php if ($subpageName == 'discount_percentage') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/ordering/discountPercentage">
                             <i class="fa fa-ge" aria-hidden="true"></i>

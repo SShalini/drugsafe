@@ -320,7 +320,8 @@ class Admin_Model extends Error_Model
             if($data['sztype']=='1'){
                 $getlastcode = $this->getmaxCorpfranchiseecode();
                 if(!empty($getlastcode)){
-                    $usercodecode = '100-' . sprintf('%02d', (int)$getlastcode['maxfrcode'] + 1);
+                    //$usercodecode = '100-' . sprintf('%02d', (int)$getlastcode['maxfrcode'] + 1);
+                    $usercodecode = 100+((int)$getlastcode['maxfrcode'] + 1);
                     if($this->updateusercodes((int)$id_franchisee,$usercodecode,(int)$getlastcode['maxfrcode'] + 1)){
                         $flag = true;
                     }else{

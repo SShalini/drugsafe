@@ -908,5 +908,23 @@ class Order_Model extends Error_Model {
                 return false;
             }
         }
+
+        function getTotalFrOrderdqty($franchiseeid,$prodid){
+            $whereAry = 'ord.franchiseeid =' . (int)$franchiseeid .' AND orddet.productid = '.(int)$prodid.' AND orddet.dispatched = 0' ;
+            $query = $this->db->select('SUM(orddet.quantity) as quantity')
+                ->from(__DBC_SCHEMATA_ORDER_DETAILS__. ' as orddet')
+                ->join(__DBC_SCHEMATA_ORDER__ . ' as ord', 'ord.id = orddet.orderid')
+                ->where($whereAry)
+                ->get();
+            /*$q = $this->db->last_query();
+            die($q);*/
+            if ($query->num_rows() > 0) {
+                $row = $query->result_array();
+                return $row;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        }
    }
 ?>

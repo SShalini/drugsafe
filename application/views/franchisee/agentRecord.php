@@ -132,7 +132,7 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Agent" onclick="editAgentEmployeeDetails('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="assign Client" onclick="assignClientAgent('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Assign Client" onclick="assignClientAgent('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
                                                     <i class="fa fa-tasks"></i> 
                                                 </a>
                                                 <?php
