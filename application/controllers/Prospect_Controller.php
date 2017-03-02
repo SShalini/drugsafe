@@ -113,7 +113,7 @@ public function addprospect()
                   
                 }
             }
-
+    $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
     $data['prospectDetailsAry'] = $prospectDetailsAry;
     $data['szMetaTagTitle'] = "Prospect Record";
     $data['is_user_login'] = $is_user_login;
@@ -166,6 +166,7 @@ public function deleteProspectConfirmation()
                redirect(base_url('/admin/admin_login'));
                 die;
             }
+            $franchiseId = $_SESSION['drugsafe_user']['id'];
             $idProspect = $this->session->userdata('idProspect');
             $flag = $this->session->userdata('flag');
             if($idProspect >0)
@@ -207,11 +208,12 @@ public function deleteProspectConfirmation()
                       
                     }
                 }
-              
+                $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
                     $data['szMetaTagTitle'] = "Edit Prospect Details ";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Prospect_Record";
                     $_POST['editProspect'] = $prospectDataAry;
+                    $data['getState']=$getState;
                     $_POST['flag'] = $flag;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
             $this->load->view('layout/admin_header',$data);
@@ -252,8 +254,8 @@ public function deleteProspectConfirmation()
             $this->pagination->initialize($config);
               $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect,$meetingNoteCreatedBy,$config['per_page'],$this->uri->segment(3));
               $mettingsDetailsSearchAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect,false,false,false,1);
-              
-              
+                $franchiseId = $prospectDetailsAry['iFranchiseeId'];
+                $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
              
                     $data['szMetaTagTitle'] = "View Prospect Details ";
                     $data['is_user_login'] = $is_user_login;
@@ -261,6 +263,7 @@ public function deleteProspectConfirmation()
                     $data['prospectDetailsAry'] = $prospectDetailsAry;
                     $data['mettingsDetailsAry'] = $mettingsDetailsAry;
                     $data['mettingsDetailsSearchAry'] = $mettingsDetailsSearchAry;
+                    $data['getState']=$getState;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/viewProspectDetails.php');

@@ -115,6 +115,15 @@
                             <p><?php echo $prospectDetailsAry['szCountry'];?></p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>City:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $prospectDetailsAry['szCity'];?></p>
+                        </div>
+                    </div>
+
                      <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Zip Code:</lable>
@@ -299,13 +308,12 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable>City:</lable>
+                            <lable>State:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szCity'];?></p>
+                            <p><?php echo $getState['name'];?></p>
                         </div>
                     </div>
-                   
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>No of Sites:</lable>

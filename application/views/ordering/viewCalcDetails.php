@@ -351,7 +351,6 @@
                                             }else{
                                                 $totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
                                             }
-
                                             echo number_format($totalRoyaltyAfter, 2, '.', ','); ?></p>
                                     </div>
                                 </div>
