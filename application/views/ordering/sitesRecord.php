@@ -134,13 +134,13 @@
                                         <?php }
                                         ?>
                                         <tr>
-                                              <td> </td>
+                                              <td><?php echo (!empty($manualCalcDetails['id'])?'#'.sprintf(__FORMAT_NUMBER__, $manualCalcDetails['id']):'N/A');?> </td>
                                             <td> CL-<?php echo $sosRormDetailsData['Clientid']; ?> </td>
                                             <td> <?php echo $userDataAry['szName'] ?> </td>
                                             <td> <?php echo date('d/m/Y', strtotime($sosRormDetailsData['testdate']));; ?> </td>
                                             <td> <?php echo $sosRormDetailsData['ServiceCommencedOn']; ?> </td>
                                             <td> <?php echo $sosRormDetailsData['ServiceConcludedOn']; ?> </td>
-                                            <td> </td>
+                                            <td><?php echo ((!empty($manualCalcDetails['dtCreatedOn']) && $manualCalcDetails['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($manualCalcDetails['dtCreatedOn'])):'N/A');?> </td>
                                             <td>
 
                                                 <?php

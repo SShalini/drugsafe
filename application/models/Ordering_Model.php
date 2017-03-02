@@ -209,6 +209,21 @@ class Ordering_Model extends Error_Model {
         } else {
             return false;
         }
-    }  
+    }
+
+    function getClientDiscountByClientId($clientid)
+    {
+        $query=$this->db->select('discount.id,discount.percentage,discount.description')
+            ->from(__DBC_SCHEMATA_DISCOUNT__.' as discount')
+            ->join(__DBC_SCHEMATA_CLIENT__.' as client','client.discountid = discount.id')
+            ->where('client.clientId',(int)$clientid)
+            ->get();
+        //echo $this->db->last_query();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row['0'];
+        }
+        return false;
+    }
 }
 ?>

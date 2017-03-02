@@ -353,7 +353,6 @@ class Ordering_Controller extends CI_Controller
         $idsite = $this->session->userdata('idsite');
         $sosid = $this->session->userdata('sosid');
         $data = $this->Ordering_Model->getManualCalculationBySosId($sosid);
-
         $data['idsite'] = $idsite;
         $data['Drugtestid'] = $Drugtestid;
         $data['sosid'] = $sosid;
@@ -454,9 +453,26 @@ class Ordering_Controller extends CI_Controller
         //$Total2 = $TotalTrevenu - $RoyaltyfeesManual + $GSTmanual;
         //$Total2 = number_format($Total2, 2, '.', '');
         //$totalRoyalty = $Royaltyfees + $RoyaltyfeesManual;
-        $totalGst = $GST + $GSTmanual;
+
         $totalinvoiceAmt = $ValTotal + $TotalTrevenu;
-        $totalRoyaltyBefore = $Total1 + $TotalbeforeRoyalty;
+
+        $discount = $this->Ordering_Model->getClientDiscountByClientId($FrenchiseeDataArr[0]['clientType']);
+        if(!empty($discount)){
+            $discountpercent = $discount['percentage'];
+        }else{
+            $discountpercent = 0;
+        }
+        if($discountpercent>0){
+            $totaldiscount = $totalinvoiceAmt*$discountpercent*0.01;
+            $totalafterdiscount = $totalinvoiceAmt-$totaldiscount;
+            $totalGst = $totalafterdiscount*0.1;
+            $totalRoyaltyBefore = $totalGst + $totalafterdiscount;
+        }else{
+            $totalGst = $GST + $GSTmanual;
+            $totalRoyaltyBefore = $Total1 + $TotalbeforeRoyalty;
+            $totaldiscount = 0;
+            $totalafterdiscount = 0;
+        }
         //$totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
         $html = '<div class="wraper">
         <table cellpadding="5px">
@@ -526,6 +542,12 @@ class Ordering_Controller extends CI_Controller
 <table border="1px" cellpadding="5px">
     <tr>
         <td width="80%" align="left"><b>Total (Excluding GST):</b></td><td width="20%" align="right">$'.number_format($totalinvoiceAmt, 2, '.', ',').'</td>
+    </tr>
+    <tr>
+        <td width="80%" align="left"><b>Discount '.($discountpercent>0?'('.$discountpercent.'%)':'').':</b></td><td width="20%" align="right">'.($discountpercent>0?'$'.number_format($totaldiscount, 2, '.', ','):'-').'</td>
+    </tr>
+    <tr>
+        <td width="80%" align="left"><b>Total After Discount (Excluding GST):</b></td><td width="20%" align="right">'.($discountpercent>0?'$'.number_format($totalafterdiscount, 2, '.', ','):'-').'</td>
     </tr>
     <tr>
         <td width="80%" align="left"><b>GST (10%):</b></td><td width="20%" align="right">$'.number_format($totalGst, 2, '.', ',').'</td>
