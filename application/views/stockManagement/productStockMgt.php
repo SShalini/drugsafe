@@ -8,7 +8,7 @@
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "success")
                     {
                     ?>
-                        <div class="alert alert-info">
+                        <div class="alert alert-success">
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php

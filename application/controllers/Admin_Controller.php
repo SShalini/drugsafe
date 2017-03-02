@@ -143,7 +143,7 @@ class Admin_Controller extends CI_Controller
 
             if ($this->Admin_Model->updateChangePassword()) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3>Your new password successfully updated.</h3></strong> ";
+                $szMessage['content'] = "<h4><strong>Your new password successfully updated.</strong></h4> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                 if ($_SESSION['drugsafe_user']['iRole'] == 5) {
@@ -216,15 +216,15 @@ class Admin_Controller extends CI_Controller
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $this->load->library('form_validation');
         $this->form_validation->set_rules('addFranchisee[sztype]', 'Franchisee Type', 'required');
-        $this->form_validation->set_rules('addFranchisee[szName]', 'Name', 'required|alpha_dash_space|is_unique[' . __DBC_SCHEMATA_USERS__ . '.szName]');
+        $this->form_validation->set_rules('addFranchisee[szName]', 'Name', 'required|alpha_dash_space|chekDuplicate[' .__DBC_SCHEMATA_USERS__. '.szName]');
         $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
         $this->form_validation->set_rules('addFranchisee[abn]', 'ABN', 'required|abn_numeric|abn_length');
         $this->form_validation->set_rules('addFranchisee[operationManagerId]', 'Operation Manager', 'required');
         $this->form_validation->set_rules('addFranchisee[szRegionName]', 'Region Name', 'required');
-        $this->form_validation->set_rules('addFranchisee[szEmail]', 'Email', 'required|is_unique[' . __DBC_SCHEMATA_USERS__ . '.szEmail]|valid_email');
+        $this->form_validation->set_rules('addFranchisee[szEmail]', 'Email', 'required|chekDuplicate[' .__DBC_SCHEMATA_USERS__. '.szEmail]|valid_email');
         $this->form_validation->set_rules('addFranchisee[szContactNumber]', 'Contact No.', 'required|valid_phone_number');
         $this->form_validation->set_rules('addFranchisee[szAddress]', 'Address', 'required');
-        $this->form_validation->set_rules('addFranchisee[szCity]', 'City', 'required');
+        $this->form_validation->set_rules('addFranchisee[szCity]', 'City', 'required|alpha_dash_space');
         $this->form_validation->set_rules('addFranchisee[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
         $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
         $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
@@ -249,7 +249,7 @@ class Admin_Controller extends CI_Controller
         } else {
             if ($this->Admin_Model->insertUserDetails($validate)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3>New franchisee added successfully.</h3></strong> ";
+                $szMessage['content'] = "<h4><strong>New franchisee added successfully.</strong></h4> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 ob_end_clean();
                 $this->session->unset_userdata('idOperationManager');
@@ -461,7 +461,7 @@ class Admin_Controller extends CI_Controller
             if ($this->Admin_Model->validateUsersData($data_validate, array(), $idfranchisee, false, 1, 2)) {
                 if ($this->Admin_Model->updateUsersDetails($data_validate, $idfranchisee)) {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>Franchisee data successfully updated.</h3></strong> ";
+                    $szMessage['content'] = "<h4><strong>Franchisee data successfully updated.</strong></h4> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     ob_end_clean();
                     $this->session->unset_userdata('idOperationManager');
@@ -541,7 +541,7 @@ class Admin_Controller extends CI_Controller
 
                 if ($this->Admin_Model->sendNewPasswordToAdmin($data_validate['szEmail'])) {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Please check your email to recover your password.</h3></strong>";
+                    $szMessage['content'] = "<h4><strong> Please check your email to recover your password.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                     $this->session->userdata('drugsafe_user_message');
                     ob_end_clean();
@@ -594,7 +594,7 @@ class Admin_Controller extends CI_Controller
                 if ($this->Admin_Model->updateAdminPassword($passwordKey, $data_validate)) {
 
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>Your new password successfully updated.</h3></strong>";
+                    $szMessage['content'] = "<h4><strong>Your new password successfully updated.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     ob_end_clean();
@@ -602,7 +602,7 @@ class Admin_Controller extends CI_Controller
                     die;
                 } else {
                     $szMessage['type'] = "error";
-                    $szMessage['content'] = "<strong><h3>Password recovery link is expired. Please reset your password again.</h3></strong>";
+                    $szMessage['content'] = "<h4><strong>Password recovery link is expired. Please reset your password again.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     ob_end_clean();
@@ -614,7 +614,7 @@ class Admin_Controller extends CI_Controller
 
         } else {
             $szMessage['type'] = "error";
-            $szMessage['content'] = "<strong><h3> Your Password Key is wrong. Please reset your password again.</h3></strong>";
+            $szMessage['content'] = "<h4><strong> Your Password Key is wrong. Please reset your password again.</strong></h4>";
             $this->session->set_userdata('drugsafe_user_message', $szMessage);
             ob_end_clean();
             redirect(base_url('/admin/admin_login'));
@@ -647,7 +647,7 @@ class Admin_Controller extends CI_Controller
 
             if ($this->Admin_Model->insertOpertionDetails($validate)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong><h3>New operation manager added successfully.</h3></strong>";
+                $szMessage['content'] = "<h4><strong>New operation manager added successfully.</strong></h4>";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 redirect(base_url('/admin/operationManagerList'));
 
@@ -716,7 +716,7 @@ class Admin_Controller extends CI_Controller
             if ($this->Admin_Model->validateUsersData($data_validate, array(), $idOperationManager)) {
                 if ($this->Admin_Model->updateOperationDetails($data_validate, $idOperationManager)) {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Operation Manager data successfully updated.<h3></strong> ";
+                    $szMessage['content'] = "<h4><strong> Operation Manager data successfully updated.</strong><h4> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     if ($flag == 1) {

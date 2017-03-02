@@ -606,7 +606,10 @@ public function deleteProspectConfirmation()
         $data[0]['szCity'] ='City';
         $data[0]['szCountry'] ='Country';
         $data[0]['szZipCode'] ='Zip Code';
+        $data[0]['L_G_Channel'] ='Lead Generation Channel';
+        $data[0]['szNoOfSites'] ='No Of Sites';
         $data[0]['dt_last_updated_meeting'] ='Meeting Date/Time';
+        $data[0]['dt_last_updated_status'] ='Status Updated Date/Time';
         
                        
                            
@@ -668,8 +671,10 @@ public function deleteProspectConfirmation()
                        $data[$i]['szContactPhone'] =($prospectDetailsData['szContactPhone']==''?'N/A':$prospectDetailsData['szContactPhone']);
                        $data[$i]['szAddress'] =$prospectDetailsData['szAddress'];
                        $data[$i]['szCity'] =$prospectDetailsData['szCity'];
-                        $data[$i]['szCountry'] =$prospectDetailsData['szCountry'];
+                       $data[$i]['szCountry'] =$prospectDetailsData['szCountry'];
                        $data[$i]['szZipCode'] =$prospectDetailsData['szZipCode'];
+                       $data[$i]['L_G_Channel'] =$prospectDetailsData['L_G_Channel'];
+                       $data[$i]['szNoOfSites'] =$prospectDetailsData['szNoOfSites'];
                        $data[$i]['dt_last_updated_meeting'] = $meetingVal ; 
                       
                        $i++;

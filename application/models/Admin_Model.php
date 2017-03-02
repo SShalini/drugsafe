@@ -241,7 +241,7 @@ class Admin_Model extends Error_Model
 
     function set_szCity($value, $flag = true)
     {
-        $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szCity", "City", false, false, $flag);
+        $this->data['szCity'] = $this->validateInput($value, __VLD_CASE_NAME__, "szCity", "City", false, false, $flag);
     }
 
     function set_szZipCode($value, $flag = true)
@@ -521,7 +521,7 @@ class Admin_Model extends Error_Model
        
         $this->db->order_by($sortBy, $orderBy);
         $this->db->limit($limit, $offset);
-        $this->db->order_by("id", "asc");
+        $this->db->order_by("id", "desc");
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
 
 //$sql = $this->db->last_query($query);

@@ -102,6 +102,9 @@ ALTER TABLE `tbl_client` ADD `agentId` INT(11) NOT NULL AFTER `clientId`;
 
 /* swapnil changes 08-02-2017*/
 ALTER TABLE `tbl_manual_calc` ADD `dtCreatedOn` DATE NOT NULL AFTER `cancelfee`;
+
+ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;
+
 ALTER TABLE `tbl_manual_calc` ADD `dtUpdatedOn` DATE NOT NULL AFTER `dtCreatedOn`;
 ALTER TABLE `ds_orders` CHANGE `status` `status` TINYINT( 1 ) NOT NULL DEFAULT '1';
 
@@ -145,6 +148,7 @@ CREATE TABLE `tbl_discount` (
   `description` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 ALTER TABLE `tbl_discount` ADD PRIMARY KEY (`id`);
+
 ALTER TABLE `tbl_discount` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `ds_user` ADD `franchiseCide` INT(6) NOT NULL AFTER `regionId`;
@@ -172,3 +176,13 @@ INSERT INTO `tbl_states` (`id`, `name`, `country_id`) VALUES
 (6, 'WA', 101),
 (7, 'TAS', 101),
 (8, 'NT', 101);
+ALTER TABLE `tbl_discount` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `ds_user` ADD `franchiseCide` INT(50) NOT NULL AFTER `regionId`;
+ALTER TABLE `ds_user` CHANGE `franchiseCide` `franchiseCode` INT(50) NOT NULL;
+
+ALTER TABLE `tbl_prospect` ADD `szCreatedBy` INT(11) NOT NULL AFTER `dt_last_updated_meeting`;
+
+ALTER TABLE `tbl_prospect` ADD `L_G_Channel` VARCHAR(15) NOT NULL AFTER `status`, ADD `szNoOfSites` INT(11) NOT NULL AFTER `L_G_Channel`;
+ALTER TABLE `tbl_prospect` ADD `dt_last_updated_status` DATETIME NOT NULL AFTER `szCreatedBy`;
+ALTER TABLE `tbl_prospect` CHANGE `L_G_Channel` `L_G_Channel` VARCHAR(55) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;

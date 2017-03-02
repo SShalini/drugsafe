@@ -60,7 +60,7 @@
                                         <div class="col-md-6">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-ticket"></i>
                                                 </span>
                                                 <input id="abn" class="form-control" type="text"
                                                        value="<?php echo $_POST['addprospect']['abn']; ?>"

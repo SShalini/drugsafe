@@ -117,7 +117,7 @@ class Franchisee_Controller extends CI_Controller
 
                 if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee)) {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>Client added successfully.</h3></strong> ";
+                    $szMessage['content'] = "<h4><strong>Client added successfully.</strong></h4> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     ob_end_clean();
@@ -142,7 +142,7 @@ class Franchisee_Controller extends CI_Controller
                 }
                 if ($this->Franchisee_Model->insertClientDetails($validate, $idfranchisee, $reqppval)) {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Client added successfully.</h3></strong>";
+                    $szMessage['content'] = "<h4><strong> Client added successfully.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                     ob_end_clean();
@@ -462,7 +462,7 @@ class Franchisee_Controller extends CI_Controller
 
 
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3>Client details successfully updated.</h3></strong> ";
+                        $szMessage['content'] = "<h4><strong>Client details successfully updated.</strong></h4> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         ob_end_clean();
                         if ($flag == 2) {
@@ -496,9 +496,9 @@ class Franchisee_Controller extends CI_Controller
 
                         $szMessage['type'] = "success";
                         if ($clientDetailsAray['clientType'] != '0') {
-                            $szMessage['content'] = "<strong><h3>Site details successfully updated.</h3> </strong> ";
+                            $szMessage['content'] = "<h4><strong>Site details successfully updated.</strong></h4> ";
                         } else {
-                            $szMessage['content'] = "<strong><h3>Client details successfully updated.</h3> </strong> ";
+                            $szMessage['content'] = "<h4><strong>Client details successfully updated. </strong></h4> ";
                         }
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
 

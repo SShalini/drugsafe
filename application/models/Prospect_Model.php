@@ -91,7 +91,7 @@ class Prospect_Model extends Error_Model
        else{
        $array = array('isDeleted' => '0');
          } 
-           $query = $this->db->select('id,szName,dt_last_updated_status,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+           $query = $this->db->select('id,szName,szNoOfSites,L_G_Channel,dt_last_updated_status,dt_last_updated_status,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("id","desc") 
            ->limit($limit, $offset)
