@@ -100,6 +100,7 @@ class Franchisee_Model extends Error_Model
 
 
             if ($this->db->affected_rows() > 0) {
+                $id_site = (int)$this->db->insert_id();
                 $CodeGen = array('userCode' => $clientcode);
                 $this->db->where('id', $id_client);
                 $this->db->update(__DBC_SCHEMATA_USERS__, $CodeGen);
@@ -121,7 +122,7 @@ class Franchisee_Model extends Error_Model
                     } else {
                         $reqppval = $reqppval;
                     }
-                    $id_site = (int)$this->db->insert_id();
+
                     $siteAry = array(
                         'siteid' => $id_site,
                         'per_form_complete' => $data['per_form_complete'],
