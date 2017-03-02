@@ -181,9 +181,17 @@ class Prospect_Model extends Error_Model
        $date = date('Y-m-d H:i:s');
        if($flag==1){
           
-           $meetingDateTime = $this->getSqlFormattedDate($data['dt_last_updated_meeting']);
-           $statusDateTime = $this->getSqlFormattedDate($data['dt_last_updated_status']);
-      
+           
+           if($data['dt_last_updated_meeting']=='N/A')
+           {
+            $meetingDateTime = '0000-00-00 00:00:00';
+           }
+           else{
+           $meetingDateTime = $this->getSqlFormattedDate($data['dt_last_updated_meeting']);    
+           }
+            
+         
+     
            if($data['industry']== 'Agriculture, Forestry and Fishing'){
                                $value = '1';
                             }
@@ -215,15 +223,39 @@ class Prospect_Model extends Error_Model
                             }if($data['industry']=='Other'){
                                $value = '13';
                             }  
-                      if($data['status']=='In Progress') {
+                      if($data['status']=='Discovery Meeting') {
                           $status = '2'; 
-                      }  
-                      elseif($data['status']=='Completed') {
+                      }
+                      if($data['status']=='In Progress') {
                           $status = '3'; 
+                      }
+                      if($data['status']=='Non Convertible') {
+                          $status = '4'; 
+                      }
+                      if($data['status']=='Contact Later') {
+                          $status = '5'; 
+                      }
+                      if($data['status']=='Closed Sale') {
+                          $status = '6'; 
                       }  
-                     else {
+                     if($data['status']=='Pre Discovery') {
                           $status = '1'; 
-                      }  
+                      }
+                      if(empty($data['status'])|| ($data['status']=='N/A')) {
+                          $status = '1'; 
+                         $statusDateTime =$date; 
+                      }
+                      else{
+                        if($data['dt_last_updated_status']=='N/A')
+                       {
+                        $statusDateTime = '0000-00-00 00:00:00';
+                       }
+                       else{
+                        $statusDateTime = $this->getSqlFormattedDate($data['dt_last_updated_status']);
+                       }  
+                      }
+                      
+                      
                     if($data['szContactEmail']=='N/A'){
                      $data['szContactEmail'] = '';
                     }  

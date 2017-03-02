@@ -671,7 +671,7 @@ public function deleteProspectConfirmation()
                        $data[$i]['szEmail'] =$prospectDetailsData['szEmail'];
                        $data[$i]['szContactNo'] =$prospectDetailsData['szContactNo'];
                        $data[$i]['industry'] = $value;
-                       $data[$i]['status'] =($prospectDetailsData['status']=='1'?'Newly Added':($prospectDetailsData['status']=='2'?'In Progress':($prospectDetailsData['status']=='3'?'Completed':'')));
+                       $data[$i]['status'] =($prospectDetailsData['status']=='1'?'Pre Discovery ':($prospectDetailsData['status']=='2'?'Discovery Meeting':($prospectDetailsData['status']=='3'?'In Progress' :($prospectDetailsData['status']=='4'?'Non Convertible' :($prospectDetailsData['status']=='5'?' Contact Later':($prospectDetailsData['status']=='6'?'Closed Sale':''))))));
                        $data[$i]['szContactEmail'] =($prospectDetailsData['szContactEmail']==''?'N/A':$prospectDetailsData['szContactEmail']);
                        $data[$i]['szContactMobile'] =($prospectDetailsData['szContactMobile']==''?'N/A':$prospectDetailsData['szContactMobile']);
                        $data[$i]['szContactPhone'] =($prospectDetailsData['szContactPhone']==''?'N/A':$prospectDetailsData['szContactPhone']);
