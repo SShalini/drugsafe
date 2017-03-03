@@ -1414,12 +1414,24 @@ class Admin_Model extends Error_Model
         }
     }
 
-    function getAllRegion()
+    function getAllRegion($idState='',$regionName='')
     {
+        if(($idState >0)||(!empty($regionName ))){
+         $array = ($idState>0?'stateId= '.(int)$idState:'').((!empty($regionName))?' AND regionName = '. '"'.$regionName.'"':'');  
         $query = $this->db->select('*')
             ->from(__DBC_SCHEMATA_STATE__)
             ->join(__DBC_SCHEMATA_REGION__, __DBC_SCHEMATA_REGION__ . '.stateId = ' . __DBC_SCHEMATA_STATE__ . '.id')
+            ->where($array)
             ->get();
+        
+        }
+        else{
+            $query = $this->db->select('*')
+            ->from(__DBC_SCHEMATA_STATE__)
+            ->join(__DBC_SCHEMATA_REGION__, __DBC_SCHEMATA_REGION__ . '.stateId = ' . __DBC_SCHEMATA_STATE__ . '.id')
+            ->get();
+        }
+        
 
         if ($query->num_rows() > 0) {
             return $query->result_array();
@@ -1434,6 +1446,20 @@ class Admin_Model extends Error_Model
             ->from(__DBC_SCHEMATA_REGION__)
             ->where('stateid', $id)
             ->where('assign', $assign)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
+        }
+    }
+     function getRegionByStateIdForSearch($id = 0)
+    {
+        $query = $this->db->select('regionName')
+                ->distinct('regionName')
+            ->from(__DBC_SCHEMATA_REGION__)
+            ->where('stateid', $id)
             ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -1534,6 +1560,7 @@ class Admin_Model extends Error_Model
     }
 
     function getstatebyregionid($regionid){
+        
         $wherearr = 'region.id = '.(int)$regionid;
         $query = $this->db->select('state.id, state.name')
                 ->from(__DBC_SCHEMATA_STATE__.' as state')
@@ -1543,6 +1570,20 @@ class Admin_Model extends Error_Model
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
+        } else {
+            return array();
+        }
+    }
+function getregionbyregionid($regionid){
+        
+        $wherearr = 'id = '.(int)$regionid;
+        $query = $this->db->select('regionName')
+                ->from(__DBC_SCHEMATA_REGION__)
+                ->where($wherearr)
+                ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row['0'];
         } else {
             return array();
         }

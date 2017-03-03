@@ -1516,7 +1516,31 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span class="caption-subject font-red-sunglo bold uppercase">Order Details</span></h4>
+                            
+                            <?php if($flag != 1){ ?>
+                        <hr>
+                            <div class = 'row'>  
+                        <div class="actions">
+                      
+                        <div class = ' col-md-6'>   
+                            
+                        </div>
+                         <div class = ' col-md-6'> 
+                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a onclick="view_order_details_pdf('<?php echo $idOrder;?>')" href="javascript:void(0);" 
+                      class=" btn green-meadow">
+                       <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+
+                  <a onclick="View_excel_order_details_list('<?php echo $idOrder;?>')" href="javascript:void(0);" 
+                      class=" btn green-meadow">
+                       <i class="fa fa-file-excel-o"></i> View Xls </a>
+                          </div>
+                         
+                     </div>
                     </div>
+                 <?php } ?>
+                    </div>
+                   
 
                 </div>
 

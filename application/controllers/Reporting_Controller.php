@@ -1903,9 +1903,9 @@ function excelfr_stockassignlist_Data()
                                         <th width="14%"> <b>Proforma Invoice Date </b> </th>
                                         <th width="13%" ><b> Client Id  </b> </th>
                                         <th width="14%" > <b>Client Name</b> </th>
-                                        <th width="13%"><b> Total Revenue </b> </th>
+                                        <th width="13%"><b> Revenue EXL GST </b> </th>
                                         <th width="14%"> <b>Royalty Fees</b> </th>
-                                        <th width="13%"> <b>Net Profit</b> </th>
+                                        <th width="13%"> <b>Net Revenue EXL GST</b> </th>
                                     </tr>';
         if ($getManualCalcStartToEndDate) {
 
@@ -2036,7 +2036,7 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Total Revenue');
+        $this->excel->getActiveSheet()->setCellValue('F1', ' Revenue EXL GST');
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -2046,7 +2046,7 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         
-        $this->excel->getActiveSheet()->setCellValue('H1', 'Net Profit');
+        $this->excel->getActiveSheet()->setCellValue('H1', 'Net Revenue EXL GST');
         $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('H1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -2404,9 +2404,9 @@ function excelfr_stockassignlist_Data()
                                     <tr>
                                         <th width="10%"><b>  #</b> </th>
                                         <th width="22%"> <b>Franchisee Name </b> </th>
-                                        <th width="22%"> <b>Total Revenue </b> </th>
+                                        <th width="22%"> <b> Revenue EXL GST</b> </th>
                                         <th width="22%"><b> Royalty Fees </b> </th>
-                                        <th width="23%"> <b>Net Profit</b> </th>
+                                        <th width="23%"> <b>Net Revenue EXL GST</b> </th>
                                     </tr>';
         if ($allfranchisee) {
 			
@@ -2564,7 +2564,7 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('C1', 'Total Revenue');
+        $this->excel->getActiveSheet()->setCellValue('C1', ' Revenue EXL GST');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -2574,7 +2574,7 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Net Profit');
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Net Revenue EXL GST');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

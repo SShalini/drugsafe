@@ -808,11 +808,19 @@ class Admin_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
-        $getAllRegion = $this->Admin_Model->getAllRegion();
+        $idState = $_POST['szSearchstate'];
+        $regionName = $_POST['szSearchRegionName'];
+        
+        $getAllStatesAry = $this->Admin_Model->getAllStateByCountryId('101');
+        $getAllRegion = $this->Admin_Model->getAllRegion($idState,$regionName);
+        $regionListArray = $this->Admin_Model->getRegionByStateIdForSearch($_POST['StateId']);
+        
         $data['szMetaTagTitle'] = "Region List";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Region_Manager_List";
+        $data['getAllStatesAry'] = $getAllStatesAry;
         $data['getAllRegion'] = $getAllRegion;
+        $data['regionListArray'] = $regionListArray;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('admin/regionList');
         $this->load->view('layout/admin_footer');
@@ -993,7 +1001,27 @@ class Admin_Controller extends CI_Controller
         $this->Admin_Model->updateFranchiseeStatus($idfranchisee, $status);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
+     function getRegionNameByStateData($idState = '')
+    {
+        if (trim($idState) != '') {
+            $_POST['StateId'] = $idState;
+        }
+ 
+         $regionListArray = $this->Admin_Model->getRegionByStateIdForSearch($_POST['StateId']);
+        
 
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearchRegionName\" name=\"szSearchRegionName\" placeholder=\"Region Name\" onfocus=\"remove_formError(this.id,'true')\">";
+        if (!empty($regionListArray)) {
+            $result .= "<option value=''>Region Name</option>";
+            foreach ($regionListArray as $regionList) {
+                $result .= "<option value='" . $regionList['regionName'] . "'>" . $regionList['regionName'] . "</option>";
+            }
+        } else {
+            $result .= "<option value=''>Region Name</option>";
+        }
+        $result .= "</select>";
+        echo $result;
+    }  
 }
 
 ?>

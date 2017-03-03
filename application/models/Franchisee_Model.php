@@ -342,8 +342,7 @@ class Franchisee_Model extends Error_Model
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
         }
-//          $s=$this->db->last_query();
-//           print_r($s);die;
+
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {

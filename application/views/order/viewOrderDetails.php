@@ -303,7 +303,7 @@
                                                                 <td>
                                                                     <a class="btn btn-circle btn-icon-only btn-default"
                                                                        title="View Order Details"
-                                                                       onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
+                                                                       onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>','1')"
                                                                        href="javascript:void(0);">
                                                                         <i class="fa fa-eye"></i>
                                                                     </a>

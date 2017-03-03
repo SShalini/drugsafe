@@ -1,3 +1,9 @@
+<script type='text/javascript'>
+    $(function() {
+         $("#szSearchstate").customselect();
+         $("#szSearchRegionName").customselect();
+    });
+</script>
 <div class="page-content-wrapper">
         <div class="page-content">
             <div id="page_content" class="row">
@@ -15,6 +21,53 @@
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                         <div class="row">
+                            <form class="form-horizontal" id="szSearchRegionRecord"
+                                  action="<?= __BASE_URL__ ?>/admin/regionManagerList" name="szSearchRegionRecord"
+                                  method="post">
+
+                                <div class="search col-md-3">
+
+                                    <select class="form-control custom-select" name="szSearchstate"
+                                            id="szSearchstate" onblur="remove_formError(this.id,'true')"
+                                            onchange="getRegionNameByState(this.value);">
+                                        <option value="">State</option>
+
+                                        <?php
+                                     
+                                        foreach ($getAllStatesAry as $getAllStates) {
+
+                                            $selected = ($getAllStates['id'] == $_POST['szSearchstate'] ? 'selected="selected"' : '');
+                                            echo '<option value="' . $getAllStates['id'] . '"' . $selected . ' >' . $getAllStates['name'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1" style="text-align: center; padding: 5px 0px;"></div>
+                                <div class="search col-md-3">
+                                    <div id='szRegion'>
+                                        <select class="form-control custom-select" name="szSearchRegionName"
+                                                id="szSearchRegionName" onfocus="remove_formError(this.id,'true')">
+                                            <option value="">Region Name</option>
+                                            <?php
+                                            foreach ($regionListArray as $regionList) {
+                                                $selected = ($regionList['regionName'] == $_POST['szSearchRegionName'] ? 'selected="selected"' : '');
+
+                                                echo '<option value="' . $regionList['regionName'] . '"' . $selected . ' >' . $regionList['regionName'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                               <div class="col-md-1">
+                               
+                               </div>
+                                <div class="col-md-1">
+                                    <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
+                                </div>
+                            </form>
                         </div>
                         <?php
                         
@@ -46,13 +99,14 @@
                                             <td> <?php echo $getAllRegionData['name'];?> </td>
                                             <td> <?php echo $getAllRegionData['regionCode'];?> </td>
                                             <td>
+                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Region Data" onclick="editRegionDetails('<?php echo $getAllRegionData['id'];?>');" href="javascript:void(0);">
+                                                            <i class="fa fa-pencil"></i> 
+                                                 </a>
                                                 <?php
                                                 if($getAllRegionData['assign']=='0')
                                                 {
                                                     ?>
-                                                        <a class="btn btn-circle btn-icon-only btn-default" title="Edit Region Data" onclick="editRegionDetails('<?php echo $getAllRegionData['id'];?>');" href="javascript:void(0);">
-                                                            <i class="fa fa-pencil"></i> 
-                                                        </a>
+                                                       
                                                         <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Region" onclick="regionDelete(<?php echo $getAllRegionData['id'];?>);" href="javascript:void(0);"></i>
                                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                         </a>

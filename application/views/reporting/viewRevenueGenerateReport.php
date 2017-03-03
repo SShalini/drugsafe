@@ -203,13 +203,13 @@
                                                         Client Name
                                                     </th>
                                                     <th>
-                                                        Total Revenue
+                                                         Revenue EXL GST
                                                     </th>
                                                     <th>
                                                         Royalty Fees
                                                     </th>
                                                     <th>
-                                                        Net Profit
+                                                        Net Revenue EXL GST
                                                     </th>
                                                 </tr>
                                                 </thead>

@@ -173,13 +173,13 @@
                                                         Client Name
                                                     </th>
                                                     <th>
-                                                        Total Revenue
+                                                         Revenue EXL GST
                                                     </th>
                                                     <th>
                                                         Royalty Fees
                                                     </th>
                                                     <th>
-                                                        Net Profit
+                                                        Net Revenue EXL GST
                                                     </th>
                                                 </tr>
                                                 </thead>
@@ -260,7 +260,7 @@
                                                      <td></td>
                                                      <td></td>
                                                      <td></td>
-                                                     <td>Total</td>
+                                                     <td><b>Total</b></td>
                                                      <td>
                                                         $<?php 
                                                             $totalRevenu = number_format($totalRevenu, 2, '.', '');

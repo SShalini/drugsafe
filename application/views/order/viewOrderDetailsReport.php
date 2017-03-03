@@ -246,9 +246,9 @@
                                                     <th>
                                                         Order Cost
                                                     </th>
-<!--                                                    <th>
+                                                   <th>
                                                         Order Details
-                                                    </th>-->
+                                                    </th>
                                                     <th>
                                                         Xero Invoice No.
                                                     </th>
@@ -326,14 +326,14 @@
                                                            $<?php echo ($validOrdersDetailsData['price']>0?$validOrdersDetailsData['price']:'0.00'); ?>
                                                         </td>
 
-<!--                                                        <td>
+                                                        <td>
                                                             <a class="btn btn-circle btn-icon-only btn-default"
                                                                title="View Order Details"
                                                                onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
                                                                href="javascript:void(0);">
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
-                                                        </td>-->
+                                                        </td>
                                                         <td>
                                                             <?php echo (!empty($validOrdersDetailsData['XeroIDnumber'])?$validOrdersDetailsData['XeroIDnumber']:'N/A'); ?>
                                                         </td>

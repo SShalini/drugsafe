@@ -94,7 +94,6 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th> Id.</th>
                                         <th> Franchisee Code</th>
                                         <th> Name</th>
                                         <th> Email</th>
@@ -102,7 +101,8 @@
                                         <th> Operation Manager </th>
                                         <?php }?>
                                         <th> Contact No </th>
-                                        <th> Address </th>
+                                        <th> State </th>
+                                        <th> Region Name </th>
                                         <th> Actions </th>
                                     </tr>
                                 </thead>
@@ -111,13 +111,15 @@
                                     if($franchiseeAray)
                                     {   $i = 0;
                                         foreach($franchiseeAray as $franchiseeData)
-                                        {
+                                        { 
                                             $operationManagerId = $this->Franchisee_Model->getOperationManagerId($franchiseeData['id']);
                                             $operationManagerDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operationManagerId['operationManagerId']);
-                                           $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($franchiseeData['id']);
-                                         ?>
+                                            $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($franchiseeData['id']);
+                                            $Statedata = $this->Admin_Model->getstatebyregionid($franchiseeData['regionId']);
+                                            $regioncode = $this->Admin_Model->getregionbyregionid($franchiseeData['regionId']);
+                                           ?>
                                         <tr>
-                                            <td> FR-<?php echo $franchiseeData['id'];?> </td>
+                                         
                                             <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?> </td>
                                             <td> <?php echo $franchiseeData['szName']?> </td>
                                             <td> <?php echo $franchiseeData['szEmail'];?> </td>
@@ -125,7 +127,22 @@
                                             <td> <?php echo $operationManagerDetArr['szName'];?> </td>
                                             <?php }?>
                                             <td> <?php echo $franchiseeData['szContactNumber'];?> </td>
-                                            <td> <?php echo $franchiseeData['szCity'];?> </td>
+                                            <?php
+                                            if(empty($Statedata['0']['name'])){
+                                               $State = "N/A";
+                                            } else {
+                                                $State = $Statedata['0']['name'];
+                                              }
+                                           
+                                       if(empty($regioncode['regionName'])){
+                                               $Region = "N/A";
+                                       }   else{
+                                                $Region = $regioncode['regionName'];
+                                            }
+                                           ?>
+                                            
+                                            <td> <?php echo $State;?> </td>
+                                             <td> <?php echo $Region;?> </td>
                                            <td>
                                             
                                                <?php 

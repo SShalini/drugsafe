@@ -13,6 +13,7 @@
                         <span class="active">Edit Region</span>
                     </li>
                 </ul>
+               
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -32,9 +33,10 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-flag-checkered"></i>
                                                 </span>
+                                             <?php if($_POST['editRegion']['assign']==1) { ?>
                                             <select class="form-control " name="editRegion[stateId]" id="stateId"
-                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')" onchange="editRegionCode(this.value);">
-                                                <option value=''>Select</option>
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')" disabled onchange="editRegionCode(this.value);">
+                                              <option value=''>Select</option>
                                                  <?php
                                                 if(!empty($getAllStates))
                                                 {
@@ -46,6 +48,23 @@
                                                 } 
                                             ?>
                                             </select>
+                                                        <?php } else {?>
+                                                <select class="form-control " name="editRegion[stateId]" id="stateId"
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')"onchange="editRegionCode(this.value);">
+                                         <option value=''>Select</option>
+                                                 <?php
+                                                if(!empty($getAllStates))
+                                                {
+                                                    foreach($getAllStates as $getAllStatesData)
+                                                    {
+                                                        $selected = ($getAllStatesData['id'] == $_POST['editRegion']['stateId'] ? 'selected="selected"' : '');
+                                                        echo '<option value="'.$getAllStatesData['id'].'"' . $selected . ' >'.$getAllStatesData['name'].'</option>';
+                                                    } 
+                                                } 
+                                            ?>
+                                            </select>      
+                                          <?php } ?>
+                                               
                                         </div>
                                         <?php
                                             if(form_error('editRegion[stateId]')){?>
