@@ -1354,11 +1354,11 @@ function checkOutOrder(idfranchisee) {
     });
 
 }
- function view_order_details(idOrder)
+ function view_order_details(idOrder,flag)
 {
     
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/order/viewOrderData", {idOrder: idOrder,}, function (result) {
+    $.post(__BASE_URL__ + "/order/viewOrderData", {idOrder: idOrder,flag:flag}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -2343,4 +2343,22 @@ function showSubmit(value) {
            
  
  }
+}
+function getRegionNameByState(StateId) {
+    
+    $.post(__BASE_URL__ + "/admin/getRegionNameByStateData", {StateId: StateId}, function (result) {
+        if (result != '') {
+            $("#szRegion").empty();
+            $("#szRegion").html(result);
+            $("#szSearchRegionName").customselect();
+        }
+    });
+}
+function View_excel_order_details_list(idOrder) {
+    $.post(__BASE_URL__ + "/order/View_excel_order_details_data", {idOrder : idOrder}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/order/" + ar_result[1];
+        window.open(URL,'_blank');
+    });
+
 }

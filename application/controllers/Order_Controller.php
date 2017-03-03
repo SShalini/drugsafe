@@ -707,28 +707,47 @@ class Order_Controller extends CI_Controller
          $this->excel->getActiveSheet()->setCellValue('A4','Order# :');
          $this->excel->getActiveSheet()->setCellValue('A5','Order Date & Time :');
          if($OrdersDetailsAray['status'] ==3){
-          $this->excel->getActiveSheet()->setCellValue('A6','Canceled Date & Time :');    
-         }
-          if($OrdersDetailsAray['status'] ==2){
-           $this->excel->getActiveSheet()->setCellValue('A6','Dispatch Date & Time :');   
-         }
-        
-         $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
+          $this->excel->getActiveSheet()->setCellValue('A6','Canceled Date & Time :');
+          $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
          $this->excel->getActiveSheet()->setCellValue('A8','Total Price :');
          $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
+         }
+          elseif($OrdersDetailsAray['status'] ==2){
+           $this->excel->getActiveSheet()->setCellValue('A6','Dispatch Date & Time :');
+           $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
+           $this->excel->getActiveSheet()->setCellValue('A8','Total Price :');
+           $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
+         }
+         else{
+           $this->excel->getActiveSheet()->setCellValue('A6','Order Status  :');
+           $this->excel->getActiveSheet()->setCellValue('A7','Total Price :');
+           $this->excel->getActiveSheet()->setCellValue('A8','Franchisee :');  
+         }
+        
+         
          
          $this->excel->getActiveSheet()->setCellValue('B4','#0000' .$idOrder);
          $this->excel->getActiveSheet()->setCellValue('B5',$orderVal);
           if($OrdersDetailsAray['status'] ==3){
          $this->excel->getActiveSheet()->setCellValue('B6',$cancelVal);
-         }
-          if($OrdersDetailsAray['status'] ==2){
-           $this->excel->getActiveSheet()->setCellValue('B6',$dispatchVal);   
-         }
-         
          $this->excel->getActiveSheet()->setCellValue('B7',$status);
          $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['price']);
          $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
+         }
+          elseif($OrdersDetailsAray['status'] ==2){
+           $this->excel->getActiveSheet()->setCellValue('B6',$dispatchVal);
+           $this->excel->getActiveSheet()->setCellValue('B7',$status);
+         $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['price']);
+         $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
+         }
+         else{
+         $this->excel->getActiveSheet()->setCellValue('B6',$status);
+         $this->excel->getActiveSheet()->setCellValue('B7','$'.$OrdersDetailsAray['price']);
+         $this->excel->getActiveSheet()->setCellValue('B8',$franchiseeDetArr1['szName']);
+         }
+         
+         
+         
      
      
       if ($totalOrdersDetailsAray) {
