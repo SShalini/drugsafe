@@ -223,20 +223,20 @@
                             </a>
                         </li>
                          <?php  } ?>	
-                        <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/sales_crm_detailed">
+                        <!--<li class="nav-item  <?php /*if ($subpageName == 'Sales_CRM_Detailed') { */?> active open <?php /*} */?>">
+                            <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/reporting/sales_crm_detailed">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Sales CRM Summary </span>
                             </a>
                         </li>
-                        <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/sales_crm_detailed">
+                        <li class="nav-item  <?php /*if ($subpageName == 'Sales_CRM_Detailed') { */?> active open <?php /*} */?>">
+                            <a class="nav-link " href="<?php /*echo __BASE_URL__; */?>/reporting/sales_crm_detailed">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Sales CRM Detailed</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li class="nav-item  <?php if ($subpageName == 'SOS_COC_Forms_Reports') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/sos_coc_forms_reports">
+                            <a class="nav-link " onclick="viewForm('1');" href="javascript:void(0);">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">SOS-COC Forms Reports</span>
                             </a>
@@ -284,6 +284,12 @@
                                 <span class="title">Inventory Report</span>
                             </a>
                    </li>
+                    <li class="nav-item  <?php if ($subpageName == 'SOS_COC_Forms_Reports') { ?> active open <?php } ?>">
+                        <a class="nav-link " onclick="viewForm('1');" href="javascript:void(0);">
+                            <i class="fa fa-ge" aria-hidden="true"></i>
+                            <span class="title">SOS-COC Forms Reports</span>
+                        </a>
+                    </li>
 
                 </ul>
 

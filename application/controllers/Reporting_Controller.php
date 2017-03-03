@@ -2792,14 +2792,15 @@ function excelfr_stockassignlist_Data()
             }
             
             $clientAry = $this->Franchisee_Model->viewClientList(true,$_POST['idFranchisee']);
-
+$clientid = $_POST['idclient'];
+        $siteid = $_POST['idsite'];
         $result = '<select class="form-control custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
       	if(!empty($clientAry))
      	{
               $result .= "<option value=''>Client Name</option>";
           	foreach ($clientAry as $clientDetails)
           	{
-             	$result .= "<option value='".$clientDetails['id']."'>".$clientDetails['szName']."</option>";
+             	$result .= "<option value='".$clientDetails['id']."' ".($clientDetails['id'] == $clientid?'selected=\"selected\"':'').">".$clientDetails['szName']."</option>";
          	}
      	}
      	else
@@ -2807,6 +2808,13 @@ function excelfr_stockassignlist_Data()
      	    $result .= "<option value=''>Client Name</option>";
      	}
         $result .= "</select>";
+      	if($clientid>0){
+      	    $result .= "<script type='text/javascript'>
+                            setTimeout(function () {
+                                getSiteListByClientIdData('".$clientid."','".$siteid."');
+                            }, 500);
+                        </script>";
+        }
       	echo $result;           
   	}
          function getSiteListByClientId($idClient='')
@@ -2817,14 +2825,14 @@ function excelfr_stockassignlist_Data()
             }
             
             $siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['idClient']);
-
+        $siteid = $_POST['idsite'];
         $result = '<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,\'true\')">';
       	if(!empty($siteAry))
      	{
               $result .= "<option value=''>Company Name/site</option>";
           	foreach ($siteAry as $siteDetails)
           	{
-             	$result .= "<option value='".$siteDetails['id']."'>".$siteDetails['szName']."</option>";
+             	$result .= "<option value='".$siteDetails['id']."' ".($siteDetails['id'] == $siteid?'selected=\"selected\"':'').">".$siteDetails['szName']."</option>";
          	}
      	}
      	else

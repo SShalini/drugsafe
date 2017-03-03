@@ -34,16 +34,11 @@ class Form_Management_Controller extends CI_Controller
             die;
         }
     }
-    function viewFormData()
-        {
+    function viewFormData(){
             $flag = $this->input->post('flag');
-            
-                $this->session->set_userdata('flag',$flag);
-                
-                echo "SUCCESS||||";
-                echo "viewForm";
-            
- 
+            $this->session->set_userdata('flag',$flag);
+            echo "SUCCESS||||";
+            echo "viewForm";
         }
 
     function viewForm()
@@ -58,8 +53,58 @@ class Form_Management_Controller extends CI_Controller
           $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
           $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
-        
-        if($_POST['szSearchFrRecord'])
+        if ($_SESSION['drugsafe_user']['iRole'] == '5'){
+            $getFranchisees = $this->Form_Management_Model->getFranchisees($_SESSION['drugsafe_user']['id']);
+        }elseif($_SESSION['drugsafe_user']['iRole'] == '1'){
+            $getFranchisees = $this->Form_Management_Model->getFranchisees();
+        }else{
+            $getFranchisees = array();
+        }
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('dtStart', 'Test Date From ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'Test Date To', 'required');
+        $this->form_validation->set_rules('szSearch1', 'Franchisee Name', 'required');
+        $this->form_validation->set_rules('szSearch2', 'Client Name', 'required');
+        $this->form_validation->set_rules('szSearch3', 'Company Name/site', 'required');
+        $this->form_validation->set_message('required', '{field} is required');
+        if ($this->form_validation->run() == FALSE) {
+            $data['franchiseearr'] = $getFranchisees;
+            $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
+            $data['arErrorMessages'] = $this->Form_Management_Model->arErrorMessages;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/sos-coc-formdetails.php');
+            $this->load->view('layout/admin_footer');
+
+        } else {
+            $search['dtStart'] = $this->input->post('dtStart');
+             $search['dtEnd'] = $this->input->post('dtEnd');
+             $search['szSearch1'] = $this->input->post('szSearch1');
+             $search['szSearch2'] = $this->input->post('szSearch2');
+             $search['szSearch3'] = $this->input->post('szSearch3');
+             $franchiseeDets = $this->Webservices_Model->getuserdetails($search['szSearch1']);
+            $ClientDets = $this->Webservices_Model->getuserdetails($search['szSearch2']);
+            $SiteDets = $this->Webservices_Model->getuserdetails($search['szSearch3']);
+            $fromdate = $this->Webservices_Model->formatdate($search['dtStart']);
+            $todate = $this->Webservices_Model->formatdate($search['dtEnd']);
+            $getTestList = $this->Form_Management_Model->getsosformdata($search['szSearch3'],$fromdate,$todate,1);
+            $data['franchiseearr'] = $getFranchisees;
+            $data['franchisee'] = $franchiseeDets[0];
+            $data['Client'] = $ClientDets[0];
+            $data['Site'] = $SiteDets[0];
+            $data['TestList'] = $getTestList;
+            $data['franchiseearr'] = $getFranchisees;
+            $data['franchiseearr'] = $getFranchisees;
+            $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
+            $data['data'] = $data;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/sos-coc-formdetails.php');
+            $this->load->view('layout/admin_footer');
+        }
+
+
+        /*if($_POST['szSearchFrRecord'])
         {
              $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
@@ -192,7 +237,7 @@ class Form_Management_Controller extends CI_Controller
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/formViewByFr');
             $this->load->view('layout/admin_footer');
-        }
+        }*/
     }
     function sosFormsdata()
         {

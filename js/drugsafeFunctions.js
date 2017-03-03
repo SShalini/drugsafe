@@ -1744,9 +1744,9 @@ function industryReportXls(dtStart,dtEnd,szIndustry,szTestType) {
     });
 
 }
-function getClientListByFrIdData(idFranchisee) {
+function getClientListByFrIdData(idFranchisee,idclient,idsite) {
     if(idFranchisee>0){
-        $.post(__BASE_URL__ + "/reporting/getClientListByFrId", {idFranchisee: idFranchisee}, function (result) {
+        $.post(__BASE_URL__ + "/reporting/getClientListByFrId", {idFranchisee: idFranchisee,idclient:idclient,idsite:idsite}, function (result) {
             if (result != '') {
                 $("#clientname").empty();
                 $("#clientname").html(result);
@@ -1756,17 +1756,28 @@ function getClientListByFrIdData(idFranchisee) {
                 $("#szSearch3").customselect();
             }
         });
+    }else{
+        $("#clientname").empty();
+        $("#clientname").html('<select class="form-control custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')"><option value="">Client Name</option></select>');
+        $("#sitename").empty();
+        $("#sitename").html('<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,\'true\')"><option value="">Company Name/site</option></select>');
+        $("#szSearch2").customselect();
+        $("#szSearch3").customselect();
     }
 }
-function getSiteListByClientIdData(idClient) {
+function getSiteListByClientIdData(idClient,idsite) {
     if(idClient>0){
-        $.post(__BASE_URL__ + "/reporting/getSiteListByClientId", {idClient: idClient}, function (result) {
+        $.post(__BASE_URL__ + "/reporting/getSiteListByClientId", {idClient: idClient,idsite:idsite}, function (result) {
             if (result != '') {
                 $("#sitename").empty();
                 $("#sitename").html(result);
                 $("#szSearch3").customselect();
             }
         });
+    }else{
+        $("#sitename").empty();
+        $("#sitename").html('<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,\'true\')"><option value="">Company Name/site</option></select>');
+        $("#szSearch3").customselect();
     }
 }
 function comparisonReportPdf(siteid,testtype,comparetype) {
@@ -2361,4 +2372,449 @@ function View_excel_order_details_list(idOrder) {
         window.open(URL,'_blank');
     });
 
+}
+function showformdata(sosid) {
+    $('#loader').css('display', 'block');
+    var jdata = {
+        sosid: sosid
+    }
+    $.ajax({
+        datatype: "json",
+        url: __BASE_URL__ + "/webservices/getsosformdatabysosid/",
+        type: "POST",
+        crossDomain: true,
+        cache: false,
+        data: JSON.stringify(jdata),
+        success: function (html) {
+            if (html.code == '200') {
+                var modalhtml = '<div class="modal fade custommodal customwebmodal" id="opensosdata" role="dialog">'+
+                    '<div class="modal-dialog">'+
+                    '<div class="modal-content">'+
+                    '<div class="modal-header">'+
+                    '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+                    '<h2 class="modal-title font-green-sharp">SOS Data</h2>'+
+                    '</div>'+
+                    '<div class="modal-body">'+
+                    '<div class="table-responsive">'+
+                    '<table class="table sosmodaltable">' +
+                    '<tbody>';
+                $.each( html.dataarr, function( key, value ) {
+                    var alchohol = false;
+                    var oral = false;
+                    var urineasnza = false;
+                    var asnza = false;
+                    var testtypesarr = value.Drugtestid.split(',');
+                    if(testtypesarr){
+                        if(testtypesarr[0]=='1'){
+                            alchohol = true;
+                        }else if(testtypesarr[0]=='2'){
+                            oral = true;
+                        }else if(testtypesarr[0]=='3'){
+                            urineasnza = true;
+                        }else if(testtypesarr[0]=='4'){
+                            asnza = true;
+                        }
+
+                        if(testtypesarr[1]=='1'){
+                            alchohol = true;
+                        }else if(testtypesarr[1]=='2'){
+                            oral = true;
+                        }else if(testtypesarr[1]=='3'){
+                            urineasnza = true;
+                        }else if(testtypesarr[1]=='4'){
+                            asnza = true;
+                        }
+
+                        if(testtypesarr[2]=='1'){
+                            alchohol = true;
+                        }else if(testtypesarr[2]=='2'){
+                            oral = true;
+                        }else if(testtypesarr[2]=='3'){
+                            urineasnza = true;
+                        }else if(testtypesarr[2]=='4'){
+                            asnza = true;
+                        }
+
+                        if(testtypesarr[3]=='1'){
+                            alchohol = true;
+                        }else if(testtypesarr[3]=='2'){
+                            oral = true;
+                        }else if(testtypesarr[3]=='3'){
+                            urineasnza = true;
+                        }else if(testtypesarr[3]=='4'){
+                            asnza = true;
+                        }
+                    }
+                    var drugteststring = '';
+                    if(alchohol){
+                        drugteststring = 'Alcohol<br>';
+                    }
+                    if(oral){
+                        drugteststring += 'Oral Fluid AS 4760:2006<br>';
+                    }
+                    if(urineasnza){
+                        drugteststring += 'Urine AS/NZA 4308:2001<br>';
+                    }
+                    if(asnza){
+                        drugteststring += 'AS/NZA 4308:2008<br>';
+                    }
+                    var drugtesttr = '<tr><th>Drugs Tested:</th><td colspan="3">'+(drugteststring!=''?drugteststring:'Other')+'</td></tr>';
+                    modalhtml += '<tr><th>Service Commenced:</th><td colspan="3">'+value.ServiceCommencedOn+'</td></tr>' +
+                        '<tr><th>Services Concluded:</th><td colspan="3">'+value.ServiceConcludedOn+'</td></tr>' +
+                        drugtesttr+
+                        '<tr><th>Total Donor Screenings/Collections:</th><td>Urine: '+(value.TotalDonarScreeningUrine>0?value.TotalDonarScreeningUrine:'0')+'</td><td colspan="2">Oral: '+(value.TotalDonarScreeningOral>0?value.TotalDonarScreeningOral:'0')+'</td></tr>' +
+                        '<tr><th>Negative Results:</th><td>Urine: '+(value.NegativeResultUrine>0?value.NegativeResultUrine:'0')+'</td><td colspan="2">Oral: '+(value.NegativeResultOral>0?value.NegativeResultOral:'0')+'</td></tr>' +
+                        '<tr><th>Results Requiring Further Testing:</th><td>Urine: '+(value.FurtherTestUrine>0?value.FurtherTestUrine:'0')+'</td><td colspan="2">Oral: '+(value.FurtherTestOral>0?value.FurtherTestOral:'0')+'</td></tr>' +
+                        '<tr><th>Alcohol Results:</th><td>Total No Alcohol Screen: '+(value.TotalAlcoholScreening>0?value.TotalAlcoholScreening:'0')+'</td><td>Negative Alcohol Results: '+(value.NegativeAlcohol>0?value.NegativeAlcohol:'0')+'</td><td>Positive Alcohol Results: '+(value.PositiveAlcohol>0?value.PositiveAlcohol:'0')+'</td></tr>' +
+                        '<tr><th>Refusals:</th><td colspan="3">'+value.Refusals+'</td></tr>' +
+                        '<tr><th>Device Name:</th><td colspan="3">'+value.DeviceName+'</td></tr>' +
+                        '<tr><th>Extra Used:</th><td colspan="3">'+value.ExtraUsed+'</td></tr>' +
+                        '<tr><th>Breath Testing Unit:</th><td colspan="3">'+value.BreathTesting+'</td></tr>' +
+                        '<tr><th>Declaration:</th><td colspan="3">I\'ve conducted the alcohol and/or drug screening/collection service detailed above and confirm that all procedures were undertaken in accordance with the relevant Standard.</td></tr>' +
+                        '<tr><th>Collector Signature:</th><td colspan="3">'+value.collsign+'</td></tr>' +
+                        '<tr><th>Comments or Observation:</th><td colspan="3">'+value.Comments+'</td></tr>' +
+                        '<tr><th>Time:</th><td colspan="3">'+value.RepresentativeSignatureTime+'</td></tr>' +
+                        '<tr><th>Nominated Client Representative:</th><td colspan="3">'+value.ClientRepresentative+'</td></tr>' +
+                        '<tr><th>Signature:</th><td colspan="3">'+value.RepresentativeSignature+'</td></tr>';
+                });
+                modalhtml += '</tbody></table>' +
+                    '</div>'+
+                    '<p><button type="button" class="btn green-meadow" onclick="usedprodsdets('+sosid+');">Used Products</button></p>'+
+                    '<a href="#productsdetmodal" id="usedprods" data-toggle="modal" style="display: none"></a> </td>' +
+                    '</div>'+
+                    '<div class="modal-footer">'+
+                    '<button type="button" class="btn green-meadow" data-dismiss="modal">Close</button>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>';
+                $('.show-stack-modal').html(modalhtml);
+                $('#loader').css('display', 'none');
+                $('#opensosdata').modal('show');
+            } else {
+                $('#loader').css('display', 'none');
+                alert(html.message);
+            }
+        }
+    });
+}
+function usedprodsdets(sosid) {
+    $('#loader').css('display', 'block');
+    var jdata = {
+        sosid: sosid,
+        used: 1
+    }
+    $.ajax({
+        datatype: "json",
+        url: __BASE_URL__ + "/webservices/getsavedkitsbysosid/",
+        type: "POST",
+        crossDomain: true,
+        cache: false,
+        data: JSON.stringify(jdata),
+        success: function (html) {
+            if(html.code == '200'){
+                var prodmodalhtml = '<div class="modal fade custommodal customwebmodal" id="productsdetmodal" role="dialog">'+
+                    '<div class="modal-dialog">'+
+                    '<div class="modal-content">'+
+                    '<div class="modal-header">'+
+                    '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+                    '<h2 class="modal-title font-green-sharp">Used Products</h2>'+
+                    '</div>'+
+                    '<div class="modal-body">'+
+                    '<div class="table-responsive">'+
+                    '<table class="table">' +
+                    '<thead>' +
+                    '<tr><th>Product</th><th>Quantity</th></tr>' +
+                    '</thead>' +
+                    '<tbody>';
+                $.each( html.kitarr, function( key, value ) {
+
+                    prodmodalhtml += '<tr><td>'+value.szProductCode+'</td><td>'+value.quantity+'</td></tr>';
+                });
+                prodmodalhtml += '</tbody></table>' +
+                    '</div>'+
+                    '</div>'+
+                    '<div class="modal-footer">'+
+                    '<button type="button" class="btn green-meadow" data-dismiss="modal">Close</button>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>';
+                $('.show-stackonstack-modal').html(prodmodalhtml);
+                $('#loader').css('display', 'none');
+                $('#productsdetmodal').modal('show');
+                //$('#usedprods').click();
+            } else {
+                $('#loader').css('display', 'none');
+                alert(html.message);
+            }
+        }
+    });
+}
+function showdonorinfo(sosid) {
+    $('#loader').css('display', 'block');
+    var jdata = {
+        sosid: sosid
+    }
+    $.ajax({
+        datatype: "json",
+        url: __BASE_URL__ + "/webservices/getdonorsbysosid/",
+        type: "POST",
+        crossDomain: true,
+        cache: false,
+        data: JSON.stringify(jdata),
+        success: function (html) {
+            if(html.code == '200'){
+                var donormodalhtml = '<div class="modal fade custommodal" id="donorsdetmodal" role="dialog">'+
+                    '<div class="modal-dialog">'+
+                    '<div class="modal-content">'+
+                    '<div class="modal-header">'+
+                    '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+                    '<h2 class="modal-title font-green-sharp">Donors List</h2>'+
+                    '</div>'+
+                    '<div class="modal-body">'+
+                    '<div class="table-responsive">'+
+                    '<table class="table">' +
+                    '<thead>' +
+                    '<tr><th width="300">Donors</th><th colspan="2" style="text-align:center">Action</th></tr>' +
+                    '</thead>' +
+                    '<tbody>';
+                $.each( html.dataarr, function( key, value ) {
+
+                    donormodalhtml += '<tr><td>'+value.donerName+'</td>' +
+                        '<td><button type="button" class="btn green-meadow infobtn" data-toggle="modal" onclick="showdonorinfobydivid(\'#viewdonorinfo'+value.id+'\')" href="javascript:void(0);"><span class="spleft">Donor </span><span class="spright"><i class="fa fa-info-circle" aria-hidden="true"></i></span></button></td>' +
+                        '<td><button type="button" class="btn green-meadow infobtn" onclick="viewcocdets(\''+value.cocid+'\',\''+value.donerName+'\');"><span class="spleft">COC </span><span class="spright"><i class="fa fa-info-circle" aria-hidden="true"></i></span></button>' +
+                        '<a href="" id="cocview" data-toggle="modal" style="display: none"></a> </td>' +
+                        '</tr>';
+                });
+                donormodalhtml += '</tbody></table>' +
+                    '</div>'+
+                    '</div>'+
+                    '<div class="modal-footer">'+
+                    '<button type="button" class="btn green-meadow" data-dismiss="modal">Close</button>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>'+
+                    '</div>';
+                $.each( html.dataarr, function( key1, value1 ) {
+                    var drugs = '';
+                    var drugarr = value1.drug.split(',');
+                    if(drugarr[0] == '1'){
+                        drugs += 'Ice<br>';
+                    }else if(drugarr[1] == '1'){
+                        drugs += 'Marijuana<br>';
+                    }else if(drugarr[2] == '1'){
+                        drugs += 'Heroin<br>';
+                    }else if(drugarr[3] == '1'){
+                        drugs += 'Cocain<br>';
+                    }
+
+                    if(drugarr[0] == '2'){
+                        drugs += 'Ice<br>';
+                    }else if(drugarr[1] == '2'){
+                        drugs += 'Marijuana<br>';
+                    }else if(drugarr[2] == '2'){
+                        drugs += 'Heroin<br>';
+                    }else if(drugarr[3] == '2'){
+                        drugs += 'Cocain<br>';
+                    }
+
+                    if(drugarr[0] == '3'){
+                        drugs += 'Ice<br>';
+                    }else if(drugarr[1] == '3'){
+                        drugs += 'Marijuana<br>';
+                    }else if(drugarr[2] == '3'){
+                        drugs += 'Heroin<br>';
+                    }else if(drugarr[3] == '3'){
+                        drugs += 'Cocain<br>';
+                    }
+
+                    if(drugarr[0] == '4'){
+                        drugs += 'Ice<br>';
+                    }else if(drugarr[1] == '4'){
+                        drugs += 'Marijuana<br>';
+                    }else if(drugarr[2] == '4'){
+                        drugs += 'Heroin<br>';
+                    }else if(drugarr[3] == '4'){
+                        drugs += 'Cocain<br>';
+                    }
+                    var alcoholread1 = '';
+                    var alcoholread2 = '';
+                    if(value1.alcoholreading1){
+                        alcoholread1 = value1.alcoholreading1;
+                    }
+                    if(value1.alcoholreading2){
+                        alcoholread2 = value1.alcoholreading2;
+                    }
+                    donormodalhtml +='<div class="modal fade custommodal" id="viewdonorinfo'+value1.id+'" role="dialog">'+
+                        '<div class="modal-dialog">'+
+                        '<div class="modal-content">'+
+                        '<div class="modal-header">'+
+                        '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+                        '<h2 class="modal-title font-green-sharp">Donors Info</h2>'+
+                        '</div>'+
+                        '<div class="modal-body">'+
+                        '<div class="table-responsive">'+
+                        '<table class="table modaltable">' +
+                        '<tbody>' +
+                        '<tr><th>Drugs:</th><td>'+(drugs!=''?drugs:'N/A')+'</td></tr>' +
+                        '<tr><th>Alcohol:</th><td>Reading One: '+(alcoholread1!=''?alcoholread1:'N/A')+'<br /> Reading Two: '+(alcoholread2!=''?alcoholread2:'N/A')+'</td></tr>' +
+                        '</tbody></table>' +
+                        '</div>'+
+                        '</div>'+
+                        '<div class="modal-footer">'+
+                        '<button type="button" class="btn green-meadow" data-dismiss="modal">Close</button>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>';
+                });
+                $('.show-stack-modal').html(donormodalhtml);
+                $('#loader').css('display', 'none');
+                $('#donorsdetmodal').modal('show');
+            } else {
+                $('#loader').css('display', 'none');
+                alert(html.message);
+            }
+        }
+    });
+}
+
+function viewcocdets(cocid,donorname){
+    $('#loader').css('display', 'block');
+    var jdata = {
+        cocid: cocid
+    }
+    $.ajax({
+        datatype: "json",
+        url: __BASE_URL__ + "/webservices/getcocdatabycocid/",
+        type: "POST",
+        crossDomain: true,
+        cache: false,
+        data: JSON.stringify(jdata),
+        success: function (html) {
+            if(html.code == '200'){
+                var cocmodalhtml = '';
+                $.each( html.dataarr, function( key, value ) {
+                    $('#cocview').attr('href','#cocdatamodal'+ value.id);
+                    cocmodalhtml = '<div class="modal fade custommodal" id="cocdatamodal' + value.id + '" role="dialog">' +
+                        '<div class="modal-dialog">' +
+                        '<div class="modal-content">' +
+                        '<div class="modal-header">' +
+                        '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+                        '<h2 class="modal-title font-green-sharp">COC Data</h4>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                        '<div class="table-responsive">' +
+                        '<table class="table modaltable">' +
+                        '<tbody>'+
+                        '<tr><th>Test Date:</th><td>'+formatdate(value.cocdate)+'</td></tr>' +
+                        '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Donor Information</h3></th> </tr>' +
+                        '<tr><th class="col-md-2">Donor Name:</th><td class="col-md-2">'+donorname+'</td></tr>' +
+                        '<tr><th class="col-md-2">Date of birth:</th><td class="col-md-2">'+formatdate(value.dob)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Employment Type:</th><td class="col-md-2">'+(value.employeetype=='1'?'Employee':(value.employeetype=='2'?'Contractor':''))+'</td></tr>' +
+                        (value.employeetype=='2'?'<tr><th class="col-md-2">Contractor Details:</th><td class="col-md-2">'+value.contractor+'</td></tr>':'' )+
+                        '<tr><th class="col-md-2">ID Type:</th><td class="col-md-2">'+(value.idtype == '1'?'Driving License':(value.idtype == '2'?'Medicare Card':(value.idtype == '3'?'Passport':'')))+'</td></tr>' +
+                        '<tr><th class="col-md-2">ID Number:</th><td class="col-md-2">'+value.idnumber+'</td></tr>' +
+                        '<tr><th class="col-md-2">Declaration:</th class="col-md-2"><td >I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs.</td></tr>' +
+                        '<tr><th >Have you taken any medication, drugs or other non-prescription agents in last week?:</th><td>'+value.lastweekq+'</td></tr>' +
+                        '<tr><th class="col-md-2">Donor Signature:</th><td class="col-md-2">'+value.donorsign+'</td></tr>' +
+                        '<tr><th colspan="2" ><h3 class="font-green-sharp">Alcohol Breath Test</h3></th> </tr>' +
+                        '<tr><th class="col-md-2">Device Serial#:</th><td class="col-md-2">'+value.devicesrno+'</td></tr>' +
+                        '<tr><th class="col-md-2">Cut off Level:</th><td class="col-md-2">'+value.cutoff+'</td></tr>' +
+                        '<tr><th class="col-md-2">Wait Time <sub>[Minutes]</sub>:</th><td class="col-md-2">'+value.donwaittime+'</td></tr>' +
+                        '<tr><th class="col-md-2">Test 1:</th><td class="col-md-2">'+value.dontest1+'</td></tr>' +
+                        '<tr><th class="col-md-2">Time <sub>[24 hr]</sub>:</th><td class="col-md-2">'+formattime(value.dontesttime1)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Test 2:</th><td class="col-md-2">'+value.dontest2+'</td></tr>' +
+                        '<tr><th class="col-md-2">Time <sub>[24 hr]</sub>:</th><td class="col-md-2">'+formattime(value.dontesttime2)+'</td></tr>' +
+                        '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp nowhitespace">Collection of Sample/On-Site Drug Screening Results</h3></th> </tr>' +
+                        '<tr><th class="col-md-2">Void Time <sub>[24 hr]</sub>:</th><td class="col-md-2">'+formattime(value.voidtime)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Sample Temp C:</th><td class="col-md-2">'+value.sampletempc+'</td></tr>' +
+                        '<tr><th class="col-md-2">Temp Read Time within 4 min <sub>[24 hr]</sub>:</th><td class="col-md-2">'+formattime(value.tempreadtime)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Intect 7 Lot. No.:</th><td class="col-md-2">'+value.intect+'</td></tr>' +
+                        '<tr><th class="col-md-2">Expiry:</th><td class="col-md-2">'+formatdate(value.intectexpiry)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Visual Colour:</th><td class="col-md-2">'+value.visualcolor+'</td></tr>' +
+                        '<tr><th class="col-md-2">Creatinine:</th><td class="col-md-2">'+value.creatinine+'</td></tr>' +
+                        '<tr><th class="col-md-2">Other Integrity:</th><td class="col-md-2">'+value.otherintegrity+'</td></tr>' +
+                        '<tr><th class="col-md-2">Hydration:</th><td class="col-md-2">'+value.hudration+'</td> </tr>' +
+                        '<tr><th class="col-md-2">Device Name:</th><td class="col-md-2">'+value.devicename+'</td></tr>' +
+                        '<tr><th class="col-md-2">Reference#:</th><td class="col-md-2">'+value.reference+'</td></tr>' +
+                        '<tr><th class="col-md-2">Lot#:</th><td class="col-md-2">'+value.lotno+'</td></tr>' +
+                        '<tr><th class="col-md-2">Expiry:</th><td class="col-md-2">'+formatdate(value.lotexpiry)+'</td></tr>' +
+                        '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Drugs Class</h3></th> </tr>' +
+                        '<tr><th class="col-md-2">Cocaine:</th><td class="col-md-2">'+(value.cocain=='U'?'Further Testing Required':(value.cocain=='N'?'Negative':''))+'</td></tr>' +
+                        '<tr><th class="col-md-2">Amp:</th><td class="col-md-2">'+(value.amp=='U'?'Further Testing Required':(value.amp=='N'?'Negative':''))+'</td></tr>' +
+                        '<tr><th class="col-md-2">mAmp:</th><td class="col-md-2">'+(value.mamp=='U'?'Further Testing Required':(value.mamp=='N'?'Negative':''))+'</td></tr>' +
+                        '<tr><th class="col-md-2">THC:</th><td class="col-md-2">'+(value.thc=='U'?'Further Testing Required':(value.thc=='N'?'Negative':''))+'</td></tr>' +
+                        '<tr><th class="col-md-2">Opiates:</th><td class="col-md-2">'+(value.opiates=='U'?'Further Testing Required':(value.opiates=='N'?'Negative':''))+'</td></tr>' +
+                        '<tr><th class="col-md-2">Benzo:</th><td class="col-md-2">'+(value.benzo=='U'?'Further Testing Required':(value.benzo=='N'?'Negative':''))+'</td></tr>' +
+                        '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Donor Declaration</h3></th> </tr>' +
+                        '<tr><td colspan="2" class="col-md-2">I certify that the specimen(s) accompanying this form is my own. Where on-site screening was performed, such screening was carried out in my presence. In the case of my specimen(s) being sent to the laboratory for testing, I  certify that the specimen containers were sealed with tamper evident seals in my presence and the identifying information on the label is correct. I certify that the information provided  on this form to be correct and I consent to the release of all test results  together with any relevant details  contained on this form to the nominated representative of the requesting authority.</td></tr>' +
+                        '<tr><th class="col-md-2">Date:</th><td class="col-md-2">'+formatdate(value.donordecdate)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.donordecsign+'</td></tr>' +
+                        '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Collector Certification</h3></th> </tr>' +
+                        '<tr><td colspan="2" class="col-md-2">I certify that I witnessed the  Donor signature and that the specimen(s) identified on this form was provided to me by the Donor whose consent and  declaration appears above,  bears the same Donor identification as  set forth above, and that the specimen(s) has been collected and if needed divided, labelled and sealed in accordance  with the relevant Standard. *If two Collectors are present the second Collector (2) is to perform sample collection/screening for Alcohol and Urine.</td></tr>' +
+                        '<tr><th class="col-md-2">Collector 1 Name/Number:</th><td class="col-md-2">'+value.collectorone+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.collectorsignone+'</td></tr>' +
+                        '<tr><th class="col-md-2">Comments or Observation:</th><td class="col-md-2">'+value.commentscol1+'</td></tr>' +
+                        '<tr><th class="col-md-2">Collector 2 Name/Number:</th><td class="col-md-2">'+value.collectortwo+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.collectorsigntwo+'</td></tr>' +
+                        '<tr><th class="col-md-2">Comments or Observation:</th><td class="col-md-2">'+value.comments+'</td></tr>' +
+                        '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Chain of Custody</h3></th> </tr>' +
+                        '<tr><th class="col-md-2">Received By(1):</th><td class="col-md-2">'+value.receiverone+'</td></tr>' +
+                        '<tr><th class="col-md-2">Receiving Date:</th><td class="col-md-2">'+formatdate(value.receiveronedate)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Receiving Time:</th><td class="col-md-2">'+format12hrtime(value.receiveronetime)+'</td></tr>' +
+                        '<tr><th class="col-md-2">Seal Intact:</th><td class="col-md-2">'+value.receiveroneseal+'</td></tr>' +
+                        '<tr><th class="col-md-2">Label/Bar Code Match:</th><td class="col-md-2">'+value.receiveronelabel+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.receiveronesign+'</td></tr>' +
+                        '<tr><th class="col-md-2">Received By(2):</th><td class="col-md-2">'+(value.receivertwo?value.receivertwo:'-')+'</td></tr>' +
+                        '<tr><th class="col-md-2">Receiving Date:</th><td class="col-md-2">'+(value.receivertwo?formatdate(value.receivertwodate):'-')+'</td></tr>' +
+                        '<tr><th class="col-md-2">Receiving Time:</th><td class="col-md-2">'+(value.receivertwo?format12hrtime(value.receivertwotime):'-')+'</td></tr>' +
+                        '<tr><th class="col-md-2">Seal Intact:</th><td class="col-md-2">'+(value.receivertwo?value.receivertwoseal:'-')+'</td></tr>' +
+                        '<tr><th class="col-md-2">Label/Bar Code Match:</th><td class="col-md-2">'+(value.receivertwo?value.receivertwolabel:'-')+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+(value.receivertwo?value.receivertwosign:'-')+'</td></tr>' +
+                        '</tbody></table>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                        '<button type="button" class="btn green-meadow" data-dismiss="modal">Close</button>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                });
+                $('.show-stackonstack-modal').html(cocmodalhtml);
+                var modalid = $('#cocview').attr('href');
+                $('#loader').css('display', 'none');
+                $(modalid).modal('show');
+            } else {
+                $('#loader').css('display', 'none');
+                alert(html.message);
+            }
+        }
+    });
+}
+function formatdate(val) {
+    var datearr = val.split('-');
+    var dateval = datearr[2]+'/'+datearr[1]+'/'+datearr[0];
+    if((dateval != '00/00/0000') && (dateval != '31/12/1969')){
+        return dateval;
+    }else{
+        return '';
+    }
+}
+function showdonorinfobydivid(id) {
+    $(id).modal('show');
+}
+function formattime(timeval){
+    timeval = timeval.split(':');
+    timeval = ("0" + parseInt(timeval[0].trim())).slice(-2)+' : '+("0" + parseInt(timeval[1].trim())).slice(-2);
+    return timeval;
+}
+
+function format12hrtime(timeval) {
+    timeval = timeval.split(' ');
+    var format = timeval[3];
+    timeval = timeval[0]+' : '+timeval[2];
+    return formattime(timeval)+' '+format;
 }

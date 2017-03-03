@@ -167,6 +167,51 @@ class Form_Management_Model extends Error_Model {
             return array();
         
         }
-    } 
+    }
+
+    public function getFranchisees($operationManagerId = 0)
+    {
+        if ($operationManagerId>0) {
+            $whereAry = array('frtbl.operationManagerId=' => $operationManagerId, 'user.isDeleted=' => '0', 'iRole' => '2');
+        } else {
+            $whereAry = array('user.isDeleted=' => '0', 'user.iRole' => '2' );
+        }
+
+        $this->db->select('user.id, user.szName, user.abn, user.szEmail, user.szContactNumber, user.userCode, user.szAddress, user.szZipCode, user.szCity, user.regionId, user.szCountry');
+        $this->db->from(__DBC_SCHEMATA_USERS__.' as user');
+        $this->db->join(__DBC_SCHEMATA_FRANCHISEE__.' as frtbl', 'frtbl.franchiseeId = user.id');
+        $this->db->where($whereAry);
+        $this->db->order_by('user.szName', 'ASC');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
+
+    function getsosformdata($siteid, $fromdate, $todate, $status =0)
+    {
+        $whereAry = 'sos.Clientid =' . (int)$siteid . ' AND sos.Status = '.(int)$status;
+        $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
+                                                sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
+                                                sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
+                                                sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.collsign, sos.ClientRepresentative,
+                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId')
+            ->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos')
+            ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'sos.Clientid = client.clientId')
+            ->where($whereAry)
+            ->where('sos.testdate >=', $fromdate)
+            ->where('sos.testdate <=', $todate)
+            ->order_by("sos.testdate","DESC")
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
 }
 ?>
