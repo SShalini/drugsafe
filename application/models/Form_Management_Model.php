@@ -149,14 +149,18 @@ class Form_Management_Model extends Error_Model {
         $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
         $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
         $this->db->select('*');
-        $this->db->from(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_SOS_FORM__,'tbl_client');
+        $this->db->from(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_SOS_FORM__,'tbl_client',__DBC_SCHEMATA_FRANCHISEE__);
         $this->db->join('ds_sos', 'tbl_manual_calc.sosid = ds_sos.id');
         $this->db->join('tbl_client', 'ds_sos.Clientid = tbl_client.clientId');
+        $this->db->join('tbl_franchisee', 'tbl_client.franchiseeId = tbl_franchisee.franchiseeId');
         $this->db->where('dtCreatedOn >=', $dtStart);
         $this->db->where('dtCreatedOn <=', $dtEnd);
         $this->db->where('clientType !=', '0');
         $this->db->where('status', '1');
-        $this->db->group_by('franchiseeId');
+        if($_SESSION['drugsafe_user']['iRole']==5){
+         $this->db->where('tbl_franchisee.operationManagerId', $_SESSION['drugsafe_user']['id']);   
+        }
+        $this->db->group_by('tbl_client.franchiseeId');
         $query = $this->db->get();
         //echo $sql = $this->db->last_query(); die();
 

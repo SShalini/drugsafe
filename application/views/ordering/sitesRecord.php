@@ -58,8 +58,13 @@
 
 
                     <?php
-                    if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                        $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, false); ?>
+                    if (($_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '5' )) {
+                        if($_SESSION['drugsafe_user']['iRole'] == '5'){
+                          $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']);
+                        }else{
+                        $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, false);
+                        }
+                        ?>
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-green-meadow"></i>

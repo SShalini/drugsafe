@@ -2224,7 +2224,14 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-        $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
+          if ($_SESSION['drugsafe_user']['iRole'] == '5') {
+          $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']);
+        } elseif ($_SESSION['drugsafe_user']['iRole'] == '1') {
+           $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
+        } else {
+            $searchOptionArr = array();
+        }
+        
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
         $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
@@ -2350,12 +2357,13 @@ function excelfr_stockassignlist_Data()
 	    $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
         }
 	$this->load->library('form_validation');
-        $this->form_validation->set_rules('szFranchisee', 'Franchisee ', 'required');
+        
         $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
         $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
        
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
+            
             $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
             $data['szMetaTagTitle'] = "Revenue Summary";
             $data['is_user_login'] = $is_user_login;
@@ -2372,16 +2380,17 @@ function excelfr_stockassignlist_Data()
             $this->load->view('layout/admin_footer');
 
         } else {
-            
+        
+              $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
             $data['szMetaTagTitle'] = "Revenue Summary";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
             $data['subpageName'] = "revenue_summery";
             $data['notification'] = $count;
             $data['data'] = $data;
+            $data['getSummeryManualCalcStartToEndDate']=$getSummeryManualCalcStartToEndDate;
             $data['searchAry'] = $_POST;
-	        $data['allfranchisee'] = $searchOptionArr;
-			$data['getSummeryManualCalcStartToEndDate']=$getSummeryManualCalcStartToEndDate;
+	    $data['allfranchisee'] = $franchiseeId;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummery');
