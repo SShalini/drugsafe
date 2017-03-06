@@ -259,7 +259,18 @@ class Order_Model extends Error_Model {
          
  public function getallValidOrderDetails($searchAry=array())
     {
-        $searchQuery = 'validorder = 1';
+        
+        if($_SESSION['drugsafe_user']['iRole']==2){
+             $searchQuery = 'validorder = 1';
+             $searchQuery .="
+                            AND franchiseeid = ".(int)($_SESSION['drugsafe_user']['id']);
+        }
+        else{
+            $searchQuery = 'validorder = 1';
+        }
+       
+       
+        
          if(!empty($searchAry))
         {
             
@@ -307,7 +318,7 @@ class Order_Model extends Error_Model {
                          
                 }
              
-
+                
                  if($key == 'szSearch1'){
                     if(!empty ($searchData)){
                         $searchQuery.="
@@ -926,5 +937,6 @@ class Order_Model extends Error_Model {
                 return false;
             }
         }
+      
    }
 ?>

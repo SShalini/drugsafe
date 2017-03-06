@@ -67,7 +67,7 @@
                             <form name="orderSearchForm" id="orderSearchForm"
                                   action="<?= __BASE_URL__ ?>/order/view_order_report" method="post">
                                 <div class="row">
-
+                      <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                     <div class="col-md-3">
 
                                         <div class="form-group ">
@@ -84,7 +84,7 @@
                                         </div>
                                     </div>
                                  <div class="col-md-1"> </div>
-                                    <div class="col-md-3">
+                                   <div class="col-md-3">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch2" id="szSearch2"
                                                     onfocus="remove_formError(this.id,'true')">
@@ -195,9 +195,120 @@
                                     </div>
 
                                   </div>
+                      <?php } else { ?>  
+                                <div class="row">
+                             <div class="col-md-3">
+                                        <div class="form-group ">
+                                            <select class="form-control custom-select" name="szSearch2" id="szSearch2"
+                                                    onfocus="remove_formError(this.id,'true')">
+                                                <option value="">Order No</option>
+                                                <?php
+                                                foreach ($validOrdersDetailsSearchAray as $validOrdersDetailsSearchList) {
+                                                    $selected = ($validOrdersDetailsSearchList['orderid'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
+                                                    echo '<option value="' . $validOrdersDetailsSearchList['orderid'] . '" ' . $selected . ' >#' . sprintf(__FORMAT_NUMBER__, $validOrdersDetailsSearchList['orderid']) . '</option>';
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                  <div class="col-md-1"> </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch4" class="form-control"
+                                                       value="<?php echo set_value('szSearch4'); ?>" readonly
+                                                       placeholder="Start Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch4">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch4')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch4'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch4'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch4']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                                <div class="col-md-1"> </div>
+                                           <div class="col-md-3">
+                                      <div
+                                            class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch5" class="form-control"
+                                                       value="<?php echo set_value('szSearch5'); ?>" readonly
+                                                       placeholder="End Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch5">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch5')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch5'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch5']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div> 
+                                               </div>
+                                </div>
+                                 <div class="row">
+                                <div class="col-md-3">
+                                <div class="form-group ">
+                                    <select class="form-control custom-select" name="szSearch3" id="szSearch3"
+                                            onblur="remove_formError(this.id,'true')">
+                                        <option value=''>Status</option>
+                                        <option value="1" <?php echo(sanitize_post_field_value($_POST['szSearch3']) == trim("1") ? "selected" : ""); ?>>
+                                            Ordered
+                                        </option>
+                                        <option value="2" <?php echo(sanitize_post_field_value($_POST['szSearch3']) == trim("2") ? "selected" : ""); ?>>
+                                            Dispatched
+                                        </option>
+                                        <option value="3" <?php echo(sanitize_post_field_value($_POST['szSearch3']) == trim("3") ? "selected" : ""); ?>>
+                                           Canceled
+                                        </option>
+                                        
+                                    </select>
+                          
+                                </div>
+                               </div>
+                                   <div class="col-md-1">
+                                       
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <button class="btn green-meadow" type="submit"><i
+                                                    class="fa fa-search"></i> 
+                                            </button>
+                                            &nbsp;
+                                            <!--<button class="btn red uppercase bold" type="button" onclick="resetClientSearch();"><i class="fa fa-refresh"></i>Reset</button>-->
+                                        </div>
+                                    </div>
+
+                                  </div>   
                                 
 
-
+                      <?php } ?>  
                             </form>
                         </div>
                     </div>
@@ -228,9 +339,11 @@
                                                     <th>
                                                         #
                                                     </th>
+                                                    <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                                     <th>
                                                         Franchisee
                                                     </th>
+                                                    <?php } ?>
                                                     <th>
                                                         Order Date
                                                     </th>
@@ -281,9 +394,11 @@
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $i; ?> </td>
+                                                        <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                                         <td>
                                                             <?php echo $franchiseeDetArr1['szName']; ?>
                                                         </td>
+                                                        <?php } ?>
                                                         <td>
                                                             <?php echo $date['2']; ?> <?php echo $monthName; ?>  <?php echo $date['0']; ?>
                                                             at <?php echo $x; ?>

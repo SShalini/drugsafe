@@ -1700,13 +1700,15 @@ function excelfr_stockassignlist_Data()
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        <th width="10%"><b>  #</b> </th>
-                                        <th  width="15%"> <b>Franchisee</b> </th>
-                                        <th  width="25%"> <b>Order Date </b> </th>
-                                        <th  width="10%"><b> Order #  </b> </th>
-                                        <th  width="10%"> <b>No. of Products</b> </th>
-                                   <th  width="10%"><b> Order Cost </b> </th>
-                                        <th  width="15%"> <b>Xero Invoice No.</b> </th>
+                                        <th width="8%"><b>  #</b> </th> ';
+                                 if($_SESSION['drugsafe_user']['iRole']==1){
+                                   $html .= '<th  width="20%"> <b>Franchisee</b> </th>';
+                                 }
+                                       $html .= '<th  width="20%"> <b>Order Date </b> </th>
+                                        <th  width="18%"><b> Order #  </b> </th>
+                                        <th  width="20%"> <b>No. of Products</b> </th>
+                                        <th  width="15%"><b> Order Cost </b> </th>
+                                        <th  width="18%"> <b>Xero Invoice No.</b> </th>
                                     </tr>';
         if ($validOrdersDetailsAray) {
 
@@ -1715,9 +1717,11 @@ function excelfr_stockassignlist_Data()
                 $i++;
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $reqOrderData['franchiseeid']);
                 $html .= '<tr>
-                                            <td> ' . $i . ' </td>
-                                            <td> ' . $franchiseeDetArr1['szName'] . '</td>
-                                            <td> ' . date('d M Y',strtotime($reqOrderData['createdon'])) . ' at '.date('h:i A',strtotime($reqOrderData['createdon'])).' </td>
+                                            <td> ' . $i . ' </td>';
+                                    if($_SESSION['drugsafe_user']['iRole']==1){
+                                $html .= '  <td> ' . $franchiseeDetArr1['szName'] . '</td>';
+                                             }
+                                       $html .= '   <td> ' . date('d M Y',strtotime($reqOrderData['createdon'])) . ' at '.date('h:i A',strtotime($reqOrderData['createdon'])).' </td>
                                             <td>#' . sprintf(__FORMAT_NUMBER__, $reqOrderData['orderid']) . ' </td>
                                                <td>' . $reqOrderData['totalproducts'] . ' </td>
                                             <td>$' . ($reqOrderData['price']>0?$reqOrderData['price']:'0.00') . ' </td>
@@ -1760,14 +1764,16 @@ function excelfr_stockassignlist_Data()
         $title = 'Orders Report';
         $file = $filename . '-' . $title ; //save our workbook as this file name
 
-
+        
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($title);
         $this->excel->getActiveSheet()->setCellValue('A1', '#');
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
+         
+        if($_SESSION['drugsafe_user']['iRole']==1){
+            
         $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee');
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
@@ -1826,7 +1832,61 @@ function excelfr_stockassignlist_Data()
                 $i++;
             }
         }
+        }
+        else{
+         $this->excel->getActiveSheet()->setCellValue('B1', 'Order Date');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Order #');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', 'No. of Products');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Order Cost');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Xero Invoice No.');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+      
+        $searchAry['szSearch1'] = $this->session->userdata('szSearch1');
+        $searchAry['szSearch2'] = $this->session->userdata('szSearch2');
+        $searchAry['szSearch4'] = $this->session->userdata('szSearch4');
+        $searchAry['szSearch5'] = $this->session->userdata('szSearch5');
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        if(!empty($validOrdersDetailsAray)){
+            $i = 2;
+            $x=0;
+            foreach($validOrdersDetailsAray as $item){
+                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $item['franchiseeid']);
+                $x++;
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, date('d M Y',strtotime($item['createdon'])) . ' at '.date('h:i A',strtotime($item['createdon'])));
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, '#'.sprintf(__FORMAT_NUMBER__, $item['orderid']));
+                $this->excel->getActiveSheet()->setCellValue('D'.$i,$item['totalproducts']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
+                $this->excel->getActiveSheet()->setCellValue('F'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $i++;
+            }
+        }   
+        }
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache

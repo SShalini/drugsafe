@@ -378,6 +378,7 @@ class Order_Controller extends CI_Controller
 
         $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
         $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        $validOrderIdforFr = $this->Order_Model->validOrderIdforFr();
         $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
 
         $this->load->library('form_validation');
@@ -552,11 +553,13 @@ class Order_Controller extends CI_Controller
         <td width="50%" align="left"><b>Total Price : </b> $'.$OrdersDetailsAray['price'].'</td>
     </tr>';
   }
+  if($_SESSION['drugsafe_user']['iRole']==1){
    $html .= '
      <tr>
         <td width="50%" align="left"><b>Franchisee : </b> '. $franchiseeDetArr1['szName'] .'</td>
-    </tr>
-    
+    </tr>';
+  }
+$html .= '    
 </table>
 <br />
 <h3 style="color:black">Products Info </h3>
@@ -728,7 +731,9 @@ class Order_Controller extends CI_Controller
          else{
            $this->excel->getActiveSheet()->setCellValue('A6','Order Status  :');
            $this->excel->getActiveSheet()->setCellValue('A7','Total Price :');
-           $this->excel->getActiveSheet()->setCellValue('A8','Franchisee :');  
+            if($_SESSION['drugsafe_user']['iRole']==1){
+           $this->excel->getActiveSheet()->setCellValue('A8','Franchisee :'); 
+            }
          }
         
          
@@ -739,18 +744,24 @@ class Order_Controller extends CI_Controller
          $this->excel->getActiveSheet()->setCellValue('B6',$cancelVal);
          $this->excel->getActiveSheet()->setCellValue('B7',$status);
          $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['price']);
+          if($_SESSION['drugsafe_user']['iRole']==1){
          $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
+          }
          }
           elseif($OrdersDetailsAray['status'] ==2){
            $this->excel->getActiveSheet()->setCellValue('B6',$dispatchVal);
            $this->excel->getActiveSheet()->setCellValue('B7',$status);
          $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['price']);
+          if($_SESSION['drugsafe_user']['iRole']==1){
          $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
+          }
          }
          else{
          $this->excel->getActiveSheet()->setCellValue('B6',$status);
          $this->excel->getActiveSheet()->setCellValue('B7','$'.$OrdersDetailsAray['price']);
+          if($_SESSION['drugsafe_user']['iRole']==1){
          $this->excel->getActiveSheet()->setCellValue('B8',$franchiseeDetArr1['szName']);
+          }
          }
          
          

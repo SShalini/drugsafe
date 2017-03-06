@@ -265,7 +265,14 @@
                     <span class="title">Reporting </span>
                     <span class="arrow"></span>
                 </a>
+                    
                 <ul class="sub-menu" <?php if ($subpageName == 'Reporting') { ?> style="display: block;" <?php } ?> >
+                     <li class="nav-item  <?php if ($subpageName == 'Orders_Report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/order/view_order_report">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Orders Report</span>
+                            </a>
+                        </li>
                     <li class="nav-item  <?php if ($subpageName == 'revenue_generate') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/franchisee_revenue_generate">
                                 <i class="fa fa-ge" aria-hidden="true"></i>

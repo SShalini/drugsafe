@@ -1682,6 +1682,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
 /*                                    echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); */?>
                                 </div>
                             </div>-->
+                             <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                             <div class="row static-info">
                                 <div class="col-md-5 name">
                                     Franchisee:
@@ -1690,6 +1691,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     <?php echo $franchiseeDetArr1['szName'] ?>
                                 </div>
                             </div>
+                             <?php } ?>
                         </div>
                     </div>
                     <hr>
