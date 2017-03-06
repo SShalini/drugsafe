@@ -1527,8 +1527,8 @@ function deliverOrderConfirmation(idOrder) {
     }); 
 }
 
- function view_order_details_pdf(idOrder) {
-    $.post(__BASE_URL__ + "/order/view_order_details", {idOrder:idOrder}, function (result) {
+ function view_order_details_pdf(idOrder,flag) {
+    $.post(__BASE_URL__ + "/order/view_order_details", {idOrder:idOrder,flag:flag}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/order/" + ar_result[1];
         window.open(URL,'_blank');
@@ -2169,18 +2169,25 @@ function editProspectStatusConfirmation(idProspect) {
 
         });
     }
-     function showDescription(idMeetingNote)
+     function showDescription(idMeetingNote,flag)
 {
-    
-    jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/prospect/showDescriptionData", {idMeetingNote: idMeetingNote,}, function (result) {
+   
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/prospect/showDescriptionData", {idMeetingNote: idMeetingNote,}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
+            if(flag==1){
+            $("#popup_box_level2").html(result_ary[1]);
+            $('#showDescription').modal("show");
+            jQuery('#loader').attr('style', 'display:none');
+   }
+        else {    
             $("#popup_box").html(result_ary[1]);
             $('#showDescription').modal("show");
              jQuery('#loader').attr('style', 'display:none');
-        }
+         }
+                }
        
 
     });
@@ -2833,5 +2840,38 @@ function showcocpdf(cocid) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/formManagement/" + ar_result[1];
         window.open(URL,'_blank');
+    });
+}
+
+ function viewProspectMeetingNotes(idProspect)
+{
+    jQuery('#loader').attr('style', 'display:block');
+   $.post(__BASE_URL__ + "/prospect/viewProspectMeetingNotesData", {idProspect: idProspect}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#showMeetingNotes').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+ function ViewpdfSalesCrmReport(franchiseeId,status) {
+    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Report", {franchiseeId: franchiseeId,status:status}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+
+function ViewexcelSalesCrmReport(franchiseeId,status) {
+    $.post(__BASE_URL__ + "/prospect/View_xls_Sales_Crm_Report", {franchiseeId: franchiseeId,status:status}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
+        window.open(URL,'_blank');
+
     });
 }

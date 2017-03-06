@@ -236,11 +236,12 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>franchisee code</th>
+                                    <th>Franchisee code</th>
                                     <th> Name</th>
                                     <th> Email</th>
                                     <th> Contact No</th>
-                                    <th> Address</th>
+                                    <th> State</th>
+                                    <th> Region Name</th>
                                     <th> Actions</th>
                                 </tr>
                                 </thead>
@@ -248,13 +249,30 @@
                                 <?php
                                 $i = 0;
                                 foreach ($franchiseeAray as $franchiseeData) {
+                                            $Statedata = $this->Admin_Model->getstatebyregionid($franchiseeData['regionId']);
+                                            $regioncode = $this->Admin_Model->getregionbyregionid($franchiseeData['regionId']);
                                     ?>
                                     <tr>
                                         <td><?php echo $franchiseeData['userCode']; ?> </td>
                                         <td> <?php echo $franchiseeData['szName'] ?> </td>
                                         <td> <?php echo $franchiseeData['szEmail']; ?> </td>
                                         <td> <?php echo $franchiseeData['szContactNumber']; ?> </td>
-                                        <td><?php echo $franchiseeData['szCity']; ?> </td>
+                                        <?php
+                                            if(empty($Statedata['0']['name'])){
+                                               $State = "N/A";
+                                            } else {
+                                                $State = $Statedata['0']['name'];
+                                              }
+                                           
+                                       if(empty($regioncode['regionName'])){
+                                               $Region = "N/A";
+                                       }   else{
+                                                $Region = $regioncode['regionName'];
+                                            }
+                                           ?>
+                                            
+                                            <td> <?php echo $State;?> </td>
+                                             <td> <?php echo $Region;?> </td>
                                             <td>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>,'1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 

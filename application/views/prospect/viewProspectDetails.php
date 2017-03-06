@@ -448,7 +448,7 @@
                                               {
                                                   array_splice($array, 15);
                                                   $retval = implode(" ", $array)." ...";
-                                                  $retval .= '<a onclick="showDescription('.$mettingsDetailsData['id'].');" href="javascript:void(0);" >Read more</a>';
+                                                  $retval .= '<a onclick="showDescription('.$mettingsDetailsData['id'].',2);" href="javascript:void(0);" >Read more</a>';
                                               }
                                                ?>
                                             

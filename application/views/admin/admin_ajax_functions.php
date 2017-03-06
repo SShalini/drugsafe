@@ -1527,7 +1527,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                         </div>
                          <div class = ' col-md-6'> 
                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a onclick="view_order_details_pdf('<?php echo $idOrder;?>')" href="javascript:void(0);" 
+                    <a onclick="view_order_details_pdf('<?php echo $idOrder;?>','1')" href="javascript:void(0);" 
                       class=" btn green-meadow">
                        <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 
@@ -3295,6 +3295,98 @@ if($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_CONFIRMATION__')
         </div>
     </div>
 
+    <?php
+}
+if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+
+
+    <div id="showMeetingNotes" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <?php  $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
+
+                ?>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Meeting Note</span></h4>
+                    </div>
+
+                </div>
+
+               
+                <div class="modal-body">
+                   
+                    <div class="portlet green-meadow box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-sticky-note"></i> Meeting Note
+
+                            </div>
+
+                        </div>
+                       
+                        <div class="portlet-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Sr No.</th>
+                                        <th>Meeting Note</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                         $i=0;
+                                    foreach ($mettingsDetailsAry as $mettingsDetailsData) {
+                                        $i++;
+                                       ?>
+                                        <tr>
+                                            <td> <?php echo $i; ?> </td>
+                                             <?php
+                                         
+                                          
+
+                                              $retval = $mettingsDetailsData['szDescription'];
+                                              $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $mettingsDetailsData['szDescription']);
+                                              $string = str_replace("\n", " ", $string);
+                                              $array = explode(" ", $string);
+                                              if (count($array)<=15)
+                                              {
+                                                  $retval = $string;
+                                              }
+                                              else
+                                              {
+                                                  array_splice($array, 15);
+                                                  $retval = implode(" ", $array)." ...";
+                                                  $retval .= '<a onclick="showDescription('.$mettingsDetailsData['id'].',1);" href="javascript:void(0);" >Read more</a>';
+                                              }
+                                               ?>
+                                            
+                                              
+                                              <td><?php echo $retval;  ?></td>
+                                            
+                                        </tr>
+                                    <?php } ?>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+ 
+                <div class="modal-footer">
+                    <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+ <div id="popup_box_level2"></div>
     <?php
 }
   ?>

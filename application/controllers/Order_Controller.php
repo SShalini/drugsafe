@@ -454,6 +454,8 @@ class Order_Controller extends CI_Controller
     function view_order_details()
     {
         $idOrder = $this->input->post('idOrder');
+         $flag = $this->input->post('flag');
+         $this->session->set_userdata('flag', $flag);
         $this->session->set_userdata('idOrder', $idOrder);
         echo "SUCCESS||||";
         echo "pdforderdetails";
@@ -480,6 +482,7 @@ class Order_Controller extends CI_Controller
         $pdf->AddPage('L');
    
         $idOrder = $this->session->userdata('idOrder');
+        $flag = $this->session->userdata('flag');
         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
      
         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
@@ -528,7 +531,7 @@ class Order_Controller extends CI_Controller
         <td width="50%" align="left"><b>Order Date & Time : </b> '.$orderVal.'</td>
     </tr>
      ';
-  
+  if($flag==1){
       if($OrdersDetailsAray['status'] == 3) { 
    $html .= '      
    <tr>
@@ -540,13 +543,16 @@ class Order_Controller extends CI_Controller
    <tr>
         <td width="50%" align="left"><b>Dispatch Date & Time : </b> '. $dispatchVal .'</td>
     </tr> ';   
-    } 
+ } } 
   $html .= '   <tr>
         <td width="50%" align="left"><b>Order Status : </b> '.$status.'</td>
-    </tr>
-     <tr>
+    </tr> ';
+  if($flag==1){
+   $html .= '  <tr>
         <td width="50%" align="left"><b>Total Price : </b> $'.$OrdersDetailsAray['price'].'</td>
-    </tr>
+    </tr>';
+  }
+   $html .= '
      <tr>
         <td width="50%" align="left"><b>Franchisee : </b> '. $franchiseeDetArr1['szName'] .'</td>
     </tr>
@@ -592,6 +598,7 @@ class Order_Controller extends CI_Controller
 
         error_reporting(E_ALL);
         $this->session->unset_userdata('idOrder');
+        $this->session->unset_userdata('flag');
 
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');

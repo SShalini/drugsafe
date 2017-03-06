@@ -91,7 +91,7 @@ class Prospect_Model extends Error_Model
        else{
        $array = array('isDeleted' => '0');
          }
-         $query = $this->db->select('id,szName,dt_last_updated_status,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
+         $query = $this->db->select('id,iFranchiseeId,szName,dt_last_updated_status,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("id","desc") 
            ->limit($limit, $offset)
@@ -180,8 +180,7 @@ class Prospect_Model extends Error_Model
      
        $date = date('Y-m-d H:i:s');
        if($flag==1){
-          
-           
+      
            if($data['dt_last_updated_meeting']=='N/A')
            {
             $meetingDateTime = '0000-00-00 00:00:00';
@@ -221,38 +220,40 @@ class Prospect_Model extends Error_Model
                             }if($data['industry']=='Other'){
                                $value = '13';
                             }  
-                      if($data['status']=='Discovery Meeting') {
+                      if($data['status']=="Discovery Meeting") {
                           $status = '2'; 
                       }
-                      if($data['status']=='In Progress') {
+                      if($data['status']=="In Progress") {
                           $status = '3'; 
                       }
-                      if($data['status']=='Non Convertible') {
+                      if($data['status']=="Non Convertible") {
                           $status = '4'; 
                       }
-                      if($data['status']=='Contact Later') {
+                      if($data['status']=="Contact Later") {
                           $status = '5'; 
                       }
-                      if($data['status']=='Closed Sale') {
+                      if($data['status']=="Closed Sale") {
                           $status = '6'; 
                       }  
-                     if($data['status']=='Pre Discovery') {
+                     if($data['status']=="Pre Discovery") {
                           $status = '1'; 
                       }
                       if(empty($data['status'])|| ($data['status']=='N/A')) {
                           $status = '1'; 
                          $statusDateTime =$date; 
                       }
-                      else{
+                     
                         if($data['dt_last_updated_status']=='N/A')
                        {
                         $statusDateTime = '0000-00-00 00:00:00';
+                      
                        }
                        else{
                         $statusDateTime = $this->getSqlFormattedDate($data['dt_last_updated_status']);
+                         
                        }  
-                      }
-                      
+                    
+                   
                       
                     if($data['szContactEmail']=='N/A'){
                      $data['szContactEmail'] = '';
