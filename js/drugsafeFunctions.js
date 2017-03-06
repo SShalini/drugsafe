@@ -2392,7 +2392,9 @@ function showformdata(sosid) {
                     '<div class="modal-content">'+
                     '<div class="modal-header">'+
                     '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
-                    '<h2 class="modal-title font-green-sharp">SOS Data</h2>'+
+                    '<h2 class="modal-title font-green-sharp">SOS Data</h2>' +
+                    /*'<button style="float: right" type="button" class="btn green-meadow" onclick="showsospdf('+sosid+')">View PDF</button>' +
+                    '<br/>'+*/
                     '</div>'+
                     '<div class="modal-body">'+
                     '<div class="table-responsive">'+
@@ -2459,7 +2461,8 @@ function showformdata(sosid) {
                         drugteststring += 'AS/NZA 4308:2008<br>';
                     }
                     var drugtesttr = '<tr><th>Drugs Tested:</th><td colspan="3">'+(drugteststring!=''?drugteststring:'Other')+'</td></tr>';
-                    modalhtml += '<tr><th>Service Commenced:</th><td colspan="3">'+value.ServiceCommencedOn+'</td></tr>' +
+                    modalhtml += '<tr><td colspan="4"><button style="float: right" type="button" class="btn green-meadow" onclick="showsospdf('+sosid+')">View PDF</button></td></tr> ' +
+                        '<tr><th>Service Commenced:</th><td colspan="3">'+value.ServiceCommencedOn+'</td></tr>' +
                         '<tr><th>Services Concluded:</th><td colspan="3">'+value.ServiceConcludedOn+'</td></tr>' +
                         drugtesttr+
                         '<tr><th>Total Donor Screenings/Collections:</th><td>Urine: '+(value.TotalDonarScreeningUrine>0?value.TotalDonarScreeningUrine:'0')+'</td><td colspan="2">Oral: '+(value.TotalDonarScreeningOral>0?value.TotalDonarScreeningOral:'0')+'</td></tr>' +
@@ -2707,7 +2710,8 @@ function viewcocdets(cocid,donorname){
                         '<div class="modal-body">' +
                         '<div class="table-responsive">' +
                         '<table class="table modaltable">' +
-                        '<tbody>'+
+                        '<tbody>' +
+                        '<tr><td colspan="2"><button style="float: right" type="button" class="btn green-meadow" onclick="showcocpdf('+cocid+')">View PDF</button></td></tr>' +
                         '<tr><th>Test Date:</th><td>'+formatdate(value.cocdate)+'</td></tr>' +
                         '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Donor Information</h3></th> </tr>' +
                         '<tr><th class="col-md-2">Donor Name:</th><td class="col-md-2">'+donorname+'</td></tr>' +
@@ -2811,10 +2815,23 @@ function formattime(timeval){
     timeval = ("0" + parseInt(timeval[0].trim())).slice(-2)+' : '+("0" + parseInt(timeval[1].trim())).slice(-2);
     return timeval;
 }
-
+function showsospdf(sosid) {
+    $.post(__BASE_URL__ + "/formManagement/getsosformpdf", {sosid : sosid}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/formManagement/" + ar_result[1];
+        window.open(URL,'_blank');
+    });
+}
 function format12hrtime(timeval) {
     timeval = timeval.split(' ');
     var format = timeval[3];
     timeval = timeval[0]+' : '+timeval[2];
     return formattime(timeval)+' '+format;
+}
+function showcocpdf(cocid) {
+    $.post(__BASE_URL__ + "/formManagement/getcocformpdf", {cocid : cocid}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/formManagement/" + ar_result[1];
+        window.open(URL,'_blank');
+    });
 }

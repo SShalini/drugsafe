@@ -708,7 +708,7 @@ class Webservices_Model extends Error_Model
     function getuserdetails($userid)
     {
         $array = array('id' => (int)$userid, 'isDeleted' => 0);
-        $query = $this->db->select('id, szName, abn, szEmail, iRole, szContactNumber, szAddress, szZipCode, szCountry')
+        $query = $this->db->select('id, szName, abn, szEmail, iRole, szContactNumber, szAddress, szZipCode, szCity, szCountry')
             ->from(__DBC_SCHEMATA_USERS__)
             ->where($array)
             ->get();
@@ -735,9 +735,9 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getsosdatabycocid($cocid)
+    function getsosdatabycocid($cocid,$sosstatus=0,$cocstatus=0)
     {
-        $whereAry = 'donor.cocid =' . (int)$cocid . ' AND sos.Status = 0 AND donor.cocstatus = 0';
+        $whereAry = 'donor.cocid =' . (int)$cocid . ' AND sos.Status = '.$sosstatus.' AND donor.cocstatus = '.$cocstatus;
         $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
                                     sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                     sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
