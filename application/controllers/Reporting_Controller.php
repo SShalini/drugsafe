@@ -2389,6 +2389,7 @@ function excelfr_stockassignlist_Data()
             $searchAry =$_POST; 
 	    $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
         }
+       
 	$this->load->library('form_validation');
         
         $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');

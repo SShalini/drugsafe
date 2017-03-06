@@ -160,6 +160,9 @@ class Form_Management_Model extends Error_Model {
         if($_SESSION['drugsafe_user']['iRole']==5){
          $this->db->where('tbl_franchisee.operationManagerId', $_SESSION['drugsafe_user']['id']);   
         }
+         if($_SESSION['drugsafe_user']['iRole']==2){
+         $this->db->where('tbl_client.franchiseeId', $_SESSION['drugsafe_user']['id']);   
+        }
         $this->db->group_by('tbl_client.franchiseeId');
         $query = $this->db->get();
         //echo $sql = $this->db->last_query(); die();

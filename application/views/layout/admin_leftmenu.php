@@ -279,6 +279,12 @@
                                 <span class="title">Revenue Generate</span>
                             </a>
                         </li>
+                        <li class="nav-item  <?php if ($subpageName == 'revenue_summery_client') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Revenue Summary Client</span>
+                            </a>
+                        </li>
                     <li class="nav-item  <?php if ($subpageName == 'Client_Comparison_Report') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/clientcomparisonReport">
                             <i class="fa fa-ge" aria-hidden="true"></i>
