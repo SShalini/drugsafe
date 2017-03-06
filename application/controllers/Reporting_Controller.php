@@ -11,7 +11,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->library('pagination');
         $this->load->model('Ordering_Model');
-	    $this->load->model('Reporting_Model');
+	$this->load->model('Reporting_Model');
         $this->load->model('Forum_Model');
         $this->load->model('Error_Model');
         $this->load->model('Admin_Model');
@@ -2241,7 +2241,25 @@ function excelfr_stockassignlist_Data()
             $searchAry =$_POST; 
             
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$_POST['szFranchisee']);
-            
+            /*$getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $_POST['szFranchisee']);
+            $id=array();
+            foreach($getClientDeatils as $getClientData)
+            {   
+                array_push($id, $getClientData['clientId']);
+            }
+            $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
+            $sosId=array();
+            foreach($getSosDetails as $getSosData)
+            {   
+                array_push($sosId, $getSosData['id']);
+            }
+           
+            if(!empty($sosId))
+            {
+                $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
+            }
+             
+             */
         }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
@@ -2299,7 +2317,22 @@ function excelfr_stockassignlist_Data()
         {
             $searchAry =$_POST;
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$idfranchisee);
-          
+            /*$getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $idfranchisee);
+            $id=array();
+            foreach($getClientDeatils as $getClientData)
+            {   
+                array_push($id, $getClientData['clientId']);
+            }
+            $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
+            $sosId=array();
+            foreach($getSosDetails as $getSosData)
+            {   
+                array_push($sosId, $getSosData['id']);
+            }
+            if(!empty($sosId))
+            {
+                $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
+            }*/
         }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
@@ -2797,7 +2830,7 @@ function excelfr_stockassignlist_Data()
             $data['szMetaTagTitle'] = "Client Comparison Report";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
-            $data['subpageName'] = "Client_Comparison_Report";
+              $data['subpageName'] = "Client_Comparison_Report";
             $data['notification'] = $count;
             $data['compareresultarr'] = $comparisonResultArr;
             $data['data'] = $data;
@@ -2813,8 +2846,14 @@ function excelfr_stockassignlist_Data()
             $this->load->view('reporting/clientCmpReport');
             $this->load->view('layout/admin_footer');
         }
-    }
-    function getClientListByFrId($idFranchisee='')
+
+
+
+
+
+
+        }
+      function getClientListByFrId($idFranchisee='')
  	{ 
             if(trim($idFranchisee) != '')
             {
@@ -2822,7 +2861,7 @@ function excelfr_stockassignlist_Data()
             }
             
             $clientAry = $this->Franchisee_Model->viewClientList(true,$_POST['idFranchisee']);
-            $clientid = $_POST['idclient'];
+$clientid = $_POST['idclient'];
         $siteid = $_POST['idsite'];
         $result = '<select class="form-control custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
       	if(!empty($clientAry))
@@ -3087,7 +3126,7 @@ function excelfr_stockassignlist_Data()
            $this->session->unset_userdata('franchiseeName');
         $pdf->Output('stock-request-report.pdf', 'I');
     }
-    function industryReportOfXls()
+     function industryReportOfXls()
     {
         $dtStart = $this->input->post('dtStart');
         $dtEnd = $this->input->post('dtEnd');
@@ -3100,6 +3139,8 @@ function excelfr_stockassignlist_Data()
         
         echo "SUCCESS||||";
         echo "industryReportXls";
+
+
     }
     public function industryReportXls()
     {
