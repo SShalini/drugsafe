@@ -11,7 +11,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->library('pagination');
         $this->load->model('Ordering_Model');
-	$this->load->model('Reporting_Model');
+	    $this->load->model('Reporting_Model');
         $this->load->model('Forum_Model');
         $this->load->model('Error_Model');
         $this->load->model('Admin_Model');
@@ -2234,25 +2234,7 @@ function excelfr_stockassignlist_Data()
             $searchAry =$_POST; 
             
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$_POST['szFranchisee']);
-            /*$getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $_POST['szFranchisee']);
-            $id=array();
-            foreach($getClientDeatils as $getClientData)
-            {   
-                array_push($id, $getClientData['clientId']);
-            }
-            $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
-            $sosId=array();
-            foreach($getSosDetails as $getSosData)
-            {   
-                array_push($sosId, $getSosData['id']);
-            }
-           
-            if(!empty($sosId))
-            {
-                $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
-            }
-             
-             */
+            
         }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {

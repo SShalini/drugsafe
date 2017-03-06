@@ -125,8 +125,7 @@ class Reporting_Model extends Error_Model {
             $this->db->limit($limit, $offset);
             $this->db->order_by(__DBC_SCHEMATA_STOCK_REQ_TRACKING__.'.id DESC');
             $query = $this->db->get();
-//$sql = $this->db->last_query($query);
-// print_r($sql);die;
+
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -301,19 +300,15 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             if (!empty($searchq)) {
                $this->db->where($searchq);
                } 
-         
-           
-            $query = $this->db->get();
-//$sql = $this->db->last_query($query);
-// print_r($sql);die;
-            if($query->num_rows() > 0)
-            {
-                return $query->result_array();
-            }
-            else
-            {
-                    return array();
-            }
+          $query = $this->db->get();
+          if($query->num_rows() > 0)
+          {
+            return $query->result_array();
+          }
+          else
+          {
+            return array();
+          }
         }
         public function getSosAndClientDetils($searchAry=array())
         {
@@ -341,7 +336,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             $this->db->select_sum('NegativeAlcohol','totalNegativeAlcohol');
             $this->db->select_sum('PositiveAlcohol','totalPositiveAlcohol');
             $query = $this->db->get();
-            //echo $sql = $this->db->last_query();die();
+           
 
         if ($query->num_rows() > 0) {
              return $query->result_array();
@@ -392,7 +387,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
                             ->where('dtCreatedOn >=', $dtStart)
                             ->where('dtCreatedOn <=', $dtEnd)
                             ->get();
-            //echo $sql=$this->db->last_query();die();
+            
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -402,7 +397,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
                 return array();
             }
         }
-	function getSummeryRevenueManualalc($searchAry=array(),$franchiseeId)
+	     function getSummeryRevenueManualalc($searchAry=array(),$franchiseeId)
         {
         
             $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
@@ -416,8 +411,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
                             ->where('dtCreatedOn >=', $dtStart)
                             ->where('dtCreatedOn <=', $dtEnd)
                             ->get();
-	  //echo $sql=$this->db->last_query();die();
-            if($query->num_rows() > 0)
+	         if($query->num_rows() > 0)
             {
                 return $query->result_array();
             }
