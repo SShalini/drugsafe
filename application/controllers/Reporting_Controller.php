@@ -3537,15 +3537,14 @@ $clientid = $_POST['idclient'];
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
         {
             $searchAry =$_POST; 
-	    $franchiseeId=$this->Form_Management_Model->getAllsosFormDetailsforClient($searchAry);
+	        $franchiseeId=$this->Form_Management_Model->getAllsosFormDetailsforClient($searchAry);
         }
-       
         $clientlistArr =   $this->Reporting_Model->getAllClientCodeDetails(true, $_POST['szSearchClRecord2']);
       
        
 	$this->load->library('form_validation');
         
-        $this->form_validation->set_rules('szSearchFrRecord', 'Franchisee ', 'required');
+        $this->form_validation->set_rules('szSearchClRecord2', 'Franchisee ', 'required');
         $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
         $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
        
@@ -3556,13 +3555,12 @@ $clientid = $_POST['idclient'];
             $data['szMetaTagTitle'] = "Revenue Summary Client";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
-            $data['subpageName'] = "revenue_summery";
+            $data['subpageName'] = "revenue_summery_client";
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['clientlistArr'] = $clientlistArr;
             $data['searchAry'] = $_POST;
-	    $data['allfranchisee'] = $franchiseeId;
-            $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+	        $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummeryClient');
             $this->load->view('layout/admin_footer');
@@ -3572,7 +3570,7 @@ $clientid = $_POST['idclient'];
             $data['szMetaTagTitle'] = "Revenue Summary Client";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
-            $data['subpageName'] = "revenue_summery";
+            $data['subpageName'] = "revenue_summery_client";
             $data['notification'] = $count;
             $data['clientlistArr'] = $clientlistArr;
             $data['data'] = $data;
@@ -3598,7 +3596,7 @@ $clientid = $_POST['idclient'];
         if (!empty($clientAray)) {
             $result .= "<option value=''>Client Name</option>";
             foreach ($clientAray as $clientDetails) {
-                $result .= "<option value='" . $clientDetails['id'] . "'>" .$clientAray['userCode']."-" .$clientDetails['szName'] . "</option>";
+                $result .= "<option value='" . $clientDetails['id'] . "'>" .$clientDetails['userCode']."-" .$clientDetails['szName'] . "</option>";
             }
         } else {
             $result .= "<option value=''>Client Name</option>";

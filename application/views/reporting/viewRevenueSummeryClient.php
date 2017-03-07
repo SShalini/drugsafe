@@ -18,7 +18,7 @@
                     </li>
 
                     <li>
-                        <span class="active">Revenue Summary</span>
+                        <span class="active">Revenue Summary Client</span>
                     </li>
                 </ul>
 
@@ -28,7 +28,7 @@
                         <div class="caption">
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase">
-                                    Revenue Summary
+                                    Revenue Summary Client
                                 </span>
                         </div>
                         <?php if(!empty($allfranchisee)){?>
@@ -80,6 +80,7 @@
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Client Name</option>
                                             <?php
+
                                             foreach ($clientlistArr as $clientList) {
                                                 $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
 
@@ -168,6 +169,7 @@
                              </form>
                         </div>
                     </div>
+                    <?php echo validation_errors(); ?>
                     <?php
                     if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
                     {
@@ -314,6 +316,7 @@
                                                      
                                                      <td></td>
                                                      <td><b>Total</b></td>
+                                                     <td></td>>
                                                      <td>
                                                         <?php echo $allfranchiseeTotalRevenue;?>
                                                      </td>
