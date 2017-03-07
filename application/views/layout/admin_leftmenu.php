@@ -215,14 +215,14 @@
                                 <span class="title">Revenue Summary</span>
                             </a>
                         </li>
-                         <?php  if ($_SESSION['drugsafe_user']['iRole'] == 5) { ?>
+                    
                         <li class="nav-item  <?php if ($subpageName == 'revenue_summery_client') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery_client">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Revenue Summary Client</span>
                             </a>
                         </li>
-                         <?php  } ?>	
+                  
                         <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/prospect/prospect_summary_report">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
@@ -280,7 +280,7 @@
                             </a>
                         </li>
                         <li class="nav-item  <?php if ($subpageName == 'revenue_summery_client') { ?> active open <?php } ?>">
-                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery_client">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Revenue Summary Client</span>
                             </a>

@@ -55,25 +55,32 @@
                       </div>
                       <div class="row">
                              <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/prospect/franchiseeProspectRecord" name="szSearchClientRecord" method="post">
-                                  <div class="search col-md-3">
-                                      <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                                   <div class="col-md-3">
+                       
+                        <div class="form-group <?php if (!empty($arErrorMessages['szSearchfr']) != '') { ?>has-error<?php } ?>">
+                            <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onchange="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
-                                          <?php
-                                           if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                                            $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
-                                            }
-                                            else{
-                                                    $operationManagerId = $_SESSION['drugsafe_user']['id'];
-                                                     $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
-                                            }
-                                            foreach($searchOptionArr as $searchOptionList)
-                                                            {
-                                                $selected = ($searchOptionList['id'] == $_POST['szSearchFrRecord'] ? 'selected="selected"' : '');
-                                                echo '<option value="'.$searchOptionList['id'].'" ' . $selected . '>'.$searchOptionList['szName'].'</option>';
-                                            }
+                                        <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
+                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false); 
+                                   }
+                                   if($_SESSION['drugsafe_user']['iRole']==5 ){
+                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']); 
+                                   }
+                                       ?>   
+                                       <?php
+                                          foreach($searchOptionArr as $searchOptionList)
+                                          {
+                                              $selected = ($searchOptionList['id'] == $_POST['szSearchfr'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$searchOptionList['id'].'"' . $selected . ' >'.$searchOptionList['szName'].'</option>';
+                                          }
                                           ?>
-                                      </select>
-                                  </div>
+                           </select>
+                             <?php
+                               if(form_error('szSearchfr')){?>
+                               <span class="help-block pull-left"><span><?php echo form_error('szSearchfr');?></span>
+                             </span><?php }?> 
+                        </div>
+                    </div>
 
                                   <div class="col-md-1">
                                       <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>

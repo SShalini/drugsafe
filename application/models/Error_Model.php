@@ -526,5 +526,52 @@
 		{
 			return $this->db->escape_str($str);
 		}
+    public function getAllClientCodeDetails($parent = false, $franchiseId = '', $operationManagrrId = '')
+    {
+        if (!empty($operationManagrrId)) {
+            $whereAry = array('operationManagerId=' => $operationManagrrId, 'clientType=' => '0');
+            
+            $this->db->select('szName');
+            $this->db->distinct('szName');
+            $this->db->from('tbl_franchisee');
+            $this->db->join('tbl_client', 'tbl_franchisee.franchiseeId = tbl_client.franchiseeId');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+           
+            $this->db->where($whereAry);
+            $this->db->order_by("operationManagerId", "asc");
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+        } else {
+           
+            if ($franchiseId) {
+                $this->db->where('clientType', 0);
+            }
+            $whereAry = array('isDeleted=' => '0');
+
+
+            $this->db->select('*');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+
+          
+                $this->db->where($whereAry);
+         
+            $this->db->order_by("franchiseeId", "asc");
+            if ($parent) {
+                $this->db->where('clientType', 0);
+            }
+            if ($franchiseId) {
+                $this->db->where('franchiseeId', $franchiseId);
+            }
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+        }
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
+        }
+    }
 	}
 ?>

@@ -378,7 +378,7 @@ class Order_Controller extends CI_Controller
 
         $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
         $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
-        $validOrderIdforFr = $this->Order_Model->validOrderIdforFr();
+        //$validOrderIdforFr = $this->Order_Model->validOrderIdforFr();
         $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
 
         $this->load->library('form_validation');

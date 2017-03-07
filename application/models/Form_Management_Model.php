@@ -220,5 +220,43 @@ class Form_Management_Model extends Error_Model {
             return false;
         }
     }
+     public function getAllsosFormDetailsforClient($searchAry=array())
+    {    
+         $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+          $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+          if(strtotime($dtStart) > strtotime($dtEnd))
+            {
+                $this->addError("dtEnd","To Date should be greater than From Date.");
+                return false;
+            } 
+            
+           if(empty($searchAry['szSearchClRecord1'])){
+           $whereAry = array('tbl_manual_calc.dtCreatedOn >=' => $dtStart,'clientType !='=> '0','tbl_manual_calc.dtCreatedOn <=' =>$dtEnd, 'status=' => '1', 'tbl_client.franchiseeId =' =>$searchAry['szSearchClRecord2']);
+           }
+            else{
+              $whereAry = array('tbl_manual_calc.dtCreatedOn >=' => $dtStart,'clientType !='=>'0','tbl_manual_calc.dtCreatedOn <=' =>$dtEnd, 'status=' => '1', 'tbl_client.franchiseeId =' =>$searchAry['szSearchClRecord2'],'clientType =' => $searchAry['szSearchClRecord1']);    
+            }
+        
+       
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_SOS_FORM__,'tbl_client',__DBC_SCHEMATA_FRANCHISEE__,__DBC_SCHEMATA_USERS__);
+        $this->db->join('ds_sos', 'tbl_manual_calc.sosid = ds_sos.id');
+        $this->db->join('tbl_client', 'ds_sos.Clientid = tbl_client.clientId');
+        $this->db->join('tbl_franchisee', 'tbl_client.franchiseeId = tbl_franchisee.franchiseeId');
+        $this->db->join('ds_user', 'tbl_client.clientType = ds_user.id');
+       
+         $this->db->where($whereAry);   
+       
+//        $this->db->group_by('tbl_client.franchiseeId');
+        $query = $this->db->get();
+//    echo $sql = $this->db->last_query(); die();
+        if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+                return $row;
+        } else {
+            return array();
+        
+        }
+    }
 }
 ?>

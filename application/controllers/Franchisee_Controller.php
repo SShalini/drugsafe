@@ -554,13 +554,13 @@ class Franchisee_Controller extends CI_Controller
 
         if ($id > 0) {
             if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                $clientAray = $this->Franchisee_Model->getAllClientDetails(true, false, false, false, false, false, $id);
+                $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$id, false, false, false, false);
             } else {
                 $operationManagerId = $_SESSION['drugsafe_user']['id'];
-                $clientAray = $this->Franchisee_Model->getAllClientDetails(true, false, $operationManagerId, false, false, false, $id);
+                $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$id, $operationManagerId, false, false, false);
             }
             if (!empty($clientAray)) {
-                $this->session->set_userdata('id', $id);
+                $this->session->set_userdata('id',$id);
                 redirect(base_url('/franchisee/clientRecord'));
 
             }
@@ -579,7 +579,10 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('layout/admin_footer');
     }
 
-    function clientRecord()
+   
+       
+    
+ function clientRecord()
     {
 
         $is_user_login = is_user_login($this);
@@ -604,16 +607,15 @@ class Franchisee_Controller extends CI_Controller
         if (isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])) {
             $idFr = $_POST['szSearchClRecord2'];
         }
+        else{
+           $idFr = $id; 
+        }
+        
         if (isset($_POST['szSearchClRecord1']) && !empty($_POST['szSearchClRecord1'])) {
             $ClientName = $_POST['szSearchClRecord1'];
         }
         // handle pagination
-        if ($_POST['szSearchClRecord1']) {
-            $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $idFr);
-
-        }
-
-
+    
         $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
         if ($_SESSION['drugsafe_user']['iRole'] == '1') {
             if (!empty($idFr) && !empty($ClientName)) {
@@ -622,84 +624,53 @@ class Franchisee_Controller extends CI_Controller
 
 
                 if (!empty($idFr)) {
-                    $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $limit, $offset, $searchAry, $idFr));
+                    $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $idFr, $operationManagrrId, $limit, $offset, $searchAry));
                 } elseif (!empty($idClient)) {
-                    $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $limit, $offset, $searchAry, $ClientName, 1));
+                    $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, false, $operationManagrrId, $limit, $offset, $searchAry, $ClientName, 1));
                 } else {
                   
-                    $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $limit, $offset, $searchAry, $idFrSession));
+                    $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $idFr, $operationManagrrId, $limit, $offset, $searchAry));
 
                 }
             }
         } else {
-            $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $limit, $offset, $searchAry, $ClientName, 1));
+            $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true,$idFr, $operationManagrrId, $limit, $offset, $searchAry, $ClientName, 1));
         }
 
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
-
-        $this->pagination->initialize($config);
-        if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-            if (!empty($idFr) && !empty($idClient)) {
+         $this->pagination->initialize($config);
+        if (($_SESSION['drugsafe_user']['iRole'] == '1')|| ($_SESSION['drugsafe_user']['iRole'] == '5')) {
+            if (!empty($idFr) && !empty($ClientName)) {
                 $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $idFr, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $ClientName, 2);
             } else {
-
-
                 if (!empty($idFr)) {
                     $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $idFr, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, false);
-                } elseif (!empty($idClient)) {
-                    $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $ClientName, 1);
+                } elseif (!empty($ClientName)) {
+                    $clientAray = $this->Franchisee_Model->getAllClientDetails(true, false, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $ClientName, 1);
 
                 } else {
 
-                    $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $id, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, false);
+                    $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $idFr, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, false);
                 }
             }
-        } else {
-            $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $ClientName, 1);
-            /*if ($_SESSION['drugsafe_user']['iRole'] == '2') {
-                $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $idClient, 1);
-                if($_SESSION['drugsafe_user']['sztype']=='1'){
-                    $getmappedfrs = $this->Franchisee_Model->getMappedFranchisees($franchiseId);
-                    //print_r($getmappedfrs);
-                    if(!empty($getmappedfrs)){
-                        foreach ($getmappedfrs as $getmappedfr) {
-                            $newrecarr = $this->Franchisee_Model->getAllClientDetails(true, $getmappedfr['franchiseeid'], $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $idClient, 1);
-                            // print_r($newrecarr);
-                            if(!empty($newrecarr)){
-                                $clientAray = array_merge($clientAray,$newrecarr);
-                            }
-                        }
-
-                    }
-                }
-            }*/
         }
-
-        if ($_SESSION['drugsafe_user']['iRole'] == '2') {
+        
+        else {
+            $clientAray = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId, $operationManagrrId, $config['per_page'], $this->uri->segment(3), $searchAry, $ClientName, 1);
+         
+        }
+        
+         if ($_SESSION['drugsafe_user']['iRole'] == '2') {
             $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true, $franchiseId);
-            /*if($_SESSION['drugsafe_user']['sztype']=='1'){
-                $getmappedfrs = $this->Franchisee_Model->getMappedFranchisees($franchiseId);
-                //print_r($getmappedfrs);
-                if(!empty($getmappedfrs)){
-                    foreach ($getmappedfrs as $getmappedfr) {
-                        $newrecarr = $this->Franchisee_Model->getAllClientDetails(true, $getmappedfr['franchiseeid']);
-                       // print_r($newrecarr);
-                        if(!empty($newrecarr)){
-                            $clientlistArr = array_merge($clientlistArr,$newrecarr);
-
-                        }
-                    }
-
-                }
-            }*/
-        }/*
-        print_r($clientlistArr);*/
+        }
+        
         if ($_SESSION['drugsafe_user']['iRole'] == '5') {
             $clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true, '', $operationManagrrId);
 
         }
-        if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+        
+         if ($_SESSION['drugsafe_user']['iRole'] == '1') {
             if (!empty($idFr)) {
                 $clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true, $idFr);
                 $this->session->set_userdata('idFr', $idFr);
@@ -711,12 +682,14 @@ class Franchisee_Controller extends CI_Controller
 
 
         }
-
+        
+        
         if (!empty($_POST)) {
             $_POST['szSearchClRecord2'] = $_POST['szSearchClRecord2'];
         } else {
             $_POST['szSearchClRecord2'] = $id;
         }
+        
         $data['searchOptionArr']=$searchOptionArr;
         $data['clientAry'] = $clientAray;
         $data['id'] = $id;
@@ -727,11 +700,12 @@ class Franchisee_Controller extends CI_Controller
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
-        $this->load->view('layout/admin_header', $data);
+
+       $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientRecord');
         $this->load->view('layout/admin_footer');
-    }
 
+   }
     function viewFranchiseeData()
     {
         $idOperationManager = $this->input->post('idOperationManager');
@@ -1067,11 +1041,11 @@ class Franchisee_Controller extends CI_Controller
 
         $clientAray = $this->Franchisee_Model->getAllDistinctClientDetails(true, $_POST['idFranchisee']);
 
-        $result = "<select class=\"form-control custom-select required\" id=\"szSearchClRecord1\" name=\"szSearchClRecord1\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\">";
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearchClientname\" name=\"szSearchClRecord1\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\">";
         if (!empty($clientAray)) {
             $result .= "<option value=''>Client Name</option>";
             foreach ($clientAray as $clientDetails) {
-                $result .= "<option value='" . $clientDetails['id'] . "'>" . $clientDetails['szName'] . "</option>";
+                $result .= "<option value='" . $clientDetails['szName'] . "'>" . $clientDetails['szName'] . "</option>";
             }
         } else {
             $result .= "<option value=''>Client Name</option>";

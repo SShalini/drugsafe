@@ -2848,11 +2848,6 @@ function excelfr_stockassignlist_Data()
             $this->load->view('layout/admin_footer');
         }
 
-
-
-
-
-
         }
       function getClientListByFrId($idFranchisee='')
  	{ 
@@ -3527,6 +3522,90 @@ $clientid = $_POST['idclient'];
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
+    }
+     public function view_revenue_summery_client()
+    {
+        $count = $this->Admin_Model->getnotification();
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+		
+        if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
+        {
+            $searchAry =$_POST; 
+	    $franchiseeId=$this->Form_Management_Model->getAllsosFormDetailsforClient($searchAry);
+        }
+       
+        $clientlistArr =   $this->Reporting_Model->getAllClientCodeDetails(true, $_POST['szSearchClRecord2']);
+      
+       
+	$this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('szSearchFrRecord', 'Franchisee ', 'required');
+        $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
+        $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
+       
+        $this->form_validation->set_message('required', '{field} is required');
+        if ($this->form_validation->run() == FALSE) {
+            
+           
+            $data['szMetaTagTitle'] = "Revenue Summary Client";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "revenue_summery";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['clientlistArr'] = $clientlistArr;
+            $data['searchAry'] = $_POST;
+	    $data['allfranchisee'] = $franchiseeId;
+            $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/viewRevenueSummeryClient');
+            $this->load->view('layout/admin_footer');
+
+        } else {
+        
+            $data['szMetaTagTitle'] = "Revenue Summary Client";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "revenue_summery";
+            $data['notification'] = $count;
+            $data['clientlistArr'] = $clientlistArr;
+            $data['data'] = $data;
+            $data['searchAry'] = $_POST;
+	    $data['allfranchisee'] = $franchiseeId;
+            $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/viewRevenueSummeryClient');
+            $this->load->view('layout/admin_footer');
+
+
+        }
+    }
+   public function getClientCodeListByFrIdData($idFranchisee = '')
+    {
+        if (trim($idFranchisee) != '') {
+            $_POST['idFranchisee'] = $idFranchisee;
+        }
+
+        $clientAray = $this->Reporting_Model->getAllClientCodeDetails(true, $_POST['idFranchisee']);
+
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearchClientname\" name=\"szSearchClRecord1\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\">";
+        if (!empty($clientAray)) {
+            $result .= "<option value=''>Client Name</option>";
+            foreach ($clientAray as $clientDetails) {
+                $result .= "<option value='" . $clientDetails['id'] . "'>" .$clientAray['userCode']."-" .$clientDetails['szName'] . "</option>";
+            }
+        } else {
+            $result .= "<option value=''>Client Name</option>";
+        }
+        $result .= "</select>";
+        echo $result;
+    
     }
 }
 ?>

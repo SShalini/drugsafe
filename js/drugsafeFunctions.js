@@ -1802,7 +1802,7 @@ function getClientListByFrId(idFranchisee) {
         if (result != '') {
             $("#szClient").empty();
             $("#szClient").html(result);
-            $("#szSearchClRecord1").customselect();
+            $("#szSearchClientname").customselect();
         }
     });
 }
@@ -2873,5 +2873,14 @@ function ViewexcelSalesCrmReport(franchiseeId,status) {
      var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
         window.open(URL,'_blank');
 
+    });
+}
+function getClientCodeListByFrId(idFranchisee) {
+    $.post(__BASE_URL__ + "/reporting/getClientCodeListByFrIdData", {idFranchisee: idFranchisee}, function (result) {
+        if (result != '') {
+            $("#szClient").empty();
+            $("#szClient").html(result);
+            $("#szSearchClientname").customselect();
+        }
     });
 }

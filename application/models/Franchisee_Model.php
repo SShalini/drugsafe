@@ -222,7 +222,7 @@ class Franchisee_Model extends Error_Model
 
     public function viewClientList($parent = false, $idfranchisee = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $id = 0)
     {
-
+echo"$idfranchisee";
 
         $whereAry = array('franchiseeId' => $idfranchisee, 'isDeleted=' => '0');
         $searchq = '';
@@ -296,7 +296,7 @@ class Franchisee_Model extends Error_Model
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
         } else {
-            if ($id > '0') {
+            if (!empty($ClientName)) {
 
                 if ($_SESSION['drugsafe_user']['iRole'] == 1) {
                     if ($flag == 1) {
@@ -342,7 +342,7 @@ class Franchisee_Model extends Error_Model
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
         }
-
+       
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {

@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Reporting_Model extends Error_Model {
     
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
      public function getAllQtyRequestDetails($searchAry = '',$limit=__PAGINATION_RECORD_LIMIT__,$offset=0,$searchItemData='',$flag='0')
         {
      
@@ -365,30 +370,30 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             ->where($wherestr)
             ->group_by($groupbystr)
             ->get();
-        if ($query->num_rows() > 0) {
+         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
             return array();
-
         }
     }
-        function getAllRevenueManualalc($searchAry=array(),$franchiseeId)
+        function getAllRevenueManualalc($searchAry=array(),$franchiseeId,$clientId)
         {
            
             $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
             $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
             $whereAry = array('clientType!='=>'0','status='=>'1'); 
-            $query=$this->db->select( '*')
-                            ->from(__DBC_SCHEMATA_CLIENT__)
-                            ->join(__DBC_SCHEMATA_SOS_FORM__, __DBC_SCHEMATA_SOS_FORM__ . '.Clientid = ' . __DBC_SCHEMATA_CLIENT__ . '.clientId')
-                            ->join(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_MANUAL_CAL__ . '.sosid = ' . __DBC_SCHEMATA_SOS_FORM__ . '.id')
-                            ->where($whereAry)
-                            ->where('franchiseeId',$franchiseeId)
-                            ->where('dtCreatedOn >=', $dtStart)
-                            ->where('dtCreatedOn <=', $dtEnd)
-                            ->get();
+                        $this->db->select( '*');
+                            $this->db->from(__DBC_SCHEMATA_CLIENT__);
+                            $this->db->join(__DBC_SCHEMATA_SOS_FORM__, __DBC_SCHEMATA_SOS_FORM__ . '.Clientid = ' . __DBC_SCHEMATA_CLIENT__ . '.clientId');
+                            $this->db->join(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_MANUAL_CAL__ . '.sosid = ' . __DBC_SCHEMATA_SOS_FORM__ . '.id');
+                            $this->db ->where($whereAry);
+                            $this->db->where('franchiseeId',$franchiseeId);
+                            $this->db->where('clientType',$clientId);
+                            $this->db ->where('dtCreatedOn >=', $dtStart);
+                            $this->db->where('dtCreatedOn <=', $dtEnd);
+                          $query =  $this->db->get();
             
-            if($query->num_rows() > 0)
+             if($query->num_rows() > 0)
             {
                 return $query->result_array();
             }
