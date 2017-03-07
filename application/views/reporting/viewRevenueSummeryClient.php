@@ -80,7 +80,6 @@
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Client Name</option>
                                             <?php
-
                                             foreach ($clientlistArr as $clientList) {
                                                 $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
 
@@ -169,7 +168,6 @@
                              </form>
                         </div>
                     </div>
-                    <?php echo validation_errors(); ?>
                     <?php
                     if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
                     {
@@ -311,12 +309,12 @@
                                                 
                                                     <?php
                                                  }
-						?>
+						                      ?>
                                                   <tr>
                                                      
                                                      <td></td>
                                                      <td><b>Total</b></td>
-                                                     <td></td>>
+                                                     <td></td>
                                                      <td>
                                                         <?php echo $allfranchiseeTotalRevenue;?>
                                                      </td>
