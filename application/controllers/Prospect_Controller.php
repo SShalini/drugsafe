@@ -901,11 +901,7 @@ public function deleteProspectConfirmation()
            
             $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearchfr', 'Franchisee Name ', 'required');
-            if($_POST['szSearch3'])
-            {
-                $productAry = $this->Inventory_Model->getProductByCategory(trim($catid));
-               
-            }
+           
             
             $this->form_validation->set_message('required', '{field} is required');
             if ($this->form_validation->run() == FALSE)
@@ -1050,7 +1046,7 @@ public function deleteProspectConfirmation()
     {
         $this->load->library('excel');
         $filename = 'Report';
-        $title = 'Sales CRM Report';
+        $title = 'Sales CRM Summary Report';
         $file = $filename . '-' . $title ; //save our workbook as this file name
 
 
@@ -1132,6 +1128,270 @@ public function deleteProspectConfirmation()
         $this->session->unset_userdata('status');
          $this->session->unset_userdata('franchiseeId');
 //force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    } 
+     public function sales_crm_detailed_report()
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+           $count = $this->Admin_Model->getnotification();
+           $searchAry = $_POST;
+           $franchiseeid = $_POST['szSearch3'];
+           $startDate = $_POST['szSearch1'];
+           $endDate = $_POST['szSearch2'];
+           $status = $_POST['szSearch4'];
+           
+           if($_POST){
+             $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status);   
+           }
+            $this->load->library('form_validation');
+            $this->form_validation->set_rules('szSearch1', 'Start Date ', 'required');
+            $this->form_validation->set_rules('szSearch2', 'End Date ', 'required');
+            $this->form_validation->set_rules('szSearch3', 'Franchisee Name ', 'required');
+            
+            
+            $this->form_validation->set_message('required', '{field} is required');
+            if ($this->form_validation->run() == FALSE)
+            { 
+                    $data['szMetaTagTitle'] = "Sales CRM Summary Report";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Prospect_Record";
+                    $data['subpageName'] = "SALES_CRM_Summary_Report";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['productAry']=$productAry;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('prospect/salesCrmDetailedReport');
+            $this->load->view('layout/admin_footer'); 
+            }
+            else
+            { 
+                    $data['recordAry'] = $recordAry; 
+                    $data['szMetaTagTitle'] = "Sales CRM Summary Report";
+                    $data['is_user_login'] = $is_user_login;
+                    $data['pageName'] = "Prospect_Record";
+                    $data['subpageName'] = "SALES_CRM_Summary_Report";
+                    $data['notification'] = $count;
+                    $data['data'] = $data;
+                    $data['productAry']=$productAry;
+                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+
+            $this->load->view('layout/admin_header',$data);
+            $this->load->view('prospect/salesCrmDetailedReport');
+            $this->load->view('layout/admin_footer'); 
+    }
+     
+               
+    }
+      function View_pdf_Sales_Crm_Detailed_Report()
+        {
+        $startDate = $this->input->post('startDate');
+        $endDate = $this->input->post('endDate');
+        $franchiseeId = $this->input->post('franchiseeId');
+        $status = $this->input->post('status');
+        $this->session->set_userdata('endDate',$endDate);
+        $this->session->set_userdata('startDate',$startDate);
+        $this->session->set_userdata('status',$status);
+        $this->session->set_userdata('franchiseeId',$franchiseeId);
+        echo "SUCCESS||||";
+        echo "viewpdfsalesCRMDetailed";
+            
+ 
+        }
+    public function viewpdfsalesCRMDetailed()
+    {
+       ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe Sales CRM Detailed Report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Sales CRM Detailed Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+       $pdf->AddPage('L');
+        
+       $franchiseeId = $this->session->userdata('franchiseeId');
+       $status = $this->session->userdata('status');
+       $startDate = $this->session->userdata('startDate');
+       $endDate = $this->session->userdata('endDate');
+        
+    
+        
+        $html = '       
+       <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Sales CRM Detailed Report</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                   
+                                         <th style="width:70px"><b> Sr No.</b></th>
+                                         <th style="width:150px"><b> Franchisee Name </b> </th>
+                                         <th style="width:150px"><b>Business Name</b> </th>
+                                         <th style="width:150px"><b>Contact Name</b> </th>
+                                         <th style="width:150px"><b>Email</b> </th>
+                                        <th style="width:150px"><b>Status</b> </th>
+                                        <th style="width:170px"> <b>Status Updated On</b> </th>
+                                   
+                                   </tr>';
+         $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeId,$startDate,$endDate,$status);   
+        if ($recordAry) {
+            $i = 0;
+            foreach ($recordAry as $recordData) {
+              
+               $i++;
+                $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $recordData['iFranchiseeId']);
+                $dt_last_updated_status =     date('d M Y',strtotime($recordData['dtUpdatedOn'])) . ' at '.date('h:i A',strtotime($recordData['dtUpdatedOn']));
+                
+                $html .= '<tr>
+                                            <td> ' . $i . ' </td>
+                                            <td> ' . $franchiseeArr['szName'] . '</td>
+                                            <td> ' . $recordData['szBusinessName'] . ' </td>
+                                            <td> ' . $recordData['szName'] . ' </td>
+                                            <td>' . $recordData['szEmail'] . ' </td>
+                                            <td>' . ($recordData['status']=='1'?'Pre Discovery':($recordData['status']=='2'?'Discovery Meeting':($recordData['status']=='3'?'In Progress' :($recordData['status']=='4'?'Non Convertible' :($recordData['status']=='5'?'Contact Later':($recordData['status']=='6'?'Closed Sale':'')))))) . ' </td>
+                                            <td> ' . $dt_last_updated_status. '  </td>
+                                        </tr>';
+            }
+        }
+        $i++;
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+        ob_end_clean();
+         $this->session->unset_userdata('status');
+         $this->session->unset_userdata('franchiseeId');
+         $this->session->unset_userdata('startDate');
+         $this->session->unset_userdata('endDate');
+       $pdf->Output('Sales_CRM_Detailed_Report.pdf', 'I');
+    }
+     function View_xls_Sales_Crm_Detailed_Report()
+        {
+        $startDate = $this->input->post('startDate');
+        $endDate = $this->input->post('endDate');
+        $franchiseeId = $this->input->post('franchiseeId');
+        $status = $this->input->post('status');
+        $this->session->set_userdata('endDate',$endDate);
+        $this->session->set_userdata('startDate',$startDate);
+        $this->session->set_userdata('status',$status);
+        $this->session->set_userdata('franchiseeId',$franchiseeId);
+        echo "SUCCESS||||";
+                echo "excel_sales_crm_detailed_report";
+            
+ 
+        }
+    public function excel_sales_crm_detailed_report()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Sales CRM Detailed Report';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', 'Sr No.');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee Name');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Business Name');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Email');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Status');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+         $this->excel->getActiveSheet()->setCellValue('G1', 'Status Updated On');
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        
+        $franchiseeId = $this->session->userdata('franchiseeId');
+       $status = $this->session->userdata('status');
+       $startDate = $this->session->userdata('startDate');
+       $endDate = $this->session->userdata('endDate');
+          $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeId,$startDate,$endDate,$status);   
+        $x=0;
+         if ($recordAry) {
+           
+            $i = 2;
+            foreach($recordAry as $item){
+                  $x++;
+                $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $item['iFranchiseeId']);
+                $dt_last_updated_status =     date('d M Y',strtotime($item['dtUpdatedOn'])) . ' at '.date('h:i A',strtotime($item['dtUpdatedOn']));
+                
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeArr['szName']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szBusinessName']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szName']);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['szEmail']);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i, ($item['status']=='1'?'Pre Discovery':($item['status']=='2'?'Discovery Meeting':($item['status']=='3'?'In Progress' :($item['status']=='4'?'Non Convertible' :($item['status']=='5'?'Contact Later':($item['status']=='6'?'Closed Sale':'')))))));
+                $this->excel->getActiveSheet()->setCellValue('G'.$i, $dt_last_updated_status);
+                
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $this->session->unset_userdata('status');
+         $this->session->unset_userdata('franchiseeId');
+//force user to download the Excel file without writing it to server's HD
+          $this->session->unset_userdata('status');
+          $this->session->unset_userdata('franchiseeId');
+          $this->session->unset_userdata('startDate');
+          $this->session->unset_userdata('endDate');
         $objWriter->save('php://output');
     } 
 }

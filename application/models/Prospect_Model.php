@@ -651,13 +651,13 @@ class Prospect_Model extends Error_Model
     
     $time1DataAry = explode(' ',$timeDataAry['1']);
    if($time1DataAry=='AM'){
-    $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' '.$timeDataAry['0'].':'.$time1DataAry['0'].':'.'00';  
+    $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' ';  
    
     }
    else{
        $value =$timeDataAry['0'] ;
        $time = 12+$value;
-       $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' '.$time.':'.$time1DataAry['0'].':'.'00';  
+       $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' ';  
    
        
    }
@@ -749,6 +749,28 @@ class Prospect_Model extends Error_Model
                return false;
            }
        }
+    }
+     function getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+    {  
+           $dtStart = $this->getSqlFormattedDate($startDate);
+           $dtEnd = $this->getSqlFormattedDate($endDate);
+           $whereAry = array('iFranchiseeId' =>$franchiseeid,'tbl_prospect_status.dtUpdatedOn >='=>$dtStart.'00:00:00','tbl_prospect_status.dtUpdatedOn <='=>$dtEnd.'23:59:59'.($status>0?' AND status = '.(int)$status:''));
+          
+           $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNo');
+           $this->db->from('tbl_prospect_status');
+           $this->db->join('tbl_prospect', 'tbl_prospect_status.prospectId = tbl_prospect.id');
+           $this->db ->order_by("prospectId","desc") ;
+           $this->db->where($whereAry);
+           $this->db->limit($limit, $offset);
+           $query =  $this->db  ->get();
+//      $q = $this->db->last_query();
+//        echo $q; die;
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return array();
+        }
     }
 }
 ?>

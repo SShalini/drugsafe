@@ -2884,3 +2884,20 @@ function getClientCodeListByFrId(idFranchisee) {
         }
     });
 }
+function ViewpdfSalesCrmDetailedReport(startDate,endDate,franchiseeId,status) {
+    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Detailed_Report", {startDate:startDate,endDate:endDate,franchiseeId: franchiseeId,status:status}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+
+function ViewexcelSalesCrmDetailedReport(startDate,endDate,franchiseeId,status) {
+     $.post(__BASE_URL__ + "/prospect/View_xls_Sales_Crm_Detailed_Report", {startDate:startDate,endDate:endDate,franchiseeId: franchiseeId,status:status}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}

@@ -376,7 +376,8 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             return array();
         }
     }
-        function getAllRevenueManualalc($searchAry=array(),$franchiseeId='',$clientId='')
+       
+        function getAllRevenueManualalc($searchAry=array(),$franchiseeId,$clientId='')
         {
            
            if($clientId)

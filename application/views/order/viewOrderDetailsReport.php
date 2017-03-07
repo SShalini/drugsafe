@@ -226,12 +226,7 @@
                                                </span>
                                             </div>
                                             <!-- /input-group -->
-                                            <?php
-                                            if (form_error('szSearch4')) {
-                                                ?>
-                                                <span class="help-block pull-left">
-                                                <span><?php echo form_error('szSearch4'); ?></span>
-                                                </span><?php } ?>
+                                           
                                             <?php if (!empty($arErrorMessages['szSearch4'])) { ?>
                                                 <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
@@ -257,12 +252,7 @@
                                                </span>
                                             </div>
                                             <!-- /input-group -->
-                                            <?php
-                                            if (form_error('szSearch5')) {
-                                                ?>
-                                                <span class="help-block pull-left">
-                                                <span><?php echo form_error('szSearch5'); ?></span>
-                                                </span><?php } ?>
+                                           
                                             <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
                                                 <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
