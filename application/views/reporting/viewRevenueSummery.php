@@ -173,7 +173,7 @@
                                                     $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$allfranchiseeData['franchiseeId']);
                                                     $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
-						    $totalRevenu='';
+						                               $totalRevenu='';
                                                     $totalRoyaltyfees='';
                                                     $totalNetProfit='';
 													

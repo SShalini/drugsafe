@@ -2241,25 +2241,7 @@ function excelfr_stockassignlist_Data()
             $searchAry =$_POST; 
             
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$_POST['szFranchisee']);
-            /*$getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $_POST['szFranchisee']);
-            $id=array();
-            foreach($getClientDeatils as $getClientData)
-            {   
-                array_push($id, $getClientData['clientId']);
-            }
-            $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
-            $sosId=array();
-            foreach($getSosDetails as $getSosData)
-            {   
-                array_push($sosId, $getSosData['id']);
-            }
-           
-            if(!empty($sosId))
-            {
-                $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
-            }
-             
-             */
+            
         }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
@@ -2317,22 +2299,7 @@ function excelfr_stockassignlist_Data()
         {
             $searchAry =$_POST;
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$idfranchisee);
-            /*$getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $idfranchisee);
-            $id=array();
-            foreach($getClientDeatils as $getClientData)
-            {   
-                array_push($id, $getClientData['clientId']);
-            }
-            $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
-            $sosId=array();
-            foreach($getSosDetails as $getSosData)
-            {   
-                array_push($sosId, $getSosData['id']);
-            }
-            if(!empty($sosId))
-            {
-                $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
-            }*/
+           
         }
         $this->form_validation->set_message('required', '{field} is required');
         if ($this->form_validation->run() == FALSE) {
@@ -2387,7 +2354,7 @@ function excelfr_stockassignlist_Data()
         if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
         {
             $searchAry =$_POST; 
-	    $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
+	       $franchiseeId=$this->Form_Management_Model->getAllsosFormDetails($searchAry);
         }
        
 	$this->load->library('form_validation');
@@ -2407,7 +2374,7 @@ function excelfr_stockassignlist_Data()
             $data['data'] = $data;
             $data['getSummeryManualCalcStartToEndDate']=$getSummeryManualCalcStartToEndDate;
             $data['searchAry'] = $_POST;
-	    $data['allfranchisee'] = $franchiseeId;
+	        $data['allfranchisee'] = $franchiseeId;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummery');
@@ -2490,30 +2457,13 @@ function excelfr_stockassignlist_Data()
                 $allfranchiseetotalRoyaltyfees='';
                 $allfranchiseetotalNetProfit='';
             foreach ($allfranchisee as $allfranchiseeData) {
-                 $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
+                 $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$allfranchiseeData['franchiseeId']);
+                                                    $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
-						    //$getClientDeatils=$this->Webservices_Model->getclientdetails($allfranchiseeData);
-                                                    $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData['franchiseeId']);
-                                                    $id=array();
-                                                    foreach($getClientDeatils as $getClientData)
-                                                    {   
-                                                        array_push($id, $getClientData['clientId']);
-                                                    }
-													
-                                                    $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
-                                                    $sosId=array();
-                                                    foreach($getSosDetails as $getSosData)
-                                                    {   
-                                                        array_push($sosId, $getSosData['id']);
-                                                    }
-													
-                                                    if(!empty($sosId))
-                                                    {
-                                                        $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
-                                                    }
-													$totalRevenu='';
+                                                       $totalRevenu='';
                                                     $totalRoyaltyfees='';
                                                     $totalNetProfit='';
+
 						    foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
                                                         $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
@@ -2667,29 +2617,13 @@ function excelfr_stockassignlist_Data()
                 $allfranchiseetotalNetProfit='';
                 
             foreach ($allfranchisee as $allfranchiseeData) {
-                 $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
+                $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$allfranchiseeData['franchiseeId']);
+                                                    $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
                                                     
-						   $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '',$allfranchiseeData['franchiseeId']);
-                                                    $id=array();
-                                                    foreach($getClientDeatils as $getClientData)
-                                                    {   
-                                                        array_push($id, $getClientData['clientId']);
-                                                    }
-													
-                                                    $getSosDetails=$this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
-                                                    $sosId=array();
-                                                    foreach($getSosDetails as $getSosData)
-                                                    {   
-                                                        array_push($sosId, $getSosData['id']);
-                                                    }
-													
-                                                    if(!empty($sosId))
-                                                    {
-                                                        $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry,$sosId);
-                                                    }
-													$totalRevenu='';
+                                                       $totalRevenu='';
                                                     $totalRoyaltyfees='';
                                                     $totalNetProfit='';
+
 						    foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
                                                         $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
@@ -3534,10 +3468,17 @@ $clientid = $_POST['idclient'];
             die;
         }
 		
-        if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
+       if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szSearchClRecord2']!='')
         {
             $searchAry =$_POST; 
-	        $franchiseeId=$this->Form_Management_Model->getAllsosFormDetailsforClient($searchAry);
+
+            if($_POST['szSearchClRecord1'])
+            {
+               $clientId=$_POST['szSearchClRecord1'];
+            }
+            
+            $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$_POST['szSearchClRecord2'],$clientId);
+            
         }
         $clientlistArr =   $this->Reporting_Model->getAllClientCodeDetails(true, $_POST['szSearchClRecord2']);
       
@@ -3575,7 +3516,7 @@ $clientid = $_POST['idclient'];
             $data['clientlistArr'] = $clientlistArr;
             $data['data'] = $data;
             $data['searchAry'] = $_POST;
-	    $data['allfranchisee'] = $franchiseeId;
+	        $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummeryClient');

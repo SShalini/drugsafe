@@ -376,9 +376,13 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             return array();
         }
     }
-        function getAllRevenueManualalc($searchAry=array(),$franchiseeId,$clientId)
+        function getAllRevenueManualalc($searchAry=array(),$franchiseeId='',$clientId='')
         {
            
+           if($clientId)
+           {
+                  $this->db->where('clientType',$clientId);
+           }
             $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
             $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
             $whereAry = array('clientType!='=>'0','status='=>'1'); 
@@ -388,8 +392,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
                             $this->db->join(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_MANUAL_CAL__ . '.sosid = ' . __DBC_SCHEMATA_SOS_FORM__ . '.id');
                             $this->db ->where($whereAry);
                             $this->db->where('franchiseeId',$franchiseeId);
-                            $this->db->where('clientType',$clientId);
-                            $this->db ->where('dtCreatedOn >=', $dtStart);
+                           $this->db ->where('dtCreatedOn >=', $dtStart);
                             $this->db->where('dtCreatedOn <=', $dtEnd);
                           $query =  $this->db->get();
             

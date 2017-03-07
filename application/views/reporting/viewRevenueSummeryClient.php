@@ -172,7 +172,7 @@
                     if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
                     {
                         
-                    if (!empty($allfranchisee)) {
+                    if (!empty($getManualCalcStartToEndDate)) {
                         
                       
                     ?>
@@ -182,7 +182,7 @@
                                 <div class="portlet green-meadow box">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-users"></i>Revenue Summary
+                                            <i class="fa fa-users"></i>Revenue Summary Client
 
                                         </div>
 
@@ -215,27 +215,19 @@
                                                 </thead>
                                                 <tbody>
                                                 <?php
-						$i = 1;
-                                                $allfranchiseeTotalRevenue='';
-                                                $allfranchiseetotalRoyaltyfees='';
-                                                $allfranchiseetotalNetProfit='';
 												
-						foreach($allfranchisee as $allfranchiseeData)
-						{ 
-                                                
-                                                    $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$allfranchiseeData['franchiseeId'],$allfranchiseeData['clientType']);
-                                                    $getAdmindetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['franchiseeId']);
-                                                    $getClientNamedetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$allfranchiseeData['clientType']);
-                                                    
-						    $totalRevenu='';
-                                                    $totalRoyaltyfees='';
-                                                    $totalNetProfit='';
-													
-                                                
-						    foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
+												$i = 0;
+                                                $totalRevenu='';
+                                                $totalRoyaltyfees='';
+                                                $totalNetProfit='';
+						                       foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
                                                        
-                                                        $DrugtestidArr = array_map('intval', str_split($getManualCalcData['Drugtestid']));
+                                                     $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
+                                                    $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+                                                    $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
+                                                    $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
+                                                    $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
                                                         
                                                         if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
                                                             $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
@@ -251,78 +243,61 @@
                                                         if (in_array(3, $DrugtestidArr)) {
                                                             $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
                                                         }
-                                                        $Royaltyfees = $ValTotal * 0.1;
-                                                        $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
-                                                        $Royaltyfees= number_format($Royaltyfees, 2, '.', ',');
+                                                    $Royaltyfees = $ValTotal * 0.1;
+                                                    $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
+                                                    $Royaltyfees= number_format($Royaltyfees, 2, '.', ',');
                                                     
-                                                        $NetTotal = $ValTotal - $Royaltyfees;
-                                                        $NetTotal = number_format($NetTotal, 2, '.', '');
-                                                        $NetTotal = number_format($NetTotal, 2, '.', ',');
+                                                    $NetTotal = $ValTotal - $Royaltyfees;
+                                                    $NetTotal = number_format($NetTotal, 2, '.', '');
+                                                    $NetTotal = number_format($NetTotal, 2, '.', ',');
                                                             
-                                                        $totalRevenu=$totalRevenu+$ValTotal;
-							$totalRevenu = number_format($totalRevenu, 2, '.', '');
-                                                        $totalRevenu=number_format($totalRevenu, 2, '.', ',');
-														
-                                                        $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
-														$totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
-                                                        $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', ',');
-														
-                                                        $totalNetProfit=$totalNetProfit+$NetTotal;
-														$totalNetProfit = number_format($totalNetProfit, 2, '.', '');
-                                                        $totalNetProfit = number_format($totalNetProfit, 2, '.', ',');
-                                                       
-						   }
-                                                   
-                                                    $allfranchiseeTotalRevenue=$allfranchiseeTotalRevenue+$totalRevenu;
-                                                    $allfranchiseeTotalRevenue = number_format($allfranchiseeTotalRevenue, 2, '.', '');
-                                                    $allfranchiseeTotalRevenue=number_format($allfranchiseeTotalRevenue, 2, '.', ',');
-                                                     
-                                                    $allfranchiseetotalRoyaltyfees=$allfranchiseetotalRoyaltyfees+$totalRoyaltyfees;
-                                                    $allfranchiseetotalRoyaltyfees = number_format($allfranchiseetotalRoyaltyfees, 2, '.', '');
-                                                    $allfranchiseetotalRoyaltyfees=number_format($allfranchiseetotalRoyaltyfees, 2, '.', ',');
-                                                    
-                                                    $allfranchiseetotalNetProfit=$allfranchiseetotalNetProfit+$totalNetProfit;
-                                                    $allfranchiseetotalNetProfit = number_format($allfranchiseetotalNetProfit, 2, '.', '');
-                                                    $allfranchiseetotalNetProfit=number_format($allfranchiseetotalNetProfit, 2, '.', ',');
+                                                    $totalRevenu=$totalRevenu+$ValTotal;
+                                                    $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
+                                                    $totalNetProfit=$totalNetProfit+$NetTotal;
+                                                    $i++;
                                                     ?>
                                                     <tr>
                                                         <td> <?php echo $i++;?></td>
                                                         <td>
-                                                         <?php echo $getAdmindetails['szName'];?>
+                                                         <?php echo $userDataAry['szName'];?>
                                                         </td>
                                                         <td>
-                                                         <?php echo $getClientNamedetails['userCode'];?>
+                                                         <?php echo $userDataAry['userCode'];?>
                                                         </td>
                                                         <td>
-                                                           <?php echo $totalRevenu;?>
-                                                           
+                                                         $<?php  echo number_format($ValTotal, 2, '.', ','); ?>
                                                         </td>
                                                         <td>
-                                                          <?php echo $totalRoyaltyfees;?>
-                                                           
+                                                            $<?php echo $Royaltyfees;?>
                                                         </td>
                                                         <td>
-                                                           <?php echo $totalNetProfit;?>
+                                                            $<?php echo $NetTotal;?>
                                                         </td>
                                                        
                                                  </tr>
                                                 
-                                                    <?php
-                                                 }
-						                      ?>
+                                                  <?php 
+											   }
+                                                ?>											   
                                                   <tr>
                                                      
                                                      <td></td>
                                                      <td><b>Total</b></td>
                                                      <td></td>
                                                      <td>
-                                                        <?php echo $allfranchiseeTotalRevenue;?>
+                                                        $<?php 
+                                                            $totalRevenu = number_format($totalRevenu, 2, '.', '');
+                                                            echo number_format($totalRevenu, 2, '.', ',');?>
                                                      </td>
                                                      <td>
-                                                      <?php echo $allfranchiseetotalRoyaltyfees;?>
+                                                      $<?php 
+                                                            $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
+                                                            echo number_format($totalRoyaltyfees, 2, '.', ',');?>
                                                      </td>
                                                      <td>
-                                                         <?php echo $allfranchiseetotalNetProfit;?>
+                                                         $<?php 
+                                                            $totalNetProfit = number_format($totalNetProfit, 2, '.', '');
+                                                            echo number_format($totalNetProfit, 2, '.', ',');?>
                                                      </td>
                                                  </tr>
                                                   
