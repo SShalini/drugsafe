@@ -895,12 +895,18 @@ public function deleteProspectConfirmation()
            $searchAry = $_POST;
            $franchiseeid = $_POST['szSearchfr'];
            $status = $_POST['szSearch2'];
-           
+          
+             if($_SESSION['drugsafe_user']['iRole']==2){ 
+             $franchiseeid = $_SESSION['drugsafe_user']['id'];
+             }
            $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeid,false,$status);
      
            
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('szSearchfr', 'Franchisee Name ', 'required');
+             if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5)){ 
+           $this->form_validation->set_rules('szSearchfr', 'Franchisee Name ', 'required');
+             }
+            
            
             
             $this->form_validation->set_message('required', '{field} is required');
@@ -908,12 +914,12 @@ public function deleteProspectConfirmation()
             { 
                     $data['szMetaTagTitle'] = "Sales CRM Summary Report";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Prospect_Record";
-                    $data['subpageName'] = "SALES_CRM_Summary_Report";
+                    $data['pageName'] = "Reporting";
+                    $data['subpageName'] = "Sales_CRM_Summary";
                     $data['notification'] = $count;
                     $data['data'] = $data;
-                    $data['productAry']=$productAry;
-                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['recordAry']=$recordAry;
+                    $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/prospect_summary_report');
@@ -924,12 +930,12 @@ public function deleteProspectConfirmation()
                     $data['recordAry'] = $recordAry; 
                     $data['szMetaTagTitle'] = "Sales CRM Summary Report";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Prospect_Record";
-                    $data['subpageName'] = "SALES_CRM_Summary_Report";
+                    $data['pageName'] = "Reporting";
+                    $data['subpageName'] = "Sales_CRM_Summary";
                     $data['notification'] = $count;
                     $data['data'] = $data;
-                    $data['productAry']=$productAry;
-                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['recordAry']=$recordAry;
+                    $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/prospect_summary_report');
@@ -1005,7 +1011,13 @@ public function deleteProspectConfirmation()
               
                $i++;
                 $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $recordData['iFranchiseeId']);
-                $dt_last_updated_status =     date('d M Y',strtotime($recordData['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($recordData['dt_last_updated_status']));
+                if(($recordData['dt_last_updated_status']) == '0000-00-00 00:00:00'){
+                $dt_last_updated_status = "N/A";  
+              }
+              else{
+              $dt_last_updated_status =     date('d M Y',strtotime($recordData['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($recordData['dt_last_updated_status']));
+              }
+                
                 
                 $html .= '<tr>
                                             <td> ' . $i . ' </td>
@@ -1093,12 +1105,17 @@ public function deleteProspectConfirmation()
          $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeId,false,$status);
         $x=0;
          if ($recordAry) {
-             $x++;
+            
             $i = 2;
             foreach($recordAry as $item){
+                 $x++;
                 $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $item['iFranchiseeId']);
-                $dt_last_updated_status =     date('d M Y',strtotime($item['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($item['dt_last_updated_status']));
-                
+               if(($item['dt_last_updated_status']) == '0000-00-00 00:00:00'){
+                $dt_last_updated_status = "N/A";  
+              }
+              else{
+              $dt_last_updated_status =     date('d M Y',strtotime($recordData['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($recordData['dt_last_updated_status']));
+              }
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeArr['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szBusinessName']);
@@ -1145,6 +1162,9 @@ public function deleteProspectConfirmation()
            $startDate = $_POST['szSearch1'];
            $endDate = $_POST['szSearch2'];
            $status = $_POST['szSearch4'];
+            if($_SESSION['drugsafe_user']['iRole']==2){ 
+             $franchiseeid = $_SESSION['drugsafe_user']['id'];
+             }
            
            if($_POST){
              $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status);   
@@ -1160,12 +1180,12 @@ public function deleteProspectConfirmation()
             { 
                     $data['szMetaTagTitle'] = "Sales CRM Summary Report";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Prospect_Record";
-                    $data['subpageName'] = "SALES_CRM_Summary_Report";
+                    $data['pageName'] = "Reporting";
+                    $data['subpageName'] = "Sales_CRM_Detailed";
                     $data['notification'] = $count;
                     $data['data'] = $data;
-                    $data['productAry']=$productAry;
-                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['recordAry']=$recordAry;
+                    $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/salesCrmDetailedReport');
@@ -1176,12 +1196,12 @@ public function deleteProspectConfirmation()
                     $data['recordAry'] = $recordAry; 
                     $data['szMetaTagTitle'] = "Sales CRM Summary Report";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Prospect_Record";
-                    $data['subpageName'] = "SALES_CRM_Summary_Report";
+                    $data['pageName'] = "Reporting";
+                    $data['subpageName'] = "Sales_CRM_Detailed";
                     $data['notification'] = $count;
                     $data['data'] = $data;
-                    $data['productAry']=$productAry;
-                    $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+                    $data['recordAry']=$recordAry;
+                    $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
 
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/salesCrmDetailedReport');

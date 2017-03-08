@@ -90,15 +90,8 @@
                 </a>
             </li>
              <?php }  ?>
-             <?php  if ($_SESSION['drugsafe_user']['iRole'] == '1') { ?>
-             <li class="nav-item start <?php if (trim($pageName) == 'Prospect_Record') { ?>active open<?php } ?>">
-               
-                  <a href="<?php echo __BASE_URL__; ?>/prospect/prospect_summary_report" class="nav-link nav-toggle">
-                     <i class="fa fa-files-o" aria-hidden="true"></i>
-                    <span class="title">Sales CRM</span>
-                    <span class="selected"></span>
-                </a>
-               <?php   } if ($_SESSION['drugsafe_user']['iRole'] == '2') {?>
+           
+               <?php   if ($_SESSION['drugsafe_user']['iRole'] == '2') {?>
                   <li class="nav-item start <?php if (trim($pageName) == 'Prospect_Record') { ?>active open<?php } ?>">
                       <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord" class="nav-link nav-toggle">
                      <i class="fa fa-files-o" aria-hidden="true"></i>
@@ -223,7 +216,7 @@
                             </a>
                         </li>
                   
-                        <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
+                        <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Summary') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/prospect/prospect_summary_report">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Sales CRM Summary  </span>
@@ -297,6 +290,18 @@
                                 <span class="title">Inventory Report</span>
                             </a>
                    </li>
+                    <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/prospect/prospect_summary_report">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Sales CRM Summary  </span>
+                            </a>
+                        </li>
+                     <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__;?>/prospect/sales_crm_detailed_report">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Sales CRM Detailed</span>
+                            </a>
+                        </li>
                     <li class="nav-item  <?php if ($subpageName == 'SOS_COC_Forms_Reports') { ?> active open <?php } ?>">
                         <a class="nav-link " onclick="viewForm('1');" href="javascript:void(0);">
                             <i class="fa fa-ge" aria-hidden="true"></i>

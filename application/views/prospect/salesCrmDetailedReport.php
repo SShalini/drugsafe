@@ -84,7 +84,7 @@
                        
                        
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/sales_crm_detailed_report" name="szSearchField" method="post">
-
+              <?php if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){  ?> 
                                   <div class="row"> 
                                     <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
@@ -131,8 +131,9 @@
                                         </div> 
                                     </div>
                                   <div class="col-md-1"> </div>
+                            
                                    <div class="col-md-3">
-                       
+                      
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch3']) != '') { ?>has-error<?php } ?>">
                                <select class="form-control custom-select" name="szSearch3" id="szSearch3" onchange="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
@@ -192,6 +193,88 @@
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>
                    </div>
+                 <?php }  ?> 
+                <?php if($_SESSION['drugsafe_user']['iRole']==2 ){  ?> 
+                    <div class="row"> 
+                                    <div class="col-md-3">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch1" class="form-control"
+                                                       value="<?php echo set_value('szSearch1'); ?>" readonly
+                                                       placeholder="Start Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch1">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                           <?php
+                               if(form_error('szSearch1')){?>
+                               <span class="help-block pull-left"><span><?php echo form_error('szSearch1');?></span>
+                             </span><?php }?> 
+                                        </div>
+
+                                    </div>
+                                        &nbsp;&nbsp;
+                                           <div class="col-md-3">
+                                              <div
+                                            class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch2" class="form-control"
+                                                       value="<?php echo set_value('szSearch2'); ?>" readonly
+                                                       placeholder="End Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch2">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                     
+                                            <?php
+                               if(form_error('szSearch2')){?>
+                               <span class="help-block pull-left"><span><?php echo form_error('szSearch2');?></span>
+                             </span><?php }?> 
+                                        </div> 
+                                    </div>
+                               &nbsp;&nbsp;
+                            
+                                <div class="search col-md-3">
+                                   
+                                      <select class="form-control custom-select" name="szSearch4" id="szSearch4" onfocus="remove_formError(this.id,'true')">
+                                         
+                                        <option value=''>Status</option>
+                                        <option value="1" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("1") ? "selected" : ""); ?>>
+                                            Pre Discovery 
+                                        </option>
+                                        <option value="2" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("2") ? "selected" : ""); ?>>
+                                           Discovery Meeting
+                                        </option>
+                                        <option value="3" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("3") ? "selected" : ""); ?>>
+                                          In Progress  
+                                        </option>
+                                        <option value="4" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("4") ? "selected" : ""); ?>>
+                                          Non Convertible 
+                                        </option>
+                                        <option value="5" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("5") ? "selected" : ""); ?>>
+                                          Contact Later 
+                                        </option>
+                                         <option value="6" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("6") ? "selected" : ""); ?>>
+                                         Closed Sale
+                                        </option>
+                                  
+                                      </select>
+                                     </div>     
+                                 &nbsp;&nbsp;
+                                  
+                                  <div class="col-md-1">
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </div>
+                      </div>     
+                <?php }  ?> 
                            </form>
                          
                       

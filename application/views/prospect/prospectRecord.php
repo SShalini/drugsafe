@@ -290,13 +290,14 @@
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                                   <?php  } } }
+                                               if ($prospectDetailsData['status'] == 6) {
                                                if($_SESSION['drugsafe_user']['iRole']==2 && $prospectDetailsData['clientcreated']==0){
                                                ?>
                                                <a class="btn btn-circle btn-icon-only btn-default" id="changeToClient" title ="Convert to Client" onclick="changeToClient('<?php echo $prospectDetailsData['id'];?>')" href="javascript:void(0);" >
                                                 <i class="fa fa-bars"></i> 
                                                 </a>
                                                  <?php
-                                                  }
+                                               } } 
                                                ?>  
                                             </td>
                                         </tr>
