@@ -6,7 +6,7 @@
 </script>
 <div class="page-content-wrapper">
     <div class="page-content">
-       
+      <?php //test ?>
 
         <div id="page_content" class="row">
             <div class="col-md-12">
