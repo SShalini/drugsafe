@@ -1065,7 +1065,7 @@ function excelfr_stockassignlist_Data()
                     $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Reporting";
-                      $data['subpageName'] = "Inventory_Report";
+                    $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['productAry']=$productAry;
@@ -1083,7 +1083,7 @@ function excelfr_stockassignlist_Data()
                     $data['szMetaTagTitle'] = "Inventory Report";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Reporting";
-                      $data['subpageName'] = "Inventory_Report";
+                    $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['productAry']=$productAry;
@@ -2842,7 +2842,7 @@ $clientid = $_POST['idclient'];
       	echo $result;           
   	} 
     public function view_industry_report()
-    {
+    { // something
         $count = $this->Admin_Model->getnotification();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
