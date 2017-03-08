@@ -25,15 +25,15 @@
                         <form class="form-horizontal" id="addfranchisee"
                               action="<?= __BASE_URL__ ?>/admin/editRegion" name="editRegion" method="post">
                             <div class="form-body">
-                                <div
-                                    class="form-group <?php if(form_error('editRegion[stateId]')){?>has-error<?php }?>">
+                               
+                                             <?php if($_POST['editRegion']['assign']==1) { ?>
+                                  <div class="form-group <?php if(form_error('editRegion[stateId]')){?>has-error<?php }?>">
                                     <label class="col-md-3 control-label">State</label>
                                     <div class="col-md-5">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-flag-checkered"></i>
                                                 </span>
-                                             <?php if($_POST['editRegion']['assign']==1) { ?>
                                             <select class="form-control " name="editRegion[stateId]" id="stateId"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')" disabled onchange="editRegionCode(this.value);">
                                               <option value=''>Select</option>
@@ -48,7 +48,23 @@
                                                 } 
                                             ?>
                                             </select>
-                                                        <?php } else {?>
+                                                       
+                                        </div>
+                                        <?php
+                                            if(form_error('editRegion[stateId]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('editRegion[stateId]');?></span>
+                                            </span><?php }?>
+                                    </div>
+                                    <input type="hidden" name="editRegion[stateId]" value="<?php echo $_POST['editRegion']['stateId']?>" />
+                                </div>
+                                     <?php } else {?>
+                                  <div class="form-group <?php if(form_error('editRegion[stateId]')){?>has-error<?php }?>">
+                                    <label class="col-md-3 control-label">State</label>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-flag-checkered"></i>
+                                                </span>
                                                 <select class="form-control " name="editRegion[stateId]" id="stateId"
                                                     Placeholder="State" onfocus="remove_formError(this.id,'true')"onchange="editRegionCode(this.value);">
                                          <option value=''>Select</option>
@@ -62,17 +78,16 @@
                                                     } 
                                                 } 
                                             ?>
-                                            </select>      
-                                          <?php } ?>
-                                               
+                                            </select> 
                                         </div>
                                         <?php
                                             if(form_error('editRegion[stateId]')){?>
                                             <span class="help-block pull-left"><span><?php echo form_error('editRegion[stateId]');?></span>
                                             </span><?php }?>
-                                    </div>
-
-                                </div>
+                                           </div>
+                                           </div>
+                                          <?php } ?>
+                                    
                                 <div id="Region">
                                 <div
                                     class="form-group">

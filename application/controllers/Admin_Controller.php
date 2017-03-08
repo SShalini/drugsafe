@@ -814,7 +814,8 @@ class Admin_Controller extends CI_Controller
         
         $getAllStatesAry = $this->Admin_Model->getAllStateByCountryId('101');
         $getAllRegion = $this->Admin_Model->getAllRegion($idState,$regionName);
-        $regionListArray = $this->Admin_Model->getRegionByStateIdForSearch($_POST['StateId']);
+        
+        $regionListArray = $this->Admin_Model->getRegionByStateIdForSearch($idState);
         
         $data['szMetaTagTitle'] = "Region List";
         $data['is_user_login'] = $is_user_login;
@@ -907,6 +908,7 @@ class Admin_Controller extends CI_Controller
             die;
         }
         $data_validate = $this->input->post('editRegion');
+    
         $idRegion = $this->session->userdata('idRegion');
         if (empty($data_validate)) {
             $getRegionData = $this->Admin_Model->getRegionById($idRegion);
@@ -916,7 +918,7 @@ class Admin_Controller extends CI_Controller
 
         $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
         $idRegion = $this->session->userdata('idRegion');
-
+        
         $this->load->library('form_validation');
         $this->form_validation->set_rules('editRegion[stateId]', 'State', 'required');
         $this->form_validation->set_rules('editRegion[regionName]', 'Region Name', 'required');

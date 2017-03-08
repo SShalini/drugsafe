@@ -144,7 +144,7 @@
                                           In Stock  
                                     </th>
                                     <th>
-                                         Ordered
+                                         Requested
                                     </th>
                                   
                             </thead>

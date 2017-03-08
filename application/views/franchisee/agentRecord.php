@@ -143,7 +143,7 @@
                                                 <?php
                                                  if($_SESSION['drugsafe_user']['iRole']==1)
 						{?>
-						    <a class="btn btn-circle btn-icon-only btn-default" title="View Assign Client" onclick="ViewAssignClient('<?php echo $agentRecordData['id']; ?>','<?php echo $agentRecordData['franchiseeid']; ?>');" href="javascript:void(0);">
+						    <a class="btn btn-circle btn-icon-only btn-default" title="View Assigned Clients" onclick="ViewAssignClient('<?php echo $agentRecordData['id']; ?>','<?php echo $agentRecordData['franchiseeid']; ?>');" href="javascript:void(0);">
                                                         <i class="fa fa-eye"></i> 
                                                     </a>
 						<?php

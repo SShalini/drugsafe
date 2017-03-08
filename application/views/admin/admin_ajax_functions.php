@@ -3122,7 +3122,7 @@ if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
                     <div class="portlet green-meadow box">
                         <div class="portlet-title">
                             <div class="caption">
-                                <i class="fa fa-cogs"></i> Assign Client Info
+                                <i class="fa fa-cogs"></i> Assigned Client Info
 
                             </div>
 

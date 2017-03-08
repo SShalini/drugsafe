@@ -166,9 +166,17 @@
                                     <th>
                                           In Stock  
                                     </th>
+                                    <?php if($_SESSION['drugsafe_user']['iRole']==1){ 
+                                        ?>
+                                      <th>
+                                         Requested 
+                                    </th>  
+                                  <?php  }  else {?>
                                     <th>
                                          Ordered 
                                     </th>
+                                    <?php } ?>
+                                    
                                   
                                   
                             </thead>
