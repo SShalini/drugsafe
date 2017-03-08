@@ -901,17 +901,17 @@ class Form_Management_Controller extends CI_Controller
 </tr>
 <tr>
     <td>Test 1: '.$cocdetarr[0]['dontest1'].'</td>
-    <td colspan="2">Time: '.$cocdetarr[0]['dontesttime1'].'</td>
+    <td colspan="2">Time: '.$cocdetarr[0]['dontesttime1'].' hours</td>
     <td>Test 2: '.$cocdetarr[0]['dontest2'].'</td>
-    <td>Time: '.$cocdetarr[0]['dontesttime2'].'</td>
+    <td>Time: '.$cocdetarr[0]['dontesttime2'].' hours</td>
 </tr>
 <tr>
     <td colspan="8">Collection of Sample/On-Site Drug Screening Results</td>
 </tr>
 <tr>
-    <td colspan="2">Void Time: '.$cocdetarr[0]['voidtime'].'</td>
+    <td colspan="2">Void Time: '.$cocdetarr[0]['voidtime'].' hours</td>
     <td colspan="2">Sample Temp C: '.$cocdetarr[0]['sampletempc'].'</td>
-    <td colspan="4">Temp Read Time within 4 min: '.$cocdetarr[0]['tempreadtime'].'</td>
+    <td colspan="4">Temp Read Time within 4 min: '.$cocdetarr[0]['tempreadtime'].' hours</td>
 </tr>
 <tr>
     <td colspan="2">Intect 7 Lot. No.: '.$cocdetarr[0]['intect'].'</td>
@@ -996,7 +996,7 @@ class Form_Management_Controller extends CI_Controller
 <tr>
     <td colspan="2">'.$cocdetarr[0]['receivertwo'].'</td>
     <td colspan="2">'.$cocdetarr[0]['receivertwosign'].'</td>
-    <td colspan="2">'.date('d/m/Y',strtotime($cocdetarr[0]['receivertwodate'])).' '.$cocdetarr[0]['receivertwotime'].'</td>
+    <td colspan="2">'.($cocdetarr[0]['receivertwotime']==' : 00 AM'?'':date('d/m/Y',strtotime($cocdetarr[0]['receivertwodate'])).' '.$cocdetarr[0]['receivertwotime']).'</td>
     <td>'.$cocdetarr[0]['receivertwoseal'].'</td>
     <td>'.$cocdetarr[0]['receivertwolabel'].'</td>
 </tr>

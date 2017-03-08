@@ -166,10 +166,10 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['collsign'])), 'collsign', 'Collector Signature', true);
+            //$this->set_fieldReq(sanitize_all_html_input(trim($data['collsign'])), 'collsign', 'Collector Signature', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Representative', true,__VLD_CASE_NAME__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['nominedec'])), 'nominedec', 'Nominated Client Representative signature time', true);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Nominated Client Representative signature', true);
+            //$this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Nominated Client Representative signature', true);
         }
         if ($this->error) {
             return false;
@@ -1455,6 +1455,20 @@ class Webservices_Model extends Error_Model
             return $row;
         } else {
             $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function savecollsign($siteid,$imgname,$fieldname){
+        $wheresosAry = array('Clientid' => (int)$siteid,'Status'=>0);
+        $dataAry = array($fieldname=>$imgname);
+        $query = $this->db->where($wheresosAry)
+            ->update(__DBC_SCHEMATA_SOS_FORM__, $dataAry);
+       /* $q = $this->db->last_query();
+        die($q);*/
+        if($query){
+            return true;
+        }else{
             return false;
         }
     }

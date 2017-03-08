@@ -2999,7 +2999,7 @@ $clientid = $_POST['idclient'];
 					    foreach($getSosAndClientDetils as $getSosAndClientData )
 					    {
 						$totalNegativeUrine=$getSosAndClientData['totalDonarUrine'] -  $getSosAndClientData['totalNegativeUrine'];
-						$html .='<td>'.$totalNegativeUrine.'</td>';
+						$html .='<td>'.($totalNegativeUrine>0?$totalNegativeUrine:0).'</td>';
 					    }
 				$html .='</tr>
 					<tr>
@@ -3029,7 +3029,7 @@ $clientid = $_POST['idclient'];
 					    foreach($getSosAndClientDetils as $getSosAndClientData)
 					    {
                             $totalPositiveOral=$getSosAndClientData['totalDonarOral'] -  $getSosAndClientData['totalNegativeOral'];
-						    $html .='<td>'.$totalPositiveOral.'</td>';
+						    $html .='<td>'.($totalPositiveOral>0?$totalPositiveOral:0).'</td>';
 					    }
 					    $html .='</tr>
 						<tr>
@@ -3172,7 +3172,7 @@ $clientid = $_POST['idclient'];
                     $k=7;
                     $alphaobj = $alphabet[$j];
                     $totalPositiveUrine=$getSosAndClientData['totalDonarUrine'] -  $getSosAndClientData['totalNegativeUrine'];
-                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$totalPositiveUrine);
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,($totalPositiveUrine>0?$totalPositiveUrine:0));
                     $j++;
                 }
                 $this->excel->getActiveSheet()->setCellValue('A8','');
@@ -3213,7 +3213,7 @@ $clientid = $_POST['idclient'];
                     $k=11;
                     $alphaobj = $alphabet[$j];
                     $totalPositiveOral= $getSosAndClientData['totalDonarOral'] -  $getSosAndClientData['totalNegativeOral'];
-                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,$totalPositiveOral);
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj.$k,($totalPositiveOral>0?$totalPositiveOral:0));
                     $j++;
                 }
                 $this->excel->getActiveSheet()->setCellValue('A12','');

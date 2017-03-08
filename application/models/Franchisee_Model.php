@@ -71,8 +71,6 @@ class Franchisee_Model extends Error_Model
                 'industry' => $data['industry'],
                 'clientCode' => (int)$nextclientcode,
                 'discountid' => (int)$data['discount']
-
-
             );
         } else {
             $clientlastcode = $this->getmaxClientSiteCodeById($data['franchiseeId'], $clientType);
@@ -84,13 +82,14 @@ class Franchisee_Model extends Error_Model
             if (!empty($usercode)) {
                 $clientcode = $usercode['userCode'] . '-Site' . sprintf('%02d', (int)$nextclientcode);
             }
+            $clientdets = $this->viewClientDetails($clientType);
             $clientAry = array(
-
                 'franchiseeId' => $data['franchiseeId'],
                 'clientId' => $id_client,
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
-                'clientCode' => (int)$nextclientcode
+                'clientCode' => (int)$nextclientcode,
+                'industry' => $clientdets['industry']
             );
         }
 
@@ -124,7 +123,7 @@ class Franchisee_Model extends Error_Model
                     }
 
                     $siteAry = array(
-                        'siteid' => (int)$this->db->insert_id(),
+                        'siteid' => (int)$id_site,
                         'per_form_complete' => $data['per_form_complete'],
                         'sp_name' => $data['sp_name'],
                         'sp_mobile' => $data['sp_mobile'],

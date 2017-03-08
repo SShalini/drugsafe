@@ -330,7 +330,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             $this->db->join('tbl_client', 'tbl_client.clientId = ds_sos.Clientid');
             $this->db->where('testdate >=', $dtStart);
             $this->db->where('testdate <=', $dtEnd);
-            $this->db->where('clientType!=', '0');
+            $this->db->where('clientType !=', '0');
             $this->db->where('status', '1');
             $this->db->group_by('industry');
             $this->db->select_sum('TotalAlcoholScreening', 'totalAlcohol');
@@ -341,7 +341,8 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             $this->db->select_sum('NegativeAlcohol','totalNegativeAlcohol');
             $this->db->select_sum('PositiveAlcohol','totalPositiveAlcohol');
             $query = $this->db->get();
-           
+           /*$q = $this->db->last_query();
+           echo $q;*/
 
         if ($query->num_rows() > 0) {
              return $query->result_array();

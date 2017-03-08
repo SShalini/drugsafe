@@ -193,7 +193,9 @@
                                                    <?php
                                                 }
                                                 ?>
-                                                
+                                               <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Franchisee Details" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);">
+                                                   <i class="fa fa-eye" aria-hidden="true"></i>
+                                               </a>
                                             </td>
                                         </tr>
                                         <?php 
