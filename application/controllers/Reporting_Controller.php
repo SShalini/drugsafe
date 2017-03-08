@@ -1205,7 +1205,8 @@ function excelfr_stockassignlist_Data()
                     $data['validPendingOrderFrDetailsAray'] = $validPendingOrderFrDetailsAray;
                     $data['szMetaTagTitle'] = "Order Details";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Orders";
+                    $data['pageName'] = "Reporting";
+                    $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                     $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
@@ -1700,15 +1701,16 @@ function excelfr_stockassignlist_Data()
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        <th width="8%"><b>  #</b> </th> ';
+                                        <th><b>  #</b> </th> ';
                                  if($_SESSION['drugsafe_user']['iRole']==1){
-                                   $html .= '<th  width="20%"> <b>Franchisee</b> </th>';
+                                   $html .= '<th> <b>Franchisee</b> </th>';
                                  }
-                                       $html .= '<th  width="20%"> <b>Order Date </b> </th>
-                                        <th  width="18%"><b> Order #  </b> </th>
-                                        <th  width="20%"> <b>No. of Products</b> </th>
-                                        <th  width="15%"><b> Order Cost </b> </th>
-                                        <th  width="18%"> <b>Xero Invoice No.</b> </th>
+                                       $html .= '<th> <b>Order Date </b> </th>
+                                        <th><b> Order #  </b> </th>
+                                        <th><b> Status  </b> </th>
+                                        <th> <b>No. of Products</b> </th>
+                                        <th><b> Order Cost </b> </th>
+                                        <th> <b>Xero Invoice No.</b> </th>
                                     </tr>';
         if ($validOrdersDetailsAray) {
 
@@ -1716,17 +1718,33 @@ function excelfr_stockassignlist_Data()
             foreach ($validOrdersDetailsAray as $reqOrderData) {
                 $i++;
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $reqOrderData['franchiseeid']);
+        if ($reqOrderData['status'] == 1) {
+
+            $status = Ordered;
+        }
+        if ($reqOrderData['status'] == 2) {
+
+
+            $status = Dispatched;
+        }
+        if ($reqOrderData['status'] == 3) {
+
+
+            $status = Canceled;
+        }
+
                 $html .= '<tr>
                                             <td> ' . $i . ' </td>';
                                     if($_SESSION['drugsafe_user']['iRole']==1){
                                 $html .= '  <td> ' . $franchiseeDetArr1['szName'] . '</td>';
                                              }
-                                       $html .= '   <td> ' . date('d M Y',strtotime($reqOrderData['createdon'])) . ' at '.date('h:i A',strtotime($reqOrderData['createdon'])).' </td>
-                                            <td>#' . sprintf(__FORMAT_NUMBER__, $reqOrderData['orderid']) . ' </td>
+                                       $html .= '<td> ' . date('d M Y',strtotime($reqOrderData['createdon'])) . ' at '.date('h:i A',strtotime($reqOrderData['createdon'])).' </td>
+                                               <td>#' . sprintf(__FORMAT_NUMBER__, $reqOrderData['orderid']) . ' </td>
+                                               <td>' . $status. ' </td>                                              
                                                <td>' . $reqOrderData['totalproducts'] . ' </td>
-                                            <td>$' . ($reqOrderData['price']>0?$reqOrderData['price']:'0.00') . ' </td>
+                                               <td>$' . ($reqOrderData['price']>0?$reqOrderData['price']:'0.00') . ' </td>
                                                <td>' . (!empty($reqOrderData['XeroIDnumber'])?$reqOrderData['XeroIDnumber']:'N/A'). ' </td>
-                                        </tr>';
+                                               </tr>';
             }
         }
 
@@ -1814,14 +1832,24 @@ function excelfr_stockassignlist_Data()
             $x=0;
             foreach($validOrdersDetailsAray as $item){
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $item['franchiseeid']);
+         if ($item['status'] == 1) {
+            $status = Ordered;
+        }
+        if ($item['status'] == 2) {
+            $status = Dispatched;
+        }
+        if ($item['status'] == 3) {
+            $status = Canceled;
+        }
                 $x++;
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeDetArr1['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, date('d M Y',strtotime($item['createdon'])) . ' at '.date('h:i A',strtotime($item['createdon'])));
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, '#'.sprintf(__FORMAT_NUMBER__, $item['orderid']));
-                $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['totalproducts']);
-                $this->excel->getActiveSheet()->setCellValue('F'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
-                $this->excel->getActiveSheet()->setCellValue('G'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
+                 $this->excel->getActiveSheet()->setCellValue('E'.$i,$status);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i,$item['totalproducts']);
+                $this->excel->getActiveSheet()->setCellValue('G'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
+                $this->excel->getActiveSheet()->setCellValue('H'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
@@ -1829,6 +1857,7 @@ function excelfr_stockassignlist_Data()
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(TRUE);
                 $i++;
             }
         }
@@ -1871,18 +1900,29 @@ function excelfr_stockassignlist_Data()
             foreach($validOrdersDetailsAray as $item){
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $item['franchiseeid']);
                 $x++;
+                 if ($item['status'] == 1) {
+            $status = Ordered;
+        }
+        if ($item['status'] == 2) {
+            $status = Dispatched;
+        }
+        if ($item['status'] == 3) {
+            $status = Canceled;
+        }
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, date('d M Y',strtotime($item['createdon'])) . ' at '.date('h:i A',strtotime($item['createdon'])));
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, '#'.sprintf(__FORMAT_NUMBER__, $item['orderid']));
-                $this->excel->getActiveSheet()->setCellValue('D'.$i,$item['totalproducts']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
-                $this->excel->getActiveSheet()->setCellValue('F'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
+                $this->excel->getActiveSheet()->setCellValue('D'.$i,$status);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i,$item['totalproducts']);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
+                $this->excel->getActiveSheet()->setCellValue('G'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
                 $i++;
             }
         }   

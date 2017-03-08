@@ -99,7 +99,7 @@
                         </div>
                     <?php } ?>
                     <?php
-                    if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                    if (($_SESSION['drugsafe_user']['iRole'] == '5')||($_SESSION['drugsafe_user']['iRole'] == '1')) {
                         ?>
                         <div class="row">
                             <form class="form-horizontal" id="szSearchClientRecord"
@@ -112,8 +112,15 @@
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
                                             onchange="getClientListByFrId(this.value);">
                                         <option value="">Franchisee Name</option>
-
+                                    
                                         <?php
+                                         if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                                            $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false);
+                                            }
+                                            else{
+                                                    $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                                                     $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
+                                            }
                                         foreach ($searchOptionArr as $searchOptionList) {
 
                                             $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
@@ -300,7 +307,6 @@
 
                     } else {
 
-
                         if (!empty($clientAry)) {
 
                             ?>
@@ -317,8 +323,8 @@
                                             <option value="">Client Name</option>
                                             <?php
                                             foreach ($clientlistArr as $clientIdList) {
-                                                $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                                echo '<option value="' . $clientIdList['id'] . '"' . $selected . ' >' . $clientIdList['szName'] . '</option>';
+                                                $selected = ($clientIdList['szName'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                                echo '<option value="' . $clientIdList['szName'] . '"' . $selected . ' >' . $clientIdList['szName'] . '</option>';
                                             }
                                             ?>
                                         </select>

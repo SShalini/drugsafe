@@ -287,7 +287,7 @@
                     <li class="nav-item  <?php if ($subpageName == 'Inventory_Report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/frInventoryReport">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
-                                <span class="title">Inventory Report</span>
+                                <span class="title">Inventory Ordered </span>
                             </a>
                    </li>
                     <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">

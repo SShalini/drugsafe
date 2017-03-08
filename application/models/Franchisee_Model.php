@@ -272,13 +272,17 @@ echo"$idfranchisee";
     }
 
     public function getAllClientDetails($parent = false, $franchiseId = '', $operationManagrrId = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $ClientName = '', $flag = 0)
-    {
+    { 
         if (!empty($operationManagrrId)) {
             $whereAry = array('operationManagerId=' => $operationManagrrId, 'clientType=' => '0', 'clientType=' => '0');
             $searchq = '';
-            if (!empty($ClientName)) {
-                $searchq = 'szName = ' .$ClientName;
-            }
+                    if ($flag == 1) {
+                        $searchq = 'szName= ' .$ClientName;
+                    } elseif ($flag == 2) {
+                        $searchq = array('szName' => $ClientName, 'tbl_client.franchiseeId=' => $franchiseId);
+                    } else {
+                        $searchq = 'tbl_client.franchiseeId = ' . (int)$franchiseId;
+                    }
             $this->db->select('*');
             $this->db->from('tbl_franchisee');
             $this->db->join('tbl_client', 'tbl_franchisee.franchiseeId = tbl_client.franchiseeId');
@@ -290,10 +294,14 @@ echo"$idfranchisee";
             } else {
                 $this->db->where($whereAry);
             }
-            $this->db->where($whereAry);
+           if ($parent) {
+                $this->db->where('clientType', 0);
+            }
             $this->db->order_by("operationManagerId", "asc");
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
+             $sql = $this->db->last_query($query);
+            
         } else {
             if (!empty($ClientName)) {
 
@@ -303,12 +311,12 @@ echo"$idfranchisee";
                     } elseif ($flag == 2) {
                         $searchq = array('szName' => $ClientName, 'franchiseeId=' => $franchiseId);
                     } else {
-                        $searchq = 'franchiseeId = ' . (int)$id;
+                        $searchq = 'franchiseeId = ' . (int)$franchiseId;
                     }
 
 
                 } else {
-                    $searchq = 'szName = ' . $ClientName;
+                      $searchq = array('szName' => $ClientName, 'franchiseeId=' => $franchiseId);
                 }
             }
 

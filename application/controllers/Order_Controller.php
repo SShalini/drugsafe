@@ -526,7 +526,7 @@ class Order_Controller extends CI_Controller
 <br />
 <table cellpadding="5px">
     <tr>
-        <td width="50%" align="left" font-size="20"><b>Order# :</b> #0000' . $idOrder . '</td>
+        <td width="50%" align="left" font-size="20"><b>Order # :</b> #0000' . $idOrder . '</td>
     </tr>
     <tr>
         <td width="50%" align="left"><b>Order Date & Time : </b> '.$orderVal.'</td>
@@ -542,7 +542,7 @@ class Order_Controller extends CI_Controller
      if($OrdersDetailsAray['status'] == 2) { 
    $html .= '      
    <tr>
-        <td width="50%" align="left"><b>Dispatch Date & Time : </b> '. $dispatchVal .'</td>
+        <td width="50%" align="left"><b>Dispatched Date & Time : </b> '. $dispatchVal .'</td>
     </tr> ';   
  } } 
   $html .= '   <tr>
@@ -714,7 +714,7 @@ $html .= '
         $this->excel->getActiveSheet()->getStyle('A11')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         
         
-         $this->excel->getActiveSheet()->setCellValue('A4','Order# :');
+         $this->excel->getActiveSheet()->setCellValue('A4','Order # :');
          $this->excel->getActiveSheet()->setCellValue('A5','Order Date & Time :');
          if($OrdersDetailsAray['status'] ==3){
           $this->excel->getActiveSheet()->setCellValue('A6','Canceled Date & Time :');
@@ -723,7 +723,7 @@ $html .= '
          $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
          }
           elseif($OrdersDetailsAray['status'] ==2){
-           $this->excel->getActiveSheet()->setCellValue('A6','Dispatch Date & Time :');
+           $this->excel->getActiveSheet()->setCellValue('A6','Dispatched Date & Time :');
            $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
            $this->excel->getActiveSheet()->setCellValue('A8','Total Price :');
            $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');

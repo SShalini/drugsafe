@@ -35,7 +35,7 @@
                     </li>
 
                     <li>
-                        <span class="active">Inventory Report</span>
+                        <span class="active">Inventory Ordered Report</span>
                     </li>
                 </ul>
 
@@ -45,7 +45,7 @@
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">
-                                    Inventory Report
+                                    Inventory Ordered Report 
                                 </span>
                             </div>
                     <?php
@@ -144,7 +144,7 @@
                                           In Stock  
                                     </th>
                                     <th>
-                                         Requested
+                                         Ordered
                                     </th>
                                   
                             </thead>

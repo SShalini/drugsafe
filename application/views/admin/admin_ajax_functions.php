@@ -2695,7 +2695,7 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                     Placeholder="Status" onfocus="remove_formError(this.id,'true')" onchange="showSubmit(this.value);">
                                           
                                                 <option value=''>Status</option>
-                                                <?php if (($prospectStatusDetailsAry['0']['status']==3 )||($prospectStatusDetailsAry['0']['status']==4 )) {?>
+                                                <?php if (($prospectStatusDetailsAry['0']['status']==3 )||($prospectStatusDetailsAry['0']['status']==2 )) {?>
                                                 <option value="1" disabled <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
                                                 <?php } else {?>
                                                 <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
