@@ -96,7 +96,7 @@
                                         </span><?php } ?>
                                 </div>
                             </div>
-                            <div class="col-md-1"></div>
+                           
                             <?php }elseif($_SESSION['drugsafe_user']['iRole'] == 2){?>
                             <input type="hidden" name="szSearch1" value="<?php echo $_SESSION['drugsafe_user']['id'];?>" />
                             <script type="text/javascript">
@@ -127,9 +127,7 @@
                                         </span><?php } ?>
                                 </div>
                             </div>
-                            <div class="col-md-1">
-
-                            </div>
+                          
                             <div class="col-md-3">
 
                                 <div class="form-group ">
@@ -159,7 +157,7 @@
                         </div>
                         <div class="row">
                             <?php }else{?>
-                                <div class="col-md-1"></div>
+                              
                             <?php }?>
                             <div class="col-md-3">
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
@@ -190,9 +188,7 @@
                                 </div>
                             </div>
                             <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
-                            <div class="col-md-1">
-
-                            </div>
+                            
                             <?php }else{?>
                         </div>
                                 <div class="row">
