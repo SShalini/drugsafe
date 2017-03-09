@@ -152,11 +152,11 @@
                                                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit Franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-
+                                              <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){ ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>
-                                               <?php 
+                                              <?php }
                                                 $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList(false,false,false,1);
                                            
                                         if(!empty($drugTestKitListAray)){
@@ -175,10 +175,11 @@
                                             if($emptyArr != true){
                                          
                                     ?>
+                                               <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){ ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="viewProductStockMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cubes" aria-hidden="true"></i>
                                                 </a>
-                                        <?php } }
+                                        <?php } } }
                                                 $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
                                                 
                                               
