@@ -786,14 +786,14 @@ class Form_Management_Controller extends CI_Controller
                                         <td colspan="3">Breath Testing Unit: '.$sosdetarr[0]['BreathTesting'].'</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="8">I\'ve conducted the alcohol and/or drug screening/collection service detailed above and confirm that all procedures were undertaken in accordance with the relevant Standard. <b>Collector Signature:</b> '.$sosdetarr[0]['collsign'].'</td>
+                                        <td colspan="8">I\'ve conducted the alcohol and/or drug screening/collection service detailed above and confirm that all procedures were undertaken in accordance with the relevant Standard. <b>Collector Signature:</b> <img src="'.__BASE_UPLOADED_SIGN_URL__.$sosdetarr[0]['collsign'].'"/></td>
                                     </tr>
                                     <tr>
                                         <td colspan="8">Comments or Observation: '.$sosdetarr[0]['Comments'].'</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">Nominated Client Representative: '.$sosdetarr[0]['ClientRepresentative'].'</td>
-                                        <td colspan="2">Signature: '.$sosdetarr[0]['RepresentativeSignature'].'</td>
+                                        <td colspan="2">Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$sosdetarr[0]['RepresentativeSignature'].'"/></td>
                                         <td colspan="2">Time: '.$sosdetarr[0]['RepresentativeSignatureTime'].'</td>
                                     </tr>
                                     ';
@@ -895,7 +895,7 @@ class Form_Management_Controller extends CI_Controller
     <td>ID No: '.$cocdetarr[0]['idnumber'].'</td>
 </tr>
 <tr>
-    <td colspan="8">(Optional): '.$cocdetarr[0]['lastweekq'].', I have taken the following medication, drugs, or other non-prescription agents in the last week <br />I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs. Donor Signature: '.$cocdetarr[0]['donorsign'].'</td>
+    <td colspan="8">(Optional): '.$cocdetarr[0]['lastweekq'].', I have taken the following medication, drugs, or other non-prescription agents in the last week <br />I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs. Donor Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['donorsign'].'" /></td>
 </tr>
 <tr>
     <td rowspan="2" colspan="2">Alcohol Breath Test</td>
@@ -959,7 +959,7 @@ class Form_Management_Controller extends CI_Controller
     <td colspan="8">I certify that the specimen(s) accompanying this form is my own. Where on-site screening was performed, such screening was carried out in my presence. In the case of my specimen(s) being sent to the laboratory for testing, I certify that the specimen containers were sealed with tamper evident seals in my presence and the identifying information on the label is correct. I certify that the information provided on this form to be correct and I consent to the release of all test results together with any relevant details contained on this form to the nominated representative of the requesting authority.</td>
 </tr>
 <tr>
-    <td colspan="7">Donor Signature: '.$cocdetarr[0]['donordecsign'].'</td>
+    <td colspan="7">Donor Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['donordecsign'].'"/></td>
     <td>Date: '.date('d/m/Y',strtotime($cocdetarr[0]['donordecdate'])).'</td>
 </tr>
 <tr>
@@ -973,8 +973,8 @@ class Form_Management_Controller extends CI_Controller
     <td colspan="4">Collector 2 Name/Number: '.$cocdetarr[0]['collectortwo'].'</td>
 </tr>
 <tr>
-    <td colspan="4">Signature: '.$cocdetarr[0]['collectorsignone'].'</td>
-    <td colspan="4">Signature: '.$cocdetarr[0]['collectorsigntwo'].'</td>
+    <td colspan="4">Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['collectorsignone'].'"/></td>
+    <td colspan="4">Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['collectorsigntwo'].'"/></td>
 </tr>
 <tr>
     <td colspan="4">Comments or Observation: '.$cocdetarr[0]['commentscol1'].'</td>
@@ -992,14 +992,14 @@ class Form_Management_Controller extends CI_Controller
 </tr>
 <tr>
     <td colspan="2">'.$cocdetarr[0]['receiverone'].'</td>
-    <td colspan="2">'.$cocdetarr[0]['receiveronesign'].'</td>
+    <td colspan="2"><img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['receiveronesign'].'"/></td>
     <td colspan="2">'.date('d/m/Y',strtotime($cocdetarr[0]['receiveronedate'])).' '.$cocdetarr[0]['receiveronetime'].'</td>
     <td>'.$cocdetarr[0]['receiveroneseal'].'</td>
     <td>'.$cocdetarr[0]['receiveronelabel'].'</td>
 </tr>
 <tr>
     <td colspan="2">'.$cocdetarr[0]['receivertwo'].'</td>
-    <td colspan="2">'.$cocdetarr[0]['receivertwosign'].'</td>
+    <td colspan="2"><img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['receivertwosign'].'"/></td>
     <td colspan="2">'.($cocdetarr[0]['receivertwotime']==' : 00 AM'?'':date('d/m/Y',strtotime($cocdetarr[0]['receivertwodate'])).' '.$cocdetarr[0]['receivertwotime']).'</td>
     <td>'.$cocdetarr[0]['receivertwoseal'].'</td>
     <td>'.$cocdetarr[0]['receivertwolabel'].'</td>

@@ -695,8 +695,8 @@ class Webservices_Model extends Error_Model
             ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
-            $donorsarr = $this->getdonorsbysosid($sosid);
-            array_push($row,$donorsarr);
+            //$donorsarr = $this->getdonorsbysosid($sosid);
+            //array_push($row,$donorsarr);
             return $row;
         } else {
             $this->addError("norecord", "No record found.");

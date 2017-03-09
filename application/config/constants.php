@@ -53,7 +53,7 @@ define("__APP_PATH_UPLOADS__", __APP_PATH__ . "/uploads");
 
 define("__BASE_ASSETS_URL__", __BASE_URL__ . "/assets");
 define("__APP_PATH_ASSETS__", __APP_PATH__ . "/assets");
-
+define("__BASE_UPLOADED_SIGN_URL__", __BASE_URL__ . "/uploadsign/");
 
 define("__FRANCHISEE_OWNER_PRICE_1__", 16.5);
 define("__FRANCHISEE_OWNER_PRICE_2__", 19.95);
