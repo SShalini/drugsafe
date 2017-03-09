@@ -117,7 +117,7 @@
                                       $drugtestArr = '0';  
                                     }
                                     $manualCalcDetails = $this->Ordering_Model->getManualCalculationBySosId($sosRormDetailsData['id']);
-                                    if ((!empty($manualCalcDetails) && $_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '2')) {
+                                    if ((!empty($manualCalcDetails) && $_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '2')|| ($_SESSION['drugsafe_user']['iRole'] == '5')) {
                                         if ($j == 0) { ?>
                                             <div class="row tabrow">
                                             <div class="table-responsive">
