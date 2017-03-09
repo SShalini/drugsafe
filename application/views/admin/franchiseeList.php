@@ -149,7 +149,7 @@
                                                if($franchiseeData['iActive']=='1')
                                                 {
                                                    ?>
-                                                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
+                                                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
 

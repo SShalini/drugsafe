@@ -1297,9 +1297,10 @@ class Franchisee_Controller extends CI_Controller
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseeid, $idAgent);
-     
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseeid);
        
         $data['recordArr'] = $recordArr;
+        $data['getState'] = $getState;
         $data['franchiseeid'] = $franchiseeid;
         $data['pageName'] = "Agent_Record";
         $data['szMetaTagTitle'] = "Agent Details";

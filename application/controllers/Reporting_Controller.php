@@ -1050,7 +1050,7 @@ function excelfr_stockassignlist_Data()
             $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch1', 'Franchisee Name ', 'required');
             $this->form_validation->set_rules('szSearch2', 'Product Category', 'required');
-            if($_POST['szSearch3'])
+            if($_POST['szSearch2'])
             {
                 $productAry = $this->Inventory_Model->getProductByCategory(trim($catid));
                
@@ -1190,7 +1190,7 @@ function excelfr_stockassignlist_Data()
            
                 $validPendingOrderFrDetailsAray = $this->Order_Model->getallValidPendingOrderFrDetails($searchAry);
            
-            if($_POST['szSearch3'])
+            if($_POST['szSearch2'])
             {
                 $productAry = $this->Inventory_Model->getProductByCategory(trim($catid));
                
@@ -1224,7 +1224,8 @@ function excelfr_stockassignlist_Data()
                    $data['validPendingOrderFrDetailsAray'] = $validPendingOrderFrDetailsAray; 
                     $data['szMetaTagTitle'] = "Order Details";
                     $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Orders";
+                   $data['pageName'] = "Reporting";
+                    $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
                      $data['productAry']=$productAry;
