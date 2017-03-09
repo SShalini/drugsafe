@@ -73,6 +73,8 @@ class Form_Management_Controller extends CI_Controller
             $data['franchiseearr'] = $getFranchisees;
             $data['notification'] = $count;
             $data['commentnotification'] = $commentReplyNotiCount;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "SOS_COC_Forms_Reports";
             $data['arErrorMessages'] = $this->Form_Management_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/sos-coc-formdetails.php');
@@ -96,6 +98,8 @@ class Form_Management_Controller extends CI_Controller
             $data['Site'] = $SiteDets[0];
             $data['TestList'] = $getTestList;
             $data['franchiseearr'] = $getFranchisees;
+             $data['pageName'] = "Reporting";
+            $data['subpageName'] = "SOS_COC_Forms_Reports";
             $data['franchiseearr'] = $getFranchisees;
             $data['notification'] = $count;
             $data['commentnotification'] = $commentReplyNotiCount;

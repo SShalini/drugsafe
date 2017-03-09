@@ -197,7 +197,7 @@
                                                         Proforma Invoice Date
                                                     </th>
                                                     <th>
-                                                        Client Id
+                                                        Client Code
                                                     </th>
                                                     <th>
                                                         Client Name
@@ -222,6 +222,7 @@
                                                 foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
                                                     $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                                                     $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+                                                    $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($getClientDetails['id']);
                                                     $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
                                                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
                                                     $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
@@ -261,10 +262,7 @@
                                                             <?php echo  date("d-m-Y", strtotime($getManualCalcData['dtCreatedOn']));?>
                                                            
                                                         </td>
-                                                        <td>
-                                                           CL- <?php echo  $getClientDetails['id'];?>
-                                                           
-                                                        </td>
+                                                         <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
                                                         <td>
                                                             <?php echo $userDataAry['szName'] ?>
                                                         </td>

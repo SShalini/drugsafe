@@ -1807,21 +1807,27 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('E1', 'No. of Products');
+        
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Status');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Order Cost');
+        
+        $this->excel->getActiveSheet()->setCellValue('F1', ' No. of Products');
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('G1', 'Xero Invoice No.');
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Order Cost');
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('H1', 'Xero Invoice No.');
+        $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('H1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         $searchAry['szSearch1'] = $this->session->userdata('szSearch1');
         $searchAry['szSearch2'] = $this->session->userdata('szSearch2');
@@ -1847,7 +1853,7 @@ function excelfr_stockassignlist_Data()
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeDetArr1['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, date('d M Y',strtotime($item['createdon'])) . ' at '.date('h:i A',strtotime($item['createdon'])));
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, '#'.sprintf(__FORMAT_NUMBER__, $item['orderid']));
-                 $this->excel->getActiveSheet()->setCellValue('E'.$i,$status);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i,$status);
                 $this->excel->getActiveSheet()->setCellValue('F'.$i,$item['totalproducts']);
                 $this->excel->getActiveSheet()->setCellValue('G'.$i,'$'.($item['price']>0?number_format($item['price'],2,'.',','):'0.00'));
                 $this->excel->getActiveSheet()->setCellValue('H'.$i,(!empty($item['XeroIDnumber'])?$item['XeroIDnumber']:'N/A'));
@@ -1873,21 +1879,27 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('D1', 'No. of Products');
+        
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Status');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Order Cost');
+        
+        $this->excel->getActiveSheet()->setCellValue('E1', 'No. of Products');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('F1', 'Xero Invoice No.');
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Order Cost');
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Xero Invoice No.');
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
       
         $searchAry['szSearch1'] = $this->session->userdata('szSearch1');
@@ -2770,12 +2782,9 @@ function excelfr_stockassignlist_Data()
         $testtype = (isset($_POST['szSearch4'])?$_POST['szSearch4']:'');
         $drugtesttype = ($testtype == 'A'?'1':($testtype=='O'?'2':($testtype=='U'?'3':($testtype=='AZ'?'4':'5'))));
         $comparetype = (isset($_POST['szSearch5'])?$_POST['szSearch5']:'');
-        if(!empty($clientid)){
-            $clientarr = $this->Webservices_Model->getclientdetails($franchiseeid);
-        }
-        if(!empty($siteid)){
-            $sitearr = $this->Webservices_Model->getclientdetails($franchiseeid,$clientid);
-        }
+        $clientarr = $this->Webservices_Model->getclientdetails($franchiseeid);
+        $sitearr = $this->Webservices_Model->getclientdetails($franchiseeid,$clientid);
+     
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szSearch1', 'Franchisee Name ', 'required');
         $this->form_validation->set_rules('szSearch2', 'Client Name', 'required');
@@ -2832,7 +2841,7 @@ function excelfr_stockassignlist_Data()
             }
             
             $clientAry = $this->Franchisee_Model->viewClientList(true,$_POST['idFranchisee']);
-$clientid = $_POST['idclient'];
+        $clientid = $_POST['idclient'];
         $siteid = $_POST['idsite'];
         $result = '<select class="form-control abc custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
       	if(!empty($clientAry))

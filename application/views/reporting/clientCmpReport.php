@@ -80,7 +80,7 @@
                                             $selected = ($allFrDetailsSearchList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
                                             if($allFrDetailsSearchList['id'] == $_POST['szSearch1']){ ?>
                                         <script type="text/javascript">
-                                            setTimeout(function(){getClientListByFrIdData('<?php echo $_POST['szSearch1'];?>');},1000);
+                                            setTimeout(function(){getClientListByFrIdData('<?php echo $_POST['szSearch1'];?>');},50000);
                                         
                                         </script>
                                             <?php }
@@ -100,7 +100,7 @@
                             <?php }elseif($_SESSION['drugsafe_user']['iRole'] == 2){?>
                             <input type="hidden" name="szSearch1" value="<?php echo $_SESSION['drugsafe_user']['id'];?>" />
                             <script type="text/javascript">
-                                setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>');},1000);
+                                setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>');},50000);
 
                             </script>
                         <?php } ?>
