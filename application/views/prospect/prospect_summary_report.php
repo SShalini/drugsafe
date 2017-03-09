@@ -86,7 +86,7 @@
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
 
                               <?php  if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){     ?>
-                                   <div class="col-md-3">
+                                   <div class="  col-md-3">
                        
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchfr']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onchange="remove_formError(this.id,'true')">
@@ -112,11 +112,9 @@
                              </span><?php }?> 
                         </div>
                     </div>
-                    <div class="col-md-1">
-                       
-                           </div>
+                   
                      <?php }?>  
-                                <div class="search col-md-3">
+                                <div class=" col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchStatus" onfocus="remove_formError(this.id,'true')">
                                          

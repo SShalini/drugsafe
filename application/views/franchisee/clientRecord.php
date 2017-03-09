@@ -101,12 +101,12 @@
                     <?php
                     if (($_SESSION['drugsafe_user']['iRole'] == '5')||($_SESSION['drugsafe_user']['iRole'] == '1')) {
                         ?>
-                        <div class="row">
+                        <div class=" search row">
                             <form class="form-horizontal" id="szSearchClientRecord"
                                   action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                                   method="post">
 
-                                <div class="search col-md-3">
+                                <div class=" col-md-3">
 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
@@ -130,8 +130,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-1" style="text-align: center; padding: 5px 0px;"></div>
-                                <div class="search col-md-3">
+                                <div class=" col-md-3">
                                     <div id='szClient'>
                                         <select class="form-control custom-select" name="szSearchClRecord1"
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
@@ -157,6 +156,7 @@
 
                         if (!empty($clientAry)) {
                             ?>
+                    
                             <div class="portlet-title">
                                 <div class="caption">
                                     <i class="icon-equalizer font-red-sunglo"></i>

@@ -49,7 +49,7 @@
                                   action="<?= __BASE_URL__ ?>/reporting/view_revenue_summery_client" method="post">
                                 <div class="row">
                                    
-                                <div class="search col-md-3">
+                                <div class=" col-md-3">
 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
@@ -72,8 +72,6 @@
                                         ?>
                                     </select>
                                 </div>
-
-                                <div class="col-md-1"></div>
                                 <div class="search col-md-3">
                                     <div id='szClient'>
                                         <select class="form-control custom-select" name="szSearchClRecord1"
@@ -89,8 +87,6 @@
                                         </select>
                                     </div>
                                 </div>
-                                  <div class="col-md-1">
-                                   </div>
                                     <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['dtStart']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -152,9 +148,6 @@
                                             </span>
                                             <?php } ?>
                                         </div>
-                                    </div>
-                                      <div class="col-md-1">
-                                        
                                     </div>
                                      <div class="col-md-3">
                                         <div class="form-group">

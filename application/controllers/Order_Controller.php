@@ -385,13 +385,14 @@ class Order_Controller extends CI_Controller
         $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
         $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
 
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
             $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
             $data['szMetaTagTitle'] = "Order Details";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
@@ -408,6 +409,7 @@ class Order_Controller extends CI_Controller
             $data['szMetaTagTitle'] = "Order Details";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
             $data['notification'] = $count;
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
@@ -955,7 +957,7 @@ $html .= '
         $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
         $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
 
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
             $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;

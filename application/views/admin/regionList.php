@@ -22,12 +22,12 @@
                                 </div>
                             </div>
                         </div>
-                         <div class="row">
+                         <div class=" search row">
                             <form class="form-horizontal" id="szSearchRegionRecord"
                                   action="<?= __BASE_URL__ ?>/admin/regionManagerList" name="szSearchRegionRecord"
                                   method="post">
-
-                                <div class="search col-md-3">
+                
+                                <div class="col-md-3">
 
                                     <select class="form-control custom-select" name="szSearchstate"
                                             id="szSearchstate" onblur="remove_formError(this.id,'true')"
@@ -45,8 +45,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-1" style="text-align: center; padding: 5px 0px;"></div>
-                                <div class="search col-md-3">
+                                <div class="col-md-3">
                                     <div id='szRegion'>
                                         <select class="form-control custom-select" name="szSearchRegionName"
                                                 id="szSearchRegionName" onfocus="remove_formError(this.id,'true')">
@@ -61,9 +60,7 @@
                                         </select>
                                     </div>
                                 </div>
-                               <div class="col-md-1">
-                               
-                               </div>
+                              
                                 <div class="col-md-1">
                                     <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                                 </div>

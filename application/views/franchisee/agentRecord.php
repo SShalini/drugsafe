@@ -51,7 +51,7 @@
                         </div>
                              <?php }?>
                         </div>
-                        <div class="row">
+                        <div class=" row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
                            <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){?>
                                   <div class="search col-md-3">
@@ -74,10 +74,10 @@
                                           ?>
                                       </select>
                                     </div>
-                                   <div class=" col-md-1"> </div>
+                                  
                              <?php }?>
                                   
-                                  <div class="search col-md-3">
+                                  <div class="col-md-3">
                                         <div id='szAgent'>                         
                                       <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Agent/Employee Name</option>

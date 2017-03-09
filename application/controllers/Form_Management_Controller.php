@@ -68,7 +68,7 @@ class Form_Management_Controller extends CI_Controller
         $this->form_validation->set_rules('szSearch1', 'Franchisee Name', 'required');
         $this->form_validation->set_rules('szSearch2', 'Client Name', 'required');
         $this->form_validation->set_rules('szSearch3', 'Company Name/site', 'required');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['franchiseearr'] = $getFranchisees;
             $data['notification'] = $count;

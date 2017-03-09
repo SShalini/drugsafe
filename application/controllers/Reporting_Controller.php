@@ -1056,7 +1056,7 @@ function excelfr_stockassignlist_Data()
                
             }
             
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             {  
                     $data['validOrdersDetailsAray'] = $validOrdersDetailsAray; 
@@ -1199,7 +1199,7 @@ function excelfr_stockassignlist_Data()
             $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch2', 'Product Category', 'required');
             
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             {  
                     $data['validPendingOrderFrDetailsAray'] = $validPendingOrderFrDetailsAray;
@@ -2284,7 +2284,7 @@ function excelfr_stockassignlist_Data()
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$_POST['szFranchisee']);
             
         }
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
             $data['szMetaTagTitle'] = "Revenue Generate";
@@ -2342,7 +2342,7 @@ function excelfr_stockassignlist_Data()
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$idfranchisee);
            
         }
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
             $data['szMetaTagTitle'] = "Revenue Generate";
@@ -2403,7 +2403,7 @@ function excelfr_stockassignlist_Data()
         $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
         $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
        
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             
             $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
@@ -2782,7 +2782,7 @@ function excelfr_stockassignlist_Data()
         $this->form_validation->set_rules('szSearch3', 'Company Name/Site ', 'required');
         $this->form_validation->set_rules('szSearch4', 'Test Type', 'required');
         $this->form_validation->set_rules('szSearch5', 'Compare Data ', 'required');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE){
 
             $data['szMetaTagTitle'] = "Client Comparison Report";
@@ -2901,7 +2901,7 @@ $clientid = $_POST['idclient'];
 	$this->load->library('form_validation');
         $this->form_validation->set_rules('dtStart', 'Start Industry date ', 'required');
         $this->form_validation->set_rules('dtEnd', 'End Industry date', 'required');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
             $data['szMetaTagTitle'] = "Industry Report";
@@ -3530,7 +3530,7 @@ $clientid = $_POST['idclient'];
         $this->form_validation->set_rules('dtStart', 'Start Revenue date ', 'required');
         $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required');
        
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             
            

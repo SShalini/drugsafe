@@ -297,7 +297,7 @@ public function deleteProspectConfirmation()
             }
             $this->load->library('form_validation');
             $this->form_validation->set_rules('meetingNotesData[szDiscription]', 'Meeting Note', 'required');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             { 
                
@@ -384,7 +384,7 @@ public function deleteProspectConfirmation()
            
             $this->load->library('form_validation');
             $this->form_validation->set_rules('changeStatus[status]', 'Status', 'required');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
            {
            ?>
@@ -909,7 +909,7 @@ public function deleteProspectConfirmation()
             
            
             
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             { 
                     $data['szMetaTagTitle'] = "Sales CRM Summary Report";
@@ -1175,7 +1175,7 @@ public function deleteProspectConfirmation()
             $this->form_validation->set_rules('szSearch3', 'Franchisee Name ', 'required');
             
             
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             { 
                     $data['szMetaTagTitle'] = "Sales CRM Summary Report";

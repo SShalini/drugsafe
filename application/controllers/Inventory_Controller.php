@@ -41,7 +41,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
@@ -85,7 +85,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             { 
@@ -133,7 +133,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
@@ -205,7 +205,7 @@ class Inventory_Controller extends CI_Controller {
              $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -403,7 +403,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -478,7 +478,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             {

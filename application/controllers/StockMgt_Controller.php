@@ -175,7 +175,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('addModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addModelStockValue[szProductCode]', 'Product Code');
             $this->form_validation->set_rules('addModelStockValue[szModelStockVal]', 'Model Stock Value','trim|required|greater_than[0]|less_than_equal_to[1000]');
-             $this->form_validation->set_message('required', '{field} is required');
+             $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -276,7 +276,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('editModelStockValue[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('editModelStockValue[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('editModelStockValue[szModelStockVal]', 'Model Stock Value', 'required|numeric|greater_than[0]|less_than_equal_to[1000]');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -429,7 +429,7 @@ class StockMgt_Controller extends CI_Controller {
             $this->form_validation->set_rules('addProductStockQty[szName]', 'Product Category', 'required');
             $this->form_validation->set_rules('addProductStockQty[szProductCode]', 'Product Code', 'required');
             $this->form_validation->set_rules('addProductStockQty[szQuantity]', 'Quantity', 'required|numeric|greater_than[0]|less_than_equal_to[1000]');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -551,7 +551,7 @@ class StockMgt_Controller extends CI_Controller {
             else{
              $this->form_validation->set_rules('editProductStockQty[szAddMoreQuantity]', 'Add More Quantity', 'required|numeric|less_than_equal_to[1000]');
             }
-             $this->form_validation->set_message('required', '{field} is required');
+             $this->form_validation->set_message('required', '{field} is required.');
              
             if ($this->form_validation->run() == FALSE)
             {
@@ -624,7 +624,7 @@ class StockMgt_Controller extends CI_Controller {
 
             $this->form_validation->set_rules('requestQuantity[szQuantity]','Request Quantity','trim|required|numeric|integer|greater_than[0]|less_than[1000]|callback_requestQuantity_check');
 
-             $this->form_validation->set_message('required', '{field} is required');
+             $this->form_validation->set_message('required', '{field} is required.');
 
             if ($this->form_validation->run() == FALSE)
            {
@@ -836,6 +836,7 @@ class StockMgt_Controller extends CI_Controller {
 
            $this->load->library('form_validation');
            $this->form_validation->set_rules('allotQuantity[szReqQuantity]', 'Request Quantity', 'required');
+           $this->form_validation->set_message('required', '{field} is required.');
             $QtyReqArr =  $this->StockMgt_Model->getQtyReqById($idProduct,$idfranchisee);
                 $i=0;
                 $reqId = $QtyReqArr[$i]['id'];
@@ -851,7 +852,7 @@ class StockMgt_Controller extends CI_Controller {
               }
            $qty =  (int)$data_validate['szReqQuantity']-$total ;
            $this->form_validation->set_rules('allotQuantity[szAddMoreQuantity]', 'Assign Quantity', 'trim|required|numeric|integer|greater_than_equal_to[0]|less_than_equal_to['.$qty.']');
-            $this->form_validation->set_message('required', '{field} is required');
+            $this->form_validation->set_message('required', '{field} is required.');
            
           
             if ($this->form_validation->run() == FALSE)

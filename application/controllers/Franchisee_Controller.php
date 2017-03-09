@@ -727,7 +727,7 @@ class Franchisee_Controller extends CI_Controller
         $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
         $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
         $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['pageName'] = "Agent_Record";
             $data['szMetaTagTitle'] = "Add Agent";
@@ -811,7 +811,7 @@ class Franchisee_Controller extends CI_Controller
         $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
         $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
         $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['szMetaTagTitle'] = "Edit Client Details ";
             $data['pageName'] = "Agent_Record";
@@ -1068,7 +1068,7 @@ class Franchisee_Controller extends CI_Controller
         $agentAssignedClientDetails = $this->Franchisee_Model->getfranchiseeagentclients($franchiseId,$idAgent);
         $this->load->library('form_validation');
         $this->form_validation->set_rules('assignClient[szClient]', 'Client', 'required');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             ?>
             <div id="assignClientPopupform" class="modal fade" tabindex="-2" data-backdrop="static"
@@ -1336,7 +1336,7 @@ class Franchisee_Controller extends CI_Controller
         $NonCorpFranchiseeArr = $this->Franchisee_Model->getNonCorpFranchisee();
         $this->load->library('form_validation');
         $this->form_validation->set_rules('assignfrClient[szFranchisee]', 'Franchisee', 'required');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             ?>
             <div id="assignfrClientPopupform" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">

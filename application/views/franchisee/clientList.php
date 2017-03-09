@@ -234,8 +234,8 @@
                                           ?>
                                       </select>
                                   </div>-->
-                                  <div class="col-md-1">
-                                      <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                                   <div class="col-md-1">
+                                  <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
                            </form>
                           </div>

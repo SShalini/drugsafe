@@ -102,7 +102,7 @@ class Ordering_Controller extends CI_Controller
         if(!empty($data['cancellationFee'])){
             $this->form_validation->set_rules('orderingData[cancellationFee]', 'Cancellation Fee', 'required|numeric');
         }
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['sosid'] = $sosid;
             $data['idsite'] = $idsite;
@@ -288,7 +288,7 @@ class Ordering_Controller extends CI_Controller
         if(!empty($data_validate['cancelfee'])){
             $this->form_validation->set_rules('orderingData[cancelfee]', 'Cancellation Fee', 'required|numeric');
         }
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
            if ($this->form_validation->run() == FALSE) {
         
           
@@ -607,7 +607,7 @@ class Ordering_Controller extends CI_Controller
             $this->form_validation->set_rules('createDiscount[percentage]', 'Discount Percentage', 'required|is_numeric|maximumCheck');
             $this->form_validation->set_rules('createDiscount[description]', 'Description', 'required');
             $this->form_validation->set_message('maximumCheck', ' %s field must be less than 100.');
-           
+            $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
             { 
@@ -665,6 +665,7 @@ class Ordering_Controller extends CI_Controller
             $this->form_validation->set_rules('editDiscount[percentage]', 'Discount Percentage', 'required|is_numeric|maximumCheck');
             $this->form_validation->set_rules('editDiscount[description]', 'Description', 'required');
             $this->form_validation->set_message('maximumCheck', ' %s field must be less than 100.');
+             $this->form_validation->set_message('required', '{field} is required.');
              if ($this->form_validation->run() == FALSE)
             { 
                 $data['szMetaTagTitle'] = "Edit Discount";

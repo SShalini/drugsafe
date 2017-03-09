@@ -71,9 +71,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
-
-                                </div>
+                                
 
                                 <div class="col-md-3">
                                     <div class="form-group ">
@@ -89,9 +87,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
-
-                                </div>
+                              
                                 <div class="col-md-3">
                                     <div
                                         class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
@@ -157,8 +153,7 @@
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div class="col-md-1">
-                                </div>
+                             
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <button class="btn green-meadow" type="submit"><i

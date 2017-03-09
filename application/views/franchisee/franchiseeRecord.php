@@ -184,23 +184,9 @@
                         ?>
                      <div class="row">
                               <form class="form-horizontal" id="szSearchFranchiseeList" action="<?=__BASE_URL__?>/franchisee/franchiseeRecord" name="szSearchFranchiseeList" method="post">
-<!--                          <div class="search col-md-3">
-                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
-                              <select class="form-control custom-select" name="szSearch1" id="szSearch" onfocus="remove_formError(this.id,'true')">
-                                  <option value="">Franchisee Id</option>
-                                  <?php
-                                      foreach($allfranchisee as $franchiseeIdList)
-                                      {
-                                          $selected = ($franchiseeIdList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                          echo '<option value="'.$franchiseeIdList['id'].'" >FR-'.$franchiseeIdList['id'].'</option>';
-                                      }
-                                  ?>
-                              </select>
-                          </div>
-                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
-<!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+
                                   <div class="search col-md-3">
-                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
+                                  
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
@@ -212,20 +198,7 @@
                                           ?>
                                       </select>
                                   </div>
-<!--                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
-                                  <div class="search col-md-3">
-                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
-                                      <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Franchisee Email</option>
-                                          <?php
-                                          foreach($allfranchisee as $franchiseeIdList)
-                                          {
-                                              $selected = ($franchiseeIdList['szEmail'] == $_POST['szSearch'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$franchiseeIdList['szEmail'].'" >'.$franchiseeIdList['szEmail'].'</option>';
-                                          }
-                                          ?>
-                                      </select>
-                                  </div>-->
+
                                   <div class="col-md-1">
                                   <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>

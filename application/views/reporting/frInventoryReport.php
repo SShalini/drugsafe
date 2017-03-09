@@ -77,9 +77,7 @@
                         
                     <div class="row">
                       <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/frInventoryReport" method="post">
-                
-                 
-                                      <div class="col-md-3">
+                    <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             
                               <select class="form-control custom-select" name="szSearch2" id="szSearch2" onblur="remove_formError(this.id,'true')" onchange="getProductCodeListByCategory(this.value);">
@@ -95,7 +93,7 @@
                            
                         </div>
                     </div>
-                    <div class="col-md-1"></div>
+                 
 			<div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szIndustry']) != '') { ?>has-error<?php } ?>">
                             <div id='szProductCode'>

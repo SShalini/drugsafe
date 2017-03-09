@@ -83,7 +83,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                 <div class="col-md-1"> </div>
+                                
                                    <div class="col-md-3">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch2" id="szSearch2"
@@ -98,7 +98,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                  <div class="col-md-1"> </div>
+                                
                                     <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -128,10 +128,7 @@
                                         </div>
 
                                     </div>
-                               
-                                    </div>
-                                     <div class="row">
-                                           <div class="col-md-3">
+                                   <div class="col-md-3">
                                       <div
                                             class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -160,8 +157,10 @@
                                             <?php } ?>
                                         </div> 
                                                </div>
-                                     <div class="col-md-1"> </div>
                                      
+                                    </div>
+                                     <div class="row">
+                                       
                                      <div class="col-md-3">
                                 <div class="form-group ">
                                     <select class="form-control custom-select" name="szSearch3" id="szSearch3"
@@ -181,9 +180,7 @@
                           
                                 </div>
                                </div>
-                                   <div class="col-md-1">
-                                       
-                                    </div>
+                                  
                                     <div class="col-md-1">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i

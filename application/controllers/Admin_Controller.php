@@ -231,7 +231,7 @@ class Admin_Controller extends CI_Controller
         $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
         $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
         $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
-        $this->form_validation->set_message('required', '{field} is required');
+        $this->form_validation->set_message('required', '{field} is required.');
 
         if ($this->form_validation->run() == FALSE) {
             $data['idOperationManager'] = $idOperationManager;
@@ -841,7 +841,7 @@ class Admin_Controller extends CI_Controller
         $this->load->library('form_validation');
         $this->form_validation->set_rules('addRegion[szState]', 'State', 'required');
         $this->form_validation->set_rules('addRegion[szRegionName]', 'Region Name', 'required');
-
+        $this->form_validation->set_message('required', '{field} is required.');
 
         if ($this->form_validation->run() == FALSE) {
             $data['szMetaTagTitle'] = "add Region";
@@ -922,7 +922,7 @@ class Admin_Controller extends CI_Controller
         $this->load->library('form_validation');
         $this->form_validation->set_rules('editRegion[stateId]', 'State', 'required');
         $this->form_validation->set_rules('editRegion[regionName]', 'Region Name', 'required');
-
+        $this->form_validation->set_message('required', '{field} is required.');
 
         if ($this->form_validation->run() == FALSE) {
             $_POST['editRegion'] = $getRegionData;
