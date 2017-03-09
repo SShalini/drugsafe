@@ -92,7 +92,7 @@ class Webservices_Controller extends CI_Controller
                 "dataarr"=>$userDetailsArr);
             header('Content-Type: application/json');
         }else{
-                $responsedata = array("code" => 111,"message"=>$userDetailsArr);
+                $responsedata = array("code" => 111,"message"=>"Bad Request.");
                 header('Content-Type: application/json');
         }
         echo json_encode($responsedata);
@@ -890,7 +890,7 @@ class Webservices_Controller extends CI_Controller
             if($updatecartstatus){
                 $responsedata = array("code" => 200,"message"=>"Cart updated successfully.");
             }else{
-                $responsedata = array("code" => 201,"message"=>"Something goes wrong. Please try again.");
+                $responsedata = array("code" => 201,"message"=>"Minimum quantity allowed is 25. Enter valid quantity to proceed further.");
             }
             header('Content-Type: application/json');
             echo json_encode($responsedata);
@@ -1072,5 +1072,481 @@ class Webservices_Controller extends CI_Controller
             }
         };
         //print $success ? $file : 'Unable to save the file.';
+    }
+
+    function uploadcocdata(){
+        define('UPLOAD_DIR', 'uploadsign/');
+        $img = $_POST['imgBase64'];
+        $cocid = $_POST['cocid'];
+        $fieldname = $_POST['fieldname'];
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $data = base64_decode($img);
+        $imgname = date('d-m-Y-H-i-s') .'-'.uniqid() . '.png';
+        $file = UPLOAD_DIR .$imgname;
+        $success = file_put_contents($file, $data);
+        if($success){
+            if($this->Webservices_Model->savecocsign($cocid,$imgname,$fieldname)){
+                return $success;
+            }else{
+                return false;
+            }
+        };
+    }
+
+    public function sosformpdf()
+    {
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $sosid = !empty($jsondata->sosid) ? $jsondata->sosid : "0";
+        ob_start();
+        define('UPLOAD_DIR', 'uploadsign/');
+        $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe SOS Form Details');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('SOS Form PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 10, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM - 10);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+
+        $pdf->AddPage('L');
+
+        //$sosid = $this->session->userdata('sosid');
+        $sosdetarr = $this->Webservices_Model->getsosformdatabysosid($sosid);
+        $sosuserdets = $this->Webservices_Model->getuserhierarchybysiteid($sosdetarr[0]['Clientid']);
+        $franchiseeDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['franchiseeId']);
+        $ClientDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['clientType']);
+        $SiteDets = $this->Webservices_Model->getuserdetails($sosdetarr[0]['Clientid']);
+        $testtypesarr = explode(',',$sosdetarr[0]['Drugtestid']);
+        $donorsarr = $this->Webservices_Model->getdonorsbysosid($sosid);
+        if(!empty($testtypesarr)){
+            if($testtypesarr[0]=='1'){
+                $alchohol = true;
+            }else if($testtypesarr[0]=='2'){
+                $oral = true;
+            }else if($testtypesarr[0]=='3'){
+                $urineasnza = true;
+            }else if($testtypesarr[0]=='4'){
+                $asnza = true;
+            }
+
+            if($testtypesarr[1]=='1'){
+                $alchohol = true;
+            }else if($testtypesarr[1]=='2'){
+                $oral = true;
+            }else if($testtypesarr[1]=='3'){
+                $urineasnza = true;
+            }else if($testtypesarr[1]=='4'){
+                $asnza = true;
+            }
+
+            if($testtypesarr[2]=='1'){
+                $alchohol = true;
+            }else if($testtypesarr[2]=='2'){
+                $oral = true;
+            }else if($testtypesarr[2]=='3'){
+                $urineasnza = true;
+            }else if($testtypesarr[2]=='4'){
+                $asnza = true;
+            }
+
+            if($testtypesarr[3]=='1'){
+                $alchohol = true;
+            }else if($testtypesarr[3]=='2'){
+                $oral = true;
+            }else if($testtypesarr[3]=='3'){
+                $urineasnza = true;
+            }else if($testtypesarr[3]=='4'){
+                $asnza = true;
+            }
+        }
+
+        $drugteststring = '';
+        if($alchohol){
+            $drugteststring = 'Alcohol, ';
+        }
+        if($oral){
+            $drugteststring .= 'Oral Fluid AS 4760:2006, ';
+        }
+        if($urineasnza){
+            $drugteststring .= 'Urine AS/NZA 4308:2001, ';
+        }
+        if($asnza){
+            $drugteststring .= 'AS/NZA 4308:2008, ';
+        }
+        $drugteststring = substr(trim($drugteststring),0,-1);
+
+        $html = '<a style="text-align:center;  margin-bottom:0px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:0px; color:black"><b>SOS Details</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                    <td colspan="4" rowspan="4"><h2>SUMMARY OF SERVICE</h2><h3><i>Strictly Confidential</i></h3></td>
+                                    <td colspan="2" rowspan="4"><h1>'.$franchiseeDets[0]['szName'].'</h1></td>
+                                    <td colspan="2">T: '.$franchiseeDets[0]['szContactNumber'].'</td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2">Address: '.$franchiseeDets[0]['szAddress'].' '.$franchiseeDets[0]['szCity'].' '.$franchiseeDets[0]['szCountry'].'</td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2">ABN: '.$franchiseeDets[0]['abn'].'</td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2">Email: '.$franchiseeDets[0]['szEmail'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6">Requesting Client: '.$ClientDets[0]['szName'].'</td>
+                                        <td colspan="2">Date: '.date('d/m/Y',strtotime($sosdetarr[0]['testdate'])).'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8">Site Location: '.$SiteDets[0]['szName'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8">'.$drugteststring.'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">Service Commenced: '.$sosdetarr[0]['ServiceCommencedOn'].'</td>
+                                        <td colspan="4">Service Concluded: '.$sosdetarr[0]['ServiceConcludedOn'].'</td>
+                                    </tr>';
+        if(!empty($donorsarr)){
+            $html .='<tr>
+                                                <td><b>#</b></td>
+                                                <td colspan="3"><b>Donor Name</b></td>
+                                                <td><b>Result*</b></td>
+                                                <td><b>Drug</b></td>
+                                                <td><b>Alcohol**</b></td>
+                                                <td><b>Lab</b></td>
+                                            </tr>';
+            $count = 1;
+            foreach ($donorsarr as $donors){
+                $drugs = '';
+                $drugarr = explode(',',$donors['drug']);
+                if($drugarr[0] == '1'){
+                    $drugs .= 'Ice<br>';
+                }else if($drugarr[1] == '1'){
+                    $drugs .= 'Marijuana<br>';
+                }else if($drugarr[2] == '1'){
+                    $drugs .= 'Heroin<br>';
+                }else if($drugarr[3] == '1'){
+                    $drugs .= 'Cocain<br>';
+                }
+
+                if($drugarr[0] == '2'){
+                    $drugs .= 'Ice<br>';
+                }else if($drugarr[1] == '2'){
+                    $drugs .= 'Marijuana<br>';
+                }else if($drugarr[2] == '2'){
+                    $drugs .= 'Heroin<br>';
+                }else if($drugarr[3] == '2'){
+                    $drugs .= 'Cocain<br>';
+                }
+
+                if($drugarr[0] == '3'){
+                    $drugs .= 'Ice<br>';
+                }else if($drugarr[1] == '3'){
+                    $drugs .= 'Marijuana<br>';
+                }else if($drugarr[2] == '3'){
+                    $drugs .= 'Heroin<br>';
+                }else if($drugarr[3] == '3'){
+                    $drugs .= 'Cocain<br>';
+                }
+
+                if($drugarr[0] == '4'){
+                    $drugs .= 'Ice<br>';
+                }else if($drugarr[1] == '4'){
+                    $drugs .= 'Marijuana<br>';
+                }else if($drugarr[2] == '4'){
+                    $drugs .= 'Heroin<br>';
+                }else if($drugarr[3] == '4'){
+                    $drugs .= 'Cocain<br>';
+                }
+                $alcoholread1 = '';
+                $alcoholread2 = '';
+                if($donors['alcoholreading1']!=''){
+                    $alcoholread1 = $donors['alcoholreading1'];
+                }
+                if($donors['alcoholreading2']!=''){
+                    $alcoholread2 = $donors['alcoholreading2'];
+                }
+                $html .='<tr>
+                                                <td>'.$count.'</td>
+                                                <td colspan="3">'.$donors['donerName'].'</td>
+                                                <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'P':'N').'</td>
+                                                <td>'.($drugs != ''?$drugs:'N/A').'</td>
+                                                <td>Reading One:'.($alcoholread1 != ''?$alcoholread1:'N/A').'<br/>Reading Two:'.($alcoholread2 != ''?$alcoholread2:'N/A').'</td>
+                                                <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'Y':'N').'</td>
+                                            </tr>';
+                $count++;
+            }
+        }
+        $html .='<tr>
+                                        <td colspan="3">* U = Result requiring further testing N = Negative<br />** P = Positive N = Negative</td>
+                                        <td>Urine</td>
+                                        <td>Oral</td>
+                                        <td colspan="2">Total No Alcohol Screen</td>
+                                        <td colspan="1">'.$sosdetarr[0]['TotalAlcoholScreening'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Total Donor Screenings/Collections</td>
+                                        <td>'.$sosdetarr[0]['TotalDonarScreeningUrine'].'</td>
+                                        <td>'.$sosdetarr[0]['TotalDonarScreeningOral'].'</td>
+                                        <td colspan="2">Negative Alcohol</td>
+                                        <td colspan="1">'.$sosdetarr[0]['NegativeAlcohol'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Negative Results</td>
+                                        <td>'.$sosdetarr[0]['NegativeResultUrine'].'</td>
+                                        <td>'.$sosdetarr[0]['NegativeResultOral'].'</td>
+                                        <td colspan="2">Positive Alcohol</td>
+                                        <td colspan="1">'.$sosdetarr[0]['PositiveAlcohol'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Results Requiring Further Testing</td>
+                                        <td>'.$sosdetarr[0]['FurtherTestUrine'].'</td>
+                                        <td>'.$sosdetarr[0]['FurtherTestOral'].'</td>
+                                        <td colspan="2">Refusals, No Shows or Other</td>
+                                        <td colspan="1">'.$sosdetarr[0]['Refusals'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Device Name: '.$sosdetarr[0]['DeviceName'].'</td>
+                                        <td colspan="2">Extra Used: '.$sosdetarr[0]['ExtraUsed'].'</td>
+                                        <td colspan="3">Breath Testing Unit: '.$sosdetarr[0]['BreathTesting'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8">I\'ve conducted the alcohol and/or drug screening/collection service detailed above and confirm that all procedures were undertaken in accordance with the relevant Standard. <b>Collector Signature:</b> <img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$sosdetarr[0]['collsign'].'" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8">Comments or Observation: '.$sosdetarr[0]['Comments'].'</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4">Nominated Client Representative: '.$sosdetarr[0]['ClientRepresentative'].'</td>
+                                        <td colspan="2">Signature: <img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$sosdetarr[0]['RepresentativeSignature'].'" /></td>
+                                        <td colspan="2">Time: '.$sosdetarr[0]['RepresentativeSignatureTime'].'</td>
+                                    </tr>
+                                    ';
+        $html .= '
+                            </table>
+                        </div>                      
+                        ';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        ob_end_clean();
+        $pdfname = 'view_sos_details-'.date('d-m-Y-H-i-s') .'-'.uniqid() . '.pdf';
+        $pdf->Output(__APP_PATH__.'/'.UPLOAD_DIR.$pdfname, 'F');
+        $responsedata = array("code" => 200,"file"=>__BASE_URL__.'/uploadsign/'.$pdfname);
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+        }
+
+    public function cocformpdf()
+    {
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $cocid = !empty($jsondata->cocid) ? $jsondata->cocid : "0";
+        ob_start();
+        define('UPLOAD_DIR', 'uploadsign/');
+        $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe COC Form Details');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('COC Form PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 10, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM - 10);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+
+        $pdf->AddPage('L');
+
+        //$cocid = $this->session->userdata('cocid');
+        $cocdetarr = $this->Webservices_Model->getcocdatabycocid($cocid);
+        $sosdetarr = $this->Webservices_Model->getsosdatabycocid($cocid,1,1);
+        $sosuserdets = $this->Webservices_Model->getuserhierarchybysiteid($sosdetarr[0]['Clientid']);
+        //echo 'Hi '.$sosuserdets[0]['franchiseeId'];
+        $franchiseeDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['franchiseeId']);
+        $ClientDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['clientType']);
+        $SiteDets = $this->Webservices_Model->getuserdetails($sosdetarr[0]['Clientid']);
+        if(!empty($cocdetarr[0]['drugtest'])){
+            $drugtype = explode(',',$cocdetarr[0]['drugtest']);
+        }
+        $html = '<a style="text-align:center;  margin-bottom:0px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:0px; color:black"><b>COC Details</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                    <td colspan="4"><h2>CHAIN OF CUSTODY FORM</h2></td>
+                                    <td colspan="2" rowspan="4"><h1>'.$franchiseeDets[0]['szName'].'</h1></td>
+                                    <td colspan="2">T: '.$franchiseeDets[0]['szContactNumber'].'</td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="4" rowspan="3"></td>                                   
+                                    <td colspan="2">Address: '.$franchiseeDets[0]['szAddress'].' '.$franchiseeDets[0]['szCity'].' '.$franchiseeDets[0]['szCountry'].'</td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2">ABN: '.$franchiseeDets[0]['abn'].'</td>
+                                    </tr>
+                                    <tr>
+                                    <td colspan="2">Email: '.$franchiseeDets[0]['szEmail'].'</td>
+                                    </tr>
+                                    <tr>
+    <td colspan="4">REQUESTING AUTHORITY</td>
+    <td colspan="4">DONOR INFORMATION</td>
+</tr>
+<tr>
+    <td colspan="4">Collection/Screen Date: '.date('d/m/Y',strtotime($cocdetarr[0]['cocdate'])).'</td>
+    <td colspan="4">Name: '.$sosdetarr[0]['donerName'].'</td>
+</tr>
+<tr>
+    <td colspan="4">Nominated Representative: '.$sosdetarr[0]['ClientRepresentative'].'</td>
+    <td colspan="4"></td>
+</tr>
+<tr>
+    <td colspan="4">Client: '.$ClientDets[0]['szName'].'</td>
+    <td colspan="4">DOB: '.date('d/m/Y',strtotime($cocdetarr[0]['dob'])).'</td>
+</tr>
+<tr>
+    <td colspan="4">Collection Site: '.$SiteDets[0]['szName'].'</td>
+    <td colspan="4">'.($cocdetarr[0]['employeetype'] == '1'?'Employee':($cocdetarr[0]['employeetype'] == '2'?'Contractor':'')).'</td>
+</tr>
+<tr>
+    <td colspan="4">Drug to be tested: '.($drugtype[0] == '1'?'Breath Alcohol':($drugtype[0] == '2'?'AS/NZS 4308:2008':'')).'</td>
+    <td colspan="4">Contractor detaild: '.(!empty($cocdetarr[0]['contractor'])?$cocdetarr[0]['contractor']:'').'</td>
+</tr>
+<tr>
+    <td colspan="4">Please Note: NATA/RCPA accreditation does not cover the performance of breath test</td>
+    <td colspan="2">Identity Verified</td>
+    <td>ID Type: '.($cocdetarr[0]['idtype'] == '1'?'Driving License':($cocdetarr[0]['idtype'] == '2'?'Medicare Card':($cocdetarr[0]['idtype'] == '3'?'Passport':''))).'</td>
+    <td>ID No: '.$cocdetarr[0]['idnumber'].'</td>
+</tr>
+<tr>
+    <td colspan="8">(Optional): '.$cocdetarr[0]['lastweekq'].', I have taken the following medication, drugs, or other non-prescription agents in the last week <br />I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs. Donor Signature: <img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$cocdetarr[0]['donorsign'].'" /></td>
+</tr>
+<tr>
+    <td rowspan="2" colspan="2">Alcohol Breath Test</td>
+    <td colspan="2">Device Serial#: '.$cocdetarr[0]['devicesrno'].'</td>
+    <td colspan="2">Cut off Level: '.$cocdetarr[0]['cutoff'].'</td>
+    <td colspan="2">Wait Time<sub>[Minutes]</sub>: '.$cocdetarr[0]['donwaittime'].'</td>
+</tr>
+<tr>
+    <td>Test 1: '.$cocdetarr[0]['dontest1'].'</td>
+    <td colspan="2">Time: '.$cocdetarr[0]['dontesttime1'].' hours</td>
+    <td>Test 2: '.$cocdetarr[0]['dontest2'].'</td>
+    <td>Time: '.$cocdetarr[0]['dontesttime2'].' hours</td>
+</tr>
+<tr>
+    <td colspan="8">Collection of Sample/On-Site Drug Screening Results</td>
+</tr>
+<tr>
+    <td colspan="2">Void Time: '.$cocdetarr[0]['voidtime'].' hours</td>
+    <td colspan="2">Sample Temp C: '.$cocdetarr[0]['sampletempc'].'</td>
+    <td colspan="4">Temp Read Time within 4 min: '.$cocdetarr[0]['tempreadtime'].' hours</td>
+</tr>
+<tr>
+    <td colspan="2">Intect 7 Lot. No.: '.$cocdetarr[0]['intect'].'</td>
+    <td colspan="2">Expiry: '.date('d/m/Y',strtotime($cocdetarr[0]['intectexpiry'])).'</td>
+    <td colspan="4">Visual Colour: '.$cocdetarr[0]['visualcolor'].'</td>
+</tr>
+<tr>
+    <td colspan="2">Creatinine: '.$cocdetarr[0]['creatinine'].'</td>
+    <td colspan="2">Other Integrity: '.$cocdetarr[0]['otherintegrity'].'</td>
+    <td colspan="4">Hydration: '.$cocdetarr[0]['hudration'].'</td>
+</tr>
+<tr>
+    <td colspan="2">Device Name: '.$cocdetarr[0]['devicename'].'</td>
+    <td colspan="2">Reference#: '.$cocdetarr[0]['reference'].'</td>
+    <td colspan="2">Lot#: '.$cocdetarr[0]['lotno'].'</td>
+    <td colspan="2">Expiry: '.date('d/m/Y',strtotime($cocdetarr[0]['lotexpiry'])).'</td>
+</tr>
+<tr>
+    <td colspan="2">Drugs Class</td>
+    <td>Cocaine </td>
+    <td>Amp </td>
+    <td>mAmp </td>
+    <td>THC </td>
+    <td>Opiates </td>
+    <td>Benzo </td>
+</tr>
+<tr>
+    <td>Screening Result</td>
+    <td>N = Negative result<br />U = Further testing required</td>
+    <td>'.($cocdetarr[0]['cocain']=='U'?'Further Testing Required':($cocdetarr[0]['cocain']=='N'?'Negative':'')).'</td>
+    <td>'.($cocdetarr[0]['amp']=='U'?'Further Testing Required':($cocdetarr[0]['amp']=='N'?'Negative':'')).'</td>
+    <td>'.($cocdetarr[0]['mamp']=='U'?'Further Testing Required':($cocdetarr[0]['mamp']=='N'?'Negative':'')).'</td>
+    <td>'.($cocdetarr[0]['thc']=='U'?'Further Testing Required':($cocdetarr[0]['thc']=='N'?'Negative':'')).'</td>
+    <td>'.($cocdetarr[0]['opiates']=='U'?'Further Testing Required':($cocdetarr[0]['opiates']=='N'?'Negative':'')).'</td>
+    <td>'.($cocdetarr[0]['benzo']=='U'?'Further Testing Required':($cocdetarr[0]['benzo']=='N'?'Negative':'')).'</td>
+</tr>
+<tr>
+    <td colspan="8">Donor Declaration</td>
+</tr>
+<tr>
+    <td colspan="8">I certify that the specimen(s) accompanying this form is my own. Where on-site screening was performed, such screening was carried out in my presence. In the case of my specimen(s) being sent to the laboratory for testing, I certify that the specimen containers were sealed with tamper evident seals in my presence and the identifying information on the label is correct. I certify that the information provided on this form to be correct and I consent to the release of all test results together with any relevant details contained on this form to the nominated representative of the requesting authority.</td>
+</tr>
+<tr>
+    <td colspan="7">Donor Signature: <img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$cocdetarr[0]['donordecsign'].'" /></td>
+    <td>Date: '.date('d/m/Y',strtotime($cocdetarr[0]['donordecdate'])).'</td>
+</tr>
+<tr>
+    <td colspan="8">Collector Certification</td>
+</tr>
+<tr>
+    <td colspan="8">I certify that I witnessed the Donor signature and that the specimen(s) identified on this form was provided to me by the Donor whose consent and declaration appears above, bears the same Donor identification as set forth above, and that the specimen(s) has been collected and if needed divided, labelled and sealed in accordance with the relevant Standard. *If two Collectors are present the second Collector (2) is to perform sample collection/screening for Alcohol and Urine.</td>
+</tr>
+<tr>
+    <td colspan="4">Collector 1 Name/Number: '.$cocdetarr[0]['collectorone'].'</td>
+    <td colspan="4">Collector 2 Name/Number: '.$cocdetarr[0]['collectortwo'].'</td>
+</tr>
+<tr>
+    <td colspan="4">Signature: <img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$cocdetarr[0]['collectorsignone'].'" /></td>
+    <td colspan="4">Signature: <img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$cocdetarr[0]['collectorsigntwo'].'" /></td>
+</tr>
+<tr>
+    <td colspan="4">Comments or Observation: '.$cocdetarr[0]['commentscol1'].'</td>
+    <td colspan="4">Comments or Observation: '.$cocdetarr[0]['commentscol2'].'</td>
+</tr>
+<tr>
+    <td colspan="8">Chain of Custody</td>
+</tr>
+<tr>
+    <td colspan="2">Received By(print) </td>
+    <td colspan="2">Signature </td>
+    <td colspan="2">Date/Time Received</td>
+    <td>Seal Intact</td>
+    <td>Label/Bar Code Match</td>
+</tr>
+<tr>
+    <td colspan="2">'.$cocdetarr[0]['receiverone'].'</td>
+    <td colspan="2"><img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$cocdetarr[0]['receiveronesign'].'" /></td>
+    <td colspan="2">'.date('d/m/Y',strtotime($cocdetarr[0]['receiveronedate'])).' '.$cocdetarr[0]['receiveronetime'].'</td>
+    <td>'.$cocdetarr[0]['receiveroneseal'].'</td>
+    <td>'.$cocdetarr[0]['receiveronelabel'].'</td>
+</tr>
+<tr>
+    <td colspan="2">'.$cocdetarr[0]['receivertwo'].'</td>
+    <td colspan="2"><img src="'.__BASE_URL__.'/'.UPLOAD_DIR.$cocdetarr[0]['receivertwosign'].'" /></td>
+    <td colspan="2">'.($cocdetarr[0]['receivertwotime']==' : 00 AM'?'':date('d/m/Y',strtotime($cocdetarr[0]['receivertwodate'])).' '.$cocdetarr[0]['receivertwotime']).'</td>
+    <td>'.$cocdetarr[0]['receivertwoseal'].'</td>
+    <td>'.$cocdetarr[0]['receivertwolabel'].'</td>
+</tr>
+                            </table>
+                        </div>                      
+                        ';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        ob_end_clean();
+        $pdfname = 'view_coc_details-'.date('d-m-Y-H-i-s') .'-'.uniqid() . '.pdf';
+        $pdf->Output(__APP_PATH__.'/'.UPLOAD_DIR.$pdfname, 'F');
+        $responsedata = array("code" => 200,"file"=>__BASE_URL__.'/uploadsign/'.$pdfname);
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
     }
 }

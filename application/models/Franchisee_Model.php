@@ -221,8 +221,6 @@ class Franchisee_Model extends Error_Model
 
     public function viewClientList($parent = false, $idfranchisee = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $id = 0)
     {
-echo"$idfranchisee";
-
         $whereAry = array('franchiseeId' => $idfranchisee, 'isDeleted=' => '0');
         $searchq = '';
         if ($id > '0') {

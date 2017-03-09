@@ -2834,7 +2834,7 @@ function excelfr_stockassignlist_Data()
             $clientAry = $this->Franchisee_Model->viewClientList(true,$_POST['idFranchisee']);
 $clientid = $_POST['idclient'];
         $siteid = $_POST['idsite'];
-        $result = '<select class="form-control custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
+        $result = '<select class="form-control abc custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
       	if(!empty($clientAry))
      	{
               $result .= "<option value=''>Client Name</option>";
