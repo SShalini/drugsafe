@@ -168,7 +168,6 @@
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th> Id.</th>
                                             <th> Client Code</th>
                                             <th> Name</th>
                                             <th> Email</th>
@@ -195,7 +194,6 @@
                                             $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientData['id']);
                                             ?>
                                             <tr>
-                                                <td> CL-<?php echo $clientData['id']; ?> </td>
                                                 <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A'); ?> </td>
                                                 <td> <?php echo $clientData['szName']; ?> </td>
                                                 <td> <?php echo $clientData['szEmail']; ?> </td>

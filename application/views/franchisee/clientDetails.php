@@ -901,7 +901,6 @@
                    <table id="sample_1" class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid" aria-describedby="sample_1_info">
                         <thead>
                             <tr>
-                                <th> Id </th>
                                 <th>Site Code</th>
 				<th> Company Name </th>
                                 <th> Company Email </th>
@@ -919,7 +918,6 @@
                                             $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($childClientDetailsData['id']);
                                         ?>
                                         <tr>
-                                            <td> CL-<?php echo $childClientDetailsData['id'];?> </td>
                                             <td><?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?></td>
                                             <td> <?php echo $childClientDetailsData['szName']?> </td>
                                             <td> <?php echo $childClientDetailsData['szEmail'];?> </td>
