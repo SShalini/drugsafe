@@ -60,25 +60,7 @@ class Prospect_Model extends Error_Model
 
      function getAllProspectDetails($franchiseeId,$szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
-//      if($_SESSION['drugsafe_user']['iRole']==5){
-//      $operationManagerId =  $_SESSION['drugsafe_user']['id'];
-//      if((!empty($szBusinessName)) || (!empty($status)))
-//      {
-//            $array = 'operationManagerId =' . (int)$operationManagerId .' AND isDeleted = 0 '.($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
-//    
-//      }
-//       else{
-//       $array = array('operationManagerId' => (int)$operationManagerId, 'isDeleted' => '0');
-//         } 
-//            $query = $this->db->select('prospect.id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
-//            ->from(__DBC_SCHEMATA_PROSPECT__. ' as prospect' )
-//            ->join(__DBC_SCHEMATA_FRANCHISEE__, prospect . '.iFranchiseeId = ' . __DBC_SCHEMATA_FRANCHISEE__ . '.franchiseeId')
-//            ->order_by("id","desc") 
-//            ->limit($limit, $offset)
-//            ->where($array)
-//            ->get();
-//      }
-//      else{
+
           if($franchiseeId){
               $franchiseeid  = $franchiseeId; 
           }
@@ -86,7 +68,6 @@ class Prospect_Model extends Error_Model
       if((!empty($szBusinessName)) || (!empty($status )) || (!empty($franchiseeId)))
       {
             $array = 'isDeleted = 0 '.($franchiseeId>0?' AND iFranchiseeId = '.(int)$franchiseeId:'').($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
-    
       }
        else{
        $array = array('isDeleted' => '0');
@@ -97,13 +78,7 @@ class Prospect_Model extends Error_Model
            ->limit($limit, $offset)
             ->where($array)
             ->get();
-     
-     
-     
-       
    
-//     $q = $this->db->last_query();
-//        echo $q; die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;

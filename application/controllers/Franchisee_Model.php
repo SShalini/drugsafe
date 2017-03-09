@@ -271,25 +271,85 @@ echo"$idfranchisee";
         }
     }
 
-    public function getAllClientDetails($parent = false, $franchiseId = '', $ClientName = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
-    {
-       
-          $array = 'isDeleted = 0 AND clientType = 0 '.($franchiseId>0?' AND franchiseeId = '.(int)$franchiseId:'').(!empty($ClientName)?' AND ds_user.szName = '.'"'.$ClientName.'"':'') ;   
-       
-       
+    public function getAllClientDetails($parent = false, $franchiseId = '', $operationManagrrId = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $ClientName = '', $flag = 0)
+    { 
+        if (!empty($operationManagrrId)) {
+            $whereAry = array('operationManagerId=' => $operationManagrrId, 'clientType=' => '0', 'clientType=' => '0');
+            $searchq = '';
+                    if ($flag == 1) {
+                        $searchq = 'szName= ' .$ClientName;
+                    } elseif ($flag == 2) {
+                        $searchq = array('szName' => $ClientName, 'tbl_client.franchiseeId=' => $franchiseId);
+                    } else {
+                        $searchq = 'tbl_client.franchiseeId = ' . (int)$franchiseId;
+                    }
+            $this->db->select('*');
+            $this->db->from('tbl_franchisee');
+            $this->db->join('tbl_client', 'tbl_franchisee.franchiseeId = tbl_client.franchiseeId');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+            if (!empty($searchq)) {
+                $this->db->where('isDeleted', '0');
+                $this->db->where($searchq);
+
+            } else {
+                $this->db->where($whereAry);
+            }
+           if ($parent) {
+                $this->db->where('clientType', 0);
+            }
+            $this->db->order_by("operationManagerId", "asc");
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+             $sql = $this->db->last_query($query);
+            
+        } else {
+            if (!empty($ClientName)) {
+
+                if ($_SESSION['drugsafe_user']['iRole'] == 1) {
+                    if ($flag == 1) {
+                        $searchq = 'szName= ' .$ClientName;
+                    } elseif ($flag == 2) {
+                        $searchq = array('szName' => $ClientName, 'franchiseeId=' => $franchiseId);
+                    } else {
+                        $searchq = 'franchiseeId = ' . (int)$franchiseId;
+                    }
+
+
+                } else {
+                      $searchq = array('szName' => $ClientName, 'franchiseeId=' => $franchiseId);
+                }
+            }
+
+            if ($franchiseId) {
+                $this->db->where('clientType', 0);
+            }
+            $whereAry = array('isDeleted=' => '0');
+
 
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
 
-                $this->db->where($array);
-            
+            if (!empty($searchq)) {
+                $this->db->where('isDeleted', '0');
+                $this->db->where($searchq);
+
+            } else {
+                $this->db->where($whereAry);
+            }
+
+
             $this->db->order_by("franchiseeId", "asc");
+            if ($parent) {
+                $this->db->where('clientType', 0);
+            }
+            if ($franchiseId) {
+                $this->db->where('franchiseeId', $franchiseId);
+            }
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
-        
-//       $sql = $this->db->last_query($query);
-//       print_r($sql);die;
+        }
+       
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
@@ -1146,26 +1206,52 @@ echo"$idfranchisee";
             return array();
         }
     }
-
- 
-       function getAllDistinctClientDetails($parent = false,$franchiseeid)
+      public function getAllDistinctClientDetails($parent = false, $franchiseId = '', $operationManagrrId = '')
     {
-        $whereAry = 'ds_user.isDeleted = 0 AND ds_user.iActive = 1 AND tbl_client.clientType = 0 AND tbl_client.franchiseeId = ' .(int)$franchiseeid ;
-        $query = $this->db->select('ds_user.szName')
-            ->distinct('ds_user.szName')
-            ->from('tbl_client')
-           ->join('ds_user', 'tbl_client.clientId = ds_user.id')
-            ->where($whereAry)
-            ->order_by('ds_user.id', 'DESC')
-            ->get();
-
-//        echo $sql=$this->db->last_query(); die();
-        if ($query->num_rows() > 0) {
-            $row = $query->result_array();
-            return $row;
+        if (!empty($operationManagrrId)) {
+            $whereAry = array('operationManagerId=' => $operationManagrrId, 'clientType=' => '0');
+            
+            $this->db->select('szName');
+            $this->db->distinct('szName');
+            $this->db->from('tbl_franchisee');
+            $this->db->join('tbl_client', 'tbl_franchisee.franchiseeId = tbl_client.franchiseeId');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+           
+            $this->db->where($whereAry);
+            $this->db->order_by("operationManagerId", "asc");
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
         } else {
-            $this->addError("norecord", "No record found.");
-            return false;
+           
+            if ($franchiseId) {
+                $this->db->where('clientType', 0);
+            }
+            $whereAry = array('isDeleted=' => '0');
+
+
+             $this->db->select('szName');
+            $this->db->distinct('szName');
+            $this->db->from('tbl_client');
+            $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+
+          
+                $this->db->where($whereAry);
+         
+            $this->db->order_by("franchiseeId", "asc");
+            if ($parent) {
+                $this->db->where('clientType', 0);
+            }
+            if ($franchiseId) {
+                $this->db->where('franchiseeId', $franchiseId);
+            }
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+        }
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        } else {
+            return array();
         }
     }
 }
