@@ -96,10 +96,10 @@
                     
                             ?>
                        
-                         <div class="row">
+                         <div class=" search row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospectRecord" name="szSearchField" method="post">
                               <?php  if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5) {?>
-                                  <div class="search col-md-2">
+                                  <div class="search col-md-3">
                                    <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
                                        $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false); 
                                    }
@@ -118,9 +118,9 @@
                                           ?>
                                       </select>
                                   </div>
-                                  <div class="search col-md-1"> </div>
+                                
                              <?php }?>
-                                  <div class="search col-md-3">
+                                  <div class=" search col-md-3">
                                      <div id='szClient'>
                                       <select class="form-control custom-select" name="szSearch1" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Business Name</option>
@@ -134,8 +134,8 @@
                                       </select>
                                            </div>
                                   </div>
-                                  <div class="search col-md-1"> </div>
-                                <div class="search col-md-3">
+                                 
+                                <div class="  col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchStatus" onfocus="remove_formError(this.id,'true')">
                                          
@@ -162,7 +162,7 @@
                                       </select>
                                   </div>
 <!--                                  <div class="search col-md-1"> </div>-->
-                                  <div class="col-md-1">
+                                  <div class=" col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>
                            </form>

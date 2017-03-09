@@ -208,7 +208,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                  <div class="col-md-1"> </div>
+                                
                                     <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -233,7 +233,7 @@
                                         </div>
 
                                     </div>
-                                <div class="col-md-1"> </div>
+                              
                                            <div class="col-md-3">
                                       <div
                                             class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
@@ -258,9 +258,8 @@
                                             <?php } ?>
                                         </div> 
                                                </div>
-                                </div>
-                                 <div class="row">
-                                <div class="col-md-3">
+                              
+                                <div class="col-md-2">
                                 <div class="form-group ">
                                     <select class="form-control custom-select" name="szSearch3" id="szSearch3"
                                             onblur="remove_formError(this.id,'true')">
@@ -279,9 +278,7 @@
                           
                                 </div>
                                </div>
-                                   <div class="col-md-1">
-                                       
-                                    </div>
+                                 
                                     <div class="col-md-1">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i
@@ -292,7 +289,7 @@
                                         </div>
                                     </div>
 
-                                  </div>   
+                                 
                                 
 
                       <?php } ?>  

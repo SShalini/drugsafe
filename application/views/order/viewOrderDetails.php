@@ -73,7 +73,7 @@
                                 </div>
                                 
 
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group ">
                                         <select class="form-control custom-select" name="szSearch2" id="szSearch2"
                                                 onfocus="remove_formError(this.id,'true')">
@@ -119,11 +119,6 @@
 
                                 </div>
 
-
-                            </div>
-                            <div class="row">
-
-
                                 <div class="col-md-3">
                                     <div
                                         class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
@@ -154,7 +149,7 @@
                                     </div>
                                 </div>
                              
-                                <div class="col-md-3">
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <button class="btn green-meadow" type="submit"><i
                                                 class="fa fa-search"></i> 
@@ -164,10 +159,7 @@
                                     </div>
                                 </div>
 
-
-                            </div>
-
-
+                                </div>
                         </form>
                     </div>
                         </div>

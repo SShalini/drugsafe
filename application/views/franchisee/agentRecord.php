@@ -51,7 +51,7 @@
                         </div>
                              <?php }?>
                         </div>
-                        <div class=" row">
+                        <div class="search  row">
                               <form class="form-horizontal" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
                            <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){?>
                                   <div class="search col-md-3">
@@ -74,9 +74,6 @@
                                           ?>
                                       </select>
                                     </div>
-                                  
-                             <?php }?>
-                                  
                                   <div class="col-md-3">
                                         <div id='szAgent'>                         
                                       <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
@@ -92,6 +89,23 @@
                                       </select>
                                             </div>
                                   </div>
+                             <?php } else {?>
+                                  <div class=" search col-md-3">
+                                        <div id='szAgent'>                         
+                                      <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Agent/Employee Name</option>
+                                          <?php
+                                          foreach($agentListArray as $agentList)
+                                          {
+                                              $selected = ($agentList['szName'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
+                                              
+                                              echo '<option value="'.$agentList['szName'].'"' . $selected . ' >'.$agentList['szName'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                            </div>
+                                  </div>
+                                   <?php } ?>
                               
                                   <div class="col-md-1">
                                       <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
