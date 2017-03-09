@@ -406,6 +406,7 @@ class Ordering_Controller extends CI_Controller
         $idsite = $this->session->userdata('idsite');
         $sosid = $this->session->userdata('sosid');
         $FrenchiseeDataArr = $this->Webservices_Model->getuserhierarchybysiteid($idsite);
+        $getState = $this->Franchisee_Model->getStateByFranchiseeId($FrenchiseeDataArr[0]['franchiseeId']);
         $siteDataArr = $this->Webservices_Model->getuserdetails($idsite);
         $clientDataArr = $this->Webservices_Model->getuserdetails($FrenchiseeDataArr[0]['clientType']);
         $data = $this->Ordering_Model->getManualCalculationBySosId($sosid);
@@ -478,7 +479,7 @@ class Ordering_Controller extends CI_Controller
         <table cellpadding="5px">
        
     <tr>
-        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> '.$FrenchiseeDataArr[0]['szAddress'].', '.$FrenchiseeDataArr[0]['szZipCode'].', '.$FrenchiseeDataArr[0]['szState'].', '.$FrenchiseeDataArr[0]['szCountry'].'</td>
+        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> '.$FrenchiseeDataArr[0]['szAddress'].', '.$FrenchiseeDataArr[0]['szZipCode'].', '.$getState['name'].', '.$FrenchiseeDataArr[0]['szCountry'].'</td>
     </tr>
     <tr>
         <td align="right"><b>Phone:</b> '.$FrenchiseeDataArr[0]['szContactNumber'].'</td>
@@ -499,7 +500,7 @@ class Ordering_Controller extends CI_Controller
         <td width="50%" align="left" font-size="20"><b>Business Name:</b> '.$clientDataArr[0]['szName'].'</td><td width="50%" align="right"><b>Company Name:</b> '.$siteDataArr[0]['szName'].'</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Business Address:</b> '.$clientDataArr[0]['szAddress'].', '.$clientDataArr[0]['szZipCode'].', '.$clientDataArr[0]['szState'].', '.$clientDataArr[0]['szCountry'].'</td><td width="50%" align="right"><b>Company Address:</b> '.$siteDataArr[0]['szAddress'].', '.$siteDataArr[0]['szZipCode'].', '.$siteDataArr[0]['szState'].', '.$siteDataArr[0]['szCountry'].'</td>
+        <td width="50%" align="left"><b>Business Address:</b> '.$clientDataArr[0]['szAddress'].', '.$clientDataArr[0]['szZipCode'].', '.$getState['name'].', '.$clientDataArr[0]['szCountry'].'</td><td width="50%" align="right"><b>Company Address:</b> '.$siteDataArr[0]['szAddress'].', '.$siteDataArr[0]['szZipCode'].', '.$getState['name'].', '.$siteDataArr[0]['szCountry'].'</td>
     </tr>
     <tr>
         <td width="50%" align="left"><b>ABN:</b> '.$clientDataArr[0]['abn'].'</td><td width="50%" align="right"><b>Test Date:</b> '.date('d/m/Y',strtotime($testDate[0]['testdate'])).'</td>

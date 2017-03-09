@@ -31,13 +31,13 @@
                                     Revenue Summary Client
                                 </span>
                         </div>
-                        <?php if(!empty($allfranchisee)){?>
+                        <?php if(!empty($getManualCalcStartToEndDate)){?>
                             <div class="actions">
 
-                                <a onclick="ViewpdfRevenueSummery('<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>')" href="javascript:void(0);" class=" btn green-meadow">
+                                <a onclick="ViewpdfRevenueSummeryClient('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>')" href="javascript:void(0);" class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 
-                                <a onclick="ViewexcelRevenueSummery('<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>')" href="javascript:void(0);" class=" btn green-meadow">
+                                <a onclick="ViewexcelRevenueSummeryClient('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>')" href="javascript:void(0);" class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
 
                             </div>
@@ -50,7 +50,7 @@
                                 <div class="row">
                                    
                                 <div class=" col-md-3">
-
+                             <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
                                             onchange="getClientCodeListByFrId(this.value);">
@@ -71,6 +71,13 @@
                                         }
                                         ?>
                                     </select>
+                                  <?php
+                                            if (form_error('szSearchClRecord2')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearchClRecord2'); ?></span>
+                                                </span><?php } ?>
+                                  </div>
                                 </div>
                                 <div class="search col-md-3">
                                     <div id='szClient'>
@@ -107,12 +114,7 @@
                                                 <span class="help-block pull-left">
                                                 <span><?php echo form_error('dtStart'); ?></span>
                                                 </span><?php } ?>
-                                            <?php if (!empty($arErrorMessages['dtStart'])) { ?>
-                                                <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                    <?php echo $arErrorMessages['dtStart']; ?>
-                                            </span>
-                                            <?php } ?>
+                                           
                                         </div>
 
                                     </div>
@@ -141,12 +143,7 @@
                                                 <span class="help-block pull-left">
                                                 <span><?php echo form_error('dtEnd'); ?></span>
                                                 </span><?php } ?>
-                                            <?php if (!empty($arErrorMessages['dtEnd'])) { ?>
-                                                <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                    <?php echo $arErrorMessages['dtEnd']; ?>
-                                            </span>
-                                            <?php } ?>
+                                           
                                         </div>
                                     </div>
                                      <div class="col-md-3">
@@ -209,11 +206,11 @@
                                                 <tbody>
                                                 <?php
 												
-												$i = 0;
+						$i = 0;
                                                 $totalRevenu='';
                                                 $totalRoyaltyfees='';
                                                 $totalNetProfit='';
-						                       foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
+						  foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
                                                        
                                                      $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);

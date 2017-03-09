@@ -3508,11 +3508,11 @@ $clientid = $_POST['idclient'];
             redirect(base_url('/admin/admin_login'));
             die;
         }
-		
+	
        if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szSearchClRecord2']!='')
         {
             $searchAry =$_POST; 
-
+          
             if($_POST['szSearchClRecord1'])
             {
                $clientId=$_POST['szSearchClRecord1'];
@@ -3587,6 +3587,278 @@ $clientid = $_POST['idclient'];
         echo $result;
     
     }
-    
-}
+   function ViewpdfofRevenueSummaryClient()
+    {   $clientId = $this->input->post('clientId');
+        $franchiseeId = $this->input->post('franchiseeId');
+        $dtStart = $this->input->post('dtStart');
+        $dtEnd = $this->input->post('dtEnd');
+        $this->session->set_userdata('franchiseeId',$franchiseeId);
+        $this->session->set_userdata('clientId',$clientId);
+        $this->session->set_userdata('dtStart',$dtStart);
+        $this->session->set_userdata('dtEnd',$dtEnd);
+        echo "SUCCESS||||";
+        echo "ViewpdfRevenueSummaryClient";
+    }
+    public function ViewpdfRevenueSummaryClient()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe Revenue Summary Client');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Revenue Summary Client PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        // set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        // set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+        $pdf->AddPage('L');
+        //$pdf->AddPage();
+        $searchAry['dtStart'] = $this->session->userdata('dtStart');
+        $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
+        $franchiseeId = $this->session->userdata('franchiseeId');
+        $clientId = $this->session->userdata('clientId');
+        
+        $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$franchiseeId,$clientId);
+        $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Revenue Summary Client</b></p></div>
+            <div class= "table-responsive" >
+                            <table align="center" border="1" cellpadding="5" >
+                                    <tr>
+                                        <th><b>  #</b> </th>
+                                        <th> <b>Franchisee Name </b> </th>
+                                        <th> <b>Client Code  </b> </th>
+                                        <th> <b> Revenue EXL GST</b> </th>
+                                        <th><b> Royalty Fees </b> </th>
+                                        <th> <b>Net Revenue EXL GST</b> </th>
+                                    </tr>';
+                                  if ($getManualCalcStartToEndDate) {
+			
+                                          $i = 0;
+                                                $totalRevenu='';
+                                                $totalRoyaltyfees='';
+                                                $totalNetProfit='';
+						  foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
+						
+                                                     $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
+                                                    $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+                                                    $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
+                                                    $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
+                                                    $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
+                                                        
+                                                        if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
+                                                            $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
+                                                        }
+                                                        $ValTotal = 0;
+														
+                                                        if (in_array(1, $DrugtestidArr)) {
+                                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_1__, 2, '.', '');
+                                                        }
+                                                        if (in_array(2, $DrugtestidArr)) {
+                                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_2__, 2, '.', '');
+                                                        }
+                                                        if (in_array(3, $DrugtestidArr)) {
+                                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
+                                                        }
+                                                    $Royaltyfees = $ValTotal * 0.1;
+                                                    $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
+                                                    $Royaltyfees= number_format($Royaltyfees, 2, '.', ',');
+                                                    
+                                                    $NetTotal = $ValTotal - $Royaltyfees;
+                                                    $NetTotal = number_format($NetTotal, 2, '.', '');
+                                                    $NetTotal = number_format($NetTotal, 2, '.', ',');
+                                                            
+                                                    $totalRevenu=$totalRevenu+$ValTotal;
+                                                    $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
+                                                    $totalNetProfit=$totalNetProfit+$NetTotal;
+                                                    $i++;
+                $html .= '<tr>
+                            <td>'.$i++.'</td>
+                            <td>'.$userDataAry['szName'].'</td>
+                            <td>'.$userDataAry['userCode'].'</td>
+                            <td>$'.number_format($ValTotal, 2, '.', ',').'</td>
+                            <td>$'.$Royaltyfees.'</td>
+                            <td>$'.$NetTotal.'</td>
+                            
+                        </tr>';
+            }
+               $totalRevenu = number_format($totalRevenu, 2, '.', '');
+               $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
+               $totalNetProfit = number_format($totalNetProfit, 2, '.', '');
+             $html.='<tr>
+                    
+                    <td></td>
+                    <td></td>
+                    <td><b>Total</b></td>
+                    <td>$'.number_format($totalRevenu, 2, '.', ',').'</td>
+                    <td>$'.number_format($totalRoyaltyfees, 2, '.', ',').'</td>
+                    <td>$'.number_format($totalNetProfit, 2, '.', ',').'</td>
+                   </tr>'; 
+        }
+                                       
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+
+        $pdf->Output('revenue-generate.pdf', 'I');
+    }  
+
+     function ViewexcelofRevenueSummeryClient()
+    {
+        $clientId = $this->input->post('clientId');
+        $franchiseeId = $this->input->post('franchiseeId');
+        $dtStart = $this->input->post('dtStart');
+        $dtEnd = $this->input->post('dtEnd');
+        $this->session->set_userdata('franchiseeId',$franchiseeId);
+        $this->session->set_userdata('clientId',$clientId);
+        $this->session->set_userdata('dtStart',$dtStart);
+        $this->session->set_userdata('dtEnd',$dtEnd);
+        echo "SUCCESS||||";
+        echo "ViewexcelRevenueSummeryClient";
+
+
+    }
+    public function ViewexcelRevenueSummeryClient()
+    {
+        $this->load->library('excel');
+        $filename = 'DrugSafe';
+        $title = 'Revenue Summary';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($title);
+        $this->excel->getActiveSheet()->setCellValue('A1', '#');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee Name');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', ' Client Code');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', ' Revenue EXL GST');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Royalty Fees');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Net Revenue EXL GST');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+       
+        $searchAry['dtStart'] = $this->session->userdata('dtStart');
+        $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
+        $franchiseeId = $this->session->userdata('franchiseeId');
+        $clientId = $this->session->userdata('clientId');
+        
+        $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry,$franchiseeId,$clientId);
+       
+            
+            if (!empty($getManualCalcStartToEndDate)) {
+
+            $i = 2;
+            $x=0;
+               $totalRevenu='';
+               $totalRoyaltyfees='';
+               $totalNetProfit='';
+            
+            foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
+
+               $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
+               $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+               $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
+               $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
+               $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
+
+                   if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
+                       $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
+                   }
+                   $ValTotal = 0;
+
+                   if (in_array(1, $DrugtestidArr)) {
+                       $ValTotal = number_format($ValTotal + $countDoner * __RRP_1__, 2, '.', '');
+                   }
+                   if (in_array(2, $DrugtestidArr)) {
+                       $ValTotal = number_format($ValTotal + $countDoner * __RRP_2__, 2, '.', '');
+                   }
+                   if (in_array(3, $DrugtestidArr)) {
+                       $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
+                   }
+               $Royaltyfees = $ValTotal * 0.1;
+               $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
+               $Royaltyfees= number_format($Royaltyfees, 2, '.', ',');
+
+               $NetTotal = $ValTotal - $Royaltyfees;
+               $NetTotal = number_format($NetTotal, 2, '.', '');
+               $NetTotal = number_format($NetTotal, 2, '.', ',');
+
+               $totalRevenu=$totalRevenu+$ValTotal;
+               $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
+               $totalNetProfit=$totalNetProfit+$NetTotal;
+                                                          
+                $x++;
+             $value =   number_format($ValTotal, 2, '.', ',');
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i,$userDataAry['szName']);
+                $this->excel->getActiveSheet()->setCellValue('c'.$i, $userDataAry['userCode']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i,'$'. $value);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i,'$'. $Royaltyfees);
+                $this->excel->getActiveSheet()->setCellValue('F'.$i,'$'.$NetTotal);
+                
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                
+                $i++;
+            }
+               $totalRevenu = number_format($totalRevenu, 2, '.', '');
+               $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
+               $totalNetProfit = number_format($totalNetProfit, 2, '.', '');
+            $this->excel->getActiveSheet()->setCellValue('C'.$i,Total);
+            $this->excel->getActiveSheet()->setCellValue('D'.$i,'$'.number_format($totalRevenu, 2, '.', ','));
+            $this->excel->getActiveSheet()->setCellValue('E'.$i,'$'.number_format($totalRoyaltyfees, 2, '.', ','));
+            $this->excel->getActiveSheet()->setCellValue('F'.$i,'$'.number_format($totalNetProfit, 2, '.', ','));
+            
+            
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+                                                        }
 ?>

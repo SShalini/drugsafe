@@ -2901,3 +2901,21 @@ function ViewexcelSalesCrmDetailedReport(startDate,endDate,franchiseeId,status) 
 
     });
 }
+function ViewpdfRevenueSummeryClient(franchiseeId,clientId,dtStart,dtEnd) {
+    $.post(__BASE_URL__ + "/reporting/ViewpdfofRevenueSummaryClient", {franchiseeId:franchiseeId,clientId:clientId,dtStart : dtStart,dtEnd: dtEnd}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ViewexcelRevenueSummeryClient(franchiseeId,clientId,dtStart,dtEnd) {
+    $.post(__BASE_URL__ + "/reporting/ViewexcelofRevenueSummeryClient", {franchiseeId:franchiseeId,clientId:clientId,dtStart : dtStart,dtEnd: dtEnd}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+
+    });
+
+}

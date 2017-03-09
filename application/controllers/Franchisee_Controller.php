@@ -724,7 +724,7 @@ class Franchisee_Controller extends CI_Controller
         $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
         $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
         $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
-        $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
+        $this->form_validation->set_message('chekDuplicate', ' %s must be unique.');
         $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
         $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
         $this->form_validation->set_message('required', '{field} is required.');
@@ -808,7 +808,7 @@ class Franchisee_Controller extends CI_Controller
         $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
         $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
         $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
-        $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
+        $this->form_validation->set_message('chekDuplicate', ' %s must be unique.');
         $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
         $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
         $this->form_validation->set_message('required', '{field} is required.');
