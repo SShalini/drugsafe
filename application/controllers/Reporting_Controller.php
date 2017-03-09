@@ -1492,7 +1492,7 @@ function excelfr_stockassignlist_Data()
                                         <th width="23%"> <b>Category</b> </th>
                                         <th width="22%"> <b>Product Code </b> </th>
                                         <th width="23%"><b> In Stock  </b> </th>
-                                        <th width="22%"> <b>Ordered</b> </th>
+                                        <th width="22%"> <b>Requested</b> </th>
                                        
                                    
                                     </tr>';
@@ -1587,7 +1587,7 @@ function excelfr_stockassignlist_Data()
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Ordered');
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Requested');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
