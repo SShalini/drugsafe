@@ -47,9 +47,8 @@
                         <div class="row">
                             <form name="revenueSearchForm" id="revenueSearchForm"
                                   action="<?= __BASE_URL__ ?>/reporting/view_revenue_summery_client" method="post">
-                                <div class="row">
-                                   
-                                <div class=" col-md-3">
+                                 <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5 )){ ?>
+                                <div class=" col-md-2">
                              <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
@@ -79,7 +78,10 @@
                                                 </span><?php } ?>
                                   </div>
                                 </div>
-                                <div class="search col-md-3">
+                             
+                                 <?php } ?>   
+                                     <div class="search col-md-3">
+                               
                                     <div id='szClient'>
                                         <select class="form-control custom-select" name="szSearchClRecord1"
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
@@ -144,7 +146,7 @@
                                            
                                         </div>
                                     </div>
-                                     <div class="col-md-3">
+                                     <div class="col-md-1">
                                         <div class="form-group">
                                             <button class="btn green-meadow" type="submit"><i
                                                     class="fa fa-search"></i> 
@@ -152,7 +154,7 @@
                                             &nbsp;
                                         </div>
                                     </div>
-                                 </div>
+                               
                              </form>
                         </div>
                     </div>

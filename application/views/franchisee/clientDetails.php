@@ -71,17 +71,20 @@
                         <?php } ?>
                         <li>
                             <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
-                        <i class="fa fa-circle"></i>
+                        
                         </li>
-                        <li>
-                               Details
-                            </li>
+                      
                         <?php if($clientDetailsAray['clientType'] == '0'){?>
                             <li>
                                 <i class="fa fa-circle"></i>
-                                <span class="active">Sites</span>
+                                <span class="active">Site's Detail</span>
                             </li>
-                        <?php } ?>
+                        <?php } else { ?>
+                              <li>
+                                <i class="fa fa-circle"></i>
+                                <span class="active"> Details</span>
+                            </li>
+                      <?php }  ?>
                     </ul>
      <div class="portlet light bordered about-text" id="user_info">
         <div class="portlet-title">
@@ -100,11 +103,16 @@
 //                    }
                    ?>
                     &nbsp; &nbsp;
-                   <?php  if($_SESSION['drugsafe_user']['iRole']=='2'){?>
+                   <?php  if($_SESSION['drugsafe_user']['iRole']=='2'){
+                   if($clientDetailsAray['clientType'] == '0'){?>  
                   <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
                     <i class="fa fa-pencil"></i> 
                   </a> 
-                <?php }?>
+                   <?php } else { ?>
+                    <a class="btn btn-circle btn-icon-only btn-default" title="Edit Site Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
+                    <i class="fa fa-pencil"></i> 
+                  </a>  
+                   <?php } } ?>
                 </span>
             </div>
             <!--<div class="actions">

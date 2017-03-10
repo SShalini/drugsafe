@@ -592,6 +592,7 @@ class Form_Management_Controller extends CI_Controller
         $SiteDets = $this->Webservices_Model->getuserdetails($sosdetarr[0]['Clientid']);
         $testtypesarr = explode(',',$sosdetarr[0]['Drugtestid']);
         $donorsarr = $this->Webservices_Model->getdonorsbysosid($sosid);
+        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($ClientDets[0]['id']);
         if(!empty($testtypesarr)){
             if($testtypesarr[0]=='1'){
                 $alchohol = true;
@@ -668,7 +669,7 @@ class Form_Management_Controller extends CI_Controller
                                     <td colspan="2">Email: '.$franchiseeDets[0]['szEmail'].'</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Requesting Client: '.$ClientDets[0]['szName'].'</td>
+                                        <td colspan="3" align="left">Client Code: '.(!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A').'</td><td align="right" colspan="3">Requesting Client: '.$ClientDets[0]['szName'].'</td>
                                         <td colspan="2">Date: '.date('d/m/Y',strtotime($sosdetarr[0]['testdate'])).'</td>
                                     </tr>
                                     <tr>
@@ -816,9 +817,10 @@ class Form_Management_Controller extends CI_Controller
 
     public function cocformpdf()
     {
-        ob_start();
+        
+          ob_start();
         $this->load->library('Pdf');
-        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetTitle('Drug-safe COC Form Details');
         $pdf->SetAuthor('Drug-safe');
@@ -865,8 +867,8 @@ class Form_Management_Controller extends CI_Controller
                                     <td colspan="2">Email: '.$franchiseeDets[0]['szEmail'].'</td>
                                     </tr>
                                     <tr>
-    <td colspan="4">REQUESTING AUTHORITY</td>
-    <td colspan="4">DONOR INFORMATION</td>
+    <td colspan="4"><b>REQUESTING AUTHORITY</b></td>
+    <td colspan="4"><b>DONOR INFORMATION</b></td>
 </tr>
 <tr>
     <td colspan="4">Collection/Screen Date: '.date('d/m/Y',strtotime($cocdetarr[0]['cocdate'])).'</td>
@@ -886,7 +888,7 @@ class Form_Management_Controller extends CI_Controller
 </tr>
 <tr>
     <td colspan="4">Drug to be tested: '.($drugtype[0] == '1'?'Breath Alcohol':($drugtype[0] == '2'?'AS/NZS 4308:2008':'')).'</td>
-    <td colspan="4">Contractor detaild: '.(!empty($cocdetarr[0]['contractor'])?$cocdetarr[0]['contractor']:'').'</td>
+    <td colspan="4">Contractor Details: '.(!empty($cocdetarr[0]['contractor'])?$cocdetarr[0]['contractor']:'').'</td>
 </tr>
 <tr>
     <td colspan="4">Please Note: NATA/RCPA accreditation does not cover the performance of breath test</td>
@@ -895,10 +897,10 @@ class Form_Management_Controller extends CI_Controller
     <td>ID No: '.$cocdetarr[0]['idnumber'].'</td>
 </tr>
 <tr>
-    <td colspan="8">(Optional): '.$cocdetarr[0]['lastweekq'].', I have taken the following medication, drugs, or other non-prescription agents in the last week <br />I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs. Donor Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['donorsign'].'" /></td>
+    <td colspan="8">Have you taken any medication, drugs or other non-prescription agents in last week? ' . $cocdetarr[0]['lastweekq'].' Donor Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['donorsign'].'" /></td>
 </tr>
 <tr>
-    <td rowspan="2" colspan="2">Alcohol Breath Test</td>
+    <td rowspan="2" colspan="2"><b>Alcohol Breath Test</b></td>
     <td colspan="2">Device Serial#: '.$cocdetarr[0]['devicesrno'].'</td>
     <td colspan="2">Cut off Level: '.$cocdetarr[0]['cutoff'].'</td>
     <td colspan="2">Wait Time<sub>[Minutes]</sub>: '.$cocdetarr[0]['donwaittime'].'</td>
@@ -910,7 +912,7 @@ class Form_Management_Controller extends CI_Controller
     <td>Time: '.$cocdetarr[0]['dontesttime2'].' hours</td>
 </tr>
 <tr>
-    <td colspan="8">Collection of Sample/On-Site Drug Screening Results</td>
+    <td colspan="8"><b>Collection of Sample/On-Site Drug Screening Results</b></td>
 </tr>
 <tr>
     <td colspan="2">Void Time: '.$cocdetarr[0]['voidtime'].' hours</td>
@@ -934,7 +936,7 @@ class Form_Management_Controller extends CI_Controller
     <td colspan="2">Expiry: '.date('d/m/Y',strtotime($cocdetarr[0]['lotexpiry'])).'</td>
 </tr>
 <tr>
-    <td colspan="2">Drugs Class</td>
+    <td colspan="2"><b>Drugs Class</b></td>
     <td>Cocaine </td>
     <td>Amp </td>
     <td>mAmp </td>
@@ -953,7 +955,7 @@ class Form_Management_Controller extends CI_Controller
     <td>'.($cocdetarr[0]['benzo']=='U'?'Further Testing Required':($cocdetarr[0]['benzo']=='N'?'Negative':'')).'</td>
 </tr>
 <tr>
-    <td colspan="8">Donor Declaration</td>
+    <td colspan="8" align="center"><b>Donor Declaration</b></td>
 </tr>
 <tr>
     <td colspan="8">I certify that the specimen(s) accompanying this form is my own. Where on-site screening was performed, such screening was carried out in my presence. In the case of my specimen(s) being sent to the laboratory for testing, I certify that the specimen containers were sealed with tamper evident seals in my presence and the identifying information on the label is correct. I certify that the information provided on this form to be correct and I consent to the release of all test results together with any relevant details contained on this form to the nominated representative of the requesting authority.</td>
@@ -963,7 +965,7 @@ class Form_Management_Controller extends CI_Controller
     <td>Date: '.date('d/m/Y',strtotime($cocdetarr[0]['donordecdate'])).'</td>
 </tr>
 <tr>
-    <td colspan="8">Collector Certification</td>
+    <td colspan="8" align="center"><b>Collector Certification</b></td>
 </tr>
 <tr>
     <td colspan="8">I certify that I witnessed the Donor signature and that the specimen(s) identified on this form was provided to me by the Donor whose consent and declaration appears above, bears the same Donor identification as set forth above, and that the specimen(s) has been collected and if needed divided, labelled and sealed in accordance with the relevant Standard. *If two Collectors are present the second Collector (2) is to perform sample collection/screening for Alcohol and Urine.</td>
@@ -981,7 +983,7 @@ class Form_Management_Controller extends CI_Controller
     <td colspan="4">Comments or Observation: '.$cocdetarr[0]['commentscol2'].'</td>
 </tr>
 <tr>
-    <td colspan="8">Chain of Custody</td>
+    <td colspan="8" align="center"><b>Chain of Custody</b></td>
 </tr>
 <tr>
     <td colspan="2">Received By(print) </td>

@@ -309,7 +309,7 @@ class Ordering_Controller extends CI_Controller
         } else {
             if ($this->Ordering_Model->updateCalulatedData($data_validate, $manualCalId)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<strong>Proforma Invoice update successfully.</strong> ";
+                $szMessage['content'] = "<strong>Proforma Invoice updated successfully.</strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
 
                 $data['idsite'] = $idsite;
@@ -474,6 +474,7 @@ class Ordering_Controller extends CI_Controller
             $totaldiscount = 0;
             $totalafterdiscount = 0;
         }
+       $val =  sprintf(__FORMAT_NUMBER__, $data['id']);
         //$totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
         $html = '<div class="wraper">
         <table cellpadding="5px">
@@ -492,7 +493,7 @@ class Ordering_Controller extends CI_Controller
     </tr>
 </table>
 <br />
-<h2 style="text-align: center;">Proforma Invoice</h2>
+<h2 style="text-align: center;">Proforma Invoice: #'.$val.'</h2>
 
 <br>
 <table cellpadding="5px">

@@ -111,6 +111,7 @@
                                 foreach ($sosRormDetailsDataArr as $sosRormDetailsData) {
                                     $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($sosRormDetailsData['Clientid']);
                                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
+                                     $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($userDataAry['id']);
                                     $drugtestidArr = explode(',', $sosRormDetailsData['Drugtestid']);
                                     $drugtestArr = implode('', $drugtestidArr);
                                     if(empty($drugtestArr)){
@@ -125,7 +126,7 @@
                                             <thead>
                                             <tr>
                                                 <th>Proforma Invoice #</th>
-                                                <th> Id.</th>
+                                                <th> Client Code</th>
                                                 <th> Client Name</th>
                                                 <th> Test Date</th>
                                                 <th> Service Commenced </th>
@@ -140,7 +141,7 @@
                                         ?>
                                         <tr>
                                               <td><?php echo (!empty($manualCalcDetails['id'])?'#'.sprintf(__FORMAT_NUMBER__, $manualCalcDetails['id']):'N/A');?> </td>
-                                            <td> CL-<?php echo $sosRormDetailsData['Clientid']; ?> </td>
+                                            <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A'); ?> </td>
                                             <td> <?php echo $userDataAry['szName'] ?> </td>
                                             <td> <?php echo date('d/m/Y', strtotime($sosRormDetailsData['testdate']));; ?> </td>
                                             <td> <?php echo $sosRormDetailsData['ServiceCommencedOn']; ?> </td>

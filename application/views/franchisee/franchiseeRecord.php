@@ -275,8 +275,12 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="viewProductStockMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cubes" aria-hidden="true"></i>
                                                 </a>
-                                        <?php } }
-                                                $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
+                                        <?php } } ?>
+                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Franchisee Details" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);">
+                                                   <i class="fa fa-eye" aria-hidden="true"></i>
+                                               </a>
+                                               <?php    
+                                               $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
                                                 
                                                 if(empty($clientDetailsAray)){
                                                ?>

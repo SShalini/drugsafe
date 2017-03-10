@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <p style="text-align:center"><b>Invoice Id:#<?php echo sprintf(__FORMAT_NUMBER__, $data['id']);?> </b></p>
+                                        <p style="text-align:center"><b>Proforma Invoice: #<?php echo sprintf(__FORMAT_NUMBER__, $data['id']);?> </b></p>
                                     </div>
                                 </div>
                             </div>
