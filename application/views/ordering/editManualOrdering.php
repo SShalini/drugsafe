@@ -80,32 +80,32 @@
                                    </tr>
                                <?php }?>
                                      <tr>
-                                         <td colspan="4">Total</td>
+                                         <td colspan="3">Total</td>
                                        
                                     <td>$<?php $ValTotal=$Val1+$Val2+$Val3+$Val4;echo number_format($ValTotal,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">Royalty fees</td>
+                                         <td colspan="3">Royalty fees</td>
                                        
                                      <td>$<?php $Royaltyfees=$ValTotal*0.1;echo number_format($Royaltyfees,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">GST</td>
+                                         <td colspan="3">GST</td>
                                        
                                     <td>$<?php $GST = $ValTotal*0.1;echo number_format($GST,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">Total  before Royalty and Inc GST</td>
+                                         <td colspan="3">Total  before Royalty and Inc GST</td>
                                        
                                     <td>$<?php $TotalbeforeRoyalty=$ValTotal+$GST;echo number_format($TotalbeforeRoyalty,2,'.',','); ?> </td>
                                     </tr> 
                                     <tr>
-                                         <td colspan="4">Total  after royalty and Inc GST</td>
+                                         <td colspan="3">Total  after royalty and Inc GST</td>
                                        
                                        <td>$<?php $TotalafterRoyalty=$ValTotal-$Royaltyfees+$GST;echo number_format($TotalafterRoyalty,2,'.',','); ?> </td>
                                     </tr>
                                      <tr>
-                                         <td colspan="4">Net Total after royalty and exl GST</td>
+                                         <td colspan="3">Net Total after royalty and exl GST</td>
                                        
                                      <td>$<?php $NetTotal =$ValTotal-$Royaltyfees;echo number_format($NetTotal,2,'.',','); ?> </td>
                                     </tr> 

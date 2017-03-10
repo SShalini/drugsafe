@@ -205,7 +205,7 @@
                          <li class="nav-item  <?php if ($subpageName == 'revenue_summery') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_revenue_summery">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
-                                <span class="title">Revenue Summary</span>
+                                <span class="title">Revenue Summary Franchisee</span>
                             </a>
                         </li>
                     

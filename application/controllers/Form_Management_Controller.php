@@ -592,6 +592,8 @@ class Form_Management_Controller extends CI_Controller
         $SiteDets = $this->Webservices_Model->getuserdetails($sosdetarr[0]['Clientid']);
         $testtypesarr = explode(',',$sosdetarr[0]['Drugtestid']);
         $donorsarr = $this->Webservices_Model->getdonorsbysosid($sosid);
+        $userprods = $this->Webservices_Model->getsavedkitsbysosid($sosid,1);
+        $getState = $this->Franchisee_Model->getStateByFranchiseeId($sosuserdets[0]['franchiseeId']);
         $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($ClientDets[0]['id']);
         if(!empty($testtypesarr)){
             if($testtypesarr[0]=='1'){
@@ -660,7 +662,7 @@ class Form_Management_Controller extends CI_Controller
                                     <td colspan="2">T: '.$franchiseeDets[0]['szContactNumber'].'</td>
                                     </tr>
                                     <tr>
-                                    <td colspan="2">Address: '.$franchiseeDets[0]['szAddress'].' '.$franchiseeDets[0]['szCity'].' '.$franchiseeDets[0]['szCountry'].'</td>
+                                    <td colspan="2">Address: '.$franchiseeDets[0]['szAddress'].', '.$franchiseeDets[0]['szZipCode'].', '.$franchiseeDets[0]['szCity'].', '.$getState['name'].', '.$franchiseeDets[0]['szCountry'].'</td>
                                     </tr>
                                     <tr>
                                     <td colspan="2">ABN: '.$franchiseeDets[0]['abn'].'</td>
@@ -747,14 +749,14 @@ class Form_Management_Controller extends CI_Controller
                                                 <td colspan="3">'.$donors['donerName'].'</td>
                                                 <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'P':'N').'</td>
                                                 <td>'.($drugs != ''?$drugs:'N/A').'</td>
-                                                <td>Reading One:'.($alcoholread1 != ''?$alcoholread1:'N/A').'<br/>Reading Two:'.($alcoholread2 != ''?$alcoholread2:'N/A').'</td>
+                                                <td>Reading One:'.($alcoholread1 != ''?'P':'N').'<br/>Reading Two:'.($alcoholread2 != ''?'P':'N').'</td>
                                                 <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'Y':'N').'</td>
                                             </tr>';
                                     $count++;
                                 }
                             }
                             $html .='<tr>
-                                        <td colspan="3">* U = Result requiring further testing N = Negative<br />** P = Positive N = Negative</td>
+                                        <td colspan="3">* P = Positive, result requiring further testing N = Negative<br />** P = Positive N = Negative</td>
                                         <td>Urine</td>
                                         <td>Oral</td>
                                         <td colspan="2">Total No Alcohol Screen</td>
@@ -791,7 +793,15 @@ class Form_Management_Controller extends CI_Controller
                                     </tr>
                                     <tr>
                                         <td colspan="8">Comments or Observation: '.$sosdetarr[0]['Comments'].'</td>
-                                    </tr>
+                                    </tr>';
+        if(!empty($userprods)){
+            foreach ($userprods as $prods){
+                $html .='<tr>
+                                        <td colspan="4">'.$prods['szProductCode'].'</td><td colspan="4">'.$prods['quantity'].'</td>
+                                    </tr>';
+            }
+        }
+                                    $html .='
                                     <tr>
                                         <td colspan="4">Nominated Client Representative: '.$sosdetarr[0]['ClientRepresentative'].'</td>
                                         <td colspan="2">Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$sosdetarr[0]['RepresentativeSignature'].'"/></td>
@@ -840,10 +850,10 @@ class Form_Management_Controller extends CI_Controller
         $cocdetarr = $this->Webservices_Model->getcocdatabycocid($cocid);
         $sosdetarr = $this->Webservices_Model->getsosdatabycocid($cocid,1,1);
         $sosuserdets = $this->Webservices_Model->getuserhierarchybysiteid($sosdetarr[0]['Clientid']);
-        //echo 'Hi '.$sosuserdets[0]['franchiseeId'];
         $franchiseeDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['franchiseeId']);
         $ClientDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['clientType']);
         $SiteDets = $this->Webservices_Model->getuserdetails($sosdetarr[0]['Clientid']);
+        $getState = $this->Franchisee_Model->getStateByFranchiseeId($sosuserdets[0]['franchiseeId']);
         if(!empty($cocdetarr[0]['drugtest'])){
             $drugtype = explode(',',$cocdetarr[0]['drugtest']);
         }
@@ -858,7 +868,7 @@ class Form_Management_Controller extends CI_Controller
                                     </tr>
                                     <tr>
                                     <td colspan="4" rowspan="3"></td>                                   
-                                    <td colspan="2">Address: '.$franchiseeDets[0]['szAddress'].' '.$franchiseeDets[0]['szCity'].' '.$franchiseeDets[0]['szCountry'].'</td>
+                                    <td colspan="2">Address: '.$franchiseeDets[0]['szAddress'].', '.$franchiseeDets[0]['szZipCode'].', '.$franchiseeDets[0]['szCity'].', '.$getState['name'].', '.$franchiseeDets[0]['szCountry'].'</td>
                                     </tr>
                                     <tr>
                                     <td colspan="2">ABN: '.$franchiseeDets[0]['abn'].'</td>
