@@ -899,8 +899,9 @@ public function deleteProspectConfirmation()
              if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeid = $_SESSION['drugsafe_user']['id'];
              }
+             if(!empty($_POST)){
            $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeid,false,$status);
-     
+             }
            
             $this->load->library('form_validation');
              if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5)){ 
