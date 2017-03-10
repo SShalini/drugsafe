@@ -1190,11 +1190,10 @@ function excelfr_stockassignlist_Data()
            
                 $validPendingOrderFrDetailsAray = $this->Order_Model->getallValidPendingOrderFrDetails($searchAry);
            
-            if($_POST['szSearch2'])
-            {
+        
                 $productAry = $this->Inventory_Model->getProductByCategory(trim($catid));
                
-            }
+          
         
             $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch2', 'Product Category', 'required');
@@ -1221,10 +1220,10 @@ function excelfr_stockassignlist_Data()
             { 
                 $searchAry = $_POST; 
                 $validPendingOrderFrDetailsAray = $this->Order_Model->getallValidPendingOrderFrDetails($searchAry);
-                   $data['validPendingOrderFrDetailsAray'] = $validPendingOrderFrDetailsAray; 
+                    $data['validPendingOrderFrDetailsAray'] = $validPendingOrderFrDetailsAray; 
                     $data['szMetaTagTitle'] = "Order Details";
                     $data['is_user_login'] = $is_user_login;
-                   $data['pageName'] = "Reporting";
+                    $data['pageName'] = "Reporting";
                     $data['subpageName'] = "Inventory_Report";
                     $data['notification'] = $count;
                     $data['data'] = $data;
@@ -2773,6 +2772,9 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
+         if($_SESSION['drugsafe_user']['iRole']==2){
+              $_POST['szSearch1'] = $_SESSION['drugsafe_user']['id'];
+          }
         $count = $this->Admin_Model->getnotification();
         $clientarr = array();
         $sitearr = array();
@@ -3517,7 +3519,10 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-	
+	  if($_SESSION['drugsafe_user']['iRole']==2){
+              $_POST['szSearchClRecord2'] = $_SESSION['drugsafe_user']['id'];
+          }
+       
        if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $_POST['szSearchClRecord2']!='')
         {
             $searchAry =$_POST; 

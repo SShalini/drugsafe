@@ -81,7 +81,7 @@
                         </div>
                    
                        
-                         <div class="row">
+                         <div class="search row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
 
                               <?php  if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){     ?>

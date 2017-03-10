@@ -67,9 +67,16 @@
                     <form name="orderSearchForm" id="orderSearchForm"
                           action="<?= __BASE_URL__ ?>/reporting/clientcomparisonReport" method="post">
                         <div class="row">
-                        <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
+                        <?php if(($_SESSION['drugsafe_user']['iRole'] == 1)||($_SESSION['drugsafe_user']['iRole'] == 5)){?>
                             <div class="col-md-3">
-                                <?php $allFrDetailsSearchAray = $this->Admin_Model->viewFranchiseeList(); ?>
+                                  <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
+                                       $allFrDetailsSearchAray =$this->Admin_Model->viewFranchiseeList(false,false); 
+                                   }
+                                   if($_SESSION['drugsafe_user']['iRole']==5 ){
+                                       $allFrDetailsSearchAray =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']); 
+                                   }
+                                       ?> 
+                                
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
                                     <select class="form-control custom-select" name="szSearch1" id="szSearch1"
                                             onblur="remove_formError(this.id,'true')"
