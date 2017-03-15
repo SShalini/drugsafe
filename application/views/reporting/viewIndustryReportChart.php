@@ -2,11 +2,11 @@
 <script src="http://code.highcharts.com/highcharts.js" rel="jquery" type="text/javascript"></script>
 <script src="http://code.highcharts.com/modules/exporting.js" rel="jquery" type="text/javascript"></script>
 <script src="http://code.highcharts.com/highcharts-3d.js" rel="jquery" type="text/javascript"></script>
-<div id="container" ></div>
-    <script>
+<div id="chart"></div>
+    <script type="text/javascript">
 	
 		$(function () {
-    $('#container').highcharts({
+    $('#chart').highcharts({
         chart: {
             type: 'column',
             margin: 75,
