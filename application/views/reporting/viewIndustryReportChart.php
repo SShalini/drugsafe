@@ -23,7 +23,6 @@
         <div id="page_content" class="row">
             <div class="col-md-12">
                 <ul class="page-breadcrumb breadcrumb">
-
                     <li>
                         <a href="<?php echo __BASE_URL__; ?>">Home</a>
                         <i class="fa fa-circle"></i>
