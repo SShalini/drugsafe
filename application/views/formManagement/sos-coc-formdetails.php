@@ -257,10 +257,11 @@
                                                 <?php
                                                 $count = 1;
                                                 foreach ($TestList as $testdata){
+                                                    
                                                      $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($testdata['clientType']);
                                                     ?>
                                                 <tr>
-                                                    <td><?php echo $count;?>.</td>
+                                                    <td><?php echo $count;?></td>
                                                     <td><?php echo $franchisee['szName'];?></td>
                                                       <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A'); ?> </td>
                                                     <td><?php echo $Client['szName'];?></td>
@@ -277,7 +278,9 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                <?php } ?>
+                                                <?php 
+                                                $count++;
+                                                } ?>
                                                 </tbody>
                                             </table>
                                         </div>

@@ -983,11 +983,13 @@ public function deleteProspectConfirmation()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         // Add a page
-      $pdf->AddPage('L');
+       $pdf->AddPage('L');
         
        $franchiseeId = $this->session->userdata('franchiseeId');
        $status = $this->session->userdata('status');
-    
+        if($_SESSION['drugsafe_user']['iRole']==2){ 
+             $franchiseeId = $_SESSION['drugsafe_user']['id'];
+             }
         
         $html = '       
        <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
@@ -1102,6 +1104,9 @@ public function deleteProspectConfirmation()
 
         
        $franchiseeId = $this->session->userdata('franchiseeId');
+        if($_SESSION['drugsafe_user']['iRole']==2){ 
+             $franchiseeId = $_SESSION['drugsafe_user']['id'];
+             }
        $status = $this->session->userdata('status');
          $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeId,false,$status);
         $x=0;

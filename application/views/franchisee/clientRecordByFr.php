@@ -53,9 +53,9 @@
                             <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related clients.</span>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row search">
                              <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/franchisee/franchiseeClientRecord" name="szSearchClientRecord" method="post">
-                                  <div class="col-md-3">
+                                  <div class="col-md-3 search">
                                       <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
@@ -75,13 +75,13 @@
                                       </select>
                                   </div>
 
-                                  <div class="col-md-1">
+                                  <div class="col-md-1 search">
                                       <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
                              
                            </form>
                           </div>
-                        <div class="row"> 
+                        <div class="row search">
                             
                             <?php if(!empty($_POST['szSearchFrRecord'])){
                                     if(empty($clientAray)){echo "Not Found";}}?>

@@ -22,7 +22,7 @@
                             <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">System calculation</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">System Calculation</span>
                             </div>
                                 <div class="actions">
                                 <a onclick="backSiteRecord('<?php echo $freanchId;?>')" href="javascript:void(0);" 
@@ -37,7 +37,7 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>System calculation</th>
+                                    <th>System Calculation</th>
                                     <th> No of Donors</th>
                                     <th> RRP </th>
                                     <th> $ Value </th>

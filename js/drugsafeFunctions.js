@@ -1437,6 +1437,7 @@ function changeordstatus(ordid,prodcount,status) {
                         prodid: prodid,
                         qty: qty
                     }, function (result) {
+                        alert(result);
                         if (result == 'SUCCESS') {
                             check++;
                         } else {

@@ -818,16 +818,7 @@
             <div class="actions">
                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                     <?php
-                   
-                    if($_SESSION['drugsafe_user']['iRole']=='5'){
-                       if($clientDetailsAray['szNoOfSites'] > $count){
-                        ?>
-                        <button class="btn btn-sm green-meadow" onclick="addClientData(<?php echo $franchiseeArr['id']; ?>,<?php echo $clientDetailsAray['id']; ?>,'<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');">
-                        &nbsp;Add Site
-                        </button>
-                        <?php
-                    }  
-                    }
+                 
                     if($_SESSION['drugsafe_user']['iRole']=='2')
                     {
                         if($clientDetailsAray['szNoOfSites'] > $count){

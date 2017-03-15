@@ -53,6 +53,7 @@
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">franchisee List</span>
                             </div>
+                              <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){ ?>
                             <div class="actions">
                                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                                     <button class="btn btn-sm green-meadow"  onclick="addFranchiseeData('','1');" href="javascript:void(0);">
@@ -60,6 +61,7 @@
                                     </button>
                                 </div>
                             </div>
+                              <?php } ?>
                         </div>
                      
                         <?php
@@ -149,10 +151,11 @@
                                                if($franchiseeData['iActive']=='1')
                                                 {
                                                    ?>
+                                                 <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){ ?>
                                                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit Franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>','<?php echo $operationManagerId['operationManagerId'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-                                              <?php if($_SESSION['drugsafe_user']['iRole'] == '1'){ ?>
+                                            
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>

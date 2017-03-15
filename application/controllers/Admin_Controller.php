@@ -67,8 +67,9 @@ class Admin_Controller extends CI_Controller
         }
         $validate = $this->input->post('adminLogin');
         $iRemember = (int)$this->input->post('adminLogin[iRemember]');
-
+        
         if ($this->Admin_Model->validateAdminData($validate)) {
+           
             $adminAry = $this->Admin_Model->adminLoginUser($validate);
             if (!empty($adminAry)) {
                 if ((int)$iRemember == 1) {
@@ -88,6 +89,7 @@ class Admin_Controller extends CI_Controller
             }
 
         }
+       
         $data['szMetaTagTitle'] = "Admin Login";
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
         $data['is_user_login'] = $is_user_login;
@@ -648,7 +650,7 @@ class Admin_Controller extends CI_Controller
 
             if ($this->Admin_Model->insertOpertionDetails($validate)) {
                 $szMessage['type'] = "success";
-                $szMessage['content'] = "<h4><strong>New operation manager added successfully.</strong></h4>";
+                $szMessage['content'] = "<h4><strong>New Operation Manager added successfully.</strong></h4>";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 redirect(base_url('/admin/operationManagerList'));
 

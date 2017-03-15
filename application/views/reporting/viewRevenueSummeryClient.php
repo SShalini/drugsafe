@@ -247,7 +247,7 @@
                                                     $i++;
                                                     ?>
                                                     <tr>
-                                                        <td> <?php echo $i++;?></td>
+                                                        <td> <?php echo $i;?></td>
                                                         <td>
                                                          <?php echo $userDataAry['szName'];?>
                                                         </td>

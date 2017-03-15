@@ -92,10 +92,12 @@ class Admin_Model extends Error_Model
 
     public function adminLoginUser($validate)
     {
-        $whereAry = array('szEmail' => $validate['szEmail'], 'szPassword' => encrypt($validate['szPassword']), 'isDeleted=' => '0', 'iActive=' => '1');
+        $whereAry = array('szEmail' => trim($validate['szEmail']), 'szPassword' => trim(encrypt($validate['szPassword'])), 'isDeleted=' => '0', 'iActive=' => '1');
         $this->db->select('id,szName,szEmail,szPassword,iRole,franchiseetype');
         $this->db->where($whereAry);
         $query = $this->db->get(__DBC_SCHEMATA_USERS__);
+//        $sql = $this->db->last_query($query);
+//          print_r($sql);die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             $adminAry['id'] = $row[0]['id'];
@@ -963,6 +965,7 @@ class Admin_Model extends Error_Model
                 }
 
             }
+      
             if ($this->error == true)
                 return false;
             else
@@ -1273,6 +1276,7 @@ class Admin_Model extends Error_Model
 
     function insertOpertionDetails($data, $id = 0)
     {
+        $flag = false;
         $szNewPassword = create_login_password();
         if (!empty($data['abn'])) {
             $abn = $data['abn'];

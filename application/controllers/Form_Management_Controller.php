@@ -671,7 +671,7 @@ class Form_Management_Controller extends CI_Controller
                                     <td colspan="2">Email: '.$franchiseeDets[0]['szEmail'].'</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" align="left">Client Code: '.(!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A').'</td><td align="right" colspan="3">Requesting Client: '.$ClientDets[0]['szName'].'</td>
+                                        <td colspan="3" align="left">Client Code: '.(!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A').'</td><td align="left" colspan="3">Requesting Client: '.$ClientDets[0]['szName'].'</td>
                                         <td colspan="2">Date: '.date('d/m/Y',strtotime($sosdetarr[0]['testdate'])).'</td>
                                     </tr>
                                     <tr>
