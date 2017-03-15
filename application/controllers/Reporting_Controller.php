@@ -3874,7 +3874,21 @@ function excelfr_stockassignlist_Data()
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-	public function view_industry_Chart()
+    function industryReportChart()
+    {
+        $dtStart = $this->input->post('dtStart');
+        $dtEnd = $this->input->post('dtEnd');
+        $szIndustry = $this->input->post('szIndustry');
+        $szTestType = $this->input->post('szTestType');
+        $this->session->set_userdata('dtStart',$dtStart);
+        $this->session->set_userdata('dtEnd',$dtEnd);
+        $this->session->set_userdata('szIndustry',$szIndustry);
+        $this->session->set_userdata('szTestType',$szTestType);
+        echo "SUCCESS||||";
+        echo "viewIndustryChart";
+    }
+
+	public function viewIndustryChart()
     { // something
         $count = $this->Admin_Model->getnotification();
         $is_user_login = is_user_login($this);
@@ -3884,11 +3898,13 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-        
-     
-        
-            
-            $data['szMetaTagTitle'] = "Industry Report Chart";
+         
+        $searchArray['dtStart'] = $this->session->userdata('dtStart');
+        $searchArray['dtEnd'] = $this->session->userdata('dtEnd');
+        $searchArray['szIndustry'] = $this->session->userdata('szIndustry');
+        $searchArray['szTestType'] = $this->session->userdata('szTestType');
+        $getSosAndClientDetils=$this->Reporting_Model->getSosAndClientDetils($searchArray); 
+        $data['szMetaTagTitle'] = "Industry Report Chart";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
             $data['subpageName'] = "industry_report";

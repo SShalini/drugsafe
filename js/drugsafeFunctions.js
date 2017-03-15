@@ -2919,3 +2919,12 @@ function ViewexcelRevenueSummeryClient(franchiseeId,clientId,dtStart,dtEnd) {
     });
 
 }
+function industryReportChart(dtStart,dtEnd,szIndustry,szTestType) {
+    
+    $.post(__BASE_URL__ + "/reporting/industryReportChart", {dtStart : dtStart,dtEnd: dtEnd,szIndustry : szIndustry,szTestType : szTestType}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}

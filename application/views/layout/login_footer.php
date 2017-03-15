@@ -7,7 +7,6 @@
         <script src="<?php echo __BASE_JS_URL__;?>/jquery.form.js" rel="jquery" type="text/javascript"></script>
        <script src="<?php echo __BASE_JS_URL__;?>/drugsafeFunctions.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
         <script src="<?php echo __BASE_JS_URL__;?>/validate.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
-		
         <script type="text/javascript">
             var __BASE_URL__ = '<?php echo __BASE_URL__;?>';
             validate_form_fields();
