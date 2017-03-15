@@ -11,7 +11,7 @@ class Reporting_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->library('pagination');
         $this->load->model('Ordering_Model');
-	$this->load->model('Reporting_Model');
+	    $this->load->model('Reporting_Model');
         $this->load->model('Forum_Model');
         $this->load->model('Error_Model');
         $this->load->model('Admin_Model');
@@ -3873,6 +3873,30 @@ function excelfr_stockassignlist_Data()
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
+    }
+	public function view_industry_Chart()
+    { // something
+        $count = $this->Admin_Model->getnotification();
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        
+     
+        
+            
+            $data['szMetaTagTitle'] = "Industry Report Chart";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "industry_report";
+            $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/viewIndustryReportChart.php');
+            $this->load->view('layout/admin_footer');
+        
     }
                                                         }
 ?>
