@@ -89,6 +89,13 @@ if(!empty($compareresultarr))
    $(function () {
 
     $('#comparesionchart').highcharts({
+        yAxis: {
+        labels: {
+            formatter: function () {
+                return Highcharts.numberFormat(this.value,0);
+            }
+        }
+    },
         colors: ['#2f7ed8','#D2691E','#A9A9A9'],
 
         chart: {

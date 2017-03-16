@@ -131,6 +131,13 @@ if(!empty($getSosAndClientDetils))
    $(function () {
 
     $('#alcohal').highcharts({
+        yAxis: {
+        labels: {
+            formatter: function () {
+                return Highcharts.numberFormat(this.value,0);
+            }
+        }
+    },
         colors: ['#2f7ed8','#D2691E','#A9A9A9'],
 
         chart: {
@@ -178,6 +185,14 @@ if(!empty($getSosAndClientDetils))
 
     });
     $('#Urine').highcharts({
+    
+    yAxis: {
+        labels: {
+            formatter: function () {
+                return Highcharts.numberFormat(this.value,0);
+            }
+        }
+    },
          colors: ['#6495ED','#98FB98','#483D8B'],
         chart: {
             type: 'column',
@@ -220,6 +235,14 @@ if(!empty($getSosAndClientDetils))
 
     });
     $('#oral').highcharts({
+    
+    yAxis: {
+        labels: {
+            formatter: function () {
+                return Highcharts.numberFormat(this.value,0);
+            }
+        }
+    },
           colors: ['#696969','#DAA520','#4169E1'],
         chart: {
             type: 'column',
