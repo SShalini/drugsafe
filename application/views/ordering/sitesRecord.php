@@ -60,9 +60,9 @@
                     <?php
                     if (($_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '5' )) {
                         if($_SESSION['drugsafe_user']['iRole'] == '5'){
-                          $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']);
+                          $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id'],false,false,false,false,false,false,1);
                         }else{
-                        $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, false);
+                        $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, false,false, false,false, false,false,false,1);
                         }
                         ?>
                         <div class="portlet-title">

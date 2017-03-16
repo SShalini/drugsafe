@@ -91,10 +91,10 @@
                             <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onchange="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                         <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
-                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false); 
+                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false,false,false,false,false,false,false,1); 
                                    }
                                    if($_SESSION['drugsafe_user']['iRole']==5 ){
-                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']); 
+                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id'],false,false,false,false,false,false,1); 
                                    }
                                        ?>   
                                        <?php

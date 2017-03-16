@@ -54,14 +54,22 @@ class Form_Management_Controller extends CI_Controller
         }
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-        $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, false);
-        if ($_SESSION['drugsafe_user']['iRole'] == '5') {
-            $getFranchisees = $this->Form_Management_Model->getFranchisees($_SESSION['drugsafe_user']['id']);
+      
+          if ($_SESSION['drugsafe_user']['iRole'] == '5') {
+          $getFranchisees =   $this->Admin_Model->viewFranchiseeList(false, $_SESSION['drugsafe_user']['id'],false,false,false,false,false,false,1);
+          
         } elseif ($_SESSION['drugsafe_user']['iRole'] == '1') {
-            $getFranchisees = $this->Form_Management_Model->getFranchisees();
+            $getFranchisees =$this->Admin_Model->viewFranchiseeList(false, false,false,false,false,false,false,false,1);
         } else {
             $getFranchisees = array();
         }
+//        if ($_SESSION['drugsafe_user']['iRole'] == '5') {
+//            $getFranchisees = $this->Form_Management_Model->getFranchisees($_SESSION['drugsafe_user']['id']);
+//        } elseif ($_SESSION['drugsafe_user']['iRole'] == '1') {
+//            $getFranchisees = $this->Form_Management_Model->getFranchisees();
+//        } else {
+//            $getFranchisees = array();
+//        }
         $this->load->library('form_validation');
         $this->form_validation->set_rules('dtStart', 'Test Date From ', 'required');
         $this->form_validation->set_rules('dtEnd', 'Test Date To', 'required');

@@ -2349,9 +2349,9 @@ class Reporting_Controller extends CI_Controller
             die;
         }
         if ($_SESSION['drugsafe_user']['iRole'] == '5') {
-            $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, $_SESSION['drugsafe_user']['id']);
+            $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false, $_SESSION['drugsafe_user']['id'],false,false,false,false,false,false,1);
         } elseif ($_SESSION['drugsafe_user']['iRole'] == '1') {
-            $searchOptionArr = $this->Admin_Model->viewFranchiseeList();
+            $searchOptionArr = $this->Admin_Model->viewFranchiseeList(false,false,false,false,false,false,false,false,1);
         } else {
             $searchOptionArr = array();
         }
