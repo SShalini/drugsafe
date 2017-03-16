@@ -146,7 +146,15 @@
                                             <td> <?php echo $State;?> </td>
                                              <td> <?php echo $Region;?> </td>
                                            <td>
-                                            
+                                              <?php if ($franchiseeData['iActive']==1) {?>   
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="status" title="Status" onclick="franchiseeStatus(<?php echo $franchiseeData['id'];?>,'0');" href="javascript:void(0);">
+                                             <i class="fa fa-circle clr_green" aria-hidden="true"></i>
+                                              </a>
+                                                 <?php } else {?>
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="status" title="Status" onclick="" href="javascript:void(0);">
+                                             <i class="fa fa-circle clr" aria-hidden="true"></i>
+                                              </a>
+                                             <?php } ?>  
                                                <?php 
                                                if($franchiseeData['iActive']=='1')
                                                 {
@@ -194,12 +202,13 @@
                                                  <?php 
                                                 }
                                                ?>
-                                                   <?php
-                                                }
-                                                ?>
+                                                 
                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Franchisee Details" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);">
                                                    <i class="fa fa-eye" aria-hidden="true"></i>
                                                </a>
+                                                <?php
+                                                }
+                                                ?>
                                             </td>
                                         </tr>
                                         <?php 

@@ -900,13 +900,13 @@
                    <table id="sample_1" class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid" aria-describedby="sample_1_info">
                         <thead>
                             <tr>
-                                <th>Site Code</th>
-				<th> Company Name </th>
-                                <th> Company Email </th>
-                                <th>Company Phone Number</th>
-                                <th> Created By</th>
-                                <th> Updated By</th>
-                                <th> Actions </th>
+                                <th width="190px;"> Site Code</th>
+				<th width="90px;"> Company Name </th>
+                                <th width="90px;"> Company Email </th>
+                                <th width="90px;">Company Phone Number</th>
+                                <th width="90px;"> Created By</th>
+                                <th width="90px;"> Updated By</th>
+                                <th width="50px;"> Actions </th>
                             </tr>
                         </thead>
                         <tbody>

@@ -247,6 +247,21 @@
                                             <td> <?php echo $State;?> </td>
                                              <td> <?php echo $Region;?> </td>
                                             <td>
+                                            
+                                             <?php if ($franchiseeData['iActive']==1) {?>   
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="status" title="Status" onclick="franchiseeStatus(<?php echo $franchiseeData['id'];?>,'0');" href="javascript:void(0);">
+                                             <i class="fa fa-circle clr_green" aria-hidden="true"></i>
+                                              </a>
+                                                 <?php } else {?>
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="status" title="Status" onclick="" href="javascript:void(0);">
+                                             <i class="fa fa-circle clr" aria-hidden="true"></i>
+                                              </a>
+                                             <?php } ?>  
+                                            
+                                               <?php 
+                                               if($franchiseeData['iActive']=='1')
+                                                {
+                                                   ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>,'1');" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
@@ -275,10 +290,11 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="productStoclMgt" title="Product Stock  Management" onclick="viewProductStockMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cubes" aria-hidden="true"></i>
                                                 </a>
-                                        <?php } } ?>
+                                                <?php } }  ?>
                                              <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Franchisee Details" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);">
                                                    <i class="fa fa-eye" aria-hidden="true"></i>
                                                </a>
+                                               
                                                <?php    
                                                $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
                                                 
@@ -288,7 +304,7 @@
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                                  <?php 
-                                                }
+                                                } }
                                                ?>
                                             </td> 
                                         

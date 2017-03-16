@@ -2929,6 +2929,38 @@ function industryReportChart(dtStart,dtEnd,szIndustry,szTestType) {
 
     });
 }
+ function receive_order_details(idOrder)
+{
+    
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/receiveOrderData", {idOrder: idOrder}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#receiveOrder').modal("show");
+             jQuery('#loader').attr('style', 'display:none');
+        }
+       
+
+    });
+}
+function receiveordstatus(idOrder) {
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#receiveOrder').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/order/receiveordConfirmation", {idOrder: idOrder}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#receiveOrderConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    }); 
+}
 function comparisonReportChart(siteid,testtype,comparetype) {
     $.post(__BASE_URL__ + "/reporting/comparisonReportChart", {siteid : siteid,testtype: testtype,comparetype : comparetype}, function (result) {
         ar_result = result.split('||||');

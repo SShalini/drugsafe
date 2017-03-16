@@ -211,6 +211,9 @@
                                                             <th>
                                                                 Delivery Docket
                                                             </th>
+                                                             <th>
+                                                              Order Received 
+                                                            </th>
 
                                                         </tr>
                                                         </thead>
@@ -314,6 +317,16 @@
                                                                            onclick="view_order_details_pdf(<?php echo $validOrdersDetailsData['orderid']; ?>);"
                                                                            href="javascript:void(0);">
                                                                             <i class="fa fa-file-pdf-o"></i>
+                                                                        </a>
+                                                                    <?php } ?>
+                                                                </td>
+                                                                  <td>
+                                                                    <?php if ($validOrdersDetailsData['status'] == 2) { ?>
+                                                                        <a class="btn btn-circle btn-icon-only btn-default"
+                                                                           title="View Pdf"
+                                                                           onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
+                                                                           href="javascript:void(0);">
+                                                                            <i class="fa fa-reply"></i>
                                                                         </a>
                                                                     <?php } ?>
                                                                 </td>

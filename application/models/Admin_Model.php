@@ -422,7 +422,7 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-    public function viewFranchiseeList($searchAry = '', $operationManagerId = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $id = 0, $name = '', $email = '', $opId = '')
+    public function viewFranchiseeList($searchAry = '', $operationManagerId = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $id = 0, $name = '', $email = '', $opId = '',$flag='0')
     {
 
         if (!empty($operationManagerId)) {
@@ -440,7 +440,16 @@ class Admin_Model extends Error_Model
              $whereAry = array('isDeleted=' => '0', 'iRole' => '2', 'operationManagerId' =>$opId );
          
         }
-
+            if($flag==1){
+            if (!empty($operationManagerId)) {
+              $whereAry = array('operationManagerId=' => $operationManagerId,'isDeleted=' => '0', 'iRole' => '2','iActive=' => '1' );   
+               }
+               else{
+                $whereAry = array('isDeleted=' => '0', 'iRole' => '2','iActive=' => '1' );         
+               }
+            }
+        
+            
         $this->db->select('*');
         $this->db->from('tbl_franchisee');
         $this->db->join('ds_user', 'tbl_franchisee.franchiseeId = ds_user.id');
@@ -1514,22 +1523,41 @@ class Admin_Model extends Error_Model
             return false;
         }
     }
-
+     function getAllSitesByFranchiseesId($idfranchisee)
+    {
+           $whereAry = array('franchiseeId' => (int)$idfranchisee,'clientType!='=>(int)0); 
+        $query = $this->db->select('*')
+            ->from(__DBC_SCHEMATA_CLIENT__)
+            ->where($whereAry)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        }else{
+            return false;
+        }
+    }
+  
     function updateClientByFranchisee($idfranchisee, $status)
     {
         $dataAry = array(
             'iActive' => $status
         );
+        $getClientDetails = $this->Admin_Model->getAllSitesByFranchiseesId($idfranchisee);
         $this->db->where('id', $idfranchisee);
         $query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
         if ($query) {
+            if ($getClientDetails) {
+                foreach ($getClientDetails as $getClientData) {
+                    $this->Admin_Model->updateSitesByFranchisee($getClientData['clientType'], $status);
+                }
+            }
             return true;
-        } else {
+        }  else {
             return false;
         }
     }
-
-    function updateFranchiseeStatus($idfranchisee, $status)
+     function updateSitesByFranchisee($idfranchisee, $status)
     {
         $dataAry = array(
             'iActive' => $status
@@ -1540,14 +1568,55 @@ class Admin_Model extends Error_Model
         if ($query) {
             if ($getClientDetails) {
                 foreach ($getClientDetails as $getClientData) {
+                    $this->Admin_Model->updateAgentByFranchisee($getClientData['agentId'], $status);
+                }
+            }
+            return true;
+        }  else {
+            return false;
+        }
+    }
+     function updateAgentByFranchisee($idfranchisee, $status)
+    {
+        $dataAry = array(
+            'iActive' => $status
+        );
+        $this->db->where('id', $idfranchisee);
+        $query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+        if ($query) {
+            return true;
+        }  else {
+            return false;
+        }
+    }
+
+    function updateFranchiseeStatus($idfranchisee, $status)
+    {
+        $dataAry = array(
+            'iActive' => $status
+        );
+        $adminDetailsAry = $this->getAdminDetailsByEmailOrId(false,$idfranchisee);
+        $getClientDetails = $this->Admin_Model->getAllUserFranchiseesId($idfranchisee);
+        $this->db->where('id', $idfranchisee);
+        $query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+        if ($query) {
+            if ($getClientDetails) {
+                foreach ($getClientDetails as $getClientData) {
                     $this->Admin_Model->updateClientByFranchisee($getClientData['clientId'], $status);
                 }
             }
+          $statusAry = array(
+            'assign' => 0
+        ); 
+       $this->db->where('id', $adminDetailsAry['regionId']);
+       $queryupdate = $this->db->update(__DBC_SCHEMATA_REGION__, $statusAry);
+       
             return true;
         } else {
             return false;
         }
     }
+
 
     function getStateById($id)
     {

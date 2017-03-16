@@ -71,10 +71,10 @@
                         <?php if(($_SESSION['drugsafe_user']['iRole'] == 1)||($_SESSION['drugsafe_user']['iRole'] == 5)){?>
                             <div class="col-md-3">
                                   <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
-                                       $allFrDetailsSearchAray =$this->Admin_Model->viewFranchiseeList(false,false); 
+                                       $allFrDetailsSearchAray =$this->Admin_Model->viewFranchiseeList(false,false,false,false,false,false,false,false,1); 
                                    }
                                    if($_SESSION['drugsafe_user']['iRole']==5 ){
-                                       $allFrDetailsSearchAray =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id']); 
+                                       $allFrDetailsSearchAray =$this->Admin_Model->viewFranchiseeList(false,$_SESSION['drugsafe_user']['id'],false,false,false,false,false,false,1); 
                                    }
                                        ?> 
                                 

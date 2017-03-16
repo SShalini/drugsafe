@@ -860,7 +860,6 @@ $html .= '
             $countOrderDispatch = 0;
             for ($i = 1; $i <= $count; $i++) {
                 $quantity = $_POST['order_quantity' . $i];
-
                 $total_price += $_POST['total_price' . $i];
                 $orderId = $_POST['order_id' . $i];
                 $productId = $_POST['product_id' . $i];
@@ -995,9 +994,29 @@ $html .= '
         }
     }
     
-    
+   public function receiveOrderData()
+    {
+        $data['mode'] = '__RECEIVE_ORDER_DETAILS_POPUP__';
+        $data['idOrder'] = $this->input->post('idOrder');
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }  
 	
-	
+    public function receiveordConfirmation()
+    {
+        $data['mode'] = '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__';
+        $data['idOrder'] = $this->input->post('idOrder');
+        $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($data['idOrder']);
+         
+         $prodid='';
+         $qty='';
+        foreach($totalOrdersDetailsAray as $totalOrdersDetailData){
+       
+        $prodid = $totalOrdersDetailData['productid'];
+        $qty = $totalOrdersDetailData['dispatched'];
+        $this->Order_Model->updateInventoryByOrderId($data['idOrder'],$prodid,$qty); 
+        }
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
     
 }
 ?>
