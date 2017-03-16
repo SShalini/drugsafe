@@ -8,6 +8,7 @@
 <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts.js"></script>
 <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts-3d.js"></script>
 <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/exporting.js"></script>
+
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php //test ?>
@@ -50,10 +51,29 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="table-responsive">
-                                   
-                                        <div id="alcohal"></div>
-                                        <div id="Urine"></div>
-                                        <div id="oral"></div>
+                                   <?php
+                                    if ($szTestType == '' || $szTestType == 'A')
+                                    {
+                                        ?>
+                                            <div id="alcohal"></div>
+                                        <?php
+                                    }
+                                    if ($szTestType == '' || $szTestType == 'U')
+                                    {
+                                        ?>
+                                             <div id="Urine"></div>
+                                        <?php
+                                    }
+                                    if ($szTestType == '' || $szTestType == 'O')
+                                    {
+                                        ?>
+                                            <div id="oral"></div>
+                                        <?php
+                                    }
+                                    ?>
+                                      
+                                       
+                                        
                                     </div>
                                 </div>
 
@@ -120,6 +140,7 @@ if(!empty($getSosAndClientDetils))
  
 
 ?>
+
 <script type="text/javascript">
    $(function () {
 
@@ -248,4 +269,4 @@ if(!empty($getSosAndClientDetils))
     });
 });
 </script>
-<?php echo die();?>
+<?php die();?>

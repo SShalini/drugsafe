@@ -3908,7 +3908,8 @@ function excelfr_stockassignlist_Data()
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
             $data['subpageName'] = "industry_report";
-			$data['getSosAndClientDetils'] = $getSosAndClientDetils;
+	    $data['getSosAndClientDetils'] = $getSosAndClientDetils;
+            $data['szTestType']=$searchArray['szTestType'];
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewIndustryReportChart.php');
