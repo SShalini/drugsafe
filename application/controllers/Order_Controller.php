@@ -1006,14 +1006,15 @@ $html .= '
         $data['mode'] = '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__';
         $data['idOrder'] = $this->input->post('idOrder');
         $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($data['idOrder']);
-         
+         $ordid ='';
          $prodid='';
          $qty='';
         foreach($totalOrdersDetailsAray as $totalOrdersDetailData){
-       
+        $ordid = $totalOrdersDetailData['orderid'];
         $prodid = $totalOrdersDetailData['productid'];
         $qty = $totalOrdersDetailData['dispatched'];
-        $this->Order_Model->updateInventoryByOrderId($data['idOrder'],$prodid,$qty); 
+        $this->Order_Model->adjustFranchisorInventory($prodid,$qty);
+        $this->Order_Model->updateInventoryByOrderId($ordid,$prodid,$qty); 
         }
         $this->load->view('admin/admin_ajax_functions', $data);
     }

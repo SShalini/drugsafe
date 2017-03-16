@@ -321,7 +321,7 @@
                                                                     <?php } ?>
                                                                 </td>
                                                                   <td>
-                                                                    <?php if ($validOrdersDetailsData['status'] == 2) { ?>
+                                                                    <?php if (($validOrdersDetailsData['status'] == 2) && ($validOrdersDetailsData['isReceived']==0) ) { ?>
                                                                         <a class="btn btn-circle btn-icon-only btn-default"
                                                                            title="View Pdf"
                                                                            onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"

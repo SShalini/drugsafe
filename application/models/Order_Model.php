@@ -355,7 +355,7 @@ class Order_Model extends Error_Model {
                   
         }
         $this->db->where($searchQuery);
-        $this->db->select('ds_orders.franchiseeid,ds_orders.price,ds_orders.dispatched_price,ds_orders.last_changed,ds_orders.dispatchedon,ds_orders.canceledon,ds_orders.XeroIDnumber,ds_orders.xeroprocessed,ds_order_details.orderid,ds_orders.createdon,ds_orders.status,ds_order_details.productid,ds_order_details.quantity,ds_order_details.dispatched, COUNT(ds_order_details.orderid) as totalproducts');
+        $this->db->select('ds_orders.franchiseeid,ds_orders.isReceived,ds_orders.price,ds_orders.dispatched_price,ds_orders.last_changed,ds_orders.dispatchedon,ds_orders.canceledon,ds_orders.XeroIDnumber,ds_orders.xeroprocessed,ds_order_details.orderid,ds_orders.createdon,ds_orders.status,ds_order_details.productid,ds_order_details.quantity,ds_order_details.dispatched, COUNT(ds_order_details.orderid) as totalproducts');
         $this->db->order_by("orderid", "desc");
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join(__DBC_SCHEMATA_ORDER_DETAILS__.' as ds_order_details', 'ds_orders.id = ds_order_details.orderid');
@@ -940,13 +940,11 @@ class Order_Model extends Error_Model {
             }
         }
      function updateInventoryByOrderId($ordid,$prodid,$qty){
-      
         $statusarr = array('isReceived' => (int)1);
         $conditionarr = array('id' => (int)$ordid);
-        $this->db->where($conditionarr)
-            ->update(__DBC_SCHEMATA_ORDER__, $statusarr);
-        if ($this->db->affected_rows() > 0) {
-            if($this->adjustFranchisorInventory($prodid,$qty)){
+        $this->db->where($conditionarr);
+        $queryUpdate = $this->db->update(__DBC_SCHEMATA_ORDER__, $statusarr);
+            if ($queryUpdate) {
             $frIdByOrderId =  $this->getOrderByOrderId($ordid);
             $prodQuantity =  $this->StockMgt_Model->getProductQtyDetailsById($frIdByOrderId['franchiseeid'],$prodid); 
            if(empty($prodQuantity)){
@@ -975,9 +973,6 @@ class Order_Model extends Error_Model {
                    return false;  
                 }
                 return true;
-            }else{
-                return false;
-            }
         } else {
             $this->addError("error", "Something went wrong. Please try again.");
             return false;
