@@ -323,10 +323,10 @@
                                                                   <td>
                                                                     <?php if (($validOrdersDetailsData['status'] == 2) && ($validOrdersDetailsData['isReceived']==0) ) { ?>
                                                                         <a class="btn btn-circle btn-icon-only btn-default"
-                                                                           title="View Pdf"
+                                                                           title="Receive Order"
                                                                            onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
                                                                            href="javascript:void(0);">
-                                                                            <i class="fa fa-reply"></i>
+                                                                            <i class="fa fa-download"></i>
                                                                         </a>
                                                                     <?php } ?>
                                                                 </td>
