@@ -3916,5 +3916,49 @@ function excelfr_stockassignlist_Data()
             $this->load->view('layout/admin_footer',$data);
         
     }
-                                                        }
+    function comparisonReportChart(){
+        $siteid = $this->input->post('siteid');
+        $testtype = $this->input->post('testtype');
+        $comparetype = $this->input->post('comparetype');
+        $this->session->set_userdata('siteid',$siteid);
+        $this->session->set_userdata('testtype',$testtype);
+        $this->session->set_userdata('comparetype',$comparetype);
+        echo "SUCCESS||||";
+        echo "comparisonReportOfChart";
+    }
+    public function comparisonReportOfChart()
+    { 
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $siteid = $this->session->userdata('siteid');
+        $testtype = $this->session->userdata('testtype');
+        $comparetype = $this->session->userdata('comparetype');
+        $compareresultarr = $this->Reporting_Model->getcomparisonrecord($siteid,$testtype,$comparetype);
+        $userdataarr = $this->Webservices_Model->getfranchiseeclientsitebysiteid($siteid);
+        
+        
+        $data['szMetaTagTitle'] = "Client Comparison Chart";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Reporting";
+        $data['subpageName'] = "Client_Comparison_Report";
+        $data['notification'] = $count;
+        $data['compareresultarr'] = $compareresultarr;
+        $data['data'] = $data;
+        $data['err'] = false;
+        $data['userdataarr'] = $userdataarr;
+        $data['testtype'] = $testtype;
+        $data['comparetype'] = $comparetype;
+        $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
+        $this->load->view('layout/admin_header',$data);
+        $this->load->view('reporting/clientCmpChart');
+        $this->load->view('layout/admin_footer');
+        
+        
+    }
+   }
 ?>

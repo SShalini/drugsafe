@@ -52,7 +52,8 @@
                         </div>
                         <?php if(!$err && !empty($compareresultarr)){?>
                             <div class="actions">
-
+                                  <a onclick="comparisonReportChart('<?php echo $_POST['szSearch3'];?>','<?php echo $drugtesttype;?>','<?php echo $comparetype;?>')" href="javascript:void(0);" class=" btn green-meadow">
+                                    <i class="fa fa-bar-chart"></i> View Chart </a>
                                 <a onclick="comparisonReportPdf('<?php echo $_POST['szSearch3'];?>','<?php echo $drugtesttype;?>','<?php echo $comparetype;?>')" href="javascript:void(0);" class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 

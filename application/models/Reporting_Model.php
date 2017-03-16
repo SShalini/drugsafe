@@ -358,8 +358,8 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
          if($compparm == 2){
              $groupbystr = 'YEAR(testdate)';
          }
-         $wherestr = " Clientid = ".(int)$siteid." AND Drugtestid LIKE '%".$drugtype."%'";
-       $query = $this->db->select('MONTHNAME(testdate) as month, YEAR(testdate) as year')
+        $wherestr = " Clientid = ".(int)$siteid." AND Drugtestid LIKE '%".$drugtype."%'";
+        $query = $this->db->select('MONTHNAME(testdate) as month, YEAR(testdate) as year')
             ->select_sum('TotalAlcoholScreening', 'totalAlcohol')
             ->select_sum('TotalDonarScreeningUrine','totalDonarUrine')
             ->select_sum('TotalDonarScreeningOral','totalDonarOral')
@@ -371,7 +371,7 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             ->where($wherestr)
             ->group_by($groupbystr)
             ->get();
-         if ($query->num_rows() > 0) {
+        if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {
             return array();

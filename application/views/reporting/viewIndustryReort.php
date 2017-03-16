@@ -35,7 +35,7 @@
                             <div class="actions">
                                 <a onclick="industryReportChart('<?php echo $_POST['dtStart']; ?>','<?php echo $_POST['dtEnd']; ?>','<?php echo $_POST['szIndustry']; ?>','<?php echo $_POST['szTestType']; ?>')"
                                    href="javascript:void(0);" class=" btn green-meadow">
-                                    <i class="fa fa-file-pdf-o"></i> View Chart </a>
+                                    <i class="fa fa-bar-chart"></i> View Chart </a>
                                 <a onclick="industryReportPdf('<?php echo $_POST['dtStart']; ?>','<?php echo $_POST['dtEnd']; ?>','<?php echo $_POST['szIndustry']; ?>','<?php echo $_POST['szTestType']; ?>')"
                                    href="javascript:void(0);" class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>

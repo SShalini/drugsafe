@@ -38,14 +38,7 @@
                     <div class="portlet-body alert">
                         <div class="row">
                             <div>
-                                <div class="portlet green-meadow box">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="fa fa-users"></i>Industry Chart
-                                        </div>
-
-                                    </div>
-                                </div>
+                                
                                 <div class="portlet-body">
                                     <div class="table-responsive">
                                    <?php
