@@ -4,10 +4,7 @@
         $("#szTestType").customselect();
     });
 </script>
-<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts.js"></script>
-<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts-3d.js"></script>
-<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/exporting.js"></script>
+
 
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -71,10 +68,7 @@
                                         <?php
                                     }
                                     ?>
-                                      
-                                       
-                                        
-                                    </div>
+                                  </div>
                                 </div>
 
                             </div>
@@ -108,24 +102,23 @@ $totalNegativeOral='';
 if(!empty($getSosAndClientDetils))
 {
     $totalPositiveDonarOralNeg='';
-	$totalPositiveUrine='';
+    $totalPositiveUrine='';
     foreach ($getSosAndClientDetils as $getSosAndClientData) 
     {
         $industryname = $this->Admin_Model->getIndustryNameByid($getSosAndClientData['industry']);
         $alcohalCat[] = $industryname['szName'];
-		$totalAlcohalDoner[]=$getSosAndClientData['totalAlcohol'];
-		$totalPositiveAlcohol[]=$getSosAndClientData['totalPositiveAlcohol'];
-		$totalNegativeAlcohol[]=$getSosAndClientData['totalNegativeAlcohol'];
-		$totalDonarUrine[]=$getSosAndClientData['totalDonarUrine'];
-		$totalPositiveUrineNeg = ($getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine']);
-		$totalPositiveUrine[]=$totalPositiveUrineNeg < 0 ? 0 : $totalPositiveUrineNeg;
-		$totalNegativeUrine[]=$getSosAndClientData['totalNegativeUrine'];
-		$totalDonarOral[]=$getSosAndClientData['totalDonarOral'];
-		$totalPositiveDonarOralNeg = ($getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral']);
-		$totalPositiveDonarOral[]=$totalPositiveDonarOralNeg < 0 ? 0 : $totalPositiveDonarOralNeg;
+	$totalAlcohalDoner[]=$getSosAndClientData['totalAlcohol'];
+	$totalPositiveAlcohol[]=$getSosAndClientData['totalPositiveAlcohol'];
+	$totalNegativeAlcohol[]=$getSosAndClientData['totalNegativeAlcohol'];
+	$totalDonarUrine[]=$getSosAndClientData['totalDonarUrine'];
+	$totalPositiveUrineNeg = ($getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine']);
+	$totalPositiveUrine[]=$totalPositiveUrineNeg < 0 ? 0 : $totalPositiveUrineNeg;
+	$totalNegativeUrine[]=$getSosAndClientData['totalNegativeUrine'];
+	$totalDonarOral[]=$getSosAndClientData['totalDonarOral'];
+	$totalPositiveDonarOralNeg = ($getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral']);
+	$totalPositiveDonarOral[]=$totalPositiveDonarOralNeg < 0 ? 0 : $totalPositiveDonarOralNeg;
         $totalNegativeOral[]= $getSosAndClientData['totalNegativeOral'];
-	}
-	
+    }
 	$alcohalCat = "'" . implode("','",  $alcohalCat) . "'";
 	$totalAlcohalDoner = "" . implode(",",  $totalAlcohalDoner) . "";
 	$totalPositiveAlcohol = "" . implode(",",  $totalPositiveAlcohol) . "";
@@ -135,7 +128,7 @@ if(!empty($getSosAndClientDetils))
 	$totalNegativeUrine = "" . implode(",",  $totalNegativeUrine) . "";
 	$totalDonarOral = "" . implode(",",  $totalDonarOral) . ""; 
 	$totalPositiveDonarOral = "" . implode(",",  $totalPositiveDonarOral) . ""; 
-    $totalNegativeOral = "" . implode(",",  $totalNegativeOral) . "";
+        $totalNegativeOral = "" . implode(",",  $totalNegativeOral) . "";
 }
  
 
@@ -150,6 +143,7 @@ if(!empty($getSosAndClientDetils))
         chart: {
             type: 'column',
             margin: 75,
+            marginBottom: 100,
             options3d: {
                 enabled: true,
                 alpha: 15,
@@ -161,7 +155,8 @@ if(!empty($getSosAndClientDetils))
                         text: 'Alcohol Test, Industry Comparison'
                     },
         xAxis: {
-                categories: [<?php echo $alcohalCat ;?>]
+                categories: [<?php echo $alcohalCat ;?>],
+                
             },
         plotOptions: {
             column: {
@@ -175,6 +170,7 @@ if(!empty($getSosAndClientDetils))
             name: 'Alcohol Total Donors',
             data: [<?php echo $totalAlcohalDoner ;?>],
             stack: 0
+            
         }, {
              name: 'Alcohol Positive Result',
             data: [<?php echo $totalPositiveAlcohol;?>],
@@ -193,6 +189,7 @@ if(!empty($getSosAndClientDetils))
         chart: {
             type: 'column',
             margin: 75,
+            marginBottom: 120,
             options3d: {
                 enabled: true,
                 alpha: 15,
@@ -233,7 +230,8 @@ if(!empty($getSosAndClientDetils))
           colors: ['#696969','#DAA520','#4169E1'],
         chart: {
             type: 'column',
-            margin: 75,
+             margin: 75,
+             marginBottom: 100,
             options3d: {
                 enabled: true,
                 alpha: 15,
@@ -244,6 +242,9 @@ if(!empty($getSosAndClientDetils))
         title: {
                 text: 'Oral Fluid AS 4760:2006'
         },
+        xAxis: {
+                categories: [<?php echo $alcohalCat ;?>]
+            },
         plotOptions: {
             column: {
                 depth: 40,
@@ -269,4 +270,3 @@ if(!empty($getSosAndClientDetils))
     });
 });
 </script>
-<?php die();?>

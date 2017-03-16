@@ -71,3 +71,6 @@ body .logo img {
 .fa.fa-circle.disabled {
     color: red;
 }
+.highcharts-credits {
+    display: none;
+}

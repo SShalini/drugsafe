@@ -14,7 +14,7 @@
     
     
       <!--CUSTOM JS-->
-       <script src="<?php echo __BASE_JS_URL__;?>/jquery-3.1.0.min.js" rel="jquery" type="text/javascript"></script>
+       
         <script src="<?php echo __BASE_JS_URL__;?>/jquery.form.js" rel="jquery" type="text/javascript"></script>
        <script src="<?php echo __BASE_JS_URL__;?>/drugsafeFunctions.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
         <script src="<?php echo __BASE_JS_URL__;?>/validate.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
@@ -61,6 +61,9 @@
 
         <link href="<?php echo __BASE_CSS_URL__; ?>/uploadfilemulti.css" rel="stylesheet" type="text/css" />
         <script src="<?php echo __BASE_JS_URL__; ?>/jquery.fileuploadmulti.min.js"></script>
+<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts.js"></script>
+<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts-3d.js"></script>
+<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/exporting.js"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
         <!--<link href="http://hayageek.github.io/jQuery-Upload-File/4.0.10/uploadfile.css" rel="stylesheet">
         <script src="http://hayageek.github.io/jQuery-Upload-File/4.0.10/jquery.uploadfile.min.js"></script>-->

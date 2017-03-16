@@ -3913,7 +3913,7 @@ function excelfr_stockassignlist_Data()
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewIndustryReportChart.php');
-            $this->load->view('layout/admin_footer');
+            $this->load->view('layout/admin_footer',$data);
         
     }
                                                         }
