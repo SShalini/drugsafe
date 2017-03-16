@@ -3904,8 +3904,6 @@ function excelfr_stockassignlist_Data()
             $searchArray['szTestType'] = $this->session->userdata('szTestType');
             $getSosAndClientDetils=$this->Reporting_Model->getSosAndClientDetils($searchArray);
      
-        
-            
             $data['szMetaTagTitle'] = "Industry Report Chart";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";

@@ -8,7 +8,6 @@
 <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts.js"></script>
 <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts-3d.js"></script>
 <script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/exporting.js"></script>
-
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php //test ?>
