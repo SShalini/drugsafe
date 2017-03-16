@@ -138,7 +138,7 @@ if(!empty($getSosAndClientDetils))
             }
         }
     },
-        colors: ['#2f7ed8','#D2691E','#A9A9A9'],
+      colors: ['#2f7ed8','#D2691E','#A9A9A9'],
 
         chart: {
             type: 'column',
