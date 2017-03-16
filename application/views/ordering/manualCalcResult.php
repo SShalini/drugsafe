@@ -170,13 +170,13 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <p>$<?php
-                                            $mobileScreen = $data['mobileScreenBasePrice'] * $data['mobileScreenHr'];
-                                            $DcmobileScreen = $data['DCmobileScreenBasePrice'] * $data['DCmobileScreenHr'];
-                                            $calloutprice = $data['CallOutBasePrice'] * $data['CallOutHr'];
-                                            $fcoprice = $data['FCOBasePrice'] * $data['FCOBasePrice'];
-                                            $travel = $data['travelBasePrice'] * $data['travelHr'];
+                                            $DcmobileScreen = $data['mobileScreenBasePrice'] * ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);
+                                            $mobileScreen = $data['mcbp'] * ($data['mchr']>1?$data['mchr']:1);
+                                            $calloutprice = $data['cobp'] * ($data['cohr']>3?$data['cohr']:3);
+                                            $fcoprice = $data['fcobp'] * ($data['fcohr']>2?$data['fcohr']:2);
+                                            $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
 
-                                            $TotalTrevenu = $data['urineNata'] + $data['laboratoryConfirmation']+$data['cancellationFee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
+                                            $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
 
 
                                             $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
@@ -287,22 +287,58 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-8 text-info bold">
+                                        <lable>Discount<?php
+                                            $FrenchiseeDataArr = $this->Webservices_Model->getuserhierarchybysiteid($idsite);
+                                            $discount = $this->Ordering_Model->getClientDiscountByClientId($FrenchiseeDataArr[0]['clientType']);
+                                            echo (!empty($discount)?'('.$discount['percentage'].'%)':'');
+                                            ?>:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <?php if(!empty($discount)){?>
+                                            <p>$<?php
+                                                $totalDisc = ($totalinvoiceAmt*$discount['percentage'])*0.01;
+                                                echo number_format($totalDisc, 2, '.', ','); ?></p>
+                                        <?php } else{
+                                            echo '<p>-</p>';
+                                        }?>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
+                                        <lable>Total After Discount:</lable>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <p>$<?php
+                                            $totalAfterDisc = $totalinvoiceAmt-$totalDisc;
+                                            echo number_format($totalAfterDisc, 2, '.', ','); ?></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-8 text-info bold">
                                         <lable>GST:</lable>
                                     </div>
                                     <div class="col-sm-2">
                                         <p>$<?php
-                                            $totalGst = $GST + $GSTmanual;
+                                            if(!empty($discount)){
+                                                $totalGst = $totalAfterDisc*0.1;
+                                            }else{
+                                                $totalGst = $GST + $GSTmanual;
+                                            }
                                             echo number_format($totalGst, 2, '.', ','); ?></p>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-8 text-info bold">
-                                        <lable>Total before Royalty and Inc GST:</lable>
+                                        <lable>Total before Royalty, Inc Discount and Inc GST:</lable>
                                     </div>
                                     <div class="col-sm-2">
                                         <p>$<?php
-                                            $totalRoyaltyBefore = $Total1 + $TotalbeforeRoyalty;
+                                            if(!empty($discount)){
+                                                $totalRoyaltyBefore = $totalGst + $totalAfterDisc;
+                                            }else{
+                                                $totalRoyaltyBefore = $Total1 + $TotalbeforeRoyalty;
+                                            }
                                             echo number_format($totalRoyaltyBefore, 2, '.', ','); ?></p>
                                     </div>
                                 </div>
@@ -310,11 +346,15 @@
 
                                 <div class="row">
                                     <div class="col-sm-8 text-info bold">
-                                        <lable>Total after royalty and Inc GST:</lable>
+                                        <lable>Total after royalty, Inc Discount and Inc GST:</lable>
                                     </div>
                                     <div class="col-sm-2">
                                         <p>$<?php
-                                            $totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
+                                            if(!empty($discount)){
+                                                $totalRoyaltyAfter = $totalRoyaltyBefore + $totalRoyalty;
+                                            }else{
+                                                $totalRoyaltyAfter = $Total2 + $TotalafterRoyalty;
+                                            }
                                             echo number_format($totalRoyaltyAfter, 2, '.', ','); ?></p>
                                     </div>
                                 </div>
@@ -322,10 +362,17 @@
 
                                 <div class="row">
                                     <div class="col-sm-8 text-info bold">
-                                        <lable>Net Total after royalty and exl GST:</lable>
+                                        <lable>Net Total after royalty, Inc Discount and exl GST:</lable>
                                     </div>
                                     <div class="col-sm-2">
-                                        <p>$<?php echo number_format($totalinvoiceAmt - $totalGst, 2, '.', ','); ?></p>
+
+                                        <p>$<?php
+                                            if(!empty($discount)){
+                                                $NetTotal = $totalAfterDisc - $totalGst;
+                                            }else{
+                                                $NetTotal = $totalinvoiceAmt - $totalGst;
+                                            }
+                                            echo number_format($NetTotal, 2, '.', ','); ?></p>
                                     </div>
                                 </div>
 

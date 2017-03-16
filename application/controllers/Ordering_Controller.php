@@ -21,7 +21,6 @@ class Ordering_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->model('Webservices_Model');
         $this->load->library('pagination');
-
     }
 
     function viewcalform()
@@ -52,66 +51,85 @@ class Ordering_Controller extends CI_Controller
         $idsite = $this->session->userdata('idsite');
         $sosid = $this->session->userdata('sosid');
         $data = $this->input->post('orderingData');
-      
+        if($data){
+            $checkforvalidation = false;
+        }else{
+            $checkforvalidation = true;
+        }
+
         $this->load->library('form_validation');
           if(!empty($data['FCOBasePrice']) || !empty($data['FCOHr'])){
         $this->form_validation->set_rules('orderingData[FCOBasePrice]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[FCOHr]', 'Hours', 'required|greater_than[1]|numeric');
+        $checkforvalidation = true;
           }
         if(!empty($data['SyntheticCannabinoids'])){
             $this->form_validation->set_rules('orderingData[SyntheticCannabinoids]', 'Synthetic Cannabinoids Screening', 'required|numeric');
+            $checkforvalidation = true;
         }
          if(!empty($data['mobileScreenBasePrice']) || !empty($data['mobileScreenHr'])){
         $this->form_validation->set_rules('orderingData[mobileScreenBasePrice]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[mobileScreenHr]', 'Hours', 'required|numeric');
+             $checkforvalidation = true;
          }
           if(!empty($data['CallOutBasePrice']) || !empty($data['CallOutHr'])){
         $this->form_validation->set_rules('orderingData[CallOutBasePrice]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[CallOutHr]', 'Hours', 'required|greater_than[2]|numeric');
+              $checkforvalidation = true;
          }
         if(!empty($data['urineNata'])){
             $this->form_validation->set_rules('orderingData[urineNata]', 'Urine NATA Laboratory screening', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data['nataLabCnfrm'])){
             $this->form_validation->set_rules('orderingData[nataLabCnfrm]', 'NATA Laboratory confirmation', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data['oralFluidNata'])){
             $this->form_validation->set_rules('orderingData[oralFluidNata]', 'Oral Fluid NATA Laboratory confirmation', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data['laboratoryScreening'])){
             $this->form_validation->set_rules('orderingData[laboratoryScreening]', 'Laboratory Screening', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data['laboratoryConfirmation'])){
             $this->form_validation->set_rules('orderingData[laboratoryConfirmation]', 'Laboratory Confirmation', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data['RtwScrenning'])){
             $this->form_validation->set_rules('orderingData[RtwScrenning]', 'Return to work  screening', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data['DCmobileScreenBasePrice']) || !empty($data['DCmobileScreenHr'])){
         $this->form_validation->set_rules('orderingData[DCmobileScreenBasePrice]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[DCmobileScreenHr]', 'Hours', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data['travelType'])){
             $this->form_validation->set_rules('orderingData[travelType]', 'Travel Type', 'required');
+            $checkforvalidation = true;
         }
 
          if(!empty($data['travelBasePrice']) || !empty($data['travelHr'])){
         $this->form_validation->set_rules('orderingData[travelBasePrice]', ' Travel Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[travelHr]', 'Travel Hours', 'required|numeric');
+             $checkforvalidation = true;
          }
         if(!empty($data['cancellationFee'])){
             $this->form_validation->set_rules('orderingData[cancellationFee]', 'Cancellation Fee', 'required|numeric');
+            $checkforvalidation = true;
         }
         $this->form_validation->set_message('required', '{field} is required.');
-        if ($this->form_validation->run() == FALSE) {
+        if (($checkforvalidation) && ($this->form_validation->run() == FALSE)) {
             $data['sosid'] = $sosid;
             $data['idsite'] = $idsite;
             $data['Drugtestid'] = $Drugtestid;
             $data['notification'] = $count;
             $data['commentnotification'] = $commentReplyNotiCount;
-            $data['szMetaTagTitle'] = "Ordering";
+            $data['szMetaTagTitle'] = "Generate Proforma Invoice";
             $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Ordering";
+            $data['pageName'] = "Generate Proforma Invoice";
             $data['subpageName'] = "Sites_Record";
             $data['freanchId'] = $freanchId;
             $this->load->view('layout/admin_header', $data);
@@ -128,9 +146,9 @@ class Ordering_Controller extends CI_Controller
                 $data['sosid'] = $sosid;
                 $data['notification'] = $count;
                 $data['data'] = $data;
-                $data['szMetaTagTitle'] = "Ordering";
+                $data['szMetaTagTitle'] = "Generate Proforma Invoice";
                 $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Ordering";
+                $data['pageName'] = "Generate Proforma Invoice";
                 $data['freanchId'] = $freanchId;
                 $data['subpageName'] = "Sites_Record";
                 $this->load->view('layout/admin_header', $data);
@@ -231,10 +249,35 @@ class Ordering_Controller extends CI_Controller
         $manualCalId = $this->session->userdata('manualCalId');
         $sosid = $this->session->userdata('sosid');
         $data_validate = $this->input->post('orderingData');
-        
+        if($data_validate){
+            $checkforvalidation = false;
+        }else{
+            $checkforvalidation = true;
+        }
       
         if (empty($data_validate)) {
             $manualCalcDataAry = $this->Ordering_Model->getManualCalculationBySosId($sosid);
+            if(!empty($manualCalcDataAry)){
+                $manualCalcDataAry['urineNata'] = ($manualCalcDataAry['urineNata']>0.00?$manualCalcDataAry['urineNata']:'');
+                $manualCalcDataAry['nataLabCnfrm'] = ($manualCalcDataAry['nataLabCnfrm']>0.00?$manualCalcDataAry['nataLabCnfrm']:'');
+                $manualCalcDataAry['oralFluidNata'] = ($manualCalcDataAry['oralFluidNata']>0.00?$manualCalcDataAry['oralFluidNata']:'');
+                $manualCalcDataAry['SyntheticCannabinoids'] = ($manualCalcDataAry['SyntheticCannabinoids']>0.00?$manualCalcDataAry['SyntheticCannabinoids']:'');
+                $manualCalcDataAry['labScrenning'] = ($manualCalcDataAry['labScrenning']>0.00?$manualCalcDataAry['labScrenning']:'');
+                $manualCalcDataAry['RtwScrenning'] = ($manualCalcDataAry['RtwScrenning']>0.00?$manualCalcDataAry['RtwScrenning']:'');
+                $manualCalcDataAry['mobileScreenBasePrice'] = ($manualCalcDataAry['mobileScreenBasePrice']>0.00?$manualCalcDataAry['mobileScreenBasePrice']:'');
+                $manualCalcDataAry['travelBasePrice'] = ($manualCalcDataAry['travelBasePrice']>0.00?$manualCalcDataAry['travelBasePrice']:'');
+                $manualCalcDataAry['fcobp'] = ($manualCalcDataAry['fcobp']>0.00?$manualCalcDataAry['fcobp']:'');
+                $manualCalcDataAry['mcbp'] = ($manualCalcDataAry['mcbp']>0.00?$manualCalcDataAry['mcbp']:'');
+                $manualCalcDataAry['cobp'] = ($manualCalcDataAry['cobp']>0.00?$manualCalcDataAry['cobp']:'');
+                $manualCalcDataAry['labconf'] = ($manualCalcDataAry['labconf']>0.00?$manualCalcDataAry['labconf']:'');
+                $manualCalcDataAry['cancelfee'] = ($manualCalcDataAry['cancelfee']>0.00?$manualCalcDataAry['cancelfee']:'');
+                $manualCalcDataAry['mobileScreenHr'] = ($manualCalcDataAry['mobileScreenHr']>0?$manualCalcDataAry['mobileScreenHr']:'');
+                $manualCalcDataAry['travelHr'] = ($manualCalcDataAry['travelHr']>0?$manualCalcDataAry['travelHr']:'');
+                $manualCalcDataAry['travelType'] = ($manualCalcDataAry['travelType']>0?$manualCalcDataAry['travelType']:'');
+                $manualCalcDataAry['fcohr'] = ($manualCalcDataAry['fcohr']>0?$manualCalcDataAry['fcohr']:'');
+                $manualCalcDataAry['mchr'] = ($manualCalcDataAry['mchr']>0?$manualCalcDataAry['mchr']:'');
+                $manualCalcDataAry['cohr'] = ($manualCalcDataAry['cohr']>0?$manualCalcDataAry['cohr']:'');
+            }
         } else {
             $manualCalcDataAry = $data_validate;
         }
@@ -243,53 +286,67 @@ class Ordering_Controller extends CI_Controller
           if(!empty($data_validate['fcobp']) || !empty($data_validate['fcohr'])){
         $this->form_validation->set_rules('orderingData[fcobp]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[fcohr]', 'Hours', 'required|greater_than[1]|numeric');
+              $checkforvalidation = true;
           }
         if(!empty($data_validate['SyntheticCannabinoids'])){
             $this->form_validation->set_rules('orderingData[SyntheticCannabinoids]', 'Synthetic Cannabinoids Screening', 'required|numeric');
+            $checkforvalidation = true;
         }
          if(!empty($data_validate['mcbp']) || !empty($data_validate['mchr'])){
         $this->form_validation->set_rules('orderingData[mcbp]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[mchr]', 'Hours', 'required|numeric');
+             $checkforvalidation = true;
          }
           if(!empty($data_validate['cobp']) || !empty($data_validate['cohr'])){
         $this->form_validation->set_rules('orderingData[cobp]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[cohr]', 'Hours', 'required|greater_than[2]|numeric');
+              $checkforvalidation = true;
          }
         if(!empty($data_validate['urineNata'])){
             $this->form_validation->set_rules('orderingData[urineNata]', 'Urine NATA Laboratory screening', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data_validate['nataLabCnfrm'])){
             $this->form_validation->set_rules('orderingData[nataLabCnfrm]', 'NATA Laboratory confirmation', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data_validate['oralFluidNata'])){
             $this->form_validation->set_rules('orderingData[oralFluidNata]', 'Oral Fluid NATA Laboratory confirmation', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data_validate['labScrenning'])){
             $this->form_validation->set_rules('orderingData[labScrenning]', 'Laboratory Screening', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data_validate['labconf'])){
             $this->form_validation->set_rules('orderingData[labconf]', 'Laboratory Confirmation', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data_validate['RtwScrenning'])){
             $this->form_validation->set_rules('orderingData[RtwScrenning]', 'Return to work  screening', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data_validate['mobileScreenBasePrice']) || !empty($data_validate['mobileScreenHr'])){
         $this->form_validation->set_rules('orderingData[mobileScreenBasePrice]', 'Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[mobileScreenHr]', 'Hours', 'required|numeric');
+            $checkforvalidation = true;
         }
         if(!empty($data_validate['travelType'])){
             $this->form_validation->set_rules('orderingData[travelType]', 'Travel Type', 'required');
+            $checkforvalidation = true;
         }
 
          if(!empty($data_validate['travelBasePrice']) || !empty($data_validate['travelHr'])){
         $this->form_validation->set_rules('orderingData[travelBasePrice]', ' Travel Base Price', 'required|numeric');
         $this->form_validation->set_rules('orderingData[travelHr]', 'Travel Hours', 'required|numeric');
+             $checkforvalidation = true;
          }
         if(!empty($data_validate['cancelfee'])){
             $this->form_validation->set_rules('orderingData[cancelfee]', 'Cancellation Fee', 'required|numeric');
+            $checkforvalidation = true;
         }
         $this->form_validation->set_message('required', '{field} is required.');
-           if ($this->form_validation->run() == FALSE) {
+           if (($checkforvalidation) && ($this->form_validation->run() == FALSE)) {
         
           
             $_POST['orderingData'] = $manualCalcDataAry;
@@ -437,13 +494,15 @@ class Ordering_Controller extends CI_Controller
         //$TotalafterRoyalty = number_format($TotalafterRoyalty, 2, '.', '');
         //$NetTotal = $ValTotal - $Royaltyfees;
         //$NetTotal = number_format($NetTotal, 2, '.', '');
-        $mobileScreen = $data['mobileScreenBasePrice'] * $data['mobileScreenHr'];
-        $DcmobileScreen = $data['DCmobileScreenBasePrice'] * $data['DCmobileScreenHr'];
-        $calloutprice = $data['CallOutBasePrice'] * $data['CallOutHr'];
-        $fcoprice = $data['FCOBasePrice'] * $data['FCOBasePrice'];
-        $travel = $data['travelBasePrice'] * $data['travelHr'];
 
-        $TotalTrevenu = $data['urineNata'] + $data['laboratoryConfirmation']+$data['cancellationFee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
+        $DcmobileScreen = $data['mobileScreenBasePrice'] * ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);
+        $mobileScreen = $data['mcbp'] * ($data['mchr']>1?$data['mchr']:1);
+        $calloutprice = $data['cobp'] * ($data['cohr']>3?$data['cohr']:3);
+        $fcoprice = $data['fcobp'] * ($data['fcohr']>2?$data['fcohr']:2);
+        $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
+
+        $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
+
         $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
         //$RoyaltyfeesManual = ($TotalTrevenu * 0.1);
         //$RoyaltyfeesManual = number_format($RoyaltyfeesManual, 2, '.', '');
@@ -561,10 +620,10 @@ class Ordering_Controller extends CI_Controller
         </div>';
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        error_reporting(E_ALL);
+        error_reporting(E_ALL);/*
         $this->session->unset_userdata('idsite');
         $this->session->unset_userdata('Drugtestid');
-        $this->session->unset_userdata('sosid');
+        $this->session->unset_userdata('sosid');*/
         ob_end_clean();
         $pdf->Output('view_calculation_details.pdf', 'I');
     }

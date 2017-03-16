@@ -174,13 +174,13 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <p>$<?php
-                                            $mobileScreen = $data['mobileScreenBasePrice'] * $data['mobileScreenHr'];
-                                            $DcmobileScreen = $data['DCmobileScreenBasePrice'] * $data['DCmobileScreenHr'];
-                                            $calloutprice = $data['CallOutBasePrice'] * $data['CallOutHr'];
-                                            $fcoprice = $data['FCOBasePrice'] * $data['FCOBasePrice'];
-                                            $travel = $data['travelBasePrice'] * $data['travelHr'];
+                                            $DcmobileScreen = $data['mobileScreenBasePrice'] * ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);
+                                            $mobileScreen = $data['mcbp'] * ($data['mchr']>1?$data['mchr']:1);
+                                            $calloutprice = $data['cobp'] * ($data['cohr']>3?$data['cohr']:3);
+                                            $fcoprice = $data['fcobp'] * ($data['fcohr']>2?$data['fcohr']:2);
+                                            $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
 
-                                            $TotalTrevenu = $data['urineNata'] + $data['laboratoryConfirmation']+$data['cancellationFee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
+                                            $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
 
 
                                             $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');

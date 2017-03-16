@@ -160,7 +160,7 @@
                                                 <tbody>
                                                 <?php
 						$i = 1;
-                                                $allfranchiseeTotalRevenue='';
+                                                $allfranchiseeTotalAfterDis='';
                                                 $allfranchiseetotalRoyaltyfees='';
                                                 $allfranchiseetotalNetProfit='';
 												
@@ -172,14 +172,21 @@
 						                               $totalRevenu='';
                                                     $totalRoyaltyfees='';
                                                     $totalNetProfit='';
+                                                    $totalAfterDiscount='';
 													
                                                 
 						    foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
                                                        
                                                         $DrugtestidArr = array_map('intval', str_split($getManualCalcData['Drugtestid']));
-                                                        
-                                                        if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
+                                                        $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
+                                                        $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
+                                                        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($getClientDetails['id']);
+                                                        $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
+                                                        $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
+                                                        $discount = $this->Ordering_Model->getClientDiscountByClientId($ClirntDetailsDataAry['clientType']);
+                                                        $data = $this->Ordering_Model->getManualCalculationBySosId($getManualCalcData['sosid']);
+                                                        if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr) || in_array(4, $DrugtestidArr)) {
                                                             $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
                                                         }
                                                         $ValTotal = 0;
@@ -193,39 +200,66 @@
                                                         if (in_array(3, $DrugtestidArr)) {
                                                             $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
                                                         }
-                                                        $Royaltyfees = $ValTotal * 0.1;
+                                                        if (in_array(4, $DrugtestidArr)) {
+                                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_4__, 2, '.', '');
+                                                        }
+                                                        $GST = $ValTotal * 0.1;
+                                                        $GST = number_format($GST, 2, '.', '');
+                                                        $TotalbeforeRoyalty = $ValTotal + $GST;
+                                                        $TotalbeforeRoyalty = number_format($TotalbeforeRoyalty, 2, '.', '');
+                                                        $DcmobileScreen = $data['mobileScreenBasePrice'] * ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);
+                                                        $mobileScreen = $data['mcbp'] * ($data['mchr']>1?$data['mchr']:1);
+                                                        $calloutprice = $data['cobp'] * ($data['cohr']>3?$data['cohr']:3);
+                                                        $fcoprice = $data['fcobp'] * ($data['fcohr']>2?$data['fcohr']:2);
+                                                        $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
+
+                                                        $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
+
+                                                        $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
+                                                        $GSTmanual = ($TotalTrevenu * 0.1);
+                                                        $GSTmanual = number_format($GSTmanual, 2, '.', '');
+                                                        $Total1 = $TotalTrevenu + $GSTmanual;
+                                                        $Total1 = number_format($Total1, 2, '.', '');
+                                                        $totalinvoiceAmt = $ValTotal + $TotalTrevenu;
+                                                        if(!empty($discount)){
+                                                            $discountpercent = $discount['percentage'];
+                                                        }else{
+                                                            $discountpercent = 0;
+                                                        }
+                                                        if($discountpercent>0){
+                                                            $totaldiscount = $totalinvoiceAmt*$discountpercent*0.01;
+                                                            $totalafterdiscount = $totalinvoiceAmt-$totaldiscount;
+                                                            $totalGst = $totalafterdiscount*0.1;
+                                                            $totalRoyaltyBefore = $totalGst + $totalafterdiscount;
+                                                        }else{
+                                                            $totalGst = $GST + $GSTmanual;
+                                                            $totalRoyaltyBefore = $Total1 + $TotalbeforeRoyalty;
+                                                            $totaldiscount = 0;
+                                                            $totalafterdiscount = 0;
+                                                        }
+                                                        $Royaltyfees = ($discountpercent>0?number_format($totalafterdiscount, 2, '.', ''):number_format($totalinvoiceAmt, 2, '.', ''))*0.1;
                                                         $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
-                                                        $Royaltyfees= number_format($Royaltyfees, 2, '.', ',');
-                                                    
-                                                        $NetTotal = $ValTotal - $Royaltyfees;
+
+                                                        $NetTotal = ($discountpercent>0?number_format($totalafterdiscount, 2, '.', ''):number_format($totalinvoiceAmt, 2, '.', '')) - $Royaltyfees;
                                                         $NetTotal = number_format($NetTotal, 2, '.', '');
-                                                        $NetTotal = number_format($NetTotal, 2, '.', ',');
-                                                            
-                                                        $totalRevenu=$totalRevenu+$ValTotal;
-							$totalRevenu = number_format($totalRevenu, 2, '.', '');
-                                                        $totalRevenu=number_format($totalRevenu, 2, '.', ',');
-														
+
                                                         $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
 														$totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
-                                                        $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', ',');
-														
+
                                                         $totalNetProfit=$totalNetProfit+$NetTotal;
 														$totalNetProfit = number_format($totalNetProfit, 2, '.', '');
-                                                        $totalNetProfit = number_format($totalNetProfit, 2, '.', ',');
-                                                       
+                                                        $totalAfterDiscount = $totalAfterDiscount+($discountpercent>0?number_format($totalafterdiscount, 2, '.', ''):number_format($totalinvoiceAmt, 2, '.', ''));
+                                                        $totalAfterDiscount = number_format($totalAfterDiscount, 2, '.', '');
 						   }
-                                                   
-                                                    $allfranchiseeTotalRevenue=$allfranchiseeTotalRevenue+$totalRevenu;
-                                                    $allfranchiseeTotalRevenue = number_format($allfranchiseeTotalRevenue, 2, '.', '');
-                                                    $allfranchiseeTotalRevenue=number_format($allfranchiseeTotalRevenue, 2, '.', ',');
-                                                     
+
+                                                    $allfranchiseeTotalAfterDis=$allfranchiseeTotalAfterDis+$totalAfterDiscount;
+                                                    $allfranchiseeTotalAfterDis = number_format($allfranchiseeTotalAfterDis, 2, '.', '');
+
                                                     $allfranchiseetotalRoyaltyfees=$allfranchiseetotalRoyaltyfees+$totalRoyaltyfees;
                                                     $allfranchiseetotalRoyaltyfees = number_format($allfranchiseetotalRoyaltyfees, 2, '.', '');
-                                                    $allfranchiseetotalRoyaltyfees=number_format($allfranchiseetotalRoyaltyfees, 2, '.', ',');
-                                                    
+
                                                     $allfranchiseetotalNetProfit=$allfranchiseetotalNetProfit+$totalNetProfit;
                                                     $allfranchiseetotalNetProfit = number_format($allfranchiseetotalNetProfit, 2, '.', '');
-                                                    $allfranchiseetotalNetProfit=number_format($allfranchiseetotalNetProfit, 2, '.', ',');
                                                     ?>
                                                     <tr>
                                                         <td> <?php echo $i++;?></td>
@@ -233,15 +267,15 @@
                                                          <?php echo $getAdmindetails['szName'];?>
                                                         </td>
                                                         <td>
-                                                           <?php echo $totalRevenu;?>
+                                                           <?php echo '$'.number_format($totalAfterDiscount, 2, '.', ',');?>
                                                            
                                                         </td>
                                                         <td>
-                                                          <?php echo $totalRoyaltyfees;?>
+                                                          <?php echo '$'.number_format($totalRoyaltyfees, 2, '.', ',');?>
                                                            
                                                         </td>
                                                         <td>
-                                                           <?php echo $totalNetProfit;?>
+                                                           <?php echo '$'.number_format($totalNetProfit, 2, '.', ',');?>
                                                         </td>
                                                        
                                                  </tr>
@@ -254,13 +288,13 @@
                                                      <td></td>
                                                      <td><b>Total</b></td>
                                                      <td>
-                                                        <?php echo $allfranchiseeTotalRevenue;?>
+                                                        <?php echo '$'.number_format($allfranchiseeTotalAfterDis, 2, '.', ',');?>
                                                      </td>
                                                      <td>
-                                                      <?php echo $allfranchiseetotalRoyaltyfees;?>
+                                                      <?php echo '$'.number_format($allfranchiseetotalRoyaltyfees, 2, '.', ',');?>
                                                      </td>
                                                      <td>
-                                                         <?php echo $allfranchiseetotalNetProfit;?>
+                                                         <?php echo '$'.number_format($allfranchiseetotalNetProfit, 2, '.', ',');?>
                                                      </td>
                                                  </tr>
                                                   

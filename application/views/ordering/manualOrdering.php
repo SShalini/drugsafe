@@ -40,7 +40,7 @@
                                     <th>System Calculation</th>
                                     <th> No of Donors</th>
                                     <th> RRP </th>
-                                    <th> $ Value </th>
+                                    <th> Value </th>
                                     
                                 </tr>
                                 </thead>
