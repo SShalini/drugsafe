@@ -248,4 +248,4 @@ if(!empty($getSosAndClientDetils))
     });
 });
 </script>
-<?php die();?>
+<?php echo die();?>
