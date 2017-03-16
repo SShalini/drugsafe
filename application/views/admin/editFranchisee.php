@@ -38,6 +38,7 @@
                                 </div>
                             </div>
                         </div>
+                      
                         <div class="portlet-body">
                             <form class="form-horizontal" id="addFranchisee" action="<?=__BASE_URL__?>/admin/editFranchisee" name="addFranchisee" method="post">
                                 <div class="form-body">
@@ -49,6 +50,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-child"></i>
                                                 </span>
+                                                <input type="hidden" id='sztype' name='addFranchisee[sztype]' value='<?php echo $_POST['addFranchisee']['franchiseetype'];?>'>
                                                 <select class="form-control" name="addFranchisee[sztype]" id="sztype" disabled="disabled">
                                                     <?php
                                                     if(!isset($_POST['addFranchisee']['sztype'])){
@@ -208,16 +210,11 @@
                                     class="form-group <?php if (!empty($arErrorMessages['szCountry']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-3 control-label">Country</label>
                                     <div class="col-md-5">
-                                        <div class="input-group">
+                                        <div class="input-group ">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-flag"></i>
                                                 </span>
-                                            <select class="form-control read-only " name="addFranchisee[szCountry]" id="szCountry"
-                                                    Placeholder="Country" readonly onfocus="remove_formError(this.id,'true')">
-                                                <option value=''>Select</option>
-                                                <option value="Australia" <?php echo(sanitize_post_field_value($_POST['addFranchisee']['szCountry']) == trim("Australia") ? "selected='selected'" : ""); ?>>Australia</option>
-                                                
-                                            </select>
+                                               <input class="form-control read-only" type="text" name="addFranchisee[szCountry]" id="szCountry" value="<?php echo $_POST['addFranchisee']['szCountry'];?>" />
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">
@@ -233,7 +230,7 @@
                                             class="form-group <?php if (!empty($arErrorMessages['szState']) != '') { ?>has-error<?php } ?>">
                                         <label class="col-md-3 control-label">State</label>
                                         <div class="col-md-5">
-                                            <div class="input-group">
+                                            <div class="input-group read-only">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-flag-checkered"></i>
                                                 </span>
@@ -245,6 +242,8 @@
                                                     <div class="form-control">
                                                         <?php echo $getState['name'] ; ?>
                                                         <input type="hidden" name="addFranchisee[szState]" value="<?php echo $getState['id'] ;?>" />
+                                                         <input type="hidden" name="addFranchisee[id]" value="<?php echo $_POST['addFranchisee']['id'] ;?>" />
+                                                         <input type="hidden" name="addFranchisee[regionId]" value="<?php echo $_POST['addFranchisee']['regionId'] ;?>" />
                                                     </div>
                                                 <?php }else{
                                                 ?>
@@ -278,7 +277,7 @@
                                             <div class="form-group <?php if (!empty($arErrorMessages['szRegionName']) != '') { ?>has-error<?php } ?>">
                                                 <label class="col-md-3 control-label">Region Name</label>
                                                 <div class="col-md-5">
-                                                    <div class="input-group">
+                                                    <div class="input-group read-only">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-map-marker"></i>
                                                     </span>
