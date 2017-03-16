@@ -3898,16 +3898,19 @@ function excelfr_stockassignlist_Data()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-         
-        $searchArray['dtStart'] = $this->session->userdata('dtStart');
-        $searchArray['dtEnd'] = $this->session->userdata('dtEnd');
-        $searchArray['szIndustry'] = $this->session->userdata('szIndustry');
-        $searchArray['szTestType'] = $this->session->userdata('szTestType');
-        $getSosAndClientDetils=$this->Reporting_Model->getSosAndClientDetils($searchArray); 
-        $data['szMetaTagTitle'] = "Industry Report Chart";
+            $searchArray['dtStart'] = $this->session->userdata('dtStart');
+            $searchArray['dtEnd'] = $this->session->userdata('dtEnd');
+            $searchArray['szIndustry'] = $this->session->userdata('szIndustry');
+            $searchArray['szTestType'] = $this->session->userdata('szTestType');
+            $getSosAndClientDetils=$this->Reporting_Model->getSosAndClientDetils($searchArray);
+     
+        
+            
+            $data['szMetaTagTitle'] = "Industry Report Chart";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
             $data['subpageName'] = "industry_report";
+			$data['getSosAndClientDetils'] = $getSosAndClientDetils;
             $data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewIndustryReportChart.php');

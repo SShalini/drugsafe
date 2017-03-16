@@ -4,10 +4,11 @@
         $("#szTestType").customselect();
     });
 </script>
-<script src="<?php echo __BASE_JS_URL__;?>/jquery.min.js" rel="jquery" type="text/javascript"></script>
-<script src="<?php echo __BASE_JS_URL__;?>/highcharts.js" rel="jquery" type="text/javascript"></script>
-<script src="<?php echo __BASE_JS_URL__;?>/exporting.js" rel="jquery" type="text/javascript"></script>
-<script src="<?php echo __BASE_JS_URL__;?>/highcharts-3d.js" rel="jquery" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts.js"></script>
+<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/highcharts-3d.js"></script>
+<script type="text/javascript" src="<?php echo __BASE_JS_URL__; ?>/exporting.js"></script>
+
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php //test ?>
@@ -37,9 +38,6 @@
                         </div>
                        
                     </div>
-
-                    
-                   
                     <div class="portlet-body alert">
                         <div class="row">
                             <div>
@@ -53,48 +51,10 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="table-responsive">
-                                        <table class="table table-hover table-bordered table-striped">
-                                            <tbody>
-											
-												<script>
-	$(function () {
-    $('#chart').highcharts({
-        chart: {
-            type: 'column',
-            margin: 75,
-            options3d: {
-				enabled: true,
-                alpha: 15,
-                beta: 0,
-                depth: 110
-            }
-        },
-        plotOptions: {
-            column: {
-                depth: 40,
-                stacking: true,
-                grouping: true,
-                groupZPadding: 100
-            }
-        },
-        series: [{
-            data: [1, 2, 4, 3, 2, 4],
-            stack: 0
-        }, {
-            data: [5, 6, 3, 4, 1, 2],
-            stack: 2
-        }, {
-            data: [7, 9, 8, 7, 5, 8],
-            stack: 1
-        }]
-    });
-});
-	
-	</script>
-	 <div id="chart"></div>
-	
-                                           </tbody>
-                                        </table>
+                                   
+                                        <div id="alcohal"></div>
+                                        <div id="Urine"></div>
+                                        <div id="oral"></div>
                                     </div>
                                 </div>
 
@@ -116,3 +76,177 @@
 </div>
 </div>
 <div id="popup_box"></div>
+<?php
+$alcohalCat='';
+$totalAlcohalDoner='';
+$totalPositiveAlcohol='';
+$totalNegativeAlcohol='';
+$totalDonarUrine='';
+$totalPositiveUrine='';
+$totalDonarOral='';
+$totalPositiveDonarOral='';
+$totalNegativeOral='';
+if(!empty($getSosAndClientDetils))
+{
+    $totalPositiveDonarOralNeg='';
+	$totalPositiveUrine='';
+    foreach ($getSosAndClientDetils as $getSosAndClientData) 
+    {
+        $industryname = $this->Admin_Model->getIndustryNameByid($getSosAndClientData['industry']);
+        $alcohalCat[] = $industryname['szName'];
+		$totalAlcohalDoner[]=$getSosAndClientData['totalAlcohol'];
+		$totalPositiveAlcohol[]=$getSosAndClientData['totalPositiveAlcohol'];
+		$totalNegativeAlcohol[]=$getSosAndClientData['totalNegativeAlcohol'];
+		$totalDonarUrine[]=$getSosAndClientData['totalDonarUrine'];
+		$totalPositiveUrineNeg = ($getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine']);
+		$totalPositiveUrine[]=$totalPositiveUrineNeg < 0 ? 0 : $totalPositiveUrineNeg;
+		$totalNegativeUrine[]=$getSosAndClientData['totalNegativeUrine'];
+		$totalDonarOral[]=$getSosAndClientData['totalDonarOral'];
+		$totalPositiveDonarOralNeg = ($getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral']);
+		$totalPositiveDonarOral[]=$totalPositiveDonarOralNeg < 0 ? 0 : $totalPositiveDonarOralNeg;
+        $totalNegativeOral[]= $getSosAndClientData['totalNegativeOral'];
+	}
+	
+	$alcohalCat = "'" . implode("','",  $alcohalCat) . "'";
+	$totalAlcohalDoner = "" . implode(",",  $totalAlcohalDoner) . "";
+	$totalPositiveAlcohol = "" . implode(",",  $totalPositiveAlcohol) . "";
+	$totalNegativeAlcohol = "" . implode(",",  $totalNegativeAlcohol) . ""; 
+	$totalDonarUrine = "" . implode(",",  $totalDonarUrine) . "";
+	$totalPositiveUrine = "" . implode(",",  $totalPositiveUrine) . "";
+	$totalNegativeUrine = "" . implode(",",  $totalNegativeUrine) . "";
+	$totalDonarOral = "" . implode(",",  $totalDonarOral) . ""; 
+	$totalPositiveDonarOral = "" . implode(",",  $totalPositiveDonarOral) . ""; 
+    $totalNegativeOral = "" . implode(",",  $totalNegativeOral) . "";
+}
+ 
+
+?>
+<script type="text/javascript">
+   $(function () {
+
+    $('#alcohal').highcharts({
+        colors: ['#2f7ed8','#D2691E','#A9A9A9'],
+
+        chart: {
+            type: 'column',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 0,
+                depth: 110
+            }
+        },
+        title: {
+                        text: 'Alcohol Test, Industry Comparison'
+                    },
+        xAxis: {
+                categories: [<?php echo $alcohalCat ;?>]
+            },
+        plotOptions: {
+            column: {
+                depth: 40,
+                stacking: true,
+                grouping: true,
+                groupZPadding: 100
+            }
+        },
+        series: [{
+            name: 'Alcohol Total Donors',
+            data: [<?php echo $totalAlcohalDoner ;?>],
+            stack: 0
+        }, {
+             name: 'Alcohol Positive Result',
+            data: [<?php echo $totalPositiveAlcohol;?>],
+            stack: 2
+        }, {
+            name: 'Alcohol Negative Result',
+            data: [<?php echo $totalNegativeAlcohol;?>],
+            stack: 1
+        }]
+
+
+
+    });
+    $('#Urine').highcharts({
+         colors: ['#6495ED','#98FB98','#483D8B'],
+        chart: {
+            type: 'column',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 0,
+                depth: 110
+            }
+        },
+        title: {
+                    text: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008'
+        },
+		xAxis: {
+                categories: [<?php echo $alcohalCat ;?>]
+            },
+        plotOptions: {
+            column: {
+                depth: 40,
+                stacking: true,
+                grouping: true,
+                groupZPadding: 100
+            }
+        },
+        series: [{
+            name: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008 Total Donors',
+            data: [<?php echo $totalDonarUrine;?>],
+            stack: 0
+        }, {
+            name: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008 Positive Result',
+            data: [<?php echo $totalPositiveUrine;?>],
+            stack: 2
+        }, {
+            name: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008 Negative Result',
+            data: [<?php echo $totalNegativeUrine;?>],
+            stack: 1
+        }]
+
+    });
+    $('#oral').highcharts({
+          colors: ['#696969','#DAA520','#4169E1'],
+        chart: {
+            type: 'column',
+            margin: 75,
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 0,
+                depth: 110
+            }
+        },
+        title: {
+                text: 'Oral Fluid AS 4760:2006'
+        },
+        plotOptions: {
+            column: {
+                depth: 40,
+                stacking: true,
+                grouping: true,
+                groupZPadding: 100
+            }
+        },
+        series: [{
+            name: 'Oral Fluid AS 4760:2006 Total Donors',
+            data: [<?php echo $totalDonarOral;?>],
+            stack: 0
+        }, {
+            name: 'Oral Fluid AS 4760:2006 Positive Result',
+            data: [<?php echo $totalPositiveDonarOral;?>],
+            stack: 2
+        }, {
+            name: 'Oral Fluid AS 4760:2006 Negative Result',
+            data: [<?php echo $totalNegativeOral;?>],
+            stack: 1
+        }]
+
+    });
+});
+</script>
+<?php die();?>

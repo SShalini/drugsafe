@@ -18,7 +18,8 @@
         <script src="<?php echo __BASE_JS_URL__;?>/jquery.form.js" rel="jquery" type="text/javascript"></script>
        <script src="<?php echo __BASE_JS_URL__;?>/drugsafeFunctions.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
         <script src="<?php echo __BASE_JS_URL__;?>/validate.js?<?php echo time(); ?>" rel="jquery" type="text/javascript"></script>
-        <script type="text/javascript">
+        
+		<script type="text/javascript">
 
             validate_form_fields();
             autoSaveHandler();
@@ -94,6 +95,7 @@
     $('.dropdown').on('click tap', function() {
         $(this).toggleClass("open");
     });
+	
 </script>
     </body>
 </html>
