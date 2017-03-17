@@ -378,7 +378,6 @@ class Order_Controller extends CI_Controller
 
         $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
         $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
-        //$validOrderIdforFr = $this->Order_Model->validOrderIdforFr();
         $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
 
         $this->load->library('form_validation');
@@ -1018,6 +1017,64 @@ $html .= '
         }
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-    
+    public function view_order_list_by_fr()
+    {
+        $count = $this->Admin_Model->getnotification();
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+
+        $searchAry = $_POST;
+
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        //$validOrderIdforFr = $this->Order_Model->validOrderIdforFr();
+        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
+        $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
+
+        $this->form_validation->set_message('required', '{field} is required.');
+        if ($this->form_validation->run() == FALSE) {
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+            //$data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('order/viewOrderDetailsByFr');
+            $this->load->view('layout/admin_footer');
+
+        } else {
+            $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+            //$data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('order/viewOrderDetailsByFr');
+            $this->load->view('layout/admin_footer');
+
+
+        }
+    } 
 }
 ?>

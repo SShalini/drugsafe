@@ -20,7 +20,6 @@
 
 
             <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
-             
             <li class="nav-item start <?php if (trim($pageName) == 'Operation_Manager_List') { ?>active open<?php } ?>">
                     <a href="<?php echo __BASE_URL__; ?>/admin/operationManagerList" class="nav-link nav-toggle">
                         <i class="fa fa-male" aria-hidden="true"></i>
@@ -386,7 +385,7 @@
                 </ul>
 
             </li>
-           <?php } if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
+           <?php } if (($_SESSION['drugsafe_user']['iRole'] == 1)|| ($_SESSION['drugsafe_user']['iRole'] == 2)) { ?>
             <li class="nav-item start <?php if (trim($pageName) == 'Orders') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>

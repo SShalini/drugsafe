@@ -107,7 +107,6 @@
                             $i = 0;
                             $j = 0;
                             foreach ($sosRormDetailsAry as $sosRormDetailsData => $sosRormDetailsDataArr) {
-
                                 foreach ($sosRormDetailsDataArr as $sosRormDetailsData) {
                                     $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($sosRormDetailsData['Clientid']);
                                     $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
@@ -135,7 +134,6 @@
                                                 <th> Service Concluded </th>
                                                 <th> Proforma Invoice Date</th>
                                                 <th> Action</th>
-
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -145,7 +143,7 @@
                                     
                                         ?>
                                         <tr>
-                                              <td><?php echo (!empty($manualCalcDetails['id'])?'#'.sprintf(__FORMAT_NUMBER__, $manualCalcDetails['id']):'N/A');?> </td>
+                                            <td><?php echo (!empty($manualCalcDetails['id'])?'#'.sprintf(__FORMAT_NUMBER__, $manualCalcDetails['id']):'N/A');?> </td>
                                             <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A'); ?> </td>
                                             <td> <?php echo $userDataAry['szName'] ?> </td>
                                             <td> <?php echo date('d/m/Y', strtotime($sosRormDetailsData['testdate']));; ?> </td>

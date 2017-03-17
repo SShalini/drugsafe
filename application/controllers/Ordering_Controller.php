@@ -194,16 +194,13 @@ class Ordering_Controller extends CI_Controller
             $i = 0;
             $sosRormDetailsAry = array();
             foreach ($childclientAray as $childclientData) {
-
-
                 $sosRormDetailsAry[$i] = $this->Form_Management_Model->getsosFormDetailsByClientId($childclientData['clientId']);
                 $i++;
             }
             $sosRormDetailsAry = array_filter($sosRormDetailsAry);
-
         }
         $manualCalcDetails = $this->Ordering_Model->getManualCalculationBySosId($sosRormDetailsAry['id']);
-        
+       
         $data['childclientAray'] = $childclientAray;
         $data['sosRormDetailsAry'] = $sosRormDetailsAry;
         $data['pageName'] = "proforma_invoice";
@@ -231,7 +228,6 @@ class Ordering_Controller extends CI_Controller
         echo "SUCCESS||||";
         echo "editcalform";
     }
-
     public function editcalform()
     {
         $count = $this->Admin_Model->getnotification();
@@ -387,7 +383,6 @@ class Ordering_Controller extends CI_Controller
             }
         }
     }
-
     function viewCalc()
     {
         $idsite = $this->input->post('idsite');
@@ -399,7 +394,6 @@ class Ordering_Controller extends CI_Controller
         echo "SUCCESS||||";
         echo "viewCalcDetails";
     }
-
     function viewCalcDetails()
     {
         $is_user_login = is_user_login($this);

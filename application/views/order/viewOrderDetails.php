@@ -55,9 +55,8 @@
                         <form name="orderSearchForm" id="orderSearchForm"
                               action="<?= __BASE_URL__ ?>/order/view_order_list" method="post">
                             <div class="row">
-
+                        <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
                                 <div class="col-md-3">
-
                                     <div class="form-group ">
                                         <select class="form-control custom-select" name="szSearch1" id="szSearch1"
                                                 onfocus="remove_formError(this.id,'true')">
@@ -71,8 +70,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                
-
+                              <?php }?>
                                 <div class="col-md-2">
                                     <div class="form-group ">
                                         <select class="form-control custom-select" name="szSearch2" id="szSearch2"
@@ -193,9 +191,11 @@
                                                             <th>
                                                                 Order No
                                                             </th>
+                                                             <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
                                                             <th>
                                                                 Franchisee
                                                             </th>
+                                                             <?php  } ?>
                                                             <th>
                                                                 Order Date
                                                             </th>
@@ -205,12 +205,15 @@
                                                             <th>
                                                                 Order Details
                                                             </th>
+                                                             <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
                                                             <th>
                                                                 Edit Order
                                                             </th>
+                                                           
                                                             <th>
                                                                 Delivery Docket
                                                             </th>
+                                                              <?php  } ?>
                                                              <th>
                                                               Order Received 
                                                             </th>
@@ -246,9 +249,11 @@
                                                                 <td>
                                                                     #<?php echo sprintf(__FORMAT_NUMBER__, $validOrdersDetailsData['orderid']); ?>
                                                                 </td>
+                                                                  <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
                                                                 <td>
                                                                     <?php echo $franchiseeDetArr1['szName']; ?>
                                                                 </td>
+                                                                  <?php } ?>
                                                                 <td>
                                                                     <?php echo $date['2']; ?> <?php echo $monthName; ?>  <?php echo $date['0']; ?>
                                                                     at <?php echo $x; ?>
@@ -298,6 +303,7 @@
                                                                         <i class="fa fa-eye"></i>
                                                                     </a>
                                                                 </td>
+                                                                  <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
                                                                 <td>
                                                                     <?php if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 4) { ?>
                                                                         <a class="btn btn-circle btn-icon-only btn-default"
@@ -310,6 +316,7 @@
 
                                                                     ?>
                                                                 </td>
+                                                                 
                                                                 <td>
                                                                     <?php if ($validOrdersDetailsData['status'] == 2) { ?>
                                                                         <a class="btn btn-circle btn-icon-only btn-default"
@@ -320,6 +327,7 @@
                                                                         </a>
                                                                     <?php } ?>
                                                                 </td>
+                                                                 <?php } ?>
                                                                   <td>
                                                                     <?php if (($validOrdersDetailsData['status'] == 2) && ($validOrdersDetailsData['isReceived']==0) ) { ?>
                                                                         <a class="btn btn-circle btn-icon-only btn-default"
@@ -350,13 +358,9 @@
                             </div>
                         </div>
                     <?php }?>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </div>
 </div>

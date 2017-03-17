@@ -3259,7 +3259,6 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -3394,8 +3393,6 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
 if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
     echo "SUCCESS||||";
     ?>
-
-
     <div id="receiveOrder" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -3619,8 +3616,6 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
             </div>
         </div>
     </div>
-
-
     <?php
 }
 if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
@@ -3633,13 +3628,13 @@ if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Pending Order</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase"> Order Received</span></h4>
                     </div>
 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-exclamation-triangle"></i> Ordered Quantity has been
-                        in pending state.</p>
+                        in received successfully.</p>
                 </div>
                 <div class="modal-footer">
                     <?php
