@@ -43,7 +43,9 @@
                         </div>
                         <?php if(!empty($getManualCalcStartToEndDate)){?>
                             <div class="actions">
-
+                                 <a onclick="revenueGenerateChart('<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>','<?php echo $idfranchisee;?>')" href="javascript:void(0);" class=" btn green-meadow">
+                                    <i class="fa fa-bar-chart"></i> View Pdf </a>
+									
                                 <a onclick="ViewpdfRevenueGenerate('<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>','<?php echo $idfranchisee;?>')" href="javascript:void(0);" class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 

@@ -2002,20 +2002,8 @@ class Reporting_Controller extends CI_Controller
         $searchAry['dtStart'] = $this->session->userdata('dtStart');
         $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
         $searchAry['szFranchisee'] = $this->session->userdata('szFranchisee');
-        $getClientDeatils = $this->Ordering_Model->getAllChClientDetails('', '', $searchAry['szFranchisee']);
-        //$getClientDeatils=$this->Webservices_Model->getclientdetails($searchAry['szFranchisee']);
-        $id = array();
-        foreach ($getClientDeatils as $getClientData) {
-            array_push($id, $getClientData['clientId']);
-        }
-        $getSosDetails = $this->Form_Management_Model->getsosFormDetailsByMultipleClientId($id);
-        $sosId = array();
-        foreach ($getSosDetails as $getSosData) {
-            array_push($sosId, $getSosData['id']);
-        }
-        if (!empty($sosId)) {
-            $getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate($searchAry, $sosId);
-        }
+        $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry, $searchAry['szFranchisee']);
+       
 
 
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
@@ -4142,5 +4130,53 @@ class Reporting_Controller extends CI_Controller
         
         
     }
+    function revenueGenerateOfChart()
+    {
+
+        $dtStart = $this->input->post('dtStart');
+        $dtEnd = $this->input->post('dtEnd');
+        $szFranchisee = $this->input->post('szFranchisee');
+        $this->session->set_userdata('dtStart', $dtStart);
+        $this->session->set_userdata('dtEnd', $dtEnd);
+        $this->session->set_userdata('szFranchisee', $szFranchisee);
+        echo "SUCCESS||||";
+        echo "revenueGenerateChart";
+    }
+    public function revenueGenerateChart()
+    { 
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $searchAry['dtStart'] = $this->session->userdata('dtStart');
+        $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
+        $searchAry['szFranchisee'] = $this->session->userdata('szFranchisee');
+        
+        $searchAry['dtStart'] = $this->session->userdata('dtStart');
+        $searchAry['dtEnd'] = $this->session->userdata('dtEnd');
+        $searchAry['szFranchisee'] = $this->session->userdata('szFranchisee');
+        $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry, $searchAry['szFranchisee']);
+        $data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
+        $data['szMetaTagTitle'] = "Revenue Generate Chart";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Reporting";
+        $data['subpageName'] = "revenue_generate";
+        $data['notification'] = $count;
+        $data['data'] = $data;
+        $data['szFranchisee'] = $searchAry['szFranchisee'];
+        $data['allfranchisee'] = $searchOptionArr;
+        $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+            //$data['drugtestkitlist'] = $drugTestKitListAray;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/viewRevenueGenerateChart');
+            $this->load->view('layout/admin_footer');
+        
+        
+    }
+
    }
 ?>

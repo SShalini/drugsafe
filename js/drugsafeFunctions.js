@@ -2969,3 +2969,11 @@ function comparisonReportChart(siteid,testtype,comparetype) {
 
     });
 }
+function revenueGenerateChart(dtStart,dtEnd,szFranchisee) {
+    $.post(__BASE_URL__ + "/reporting/revenueGenerateOfChart", {dtStart : dtStart,dtEnd: dtEnd,szFranchisee: szFranchisee}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}

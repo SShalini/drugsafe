@@ -48,7 +48,9 @@
                         </div>
                         <?php if(!empty($getManualCalcStartToEndDate)){?>
                             <div class="actions">
-
+                                <a onclick="revenueGenerateChart('<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>','<?php echo $_POST['szFranchisee'];?>')"
+                                   href="javascript:void(0);" class=" btn green-meadow">
+                                    <i class="fa fa-bar-chart"></i> View Chart </a>
                                 <a onclick="ViewpdfRevenueGenerate('<?php echo $_POST['dtStart'];?>','<?php echo $_POST['dtEnd'];?>','<?php echo $_POST['szFranchisee'];?>')" href="javascript:void(0);" class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 
@@ -288,7 +290,7 @@
                                                     $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
                                                     $totalNetProfit=$totalNetProfit+$NetTotal;
                                                     $i++;
-                                                    
+                                                   
                                                     ?>
                                                     <tr>
                                                         <td> <?php echo $i;?></td>
