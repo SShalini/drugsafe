@@ -3483,7 +3483,6 @@ class Reporting_Controller extends CI_Controller
 
         $pdf->Output('client-comparison-report.pdf', 'I');
     }
-
     function comparisonReportOfXls()
     {
         $siteid = $this->input->post('siteid');
@@ -3496,7 +3495,6 @@ class Reporting_Controller extends CI_Controller
         echo "SUCCESS||||";
         echo "comparisonReportXls";
     }
-
     public function comparisonReportXls()
     {
         $this->load->library('excel');
@@ -3604,7 +3602,6 @@ class Reporting_Controller extends CI_Controller
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
-
     public function view_revenue_summery_client()
     {
         $count = $this->Admin_Model->getnotification();
@@ -3627,11 +3624,12 @@ class Reporting_Controller extends CI_Controller
             }
 
             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc($searchAry, $_POST['szSearchClRecord2'], $clientId);
-
         }
-        $clientlistArr = $this->Reporting_Model->getAllClientCodeDetails(true, $_POST['szSearchClRecord2']);
-
-
+        if ($_POST) {
+                 $clientAray = $this->Reporting_Model->getAllClientCodeDetails(true, $_POST['idFranchisee']);
+                 $clientlistArr = $this->Reporting_Model->getAllClientCodeDetails(true, $_POST['szSearchClRecord2']);
+            }
+      
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('szSearchClRecord2', 'Franchisee ', 'required');
@@ -3640,8 +3638,6 @@ class Reporting_Controller extends CI_Controller
 
         $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
-
-
             $data['szMetaTagTitle'] = "Revenue Summary Client";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
@@ -3654,9 +3650,7 @@ class Reporting_Controller extends CI_Controller
             $this->load->view('layout/admin_header', $data);
             $this->load->view('reporting/viewRevenueSummeryClient');
             $this->load->view('layout/admin_footer');
-
         } else {
-
             $data['szMetaTagTitle'] = "Revenue Summary Client";
             $data['is_user_login'] = $is_user_login;
             $data['pageName'] = "Reporting";
@@ -3710,7 +3704,6 @@ class Reporting_Controller extends CI_Controller
         echo "SUCCESS||||";
         echo "ViewpdfRevenueSummaryClient";
     }
-
     public function ViewpdfRevenueSummaryClient()
     {
         ob_start();
@@ -3927,7 +3920,6 @@ class Reporting_Controller extends CI_Controller
 
 
         if (!empty($getManualCalcStartToEndDate)) {
-
             $i = 2;
             $x = 0;
             $totalRevenu = '';
@@ -4031,7 +4023,6 @@ class Reporting_Controller extends CI_Controller
             $this->excel->getActiveSheet()->setCellValue('E' . $i, '$' . number_format($totalRoyaltyfees, 2, '.', ','));
             $this->excel->getActiveSheet()->setCellValue('F' . $i, '$' . number_format($totalNetProfit, 2, '.', ','));
 
-
         }
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
@@ -4058,8 +4049,8 @@ class Reporting_Controller extends CI_Controller
         echo "viewIndustryChart";
     }
 
-	public function viewIndustryChart()
-    { // something
+    public function viewIndustryChart()
+        { // something
         $count = $this->Admin_Model->getnotification();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
@@ -4110,8 +4101,7 @@ class Reporting_Controller extends CI_Controller
         $comparetype = $this->session->userdata('comparetype');
         $compareresultarr = $this->Reporting_Model->getcomparisonrecord($siteid,$testtype,$comparetype);
         $userdataarr = $this->Webservices_Model->getfranchiseeclientsitebysiteid($siteid);
-        
-        
+     
         $data['szMetaTagTitle'] = "Client Comparison Chart";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Reporting";
@@ -4127,8 +4117,6 @@ class Reporting_Controller extends CI_Controller
         $this->load->view('layout/admin_header',$data);
         $this->load->view('reporting/clientCmpChart');
         $this->load->view('layout/admin_footer');
-        
-        
     }
     function revenueGenerateOfChart()
     {
