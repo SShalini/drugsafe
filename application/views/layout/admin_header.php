@@ -59,8 +59,6 @@
           
     </head>
     <!-- END HEAD -->
-
-
     <body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
         <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
@@ -85,7 +83,6 @@
                 <!-- END PAGE ACTIONS -->
                 <!-- BEGIN PAGE TOP -->
                 <div class="page-top">
-                  
                     <div class="top-menu">
                          <?php 
                             if((int)$_SESSION['drugsafe_user']['id'] >0)
@@ -135,10 +132,5 @@
             </div>
             <!-- END HEADER INNER -->
         </div>
-       
         <div class="page-container">
-    
-    <?php $this->view('layout/admin_leftmenu.php'); ?>
-           
-                 
-               
+        <?php $this->view('layout/admin_leftmenu.php'); ?>
