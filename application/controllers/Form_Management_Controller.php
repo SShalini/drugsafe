@@ -766,7 +766,7 @@ class Form_Management_Controller extends CI_Controller
                                                 <td colspan="3">'.$donors['donerName'].'</td>
                                                 <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'P':'N').'</td>
                                                 <td>'.($drugs != ''?$drugs:'N/A').'</td>
-                                                <td>Reading One:'.($alcoholread1 != ''?'P':'N').'<br/>Reading Two:'.($alcoholread2 != ''?'P':'N').'</td>
+                                                <td>'.($alcoholread1 != ''?'P':'N').': Reading One<br/>'.($alcoholread2 != ''?'P':'N').': Reading Two</td>
                                                 <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'Y':'N').'</td>
                                             </tr>';
                                     $count++;
@@ -812,6 +812,9 @@ class Form_Management_Controller extends CI_Controller
                                         <td colspan="8">Comments or Observation: '.$sosdetarr[0]['Comments'].'</td>
                                     </tr>';
         if(!empty($userprods)){
+            $html .='<tr>
+                                        <td colspan="8"><b>Product Quantity Used</b></td>
+                                    </tr>';
             foreach ($userprods as $prods){
                 $html .='<tr>
                                         <td colspan="4">'.$prods['szProductCode'].'</td><td colspan="4">'.$prods['quantity'].'</td>
@@ -924,7 +927,7 @@ class Form_Management_Controller extends CI_Controller
     <td>ID No: '.$cocdetarr[0]['idnumber'].'</td>
 </tr>
 <tr>
-    <td colspan="8">Have you taken any medication, drugs or other non-prescription agents in last week? ' . $cocdetarr[0]['lastweekq'].' Donor Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['donorsign'].'" /></td>
+    <td colspan="8">Have you taken any medication, drugs or other non-prescription agents in last week? ' . $cocdetarr[0]['lastweekq'].'<br />I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs.<br /> Donor Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['donorsign'].'" /></td>
 </tr>
 <tr>
     <td rowspan="2" colspan="2"><b>Alcohol Breath Test</b></td>

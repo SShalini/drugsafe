@@ -546,10 +546,12 @@ class Ordering_Controller extends CI_Controller
     </tr>
 </table>
 <br />
-<h2 style="text-align: center;">Proforma Invoice: #'.$val.'</h2>
+<h1 style="text-align: center;">Proforma Invoice</h1>
 
-<br>
 <table cellpadding="5px">
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Proforma Invoice#:</b> #'.$val.'</td><td width="50%" align="right"><b>Proforma Invoice Date:</b> '.date('d/m/Y',strtotime($data['dtCreatedOn'])).'</td>
+    </tr>
     <tr>
         <td width="50%" align="left" font-size="20"><b>Business Name:</b> '.$clientDataArr[0]['szName'].'</td><td width="50%" align="right"><b>Company Name:</b> '.$siteDataArr[0]['szName'].'</td>
     </tr>
@@ -563,9 +565,7 @@ class Ordering_Controller extends CI_Controller
        <td width="50%"> </td><td width="50%" align="right"><b>No of Donors Tested:</b> '.$countDoner.'</td>
     </tr>
 </table>
-<br />
 <h3 style="color:black">System Calculated Result</h3>
-<br />
 <table border="1px" cellpadding="5px">
     <tr>
         <td width="80%" align="left"><b>Total (Excluding GST):</b></td><td width="20%" align="right">$'.number_format($ValTotal,2,'.',',').'</td>
@@ -577,9 +577,7 @@ class Ordering_Controller extends CI_Controller
         <td width="80%" align="left"><b>Total (Including GST):</b></td><td width="20%" align="right">$'.number_format($TotalbeforeRoyalty, 2, '.', ',').'</td>
     </tr>
 </table>
-<br />
 <h3 style="color:black">Other Revenue Stream Calculation Result</h3>
-<br />
 <table border="1px" cellpadding="5px">
     <tr>
         <td width="80%" align="left"><b>Total (Excluding GST):</b></td><td width="20%" align="right">$'.number_format($TotalTrevenu,2,'.',',').'</td>

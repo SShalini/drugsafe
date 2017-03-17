@@ -146,15 +146,15 @@
                                             <td> <?php echo $State;?> </td>
                                              <td> <?php echo $Region;?> </td>
                                            <td>
-                                              <?php if ($franchiseeData['iActive']==1) {?>   
-                                              <a class="btn btn-circle btn-icon-only btn-default" id="status" title="Status" onclick="franchiseeStatus(<?php echo $franchiseeData['id'];?>,'0');" href="javascript:void(0);">
+                                              <?php /*if ($franchiseeData['iActive']==1) {*/?><!--
+                                              <a class="btn btn-circle btn-icon-only btn-default" id="status" title="Status" onclick="franchiseeStatus(<?php /*echo $franchiseeData['id'];*/?>,'0');" href="javascript:void(0);">
                                              <i class="fa fa-circle clr_green" aria-hidden="true"></i>
                                               </a>
-                                                 <?php } else {?>
+                                                 <?php /*} else {*/?>
                                               <a class="btn btn-circle btn-icon-only btn-default" id="status" title="Status" onclick="" href="javascript:void(0);">
                                              <i class="fa fa-circle clr" aria-hidden="true"></i>
                                               </a>
-                                             <?php } ?>  
+                                             --><?php /*} */?>
                                                <?php 
                                                if($franchiseeData['iActive']=='1')
                                                 {

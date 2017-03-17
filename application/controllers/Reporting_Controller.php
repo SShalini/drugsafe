@@ -3822,7 +3822,7 @@ class Reporting_Controller extends CI_Controller
                 $totalNetProfit=$totalNetProfit+$NetTotal;
                 $i++;
                 $html .= '<tr>
-                            <td>' . $i++ . '</td>
+                            <td>' . $i . '</td>
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
                             <td>$' . ($discountpercent>0?number_format($totalafterdiscount, 2, '.', ','):number_format($totalinvoiceAmt, 2, '.', ',')) . '</td>

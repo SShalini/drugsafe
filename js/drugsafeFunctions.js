@@ -1437,7 +1437,6 @@ function changeordstatus(ordid,prodcount,status) {
                         prodid: prodid,
                         qty: qty
                     }, function (result) {
-                        alert(result);
                         if (result == 'SUCCESS') {
                             check++;
                         } else {
@@ -2482,11 +2481,11 @@ function showformdata(sosid) {
                         '<tr><th>Extra Used:</th><td colspan="3">'+value.ExtraUsed+'</td></tr>' +
                         '<tr><th>Breath Testing Unit:</th><td colspan="3">'+value.BreathTesting+'</td></tr>' +
                         '<tr><th>Declaration:</th><td colspan="3">I\'ve conducted the alcohol and/or drug screening/collection service detailed above and confirm that all procedures were undertaken in accordance with the relevant Standard.</td></tr>' +
-                        '<tr><th>Collector Signature:</th><td colspan="3">'+value.collsign+'</td></tr>' +
+                        '<tr><th>Collector Signature:</th><td colspan="3"><img src="'+__BASE_URL__+'/uploadsign/'+value.collsign+'" /></td></tr>' +
                         '<tr><th>Comments or Observation:</th><td colspan="3">'+value.Comments+'</td></tr>' +
                         '<tr><th>Time:</th><td colspan="3">'+value.RepresentativeSignatureTime+'</td></tr>' +
                         '<tr><th>Nominated Client Representative:</th><td colspan="3">'+value.ClientRepresentative+'</td></tr>' +
-                        '<tr><th>Signature:</th><td colspan="3">'+value.RepresentativeSignature+'</td></tr>';
+                        '<tr><th>Signature:</th><td colspan="3"><img src="'+__BASE_URL__+'/uploadsign/'+value.RepresentativeSignature+'" /></td></tr>';
                 });
                 modalhtml += '</tbody></table>' +
                     '</div>'+
@@ -2730,7 +2729,8 @@ function viewcocdets(cocid,donorname){
                         '<tr><th class="col-md-2">ID Number:</th><td class="col-md-2">'+value.idnumber+'</td></tr>' +
                         '<tr><th class="col-md-2">Declaration:</th class="col-md-2"><td >I consent to the testing of my breath/urine/oral fluid sample for alcohol &/or drugs.</td></tr>' +
                         '<tr><th >Have you taken any medication, drugs or other non-prescription agents in last week?:</th><td>'+value.lastweekq+'</td></tr>' +
-                        '<tr><th class="col-md-2">Donor Signature:</th><td class="col-md-2">'+value.donorsign+'</td></tr>' +
+                        '<tr><th class="col-md-2">Donor Signature:</th><td class="col-md-2"><img src="'+__BASE_URL__+'/uploadsign/'+value.donorsign+'" /></td></tr>' +
+                        '<tr><td colspan="2"><p>Please Note: NATA/RCPA accreditation does not cover the performance of breath test.</p></td></tr>' +
                         '<tr><th colspan="2" ><h3 class="font-green-sharp">Alcohol Breath Test</h3></th> </tr>' +
                         '<tr><th class="col-md-2">Device Serial#:</th><td class="col-md-2">'+value.devicesrno+'</td></tr>' +
                         '<tr><th class="col-md-2">Cut off Level:</th><td class="col-md-2">'+value.cutoff+'</td></tr>' +
@@ -2763,14 +2763,14 @@ function viewcocdets(cocid,donorname){
                         '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Donor Declaration</h3></th> </tr>' +
                         '<tr><td colspan="2" class="col-md-2">I certify that the specimen(s) accompanying this form is my own. Where on-site screening was performed, such screening was carried out in my presence. In the case of my specimen(s) being sent to the laboratory for testing, I  certify that the specimen containers were sealed with tamper evident seals in my presence and the identifying information on the label is correct. I certify that the information provided  on this form to be correct and I consent to the release of all test results  together with any relevant details  contained on this form to the nominated representative of the requesting authority.</td></tr>' +
                         '<tr><th class="col-md-2">Date:</th><td class="col-md-2">'+formatdate(value.donordecdate)+'</td></tr>' +
-                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.donordecsign+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2"><img src="'+__BASE_URL__+'/uploadsign/'+value.donordecsign+'" /></td></tr>' +
                         '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Collector Certification</h3></th> </tr>' +
                         '<tr><td colspan="2" class="col-md-2">I certify that I witnessed the  Donor signature and that the specimen(s) identified on this form was provided to me by the Donor whose consent and  declaration appears above,  bears the same Donor identification as  set forth above, and that the specimen(s) has been collected and if needed divided, labelled and sealed in accordance  with the relevant Standard. *If two Collectors are present the second Collector (2) is to perform sample collection/screening for Alcohol and Urine.</td></tr>' +
                         '<tr><th class="col-md-2">Collector 1 Name/Number:</th><td class="col-md-2">'+value.collectorone+'</td></tr>' +
-                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.collectorsignone+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2"><img src="'+__BASE_URL__+'/uploadsign/'+value.collectorsignone+'" /></td></tr>' +
                         '<tr><th class="col-md-2">Comments or Observation:</th><td class="col-md-2">'+value.commentscol1+'</td></tr>' +
                         '<tr><th class="col-md-2">Collector 2 Name/Number:</th><td class="col-md-2">'+value.collectortwo+'</td></tr>' +
-                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.collectorsigntwo+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2"><img src="'+__BASE_URL__+'/uploadsign/'+value.collectorsigntwo+'" /></td></tr>' +
                         '<tr><th class="col-md-2">Comments or Observation:</th><td class="col-md-2">'+value.comments+'</td></tr>' +
                         '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Chain of Custody</h3></th> </tr>' +
                         '<tr><th class="col-md-2">Received By(1):</th><td class="col-md-2">'+value.receiverone+'</td></tr>' +
@@ -2778,13 +2778,13 @@ function viewcocdets(cocid,donorname){
                         '<tr><th class="col-md-2">Receiving Time:</th><td class="col-md-2">'+format12hrtime(value.receiveronetime)+'</td></tr>' +
                         '<tr><th class="col-md-2">Seal Intact:</th><td class="col-md-2">'+value.receiveroneseal+'</td></tr>' +
                         '<tr><th class="col-md-2">Label/Bar Code Match:</th><td class="col-md-2">'+value.receiveronelabel+'</td></tr>' +
-                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+value.receiveronesign+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2"><img src="'+__BASE_URL__+'/uploadsign/'+value.receiveronesign+'" /></td></tr>' +
                         '<tr><th class="col-md-2">Received By(2):</th><td class="col-md-2">'+(value.receivertwo?value.receivertwo:'-')+'</td></tr>' +
                         '<tr><th class="col-md-2">Receiving Date:</th><td class="col-md-2">'+(value.receivertwo?formatdate(value.receivertwodate):'-')+'</td></tr>' +
                         '<tr><th class="col-md-2">Receiving Time:</th><td class="col-md-2">'+(value.receivertwo?format12hrtime(value.receivertwotime):'-')+'</td></tr>' +
                         '<tr><th class="col-md-2">Seal Intact:</th><td class="col-md-2">'+(value.receivertwo?value.receivertwoseal:'-')+'</td></tr>' +
                         '<tr><th class="col-md-2">Label/Bar Code Match:</th><td class="col-md-2">'+(value.receivertwo?value.receivertwolabel:'-')+'</td></tr>' +
-                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+(value.receivertwo?value.receivertwosign:'-')+'</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">'+(value.receivertwo?'<img src="'+__BASE_URL__+'/uploadsign/'+value.receivertwosign+'" />':'-')+'</td></tr>' +
                         '</tbody></table>' +
                         '</div>' +
                         '</div>' +
