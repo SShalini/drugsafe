@@ -86,6 +86,7 @@ class Ordering_Model extends Error_Model {
         } 
         public function getManualCalculationBySosId($sisId = 0)
         {
+			
            
             $whereAry = array('sosid' => $this->sql_real_escape_string(trim($sisId)));
             $this->db->select('*');

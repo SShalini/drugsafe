@@ -358,11 +358,8 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                        
                                     </div>
-                                    
-                                    
-                                   <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iRole]">
+                                    <input id="iRole" class="form-control" type="hidden" value="2" placeholder="Role" onfocus="remove_formError(this.id,'true')" name="addFranchisee[iRole]">
                                      <?php
                               
                                   if($_SESSION['drugsafe_user']['iRole']=='5'){

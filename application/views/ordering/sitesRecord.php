@@ -118,7 +118,9 @@
                                       $drugtestArr = '0';  
                                     }
                                     $manualCalcDetails = $this->Ordering_Model->getManualCalculationBySosId($sosRormDetailsData['id']);
-                                    if ((!empty($manualCalcDetails) && $_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '2')|| ($_SESSION['drugsafe_user']['iRole'] == '5')) {
+									if(!empty($manualCalcDetails))
+									{
+										if ((!empty($manualCalcDetails) && $_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '2')|| ($_SESSION['drugsafe_user']['iRole'] == '5')) {
                                         if ($j == 0) { ?>
                                             <div class="row tabrow">
                                             <div class="table-responsive">
@@ -138,6 +140,9 @@
                                             </thead>
                                             <tbody>
                                         <?php }
+										
+									}
+                                    
                                         ?>
                                         <tr>
                                               <td><?php echo (!empty($manualCalcDetails['id'])?'#'.sprintf(__FORMAT_NUMBER__, $manualCalcDetails['id']):'N/A');?> </td>

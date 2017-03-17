@@ -33,7 +33,6 @@
                                     Industry Chart
                                 </span>
                         </div>
-                       
                     </div>
                     <div class="portlet-body alert">
                         <div class="row">
