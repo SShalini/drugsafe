@@ -163,9 +163,7 @@ if(!empty($getManualCalcStartToEndDate))
    $(function () {
 
     $('#revenue_Generate_Chart').highcharts({
-        
-    
-     yAxis: {
+      yAxis: {
         
         title: {
             text: ''

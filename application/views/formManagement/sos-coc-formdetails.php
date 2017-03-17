@@ -69,7 +69,7 @@
 
                     <form name="orderSearchForm" id="orderSearchForm"
                           action="<?= __BASE_URL__ ?>/formManagement/viewForm" method="post">
-                        <?php if (!empty($franchiseearr)){ ?>
+                      
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group <?php if (!empty($arErrorMessages['dtStart']) != '') { ?>has-error<?php } ?>">
@@ -129,7 +129,12 @@
                                     <?php } ?>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <?php
+                           // echo $socFr;die();
+                            if($socFr)
+                            {
+                                ?>
+                                 <div class="col-md-3">
 
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
                                     <select class="form-control custom-select" name="szSearch1" id="szSearch1"
@@ -159,15 +164,15 @@
                                         </span><?php } ?>
                                 </div>
                             </div>
+                                <?php
+                                
+                            }
+                            ?>
+                            
                             <?php if ($_SESSION['drugsafe_user']['iRole'] == 2) { ?>
                                 <input type="hidden" name="szSearch1"
                                        value="<?php echo $_SESSION['drugsafe_user']['id']; ?>"/>
-                                <script type="text/javascript">
-                                    setTimeout(function () {
-                                        getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>');
-                                    }, 1000);
-
-                                </script>
+                               
                             <?php } ?>
 
                             <div class="col-md-3">
@@ -223,7 +228,7 @@
                                 <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-                <?php } ?>
+             
                 </form>
 
                     <div class="portlet-body alert">

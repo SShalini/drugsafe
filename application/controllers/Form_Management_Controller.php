@@ -54,7 +54,18 @@ class Form_Management_Controller extends CI_Controller
         }
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-      
+        $socFr='';
+        if($_SESSION['drugsafe_user']['iRole']=='2'){
+            $socFr=false;
+            $clientAry = $this->Franchisee_Model->viewClientList(true, $_SESSION['drugsafe_user']['id']);
+            if($_POST['szSearch2'])
+            {
+                $siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearch2']);
+            }
+        } else{
+            $socFr=true;
+            
+        }
           if ($_SESSION['drugsafe_user']['iRole'] == '5') {
           $getFranchisees =   $this->Admin_Model->viewFranchiseeList(false, $_SESSION['drugsafe_user']['id'],false,false,false,false,false,false,1);
           
@@ -63,13 +74,6 @@ class Form_Management_Controller extends CI_Controller
         } else {
             $getFranchisees = array();
         }
-//        if ($_SESSION['drugsafe_user']['iRole'] == '5') {
-//            $getFranchisees = $this->Form_Management_Model->getFranchisees($_SESSION['drugsafe_user']['id']);
-//        } elseif ($_SESSION['drugsafe_user']['iRole'] == '1') {
-//            $getFranchisees = $this->Form_Management_Model->getFranchisees();
-//        } else {
-//            $getFranchisees = array();
-//        }
         $this->load->library('form_validation');
         $this->form_validation->set_rules('dtStart', 'Test Date From ', 'required');
         $this->form_validation->set_rules('dtEnd', 'Test Date To', 'required');
@@ -80,6 +84,9 @@ class Form_Management_Controller extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $data['franchiseearr'] = $getFranchisees;
             $data['notification'] = $count;
+            $data['socFr']=$socFr;
+            $data['sitearr']=$siteAry;
+            $data['clientarr']=$clientAry;
             $data['commentnotification'] = $commentReplyNotiCount;
             $data['pageName'] = "Reporting";
             $data['subpageName'] = "SOS_COC_Forms_Reports";
@@ -110,6 +117,9 @@ class Form_Management_Controller extends CI_Controller
             $data['subpageName'] = "SOS_COC_Forms_Reports";
             $data['franchiseearr'] = $getFranchisees;
             $data['notification'] = $count;
+            $data['socFr']=$socFr;
+            $data['sitearr']=$siteAry;
+            $data['clientarr']=$clientAry;
             $data['commentnotification'] = $commentReplyNotiCount;
             $data['data'] = $data;
             $this->load->view('layout/admin_header', $data);
