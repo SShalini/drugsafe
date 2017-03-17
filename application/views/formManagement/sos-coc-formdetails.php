@@ -230,7 +230,11 @@
                         </div>
              
                 </form>
-
+                   
+                    <?php 
+                    if(!empty($_POST))
+                    {
+                        if (!empty($TestList)) { ?>
                     <div class="portlet-body alert">
                         <div class="row">
                             <div>
@@ -243,7 +247,7 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <?php if (!empty($TestList)) { ?>
+                                  
                                         <div class="table-responsive">
                                             <table class="table table-hover table-bordered table-striped">
                                                 <thead>
@@ -285,13 +289,16 @@
                                                 </tr>
                                                 <?php 
                                                 $count++;
-                                                } ?>
+                                                }
+                                               ?>
                                                 </tbody>
                                             </table>
                                         </div>
-                                    <?php }else{
-                                        echo '<p>No data found.</p>';
-                                    } ?>
+                                    <?php }
+ else {
+      echo "<h4>No record found</h4>";
+ }
+                    }?>
                                 </div>
 
                             </div>

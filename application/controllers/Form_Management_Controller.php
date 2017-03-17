@@ -58,8 +58,7 @@ class Form_Management_Controller extends CI_Controller
         if($_SESSION['drugsafe_user']['iRole']=='2'){
             $socFr=false;
             $clientAry = $this->Franchisee_Model->viewClientList(true, $_SESSION['drugsafe_user']['id']);
-            if($_POST['szSearch2'])
-            {
+            if($_POST['szSearch2']){
                 $siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearch2']);
             }
         } else{
