@@ -93,8 +93,10 @@
                      <?php 
                         if(!empty($_POST))
                         { 
-                    
-                            ?>
+                
+                        if(!empty($prospectDetailsAry))
+                        { 
+                       ?>
                        
                          <div class=" search row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospectRecord" name="szSearchField" method="post">
@@ -168,7 +170,7 @@
                            </form>
                           </div>
                           <?php
-                        }
+                        } }
                             ?>
                           <?php
                         if(!empty($prospectDetailsAry))

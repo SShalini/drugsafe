@@ -69,7 +69,6 @@
                                 <div class="row">
                       <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
                                     <div class="col-md-3">
-
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch1" id="szSearch1"
                                                     onfocus="remove_formError(this.id,'true')">
@@ -82,9 +81,8 @@
                                                 ?>
                                             </select>
                                         </div>
-                                    </div>
-                                
-                                   <div class="col-md-3">
+                                    </div>                           
+                                   <div class="col-md-2 ">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch2" id="szSearch2"
                                                     onfocus="remove_formError(this.id,'true')">
@@ -99,7 +97,7 @@
                                         </div>
                                     </div>
                                 
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 search">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
@@ -128,7 +126,7 @@
                                         </div>
 
                                     </div>
-                                   <div class="col-md-3">
+                                   <div class="col-md-3 ">
                                       <div
                                             class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -156,11 +154,9 @@
                                             </span>
                                             <?php } ?>
                                         </div> 
-                                               </div>
-                                     
                                     </div>
-                                     <div class="row">
-                                       
+                                    </div>
+                                    <div class="row">
                                      <div class="col-md-3">
                                 <div class="form-group ">
                                     <select class="form-control custom-select" name="szSearch3" id="szSearch3"
