@@ -72,7 +72,7 @@
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
                                 
-                               <a onclick="ViewexcelSalesCrmDetailedReport('<?php echo $_POST['szSearchfr'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
+                               <a onclick="ViewexcelSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
                          

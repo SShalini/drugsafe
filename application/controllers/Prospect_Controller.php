@@ -1257,7 +1257,9 @@ public function deleteProspectConfirmation()
        $status = $this->session->userdata('status');
        $startDate = $this->session->userdata('startDate');
        $endDate = $this->session->userdata('endDate');
-        
+         if($_SESSION['drugsafe_user']['iRole']==2){ 
+             $franchiseeId = $_SESSION['drugsafe_user']['id'];
+             }  
     
         
         $html = '       
@@ -1372,9 +1374,12 @@ public function deleteProspectConfirmation()
 
         
         $franchiseeId = $this->session->userdata('franchiseeId');
-       $status = $this->session->userdata('status');
-       $startDate = $this->session->userdata('startDate');
-       $endDate = $this->session->userdata('endDate');
+        $status = $this->session->userdata('status');
+        $startDate = $this->session->userdata('startDate');
+        $endDate = $this->session->userdata('endDate');
+         if($_SESSION['drugsafe_user']['iRole']==2){ 
+             $franchiseeId = $_SESSION['drugsafe_user']['id'];
+             }
           $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeId,$startDate,$endDate,$status);   
         $x=0;
          if ($recordAry) {

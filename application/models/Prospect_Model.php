@@ -729,7 +729,13 @@ class Prospect_Model extends Error_Model
     {  
            $dtStart = $this->getSqlFormattedDate($startDate);
            $dtEnd = $this->getSqlFormattedDate($endDate);
-           $whereAry = array('iFranchiseeId' =>$franchiseeid,'tbl_prospect_status.dtUpdatedOn >='=>$dtStart.'00:00:00','tbl_prospect_status.dtUpdatedOn <='=>$dtEnd.'23:59:59'.($status>0?' AND status = '.(int)$status:''));
+           if ($status>0){
+           $whereAry = array('iFranchiseeId' =>$franchiseeid ,'tbl_prospect_status.status' =>$status,'tbl_prospect_status.dtUpdatedOn >='=>$dtStart.'00:00:00','tbl_prospect_status.dtUpdatedOn <='=>$dtEnd.'23:59:59');    
+           }
+           else{
+            $whereAry = array('iFranchiseeId' =>$franchiseeid ,'tbl_prospect_status.dtUpdatedOn >='=>$dtStart.'00:00:00','tbl_prospect_status.dtUpdatedOn <='=>$dtEnd.'23:59:59');   
+           }
+           
           
            $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNo');
            $this->db->from('tbl_prospect_status');
@@ -738,8 +744,8 @@ class Prospect_Model extends Error_Model
            $this->db->where($whereAry);
            $this->db->limit($limit, $offset);
            $query =  $this->db  ->get();
-//      $q = $this->db->last_query();
-//        echo $q; die;
+//       $q = $this->db->last_query();
+//       echo $q; die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
