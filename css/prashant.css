@@ -54,6 +54,9 @@ body .logo img {
   50% 50%
   no-repeat;
 }
+.table-checkable tr > th:first-child, .table-checkable tr > td:first-child{
+  word-wrap: break-word;
+}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;
