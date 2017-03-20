@@ -98,7 +98,6 @@
                              </span><?php }?> 
                         </div>
                     </div>
-                   
                        <div class="col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             

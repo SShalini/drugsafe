@@ -54,10 +54,11 @@
                            $this->session->unset_userdata('productCode');
                            $this->session->unset_userdata('prodCategory');
            
-                                
+                             if(!empty($validPendingOrdersDetailsAray)) 
+                        {      
                            
                             ?>
-                          
+                        
                             <div class="actions">
                                
                                  <a onclick="ViewpdfFrInventoryReport('<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
@@ -70,7 +71,7 @@
                                     
                             </div>
                             <?php
-                        }
+                        }  } 
                             ?>
                        
                         </div>
