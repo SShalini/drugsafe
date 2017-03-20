@@ -935,7 +935,7 @@ class Webservices_Model extends Error_Model
                     $this->db->where($conditionarr)
                         ->update(__DBC_SCHEMATA_DONER__, $statusarr);
                     if ($this->db->affected_rows() > 0) {
-                        $this->addError("successcomplete", "COC data saved successfully");
+                        $this->addError("success", "COC data saved successfully");
                         return true;
                     }
                 } elseif ($data['status'] == '0') {

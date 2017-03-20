@@ -963,7 +963,7 @@ class Form_Management_Controller extends CI_Controller
     <td colspan="2">Device Name: '.$cocdetarr[0]['devicename'].'</td>
     <td colspan="2">Reference#: '.$cocdetarr[0]['reference'].'</td>
     <td colspan="2">Lot#: '.$cocdetarr[0]['lotno'].'</td>
-    <td colspan="2">Expiry: '.date('d/m/Y',strtotime($cocdetarr[0]['lotexpiry'])).'</td>
+    <td colspan="2">Expiry: '.(date('d/m/Y',strtotime($cocdetarr[0]['lotexpiry'])) != '01/01/1970' && date('d/m/Y',strtotime($cocdetarr[0]['lotexpiry'])) != '30/11/-0001'?date('d/m/Y',strtotime($cocdetarr[0]['lotexpiry'])):'N/A').'</td>
 </tr>
 <tr>
     <td colspan="2"><b>Drugs Class</b></td>
