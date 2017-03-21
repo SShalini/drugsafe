@@ -151,6 +151,8 @@ class Webservices_Controller extends CI_Controller
         $dataArr['oldkitcount'] = !empty($jsondata->oldkitcount) ? $jsondata->oldkitcount : "0";
         $dataArr['totalkitcount'] = !empty($jsondata->totalkitcount) ? $jsondata->totalkitcount : "0";
         $dataArr['newkitids'] = !empty($jsondata->newkitids) ? $jsondata->newkitids : "";
+        $dataArr['sign1'] = $jsondata->sign1;
+        $dataArr['sign2'] = $jsondata->sign2;
         for($i=1;$i<=$dataArr['donercount'];$i++){
             $namevar = 'name'.$i;
             $resultvar = 'result'.$i;
@@ -244,13 +246,13 @@ class Webservices_Controller extends CI_Controller
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['extraused']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['breathtest'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['breathtest']);
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['collsign'])){
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sign1'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['collsign']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominated'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['nominated']);
             }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['nominedec'])){
                 $responsedata = array("code" => 203, "message"=>$errorMsgArr['nominedec']);
-            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sign'])){
+            }elseif(!empty($errorMsgArr) && !empty($errorMsgArr['sign2'])){
                 $responsedata = array("code" => 203, "message"=>"Nominated Client Representative signature required.");
             }elseif(!empty($sosdatares['totalcoccount'][0]['totalcoc'])){
                 $coccount = (int)$sosdatares['totalcoccount'][0]['totalcoc'];
@@ -1129,6 +1131,7 @@ class Webservices_Controller extends CI_Controller
         $donorsarr = $this->Webservices_Model->getdonorsbysosid($sosid);
         $userprods = $this->Webservices_Model->getsavedkitsbysosid($sosid,1);
         $getState = $this->Franchisee_Model->getStateByFranchiseeId($sosuserdets[0]['franchiseeId']);
+        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($sosuserdets[0]['clientType']);
         if(!empty($testtypesarr)){
             if($testtypesarr[0]=='1'){
                 $alchohol = true;
@@ -1205,7 +1208,7 @@ class Webservices_Controller extends CI_Controller
                                     <td colspan="2">Email: '.$franchiseeDets[0]['szEmail'].'</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6">Requesting Client: '.$ClientDets[0]['szName'].'</td>
+                                        <td colspan="3" align="left">Client Code: '.(!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A').'</td><td colspan="3" align="left">Requesting Client: '.$ClientDets[0]['szName'].'</td>
                                         <td colspan="2">Date: '.date('d/m/Y',strtotime($sosdetarr[0]['testdate'])).'</td>
                                     </tr>
                                     <tr>

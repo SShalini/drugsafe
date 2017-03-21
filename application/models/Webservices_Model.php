@@ -165,10 +165,11 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['extraused'])), 'extraused', 'Extra Used', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['breathtest'])), 'breathtest', 'Breath Testing Unit', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['sign1'])), 'sign1', 'Collector Signature', true);
             //$this->set_fieldReq(sanitize_all_html_input(trim($data['collsign'])), 'collsign', 'Collector Signature', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['nominated'])), 'nominated', 'Nominated Client Representative', true,__VLD_CASE_NAME__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['nominedec'])), 'nominedec', 'Nominated Client Representative signature time', true);
-            //$this->set_fieldReq(sanitize_all_html_input(trim($data['sign'])), 'sign', 'Nominated Client Representative signature', true);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['sign2'])), 'sign2', 'Nominated Client Representative signature', true);
         }
         if ($this->error) {
             return false;
@@ -196,7 +197,9 @@ class Webservices_Model extends Error_Model
                 'Comments' => $data['comments'],
                 'ClientRepresentative' => $data['nominated'],
                 'RepresentativeSignatureTime' => $data['nominedec'],
-                'Status' => $data['status']
+                'Status' => $data['status'],
+                'sign1' => $data['sign1'],
+                'sign2' => $data['sign2']
             );
             if ($data['update'] == '1') {
                 $wheresosAry = array('id' => (int)$data['idsos']);
@@ -672,7 +675,7 @@ class Webservices_Model extends Error_Model
                                                 sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                                 sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
                                                 sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.collsign, sos.ClientRepresentative,
-                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId')
+                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, sos.sign1, sos.sign2, client.clientType, client.franchiseeId')
             ->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos')
             ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'sos.Clientid = client.clientId')
             ->where($whereAry)
@@ -858,9 +861,9 @@ class Webservices_Model extends Error_Model
             return false;
         } else {
             $updatearr = array(
-                'cocdate' => date('Y-m-d', strtotime($data['cocdate'])),
+                'cocdate' => (!empty($data['cocdate']) ? date('Y-m-d', strtotime($data['cocdate'])) : ''),
                 'drugtest' => $data['drugtest'],
-                'dob' => date('Y-m-d', strtotime($data['dob'])),
+                'dob' => (!empty($data['dob']) ? date('Y-m-d', strtotime($data['dob'])) : ''),
                 'employeetype' => $data['employeetype'],
                 'contractor' => $data['contractor'],
                 'idtype' => $data['idtype'],
@@ -870,7 +873,7 @@ class Webservices_Model extends Error_Model
                 'sampletempc' => $data['sampletempc'],
                 'tempreadtime' => $data['tempreadtime'],
                 'intect' => $data['intect'],
-                'intectexpiry' => date('Y-m-d', strtotime($data['intectexpiry'])),
+                'intectexpiry' => (!empty($data['intectexpiry']) ? date('Y-m-d', strtotime($data['intectexpiry'])) : ''),
                 'visualcolor' => $data['visualcolor'],
                 'creatinine' => $data['creatinine'],
                 'otherintegrity' => $data['otherintegrity'],
@@ -878,7 +881,7 @@ class Webservices_Model extends Error_Model
                 'devicename' => $data['devicename'],
                 'reference' => $data['reference'],
                 'lotno' => $data['lotno'],
-                'lotexpiry' => date('Y-m-d', strtotime($data['lotexpiry'])),
+                'lotexpiry' => (!empty($data['lotexpiry']) ? date('Y-m-d', strtotime($data['lotexpiry'])) : ''),
                 'cocain' => $data['cocain'],
                 'amp' => $data['amp'],
                 'mamp' => $data['mamp'],
@@ -891,12 +894,12 @@ class Webservices_Model extends Error_Model
                 'comments' => $data['comments'],
                 'onsitescreeningrepo' => $data['onsitescreeningrepo'],
                 'receiverone' => $data['receiverone'],
-                'receiveronedate' => date('Y-m-d', strtotime($data['receiveronedate'])),
+                'receiveronedate' => (!empty($data['receiveronedate']) ? date('Y-m-d', strtotime($data['receiveronedate'])) : ''),
                 'receiveronetime' => $data['receiveronetime'],
                 'receiveroneseal' => $data['receiveroneseal'],
                 'receiveronelabel' => $data['receiveronelabel'],
                 'receivertwo' => $data['receivertwo'],
-                'receivertwodate' => (!empty($data['receivertwodate']) ? date('Y-m-d', strtotime($data['receivertwodate'])) : date('Y-m-d')),
+                'receivertwodate' => (!empty($data['receivertwodate']) ? date('Y-m-d', strtotime($data['receivertwodate'])) : ''),
                 'receivertwotime' => $data['receivertwotime'],
                 'receivertwoseal' => $data['receivertwoseal'],
                 'receivertwolabel' => $data['receivertwolabel'],
