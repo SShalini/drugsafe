@@ -362,9 +362,9 @@ function addClientData(idfranchisee,idclient,url,flag) {
 
     });
 }
-function clientDelete(idClient,url) {
+function clientDelete(idClient,url,flag) {
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/franchisee/deleteClientAlert", {idClient: idClient,url:url}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/deleteClientAlert", {idClient: idClient,url:url,flag: flag}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -375,13 +375,13 @@ function clientDelete(idClient,url) {
 
     });
 }
-function deleteClientConfirmation(idClient) {
+function deleteClientConfirmation(idClient,flag) {
 
     $('.modal-backdrop').remove();
     $('#static').modal("hide");
     $('#clientStatus').modal("hide");
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/franchisee/deleteClientConfirmation", {idClient: idClient}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/deleteClientConfirmation", {idClient: idClient,flag:flag}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {

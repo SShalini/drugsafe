@@ -6,6 +6,29 @@
 </script>
 <div class="page-content-wrapper">
         <div class="page-content">
+                        <?php 
+            if(!empty($_SESSION['drugsafe_user_message']))
+            {
+                    if(trim($_SESSION['drugsafe_user_message']['type']) == "success")
+                    {
+                    ?>
+                        <div class="alert alert-success">
+                            <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                        </div>
+                    <?php
+
+                    }
+                    if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
+                    {
+                    ?>
+                        <div class="alert alert-danger">
+                            <?php echo $_SESSION['drugsafe_user_message']['content'];?>
+                        </div>
+                    <?php
+                    }
+                    $this->session->unset_userdata('drugsafe_user_message');
+            }
+            ?>
             <div id="page_content" class="row">
                 <div class="col-md-12">
                     <div class="portlet light bordered">
@@ -26,7 +49,12 @@
                             <form class="form-horizontal" id="szSearchRegionRecord"
                                   action="<?= __BASE_URL__ ?>/admin/regionManagerList" name="szSearchRegionRecord"
                                   method="post">
-                
+                  <?php
+                        
+                        if(!empty($getAllRegion))
+                        {
+                           
+                            ?>
                                 <div class="col-md-3">
 
                                     <select class="form-control custom-select" name="szSearchstate"
@@ -64,6 +92,9 @@
                                 <div class="col-md-1">
                                     <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
+                                  <?php
+                        }
+                            ?>
                             </form>
                         </div>
                         <?php

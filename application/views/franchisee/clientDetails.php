@@ -963,7 +963,7 @@
                                                    $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
                                                      if(empty($sosRormDetailsAry)) {
                                                ?>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Site" onclick="clientDelete('<?php echo $childClientDetailsData['id'];?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>');" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Site" onclick="clientDelete('<?php echo $childClientDetailsData['id'];?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>','1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>

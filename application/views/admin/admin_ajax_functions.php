@@ -73,21 +73,35 @@ if ($mode == '__DELETE_CLIENT_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Delete Client Record</span>
+                            <?php if ($flag==1){?>
+                             <span class="caption-subject font-red-sunglo bold uppercase">Delete Site Record</span>
+                            <?php } else { ?>
+                              <span class="caption-subject font-red-sunglo bold uppercase">Delete Client Record</span>
+                            <?php } ?>
+                           
                         </h4>
                     </div>
 
                 </div>
+              
                 <div class="modal-body">
-                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                      <?php if ($flag==1){?>
+                      <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        delete the selected Site?</p>
+                          
+                            <?php } else { ?>
+                             <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
                         delete the selected Client?</p>
+                            <?php } ?>
+                 
                 </div>
                 <div class="modal-footer">
 
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="deleteClientConfirmation('<?php echo $idClient; ?>'); return false;"
+                    <button type="button" onclick="deleteClientConfirmation('<?php echo $idClient; ?>','<?php echo $flag; ?>'); return false;"
                             class="btn green"><i class="fa fa-user-times"></i> Delete
                     </button>
+                   
                 </div>
             </div>
         </div>
@@ -104,18 +118,36 @@ if ($mode == '__DELETE_CLIENT_CONFIRM__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                              <?php if ($flag==1){?>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Deleted Site Record</span>
+                          
+                            <?php } else { ?>
                             <span class="caption-subject font-red-sunglo bold uppercase">Deleted Client Record</span>
+                            <?php } ?>
+                           
                         </h4>
                     </div>
 
                 </div>
-
+        
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully
+                      <?php if ($flag==1){?>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Site has been successfully
                         deleted.</p>
+                          
+                            <?php } else { ?>
+                           <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully
+                        deleted.</p>
+                            <?php } ?>
+                   
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__ . $url; ?>" class="btn dark btn-outline">Close</a>
+                     <?php if ($flag==1){?>
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/viewClientDetails" class="btn dark btn-outline">Close</a>
+                    <?php } else { ?>
+                   <a href="<?php echo __BASE_URL__ . $url; ?>" class="btn dark btn-outline">Close</a>
+                    <?php } ?>
+                   
                 </div>
             </div>
         </div>

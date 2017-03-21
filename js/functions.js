@@ -516,7 +516,7 @@ function deleteClient(clientId)
     });
 }
 
-function deleteClientConfirmation(clientId)
+function deleteClientConfirmation(clientId,flag)
 {
     var szSearchText = $("#szSearchText").val();
     jQuery('#loader').attr('style','display:block');

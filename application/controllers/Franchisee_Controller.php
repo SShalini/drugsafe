@@ -280,6 +280,7 @@ class Franchisee_Controller extends CI_Controller
     {
         $data['mode'] = '__DELETE_CLIENT_POPUP__';
         $data['idClient'] = $this->input->post('idClient');
+        $data['flag'] = $this->input->post('flag');
         $url = $this->input->post('url');
         $this->session->set_userdata('url', $url);
 
@@ -290,6 +291,7 @@ class Franchisee_Controller extends CI_Controller
     {
         $data['url'] = $this->session->userdata('url');
         $data['mode'] = '__DELETE_CLIENT_CONFIRM__';
+        $data['flag'] = $this->input->post('flag');
         $data['idClient'] = $this->input->post('idClient');
         $this->Franchisee_Model->deleteClient($data['idClient']);
         $this->load->view('admin/admin_ajax_functions', $data);

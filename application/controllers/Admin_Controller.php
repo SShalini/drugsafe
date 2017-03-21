@@ -939,6 +939,10 @@ class Admin_Controller extends CI_Controller
         } else {
 
             if ($this->Admin_Model->updateRegion($data_validate, $idRegion)) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong> Region data has been updated successfully .</strong><h4> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+
                 redirect(base_url('admin/regionManagerList/'));
                 die;
             }
