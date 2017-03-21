@@ -2308,7 +2308,12 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(TRUE);
                 $i++;
             }
-            $this->excel->getActiveSheet()->setCellValue('E' . $i, Total);
+        $this->excel->getActiveSheet()->setCellValue('E'. $i, Total);
+        $this->excel->getActiveSheet()->getStyle('E' . $i)->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E' . $i)->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E' . $i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+          
             $this->excel->getActiveSheet()->setCellValue('F' . $i, '$' . number_format($totalRevenu, 2, '.', ','));
             $this->excel->getActiveSheet()->setCellValue('G' . $i, '$' . number_format($totalRoyaltyfees, 2, '.', ','));
             $this->excel->getActiveSheet()->setCellValue('H' . $i, '$' . number_format($totalNetProfit, 2, '.', ','));
@@ -2865,7 +2870,12 @@ class Reporting_Controller extends CI_Controller
 
                 $i++;
             }
-            $this->excel->getActiveSheet()->setCellValue('B' . $i, Total);
+        $this->excel->getActiveSheet()->setCellValue('B'. $i, Total);
+        $this->excel->getActiveSheet()->getStyle('B' . $i)->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B' . $i)->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B' . $i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+          
             $this->excel->getActiveSheet()->setCellValue('C' . $i, '$' . number_format($allfranchiseeTotalAfterDis, 2, '.', ','));
             $this->excel->getActiveSheet()->setCellValue('D' . $i, '$' . number_format($allfranchiseetotalRoyaltyfees, 2, '.', ','));
             $this->excel->getActiveSheet()->setCellValue('E' . $i, '$' . number_format($allfranchiseetotalNetProfit, 2, '.', ','));
@@ -4018,7 +4028,12 @@ class Reporting_Controller extends CI_Controller
             $totalRevenu = number_format($totalRevenu, 2, '.', '');
             $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
             $totalNetProfit = number_format($totalNetProfit, 2, '.', '');
-            $this->excel->getActiveSheet()->setCellValue('C' . $i, Total);
+        
+            $this->excel->getActiveSheet()->setCellValue('C'. $i, Total);
+        $this->excel->getActiveSheet()->getStyle('C' . $i)->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C' . $i)->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C' . $i)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
             $this->excel->getActiveSheet()->setCellValue('D' . $i, '$' . number_format($totalRevenu, 2, '.', ','));
             $this->excel->getActiveSheet()->setCellValue('E' . $i, '$' . number_format($totalRoyaltyfees, 2, '.', ','));
             $this->excel->getActiveSheet()->setCellValue('F' . $i, '$' . number_format($totalNetProfit, 2, '.', ','));
