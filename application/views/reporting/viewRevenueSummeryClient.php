@@ -44,11 +44,12 @@
                         <?php } ?>
                     </div>
                     <div class="portlet-body totalpr alert">
-                        <div class="row">
+                         <div class="row">
                             <form name="revenueSearchForm" id="revenueSearchForm"
                                   action="<?= __BASE_URL__ ?>/reporting/view_revenue_summery_client" method="post">
                                  <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5 )){ ?>
-                                <div class=" col-md-2">
+                                  <div class="row">
+                                <div class=" col-md-3">
                              <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
@@ -79,8 +80,8 @@
                                   </div>
                                 </div>
                              
-                                 <?php } ?>   
-                                     <div class="search col-md-3">
+                              
+                                     <div class=" col-md-3">
                                
                                     <div id='szClient'>
                                         <select class="form-control custom-select" name="szSearchClRecord1"
@@ -120,9 +121,83 @@
                                         </div>
 
                                     </div>
-                              
-                                     
+                                 </div>
+                                    <div class="row">   
+                                    <div class=" col-md-3">
+                                        <div
+                                            class="form-group <?php if (!empty($arErrorMessages['dtEnd']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch5" class="form-control"
+                                                       value="<?php echo set_value('dtEnd'); ?>" readonly
+                                                       placeholder="End Revenue Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="dtEnd">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('dtEnd')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('dtEnd'); ?></span>
+                                                </span><?php } ?>
+                                           
+                                        </div>
+                                    </div>
+                                        
+                                     <div class="col-md-1">
+                                        <div class="form-group">
+                                            <button class="btn green-meadow" type="submit"><i
+                                                    class="fa fa-search"></i> 
+                                            </button>
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                        </div>
+                                  <?php } if($_SESSION['drugsafe_user']['iRole']==2) { ?>
+                                   <div class=" col-md-3">
+                               
+                                    <div id='szClient'>
+                                        <select class="form-control custom-select" name="szSearchClRecord1"
+                                                id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
+                                            <option value="">Client Name</option>
+                                            <?php
+                                            foreach ($clientlistArr as $clientList) {
+                                                $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+
+                                                echo '<option value="' . $clientList['id'] . '"' . $selected . ' >'.$clientList['userCode']."-" .$clientList['szName'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
                                     <div class="col-md-3">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['dtStart']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="dtStart" class="form-control"
+                                                       value="<?php echo set_value('dtStart'); ?>" readonly
+                                                       placeholder="Start Revenue Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="dtStart">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('dtStart')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('dtStart'); ?></span>
+                                                </span><?php } ?>
+                                           
+                                        </div>
+                                    </div>
+                                 <div class="col-md-3">
                                         <div
                                             class="form-group <?php if (!empty($arErrorMessages['dtEnd']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
@@ -154,9 +229,9 @@
                                             &nbsp;
                                         </div>
                                     </div>
-                               
+                                   <?php } ?>   
                              </form>
-                        </div>
+                       </div>
                     </div>
                     <?php
                     if($_POST['dtStart']!='' && $_POST['dtEnd']!='')

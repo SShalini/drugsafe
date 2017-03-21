@@ -855,6 +855,10 @@ class Admin_Controller extends CI_Controller
             $this->load->view('layout/admin_footer');
         } else {
             if ($this->Admin_Model->insertRegion($data)) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong>New Region has been added successfully .</strong><h4> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+
                 redirect(base_url('admin/regionManagerList/'));
                 die;
             }
