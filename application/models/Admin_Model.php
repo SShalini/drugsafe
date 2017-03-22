@@ -192,8 +192,9 @@ class Admin_Model extends Error_Model
             }
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
+            
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
-            //if (!in_array('szReginalName', $arExclude)) $this->set_szReginalName(sanitize_all_html_input(trim($data['szReginalName'])), true);
+            if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
             if ($this->error == false && $this->data['szEmail'] != '') {
 
 

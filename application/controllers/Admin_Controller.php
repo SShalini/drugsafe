@@ -223,6 +223,7 @@ class Admin_Controller extends CI_Controller
         $this->form_validation->set_rules('addFranchisee[abn]', 'ABN', 'required|abn_numeric|abn_length');
         $this->form_validation->set_rules('addFranchisee[operationManagerId]', 'Operation Manager', 'required');
         $this->form_validation->set_rules('addFranchisee[szRegionName]', 'Region Name', 'required');
+        $this->form_validation->set_rules('addFranchisee[szState]', 'State', 'required');
         $this->form_validation->set_rules('addFranchisee[szEmail]', 'Email', 'required|chekDuplicate[' .__DBC_SCHEMATA_USERS__. '.szEmail]|valid_email');
         $this->form_validation->set_rules('addFranchisee[szContactNumber]', 'Contact No.', 'required|valid_phone_number');
         $this->form_validation->set_rules('addFranchisee[szAddress]', 'Address', 'required');
