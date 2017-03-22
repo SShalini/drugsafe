@@ -2502,7 +2502,7 @@ if ($mode == '__FRANCHISEE_STATUS_POPUP__') {
         $statusMsg="Enable";
     }
     else{
-         $statusMsg="Disabled";
+         $statusMsg="Disable";
     }
     ?>
     <div id="franchiseeStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
