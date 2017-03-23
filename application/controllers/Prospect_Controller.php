@@ -1120,7 +1120,7 @@ public function deleteProspectConfirmation()
                 $dt_last_updated_status = "N/A";  
               }
               else{
-              $dt_last_updated_status =     date('d M Y',strtotime($recordData['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($recordData['dt_last_updated_status']));
+              $dt_last_updated_status =     date('d M Y',strtotime($item['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($item['dt_last_updated_status']));
               }
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeArr['szName']);

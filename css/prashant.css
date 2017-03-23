@@ -39,6 +39,7 @@ body .logo img {
 .collapse-sec.collapsed{background-image: url("/assets/global/img/portlet-collapse-icon-white.png");}
 .media.replyoncomment, .media.replyoncomment .media-body{overflow: visible}
 .drugtypeselect .custom-select a span{width:120px}
+.clienttypeselect .custom-select a span{width:215px}
 .industryselect .custom-select a span{width:220px}
 .modal-custom-heading{font-weight: 500; color: #16997E}
 #loader {

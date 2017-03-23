@@ -81,7 +81,7 @@
                                 </div>
                              
                               
-                                     <div class=" col-md-3">
+                                     <div class=" col-md-3 clienttypeselect">
                                
                                     <div id='szClient'>
                                         <select class="form-control custom-select" name="szSearchClRecord1"
@@ -382,10 +382,9 @@
 											   }
                                                 ?>											   
                                                   <tr>
-                                                     
+                                                   <td></td>
                                                      <td></td>
                                                      <td><b>Total</b></td>
-                                                     <td></td>
                                                       <td>
                                                           $<?php
                                                           $totalRevenu = number_format($totalRevenu, 2, '.', '');
