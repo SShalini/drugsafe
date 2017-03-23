@@ -193,14 +193,14 @@
                                         <?php } } }
                                                 $clientDetailsAray = $this->Franchisee_Model->getClientCountId($franchiseeData['id']);
                                                 
-                                              
+                                                if($_SESSION['drugsafe_user']['iRole'] == '1'){ 
                                                 if(empty($clientDetailsAray)){
                                                ?>  
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Franchisee" onclick="franchiseeDelete(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
                                                  <?php 
-                                                }
+                                                }  }
                                                ?>
                                                  
                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Franchisee Details" onclick="viewClient(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);">
