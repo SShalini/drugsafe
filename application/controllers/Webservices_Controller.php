@@ -550,6 +550,12 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['dontesttime2'] = trim($jsondata->dontesttime2) == ':' ? "":$jsondata->dontesttime2;
         $data['coc']['donordecdate'] = !empty($jsondata->donordecdate) ? $jsondata->donordecdate : "";
         $data['coc']['donordecsign'] = !empty($jsondata->donordecsign) ? $jsondata->donordecsign : "";
+        $data['coc']['signcoc1'] = $jsondata->signcoc1;
+        $data['coc']['signcoc2'] = $jsondata->signcoc2;
+        $data['coc']['signcoc3'] = $jsondata->signcoc3;
+        $data['coc']['signcoc4'] = $jsondata->signcoc4;
+        $data['coc']['signcoc5'] = $jsondata->signcoc5;
+        $data['coc']['signcoc6'] = $jsondata->signcoc6;
         $donordata = $this->Webservices_Model->addcocdata($data['coc']);
         $errorMsgArr = $this->Webservices_Model->arErrorMessages;
         if($donordata)
@@ -1567,6 +1573,20 @@ class Webservices_Controller extends CI_Controller
         $pdfname = 'view_coc_details-'.date('d-m-Y-H-i-s') .'-'.uniqid() . '.pdf';
         $pdf->Output(__APP_PATH__.'/'.UPLOAD_DIR.$pdfname, 'F');
         $responsedata = array("code" => 200,"file"=>__BASE_URL__.'/uploadsign/'.$pdfname);
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
+
+    function getfranchiseeinventory(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "0";
+        $data['prodid'] = !empty($jsondata->prodid) ? $jsondata->prodid : "0";
+        $franchiseeInventoryArr = $this->Webservices_Model->getFranchiseeInventory($data['franchiseeid'],$data['prodid']);
+        if(!empty($franchiseeInventoryArr)){
+            $responsedata = array("code" => 200,"dataarr"=>$franchiseeInventoryArr);
+        }else{
+            $responsedata = array("code" => 201,"message"=>"No product found.");
+        }
         header('Content-Type: application/json');
         echo json_encode($responsedata);
     }
