@@ -746,5 +746,23 @@ class Prospect_Model extends Error_Model
             return array();
         }
     }
+    function getAllProspectDetailsByOpId($opId)
+    {  
+        
+         $array = array('isDeleted' => '0','clientcreated'=> '0','operationManagerId'=> (int)$opId);
+          
+           $this->db->select('tbl_prospect.szBusinessName');
+           $this->db->from('tbl_prospect');
+           $this->db->join('tbl_franchisee', 'tbl_prospect.iFranchiseeId = tbl_franchisee.franchiseeId');
+           $this->db->where($array);
+           $query =  $this->db  ->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return array();
+        }
+    }
 }
 ?>

@@ -297,7 +297,7 @@
                                          $id = $_SESSION['drugsafe_user']['id'];  
                                         $searchArr = $this->Prospect_Model->getAllProspectDetails($id); 
                                        }else {
-                                      $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
+                                      $searchArr = $this->Prospect_Model->getAllProspectDetailsbyopId(); 
                                           }
                                    
                                           foreach($searchArr as $searchOptionData)

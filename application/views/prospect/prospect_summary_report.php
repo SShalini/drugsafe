@@ -124,7 +124,12 @@
         
                                          $id = $_SESSION['drugsafe_user']['id'];  
                                         $searchArr = $this->Prospect_Model->getAllProspectDetails($id); 
-                                       }else {
+                                       }elseif($_SESSION['drugsafe_user']['iRole']==5)
+                                       {
+                                          $opid = $_SESSION['drugsafe_user']['id'];  
+                                          $searchArr = $this->Prospect_Model->getAllProspectDetailsByOpId($opid); 
+                                       }
+                                           else{
                                    $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
                                           }
                                           foreach($searchArr as $searchOptionData)
