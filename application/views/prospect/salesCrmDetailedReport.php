@@ -2,6 +2,7 @@
     $(function() {
          $("#szSearch3").customselect();
          $("#szSearch4").customselect();
+         $("#szSearch5").customselect();
     });
 </script>
 <div id="loader"></div>
@@ -84,7 +85,7 @@
                        
                        
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/sales_crm_detailed_report" name="szSearchField" method="post">
-              <?php if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){  ?> 
+                       <?php if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){  ?> 
                                   <div class="row"> 
                                     <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
@@ -107,7 +108,7 @@
                                         </div>
 
                                     </div>
-                                        <div class="col-md-1"> </div>
+                                      
                                            <div class="col-md-3">
                                               <div
                                             class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
@@ -130,7 +131,7 @@
                              </span><?php }?> 
                                         </div> 
                                     </div>
-                                  <div class="col-md-1"> </div>
+                                 
                             
                                    <div class="col-md-3">
                       
@@ -158,10 +159,27 @@
                              </span><?php }?> 
                         </div>
                     </div>
-                      </div>              
-                    <div class="row">
-                   
-                                <div class="search col-md-3">
+                      </div> 
+                         
+                    <div class=" row">
+                             <div class="search col-md-3">
+                       
+                            <select class="form-control custom-select" name="szSearch5" id="szSearch5" onchange="remove_formError(this.id,'true')">
+                               <option value="">Business Name</option>
+                                  
+                                       <?php
+                                   $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
+                                   
+                                          foreach($searchArr as $searchOptionData)
+                                          {
+                                              $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearch5'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$searchOptionData['szBusinessName'].'"' . $selected . ' >'.$searchOptionData['szBusinessName'].'</option>';
+                                          }
+                                          ?>
+                           </select>
+                      
+                         </div>
+                                <div class=" col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch4" id="szSearch4" onfocus="remove_formError(this.id,'true')">
                                          
@@ -187,8 +205,7 @@
                                   
                                       </select>
                                   </div>
-                                  <div class="search col-md-1"> </div>
-                                  
+                            
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>
@@ -240,8 +257,7 @@
                              </span><?php }?> 
                                         </div> 
                                     </div>
-                               &nbsp;&nbsp;
-                            
+                             
                                 <div class="search col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch4" id="szSearch4" onfocus="remove_formError(this.id,'true')">
@@ -268,8 +284,7 @@
                                   
                                       </select>
                                      </div>     
-                                 &nbsp;&nbsp;
-                                  
+                               
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>

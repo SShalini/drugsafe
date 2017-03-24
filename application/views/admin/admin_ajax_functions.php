@@ -3383,10 +3383,11 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                         </div>
                        
                         <div class="portlet-body">
-                              <?php   if(!empty($mettingsDetailsAry)){ ?>
+                             
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
+                                         <?php   if(!empty($mettingsDetailsAry)){ ?>
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Meeting Note</th>

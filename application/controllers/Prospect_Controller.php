@@ -894,13 +894,14 @@ public function deleteProspectConfirmation()
            $count = $this->Admin_Model->getnotification();
            $searchAry = $_POST;
            $franchiseeid = $_POST['szSearchfr'];
+           $szBusinessName = $_POST['szSearchBussName'];
            $status = $_POST['szSearch2'];
           
              if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeid = $_SESSION['drugsafe_user']['id'];
              }
              if(!empty($franchiseeid)){
-           $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeid,false,$status);
+           $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeid,$szBusinessName,$status);
              }
            
             $this->load->library('form_validation');
@@ -1168,12 +1169,13 @@ public function deleteProspectConfirmation()
            $startDate = $_POST['szSearch1'];
            $endDate = $_POST['szSearch2'];
            $status = $_POST['szSearch4'];
+            $szBusinessName = $_POST['szSearch5'];
             if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeid = $_SESSION['drugsafe_user']['id'];
              }
            
            if($_POST){
-             $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status);   
+             $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status,$szBusinessName);   
            }
             $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch1', 'Start Date ', 'required');

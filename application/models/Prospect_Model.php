@@ -67,10 +67,10 @@ class Prospect_Model extends Error_Model
          
       if((!empty($szBusinessName)) || (!empty($status )) || (!empty($franchiseeId)))
       {
-            $array = 'isDeleted = 0 '.($franchiseeId>0?' AND iFranchiseeId = '.(int)$franchiseeId:'').($status>0?' AND status = '.(int)$status:'').($szBusinessName>0?' AND id = '.(int)$szBusinessName:'') ;   
+            $array = 'isDeleted = 0 AND clientcreated = 0'.($franchiseeId>0?' AND iFranchiseeId = '.(int)$franchiseeId:'').($status>0?' AND status = '.(int)$status:'').((!empty($szBusinessName))?' AND szBusinessName = '.'"'.$szBusinessName.'"':'') ;   
       }
        else{
-       $array = array('isDeleted' => '0');
+       $array = array('isDeleted' => '0','clientcreated'=> '0');
          }
          $query = $this->db->select('id,iFranchiseeId,szName,dt_last_updated_status,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
             ->from(__DBC_SCHEMATA_PROSPECT__)
@@ -723,27 +723,22 @@ class Prospect_Model extends Error_Model
            }
        }
     }
-     function getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+     function getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status='0',$szBusinessName='', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {  
            $dtStart = $this->getSqlFormattedDate($startDate);
            $dtEnd = $this->getSqlFormattedDate($endDate);
-           if ($status>0){
-           $whereAry = array('iFranchiseeId' =>$franchiseeid ,'tbl_prospect_status.status' =>$status,'tbl_prospect_status.dtUpdatedOn >='=>$dtStart.'00:00:00','tbl_prospect_status.dtUpdatedOn <='=>$dtEnd.'23:59:59');    
-           }
-           else{
-            $whereAry = array('iFranchiseeId' =>$franchiseeid ,'tbl_prospect_status.dtUpdatedOn >='=>$dtStart.'00:00:00','tbl_prospect_status.dtUpdatedOn <='=>$dtEnd.'23:59:59');   
-           }
-           
+          
+           $array = __DBC_SCHEMATA_PROSPECT__ . '.iFranchiseeId = ' . (int)$franchiseeid . ' AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn >= '.$dtStart.'00:00:00  AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn <= '.$dtEnd.'23:59:59'. (!empty($szBusinessName) ? ' AND ' . __DBC_SCHEMATA_PROSPECT__ . '.szBusinessName = ' .'"'.$szBusinessName.'"':'').(!empty($status) ? ' AND ' . __DBC_SCHEMATA_STATUS__ . '.status = ' .(int)$status:'');
           
            $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNo');
            $this->db->from('tbl_prospect_status');
            $this->db->join('tbl_prospect', 'tbl_prospect_status.prospectId = tbl_prospect.id');
            $this->db ->order_by("prospectId","desc") ;
-           $this->db->where($whereAry);
+           $this->db->where($array);
            $this->db->limit($limit, $offset);
            $query =  $this->db  ->get();
-//       $q = $this->db->last_query();
-//       echo $q; die;
+       $q = $this->db->last_query();
+       echo $q; die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;
