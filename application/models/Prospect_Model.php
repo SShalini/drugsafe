@@ -58,7 +58,7 @@ class Prospect_Model extends Error_Model
         $this->data['L_G_Channel'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "L_G_Channel", "Lead Generation Channel", false, false, $flag);
     }
 
-     function getAllProspectDetails($franchiseeId,$szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+     function getAllProspectDetails($franchiseeId='0',$szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
 
           if($franchiseeId){

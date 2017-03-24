@@ -2,6 +2,7 @@
     $(function() {
          $("#szSearchfr").customselect();
          $("#szSearchStatus").customselect();
+         $("#szSearchBussName").customselect();
     });
 </script>
 <div id="loader"></div>
@@ -81,11 +82,11 @@
                         </div>
                    
                        
-                         <div class="search row">
+                         <div class=" row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
 
                               <?php  if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){     ?>
-                                   <div class="  col-md-3">
+                                   <div class=" col-md-3">
                        
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchfr']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onchange="remove_formError(this.id,'true')">
@@ -112,7 +113,24 @@
                         </div>
                     </div>
                    
-                     <?php }?>  
+                     <?php }?> 
+                      <div class=" col-md-3">
+                       
+                            <select class="form-control custom-select" name="szSearchBussName" id="szSearchBussName" onchange="remove_formError(this.id,'true')">
+                               <option value="">Business Name</option>
+                                  
+                                       <?php
+                                   $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
+                                   
+                                          foreach($searchArr as $searchOptionData)
+                                          {
+                                              $selected = ($searchOptionData['szName'] == $_POST['szSearchBussName'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$searchOptionData['szName'].'"' . $selected . ' >'.$searchOptionData['szName'].'</option>';
+                                          }
+                                          ?>
+                           </select>
+                      
+                    </div>
                                 <div class=" col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchStatus" onfocus="remove_formError(this.id,'true')">

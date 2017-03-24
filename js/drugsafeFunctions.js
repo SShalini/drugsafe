@@ -2985,3 +2985,11 @@ function revenueGenerateChart(dtStart,dtEnd,szFranchisee) {
 
     });
 }
+function View_meeting_note_excel(idProspect) {
+    $.post(__BASE_URL__ + "/prospect/ViewMeetingNoteExcelData", {idProspect : idProspect}, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
+        window.open(URL,'_blank');
+    });
+
+}

@@ -1458,12 +1458,7 @@ public function deleteProspectConfirmation()
           $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
           $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $prospectAry['iFranchiseeId']);
           $meetingAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
-      if(($prospectAry['dt_last_updated_status']) == '0000-00-00 00:00:00'){
-        $val = "N/A";  
-      }
-      else{
-       $val = date('d M Y',strtotime($prospectAry['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($prospectAry['dt_last_updated_status']));   
-      }
+      
     $html = '<div class="wraper">
         <table cellpadding="5px">
        
@@ -1498,9 +1493,7 @@ public function deleteProspectConfirmation()
   <tr>
        <td width="50%" align="left"><b>Status : </b> '. ($prospectAry['status']=='1'?'Pre Discovery':($prospectAry['status']=='2'?'Discovery Meeting':($prospectAry['status']=='3'?'In Progress' :($prospectAry['status']=='4'?'Non Convertible' :($prospectAry['status']=='5'?'Contact Later':($prospectAry['status']=='6'?'Closed Sale':'')))))) .'</td>  
     </tr>
-    <tr>
-       <td width="50%" align="left"><b>Status Updated On: </b> '.$val.'</td>  
-    </tr>
+ 
     
 </table>
 <br />
@@ -1511,16 +1504,24 @@ public function deleteProspectConfirmation()
                             <table border="1" cellpadding="5">
                                     <tr>
                                         <th width="10%" ><b>Sr No</b> </th>
-                                        <th width="90%"> <b>Meeting Note</b> </th>
+                                        <th width="70%"> <b>Meeting Note</b> </th>
+                                        <th width="20%"> <b>Meeting Date/Time</b> </th>
                                     </tr>';
        
         if ($meetingAry) {
             $i = 0;
             foreach ($meetingAry as $meetingData) {
+            if(($meetingData['dtCreatedOn']) == '0000-00-00 00:00:00'){
+                 $val = "N/A";  
+              }
+                else{
+               $val = date('d M Y',strtotime($meetingData['dtCreatedOn'])) . ' at '.date('h:i A',strtotime($meetingData['dtCreatedOn']));   
+             }    
               $i++;
                 $html .= '<tr>
                                             <td> ' . $i. ' </td>
                                             <td> ' . $meetingData['szDescription'] . '</td>
+                                            <td> ' . $val . '</td>
                                            
                                         </tr>';
             }
@@ -1535,12 +1536,148 @@ public function deleteProspectConfirmation()
         $pdf->writeHTML($html, true, false, true, false, '');
 
         error_reporting(E_ALL);
-        $this->session->unset_userdata('idOrder');
-        $this->session->unset_userdata('flag');
-
+        $this->session->unset_userdata('idProspect');
+  
         ob_end_clean();
-        $pdf->Output('view_order_details.pdf', 'I');
+        $pdf->Output('view_meeting_note.pdf', 'I');
     }
+  function ViewMeetingNoteExcelData()
+        {
+            $idProspect = $this->input->post('idProspect');
+          
+                $this->session->set_userdata('idProspect',$idProspect);
+               
+                
+                echo "SUCCESS||||";
+                echo "ViewMeetingNoteExcel";
+            
+ 
+        }
+    public function ViewMeetingNoteExcel()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Drug-safe Meeting Note Details';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A12', 'Sr No');
+        $this->excel->getActiveSheet()->getStyle('A12')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A12')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A12')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B12', 'Meeting Note');
+        $this->excel->getActiveSheet()->getStyle('B12')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B12')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B12')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C12', 'Meeting Date/Time');
+        $this->excel->getActiveSheet()->getStyle('C12')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C12')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C12')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+       
+          $idProspect = $this->session->userdata('idProspect');
+          $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
+          $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $prospectAry['iFranchiseeId']);
+          $meetingAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
     
+          if ($prospectAry['status'] == 1) {
+
+            $status = "Pre Discovery";
+        }
+        if ($prospectAry['status'] == 2) {
+
+            $status = "Discovery Meeting";
+        }
+        if ($prospectAry['status'] == 3) {
+
+
+            $status = "In Progress" ;
+        }
+
+        if ($prospectAry['status'] == 4) {
+
+            $status = "Non Convertible";
+        }
+         if ($prospectAry['status'] == 5) {
+
+            $status = "Contact Later";
+        }
+         if ($prospectAry['status'] == 6) {
+
+            $status = "Closed Sale";
+        }
+   
+     
+        $this->excel->getActiveSheet()->setCellValue('B1', 'PROSPECT DETAILS');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+     
+      
+        $this->excel->getActiveSheet()->setCellValue('A2', 'Prospect Info ');
+        $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+       
+        $this->excel->getActiveSheet()->setCellValue('A10', 'Meeting Note Info ');
+        $this->excel->getActiveSheet()->getStyle('A10')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A10')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A10')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        
+         $this->excel->getActiveSheet()->setCellValue('A4','Franchisee Name :');
+         $this->excel->getActiveSheet()->setCellValue('A5','Business Name :');
+         $this->excel->getActiveSheet()->setCellValue('A6','Contact Name :');
+         $this->excel->getActiveSheet()->setCellValue('A7','Email :');
+         $this->excel->getActiveSheet()->setCellValue('A8','Status :');
+     
+         $this->excel->getActiveSheet()->setCellValue('B4',$franchiseeArr['szName']);
+         $this->excel->getActiveSheet()->setCellValue('B5',$prospectAry['szBusinessName']);
+         $this->excel->getActiveSheet()->setCellValue('B6',$prospectAry['szName']);
+         $this->excel->getActiveSheet()->setCellValue('B7',$prospectAry['szEmail']);
+           $this->excel->getActiveSheet()->setCellValue('B8',$status);
+        
+   
+         if ($meetingAry) {
+            $i = 13 ;
+            $x=0;
+            foreach ($meetingAry as $item) {
+               if($item['createdon']=="0000-00-00 00:00:00"){
+                 $date =   "N/A";
+                       } 
+                   else{
+                   $date = date('d M Y',strtotime($item['dtCreatedOn'])) . ' at '.date('h:i A',strtotime($item['dtCreatedOn']));   
+                   }
+               $x++;
+                 
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szDescription']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, $date);
+              
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+              
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $this->session->unset_userdata('idProspect');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }   
 }
 ?>
