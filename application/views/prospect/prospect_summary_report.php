@@ -120,8 +120,13 @@
                                <option value="">Business Name</option>
                                   
                                        <?php
+                                        if($_SESSION['drugsafe_user']['iRole']==2){
+        
+                                         $id = $_SESSION['drugsafe_user']['id'];  
+                                        $searchArr = $this->Prospect_Model->getAllProspectDetails($id); 
+                                       }else {
                                    $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
-                                   
+                                          }
                                           foreach($searchArr as $searchOptionData)
                                           {
                                               $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearchBussName'] ? 'selected="selected"' : '');
@@ -165,8 +170,7 @@
                           </div>
                       
                           <?php
-                          if(!empty($_POST))
-                        {
+                          
                         if(!empty($recordAry))
                         { 
                     
@@ -287,7 +291,7 @@
                         {
                             echo "Not Found";
                         }
-                        }
+                       
                         ?>
                            <?php  if(!empty($prospectDetailsAry)){?>
 		     <div class="row">

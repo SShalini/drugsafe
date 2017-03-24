@@ -2861,7 +2861,7 @@ function showcocpdf(cocid) {
 }
  function ViewpdfSalesCrmReport(franchiseeId,szBusinessName,status) {
      
-    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Report", {franchiseeId: franchiseeId,,szBusinessName:szBusinessName,status:status}, function (result) {
+    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Report", {franchiseeId: franchiseeId,szBusinessName:szBusinessName,status:status}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
         window.open(URL,'_blank');
@@ -2869,8 +2869,8 @@ function showcocpdf(cocid) {
     });
 }
 
-function ViewexcelSalesCrmReport(franchiseeId,status) {
-    $.post(__BASE_URL__ + "/prospect/View_xls_Sales_Crm_Report", {franchiseeId: franchiseeId,status:status}, function (result) {
+function ViewexcelSalesCrmReport(franchiseeId,szBusinessName,status) {
+    $.post(__BASE_URL__ + "/prospect/View_xls_Sales_Crm_Report", {franchiseeId: franchiseeId,szBusinessName: szBusinessName,status:status}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
         window.open(URL,'_blank');
@@ -2886,8 +2886,8 @@ function getClientCodeListByFrId(idFranchisee) {
         }
     });
 }
-function ViewpdfSalesCrmDetailedReport(startDate,endDate,franchiseeId,status) {
-    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Detailed_Report", {startDate:startDate,endDate:endDate,franchiseeId: franchiseeId,status:status}, function (result) {
+function ViewpdfSalesCrmDetailedReport(startDate,endDate,franchiseeId,status,szBusinessName) {
+    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Detailed_Report", {startDate:startDate,endDate:endDate,franchiseeId: franchiseeId,status:status,szBusinessName:szBusinessName}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
         window.open(URL,'_blank');
@@ -2895,8 +2895,8 @@ function ViewpdfSalesCrmDetailedReport(startDate,endDate,franchiseeId,status) {
     });
 }
 
-function ViewexcelSalesCrmDetailedReport(startDate,endDate,franchiseeId,status) {
-     $.post(__BASE_URL__ + "/prospect/View_xls_Sales_Crm_Detailed_Report", {startDate:startDate,endDate:endDate,franchiseeId: franchiseeId,status:status}, function (result) {
+function ViewexcelSalesCrmDetailedReport(startDate,endDate,franchiseeId,status,szBusinessName) {
+     $.post(__BASE_URL__ + "/prospect/View_xls_Sales_Crm_Detailed_Report", {startDate:startDate,endDate:endDate,franchiseeId: franchiseeId,status:status,szBusinessName:szBusinessName}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
         window.open(URL,'_blank');

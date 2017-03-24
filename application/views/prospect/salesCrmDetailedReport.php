@@ -69,11 +69,11 @@
                             ?>
                            
                                
-                                 <a onclick="ViewpdfSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>')" href="javascript:void(0);" 
+                                 <a onclick="ViewpdfSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
                                 
-                               <a onclick="ViewexcelSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>')" href="javascript:void(0);" 
+                               <a onclick="ViewexcelSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
                          
@@ -283,8 +283,32 @@
                                         </option>
                                   
                                       </select>
-                                     </div>     
-                               
+                                     </div>    
+                                        </div>  
+                                  <div class="row">    
+                                <div class="search col-md-3">
+                       
+                            <select class="form-control custom-select" name="szSearch5" id="szSearch5" onchange="remove_formError(this.id,'true')">
+                               <option value="">Business Name</option>
+                                  
+                                       <?php
+                                   if($_SESSION['drugsafe_user']['iRole']==2){
+        
+                                         $id = $_SESSION['drugsafe_user']['id'];  
+                                        $searchArr = $this->Prospect_Model->getAllProspectDetails($id); 
+                                       }else {
+                                      $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
+                                          }
+                                   
+                                          foreach($searchArr as $searchOptionData)
+                                          {
+                                              $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearch5'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$searchOptionData['szBusinessName'].'"' . $selected . ' >'.$searchOptionData['szBusinessName'].'</option>';
+                                          }
+                                          ?>
+                           </select>
+                      
+                         </div>
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>
