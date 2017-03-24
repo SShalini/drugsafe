@@ -955,9 +955,11 @@ public function deleteProspectConfirmation()
 
       function View_pdf_Sales_Crm_Report()
         {
-       $franchiseeId = $this->input->post('franchiseeId');
+        $szBusinessName = $this->input->post('szBusinessName');
         $status = $this->input->post('status');
+        $franchiseeId = $this->input->post('franchiseeId');
         $this->session->set_userdata('status',$status);
+        $this->session->set_userdata('szBusinessName',$szBusinessName);
         $this->session->set_userdata('franchiseeId',$franchiseeId);
         echo "SUCCESS||||";
         echo "viewpdfsalesCRMSummary";
@@ -987,6 +989,7 @@ public function deleteProspectConfirmation()
        $pdf->AddPage('L');
         
        $franchiseeId = $this->session->userdata('franchiseeId');
+        $szBusinessName = $this->session->userdata('szBusinessName');
        $status = $this->session->userdata('status');
         if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeId = $_SESSION['drugsafe_user']['id'];
@@ -1008,7 +1011,7 @@ public function deleteProspectConfirmation()
                                         <th style="width:170px"> <b>Status Updated On</b> </th>
                                    
                                    </tr>';
-         $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeId,false,$status);
+         $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeId,$szBusinessName,$status);
         if ($recordAry) {
             $i = 0;
             foreach ($recordAry as $recordData) {

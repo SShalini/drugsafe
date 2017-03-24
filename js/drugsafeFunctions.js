@@ -2859,8 +2859,9 @@ function showcocpdf(cocid) {
 
     });
 }
- function ViewpdfSalesCrmReport(franchiseeId,status) {
-    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Report", {franchiseeId: franchiseeId,status:status}, function (result) {
+ function ViewpdfSalesCrmReport(franchiseeId,szBusinessName,status) {
+     
+    $.post(__BASE_URL__ + "/prospect/View_pdf_Sales_Crm_Report", {franchiseeId: franchiseeId,,szBusinessName:szBusinessName,status:status}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/prospect/" + ar_result[1];
         window.open(URL,'_blank');

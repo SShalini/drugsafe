@@ -728,7 +728,7 @@ class Prospect_Model extends Error_Model
            $dtStart = $this->getSqlFormattedDate($startDate);
            $dtEnd = $this->getSqlFormattedDate($endDate);
           
-           $array = __DBC_SCHEMATA_PROSPECT__ . '.iFranchiseeId = ' . (int)$franchiseeid . ' AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn >= '.$dtStart.'00:00:00  AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn <= '.$dtEnd.'23:59:59'. (!empty($szBusinessName) ? ' AND ' . __DBC_SCHEMATA_PROSPECT__ . '.szBusinessName = ' .'"'.$szBusinessName.'"':'').(!empty($status) ? ' AND ' . __DBC_SCHEMATA_STATUS__ . '.status = ' .(int)$status:'');
+           $array = __DBC_SCHEMATA_PROSPECT__ . '.iFranchiseeId = ' . (int)$franchiseeid . ' AND '. __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn >= '.'"'.$dtStart .'00:00:00 " AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn <= '.'"'.$dtEnd .' 23:59:59"'. (!empty($szBusinessName) ? ' AND ' . __DBC_SCHEMATA_PROSPECT__ . '.szBusinessName = ' .'"'.$szBusinessName.'"':'').(!empty($status) ? ' AND ' . __DBC_SCHEMATA_STATUS__ . '.status = ' .(int)$status:'');
           
            $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNo');
            $this->db->from('tbl_prospect_status');
@@ -737,8 +737,8 @@ class Prospect_Model extends Error_Model
            $this->db->where($array);
            $this->db->limit($limit, $offset);
            $query =  $this->db  ->get();
-       $q = $this->db->last_query();
-       echo $q; die;
+//       $q = $this->db->last_query();
+//       echo $q; die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;

@@ -68,11 +68,11 @@
                     
                             ?>
                            
-                                 <a onclick="ViewpdfSalesCrmReport('<?php echo $_POST['szSearchfr'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
+                                 <a onclick="ViewpdfSalesCrmReport('<?php echo $_POST['szSearchfr'];?>','<?php echo $_POST['szSearchBussName'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
                                 
-                               <a onclick="ViewexcelSalesCrmReport('<?php echo $_POST['szSearchfr'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>')" href="javascript:void(0);" 
+                               <a onclick="ViewexcelSalesCrmReport('<?php echo $_POST['szSearchfr'];?>','<?php echo $_POST['szSearchBussName'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
                          
