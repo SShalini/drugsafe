@@ -3341,18 +3341,38 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                 <?php  $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
 
                 ?>
-                <div class="modal-header">
+                
+                    <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span class="caption-subject font-red-sunglo bold uppercase">Meeting Note</span></h4>
+                <?php  if(!empty($mettingsDetailsAry)) {?> 
+                            <?php if($flag != 2){ ?>
+                        <hr>
+                            <div class = 'row'>  
+                        <div class="actions">
+                      
+                        <div class = ' col-md-6'>   
+                            
+                        </div>
+                         <div class = ' col-md-6'> 
+                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a onclick="view_meeting_note_pdf('<?php echo $idProspect;?>')" href="javascript:void(0);" 
+                      class=" btn green-meadow">
+                       <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+
+                    <a onclick="View_meeting_note_excel('<?php echo $idProspect;?>')" href="javascript:void(0);" 
+                      class=" btn green-meadow">
+                       <i class="fa fa-file-excel-o"></i> View Xls </a>
+                         </div>
+                         
+                     </div>
                     </div>
-
+                <?php } }?>
+                    </div>
                 </div>
-
-               
                 <div class="modal-body">
-                   
                     <div class="portlet green-meadow box">
                         <div class="portlet-title">
                             <div class="caption">
@@ -3363,6 +3383,7 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                         </div>
                        
                         <div class="portlet-body">
+                              <?php   if(!empty($mettingsDetailsAry)){ ?>
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
@@ -3403,7 +3424,7 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                                               <td><?php echo $retval;  ?></td>
                                             
                                         </tr>
-                                    <?php } ?>
+                                    <?php }} else echo "Not Found" ?>
 
                                     </tbody>
                                 </table>
@@ -3422,6 +3443,7 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
  <div id="popup_box_level2"></div>
     <?php
 }
+
 if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
     echo "SUCCESS||||";
     ?>

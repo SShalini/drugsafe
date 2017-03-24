@@ -326,7 +326,7 @@ class Prospect_Model extends Error_Model
     {
         
         $array = array('id' => (int)$prospectsId, 'isDeleted' => '0');
-        $query = $this->db->select('id,szName,L_G_Channel,szNoOfSites,iFranchiseeId,szEmail,szContactNo,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
+        $query = $this->db->select('id,szName,dt_last_updated_status,L_G_Channel,szNoOfSites,iFranchiseeId,szEmail,szContactNo,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
             ->from(__DBC_SCHEMATA_PROSPECT__)
             ->where($array)
             ->get();
@@ -443,9 +443,7 @@ class Prospect_Model extends Error_Model
        else{
             $array = array('idProspect' => (int)$prospectsId);
        }
-       
      
-          
        if($flag==1){
           $query = $this->db->select('szCreatedBy')
            ->distinct('szCreatedBy')

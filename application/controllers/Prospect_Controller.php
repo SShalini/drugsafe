@@ -899,7 +899,7 @@ public function deleteProspectConfirmation()
              if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeid = $_SESSION['drugsafe_user']['id'];
              }
-             if(!empty($_POST)){
+             if(!empty($franchiseeid)){
            $recordAry = $this->Prospect_Model->getAllProspectDetails($franchiseeid,false,$status);
              }
            
@@ -1424,6 +1424,123 @@ public function deleteProspectConfirmation()
           $this->session->unset_userdata('startDate');
           $this->session->unset_userdata('endDate');
         $objWriter->save('php://output');
-    } 
+    }
+      function viewMeetingNotePdfData()
+        {
+       $idProspect = $this->input->post('idProspect');
+        $this->session->set_userdata('idProspect',$idProspect);
+        echo "SUCCESS||||";
+        echo "viewMeetingNotePdf";
+            
+ 
+        }
+         public function viewMeetingNotePdf()
+    {
+       ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe Meeting Note Report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Meeting Note Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+
+        $pdf->AddPage('L');
+   
+          $idProspect = $this->session->userdata('idProspect');
+          $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
+          $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $prospectAry['iFranchiseeId']);
+          $meetingAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
+      if(($prospectAry['dt_last_updated_status']) == '0000-00-00 00:00:00'){
+        $val = "N/A";  
+      }
+      else{
+       $val = date('d M Y',strtotime($prospectAry['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($prospectAry['dt_last_updated_status']));   
+      }
+    $html = '<div class="wraper">
+        <table cellpadding="5px">
+       
+    <tr>
+        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
+    </tr>
+
+</table>
+<br />
+<h2 style="text-align: center;">PROSPECT DETAILS</h2>
+
+<br>
+<h3 style="color:black">Prospect Info  </h3>
+<br />
+<table cellpadding="5px">
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Franchisee Name  :</b> ' .$franchiseeArr['szName'] . '</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Business Name : </b> '.$prospectAry['szBusinessName'].'</td>
+    </tr>
+  
+   <tr>
+        <td width="50%" align="left"><b>Contact Name : </b> '. $prospectAry['szName'] .'</td>
+    </tr>      
+  
+
+   <tr>
+    <td width="50%" align="left"><b>Email : </b> '.$prospectAry['szEmail'].'</td>
+      
+    </tr> 
+  <tr>
+       <td width="50%" align="left"><b>Status : </b> '. ($prospectAry['status']=='1'?'Pre Discovery':($prospectAry['status']=='2'?'Discovery Meeting':($prospectAry['status']=='3'?'In Progress' :($prospectAry['status']=='4'?'Non Convertible' :($prospectAry['status']=='5'?'Contact Later':($prospectAry['status']=='6'?'Closed Sale':'')))))) .'</td>  
+    </tr>
+    <tr>
+       <td width="50%" align="left"><b>Status Updated On: </b> '.$val.'</td>  
+    </tr>
+    
+</table>
+<br />
+<h3 style="color:black">Meeting Note Info </h3>
+            <div>
+         
+                        <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th width="10%" ><b>Sr No</b> </th>
+                                        <th width="90%"> <b>Meeting Note</b> </th>
+                                    </tr>';
+       
+        if ($meetingAry) {
+            $i = 0;
+            foreach ($meetingAry as $meetingData) {
+              $i++;
+                $html .= '<tr>
+                                            <td> ' . $i. ' </td>
+                                            <td> ' . $meetingData['szDescription'] . '</td>
+                                           
+                                        </tr>';
+            }
+        }
+        
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        error_reporting(E_ALL);
+        $this->session->unset_userdata('idOrder');
+        $this->session->unset_userdata('flag');
+
+        ob_end_clean();
+        $pdf->Output('view_order_details.pdf', 'I');
+    }
+    
 }
 ?>
