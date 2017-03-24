@@ -294,7 +294,14 @@
                         }
                         else
                         {
-                            echo "Not Found";
+                           if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){   
+                          if(!empty($_POST['szSearchfr'])){   
+                               echo "Not Found";
+                           }
+                           }
+                           else{
+                             echo "Not Found";   
+                           }
                         }
                        
                         ?>

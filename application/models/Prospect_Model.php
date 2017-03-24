@@ -78,7 +78,7 @@ class Prospect_Model extends Error_Model
            ->limit($limit, $offset)
             ->where($array)
             ->get();
-   
+
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             return $row;

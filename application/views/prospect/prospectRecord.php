@@ -129,8 +129,8 @@
                                           <?php
                                           foreach($prospectDetailsSearchAry as $prospectDetailsSearchList)
                                           {
-                                              $selected = ($prospectDetailsSearchList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$prospectDetailsSearchList['id'].'"' . $selected . ' >'.$prospectDetailsSearchList['szBusinessName'].'</option>';
+                                              $selected = ($prospectDetailsSearchList['szBusinessName'] == $_POST['szBusinessName'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$prospectDetailsSearchList['szBusinessName'].'"' . $selected . ' >'.$prospectDetailsSearchList['szBusinessName'].'</option>';
                                           }
                                           ?>
                                       </select>
