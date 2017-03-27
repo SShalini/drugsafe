@@ -1166,6 +1166,57 @@ class Franchisee_Model extends Error_Model
             return false;
         }
     }
+     public function getfranchiseeagent($agentId)
+    {
+
+        if ((int)$agentId > 0) {
+            $whereAry = array('agentid' => (int)$agentId);
+        } 
+        $this->db->select('*');
+        $this->db->where($whereAry);
+        $query = $this->db->get(__DBC_SCHEMATA_AGENT_FRANCHISEE__);
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            return array();
+        }
+    }
+
+     public function ChangeAgentPassword($password,$agentId)
+    {
+        $dataAry = array(
+            'szPassword' => encrypt($password),
+            'dtUpdatedOn' => date('Y-m-d H:i:s')
+        );
+
+        $whereAry = array('id ' => (int)$agentId);
+
+        $this->db->where($whereAry);
+
+        $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
+
+
+        if ($this->db->affected_rows() > 0) {
+             $agentDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $agentId);
+             $franchiseeArr = $this->getfranchiseeagent($agentId);
+             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId($franchiseeArr['franchiseeid']);
+             
+                    $replace_ary = array();
+                    $replace_ary['szName'] = $agentDetArr['szName'];
+                    $replace_ary['szEmail'] = $agentDetArr['szEmail'];
+                    $replace_ary['szPassword'] = $password;
+                    $replace_ary['supportEmail'] = $franchiseeDetArr['szEmail'];
+
+                    createEmail($this, '__NEW_PASSWORD_FOR_AGENT/EMP__', $replace_ary, $agentDetArr['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
+
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
 
 ?>

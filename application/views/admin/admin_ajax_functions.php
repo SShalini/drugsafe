@@ -3703,4 +3703,112 @@ if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
 
     <?php
 }
+if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="agentChangePassword" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="modal-title">
+                        <div class="caption">
+                            <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span class="caption-subject font-red-sunglo bold uppercase">Change Password</span>
+                            </h4>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form action="" id="changePasswordForm" name="changePassword" method="post"
+                          class="form-horizontal form-row-sepe">
+                        <div class="form-body">
+                            <div
+                                class="form-group <?php if (form_error('changePassword[szNewPassword]')) { ?>has-error<?php } ?>">
+                                <label class="control-label col-md-4">New Password</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input id="szNewPassword"
+                                               class="form-control input-large select2me input-square-right required  "
+                                               type="password"
+                                               value="<?php echo set_value('changePassword[szNewPassword]'); ?>"
+                                               placeholder="New Password" onfocus="remove_formError(this.id,'true')"
+                                               name="changePassword[szNewPassword]">
+                                    </div>
+                                    <?php
+                                    if (form_error('changePassword[szNewPassword]')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('changePassword[szNewPassword]'); ?></span>
+                                        </span><?php } ?>
+                                </div>
+                            </div>
+                              <div
+                                class="form-group <?php if (form_error('changePassword[szConfirmPassword]')) { ?>has-error<?php } ?>">
+                                <label class="control-label col-md-4">Confirm Password</label>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input id="szConfirmPassword"
+                                               class="form-control input-large select2me input-square-right required  "
+                                               type="password"
+                                               value="<?php echo set_value('changePassword[szConfirmPassword]'); ?>"
+                                               placeholder="Confirm Password" onfocus="remove_formError(this.id,'true')"
+                                               name="changePassword[szConfirmPassword]">
+                                    </div>
+                                    <?php
+                                    if (form_error('changePassword[szConfirmPassword]')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('changePassword[szConfirmPassword]'); ?></span>
+                                        </span><?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+
+                    <button type="button"
+                            onclick="changeAgentPasswordConfirmation('<?php echo $agentId; ?>'); return false;"
+                            class="btn green">Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_CONFIRM__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="agentChangePasswordConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+         data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="modal-title">
+                        <div class="caption">
+                            <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                                <span class="caption-subject font-red-sunglo bold uppercase">Changed Password</span>
+                            </h4>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Agent Password has been successfully
+                        changed , Please check the email.</p>
+                </div>
+                <div class="modal-footer">
+                        <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord"
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
   ?>

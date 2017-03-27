@@ -170,7 +170,12 @@
                                                         <i class="fa fa-trash"></i> 
                                                     </a>
 						<?php
-                                        }}
+                                        } ?>
+                                        <a class="btn btn-circle btn-icon-only btn-default" title="Change Password" onclick="changeAgentPassword('<?php echo $agentRecordData['id']; ?>');" href="javascript:void(0);">
+                                                        <i class="fa fa-key"></i> 
+                                                    </a>
+                                        
+                                       <?php  }
 						?>
                                             </td>
                                         </tr>

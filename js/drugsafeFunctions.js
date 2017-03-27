@@ -2994,3 +2994,41 @@ function View_meeting_note_excel(idProspect) {
     });
 
 }
+function changeAgentPassword(agentId) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/changeAgentPasswordAlert", {agentId: agentId}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#agentChangePassword').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}
+ function changeAgentPasswordConfirmation(agentId) {
+        
+     var value = jQuery("#changePasswordForm").serialize(); 
+      var newValue = value+"&agentId="+agentId;
+   
+        $('.modal-backdrop').remove();
+        $('#static').modal("hide");
+        $('#agentChangePassword').modal("hide");
+        jQuery('#loader').attr('style', 'display:block');
+        $.post(__BASE_URL__ + "/franchisee/changeAgentPasswordConfirmation",newValue, function (result) {
+            var result_ary = result.split("||||");
+            var res = result_ary[0].trim(" ");
+            if (res == 'SUCCESS') {
+                $("#popup_box").html(result_ary[1]);
+                $('#agentChangePasswordConfirmation').modal("show");
+                jQuery('#loader').attr('style', 'display:none');
+           }else{
+                $("#popup_box").html(result);
+                $('#agentChangePassword').modal("show");
+                jQuery('#loader').attr('style', 'display:block');
+            }
+           
+
+        });
+    }
