@@ -216,3 +216,5 @@ ADD `signcoc3` TINYINT( 1 ) NOT NULL DEFAULT '0',
 ADD `signcoc4` TINYINT( 1 ) NOT NULL DEFAULT '0',
 ADD `signcoc5` TINYINT( 1 ) NOT NULL DEFAULT '0',
 ADD `signcoc6` TINYINT( 1 ) NOT NULL DEFAULT '0';
+INSERT INTO `tbl_email_cms` (`id`, `szFriendlyName`, `sectionTitle`, `subject`, `sectionDescription`, `iActive`, `atCreatedOn`, `atUpdatedOn`) VALUES (NULL, 'Agent/Employee New Password Email', '__NEW_PASSWORD_FOR_AGENT/EMP__', 'Agent/Employee New Password ', '<p>Dear szName,<br/>Your Password has been changed successfully.<br/><br/> You can login with following login details. <br/> <br/> Email - szEmail <br/> Password - szPassword <br/> <br /> Kind regards,<br /> Drug-Safe Communities.</p>', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
