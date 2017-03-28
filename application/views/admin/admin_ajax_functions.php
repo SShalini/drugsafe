@@ -3689,7 +3689,7 @@ if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-exclamation-triangle"></i> Ordered Quantity has been
-                        in received successfully.</p>
+                        in allocated successfully.</p>
                 </div>
                 <div class="modal-footer">
                     <?php
@@ -3773,7 +3773,7 @@ if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_POPUP__') {
 
                     <button type="button"
                             onclick="changeAgentPasswordConfirmation('<?php echo $agentId; ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>

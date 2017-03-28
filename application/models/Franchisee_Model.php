@@ -429,7 +429,6 @@ class Franchisee_Model extends Error_Model
     public function updateClientDetails($idClient = 0, $data, $reqppval)
     {
         $date = date('Y-m-d');
-
         $dataAry = array(
             'szName' => $data['szName'],
             'szEmail' => $data['szEmail'],
@@ -449,8 +448,20 @@ class Franchisee_Model extends Error_Model
         $this->db->where($whereAry);
 
         $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
-
-        $UpdatedBy = $_SESSION['drugsafe_user']['id'];
+    $UpdatedBy = $_SESSION['drugsafe_user']['id'];
+        if(($data['szEmail'])!= ($data['szOrgEmail'])){
+                  $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId($UpdatedBy);
+                    $replace_ary = array();
+                    $id_player = (int)$this->db->insert_id();
+                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['supportEmail'] = $franchiseeDetArr['szEmail'];
+      
+                    createEmail($this, '__NEW_EMAIL_FOR_CLIENT__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
+            }
+        
+        
+        
         if ($idClient == '') {
             $idClient = $_SESSION['drugsafe_user']['id'];
         }
@@ -551,7 +562,7 @@ class Franchisee_Model extends Error_Model
             } else {
                 return false;
             }
-
+            
         } else {
             return false;
         }

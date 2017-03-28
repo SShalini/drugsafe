@@ -443,7 +443,7 @@ class Franchisee_Controller extends CI_Controller
         if ($idClient > 0) {
 
             $data_validate = $this->input->post('clientData');
-
+           
             if (empty($data_validate)) {
                 if (empty($clientDetailsAray['clientType'])) {
                     $userDataAry = $this->Franchisee_Model->getUserDetailsByEmailOrId('', $idClient);
@@ -1527,7 +1527,7 @@ class Franchisee_Controller extends CI_Controller
 
                     <button type="button"
                             onclick="changeAgentPasswordConfirmation('<?php echo $agentId; ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>

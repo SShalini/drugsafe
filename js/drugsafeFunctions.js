@@ -2994,7 +2994,7 @@ function View_meeting_note_excel(idProspect) {
     });
 
 }
-function changeAgentPassword(agentId) {
+  function changeAgentPassword(agentId) {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/franchisee/changeAgentPasswordAlert", {agentId: agentId}, function (result) {
         var result_ary = result.split("||||");
@@ -3007,7 +3007,7 @@ function changeAgentPassword(agentId) {
 
     });
 }
- function changeAgentPasswordConfirmation(agentId) {
+  function changeAgentPasswordConfirmation(agentId) {
         
      var value = jQuery("#changePasswordForm").serialize(); 
       var newValue = value+"&agentId="+agentId;

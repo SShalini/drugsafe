@@ -115,11 +115,11 @@
                                     
                                         <?php
                                          if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                                           $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false,false,false,false,false,false,false,1);
+                                           $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
                                             }
                                             else{
                                                       $operationManagerId = $_SESSION['drugsafe_user']['id'];
-                                                     $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId,false,false,false,false,false,false,1);
+                                                     $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
                                             }
                                         foreach ($searchOptionArr as $searchOptionList) {
 

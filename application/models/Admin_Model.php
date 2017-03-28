@@ -423,7 +423,7 @@ class Admin_Model extends Error_Model
         return false;
     }
 
-    public function viewFranchiseeList($searchAry = '', $operationManagerId = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $id = 0, $name = '', $email = '', $opId = '',$flag='0')
+    public function viewFranchiseeList($searchAry = '', $operationManagerId = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $id = 0, $name = '', $email = '', $opId = '')
     {
 
         if (!empty($operationManagerId)) {
@@ -441,14 +441,14 @@ class Admin_Model extends Error_Model
              $whereAry = array('isDeleted=' => '0', 'iRole' => '2', 'operationManagerId' =>$opId );
          
         }
-            if($flag==1){
-            if (!empty($operationManagerId)) {
-              $whereAry = array('operationManagerId=' => $operationManagerId,'isDeleted=' => '0', 'iRole' => '2','iActive=' => '1' );   
-               }
-               else{
-                $whereAry = array('isDeleted=' => '0', 'iRole' => '2','iActive=' => '1' );         
-               }
-            }
+//            if($flag==1){
+//            if (!empty($operationManagerId)) {
+//              $whereAry = array('operationManagerId=' => $operationManagerId,'isDeleted=' => '0', 'iRole' => '2','iActive=' => '1' );   
+//               }
+//               else{
+//                $whereAry = array('isDeleted=' => '0', 'iRole' => '2','iActive=' => '1' );         
+//               }
+//            }
         
             
         $this->db->select('*');

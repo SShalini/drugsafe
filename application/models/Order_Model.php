@@ -374,7 +374,7 @@ class Order_Model extends Error_Model {
     } 
       public function getallValidOrderFrId()
     {
-        $whereAry = array('validorder=' => '1','ds_user.iActive=' => '1');
+        $whereAry = array('validorder=' => '1');
         $this->db->distinct();
         $this->db->select('szName,franchiseeid');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
