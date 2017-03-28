@@ -1977,7 +1977,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
 
                                 <div class="modal-footer">
                                     <button type="button"
-                                            onclick="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','1');"
+                                            onmousedown="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','1');"
                                             class="btn green" name="submit"><i class="icon-basket"></i> Dispatch Order
                                     </button>
 <!--                                    <button type="button"
@@ -1987,7 +1987,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                     </button>-->
                                     <!--                      <button type="button" onclick="pendingOrder('<?php echo $idOrder; ?>'); return false;" class="btn green-meadow"><i class="fa fa-shopping-cart"></i>  Pending Order</button>-->
                                     <button type="button"
-                                            onclick="CancelOrderConfirmation('<?php echo $idOrder; ?>'); return false;"
+                                            onmousedown="CancelOrderConfirmation('<?php echo $idOrder; ?>'); return false;"
                                             class="btn red"><i class="fa fa-times"></i> Cancel Order
                                     </button>
                                 </div>
@@ -2225,14 +2225,25 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
                                 <tbody>
                                 <?php
                                 $clcount = 1;
-                                foreach ($agentAssignedClientDetails as $agentclients){?>
+                                foreach ($agentAssignedClientDetails as $agentclients){
+                                    $isUnAssignable = true;
+                                        $agentCLientSitesArr = $this->Webservices_Model->getclientsites($agentclients['id']);
+                                        if(!empty($agentCLientSitesArr)){
+                                            foreach ($agentCLientSitesArr as $agentClientSite){
+                                                $siteSos = $this->Webservices_Model->getsosformdata($agentClientSite['clientId']);
+                                                if(!empty($siteSos)){
+                                                    $isUnAssignable = false;
+                                                }
+                                            }
+                                        }
+                                    ?>
                                     <tr><td><?php echo $clcount;?></td>
                                         <td><?php echo $agentclients['szName'];?></td>
                                         <td><?php echo $agentclients['szEmail'];?></td>
                                         <td><?php echo $agentclients['szContactNumber'];?></td>
-                                        <td><a class="btn btn-circle btn-icon-only btn-default" title="Unassign Client" onclick="unassignclient('<?php echo $agentclients['agentclientid'];?>');" href="javascript:void(0);">
+                                        <td><?php if($isUnAssignable){?><a class="btn btn-circle btn-icon-only btn-default" title="Unassign Client" onclick="unassignclient('<?php echo $agentclients['agentclientid'];?>');" href="javascript:void(0);">
                                                 <i class="fa fa-times"></i>
-                                            </a></td>
+                                            </a><?php } ?></td>
                                     </tr>
                                     <?php $clcount++; }
                                 ?>

@@ -208,7 +208,7 @@ class Webservices_Model extends Error_Model
                     ->update(__DBC_SCHEMATA_SOS_FORM__, $dataAry);
 
                 $sosid = (int)$data['idsos'];
-                $failarr = array();
+                $failarr = array("sosid" => $sosid);
                 $newupdate = false;
                 for ($i = 1; $i <= $data['donercount']; $i++) {
                     $oldupdate = true;
@@ -220,7 +220,8 @@ class Webservices_Model extends Error_Model
                             'alcoholreading1' => $data['pos1read' . $i],
                             'alcoholreading2' => $data['pos2read' . $i],
                             'lab' => $data['lab' . $i],
-                            'sosid' => (int)$sosid
+                            'sosid' => (int)$sosid,
+                            'otherdrug' => $data['oth' . $i]
                         );
 //                        echo $newdonors.' newdonors <br />';;
                         if ($newdonors > '0') {
@@ -359,7 +360,7 @@ class Webservices_Model extends Error_Model
                 $this->db->insert(__DBC_SCHEMATA_SOS_FORM__, $dataAry);
                 if ($this->db->affected_rows() > 0) {
                     $sosid = (int)$this->db->insert_id();
-                    $failarr = array();
+                    $failarr = array("sosid" => $sosid);
                     for ($i = 1; $i <= $data['donercount']; $i++) {
                         if (!empty($data['name' . $i])) {
                             $donerAry = array(
@@ -369,7 +370,8 @@ class Webservices_Model extends Error_Model
                                 'alcoholreading1' => $data['pos1read' . $i],
                                 'alcoholreading2' => $data['pos2read' . $i],
                                 'lab' => $data['lab' . $i],
-                                'sosid' => (int)$sosid
+                                'sosid' => (int)$sosid,
+                                'otherdrug' => $data['oth' . $i]
                             );
                             $this->db->insert(__DBC_SCHEMATA_DONER__, $donerAry);
                             if (($this->db->affected_rows() > 0) && (($data['result' . $i] == '1') || ($data['drug' . $i] == '1') || ($data['alcohol' . $i] == '1'))) {
@@ -728,7 +730,7 @@ class Webservices_Model extends Error_Model
     function getdonorsbysosid($sosid)
     {
         $array = array('sosid' => (int)$sosid);
-        $query = $this->db->select('id, donerName, result, drug, alcoholreading1, alcoholreading2, lab, sosid, cocid, cocstatus')
+        $query = $this->db->select('id, donerName, result, drug, otherdrug, alcoholreading1, alcoholreading2, lab, sosid, cocid, cocstatus')
             ->from(__DBC_SCHEMATA_DONER__)
             ->where($array)
             ->get();
@@ -1336,12 +1338,14 @@ class Webservices_Model extends Error_Model
             } else {
                 return false;
             }
+        }else{
+            return true;
         }
     }
 
     function getSavedKitsBySosid($sosid, $used = 0)
     {
-        $array = array('sosid' => (int)$sosid, 'used' => (int)$used);
+        $array = array('kits.sosid' => (int)$sosid, 'kits.used' => (int)$used);
         $query = $this->db->select('kits.id, kits.prodid, kits.quantity, kits.used, prods.szProductCode')
             ->from(__DBC_SCHEMATA_USED_KITS__ . ' as kits')
             ->join(__DBC_SCHEMATA_PRODUCT__ . ' as prods', 'kits.prodid = prods.id')
@@ -1399,9 +1403,9 @@ class Webservices_Model extends Error_Model
     {
         $statusarr = array('Status' => '1');
         $conditionarr = array('id' => (int)$sosid);
-        $this->db->where($conditionarr)
+        $q = $this->db->where($conditionarr)
             ->update(__DBC_SCHEMATA_SOS_FORM__, $statusarr);
-        if ($this->db->affected_rows() > 0) {
+        if ($q) {
             return true;
         } else {
             $this->addError("error", "Something went wrong. Please try again.");
@@ -1490,9 +1494,9 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function savecollsign($siteid, $imgname, $fieldname)
+    function savecollsign($siteid, $imgname, $fieldname,$status)
     {
-        $wheresosAry = array('Clientid' => (int)$siteid, 'Status' => 0);
+        $wheresosAry = array('Clientid' => (int)$siteid, 'Status' => $status);
         $dataAry = array($fieldname => $imgname);
         $query = $this->db->where($wheresosAry)
             ->update(__DBC_SCHEMATA_SOS_FORM__, $dataAry);

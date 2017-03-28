@@ -1402,6 +1402,7 @@ function CancelOrderConfirmation(idOrder) {
 }
 
 function changeordstatus(ordid,prodcount,status) {
+
     var counter = 0;
     var check = 0;
     var nonchangeable = 0;
@@ -1425,6 +1426,7 @@ function changeordstatus(ordid,prodcount,status) {
         }
     }
     if(prodcount == proceedcounter){
+        $('#loader').attr('style', 'display:block');
         for(var i=1;i<=prodcount;i++){
             var isdispid = $('#isdispid'+i).val();
             if(isdispid == '0') {
@@ -1440,12 +1442,14 @@ function changeordstatus(ordid,prodcount,status) {
                         if (result == 'SUCCESS') {
                             check++;
                         } else {
+                            $('#loader').attr('style', 'display:none');
                             alert('Something went wrong. Please try again.');
                             return false;
                         }
                     });
                 }
             }else{
+                $('#loader').attr('style', 'display:block');
                 nonchangeable++;
             }
         }
@@ -1462,6 +1466,7 @@ function changeordstatus(ordid,prodcount,status) {
                     var result_ary = result.split("||||");
                     var res = result_ary[0].trim(" ");
                     if (res == 'SUCCESS') {
+                        $('#loader').attr('style', 'display:none');
                         $("#popup_box").html(result_ary[1]);
                         $('#editOrder').modal("hide");
                         $('#dispatchprodsucess').modal("show");
@@ -1476,6 +1481,7 @@ function changeordstatus(ordid,prodcount,status) {
                     var result_ary = result.split("||||");
                     var res = result_ary[0].trim(" ");
                     if (res == 'SUCCESS') {
+                        $('#loader').attr('style', 'display:none');
                         $("#popup_box").html(result_ary[1]);
                         $('#editOrder').modal("hide");
                         $('#orderstatchanged').modal("show");
@@ -1483,7 +1489,7 @@ function changeordstatus(ordid,prodcount,status) {
                 });
             }
         }
-    },500);
+    },1000);
 
 }
 

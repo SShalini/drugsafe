@@ -235,10 +235,11 @@
                                                 <i class="fa fa-flag-checkered"></i>
                                                 </span>
                                                 <?php
+
                                                 $checkEditableArr = $this->Admin_Model->getAllUserFranchiseesId($_POST['addFranchisee']['id']);
                                                 $selectedstateid = $this->Admin_Model->getstatebyregionid($_POST['addFranchisee']['regionId']);
                                                 $selectedregionid[0] = $this->Admin_Model->getregionbyid($_POST['addFranchisee']['regionId']);
-                                                if(!empty($checkEditableArr)){ ?>
+                                                if(!empty($checkEditableArr) || $_POST['addFranchisee']['id']>0){ ?>
                                                     <div class="form-control">
                                                         <?php echo $getState['name'] ; ?>
                                                         <input type="hidden" name="addFranchisee[szState]" value="<?php echo $getState['id'] ;?>" />
@@ -281,7 +282,7 @@
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-map-marker"></i>
                                                     </span>
-                                                        <?php if(!empty($checkEditableArr)){ ?>
+                                                        <?php if(!empty($checkEditableArr) || $_POST['addFranchisee']['id']>0){ ?>
                                                             <div class="form-control">
                                                                 <?php echo $selectedregionid[0]['regionName'] ;?>
                                                                 <input type="hidden" name="addFranchisee[szRegionName]" value="<?php echo $selectedregionid[0]['id'] ;?>" />

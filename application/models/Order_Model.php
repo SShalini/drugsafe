@@ -362,7 +362,6 @@ class Order_Model extends Error_Model {
         $this->db->group_by('ds_order_details.orderid');
      
         $query = $this->db->get();
-
         if ($query->num_rows() > 0) {
             return $query->result_array();
           
@@ -566,14 +565,13 @@ class Order_Model extends Error_Model {
 	}
       public function getallPendingValidOrderFrId()
     { 
-        $whereAry = "validorder LIKE '%1%' OR status LIKE '%4%' OR status LIKE '%1%'";
+        $whereAry = "ds_user.iActive = 1 AND (ds_orders.validorder LIKE '%1%' OR ds_orders.status LIKE '%4%' OR ds_orders.status LIKE '%1%')";
         $this->db->distinct();
         $this->db->select('szName,franchiseeid');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_user', 'ds_orders.franchiseeid = ds_user.id');
         $this->db->where($whereAry);
         $query = $this->db->get();
-
         if ($query->num_rows() > 0) {
             return $query->result_array();
           
@@ -784,9 +782,9 @@ class Order_Model extends Error_Model {
       function dispatchsingleprod($ordid,$prodid,$qty){
         $statusarr = array('dispatched' => (int)$qty);
         $conditionarr = array('orderid' => (int)$ordid,'productid'=>$prodid);
-        $this->db->where($conditionarr)
+        $query = $this->db->where($conditionarr)
             ->update(__DBC_SCHEMATA_ORDER_DETAILS__, $statusarr);
-        if ($this->db->affected_rows() > 0) {
+        if ($query) {
 //            if($this->adjustFranchisorInventory($prodid,$qty)){
 //            $frIdByOrderId =  $this->getOrderByOrderId($ordid);
 //           

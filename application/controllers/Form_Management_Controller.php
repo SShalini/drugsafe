@@ -951,7 +951,7 @@ class Form_Management_Controller extends CI_Controller
 </tr>
 <tr>
     <td colspan="2">Intect 7 Lot. No.: '.$cocdetarr[0]['intect'].'</td>
-    <td colspan="2">Expiry: '.date('d/m/Y',strtotime($cocdetarr[0]['intectexpiry'])).'</td>
+    <td colspan="2">Expiry: '.(!empty($cocdetarr[0]['intect'])?date('d/m/Y',strtotime($cocdetarr[0]['intectexpiry'])):'').'</td>
     <td colspan="4">Visual Colour: '.$cocdetarr[0]['visualcolor'].'</td>
 </tr>
 <tr>

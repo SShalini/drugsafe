@@ -164,6 +164,7 @@ class Webservices_Controller extends CI_Controller
             $pos2readvar = 'pos2read'.$i;
             $idcoc = 'idcoc'.$i;
             $iddonor = 'iddonor'.$i;
+            $othvar = 'oth'.$i;
             $dataArr['name'.$i] = !empty($jsondata->$namevar) ? $jsondata->$namevar : "";
             $dataArr['result'.$i] = !empty($jsondata->$resultvar) ? $jsondata->$resultvar : "0";
             $dataArr['drug'.$i] = !empty($jsondata->$drugvar) ? $jsondata->$drugvar : "0";
@@ -171,6 +172,7 @@ class Webservices_Controller extends CI_Controller
             $dataArr['lab'.$i] = !empty($jsondata->$labvar) ? $jsondata->$labvar : "";
             $dataArr['idcoc'.$i] = !empty($jsondata->$idcoc) ? $jsondata->$idcoc : "0";
             $dataArr['iddonor'.$i] = !empty($jsondata->$iddonor) ? $jsondata->$iddonor : "";
+            $dataArr['oth'.$i] = !empty($jsondata->$othvar) ? $jsondata->$othvar : "";
             $drugtype = '';
             if(!empty($jsondata->$drugtypevar)){
                 $drugtype = '';
@@ -263,10 +265,10 @@ class Webservices_Controller extends CI_Controller
                     $responsedata = array("code" => 200, "count"=>(int)$coccount, "sosid"=>$sosdatares['sosid'], "cocid" => $cocid,"message"=>"SOS form data saved successfully.");
                 }
 
-            }elseif(!empty($sosdatares)){
-                $responsedata = array("code" => 201, "errordata"=>$sosdatares);
+            }elseif($sosdatares['sosid']>0){
+                $responsedata = array("code" => 200, "message"=>"SOS form data added successfully.","sosid"=>$sosdatares['sosid']);
             }else{
-                $responsedata = array("code" => 200, "message"=>"SOS form data added successfully.");
+                $responsedata = array("code" => 201, "errordata"=>$sosdatares);
             }
         }else{
             $responsedata = array("code" => 111,"message"=>"Bad Request.");
@@ -1068,6 +1070,7 @@ class Webservices_Controller extends CI_Controller
         $img = $_POST['imgBase64'];
         $siteid = $_POST['siteid'];
         $fieldname = $_POST['fieldname'];
+        $status = $_POST['status'];
         $img = str_replace('data:image/png;base64,', '', $img);
         $img = str_replace(' ', '+', $img);
         $data = base64_decode($img);
@@ -1075,7 +1078,7 @@ class Webservices_Controller extends CI_Controller
         $file = UPLOAD_DIR .$imgname;
         $success = file_put_contents($file, $data);
         if($success){
-            if($this->Webservices_Model->savecollsign($siteid,$imgname,$fieldname)){
+            if($this->Webservices_Model->savecollsign($siteid,$imgname,$fieldname,$status)){
                 return $success;
             }else{
                 return false;
@@ -1446,7 +1449,7 @@ class Webservices_Controller extends CI_Controller
 </tr>
 <tr>
     <td colspan="4">Drug to be tested: '.($drugtype[0] == '1'?'Breath Alcohol':($drugtype[0] == '2'?'AS/NZS 4308:2008':'')).'</td>
-    <td colspan="4">Contractor detaild: '.(!empty($cocdetarr[0]['contractor'])?$cocdetarr[0]['contractor']:'').'</td>
+    <td colspan="4">Contractor details: '.(!empty($cocdetarr[0]['contractor'])?$cocdetarr[0]['contractor']:'').'</td>
 </tr>
 <tr>
     <td colspan="4">Please Note: NATA/RCPA accreditation does not cover the performance of breath test</td>
@@ -1479,7 +1482,7 @@ class Webservices_Controller extends CI_Controller
 </tr>
 <tr>
     <td colspan="2">Intect 7 Lot. No.: '.$cocdetarr[0]['intect'].'</td>
-    <td colspan="2">Expiry: '.date('d/m/Y',strtotime($cocdetarr[0]['intectexpiry'])).'</td>
+    <td colspan="2">Expiry: '.(!empty($cocdetarr[0]['intect'])?date('d/m/Y',strtotime($cocdetarr[0]['intectexpiry'])):'').'</td>
     <td colspan="4">Visual Colour: '.$cocdetarr[0]['visualcolor'].'</td>
 </tr>
 <tr>

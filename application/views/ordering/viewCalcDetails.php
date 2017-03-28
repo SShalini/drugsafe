@@ -37,7 +37,7 @@
                    
                     $DrugtestidArr = array_map('intval', str_split($Drugtestid));
                     
-                    if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr)) {
+                    if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr) || in_array(4, $DrugtestidArr)) {
                         $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));
 
                         ?>
@@ -86,6 +86,9 @@
                                         }
                                         if (in_array(3, $DrugtestidArr)) {
                                             $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
+                                        }
+                                        if (in_array(4, $DrugtestidArr)) {
+                                            $ValTotal = number_format($ValTotal + $countDoner * __RRP_4__, 2, '.', '');
                                         }
                                         /*$Val1=$countDoner*__RRP_1__;
                                               $Val2=$countDoner*__RRP_2__;
