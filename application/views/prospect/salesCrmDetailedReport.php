@@ -2,7 +2,7 @@
     $(function() {
          $("#szSearch3").customselect();
          $("#szSearch4").customselect();
-         $("#szSearch5").customselect();
+         $("#szSearchBussName").customselect();
     });
 </script>
 <div id="loader"></div>
@@ -69,11 +69,11 @@
                             ?>
                            
                                
-                                 <a onclick="ViewpdfSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);" 
+                                 <a onclick="ViewpdfSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearchBussName'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
                                 
-                               <a onclick="ViewexcelSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);" 
+                               <a onclick="ViewexcelSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearchBussName'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-excel-o"></i> View Xls </a>
                          
@@ -133,10 +133,10 @@
                                     </div>
                                  
                             
-                                   <div class="col-md-3">
+                           <div class="col-md-3">
                       
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch3']) != '') { ?>has-error<?php } ?>">
-                               <select class="form-control custom-select" name="szSearch3" id="szSearch3" onchange="remove_formError(this.id,'true')">
+                               <select class="form-control custom-select" name="szSearch3" id="szSearch3" onblur="remove_formError(this.id,'true')" onchange="getBussinessListByFrId(this.value);">
                                           <option value="">Franchisee Name</option>
                                         <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
                                       $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false,false,false,false,false,false,false,1); 
@@ -162,30 +162,23 @@
                       </div> 
                          
                     <div class=" row">
-                             <div class="search col-md-3">
-                       
-                            <select class="form-control custom-select" name="szSearch5" id="szSearch5" onchange="remove_formError(this.id,'true')">
-                               <option value="">Business Name</option>
-                                  
-                                       <?php
-                                   if($_SESSION['drugsafe_user']['iRole']==5)
-                                       {
-                                          $opid = $_SESSION['drugsafe_user']['id'];  
-                                          $searchArr = $this->Prospect_Model->getAllProspectDetailsByOpId($opid); 
-                                       }
-                                           else{
-                                   $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
-                                          }
-                                   
-                                          foreach($searchArr as $searchOptionData)
+                         <div class=" col-md-3 search clienttypeselect">
+                               
+                                    <div id='szBusinessName'>
+                                        <select class="form-control custom-select" name="szSearchBussName"
+                                                id="szSearchBussName" onfocus="remove_formError(this.id,'true')">
+                                            <option value="">Business Name</option>
+                                            <?php
+                                            foreach($searchArr as $searchOptionData)
                                           {
-                                              $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearch5'] ? 'selected="selected"' : '');
+                                              $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearchBussName'] ? 'selected="selected"' : '');
                                               echo '<option value="'.$searchOptionData['szBusinessName'].'"' . $selected . ' >'.$searchOptionData['szBusinessName'].'</option>';
                                           }
-                                          ?>
-                           </select>
-                      
-                         </div>
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>     
+
                                 <div class=" col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch4" id="szSearch4" onfocus="remove_formError(this.id,'true')">
@@ -295,7 +288,7 @@
                                   <div class="row">    
                                 <div class="search col-md-3">
                        
-                            <select class="form-control custom-select" name="szSearch5" id="szSearch5" onchange="remove_formError(this.id,'true')">
+                            <select class="form-control custom-select" name="szSearchBussName" id="szSearchBussName" onchange="remove_formError(this.id,'true')">
                                <option value="">Business Name</option>
                                   
                                        <?php
@@ -309,7 +302,7 @@
                                    
                                           foreach($searchArr as $searchOptionData)
                                           {
-                                              $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearch5'] ? 'selected="selected"' : '');
+                                              $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearchBussName'] ? 'selected="selected"' : '');
                                               echo '<option value="'.$searchOptionData['szBusinessName'].'"' . $selected . ' >'.$searchOptionData['szBusinessName'].'</option>';
                                           }
                                           ?>

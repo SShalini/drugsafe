@@ -89,7 +89,7 @@
                                    <div class=" col-md-3">
                        
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchfr']) != '') { ?>has-error<?php } ?>">
-                            <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onchange="remove_formError(this.id,'true')">
+                            <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onblur="remove_formError(this.id,'true')" onchange="getBussinessListByFrId(this.value);">
                                           <option value="">Franchisee Name</option>
                                         <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
                                        $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false,false,false,false,false,false,false,1); 
@@ -113,8 +113,25 @@
                         </div>
                     </div>
                    
-                     <?php }?> 
-                      <div class=" col-md-3">
+                   
+                         <div class=" col-md-3 clienttypeselect">
+                               
+                                    <div id='szBusinessName'>
+                                        <select class="form-control custom-select" name="szSearchBussName"
+                                                id="szSearchBussName" onfocus="remove_formError(this.id,'true')">
+                                            <option value="">Business Name</option>
+                                            <?php
+                                            foreach($searchArr as $searchOptionData)
+                                          {
+                                              $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearchBussName'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$searchOptionData['szBusinessName'].'"' . $selected . ' >'.$searchOptionData['szBusinessName'].'</option>';
+                                          }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div> 
+                                    <?php } if($_SESSION['drugsafe_user']['iRole']==2){?> 
+                     <div class="search col-md-3">
                        
                             <select class="form-control custom-select" name="szSearchBussName" id="szSearchBussName" onchange="remove_formError(this.id,'true')">
                                <option value="">Business Name</option>
@@ -124,14 +141,7 @@
         
                                          $id = $_SESSION['drugsafe_user']['id'];  
                                         $searchArr = $this->Prospect_Model->getAllProspectDetails($id); 
-                                       }elseif($_SESSION['drugsafe_user']['iRole']==5)
-                                       {
-                                          $opid = $_SESSION['drugsafe_user']['id'];  
-                                          $searchArr = $this->Prospect_Model->getAllProspectDetailsByOpId($opid); 
                                        }
-                                           else{
-                                   $searchArr = $this->Prospect_Model->getAllProspectDetails(); 
-                                          }
                                           foreach($searchArr as $searchOptionData)
                                           {
                                               $selected = ($searchOptionData['szBusinessName'] == $_POST['szSearchBussName'] ? 'selected="selected"' : '');
@@ -141,6 +151,7 @@
                            </select>
                       
                     </div>
+                                    <?php }?> 
                                 <div class=" col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchStatus" onfocus="remove_formError(this.id,'true')">

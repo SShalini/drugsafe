@@ -3032,3 +3032,12 @@ function View_meeting_note_excel(idProspect) {
 
         });
     }
+    function getBussinessListByFrId(idFranchisee) {
+    $.post(__BASE_URL__ + "/prospect/getBussinessListByFrIdData", {idFranchisee: idFranchisee}, function (result) {
+        if (result != '') {
+            $("#szBusinessName").empty();
+            $("#szBusinessName").html(result);
+            $("#szSearchBussName").customselect();
+        }
+    });
+}

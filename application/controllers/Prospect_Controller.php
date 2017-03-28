@@ -896,7 +896,9 @@ public function deleteProspectConfirmation()
            $franchiseeid = $_POST['szSearchfr'];
            $szBusinessName = $_POST['szSearchBussName'];
            $status = $_POST['szSearch2'];
-          
+          if($franchiseeid){
+            $searchArr = $this->Prospect_Model->getAllProspectDetails($franchiseeid);
+          }
              if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeid = $_SESSION['drugsafe_user']['id'];
              }
@@ -906,11 +908,8 @@ public function deleteProspectConfirmation()
            
             $this->load->library('form_validation');
              if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5)){ 
-           $this->form_validation->set_rules('szSearchfr', 'Franchisee Name ', 'required');
+             $this->form_validation->set_rules('szSearchfr', 'Franchisee Name ', 'required');
              }
-            
-           
-            
             $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             { 
@@ -919,6 +918,7 @@ public function deleteProspectConfirmation()
                     $data['pageName'] = "Reporting";
                     $data['subpageName'] = "Sales_CRM_Summary";
                     $data['notification'] = $count;
+                    $data['searchArr'] = $searchArr;
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
@@ -935,6 +935,7 @@ public function deleteProspectConfirmation()
                     $data['pageName'] = "Reporting";
                     $data['subpageName'] = "Sales_CRM_Summary";
                     $data['notification'] = $count;
+                    $data['searchArr'] = $searchArr;
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
@@ -1174,7 +1175,10 @@ public function deleteProspectConfirmation()
            $startDate = $_POST['szSearch1'];
            $endDate = $_POST['szSearch2'];
            $status = $_POST['szSearch4'];
-            $szBusinessName = $_POST['szSearch5'];
+            $szBusinessName = $_POST['szSearchBussName'];
+             if($franchiseeid){
+            $searchArr = $this->Prospect_Model->getAllProspectDetails($franchiseeid);
+          }
             if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeid = $_SESSION['drugsafe_user']['id'];
              }
@@ -1196,6 +1200,7 @@ public function deleteProspectConfirmation()
                     $data['pageName'] = "Reporting";
                     $data['subpageName'] = "Sales_CRM_Detailed";
                     $data['notification'] = $count;
+                    $data['searchArr'] = $searchArr;
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
@@ -1212,6 +1217,7 @@ public function deleteProspectConfirmation()
                     $data['pageName'] = "Reporting";
                     $data['subpageName'] = "Sales_CRM_Detailed";
                     $data['notification'] = $count;
+                    $data['searchArr'] = $searchArr;
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
@@ -1690,6 +1696,33 @@ public function deleteProspectConfirmation()
         $this->session->unset_userdata('idProspect');
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
-    }   
+    }
+     public function getBussinessListByFrIdData($idFranchisee = '')
+    {
+        if (trim($idFranchisee) != '') {
+            $_POST['idFranchisee'] = $idFranchisee;
+         
+        }
+        if( $_POST['idFranchisee']==0){
+          $searchArr = '';   
+        }
+        else
+        {
+         $searchArr = $this->Prospect_Model->getAllProspectDetails($_POST['idFranchisee']);
+        }
+     
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearchBussName\" name=\"szSearchBussName\" placeholder=\"Business Name\" onfocus=\"remove_formError(this.id,'true')\">";
+        if (!empty($searchArr)) {
+            $result .= "<option value=''>Business Name</option>";
+            foreach ($searchArr as $searchData) {
+                $result .= "<option value='" . $searchData['szBusinessName'] . "'>" . $searchData['szBusinessName'] . "</option>";
+            }
+        } else {
+            $result .= "<option value=''>Business Name</option>";
+        }
+        $result .= "</select>";
+        echo $result;
+
+    }
 }
 ?>
