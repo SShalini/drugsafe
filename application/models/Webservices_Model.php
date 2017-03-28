@@ -265,7 +265,8 @@ class Webservices_Model extends Error_Model
                                         $this->db->where($weherecocarr)
                                             ->update(__DBC_SCHEMATA_DONER__, $donerAry);
                                         /*$q4 = $this->db->last_query();
-                                        echo 'q4 '.$q4.'<br />';*/
+                                        echo 'q4 '.$q4.'<br />';
+                                        die;*/
                                         if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drug' . $i] == '1') || ($data['alcohol' . $i] == '1'))) {
                                             $cocdateupdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
                                             $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdateupdatearr);
@@ -296,7 +297,8 @@ class Webservices_Model extends Error_Model
                             $this->db->where($weherecocarr)
                                 ->update(__DBC_SCHEMATA_DONER__, $donerAry);
                             /*$q7 = $this->db->last_query();
-                            echo 'q7 '.$q7.'<br />';*/
+                            echo 'q7 '.$q7.'<br />';
+                            die;*/
                             if (($data['idcoc' . $i] == '0') && (($data['result' . $i] == '1') || ($data['drug' . $i] == '1') || ($data['alcohol' . $i] == '1'))) {
                                 $cocdateupdatearr = array('cocdate' => date('Y-m-d', strtotime($data['testdate'])));
                                 $this->db->insert(__DBC_SCHEMATA_COC_FORM__, $cocdateupdatearr);
@@ -749,7 +751,7 @@ class Webservices_Model extends Error_Model
                                     sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                     sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
                                     sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.ClientRepresentative,
-                                    sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, donor.donerName,donor.drug,donor.alcoholreading1,donor.alcoholreading2, donor.cocid, 
+                                    sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, donor.donerName,donor.drug, donor.otherdrug, donor.alcoholreading1,donor.alcoholreading2, donor.cocid, 
                                     coc.cocdate, coc.drugtest, coc.dob, coc.employeetype, coc.contractor, coc.idtype, coc.idnumber, coc.lastweekq, coc.donorsign,
                                     coc.voidtime, coc.sampletempc, coc.tempreadtime, 
                                     coc.intect, coc.intectexpiry, coc.visualcolor, coc.creatinine,coc.otherintegrity,coc.hudration,coc.devicename as cocdevice,coc.lotno,coc.lotexpiry,coc.cocain,

@@ -167,12 +167,21 @@ class Webservices_Controller extends CI_Controller
             $othvar = 'oth'.$i;
             $dataArr['name'.$i] = !empty($jsondata->$namevar) ? $jsondata->$namevar : "";
             $dataArr['result'.$i] = !empty($jsondata->$resultvar) ? $jsondata->$resultvar : "0";
-            $dataArr['drug'.$i] = !empty($jsondata->$drugvar) ? $jsondata->$drugvar : "0";
+            if($jsondata->$drugvar == "1"){
+                $dataArr['drug'.$i] = !empty($jsondata->$drugvar) ? $jsondata->$drugvar : "0";
+            }else{
+                $dataArr['drug'.$i] = "";
+            }
             $dataArr['alcohol'.$i] = !empty($jsondata->$alcoholvar) ? $jsondata->$alcoholvar : "0";
             $dataArr['lab'.$i] = !empty($jsondata->$labvar) ? $jsondata->$labvar : "";
             $dataArr['idcoc'.$i] = !empty($jsondata->$idcoc) ? $jsondata->$idcoc : "0";
             $dataArr['iddonor'.$i] = !empty($jsondata->$iddonor) ? $jsondata->$iddonor : "";
-            $dataArr['oth'.$i] = !empty($jsondata->$othvar) ? $jsondata->$othvar : "";
+            if($dataArr['drug'.$i] == '1'){
+                $dataArr['oth'.$i] = !empty($jsondata->$othvar) ? $jsondata->$othvar : "";
+            }else{
+                $dataArr['oth'.$i] = "";
+            }
+
             $drugtype = '';
             if(!empty($jsondata->$drugtypevar)){
                 $drugtype = '';
@@ -188,9 +197,15 @@ class Webservices_Controller extends CI_Controller
                 }
 
             }
-            $dataArr['drugtype'.$i] = $drugtype;
-            $dataArr['pos1read'.$i] = !empty($jsondata->$pos1readvar) ? $jsondata->$pos1readvar : "";
-            $dataArr['pos2read'.$i] = !empty($jsondata->$pos2readvar) ? $jsondata->$pos2readvar : "";
+            $dataArr['drugtype'.$i] = ($dataArr['drug'.$i] == '1'?$drugtype:'');
+            if($dataArr['alcohol'.$i] == "1"){
+                $dataArr['pos1read'.$i] = !empty($jsondata->$pos1readvar) ? $jsondata->$pos1readvar : "";
+                $dataArr['pos2read'.$i] = !empty($jsondata->$pos2readvar) ? $jsondata->$pos2readvar : "";
+            }else{
+                $dataArr['pos1read'.$i] = "";
+                $dataArr['pos2read'.$i] = "";
+            }
+
         }
 
         for($dc=1;$dc<=$dataArr['kitcount'];$dc++){
