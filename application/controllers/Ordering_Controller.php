@@ -1039,6 +1039,82 @@ class Ordering_Controller extends CI_Controller
         ob_end_clean();
         $pdf->Output('view_calculation_details.pdf', 'I');
     }
+     function taxInvoiceExcelData()
+    {
+       
+        echo "SUCCESS||||";
+        echo "taxInvoiceExcel";
+    }
+
+    public function taxInvoiceExcel()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Stock request list';
+        $file = $filename . '-' . $title; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', 'Franchisee Id');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Quantity Request');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Requested On');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $franchiseeName = $this->session->userdata('franchiseeName');
+        $productCode = $this->session->userdata('productCode');
+        $allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetailsForPdf($franchiseeName, $productCode);
+        if (!empty($allReqQtyAray)) {
+            $i = 2;
+            foreach ($allReqQtyAray as $item) {
+                $this->excel->getActiveSheet()->setCellValue('A' . $i, $item['iFranchiseeId']);
+                $this->excel->getActiveSheet()->setCellValue('B' . $i, $item['szName']);
+                $this->excel->getActiveSheet()->setCellValue('C' . $i, $item['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('D' . $i, $item['szQuantity']);
+                $this->excel->getActiveSheet()->setCellValue('E' . $i, date('d/m/Y h:i:s A', strtotime($item['dtRequestedOn'])));
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $this->session->unset_userdata('productCode');
+        $this->session->unset_userdata('franchiseeName');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+
 }
 
 ?>
