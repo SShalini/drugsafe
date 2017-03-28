@@ -49,6 +49,9 @@
                                 </span>
                             </div>
                              <div class="actions">
+                                  <a onclick="viewTaxIncoice()" href="javascript:void(0);" 
+                                   class=" btn green-meadow">
+                                <i class="fa fa-navicon"></i> Tax Invoice</a>
                                 <a onclick="calcDetailspdf('<?php echo $idsite;?>','<?php echo $Drugtestid;?>','<?php echo $sosid;?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                 <i class="fa fa-file-pdf-o"></i> View Pdf </a>

@@ -3041,3 +3041,23 @@ function View_meeting_note_excel(idProspect) {
         }
     });
 }
+function viewTaxIncoice() {
+
+    $.post(__BASE_URL__ + "/ordering/viewTaxIncoiceData", {
+       
+    }, function (result) {
+
+        ar_result = result.split('||||');
+
+        window.location = __BASE_URL__ + "/ordering/" + ar_result[1];
+
+    });
+}
+function taxInvoicepdf() {
+     $.post(__BASE_URL__ + "/ordering/taxInvoicepdfData", {}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/ordering/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}

@@ -790,6 +790,254 @@ class Ordering_Controller extends CI_Controller
                 $this->load->view('layout/admin_footer');
           
          }
+  function viewTaxIncoiceData()
+    {
+        echo "SUCCESS||||";
+        echo "viewTaxIncoice";
+    }
+
+    public function viewTaxIncoice()
+    {
+       
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+                $data['data'] = $data;
+                $data['szMetaTagTitle'] = "Generate Proforma Invoice";
+                $data['is_user_login'] = $is_user_login;
+                $data['pageName'] = "Generate Proforma Invoice";
+                $data['subpageName'] = "Sites_Record";
+                $this->load->view('layout/admin_header', $data);
+                $this->load->view('ordering/tax_invoice');
+                $this->load->view('layout/admin_footer');
+
+    }
+      function taxInvoicepdfData()
+    {
+       
+        echo "SUCCESS||||";
+        echo "taxInvoicepdf";
+    }
+
+    public function taxInvoicepdf()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe Tax Invoice report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Tax Invoice Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+
+        $pdf->AddPage('L');
+
+      
+        $html = '<div class="wraper">
+        <table cellpadding="5px">
+       
+    <tr>
+        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> Franchisee’s Address conducting tests </td>
+    </tr>
+    <tr>
+        <td align="right"><b>Phone:</b> Franchisee’s phone</td>
+    </tr>
+    <tr>
+        <td align="right"><b>Email:</b> Franchisee’s email  </td>
+    </tr>
+    <tr>
+        <td align="right"><b>ABN:</b> Franchisee’s ABN Number</td>
+    </tr>
+</table>
+<br />
+<h1 style="text-align: center;">Tax Invoice</h1>
+
+<table cellpadding="5px">
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Invoice #:</b> Unique proforma invoice #</td><td width="50%" align="right"><b>Invoice Date:</b>Date on which proforma was generated</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Contact Name:</b> Client Contact Name</td><td width="50%" align="right"><b>Company Name:</b> Client Site Name</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Business Name:</b> Client Business Name</td><td width="50%" align="right"><b>Company Address:</b> Client Site address</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Business Address:</b> Client HQ address</td><td width="50%" align="right"><b>Test Date:</b> Date on which test was conducted</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>ABN:</b> Client ABN No</td><td width="50%" align="right"><b>No of Donors Tested:</b> pull value from sos from</td>
+    </tr>
+    
+</table>
+<h3 style="color:black">Services Provided</h3>
+  <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th><b>System Calculation</b> </th>
+                                        <th> <b>No of Donors</b> </th>
+                                        <th> <b>RRP</b> </th>
+                                        <th> <b>$ Value </b> </th>
+                                   
+                                    </tr>
+                                      <tr>
+                                            <td>URINE AS/NZA 4308/2001</td>
+                                            <td>1</td>
+                                            <td>$75.00</td>
+                                            <td>$75.00</td>
+                                       </tr>
+       
+                            </table>
+                        </div>
+                        <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th></th>
+                                         <th> <b>Base Price </b> </th>
+                                        <th> <b>No of Hours</b> </th>
+                                        <th> <b>$ Value </b> </th>
+                                   
+                                    </tr>
+                                       <tr>
+                                            <td>Single Field Collection Officer (FCO)</td>
+                                            <td>$25.00</td>
+                                            <td>5</td>
+                                            <td> $125.00 </td>
+                                        </tr>
+                                         <tr>
+                                            <td>Mobile Clinic</td>
+                                            <td>$5.00</td>
+                                            <td>5</td>
+                                            
+                                            <td> $25.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                            <td>Call Out (including an alcohol & drug screen)</td>
+                                            <td>$5.00</td>
+                                            <td>5</td>
+                                            
+                                            <td> $25.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                            <td>Drug-Safe Communities mobile clinic screening</td>
+                                            <td>$5.00</td>
+                                            <td>5</td>
+                                            <td> $12.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                            <td>Travel – When > 100 km return trip from DSC base</td>
+                                            <td>$5.00</td>
+                                            <td>5</td>
+                                            
+                                            <td> $25.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                              <td colspan="3">Synthetic Cannabinoids screening</td>
+                                            
+                                            <td> $5.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                              <td colspan="3">Urine NATA Laboratory screening</td>   
+                                            <td> $55.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                             <td colspan="3">NATA Laboratory confirmation</td>
+                                          
+                                            <td> $5.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                             <td colspan="3">Oral Fluid NATA Laboratory confirmation</td>
+                                         
+                                            <td> $5.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                             <td colspan="3">Synthetic Cannabinoids or Designer Drugs, per sample. - Laboratory screening</td>
+                                         
+                                            <td> $5.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                             <td colspan="3">Synthetic Cannabinoids or Designer Drugs, per sample. - Laboratory confirmation</td>
+                                         
+                                            <td> $5.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                              <td colspan="3">Return to work (RTW) screening</td>
+                                         
+                                            <td> $5.00 </td>
+                                      
+                                            
+                                        </tr>
+                                         <tr>
+                                             <td colspan="3">Cancellation Fee</td>
+                                            
+                                            <td> $5.00 </td>
+                                      
+                                            
+                                        </tr>
+       
+                            </table>
+                        </div>
+         
+<br />
+<br />
+<br />
+<br />
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="80%" align="left"><b>Discounts:</b></td><td width="20%" align="right">$26.95</td>
+    </tr>
+    <tr>
+     <td width="80%" align="left"><b>Sub Total (Exc GST):</b></td><td width="20%" align="right">$358.05</td>
+    </tr>
+    <tr>
+        <td width="80%" align="left"><b>GST:</b></td><td width="20%" align="right">$35.81</td>
+    </tr>
+    <tr>
+        <td width="80%" align="left"><b>Invoice Amount (INC GST):</b></td><td width="20%" align="right">$393.86</td>
+    </tr>
+   
+</table>
+        </div>';
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        error_reporting(E_ALL);/*
+        $this->session->unset_userdata('idsite');
+        $this->session->unset_userdata('Drugtestid');
+        $this->session->unset_userdata('sosid');*/
+        ob_end_clean();
+        $pdf->Output('view_calculation_details.pdf', 'I');
+    }
 }
 
 ?>
