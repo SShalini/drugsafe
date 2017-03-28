@@ -807,7 +807,7 @@ class Ordering_Controller extends CI_Controller
             die;
         }
                 $data['data'] = $data;
-                $data['szMetaTagTitle'] = "Generate Proforma Invoice";
+                $data['szMetaTagTitle'] = "Generate Tax Invoice";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Generate Proforma Invoice";
                 $data['subpageName'] = "Sites_Record";
@@ -881,7 +881,7 @@ class Ordering_Controller extends CI_Controller
     </tr>
     
 </table>
-<h3 style="color:black">Services Provided</h3>
+<h3 style="color:red">Services Provided</h3>
   <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
@@ -1028,7 +1028,8 @@ class Ordering_Controller extends CI_Controller
     </tr>
    
 </table>
-        </div>';
+        </div>
+      <h3 style="color:black">Please pay within 7 days.</h3>  ';
         $pdf->writeHTML($html, true, false, true, false, '');
 
         error_reporting(E_ALL);/*
