@@ -46,7 +46,7 @@
                                    class=" btn green-meadow">
                                 <i class="fa fa-file-pdf-o"></i> View Pdf </a>
                                 
-                                 <a onclick="backSiteRecord('<?php echo $freanchId;?>')" href="javascript:void(0);" 
+                                 <a href="<?php echo __BASE_URL__; ?>/ordering/viewCalcDetails"
                                    class=" btn green-meadow">
                                 Back </a>
                             </div>
@@ -191,7 +191,7 @@
                                 </tbody>
                             </table>
                         </div>
-<!--test cmmit-->
+
                       <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                               
