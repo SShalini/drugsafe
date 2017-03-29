@@ -150,7 +150,7 @@
                                 </div>
 
                             </div>
-                            <input id="szOrgEmail" class="form-control" type="text" value="<?php echo $_POST['clientData']['szEmail'] ;?>" onfocus="remove_formError(this.id,'true')" name="clientData[szOrgEmail]">
+                            <input id="szOrgEmail" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['szEmail'] ;?>" onfocus="remove_formError(this.id,'true')" name="clientData[szOrgEmail]">
                             <div class="form-group <?php if(!empty($arErrorMessages['szContactNumber'])){?>has-error<?php }?>">
                                 <label class="col-md-4 control-label">Primary Phone</label>
                                 <div class="col-md-6">

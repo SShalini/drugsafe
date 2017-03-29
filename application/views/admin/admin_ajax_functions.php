@@ -3699,7 +3699,7 @@ if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
 
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-exclamation-triangle"></i> Ordered Quantity has been
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Ordered Quantity has been
                         in allocated successfully.</p>
                 </div>
                 <div class="modal-footer">

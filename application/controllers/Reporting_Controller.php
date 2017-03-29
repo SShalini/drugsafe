@@ -3089,9 +3089,9 @@ class Reporting_Controller extends CI_Controller
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetTitle('Drug-safe stock request report');
+        $pdf->SetTitle('Drug-safe industry report');
         $pdf->SetAuthor('Drug-safe');
-        $pdf->SetSubject('Stock Request Report PDF');
+        $pdf->SetSubject('Industry Report PDF');
         $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
         $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 // set image scale factor
@@ -3957,7 +3957,7 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-   } else{
+   } else {
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($title);
         $this->excel->getActiveSheet()->setCellValue('A1', '#');
