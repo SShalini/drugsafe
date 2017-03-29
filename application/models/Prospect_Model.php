@@ -227,9 +227,7 @@ class Prospect_Model extends Error_Model
                         $statusDateTime = $this->getSqlFormattedDate($data['dt_last_updated_status']);
                          
                        }  
-                    
-                   
-                      
+             
                     if($data['szContactEmail']=='N/A'){
                      $data['szContactEmail'] = '';
                     }  
@@ -248,9 +246,7 @@ class Prospect_Model extends Error_Model
                     else{
                        $data['szContactPhone'] = $data['szContactPhone'];  
                     }
-                     
-     
-       $whereAry = array(
+                $whereAry = array(
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],

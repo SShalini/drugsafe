@@ -4,8 +4,6 @@
         $("#szTestType").customselect();
     });
 </script>
-
-
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php //test ?>
@@ -31,7 +29,7 @@
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase">
                                     Revenue Generate Chart
-                                </span>
+                            </span>
                         </div>
                     </div>
                     <div class="portlet-body alert">
@@ -92,7 +90,7 @@ if(!empty($getManualCalcStartToEndDate))
         if (in_array(1, $DrugtestidArr)) {
             $ValTotal = number_format($ValTotal + $countDoner * __RRP_1__, 2, '.', '');
         }
-        if (in_array(2, $DrugtestidArr)) {
+        if(in_array(2, $DrugtestidArr)) {
              $ValTotal = number_format($ValTotal + $countDoner * __RRP_2__, 2, '.', '');
         }
         if (in_array(3, $DrugtestidArr)) {

@@ -23,7 +23,7 @@
                 <ul class="page-breadcrumb breadcrumb">
 
                     <li>
-                        <a href="<?php echo __BASE_URL__; ?>/ordering/sitesRecord">Home</a>
+                        <a href="<?php echo __BASE_URL__; ?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
 
@@ -58,7 +58,7 @@
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                      <tr>
-                                        <th>System Calculation</th>
+                                         <th>System Calculation</th>
                                         <th>No of Donors</th>
                                         <th>RRP</th>
                                         <th>$ Value </th>

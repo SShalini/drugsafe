@@ -49,12 +49,7 @@
                             <form class="form-horizontal" id="szSearchRegionRecord"
                                   action="<?= __BASE_URL__ ?>/admin/regionManagerList" name="szSearchRegionRecord"
                                   method="post">
-                  <?php
-                        
-                        if(!empty($getAllRegion))
-                        {
-                           
-                            ?>
+                 
                                 <div class="col-md-3">
 
                                     <select class="form-control custom-select" name="szSearchstate"
@@ -92,9 +87,7 @@
                                 <div class="col-md-1">
                                     <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
-                                  <?php
-                        }
-                            ?>
+                            
                             </form>
                         </div>
                         <?php
