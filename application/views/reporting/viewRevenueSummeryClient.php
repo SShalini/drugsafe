@@ -261,8 +261,13 @@
                                                     <th>
                                                         #
                                                     </th>
+                                                    <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)) { ?>
                                                     <th>
                                                         Franchisee Name 
+                                                    </th>
+                                                   <?php } ?>
+                                                    <th>
+                                                        Client Name 
                                                     </th>
                                                     <th>
                                                         Client Code 
@@ -288,14 +293,16 @@
 						  foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
                                                        
-                                                     $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
+                              $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                               $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
                               $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($getClientDetails['id']);
+                          
                               $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
                               $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
                               $discount = $this->Ordering_Model->getClientDiscountByClientId($ClirntDetailsDataAry['clientType']);
                               $data = $this->Ordering_Model->getManualCalculationBySosId($getManualCalcData['sosid']);
-                                                    $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
+                              $frDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $getManualCalcData['franchiseeId']);
+                              $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
 
                                                       if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr) || in_array(4, $DrugtestidArr)) {
                                                           $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
@@ -360,7 +367,12 @@
                                                     ?>
                                                     <tr>
                                                         <td> <?php echo $i;?></td>
+                                                         <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)) {?>
                                                         <td>
+                                                         <?php echo $frDataAry['szName'];?>
+                                                        </td>
+                                                          <?php } ?>
+                                                         <td>
                                                          <?php echo $userDataAry['szName'];?>
                                                         </td>
                                                         <td>
@@ -383,6 +395,9 @@
                                                 ?>											   
                                                   <tr>
                                                    <td></td>
+                                                   <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)) {?>
+                                                    <td></td>
+                                                   <?php } ?>
                                                      <td></td>
                                                      <td><b>Total</b></td>
                                                       <td>

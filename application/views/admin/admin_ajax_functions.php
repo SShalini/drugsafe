@@ -1798,7 +1798,7 @@ if ($mode == '__PLACE_ORDER_POPUP_ERROR_CONFIRM__') {
 
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greater than zero
+                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greater than twenty five
                         and less than hundred.</p>
                 </div>
                 <div class="modal-footer">
