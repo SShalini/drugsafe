@@ -2622,7 +2622,11 @@ function showdonorinfo(sosid) {
                     }else if(drugarr[2] == '1'){
                         drugs += 'Heroin<br>';
                     }else if(drugarr[3] == '1'){
-                        drugs += 'Cocain<br>';
+                        drugs += 'Cocaine<br>';
+                    }else if(drugarr[4] == '1'){
+                        drugs += 'Benzos<br>';
+                    }else if(drugarr[5] == '1'){
+                        drugs += 'Amphetamine<br>';
                     }
 
                     if(drugarr[0] == '2'){
@@ -2632,7 +2636,11 @@ function showdonorinfo(sosid) {
                     }else if(drugarr[2] == '2'){
                         drugs += 'Heroin<br>';
                     }else if(drugarr[3] == '2'){
-                        drugs += 'Cocain<br>';
+                        drugs += 'Cocaine<br>';
+                    }else if(drugarr[4] == '2'){
+                        drugs += 'Benzos<br>';
+                    }else if(drugarr[5] == '2'){
+                        drugs += 'Amphetamine<br>';
                     }
 
                     if(drugarr[0] == '3'){
@@ -2642,7 +2650,11 @@ function showdonorinfo(sosid) {
                     }else if(drugarr[2] == '3'){
                         drugs += 'Heroin<br>';
                     }else if(drugarr[3] == '3'){
-                        drugs += 'Cocain<br>';
+                        drugs += 'Cocaine<br>';
+                    }else if(drugarr[4] == '3'){
+                        drugs += 'Benzos<br>';
+                    }else if(drugarr[5] == '3'){
+                        drugs += 'Amphetamine<br>';
                     }
 
                     if(drugarr[0] == '4'){
@@ -2652,7 +2664,43 @@ function showdonorinfo(sosid) {
                     }else if(drugarr[2] == '4'){
                         drugs += 'Heroin<br>';
                     }else if(drugarr[3] == '4'){
-                        drugs += 'Cocain<br>';
+                        drugs += 'Cocaine<br>';
+                    }else if(drugarr[4] == '4'){
+                        drugs += 'Benzos<br>';
+                    }else if(drugarr[5] == '4'){
+                        drugs += 'Amphetamine<br>';
+                    }
+
+                    if(drugarr[0] == '5'){
+                        drugs += 'Ice<br>';
+                    }else if(drugarr[1] == '5'){
+                        drugs += 'Marijuana<br>';
+                    }else if(drugarr[2] == '5'){
+                        drugs += 'Heroin<br>';
+                    }else if(drugarr[3] == '5'){
+                        drugs += 'Cocaine<br>';
+                    }else if(drugarr[4] == '5'){
+                        drugs += 'Benzos<br>';
+                    }else if(drugarr[5] == '5'){
+                        drugs += 'Amphetamine<br>';
+                    }
+
+                    if(drugarr[0] == '6'){
+                        drugs += 'Ice<br>';
+                    }else if(drugarr[1] == '6'){
+                        drugs += 'Marijuana<br>';
+                    }else if(drugarr[2] == '6'){
+                        drugs += 'Heroin<br>';
+                    }else if(drugarr[3] == '6'){
+                        drugs += 'Cocaine<br>';
+                    }else if(drugarr[4] == '6'){
+                        drugs += 'Benzos<br>';
+                    }else if(drugarr[5] == '6'){
+                        drugs += 'Amphetamine<br>';
+                    }
+
+                    if(value1.otherdrug){
+                        drugs += value1.otherdrug+'<br>';
                     }
                     var alcoholread1 = '';
                     var alcoholread2 = '';
@@ -2674,7 +2722,7 @@ function showdonorinfo(sosid) {
                         '<table class="table modaltable">' +
                         '<tbody>' +
                         '<tr><th>Drugs:</th><td>'+(drugs!=''?drugs:'N/A')+'</td></tr>' +
-                        '<tr><th>Alcohol:</th><td>Reading One: '+(alcoholread1!=''?alcoholread1:'N/A')+'<br /> Reading Two: '+(alcoholread2!=''?alcoholread2:'N/A')+'</td></tr>' +
+                        '<tr><th>Alcohol:</th><td>'+(alcoholread1!=''?'P, ':'N, ')+'Reading One:'+(alcoholread1!=''?alcoholread1:'N/A')+'<br />'+(alcoholread2!=''?'P, ':'N, ')+'Reading Two:'+(alcoholread2!=''?alcoholread2:'N/A')+'</td></tr>' +
                         '</tbody></table>' +
                         '</div>'+
                         '</div>'+
@@ -3047,10 +3095,10 @@ function View_meeting_note_excel(idProspect) {
         }
     });
 }
-function viewTaxIncoice() {
+function viewTaxIncoice(idsite,Drugtestid,sosid) {
 
     $.post(__BASE_URL__ + "/ordering/viewTaxIncoiceData", {
-       
+        idsite: idsite,Drugtestid : Drugtestid,sosid:sosid
     }, function (result) {
 
         ar_result = result.split('||||');
@@ -3059,11 +3107,10 @@ function viewTaxIncoice() {
 
     });
 }
-function taxInvoicepdf() {
-     $.post(__BASE_URL__ + "/ordering/taxInvoicepdfData", {}, function (result) {
+function taxInvoicepdf(idsite,Drugtestid,sosid) {
+     $.post(__BASE_URL__ + "/ordering/taxInvoicepdfData", {idsite: idsite,Drugtestid : Drugtestid,sosid:sosid}, function (result) {
         ar_result = result.split('||||');
      var URL = __BASE_URL__ + "/ordering/" + ar_result[1];
         window.open(URL,'_blank');
-
     });
 }

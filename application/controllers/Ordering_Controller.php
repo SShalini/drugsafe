@@ -411,9 +411,9 @@ class Ordering_Controller extends CI_Controller
         $data['commentnotification'] = $commentReplyNotiCount;
         $data['data'] = $data;
         $data['freanchId'] = $freanchId;
-        $data['szMetaTagTitle'] = "Ordering";
+        $data['szMetaTagTitle'] = "Proforma Invoice Calculations";
         $data['is_user_login'] = $is_user_login;
-        $data['pageName'] = "Ordering";
+        $data['pageName'] = "Proforma Invoice Calculations";
         $data['subpageName'] = "Sites_Record";
         $this->load->view('layout/admin_header', $data);
         $this->load->view('ordering/viewCalcDetails');
@@ -533,7 +533,8 @@ class Ordering_Controller extends CI_Controller
         <table cellpadding="5px">
        
     <tr>
-        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> '.$FrenchiseeDataArr[0]['szAddress'].', '.$FrenchiseeDataArr[0]['szZipCode'].', '.$getState['name'].', '.$FrenchiseeDataArr[0]['szCountry'].'</td>
+        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
+        <td align="right"><b>Address:</b> '.$FrenchiseeDataArr[0]['szAddress'].', '.$FrenchiseeDataArr[0]['szZipCode'].', '.$getState['name'].', '.$FrenchiseeDataArr[0]['szCountry'].'</td>
     </tr>
     <tr>
         <td align="right"><b>Phone:</b> '.$FrenchiseeDataArr[0]['szContactNumber'].'</td>
@@ -792,6 +793,12 @@ class Ordering_Controller extends CI_Controller
          }
   function viewTaxIncoiceData()
     {
+        $idsite = $this->input->post('idsite');
+        $Drugtestid = $this->input->post('Drugtestid');
+        $sosid = $this->input->post('sosid');
+        $this->session->set_userdata('Drugtestid', $Drugtestid);
+        $this->session->set_userdata('idsite', $idsite);
+        $this->session->set_userdata('sosid', $sosid);
         echo "SUCCESS||||";
         echo "viewTaxIncoice";
     }
@@ -806,19 +813,38 @@ class Ordering_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
-                $data['data'] = $data;
-                $data['szMetaTagTitle'] = "Generate Tax Invoice";
-                $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Generate Proforma Invoice";
-                $data['subpageName'] = "Sites_Record";
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('ordering/tax_invoice');
-                $this->load->view('layout/admin_footer');
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $freanchId = $this->session->userdata('freanchId');
+        $Drugtestid = $this->session->userdata('Drugtestid');
+        $idsite = $this->session->userdata('idsite');
+        $sosid = $this->session->userdata('sosid');
+        $data = $this->Ordering_Model->getManualCalculationBySosId($sosid);
+        $data['idsite'] = $idsite;
+        $data['Drugtestid'] = $Drugtestid;
+        $data['sosid'] = $sosid;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+        $data['data'] = $data;
+        $data['freanchId'] = $freanchId;
+        $data['szMetaTagTitle'] = "Generate Tax Invoice";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Generate Proforma Invoice";
+        $data['subpageName'] = "Sites_Record";
+        $data['data'] = $data;
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('ordering/tax_invoice');
+        $this->load->view('layout/admin_footer');
 
     }
       function taxInvoicepdfData()
     {
-       
+        $idsite = $this->input->post('idsite');
+        $Drugtestid = $this->input->post('Drugtestid');
+        $sosid = $this->input->post('sosid');
+        $this->session->set_userdata('Drugtestid', $Drugtestid);
+        $this->session->set_userdata('idsite', $idsite);
+        $this->session->set_userdata('sosid', $sosid);
         echo "SUCCESS||||";
         echo "taxInvoicepdf";
     }
@@ -842,47 +868,73 @@ class Ordering_Controller extends CI_Controller
         $pdf->SetFont('times', '', 12);
 
         $pdf->AddPage('L');
+        $freanchId = $this->session->userdata('freanchId');
+        $Drugtestid = $this->session->userdata('Drugtestid');
+        $idsite = $this->session->userdata('idsite');
+        $sosid = $this->session->userdata('sosid');
+        $FrenchiseeDataArr = $this->Webservices_Model->getuserhierarchybysiteid($idsite);
+        $clientdetsArr = $this->Webservices_Model->getuserhierarchybysiteid($FrenchiseeDataArr[0]['clientType']);
+        $getState = $this->Franchisee_Model->getStateByFranchiseeId($FrenchiseeDataArr[0]['franchiseeId']);
+        $siteDataArr = $this->Webservices_Model->getuserdetails($idsite);
+        $clientDataArr = $this->Webservices_Model->getuserdetails($FrenchiseeDataArr[0]['clientType']);
+        $data = $this->Ordering_Model->getManualCalculationBySosId($sosid);
+        $DrugtestidArr = array_map('intval', str_split($Drugtestid));
+        $testDate = $this->Webservices_Model->getsosformdatabysosid($sosid);
+        $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($sosid));
+        $val =  sprintf(__FORMAT_NUMBER__, $data['id']);
 
-      
+        $ValTotal = 0;
+        if (in_array(1, $DrugtestidArr)) {
+            $ValTotal = number_format($ValTotal + $countDoner * __RRP_1__, 2, '.', '');
+        }
+        if (in_array(2, $DrugtestidArr)) {
+            $ValTotal = number_format($ValTotal + $countDoner * __RRP_2__, 2, '.', '');
+        }
+        if (in_array(3, $DrugtestidArr)) {
+            $ValTotal = number_format($ValTotal + $countDoner * __RRP_3__, 2, '.', '');
+        }
+        if (in_array(4, $DrugtestidArr)) {
+            $ValTotal = number_format($ValTotal + $countDoner * __RRP_4__, 2, '.', '');
+        }
+
         $html = '<div class="wraper">
         <table cellpadding="5px">
        
     <tr>
-        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> Franchisee’s Address conducting tests </td>
+        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td><td align="right"><b>Address:</b> '.$FrenchiseeDataArr[0]['szAddress'].', '.$FrenchiseeDataArr[0]['szZipCode'].', '.$getState['name'].', '.$FrenchiseeDataArr[0]['szCountry'].' </td>
     </tr>
     <tr>
-        <td align="right"><b>Phone:</b> Franchisee’s phone</td>
+        <td align="right"><b>Phone:</b> '.$FrenchiseeDataArr[0]['szContactNumber'].'</td>
     </tr>
     <tr>
-        <td align="right"><b>Email:</b> Franchisee’s email  </td>
+        <td align="right"><b>Email:</b> '.$FrenchiseeDataArr[0]['szEmail'].'  </td>
     </tr>
     <tr>
-        <td align="right"><b>ABN:</b> Franchisee’s ABN Number</td>
+        <td align="right"><b>ABN:</b> '.$FrenchiseeDataArr[0]['abn'].'</td>
     </tr>
 </table>
 <br />
 <h1 style="text-align: center;">Tax Invoice</h1>
 
-<table cellpadding="5px">
+<table cellpadding="5">
     <tr>
-        <td width="50%" align="left" font-size="20"><b>Invoice #:</b> Unique proforma invoice #</td><td width="50%" align="right"><b>Invoice Date:</b>Date on which proforma was generated</td>
+        <td width="50%" align="left" font-size="20"><b>Invoice #:</b> '.$val.'</td><td width="50%" align="right"><b>Invoice Date:</b>'.date('d/m/Y',strtotime($data['dtCreatedOn'])).'</td>
     </tr>
     <tr>
-        <td width="50%" align="left" font-size="20"><b>Contact Name:</b> Client Contact Name</td><td width="50%" align="right"><b>Company Name:</b> Client Site Name</td>
+        <td width="50%" align="left" font-size="20"><b>Contact Name:</b> '.$clientDataArr[0]['szName'].'</td><td width="50%" align="right"><b>Company Name:</b> '.$siteDataArr[0]['szName'].'</td>
     </tr>
     <tr>
-        <td width="50%" align="left" font-size="20"><b>Business Name:</b> Client Business Name</td><td width="50%" align="right"><b>Company Address:</b> Client Site address</td>
+        <td width="50%" align="left" font-size="20"><b>Business Name:</b> '.$clientdetsArr[0]['szBusinessName'].'</td><td width="50%" align="right"><b>Company Address:</b> '.$siteDataArr[0]['szAddress'].', '.$siteDataArr[0]['szZipCode'].', '.$getState['name'].', '.$siteDataArr[0]['szCountry'].'</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Business Address:</b> Client HQ address</td><td width="50%" align="right"><b>Test Date:</b> Date on which test was conducted</td>
+        <td width="50%" align="left"><b>Business Address:</b> '.$clientDataArr[0]['szAddress'].', '.$clientDataArr[0]['szZipCode'].', '.$getState['name'].', '.$clientDataArr[0]['szCountry'].'</td><td width="50%" align="right"><b>Test Date:</b> '.date('d/m/Y',strtotime($testDate[0]['testdate'])).'</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>ABN:</b> Client ABN No</td><td width="50%" align="right"><b>No of Donors Tested:</b> pull value from sos from</td>
+        <td width="50%" align="left"><b>ABN:</b>'.$clientDataArr[0]['abn'].'</td><td width="50%" align="right"><b>No of Donors Tested:</b> '.$countDoner.'</td>
     </tr>
     
 </table>
 <h3 style="color:red">Services Provided</h3>
-  <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
                                         <th><b>System Calculation</b> </th>
@@ -890,17 +942,51 @@ class Ordering_Controller extends CI_Controller
                                         <th> <b>RRP</b> </th>
                                         <th> <b>$ Value </b> </th>
                                    
-                                    </tr>
-                                      <tr>
+                                    </tr>';
+        if(in_array(1, $DrugtestidArr)) {
+            $Val1=$countDoner*__RRP_1__;
+            $html .= '<tr>
+                                            <td>Alcohol</td>
+                                            <td>'.$countDoner.'</td>
+                                            <td>$'.number_format(__RRP_1__,2,'.',',').'</td>
+                                            <td>$'.number_format($Val1,2,'.',',').'</td>
+                                       </tr>';
+        }
+        if(in_array(2, $DrugtestidArr)) {
+            $Val2=$countDoner*__RRP_2__;
+            $html .= '<tr>
+                                            <td>Oral Fluid AS 4760/2006</td>
+                                            <td>'.$countDoner.'</td>
+                                            <td>$'.number_format(__RRP_2__,2,'.',',').'</td>
+                                            <td>$'.number_format($Val2,2,'.',',').'</td>
+                                       </tr>';
+        }
+        if(in_array(3, $DrugtestidArr)) {
+            $Val3=$countDoner*__RRP_3__;
+            $html .= '<tr>
                                             <td>URINE AS/NZA 4308/2001</td>
-                                            <td>1</td>
-                                            <td>$75.00</td>
-                                            <td>$75.00</td>
-                                       </tr>
-       
-                            </table>
-                        </div>
-                        <div class= "table-responsive" >
+                                            <td>'.$countDoner.'</td>
+                                            <td>$'.number_format(__RRP_3__,2,'.',',').'</td>
+                                            <td>$'.number_format($Val3,2,'.',',').'</td>
+                                       </tr>';
+        }
+        if(in_array(4, $DrugtestidArr)) {
+            $Val4=$countDoner*__RRP_4__;
+            $html .= '<tr>
+                                            <td>AS/NZA 4308:2008</td>
+                                            <td>'.$countDoner.'</td>
+                                            <td>$'.number_format(__RRP_4__,2,'.',',').'</td>
+                                            <td>$'.number_format($Val4,2,'.',',').'</td>
+                                       </tr>';
+        }
+        $DcmobileScreen = number_format($data['mobileScreenBasePrice'], 2, '.', '') * ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);
+        $mobileScreen = number_format($data['mcbp'], 2, '.', '') * ($data['mchr']>1?$data['mchr']:1);
+        $calloutprice = number_format($data['cobp'], 2, '.', '') * ($data['cohr']>3?$data['cohr']:3);
+        $fcoprice = number_format($data['fcobp'], 2, '.', '') * ($data['fcohr']>2?$data['fcohr']:2);
+        $travel = number_format($data['travelBasePrice'], 2, '.', '') * ($data['travelHr']>1?$data['travelHr']:1);
+        $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
+        $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
+            $html .='</table><br /><br />
                             <table border="1" cellpadding="5">
                                     <tr>
                                         <th></th>
@@ -908,128 +994,126 @@ class Ordering_Controller extends CI_Controller
                                         <th> <b>No of Hours</b> </th>
                                         <th> <b>$ Value </b> </th>
                                    
-                                    </tr>
-                                       <tr>
+                                    </tr>';
+                                       $html .='<tr>
                                             <td>Single Field Collection Officer (FCO)</td>
-                                            <td>$25.00</td>
-                                            <td>5</td>
-                                            <td> $125.00 </td>
+                                            <td>$'.(!empty($data['fcobp'])?number_format($data['fcobp'], 2, '.', ','):0.00).'</td>
+                                            <td>'.($data['fcohr']>2?$data['fcohr']:2).'</td>
+                                            <td> $'.number_format($fcoprice, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
                                             <td>Mobile Clinic</td>
-                                            <td>$5.00</td>
-                                            <td>5</td>
-                                            
-                                            <td> $25.00 </td>
+                                            <td>$'.(!empty($data['mcbp'])?number_format($data['mcbp'], 2, '.', ','):0.00).'</td>
+                                            <td>'.($data['mchr']>1?$data['mchr']:1).'</td>
+                                            <td> $'.number_format($mobileScreen, 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                             <td>Call Out (including an alcohol & drug screen)</td>
-                                            <td>$5.00</td>
-                                            <td>5</td>
-                                            
-                                            <td> $25.00 </td>
-                                      
-                                            
+                                            <td>$'.(!empty($data['cobp'])?number_format($data['cobp'], 2, '.', ','):0.00).'</td>
+                                            <td>'.($data['cohr']>3?$data['cohr']:3).'</td>
+                                            <td> $'.number_format($calloutprice, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
                                             <td>Drug-Safe Communities mobile clinic screening</td>
-                                            <td>$5.00</td>
-                                            <td>5</td>
-                                            <td> $12.00 </td>
-                                      
-                                            
+                                            <td>$'.(!empty($data['mobileScreenBasePrice'])?number_format($data['mobileScreenBasePrice'], 2, '.', ','):0.00).'</td>
+                                            <td>'.($data['mobileScreenHr']>1?$data['mobileScreenHr']:1).'</td>
+                                            <td> $'.number_format($DcmobileScreen, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
-                                            <td>Travel – When > 100 km return trip from DSC base</td>
-                                            <td>$5.00</td>
-                                            <td>5</td>
-                                            
-                                            <td> $25.00 </td>
-                                      
-                                            
+                                            <td>Travel'.($data['travelType'] == 1?'– When > 100 km return trip from DSC base.':($data['travelType'] == 2?'– When > 100 km return trip from MC base. Includes tester.':'')).'</td>
+                                            <td>$'.(!empty($data['travelBasePrice'])?number_format($data['travelBasePrice'], 2, '.', ','):0.00).'</td>
+                                            <td>'.($data['travelHr']>1?$data['travelHr']:1).'</td>
+                                            <td> $'.number_format($travel, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
                                               <td colspan="3">Synthetic Cannabinoids screening</td>
                                             
-                                            <td> $5.00 </td>
+                                            <td> $'.number_format($data['SyntheticCannabinoids'], 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                               <td colspan="3">Urine NATA Laboratory screening</td>   
-                                            <td> $55.00 </td>
+                                            <td> $'.number_format($data['urineNata'], 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                              <td colspan="3">NATA Laboratory confirmation</td>
                                           
-                                            <td> $5.00 </td>
+                                            <td> $'.number_format($data['nataLabCnfrm'], 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                              <td colspan="3">Oral Fluid NATA Laboratory confirmation</td>
                                          
-                                            <td> $5.00 </td>
+                                            <td> $'.number_format($data['oralFluidNata'], 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                              <td colspan="3">Synthetic Cannabinoids or Designer Drugs, per sample. - Laboratory screening</td>
                                          
-                                            <td> $5.00 </td>
+                                            <td> $'.number_format($data['labScrenning'], 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                              <td colspan="3">Synthetic Cannabinoids or Designer Drugs, per sample. - Laboratory confirmation</td>
                                          
-                                            <td> $5.00 </td>
+                                            <td> $'.number_format($data['labconf'], 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                               <td colspan="3">Return to work (RTW) screening</td>
                                          
-                                            <td> $5.00 </td>
+                                            <td> $'.number_format($data['RtwScrenning'], 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                              <td colspan="3">Cancellation Fee</td>
                                             
-                                            <td> $5.00 </td>
+                                            <td> $'.number_format($data['cancelfee'], 2, '.', ',').'</td>
                                       
                                             
                                         </tr>
        
-                            </table>
-                        </div>
-         
-<br />
-<br />
-<br />
-<br />
-<table border="1px" cellpadding="5px">
+                            </table>';
+        $totalinvoiceAmt = $ValTotal + $TotalTrevenu;
+        $totalinvoiceAmt = number_format($totalinvoiceAmt, 2, '.', '');
+        $FrenchiseeDataArr = $this->Webservices_Model->getuserhierarchybysiteid($idsite);
+        $discount = $this->Ordering_Model->getClientDiscountByClientId($FrenchiseeDataArr[0]['clientType']);
+        $totalDisc = ($totalinvoiceAmt*$discount['percentage'])*0.01;
+        $totalDisc = number_format($totalDisc, 2, '.', '');
+        $totalAfterDisc = $totalinvoiceAmt-$totalDisc;
+        $totalAfterDisc = number_format($totalAfterDisc, 2, '.', '');
+        $totalGst = $totalAfterDisc*0.1;
+        $totalGst =number_format($totalGst, 2, '.', '');
+        $totalRoyaltyBefore = $totalGst + $totalAfterDisc;
+        $totalRoyaltyBefore =number_format($totalRoyaltyBefore, 2, '.', '');
+$html.='<br /><br />
+<table border="1px" cellpadding="5">
     <tr>
-        <td width="80%" align="left"><b>Discounts:</b></td><td width="20%" align="right">$26.95</td>
+        <td width="80%" align="left"><b>Discounts:</b></td><td width="20%" align="right">$'.number_format($totalDisc, 2, '.', ',').'</td>
     </tr>
     <tr>
-     <td width="80%" align="left"><b>Sub Total (Exc GST):</b></td><td width="20%" align="right">$358.05</td>
+     <td width="80%" align="left"><b>Sub Total (Exc GST):</b></td><td width="20%" align="right">$'.number_format($totalAfterDisc, 2, '.', ',').'</td>
     </tr>
     <tr>
-        <td width="80%" align="left"><b>GST:</b></td><td width="20%" align="right">$35.81</td>
+        <td width="80%" align="left"><b>GST:</b></td><td width="20%" align="right">$'.number_format($totalGst, 2, '.', ',').'</td>
     </tr>
     <tr>
-        <td width="80%" align="left"><b>Invoice Amount (INC GST):</b></td><td width="20%" align="right">$393.86</td>
+        <td width="80%" align="left"><b>Invoice Amount (INC GST):</b></td><td width="20%" align="right">$'.number_format($totalRoyaltyBefore, 2, '.', ',').'</td>
     </tr>
    
 </table>
-        </div>
-      <h3 style="color:black">Please pay within 7 days.</h3>  ';
+      <h3 style="color:black">Please pay within 7 days.</h3> 
+        </div> ';
         $pdf->writeHTML($html, true, false, true, false, '');
 
         error_reporting(E_ALL);/*

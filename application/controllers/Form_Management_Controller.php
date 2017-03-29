@@ -704,10 +704,10 @@ class Form_Management_Controller extends CI_Controller
                             if(!empty($donorsarr)){
                                 $html .='<tr>
                                                 <td><b>#</b></td>
-                                                <td colspan="3"><b>Donor Name</b></td>
+                                                <td colspan="2"><b>Donor Name</b></td>
                                                 <td><b>Result*</b></td>
                                                 <td><b>Drug</b></td>
-                                                <td><b>Alcohol**</b></td>
+                                                <td colspan="2"><b>Alcohol**</b></td>
                                                 <td><b>Lab</b></td>
                                             </tr>';
                                 $count = 1;
@@ -721,7 +721,11 @@ class Form_Management_Controller extends CI_Controller
                                     }else if($drugarr[2] == '1'){
                                         $drugs .= 'Heroin<br>';
                                     }else if($drugarr[3] == '1'){
-                                        $drugs .= 'Cocain<br>';
+                                        $drugs .= 'Cocaine<br>';
+                                    }else if($drugarr[4] == '1'){
+                                        $drugs .= 'Benzos<br>';
+                                    }else if($drugarr[5] == '1'){
+                                        $drugs .= 'Amphetamine<br>';
                                     }
 
                                     if($drugarr[0] == '2'){
@@ -731,7 +735,11 @@ class Form_Management_Controller extends CI_Controller
                                     }else if($drugarr[2] == '2'){
                                         $drugs .= 'Heroin<br>';
                                     }else if($drugarr[3] == '2'){
-                                        $drugs .= 'Cocain<br>';
+                                        $drugs .= 'Cocaine<br>';
+                                    }else if($drugarr[4] == '2'){
+                                        $drugs .= 'Benzos<br>';
+                                    }else if($drugarr[5] == '2'){
+                                        $drugs .= 'Amphetamine<br>';
                                     }
 
                                     if($drugarr[0] == '3'){
@@ -741,7 +749,11 @@ class Form_Management_Controller extends CI_Controller
                                     }else if($drugarr[2] == '3'){
                                         $drugs .= 'Heroin<br>';
                                     }else if($drugarr[3] == '3'){
-                                        $drugs .= 'Cocain<br>';
+                                        $drugs .= 'Cocaine<br>';
+                                    }else if($drugarr[4] == '3'){
+                                        $drugs .= 'Benzos<br>';
+                                    }else if($drugarr[5] == '3'){
+                                        $drugs .= 'Amphetamine<br>';
                                     }
 
                                     if($drugarr[0] == '4'){
@@ -751,8 +763,45 @@ class Form_Management_Controller extends CI_Controller
                                     }else if($drugarr[2] == '4'){
                                         $drugs .= 'Heroin<br>';
                                     }else if($drugarr[3] == '4'){
-                                        $drugs .= 'Cocain<br>';
+                                        $drugs .= 'Cocaine<br>';
+                                    }else if($drugarr[4] == '4'){
+                                        $drugs .= 'Benzos<br>';
+                                    }else if($drugarr[5] == '4'){
+                                        $drugs .= 'Amphetamine<br>';
                                     }
+
+                                    if($drugarr[0] == '5'){
+                                        $drugs .= 'Ice<br>';
+                                    }else if($drugarr[1] == '5'){
+                                        $drugs .= 'Marijuana<br>';
+                                    }else if($drugarr[2] == '5'){
+                                        $drugs .= 'Heroin<br>';
+                                    }else if($drugarr[3] == '5'){
+                                        $drugs .= 'Cocaine<br>';
+                                    }else if($drugarr[4] == '5'){
+                                        $drugs .= 'Benzos<br>';
+                                    }else if($drugarr[5] == '5'){
+                                        $drugs .= 'Amphetamine<br>';
+                                    }
+
+                                    if($drugarr[0] == '6'){
+                                        $drugs .= 'Ice<br>';
+                                    }else if($drugarr[1] == '6'){
+                                        $drugs .= 'Marijuana<br>';
+                                    }else if($drugarr[2] == '6'){
+                                        $drugs .= 'Heroin<br>';
+                                    }else if($drugarr[3] == '6'){
+                                        $drugs .= 'Cocaine<br>';
+                                    }else if($drugarr[4] == '6'){
+                                        $drugs .= 'Benzos<br>';
+                                    }else if($drugarr[5] == '6'){
+                                        $drugs .= 'Amphetamine<br>';
+                                    }
+
+                                    if(!empty($donors['otherdrug'])){
+                                        $drugs .= $donors['otherdrug'].'<br>';
+                                    }
+
                                     $alcoholread1 = '';
                                     $alcoholread2 = '';
                                     if($donors['alcoholreading1']!=''){
@@ -763,10 +812,10 @@ class Form_Management_Controller extends CI_Controller
                                     }
                                     $html .='<tr>
                                                 <td>'.$count.'</td>
-                                                <td colspan="3">'.$donors['donerName'].'</td>
-                                                <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'P':'N').'</td>
-                                                <td>'.($drugs != ''?$drugs:'N/A').'</td>
-                                                <td>'.($alcoholread1 != ''?'P':'N').': Reading One<br/>'.($alcoholread2 != ''?'P':'N').': Reading Two</td>
+                                                <td colspan="2">'.$donors['donerName'].'</td>
+                                                <td>'.(!empty($drugs) || $alcoholread1 != '' || $alcoholread2 != ''?'P':'N').'</td>
+                                                <td>'.(!empty($drugs)?$drugs:'N/A').'</td>
+                                                <td colspan="2">'.(!empty($alcoholread1)?'P':'N').', Reading One:'.(!empty($alcoholread1)?$alcoholread1:'N/A').'<br/>'.(!empty($alcoholread2)?'P':'N').', Reading Two:'.(!empty($alcoholread2)?$alcoholread2:'N/A').'</td>
                                                 <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'Y':'N').'</td>
                                             </tr>';
                                     $count++;

@@ -969,7 +969,7 @@ class Webservices_Model extends Error_Model
     function getuserhierarchybysiteid($siteid)
     {
         $whereAry = 'client.clientId =' . (int)$siteid . ' AND user.isDeleted = 0';
-        $query = $this->db->select('client.franchiseeId, client.clientType, user.szName, user.abn, user.szAddress, user.szContactNumber, user.szEmail, user.szZipCode, user.szCountry')
+        $query = $this->db->select('client.franchiseeId, client.clientType, client.szBusinessName, user.szName, user.abn, user.szAddress, user.szContactNumber, user.szEmail, user.szZipCode, user.szCountry')
             ->from(__DBC_SCHEMATA_CLIENT__ . ' as client')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'client.franchiseeId = user.id')
             ->where($whereAry)
@@ -1326,7 +1326,7 @@ class Webservices_Model extends Error_Model
             foreach ($usedKitarr as $kit) {
                 $counter++;
                 $availInvArr = $this->getFranchiseeInventory($franchiseeid, $kit['prodid']);
-                if (!empty($availInvArr) && ($availInvArr[0]['szQuantity'] > $kit['quantity'])) {
+                if (!empty($availInvArr) && ($availInvArr[0]['szQuantity'] >= $kit['quantity'])) {
                     if ($this->adjustFranchiseeInventory($availInvArr[0]['id'], $kit['quantity'])) {
                         $this->markKitStatusUsed($kit['id']);
                         $checkCount++;
