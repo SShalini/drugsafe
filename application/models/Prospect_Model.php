@@ -74,7 +74,7 @@ class Prospect_Model extends Error_Model
          }
          $query = $this->db->select('id,iFranchiseeId,szName,dt_last_updated_status,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
             ->from(__DBC_SCHEMATA_PROSPECT__)
-           ->order_by("id","desc") 
+           ->order_by("dt_last_updated_status","desc")
            ->limit($limit, $offset)
             ->where($array)
             ->get();
@@ -729,7 +729,7 @@ class Prospect_Model extends Error_Model
            $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNo');
            $this->db->from('tbl_prospect_status');
            $this->db->join('tbl_prospect', 'tbl_prospect_status.prospectId = tbl_prospect.id');
-           $this->db ->order_by("prospectId","desc") ;
+           $this->db ->order_by("tbl_prospect_status.dtUpdatedOn","desc") ;
            $this->db->where($array);
            $this->db->limit($limit, $offset);
            $query =  $this->db  ->get();

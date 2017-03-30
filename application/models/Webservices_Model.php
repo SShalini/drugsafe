@@ -27,7 +27,7 @@ class Webservices_Model extends Error_Model
                     $role = "(`iRole` = '3'
                     OR `iRole` = '4')";
                 }
-                $where = "szEmail='" . $data['szEmail'] . "' AND `szPassword` = '" . encrypt($data['szPassword']) . "' AND " . $role . " AND isDeleted = 0 ";
+                $where = "szEmail='" . $data['szEmail'] . "' AND `szPassword` = '" . encrypt($data['szPassword']) . "' AND " . $role . " AND isDeleted = 0 AND iActive = 1";
                 //$whereAry = array('szEmail' => $data['szEmail'], 'szPassword' => encrypt($data['szPassword']),'iRole' => $role, 'isDeleted' => 0);
                 $query = $this->db->select('id, szName, szEmail, iRole')
                     ->from(__DBC_SCHEMATA_USERS__)
@@ -223,12 +223,9 @@ class Webservices_Model extends Error_Model
                             'sosid' => (int)$sosid,
                             'otherdrug' => $data['oth' . $i]
                         );
-//                        echo $newdonors.' newdonors <br />';;
                         if ($newdonors > '0') {
                             $totalnewdonors = explode(',', $data['newdonerids']);
                             foreach ($totalnewdonors as $newkey => $newval) {
-//                                echo $newval.' newval <br />';
-//                                echo $i.' i <br />';
                                 if ($i == $newval) {
                                     $newupdate = true;
                                     $this->db->insert(__DBC_SCHEMATA_DONER__, $donerAry);
@@ -285,10 +282,7 @@ class Webservices_Model extends Error_Model
                                                     array_push($failarr, $message);
                                                 }
                                             }
-                                        } /*elseif (!($this->db->affected_rows() > 0)) {
-                                            $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
-                                            array_push($failarr, $message);
-                                        }*/
+                                        }
                                     }
                                 }
                             }
@@ -317,10 +311,7 @@ class Webservices_Model extends Error_Model
                                         array_push($failarr, $message);
                                     }
                                 }
-                            }/* elseif (!($this->db->affected_rows() > 0)) {
-                                $message = "Some error occurred while adding " . $data['name' . $i] . " donor.";
-                                array_push($failarr, $message);
-                            }*/
+                            }
                         }
                     }
                 }

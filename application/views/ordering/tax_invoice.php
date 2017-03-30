@@ -145,33 +145,33 @@ $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
 ?>
                                         <tr>
                                             <td>Single Field Collection Officer (FCO)</td>
-                                            <td>$<?php echo (!empty($data['fcobp'])?number_format($data['fcobp'], 2, '.', ','):0.00);?></td>
-                                            <td><?php echo ($data['fcohr']>2?$data['fcohr']:2);?></td>
+                                            <td>$<?php echo (!empty($data['fcobp'])?number_format($data['fcobp'], 2, '.', ','):'');?></td>
+                                            <td><?php echo (!empty($data['fcohr'])?($data['fcohr']>2?$data['fcohr']:2):'');?></td>
                                             <td> $<?php echo number_format($fcoprice, 2, '.', ',');?> </td>
                                         </tr>
                                          <tr>
                                             <td>Mobile Clinic</td>
-                                             <td>$<?php echo (!empty($data['mcbp'])?number_format($data['mcbp'], 2, '.', ','):0.00);?></td>
-                                             <td><?php echo ($data['mchr']>1?$data['mchr']:1);?></td>
+                                             <td>$<?php echo (!empty($data['mcbp'])?number_format($data['mcbp'], 2, '.', ','):'');?></td>
+                                             <td><?php echo (!empty($data['mchr'])?($data['mchr']>1?$data['mchr']:1):'');?></td>
                                              <td> $<?php echo number_format($mobileScreen, 2, '.', ',');?> </td>
 
                                         </tr>
                                          <tr>
                                             <td>Call Out (including an alcohol & drug screen)</td>
-                                             <td>$<?php echo (!empty($data['cobp'])?number_format($data['cobp'], 2, '.', ','):0.00);?></td>
-                                             <td><?php echo ($data['cohr']>3?$data['cohr']:3);?></td>
+                                             <td>$<?php echo (!empty($data['cobp'])?number_format($data['cobp'], 2, '.', ','):'');?></td>
+                                             <td><?php echo (!empty($data['cohr'])?($data['cohr']>3?$data['cohr']:3):'');?></td>
                                              <td> $<?php echo number_format($calloutprice, 2, '.', ',');?> </td>
                                         </tr>
                                          <tr>
                                             <td>Drug-Safe Communities mobile clinic screening</td>
-                                             <td>$<?php echo (!empty($data['mobileScreenBasePrice'])?number_format($data['mobileScreenBasePrice'], 2, '.', ','):0.00);?></td>
-                                             <td><?php echo ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);?></td>
+                                             <td>$<?php echo (!empty($data['mobileScreenBasePrice'])?number_format($data['mobileScreenBasePrice'], 2, '.', ','):'');?></td>
+                                             <td><?php echo (!empty($data['mobileScreenHr'])?($data['mobileScreenHr']>1?$data['mobileScreenHr']:1):'');?></td>
                                              <td> $<?php echo number_format($DcmobileScreen, 2, '.', ',');?> </td>
                                         </tr>
                                          <tr>
                                             <td>Travel <?php echo ($data['travelType'] == 1?'– When > 100 km return trip from DSC base.':($data['travelType'] == 2?'– When > 100 km return trip from MC base. Includes tester.':''));?></td>
-                                             <td>$<?php echo (!empty($data['travelBasePrice'])?number_format($data['travelBasePrice'], 2, '.', ','):0.00);?></td>
-                                             <td><?php echo ($data['travelHr']>1?$data['travelHr']:1);?></td>
+                                             <td>$<?php echo (!empty($data['travelBasePrice'])?number_format($data['travelBasePrice'], 2, '.', ','):'');?></td>
+                                             <td><?php echo (!empty($data['travelHr'])?($data['travelHr']>1?$data['travelHr']:1):'');?></td>
                                              <td> $<?php echo number_format($travel, 2, '.', ',');?> </td>
                                       
                                             

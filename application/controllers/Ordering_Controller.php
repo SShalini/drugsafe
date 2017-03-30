@@ -997,34 +997,34 @@ class Ordering_Controller extends CI_Controller
                                     </tr>';
                                        $html .='<tr>
                                             <td>Single Field Collection Officer (FCO)</td>
-                                            <td>$'.(!empty($data['fcobp'])?number_format($data['fcobp'], 2, '.', ','):0.00).'</td>
-                                            <td>'.($data['fcohr']>2?$data['fcohr']:2).'</td>
+                                            <td>$'.(!empty($data['fcobp'])?number_format($data['fcobp'], 2, '.', ','):'').'</td>
+                                            <td>'.(!empty($data['fcohr'])?($data['fcohr']>2?$data['fcohr']:2):'').'</td>
                                             <td> $'.number_format($fcoprice, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
                                             <td>Mobile Clinic</td>
-                                            <td>$'.(!empty($data['mcbp'])?number_format($data['mcbp'], 2, '.', ','):0.00).'</td>
-                                            <td>'.($data['mchr']>1?$data['mchr']:1).'</td>
+                                            <td>$'.(!empty($data['mcbp'])?number_format($data['mcbp'], 2, '.', ','):'').'</td>
+                                            <td>'.(!empty($data['mchr'])?($data['mchr']>1?$data['mchr']:1):'').'</td>
                                             <td> $'.number_format($mobileScreen, 2, '.', ',').' </td>
                                       
                                             
                                         </tr>
                                          <tr>
                                             <td>Call Out (including an alcohol & drug screen)</td>
-                                            <td>$'.(!empty($data['cobp'])?number_format($data['cobp'], 2, '.', ','):0.00).'</td>
-                                            <td>'.($data['cohr']>3?$data['cohr']:3).'</td>
+                                            <td>$'.(!empty($data['cobp'])?number_format($data['cobp'], 2, '.', ','):'').'</td>
+                                            <td>'.(!empty($data['cohr'])?($data['cohr']>3?$data['cohr']:3):'').'</td>
                                             <td> $'.number_format($calloutprice, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
                                             <td>Drug-Safe Communities mobile clinic screening</td>
-                                            <td>$'.(!empty($data['mobileScreenBasePrice'])?number_format($data['mobileScreenBasePrice'], 2, '.', ','):0.00).'</td>
-                                            <td>'.($data['mobileScreenHr']>1?$data['mobileScreenHr']:1).'</td>
+                                            <td>$'.(!empty($data['mobileScreenBasePrice'])?number_format($data['mobileScreenBasePrice'], 2, '.', ','):'').'</td>
+                                            <td>'.(!empty($data['mobileScreenHr'])?($data['mobileScreenHr']>1?$data['mobileScreenHr']:1):'').'</td>
                                             <td> $'.number_format($DcmobileScreen, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
                                             <td>Travel'.($data['travelType'] == 1?'– When > 100 km return trip from DSC base.':($data['travelType'] == 2?'– When > 100 km return trip from MC base. Includes tester.':'')).'</td>
-                                            <td>$'.(!empty($data['travelBasePrice'])?number_format($data['travelBasePrice'], 2, '.', ','):0.00).'</td>
-                                            <td>'.($data['travelHr']>1?$data['travelHr']:1).'</td>
+                                            <td>$'.(!empty($data['travelBasePrice'])?number_format($data['travelBasePrice'], 2, '.', ','):'').'</td>
+                                            <td>'.(!empty($data['travelHr'])?($data['travelHr']>1?$data['travelHr']:1):'').'</td>
                                             <td> $'.number_format($travel, 2, '.', ',').' </td>
                                         </tr>
                                          <tr>
