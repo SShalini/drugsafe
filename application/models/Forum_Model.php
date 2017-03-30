@@ -19,8 +19,9 @@ class Forum_Model extends Error_Model {
             $this->db->select('id,szName,szDiscription');
         
             $this->db->limit($limit, $offset);
+            $this->db->order_by("id", "desc");
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_CATEGORY__);
-     
+       
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -30,7 +31,23 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }   
-        
+     public function viewDistinctCategoriesList()
+        {
+             
+            $this->db->select('szName');
+            $this->db->distinct('szName');
+            $this->db->order_by("id", "desc");
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_CATEGORY__);
+       
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }      
         
         public function viewCategoriesListByCatId($idCategory)
         {
@@ -368,7 +385,7 @@ class Forum_Model extends Error_Model {
             $this->db->select('id,szTopicTitle,szTopicDescreption,idForum,idUser,dtCreatedOn,isClosed');
               $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_TOPIC__);
-//sss
+
             if($query->num_rows() > 0)
             {
                 return $query->result_array();
@@ -407,7 +424,6 @@ class Forum_Model extends Error_Model {
               }
      
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_COMMENTS__, $dataAry);
-            
             if($this->db->affected_rows() > 0)
             {
 	        return true;

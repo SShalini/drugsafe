@@ -188,7 +188,7 @@ class Forum_Controller extends CI_Controller {
             
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
                $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
-               $categoriesListAray =$this->Forum_Model->viewCategoriesList();
+               $categoriesListAray =$this->Forum_Model->viewDistinctCategoriesList();
                $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 

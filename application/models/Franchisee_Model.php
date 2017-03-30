@@ -1169,7 +1169,7 @@ class Franchisee_Model extends Error_Model
  
        function getAllDistinctClientDetails($parent = false,$franchiseeid)
     {
-        $whereAry = 'ds_user.isDeleted = 0 AND ds_user.iActive = 1 AND tbl_client.clientType = 0 AND tbl_client.franchiseeId = ' .(int)$franchiseeid ;
+        $whereAry = 'ds_user.isDeleted = 0 AND tbl_client.clientType = 0 AND tbl_client.franchiseeId = ' .(int)$franchiseeid ;
         $query = $this->db->select('ds_user.szName')
             ->distinct('ds_user.szName')
             ->from('tbl_client')
