@@ -565,7 +565,7 @@ class Order_Model extends Error_Model {
 	}
       public function getallPendingValidOrderFrId()
     { 
-        $whereAry = "ds_user.iActive = 1 AND (ds_orders.validorder LIKE '%1%' OR ds_orders.status LIKE '%4%' OR ds_orders.status LIKE '%1%')";
+        $whereAry = "(ds_orders.validorder LIKE '%1%' OR ds_orders.status LIKE '%4%' OR ds_orders.status LIKE '%1%')";
         $this->db->distinct();
         $this->db->select('szName,franchiseeid');
         $this->db->from(__DBC_SCHEMATA_ORDER__);

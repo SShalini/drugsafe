@@ -79,7 +79,7 @@
                               </select>
                           </div>
                                     <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
-                                  <div class="search col-md-3">
+                                  <div class="search col-md-3 clienttypeselect" >
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Operation Manager Name</option>

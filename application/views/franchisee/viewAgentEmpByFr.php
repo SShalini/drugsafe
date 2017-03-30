@@ -55,7 +55,7 @@
                       </div>
                       <div class="row">
                              <form class="form-horizontal" id="szSearchRecord" action="<?=__BASE_URL__?>/franchisee/viewAgentEmpByfranchisee" name="szSearchRecord" method="post">
-                                  <div class="search col-md-3">
+                                  <div class="search clienttypeselect col-md-3">
                                       <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                            <?php

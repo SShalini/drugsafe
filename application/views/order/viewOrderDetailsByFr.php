@@ -56,7 +56,7 @@
                               action="<?= __BASE_URL__ ?>/order/view_order_list_by_fr" method="post">
                             <div class="row">
 
-                                <div class="col-md-3">
+                                <div class="clienttypeselect col-md-3">
 
                                     <div class="form-group ">
                                         <select class="form-control custom-select" name="szSearch1" id="szSearch1"

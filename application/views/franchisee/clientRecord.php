@@ -106,7 +106,7 @@
                                   action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                                   method="post">
 
-                                <div class=" col-md-3">
+                                <div class=" col-md-3 clienttypeselect">
 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
@@ -130,7 +130,7 @@
                                     </select>
                                 </div>
 
-                                <div class=" col-md-3">
+                                <div class=" col-md-3 clienttypeselect">
                                     <div id='szClient'>
                                         <select class="form-control custom-select" name="szSearchClRecord1"
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
@@ -313,7 +313,7 @@
                                       action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                                       method="post">
 
-                                    <div class="search col-md-3">
+                                    <div class="search col-md-3 clienttypeselect">
 
                                         <select class="form-control custom-select" name="szSearchClRecord1"
                                                 id="szSearchname"

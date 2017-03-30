@@ -72,7 +72,7 @@
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/admin/franchiseeList" name="szSearchField" method="post">
 
 
-                                  <div class="search col-md-3">
+                                  <div class="search clienttypeselect col-md-3 ">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>

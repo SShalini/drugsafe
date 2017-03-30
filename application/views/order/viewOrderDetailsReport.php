@@ -68,7 +68,7 @@
                                   action="<?= __BASE_URL__ ?>/order/view_order_report" method="post">
                                 <div class="row">
                       <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
-                                    <div class="col-md-3">
+                                    <div class="clienttypeselect col-md-3">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch1" id="szSearch1"
                                                     onfocus="remove_formError(this.id,'true')">

@@ -49,7 +49,7 @@
                                   action="<?= __BASE_URL__ ?>/reporting/view_revenue_summery_client" method="post">
                                  <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5 )){ ?>
                                   <div class="row">
-                                <div class=" col-md-3">
+                                <div class=" col-md-3 clienttypeselect">
                              <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"

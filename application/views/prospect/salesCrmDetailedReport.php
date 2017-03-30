@@ -133,7 +133,7 @@
                                     </div>
                                  
                             
-                           <div class="col-md-3">
+                           <div class="clienttypeselect col-md-3">
                       
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch3']) != '') { ?>has-error<?php } ?>">
                                <select class="form-control custom-select" name="szSearch3" id="szSearch3" onblur="remove_formError(this.id,'true')" onchange="getBussinessListByFrId(this.value);">

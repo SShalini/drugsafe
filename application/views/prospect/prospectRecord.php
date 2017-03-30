@@ -99,7 +99,7 @@
                          <div class=" search row">
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospectRecord" name="szSearchField" method="post">
                               <?php  if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5) {?>
-                                  <div class="search col-md-3">
+                                  <div class="search clienttypeselect col-md-3">
                                    <?php if($_SESSION['drugsafe_user']['iRole']==1 ){
                                        $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false); 
                                    }
@@ -120,7 +120,7 @@
                                   </div>
                                 
                              <?php }?>
-                                  <div class=" search col-md-3">
+                                  <div class="clienttypeselect search col-md-3">
                                      <div id='szClient'>
                                       <select class="form-control custom-select" name="szSearch1" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Business Name</option>

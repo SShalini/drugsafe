@@ -55,7 +55,7 @@
                       </div>
                       <div class="row">
                              <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/prospect/franchiseeProspectRecord" name="szSearchClientRecord" method="post">
-                                   <div class="col-md-3">
+                                   <div class="col-md-3 clienttypeselect">
                        
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchfr']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onchange="remove_formError(this.id,'true')">

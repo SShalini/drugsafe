@@ -66,7 +66,7 @@
                             <form name="revenueSearchForm" id="revenueSearchForm"
                                   action="<?= __BASE_URL__ ?>/reporting/view_revenue_generate" method="post">
                                 <div class="row">
-                                    <div class="search col-md-3">
+                                    <div class="search col-md-3 clienttypeselect">
                                      <div class="form-group <?php if (!empty($arErrorMessages['szFranchisee']) != '') { ?>has-error<?php } ?>">
                                       <select class="form-control custom-select" name="szFranchisee" id="szFranchisee" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>

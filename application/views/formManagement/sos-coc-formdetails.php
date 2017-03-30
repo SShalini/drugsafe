@@ -134,7 +134,7 @@
                             if($socFr)
                             {
                                 ?>
-                                 <div class="col-md-3">
+                                 <div class="col-md-3 clienttypeselect">
 
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
                                     <select class="form-control custom-select" name="szSearch1" id="szSearch1"
@@ -175,7 +175,7 @@
                                
                             <?php } ?>
 
-                            <div class="col-md-3">
+                            <div class=" clienttypeselect col-md-3">
                                 <div class="form-group ">
                                     <div id="clientname">
                                         <select class="form-control custom-select" name="szSearch2" id="szSearch2"
@@ -200,7 +200,7 @@
                             </div>
                                 </div>
                                 <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 clienttypeselect">
 
                                 <div class="form-group ">
                                     <div id="sitename">

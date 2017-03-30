@@ -86,7 +86,7 @@
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
 
                               <?php  if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){     ?>
-                                   <div class=" col-md-3">
+                                   <div class="clienttypeselect col-md-3">
                        
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchfr']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onblur="remove_formError(this.id,'true')" onchange="getBussinessListByFrId(this.value);">

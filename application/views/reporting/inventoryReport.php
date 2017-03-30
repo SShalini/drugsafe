@@ -79,7 +79,7 @@
                       <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/inventoryReport" method="post">
                 
                     
-                    <div class="search col-md-3">
+                    <div class="clienttypeselect search col-md-3">
                        
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearch1" id="szSearch1" onchange="remove_formError(this.id,'true')">
@@ -98,7 +98,7 @@
                              </span><?php }?> 
                         </div>
                     </div>
-                       <div class="col-md-3">
+                       <div class="col-md-3 clienttypeselect">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             
                               <select class="form-control custom-select" name="szSearch2" id="szSearch2" onblur="remove_formError(this.id,'true')" onchange="getProductCodeListByCategory(this.value);">
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                    
-			<div class="search col-md-3">
+			<div class="search clienttypeselect col-md-3">
                         <div class="form-group <?php if (!empty($arErrorMessages['szIndustry']) != '') { ?>has-error<?php } ?>">
                             <div id='szProductCode'>
 							<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,'true')">
