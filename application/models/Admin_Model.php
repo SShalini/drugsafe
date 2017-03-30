@@ -256,7 +256,10 @@ class Admin_Model extends Error_Model
     {
         $this->data['szAddress'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szAddress", "Address", false, false, $flag);
     }
-
+    function set_szRegionName($value, $field = false, $message = false, $flag = true)
+    {
+        $this->data['szRegionName'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "szRegionName", "Region Name", false, false, $flag);
+    }
     public function checkUserExists($szEmail = false, $id = 0)
     {
 
@@ -872,6 +875,10 @@ class Admin_Model extends Error_Model
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
+            if($data['frtype'] == 1){
+                if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
+                if (!in_array('szRegionName', $arExclude)) $this->set_szRegionName(sanitize_all_html_input(trim($data['szRegionName'])), true);
+            }
             if (!in_array('franchiseeId', $arExclude)) $this->set_franchiseeId(sanitize_all_html_input(trim($data['franchiseeId'])), true);
             if (!in_array('operationManagerId', $arExclude)) $this->set_operationManagerId(sanitize_all_html_input(trim($data['operationManagerId'])), true);
             if (!in_array('szNoOfSites', $arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])), true);
@@ -1058,6 +1065,10 @@ class Admin_Model extends Error_Model
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
             if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
             if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
+            if($data['frtype']){
+                if (!in_array('szState', $arExclude)) $this->set_szState(sanitize_all_html_input(trim($data['szState'])), true);
+                if (!in_array('szRegionName', $arExclude)) $this->set_szRegionName(sanitize_all_html_input(trim($data['szRegionName'])), true);
+            }
             if (!in_array('sp_name', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['sp_name'])), "sp_name", "Contact Name", true);
             if (!in_array('sp_mobile', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['sp_mobile'])), "sp_mobile", "Contact Phone Number", true);
             if (!in_array('sp_email', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['sp_email'])), "sp_email", " Contact Email", true);
@@ -1468,6 +1479,21 @@ class Admin_Model extends Error_Model
             return false;
         }
     }
+
+    function getAllRegionByStateId($id = 0)
+    {
+        $query = $this->db->select('*')
+            ->from(__DBC_SCHEMATA_REGION__)
+            ->where('stateid', $id)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
      function getRegionByStateIdForSearch($id = 0)
     {
         $query = $this->db->select('regionName')

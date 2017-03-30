@@ -89,7 +89,7 @@
                                 <div class="actions">
                                     <div class="btn-group btn-group-devided" data-toggle="buttons">
                                         <button class="btn btn-sm green-meadow"
-                                                onclick="addClientData('','','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>','2');"
+                                                onclick="addClientData('<?php echo $idfranchisee;?>','','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>','2');"
                                                 href="javascript:void(0);">
                                             &nbsp;Add New Client
                                         </button>

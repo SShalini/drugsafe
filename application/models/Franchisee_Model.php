@@ -35,11 +35,13 @@ class Franchisee_Model extends Error_Model
             'szCity' => $data['szCity'],
             'szZipCode' => $data['szZipCode'],
             'szAddress' => $data['szAddress'],
+            'regionId' => ($data['frtype'] == '1'?(int)$data['szRegionName']:0),
             'iRole' => '3',
             'iActive' => '1',
             'dtCreatedOn' => $date
         );
         $this->db->insert(__DBC_SCHEMATA_USERS__, $dataAry);
+
         $id_client = (int)$this->db->insert_id();
         $CreatedBy = $_SESSION['drugsafe_user']['id'];
 

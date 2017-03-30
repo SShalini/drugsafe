@@ -94,15 +94,19 @@ class Franchisee_Controller extends CI_Controller
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $validate = $this->input->post('clientData');
         $reqppearr = $this->input->post('req_ppe');
-
+        if ($validate['szState']) {
+            $getReginolCode = $this->Admin_Model->getRegionByStateId($validate['szState']);
+        }
         $idfranchisee = $this->session->userdata('idfranchisee');
         $url = $this->session->userdata('url');
         $flag = $this->session->userdata('flag');
         $idclient = $this->session->userdata('idclient');
 
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
         $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false, false, false);
         $franchiseId = $_SESSION['drugsafe_user']['id'];
         $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+        $data['corpFranchisee'] = 0;
         if (!empty($idclient)) {
             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idclient);
             $data['clientDetailsAray'] = $franchiseeDetArr1;
@@ -110,6 +114,9 @@ class Franchisee_Controller extends CI_Controller
         if (!empty($idfranchisee)) {
             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idfranchisee);
             $data['franchiseeArr'] = $franchiseeDetArr;
+            if($franchiseeDetArr['franchiseetype'] == '1'){
+                $data['corpFranchisee'] = 1;
+            }
         }
         if (empty($idclient)) {
 
@@ -165,6 +172,8 @@ class Franchisee_Controller extends CI_Controller
         $data['validate'] = $validate;
         $data['idfranchisee'] = $idfranchisee;
         $data['getState']=$getState;
+        $data['getAllStates'] = $getAllStates;
+        $data['getReginolCode'] = $getReginolCode;
         $data['flag'] = $flag;
         $data['szParentId'] = $idclient;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
@@ -368,7 +377,7 @@ class Franchisee_Controller extends CI_Controller
         
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
         $franchiseId = $clientDetailsAray['franchiseeId'];
-        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+
         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, $config['per_page'], $this->uri->segment(3), $searchAry, $id);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
@@ -380,6 +389,11 @@ class Franchisee_Controller extends CI_Controller
         if (!empty($clientFranchiseeArr)) {
             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientFranchiseeArr[0]['franchiseeId']);
             $data['franchiseeArr'] = $franchiseeDetArr;
+        }
+        if($franchiseeDetArr['franchiseetype'] == 1){
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($idClient);
+        }else{
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
         }
 
         $data['sitesArr'] = $sitesArr;
@@ -627,6 +641,7 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Client Record";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
+        $data['idfranchisee'] = $idFr;
         $data['commentnotification'] = $commentReplyNotiCount;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientRecord');

@@ -1927,10 +1927,9 @@ function agentEmployeeDeleteConfirmation(agentId) {
 
     }); 
 }
-function getReginolCode(stateId,idfranchisee) {
-    
+function getReginolCode(stateId) {
     if(stateId>0){
-        $.post(__BASE_URL__ + "/admin/getReginolCode", {stateId: stateId,idfranchisee:idfranchisee}, function (result) {
+        $.post(__BASE_URL__ + "/admin/getReginolCode", {stateId: stateId}, function (result) {
             if (result != '') {
                 $("#reginolFiled").empty();
                 $("#reginolFiled").html(result);
@@ -1941,8 +1940,23 @@ function getReginolCode(stateId,idfranchisee) {
     {
          $("#reginolFiled").empty();
     }
-   
 }
+
+function getAllReginolCode(stateId,error,regionid) {
+    if(stateId>0){
+        $.post(__BASE_URL__ + "/admin/getAllReginolCode", {stateId: stateId,error: error,regionid: regionid}, function (result) {
+            if (result != '') {
+                $("#reginolFiled").empty();
+                $("#reginolFiled").html(result);
+            }
+        });
+    }
+    else
+    {
+        $("#reginolFiled").empty();
+    }
+}
+
 function addRegionCode(stateId) {
     
     if(stateId>0){
