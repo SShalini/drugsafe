@@ -175,7 +175,7 @@ class Order_Controller extends CI_Controller
         $flag = $this->input->post('flag');
         $this->session->set_userdata('flag', $flag);
 
-        if (($quantity > 25) && ($quantity < 100)) {
+        if (($quantity >= 25) && ($quantity <= 100)) {
             $this->Order_Model->InsertOrder($idProduct, $quantity);
             echo "SUCCESS||||";
             echo "placeOrderConfirmation";
@@ -274,7 +274,7 @@ class Order_Controller extends CI_Controller
             $quantity = $_POST['order_quantity' . $i];
             $orderId = $_POST['order_id' . $i];
             $orderUpdate = $this->Order_Model->updateOrder($quantity, $orderId);
-        }
+        } 
         if ($orderUpdate) {
             $szMessage['type'] = "success";
             $szMessage['content'] = "<strong><h3>Your Cart has been successfully updated.</h3></strong> ";
@@ -289,10 +289,14 @@ class Order_Controller extends CI_Controller
     {
         $idfranchisee = $this->input->post('idfranchisee');
         $this->session->set_userdata('idfranchisee', $idfranchisee);
-
-        echo "SUCCESS||||";
-        echo "checkOutOrder";
-
+       if($idfranchisee)
+       {
+            echo "SUCCESS||||";
+            echo "checkOutOrder";
+        } else {
+            echo "ERROR||||";
+            echo "placeOrderErrorConfirmation";
+        }
     }
 
     public function checkOutOrder()
@@ -308,7 +312,7 @@ class Order_Controller extends CI_Controller
         $this->session->unset_userdata('orderid');
         $franchiseeid = $this->session->userdata('idfranchisee');
         $totalOrdersAray = $this->Order_Model->getOrdersListByFranchisee($franchiseeid);
-
+      
         $TotalPrice = 0;
         foreach ($totalOrdersAray as $totalOrdersData) {
             $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersData['productid']);

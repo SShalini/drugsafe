@@ -71,9 +71,7 @@
                                  <?php
                         if(!empty($prospectDetailsAry))
                         { 
-                    
                             ?>
-                           
                                 &nbsp; &nbsp;
                                   <a onclick="export_csv_report('<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">

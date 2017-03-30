@@ -1345,16 +1345,27 @@ function DeleteOrderConfirmation(idOrder) {
 
     }); 
 }
-function checkOutOrder(idfranchisee) {
-
-    $.post(__BASE_URL__ + "/order/checkOutOrderData", {idfranchisee: idfranchisee}, function (result) {
-        ar_result = result.split('||||');
-        window.location = __BASE_URL__ + "/order/" + ar_result[1];
-
-    });
-
+function checkOutOrder(idfranchisee,prodcount) {
+   var check = 0;
+   for(var j=1;j<=prodcount;j++){
+   var qty = $('#order_quantity' + j).val(); 
+   if((qty < 25) || (qty > 100) ){
+        check = 1;
+     }
+        }
+if(check == 1){
+   placeOrderErrorConfirmation();   
 }
- function view_order_details(idOrder,flag)
+else{
+  $.post(__BASE_URL__ + "/order/checkOutOrderData", {idfranchisee: idfranchisee}, function (result) {
+        ar_result = result.split('||||');
+         
+             window.location = __BASE_URL__ + "/order/" + ar_result[1];
+  
+    });  
+}  
+}
+function view_order_details(idOrder,flag)
 {
     
     jQuery('#loader').attr('style', 'display:block');
@@ -3113,4 +3124,19 @@ function taxInvoicepdf(idsite,Drugtestid,sosid) {
      var URL = __BASE_URL__ + "/ordering/" + ar_result[1];
         window.open(URL,'_blank');
     });
+}
+function updateCartData(prodcount){
+   var check = 0;
+   for(var j=1;j<=prodcount;j++){
+       var qty = $('#order_quantity' + j).val(); 
+       if((qty < 25) || (qty > 100) ){
+              check = 1;
+               }
+                }
+                if(check == 1){
+                    placeOrderErrorConfirmation(); 
+                    }
+                    else{
+                        $("#updateCart").submit(); 
+       }
 }

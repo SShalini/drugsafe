@@ -92,9 +92,10 @@
                                            
                                                 $i = 1;
                                                 $TotalPrice = 0;
+                                                 $count = 0;
                                                 foreach($totalOrdersAray as $totalOrdersData)
                                                 {   
-                                                 
+                                                  $count++;
                                                    $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersData['productid']);
                                                   $price =  ($totalOrdersData['quantity'])*($productDataArr['szProductCost']);
                                                    $TotalPrice +=$price;
@@ -107,7 +108,7 @@
                                                     <td> <?php echo $productDataArr['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                     <td>
-                                                         <input type="number" min="1" max="100"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" value="<?php echo $totalOrdersData['quantity'];?>" id="order_quantity<?php echo $i;?>" >
+                                                         <input type="number" min="25" max="100"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" value="<?php echo $totalOrdersData['quantity'];?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>
                                                        <td> $<?php 
                                                    echo number_format($price, 2, '.', ','); ?> 
@@ -118,6 +119,7 @@
                                                         </a>
                                                     </td>
                                                 </tr>
+                                               
                                                  <input id="orderId" class="form-control" type="hidden"
                                                value="<?php echo $totalOrdersData['id']; ?>" name="order_id<?php echo $i;?>" id="order_id<?php echo $i;?>">
                                                <?php
@@ -131,9 +133,7 @@
                                      </table>
                                      </div>
                             </div>
-                        
                        
-                             
                           <input id="count" class="form-control" type="hidden"
                                                value="<?php echo $count; ?>" name="count">
                            <div class="row ">
@@ -152,11 +152,11 @@
                           <div class="col-md-6">
                               </div>
                             <div class="col-md-6">
-                           <button type="submit" class="btn green-meadow" name="submit"><i class="fa fa-cart-arrow-down"></i> Update Cart</button>  
+                           <button type="button" onclick="updateCartData('<?php echo $count;?>'); return false;" class="btn green-meadow"><i class="fa fa-cart-arrow-down"></i>Update Cart</button>
                             &nbsp;
                              <button type="button" onclick="redirect_url('<?php echo base_url();?>order/drugtestkit');" class="btn green-meadow"><i class="fa fa-cart-arrow-down"></i> Continue Ordering</button>   
                              &nbsp;
-                              <button type="button" onclick="checkOutOrder('<?php echo $totalOrdersAray['0']['franchiseeid'];?>'); return false;" class="btn green-meadow"><i class="fa fa-check"></i> Checkout</button>   </div>
+                              <button type="button" onclick="checkOutOrder('<?php echo $totalOrdersAray['0']['franchiseeid'];?>','<?php echo $count;?>'); return false;" class="btn green-meadow"><i class="fa fa-check"></i> Checkout</button>   </div>
                             </div>
                        
                      </form>
