@@ -71,6 +71,12 @@
                 </div>
             </div>-->
         </div>
+         <?php  $regioncode = $this->Admin_Model->getregionbyregionid($franchiseeDetArr['regionId']);
+                     if(empty($regioncode['regionName'])){
+                                               $Region = "N/A";
+                                       }   else{
+                                                $Region = $regioncode['regionName'];
+                                            }?>
         <div class="portlet-body alert">
             <div class="row">
                 <div class="col-md-6">
@@ -91,7 +97,14 @@
                         </div>
                     </div>
                      
-                     
+                      <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable> Region Name:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $Region;?></p>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>City:</lable>

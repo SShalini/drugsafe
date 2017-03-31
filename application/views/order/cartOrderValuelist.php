@@ -108,7 +108,7 @@
                                                     <td> <?php echo $productDataArr['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                     <td>
-                                                         <input type="number" min="25" max="100"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" value="<?php echo $totalOrdersData['quantity'];?>" id="order_quantity<?php echo $i;?>" >
+                                                         <input type="number" min="25" class="form-control btn-xs " name="order_quantity<?php echo $i;?>" value="<?php echo $totalOrdersData['quantity'];?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>
                                                        <td> $<?php 
                                                    echo number_format($price, 2, '.', ','); ?> 

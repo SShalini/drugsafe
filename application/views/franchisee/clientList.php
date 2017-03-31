@@ -88,6 +88,12 @@
                 <div class="col-md-6">
                     <?php
                     $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($franchiseeArr['id']);
+                    $regioncode = $this->Admin_Model->getregionbyregionid($franchiseeArr['regionId']);
+                     if(empty($regioncode['regionName'])){
+                                               $Region = "N/A";
+                                       }   else{
+                                                $Region = $regioncode['regionName'];
+                                            }
                     ?>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
@@ -121,7 +127,14 @@
                             <p><?php echo $franchiseeArr['szCity'];?></p>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Region Name:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $Region;?></p>
+                        </div>
+                    </div>  
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Country:</lable>
@@ -132,12 +145,34 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                     <?php
+                    if($_SESSION['drugsafe_user']['iRole'] == '1'){
+                     ?>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>Operation Manager:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $operationManagerDetArr['szName'];?></p>
+                        </div>
+                    </div>
+                     <?php
+                    }
+                     ?>
                     <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Email Id:</lable>
                         </div>
                         <div class="col-sm-8">
                             <p><?php echo $franchiseeArr['szEmail'];?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable>ABN:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $franchiseeArr['abn'];?></p>
                         </div>
                     </div>
                     <div class="row">

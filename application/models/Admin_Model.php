@@ -1627,9 +1627,9 @@ class Admin_Model extends Error_Model
         $this->db->where('id', $idfranchisee);
         $query = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
         if ($query) {
-            if ($getClientDetails) {
+             if ($getClientDetails) {
                 foreach ($getClientDetails as $getClientData) {
-                    $this->Admin_Model->updateClientByFranchisee($getClientData['clientId'], $status);
+                    $this->Admin_Model->updateAgentByFranchisee($getClientData['agentId'], $status);
                 }
             }
           $statusAry = array(
@@ -1642,6 +1642,7 @@ class Admin_Model extends Error_Model
         } else {
             return false;
         }
+    
     }
 
 

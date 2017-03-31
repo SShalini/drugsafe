@@ -175,7 +175,7 @@ class Order_Controller extends CI_Controller
         $flag = $this->input->post('flag');
         $this->session->set_userdata('flag', $flag);
 
-        if (($quantity >= 25) && ($quantity <= 100)) {
+        if ($quantity >= 25) {
             $this->Order_Model->InsertOrder($idProduct, $quantity);
             echo "SUCCESS||||";
             echo "placeOrderConfirmation";

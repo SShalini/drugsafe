@@ -208,7 +208,7 @@ class Franchisee_Model extends Error_Model
     function getusercodebyuserid($userid)
     {
         $whereAry = 'id = ' . (int)$userid;
-        $query = $this->db->select('userCode')
+        $query = $this->db->select('userCode,regionId')
             ->from(__DBC_SCHEMATA_USERS__)
             ->where($whereAry)
             ->get();

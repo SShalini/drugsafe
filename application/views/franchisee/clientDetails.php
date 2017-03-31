@@ -127,9 +127,16 @@
             <div class="row">
                 <div class="col-md-6">
                      <?php
+                     
                      if($clientDetailsAray['id']>0){
                          $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientDetailsAray['id']);
                      }
+                      $regioncode = $this->Admin_Model->getregionbyregionid($franchiseeArr['regionId']);
+                     if(empty($regioncode['regionName'])){
+                                               $Region = "N/A";
+                                       }   else{
+                                                $Region = $regioncode['regionName'];
+                                            }
                     if($clientDetailsAray['clientType']=='0')
                     {
 
@@ -335,6 +342,14 @@
                         </div>
                         <div class="col-sm-8">
                             <p><?php echo $getState['name'];?></p>
+                        </div>
+                    </div>
+                     <div class="row">
+                        <div class="col-sm-4 text-info bold">
+                            <lable> Region Name:</lable>
+                        </div>
+                        <div class="col-sm-8">
+                            <p><?php echo $Region;?></p>
                         </div>
                     </div>
                     <div class="row">

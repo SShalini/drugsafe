@@ -1349,7 +1349,7 @@ function checkOutOrder(idfranchisee,prodcount) {
    var check = 0;
    for(var j=1;j<=prodcount;j++){
    var qty = $('#order_quantity' + j).val(); 
-   if((qty < 25) || (qty > 100) ){
+   if(qty < 25){
         check = 1;
      }
         }
@@ -1511,10 +1511,15 @@ function validatedispprod(id) {
     var isdispid = $('#isdispid'+id).val();
     if(dispatch_quantity > 0 && isdispid == '0'){
         if(parseInt(dispatch_quantity) > parseInt(ordqtyid)){
-            $('#orddiperr'+id).html('Dispatch quantity must be less than or equal to ordered quantity.');
+            $('#orddiperr'+id).html('Dispatch quantity must be equal to ordered quantity.');
             $('#orddiperr'+id).show();
             return false;
-        }else if(parseInt(dispatch_quantity) > parseInt(availqtyid)){
+        }else if(parseInt(dispatch_quantity) < parseInt(ordqtyid)){
+            $('#orddiperr'+id).html('Dispatch quantity must be equal to ordered quantity.');
+            $('#orddiperr'+id).show();
+            return false;
+        }
+        else if(parseInt(dispatch_quantity) > parseInt(availqtyid)){
             $('#orddiperr'+id).html('Dispatch quantity must be less than or equal to available quantity.');
             $('#orddiperr'+id).show();
             return false;
@@ -3143,7 +3148,7 @@ function updateCartData(prodcount){
    var check = 0;
    for(var j=1;j<=prodcount;j++){
        var qty = $('#order_quantity' + j).val(); 
-       if((qty < 25) || (qty > 100) ){
+       if(qty < 25){
               check = 1;
                }
                 }
