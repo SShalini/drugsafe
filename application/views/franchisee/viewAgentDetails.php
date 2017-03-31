@@ -146,7 +146,6 @@
                             <p><?php echo $recordArr['0']['szCountry'];?></p>
                         </div>
                     </div>
-                   
                   <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>City:</lable>
@@ -155,17 +154,14 @@
                             <p><?php echo $recordArr['0']['szCity'];?></p>
                         </div>
                     </div>
-                   
-                   
-                   
+            
                 </div> 
                 
              </div>
            
         </div>
      </div>
-              
-       
+ 
 </div>
 </div>
 </div>

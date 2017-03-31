@@ -72,7 +72,7 @@
                               <form class="form-horizontal" id="szSearchMarketingMaterialList" action="<?=__BASE_URL__?>/order/marketingmaterial" name="szSearchMarketingMaterialList" method="post">
                           <div class="search col-md-3">
 <!--                            <input type="text" name="szSearchProductCode" id="szSearchProductCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProductCode'])?><!--">-->
-                              <select class="form-control custom-select" name="szSearchProductCode" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
+                              <select class="form-control custom-select" name="szSearchProdCode" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
                                   <option value="">Product Code</option>
                                   <?php
                                   foreach($marketingMaterialListAray as $marketItem)

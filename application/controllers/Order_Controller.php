@@ -74,7 +74,7 @@ class Order_Controller extends CI_Controller
             die;
         }
 
-        $searchAry = $_POST['szSearchProductCode'];
+        $searchAry = $_POST['szSearchProdCode'];
         $config['base_url'] = __BASE_URL__ . "/order/marketingmaterial/";
         $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry, $limit, $offset, 2));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
