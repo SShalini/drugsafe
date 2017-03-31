@@ -192,6 +192,10 @@
                                         $i = 0;
                                         foreach ($clientAry as $clientData) {
                                             $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientData['id']);
+                                            $addEditClientDet = false;
+                                            if($clientData['szNoOfSites'] > 0){
+                                                $addEditClientDet = true;
+                                            }
                                             ?>
                                             <tr>
                                                 <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A'); ?> </td>
@@ -247,7 +251,7 @@
                                                         ?>
                                                         <?php
                                                         if ($clientData['clientType'] == '0') {
-                                                            if ($clientData['szNoOfSites'] > count($childClientDetailsAray)) {
+                                                            if (($clientData['szNoOfSites'] > count($childClientDetailsAray)) && $addEditClientDet) {
                                                                 ?>
 
                                                                 <a class="btn btn-circle btn-icon-only btn-default"
@@ -259,17 +263,20 @@
 
                                                                 </a>
                                                             <?php }
-                                                        } ?>
-                                                        <a class="btn btn-circle btn-icon-only btn-default"
-                                                           title="Edit Client Data"
-                                                           onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>','1');"
-                                                           href="javascript:void(0);">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                    <?php } ?>
+                                                        }
+                                                        if ($addEditClientDet) {
+                                                            ?>
+                                                            <a class="btn btn-circle btn-icon-only btn-default"
+                                                               title="Edit Client Data"
+                                                               onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>','1');"
+                                                               href="javascript:void(0);">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                        <?php }
+                                                    }?>
                                                     <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                        title="View Client Details"
-                                                       onclick="viewClientDetails(<?php echo $clientData['id']; ?>);"
+                                                       onclick="viewClientDetails(<?php echo $clientData['id']; ?>,<?php echo $idfranchisee; ?>);"
                                                        href="javascript:void(0);"></i>
                                                         <i class="fa fa-eye" aria-hidden="true"></i>
                                                     </a>
@@ -364,6 +371,10 @@
                                         $i = 0;
                                         foreach ($clientAry as $clientData) {
                                         $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientData['id']);
+                                            $addEditClientDet = false;
+                                            if($clientData['szNoOfSites'] > 0){
+                                                $addEditClientDet = true;
+                                            }
                                         ?>
                                         <tr>
                                             <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
@@ -416,7 +427,7 @@
                                                     ?>
                                                     <?php
                                                     if ($clientData['clientType'] == '0') {
-                                                        if ($clientData['szNoOfSites'] > count($childClientDetailsAray)) {
+                                                        if (($clientData['szNoOfSites'] > count($childClientDetailsAray)) && $addEditClientDet) {
                                                             ?>
 
                                                             <a class="btn btn-circle btn-icon-only btn-default"
@@ -429,31 +440,26 @@
 
                                                             </a>
                                                         <?php }
-                                                    } ?>
+                                                    }
+                                                    if ($addEditClientDet) {
+                                                        ?>
 
-                                                    <a class="btn btn-circle btn-icon-only btn-default"
-                                                       title="Edit Client Data"
-                                                       onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
-                                                       href="javascript:void(0);">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </a>
-                                                <?php } ?>
+                                                        <a class="btn btn-circle btn-icon-only btn-default"
+                                                           title="Edit Client Data"
+                                                           onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
+                                                           href="javascript:void(0);">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                    <?php }
+                                                }?>
                                                 <a class="btn btn-circle btn-icon-only btn-default"
                                                    id="userStatus"
                                                    title="View Client Details"
-                                                   onclick="viewClientDetails(<?php echo $clientData['id']; ?>);"
+                                                   onclick="viewClientDetails(<?php echo $clientData['id']; ?>,<?php echo $idfranchisee; ?>);"
                                                    href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-                                                <?php  if ($_SESSION['drugsafe_user']['iRole'] == '2' && $_SESSION['drugsafe_user']['sztype'] == '1') { ?>
-                                                <a class="btn btn-circle btn-icon-only btn-default"
-                                                   title="Assign Franchisee"
-                                                   onclick="assignfranchiseeClient('<?php echo $clientData['id']; ?>');"
-                                                   href="javascript:void(0);">
-                                                    <i class="fa fa-tasks"></i>
-                                                </a>
                                                 <?php
-                                                }
                                                     if ($_SESSION['drugsafe_user']['iRole'] == '2') {
                                                         if (empty($childClientDetailsAray)) {
                                                             ?>

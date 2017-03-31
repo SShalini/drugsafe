@@ -64,13 +64,13 @@
                      ?>
                         <?php if($clientDetailsAray['clientType'] > '0'){?>
                             <li>
-                                <a onclick="viewClientDetails(<?php echo $ParentOfChild['id'];?>);" href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
+                                <a onclick="viewClientDetails(<?php echo $ParentOfChild['id'];?>,<?php echo $idfranchisee; ?>);" href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
                                 <i class="fa fa-circle"></i>
                             </li>
                             
                         <?php } ?>
                         <li>
-                            <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
+                            <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>,<?php echo $idfranchisee; ?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
                         
                         </li>
                       
@@ -103,8 +103,8 @@
 //                    }
                    ?>
                     &nbsp; &nbsp;
-                   <?php  if($_SESSION['drugsafe_user']['iRole']=='2'){
-                   if($clientDetailsAray['clientType'] == '0'){?>  
+                   <?php  if($_SESSION['drugsafe_user']['iRole']=='2' && $addEditClientDet){
+                   if(($clientDetailsAray['clientType'] == '0')){?>
                   <a class="btn btn-circle btn-icon-only btn-default" title="Edit Client Data" onclick="editClient('<?php echo $clientDetailsAray['id'];?>','<?php echo $clientDetailsAray['franchiseeId'];?>','<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>');" href="javascript:void(0);">
                     <i class="fa fa-pencil"></i> 
                   </a> 
@@ -132,11 +132,7 @@
                          $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientDetailsAray['id']);
                      }
                       $regioncode = $this->Admin_Model->getregionbyregionid($franchiseeArr['regionId']);
-                     if(empty($regioncode['regionName'])){
-                                               $Region = "N/A";
-                                       }   else{
-                                                $Region = $regioncode['regionName'];
-                                            }
+
                     if($clientDetailsAray['clientType']=='0')
                     {
 
@@ -344,12 +340,13 @@
                             <p><?php echo $getState['name'];?></p>
                         </div>
                     </div>
-                     <div class="row">
+
+                    <div class="row">
                         <div class="col-sm-4 text-info bold">
-                            <lable> Region Name:</lable>
+                            <lable>Region Name:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $Region;?></p>
+                            <p><?php echo $regionname;?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -834,7 +831,7 @@
                 <div class="btn-group btn-group-devided" data-toggle="buttons">
                     <?php
                  
-                    if($_SESSION['drugsafe_user']['iRole']=='2')
+                    if($_SESSION['drugsafe_user']['iRole']=='2' && $addEditClientDet)
                     {
                         if($clientDetailsAray['szNoOfSites'] > $count){
                         ?>
@@ -969,10 +966,18 @@
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
                                                     <?php }  ?>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Site Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Site Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>,<?php echo $idfranchisee; ?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
-                                                <?php
+                                             <?php  if ($_SESSION['drugsafe_user']['iRole'] == '2' && $_SESSION['drugsafe_user']['sztype'] == '1') { ?>
+                                                 <a class="btn btn-circle btn-icon-only btn-default"
+                                                    title="Assign Franchisee"
+                                                    onclick="assignfranchiseeClient('<?php echo $childClientDetailsData['id']; ?>','<?php echo $franchiseecode['regionId']; ?>');"
+                                                    href="javascript:void(0);">
+                                                     <i class="fa fa-tasks"></i>
+                                                 </a>
+                                                 <?php
+                                             }
                                               if($_SESSION['drugsafe_user']['iRole'] == '2'){
                                                     $id =   $childClientDetailsData['id'];
                                                    $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);

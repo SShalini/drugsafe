@@ -352,7 +352,7 @@
                                                  ?>
                                             <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
                                                title="View Client Details"
-                                               onclick="viewClientDetails(<?php echo $clientData['id']; ?>);"
+                                               onclick="viewClientDetails(<?php echo $clientData['id']; ?>,<?php echo $idfranchisee; ?>);"
                                                href="javascript:void(0);">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
 

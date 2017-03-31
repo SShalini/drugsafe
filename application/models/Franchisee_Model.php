@@ -283,7 +283,7 @@ class Franchisee_Model extends Error_Model
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
 
                 $this->db->where($array);
-            
+            //$this->db->group_by('ds_user.szName');
             $this->db->order_by("franchiseeId", "asc");
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
@@ -319,14 +319,14 @@ class Franchisee_Model extends Error_Model
         }
     }
 
-    public function viewChildClientDetails($idClient = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $id = 0)
+    public function viewChildClientDetails($idClient = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $id = 0,$franchiseeid=0)
     {
 
-        $whereAry = array('clientType' => $idClient, 'isDeleted=' => '0');
-
+        //$whereAry = array('clientType' => $idClient, 'isDeleted=' => '0');
+        $whereAry = 'clientType = '.$idClient.' AND isDeleted = 0 '.($franchiseeid>0?' AND franchiseeId = '.(int)$franchiseeid:'');
         $searchq = '';
         if ($id > '0') {
-            $searchq = 'clientId = ' . (int)$id;
+            $searchq = 'clientId = ' . (int)$id.($franchiseeid>0?' AND franchiseeId = '.(int)$franchiseeid:'');
         }
         $this->db->select('*');
         $this->db->from('tbl_client');
@@ -334,7 +334,7 @@ class Franchisee_Model extends Error_Model
 
 
         if (!empty($searchq)) {
-            $whereAry = array('clientType' => $idClient, 'isDeleted=' => '0');
+            //$whereAry = array('clientType' => $idClient, 'isDeleted=' => '0');
             $this->db->where($searchq);
 
         } else {
@@ -965,24 +965,7 @@ class Franchisee_Model extends Error_Model
         } else {
             return array();
         }
-        function getStateByFranchiseeId($id)
-        {
-            $query = $this->db->select('regionId')
-                ->where('id', $id)
-                ->from(__DBC_SCHEMATA_USERS__)
-                ->get();
-            if ($query->num_rows() > 0) {
-                $row = $query->result_array();
-                $getRegionDetails = $this->Admin_Model->getstateIdByResinolId($row['0']['regionId']);
-                if (!empty($getRegionDetails)) {
-                    $getStateDetails = $this->Admin_Model->getStateById($getRegionDetails['stateId']);
-                    return $getStateDetails;
-                }
-            } else {
-                return array();
-            }
 
-        }
     }
 
     public function getAgentDataById($agentId)
@@ -1057,9 +1040,9 @@ class Franchisee_Model extends Error_Model
         }
     }
 
-    function getNonCorpFranchisee()
+    function getNonCorpFranchisee($regionId = 0)
     {
-        $wherestr = 'iRole = 2 AND franchiseetype = 0 AND iActive = 1 AND isDeleted = 0';
+        $wherestr = 'iRole = 2 AND franchiseetype = 0 AND iActive = 1 AND isDeleted = 0'.($regionId>0?' AND regionId = '.(int)$regionId:'');
         $query = $this->db->select('*')
             ->where($wherestr)
             ->from(__DBC_SCHEMATA_USERS__)
@@ -1074,33 +1057,124 @@ class Franchisee_Model extends Error_Model
 
     function MapClientToFranchisee($clientid, $corpfranchisee, $franchiseeid)
     {
-        $flag = false;
-        $checkClientMappedOrNotArr = $this->getMappedNonCorpFranchisee($clientid, $corpfranchisee);
-        if (!empty($checkClientMappedOrNotArr)) {
-            $updateWhere = 'clientid = ' . (int)$clientid . ' AND corpfrid = ' . (int)$corpfranchisee;
-            $dataAry = array('franchiseeid' => $franchiseeid);
-            $this->db->where($updateWhere);
-            $queyUpdate = $this->db->update(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
-            if ($queyUpdate) {
-                $flag = true;
-            } else {
-                $flag = false;
+        $getcorpDets = $this->getdetailsbyfrisandsiteid($corpfranchisee,$clientid);
+        if(!empty($getcorpDets)){
+            $getParentcorpDets = $this->getdetailsbyfrisandsiteid($corpfranchisee,$getcorpDets['clientType']);
+            if(!empty($getParentcorpDets)){
+                $clientAry = array(
+                    'franchiseeId' => $franchiseeid,
+                    'clientId' => $getcorpDets['clientType'],
+                    'agentId' => $getParentcorpDets['agentId'],
+                    'clientType' => $getParentcorpDets['clientType'],
+                    'szCreatedBy' => $getParentcorpDets['szCreatedBy'],
+                    'szBusinessName' => $getParentcorpDets['szBusinessName'],
+                    'szContactEmail' => $getParentcorpDets['szContactEmail'],
+                    'szContactPhone' => $getParentcorpDets['szContactPhone'],
+                    'szContactMobile' => $getParentcorpDets['szContactMobile'],
+                    'szNoOfSites' => '0',
+                    'industry' => $getParentcorpDets['industry'],
+                    'clientCode' => (int)$getParentcorpDets['clientCode'],
+                    'discountid' => (int)$getParentcorpDets['discountid'],
+                    'szLastUpdatedBy' => $corpfranchisee
+                );
+                $siteAry = array(
+                    'franchiseeId' => $franchiseeid,
+                    'clientId' => $clientid,
+                    'agentId' => $getcorpDets['agentId'],
+                    'clientType' => $getcorpDets['clientType'],
+                    'szCreatedBy' => $getcorpDets['szCreatedBy'],
+                    'szBusinessName' => $getcorpDets['szBusinessName'],
+                    'szContactEmail' => $getcorpDets['szContactEmail'],
+                    'szContactPhone' => $getcorpDets['szContactPhone'],
+                    'szContactMobile' => $getcorpDets['szContactMobile'],
+                    'szNoOfSites' => $getcorpDets['szNoOfSites'],
+                    'industry' => $getcorpDets['industry'],
+                    'clientCode' => (int)$getcorpDets['clientCode'],
+                    'discountid' => (int)$getcorpDets['discountid'],
+                    'szLastUpdatedBy' => $corpfranchisee
+                );
+                //$data = array($clientAry,$siteAry);
+                $CheckClientExixstArr = $this->getdetailsbyfrisandsiteid($franchiseeid, $getcorpDets['clientType']);
+                if(!empty($CheckClientExixstArr)){
+                    $q = true;
+                }else{
+                    $q = $this->db->insert(__DBC_SCHEMATA_CLIENT__, $clientAry);
+                }
+                if($q){
+                    $this->db->insert(__DBC_SCHEMATA_CLIENT__, $siteAry);
+                    if($this->db->affected_rows() > 0) {
+                        $siteid = $this->db->insert_id();
+                        $oldsitedetarr = $this->getdetailsbyfrisandsiteid($corpfranchisee, $clientid);
+                        if (!empty($oldsitedetarr)) {
+                            $updatearr = array('siteid' => (int)$siteid);
+                            $whereAry = array('siteid' => (int)$oldsitedetarr['id']);
+                            $this->db->where($whereAry)
+                                ->update(__DBC_SCHEMATA_SITES__, $updatearr);
+                            if ($this->db->affected_rows() > 0) {
+                                $whereAry = 'clientId =' . (int)$clientid . ' AND franchiseeId = ' . (int)$corpfranchisee;
+                                $query = $this->db->where($whereAry)
+                                    ->delete(__DBC_SCHEMATA_CLIENT__);
+                                if ($query) {
+                                    return true;
+                                } else {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            return false;
+                        }
+                    }
+                }
             }
-        } else {
-            $dataAry = array('franchiseeid' => $franchiseeid,
-                'corpfrid' => $corpfranchisee,
-                'clientid' => $clientid);
-            $this->db->insert(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
-            if ($this->db->affected_rows() > 0) {
-                $flag = true;
+
+        }
+
+    }
+
+    function moveSite($franchiseeid,$clientid,$corpfranchisee,$getcorpDets){
+        $clientAry1 = array(
+            'franchiseeId' => $franchiseeid,
+            'clientId' => $clientid,
+            'agentId' => $getcorpDets['agentId'],
+            'clientType' => $getcorpDets['clientType'],
+            'szCreatedBy' => $getcorpDets['szCreatedBy'],
+            'szContactEmail' => $getcorpDets['szContactEmail'],
+            'szContactPhone' => $getcorpDets['szContactPhone'],
+            'szContactMobile' => $getcorpDets['szContactMobile'],
+            'szNoOfSites' => $getcorpDets['szNoOfSites'],
+            'industry' => $getcorpDets['industry'],
+            'clientCode' => (int)$getcorpDets['clientCode'],
+            'discountid' => (int)$getcorpDets['discountid'],
+            'szLastUpdatedBy' => $corpfranchisee
+        );
+        $q2 = $this->db->insert(__DBC_SCHEMATA_CLIENT__, $clientAry1);
+         echo '2------<br />';
+            echo $this->db->last_query();
+        if($q2){
+            $whereAry = 'clientId =' . (int)$clientid.' AND franchiseeId = '.(int)$franchiseeid;
+            $query = $this->db->where($whereAry)
+                ->delete(__DBC_SCHEMATA_CLIENT__);
+           /* echo '3------<br />';
+            echo $this->db->last_query();*/
+            if ($query) {
+                return true;
             } else {
-                $flag = false;
+                return false;
             }
         }
-        if ($flag && $this->switchClientFranchisee($clientid, $franchiseeid)) {
-            return true;
+    }
+
+    function getdetailsbyfrisandsiteid($frid,$clid){
+        $wherestr = 'clientid = ' . (int)$clid . ' AND franchiseeId = ' . (int)$frid;
+        $query = $this->db->select('*')
+            ->where($wherestr)
+            ->from(__DBC_SCHEMATA_CLIENT__)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
         } else {
-            return false;
+            return array();
         }
     }
 
@@ -1239,5 +1313,4 @@ class Franchisee_Model extends Error_Model
 
     }
 }
-
 ?>

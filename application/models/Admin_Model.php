@@ -1684,7 +1684,7 @@ function getregionbyregionid($regionid){
                 ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
-            return $row['0'];
+            return $row[0];
         } else {
             return array();
         }

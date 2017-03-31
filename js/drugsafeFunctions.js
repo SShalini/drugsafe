@@ -419,9 +419,9 @@ function getStateListingProfileclient(szCountry) {
         }
     });
 }
-function viewClientDetails(idClient) {
+function viewClientDetails(idClient,idfranchisee) {
 
-    $.post(__BASE_URL__ + "/franchisee/viewClientDetailsData", {idClient: idClient}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/viewClientDetailsData", {idClient: idClient,idfranchisee: idfranchisee}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 
@@ -2344,9 +2344,9 @@ function ViewAgentDetails(idAgent,franchiseeid) {
     });
 }
 
-function assignfranchiseeClient(clientid) {
+function assignfranchiseeClient(clientid,regionId) {
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/franchisee/assignfranchiseeClient", {clientid: clientid}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/assignfranchiseeClient", {clientid: clientid,regionId: regionId}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -2358,9 +2358,9 @@ function assignfranchiseeClient(clientid) {
     });
 }
 
-function assignFranchiseeClientConfirmation(clientid) {
+function assignFranchiseeClientConfirmation(clientid,regionId) {
     var value = jQuery("#assignClient").serialize();
-    var newValue = value+"&clientid="+clientid;
+    var newValue = value+"&clientid="+clientid+"&regionId="+regionId;
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/franchisee/assignFranchiseeClientConfirmation",newValue, function (result) {
 

@@ -853,7 +853,7 @@ class Ordering_Controller extends CI_Controller
     {
         ob_start();
         $this->load->library('Pdf');
-        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetTitle('Drug-safe Tax Invoice report');
         $pdf->SetAuthor('Drug-safe');
@@ -865,9 +865,9 @@ class Ordering_Controller extends CI_Controller
         $pdf->setPrintHeader(false);
         $pdf->setPrintFooter(false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-        $pdf->SetFont('times', '', 12);
+        $pdf->SetFont('times', '', 10);
 
-        $pdf->AddPage('L');
+        $pdf->AddPage('P');
         $freanchId = $this->session->userdata('freanchId');
         $Drugtestid = $this->session->userdata('Drugtestid');
         $idsite = $this->session->userdata('idsite');

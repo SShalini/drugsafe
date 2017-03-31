@@ -338,8 +338,10 @@ class Franchisee_Controller extends CI_Controller
     {
 
         $idClient = $this->input->post('idClient');
+        $idfranchisee = $this->input->post('idfranchisee');
         {
             $this->session->set_userdata('idClient', $idClient);
+            $this->session->set_userdata('idfranchisee', $idfranchisee);
             echo "SUCCESS||||";
             echo "viewClientDetails";
         }
@@ -377,11 +379,11 @@ class Franchisee_Controller extends CI_Controller
         
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
         $franchiseId = $clientDetailsAray['franchiseeId'];
-
-        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, $config['per_page'], $this->uri->segment(3), $searchAry, $id);
+        $idfranchisee = $this->session->userdata('idfranchisee');
+        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, $config['per_page'], $this->uri->segment(3), $searchAry, $id,$idfranchisee);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
-        $sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient);
+        $sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
         if ($clientDetailsAray['clientType'] > 0) {
             $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
             $data['ParentOfChild'] = $parentClientDetArr;
@@ -392,10 +394,18 @@ class Franchisee_Controller extends CI_Controller
         }
         if($franchiseeDetArr['franchiseetype'] == 1){
             $getState=$this->Franchisee_Model->getStateByFranchiseeId($idClient);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($clientDetailsAray['regionId']);
         }else{
             $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($franchiseeDetArr['regionId']);
         }
-
+        $clientAray = $this->Webservices_Model->getFranchiseeWithClient($idClient,$idfranchisee);
+        $addEditClientDet = true;
+        if(!empty($clientAray)){
+            if(($clientAray[0]['szNoOfSites'] == 0) && $clientAray[0]['clientType'] == 0){
+                $addEditClientDet = false;
+            }
+        }
         $data['sitesArr'] = $sitesArr;
         $data['idClient'] = $idClient;
         $data['pageName'] = "Client_Record";
@@ -404,9 +414,11 @@ class Franchisee_Controller extends CI_Controller
         $data['szMetaTagTitle'] = "Client Details";
         $data['is_user_login'] = $is_user_login;
         $data['getState']=$getState;
+        $data['regionname']=$getRegionName['regionName'];
         $data['notification'] = $count;
+        $data['idfranchisee'] = $idfranchisee;
         $data['commentnotification'] = $commentReplyNotiCount;
-
+        $data['addEditClientDet'] = $addEditClientDet;
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientDetails');
         $this->load->view('layout/admin_footer');
@@ -418,8 +430,6 @@ class Franchisee_Controller extends CI_Controller
         $idfranchisee = $this->input->post('idfranchisee');
         $url = $this->input->post('url');
         $flag = $this->input->post('flag');
-
-
         if ($idClient > 0) {
             $this->session->set_userdata('idClient', $idClient);
             $this->session->set_userdata('idfranchisee', $idfranchisee);
@@ -440,8 +450,15 @@ class Franchisee_Controller extends CI_Controller
         $url = $this->session->userdata('url');
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
         $franchiseId = $_SESSION['drugsafe_user']['id'];
-        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
-
+        //$getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+        if($clientDetailsAray['regionId'] > 0){
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($idClient);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($clientDetailsAray['regionId']);
+        }else{
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($clientDetailsAray['franchiseeId']);
+            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['franchiseeId']);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($franchiseeDetArr['regionId']);
+        }
         if (!empty($clientDetailsAray['clientType'])) {
             $franchiseeDetArr2 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
             $data['clientChildDetailsAray'] = $franchiseeDetArr2;
@@ -540,6 +557,7 @@ class Franchisee_Controller extends CI_Controller
             $data['idfranchisee'] = $idfranchisee;
             $data['parentClient'] = $parentClient;
             $data['getState']=$getState;
+            $data['regionname']=$getRegionName['regionName'];
             $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
             $data['notification'] = $count;
             $data['commentnotification'] = $commentReplyNotiCount;
@@ -1335,11 +1353,13 @@ class Franchisee_Controller extends CI_Controller
         $data['mode'] = '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__';
         $franchiseId = $_SESSION['drugsafe_user']['id'];
         $clientid = $this->input->post('clientid');
+        $regionId = $this->input->post('regionId');
         $NonCorpFranchiseeArr = $this->Franchisee_Model->getMappedNonCorpFranchisee($clientid,$franchiseId);
-        $clientlistArr = $this->Franchisee_Model->getNonCorpFranchisee();
+        $clientlistArr = $this->Franchisee_Model->getNonCorpFranchisee($regionId);
         $data['NonCorpFranchiseeArr'] = $NonCorpFranchiseeArr;
         $data['clientlistArr'] = $clientlistArr;
         $data['clientid'] = $clientid;
+        $data['regionId'] = $regionId;
         $this->load->view('admin/admin_ajax_functions', $data);
     }
 
@@ -1347,10 +1367,11 @@ class Franchisee_Controller extends CI_Controller
     {
         $franchiseId = $_SESSION['drugsafe_user']['id'];
         $clientid = $this->input->post('clientid');
+        $regionId = $this->input->post('regionId');
         $clientlistArr = $this->Franchisee_Model->getMappedNonCorpFranchisee($clientid,$franchiseId);
         $data = $this->input->post('assignfrClient');
         $data['franchiseeId'] = $franchiseId;
-        $NonCorpFranchiseeArr = $this->Franchisee_Model->getNonCorpFranchisee();
+        $NonCorpFranchiseeArr = $this->Franchisee_Model->getNonCorpFranchisee($regionId);
         $this->load->library('form_validation');
         $this->form_validation->set_rules('assignfrClient[szFranchisee]', 'Franchisee', 'required');
         $this->form_validation->set_message('required', '{field} is required.');

@@ -3305,7 +3305,7 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
-                            onclick="assignFranchiseeClientConfirmation('<?php echo $clientid; ?>');"
+                            onclick="assignFranchiseeClientConfirmation('<?php echo $clientid; ?>','<?php echo $regionId; ?>');"
                             class="btn green-meadow">Assign
                     </button>
                 </div>
@@ -3329,7 +3329,7 @@ if($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_CONFIRMATION__')
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected franchisee has been successfully assigned to the chossen client.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected franchisee has been successfully assigned to the chosen client.</p>
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>

@@ -1516,4 +1516,19 @@ class Webservices_Model extends Error_Model
             return false;
         }
     }
+
+    function getFranchiseeWithClient($clientId,$franchiseeid)
+    {
+        $whereAry = array('clientId' => $clientId,'franchiseeId' => $franchiseeid, 'isDeleted=' => '0');
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_CLIENT__);
+        $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
+        $this->db->where($whereAry);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->result_array();
+        }
+        return false;
+    }
 } 
