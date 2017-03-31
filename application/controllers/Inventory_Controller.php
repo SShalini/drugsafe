@@ -320,7 +320,7 @@ class Inventory_Controller extends CI_Controller {
                 die;
             }
             
-             $searchAry = $_POST['szSearchProductCode'];
+             $searchAry = $_POST['szSearchProdCode'];
              $config['base_url'] = __BASE_URL__ . "/inventory/marketingmateriallist/";
              $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
