@@ -176,13 +176,21 @@
                                     </div>
                                     <div class="col-sm-2">
                                         <p>$<?php
+										if($editform == "0"){
                                             $DcmobileScreen = $data['DCmobileScreenBasePrice'] * ($data['DCmobileScreenHr']>1?$data['DCmobileScreenHr']:1);
                                             $mobileScreen = $data['mobileScreenBasePrice'] * ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);
                                             $calloutprice = $data['CallOutBasePrice'] * ($data['CallOutHr']>3?$data['CallOutHr']:3);
                                             $fcoprice = $data['FCOBasePrice'] * ($data['FCOHr']>2?$data['FCOHr']:2);
                                             $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
                                             $TotalTrevenu = $data['urineNata'] + $data['laboratoryConfirmation']+$data['cancellationFee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
-
+										}elseif($editform == "1"){
+											$DcmobileScreen = $data['mobileScreenBasePrice'] * ($data['mobileScreenHr']>1?$data['mobileScreenHr']:1);
+                                            $mobileScreen = $data['mcbp'] * ($data['mchr']>1?$data['mchr']:1);
+                                            $calloutprice = $data['cobp'] * ($data['cohr']>3?$data['cohr']:3);
+                                            $fcoprice = $data['fcobp'] * ($data['fcohr']>2?$data['fcohr']:2);
+                                            $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
+                                            $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['laboratoryScreening'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
+										}
                                             $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
                                             echo number_format($TotalTrevenu, 2, '.', ',');?></p>
                                     </div>

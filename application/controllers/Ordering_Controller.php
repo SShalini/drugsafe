@@ -151,6 +151,7 @@ class Ordering_Controller extends CI_Controller
                 $data['pageName'] = "Generate Proforma Invoice";
                 $data['freanchId'] = $freanchId;
                 $data['subpageName'] = "Sites_Record";
+				$data['editform'] = "0";
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('ordering/manualCalcResult');
                 $this->load->view('layout/admin_footer');
@@ -375,6 +376,7 @@ class Ordering_Controller extends CI_Controller
                 $data['freanchId'] = $freanchId;
                 $data['pageName'] = "Ordering";
                 $data['subpageName'] = "Sites_Record";
+				$data['editform'] = "1";
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('ordering/manualCalcResult');
                 $this->load->view('layout/admin_footer');
