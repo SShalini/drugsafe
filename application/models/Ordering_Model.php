@@ -226,5 +226,24 @@ class Ordering_Model extends Error_Model {
         }
         return false;
     }
+	
+	function getAssignedDiscount($discountid)
+    {
+        $array = __DBC_SCHEMATA_CLIENT__ . '.discountid = '.(int)$discountid.' AND ' . __DBC_SCHEMATA_CLIENT__ . '.clientType = 0 AND ' . __DBC_SCHEMATA_USERS__ . '.iActive = 1  AND ' . __DBC_SCHEMATA_USERS__ . '.isDeleted = 0 ';
+        //$array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent, __DBC_SCHEMATA_USERS__ . '.isDeleted' => '0');
+        $query = $this->db->distinct(__DBC_SCHEMATA_CLIENT__ . '.clientId')			
+            ->from(__DBC_SCHEMATA_CLIENT__)
+            ->join(__DBC_SCHEMATA_USERS__, __DBC_SCHEMATA_CLIENT__ . '.clientId = ' . __DBC_SCHEMATA_USERS__ . '.id')
+            ->where($array)
+            ->get();
+        /*echo $q;*/
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("usernotexist", "User does not exist.");
+            return false;
+        }
+    }
 }
 ?>

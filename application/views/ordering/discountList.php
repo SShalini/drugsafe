@@ -45,6 +45,11 @@
                                        $i = 0;
                                         foreach($getAllDiscountAry as $getAllDiscountData)
                                         {
+											$getAssignedDiscountArr=$this->Ordering_Model->getAssignedDiscount($getAllDiscountData['id']);
+											$deletableDiscount = true;
+											if(!empty($getAssignedDiscountArr)){
+												$deletableDiscount = false;
+											}
                                             $i++;
                                         ?>
                                         <tr>
@@ -59,10 +64,11 @@
                                                  <a class="btn btn-circle btn-icon-only btn-default" id="viewStatus" title="View Discount" onclick="discountView(<?php echo $getAllDiscountData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-eye" aria-hidden="true"></i>
                                                 </a>
+												<?php if($deletableDiscount){ ?>
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Discount" onclick="discountDelete(<?php echo $getAllDiscountData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
-                                                
+                                                <?php } ?>
                                             </td>
                                         <?php } ?>
                                             
