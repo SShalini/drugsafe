@@ -67,6 +67,7 @@
                                         </div>
                                        
                                     </div>
+                                    <input id="szOrgEmail" class="form-control" type="hidden" value="<?php echo $_POST['editOperationManager']['szEmail'] ;?>" placeholder="Email" onfocus="remove_formError(this.id,'true')" name="editOperationManager[szOrgEmail]">
                                     <div class="form-group <?php if(!empty($arErrorMessages['szContactNumber'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Contact No</label>
                                         <div class="col-md-5">
@@ -83,7 +84,6 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                       
                                     </div>
                                      <div class="form-group <?php if(!empty($arErrorMessages['szAddress'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Address</label>
@@ -101,9 +101,8 @@
                                             </span>
                                         <?php }?>
                                         </div>
-                                       
                                     </div>
- <div
+                                    <div
                                     class="form-group <?php if (!empty($arErrorMessages['szCountry']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-3 control-label">Country</label>
                                     <div class="col-md-5">
@@ -155,7 +154,6 @@
                                             </span>
                                         <?php } ?>
                                     </div>
-
                                 </div>
                                 <div class="form-group <?php if(!empty($arErrorMessages['szCity'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> City</label>

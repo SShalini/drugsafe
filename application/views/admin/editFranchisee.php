@@ -127,6 +127,7 @@
                                         </div>
                                        
                                     </div>
+                                    <input id="szOrgEmail" class="form-control" type="text" value="<?php echo $_POST['addFranchisee']['szEmail'] ;?>" placeholder="Email" onfocus="remove_formError(this.id,'true')" name="addFranchisee[szOrgEmail]">
                                     <div class="form-group <?php if(!empty($arErrorMessages['szContactNumber'])){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label"> Contact No</label>
                                         <div class="col-md-5">

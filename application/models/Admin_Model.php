@@ -741,14 +741,32 @@ class Admin_Model extends Error_Model
             'dtUpdatedOn' => $date
         );
 
-
+     
         if ($id > 0) {
             $whereAry = array('id' => (int)$id);
 
             $this->db->where($whereAry);
 
             $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataAry);
-
+             if(($data['szEmail'])!= ($data['szOrgEmail'])){
+                    $szNewPassword = create_login_password();
+                    $replace_ary = array();
+                    $id_player = (int)$this->db->insert_id();
+                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szPassword'] = $szNewPassword;
+                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['supportEmail'] = __ADMIN_EMAIL__;
+      
+                    createEmail($this, '__NEW_EMAIL_FOR_FRANCHISEE__', $replace_ary, $data['szEmail'], '',__ADMIN_EMAIL__, $id_player,__ADMIN_EMAIL__);
+           
+                    
+            $dataPasswordAry = array(
+           'szPassword' => encrypt($szNewPassword)
+        );
+        $whereAry = array('id' => (int)$id);
+        $this->db->where($whereAry);
+        $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataPasswordAry);              
+        }
             if ($queyUpdate) {
                 $OmAry = array(
                     'operationManagerId' => $data['operationManagerId']
@@ -1415,6 +1433,27 @@ class Admin_Model extends Error_Model
                 $whereAry = array('franchiseeId' => (int)$id);
                 $this->db->where($whereAry);
                 $this->db->update(__DBC_SCHEMATA_FRANCHISEE__, $OmAry);
+                
+                  if(($data['szEmail'])!= ($data['szOrgEmail'])){
+                    $szNewPassword = create_login_password();
+                    $replace_ary = array();
+                    $id_player = (int)$this->db->insert_id();
+                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szPassword'] = $szNewPassword;
+                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['supportEmail'] = __ADMIN_EMAIL__;
+      
+                    createEmail($this, '__NEW_EMAIL_FOR_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '',__ADMIN_EMAIL__, $id_player,__ADMIN_EMAIL__);
+           
+                
+            $dataPasswordAry = array(
+           'szPassword' => encrypt($szNewPassword)
+        );
+        $whereAry = array('id' => (int)$id);
+        $this->db->where($whereAry);
+        $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataPasswordAry);              
+        }
+           
                 return true;
             } else {
                 return false;

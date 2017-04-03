@@ -444,7 +444,6 @@ class Franchisee_Model extends Error_Model
             'iActive' => '1',
             'dtUpdatedOn' => $date
         );
-
         $whereAry = array('id' => (int)$idClient);
         $this->db->where($whereAry);
 
@@ -459,19 +458,20 @@ class Franchisee_Model extends Error_Model
                     $replace_ary['szPassword'] = $szNewPassword;
                     $replace_ary['szEmail'] = $data['szEmail'];
                     $replace_ary['supportEmail'] = $franchiseeDetArr['szEmail'];
-      
-                    createEmail($this, '__NEW_EMAIL_FOR_CLIENT__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
-           
+      if (!empty($clientType)) {
+                    createEmail($this, '__NEW_EMAIL_FOR_SITE__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
+      }
+      else{
+            createEmail($this, '__NEW_EMAIL_FOR_CLIENT__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']); 
+      }
                     
             $dataPasswordAry = array(
            'szPassword' => encrypt($szNewPassword)
         );
         $whereAry = array('id' => (int)$idClient);
         $this->db->where($whereAry);
-
         $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataPasswordAry);              
         }
-   
         if ($idClient == '') {
             $idClient = $_SESSION['drugsafe_user']['id'];
         }
@@ -828,6 +828,25 @@ class Franchisee_Model extends Error_Model
     {
         $updateAgent = $this->updateUserdata($idAgent, $data);
         if ($updateAgent) {
+            if(($data['szEmail'])!= ($data['szOrgEmail'])){
+                $UpdatedBy = $_SESSION['drugsafe_user']['id'];
+                    $szNewPassword = create_login_password();
+                    $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId($UpdatedBy);
+                    $replace_ary = array();
+                    $id_player = (int)$this->db->insert_id();
+                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szPassword'] = $szNewPassword;
+                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['supportEmail'] = $franchiseeDetArr['szEmail'];
+                    createEmail($this, '__NEW_EMAIL_FOR_AGENT__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
+                 
+            $dataPasswordAry = array(
+           'szPassword' => encrypt($szNewPassword)
+        );
+        $whereAry = array('id' => (int)$idAgent);
+        $this->db->where($whereAry);
+        $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataPasswordAry);              
+        }
             return true;
         } else {
             return false;

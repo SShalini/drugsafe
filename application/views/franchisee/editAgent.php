@@ -103,6 +103,11 @@
                                         </div>
 
                                     </div>
+                                  <input id="szOrgEmail" class="form-control" type="hidden"
+                                                       value="<?php echo set_value('agentData[szEmail]'); ?>"
+                                                       placeholder="Primary Email"
+                                                       onfocus="remove_formError(this.id,'true')"
+                                                       name="agentData[szOrgEmail]">
                                     <div
                                         class="form-group  <?php if(form_error('agentData[szContactNumber]')){?>has-error<?php }?>">
                                         <label class="col-md-4 control-label">Contact No.</label>

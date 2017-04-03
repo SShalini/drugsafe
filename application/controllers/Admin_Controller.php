@@ -716,7 +716,6 @@ class Admin_Controller extends CI_Controller
 
 
             }
-
             if ($this->Admin_Model->validateUsersData($data_validate, array(), $idOperationManager)) {
                 if ($this->Admin_Model->updateOperationDetails($data_validate, $idOperationManager)) {
                     $szMessage['type'] = "success";

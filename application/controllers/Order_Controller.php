@@ -768,11 +768,7 @@ $html .= '
          $this->excel->getActiveSheet()->setCellValue('B8',$franchiseeDetArr1['szName']);
           }
          }
-         
-         
-         
-     
-     
+   
       if ($totalOrdersDetailsAray) {
             $i = 14 ;
             foreach ($totalOrdersDetailsAray as $item) {
