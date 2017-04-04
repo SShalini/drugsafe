@@ -103,7 +103,7 @@
                                                 <tr>
                                                     <th> Image </th>
                                                     <th> Product Code</th>
-                                                    <th> Descreption</th>
+                                                    <th> Description</th>
                                                     <th> Cost</th>
                                                     <th>Quantity </th>
 <!--                                                    <th>Quantity Assign By </th>
@@ -249,7 +249,7 @@
                             <tr>
                                 <th> Image </th>
                                 <th> Product Code</th>
-                                <th> Descreption</th>
+                                <th> Description</th>
                                 <th> Cost</th>
                                 <th> Quantity </th>
 <!--                                <th>Quantity Assign By </th>
@@ -382,7 +382,7 @@
                                                 <tr>
                                                     <th> Image </th>
                                                     <th> Product Code</th>
-                                                    <th> Descreption</th>
+                                                    <th> Description</th>
                                                     <th> Cost</th>
                                                     <th>Quantity </th>
 <!--                                                    <th>Quantity Assign By </th>

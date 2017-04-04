@@ -3007,7 +3007,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                                      <br>
                                     <input type="hidden" name="importProspects" value="1"/>
                                    <?php if(($_SESSION['drugsafe_user']['iRole']==5) || ($_SESSION['drugsafe_user']['iRole']==1)) {?>
-                                <div class="form-group " >
+                                   <div class="form-group " >
                                     <label class="col-md-3 control-label">Franchisee</label>
                                     <div class="col-md-8">
                                         <div class="input-group">

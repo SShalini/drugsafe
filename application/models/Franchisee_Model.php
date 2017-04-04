@@ -462,7 +462,7 @@ class Franchisee_Model extends Error_Model
                     createEmail($this, '__NEW_EMAIL_FOR_SITE__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
       }
       else{
-            createEmail($this, '__NEW_EMAIL_FOR_CLIENT__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']); 
+            createEmail($this, '__NEW_EMAIL_FOR_CLIENT__', $replace_ary,$data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']); 
       }
                     
             $dataPasswordAry = array(

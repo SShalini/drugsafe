@@ -102,7 +102,7 @@
                                                 <tr>
                                                     <th> Image </th>
                                                     <th> Product Code</th>
-                                                    <th>  Descreption</th>
+                                                    <th>  Description</th>
                                                     <th> Cost</th>
                                                     <th> Model Stock Value </th>
                                                     <th> Action </th>
