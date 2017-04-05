@@ -1409,18 +1409,36 @@ class Reporting_Controller extends CI_Controller
         $productCode = $this->session->userdata('productCode');
         $prodCategory = $this->session->userdata('prodCategory');
 
-
-        $allReqOrderAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf($productCode, $prodCategory);
+       $allReqOrderAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf($productCode, $prodCategory);
+       
         if (!empty($allReqOrderAray)) {
             $i = 2;
             $x = 0;
             foreach ($allReqOrderAray as $item) {
                 $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($item['szProductCategory']));
-                $x++;
+                 $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($item['franchiseeid'], $item['szProductCategory'], $item['productid']);
+               
+                 
+                      if (!empty($validPendingOrdersQtyDetailsAray)) {
+                    $printzero = true;
+                    foreach ($validPendingOrdersQtyDetailsAray as $qtyData) {
+                        $val =$qtyData['szQuantity'];
+                        $printzero = false;
+                    }
+
+                    if ($printzero) {
+                           $val ='0';
+                    }
+                } else {
+                     $val ='0';
+                }
+
+                 
+                 $x++;
                 $this->excel->getActiveSheet()->setCellValue('A' . $i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B' . $i, $productcatAry['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C' . $i, $item['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('D' . $i, $item['szAvailableQuantity']);
+                $this->excel->getActiveSheet()->setCellValue('D' . $i, $val);
                 $this->excel->getActiveSheet()->setCellValue('E' . $i, $item['quantity']);
 
 
