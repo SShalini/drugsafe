@@ -2905,7 +2905,7 @@ function showdonorinfobydivid(id) {
 function formattime(timeval){
     timeval = timeval.split(':');
 	if(parseInt(timeval[0].trim())>0){
-		timeval = ("0" + parseInt(timeval[0].trim())).slice(-2)+' : '+("0" + parseInt(timeval[1].trim())).slice(-2);
+		timeval = ("0" + parseInt((timeval[0]?timeval[0].trim():0))).slice(-2)+' : '+("0" + parseInt((timeval[1]?timeval[1].trim():0))).slice(-2);
 		return timeval;
 	}else{
 		return "";

@@ -347,7 +347,7 @@
 						}
 						break;
                     case "DECIMAL":
-						if( !preg_match( "/^[0-9]+(\.[0-9]{2})*$/", $value ) )
+						if( !preg_match( "/^[0-9]+(\.[0-9]{1,2})?$/", $value ) )
 						{
 							$error = true;
 							$this->addError( $error_field, $szErrorMessage . " -- format allowed =  00.00 , 22, 0.5" );
