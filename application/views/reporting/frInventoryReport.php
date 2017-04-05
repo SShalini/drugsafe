@@ -54,7 +54,7 @@
                            $this->session->unset_userdata('productCode');
                            $this->session->unset_userdata('prodCategory');
            
-                             if(!empty($validPendingOrdersDetailsAray)) 
+                             if(!empty($validPendingOrderFrDetailsAray)) 
                         {      
                            
                             ?>
