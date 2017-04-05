@@ -431,7 +431,7 @@
                                   
                                       <hr>
                                             <div class="text align-center font-green-meadow">
-                                               Drugsafe Communiies mobile clinic screening</div>
+                                               Drugsafe Communities mobile clinic screening</div>
                                                <hr>
                                      
                                      <div class="form-group <?php if(form_error('orderingData[DCmobileScreenBasePrice]')){?>has-error<?php }?>">

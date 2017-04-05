@@ -131,9 +131,11 @@ if(!empty($getSosAndClientDetils))
 
     $('#alcohal').highcharts({
         yAxis: {
+        	allowDecimals: false,
         labels: {
             formatter: function () {
-                return Highcharts.numberFormat(this.value,0);
+                //return Highcharts.numberFormat(this.value,0);
+                return this.value;
             }
         }
     },
@@ -162,7 +164,13 @@ if(!empty($getSosAndClientDetils))
                 depth: 40,
                 stacking: true,
                 grouping: true,
-                groupZPadding: 100
+                groupZPadding: 100,
+				dataLabels: {
+                enabled: true,
+                crop: false,
+                overflow: 'none',
+				verticalAlign: 'top'
+            }
             }
         },
         series: [{
@@ -186,9 +194,11 @@ if(!empty($getSosAndClientDetils))
     $('#Urine').highcharts({
     
     yAxis: {
+    	allowDecimals: false,
         labels: {
             formatter: function () {
-                return Highcharts.numberFormat(this.value,0);
+                //return Highcharts.numberFormat(this.value,0);
+                return this.value;
             }
         }
     },
@@ -196,7 +206,7 @@ if(!empty($getSosAndClientDetils))
         chart: {
             type: 'column',
             margin: 75,
-            marginBottom: 120,
+            marginBottom: 100,
             options3d: {
                 enabled: true,
                 alpha: 15,
@@ -215,7 +225,13 @@ if(!empty($getSosAndClientDetils))
                 depth: 40,
                 stacking: true,
                 grouping: true,
-                groupZPadding: 100
+                groupZPadding: 100,
+				dataLabels: {
+                enabled: true,
+                crop: false,
+                overflow: 'none',
+				verticalAlign: 'top'
+            }
             }
         },
         series: [{
@@ -236,9 +252,11 @@ if(!empty($getSosAndClientDetils))
     $('#oral').highcharts({
     
     yAxis: {
+    	allowDecimals: false,
         labels: {
             formatter: function () {
-                return Highcharts.numberFormat(this.value,0);
+                //return Highcharts.numberFormat(this.value,0);
+                return this.value;
             }
         }
     },
@@ -265,7 +283,13 @@ if(!empty($getSosAndClientDetils))
                 depth: 40,
                 stacking: true,
                 grouping: true,
-                groupZPadding: 100
+                groupZPadding: 100,
+				dataLabels: {
+                enabled: true,
+                crop: false,
+                overflow: 'none',
+				verticalAlign: 'top'
+            }
             }
         },
         series: [{

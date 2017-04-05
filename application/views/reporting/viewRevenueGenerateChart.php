@@ -162,9 +162,8 @@ if(!empty($getManualCalcStartToEndDate))
 
     $('#revenue_Generate_Chart').highcharts({
       yAxis: {
-        
         title: {
-            text: ''
+            text: 'Amount'
         },
          labels: {
             formatter: function () {
@@ -200,7 +199,17 @@ if(!empty($getManualCalcStartToEndDate))
                 depth: 40,
                 stacking: true,
                 grouping: true,
-                groupZPadding: 100
+                groupZPadding: 100,
+				dataLabels: {
+                enabled: true,
+                crop: true,
+                overflow: 'none',
+				style: {
+                    fontSize: '10px'
+                },
+				color: '#ffffff',
+				verticalAlign: 'top'
+            }
             }
         },
         series: [{

@@ -188,7 +188,6 @@
 
                                             $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
 
-
                                             $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
                                             echo number_format($TotalTrevenu, 2, '.', ',');?></p>
                                     </div>

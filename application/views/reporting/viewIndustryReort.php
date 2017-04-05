@@ -203,6 +203,7 @@
 
                                                 </th>
                                                 <?php
+                                                $colcount = 0;
                                                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                     ?>
                                                     <th>
@@ -213,6 +214,7 @@
 
                                                     </th>
                                                     <?php
+                                                    $colcount++;
                                                 }
                                                 ?>
 
@@ -261,10 +263,7 @@
                                                     ?>
                                                 </tr>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td colspan="<?php echo $colcount+2; ?>"></td>
                                                 </tr>
                                                 </tbody>
                                                 <?php
@@ -310,10 +309,7 @@
                                                     ?>
                                                 </tr>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td colspan="<?php echo $colcount+2; ?>"></td>
                                                 </tr>
                                                 </tbody>
                                                 <?php
@@ -359,10 +355,7 @@
                                                     ?>
                                                 </tr>
                                                 <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td colspan="<?php echo $colcount+2; ?>"></td>
                                                 </tr>
                                                 </tbody>
                                                 <?php

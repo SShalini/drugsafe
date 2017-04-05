@@ -3329,7 +3329,7 @@ if($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_CONFIRMATION__')
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected franchisee has been successfully assigned to the chosen client.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> This Site has been successfully assigned to the selected Franchisee.</p>
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>

@@ -1403,8 +1403,8 @@ class Webservices_Controller extends CI_Controller
                                     <tr>
                                         <td colspan="8">Comments or Observation: '.$sosdetarr[0]['Comments'].'</td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="8">Products Used</td>
+                                    <tr>';
+                                        /*$html .='<td colspan="8">Products Used</td>
                                     </tr>
                                     <tr>
                                         <td colspan="4">Products Name</td><td colspan="4">Quantity</td>
@@ -1415,7 +1415,7 @@ class Webservices_Controller extends CI_Controller
                                         <td colspan="4">'.$prods['szProductCode'].'</td><td colspan="4">'.$prods['quantity'].'</td>
                                     </tr>';
             }
-        }
+        }*/
                                     $html .='<tr>
                                         <td colspan="4">Nominated Client Representative: '.$sosdetarr[0]['ClientRepresentative'].'</td>
                                         <td colspan="2">Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$sosdetarr[0]['RepresentativeSignature'].'" /></td>
@@ -1461,7 +1461,7 @@ class Webservices_Controller extends CI_Controller
 
         //$cocid = $this->session->userdata('cocid');
         $cocdetarr = $this->Webservices_Model->getcocdatabycocid($cocid);
-        $sosdetarr = $this->Webservices_Model->getsosdatabycocid($cocid,0,1);
+        $sosdetarr = $this->Webservices_Model->getsosdatabycocid($cocid,1,1);
         $sosuserdets = $this->Webservices_Model->getuserhierarchybysiteid($sosdetarr[0]['Clientid']);
         //echo 'Hi '.$sosuserdets[0]['franchiseeId'];
         $franchiseeDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['franchiseeId']);
@@ -1527,21 +1527,21 @@ class Webservices_Controller extends CI_Controller
     <td rowspan="2" colspan="2"><b>Alcohol Breath Test</b></td>
     <td colspan="2">Device Serial#: '.$cocdetarr[0]['devicesrno'].'</td>
     <td colspan="2">Cut off Level: '.$cocdetarr[0]['cutoff'].'</td>
-    <td colspan="2">Wait Time<sub>[Minutes]</sub>: '.$cocdetarr[0]['donwaittime'].'</td>
+    <td colspan="2">Wait Time<sub>[Minutes]</sub>: '.$this->formatcustomTime($cocdetarr[0]['donwaittime']).'</td>
 </tr>
 <tr>
     <td>Test 1: '.$cocdetarr[0]['dontest1'].'</td>
-    <td colspan="2">Time: '.$cocdetarr[0]['dontesttime1'].' hours</td>
+    <td colspan="2">Time: '.$this->formatcustomTime($cocdetarr[0]['dontesttime1']).' hours</td>
     <td>Test 2: '.$cocdetarr[0]['dontest2'].'</td>
-    <td>Time: '.$cocdetarr[0]['dontesttime2'].' hours</td>
+    <td>Time: '.$this->formatcustomTime($cocdetarr[0]['dontesttime2']).' hours</td>
 </tr>
 <tr>
     <td colspan="8"><b>Collection of Sample/On-Site Drug Screening Results</b></td>
 </tr>
 <tr>
-    <td colspan="2">Void Time: '.$cocdetarr[0]['voidtime'].' hours</td>
+    <td colspan="2">Void Time: '.$this->formatcustomTime($cocdetarr[0]['voidtime']).' hours</td>
     <td colspan="2">Sample Temp C: '.$cocdetarr[0]['sampletempc'].'</td>
-    <td colspan="4">Temp Read Time within 4 min: '.$cocdetarr[0]['tempreadtime'].' hours</td>
+    <td colspan="4">Temp Read Time within 4 min: '.$this->formatcustomTime($cocdetarr[0]['tempreadtime']).' hours</td>
 </tr>
 <tr>
     <td colspan="2">Intect 7 Lot. No.: '.$cocdetarr[0]['intect'].'</td>
@@ -1656,4 +1656,13 @@ class Webservices_Controller extends CI_Controller
         header('Content-Type: application/json');
         echo json_encode($responsedata);
     }
+	
+	function formatcustomTime($time){
+		$timeArr = explode(':',$time);
+		$timeval = "";
+		if(trim($timeArr[0])>0){
+			$timeval = sprintf("%02d", trim($timeArr[0])).' : '.sprintf("%02d", trim($timeArr[1])); 
+		}
+		return $timeval;
+	}
 }

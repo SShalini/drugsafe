@@ -982,21 +982,21 @@ class Form_Management_Controller extends CI_Controller
     <td rowspan="2" colspan="2"><b>Alcohol Breath Test</b></td>
     <td colspan="2">Device Serial#: '.$cocdetarr[0]['devicesrno'].'</td>
     <td colspan="2">Cut off Level: '.$cocdetarr[0]['cutoff'].'</td>
-    <td colspan="2">Wait Time<sub>[Minutes]</sub>: '.$cocdetarr[0]['donwaittime'].'</td>
+    <td colspan="2">Wait Time<sub>[Minutes]</sub>: '.$this->formatcustomTime($cocdetarr[0]['donwaittime']).'</td>
 </tr>
 <tr>
     <td>Test 1: '.$cocdetarr[0]['dontest1'].'</td>
-    <td colspan="2">Time: '.$cocdetarr[0]['dontesttime1'].' hours</td>
+    <td colspan="2">Time: '.$this->formatcustomTime($cocdetarr[0]['dontesttime1']).' hours</td>
     <td>Test 2: '.$cocdetarr[0]['dontest2'].'</td>
-    <td>Time: '.$cocdetarr[0]['dontesttime2'].' hours</td>
+    <td>Time: '.$this->formatcustomTime($cocdetarr[0]['dontesttime2']).' hours</td>
 </tr>
 <tr>
     <td colspan="8"><b>Collection of Sample/On-Site Drug Screening Results</b></td>
 </tr>
 <tr>
-    <td colspan="2">Void Time: '.$cocdetarr[0]['voidtime'].' hours</td>
+    <td colspan="2">Void Time: '.$this->formatcustomTime($cocdetarr[0]['voidtime']).' hours</td>
     <td colspan="2">Sample Temp C: '.$cocdetarr[0]['sampletempc'].'</td>
-    <td colspan="4">Temp Read Time within 4 min: '.$cocdetarr[0]['tempreadtime'].' hours</td>
+    <td colspan="4">Temp Read Time within 4 min: '.$this->formatcustomTime($cocdetarr[0]['tempreadtime']).' hours</td>
 </tr>
 <tr>
     <td colspan="2">Intect 7 Lot. No.: '.$cocdetarr[0]['intect'].'</td>
@@ -1093,5 +1093,14 @@ class Form_Management_Controller extends CI_Controller
         ob_end_clean();
         $pdf->Output('view_coc_details.pdf', 'I');
     }
+	
+	function formatcustomTime($time){
+		$timeArr = explode(':',$time);
+		$timeval = "";
+		if(trim($timeArr[0])>0){
+			$timeval = sprintf("%02d", trim($timeArr[0])).' : '.sprintf("%02d", trim($timeArr[1])); 
+		}
+		return $timeval;
+	}
 }
 ?>

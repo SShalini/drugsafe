@@ -2648,83 +2648,83 @@ function showdonorinfo(sosid) {
                     if(drugarr[0] == '1'){
                         drugs += 'Ice<br>';
                     }else if(drugarr[1] == '1'){
-                        drugs += 'Marijuana<br>';
+                        drugs += 'Ice<br>';
                     }else if(drugarr[2] == '1'){
-                        drugs += 'Heroin<br>';
+                        drugs += 'Ice<br>';
                     }else if(drugarr[3] == '1'){
-                        drugs += 'Cocaine<br>';
+                        drugs += 'Ice<br>';
                     }else if(drugarr[4] == '1'){
-                        drugs += 'Benzos<br>';
+                        drugs += 'Ice<br>';
                     }else if(drugarr[5] == '1'){
-                        drugs += 'Amphetamine<br>';
+                        drugs += 'Ice<br>';
                     }
 
                     if(drugarr[0] == '2'){
-                        drugs += 'Ice<br>';
+                        drugs += 'Marijuana<br>';
                     }else if(drugarr[1] == '2'){
                         drugs += 'Marijuana<br>';
                     }else if(drugarr[2] == '2'){
-                        drugs += 'Heroin<br>';
+                        drugs += 'Marijuana<br>';
                     }else if(drugarr[3] == '2'){
-                        drugs += 'Cocaine<br>';
+                        drugs += 'Marijuana<br>';
                     }else if(drugarr[4] == '2'){
-                        drugs += 'Benzos<br>';
+                        drugs += 'Marijuana<br>';
                     }else if(drugarr[5] == '2'){
-                        drugs += 'Amphetamine<br>';
+                        drugs += 'Marijuana<br>';
                     }
 
                     if(drugarr[0] == '3'){
-                        drugs += 'Ice<br>';
+                        drugs += 'Heroin<br>';
                     }else if(drugarr[1] == '3'){
-                        drugs += 'Marijuana<br>';
+                        drugs += 'Heroin<br>';
                     }else if(drugarr[2] == '3'){
                         drugs += 'Heroin<br>';
                     }else if(drugarr[3] == '3'){
-                        drugs += 'Cocaine<br>';
+                        drugs += 'Heroin<br>';
                     }else if(drugarr[4] == '3'){
-                        drugs += 'Benzos<br>';
+                        drugs += 'Heroin<br>';
                     }else if(drugarr[5] == '3'){
-                        drugs += 'Amphetamine<br>';
+                        drugs += 'Heroin<br>';
                     }
 
                     if(drugarr[0] == '4'){
-                        drugs += 'Ice<br>';
+                        drugs += 'Cocaine<br>';
                     }else if(drugarr[1] == '4'){
-                        drugs += 'Marijuana<br>';
+                        drugs += 'Cocaine<br>';
                     }else if(drugarr[2] == '4'){
-                        drugs += 'Heroin<br>';
+                        drugs += 'Cocaine<br>';
                     }else if(drugarr[3] == '4'){
                         drugs += 'Cocaine<br>';
                     }else if(drugarr[4] == '4'){
-                        drugs += 'Benzos<br>';
+                        drugs += 'Cocaine<br>';
                     }else if(drugarr[5] == '4'){
-                        drugs += 'Amphetamine<br>';
+                        drugs += 'Cocaine<br>';
                     }
 
                     if(drugarr[0] == '5'){
-                        drugs += 'Ice<br>';
+                        drugs += 'Benzos<br>';
                     }else if(drugarr[1] == '5'){
-                        drugs += 'Marijuana<br>';
+                        drugs += 'Benzos<br>';
                     }else if(drugarr[2] == '5'){
-                        drugs += 'Heroin<br>';
+                        drugs += 'Benzos<br>';
                     }else if(drugarr[3] == '5'){
-                        drugs += 'Cocaine<br>';
+                        drugs += 'Benzos<br>';
                     }else if(drugarr[4] == '5'){
                         drugs += 'Benzos<br>';
                     }else if(drugarr[5] == '5'){
-                        drugs += 'Amphetamine<br>';
+                        drugs += 'Benzos<br>';
                     }
 
                     if(drugarr[0] == '6'){
-                        drugs += 'Ice<br>';
+                        drugs += 'Amphetamine<br>';
                     }else if(drugarr[1] == '6'){
-                        drugs += 'Marijuana<br>';
+                        drugs += 'Amphetamine<br>';
                     }else if(drugarr[2] == '6'){
-                        drugs += 'Heroin<br>';
+                        drugs += 'Amphetamine<br>';
                     }else if(drugarr[3] == '6'){
-                        drugs += 'Cocaine<br>';
+                        drugs += 'Amphetamine<br>';
                     }else if(drugarr[4] == '6'){
-                        drugs += 'Benzos<br>';
+                        drugs += 'Amphetamine<br>';
                     }else if(drugarr[5] == '6'){
                         drugs += 'Amphetamine<br>';
                     }
@@ -2904,8 +2904,13 @@ function showdonorinfobydivid(id) {
 }
 function formattime(timeval){
     timeval = timeval.split(':');
-    timeval = ("0" + parseInt(timeval[0].trim())).slice(-2)+' : '+("0" + parseInt(timeval[1].trim())).slice(-2);
-    return timeval;
+	if(parseInt(timeval[0].trim())>0){
+		timeval = ("0" + parseInt(timeval[0].trim())).slice(-2)+' : '+("0" + parseInt(timeval[1].trim())).slice(-2);
+		return timeval;
+	}else{
+		return "";
+	}
+    
 }
 function showsospdf(sosid) {
     $.post(__BASE_URL__ + "/formManagement/getsosformpdf", {sosid : sosid}, function (result) {
@@ -2918,7 +2923,13 @@ function format12hrtime(timeval) {
     timeval = timeval.split(' ');
     var format = timeval[3];
     timeval = timeval[0]+' : '+timeval[2];
-    return formattime(timeval)+' '+format;
+	var formattedTime = formattime(timeval);
+	if(formattedTime!=''){
+		return formattedTime+' '+format;
+	}else{
+		return "";
+	}
+    
 }
 function showcocpdf(cocid) {
     $.post(__BASE_URL__ + "/formManagement/getcocformpdf", {cocid : cocid}, function (result) {

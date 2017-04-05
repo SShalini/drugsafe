@@ -84,15 +84,17 @@ if(!empty($compareresultarr))
 }
  $testType=($testtype == '1'?'Alcohol':($testtype == '3'?'Urine AS/NZA 4308:2001':($testtype == '2'?'Oral Fluid AS 4760:2006':($testtype=='4'?'As/NZA 4308:2008':''))));
 ?>
-
+<input type="hidden" id="charttesttype" value="<?php echo $testType;?>" />
 <script type="text/javascript">
    $(function () {
-
+var testtypeval = $('#charttesttype').val();
     $('#comparesionchart').highcharts({
         yAxis: {
+        	allowDecimals: false,
         labels: {
             formatter: function () {
-                return Highcharts.numberFormat(this.value,0);
+                //return Highcharts.numberFormat(this.value,0);
+                return this.value;
             }
         }
     },
@@ -120,7 +122,13 @@ if(!empty($compareresultarr))
                 depth: 40,
                 stacking: true,
                 grouping: true,
-                groupZPadding: 100
+                groupZPadding: 100,
+				dataLabels: {
+                enabled: true,
+                crop: false,
+                overflow: 'none',
+				verticalAlign: 'top'
+            }
             }
         },
         series: [{

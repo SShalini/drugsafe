@@ -123,7 +123,7 @@
                                   
                                       
                                             <div class="text align-center font-green-meadow">
-                                               Drugsafe Communiies mobile clinic screening</div>
+                                               Drugsafe Communities mobile clinic screening</div>
                                                <hr>
                                      
                                      <div class="form-group <?php if(form_error('orderingData[mobileScreenBasePrice]')){?>has-error<?php }?>">
@@ -185,8 +185,8 @@
                                                     Placeholder="Travel" onfocus="remove_formError(this.id,'true')"  onchange="showHideTextboxForCalc()">
                                                 <option value=''>Select</option>
                                                 
-                                                        <option  value="1" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == trim("Drugsafe Communiies") ? "selected" : ""); ?>>Drugsafe Communiies</option>
-                                                        <option  value="2" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == trim("Marketing Material Communiies") ? "selected" : ""); ?>>Marketing Material Communiies</option>
+                                                        <option  value="1" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == trim("Drugsafe Communiies") ? "selected" : ""); ?>>Drugsafe Communities</option>
+                                                        <option  value="2" <?php echo (sanitize_post_field_value($_POST['orderingData']['travelType']) == trim("Marketing Material Communiies") ? "selected" : ""); ?>>Marketing Material Communities</option>
                                                         
                                                        
                                                   
