@@ -70,7 +70,7 @@ if(!empty($compareresultarr))
 {
     foreach ($compareresultarr as $comparisondata) 
     {
-        $comparesionCat[]=($comparetype == 1 ? $comparisondata['month'] : $comparisondata['year']);
+        $comparesionCat[]=($comparetype == 1 ? $comparisondata['month'].' '.$comparisondata['year'] : $comparisondata['year']);
         $TotalDonors[]=($testtype == '1'?$comparisondata['totalAlcohol']:($testtype == '3'?$comparisondata['totalDonarUrine']:($testtype == '2'?$comparisondata['totalDonarOral']:($testtype=='4'?$comparisondata['totalDonarUrine']:'0'))));
         $Positive[]=($testtype == '1'?$comparisondata['totalPositiveAlcohol']:($testtype == '3'?($comparisondata['totalDonarUrine']-$comparisondata['totalNegativeUrine']):($testtype == '2'?($comparisondata['totalDonarOral']-$comparisondata['totalNegativeOral']):($testtype=='4'?($comparisondata['totalDonarUrine']-$comparisondata['totalNegativeUrine']):'0'))));
         $Negative[]=($testtype == '1'?$comparisondata['totalNegativeAlcohol']:($testtype == '3'?$comparisondata['totalNegativeUrine']:($testtype == '2'?$comparisondata['totalNegativeOral']:($testtype=='4'?$comparisondata['totalNegativeUrine']:'0'))));

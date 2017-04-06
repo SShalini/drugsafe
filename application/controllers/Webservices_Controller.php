@@ -84,6 +84,19 @@ class Webservices_Controller extends CI_Controller
         $parentid = !empty($jsondata->parentid) ? $jsondata->parentid : "0";
         $agentid = !empty($jsondata->agentid) ? $jsondata->agentid : "0";
         $userDetailsArr = $this->Webservices_Model->getclientdetails($franchiseeid,$parentid,$agentid);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($franchiseeid);
+        /*$CorpClient = array();
+            if(!empty($AssignCorpuserDetailsArr)){
+                $i=sizeof($userDetailsArr);
+                foreach ($AssignCorpuserDetailsArr as $AssignCorpUsr){
+                    if(!in_array($AssignCorpUsr['id'],$userDetailsArr)){
+
+                        array_push($userDetailsArr[$i], $AssignCorpUsr);
+                        $i++;
+                    }
+                }
+            }*/
+        $allClients = array_merge($userDetailsArr, $AssignCorpuserDetailsArr);
         if(!empty($userDetailsArr))
         {
             $responsedata = array("code" => 200,
@@ -91,7 +104,7 @@ class Webservices_Controller extends CI_Controller
                 "userid"=>$userDetailsArr[0]['id'],
                 "szName"=>$userDetailsArr[0]['szName'],
                 "szEmail"=>$userDetailsArr[0]['szEmail'],
-                "dataarr"=>$userDetailsArr);
+                "dataarr"=>$allClients);
             header('Content-Type: application/json');
         }else{
                 $responsedata = array("code" => 111,"message"=>"Bad Request.");

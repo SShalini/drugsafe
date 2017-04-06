@@ -81,7 +81,6 @@ class Webservices_Model extends Error_Model
     function getclientdetails($franchiseeid, $parent = 0, $agent = 0)
     {
         $array = __DBC_SCHEMATA_CLIENT__ . '.franchiseeId = ' . (int)$franchiseeid . ' AND ' . __DBC_SCHEMATA_USERS__ . '.isDeleted = 0 ' . ($agent > 0 && $parent == 0 ? ' AND ' . __DBC_SCHEMATA_CLIENT__ . '.agentId = ' . (int)$agent : ($agent > 0 && $parent > 0 ? ' AND ' . __DBC_SCHEMATA_CLIENT__ . '.clientType = ' . (int)$parent : ' AND ' . __DBC_SCHEMATA_CLIENT__ . '.clientType = ' . (int)$parent));
-        //$array = array(__DBC_SCHEMATA_CLIENT__ . '.franchiseeId' => (int)$franchiseeid, __DBC_SCHEMATA_CLIENT__ . '.clientType' => (int)$parent, __DBC_SCHEMATA_USERS__ . '.isDeleted' => '0');
         $query = $this->db->select(__DBC_SCHEMATA_USERS__ . '.id, szName, szEmail')
             ->from(__DBC_SCHEMATA_USERS__)
             ->join(__DBC_SCHEMATA_CLIENT__, __DBC_SCHEMATA_CLIENT__ . '.clientId = ' . __DBC_SCHEMATA_USERS__ . '.id')
@@ -90,6 +89,33 @@ class Webservices_Model extends Error_Model
         /*echo $q;*/
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
+            return $row;
+        } else {
+            $this->addError("usernotexist", "User does not exist.");
+            return false;
+        }
+    }
+
+    function getcorpclientdetails($franchiseeid)
+    {
+        $array = __DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__ . '.franchiseeId = ' . (int)$franchiseeid . ' AND ' . __DBC_SCHEMATA_USERS__ . '.isDeleted = 0 '. ' AND ' . __DBC_SCHEMATA_USERS__ . '.iActive = 1';
+        $query = $this->db->select(__DBC_SCHEMATA_USERS__ . '.id, '.__DBC_SCHEMATA_USERS__.'.szName, '.__DBC_SCHEMATA_USERS__.'.szEmail, '.__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__.'.clientid')
+            ->from(__DBC_SCHEMATA_USERS__)
+            ->join(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, __DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__ . '.franchiseeid = ' . __DBC_SCHEMATA_USERS__ . '.id')
+            ->where($array)
+            ->get();
+        /*echo $q;*/
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            $CorpCl = array();
+            if(!empty($row)){
+                foreach ($row as $data){
+                    $parentClient = $this->getclientdetailsbyclientid($data['clientid']);
+                    if(!in_array($parentClient,$CorpCl)){
+                        array_push($CorpCl,$parentClient);
+                    }
+                }
+            }
             return $row;
         } else {
             $this->addError("usernotexist", "User does not exist.");

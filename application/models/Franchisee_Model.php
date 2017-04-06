@@ -1076,7 +1076,37 @@ class Franchisee_Model extends Error_Model
 
     function MapClientToFranchisee($clientid, $corpfranchisee, $franchiseeid)
     {
-        $getcorpDets = $this->getdetailsbyfrisandsiteid($corpfranchisee,$clientid);
+
+        $flag = false;
+        $checkClientMappedOrNotArr = $this->getMappedNonCorpFranchisee($clientid, $corpfranchisee);
+        if (!empty($checkClientMappedOrNotArr)) {
+            $updateWhere = 'clientid = ' . (int)$clientid . ' AND corpfrid = ' . (int)$corpfranchisee;
+            $dataAry = array('franchiseeid' => $franchiseeid);
+            $this->db->where($updateWhere);
+            $queyUpdate = $this->db->update(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
+            if ($queyUpdate) {
+                $flag = true;
+            } else {
+                $flag = false;
+            }
+        } else {
+            $dataAry = array('franchiseeid' => $franchiseeid,
+                'corpfrid' => $corpfranchisee,
+                'clientid' => $clientid);
+            $this->db->insert(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__, $dataAry);
+            if ($this->db->affected_rows() > 0) {
+                $flag = true;
+            } else {
+                $flag = false;
+            }
+        }
+        if ($flag) {
+            return true;
+        } else {
+            return false;
+        }
+
+        /*$getcorpDets = $this->getdetailsbyfrisandsiteid($corpfranchisee,$clientid);
         if(!empty($getcorpDets)){
             $getParentcorpDets = $this->getdetailsbyfrisandsiteid($corpfranchisee,$getcorpDets['clientType']);
             if(!empty($getParentcorpDets)){
@@ -1146,7 +1176,7 @@ class Franchisee_Model extends Error_Model
                 }
             }
 
-        }
+        }*/
 
     }
 

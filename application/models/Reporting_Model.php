@@ -354,9 +354,9 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
     }
 
     function getcomparisonrecord($siteid,$drugtype,$compparm=1){
-         $groupbystr = 'MONTH(testdate)';
+         $groupbystr = 'MONTH(testdate), YEAR(testdate) DESC';
          if($compparm == 2){
-             $groupbystr = 'YEAR(testdate)';
+             $groupbystr = 'YEAR(testdate) DESC';
          }
         $wherestr = " Clientid = ".(int)$siteid." AND Drugtestid LIKE '%".$drugtype."%'";
         $query = $this->db->select('MONTHNAME(testdate) as month, YEAR(testdate) as year')
@@ -371,6 +371,8 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
             ->where($wherestr)
             ->group_by($groupbystr)
             ->get();
+        /*$q = $this->db->last_query();
+        echo $q;*/
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {

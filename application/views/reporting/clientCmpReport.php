@@ -88,7 +88,7 @@
                                             $selected = ($allFrDetailsSearchList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
                                             if($allFrDetailsSearchList['id'] == $_POST['szSearch1']){ ?>
                                         <script type="text/javascript">
-                                            setTimeout(function(){getClientListByFrIdData('<?php echo $_POST['szSearch1'];?>');},50000);
+                                            setTimeout(function(){getClientListByFrIdData('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>');},300);
                                         
                                         </script>
                                             <?php }
@@ -108,7 +108,7 @@
                             <?php }elseif($_SESSION['drugsafe_user']['iRole'] == 2){?>
                             <input type="hidden" name="szSearch1" value="<?php echo $_SESSION['drugsafe_user']['id'];?>" />
                             <script type="text/javascript">
-                                setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>');},50000);
+                                setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>');},500);
 
                             </script>
                         <?php } ?>
@@ -275,7 +275,7 @@
                                                 foreach ($compareresultarr as $comparisondata) { ?>
                                                     <tr>
                                                         <td>
-                                                            <?php echo($comparetype == 1 ? $comparisondata['month'] : $comparisondata['year']); ?>
+                                                            <?php echo($comparetype == 1 ? $comparisondata['month'].' '.$comparisondata['year'] : $comparisondata['year']); ?>
                                                         </td>
                                                         <td><?php echo ($testtype == 'A'?'Alcohol':($testtype == 'U'?'Urine AS/NZA 4308:2001':($testtype == 'O'?'Oral Fluid AS 4760:2006':($testtype=='AZ'?'As/NZA 4308:2008':''))));?></td>
                                                         <td><?php echo ($testtype == 'A'?$comparisondata['totalAlcohol']:($testtype == 'U'?$comparisondata['totalDonarUrine']:($testtype == 'O'?$comparisondata['totalDonarOral']:($testtype=='AZ'?$comparisondata['totalDonarUrine']:'0'))));?></td>

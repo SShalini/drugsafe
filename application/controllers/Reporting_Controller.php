@@ -3008,7 +3008,7 @@ class Reporting_Controller extends CI_Controller
             $result .= "<script type='text/javascript'>
                             setTimeout(function () {
                                 getSiteListByClientIdData('" . $clientid . "','" . $siteid . "');
-                            }, 500);
+                            }, 300);
                         </script>";
         }
         echo $result;
@@ -3490,7 +3490,7 @@ class Reporting_Controller extends CI_Controller
             foreach ($compareresultarr as $comparisondata) {
                 $html .= '<tr>
                             <td>
-                                ' . ($comparetype == 1 ? $comparisondata['month'] : $comparisondata['year']) . '
+                                ' . ($comparetype == 1 ? $comparisondata['month'].' '.$comparisondata['year'] : $comparisondata['year']) . '
                             </td>
                             <td>' . ($testtype == '1' ? 'Alcohol' : ($testtype == '3' ? 'Urine AS/NZA 4308:2001' : ($testtype == '2' ? 'Oral Fluid AS 4760:2006' : ($testtype == '4' ? 'As/NZA 4308:2008' : '')))) . '</td>
                             <td>' . ($testtype == '1' ? $comparisondata['totalAlcohol'] : ($testtype == '3' ? $comparisondata['totalDonarUrine'] : ($testtype == '2' ? $comparisondata['totalDonarOral'] : ($testtype == '4' ? $comparisondata['totalDonarUrine'] : '0')))) . '</td>
@@ -3603,7 +3603,7 @@ class Reporting_Controller extends CI_Controller
             $x = 4;
             foreach ($compareresultarr as $comparisondata) {
                 $this->excel->getActiveSheet()->setCellValue('A' . $x, $x - 3);
-                $this->excel->getActiveSheet()->setCellValue('B' . $x, ($comparetype == 1 ? $comparisondata['month'] : $comparisondata['year']));
+                $this->excel->getActiveSheet()->setCellValue('B' . $x, ($comparetype == 1 ? $comparisondata['month'].' '.$comparisondata['year'] : $comparisondata['year']));
                 $this->excel->getActiveSheet()->setCellValue('C' . $x, ($testtype == '1' ? 'Alcohol' : ($testtype == '3' ? 'Urine AS/NZA 4308:2001' : ($testtype == '2' ? 'Oral Fluid AS 4760:2006' : ($testtype == '4' ? 'As/NZA 4308:2008' : '')))));
                 $this->excel->getActiveSheet()->setCellValue('D' . $x, ($testtype == '1' ? $comparisondata['totalAlcohol'] : ($testtype == '3' ? $comparisondata['totalDonarUrine'] : ($testtype == '2' ? $comparisondata['totalDonarOral'] : ($testtype == '4' ? $comparisondata['totalDonarUrine'] : '0')))));
                 $this->excel->getActiveSheet()->setCellValue('E' . $x, ($testtype == '1' ? $comparisondata['totalPositiveAlcohol'] : ($testtype == '3' ? ($comparisondata['totalDonarUrine'] - $comparisondata['totalNegativeUrine']) : ($testtype == '2' ? ($comparisondata['totalDonarOral'] - $comparisondata['totalNegativeOral']) : ($testtype == '4' ? ($comparisondata['totalDonarUrine'] - $comparisondata['totalNegativeUrine']) : '0')))));
