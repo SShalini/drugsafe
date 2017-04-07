@@ -3254,12 +3254,15 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
                                 <tbody>
                                 <?php
                                 $clcount = 1;
-                                foreach ($NonCorpFranchiseeArr as $franchiseedet){?>
+                                foreach ($NonCorpFranchiseeArr as $franchiseedet){
+                                    $franchiseeDetsArr = $this->Webservices_Model->getuserdetails($franchiseedet['franchiseeid']);
+                                    $franchiseeCode = $this->Franchisee_Model->getusercodebyuserid($franchiseedet['franchiseeid']);
+                                    ?>
                                     <tr><td><?php echo $clcount;?></td>
-                                        <td><?php echo $franchiseedet['userCode'];?></td>
-                                        <td><?php echo $franchiseedet['szName'];?></td>
-                                        <td><?php echo $franchiseedet['szEmail'];?></td>
-                                        <td><?php echo $franchiseedet['szContactNumber'];?></td>
+                                        <td><?php echo $franchiseeCode['userCode'];?></td>
+                                        <td><?php echo $franchiseeDetsArr[0]['szName'];?></td>
+                                        <td><?php echo $franchiseeDetsArr[0]['szEmail'];?></td>
+                                        <td><?php echo $franchiseeDetsArr[0]['szContactNumber'];?></td>
                                     </tr>
                                     <?php $clcount++; }
                                 ?>

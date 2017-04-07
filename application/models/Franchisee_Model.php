@@ -1229,10 +1229,11 @@ class Franchisee_Model extends Error_Model
 
     function getMappedNonCorpFranchisee($clientid, $corpfranchiseeid)
     {
-        $wherestr = 'clientid = ' . (int)$clientid . ' AND corpfrid = ' . (int)$corpfranchiseeid;
-        $query = $this->db->select('*')
+        $wherestr = 'corpclient.clientid = ' . (int)$clientid . ' AND corpclient.corpfrid = ' . (int)$corpfranchiseeid;
+        $query = $this->db->select('corpclient.franchiseeid')
             ->where($wherestr)
-            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__)
+            ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__.' as corpclient')
+            ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = corpclient.clientid')
             ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();

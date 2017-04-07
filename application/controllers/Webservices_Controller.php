@@ -83,24 +83,68 @@ class Webservices_Controller extends CI_Controller
         $franchiseeid = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
         $parentid = !empty($jsondata->parentid) ? $jsondata->parentid : "0";
         $agentid = !empty($jsondata->agentid) ? $jsondata->agentid : "0";
+        $loggedinFranchisee = 0;
+        if($parentid>0){
+            $loggedinFranchisee = $franchiseeid;
+            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($parentid);
+            if(!empty($clientDetsArr)){
+                $franchiseeid = $clientDetsArr[0]['franchiseeId'];
+            }
+        }
         $userDetailsArr = $this->Webservices_Model->getclientdetails($franchiseeid,$parentid,$agentid);
-        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($franchiseeid);
+        if($parentid == 0){
+            $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($franchiseeid);
+            if(!empty($AssignCorpuserDetailsArr)){
+                $CorpuserDetailsArr = array();
+                foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                    $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                    if(!empty($CorpSitesDetailsArr)){
+                        foreach ($CorpSitesDetailsArr as $CorpUser){
+                            array_push($CorpuserDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+
+            }
+        }
+        if($parentid>0){
+            $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
+           // print_r($AssignCorpuserDetailsArr);
+
+            if(!empty($AssignCorpuserDetailsArr)){
+                $userDetailsArr = array();
+                foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+//                    print_r($assignCorpUser);
+                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$parentid,$agentid,$assignCorpUser['clientid']);
+
+                    if(!empty($CorpuserDetailsArr)){
+                        foreach ($CorpuserDetailsArr as $CorpUser){
+                            array_push($userDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+            }
+        }
         /*$CorpClient = array();
             if(!empty($AssignCorpuserDetailsArr)){
                 $i=sizeof($userDetailsArr);
                 foreach ($AssignCorpuserDetailsArr as $AssignCorpUsr){
                     if(!in_array($AssignCorpUsr['id'],$userDetailsArr)){
-
                         array_push($userDetailsArr[$i], $AssignCorpUsr);
                         $i++;
                     }
                 }
             }*/
-        $allClients = array_merge($userDetailsArr, $AssignCorpuserDetailsArr);
+        if($parentid == 0 && !empty($userDetailsArr) && !empty($CorpuserDetailsArr)){
+            $allClients = array_merge($userDetailsArr, $CorpuserDetailsArr);
+        }else{
+            $allClients = $userDetailsArr;
+        }
+
         if(!empty($userDetailsArr))
         {
             $responsedata = array("code" => 200,
-                "message"=>"Franchisee clients"/"sites record retrieved successfully.",
+                "message"=>"Franchisee clients/sites record retrieved successfully.",
                 "userid"=>$userDetailsArr[0]['id'],
                 "szName"=>$userDetailsArr[0]['szName'],
                 "szEmail"=>$userDetailsArr[0]['szEmail'],
@@ -434,7 +478,20 @@ class Webservices_Controller extends CI_Controller
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['franchiseeid'] = !empty($jsondata->franchiseeid) ? $jsondata->franchiseeid : "";
         $data['status'] = $jsondata->status == '1' ? true : false;
+        $corpFrArr = $this->Webservices_Model->getcorpclientdetails($data['franchiseeid']);
         $franchiseesosdata = $this->Webservices_Model->getfranchiseesosformdata($data['franchiseeid']);
+        if(!empty($corpFrArr)){
+            foreach ($corpFrArr as $corpFr){
+                $CorpfranchiseesosdataArr = $this->Webservices_Model->getCorpfranchiseesosformdata($corpFr['corpfrid'],$corpFr['clientid']);
+                if(!empty($CorpfranchiseesosdataArr)){
+                    foreach ($CorpfranchiseesosdataArr as $Corpfranchiseesosdata){
+                        if(!in_array($Corpfranchiseesosdata,$franchiseesosdata)){
+                            array_push($franchiseesosdata,$Corpfranchiseesosdata);
+                        }
+                    }
+                }
+            }
+        }
         if(!empty($franchiseesosdata[0]))
         {
             $responsedata = array("code" => 200,"dataarr"=>$franchiseesosdata);
