@@ -97,7 +97,7 @@
                                                 <th> Product Code</th>
                                                 <th>  Description</th>
                                                 <th>  Cost</th>
-                                                 <th>  Expiry Date</th>
+<!--                                                 <th>  Expiry Date</th>-->
                                                  <th>  Model Stock Value</th>
                                                   <th>  Available Stock Quantity</th>
                                                 <th style="width:60px;">  Quantity</th>
@@ -123,10 +123,10 @@
                                                     <td><?php echo $drugTestKitData['szProductCode']?> </td>
                                                     <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
-                                                    <td><?php 
+<!--                                                    <td><?php 
                                                     $date= $drugTestKitData['dtExpiredOn'];
                                                     $dtExpiredOn = date("d-m-Y", strtotime($date)); 
-                                                    echo $dtExpiredOn;?> </td>
+                                                    echo $dtExpiredOn;?> </td>-->
                                                      <td><?php echo($drugTestKitDataArr['szModelStockVal'] > 0 ? $drugTestKitDataArr['szModelStockVal'] : 'N/A')?></td>
                                                     <td><?php echo($modelStockDataAry['szQuantity'] > 0 ? $modelStockDataAry['szQuantity'] : 'N/A')?></td>
                                          

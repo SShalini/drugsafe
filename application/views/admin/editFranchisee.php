@@ -215,7 +215,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-flag"></i>
                                                 </span>
-                                               <input class="form-control read-only" type="text" name="addFranchisee[szCountry]" id="szCountry" value="<?php echo $_POST['addFranchisee']['szCountry'];?>" />
+                                               <input class="form-control read-only" type="text" readonly name="addFranchisee[szCountry]" id="szCountry" value="<?php echo $_POST['addFranchisee']['szCountry'];?>" />
                                         </div>
                                         <?php if (!empty($arErrorMessages['szCountry'])) { ?>
                                             <span class="help-block pull-left">

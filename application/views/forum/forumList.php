@@ -100,8 +100,9 @@
                                 <tr>
 
                                     <th style="width:200px"> Forum Title</th>
-                                    <th style="width:500px"> Short Description </th>
+                                    <th style="width:450px"> Short Description </th>
                                      <th style="width:100px"> Total Topics </th>
+                                     <th style="width:150px"> Date Created </th>
                                     <th> Actions </th>
 
                                 </tr>
@@ -119,6 +120,7 @@
                                         <td> <?php echo $forumDataData['szForumTitle']?> </td>
                                         <td> <?php echo $forumDataData['szForumDiscription'];?> </td>
                                         <td> <?php echo $TotalTopics;?> </td>
+                                         <td> <?php echo date('d M Y',strtotime($forumDataData['dtCreatedOn'])); ?> </td>
 
                                             <td>
                                             <a class="btn btn-circle btn-icon-only btn-default" title="Add Topic " onclick="addTopic('<?php echo $forumDataData['id'];?>');" href="javascript:void(0);">

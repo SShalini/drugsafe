@@ -97,7 +97,7 @@
                                         <th> Product Code</th>
                                         <th>  Description</th>
                                         <th>  Cost</th>
-                                        <th>  Expiry Date</th>
+<!--                                        <th>  Expiry Date</th>-->
                                         <th>  Model Stock Value</th>
                                         <th>  Available Stock Quantity</th>
                                         <th style="width:60px;">  Quantity</th>
@@ -123,10 +123,10 @@
                                             <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                             <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
                                             <td>$<?php echo $marketingMaterialData['szProductCost'];?> </td>
-                                             <td><?php 
+<!--                                             <td><?php 
                                             $date= $marketingMaterialData['dtExpiredOn'];
                                             $dtExpiredOn = date("d-m-Y", strtotime($date)); 
-                                            echo $dtExpiredOn;?> </td>
+                                            echo $dtExpiredOn;?> </td>-->
                                             <td><?php echo($marketingMaterialDataArr['szModelStockVal'] > 0 ?$marketingMaterialDataArr['szModelStockVal'] : 'N/A')?></td>
                                             <td><?php echo($modelStockDataAry['szQuantity'] > 0 ? $modelStockDataAry['szQuantity'] : 'N/A')?></td>
                                            

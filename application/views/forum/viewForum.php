@@ -115,6 +115,8 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 300px">Topic</th>
+                                         <th style="width: 100px"> Date Created </th>
+                                          <th style="width: 100px">Created By</th>
                                         <th style="width: 100px">Status </th>
                                         <th style="width: 100px">Comments </th>
                                         <th style="width: 100px">Action</th>
@@ -128,10 +130,12 @@
                                         {  
                                            
                                         $commentsDataArr = count($this->Forum_Model->getAllCommentsByTopicId($forumTopicData['id'])); 
-                                            
+                                              $createdByDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $forumTopicData['idUser']);   
                                             ?>
                                         <tr>
-                                            <td> <?php echo $forumTopicData['szTopicTitle'];?> </td> 
+                                              <td> <?php echo $forumTopicData['szTopicTitle'];?> </td> 
+                                              <td> <?php echo date('d M Y',strtotime($forumTopicData['dtCreatedOn'])); ?> </td>
+                                              <td> <?php echo $createdByDetArr['szName'];?> </td>
                                             <?php if($forumTopicData['isClosed']==1)
                                             {?>
                                                   <td style="color: #e73d4a">Closed</td> 
@@ -144,7 +148,7 @@
                                                 
                                                 ?>
                                           
-                                            <td> <?php echo $commentsDataArr;?> </td> 
+                                            <td> <?php echo $commentsDataArr;?> </td>
                                             <td> <a class="btn btn-circle btn-icon-only btn-default" title="View Topic Details" onclick="viewTopicDetails('<?php echo $forumTopicData['id'];?>','<?php echo $forumTopicData['idForum'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-eye"></i> 
                                              </a>

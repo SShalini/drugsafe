@@ -1952,7 +1952,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                 <div class="well">
                                                     <div class="row static-info align-reverse totalpr">
                                                         <div class="col-md-6 name portlet_list_title">
-                                                            Total Price:
+                                                            Total Price (Exc GST):
                                                         </div>
                                                         <div class="col-md-6 value">
                                                             <input id="totalprice" class="form-control" type="hidden"

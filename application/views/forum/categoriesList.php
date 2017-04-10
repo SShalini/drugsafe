@@ -89,8 +89,9 @@
                                         <thead>
                                             <tr>
                                                 <th> No </th>
-                                                <th> Category Name</th>
-                                                <th> Category Description</th>
+                                                <th> Category Name </th>
+                                                <th> Category Description </th>
+                                                  <th> Date Created </th>
                                                 <th> Actions </th>
                                             </tr>
                                         </thead>
@@ -106,7 +107,7 @@
                                                     <td> <?php echo $i ;?> </td>
                                                     <td> <?php echo $categoriesData['szName'];?> </td>
                                                     <td> <?php echo $categoriesData['szDiscription'];?> </td>
-
+                                                     <td> <?php echo date('d M Y',strtotime($categoriesData['dtCreatedOn'])); ?> </td>
 
                                                         <td>
                                                           <?php if($_SESSION['drugsafe_user']['iRole']==1){?>    

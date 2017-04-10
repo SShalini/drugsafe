@@ -16,7 +16,7 @@ class Forum_Model extends Error_Model {
                 }
                  
             
-            $this->db->select('id,szName,szDiscription');
+            $this->db->select('id,szName,dtCreatedOn,szDiscription');
         
             $this->db->limit($limit, $offset);
             $this->db->order_by("id", "desc");
@@ -231,6 +231,7 @@ class Forum_Model extends Error_Model {
             $this->db->select('*');
         
             $this->db->limit($limit, $offset);
+            $this->db->order_by("id", "desc");
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_DATA__);
 
             if($query->num_rows() > 0)
@@ -383,6 +384,7 @@ class Forum_Model extends Error_Model {
             }
             $this->db->where($whereAry); 
             $this->db->select('id,szTopicTitle,szTopicDescreption,idForum,idUser,dtCreatedOn,isClosed');
+            $this->db->order_by("id", "desc");
               $this->db->limit($limit, $offset);
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_TOPIC__);
 
@@ -468,6 +470,7 @@ class Forum_Model extends Error_Model {
             }
           
             $this->db->where($whereAry); 
+              $this->db->order_by("id", "desc");
             $this->db->select('id,idCmnters,szCmnt,cmntDate,idTopic');
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_COMMENTS__);
 

@@ -296,7 +296,7 @@ class Ordering_Controller extends CI_Controller
          }
           if(!empty($data_validate['cobp']) || !empty($data_validate['cohr'])){
         $this->form_validation->set_rules('orderingData[cobp]', 'Base Price', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[cohr]', 'Hours', 'required|greater_than[2]|numeric');
+        $this->form_validation->set_rules('orderingData[cohr]', 'Hours', 'required|greater_than[0]|numeric');
               $checkforvalidation = true;
          }
         if(!empty($data_validate['urineNata'])){

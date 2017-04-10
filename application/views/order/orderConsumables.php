@@ -98,7 +98,6 @@
                                         <th> Product Code</th>
                                         <th>  Description</th>
                                         <th>  Cost</th>
-                                        <th>  Expiry Date</th>
                                         <th>  Model Stock Value</th>
                                          <th>  Available Stock Quantity</th>
                                         <th style="width:60px;">  Quantity</th>
@@ -125,10 +124,6 @@
                                             <td> <?php echo $consumablesData['szProductCode']?> </td>
                                             <td> <?php echo $consumablesData['szProductDiscription'];?> </td>
                                             <td> $<?php echo $consumablesData['szProductCost'];?> </td>
-                                             <td><?php 
-                                            $date= $consumablesData['dtExpiredOn'];
-                                            $dtExpiredOn = date("d-m-Y", strtotime($date)); 
-                                            echo $dtExpiredOn;?> </td>
                                              <td><?php echo($consumablesDataArr['szModelStockVal'] > 0 ? $consumablesDataArr['szModelStockVal'] : 'N/A')?></td>
                                              <td><?php echo($modelStockDataAry['szQuantity'] > 0 ? $modelStockDataAry['szQuantity'] : 'N/A')?></td>
                                          
