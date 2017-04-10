@@ -3245,11 +3245,13 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
                         <?php if(!empty($NonCorpFranchiseeArr)){?>
                             <table class="table table-striped table-hover">
                                 <thead>
+                                <tr>
                                 <th>#</th>
                                 <th>Franchisee Code</th>
                                 <th>Franchisee</th>
                                 <th>Email</th>
-                                <th>Contact</th>
+                                <th>Action</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 <?php
@@ -3262,7 +3264,10 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
                                         <td><?php echo $franchiseeCode['userCode'];?></td>
                                         <td><?php echo $franchiseeDetsArr[0]['szName'];?></td>
                                         <td><?php echo $franchiseeDetsArr[0]['szEmail'];?></td>
-                                        <td><?php echo $franchiseeDetsArr[0]['szContactNumber'];?></td>
+<!--                                        <td>--><?php //echo $franchiseeDetsArr[0]['szContactNumber'];?><!--</td>-->
+                                        <td><a class="btn btn-circle btn-icon-only btn-default" id="unassignsite" title="Unassign Site" onclick="unassignSite(<?php echo $franchiseedet['id'];?>);" href="javascript:void(0);"></i>
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </a></td>
                                     </tr>
                                     <?php $clcount++; }
                                 ?>
@@ -3822,6 +3827,65 @@ if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_CONFIRM__') {
             </div>
         </div>
     </div>
+    <?php
+}
+
+if ($mode == '__UNASSIGN_SITE_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="unassignSiteAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Unassign Site</span></h4>
+                    </div>
+
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        unassign this site?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+
+                    <button type="button" onclick="unassignSiteConfirmation('<?php echo $mapid; ?>'); return false;"
+                            class="btn green"><i class="fa fa-times"></i> Unassign
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+if ($mode == '__UNASSIGN_SITE_CONFIRM_POPUP__') {
+    echo "SUCCESS||||";
+    ?>
+    <div id="unassignSiteConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
+                        <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                            <span class="caption-subject font-red-sunglo bold uppercase">Unassign Site</span></h4>
+                    </div>
+
+                </div>
+
+                <div class="modal-body">
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Site has been successfully unassigned.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/viewClientDetails" class="btn dark btn-outline">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php
 }
   ?>

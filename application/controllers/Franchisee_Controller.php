@@ -642,7 +642,20 @@ class Franchisee_Controller extends CI_Controller
             
          $this->pagination->initialize($config);
         
-        $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3)); 
+        $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3));
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
+        $CorpuserDetailsArr = array();
+        if(!empty($AssignCorpuserDetailsArr)){
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                if(!empty($CorpSitesDetailsArr)){
+                    foreach ($CorpSitesDetailsArr as $CorpUser){
+                        array_push($CorpuserDetailsArr,$CorpUser);
+                    }
+                }
+            }
+
+        }
         $clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true,$idFr);       
         
         if(!empty($_POST)){
@@ -655,6 +668,7 @@ class Franchisee_Controller extends CI_Controller
         $data['id'] = $id;
         $data['flag'] = $flag;
         $data['clientlistArr'] = $clientlistArr;
+        $data['CorpuserDetailsArr'] = $CorpuserDetailsArr;
         $data['pageName'] = "Client_Record";
         $data['szMetaTagTitle'] = "Client Record";
         $data['is_user_login'] = $is_user_login;
@@ -1579,7 +1593,23 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('admin/admin_ajax_functions', $data);
            }
   
-        } 
+        }
+
+    public function unassignSiteAlert()
+    {
+        $data['mode'] = '__UNASSIGN_SITE_POPUP__';
+        $data['mapid'] = $this->input->post('mapid');
+        $this->load->view('admin/admin_ajax_functions',$data);
+    }
+    public function unassignSiteConfirmation()
+    {
+
+        $data['mode'] = '__UNASSIGN_SITE_CONFIRM_POPUP__';
+        $data['mapid'] = $this->input->post('mapid');
+        if($this->Franchisee_Model->unassignSite($data['mapid'])){
+            $this->load->view('admin/admin_ajax_functions', $data);
+        }
+    }
 }
 
 ?>

@@ -3170,3 +3170,33 @@ function updateCartData(prodcount){
                         $("#updateCart").submit(); 
        }
 }
+
+function unassignSite(mapid)
+{
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/unassignSiteAlert", {mapid:mapid,}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#unassignSiteAlert').modal("show");
+            jQuery('#loader').attr('style', 'display:none');
+        }
+    });
+}
+function unassignSiteConfirmation(mapid) {
+
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#approveReplyAlert').modal("hide");
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/franchisee/unassignSiteConfirmation", {mapid: mapid}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#unassignSiteConfirmation').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+    });
+}

@@ -1230,7 +1230,7 @@ class Franchisee_Model extends Error_Model
     function getMappedNonCorpFranchisee($clientid, $corpfranchiseeid)
     {
         $wherestr = 'corpclient.clientid = ' . (int)$clientid . ' AND corpclient.corpfrid = ' . (int)$corpfranchiseeid;
-        $query = $this->db->select('corpclient.franchiseeid')
+        $query = $this->db->select('corpclient.id, corpclient.franchiseeid')
             ->where($wherestr)
             ->from(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__.' as corpclient')
             ->join(__DBC_SCHEMATA_USERS__ . ' as user', 'user.id = corpclient.clientid')
@@ -1361,6 +1361,17 @@ class Franchisee_Model extends Error_Model
             return false;
         }
 
+    }
+
+    function unassignSite($mapid){
+        $whereAry = 'id =' . (int)$mapid;
+        $query = $this->db->where($whereAry)
+            ->delete(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__);
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 ?>
