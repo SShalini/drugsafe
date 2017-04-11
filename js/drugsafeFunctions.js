@@ -476,7 +476,7 @@ function productDeleteAlert(idProduct,flag)
 
         });
     }
-    function deleteCategoryAlert(idCategory)
+function deleteCategoryAlert(idCategory)
 {
     jQuery('#loader').attr('style', 'display:block');
     $.post(__BASE_URL__ + "/forum/deleteCategoryAlert", {idCategory: idCategory}, function (result) {

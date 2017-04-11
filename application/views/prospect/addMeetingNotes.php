@@ -51,7 +51,6 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
-                      
                                     </div>
                                     <div class="form-actions">
                                     <div class="row">
@@ -65,12 +64,11 @@
                               
                                  <?php }?>
                                             <input type="submit" class="btn green-meadow" value="SAVE" name="meetingNotesData[submit]">
-                                        </div>
                                     </div>
-                                    </div>
-                                    
-                            </form>
-                        </div>
+                                </div>
+                            </div>   
+                        </form>
+                    </div>
                 </div>
             </div> 
         </div>
