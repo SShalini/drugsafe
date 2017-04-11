@@ -689,51 +689,37 @@ if ($mode == '__REPLY_CONFIRM_POPUP__') {
 
     <?php
 }
-if ($mode == '__COMMENT_POPUP__') {
+if ($mode == '__TOPIC_POPUP__') {
     echo "SUCCESS||||";
     ?>
 
 
-    <div id="showComment" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="showTopic" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <?php $cmntDataArr = $this->Forum_Model->getAllCommentsByCmntId($idComment);
+                <?php
 
-                $TopicsArr = $this->Forum_Model->viewTopicListByTopicId($cmntDataArr['idTopic']);
-                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $cmntDataArr['idCmnters']);
-
-
-                $splitTime = explode(" ", $cmntDataArr['cmntDate']);
-                $Cmntdate = $splitTime[0];
-                $time = $splitTime[1];
-
-                $Cmnttime = date("g:i a", strtotime($time));
-
-                $NewdateComment = explode('-', $Cmntdate);
-
-                $CnmtmonthNum = $NewdateComment['1'];
-
-                $dateObj = DateTime::createFromFormat('!m', $CnmtmonthNum);
-                $CmntmonthName = $dateObj->format('M');
+                $TopicsArr = $this->Forum_Model->viewTopicListByTopicId($idTopic);
+                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$TopicsArr['idUser']);
+            
                 ?>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Comment</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Topic</span></h4>
                     </div>
 
                 </div>
 
                 <div>
-                    <h4 class="text_cmnt"><b> Topic - <?php echo $TopicsArr['szTopicTitle'] ?>  </b></h4>
+                    <h4 class="text_cmnt"><b>Title - <?php echo $TopicsArr['szTopicTitle'] ?>  </b></h4>
                 </div>
                 <div class="modal-body">
-                    <h4 class="alert alert-success"> <?php echo $cmntDataArr['szCmnt']; ?> </h4>
+                    <h4 class="alert alert-success"> <?php echo $TopicsArr['szTopicDescreption']; ?> </h4>
                     <span class="todo-comment-username cmntDetais"><?php echo $franchiseeDetArr1['szName'] ?></span>
                     &nbsp; <span
-                        class="todo-comment-date"><?php echo $NewdateComment['2']; ?> <?php echo $CmntmonthName; ?>  <?php echo $NewdateComment['0']; ?>
-                        at <?php echo $Cmnttime; ?></span>
+                        class="todo-comment-date"> <?php echo date('d M Y',strtotime($TopicsArr['dtCreatedOn'])) . ' at '.date('h:i A',strtotime($TopicsArr['dtCreatedOn'])); ?></span>
                 </div>
 
                 <div class="modal-footer">
@@ -1175,29 +1161,29 @@ if ($mode == '__EDIT_REPLY_POPUP_CONFIRM__') {
 
     <?php
 }
-if ($mode == '__APPROVE_COMMENT_POPUP__') {
+if ($mode == '__APPROVE_TOPIC_POPUP__') {
     echo "SUCCESS||||";
     ?>
-    <div id="approveCommentAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="approveTopicAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Approve Comment</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Approve Topic</span></h4>
                     </div>
 
                 </div>
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        approve this comment?</p>
+                        approve this topic?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button"
-                            onclick="approveCommentConfirmation('<?php echo $idComment; ?>'); return false;"
+                            onclick="approveTopicConfirmation('<?php echo $idTopic; ?>'); return false;"
                             class="btn green"><i class="fa fa-check"></i> Approve
                     </button>
                 </div>
@@ -1206,23 +1192,23 @@ if ($mode == '__APPROVE_COMMENT_POPUP__') {
     </div>
     <?php
 }
-if ($mode == '__COMMENT_APPROVE_CONFIRM_POPUP__') {
+if ($mode == '__TOPIC_APPROVE_CONFIRM_POPUP__') {
     echo "SUCCESS||||";
     ?>
-    <div id="approveCommentConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="approveTopicConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Approved Comment</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Approved Topic</span></h4>
                     </div>
 
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been successfully approved.
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Topic has been successfully approved.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -1233,30 +1219,30 @@ if ($mode == '__COMMENT_APPROVE_CONFIRM_POPUP__') {
     </div>
 
 <?php }
-if ($mode == '__UNAPPROVE_COMMENT_POPUP__') {
+if ($mode == '__UNAPPROVE_TOPIC_POPUP__') {
     echo "SUCCESS||||";
     ?>
-    <div id="unapproveCommentAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="unapproveTopicAlert" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Unapprove Comment</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Unapprove Topic</span></h4>
                     </div>
 
                 </div>
 
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        unapprove this Comment?</p>
+                        unapprove this Topic?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button"
-                            onclick="unapproveCommentConfirmation('<?php echo $idComment; ?>'); return false;"
+                            onclick="unapproveTopicConfirmation('<?php echo $idTopic; ?>'); return false;"
                             class="btn green"><i class="fa fa-times"></i> Unapprove
                     </button>
                 </div>
@@ -1265,10 +1251,10 @@ if ($mode == '__UNAPPROVE_COMMENT_POPUP__') {
     </div>
     <?php
 }
-if ($mode == '__COMMENT_UNAPPROVE_CONFIRM_POPUP__') {
+if ($mode == '__TOPIC_UNAPPROVE_CONFIRM_POPUP__') {
     echo "SUCCESS||||";
     ?>
-    <div id="unapproveCommentConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+    <div id="unapproveTopicConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
          data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -1276,12 +1262,12 @@ if ($mode == '__COMMENT_UNAPPROVE_CONFIRM_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Unapproved Comment</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Unapproved Topic</span></h4>
                     </div>
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Comment has been successfully unapproved.
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Topic has been successfully unapproved.
                     </p>
                 </div>
                 <div class="modal-footer">

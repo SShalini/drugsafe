@@ -38,7 +38,7 @@
                         </li>
                        
                         <li>
-                            <span class="active">Comment/Reply List</span>
+                            <span class="active">Topic List</span>
                         </li>
                     </ul>
                     <div class="portlet light bordered">
@@ -56,7 +56,7 @@
                         </div>
                         <?php
                         
-                        if(!empty($replyDataArr)||!empty($cmntDataArr))
+                        if(!empty($topicDataArr))
                         {
                             
                       
@@ -68,8 +68,8 @@
                                 <thead>
                                     <tr>
                                        
-                                        <th style="width: 180px">Topic</th>
-                                        <th style="width: 220px">Comment/Reply</th>
+                                        <th style="width: 180px">Topic Title</th>
+                                        <th style="width: 220px">Topic Description</th>
                                        <th style="width: 80px"> Actions </th>
                                        
                                     </tr>
@@ -77,21 +77,19 @@
                                 <tbody>
                                     
                                     <?php
-                                    if(!empty($cmntDataArr)){
+                                    if(!empty($topicDataArr)){
                                      $i = 0;
-                                       foreach($cmntDataArr as $cmntData)
+                                       foreach($topicDataArr as $topicData)
                                         { 
-                                      
-                                        $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntData['idTopic']); 
-
+                                    
                                         ?>
                                         <tr>
                                           
-                                              <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
+                                              <td> <?php echo $topicData['szTopicTitle']?> </td>
                                               <?php
 
-                                              $retval = $cmntData['szCmnt'];
-                                              $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $cmntData['szCmnt']);
+                                              $retval = $topicData['szTopicDescreption'];
+                                              $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $topicData['szTopicDescreption']);
                                               $string = str_replace("\n", " ", $string);
                                               $array = explode(" ", $string);
                                               if (count($array)<=15)
@@ -102,7 +100,7 @@
                                               {
                                                   array_splice($array, 15);
                                                   $retval = implode(" ", $array)." ...";
-                                                  $retval .= '<a onclick="showComment('.$cmntData['id'].');" href="javascript:void(0);" >Read more</a>';
+                                                  $retval .= '<a onclick="showTopic('.$topicData['id'].');" href="javascript:void(0);" >Read more</a>';
                                               }
                                                ?>
                                             
@@ -110,10 +108,10 @@
                                               <td><?php echo $retval;  ?></td>
                                          
                                                 <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveComment('<?php echo $cmntData['id'];?>');" href="javascript:void(0);">
+                                                <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveTopic('<?php echo $topicData['id'];?>');" href="javascript:void(0);">
                                                     <i class="fa fa-check"></i> 
                                                 </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Unapprove" onclick="unapproveComment(<?php echo $cmntData['id'];?>);" href="javascript:void(0);"></i>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Unapprove" onclick="unapproveTopic(<?php echo $topicData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-times" aria-hidden="true"></i>
                                                 </a>
                                                 </td>
@@ -123,55 +121,7 @@
                                         $i++;
                                         }   
                                     }
-                                   if(!empty($replyDataArr)){
-                                      $i = 0;
-                                      
-                                       foreach($replyDataArr as $replyData)
-                                        {
-                                       
-                                        $cmntsArr =$this->Forum_Model->viewCmntListByCmntId($replyData['idCmnt']); 
-                                        $TopicsArr =$this->Forum_Model->viewTopicListByTopicId($cmntsArr['idTopic']); 
-                                        
-                                       
-                                        ?>
-                                        <tr>
-                                          
-                                              <td> <?php echo $TopicsArr['szTopicTitle']?> </td>
-                                             
-
-                                           <?php
-                                           $replytext = $replyData['szReply'];
-                                           $replystring = preg_replace('/(?<=\S,)(?=\S)/', ' ', $replyData['szReply']);
-                                           $replystring = str_replace("\n", " ", $replystring);
-                                           $arrayrep = explode(" ", $replystring);
-                                           if (count($arrayrep)<=15)
-                                           {
-                                               $replytext = $replystring;
-                                           }
-                                           else
-                                           {
-                                               array_splice($arrayrep, 15);
-                                               $replytext = implode(" ", $arrayrep)." ...";
-                                               $replytext .= '<a onclick="showReply('.$replyData['id'].');" href="javascript:void(0);" >Read more</a>';
-                                           }
-                                               ?>
-                                            
-                                              
-                                              <td><?php echo $replytext;  ?></td>
-                                         <td>
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Approve" onclick="approveReply('<?php echo $replyData['id'];?>');" href="javascript:void(0);">
-                                                    <i class="fa fa-check"></i> 
-                                                </a>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="ForumStatus" title="Unapprove" onclick="unapproveReply(<?php echo $replyData['id'];?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                                </a>
-                                                </td>
-                                      
-                                        </tr>
-                                        <?php
-                                        $i++;
-                                        }  
-                                    }
+                                 
                                    ?>
                                         
                                 </tbody>

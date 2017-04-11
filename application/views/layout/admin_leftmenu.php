@@ -421,7 +421,7 @@
                         </a>
                     </li>
                       <?php if ($_SESSION['drugsafe_user']['iRole'] == 1 ) { ?>
-                     <li class="nav-item  <?php if ($subpageName == 'Comment/Reply Approval') { ?> active open <?php } ?>">
+                     <li class="nav-item  <?php if ($subpageName == 'Topic Approval') { ?> active open <?php } ?>">
                         <a class="nav-link " href="<?php echo __BASE_URL__; ?>/forum/approvallist">
                             <i class="fa fa-check-circle" aria-hidden="true"></i>
                             <span class="title"> Approval</span>

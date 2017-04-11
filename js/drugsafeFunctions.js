@@ -847,16 +847,16 @@ function viewCalcDetails(idsite,Drugtestid,sosid) {
     });
 
 }
-  function showComment(idComment)
+  function showTopic(idTopic)
 {
     
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/showCommentData", {idComment: idComment,}, function (result) {
+    $.post(__BASE_URL__ + "/forum/showTopicData", {idTopic: idTopic,}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
-            $('#showComment').modal("show");
+            $('#showTopic').modal("show");
              jQuery('#loader').attr('style', 'display:none');
         }
        
@@ -1183,65 +1183,65 @@ var val = CKEDITOR.instances.szComment.getData();
 }
 
 
-function approveComment(idComment)
+function approveTopic(idTopic)
 {
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/approveCommentAlert", {idComment:idComment,}, function (result) {
+    $.post(__BASE_URL__ + "/forum/approveTopicAlert", {idTopic:idTopic,}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
-            $('#approveCommentAlert').modal("show");
+            $('#approveTopicAlert').modal("show");
              jQuery('#loader').attr('style', 'display:none');
         }
        
 
     });
 }
-function approveCommentConfirmation(idComment) {
+function approveTopicConfirmation(idTopic) {
 
         $('.modal-backdrop').remove();
         $('#static').modal("hide");
-        $('#approveCommentAlert').modal("hide");
+        $('#approveTopicAlert').modal("hide");
         jQuery('#loader').attr('style', 'display:block');
-        $.post(__BASE_URL__ + "/forum/approveCommentConfirmation", {idComment: idComment}, function (result) {
+        $.post(__BASE_URL__ + "/forum/approveTopicConfirmation", {idTopic: idTopic}, function (result) {
             var result_ary = result.split("||||");
             var res = result_ary[0].trim(" ");
             if (res == 'SUCCESS') {
                 $("#popup_box").html(result_ary[1]);
-                $('#approveCommentConfirmation').modal("show");
+                $('#approveTopicConfirmation').modal("show");
             }
             jQuery('#loader').attr('style', 'display:none');
 
         });
     }
-function unapproveComment(idComment)
+function unapproveTopic(idTopic)
 {
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/forum/unapproveCommentAlert", {idComment:idComment,}, function (result) {
+    $.post(__BASE_URL__ + "/forum/unapproveTopicAlert", {idTopic:idTopic,}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
             $("#popup_box").html(result_ary[1]);
-            $('#unapproveCommentAlert').modal("show");
+            $('#unapproveTopicAlert').modal("show");
              jQuery('#loader').attr('style', 'display:none');
         }
        
 
     });
 }
-function unapproveCommentConfirmation(idComment) {
+function unapproveTopicConfirmation(idTopic) {
 
         $('.modal-backdrop').remove();
         $('#static').modal("hide");
-        $('#unapproveCommentAlert').modal("hide");
+        $('#unapproveTopicAlert').modal("hide");
         jQuery('#loader').attr('style', 'display:block');
-        $.post(__BASE_URL__ + "/forum/unapproveCommentConfirmation", {idComment: idComment}, function (result) {
+        $.post(__BASE_URL__ + "/forum/unapproveTopicConfirmation", {idTopic: idTopic}, function (result) {
             var result_ary = result.split("||||");
             var res = result_ary[0].trim(" ");
             if (res == 'SUCCESS') {
                 $("#popup_box").html(result_ary[1]);
-                $('#unapproveCommentConfirmation').modal("show");
+                $('#unapproveTopicConfirmation').modal("show");
             }
             jQuery('#loader').attr('style', 'display:none');
 

@@ -149,6 +149,7 @@
                         ?>
                         <li class="media">
                                         <a class="pull-left" href="javascript:;">
+                                            <a href="viewForum.php"></a>
                                         <img class="todo-userpic"  src="<?php echo $szImage;?>" width="27px" height="27px">
                                         </a>
                                         <div class="media-body todo-comment">

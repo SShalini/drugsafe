@@ -70,7 +70,7 @@
                                         foreach($forumDetailsAry as $forumDetailsData)
                                         {  
                                        
-                                            
+                                          
                                             ?>
                                         <tr>
                                             <td>

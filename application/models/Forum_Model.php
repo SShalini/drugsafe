@@ -102,7 +102,7 @@ class Forum_Model extends Error_Model {
             
                  $this->db->where($whereAry); 
            
-            $this->db->select('szTopicTitle');
+            $this->db->select('szTopicTitle,szTopicDescreption,idUser,dtCreatedOn');
         
            
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_TOPIC__);
@@ -353,15 +353,33 @@ class Forum_Model extends Error_Model {
               
         function insertTopic($data,$idForum)
         {
-            $date = date('Y-m-d');
-            $dataAry = array(
+             $date = date('Y-m-d H:i:s');
+             if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                 
+                 $dataAry = array(
                                 'szTopicTitle' =>$data['szTopicTitle'],
                                 'szTopicDescreption' =>$data['szTopicDiscription'],
+                                'isApproved'  => '1',
+                                'isAdminApproved' => '1',
 				'dtCreatedOn' => $date,
                                 'idUser'  => $_SESSION['drugsafe_user']['id'],
                                 'idForum'  => $idForum,
                                 'isClosed'  => '0', 
                             );
+           
+              } else{
+                              $dataAry = array(
+                                'szTopicTitle' =>$data['szTopicTitle'],
+                                'szTopicDescreption' =>$data['szTopicDiscription'],
+				'dtCreatedOn' => $date,
+                                'isApproved'  => '0',
+                                'isAdminApproved' => '0',
+                                'idUser'  => $_SESSION['drugsafe_user']['id'],
+                                'idForum'  => $idForum,
+                                'isClosed'  => '0', 
+                            );
+              }
+           
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_TOPIC__, $dataAry);
             
             if($this->db->affected_rows() > 0)
@@ -377,10 +395,10 @@ class Forum_Model extends Error_Model {
         {
            
             if($flag==1){
-              $whereAry = array('idForum='=> $idForum,'id='=> $idTopic);   
+              $whereAry = array('idForum='=> $idForum,'id='=> $idTopic,'isAdminApproved' => '1');   
             }
             else{
-               $whereAry = array('idForum='=> $idForum);  
+               $whereAry = array('idForum='=> $idForum,'isAdminApproved' => '1');  
             }
             $this->db->where($whereAry); 
             $this->db->select('id,szTopicTitle,szTopicDescreption,idForum,idUser,dtCreatedOn,isClosed');
@@ -407,9 +425,7 @@ class Forum_Model extends Error_Model {
                                 'szCmnt' => $_POST['replyData']['szForumLongDiscription'],
                                 'idTopic' => $idTopic,
 				'cmntDate' => $date,
-                                'idCmnters' => $_SESSION['drugsafe_user']['id'],
-                                 'isAdminApproved' =>'1',
-                                  'isApproved' => '1',
+                                'idCmnters' => $_SESSION['drugsafe_user']['id']
                 
                             );
            
@@ -419,8 +435,6 @@ class Forum_Model extends Error_Model {
                                 'idTopic' => $idTopic,
 				'cmntDate' => $date,
                                 'idCmnters' => $_SESSION['drugsafe_user']['id'],
-                                'isApproved' => '0',
-                                'isAdminApproved' =>'0',
                 
                             );
               }
@@ -462,11 +476,11 @@ class Forum_Model extends Error_Model {
         {
               
             if($flag==1){
-              $whereAry = array('isApproved='=> '0','idCmnters!='=> '1');
+              $whereAry = array('idCmnters!='=> '1');
               
             }
             else{
-                $whereAry = array('idTopic='=> $idTopic,'isAdminApproved='=> '1');  
+                $whereAry = array('idTopic='=> $idTopic);  
             }
           
             $this->db->where($whereAry); 
@@ -493,8 +507,6 @@ class Forum_Model extends Error_Model {
                   $dataAry = array(
                                 'idCmnt' => $idCmnt,
                                 'szReply' => $Reply,
-                                'isApproved' => '1',
-                                'isAdminApproved' =>'1',
 				'dtReplyOn' => $date,
                                 'idReplier' =>$_SESSION['drugsafe_user']['id'],
                                 
@@ -504,8 +516,6 @@ class Forum_Model extends Error_Model {
                                $dataAry = array(
                                 'idCmnt' => $idCmnt,
                                 'szReply' => $Reply,
-                                'isApproved' => '0',
-                                'isAdminApproved' =>'0',
 				'dtReplyOn' => $date,
                                 'idReplier' =>$_SESSION['drugsafe_user']['id'],
                                 
@@ -534,13 +544,13 @@ class Forum_Model extends Error_Model {
                  }
                    else  
                      {
-                      $whereAry = array('idCmnt='=> $id,'isAdminApproved='=> '1');
+                      $whereAry = array('idCmnt='=> $id);
                       
                  }
                
            
             $this->db->where($whereAry); 
-            $this->db->select('id,idCmnt,szReply,isApproved,dtReplyOn,idReplier');
+            $this->db->select('id,idCmnt,szReply,dtReplyOn,idReplier');
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_REPLY__);
 //  $sql = $this->db->last_query($query);
 //  print_r($sql);die;
@@ -591,18 +601,17 @@ class Forum_Model extends Error_Model {
         public function getAllReply($idReply='0',$flag='0')
         {
             if($flag==1){
-                $whereAry = array('id='=> $idReply);   
+                $whereAry = array('id='=> $idReply);  
+                 $this->db->where($whereAry); 
             }
             elseif($flag==2){
                
-                  $whereAry = array('isApproved='=> '0','idReplier!='=> '1'); 
-            }
-            else{
-                $whereAry = array('isApproved='=> '0');   
+                  $whereAry = array('idReplier!='=> '1'); 
+                   $this->db->where($whereAry); 
             }
           
-            $this->db->where($whereAry); 
-            $this->db->select('id,idCmnt,szReply,isApproved,dtReplyOn,idReplier');
+           
+            $this->db->select('id,idCmnt,szReply,dtReplyOn,idReplier');
             $query = $this->db->get(__DBC_SCHEMATA_FORUM_REPLY__);
 
             if($query->num_rows() > 0)
@@ -616,7 +625,29 @@ class Forum_Model extends Error_Model {
             }
         }
        
-      public function updateReplyApproval($idReply)
+//      public function updateReplyApproval($idReply)
+//    {
+//
+//        $dataAry = array(
+//            'isAdminApproved' => '1',
+//            'isApproved' => '1'
+//        );
+//
+//        $whereAry = array('id ' => (int)$idReply);
+//
+//        $this->db->where($whereAry);
+//
+//        $this->db->update(__DBC_SCHEMATA_FORUM_REPLY__, $dataAry);
+//
+//
+//        if ($this->db->affected_rows() > 0) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+//
+//    }
+     public function updateTopicApproval($idTopic)
     {
 
         $dataAry = array(
@@ -624,33 +655,11 @@ class Forum_Model extends Error_Model {
             'isApproved' => '1'
         );
 
-        $whereAry = array('id ' => (int)$idReply);
+        $whereAry = array('id ' => (int)$idTopic);
 
         $this->db->where($whereAry);
 
-        $this->db->update(__DBC_SCHEMATA_FORUM_REPLY__, $dataAry);
-
-
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-     public function updateCommentapproval($idComment)
-    {
-
-        $dataAry = array(
-            'isAdminApproved' => '1',
-            'isApproved' => '1'
-        );
-
-        $whereAry = array('id ' => (int)$idComment);
-
-        $this->db->where($whereAry);
-
-        $this->db->update(__DBC_SCHEMATA_FORUM_COMMENTS__, $dataAry);
+        $this->db->update(__DBC_SCHEMATA_FORUM_TOPIC__, $dataAry);
 
 
         if ($this->db->affected_rows() > 0) {
@@ -681,7 +690,7 @@ class Forum_Model extends Error_Model {
         }
 
     }
-     public function updateCommentUnapproval($idComment)
+     public function updateTopicUnapproval($idTopic)
     {
 
         $dataAry = array(
@@ -689,11 +698,11 @@ class Forum_Model extends Error_Model {
             'isApproved' => '1'
         );
 
-        $whereAry = array('id ' => (int)$idComment);
+        $whereAry = array('id ' => (int)$idTopic);
 
         $this->db->where($whereAry);
 
-      $this->db->update(__DBC_SCHEMATA_FORUM_COMMENTS__, $dataAry);
+      $this->db->update(__DBC_SCHEMATA_FORUM_TOPIC__, $dataAry);
 
     
         if ($this->db->affected_rows() > 0) {
@@ -771,9 +780,8 @@ class Forum_Model extends Error_Model {
     }
 
     function commentReplyNotifications(){
-        $replyArr = $this->getAllReply(false,2);
-        $commentArr = $this->getAllCommentsByTopicId(false,1);
-        $totalNotificationCount = count($replyArr)+count($commentArr);
+         $topicDataArr = $this->viewUnapprovedTopicList();
+        $totalNotificationCount = count($topicDataArr);
         return$totalNotificationCount;
     }
    
@@ -905,5 +913,26 @@ class Forum_Model extends Error_Model {
             }
 
     }
+     public function viewUnapprovedTopicList()
+        {
+         
+            $whereAry = array('isApproved' => '0');  
+          
+            $this->db->where($whereAry); 
+            $this->db->select('id,szTopicTitle,szTopicDescreption,idForum,idUser,dtCreatedOn,isClosed');
+            $this->db->order_by("id", "desc");
+              $this->db->limit($limit, $offset);
+            $query = $this->db->get(__DBC_SCHEMATA_FORUM_TOPIC__);
+
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+               
+            }
+            else
+            {
+                    return array();
+            }
+        }
 }
 ?>

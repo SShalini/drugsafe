@@ -544,19 +544,21 @@ class Forum_Controller extends CI_Controller {
                 redirect(base_url('/admin/admin_login'));
                 die;
             }
-              $replyDataArr = $this->Forum_Model->getAllReply(false,2);
-              $cmntDataArr = $this->Forum_Model->getAllCommentsByTopicId(false,1); 
+//               $replyDataArr = $this->Forum_Model->getAllReply(false,2);
+//               $cmntDataArr = $this->Forum_Model->getAllCommentsByTopicId(false,1); 
+            $topicDataArr = $this->Forum_Model->viewUnapprovedTopicList();
+            
                $count = $this->Admin_Model->getnotification();
-        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+              $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                   
-                    $data['szMetaTagTitle'] = "Comment/Reply Approval";
-                    $data['replyDataArr'] = $replyDataArr;
+                    $data['szMetaTagTitle'] = "Topic Approval";
+                    $data['topicDataArr'] = $topicDataArr; 
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Forum";
-                    $data['subpageName'] = "Comment/Reply Approval";
+                    $data['subpageName'] = "Topic Approval";
                     $data['notification'] = $count;
                     $data['commentnotification'] = $commentReplyNotiCount;
-                    $data['cmntDataArr'] = $cmntDataArr;
+                   
                     $data['data'] = $data;
            
  
@@ -564,10 +566,10 @@ class Forum_Controller extends CI_Controller {
             $this->load->view('forum/replyListForApproval');
             $this->load->view('layout/admin_footer');
         }
-        public function showCommentData()
+        public function showTopicData()
         {
-            $data['mode'] = '__COMMENT_POPUP__';
-            $data['idComment'] = $this->input->post('idComment');
+            $data['mode'] = '__TOPIC_POPUP__';
+            $data['idTopic'] = $this->input->post('idTopic');
          
             $this->load->view('admin/admin_ajax_functions',$data);
         }
@@ -661,32 +663,32 @@ class Forum_Controller extends CI_Controller {
             $this->Forum_Model->updateReply($data['idReply'],$data['val']);
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-         public function approveCommentAlert()
+         public function approveTopicAlert()
         {
-            $data['mode'] = '__APPROVE_COMMENT_POPUP__';
-            $data['idComment'] = $this->input->post('idComment');
+            $data['mode'] = '__APPROVE_TOPIC_POPUP__';
+            $data['idTopic'] = $this->input->post('idTopic');
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-         public function approveCommentConfirmation()
+         public function approveTopicConfirmation()
     {
         
-        $data['mode'] = '__COMMENT_APPROVE_CONFIRM_POPUP__';
-        $data['idComment'] = $this->input->post('idComment');
-        $this->Forum_Model->updateCommentapproval($data['idComment']);
+        $data['mode'] = '__TOPIC_APPROVE_CONFIRM_POPUP__';
+        $data['idTopic'] = $this->input->post('idTopic');
+        $this->Forum_Model->updateTopicApproval($data['idTopic']);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-     public function unapproveCommentAlert()
+     public function unapproveTopicAlert()
         {
-            $data['mode'] = '__UNAPPROVE_COMMENT_POPUP__';
-            $data['idComment'] = $this->input->post('idComment');
+            $data['mode'] = '__UNAPPROVE_TOPIC_POPUP__';
+            $data['idTopic'] = $this->input->post('idTopic');
             $this->load->view('admin/admin_ajax_functions',$data);
         }
-         public function unapproveCommentConfirmation()
+         public function unapproveTopicConfirmation()
     {
         
-        $data['mode'] = '__COMMENT_UNAPPROVE_CONFIRM_POPUP__';
-        $data['idComment'] = $this->input->post('idComment');
-        $this->Forum_Model->updateCommentUnapproval($data['idComment']);
+        $data['mode'] = '__TOPIC_UNAPPROVE_CONFIRM_POPUP__';
+        $data['idTopic'] = $this->input->post('idTopic');
+        $this->Forum_Model->updateTopicUnapproval($data['idTopic']);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
     
