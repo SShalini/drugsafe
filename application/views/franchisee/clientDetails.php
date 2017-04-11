@@ -927,7 +927,7 @@
                                         </td>
                                          <td>
                                               <?php
-                                              if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                              if($_SESSION['drugsafe_user']['iRole'] == '2'  && $addEditClientDet){
                                                ?>
                                               
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit Site" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>','1');" href="javascript:void(0);">
@@ -946,7 +946,7 @@
                                                  </a>
                                                  <?php
                                              }
-                                              if($_SESSION['drugsafe_user']['iRole'] == '2'){
+                                              if($_SESSION['drugsafe_user']['iRole'] == '2' && $addEditClientDet){
                                                     $id =   $childClientDetailsData['id'];
                                                    $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
                                                      if(empty($sosRormDetailsAry)) {

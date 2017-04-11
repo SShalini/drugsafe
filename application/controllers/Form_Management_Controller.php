@@ -66,15 +66,19 @@ class Form_Management_Controller extends CI_Controller
                     $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
                     if(!empty($CorpSitesDetailsArr)){
                         foreach ($CorpSitesDetailsArr as $CorpUser){
-                            array_push($CorpuserDetailsArr,$CorpUser);
+                            if(!in_array($CorpUser,$CorpuserDetailsArr)) {
+                                array_push($CorpuserDetailsArr, $CorpUser);
+                            }
                         }
                     }
                 }
             }
             if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
                 $clientAry = array_merge($AllclientAry, $CorpuserDetailsArr);
-            }else{
+            }elseif(!empty($AllclientAry)){
                 $clientAry = $AllclientAry;
+            }elseif(!empty($CorpuserDetailsArr)){
+                $clientAry = $CorpuserDetailsArr;
             }
             if($_POST['szSearch2']){
                 //$siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearch2']);
@@ -91,7 +95,9 @@ class Form_Management_Controller extends CI_Controller
                         $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$_POST['szSearch2'],0,$assignCorpUser['clientid']);
                         if(!empty($CorpuserDetailsArr)){
                             foreach ($CorpuserDetailsArr as $CorpUser){
-                                array_push($siteAry,$CorpUser);
+                                if(!in_array($CorpUser,$CorpuserDetailsArr)) {
+                                    array_push($siteAry, $CorpUser);
+                                }
                             }
                         }
                     }

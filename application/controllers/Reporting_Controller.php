@@ -3001,19 +3001,23 @@ class Reporting_Controller extends CI_Controller
                 $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
                 if(!empty($CorpSitesDetailsArr)){
                     foreach ($CorpSitesDetailsArr as $CorpUser){
-                        array_push($CorpuserDetailsArr,$CorpUser);
+                        if(!in_array($CorpUser,$CorpuserDetailsArr)) {
+                            array_push($CorpuserDetailsArr, $CorpUser);
+                        }
                     }
                 }
             }
         }
         if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
             $clientAry = array_merge($AllclientAry, $CorpuserDetailsArr);
-        }else{
+        }elseif(!empty($AllclientAry)){
             $clientAry = $AllclientAry;
+        }elseif(!empty($CorpuserDetailsArr)){
+            $clientAry = $CorpuserDetailsArr;
         }
         $clientid = $_POST['idclient'];
         $siteid = $_POST['idsite'];
-        $result = '<select class="form-control abc custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
+        $result = '<select class="form-control abc custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value,\'\',\'' . $_POST['idFranchisee'] . '\')">';
         if (!empty($clientAry)) {
             $result .= "<option value=''>Client Name</option>";
             foreach ($clientAry as $clientDetails) {
@@ -3053,6 +3057,7 @@ class Reporting_Controller extends CI_Controller
                 $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$_POST['idClient'],0,$assignCorpUser['clientid']);
                 if(!empty($CorpuserDetailsArr)){
                     foreach ($CorpuserDetailsArr as $CorpUser){
+
                         array_push($siteAry,$CorpUser);
                     }
                 }

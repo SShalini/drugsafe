@@ -88,7 +88,7 @@ class Webservices_Model extends Error_Model
             ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'client.clientId = user.id')
             ->where($array)
             ->get();
-        /*$q = $this->db->last_query();
+       /* $q = $this->db->last_query();
         echo $q;*/
         if ($query->num_rows() > 0) {
             $row = $query->result_array();

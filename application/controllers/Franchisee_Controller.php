@@ -441,6 +441,7 @@ class Franchisee_Controller extends CI_Controller
 
             $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$idfranchisee);
             if(!empty($AssignCorpuserDetailsArr)){
+                $addEditClientDet = false;
                 $userDetailsArr = array();
                 foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
                     $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
@@ -632,8 +633,29 @@ class Franchisee_Controller extends CI_Controller
 //        print_r($id);die;
         if($idFr>0){
             
-         $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr);   
-           
+         //$clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr);
+            $AllclientAry = $this->Webservices_Model->getclientdetails($idFr);
+            $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
+            $CorpuserDetailsArr = array();
+            if(!empty($AssignCorpuserDetailsArr)){
+                foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                    $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                    if(!empty($CorpSitesDetailsArr)){
+                        foreach ($CorpSitesDetailsArr as $CorpUser){
+                            if(!in_array($CorpUser,$CorpuserDetailsArr)){
+                                array_push($CorpuserDetailsArr,$CorpUser);
+                            }
+                        }
+                    }
+                }
+            }
+            if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
+                $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);
+            }elseif(!empty($AllclientAry)){
+                $clientAray = $AllclientAry;
+            }elseif(!empty($CorpuserDetailsArr)){
+                $clientAray = $CorpuserDetailsArr;
+            }
          if(!empty($clientAray)){
            $this->session->set_userdata('idFr', $idFr);
             redirect(base_url('/franchisee/clientRecord'));
@@ -690,7 +712,7 @@ class Franchisee_Controller extends CI_Controller
          $this->pagination->initialize($config);
         
         $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3));
-        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
+        /*$AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
         $CorpuserDetailsArr = array();
         if(!empty($AssignCorpuserDetailsArr)){
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
@@ -702,7 +724,7 @@ class Franchisee_Controller extends CI_Controller
                 }
             }
 
-        }
+        }*/
         //$clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true,$idFr);
         $AllclientAry = $this->Webservices_Model->getclientdetails($idFr);
         $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
@@ -712,15 +734,19 @@ class Franchisee_Controller extends CI_Controller
                 $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
                 if(!empty($CorpSitesDetailsArr)){
                     foreach ($CorpSitesDetailsArr as $CorpUser){
-                        array_push($CorpuserDetailsArr,$CorpUser);
+                        if(!in_array($CorpUser,$CorpuserDetailsArr)){
+                            array_push($CorpuserDetailsArr,$CorpUser);
+                        }
                     }
                 }
             }
         }
         if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
             $clientlistArr = array_merge($AllclientAry, $CorpuserDetailsArr);
-        }else{
+        }elseif(!empty($AllclientAry)){
             $clientlistArr = $AllclientAry;
+        }elseif(!empty($CorpuserDetailsArr)){
+            $clientlistArr = $CorpuserDetailsArr;
         }
         if(!empty($_POST)){
            $_POST['szSearchClRecord2']= $_POST['szSearchClRecord2'];  

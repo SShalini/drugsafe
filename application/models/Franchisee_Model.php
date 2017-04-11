@@ -274,7 +274,7 @@ class Franchisee_Model extends Error_Model
     public function getAllClientDetails($parent = false, $franchiseId = '', $ClientName = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
        
-          $array = 'isDeleted = 0 AND clientType = 0 '.($franchiseId>0?' AND franchiseeId = '.(int)$franchiseId:'').(!empty($ClientName)?' AND ds_user.szName = '.'"'.$ClientName.'"':'') ;   
+          $array = 'isDeleted = 0 AND clientType = 0 '.($franchiseId>0?' AND franchiseeId = '.(int)$franchiseId:'').(!empty($ClientName)?" AND ds_user.szName = '".$ClientName."'":'') ;
        
        
 

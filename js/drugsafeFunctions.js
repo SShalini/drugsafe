@@ -419,8 +419,10 @@ function getStateListingProfileclient(szCountry) {
         }
     });
 }
-function viewClientDetails(idClient,idfranchisee,corpclient=0) {
-
+function viewClientDetails(idClient,idfranchisee,corpclient) {
+if(!corpclient){
+    corpclient = 0;
+}
     $.post(__BASE_URL__ + "/franchisee/viewClientDetailsData", {idClient: idClient,idfranchisee: idfranchisee, corpclient:corpclient}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
