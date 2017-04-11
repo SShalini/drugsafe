@@ -53,6 +53,11 @@
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase">Forum List</span>
                         </div>
+                        <div class="actions">
+                                 <a href="<?= __BASE_URL__ ?>/forum/categoriesList" 
+                                   class=" btn green-meadow">
+                                Back </a>
+                            </div>
                         <?php 
                         if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){
                         ?>

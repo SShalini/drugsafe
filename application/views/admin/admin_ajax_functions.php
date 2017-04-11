@@ -2726,13 +2726,13 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                 <?php if (($prospectStatusDetailsAry['0']['status']==3 )||($prospectStatusDetailsAry['0']['status']==2 )) {?>
                                                 <option value="1" disabled <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
                                                 <?php } else {?>
-                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
+                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected disabled" : ""); ?>>Pre Discovery</option>
                                                 <?php } ?>
-                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected" : ""); ?>>Discovery Meeting</option>
-                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected" : ""); ?>>In Progress</option>
-                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("4") ? "selected" : ""); ?>>Non Convertible</option>
-                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("5") ? "selected" : ""); ?>>Contact Later</option>
-                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("6") ? "selected" : ""); ?>>Closed Sale</option>
+                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected disabled" : ""); ?>>Discovery Meeting</option>
+                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected disabled" : ""); ?>>In Progress</option>
+                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("4") ? "selected disabled" : ""); ?>>Non Convertible</option>
+                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("5") ? "selected disabled" : ""); ?>>Contact Later</option>
+                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("6") ? "selected disabled" : ""); ?>>Closed Sale</option>
                                                
                                             </select>
                                             </div>
