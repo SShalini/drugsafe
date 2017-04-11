@@ -24,7 +24,7 @@ if ($mode == '__DELETE_FRANCHISEE_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="deleteFranchiseeConfirmation('<?php echo $idfranchisee; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -99,7 +99,7 @@ if ($mode == '__DELETE_CLIENT_POPUP__') {
 
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button" onclick="deleteClientConfirmation('<?php echo $idClient; ?>','<?php echo $flag; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                    
                 </div>
@@ -179,7 +179,7 @@ if ($mode == '__DELETE_PRODUCT_POPUP__') {
 
                     <button type="button"
                             onclick="deleteProductConfirmation('<?php echo $idProduct; ?>','<?php echo $flag ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -271,7 +271,7 @@ if ($mode == '__REQUEST_QUANTITY_POPUP__') {
 
                     <button type="button"
                             onclick="requestQuantityConfirmation('<?php echo $idProduct; ?>','<?php echo $flag ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>
@@ -390,7 +390,7 @@ if ($mode == '__ALLOT_QUANTITY_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="allotQuantityConfirmation('<?php echo $idProduct; ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>
@@ -451,7 +451,7 @@ if ($mode == '__DELETE_OPERATION_MANAGER_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="deleteOperationManagerConfirmation('<?php echo $idOperationManager; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -514,7 +514,7 @@ if ($mode == '__DELETE_CATEGORY_POPUP__') {
 
                     <button type="button"
                             onclick="deleteCategoryConfirmation('<?php echo $idCategory; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -574,7 +574,7 @@ if ($mode == '__DELETE_FORUM_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button" onclick="deleteForumConfirmation('<?php echo $id; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -653,7 +653,7 @@ if ($mode == '__REPLY_POPUP__') {
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button" onclick="replyToCmntConfirmation('<?php echo $idCmnt; ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>
@@ -811,7 +811,7 @@ if ($mode == '__APPROVE_REPLY_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button" onclick="approveReplyConfirmation('<?php echo $idReply; ?>'); return false;"
-                            class="btn green"><i class="fa fa-check"></i> Approve
+                            class="btn green-meadow"><i class="fa fa-check"></i> Approve
                     </button>
                 </div>
             </div>
@@ -868,7 +868,7 @@ if ($mode == '__UNAPPROVE_REPLY_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button" onclick="unapproveReplyConfirmation('<?php echo $idReply; ?>'); return false;"
-                            class="btn green"><i class="fa fa-times"></i> Unapprove
+                            class="btn green-meadow"><i class="fa fa-times"></i> Unapprove
                     </button>
                 </div>
             </div>
@@ -927,7 +927,7 @@ if ($mode == '__DELETE_REPLY_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button" onclick="replyDeleteConfirmation('<?php echo $idReply; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -986,7 +986,7 @@ if ($mode == '__DELETE_COMMENT_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button" onclick="cmntDeleteConfirmation('<?php echo $idCmnt; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -1046,7 +1046,7 @@ if ($mode == '__TOPIC_CLOSE_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button" onclick="closeTopicConfirmation('<?php echo $idTopic; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Submit
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Submit
                     </button>
                 </div>
             </div>
@@ -1125,7 +1125,7 @@ if ($mode == '__EDIT_REPLY_POPUP__') {
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button" onclick="replyEditConfirmation('<?php echo $idReply; ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>
@@ -1184,7 +1184,7 @@ if ($mode == '__APPROVE_TOPIC_POPUP__') {
 
                     <button type="button"
                             onclick="approveTopicConfirmation('<?php echo $idTopic; ?>'); return false;"
-                            class="btn green"><i class="fa fa-check"></i> Approve
+                            class="btn green-meadow"><i class="fa fa-check"></i> Approve
                     </button>
                 </div>
             </div>
@@ -1243,7 +1243,7 @@ if ($mode == '__UNAPPROVE_TOPIC_POPUP__') {
 
                     <button type="button"
                             onclick="unapproveTopicConfirmation('<?php echo $idTopic; ?>'); return false;"
-                            class="btn green"><i class="fa fa-times"></i> Unapprove
+                            class="btn green-meadow"><i class="fa fa-times"></i> Unapprove
                     </button>
                 </div>
             </div>
@@ -1320,7 +1320,7 @@ if ($mode == '__EDIT_COMMENT_POPUP__') {
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button" onclick="commentEditConfirmation('<?php echo $idComment; ?>'); return false;"
-                            class="btn green">Submit
+                            class="btn green-meadow">Submit
                     </button>
                 </div>
             </div>
@@ -1382,7 +1382,7 @@ if ($mode == '__DELETE_TOPIC_POPUP__') {
 
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button" onclick="topicDeleteConfirmation('<?php echo $idTopic; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -1963,7 +1963,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                 <div class="modal-footer">
                                     <button type="button"
                                             onmousedown="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','1');"
-                                            class="btn green" name="submit"><i class="icon-basket"></i> Dispatch Order
+                                            class="btn green-meadow" name="submit"><i class="icon-basket"></i> Dispatch Order
                                     </button>
 <!--                                    <button type="button"
                                             onclick="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','0');"
@@ -2148,7 +2148,7 @@ if($mode == '__DELETE_AGENT_POPUP__')
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="agentDeleteConfirmation('<?php echo $id_agent;?>'); return false;" class="btn green"><i class="fa fa-user-times"></i> Delete</button>
+                    <button type="button" onclick="agentDeleteConfirmation('<?php echo $id_agent;?>'); return false;" class="btn green-meadow"><i class="fa fa-user-times"></i> Delete</button>
                 </div>
             </div>
         </div>
@@ -2334,7 +2334,7 @@ if ($mode == '__DELETE_AGENT_EMPLOYE_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="agentEmployeeDeleteConfirmation('<?php echo $agentId; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -2454,7 +2454,7 @@ if ($mode == '__DELETE_REGION_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="regionDeleteConfirmation('<?php echo $regionId; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -2515,7 +2515,7 @@ if ($mode == '__FRANCHISEE_STATUS_POPUP__') {
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to <?php echo $statusMsg;?>  the selected Franchisee?</p>
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to disable  the selected Franchisee?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -2554,7 +2554,7 @@ if ($mode == '__FRANCHISEE_STATUS_CONFIRM__') {
 
                 <div class="modal-body">
                     <p class="alert alert-success"><i class="fa fa-check"></i> Selected Franchisee has been successfully
-                        <?php echo $statusMsg;?>.</p>
+                        disabled.</p>
                 </div>
                 <div class="modal-footer">
                     <a href="<?php echo __BASE_URL__; ?>/admin/franchiseeList" class="btn dark btn-outline">Close</a>
@@ -2589,7 +2589,7 @@ if ($mode == '__DELETE_DISCOUNT_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="discountDeleteConfirmation('<?php echo $idDiscount; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -2652,7 +2652,7 @@ if ($mode == '__DELETE_PROSPECT_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="deleteProspectConfirmation('<?php echo $prospectId; ?>'); return false;"
-                            class="btn green"><i class="fa fa-user-times"></i> Delete
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
                 </div>
             </div>
@@ -2726,13 +2726,13 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                 <?php if (($prospectStatusDetailsAry['0']['status']==3 )||($prospectStatusDetailsAry['0']['status']==2 )) {?>
                                                 <option value="1" disabled <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
                                                 <?php } else {?>
-                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected disabled" : ""); ?>>Pre Discovery</option>
+                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
                                                 <?php } ?>
-                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected disabled" : ""); ?>>Discovery Meeting</option>
-                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected disabled" : ""); ?>>In Progress</option>
-                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("4") ? "selected disabled" : ""); ?>>Non Convertible</option>
-                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("5") ? "selected disabled" : ""); ?>>Contact Later</option>
-                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("6") ? "selected disabled" : ""); ?>>Closed Sale</option>
+                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected" : ""); ?>>Discovery Meeting</option>
+                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected" : ""); ?>>In Progress</option>
+                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("4") ? "selected" : ""); ?>>Non Convertible</option>
+                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("5") ? "selected" : ""); ?>>Contact Later</option>
+                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("6") ? "selected" : ""); ?>>Closed Sale</option>
                                                
                                             </select>
                                             </div>
@@ -3037,7 +3037,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                      
                     <div class="modal-footer">
                          <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
-                        <input type="button" name="pricesimport" value="Import" onclick="import_csv_popup_confirmation()" class="btn green"/>
+                        <input type="button" name="pricesimport" value="Import" onclick="import_csv_popup_confirmation()" class="btn green-meadow"/>
                     </div>
                 </form>
                  </div>
@@ -3070,7 +3070,7 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
                             onclick="changeToClientConfirmation('<?php echo $prospectId; ?>'); return false;"
-                            class="btn green"><i class="fa fa-check"></i> Submit
+                            class="btn green-meadow"><i class="fa fa-check"></i> Submit
                     </button>
                 </div>
             </div>
@@ -3668,7 +3668,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                 <div class="modal-footer">
                      <button type="button"
                         onclick="receiveordstatus('<?php echo $idOrder; ?>');"
-                        class="btn green" name="submit"><i class="icon-check"></i> Receive Order
+                        class="btn green-meadow" name="submit"><i class="icon-check"></i> Receive Order
                      </button>
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 </div>
@@ -3838,7 +3838,7 @@ if ($mode == '__UNASSIGN_SITE_POPUP__') {
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
 
                     <button type="button" onclick="unassignSiteConfirmation('<?php echo $mapid; ?>'); return false;"
-                            class="btn green"><i class="fa fa-times"></i> Unassign
+                            class="btn green-meadow"><i class="fa fa-times"></i> Unassign
                     </button>
                 </div>
             </div>

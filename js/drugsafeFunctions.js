@@ -2381,7 +2381,8 @@ function assignFranchiseeClientConfirmation(clientid,regionId) {
     });
 }
 
-function showSubmit(value) { 
+function showSubmit(value) {
+    alert(value);
   var statusVal = $("#statusValue").val(); 
   var idProspect = $("#idProspect").val(); 
  if((statusVal==value)||(!value)){

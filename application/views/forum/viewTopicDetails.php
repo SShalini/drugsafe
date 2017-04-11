@@ -105,7 +105,10 @@
                             echo "";
                         }
                         ?>
-        <hr style="border-top: dotted 1px;" />
+   <hr style="border-top: dotted 1px;" />
+  <?php   $commentsDataArr = $this->Forum_Model->getAllCommentsByTopicId($forumTopicDataAry['0']['id']); ?>
+  <?php if(!empty($commentsDataArr)){?>
+       
         <!-- somewhere deep start -->
   <div class="row">
     <div class="center-block col-md-16 Reply">
@@ -113,8 +116,7 @@
     </div>
   </div>
   <!-- somewhere deep end -->
-  <?php   $commentsDataArr = $this->Forum_Model->getAllCommentsByTopicId($forumTopicDataAry['0']['id']); ?>
-  <?php if(!empty($commentsDataArr)){?>
+  
  
             
 <div class="tab-content">
