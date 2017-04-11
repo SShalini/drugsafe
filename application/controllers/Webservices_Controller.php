@@ -109,14 +109,10 @@ class Webservices_Controller extends CI_Controller
         }
         if($parentid>0){
             $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
-           // print_r($AssignCorpuserDetailsArr);
-
             if(!empty($AssignCorpuserDetailsArr)){
                 $userDetailsArr = array();
                 foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-//                    print_r($assignCorpUser);
                     $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$parentid,$agentid,$assignCorpUser['clientid']);
-
                     if(!empty($CorpuserDetailsArr)){
                         foreach ($CorpuserDetailsArr as $CorpUser){
                             array_push($userDetailsArr,$CorpUser);

@@ -108,7 +108,7 @@
                             <?php }elseif($_SESSION['drugsafe_user']['iRole'] == 2){?>
                             <input type="hidden" name="szSearch1" value="<?php echo $_SESSION['drugsafe_user']['id'];?>" />
                             <script type="text/javascript">
-                                setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>');},500);
+                                setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>');},300);
 
                             </script>
                         <?php } ?>
@@ -122,6 +122,12 @@
                                             <?php
                                             foreach ($clientarr as $clientData) {
                                                 $selected = ($clientData['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
+                                                if($clientData['id'] == $_POST['szSearch2']){ ?>
+                                                    <script type="text/javascript">
+                                                        setTimeout(function(){getSiteListByClientIdData('<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch1'];?>');},500);
+
+                                                    </script>
+                                                <?php }
                                                 echo '<option value="' . $clientData['id'] . '"' . $selected . ' >' . $clientData['szName'] . '</option>';
                                             }
                                             ?>

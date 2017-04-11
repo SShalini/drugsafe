@@ -855,28 +855,9 @@
             
              <div class="row">
                            <form class="form-horizontal" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
-                          <!--<div class="search col-md-3">
-                            <input type="text" name="szSearchClDetails" id="szSearchClDetails" class="form-control input-square-right " placeholder="Id,Name Or Email " value="<?/*=sanitize_post_field_value($_POST['szSearchClDetails'])*/?>">
-                          
-                          </div>
-                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
-<!--                               <div class="search col-md-3">
-                                                               <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
-                                   <select class="form-control custom-select" name="szSearchClRecord" id="szSearch" onfocus="remove_formError(this.id,'true')">
-                                       <option value="">Client Id</option>
-                                       <?php
-                                       foreach($sitesArr as $sitesIdList)
-                                       {
-                                           $selected = ($sitesIdList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
-                                           echo '<option value="'.$sitesIdList['id'].'" >CL-'.$sitesIdList['id'].'</option>';
-                                       }
-                                       ?>
-                                   </select>
-                               </div>
-                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
-                               <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
+
                                <div class="clienttypeselect search col-md-3 ">
-                                   <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
+
                                    <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                        <option value="">Company Name</option>
                                        <?php
@@ -888,20 +869,7 @@
                                        ?>
                                    </select>
                                </div>
-<!--                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
-<!--                               <div class="search col-md-3">
-                                                               <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
-                                   <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
-                                       <option value="">Company Email</option>
-                                       <?php
-                                       foreach($sitesArr as $sitesIdList)
-                                       {
-                                           $selected = ($sitesIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                           echo '<option value="'.$sitesIdList['id'].'" >'.$sitesIdList['szEmail'].'</option>';
-                                       }
-                                       ?>
-                                   </select>
-                               </div>-->
+
                                <div class="col-md-1">
                                    <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                </div>

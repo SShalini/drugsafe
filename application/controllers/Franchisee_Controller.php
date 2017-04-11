@@ -339,9 +339,11 @@ class Franchisee_Controller extends CI_Controller
 
         $idClient = $this->input->post('idClient');
         $idfranchisee = $this->input->post('idfranchisee');
+        $corpclient = $this->input->post('corpclient');
         {
             $this->session->set_userdata('idClient', $idClient);
             $this->session->set_userdata('idfranchisee', $idfranchisee);
+            $this->session->set_userdata('corpclient', $corpclient);
             echo "SUCCESS||||";
             echo "viewClientDetails";
         }
@@ -359,6 +361,8 @@ class Franchisee_Controller extends CI_Controller
             die;
         }
         $idClient = $this->session->userdata('idClient');
+        $corpclient = $this->session->userdata('corpclient');
+        $frid = $this->session->userdata('idfranchisee');
         if (isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])) {
             $id = $_POST['szSearchClRecord'];
         }
@@ -383,7 +387,28 @@ class Franchisee_Controller extends CI_Controller
         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, $config['per_page'], $this->uri->segment(3), $searchAry, $id,$idfranchisee);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
-        $sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
+        //$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
+
+        $loggedinFranchisee = $frid;
+        $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+        if(!empty($clientDetsArr)){
+            $franchiseeid = $clientDetsArr[0]['franchiseeId'];
+        }
+        $sitesArr = array();
+        $sitesArr = $this->Webservices_Model->getclientdetails($franchiseeid,$idClient);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
+        if(!empty($AssignCorpuserDetailsArr)){
+            $sitesArr = array();
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+                if(!empty($CorpuserDetailsArr)){
+                    foreach ($CorpuserDetailsArr as $CorpUser){
+                        array_push($sitesArr,$CorpUser);
+                    }
+                }
+            }
+        }
+
         if ($clientDetailsAray['clientType'] > 0) {
             $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
             $data['ParentOfChild'] = $parentClientDetArr;
@@ -406,11 +431,33 @@ class Franchisee_Controller extends CI_Controller
                 $addEditClientDet = false;
             }
         }
+        $userDetailsArr = array();
+        if($corpclient == '1'){
+            $loggedinFranchisee = $idfranchisee;
+            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+            if(!empty($clientDetsArr)){
+                $idfranchisee = $clientDetsArr[0]['franchiseeId'];
+            }
+
+            $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$idfranchisee);
+            if(!empty($AssignCorpuserDetailsArr)){
+                $userDetailsArr = array();
+                foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+
+                    if(!empty($CorpuserDetailsArr)){
+                        foreach ($CorpuserDetailsArr as $CorpUser){
+                            array_push($userDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+            }
+        }
         $data['sitesArr'] = $sitesArr;
         $data['idClient'] = $idClient;
         $data['pageName'] = "Client_Record";
         $data['clientDetailsAray'] = $clientDetailsAray;
-        $data['childClientDetailsAray'] = $childClientDetailsAray;
+        $data['childClientDetailsAray'] = ($corpclient == '1'?$userDetailsArr:$childClientDetailsAray);
         $data['szMetaTagTitle'] = "Client Details";
         $data['is_user_login'] = $is_user_login;
         $data['getState']=$getState;
@@ -656,8 +703,25 @@ class Franchisee_Controller extends CI_Controller
             }
 
         }
-        $clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true,$idFr);       
-        
+        //$clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true,$idFr);
+        $AllclientAry = $this->Webservices_Model->getclientdetails($idFr);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
+        $CorpuserDetailsArr = array();
+        if(!empty($AssignCorpuserDetailsArr)){
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                if(!empty($CorpSitesDetailsArr)){
+                    foreach ($CorpSitesDetailsArr as $CorpUser){
+                        array_push($CorpuserDetailsArr,$CorpUser);
+                    }
+                }
+            }
+        }
+        if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
+            $clientlistArr = array_merge($AllclientAry, $CorpuserDetailsArr);
+        }else{
+            $clientlistArr = $AllclientAry;
+        }
         if(!empty($_POST)){
            $_POST['szSearchClRecord2']= $_POST['szSearchClRecord2'];  
         }
@@ -668,7 +732,7 @@ class Franchisee_Controller extends CI_Controller
         $data['id'] = $id;
         $data['flag'] = $flag;
         $data['clientlistArr'] = $clientlistArr;
-        $data['CorpuserDetailsArr'] = $CorpuserDetailsArr;
+        $data['corpuserDetailsArr'] = $CorpuserDetailsArr;
         $data['pageName'] = "Client_Record";
         $data['szMetaTagTitle'] = "Client Record";
         $data['is_user_login'] = $is_user_login;
@@ -1012,8 +1076,25 @@ class Franchisee_Controller extends CI_Controller
             $_POST['idFranchisee'] = $idFranchisee;
         }
 
-            $clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true, $_POST['idFranchisee']);
-
+            //$clientlistArr = $this->Franchisee_Model->getAllDistinctClientDetails(true, $_POST['idFranchisee']);
+        $AllclientAry = $this->Webservices_Model->getclientdetails($_POST['idFranchisee']);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($_POST['idFranchisee']);
+        $CorpuserDetailsArr = array();
+        if(!empty($AssignCorpuserDetailsArr)){
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                if(!empty($CorpSitesDetailsArr)){
+                    foreach ($CorpSitesDetailsArr as $CorpUser){
+                        array_push($CorpuserDetailsArr,$CorpUser);
+                    }
+                }
+            }
+        }
+        if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
+            $clientlistArr = array_merge($AllclientAry, $CorpuserDetailsArr);
+        }else{
+            $clientlistArr = $AllclientAry;
+        }
         $result = "<select class=\"form-control custom-select required\" id=\"szSearchClientname\" name=\"szSearchClRecord1\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\">";
         if (!empty($clientlistArr)) {
             $result .= "<option value=''>Client Name</option>";

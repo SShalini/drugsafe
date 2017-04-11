@@ -57,9 +57,45 @@ class Form_Management_Controller extends CI_Controller
         $socFr='';
         if($_SESSION['drugsafe_user']['iRole']=='2'){
             $socFr=false;
-            $clientAry = $this->Franchisee_Model->viewClientList(true, $_SESSION['drugsafe_user']['id']);
+            //$clientAry = $this->Franchisee_Model->viewClientList(true, $_SESSION['drugsafe_user']['id']);
+            $AllclientAry = $this->Webservices_Model->getclientdetails($_SESSION['drugsafe_user']['id']);
+            $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($_SESSION['drugsafe_user']['id']);
+            $CorpuserDetailsArr = array();
+            if(!empty($AssignCorpuserDetailsArr)){
+                foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                    $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                    if(!empty($CorpSitesDetailsArr)){
+                        foreach ($CorpSitesDetailsArr as $CorpUser){
+                            array_push($CorpuserDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+            }
+            if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
+                $clientAry = array_merge($AllclientAry, $CorpuserDetailsArr);
+            }else{
+                $clientAry = $AllclientAry;
+            }
             if($_POST['szSearch2']){
-                $siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearch2']);
+                //$siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearch2']);
+                $loggedinFranchisee = $_SESSION['drugsafe_user']['id'];
+                $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($_POST['szSearch2']);
+                if(!empty($clientDetsArr)){
+                    $franchiseeid = $clientDetsArr[0]['franchiseeId'];
+                }
+                $siteAry = $this->Webservices_Model->getclientdetails($franchiseeid,$_POST['szSearch2']);
+                $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
+                if(!empty($AssignCorpuserDetailsArr)){
+                    $siteAry = array();
+                    foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                        $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$_POST['szSearch2'],0,$assignCorpUser['clientid']);
+                        if(!empty($CorpuserDetailsArr)){
+                            foreach ($CorpuserDetailsArr as $CorpUser){
+                                array_push($siteAry,$CorpUser);
+                            }
+                        }
+                    }
+                }
             }
         } else{
             $socFr=true;

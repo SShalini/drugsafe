@@ -2991,7 +2991,26 @@ class Reporting_Controller extends CI_Controller
             $_POST['idFranchisee'] = $idFranchisee;
         }
 
-        $clientAry = $this->Franchisee_Model->viewClientList(true, $_POST['idFranchisee']);
+        //$clientAry = $this->Franchisee_Model->viewClientList(true, $_POST['idFranchisee']);
+        $AllclientAry = array();
+        $AllclientAry = $this->Webservices_Model->getclientdetails($_POST['idFranchisee']);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($_POST['idFranchisee']);
+        $CorpuserDetailsArr = array();
+        if(!empty($AssignCorpuserDetailsArr)){
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                if(!empty($CorpSitesDetailsArr)){
+                    foreach ($CorpSitesDetailsArr as $CorpUser){
+                        array_push($CorpuserDetailsArr,$CorpUser);
+                    }
+                }
+            }
+        }
+        if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
+            $clientAry = array_merge($AllclientAry, $CorpuserDetailsArr);
+        }else{
+            $clientAry = $AllclientAry;
+        }
         $clientid = $_POST['idclient'];
         $siteid = $_POST['idsite'];
         $result = '<select class="form-control abc custom-select" name="szSearch2" id="szSearch2" onfocus="remove_formError(this.id,\'true\')" onchange="getSiteListByClientIdData(this.value)">';
@@ -3007,7 +3026,7 @@ class Reporting_Controller extends CI_Controller
         if ($clientid > 0) {
             $result .= "<script type='text/javascript'>
                             setTimeout(function () {
-                                getSiteListByClientIdData('" . $clientid . "','" . $siteid . "');
+                                getSiteListByClientIdData('" . $clientid . "','" . $siteid . "','" . $_POST['idFranchisee'] . "');
                             }, 300);
                         </script>";
         }
@@ -3019,8 +3038,26 @@ class Reporting_Controller extends CI_Controller
         if (trim($idClient) != '') {
             $_POST['idClient'] = $idClient;
         }
-
-        $siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['idClient']);
+        $franchiseeid = $_POST['franchiseeid'];
+        //$siteAry = $this->Franchisee_Model->viewChildClientDetails($_POST['idClient']);
+        $loggedinFranchisee = $franchiseeid;
+        $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($_POST['idClient']);
+        if(!empty($clientDetsArr)){
+            $franchiseeid = $clientDetsArr[0]['franchiseeId'];
+        }
+        $siteAry = $this->Webservices_Model->getclientdetails($franchiseeid,$_POST['idClient']);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
+        if(!empty($AssignCorpuserDetailsArr)){
+            $siteAry = array();
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$_POST['idClient'],0,$assignCorpUser['clientid']);
+                if(!empty($CorpuserDetailsArr)){
+                    foreach ($CorpuserDetailsArr as $CorpUser){
+                        array_push($siteAry,$CorpUser);
+                    }
+                }
+            }
+        }
         $siteid = $_POST['idsite'];
         $result = '<select class="form-control custom-select" name="szSearch3" id="szSearch3" onfocus="remove_formError(this.id,\'true\')">';
         if (!empty($siteAry)) {

@@ -154,7 +154,7 @@
 
                         <?php
 
-                        if (!empty($clientAry)) {
+                        if (!empty($clientAry) || !empty($corpuserDetailsArr)) {
                             ?>
                     
                             <div class="portlet-title">
@@ -190,81 +190,78 @@
                                         <tbody>
                                         <?php
                                         $i = 0;
-                                        foreach ($clientAry as $clientData) {
-                                            $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientData['id']);
-                                            $addEditClientDet = false;
-                                            if($clientData['szNoOfSites'] > 0){
-                                                $addEditClientDet = true;
-                                            }
-                                            ?>
-                                            <tr>
-                                                <td> <?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A'); ?> </td>
-                                                <td> <?php echo $clientData['szName']; ?> </td>
-                                                <td> <?php echo $clientData['szEmail']; ?> </td>
-                                                <?php
-                                                if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                                        if(!empty($clientAry)) {
+                                            foreach ($clientAry as $clientData) {
+                                                $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientData['id']);
+
+                                                ?>
+                                                <tr>
+                                                    <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
+                                                    <td> <?php echo $clientData['szName']; ?> </td>
+                                                    <td> <?php echo $clientData['szEmail']; ?> </td>
+                                                    <?php
+                                                    if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                                                        ?>
+                                                        <td>
+                                                            <?php
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['franchiseeId']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                            ?>
+                                                        </td>
+                                                        <?php
+                                                    }
                                                     ?>
+
                                                     <td>
                                                         <?php
-                                                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['franchiseeId']);
-                                                        echo $franchiseeDetArr['szName'];
+                                                        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($clientData['id']);
+                                                        echo count($childClientDetailsAray);
+                                                        ?>
+
+
+                                                    </td>
+                                                    <td> <?php echo $clientData['szContactNumber']; ?> </td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($clientData['szCreatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szCreatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        ?>
+
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($clientData['szLastUpdatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szLastUpdatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        } else {
+                                                            echo "N.A";
+                                                        }
+
                                                         ?>
                                                     </td>
-                                                    <?php
-                                                }
-                                                ?>
 
-                                                <td>
-                                                    <?php
-                                                    $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($clientData['id']);
-                                                    echo count($childClientDetailsAray);
-                                                    ?>
-
-
-                                                </td>
-                                                <td> <?php echo $clientData['szContactNumber']; ?> </td>
-
-                                                <td>
-                                                    <?php
-                                                    if ($clientData['szCreatedBy']) {
-                                                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szCreatedBy']);
-                                                        echo $franchiseeDetArr['szName'];
-                                                    }
-                                                    ?>
-
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                    if ($clientData['szLastUpdatedBy']) {
-                                                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szLastUpdatedBy']);
-                                                        echo $franchiseeDetArr['szName'];
-                                                    } else {
-                                                        echo "N.A";
-                                                    }
-
-                                                    ?>
-                                                </td>
-
-                                                <td>
-                                                    <?php
-                                                    if ($_SESSION['drugsafe_user']['iRole'] == '2') {
-                                                        ?>
+                                                    <td>
                                                         <?php
-                                                        if ($clientData['clientType'] == '0') {
-                                                            if (($clientData['szNoOfSites'] > count($childClientDetailsAray)) && $addEditClientDet) {
-                                                                ?>
+                                                        if ($_SESSION['drugsafe_user']['iRole'] == '2') {
+                                                            ?>
+                                                            <?php
+                                                            if ($clientData['clientType'] == '0') {
+                                                                if ($clientData['szNoOfSites'] > count($childClientDetailsAray)) {
+                                                                    ?>
 
-                                                                <a class="btn btn-circle btn-icon-only btn-default"
-                                                                   id="userAdd"
-                                                                   title="Add Site"
-                                                                   onclick="addClientData(<?php echo $clientData['franchiseeId']; ?>,'<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
-                                                                   href="javascript:void(0);"></i>
-                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                    <a class="btn btn-circle btn-icon-only btn-default"
+                                                                       id="userAdd"
+                                                                       title="Add Site"
+                                                                       onclick="addClientData(<?php echo $clientData['franchiseeId']; ?>,'<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
+                                                                       href="javascript:void(0);"></i>
+                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
 
-                                                                </a>
-                                                            <?php }
-                                                        }
-                                                        if ($addEditClientDet) {
+                                                                    </a>
+                                                                <?php }
+                                                            }
                                                             ?>
                                                             <a class="btn btn-circle btn-icon-only btn-default"
                                                                title="Edit Client Data"
@@ -272,31 +269,104 @@
                                                                href="javascript:void(0);">
                                                                 <i class="fa fa-pencil"></i>
                                                             </a>
-                                                        <?php }
-                                                    }?>
-                                                    <a class="btn btn-circle btn-icon-only btn-default" id="userStatus"
-                                                       title="View Client Details"
-                                                       onclick="viewClientDetails(<?php echo $clientData['id']; ?>,<?php echo $idfranchisee; ?>);"
-                                                       href="javascript:void(0);"></i>
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </a>
-                                                    <?php
-                                                    if ($_SESSION['drugsafe_user']['iRole'] == '2') {
-
-                                                        ?>
+                                                            <?php
+                                                        } ?>
                                                         <a class="btn btn-circle btn-icon-only btn-default"
                                                            id="userStatus"
-                                                           title="Delete Client"
-                                                           onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
+                                                           title="View Client Details"
+                                                           onclick="viewClientDetails(<?php echo $clientData['id']; ?>,<?php echo $idfranchisee; ?>);"
                                                            href="javascript:void(0);"></i>
-                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
                                                         </a>
+                                                        <?php
+                                                        if ($_SESSION['drugsafe_user']['iRole'] == '2') {
 
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                            $i++;
+                                                            ?>
+                                                            <a class="btn btn-circle btn-icon-only btn-default"
+                                                               id="userStatus"
+                                                               title="Delete Client"
+                                                               onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
+                                                               href="javascript:void(0);"></i>
+                                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                            </a>
+
+                                                        <?php } ?>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                                $i++;
+                                            }
+                                        }
+                                        if(!empty($corpuserDetailsArr)) {
+                                            $displyedClient = array();
+                                            foreach ($corpuserDetailsArr as $CorpclientData) {
+                                                if (!in_array($CorpclientData['id'], $displyedClient)){
+                                                    array_push($displyedClient,$CorpclientData['id']);
+                                                $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($CorpclientData['id']);
+                                                ?>
+                                                <tr>
+                                                    <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
+                                                    <td> <?php echo $CorpclientData['szName']; ?> </td>
+                                                    <td> <?php echo $CorpclientData['szEmail']; ?> </td>
+                                                    <?php
+                                                    if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                                                        ?>
+                                                        <td>
+                                                            <?php
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $CorpclientData['franchiseeId']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                            ?>
+                                                        </td>
+                                                        <?php
+                                                    }
+                                                    ?>
+
+                                                    <td>
+                                                        <?php
+                                                        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($CorpclientData['id']);
+                                                        echo count($childClientDetailsAray);
+                                                        ?>
+
+
+                                                    </td>
+                                                    <td> <?php echo $CorpclientData['szContactNumber']; ?> </td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($CorpclientData['szCreatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $CorpclientData['szCreatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        ?>
+
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($CorpclientData['szLastUpdatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $CorpclientData['szLastUpdatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        } else {
+                                                            echo "N.A";
+                                                        }
+
+                                                        ?>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <a class="btn btn-circle btn-icon-only btn-default"
+                                                           id="userStatus"
+                                                           title="View Client Details"
+                                                           onclick="viewClientDetails(<?php echo $CorpclientData['id']; ?>,<?php echo $idfranchisee; ?>,'1');"
+                                                           href="javascript:void(0);"></i>
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                                $i++;
+                                            }
+                                            }
                                         }
                                         ?>
                                         </tbody>
@@ -312,39 +382,39 @@
 
                     } else {
 
-                        if (!empty($clientAry)) {
+                        if (!empty($clientAry) || !empty($corpuserDetailsArr)) {
 
-                            ?>
-                            <div class="row">
-                                <form class="form-horizontal" id="szSearchClientRecord"
-                                      action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
-                                      method="post">
+                    ?>
+                    <div class="row">
+                        <form class="form-horizontal" id="szSearchClientRecord"
+                              action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
+                              method="post">
 
-                                    <div class="search col-md-3 clienttypeselect">
+                            <div class="search col-md-3 clienttypeselect">
 
-                                        <select class="form-control custom-select" name="szSearchClRecord1"
-                                                id="szSearchname"
-                                                onfocus="remove_formError(this.id,'true')">
-                                            <option value="">Client Name</option>
-                                            <?php
-                                            foreach ($clientlistArr as $clientIdList) {
-                                                $selected = ($clientIdList['szName'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                                echo '<option value="' . $clientIdList['szName'] . '"' . $selected . ' >' . $clientIdList['szName'] . '</option>';
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-md-1">
-                                        <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i>
-                                        </button>
-                                    </div>
-                                </form>
+                                <select class="form-control custom-select" name="szSearchClRecord1"
+                                        id="szSearchname"
+                                        onfocus="remove_formError(this.id,'true')">
+                                    <option value="">Client Name</option>
+                                    <?php
+                                    foreach ($clientlistArr as $clientIdList) {
+                                        $selected = ($clientIdList['szName'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                        echo '<option value="' . $clientIdList['szName'] . '"' . $selected . ' >' . $clientIdList['szName'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
                             </div>
 
+                            <div class="col-md-1">
+                                <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
 
-                            <div id="page_content" class="row">
-                            <div class="col-md-12">
+
+                    <div id="page_content" class="row">
+                        <div class="col-md-12">
                             <div class="row">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover">
@@ -357,7 +427,7 @@
                                             if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                                                 ?>
                                                 <th> Franchisee</th>
-                                                <?php } ?>
+                                            <?php } ?>
 
                                             <th> No. of sites</th>
                                             <th> Contact No.</th>
@@ -369,115 +439,188 @@
                                         <tbody>
                                         <?php
                                         $i = 0;
-                                        foreach ($clientAry as $clientData) {
-                                        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientData['id']);
-                                            $addEditClientDet = false;
-                                            if($clientData['szNoOfSites'] > 0){
-                                                $addEditClientDet = true;
-                                            }
-                                        ?>
-                                        <tr>
-                                            <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
-                                            <td> <?php echo $clientData['szName'] ?> </td>
-                                            <td> <?php echo $clientData['szEmail']; ?> </td>
-                                            <?php
-                                            if ($_SESSION['drugsafe_user']['iRole'] == '1') {
-                                                ?>
-                                                <td>
-                                                    <?php
-                                                    $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['franchiseeId']);
-                                                    echo $franchiseeDetArr['szName'];
-                                                    ?>
-                                                </td>
-                                            <?php } ?>
-                                            <td>
-                                                <?php
-                                                $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($clientData['id']);
-                                                echo count($childClientDetailsAray);
-                                                ?>
-
-
-                                            </td>
-                                            <td> <?php echo $clientData['szContactNumber']; ?> </td>
-
-                                            <td>
-                                                <?php
-                                                if ($clientData['szCreatedBy']) {
-                                                    $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szCreatedBy']);
-                                                    echo $franchiseeDetArr['szName'];
+                                        if (!empty($clientAry)){
+                                            foreach ($clientAry as $clientData) {
+                                                $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientData['id']);
+                                                $addEditClientDet = false;
+                                                if ($clientData['szNoOfSites'] > 0) {
+                                                    $addEditClientDet = true;
                                                 }
                                                 ?>
-
-                                            </td>
-                                            <td>
-                                                <?php
-                                                if ($clientData['szLastUpdatedBy']) {
-                                                    $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szLastUpdatedBy']);
-                                                    echo $franchiseeDetArr['szName'];
-                                                } else {
-                                                    echo "N.A";
-                                                }
-
-                                                ?>
-                                            </td>
-
-                                            <td>
-                                                <?php
-                                                if ($_SESSION['drugsafe_user']['iRole'] == '2') {
-                                                    ?>
+                                                <tr>
+                                                    <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
+                                                    <td> <?php echo $clientData['szName'] ?> </td>
+                                                    <td> <?php echo $clientData['szEmail']; ?> </td>
                                                     <?php
-                                                    if ($clientData['clientType'] == '0') {
-                                                        if (($clientData['szNoOfSites'] > count($childClientDetailsAray)) && $addEditClientDet) {
+                                                    if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                                                        ?>
+                                                        <td>
+                                                            <?php
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['franchiseeId']);
+                                                            echo $franchiseeDetArr['szName'];
                                                             ?>
-
-                                                            <a class="btn btn-circle btn-icon-only btn-default"
-                                                               id="userAdd"
-                                                               title="Add Site"
-                                                               onclick="addClientData(<?php echo $clientData['franchiseeId']; ?>,'<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
-                                                               href="javascript:void(0);"></i>
-                                                                <i class="fa fa-plus"
-                                                                   aria-hidden="true"></i>
-
-                                                            </a>
-                                                        <?php }
-                                                    }
-                                                    if ($addEditClientDet) {
+                                                        </td>
+                                                    <?php } ?>
+                                                    <td>
+                                                        <?php
+                                                        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($clientData['id']);
+                                                        echo count($childClientDetailsAray);
                                                         ?>
 
-                                                        <a class="btn btn-circle btn-icon-only btn-default"
-                                                           title="Edit Client Data"
-                                                           onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
-                                                           href="javascript:void(0);">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                    <?php }
-                                                }?>
-                                                <a class="btn btn-circle btn-icon-only btn-default"
-                                                   id="userStatus"
-                                                   title="View Client Details"
-                                                   onclick="viewClientDetails(<?php echo $clientData['id']; ?>,<?php echo $idfranchisee; ?>);"
-                                                   href="javascript:void(0);"></i>
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                                <?php
-                                                    if ($_SESSION['drugsafe_user']['iRole'] == '2') {
-                                                        if (empty($childClientDetailsAray)) {
-                                                            ?>
-                                                            <a class="btn btn-circle btn-icon-only btn-default"
-                                                               id="userStatus"
-                                                               title="Delete Client"
-                                                               onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
-                                                               href="javascript:void(0);"></i>
-                                                                <i class="fa fa-trash-o"
-                                                                   aria-hidden="true"></i>
-                                                            </a>
 
-                                                        <?php }
-                                                    } ?>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                            $i++;
+                                                    </td>
+                                                    <td> <?php echo $clientData['szContactNumber']; ?> </td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($clientData['szCreatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szCreatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        ?>
+
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($clientData['szLastUpdatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szLastUpdatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        } else {
+                                                            echo "N.A";
+                                                        }
+
+                                                        ?>
+                                                    </td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($_SESSION['drugsafe_user']['iRole'] == '2') {
+                                                            ?>
+                                                            <?php
+                                                            if ($clientData['clientType'] == '0') {
+                                                                if (($clientData['szNoOfSites'] > count($childClientDetailsAray)) && $addEditClientDet) {
+                                                                    ?>
+
+                                                                    <a class="btn btn-circle btn-icon-only btn-default"
+                                                                       id="userAdd"
+                                                                       title="Add Site"
+                                                                       onclick="addClientData(<?php echo $clientData['franchiseeId']; ?>,'<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
+                                                                       href="javascript:void(0);"></i>
+                                                                        <i class="fa fa-plus"
+                                                                           aria-hidden="true"></i>
+
+                                                                    </a>
+                                                                <?php }
+                                                            }
+                                                            if ($addEditClientDet) {
+                                                                ?>
+
+                                                                <a class="btn btn-circle btn-icon-only btn-default"
+                                                                   title="Edit Client Data"
+                                                                   onclick="editClient('<?php echo $clientData['id']; ?>','<?php echo $clientData['franchiseeId']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
+                                                                   href="javascript:void(0);">
+                                                                    <i class="fa fa-pencil"></i>
+                                                                </a>
+                                                            <?php }
+                                                        } ?>
+                                                        <a class="btn btn-circle btn-icon-only btn-default"
+                                                           id="userStatus"
+                                                           title="View Client Details"
+                                                           onclick="viewClientDetails(<?php echo $clientData['id']; ?>,<?php echo $idfranchisee; ?>);"
+                                                           href="javascript:void(0);"></i>
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                        <?php
+                                                        if ($_SESSION['drugsafe_user']['iRole'] == '2') {
+                                                            if (empty($childClientDetailsAray)) {
+                                                                ?>
+                                                                <a class="btn btn-circle btn-icon-only btn-default"
+                                                                   id="userStatus"
+                                                                   title="Delete Client"
+                                                                   onclick="clientDelete('<?php echo $clientData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>');"
+                                                                   href="javascript:void(0);"></i>
+                                                                    <i class="fa fa-trash-o"
+                                                                       aria-hidden="true"></i>
+                                                                </a>
+
+                                                            <?php }
+                                                        } ?>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                                $i++;
+                                            }
+                                        }
+                                        if(!empty($corpuserDetailsArr)) {
+                                            $displyedClient = array();
+                                            foreach ($corpuserDetailsArr as $CorpclientData) {
+                                                if (!in_array($CorpclientData['id'], $displyedClient)){
+                                                    array_push($displyedClient,$CorpclientData['id']);
+                                                    $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($CorpclientData['id']);
+                                                ?>
+                                                <tr>
+                                                    <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
+                                                    <td> <?php echo $CorpclientData['szName']; ?> </td>
+                                                    <td> <?php echo $CorpclientData['szEmail']; ?> </td>
+                                                    <?php
+                                                    if ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                                                        ?>
+                                                        <td>
+                                                            <?php
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $CorpclientData['franchiseeId']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                            ?>
+                                                        </td>
+                                                        <?php
+                                                    }
+                                                    ?>
+
+                                                    <td>
+                                                        <?php
+                                                        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($CorpclientData['id']);
+                                                        echo count($childClientDetailsAray);
+                                                        ?>
+
+
+                                                    </td>
+                                                    <td> <?php echo $CorpclientData['szContactNumber']; ?> </td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($CorpclientData['szCreatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $CorpclientData['szCreatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        ?>
+
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($CorpclientData['szLastUpdatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $CorpclientData['szLastUpdatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        } else {
+                                                            echo "N.A";
+                                                        }
+
+                                                        ?>
+                                                    </td>
+
+                                                    <td>
+
+                                                        <a class="btn btn-circle btn-icon-only btn-default"
+                                                           id="userStatus"
+                                                           title="View Client Details"
+                                                           onclick="viewClientDetails(<?php echo $CorpclientData['id']; ?>,<?php echo $idfranchisee; ?>,'1');"
+                                                           href="javascript:void(0);"></i>
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                                $i++;
+                                            }
+                                            }
                                         }
                                         ?>
                                         </tbody>

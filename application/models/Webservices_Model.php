@@ -78,12 +78,14 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getclientdetails($franchiseeid, $parent = 0, $agent = 0, $site=0)
+    function getclientdetails($franchiseeid, $parent = 0, $agent = 0, $site = 0)
     {
-        $array = __DBC_SCHEMATA_CLIENT__ . '.franchiseeId = ' . (int)$franchiseeid . ' AND ' . __DBC_SCHEMATA_USERS__ . '.isDeleted = 0 ' . ($agent > 0 && $parent == 0 ? ' AND ' . __DBC_SCHEMATA_CLIENT__ . '.agentId = ' . (int)$agent : ($agent > 0 && $parent > 0 ? ' AND ' . __DBC_SCHEMATA_CLIENT__ . '.clientType = ' . (int)$parent : ' AND ' . __DBC_SCHEMATA_CLIENT__ . '.clientType = ' . (int)$parent).($site>0?' AND '.__DBC_SCHEMATA_CLIENT__ . '.clientId = ' .(int)$site:''));
-        $query = $this->db->select(__DBC_SCHEMATA_USERS__ . '.id, szName, szEmail')
-            ->from(__DBC_SCHEMATA_USERS__)
-            ->join(__DBC_SCHEMATA_CLIENT__, __DBC_SCHEMATA_CLIENT__ . '.clientId = ' . __DBC_SCHEMATA_USERS__ . '.id')
+        $array = 'client.franchiseeId = ' . (int)$franchiseeid . ' AND user.isDeleted = 0 ' . ($agent > 0 && $parent == 0 ? ' AND client.agentId = ' . (int)$agent : ($agent > 0 && $parent > 0 ? ' AND client.clientType = ' . (int)$parent : ' AND client.clientType = ' . (int)$parent) . ($site > 0 ? ' AND client.clientId = ' . (int)$site : ''));
+        $query = $this->db->select('user.id, user.szName, user.szEmail, client.franchiseeId, user.szContactNumber, client.szCreatedBy, client.szLastUpdatedBy, client.szLastUpdatedBy, client.clientType,
+                                    client.szBusinessName, client.szContactEmail, client.szContactMobile, client.discountid, client.szContactPhone, user.szCity, user.szCountry, user.abn,
+                                    user.szAddress, user.szZipCode')
+            ->from(__DBC_SCHEMATA_USERS__ . ' as user')
+            ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'client.clientId = user.id')
             ->where($array)
             ->get();
         /*$q = $this->db->last_query();
@@ -97,12 +99,12 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getcorpclientdetails($franchiseeid=0,$corpFranchisee=0)
+    function getcorpclientdetails($franchiseeid = 0, $corpFranchisee = 0)
     {
-        $array ='user.isDeleted = 0 '.($franchiseeid>0?' AND corpfranch.franchiseeId = ' . (int)$franchiseeid:'').($corpFranchisee>0?' AND corpfranch.corpfrid = ' . (int)$corpFranchisee:'').' AND user.iActive = 1';
+        $array = 'user.isDeleted = 0 ' . ($franchiseeid > 0 ? ' AND corpfranch.franchiseeId = ' . (int)$franchiseeid : '') . ($corpFranchisee > 0 ? ' AND corpfranch.corpfrid = ' . (int)$corpFranchisee : '') . ' AND user.iActive = 1';
         $query = $this->db->select('user.id, user.szName, user.szEmail, corpfranch.clientid, corpfranch.corpfrid')
-            ->from(__DBC_SCHEMATA_USERS__.' as user')
-            ->join(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__.' as corpfranch','corpfranch.franchiseeid = user.id')
+            ->from(__DBC_SCHEMATA_USERS__ . ' as user')
+            ->join(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__ . ' as corpfranch', 'corpfranch.franchiseeid = user.id')
             ->where($array)
             ->get();
         if ($query->num_rows() > 0) {
@@ -614,42 +616,6 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getCorpfranchiseesosformdata($franchiseeid,$siteid)
-    {
-        $resultarr = array();
-        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
-        if (!empty($franchiseeclientsarr)) {
-            foreach ($franchiseeclientsarr as $franchiseeclient) {
-                $clientsosdataarr = $this->getCorpclientsosformdata($siteid);
-
-                if (!empty($clientsosdataarr)) {
-                    foreach ($clientsosdataarr as $key => $val) {
-                        $clientsosdataarr[$key][0]['parentclientid'] = $franchiseeclient['clientId'];
-                        $clientdetarr = $this->getuserdetails($franchiseeclient['clientId']);
-                        if (!empty($clientdetarr)) {
-                            $clientsosdataarr[$key][0]['clientname'] = $clientdetarr[0]['szName'];
-                        }
-                        $sitedetarr = $this->getuserdetails($siteid);
-                        if (!empty($sitedetarr)) {
-                            $clientsosdataarr[$key][0]['sitename'] = $sitedetarr[0]['szName'];
-                        }
-                    }
-                    array_push($resultarr, $clientsosdataarr);
-                }
-            }
-
-            if (!empty($resultarr)) {
-                return $resultarr;
-            } else {
-                $this->addError("norecord", "No record found.");
-                return false;
-            }
-        } else {
-            $this->addError("norecord", "No record found.");
-            return false;
-        }
-    }
-
     function getclientsosformdata($clientid)
     {
         $resultarr = array();
@@ -671,22 +637,6 @@ class Webservices_Model extends Error_Model
             $this->addError("norecord", "No record found.");
             return false;
         }
-    }
-
-    function getCorpclientsosformdata($siteid)
-    {
-        $resultarr = array();
-                $sosdataarr = $this->getsosformdata($siteid);
-                if (!empty($sosdataarr)) {
-                    array_push($resultarr, $sosdataarr);
-                }
-            if (!empty($resultarr)) {
-                return $resultarr;
-            } else {
-                $this->addError("norecord", "No record found.");
-                return false;
-            }
-
     }
 
     function getsosformdata($siteid, $status = 0)
@@ -724,6 +674,58 @@ class Webservices_Model extends Error_Model
         } else {
             $this->addError("usernotexist", "User does not exist.");
         }
+    }
+
+    function getCorpfranchiseesosformdata($franchiseeid, $siteid)
+    {
+        $resultarr = array();
+        $franchiseeclientsarr = $this->getfranchiseeclients($franchiseeid);
+        if (!empty($franchiseeclientsarr)) {
+            foreach ($franchiseeclientsarr as $franchiseeclient) {
+                $clientsosdataarr = $this->getCorpclientsosformdata($siteid);
+
+                if (!empty($clientsosdataarr)) {
+                    foreach ($clientsosdataarr as $key => $val) {
+                        $clientsosdataarr[$key][0]['parentclientid'] = $franchiseeclient['clientId'];
+                        $clientdetarr = $this->getuserdetails($franchiseeclient['clientId']);
+                        if (!empty($clientdetarr)) {
+                            $clientsosdataarr[$key][0]['clientname'] = $clientdetarr[0]['szName'];
+                        }
+                        $sitedetarr = $this->getuserdetails($siteid);
+                        if (!empty($sitedetarr)) {
+                            $clientsosdataarr[$key][0]['sitename'] = $sitedetarr[0]['szName'];
+                        }
+                    }
+                    array_push($resultarr, $clientsosdataarr);
+                }
+            }
+
+            if (!empty($resultarr)) {
+                return $resultarr;
+            } else {
+                $this->addError("norecord", "No record found.");
+                return false;
+            }
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
+
+    function getCorpclientsosformdata($siteid)
+    {
+        $resultarr = array();
+        $sosdataarr = $this->getsosformdata($siteid);
+        if (!empty($sosdataarr)) {
+            array_push($resultarr, $sosdataarr);
+        }
+        if (!empty($resultarr)) {
+            return $resultarr;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+
     }
 
     function getagentsosformdata($agentid)
@@ -1409,7 +1411,7 @@ class Webservices_Model extends Error_Model
             } else {
                 return false;
             }
-        }else{
+        } else {
             return true;
         }
     }
@@ -1565,7 +1567,7 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function savecollsign($siteid, $imgname, $fieldname,$status)
+    function savecollsign($siteid, $imgname, $fieldname, $status)
     {
         $wheresosAry = array('Clientid' => (int)$siteid, 'Status' => $status);
         $dataAry = array($fieldname => $imgname);
@@ -1595,9 +1597,9 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getFranchiseeWithClient($clientId,$franchiseeid)
+    function getFranchiseeWithClient($clientId, $franchiseeid)
     {
-        $whereAry = array('clientId' => $clientId,'franchiseeId' => $franchiseeid, 'isDeleted=' => '0');
+        $whereAry = array('clientId' => $clientId, 'franchiseeId' => $franchiseeid, 'isDeleted=' => '0');
         $this->db->select('*');
         $this->db->from(__DBC_SCHEMATA_CLIENT__);
         $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');

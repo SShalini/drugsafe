@@ -419,9 +419,9 @@ function getStateListingProfileclient(szCountry) {
         }
     });
 }
-function viewClientDetails(idClient,idfranchisee) {
+function viewClientDetails(idClient,idfranchisee,corpclient=0) {
 
-    $.post(__BASE_URL__ + "/franchisee/viewClientDetailsData", {idClient: idClient,idfranchisee: idfranchisee}, function (result) {
+    $.post(__BASE_URL__ + "/franchisee/viewClientDetailsData", {idClient: idClient,idfranchisee: idfranchisee, corpclient:corpclient}, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
 
@@ -1787,9 +1787,9 @@ function getClientListByFrIdData(idFranchisee,idclient,idsite) {
         $("#szSearch3").customselect();
     }
 }
-function getSiteListByClientIdData(idClient,idsite) {
+function getSiteListByClientIdData(idClient,idsite,franchiseeid) {
     if(idClient>0){
-        $.post(__BASE_URL__ + "/reporting/getSiteListByClientId", {idClient: idClient,idsite:idsite}, function (result) {
+        $.post(__BASE_URL__ + "/reporting/getSiteListByClientId", {idClient: idClient,idsite:idsite,franchiseeid:franchiseeid}, function (result) {
             if (result != '') {
                 $("#sitename").empty();
                 $("#sitename").html(result);
