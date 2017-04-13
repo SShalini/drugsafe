@@ -178,11 +178,27 @@
                                                 <i class="fa fa-map-marker"></i>
                                             </span>
                                             <div class="form-control">
-                                                 <?php echo $getState['name'] ;?>
+                                                <?php echo $getState['name'] ;?>
                                             </div>
-                                             
+
                                         </div>
-                                      
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Region Name</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-map-marker"></i>
+                                            </span>
+                                            <div class="form-control">
+                                                <?php echo $regionname ;?>
+                                            </div>
+
+                                        </div>
+
                                     </div>
 
                                 </div>

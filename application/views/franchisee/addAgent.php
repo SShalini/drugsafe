@@ -168,7 +168,76 @@
                                     </div>
 
                                 </div>
-                                <div class="form-group">
+
+                                <div
+                                        class="form-group">
+                                    <label class="col-md-4 control-label">State</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-flag-checkered"></i>
+                                                </span>
+                                            <select class="form-control " name="agentData[szState]" id="szState"
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')"
+                                                    onchange="getAllReginolCodeForAgent(this.value);">
+                                                <option value=''>Select</option>
+                                                <?php
+                                                if (!empty($getAllStates)) {
+                                                    foreach ($getAllStates as $getAllStatesData) {
+                                                        $selected = ($getAllStatesData['id'] == $_POST['agentData']['szState'] ? 'selected="selected"' : '');
+                                                        echo '<option value="' . $getAllStatesData['id'] . '"' . $selected . ' >' . $getAllStatesData['name'] . '</option>';
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="reginolFiled" id="reginolFiled">
+                                    <?php
+                                    if ($_POST['agentData']['szState'] != '') {
+                                        ?>
+
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label">Region Name</label>
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-map-marker"></i>
+                                                    </span>
+                                                    <select class="form-control " name="agentData[szRegionName]"
+                                                            id="szRegionName" Placeholder="Region Name"
+                                                            onfocus="remove_formError(this.id,'true')">
+                                                        <option value=''>Select</option>
+                                                        <?php
+                                                        if (!empty($getReginolCode)) {
+                                                            foreach ($getReginolCode as $getReginolCodeData) {
+                                                                $selected = ($getReginolCodeData['id'] == $_POST['agentData']['szRegionName'] ? 'selected="selected"' : '');
+                                                                echo '<option value="' . $getReginolCodeData['id'] . '"' . $selected . ' >' . $getReginolCodeData['regionName'] . '</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <script type="text/javascript">
+                                            setTimeout(function () {
+                                                getAllReginolCodeForAgent('<?php echo $_POST['agentData']['szState'];?>', '<?php echo $arErrorMessages['szRegionName'];?>', '<?php echo $_POST['agentData']['szRegionName'];?>');
+                                            }, 500);
+
+                                        </script>
+                                        <?php
+                                    }
+
+                                    ?>
+                                </div>
+
+                                <!--<div class="form-group">
                                     <label class="col-md-4 control-label">State</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -176,14 +245,14 @@
                                                 <i class="fa fa-map-marker"></i>
                                             </span>
                                             <div class="form-control">
-                                                 <?php echo $getState['name'] ;?>
+                                                 <?php /*echo $getState['name'] ;*/?>
                                             </div>
                                              
                                         </div>
                                       
                                     </div>
 
-                                </div>
+                                </div>-->
                                 <div
                                         class="form-group <?php if (form_error('agentData[szCity]')) { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label"> City</label>

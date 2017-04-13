@@ -900,9 +900,9 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['intect'])), 'intect', 'Intect 7 Lot. No.', false, __VLD_CASE_NUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['intectexpiry'])), 'intectexpiry', 'Intect 7 Expiry', false, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['visualcolor'])), 'visualcolor', 'Visual Color', ($drugtestdata1 == '2' || $drugtestdata2 == '2' ? true : false));
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['creatinine'])), 'creatinine', 'Creatinine', ($drugtestdata1 == '2' || $drugtestdata2 == '2' ? true : false), __VLD_CASE_DECIMAL__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['creatinine'])), 'creatinine', 'Creatinine', ($drugtestdata1 == '2' || $drugtestdata2 == '2' ? true : false), __VLD_CASE_ALPHANUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['otherintegrity'])), 'otherintegrity', 'Other Integrity', false);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['hudration'])), 'hudration', 'Hydration', false, __VLD_CASE_DECIMAL__);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['hudration'])), 'hudration', 'Hydration', false, __VLD_CASE_ALPHANUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['devicename'])), 'devicename', 'Device Name', ($drugtestdata1 == '2' || $drugtestdata2 == '2' ? true : false));
             $this->set_fieldReq(sanitize_all_html_input(trim($data['reference'])), 'reference', 'Reference', ($drugtestdata1 == '2' || $drugtestdata2 == '2' ? true : false), __VLD_CASE_NUMERIC__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['lotno'])), 'lotno', 'Lot No.', ($drugtestdata1 == '2' || $drugtestdata2 == '2' ? true : false), __VLD_CASE_NUMERIC__);

@@ -46,7 +46,8 @@
                     if($_SESSION['drugsafe_user']['iRole'] == '1'){
                      ?>
                         <li>
-                            <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                            <!--onclick="viewClient(<?php /*echo $franchiseeArr['id'];*/?>);"-->
+                            <a href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
                             <i class="fa fa-circle"></i>
                         </li>
                          <?php
@@ -56,7 +57,8 @@
                     if($_SESSION['drugsafe_user']['iRole'] == '5'){
                      ?>
                          <li>
-                            <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                             <!--onclick="viewClient(<?php /*echo $franchiseeArr['id'];*/?>);"-->
+                            <a href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
                             <i class="fa fa-circle"></i>
                         </li>
                          <?php
@@ -64,13 +66,15 @@
                      ?>
                         <?php if($clientDetailsAray['clientType'] > '0'){?>
                             <li>
-                                <a onclick="viewClientDetails(<?php echo $ParentOfChild['id'];?>,<?php echo $idfranchisee; ?>);" href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
+                                <!--onclick="viewClientDetails(<?php /*echo $ParentOfChild['id'];*/?>,<?php /*echo $idfranchisee; */?>);"-->
+                                <a href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
                                 <i class="fa fa-circle"></i>
                             </li>
                             
                         <?php } ?>
                         <li>
-                            <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>,<?php echo $idfranchisee; ?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
+                            <!--onclick="viewClientDetails(<?php /*echo $clientDetailsAray['id'];*/?>,<?php /*echo $idfranchisee; */?>);"-->
+                            <a href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
                         
                         </li>
                       
@@ -892,76 +896,87 @@
                         <tbody>
                            <?php
                                        $i = 0;
-                                        foreach($childClientDetailsAray as $childClientDetailsData)
-                                        {
+                                        foreach($childClientDetailsAray as $childClientDetailsData) {
                                             $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($childClientDetailsData['id']);
-                                        ?>
-                                        <tr>
-                                            <td><?php echo (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A');?></td>
-                                            <td> <?php echo $childClientDetailsData['szName']?> </td>
-                                            <td> <?php echo $childClientDetailsData['szEmail'];?> </td>
-                                             <td> <?php echo $childClientDetailsData['szContactNumber'];?> </td>
-                                              <td>
-                                        <?php
-                                        if($childClientDetailsData['szCreatedBy'])
-                                        {
-                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$childClientDetailsData['szCreatedBy']);
-                                            echo $franchiseeDetArr['szName'];
-                                        }
-                                        ?>
-                                        
-                                        </td>
-                                        <td>
-                                            <?php 
-                                            if($childClientDetailsData['szLastUpdatedBy'])
-                                            {
-                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$childClientDetailsData['szLastUpdatedBy']);
-                                                echo $franchiseeDetArr['szName'];
+                                            $showrec = true;
+                                            if (isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2']) && ($_POST['szSearchClRecord2'] != $childClientDetailsData['id'])) {
+                                                $showrec = false;
                                             }
-                                            else
-                                            {
-                                               echo "N/A";
-                                            }
-                                           
-                                            ?> 
-                                        </td>
-                                         <td>
-                                              <?php
-                                              if($_SESSION['drugsafe_user']['iRole'] == '2'  && $addEditClientDet){
-                                               ?>
-                                              
-                                                <a class="btn btn-circle btn-icon-only btn-default" title="Edit Site" onclick="editClient('<?php echo $childClientDetailsData['id'];?>',<?php echo $childClientDetailsData['franchiseeId'];?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__  ;?>','1');" href="javascript:void(0);">
-                                                    <i class="fa fa-pencil"></i> 
-                                                </a>
-                                                    <?php }  ?>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="View Site Details" onclick="viewClientDetails(<?php echo $childClientDetailsData['id'];?>,<?php echo $idfranchisee; ?>);" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                             <?php  if ($_SESSION['drugsafe_user']['iRole'] == '2' && $_SESSION['drugsafe_user']['sztype'] == '1') { ?>
-                                                 <a class="btn btn-circle btn-icon-only btn-default"
-                                                    title="Assign Franchisee"
-                                                    onclick="assignfranchiseeClient('<?php echo $childClientDetailsData['id']; ?>','<?php echo $franchiseecode['regionId']; ?>');"
-                                                    href="javascript:void(0);">
-                                                     <i class="fa fa-tasks"></i>
-                                                 </a>
-                                                 <?php
-                                             }
-                                              if($_SESSION['drugsafe_user']['iRole'] == '2' && $addEditClientDet){
-                                                    $id =   $childClientDetailsData['id'];
-                                                   $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
-                                                     if(empty($sosRormDetailsAry)) {
-                                               ?>
-                                                <a class="btn btn-circle btn-icon-only btn-default" id="userStatus" title="Delete Site" onclick="clientDelete('<?php echo $childClientDetailsData['id'];?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__ ;?>','1');" href="javascript:void(0);"></i>
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            if ($showrec) {
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?></td>
+                                                    <td> <?php echo $childClientDetailsData['szName'] ?> </td>
+                                                    <td> <?php echo $childClientDetailsData['szEmail']; ?> </td>
+                                                    <td> <?php echo $childClientDetailsData['szContactNumber']; ?> </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($childClientDetailsData['szCreatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $childClientDetailsData['szCreatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        }
+                                                        ?>
 
-                                                </a>
-                                                     <?php } }  ?>
-                                               
-                                            </td>
-                                            
-                                        </tr>
-                                        <?php 
-                                         $i++;
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($childClientDetailsData['szLastUpdatedBy']) {
+                                                            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $childClientDetailsData['szLastUpdatedBy']);
+                                                            echo $franchiseeDetArr['szName'];
+                                                        } else {
+                                                            echo "N/A";
+                                                        }
+
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($_SESSION['drugsafe_user']['iRole'] == '2' && $addEditClientDet) {
+                                                            ?>
+
+                                                            <a class="btn btn-circle btn-icon-only btn-default"
+                                                               title="Edit Site"
+                                                               onclick="editClient('<?php echo $childClientDetailsData['id']; ?>',<?php echo $childClientDetailsData['franchiseeId']; ?>,'<?php echo __URL_FRANCHISEE_VIEWCLIENTDETIALS__; ?>','1');"
+                                                               href="javascript:void(0);">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                        <?php } ?>
+                                                        <a class="btn btn-circle btn-icon-only btn-default"
+                                                           id="userStatus" title="View Site Details"
+                                                           onclick="viewClientDetails(<?php echo $childClientDetailsData['id']; ?>,<?php echo $idfranchisee; ?>);"
+                                                           href="javascript:void(0);"></i>
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </a>
+                                                        <?php if ($_SESSION['drugsafe_user']['iRole'] == '2' && $_SESSION['drugsafe_user']['sztype'] == '1') { ?>
+                                                            <a class="btn btn-circle btn-icon-only btn-default"
+                                                               title="Assign Franchisee"
+                                                               onclick="assignfranchiseeClient('<?php echo $childClientDetailsData['id']; ?>','<?php echo $franchiseecode['regionId']; ?>');"
+                                                               href="javascript:void(0);">
+                                                                <i class="fa fa-tasks"></i>
+                                                            </a>
+                                                            <?php
+                                                        }
+                                                        if ($_SESSION['drugsafe_user']['iRole'] == '2' && $addEditClientDet) {
+                                                            $id = $childClientDetailsData['id'];
+                                                            $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($id);
+                                                            if (empty($sosRormDetailsAry)) {
+                                                                ?>
+                                                                <a class="btn btn-circle btn-icon-only btn-default"
+                                                                   id="userStatus" title="Delete Site"
+                                                                   onclick="clientDelete('<?php echo $childClientDetailsData['id']; ?>','<?php echo __URL_FRANCHISEE_CLIENTRECORD__; ?>','1');"
+                                                                   href="javascript:void(0);"></i>
+                                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+
+                                                                </a>
+                                                            <?php }
+                                                        } ?>
+
+                                                    </td>
+
+                                                </tr>
+                                                <?php
+                                                $i++;
+                                            }
                                         }
                                    ?>
                         </tbody>

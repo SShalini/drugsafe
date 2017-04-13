@@ -278,7 +278,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-dollar"></i>
                                                 </span>
-                                                <input id="CallOutBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutBasePrice]"  onblur="calcombinetotalprice('CallOutBasePrice','CallOutHr',3,'CallOutTotal');">
+                                                <input id="CallOutBasePrice" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutBasePrice]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutBasePrice]"  onblur="calcombinetotalprice('CallOutBasePrice','CallOutHr',1,'CallOutTotal');">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[CallOutBasePrice]')){?>
@@ -294,7 +294,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                                 </span>
-                                                <input id="CallOutHr" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutHr]'); ?>" onblur="calcombinetotalprice('CallOutBasePrice','CallOutHr',3,'CallOutTotal');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutHr]">
+                                                <input id="CallOutHr" class="form-control" type="text" value="<?php echo set_value('orderingData[CallOutHr]'); ?>" onblur="calcombinetotalprice('CallOutBasePrice','CallOutHr',1,'CallOutTotal');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[CallOutHr]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[CallOutHr]')){?>

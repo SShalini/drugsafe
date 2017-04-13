@@ -1964,6 +1964,21 @@ function getAllReginolCode(stateId,error,regionid) {
     }
 }
 
+function getAllReginolCodeForAgent(stateId,error,regionid) {
+    if(stateId>0){
+        $.post(__BASE_URL__ + "/admin/getAllReginolCodeForAgent", {stateId: stateId,error: error,regionid: regionid}, function (result) {
+            if (result != '') {
+                $("#reginolFiled").empty();
+                $("#reginolFiled").html(result);
+            }
+        });
+    }
+    else
+    {
+        $("#reginolFiled").empty();
+    }
+}
+
 function addRegionCode(stateId) {
     
     if(stateId>0){

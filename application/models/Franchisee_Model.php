@@ -750,6 +750,7 @@ class Franchisee_Model extends Error_Model
             'szCity' => $data['szCity'],
             'szZipCode' => $data['szZipCode'],
             'szAddress' => $data['szAddress'],
+            'regionId' => (int)$data['szRegionName'],
             'iRole' => '6',
             'iActive' => '1',
             'dtCreatedOn' => $date
@@ -936,7 +937,7 @@ class Franchisee_Model extends Error_Model
     function getAgentrecord($franchiseeid, $agentId = '0', $agentName = 0)
     {
         $whereAry = 'user.isDeleted = 0 AND user.iActive = 1 AND agent.franchiseeId = ' . (int)$franchiseeid . (!empty($agentName) ? ' AND user.szName = ' . '"' . $agentName . '"' : '') . ($agentId > 0 ? ' AND user.id = ' . (int)$agentId : '');
-        $query = $this->db->select('user.id,agent.franchiseeid , user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.szCity, user.userCode, user.szCountry')
+        $query = $this->db->select('user.id,agent.franchiseeid , user.szName, user.abn, user.szEmail, user.szContactNumber, user.szAddress, user.szZipCode, user.regionId, user.szCity, user.userCode, user.szCountry')
             ->from(__DBC_SCHEMATA_USERS__ . ' as user')
             ->join(__DBC_SCHEMATA_AGENT_FRANCHISEE__ . ' as agent', 'user.id = agent.agentid')
             //->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'agent.franchiseeid = client.franchiseeId')

@@ -360,6 +360,7 @@ class Franchisee_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
+        $addEditClientDet = true;
         $idClient = $this->session->userdata('idClient');
         $corpclient = $this->session->userdata('corpclient');
         $frid = $this->session->userdata('idfranchisee');
@@ -394,10 +395,14 @@ class Franchisee_Controller extends CI_Controller
         if(!empty($clientDetsArr)){
             $franchiseeid = $clientDetsArr[0]['franchiseeId'];
         }
+        if($franchiseeid != $_SESSION['drugsafe_user']['id']){
+            $addEditClientDet = false;
+        }
         $sitesArr = array();
         $sitesArr = $this->Webservices_Model->getclientdetails($franchiseeid,$idClient);
         $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
         if(!empty($AssignCorpuserDetailsArr)){
+            $addEditClientDet = false;
             $sitesArr = array();
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
                 $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
@@ -425,12 +430,12 @@ class Franchisee_Controller extends CI_Controller
             $getRegionName = $this->Admin_Model->getregionbyregionid($franchiseeDetArr['regionId']);
         }
         $clientAray = $this->Webservices_Model->getFranchiseeWithClient($idClient,$idfranchisee);
-        $addEditClientDet = true;
-        if(!empty($clientAray)){
+
+        /*if(!empty($clientAray)){
             if(($clientAray[0]['szNoOfSites'] == 0) && $clientAray[0]['clientType'] == 0){
                 $addEditClientDet = false;
             }
-        }
+        }*/
         $userDetailsArr = array();
         if($corpclient == '1'){
             $loggedinFranchisee = $idfranchisee;
@@ -850,8 +855,11 @@ class Franchisee_Controller extends CI_Controller
         }
         $franchiseId = $_SESSION['drugsafe_user']['id'];
         $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
         $allIndustry = $this->Admin_Model->viewAllIndustryList();
-
+        if ($_POST['agentData']['szState']) {
+            $getReginolCode = $this->Admin_Model->getRegionByStateId($_POST['agentData']['szState']);
+        }
         $this->load->library('form_validation');
         $this->form_validation->set_rules('agentData[szBusinessName]', 'Name', 'required|alpha_dash_space|chekDuplicate['. __DBC_SCHEMATA_USERS__ . '.szName]');
         $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
@@ -873,6 +881,8 @@ class Franchisee_Controller extends CI_Controller
             $data['is_user_login'] = $is_user_login;
             $data['allIndustry'] = $allIndustry;
             $data['getState']=$getState;
+            $data['getAllStates'] = $getAllStates;
+            $data['getReginolCode'] = $getReginolCode;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/addAgent');
             $this->load->view('layout/admin_footer');
@@ -911,20 +921,26 @@ class Franchisee_Controller extends CI_Controller
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $idAgent = $this->session->userdata('idAgent');
         $franchiseId = $_SESSION['drugsafe_user']['id'];
-        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($idAgent);
         if ($idAgent > 0) {
             $data_validate = $this->input->post('agentData');
             if (empty($data_validate)) {
                 $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseId,$idAgent);
                 
                 $agentDataArray = $recordArr[0];
+                if(!empty($agentDataArray)){
+                    $getRegionName = $this->Admin_Model->getregionbyregionid($agentDataArray['regionId']);
+                }
                 //print_r($agentDataArray);
             } else {
                 $agentDataArray = $data_validate;
                 $agentoriginaldata = $agentDataArray = $this->Franchisee_Model->getAgentrecord($franchiseId, $idAgent);
+                if(!empty($agentDataArray)){
+                    $getRegionName = $this->Admin_Model->getregionbyregionid($agentDataArray[0]['regionId']);
+                }
             }
         }
-   
+
         $this->load->library('form_validation');
         if ($agentoriginaldata[0]['szName'] != $data_validate['szName']) {
             $isuniqueName = '|chekDuplicate['. __DBC_SCHEMATA_USERS__ . '.szName]';
@@ -958,6 +974,7 @@ class Franchisee_Controller extends CI_Controller
             $_POST['agentData'] = $agentDataArray;
             $data['notification'] = $count;
             $data['getState']=$getState;
+            $data['regionname']=$getRegionName['regionName'];
             $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/editAgent');
@@ -1111,15 +1128,19 @@ class Franchisee_Controller extends CI_Controller
                 $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
                 if(!empty($CorpSitesDetailsArr)){
                     foreach ($CorpSitesDetailsArr as $CorpUser){
-                        array_push($CorpuserDetailsArr,$CorpUser);
+                        if(!in_array($CorpUser,$CorpuserDetailsArr)) {
+                            array_push($CorpuserDetailsArr, $CorpUser);
+                        }
                     }
                 }
             }
         }
         if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
             $clientlistArr = array_merge($AllclientAry, $CorpuserDetailsArr);
-        }else{
+        }elseif(!empty($AllclientAry)){
             $clientlistArr = $AllclientAry;
+        }elseif(!empty($CorpuserDetailsArr)){
+            $clientlistArr = $CorpuserDetailsArr;
         }
         $result = "<select class=\"form-control custom-select required\" id=\"szSearchClientname\" name=\"szSearchClRecord1\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\">";
         if (!empty($clientlistArr)) {
@@ -1453,8 +1474,8 @@ class Franchisee_Controller extends CI_Controller
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseeid, $idAgent);
-        $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseeid);
-       
+        $getState=$this->Franchisee_Model->getStateByFranchiseeId($idAgent);
+        $getRegionName = $this->Admin_Model->getregionbyregionid($recordArr[0]['regionId']);
         $data['recordArr'] = $recordArr;
         $data['getState'] = $getState;
         $data['franchiseeid'] = $franchiseeid;
@@ -1463,7 +1484,7 @@ class Franchisee_Controller extends CI_Controller
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
-
+        $data['regionname']=$getRegionName['regionName'];
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/viewAgentDetails');
         $this->load->view('layout/admin_footer');

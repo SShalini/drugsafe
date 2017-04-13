@@ -276,7 +276,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-dollar"></i>
                                                 </span>
-                                                <input id="cobp" class="form-control" type="text" value="<?php echo set_value('orderingData[cobp]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[cobp]"  onblur="calcombinetotalprice('cobp','cohr',3,'CallOutTotal');">
+                                                <input id="cobp" class="form-control" type="text" value="<?php echo set_value('orderingData[cobp]'); ?>" placeholder="Base Price " onfocus="remove_formError(this.id,'true')" name="orderingData[cobp]"  onblur="calcombinetotalprice('cobp','cohr',1,'CallOutTotal');">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[cobp]')){?>
@@ -292,7 +292,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                                 </span>
-                                                <input id="cohr" class="form-control" type="text" value="<?php echo set_value('orderingData[cohr]'); ?>" onblur="calcombinetotalprice('cobp','cohr',3,'CallOutTotal');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[cohr]">
+                                                <input id="cohr" class="form-control" type="text" value="<?php echo set_value('orderingData[cohr]'); ?>" onblur="calcombinetotalprice('cobp','cohr',1,'CallOutTotal');" placeholder=" Hours " onfocus="remove_formError(this.id,'true')" name="orderingData[cohr]">
                                             </div>
                                              <?php
                                             if(form_error('orderingData[cohr]')){?>

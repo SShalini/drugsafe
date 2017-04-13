@@ -841,6 +841,45 @@ class Admin_Controller extends CI_Controller
         <?php
     }
 
+    function getAllReginolCodeForAgent()
+    {
+        $Err = $this->input->post('error');
+        $regionid = $this->input->post('regionid');
+        $stateId = $this->input->post('stateId');
+        $getReginolCode = $this->Admin_Model->getAllRegionByStateId($stateId);
+        ?>
+        <div class="form-group <?php if (!empty($Err)) { ?>has-error<?php } ?>">
+            <label class="col-md-4 control-label">Region Name</label>
+            <div class="col-md-6">
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                         </span>
+                    <select class="form-control " name="agentData[szRegionName]" id="szRegionName"
+                            Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">
+                        <option value=''>Select</option>
+                        <?php
+                        if (!empty($getReginolCode)) {
+                            foreach ($getReginolCode as $getReginolCodeData) {
+                                $selected = ($getReginolCodeData['id'] == $regionid ? 'selected="selected"' : '');
+                                echo '<option value="' . $getReginolCodeData['id'] . '"' . $selected . ' >' . $getReginolCodeData['regionName'] . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <?php if (!empty($Err)) { ?>
+                    <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                        <?php echo $Err; ?>
+                                            </span>
+                <?php } ?>
+            </div>
+
+        </div>
+        <?php
+    }
+
     function regionManagerList()
     {
         $is_user_login = is_user_login($this);

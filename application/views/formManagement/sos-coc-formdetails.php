@@ -180,12 +180,21 @@
                                     <div id="clientname">
                                         <select class="form-control custom-select" name="szSearch2" id="szSearch2"
                                                 onfocus="remove_formError(this.id,'true')"
-                                                onchange="getSiteListByClientIdData(this.value)">
+                                                onchange="getSiteListByClientIdData(this.value,'','<?php echo $_SESSION['drugsafe_user']['id'];?>')">
                                             <option value="">Client Name</option>
                                             <?php
                                             foreach ($clientarr as $clientData) {
                                                 $selected = ($clientData['id'] == $_POST['szSearch2'] ? 'selected="selected"' : '');
                                                 echo '<option value="' . $clientData['id'] . '"' . $selected . ' >' . $clientData['szName'] . '</option>';
+                                            if ($_SESSION['drugsafe_user']['iRole'] == 2) { ?>
+                                                <script type="text/javascript">
+                                                    setTimeout(function () {
+                                                        getSiteListByClientIdData('<?php echo $_POST['szSearch2'];?>', '<?php echo $_POST['szSearch3'];?>', '<?php echo $_SESSION['drugsafe_user']['id'];?>');
+                                                    }, 300);
+
+                                                </script>
+                                                <?php
+                                            }
                                             }
                                             ?>
                                         </select>
