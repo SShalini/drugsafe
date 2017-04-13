@@ -919,6 +919,7 @@ $html .= '
         if($dispStat){
             $data['mode'] = '__PRODUCT_DISPATCHED_SUCCESSFULLY__';
             $this->load->view('admin/admin_ajax_functions', $data);
+            $this->Order_Model->xeroIntigration($ordid);
         }else{
             return false;
         }

@@ -975,6 +975,76 @@ class Order_Model extends Error_Model {
             $this->addError("error", "Something went wrong. Please try again.");
             return false;
         }
-    }   
+    }
+
+    function xeroIntigration($ordid)
+    {
+        $this->load->library('xero');
+        $getOrderDetails=$this->getOrderByOrderId($ordid);
+        $totalOrdersDetailsAray = $this->getOrderDetailsByOrderId($ordid);
+        if(!empty($getOrderDetails))
+        {
+            $userDeatils=$this->Admin_Model->getUserDetailsByEmailOrId('',$getOrderDetails['franchiseeid']);
+        }
+        $lineItems = array();
+        if (!empty($totalOrdersDetailsAray)) {
+            foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
+                $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
+                $lienItem = array(
+                    "Description" => $productDataArr['szProductCode'],
+                    "Quantity" => $totalOrdersDetailsData['quantity'],
+                    "UnitAmount" => $productDataArr['szProductCost'],
+                    "AccountCode" => "200"
+                );
+                array_push($lineItems, $lienItem);
+            }
+        }
+        $new_contact = array(
+            array(
+                "Name" => $userDeatils['szName'],
+                "FirstName" => $userDeatils['szName'],
+                "Addresses" => array(
+                    "Address" => array(
+                        array(
+                            "AddressType" => "POBOX",
+                            "AddressLine1" => $userDeatils['szAddress'],
+                            "City" => $userDeatils['szCity'],
+                            "Country" => $userDeatils['szCountry'],
+                            "PostalCode" => $userDeatils['szZipCode']
+                        ),
+                        array(
+                            "AddressType" => "STREET",
+                            "AddressLine1" => $userDeatils['szAddress'],
+                            "City" => $userDeatils['szCity'],
+                            "Country" => $userDeatils['szCountry'],
+                            "PostalCode" => $userDeatils['szZipCode']
+                        )
+                    )
+                )
+            )
+        );
+        // create the contact
+        $contact_result = $this->xero->Contacts($new_contact);
+
+
+        $new_invoice = array(
+            array(
+                "Type"=>"ACCREC",
+                "Contact" => array(
+                    "Name" => $userDeatils['szName']
+                ),
+                "Date" => $getOrderDetails['createdon'],
+                "DueDate" => date('Y-m-d H:i:s', strtotime($getOrderDetails['createdon'] . ' +30 day')),
+                "Status" => "AUTHORISED",
+                "LineAmountTypes" => "Exclusive",
+                "LineItems" => array(
+                    "LineItem" => $lineItems
+                )
+            )
+        );
+        $invoice_result = $this->xero->Invoices($new_invoice);
+        $result = $this->xero->Accounts(false, false, array("Name"=>$userDeatils['szName']));
+        $all_accounts = $this->xero->Accounts;
+    }
    }
 ?>
