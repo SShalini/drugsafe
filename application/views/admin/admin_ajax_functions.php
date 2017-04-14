@@ -1684,7 +1684,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                             </div>
                             <div class="row static-info">
                                 <div class="col-md-5 name">
-                                    Total Price:
+                                    Total Price EXL GST:
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php
@@ -3590,7 +3590,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                             </div>
                             <div class="row static-info">
                                 <div class="col-md-5 name">
-                                    Total Price:
+                                    Total Price EXL GST:
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php

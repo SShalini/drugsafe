@@ -1742,7 +1742,7 @@ class Reporting_Controller extends CI_Controller
                                         <th><b> Order #  </b> </th>
                                         <th><b> Status  </b> </th>
                                         <th> <b>No. of Products</b> </th>
-                                        <th><b> Order Cost </b> </th>
+                                        <th><b> Order Cost EXL GST </b> </th>
                                         <th> <b>Xero Invoice No.</b> </th>
                                     </tr>';
         if ($validOrdersDetailsAray) {
@@ -1852,7 +1852,7 @@ class Reporting_Controller extends CI_Controller
             $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-            $this->excel->getActiveSheet()->setCellValue('G1', 'Order Cost');
+            $this->excel->getActiveSheet()->setCellValue('G1', 'Order Cost EXL GST');
             $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
             $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

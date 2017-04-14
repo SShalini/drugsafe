@@ -337,7 +337,7 @@
                                                         No. of products
                                                     </th>
                                                     <th>
-                                                        Order Cost
+                                                        Order Cost EXL GST
                                                     </th>
                                                    <th>
                                                         Order Details

@@ -977,6 +977,15 @@ class Order_Model extends Error_Model {
         }
     }
 
+    function updateXeroOrderDetails($orderid,$xerono){
+        $dataAry = array(
+            'XeroIDnumber' => $xerono,
+            'xeroprocessed' => 1
+        );
+        $this->db->where('id',(int)$orderid)
+                ->update(__DBC_SCHEMATA_ORDER__, $dataAry);
+    }
+
     function xeroIntigration($ordid)
     {
         $this->load->library('xero');
@@ -1024,9 +1033,7 @@ class Order_Model extends Error_Model {
             )
         );
         // create the contact
-        $contact_result = $this->xero->Contacts($new_contact);
-
-
+        $this->xero->Contacts($new_contact);
         $new_invoice = array(
             array(
                 "Type"=>"ACCREC",
@@ -1045,7 +1052,15 @@ class Order_Model extends Error_Model {
         );
         $this->xero->Invoices($new_invoice);
         $this->xero->Accounts(false, false, array("Name"=>$userDeatils['szName']));
-        $this->xero->Accounts;
+        $org_invoices = $this->xero->Invoices;
+
+        $invoice_count = sizeof($org_invoices->Invoices->Invoice);
+
+        //$invoice_index = rand(0,$invoice_count);
+        $invoice_index = $invoice_count-1;
+        //$invoice_id = (string) $org_invoices->Invoices->Invoice[$invoice_index]->InvoiceID;
+        $invoice_number = (string) $org_invoices->Invoices->Invoice[$invoice_index]->InvoiceNumber;
+        $this->updateXeroOrderDetails($ordid,$invoice_number);
     }
    }
 ?>

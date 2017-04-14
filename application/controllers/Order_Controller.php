@@ -555,7 +555,7 @@ class Order_Controller extends CI_Controller
     </tr> ';
   if($flag==1){
    $html .= '  <tr>
-        <td width="50%" align="left"><b>Total Price : </b> $'.$OrdersDetailsAray['price'].'</td>
+        <td width="50%" align="left"><b>Total Price EXL GST: </b> $'.$OrdersDetailsAray['price'].'</td>
     </tr>';
   }
   if($_SESSION['drugsafe_user']['iRole']==1){
@@ -724,18 +724,18 @@ $html .= '
          if($OrdersDetailsAray['status'] ==3){
           $this->excel->getActiveSheet()->setCellValue('A6','Canceled Date & Time :');
           $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
-         $this->excel->getActiveSheet()->setCellValue('A8','Total Price :');
+         $this->excel->getActiveSheet()->setCellValue('A8','Total Price EXL GST:');
          $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
          }
           elseif($OrdersDetailsAray['status'] ==2){
            $this->excel->getActiveSheet()->setCellValue('A6','Dispatched Date & Time :');
            $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
-           $this->excel->getActiveSheet()->setCellValue('A8','Total Price :');
+           $this->excel->getActiveSheet()->setCellValue('A8','Total Price EXL GST:');
            $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
          }
          else{
            $this->excel->getActiveSheet()->setCellValue('A6','Order Status  :');
-           $this->excel->getActiveSheet()->setCellValue('A7','Total Price :');
+           $this->excel->getActiveSheet()->setCellValue('A7','Total Price EXL GST:');
             if($_SESSION['drugsafe_user']['iRole']==1){
            $this->excel->getActiveSheet()->setCellValue('A8','Franchisee :'); 
             }
