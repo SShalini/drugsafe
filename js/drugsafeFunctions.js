@@ -1470,6 +1470,7 @@ function changeordstatus(ordid,prodcount,status) {
 
     setTimeout(function () {
         if(status == '1'){
+            $('#loader').attr('style', 'display:block');
             if((check == counter)||(nonchangeable == prodcount)){
                 var price = $('#totalprice').val();
                 $.post(__BASE_URL__ + "/order/dispatchfinal", {

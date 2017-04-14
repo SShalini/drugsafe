@@ -991,7 +991,7 @@ class Order_Model extends Error_Model {
             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
                 $lienItem = array(
-                    "Description" => $productDataArr['szProductCode'],
+                    "Description" => $productDataArr['szProductDiscription'],
                     "Quantity" => $totalOrdersDetailsData['quantity'],
                     "UnitAmount" => $productDataArr['szProductCost'],
                     "AccountCode" => "200"
@@ -1034,17 +1034,18 @@ class Order_Model extends Error_Model {
                     "Name" => $userDeatils['szName']
                 ),
                 "Date" => $getOrderDetails['createdon'],
-                "DueDate" => date('Y-m-d H:i:s', strtotime($getOrderDetails['createdon'] . ' +30 day')),
+                "DueDate" => date('Y-m-d H:i:s', strtotime($getOrderDetails['createdon'] . ' +14 day')),
                 "Status" => "AUTHORISED",
                 "LineAmountTypes" => "Exclusive",
                 "LineItems" => array(
                     "LineItem" => $lineItems
-                )
+                ),
+                "TaxType" => "OUTPUT"
             )
         );
-        $invoice_result = $this->xero->Invoices($new_invoice);
-        $result = $this->xero->Accounts(false, false, array("Name"=>$userDeatils['szName']));
-        $all_accounts = $this->xero->Accounts;
+        $this->xero->Invoices($new_invoice);
+        $this->xero->Accounts(false, false, array("Name"=>$userDeatils['szName']));
+        $this->xero->Accounts;
     }
    }
 ?>
