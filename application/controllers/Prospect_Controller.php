@@ -1036,10 +1036,13 @@ public function deleteProspectConfirmation()
                                             <td>' . $recordData['szEmail'] . ' </td>
                                             <td>' . ($recordData['status']=='1'?'Pre Discovery':($recordData['status']=='2'?'Discovery Meeting':($recordData['status']=='3'?'In Progress' :($recordData['status']=='4'?'Non Convertible' :($recordData['status']=='5'?'Contact Later':($recordData['status']=='6'?'Closed Sale':'')))))) . ' </td>
                                             <td> ' . $dt_last_updated_status. '  </td>
-                                        </tr>
-                                        <tr>
+                                        </tr>';
+                if(!empty($meetingAry)){
+                $html .= 
+                                       ' <tr>
                                             <td style="width:990"> <b>Meeting Note:- </b>'.$meetingAry['szDescription'].' </td>
                                         </tr>';
+                }
             }
         }
         $i++;
