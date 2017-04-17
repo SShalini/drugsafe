@@ -167,7 +167,16 @@
                                 <span class="title">Stock Assignments</span>
                             </a>
                         </li>-->
-						 <li class="nav-item  <?php if ($subpageName == 'industry_report') { ?> active open <?php } ?>">
+                        
+            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
+                        <li class="nav-item  <?php if ($subpageName == 'fr_stock_qty_report') { ?> active open <?php } ?>">
+                            <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_fr_stock_qty_report">
+                                <i class="fa fa-ge" aria-hidden="true"></i>
+                                <span class="title">Franchisee Stock Qty Report</span>
+                            </a>
+                        </li>
+                          <?php } ?>
+			<li class="nav-item  <?php if ($subpageName == 'industry_report') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/reporting/view_industry_report">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Industry Report</span>

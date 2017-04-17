@@ -3218,3 +3218,20 @@ function unassignSiteConfirmation(mapid) {
         jQuery('#loader').attr('style', 'display:none');
     });
 }
+function ViewpdfFrStockQtyReport(franchiseeName,prodCategory) {
+    $.post(__BASE_URL__ + "/reporting/ViewpdfFrStockQtyReportData", {franchiseeName : franchiseeName,prodCategory: prodCategory}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL,'_blank');
+
+    });
+}
+function ViewexcelFrStockQtyReport(franchiseeName,prodCategory) {
+    $.post(__BASE_URL__ + "/reporting/ViewExcelFrStockQtyReportData", {franchiseeName : franchiseeName,prodCategory: prodCategory}, function (result) {
+        ar_result = result.split('||||');
+     var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+      window.open(URL,'_blank');
+     
+      
+    });
+}

@@ -4343,6 +4343,218 @@ class Reporting_Controller extends CI_Controller
         
         
     }
+ public function view_fr_stock_qty_report()
+    {
 
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $count = $this->Admin_Model->getnotification();
+        $franchiseeName = $_POST['szSearch1'];
+        $catid = $_POST['szSearch2'];
+       
+        $viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList($franchiseeName, $catid);
+      
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('szSearch1', 'Franchisee Name ', 'required');
+        $this->form_validation->set_rules('szSearch2', 'Product Category', 'required');
+      
+        $this->form_validation->set_message('required', '{field} is required.');
+        if ($this->form_validation->run() == FALSE) {
+            $data['szMetaTagTitle'] = "Franchisee Stock Qty Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "fr_stock_qty_report";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/franchisee_stock_qty');
+            $this->load->view('layout/admin_footer');
+        } else {
+            $data['viewFranchiseeInventoryListAry'] = $viewFranchiseeInventoryListAry;
+            $data['szMetaTagTitle'] = "Franchisee Stock Qty Report";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Reporting";
+            $data['subpageName'] = "fr_stock_qty_report";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('reporting/franchisee_stock_qty');
+            $this->load->view('layout/admin_footer');
+        }
+    }
+     function ViewpdfFrStockQtyReportData()
+    {
+
+        $prodCategory = $this->input->post('prodCategory');
+        $franchiseeName = $this->input->post('franchiseeName');
+
+
+        $this->session->set_userdata('franchiseeName', $franchiseeName);
+        $this->session->set_userdata('prodCategory', $prodCategory);
+
+
+        echo "SUCCESS||||";
+        echo "ViewpdfFrStockQtyReport";
+
+
+    }
+
+    public function ViewpdfFrStockQtyReport()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe fr stock qty report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Fr Stock Qty Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+        $pdf->AddPage('L');
+
+        $franchiseeName = $this->session->userdata('franchiseeName');
+        $prodCategory = $this->session->userdata('prodCategory');
+
+
+        $viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList($franchiseeName, $prodCategory);
+
+
+        $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Inventory Report</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th><b>Image</b> </th>
+                                        <th> <b>Product Code </b> </th>
+                                        <th><b> Description  </b> </th>
+                                        <th> <b>Available Stock Quantity</b> </th>
+                                       
+                                   
+                                    </tr>';
+        if ($viewFranchiseeInventoryListAry) {
+
+            $i = 0;
+            foreach($viewFranchiseeInventoryListAry as $viewFranchiseeInventoryData)
+                $i++;
+
+                $html .= '<tr>
+                                           <td>
+                                            <img class="file_preview_image" src="'. __BASE_USER_PRODUCT_IMAGES_URL__.'/'. $viewFranchiseeInventoryData['szProductImage'].'" width="60" height="60"/>    
+                                        </td>
+                                            <td> ' . $viewFranchiseeInventoryData['szProductCode'] . '</td>
+                                            <td> ' . $viewFranchiseeInventoryData['szProductDiscription'] . ' </td>
+                                            <td>' . $viewFranchiseeInventoryData['szQuantity'] . ' </td>';
+                
+
+                $html .= '</tr>';
+             }
+
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+
+        $pdf->Output('stock-request-report.pdf', 'I');
+    }
+     function ViewExcelFrStockQtyReportData()
+    {
+        $prodCategory = $this->input->post('prodCategory');
+        $franchiseeName = $this->input->post('franchiseeName');
+
+
+        $this->session->set_userdata('franchiseeName', $franchiseeName);
+        $this->session->set_userdata('prodCategory', $prodCategory);
+
+        echo "SUCCESS||||";
+        echo "ViewExcelFrStockQtyReportReport";
+
+
+    }
+
+    public function ViewExcelFrStockQtyReportReport()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Drug-safe fr stock qty report';
+        $file = $filename . '-' . $title; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Description');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Available Stock Quantity');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+
+        $franchiseeName = $this->session->userdata('franchiseeName');
+        $prodCategory = $this->session->userdata('prodCategory');
+       
+
+
+         $viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList($franchiseeName, $prodCategory);
+        if (!empty($viewFranchiseeInventoryListAry)) {
+            $i = 2;
+            $x = 0;
+            foreach ($viewFranchiseeInventoryListAry as $item) {
+                
+                $x++;
+                $this->excel->getActiveSheet()->setCellValue('A' . $i, $item['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('B' . $i, $item['szProductDiscription']);
+                $this->excel->getActiveSheet()->setCellValue('C' . $i, $item['szQuantity']);
+               
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $this->session->unset_userdata('franchiseeName');
+        $this->session->unset_userdata('prodCategory');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
    }
 ?>

@@ -123,7 +123,7 @@
                                                     <td><?php echo $drugTestKitData['szProductCode']?> </td>
                                                     <td> <?php echo $drugTestKitData['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $drugTestKitData['szProductCost'];?> </td>
-<!--                                                    <td><?php 
+<!--                                                 <?php 
                                                     $date= $drugTestKitData['dtExpiredOn'];
                                                     $dtExpiredOn = date("d-m-Y", strtotime($date)); 
                                                     echo $dtExpiredOn;?> </td>-->

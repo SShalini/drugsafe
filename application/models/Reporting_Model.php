@@ -432,5 +432,27 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
                 return array();
             }
         }
+     public function viewFranchiseeInventoryList($franchiseeName, $catid)
+        {
+            $whereAry = array('product.isDeleted=' => '0','product.szProductCategory' => $catid ,'user.szName=' => $franchiseeName);
+            $this->db->select('*');   
+          
+            $this->db->from(__DBC_SCHEMATA_PRODUCT__.' as product');
+            $this->db->join(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__.' as qty','qty.iProductId = product.id');
+            $this->db->join(__DBC_SCHEMATA_USERS__.' as user','qty.iFranchiseeId = user.id');
+         
+            $this->db->where($whereAry);
+            $this->db->limit($limit, $offset);
+            $query = $this->db->get();
+
+            if($query->num_rows() > 0)
+            {
+                return $query->result_array();
+            }
+            else
+            {
+                    return array();
+            }
+        }
 }
 ?>
