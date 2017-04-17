@@ -1019,6 +1019,7 @@ public function deleteProspectConfirmation()
               
                $i++;
                 $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $recordData['iFranchiseeId']);
+                $meetingAry = $this->Prospect_Model->getLatestMettingDetailsById($recordData['id'],$recordData['dt_last_updated_meeting']);
                 if(($recordData['dt_last_updated_status']) == '0000-00-00 00:00:00'){
                 $dt_last_updated_status = "N/A";  
               }
@@ -1035,6 +1036,9 @@ public function deleteProspectConfirmation()
                                             <td>' . $recordData['szEmail'] . ' </td>
                                             <td>' . ($recordData['status']=='1'?'Pre Discovery':($recordData['status']=='2'?'Discovery Meeting':($recordData['status']=='3'?'In Progress' :($recordData['status']=='4'?'Non Convertible' :($recordData['status']=='5'?'Contact Later':($recordData['status']=='6'?'Closed Sale':'')))))) . ' </td>
                                             <td> ' . $dt_last_updated_status. '  </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:990"> <b>Meeting Note:- </b>'.$meetingAry['szDescription'].' </td>
                                         </tr>';
             }
         }

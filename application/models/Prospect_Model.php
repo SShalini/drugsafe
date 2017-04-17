@@ -72,7 +72,7 @@ class Prospect_Model extends Error_Model
        else{
        $array = array('isDeleted' => '0');
          }
-         $query = $this->db->select('id,iFranchiseeId,szName,dt_last_updated_status,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
+         $query = $this->db->select('id,iFranchiseeId,szName,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("dt_last_updated_status","desc")
            ->limit($limit, $offset)
@@ -758,6 +758,23 @@ class Prospect_Model extends Error_Model
             return $row;
         } else {
             return array();
+        }
+    }
+     function getLatestMettingDetailsById($Id,$meatingDate)
+    {
+        
+       $array = array('idProspect' => (int)$Id,'dtCreatedOn' => $meatingDate);
+       $query = $this->db->select('szDescription')
+            ->from(__DBC_SCHEMATA_MEETINGS_NOTE__)
+            ->where($array)
+            ->get();
+//       $q = $this->db->last_query();
+//        echo $q;die;
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row['0'];
+        } else {
+            return false;
         }
     }
 }
