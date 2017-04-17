@@ -1038,12 +1038,17 @@ public function deleteProspectConfirmation()
                                             <td> ' . $dt_last_updated_status. '  </td>
                                         </tr>';
                 if(!empty($meetingAry)){
+                  $meetingVal = $meetingAry['szDescription']; 
+                }
+                else{
+                  $meetingVal = "N/A" ;  
+                }
                 $html .= 
                                        ' <tr>
-                                            <td style="width:990"> <b>Meeting Note:- </b>'.$meetingAry['szDescription'].' </td>
+                                            <td colspan="7"> <b>Meeting Note:- </b>'.$meetingVal.' </td>
                                         </tr>';
                 }
-            }
+            
         }
         $i++;
         $html .= '
