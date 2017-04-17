@@ -4436,7 +4436,6 @@ class Reporting_Controller extends CI_Controller
 
         $viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList($franchiseeName, $prodCategory);
 
-
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Stock Report</b></p></div>
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Name:- </b>'.$viewFranchiseeInventoryListAry['0']['szName'].'</p></div>
@@ -4452,10 +4451,10 @@ class Reporting_Controller extends CI_Controller
                                     </tr>';
         if ($viewFranchiseeInventoryListAry) {
 
-            $i = 0;
+             $i = 0; 
             foreach($viewFranchiseeInventoryListAry as $viewFranchiseeInventoryData)
-                $i++;
-
+             
+            {
                 $html .= '<tr>
                                            <td>
                                             <img class="file_preview_image" src="'. __BASE_USER_PRODUCT_IMAGES_URL__.'/'. $viewFranchiseeInventoryData['szProductImage'].'" width="60" height="60"/>    
@@ -4466,8 +4465,10 @@ class Reporting_Controller extends CI_Controller
                 
 
                 $html .= '</tr>';
+                
              }
-
+       $i++;
+        }
         $html .= '
                             </table>
                         </div>
