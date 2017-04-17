@@ -100,7 +100,7 @@
                        <div class="col-md-3 clienttypeselect">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             
-                              <select class="form-control custom-select" name="szSearch2" id="szSearch2" onblur="remove_formError(this.id,'true')" >
+                              <select class="form-control custom-select" name="szSearch2" id="szSearch2" onchange="remove_formError(this.id,'true')" >
                                                 <option value=''>Product Category</option>
                                                 <option value="1" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("1") ? "selected" : ""); ?>>Drug Test Kit</option>
                                                 <option value="2" <?php echo (sanitize_post_field_value($_POST['szSearch2']) == trim("2") ? "selected" : ""); ?>>Marketing Material</option>
@@ -124,7 +124,7 @@
             </form>  
                       </div>
                 <?php
-                        if(!empty($viewFranchiseeInventoryListAry) || !empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
+                        if(!empty($_POST['szSearch2']) && !empty($_POST['szSearch1']) ){
                         if(!empty($viewFranchiseeInventoryListAry)) 
                         {
                            ?>      

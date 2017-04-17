@@ -271,7 +271,7 @@
                                                                         ?>
                                                                         <p title="Order Status"
                                                                            class="label label-sm label-success">
-                                                                            Dispatched
+                                                                         Dispatched
                                                                         </p>
                                                                         <?php
                                                                     }
@@ -336,6 +336,11 @@
                                                                            href="javascript:void(0);">
                                                                             <i class="fa fa-download"></i>
                                                                         </a>
+                                                                    <?php }else{ ?>
+                                                                      <p title="Order Status"
+                                                                           class="label label-sm label-info">
+                                                                           Order Received
+                                                                        </p>  
                                                                     <?php } ?>
                                                                 </td>
 
