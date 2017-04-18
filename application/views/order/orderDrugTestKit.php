@@ -97,9 +97,9 @@
                                                 <th> Product Code</th>
                                                 <th>  Description</th>
                                                 <th>  Cost</th>
-<!--                                                 <th>  Expiry Date</th>-->
                                                  <th>  Model Stock Value</th>
-                                                  <th>  Available Stock Quantity</th>
+                                                 <th>  Available Stock Quantity</th>
+                                                 <th>  Minimum Order Quantity</th>
                                                 <th style="width:60px;">  Quantity</th>
                                                 <th>  Action</th>
                                             </tr>
@@ -129,6 +129,7 @@
                                                     echo $dtExpiredOn;?> </td>-->
                                                      <td><?php echo($drugTestKitDataArr['szModelStockVal'] > 0 ? $drugTestKitDataArr['szModelStockVal'] : 'N/A')?></td>
                                                     <td><?php echo($modelStockDataAry['szQuantity'] > 0 ? $modelStockDataAry['szQuantity'] : 'N/A')?></td>
+                                                     <td><?php echo($drugTestKitData['min_ord_qty'] > 0 ? $drugTestKitData['min_ord_qty'] : 'N/A')?></td>
                                          
                                                     <td>
                                                          <input type="number"min="25"  class="form-control btn-xs "  name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >

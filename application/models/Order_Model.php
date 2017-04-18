@@ -904,7 +904,7 @@ class Order_Model extends Error_Model {
 
         function getProductDetsByfranchiseeid($franchiseeid,$catid=0,$prodcode=0){
             $whereAry = 'prodstock.iFranchiseeId =' . (int)$franchiseeid .' AND prod.isDeleted = 0 '.($catid>0?' AND prod.szProductCategory = '.(int)$catid:'').($prodcode>0?' AND prod.id = '.(int)$prodcode:'') ;
-            $query = $this->db->select('prodstock.szQuantity, prodstock.iFranchiseeId, prod.id, prod.szProductCode, prod.szProductDiscription, prod.szProductCategory,prod.szAvailableQuantity')
+            $query = $this->db->select('prodstock.szQuantity, prodstock.iFranchiseeId, prod.id, prod.szProductCode, prod.model_stk_val, prod.szProductDiscription, prod.szProductCategory,prod.szAvailableQuantity')
                 ->from(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__. ' as prodstock')
                 ->join(__DBC_SCHEMATA_PRODUCT__ . ' as prod', 'prod.id = prodstock.iProductId')
                 ->where($whereAry)

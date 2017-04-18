@@ -100,6 +100,7 @@
                                         <th>  Cost</th>
                                         <th>  Model Stock Value</th>
                                          <th>  Available Stock Quantity</th>
+                                         <th>  Minimum Order Quantity</th>
                                         <th style="width:60px;">  Quantity</th>
                                         <th> Actions </th>
                                       
@@ -126,7 +127,7 @@
                                             <td> $<?php echo $consumablesData['szProductCost'];?> </td>
                                              <td><?php echo($consumablesDataArr['szModelStockVal'] > 0 ? $consumablesDataArr['szModelStockVal'] : 'N/A')?></td>
                                              <td><?php echo($modelStockDataAry['szQuantity'] > 0 ? $modelStockDataAry['szQuantity'] : 'N/A')?></td>
-                                         
+                                            <td><?php echo($consumablesData['szQuantity'] > 0 ? $consumablesData['szQuantity'] : 'N/A')?></td>
                                             <td>
 						 <input type="number" min="25"  class="form-control btn-xs " name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
 					   </td>

@@ -1516,12 +1516,13 @@ class Reporting_Controller extends CI_Controller
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Inventory Report</b></p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
-                                    <tr>
-                                        <th width="10%"><b>  #</b> </th>
-                                        <th width="23%"> <b>Category</b> </th>
-                                        <th width="22%"> <b>Product Code </b> </th>
-                                        <th width="23%"><b> In Stock  </b> </th>
-                                        <th width="22%"> <b>Requested</b> </th>
+                                    <tr> 
+                                        <th width="9%"><b>  #</b> </th>
+                                        <th width="18%"> <b>Category</b> </th>
+                                        <th width="18%"> <b>Product Code </b> </th>
+                                        <th width="18%"> <b> Model Stock Value </b> </th>
+                                        <th width="18%"><b> In Stock  </b> </th>
+                                        <th width="18%"> <b>Requested</b> </th>
                                        
                                    
                                     </tr>';
@@ -1537,6 +1538,7 @@ class Reporting_Controller extends CI_Controller
                                             <td> ' . $i . ' </td>
                                             <td> ' . $productcatAry['szName'] . '</td>
                                             <td> ' . $reqOrderData['szProductCode'] . ' </td>
+                                            <td>' . $reqOrderData['model_stk_val'] . ' </td>
                                             <td>' . $reqOrderData['szAvailableQuantity'] . ' </td>';
                 if (!empty($availprodqty)) {
                     $printzero = true;
@@ -1613,15 +1615,20 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('D1', ' In Stock ');
+        $this->excel->getActiveSheet()->setCellValue('D1', ' Model Stock Value ');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('E1', 'Requested');
+        $this->excel->getActiveSheet()->setCellValue('E1', ' In Stock ');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'Requested');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
 
         $productCode = $this->session->userdata('productCode');
@@ -1640,22 +1647,23 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->setCellValue('A' . $i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B' . $i, $productcatAry['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C' . $i, $item['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('D' . $i, $item['szAvailableQuantity']);
+                $this->excel->getActiveSheet()->setCellValue('D' . $i, $item['model_stk_val']);
+                $this->excel->getActiveSheet()->setCellValue('E' . $i, $item['szAvailableQuantity']);
                 if (!empty($availprodqty)) {
                     $printzero = true;
                     foreach ($availprodqty as $requestedqty) {
                         if ($requestedqty['productid'] == $item['id']) {
-                            $this->excel->getActiveSheet()->setCellValue('E' . $i, $requestedqty['quantity']);
+                            $this->excel->getActiveSheet()->setCellValue('F' . $i, $requestedqty['quantity']);
 
                             $printzero = false;
                         }
                     }
                     if ($printzero) {
-                        $this->excel->getActiveSheet()->setCellValue('E' . $i, 0);
+                        $this->excel->getActiveSheet()->setCellValue('F' . $i, 0);
 
                     }
                 } else {
-                    $this->excel->getActiveSheet()->setCellValue('E' . $i, 0);
+                    $this->excel->getActiveSheet()->setCellValue('F' . $i, 0);
 
                 }
 
@@ -1664,7 +1672,7 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
-
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);  
                 $i++;
             }
         }

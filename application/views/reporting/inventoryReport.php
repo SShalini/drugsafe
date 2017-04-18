@@ -160,6 +160,9 @@
                                           Product Code 
                                     </th>
                                     <th>
+                                          Model Stock Value 
+                                    </th>
+                                    <th>
                                           In Stock  
                                     </th>
                                   
@@ -183,6 +186,9 @@
                                     </td>
                                     <td>
                                          <?php echo $validPendingOrdersDetailsData['szProductCode'] ;?>
+                                    </td>
+                                    <td>
+                                         <?php echo $validPendingOrdersDetailsData['model_stk_val'] ;?>
                                     </td>
                                    <td>  <?php echo $validPendingOrdersDetailsData['szAvailableQuantity'] ;?> </td>
                                 <?php
