@@ -142,6 +142,9 @@
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
 
                                                 </a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="MarketingMaterialView" title="View Marketing Material Details" onclick="viewProductDetails(<?php echo $marketingMaterialData['id'];?>,'2');" href="javascript:void(0);"></i>
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
   
                                             </td>
                                              <?php }else{?>

@@ -144,6 +144,9 @@
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitStatus" title="Delete Drug-Test Kit Details" onclick="productDeleteAlert(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" id="drugTestKitView" title="View Drug-Test Kit Details" onclick="viewProductDetails(<?php echo $drugTestKitData['id'];?>,'1');" href="javascript:void(0);"></i>
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                                </a>
                                                 </td>
                                         <?php }else{?>
                                           <td><?php echo($drugTestKitDataArr['szModelStockVal'] > 0 ? $drugTestKitDataArr['szModelStockVal'] : 'N/A')?></td>

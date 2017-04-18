@@ -27,7 +27,7 @@ margin-bottom: 16px;
 .help-block p{margin:5px;}
 
 .subCaption{
-  margin-bottom: 20px;
+    margin-bottom: 20px;
     margin-right: 130px;
     margin-top: 20px;
     text-align: center;
@@ -141,3 +141,10 @@ margin-bottom: 10px;
 .totalpr{margin-bottom: 0px}
 .clr{color: red}
 .clr_green{color: green}
+
+.Text_align_popup{
+text-align: center;
+margin-top: 17px;
+ margin-bottom: 20px;
+}
+

@@ -3235,3 +3235,17 @@ function ViewexcelFrStockQtyReport(franchiseeName,prodCategory) {
       
     });
 }
+
+function viewProductDetails(idProduct,flag) {
+    jQuery('#loader').attr('style', 'display:block');
+    $.post(__BASE_URL__ + "/inventory/viewProductDetails", {idProduct: idProduct,flag: flag}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#ViewProductDetails').modal("show");
+        }
+        jQuery('#loader').attr('style', 'display:none');
+
+    });
+}

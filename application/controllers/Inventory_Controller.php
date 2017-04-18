@@ -21,6 +21,19 @@ class Inventory_Controller extends CI_Controller {
         $this->load->library('pagination');
         
 	}
+         public function index() 
+        {
+          
+            $is_user_login = is_user_login($this);
+            // redirect to dashboard if already logged in
+            if (!$is_user_login) {
+                ob_end_clean();
+                  redirect(base_url('/admin/admin_login'));
+                die;
+            }
+            redirect(base_url('/inventory/drugTestKitList'));
+          
+        }
 	
         public function addMarketingMaterial() 
         {
@@ -38,6 +51,9 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required');
+            $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
+            $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
@@ -82,6 +98,9 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required');
+            $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
+            $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
@@ -130,6 +149,9 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required');
+            $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
+            $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
@@ -200,6 +222,9 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szProductCategory]', 'Product Category', 'required');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required');
+            $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
+            $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
              $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
@@ -401,6 +426,9 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required');
+            $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
+            $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required.');
@@ -474,7 +502,10 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required' .$isunique);
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
-             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
+            $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required');
+            $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
+            $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
@@ -543,6 +574,14 @@ class Inventory_Controller extends CI_Controller {
             $this->load->view('layout/admin_header',$data);
             $this->load->view('inventory/consumablesList');
             $this->load->view('layout/admin_footer');
-        }  
+        }
+         public function viewProductDetails()
+        {
+            $data['mode'] = '__VIEW_PRODUCT_POPUP__';
+            $data['idProduct'] = $this->input->post('idProduct');
+            $data['flag'] = $this->input->post('flag');
+            $this->load->view('admin/common_ajax_functions',$data);
+        }
+       
     }      
 ?>
