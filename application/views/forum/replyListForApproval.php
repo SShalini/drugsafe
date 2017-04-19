@@ -45,7 +45,7 @@
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
-                                <span class="caption-subject font-red-sunglo bold uppercase">Comment/Reply List</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Topic List</span>
                             </div>
                             <?php 
                             if($_SESSION['drugsafe_user']['iRole']==1 || $_SESSION['drugsafe_user']['iRole']==5){

@@ -1236,7 +1236,7 @@ if ($mode == '__UNAPPROVE_TOPIC_POPUP__') {
 
                 <div class="modal-body">
                     <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        unapprove this Topic?</p>
+                        unapprove this topic?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
