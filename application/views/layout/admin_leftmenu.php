@@ -66,8 +66,8 @@
                 </a>
                       <?php   } else { ?>
                  <a href="<?php echo __BASE_URL__; ?>/formManagement/view_form_for_client" class="nav-link nav-toggle">
-                         <i class="fa fa-users" aria-hidden="true"></i>
-                    <span class="title">SOS/COC Form</span>
+                         <i class="fa fa-file-text" aria-hidden="true"></i>
+                    <span class="title">SOS-COC Form</span>
                     <span class="selected"></span>
                 </a>
                       <?php   }?>       
