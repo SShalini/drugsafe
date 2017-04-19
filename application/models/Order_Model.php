@@ -242,7 +242,7 @@ class Order_Model extends Error_Model {
         {
           
             $whereAry = array('id=' => $orderId);
-            $this->db->select('createdon,franchiseeid,status,price,dispatched_price,last_changed,dispatchedon,canceledon');
+            $this->db->select('createdon,franchiseeid,status,price,freightprice,dispatched_price,last_changed,dispatchedon,canceledon');
             $this->db->from(__DBC_SCHEMATA_ORDER__);
             $this->db->where($whereAry);
             $query = $this->db->get();
@@ -257,7 +257,25 @@ class Order_Model extends Error_Model {
                 return array();
             }
         }
-         
+
+        public function getMinQtyOfProduct($prodid){
+            $whereAry = array('id=' => $prodid);
+            $this->db->select('min_ord_qty');
+            $this->db->from(__DBC_SCHEMATA_PRODUCT__);
+            $this->db->where($whereAry);
+            $query = $this->db->get();
+
+            if($query->num_rows() > 0)
+            {
+                $row = $query->result_array();
+                return  $row[0];
+            }
+            else
+            {
+                return array();
+            }
+        }
+
  public function getallValidOrderDetails($searchAry=array())
     {
         
@@ -828,12 +846,18 @@ class Order_Model extends Error_Model {
         }
     }
 
-    function changesdispatchstatus($ordid, $status, $price=0.00){
+    function changesdispatchstatus($ordid, $status, $price=0.00,$freightprice=0){
         $statusarr4 = array('status' => (int)$status,'last_changed'=>date('Y-m-d h:i:s'),'dispatched_price'=>(float)$price);
         $statusarr2 = array('status' => (int)$status,'dispatchedon'=>date('Y-m-d h:i:s'),'dispatched_price'=>(float)$price);
         $conditionarr = array('id' => (int)$ordid);
         $this->db->where($conditionarr)
             ->update(__DBC_SCHEMATA_ORDER__, ($status == '2'?$statusarr2:$statusarr4));
+        if($freightprice>0){
+            $priceArr = array('freightprice' => $freightprice);
+            $this->db->where($conditionarr)
+                ->update(__DBC_SCHEMATA_ORDER__, $priceArr);
+            return true;
+        }
         return true;
     }
 

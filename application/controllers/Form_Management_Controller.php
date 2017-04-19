@@ -619,6 +619,8 @@ class Form_Management_Controller extends CI_Controller
     {
         $sosid = $this->input->post('sosid');
         $this->session->set_userdata('sosid', $sosid);
+        $hide = $this->input->post('hide');
+        $this->session->set_userdata('hide', $hide);
         echo "SUCCESS||||";
         echo "sosformpdf";
     }
@@ -644,6 +646,7 @@ class Form_Management_Controller extends CI_Controller
         $pdf->AddPage('L');
 
         $sosid = $this->session->userdata('sosid');
+        $hide = $this->session->userdata('hide');
         $sosdetarr = $this->Webservices_Model->getsosformdatabysosid($sosid);
         $sosuserdets = $this->Webservices_Model->getuserhierarchybysiteid($sosdetarr[0]['Clientid']);
         $franchiseeDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['franchiseeId']);
@@ -902,7 +905,7 @@ class Form_Management_Controller extends CI_Controller
                                     <tr>
                                         <td colspan="8">Comments or Observation: '.$sosdetarr[0]['Comments'].'</td>
                                     </tr>';
-        if(!empty($userprods)){
+        if($hide == '0' && !empty($userprods)){
             $html .='<tr>
                                         <td colspan="8"><b>Product Quantity Used</b></td>
                                     </tr>';

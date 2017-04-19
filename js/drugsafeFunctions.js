@@ -1336,7 +1336,7 @@ function placeOrder(idProduct, inc, flag) {
             placeOrderConfirmation();
         }
         if (ar_result[0] == 'ERROR') {
-            placeOrderErrorConfirmation();
+            placeOrderErrorConfirmation(ar_result[2]);
         }
 
     });
@@ -1354,9 +1354,12 @@ function placeOrderConfirmation() {
 
     });
 }
-function placeOrderErrorConfirmation() {
+function placeOrderErrorConfirmation(qty,prodname) {
+    if(!prodname){
+        prodname = '';
+    }
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/order/placeOrderErrorConfirmation", function (result) {
+    $.post(__BASE_URL__ + "/order/placeOrderErrorConfirmation",{qty: qty, prodname: prodname}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {
@@ -1399,14 +1402,18 @@ function DeleteOrderConfirmation(idOrder) {
 }
 function checkOutOrder(idfranchisee, prodcount) {
     var check = 0;
+    var prodname = '';
     for (var j = 1; j <= prodcount; j++) {
         var qty = $('#order_quantity' + j).val();
-        if (qty < 25) {
+        var minqty = $('#min_prod_quantity' + j).val();
+        prodname = $('#prod_code' + j).val();
+        if (qty < minqty) {
             check = 1;
+            break;
         }
     }
     if (check == 1) {
-        placeOrderErrorConfirmation();
+        placeOrderErrorConfirmation(minqty,prodname);
     }
     else {
         $.post(__BASE_URL__ + "/order/checkOutOrderData", {idfranchisee: idfranchisee}, function (result) {
@@ -1467,6 +1474,7 @@ function changeordstatus(ordid, prodcount, status) {
     var counter = 0;
     var check = 0;
     var nonchangeable = 0;
+    var freightPrice = $('#freightprice').val();
     if (status == '1') {
         calTotalPrice();
         $('.err').hide();
@@ -1523,7 +1531,8 @@ function changeordstatus(ordid, prodcount, status) {
                 var price = $('#totalprice').val();
                 $.post(__BASE_URL__ + "/order/dispatchfinal", {
                     ordid: ordid,
-                    price: price
+                    price: price,
+                    freightPrice:freightPrice
                 }, function (result) {
                     var result_ary = result.split("||||");
                     var res = result_ary[0].trim(" ");
@@ -1624,6 +1633,11 @@ function calTotalPrice() {
         $('#total_price' + i).html('$' + parseFloat(pertotal).toFixed(2));
         //}
     }
+    var freightPrice = $('#freightprice').val();
+    if(freightPrice<=0){
+        freightPrice = 0.00;
+    }
+    total = (parseFloat(total) + parseFloat(freightPrice));
     $('#finaltotal').html('$' + parseFloat(total).toFixed(2));
     $('#totalprice').val(parseFloat(total).toFixed(2));
 }
@@ -2557,7 +2571,10 @@ function View_excel_order_details_list(idOrder) {
     });
 
 }
-function showformdata(sosid) {
+function showformdata(sosid,hide) {
+    if(!hide){
+        hide = 0;
+    }
     $('#loader').css('display', 'block');
     var jdata = {
         sosid: sosid
@@ -2645,7 +2662,7 @@ function showformdata(sosid) {
                         drugteststring += 'AS/NZA 4308:2008<br>';
                     }
                     var drugtesttr = '<tr><th>Drugs Tested:</th><td colspan="3">' + (drugteststring != '' ? drugteststring : 'Other') + '</td></tr>';
-                    modalhtml += '<tr><td colspan="4"><button style="float: right" type="button" class="btn green-meadow" onclick="showsospdf(' + sosid + ')">View PDF</button></td></tr> ' +
+                    modalhtml += '<tr><td colspan="4"><button style="float: right" type="button" class="btn green-meadow" onclick="showsospdf(' + sosid + ',' + hide + ')">View PDF</button></td></tr> ' +
                         '<tr><th>Service Commenced:</th><td colspan="3">' + value.ServiceCommencedOn + '</td></tr>' +
                         '<tr><th>Services Concluded:</th><td colspan="3">' + value.ServiceConcludedOn + '</td></tr>' +
                         drugtesttr +
@@ -2666,7 +2683,7 @@ function showformdata(sosid) {
                 });
                 modalhtml += '</tbody></table>' +
                     '</div>' +
-                    '<p><button type="button" class="btn green-meadow" onclick="usedprodsdets(' + sosid + ');">Used Products</button></p>' +
+                    (hide==0?'<p><button type="button" class="btn green-meadow" onclick="usedprodsdets(' + sosid + ');">Used Products</button></p>':'') +
                     '<a href="#productsdetmodal" id="usedprods" data-toggle="modal" style="display: none"></a> </td>' +
                     '</div>' +
                     '<div class="modal-footer">' +
@@ -3053,8 +3070,11 @@ function formattime(timeval) {
     }
 
 }
-function showsospdf(sosid) {
-    $.post(__BASE_URL__ + "/formManagement/getsosformpdf", {sosid: sosid}, function (result) {
+function showsospdf(sosid,hide) {
+    if(!hide){
+        hide = 0;
+    }
+    $.post(__BASE_URL__ + "/formManagement/getsosformpdf", {sosid: sosid, hide: hide}, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/formManagement/" + ar_result[1];
         window.open(URL, '_blank');
@@ -3343,14 +3363,18 @@ function taxInvoicepdf(idsite, Drugtestid, sosid) {
 }
 function updateCartData(prodcount) {
     var check = 0;
+    var prodname = '';
     for (var j = 1; j <= prodcount; j++) {
         var qty = $('#order_quantity' + j).val();
-        if (qty < 25) {
+        var minqty = $('#min_prod_quantity' + j).val();
+        prodname = $('#prod_code' + j).val();
+        if (qty < minqty) {
             check = 1;
+            break;
         }
     }
     if (check == 1) {
-        placeOrderErrorConfirmation();
+        placeOrderErrorConfirmation(minqty,prodname);
     }
     else {
         $("#updateCart").submit();

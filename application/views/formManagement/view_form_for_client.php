@@ -188,7 +188,7 @@
                                                     <td><?php echo $SiteDets['0']['szName'];?></td>
                                                     <td><?php echo date('d/m/Y',strtotime($testdata['testdate']));?></td>
                                                     <td>
-                                                        <a class="btn btn-circle btn-icon-only btn-default" id="viewsos" title="View SOS Form" onclick="showformdata('<?php echo $testdata['id'];?>');" href="javascript:void(0);">
+                                                        <a class="btn btn-circle btn-icon-only btn-default" id="viewsos" title="View SOS Form" onclick="showformdata('<?php echo $testdata['id'];?>','1');" href="javascript:void(0);">
                                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                                         </a>
                                                     </td>

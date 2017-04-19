@@ -104,11 +104,13 @@
                                                     <td>
                                                         <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $productDataArr['szProductImage']; ?>" width="60" height="60"/>    
                                                     </td>
-                                                    <td><?php echo $productDataArr['szProductCode']?> </td>
+                                                    <td><?php echo $productDataArr['szProductCode']?>
+                                                        <input type="hidden" name="prod_code<?php echo $i;?>" value="<?php echo $productDataArr['szProductCode'];?>" id="prod_code<?php echo $i;?>" ></td>
                                                     <td> <?php echo $productDataArr['szProductDiscription'];?> </td>
                                                     <td> $<?php echo $productDataArr['szProductCost'];?> </td>
                                                     <td>
-                                                         <input type="number" min="25" class="form-control btn-xs " name="order_quantity<?php echo $i;?>" value="<?php echo $totalOrdersData['quantity'];?>" id="order_quantity<?php echo $i;?>" >
+                                                        <input type="hidden" name="min_prod_quantity<?php echo $i;?>" value="<?php echo $productDataArr['min_ord_qty'];?>" id="min_prod_quantity<?php echo $i;?>" >
+                                                         <input type="number" min="<?php echo $productDataArr['min_ord_qty'];?>" class="form-control btn-xs " name="order_quantity<?php echo $i;?>" value="<?php echo $totalOrdersData['quantity'];?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>
                                                        <td> $<?php 
                                                    echo number_format($price, 2, '.', ','); ?> 

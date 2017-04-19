@@ -174,14 +174,14 @@ class Order_Controller extends CI_Controller
         $quantity = $this->input->post('val');
         $flag = $this->input->post('flag');
         $this->session->set_userdata('flag', $flag);
-
-        if ($quantity >= 25) {
+        $MinQuantity = $this->Order_Model->getMinQtyOfProduct($idProduct);
+        if ($quantity >= $MinQuantity['min_ord_qty']) {
             $this->Order_Model->InsertOrder($idProduct, $quantity);
             echo "SUCCESS||||";
             echo "placeOrderConfirmation";
         } else {
             echo "ERROR||||";
-            echo "placeOrderErrorConfirmation";
+            echo "placeOrderErrorConfirmation||||".$MinQuantity['min_ord_qty'];
         }
     }
 
@@ -196,8 +196,11 @@ class Order_Controller extends CI_Controller
 
     public function placeOrderErrorConfirmation()
     {
+        $qty = $this->input->post('qty');
         $flag = $this->session->userdata('flag');
         $data['mode'] = '__PLACE_ORDER_POPUP_ERROR_CONFIRM__';
+        $data['qty'] = $qty;
+        $data['prodname'] = $this->input->post('prodname');
         $this->load->view('admin/admin_ajax_functions', $data);
 
 
@@ -555,7 +558,10 @@ class Order_Controller extends CI_Controller
     </tr> ';
   if($flag==1){
    $html .= '  <tr>
-        <td width="50%" align="left"><b>Total Price EXL GST: </b> $'.$OrdersDetailsAray['price'].'</td>
+        <td width="50%" align="left"><b>Freight Price: </b> $'.$OrdersDetailsAray['freightprice'].'</td>
+    </tr>
+     <tr>
+        <td width="50%" align="left"><b>Total Price EXL GST: </b> $'.$OrdersDetailsAray['dispatched_price'].'</td>
     </tr>';
   }
   if($_SESSION['drugsafe_user']['iRole']==1){
@@ -724,20 +730,23 @@ $html .= '
          if($OrdersDetailsAray['status'] ==3){
           $this->excel->getActiveSheet()->setCellValue('A6','Canceled Date & Time :');
           $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
-         $this->excel->getActiveSheet()->setCellValue('A8','Total Price EXL GST:');
-         $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
+             $this->excel->getActiveSheet()->setCellValue('A8','Freight Price:');
+         $this->excel->getActiveSheet()->setCellValue('A9','Total Price EXL GST:');
+         $this->excel->getActiveSheet()->setCellValue('A10','Franchisee :');
          }
           elseif($OrdersDetailsAray['status'] ==2){
            $this->excel->getActiveSheet()->setCellValue('A6','Dispatched Date & Time :');
            $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
-           $this->excel->getActiveSheet()->setCellValue('A8','Total Price EXL GST:');
-           $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
+              $this->excel->getActiveSheet()->setCellValue('A8','Freight Price:');
+           $this->excel->getActiveSheet()->setCellValue('A9','Total Price EXL GST:');
+           $this->excel->getActiveSheet()->setCellValue('A10','Franchisee :');
          }
          else{
            $this->excel->getActiveSheet()->setCellValue('A6','Order Status  :');
-           $this->excel->getActiveSheet()->setCellValue('A7','Total Price EXL GST:');
+             $this->excel->getActiveSheet()->setCellValue('A7','Freight Price:');
+           $this->excel->getActiveSheet()->setCellValue('A8','Total Price EXL GST:');
             if($_SESSION['drugsafe_user']['iRole']==1){
-           $this->excel->getActiveSheet()->setCellValue('A8','Franchisee :'); 
+           $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
             }
          }
         
@@ -748,24 +757,27 @@ $html .= '
           if($OrdersDetailsAray['status'] ==3){
          $this->excel->getActiveSheet()->setCellValue('B6',$cancelVal);
          $this->excel->getActiveSheet()->setCellValue('B7',$status);
-         $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['price']);
+              $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['freightprice']);
+         $this->excel->getActiveSheet()->setCellValue('B9','$'.($OrdersDetailsAray['dispatched_price']));
           if($_SESSION['drugsafe_user']['iRole']==1){
-         $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
+         $this->excel->getActiveSheet()->setCellValue('B10',$franchiseeDetArr1['szName']);
           }
          }
           elseif($OrdersDetailsAray['status'] ==2){
            $this->excel->getActiveSheet()->setCellValue('B6',$dispatchVal);
            $this->excel->getActiveSheet()->setCellValue('B7',$status);
-         $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['price']);
+              $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['freightprice']);
+         $this->excel->getActiveSheet()->setCellValue('B9','$'.($OrdersDetailsAray['dispatched_price']));
           if($_SESSION['drugsafe_user']['iRole']==1){
-         $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
+         $this->excel->getActiveSheet()->setCellValue('B10',$franchiseeDetArr1['szName']);
           }
          }
          else{
          $this->excel->getActiveSheet()->setCellValue('B6',$status);
-         $this->excel->getActiveSheet()->setCellValue('B7','$'.$OrdersDetailsAray['price']);
+             $this->excel->getActiveSheet()->setCellValue('B7','$'.$OrdersDetailsAray['freightprice']);
+         $this->excel->getActiveSheet()->setCellValue('B8','$'.($OrdersDetailsAray['dispatched_price']));
           if($_SESSION['drugsafe_user']['iRole']==1){
-         $this->excel->getActiveSheet()->setCellValue('B8',$franchiseeDetArr1['szName']);
+         $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
           }
          }
    
@@ -915,7 +927,8 @@ $html .= '
     function dispatchfinal(){
         $ordid = $_POST['ordid'];
         $price = $_POST['price'];
-        $dispStat = $this->Order_Model->changesdispatchstatus($ordid,'2',$price);
+        $freightPrice = $_POST['freightPrice'];
+        $dispStat = $this->Order_Model->changesdispatchstatus($ordid,'2',$price,$freightPrice);
         if($dispStat){
             $data['mode'] = '__PRODUCT_DISPATCHED_SUCCESSFULLY__';
             $this->load->view('admin/admin_ajax_functions', $data);

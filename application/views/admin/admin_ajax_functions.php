@@ -1684,11 +1684,20 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                             </div>
                             <div class="row static-info">
                                 <div class="col-md-5 name">
+                                    Freight Price:
+                                </div>
+                                <div class="col-md-7 value">
+                                    $<?php
+                                    echo number_format($OrdersDetailsAray['freightprice'], 2, '.', ','); ?>
+                                </div>
+                            </div>
+                            <div class="row static-info">
+                                <div class="col-md-5 name">
                                     Total Price EXL GST:
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php
-                                    echo number_format($OrdersDetailsAray['price'], 2, '.', ','); ?>
+                                    echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); ?>
                                 </div>
                             </div>
                             <!--<div class="row static-info">
@@ -1784,7 +1793,7 @@ if ($mode == '__PLACE_ORDER_POPUP_ERROR_CONFIRM__') {
 
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greater than or equal to twenty five.</p>
+                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greater than or equal to <?php echo '<b>'.$qty.'</b>'.(!empty($prodname)?' for <b>'.$prodname.'</b>':'');?>.</p>
                 </div>
                 <div class="modal-footer">
                     <?php
@@ -1935,6 +1944,18 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             <div class="col-md-6">
                                             </div>
                                             <div class="col-md-6">
+                                                <div class="well">
+                                                    <div class="row static-info align-reverse totalpr">
+                                                        <div class="col-md-6 name portlet_list_title">
+                                                            Freight Price:
+                                                        </div>
+                                                        <div class="col-md-6 value">
+                                                            <input id="freightprice" class="form-control" type="number" step="0.01" min="0.00"
+                                                                   value="0.00" name="freightprice" onblur="calTotalPrice()">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="well">
                                                     <div class="row static-info align-reverse totalpr">
                                                         <div class="col-md-6 name portlet_list_title">
@@ -3590,11 +3611,20 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                             </div>
                             <div class="row static-info">
                                 <div class="col-md-5 name">
+                                    Freight Price:
+                                </div>
+                                <div class="col-md-7 value">
+                                    $<?php
+                                    echo number_format($OrdersDetailsAray['freightprice'], 2, '.', ','); ?>
+                                </div>
+                            </div>
+                            <div class="row static-info">
+                                <div class="col-md-5 name">
                                     Total Price EXL GST:
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php
-                                    echo number_format($OrdersDetailsAray['price'], 2, '.', ','); ?>
+                                    echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); ?>
                                 </div>
                             </div>
                             <!--<div class="row static-info">
