@@ -1155,7 +1155,7 @@ class Form_Management_Controller extends CI_Controller
         }
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-        $socFr='';
+       
          $idClient =$_SESSION['drugsafe_user']['id'];
         
          $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
@@ -1178,17 +1178,13 @@ class Form_Management_Controller extends CI_Controller
            
           
              $getTestList = $this->Form_Management_Model->getsosformdataForClient($idClient,$fromdate,$todate,1,$search['szSearch1']);
-           
-            $data['Client'] = $ClientDets[0];
-            $data['Site'] = $SiteDets[0];
+         
             $data['TestList'] = $getTestList;
-          
-             $data['pageName'] = "Reporting";
+             $data['pageName'] = "Client_Record";
             $data['subpageName'] = "SOS_COC_Forms_Reports";
             $data['franchiseearr'] = $getFranchisees;
             $data['notification'] = $count;
             $data['sitesArr']=$sitesArr;
-            $data['sitearr']=$siteAry;
             $data['clientarr']=$clientAry;
             $data['commentnotification'] = $commentReplyNotiCount;
             $data['data'] = $data;

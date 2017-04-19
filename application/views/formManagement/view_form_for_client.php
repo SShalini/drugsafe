@@ -36,7 +36,7 @@
                     </li>
 
                     <li>
-                        <span class="active">SOS-COC Forms Report</span>
+                        <span class="active">SOS-COC Form</span>
                     </li>
                 </ul>
 
@@ -46,22 +46,10 @@
                         <div class="caption">
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase">
-                                   SOS-COC Forms Report
+                                   SOS-COC Form 
                                 </span>
                         </div>
-                        <?php if (!$err && !empty($compareresultarr)) { ?>
-                            <div class="actions">
-
-                                <a onclick="comparisonReportPdf('<?php echo $_POST['szSearch3']; ?>','<?php echo $drugtesttype; ?>','<?php echo $comparetype; ?>')"
-                                   href="javascript:void(0);" class=" btn green-meadow">
-                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>
-
-                                <a onclick="comparisonReportXls('<?php echo $_POST['szSearch3']; ?>','<?php echo $drugtesttype; ?>','<?php echo $comparetype; ?>')"
-                                   href="javascript:void(0);" class=" btn green-meadow">
-                                    <i class="fa fa-file-excel-o"></i> View Xls </a>
-
-                            </div>
-                        <?php } ?>
+           
                     </div>
 
 
@@ -168,7 +156,7 @@
                                 <div class="portlet green-meadow box">
                                     <div class="portlet-title">
                                         <div class="caption">
-                                            <i class="fa fa-file-text"></i>SOS-COC Forms Report
+                                            <i class="fa fa-file-text"></i>SOS-COC Form
                                         </div>
 
                                     </div>
