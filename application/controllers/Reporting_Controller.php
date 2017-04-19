@@ -3178,7 +3178,6 @@ class Reporting_Controller extends CI_Controller
         $searchArray['szIndustry'] = $this->session->userdata('szIndustry');
         $searchArray['szTestType'] = $this->session->userdata('szTestType');
 
-
         $getSosAndClientDetils = $this->Reporting_Model->getSosAndClientDetils($searchArray);
 
 
@@ -3192,34 +3191,40 @@ class Reporting_Controller extends CI_Controller
 					<th></th>';
         foreach ($getSosAndClientDetils as $getSosAndClientData) {
             $industryname = $this->Admin_Model->getIndustryNameByid($getSosAndClientData['industry']);
-            $html .= '<td>' . $industryname['szName'] . '</td>';
+            $html .= '<th>' . $industryname['szName'] . '</th>';
         }
-        $html .= '</tr>
+        $html .= '<th>Total</th></tr>
                             </thead>';
         if ($searchArray['szTestType'] == '' || $searchArray['szTestType'] == 'A') {
             $html .= '<tbody>
 					<tr>
                                             <td>Alchohol</td>
                                             <td>Total Donors</td>';
+            $FinalTotalAlc = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
-                $html .= '<td>' . $getSosAndClientData['totalAlcohol'] . '</td>';
+                $html .= '<td>' . ($getSosAndClientData['totalPositiveAlcohol']+$getSosAndClientData['totalNegativeAlcohol']) . '</td>';
+                $FinalTotalAlc +=  $getSosAndClientData['totalPositiveAlcohol']+$getSosAndClientData['totalNegativeAlcohol'];
             }
 
-            $html .= '</tr>
+            $html .= '<td>' . $FinalTotalAlc . '</td></tr>
                                         <tr>
 				            <td></td>
                                             <td>Positive Result</td>';
+            $FinalTotalAlcPos = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $html .= '<td>' . $getSosAndClientData['totalPositiveAlcohol'] . '</td>';
+                $FinalTotalAlcPos +=  $getSosAndClientData['totalPositiveAlcohol'];
             }
-            $html .= '</tr>
+            $html .= '<td>' . $FinalTotalAlcPos . '</td></tr>
 			                <tr>
 				            <td></td>
                                             <td>Negative Result</td>';
+            $FinalTotalAlcNeg = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $html .= '<td>' . $getSosAndClientData['totalNegativeAlcohol'] . '</td>';
+                $FinalTotalAlcNeg +=  $getSosAndClientData['totalNegativeAlcohol'];
             }
-            $html .= '</tr>
+            $html .= '<td>' . $FinalTotalAlcNeg . '</td></tr>
                                     </tbody>';
         }
         if ($searchArray['szTestType'] == '' || $searchArray['szTestType'] == 'U') {
@@ -3227,25 +3232,31 @@ class Reporting_Controller extends CI_Controller
 					<tr>
                                             <td>Urine AS/NZA 4308:2001 or As/NZA 4308:2008</td>
                                             <td>Total Donors</td>';
+            $FinalTotalUri = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $html .= '<td>' . $getSosAndClientData['totalDonarUrine'] . '</td>';
+                $FinalTotalUri +=  $getSosAndClientData['totalDonarUrine'];
             }
-            $html .= '</tr>
+            $html .= '<td>' . $FinalTotalUri . '</td></tr>
                                         <tr>
 					    <td></td>
                                             <td>Positive Result</td>';
+            $FinalTotalUriPos = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $totalNegativeUrine = $getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine'];
                 $html .= '<td>' . ($totalNegativeUrine > 0 ? $totalNegativeUrine : 0) . '</td>';
+                $FinalTotalUriPos +=  ($totalNegativeUrine > 0 ? $totalNegativeUrine : 0);
             }
-            $html .= '</tr>
+            $html .= '<td>' . ($FinalTotalUriPos>0?$FinalTotalUriPos:0) . '</td></tr>
 					<tr>
 					    <td></td>
                                             <td>Negative Result</td>';
+            $FinalTotalUriNeg = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $html .= '<td>' . $getSosAndClientData['totalNegativeUrine'] . '</td>';
+                $FinalTotalUriNeg +=  $getSosAndClientData['totalNegativeUrine'];
             }
-            $html .= '</tr>
+            $html .= '<td>' . ($FinalTotalUriNeg>0?$FinalTotalUriNeg:0) . '</td></tr>
                                     </tbody>';
         }
         if ($searchArray['szTestType'] == '' || $searchArray['szTestType'] == 'O') {
@@ -3253,28 +3264,33 @@ class Reporting_Controller extends CI_Controller
 					<tr>
                                             <td>Oral Fluid AS 4760:2006</td>
                                             <td>Total Donors</td>';
+            $FinalTotalOrl = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $html .= '<td>' . $getSosAndClientData['totalDonarOral'] . '</td>';
+                $FinalTotalOrl +=  $getSosAndClientData['totalDonarOral'];
             }
-            $html .= '</tr>
+            $html .= '<td>' . $FinalTotalOrl . '</td></tr>
                                         <tr>
 					    <td></td>
                                             <td>Positive Result</td>';
+            $FinalTotalOrlPos = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $totalPositiveOral = $getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral'];
                 $html .= '<td>' . ($totalPositiveOral > 0 ? $totalPositiveOral : 0) . '</td>';
+                $FinalTotalOrlPos +=  ($totalPositiveOral > 0 ? $totalPositiveOral : 0);
             }
-            $html .= '</tr>
+            $html .= '<td>' . ($FinalTotalOrlPos>0?$FinalTotalOrlPos:0) . '</td></tr>
 						<tr>
 						   <td></td>
                                                     <td>Negative Result</td>';
+            $FinalTotalOrlNeg = 0;
             foreach ($getSosAndClientDetils as $getSosAndClientData) {
                 $html .= '<td>' . $getSosAndClientData['totalNegativeOral'] . '</td>';
+                $FinalTotalOrlNeg +=  $getSosAndClientData['totalNegativeOral'];
             }
-            $html .= '</tr>
+            $html .= '<td>' . ($FinalTotalOrlNeg>0?$FinalTotalOrlNeg:0) . '</td></tr>
                                     </tbody>';
         }
-        $i++;
         $html .= '
                             </table>
                         </div>
@@ -3317,7 +3333,7 @@ class Reporting_Controller extends CI_Controller
         $searchArray['dtEnd'] = $this->session->userdata('dtEnd');
         $searchArray['szIndustry'] = $this->session->userdata('szIndustry');
         $searchArray['szTestType'] = $this->session->userdata('szTestType');
-        $alphabet = array('B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N');
+        $alphabet = array('B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N','O');
         $getSosAndClientDetils = $this->Reporting_Model->getSosAndClientDetils($searchArray);
 
         $this->excel->setActiveSheetIndex(0);
@@ -3343,6 +3359,11 @@ class Reporting_Controller extends CI_Controller
             $this->excel->getActiveSheet()->getStyle($alphaobj . $k)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
             $j++;
         }
+        $alphaobj = $alphabet[$j];
+        $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, 'Total');
+        $this->excel->getActiveSheet()->getStyle($alphaobj . $k)->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle($alphaobj . $k)->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle($alphaobj . $k)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
         if (!empty($getSosAndClientDetils)) {
 
@@ -3350,30 +3371,42 @@ class Reporting_Controller extends CI_Controller
                 $j = 1;
                 $this->excel->getActiveSheet()->setCellValue('A2', 'Alchohol');
                 $this->excel->getActiveSheet()->setCellValue('B2', 'Total Donors');
+                $FinalTotalAlc = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 2;
                     $alphaobj = $alphabet[$j];
-                    $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $getSosAndClientData['totalAlcohol']);
+                    $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, ($getSosAndClientData['totalPositiveAlcohol']+$getSosAndClientData['totalNegativeAlcohol']));
+                    $FinalTotalAlc +=  $getSosAndClientData['totalPositiveAlcohol']+$getSosAndClientData['totalNegativeAlcohol'];
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $FinalTotalAlc);
                 $this->excel->getActiveSheet()->setCellValue('A3', '');
                 $this->excel->getActiveSheet()->setCellValue('B3', 'Positive Result');
                 $j = 1;
+                $FinalTotalAlcPos = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 3;
                     $alphaobj = $alphabet[$j];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $getSosAndClientData['totalPositiveAlcohol']);
+                    $FinalTotalAlcPos +=  $getSosAndClientData['totalPositiveAlcohol'];
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $FinalTotalAlcPos);
                 $this->excel->getActiveSheet()->setCellValue('A4', '');
                 $this->excel->getActiveSheet()->setCellValue('B4', 'Negative Result');
                 $j = 1;
+                $FinalTotalAlcNeg = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 4;
                     $alphaobj = $alphabet[$j];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $getSosAndClientData['totalNegativeAlcohol']);
+                    $FinalTotalAlcNeg +=  $getSosAndClientData['totalNegativeAlcohol'];
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $FinalTotalAlcNeg);
                 $this->excel->getActiveSheet()->setCellValue('A5', '');
                 $this->excel->getActiveSheet()->setCellValue('B5', '');
                 $this->excel->getActiveSheet()->setCellValue('C5', '');
@@ -3384,32 +3417,44 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->setCellValue('A6', 'Urine AS/NZA 4308:2001 or As/NZA 4308:2008');
                 $this->excel->getActiveSheet()->setCellValue('B6', 'Total Donors');
                 $j = 1;
+                $FinalTotalUri = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 6;
                     $alphaobj = $alphabet[$j];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $getSosAndClientData['totalDonarUrine']);
+                    $FinalTotalUri +=  $getSosAndClientData['totalDonarUrine'];
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $FinalTotalUri);
                 $this->excel->getActiveSheet()->setCellValue('A7', '');
                 $this->excel->getActiveSheet()->setCellValue('B7', 'Positive Result');
                 $totalPositiveUrine = '';
                 $j = 1;
+                $FinalTotalUriPos = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 7;
                     $alphaobj = $alphabet[$j];
                     $totalPositiveUrine = $getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine'];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, ($totalPositiveUrine > 0 ? $totalPositiveUrine : 0));
+                    $FinalTotalUriPos +=  ($totalPositiveUrine>0?$totalPositiveUrine:0);
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, ($FinalTotalUriPos>0?$FinalTotalUriPos:0));
                 $this->excel->getActiveSheet()->setCellValue('A8', '');
                 $this->excel->getActiveSheet()->setCellValue('B8', 'Negative Result');
                 $j = 1;
+                $FinalTotalUriNeg = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 8;
                     $alphaobj = $alphabet[$j];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $getSosAndClientData['totalNegativeUrine']);
+                    $FinalTotalUriNeg +=  $getSosAndClientData['totalNegativeUrine'];
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, ($FinalTotalUriNeg>0?$FinalTotalUriNeg:0));
                 $this->excel->getActiveSheet()->setCellValue('A9', '');
                 $this->excel->getActiveSheet()->setCellValue('B9', '');
                 $this->excel->getActiveSheet()->setCellValue('C9', '');
@@ -3421,32 +3466,44 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->setCellValue('A10', 'Oral Fluid AS 4760:2006');
                 $this->excel->getActiveSheet()->setCellValue('B10', 'Total Donors');
                 $j = 1;
+                $FinalTotalOrl = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 10;
                     $alphaobj = $alphabet[$j];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $getSosAndClientData['totalDonarOral']);
+                    $FinalTotalOrl +=  $getSosAndClientData['totalDonarOral'];
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $FinalTotalOrl);
                 $this->excel->getActiveSheet()->setCellValue('A11', '');
                 $this->excel->getActiveSheet()->setCellValue('B11', 'Positive Result');
                 $j = 1;
+                $FinalTotalOrlPos = 0;
                 $totalPositiveOral = '';
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 11;
                     $alphaobj = $alphabet[$j];
                     $totalPositiveOral = $getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral'];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, ($totalPositiveOral > 0 ? $totalPositiveOral : 0));
+                    $FinalTotalOrlPos +=  ($totalPositiveOral>0?$totalPositiveOral:0);
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, ($FinalTotalOrlPos>0?$FinalTotalOrlPos:0));
                 $this->excel->getActiveSheet()->setCellValue('A12', '');
                 $this->excel->getActiveSheet()->setCellValue('B12', 'Negative Result');
                 $j = 1;
+                $FinalTotalOrlNeg = 0;
                 foreach ($getSosAndClientDetils as $getSosAndClientData) {
                     $k = 12;
                     $alphaobj = $alphabet[$j];
                     $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, $getSosAndClientData['totalNegativeOral']);
+                    $FinalTotalOrlNeg +=  $getSosAndClientData['totalNegativeOral'];
                     $j++;
                 }
+                $alphaobj = $alphabet[$j];
+                $this->excel->getActiveSheet()->setCellValue($alphaobj . $k, ($FinalTotalOrlNeg>0?$FinalTotalOrlNeg:0));
 
             }
             $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);

@@ -21,7 +21,6 @@ class Admin_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->model('Webservices_Model');
         $this->load->library('pagination');
-
     }
 
     public function index()
@@ -52,7 +51,6 @@ class Admin_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
-
     }
 
     public function admin_login()

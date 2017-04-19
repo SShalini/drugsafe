@@ -216,8 +216,9 @@
                                                     <?php
                                                     $colcount++;
                                                 }
-                                                ?>
 
+                                                ?>
+                                                <th>Total</th>
                                             </tr>
                                             </thead>
                                             <?php
@@ -229,38 +230,45 @@
                                                     <td>Alchohol</td>
                                                     <td>Total Donors</td>
                                                     <?php
+                                                    $FinalTotalAlc = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         ?>
-                                                        <td><?php echo $getSosAndClientData['totalAlcohol']; ?></td>
+                                                        <td><?php echo $getSosAndClientData['totalPositiveAlcohol']+$getSosAndClientData['totalNegativeAlcohol'];
+                                                            $FinalTotalAlc +=  $getSosAndClientData['totalPositiveAlcohol']+$getSosAndClientData['totalNegativeAlcohol'];
+                                                        ?></td>
 
                                                         <?php
                                                     }
                                                     ?>
-
+<td><?php echo $FinalTotalAlc;?></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Positive Result</td>
                                                     <?php
+                                                    $FinalTotalAlcPos = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         ?>
-                                                        <td><?php echo $getSosAndClientData['totalPositiveAlcohol']; ?></td>
-
+                                                        <td><?php echo $getSosAndClientData['totalPositiveAlcohol'];
+                                                            $FinalTotalAlcPos +=  $getSosAndClientData['totalPositiveAlcohol'];?></td>
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo $FinalTotalAlcPos;?></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Negative Result</td>
                                                     <?php
+                                                    $FinalTotalAlcNeg = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         ?>
-                                                        <td><?php echo $getSosAndClientData['totalNegativeAlcohol']; ?></td>
-
+                                                        <td><?php echo $getSosAndClientData['totalNegativeAlcohol'];
+                                                            $FinalTotalAlcNeg +=  $getSosAndClientData['totalNegativeAlcohol'];?></td>
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo $FinalTotalAlcNeg;?></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="<?php echo $colcount+2; ?>"></td>
@@ -275,38 +283,45 @@
                                                     <td>Urine AS/NZA 4308:2001 or As/NZA 4308:2008</td>
                                                     <td>Total Donors</td>
                                                     <?php
+                                                    $FinalTotalUri = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         ?>
-                                                        <td><?php echo $getSosAndClientData['totalDonarUrine']; ?></td>
-
+                                                        <td><?php echo $getSosAndClientData['totalDonarUrine'];
+                                                            $FinalTotalUri +=  $getSosAndClientData['totalDonarUrine']; ?></td>
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo $FinalTotalUri;?></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Positive Result</td>
                                                     <?php
+                                                    $FinalTotalUriPos = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         $posval1 = ($getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine']);
+                                                        $FinalTotalUriPos +=  ($posval1>0?$posval1:0);
                                                         ?>
                                                         <td><?php echo ($posval1>0?$posval1:0); ?></td>
 
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo ($FinalTotalUriPos>0?$FinalTotalUriPos:0);?></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Negative Result</td>
                                                     <?php
+                                                    $FinalTotalUriNeg = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         ?>
-                                                        <td><?php echo $getSosAndClientData['totalNegativeUrine']; ?></td>
-
+                                                        <td><?php echo $getSosAndClientData['totalNegativeUrine'];
+                                                            $FinalTotalUriNeg +=  $getSosAndClientData['totalNegativeUrine'];?></td>
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo ($FinalTotalUriNeg>0?$FinalTotalUriNeg:0);?></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="<?php echo $colcount+2; ?>"></td>
@@ -321,38 +336,44 @@
                                                     <td>Oral Fluid AS 4760:2006</td>
                                                     <td>Total Donors</td>
                                                     <?php
+                                                    $FinalTotalOrl = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         ?>
-                                                        <td><?php echo $getSosAndClientData['totalDonarOral']; ?></td>
-
+                                                        <td><?php echo $getSosAndClientData['totalDonarOral'];
+                                                            $FinalTotalOrl +=  $getSosAndClientData['totalDonarOral']; ?></td>
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo $FinalTotalOrl;?></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Positive Result</td>
                                                     <?php
+                                                    $FinalTotalOrlPos = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         $posval = ($getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral']);
+                                                        $FinalTotalOrlPos +=  ($posval>0?$posval:0);
                                                         ?>
                                                         <td><?php echo ($posval>0?$posval:0); ?></td>
-
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo ($FinalTotalOrlPos>0?$FinalTotalOrlPos:0);?></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Negative Result</td>
                                                     <?php
+                                                    $FinalTotalOrlNeg = 0;
                                                     foreach ($getSosAndClientDetils as $getSosAndClientData) {
                                                         ?>
-                                                        <td><?php echo $getSosAndClientData['totalNegativeOral']; ?></td>
-
+                                                        <td><?php echo $getSosAndClientData['totalNegativeOral'];
+                                                            $FinalTotalOrlNeg +=  $getSosAndClientData['totalNegativeOral'];?></td>
                                                         <?php
                                                     }
                                                     ?>
+                                                    <td><?php echo ($FinalTotalOrlNeg>0?$FinalTotalOrlNeg:0);?></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="<?php echo $colcount+2; ?>"></td>

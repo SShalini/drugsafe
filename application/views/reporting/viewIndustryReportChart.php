@@ -37,37 +37,56 @@
                     <div class="portlet-body alert">
                         <div class="row">
                             <div>
-                                
+
                                 <div class="portlet-body">
                                     <div class="table-responsive">
-                                   <?php
-                                    if ($szTestType == '' || $szTestType == 'A')
-                                    {
-                                        ?>
-                                            <div id="alcohal"></div>
                                         <?php
-                                    }
-                                    if ($szTestType == '' || $szTestType == 'U')
-                                    {
+                                        if ($szTestType == '' || $szTestType == 'A') {
+                                            ?>
+                                            <div id="alcohal">
+                                                <p class="group-title col-md-9">Alcohol Test, Industry Comparison</p>
+                                                <p class="group-title col-md-3"><a id="alcohol-pie"
+                                                                                   class="btn green-meadow custom-save-img">Save
+                                                        Image</a>
+                                                    <a id="alcohol-pie-pdf" class="btn green-meadow custom-save-img">Save
+                                                        PDF</a></p>
+                                            </div>
+                                            <?php
+                                        }
+                                        if ($szTestType == '' || $szTestType == 'U') {
+                                            ?>
+                                            <div id="Urine" style="clear: both">
+                                                <p class="group-title col-md-9">Urine AS/NZA 4308:2001/ As/NZA
+                                                    4308:2008</p>
+                                                <p class="group-title col-md-3"><a id="urine-pie"
+                                                                                   class="btn green-meadow custom-save-img">Save
+                                                        Image</a>
+                                                    <a id="urine-pie-pdf" class="btn green-meadow custom-save-img">Save
+                                                        PDF</a></p>
+                                            </div>
+                                            <?php
+                                        }
+                                        if ($szTestType == '' || $szTestType == 'O') {
+                                            ?>
+                                            <div id="oral" style="clear: both">
+                                                <p class="group-title col-md-9">Oral Fluid AS 4760:2006</p>
+                                                <p class="group-title col-md-3"><a id="oral-pie"
+                                                                                   class="btn green-meadow custom-save-img">Save
+                                                        Image</a>
+                                                    <a id="oral-pie-pdf" class="btn green-meadow custom-save-img">Save
+                                                        PDF</a></p>
+                                            </div>
+                                            <?php
+                                        }
                                         ?>
-                                             <div id="Urine"></div>
-                                        <?php
-                                    }
-                                    if ($szTestType == '' || $szTestType == 'O')
-                                    {
-                                        ?>
-                                            <div id="oral"></div>
-                                        <?php
-                                    }
-                                    ?>
-                                  </div>
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
 
             </div>
 
@@ -82,230 +101,302 @@
 </div>
 <div id="popup_box"></div>
 <?php
-$alcohalCat='';
-$totalAlcohalDoner='';
-$totalPositiveAlcohol='';
-$totalNegativeAlcohol='';
-$totalDonarUrine='';
-$totalPositiveUrine='';
-$totalDonarOral='';
-$totalPositiveDonarOral='';
-$totalNegativeOral='';
-if(!empty($getSosAndClientDetils))
-{
-    $totalPositiveDonarOralNeg='';
-    $totalPositiveUrine='';
-    foreach ($getSosAndClientDetils as $getSosAndClientData) 
-    {
+$alcohalCat = '';
+$totalAlcohalDoner = '';
+$totalPositiveAlcohol = '';
+$totalNegativeAlcohol = '';
+$totalDonarUrine = '';
+$totalPositiveUrine = '';
+$totalDonarOral = '';
+$totalPositiveDonarOral = '';
+$totalNegativeOral = '';
+if (!empty($getSosAndClientDetils)) {
+    $totalPositiveDonarOralNeg = '';
+    $totalPositiveUrine = '';
+    $FinalTotalAlcPos = 0;
+    $FinalTotalAlcNeg = 0;
+    $FinalTotalUriPos = 0;
+    $FinalTotalUriNeg = 0;
+    $FinalTotalOrlPos = 0;
+    $FinalTotalOrlNeg = 0;
+    foreach ($getSosAndClientDetils as $getSosAndClientData) {
         $industryname = $this->Admin_Model->getIndustryNameByid($getSosAndClientData['industry']);
         $alcohalCat[] = $industryname['szName'];
-	$totalAlcohalDoner[]=$getSosAndClientData['totalAlcohol'];
-	$totalPositiveAlcohol[]=$getSosAndClientData['totalPositiveAlcohol'];
-	$totalNegativeAlcohol[]=$getSosAndClientData['totalNegativeAlcohol'];
-	$totalDonarUrine[]=$getSosAndClientData['totalDonarUrine'];
-	$totalPositiveUrineNeg = ($getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine']);
-	$totalPositiveUrine[]=$totalPositiveUrineNeg < 0 ? 0 : $totalPositiveUrineNeg;
-	$totalNegativeUrine[]=$getSosAndClientData['totalNegativeUrine'];
-	$totalDonarOral[]=$getSosAndClientData['totalDonarOral'];
-	$totalPositiveDonarOralNeg = ($getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral']);
-	$totalPositiveDonarOral[]=$totalPositiveDonarOralNeg < 0 ? 0 : $totalPositiveDonarOralNeg;
-        $totalNegativeOral[]= $getSosAndClientData['totalNegativeOral'];
+        $totalAlcohalDoner[] = $getSosAndClientData['totalPositiveAlcohol'] + $getSosAndClientData['totalNegativeAlcohol'];
+        $totalPositiveAlcohol[] = $getSosAndClientData['totalPositiveAlcohol'];
+        $FinalTotalAlcPos += $getSosAndClientData['totalPositiveAlcohol'];
+        $totalNegativeAlcohol[] = $getSosAndClientData['totalNegativeAlcohol'];
+        $FinalTotalAlcNeg += $getSosAndClientData['totalNegativeAlcohol'];
+        $totalDonarUrine[] = $getSosAndClientData['totalDonarUrine'];
+        $totalPositiveUrineNeg = ($getSosAndClientData['totalDonarUrine'] - $getSosAndClientData['totalNegativeUrine']);
+        $totalPositiveUrine[] = $totalPositiveUrineNeg < 0 ? 0 : $totalPositiveUrineNeg;
+        $FinalTotalUriPos += $totalPositiveUrineNeg < 0 ? 0 : $totalPositiveUrineNeg;
+        $totalNegativeUrine[] = $getSosAndClientData['totalNegativeUrine'];
+        $FinalTotalUriNeg += $getSosAndClientData['totalNegativeUrine'];
+        $totalDonarOral[] = $getSosAndClientData['totalDonarOral'];
+        $totalPositiveDonarOralNeg = ($getSosAndClientData['totalDonarOral'] - $getSosAndClientData['totalNegativeOral']);
+        $totalPositiveDonarOral[] = $totalPositiveDonarOralNeg < 0 ? 0 : $totalPositiveDonarOralNeg;
+        $FinalTotalOrlPos += $totalPositiveDonarOralNeg < 0 ? 0 : $totalPositiveDonarOralNeg;
+        $totalNegativeOral[] = $getSosAndClientData['totalNegativeOral'];
+        $FinalTotalOrlNeg += $getSosAndClientData['totalNegativeOral'];
     }
-	$alcohalCat = "'" . implode("','",  $alcohalCat) . "'";
-	$totalAlcohalDoner = "" . implode(",",  $totalAlcohalDoner) . "";
-	$totalPositiveAlcohol = "" . implode(",",  $totalPositiveAlcohol) . "";
-	$totalNegativeAlcohol = "" . implode(",",  $totalNegativeAlcohol) . ""; 
-	$totalDonarUrine = "" . implode(",",  $totalDonarUrine) . "";
-	$totalPositiveUrine = "" . implode(",",  $totalPositiveUrine) . "";
-	$totalNegativeUrine = "" . implode(",",  $totalNegativeUrine) . "";
-	$totalDonarOral = "" . implode(",",  $totalDonarOral) . ""; 
-	$totalPositiveDonarOral = "" . implode(",",  $totalPositiveDonarOral) . ""; 
-        $totalNegativeOral = "" . implode(",",  $totalNegativeOral) . "";
+    $alcohalCat = "'" . implode("','", $alcohalCat) . "'";
+    $alcohalCat = $alcohalCat . ",'Total'";
+    $totalAlcohalDoner = "" . implode(",", $totalAlcohalDoner) . "";
+    $totalPositiveAlcohol = "" . implode(",", $totalPositiveAlcohol) . "";
+    $totalPositiveAlcohol = $totalPositiveAlcohol . ',' . $FinalTotalAlcPos;
+    $totalNegativeAlcohol = "" . implode(",", $totalNegativeAlcohol) . "";
+    $totalNegativeAlcohol = $totalNegativeAlcohol . ',' . $FinalTotalAlcNeg;
+    $totalDonarUrine = "" . implode(",", $totalDonarUrine) . "";
+    $totalPositiveUrine = "" . implode(",", $totalPositiveUrine) . "";
+    $totalPositiveUrine = $totalPositiveUrine . ',' . $FinalTotalUriPos;
+    $totalNegativeUrine = "" . implode(",", $totalNegativeUrine) . "";
+    $totalNegativeUrine = $totalNegativeUrine . ',' . $FinalTotalUriNeg;
+    $totalDonarOral = "" . implode(",", $totalDonarOral) . "";
+    $totalPositiveDonarOral = "" . implode(",", $totalPositiveDonarOral) . "";
+    $totalPositiveDonarOral = $totalPositiveDonarOral . ',' . $FinalTotalOrlPos;
+    $totalNegativeOral = "" . implode(",", $totalNegativeOral) . "";
+    $totalNegativeOral = $totalNegativeOral . ',' . $FinalTotalOrlNeg;
 }
- 
 
 ?>
 
 <script type="text/javascript">
-   $(function () {
+    var testtype = '<?php echo $szTestType;?>';
+    var DrugcategoriesArr = [<?php echo $alcohalCat;?>];
+    var TotPosDoner = [<?php echo $totalPositiveAlcohol;?>];
+    var TotNegDoner = [<?php echo $totalNegativeAlcohol;?>];
+    var alcdivwidth = parseInt(100 / (DrugcategoriesArr.length < 4 ? DrugcategoriesArr.length : 3)) + '%';
+    var UrTotPosDoner = [<?php echo $totalPositiveUrine;?>];
+    var UrTotNegDoner = [<?php echo $totalNegativeUrine;?>];
+    var OrTotPosDoner = [<?php echo $totalPositiveDonarOral;?>];
+    var OrTotNegDoner = [<?php echo $totalNegativeOral;?>];
+    var custchartAlc = [];
+    var custchartUri = [];
+    var custchartOrl = [];
+    $(function () {
+        Highcharts.getSVG = function (charts) {
+            var svgArr = [],
+                top = 0,
+                width = 200;
 
-    $('#alcohal').highcharts({
-        yAxis: {
-        	allowDecimals: false,
-        labels: {
-            formatter: function () {
-                //return Highcharts.numberFormat(this.value,0);
-                return this.value;
-            }
-        }
-    },
-      colors: ['#2f7ed8','#D2691E','#A9A9A9'],
+            Highcharts.each(charts, function (chart) {
+                var svg = chart.getSVG(),
+                    // Get width/height of SVG for export
+                    svgWidth = +svg.match(
+                        /^<svg[^>]*width\s*=\s*\"?(\d+)\"?[^>]*>/
+                    )[1],
+                    svgHeight = +svg.match(
+                        /^<svg[^>]*height\s*=\s*\"?(\d+)\"?[^>]*>/
+                    )[1];
 
-        chart: {
-            type: 'column',
-            margin: 75,
-            marginBottom: 100,
-            options3d: {
-                enabled: true,
-                alpha: 15,
-                beta: 0,
-                depth: 110
-            }
-        },
-        title: {
-                        text: 'Alcohol Test, Industry Comparison'
+                svg = svg.replace(
+                    '<svg',
+                    '<g transform="translate(0,' + top + ')" '
+                );
+                svg = svg.replace('</svg>', '</g>');
+
+                top += svgHeight;
+                width = Math.max(width, svgWidth);
+
+                svgArr.push(svg);
+            });
+
+            return '<svg height="' + top + '" width="' + width +
+                '" version="1.1" xmlns="http://www.w3.org/2000/svg">' +
+                svgArr.join('') + '</svg>';
+        };
+
+        /**
+         * Create a global exportCharts method that takes an array of charts as an
+         * argument, and exporting options as the second argument
+         */
+        Highcharts.exportCharts = function (charts, options) {
+
+            // Merge the options
+            options = Highcharts.merge(Highcharts.getOptions().exporting, options);
+
+            // Post to export server
+            Highcharts.post(options.url, {
+                filename: options.filename || 'chart',
+                type: options.type,
+                width: options.width,
+                svg: Highcharts.getSVG(charts)
+            });
+        };
+
+
+        if (testtype == '' || testtype == 'A') {
+            for (var i = 0; i < DrugcategoriesArr.length; i++) {
+                var $div = $("<div>", {id: "Alco" + i, "class": "inds", "width": alcdivwidth});
+                $("#alcohal").append($div);
+                custchartAlc[i] = Highcharts.chart("Alco" + i, {
+                    chart: {
+                        type: 'pie',
+                        margin: [0, 0, 0, 0],
+                        spacingTop: 10,
+                        spacingBottom: 0,
+                        spacingLeft: 0,
+                        spacingRight: 0,
+                        options3d: {
+                            enabled: true,
+                            alpha: 45,
+                            beta: 0
+                        }
                     },
-        xAxis: {
-                categories: [<?php echo $alcohalCat ;?>],
-                
-            },
-        plotOptions: {
-            column: {
-                depth: 40,
-                stacking: true,
-                grouping: true,
-                groupZPadding: 100,
-				dataLabels: {
-                enabled: true,
-                crop: false,
-                overflow: 'none',
-				verticalAlign: 'top'
+                    title: {
+                        text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Alcohol Test)</span>'
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
+                    },
+                    colors: ['#696969','#4169E1'],
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            depth: 40,
+                            dataLabels: {
+                                distance: -60,
+                                enabled: true,
+                                format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: DrugcategoriesArr[i],
+                        data: [
+                            ['<span style="font-size:13px">Positive</span>', TotPosDoner[i]],
+                            ['<span style="font-size:13px">Negative</span>', TotNegDoner[i]]
+                        ]
+                    }]
+                });
             }
-            }
-        },
-        series: [{
-            name: 'Alcohol Total Donors',
-            data: [<?php echo $totalAlcohalDoner ;?>],
-            stack: 0
-            
-        }, {
-             name: 'Alcohol Positive Result',
-            data: [<?php echo $totalPositiveAlcohol;?>],
-            stack: 2
-        }, {
-            name: 'Alcohol Negative Result',
-            data: [<?php echo $totalNegativeAlcohol;?>],
-            stack: 1
-        }]
+            $('#alcohol-pie').click(function () {
+                Highcharts.exportCharts(custchartAlc);
+            });
 
-
-
-    });
-    $('#Urine').highcharts({
-    
-    yAxis: {
-    	allowDecimals: false,
-        labels: {
-            formatter: function () {
-                //return Highcharts.numberFormat(this.value,0);
-                return this.value;
-            }
+            $('#alcohol-pie-pdf').click(function () {
+                Highcharts.exportCharts(custchartAlc, {
+                    type: 'application/pdf'
+                });
+            });
         }
-    },
-         colors: ['#6495ED','#98FB98','#483D8B'],
-        chart: {
-            type: 'column',
-            margin: 75,
-            marginBottom: 100,
-            options3d: {
-                enabled: true,
-                alpha: 15,
-                beta: 0,
-                depth: 110
-            }
-        },
-        title: {
-                    text: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008'
-        },
-		xAxis: {
-                categories: [<?php echo $alcohalCat ;?>]
-            },
-        plotOptions: {
-            column: {
-                depth: 40,
-                stacking: true,
-                grouping: true,
-                groupZPadding: 100,
-				dataLabels: {
-                enabled: true,
-                crop: false,
-                overflow: 'none',
-				verticalAlign: 'top'
-            }
-            }
-        },
-        series: [{
-            name: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008 Total Donors',
-            data: [<?php echo $totalDonarUrine;?>],
-            stack: 0
-        }, {
-            name: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008 Positive Result',
-            data: [<?php echo $totalPositiveUrine;?>],
-            stack: 2
-        }, {
-            name: 'Urine AS/NZA 4308:2001/ As/NZA 4308:2008 Negative Result',
-            data: [<?php echo $totalNegativeUrine;?>],
-            stack: 1
-        }]
 
-    });
-    $('#oral').highcharts({
-    
-    yAxis: {
-    	allowDecimals: false,
-        labels: {
-            formatter: function () {
-                //return Highcharts.numberFormat(this.value,0);
-                return this.value;
+        if (testtype == '' || testtype == 'U') {
+            for (var i = 0; i < DrugcategoriesArr.length; i++) {
+                var $div = $("<div>", {id: "uri" + i, "class": "inds", "width": alcdivwidth});
+                $("#Urine").append($div);
+                custchartUri[i] = Highcharts.chart("uri" + i, {
+                    chart: {
+                        type: 'pie',
+                        margin: [0, 0, 0, 0],
+                        spacingTop: 10,
+                        spacingBottom: 0,
+                        spacingLeft: 0,
+                        spacingRight: 0,
+                        options3d: {
+                            enabled: true,
+                            alpha: 45,
+                            beta: 0
+                        }
+                    },
+                    title: {
+                        text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Urine Test)</span>'
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
+                    },
+                    colors: ['#696969','#4169E1'],
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            depth: 40,
+                            dataLabels: {
+                                distance: -60,
+                                enabled: true,
+                                format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: DrugcategoriesArr[i],
+                        data: [
+                            ['<span style="font-size:13px">Positive</span>', UrTotPosDoner[i]],
+                            ['<span style="font-size:13px">Negative</span>', UrTotNegDoner[i]]
+                        ]
+                    }]
+                });
             }
+            $('#urine-pie').click(function () {
+                Highcharts.exportCharts(custchartUri);
+            });
+
+            $('#urine-pie-pdf').click(function () {
+                Highcharts.exportCharts(custchartUri, {
+                    type: 'application/pdf'
+                });
+            });
         }
-    },
-          colors: ['#696969','#DAA520','#4169E1'],
-        chart: {
-            type: 'column',
-             margin: 75,
-             marginBottom: 100,
-            options3d: {
-                enabled: true,
-                alpha: 15,
-                beta: 0,
-                depth: 110
+        if (testtype == '' || testtype == 'O') {
+            for (var i = 0; i < DrugcategoriesArr.length; i++) {
+                var $div = $("<div>", {id: "orl" + i, "class": "inds", "width": alcdivwidth});
+                $("#oral").append($div);
+                custchartOrl[i] = Highcharts.chart("orl" + i, {
+                    chart: {
+                        type: 'pie',
+                        margin: [0, 0, 0, 0],
+                        spacingTop: 10,
+                        spacingBottom: 0,
+                        spacingLeft: 0,
+                        spacingRight: 0,
+                        options3d: {
+                            enabled: true,
+                            alpha: 45,
+                            beta: 0
+                        }
+                    },
+                    title: {
+                        text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Oral Test)</span>'
+                    },
+                    tooltip: {
+                        pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
+                    },
+                    colors: ['#696969','#4169E1'],
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            depth: 40,
+                            dataLabels: {
+                                distance: -60,
+                                enabled: true,
+                                format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                            }
+                        }
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: DrugcategoriesArr[i],
+                        data: [
+                            ['<span style="font-size:13px">Positive</span>', OrTotPosDoner[i]],
+                            ['<span style="font-size:13px">Negative</span>', OrTotNegDoner[i]]
+                        ]
+                    }]
+                });
             }
-        },
-        title: {
-                text: 'Oral Fluid AS 4760:2006'
-        },
-        xAxis: {
-                categories: [<?php echo $alcohalCat ;?>]
-            },
-        plotOptions: {
-            column: {
-                depth: 40,
-                stacking: true,
-                grouping: true,
-                groupZPadding: 100,
-				dataLabels: {
-                enabled: true,
-                crop: false,
-                overflow: 'none',
-				verticalAlign: 'top'
-            }
-            }
-        },
-        series: [{
-            name: 'Oral Fluid AS 4760:2006 Total Donors',
-            data: [<?php echo $totalDonarOral;?>],
-            stack: 0
-        }, {
-            name: 'Oral Fluid AS 4760:2006 Positive Result',
-            data: [<?php echo $totalPositiveDonarOral;?>],
-            stack: 2
-        }, {
-            name: 'Oral Fluid AS 4760:2006 Negative Result',
-            data: [<?php echo $totalNegativeOral;?>],
-            stack: 1
-        }]
+            $('#oral-pie').click(function () {
+                Highcharts.exportCharts(custchartOrl);
+            });
 
+            $('#oral-pie-pdf').click(function () {
+                Highcharts.exportCharts(custchartOrl, {
+                    type: 'application/pdf'
+                });
+            });
+        }
     });
-});
 </script>

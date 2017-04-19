@@ -23,7 +23,10 @@ body .forgotpassword .btn-cancel {
   color: #ffffff !important;
   border: 1px solid #8E8F93;
 }
-
+.inds{float: left}
+.group-title{text-align: center; font-size: 22px; font-weight: 600}
+.group-title .custom-save-img{float:right; margin: 0 5px}
+.inds .pie-title{display: none}
 body .logo img {
   height: 100px;
 }
@@ -58,6 +61,7 @@ body .logo img {
 .table-checkable tr > th:first-child, .table-checkable tr > td:first-child{
   word-wrap: break-word;
 }
+.highcharts-label.creategap{margin-bottom: 15px}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;
