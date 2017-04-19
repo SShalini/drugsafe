@@ -98,7 +98,6 @@ public function addprospect()
      }
      if($validateData)
             {
-              
                 if($this->Prospect_Model->insertProspectData($validate))
                 {
                     $szMessage['type'] = "success";
@@ -113,11 +112,11 @@ public function addprospect()
                   
                 }
             }
-    $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
-    $data['prospectDetailsAry'] = $prospectDetailsAry;
-    $data['szMetaTagTitle'] = "Prospect Record";
-    $data['is_user_login'] = $is_user_login;
-    $data['pageName'] = "Prospect_Record";
+     $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+     $data['prospectDetailsAry'] = $prospectDetailsAry;
+     $data['szMetaTagTitle'] = "Prospect Record";
+     $data['is_user_login'] = $is_user_login;
+     $data['pageName'] = "Prospect_Record";
      $data['validate'] = $validate;
      $data['getState']=$getState;
      $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
@@ -669,23 +668,23 @@ public function deleteProspectConfirmation()
 
                        $data[$i]['sn'] =$i;
                        $data[$i]['business_name'] =$prospectDetailsData['szBusinessName'];
-                       $data[$i]['contact_name'] =$prospectDetailsData['szName'];
-                       $data[$i]['abn'] =$prospectDetailsData['abn'];
-                       $data[$i]['szEmail'] =$prospectDetailsData['szEmail'];
-                       $data[$i]['szContactNo'] =$prospectDetailsData['szContactNo'];
+                       $data[$i]['contact_name'] =($prospectDetailsData['szName']==''?'N/A':$prospectDetailsData['szName']);
+                       $data[$i]['abn'] =($prospectDetailsData['abn']==''?'N/A':$prospectDetailsData['abn']);
+                       $data[$i]['szEmail'] =($prospectDetailsData['szEmail']==''?'N/A':$prospectDetailsData['szEmail']);
+                       $data[$i]['szContactNo'] =($prospectDetailsData['szContactNo']==''?'N/A':$prospectDetailsData['szContactNo']);
                        $data[$i]['industry'] = $value;
                        $data[$i]['status'] =($prospectDetailsData['status']=='1'?'Pre Discovery':($prospectDetailsData['status']=='2'?'Discovery Meeting':($prospectDetailsData['status']=='3'?'In Progress' :($prospectDetailsData['status']=='4'?'Non Convertible' :($prospectDetailsData['status']=='5'?'Contact Later':($prospectDetailsData['status']=='6'?'Closed Sale':''))))));
                        $data[$i]['szContactEmail'] =($prospectDetailsData['szContactEmail']==''?'N/A':$prospectDetailsData['szContactEmail']);
                        $data[$i]['szContactMobile'] =($prospectDetailsData['szContactMobile']==''?'N/A':$prospectDetailsData['szContactMobile']);
                        $data[$i]['szContactPhone'] =($prospectDetailsData['szContactPhone']==''?'N/A':$prospectDetailsData['szContactPhone']);
-                       $data[$i]['szAddress'] =$prospectDetailsData['szAddress'];
-                       $data[$i]['szCity'] =$prospectDetailsData['szCity'];
-                       $data[$i]['szCountry'] =$prospectDetailsData['szCountry'];
-                       $data[$i]['szZipCode'] =$prospectDetailsData['szZipCode'];
+                       $data[$i]['szAddress'] =($prospectDetailsData['szAddress']==''?'N/A':$prospectDetailsData['szAddress']);
+                       $data[$i]['szCity'] =($prospectDetailsData['szCity']==''?'N/A':$prospectDetailsData['szCity']);
+                       $data[$i]['szCountry'] =($prospectDetailsData['szCountry']==''?'N/A':$prospectDetailsData['szCountry']);
+                       $data[$i]['szZipCode'] =($prospectDetailsData['szZipCode']==''?'N/A':$prospectDetailsData['szZipCode']);
                        $data[$i]['L_G_Channel'] =$prospectDetailsData['L_G_Channel'];
-                       $data[$i]['szNoOfSites'] =$prospectDetailsData['szNoOfSites'];
+                       $data[$i]['szNoOfSites'] =($prospectDetailsData['szNoOfSites']==''?'N/A':$prospectDetailsData['szNoOfSites']);
                        $data[$i]['dt_last_updated_meeting'] = $meetingVal ; 
-                        $data[$i]['dt_last_updated_status'] = $statusVal ; 
+                       $data[$i]['dt_last_updated_status'] = $statusVal ; 
                       
                        $i++;
 

@@ -196,14 +196,13 @@
                                         foreach($prospectDetailsAry as $prospectDetailsData)
                                         {
                                         
-                                        
                                            $i++;
                                         ?>
                                         <tr>
                                             <td> <?php echo $i;?> </td>
                                             <td> <?php echo $prospectDetailsData['szBusinessName']?> </td>
-                                            <td> <?php echo $prospectDetailsData['szEmail'];?> </td>
-                                            <td> <?php echo $prospectDetailsData['szContactNo'];?> </td>
+                                            <td><?php if(empty($prospectDetailsData['szEmail'])){echo "N/A";} else {echo $prospectDetailsData['szEmail'];} ?>  </td>
+                                            <td><?php if(empty($prospectDetailsData['szContactNo'])){echo "N/A";} else {echo $prospectDetailsData['szContactNo'];} ?>  </td>
                                             <td>
                                                                     <?php if ($prospectDetailsData['status'] == 1) { ?>
 

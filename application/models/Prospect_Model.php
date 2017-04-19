@@ -103,24 +103,24 @@ class Prospect_Model extends Error_Model
                $data['szContactMobile']=''; 
             }
             if (!in_array('szBusinessName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szBusinessName'])),"szBusinessName","Business Name",true);
-            if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), true);
-            if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", true);
-            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Primary Email address", true);
-            if (!in_array('szContactNo', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactNo'])),"szContactNo","Primary Phone Number", true);
+            if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), false);
+            if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", false);
+            if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Primary Email address", false);
+            if (!in_array('szContactNo', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactNo'])),"szContactNo","Primary Phone Number", false);
             if (!in_array('szContactEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szContactEmail'])),"szContactEmail","Contact Email address", false);
             if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
             if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
-            if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), true);
+            if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), false);
             if (!in_array('L_G_Channel', $arExclude)) $this->set_L_G_Channel(sanitize_all_html_input(trim($data['L_G_Channel'])), true);
-            if (!in_array('szNoOfSites', $arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])), true); 
+            if (!in_array('szNoOfSites', $arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])), false); 
             if($flag==2){
                 if (!in_array('iFranchiseeId', $arExclude)) $this->set_iFranchiseeId(sanitize_all_html_input(trim($data['iFranchiseeId'])), true);
             }
             if($flag==1){
                 if (!in_array('szCountry', $arExclude)) $this->set_szCountry(sanitize_all_html_input(trim($data['szCountry'])), true);   
             }
-            if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), true);
-            if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), true);
+            if (!in_array('szZipCode', $arExclude)) $this->set_szZipCode(sanitize_all_html_input(trim($data['szZipCode'])), false);
+            if (!in_array('szAddress', $arExclude)) $this->set_szAddress(sanitize_all_html_input(trim($data['szAddress'])), false);
             if(!in_array('industry',$arExclude)) $this->set_industry(sanitize_all_html_input(trim($data['industry'])),true);
       
             if($this->error == false )
@@ -245,6 +245,60 @@ class Prospect_Model extends Error_Model
                     }  
                     else{
                        $data['szContactPhone'] = $data['szContactPhone'];  
+                    }
+                     if($data['szName']=='N/A'){
+                     $data['szName'] = '';
+                    }  
+                    else{
+                       $data['szName'] = $data['szName'];  
+                    }
+                     if($data['szEmail']=='N/A'){
+                     $data['szEmail'] = '';
+                    }  
+                    else{
+                       $data['szEmail'] = $data['szEmail'];  
+                    }
+                     if($data['szContactNo']=='N/A'){
+                     $data['szContactNo'] = '';
+                    }  
+                    else{
+                       $data['szContactNo'] = $data['szContactNo'];  
+                    }
+                     if($data['szCountry']=='N/A'){
+                     $data['szCountry'] = '';
+                    }  
+                    else{
+                       $data['szCountry'] = $data['szCountry'];  
+                    }
+                     if($data['abn']=='N/A'){
+                     $data['abn'] = '';
+                    }  
+                    else{
+                       $data['abn'] = $data['abn'];  
+                    }
+                    if($data['szCity']=='N/A'){
+                     $data['szCity'] = '';
+                    }  
+                    else{
+                       $data['szCity'] = $data['szCity'];  
+                    }
+                     if($data['szZipCode']=='N/A'){
+                     $data['szZipCode'] = '';
+                    }  
+                    else{
+                       $data['szZipCode'] = $data['szZipCode'];  
+                    }
+                     if($data['szNoOfSites']=='N/A'){
+                     $data['szNoOfSites'] = '';
+                    }  
+                    else{
+                       $data['szNoOfSites'] = $data['szNoOfSites'];  
+                    }
+                     if($data['szAddress']=='N/A'){
+                     $data['szAddress'] = '';
+                    }  
+                    else{
+                       $data['szAddress'] = $data['szAddress'];  
                     }
                 $whereAry = array(
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],

@@ -40,5 +40,5 @@ ALTER TABLE `fo_cmnt` DROP `isApproved`;
 ALTER TABLE `fo_reply` DROP `isAdminApproved`;
 ALTER TABLE `fo_topic` ADD `isApproved` TINYINT(1) NOT NULL AFTER `idUser`;
 ALTER TABLE `fo_topic` ADD `isAdminApproved` TINYINT(1) NOT NULL AFTER `isApproved`;
-
+ALTER TABLE `tbl_prospect` CHANGE `abn` `abn` VARCHAR(12) NOT NULL, CHANGE `szZipCode` `szZipCode` VARCHAR(4) NOT NULL, CHANGE `szNoOfSites` `szNoOfSites` VARCHAR(11) NOT NULL;
 ALTER TABLE `tbl_product` ADD `supplier` VARCHAR(200) NOT NULL AFTER `szProductCategory`, ADD `min_ord_qty` INT NOT NULL AFTER `supplier`, ADD `model_stk_val` INT NOT NULL AFTER `min_ord_qty`;

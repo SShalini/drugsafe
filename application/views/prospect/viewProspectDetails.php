@@ -35,10 +35,12 @@
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
+                    <?php if($prospectDetailsAry['szName']) { ?>
                    <li>
                         <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord"><?php echo $prospectDetailsAry['szName'];?></a>
                         <i class="fa fa-circle"></i>
                     </li>
+                    <?php }?>
                     <li>
                         <span class="active">Prospect Details</span>
                     </li>
@@ -54,7 +56,7 @@
                        echo "Prospect Details";
 
                       if($_SESSION['drugsafe_user']['iRole']==2){
-                            if (($prospectDetailsData['status']== 1) || ($prospectDetailsData['status']== 2)|| ($prospectDetailsData['status']== 3)|| ($prospectDetailsData['status']== 5)) { ?>
+                            if (($prospectDetailsAry['status']==1) || ($prospectDetailsAry['status']== 2)|| ($prospectDetailsAry['status']== 3)|| ($prospectDetailsAry['status']== 5)) { ?>
                     &nbsp; &nbsp;
                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit Prospect Data" onclick="editProspectDetails('<?php echo $prospectDetailsAry['id'];?>','2');" href="javascript:void(0);">
                         <i class="fa fa-pencil"></i> 
@@ -80,7 +82,7 @@
                             <lable>ABN:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['abn'];?></p>
+                            <p><?php if(empty($prospectDetailsAry['abn'])){echo "N/A";} else {echo $prospectDetailsAry['abn'];} ?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -88,7 +90,7 @@
                             <lable>Primary Phone No:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szContactNo'];?></p>
+                             <p><?php if(empty($prospectDetailsAry['szContactNo'])){echo "N/A";} else {echo $prospectDetailsAry['szContactNo'];} ?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -112,7 +114,7 @@
                             <lable>Country:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szCountry'];?></p>
+                            <p><?php if(empty($prospectDetailsAry['szCountry'])){echo "N/A";} else {echo $prospectDetailsAry['szCountry'];} ?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -120,16 +122,15 @@
                             <lable>City:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szCity'];?></p>
-                        </div>
+                             <p><?php if(empty($prospectDetailsAry['szCity'])){echo "N/A";} else {echo $prospectDetailsAry['szCity'];} ?></p>
                     </div>
-
+                      </div>
                      <div class="row">
                         <div class="col-sm-4 text-info bold">
                             <lable>Zip Code:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szZipCode'];?></p>
+                             <p><?php if(empty($prospectDetailsAry['szZipCode'])){echo "N/A";} else {echo $prospectDetailsAry['szZipCode'];} ?></p>
                         </div>
                     </div>
                       <div class="row">
@@ -225,9 +226,7 @@
                                 }
 
                                 ?>
-                          
-                       
-                    </div>
+                        </div>   
                 </div>
                 <div class="col-md-6">
                    <div class="row">
@@ -235,7 +234,7 @@
                             <lable>Contact Name:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szName'];?></p>
+                             <p><?php if(empty($prospectDetailsAry['szName'])){echo "N/A";} else {echo $prospectDetailsAry['szName'];} ?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -243,7 +242,7 @@
                             <lable>Primary Email:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szEmail'];?></p>
+                             <p><?php if(empty($prospectDetailsAry['szEmail'])){echo "N/A";} else {echo $prospectDetailsAry['szEmail'];} ?></p>
                         </div>
                     </div>
                      <div class="row">
@@ -294,6 +293,7 @@
                             <lable>Contact Phone No:</lable>
                         </div>
                         <div class="col-sm-8">
+     
                               <p><?php if(empty($prospectDetailsAry['szContactPhone'])){echo "N/A";} else {echo $prospectDetailsAry['szContactPhone'];} ?></p>
                         </div>
                     </div>
@@ -303,7 +303,7 @@
                             <lable>Address:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szAddress'];?></p>
+                             <p><?php if(empty($prospectDetailsAry['szAddress'])){echo "N/A";} else {echo $prospectDetailsAry['szAddress'];} ?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -311,7 +311,7 @@
                             <lable>State:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $getState['name'];?></p>
+                             <p><?php if(empty($getState['name'])){echo "N/A";} else {echo $getState['name'];} ?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -319,7 +319,7 @@
                             <lable>No of Sites:</lable>
                         </div>
                         <div class="col-sm-8">
-                            <p><?php echo $prospectDetailsAry['szNoOfSites'];?></p>
+                             <p><?php if(empty($prospectDetailsAry['szNoOfSites'])){echo "N/A";} else {echo $prospectDetailsAry['szNoOfSites'];} ?></p>
                         </div>
                     </div>
                     <div class="row">
