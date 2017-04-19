@@ -58,14 +58,19 @@
                     <span class="title">Client Record</span>
                     <span class="selected"></span>
                 </a>
-               <?php   } else{?>
+               <?php } elseif ($_SESSION['drugsafe_user']['iRole'] == 2) { ?>    
                      <a href="<?php echo __BASE_URL__; ?>/franchisee/clientRecord" class="nav-link nav-toggle">
                          <i class="fa fa-users" aria-hidden="true"></i>
                     <span class="title">Client Record</span>
                     <span class="selected"></span>
                 </a>
-                      <?php   } ?>
-                    
+                      <?php   } else { ?>
+                 <a href="<?php echo __BASE_URL__; ?>/formManagement/view_form_for_client" class="nav-link nav-toggle">
+                         <i class="fa fa-users" aria-hidden="true"></i>
+                    <span class="title">SOS/COC Form</span>
+                    <span class="selected"></span>
+                </a>
+                      <?php   }?>       
             </li>
            <?php
             if ($_SESSION['drugsafe_user']['iRole'] == 2 ) { ?>
@@ -413,6 +418,7 @@
 
             </li>
            <?php } ?>
+                <?php if (($_SESSION['drugsafe_user']['iRole'] == 1 ) || ($_SESSION['drugsafe_user']['iRole'] == 2 ) || ($_SESSION['drugsafe_user']['iRole'] == 5 )) { ?> 
              <li class="nav-item start <?php if (trim($pageName) == 'Forum') { ?>active open<?php } ?>">
                 <a href="javascript:void(0);" class="nav-link nav-toggle">
                     <i class="fa fa-building" aria-hidden="true"></i>
@@ -447,7 +453,8 @@
                   <?php }?> 
                 </ul>
 
-            </li>       
+            </li>  
+                <?php } ?>
         </ul>
     </div>
 

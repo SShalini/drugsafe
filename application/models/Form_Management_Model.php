@@ -257,5 +257,39 @@ class Form_Management_Model extends Error_Model {
         
         }
     }
+    function getsosformdataForClient($clientid, $fromdate='', $todate='', $status =0,$siteid='')
+    { 
+        $whereAry = 'client.clientType =' . (int)$clientid . ' AND sos.Status = '.(int)$status;
+        $query = $this->db->select('sos.id, sos.testdate, sos.Clientid, sos.Drugtestid, sos.ServiceCommencedOn, sos.ServiceConcludedOn,
+                                                sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
+                                                sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
+                                                sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.collsign, sos.ClientRepresentative,
+                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, client.clientType, client.franchiseeId');
+             $this->db->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos');
+             $this->db->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'sos.Clientid = client.clientId');
+             $this->db->where($whereAry);
+             if(!empty($fromdate)){
+              $this->db->where('sos.testdate >=', $fromdate);   
+             }
+             if(!empty($todate)){
+              $this->db->where('sos.testdate <=', $todate);   
+             }
+             if(!empty($siteid)){
+              $this->db->where('sos.Clientid =', $siteid);   
+             }
+//            ->where('sos.testdate >=', $fromdate)
+//            ->where('sos.testdate <=', $todate)
+             $this->db->order_by("sos.testdate","DESC");
+            $query =  $this->db->get();
+//       $sql = $this->db->last_query();
+//        print_r($sql);die;
+        if ($query->num_rows() > 0) {
+             $row = $query->result_array();
+                return $row;
+        } else {
+            $this->addError("norecord", "No record found.");
+            return false;
+        }
+    }
 }
 ?>

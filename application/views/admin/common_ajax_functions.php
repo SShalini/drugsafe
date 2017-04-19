@@ -14,8 +14,6 @@ if ($mode == '__VIEW_PRODUCT_POPUP__') {
       $msg = "Inventory Product Info" ;   
     }
     ?>
-
-
     <div id="ViewProductDetails" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -39,6 +37,12 @@ if ($mode == '__VIEW_PRODUCT_POPUP__') {
 
                         </div>
                         <?php   $productDataAry = $this->Inventory_Model->getProductDetailsById($idProduct);
+                        if($productDataAry['supplier']==''){
+                          $productDataAry['supplier'] = 'N/A';  
+                        }
+                        else{
+                           $productDataAry['supplier'] = $productDataAry['supplier'];    
+                        }
                         ?>
                         <div class="portlet-body">
                             <div class="row static-info">
@@ -91,20 +95,15 @@ if ($mode == '__VIEW_PRODUCT_POPUP__') {
                                     </tbody>
                                 </table>
                             </div>
-                          
+                        </div>
                     </div>
-                         </div>
-                   
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-
     <?php
 }
 ?>

@@ -976,10 +976,8 @@ class Admin_Model extends Error_Model
             if (!in_array('szPassword', $arExclude)) $this->set_szPassword(sanitize_all_html_input(trim($data['szPassword'])), true);
 
             if ($this->error == false && $this->data['szEmail'] != '' || $this->data['szPassword'] != '') {
-                $this->db->select('iRole,iActive,isDeleted');
-
+                $this->db->select('id,iRole,iActive,isDeleted');
                 $this->db->from(__DBC_SCHEMATA_USERS__);
-
                 $this->db->where('szEmail =', $data['szEmail']);
 
 
@@ -988,6 +986,13 @@ class Admin_Model extends Error_Model
                 if ($query->num_rows() > 0) {
                     $row = $query->row_array();
                     if ((int)$row['iRole'] == 3) {
+                $this->db->select('clientId,clientType');
+                $this->db->from(__DBC_SCHEMATA_CLIENT__);
+                $this->db->where('clientId =',(int)$row['id']); 
+                  $query = $this->db->get();
+                   if ($query->num_rows() > 0) {
+                    $row = $query->row_array();
+                 if ((int)$row['clientType'] != '0') {
                         $this->addError('szEmail', "Invalid EmailId or Password.");
                         return false;
                     }
@@ -998,9 +1003,9 @@ class Admin_Model extends Error_Model
 //                $this->addError("szEmail", "Your account is deleted.");
 //            }
                 }
-
+                    }
             }
-      
+            }
             if ($this->error == true)
                 return false;
             else

@@ -1144,5 +1144,58 @@ class Form_Management_Controller extends CI_Controller
 		}
 		return $timeval;
 	}
+        function view_form_for_client()
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $socFr='';
+         $idClient =$_SESSION['drugsafe_user']['id'];
+        
+         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
+        
+         $franchiseId = $clientDetailsAray['franchiseeId'];
+         $sitesArr = $this->Webservices_Model->getclientdetails($franchiseId,$idClient);
+        
+       
+            $search['dtStart'] = $this->input->post('dtStart');
+            $search['dtEnd'] = $this->input->post('dtEnd');
+            $search['szSearch1'] = $this->input->post('szSearch1');
+          
+             if(!empty($search['dtStart'] )){
+             $fromdate = $this->Webservices_Model->formatdate($search['dtStart']);    
+             }
+               if(!empty($search['dtEnd'])){
+                $todate = $this->Webservices_Model->formatdate($search['dtEnd']);  
+             }
+            
+           
+          
+             $getTestList = $this->Form_Management_Model->getsosformdataForClient($idClient,$fromdate,$todate,1,$search['szSearch1']);
+           
+            $data['Client'] = $ClientDets[0];
+            $data['Site'] = $SiteDets[0];
+            $data['TestList'] = $getTestList;
+          
+             $data['pageName'] = "Reporting";
+            $data['subpageName'] = "SOS_COC_Forms_Reports";
+            $data['franchiseearr'] = $getFranchisees;
+            $data['notification'] = $count;
+            $data['sitesArr']=$sitesArr;
+            $data['sitearr']=$siteAry;
+            $data['clientarr']=$clientAry;
+            $data['commentnotification'] = $commentReplyNotiCount;
+            $data['data'] = $data;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('formManagement/view_form_for_client.php');
+            $this->load->view('layout/admin_footer');
+        }
+    
 }
 ?>

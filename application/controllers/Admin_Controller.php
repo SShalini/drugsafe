@@ -37,9 +37,14 @@ class Admin_Controller extends CI_Controller
                 ob_end_clean();
                 redirect(base_url('/admin/operationManagerList'));
                 die;
-            } else {
+            }elseif ($_SESSION['drugsafe_user']['iRole'] == '2') {
                 ob_end_clean();
-                redirect(base_url('/franchisee/clientRecord'));
+                 redirect(base_url('/franchisee/clientRecord'));
+                die;
+            }
+            else {
+                ob_end_clean();
+                redirect(base_url('/formManagement/view_form_for_client'));
                 die;
             }
         } else {
@@ -82,10 +87,16 @@ class Admin_Controller extends CI_Controller
                 } elseif ($user_session[iRole] == '5') {
                     ob_end_clean();
                     redirect(base_url('/admin/franchiseeList'));
-                } else {
-                    ob_end_clean();
-                    redirect(base_url('/franchisee/clientRecord'));
-                }
+                }elseif ($user_session[iRole] == '2') {
+                ob_end_clean();
+                 redirect(base_url('/franchisee/clientRecord'));
+                die;
+            }
+            else {
+                ob_end_clean();
+                redirect(base_url('/formManagement/view_form_for_client'));
+                die;
+            }
             }
 
         }
