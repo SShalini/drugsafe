@@ -3177,25 +3177,32 @@ function ViewexcelSalesCrmDetailedReport(startDate, endDate, franchiseeId, statu
 
     });
 }
-function ViewpdfRevenueSummeryClient(franchiseeId, clientId, dtStart, dtEnd) {
+function ViewpdfRevenueSummeryClient(franchiseeId, clientId, dtStart, dtEnd, singleline) {
+    if(!singleline){
+        singleline = 0;
+    }
     $.post(__BASE_URL__ + "/reporting/ViewpdfofRevenueSummaryClient", {
         franchiseeId: franchiseeId,
         clientId: clientId,
         dtStart: dtStart,
-        dtEnd: dtEnd
+        dtEnd: dtEnd,
+        singleline: singleline
     }, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
         window.open(URL, '_blank');
-
     });
 }
-function ViewexcelRevenueSummeryClient(franchiseeId, clientId, dtStart, dtEnd) {
+function ViewexcelRevenueSummeryClient(franchiseeId, clientId, dtStart, dtEnd, singleline) {
+    if(!singleline){
+        singleline = 0;
+    }
     $.post(__BASE_URL__ + "/reporting/ViewexcelofRevenueSummeryClient", {
         franchiseeId: franchiseeId,
         clientId: clientId,
         dtStart: dtStart,
-        dtEnd: dtEnd
+        dtEnd: dtEnd,
+        singleline: singleline
     }, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/reporting/" + ar_result[1];

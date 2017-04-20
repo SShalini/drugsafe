@@ -152,8 +152,10 @@ class Form_Management_Model extends Error_Model {
         $this->db->join('ds_sos', 'tbl_manual_calc.sosid = ds_sos.id');
         $this->db->join('tbl_client', 'ds_sos.Clientid = tbl_client.clientId');
         $this->db->join('tbl_franchisee', 'tbl_client.franchiseeId = tbl_franchisee.franchiseeId');
-        $this->db->where('dtCreatedOn >=', $dtStart);
-        $this->db->where('dtCreatedOn <=', $dtEnd);
+        if(!empty($searchAry)){
+            $this->db->where('dtCreatedOn >=', $dtStart);
+            $this->db->where('dtCreatedOn <=', $dtEnd);
+        }
         $this->db->where('clientType !=', '0');
         $this->db->where('status', '1');
         if($_SESSION['drugsafe_user']['iRole']==5){

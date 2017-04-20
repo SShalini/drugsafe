@@ -396,8 +396,10 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
                             $this->db->join(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_MANUAL_CAL__ . '.sosid = ' . __DBC_SCHEMATA_SOS_FORM__ . '.id');
                             $this->db ->where($whereAry);
                             $this->db->where('franchiseeId',$franchiseeId);
-                           $this->db ->where('dtCreatedOn >=', $dtStart);
-                            $this->db->where('dtCreatedOn <=', $dtEnd);
+                            if(!empty($searchAry)){
+                                $this->db ->where('dtCreatedOn >=', $dtStart);
+                                $this->db->where('dtCreatedOn <=', $dtEnd);
+                            }
                           $query =  $this->db->get();
             
              if($query->num_rows() > 0)
