@@ -74,7 +74,7 @@ class Ordering_Controller extends CI_Controller
          }
           if(!empty($data['CallOutBasePrice']) || !empty($data['CallOutHr'])){
         $this->form_validation->set_rules('orderingData[CallOutBasePrice]', 'Base Price', 'required|numeric');
-        $this->form_validation->set_rules('orderingData[CallOutHr]', 'Hours', 'required|greater_than[2]|numeric');
+        $this->form_validation->set_rules('orderingData[CallOutHr]', 'Hours', 'required|greater_than[0]|numeric');
               $checkforvalidation = true;
          }
         if(!empty($data['urineNata'])){

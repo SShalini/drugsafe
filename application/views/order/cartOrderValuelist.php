@@ -142,7 +142,7 @@
                           <div class="col-md-8">
                               </div>
                             <div class="col-md-4">
-                            <lable> &nbsp;&nbsp;<b>Total Price (Exc GST) :</b></lable>
+                            <lable> &nbsp;&nbsp;<b>Total Price (Exl GST) :</b></lable>
                             &nbsp;
                             
                              $<?php echo number_format($TotalPrice, 2, '.', ',');?>

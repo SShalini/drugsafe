@@ -872,13 +872,53 @@ public function deleteProspectConfirmation()
     $this->load->view('admin/admin_ajax_functions',$data);   
  }
  public function changeToClientConfirmation()
- {
-    if($this->Prospect_Model->changeToClient($this->input->post('prospectId'))){
-        $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION__';
-    }else{
-        $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__';
+ { 
+   
+    $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($this->input->post('prospectId'));
+    if($prospectAry){
+   $emptyFieldArr = array();
+   if(!in_array('abn',$prospectAry)){
+   array_push($emptyFieldArr, 'ABN');
+   }         
+    if(!in_array('szName',$prospectAry)){
+       array_push($emptyFieldArr, 'Name');
+      }
+     if(!in_array('szEmail',$prospectAry)){
+     array_push($emptyFieldArr, 'Email');
+     }
+     if(!in_array('szContactNo',$prospectAry)){
+    array_push($emptyFieldArr, 'Contact No');
+     }
+    if(!in_array('szAddress',$prospectAry)){
+    array_push($emptyFieldArr, 'Address');
+     }
+    if(!in_array('szNoOfSites',$prospectAry)){
+    array_push($emptyFieldArr, 'No Of Sites');
+     }
+   if(!in_array('szCountry',$prospectAry)){
+    array_push($emptyFieldArr, 'Country');
+     }
+    if(!in_array('szZipCode',$prospectAry)){
+    array_push($emptyFieldArr, 'Zip Code');
+     }
+   if(!in_array('szCity',$prospectAry)){
+    array_push($emptyFieldArr, 'City');
+     }
+     } 
+    
+    if(!empty($emptyFieldArr)){
+     $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__'; 
+     $data['emptyFieldArr'] = $emptyFieldArr; 
+     $data['prospectAry'] = $prospectAry; 
     }
+    else{
+      $this->Prospect_Model->changeToClient($this->input->post('prospectId'));   
+      $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION__';
+   
+    }
+   
      $this->load->view('admin/admin_ajax_functions',$data);
+  
  }
   public function prospect_summary_report()
     {

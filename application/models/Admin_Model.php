@@ -916,15 +916,13 @@ class Admin_Model extends Error_Model
                     return false;
                 }
             }
-
-
             if ($this->error == true)
                 return false;
             else
                 return true;
         }
         return false;
-
+print_r($arErrorMessages);die;
     }
 
     function set_franchiseeId($value, $flag = true)

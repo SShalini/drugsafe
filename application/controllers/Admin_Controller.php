@@ -59,7 +59,7 @@ class Admin_Controller extends CI_Controller
         ob_start();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
-
+    if($_SESSION['drugsafe_user']['id']>0){
         if ($is_user_login) {
 
             ob_end_clean();
@@ -67,7 +67,7 @@ class Admin_Controller extends CI_Controller
             exit();
             /*header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
            die;*/
-        }
+    }}
         $validate = $this->input->post('adminLogin');
         $iRemember = (int)$this->input->post('adminLogin[iRemember]');
         

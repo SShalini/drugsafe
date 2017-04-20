@@ -1740,7 +1740,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                         <th> Product Code</th>
                                         <th> Product Cost</th>
                                         <th> Quantity</th>
-                                        <th> Total Price</th>
+                                        <th> Total Price EXL GST</th>
                                         <th> Dispatched Quantity</th>
                                     </tr>
                                     </thead>
@@ -1853,7 +1853,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                 <th> Ordered</th>
                                                 <th> Available</th>
                                                 <th> Dispatch Qty</th>
-                                                <th> Total Price</th>
+                                                <th> Total Price EXL GST</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -1959,7 +1959,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                 <div class="well">
                                                     <div class="row static-info align-reverse totalpr">
                                                         <div class="col-md-6 name portlet_list_title">
-                                                            Total Price (Exc GST):
+                                                            Total Price (Exl GST):
                                                         </div>
                                                         <div class="col-md-6 value">
                                                             <input id="totalprice" class="form-control" type="hidden"
@@ -2731,8 +2731,7 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                          <form action="" id="changeStatus" name="changeStatus" method="post"
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
-                            <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getAllProspectDetails(false);
-                            
+                            <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
                             ?>
                             <div
                                 class="form-group <?php if (form_error('changeStatus[szClient]')) { ?>has-error<?php } ?>">
@@ -2744,16 +2743,16 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                     Placeholder="Status" onfocus="remove_formError(this.id,'true')" onchange="showSubmit(this.value);">
                                           
                                                 <option value=''>Status</option>
-                                                <?php if (($prospectStatusDetailsAry['0']['status']==3 )||($prospectStatusDetailsAry['0']['status']==2 )) {?>
-                                                <option value="1" disabled <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
+                                                <?php if (($prospectStatusDetailsAry['status']==3 )||($prospectStatusDetailsAry['status']==2 )) {?>
+                                                <option value="1" disabled <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("1") ? "selected " : ""); ?>>Pre Discovery</option>
                                                 <?php } else {?>
-                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("1") ? "selected" : ""); ?>>Pre Discovery</option>
+                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("1") ? "selected disabled" : ""); ?>>Pre Discovery</option>
                                                 <?php } ?>
-                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("2") ? "selected" : ""); ?>>Discovery Meeting</option>
-                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("3") ? "selected" : ""); ?>>In Progress</option>
-                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("4") ? "selected" : ""); ?>>Non Convertible</option>
-                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("5") ? "selected" : ""); ?>>Contact Later</option>
-                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['0']['status']) == trim("6") ? "selected" : ""); ?>>Closed Sale</option>
+                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("2") ? "selected disabled" : ""); ?>>Discovery Meeting</option>
+                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("3") ? "selected disabled" : ""); ?>>In Progress</option>
+                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("4") ? "selected disabled" : ""); ?>>Non Convertible</option>
+                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("5") ? "selected disabled" : ""); ?>>Contact Later</option>
+                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("6") ? "selected disabled" : ""); ?>>Closed Sale</option>
                                                
                                             </select>
                                             </div>
@@ -3125,7 +3124,6 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
     <?php
 }
 if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
-
     echo "ERROR||||";
     ?>
     <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
@@ -3136,12 +3134,51 @@ if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
                     <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                         <span  class="caption-subject font-red-sunglo bold uppercase">Convert To Client Confirmation</span> </h4>
                 </div>
+             <div class="modal-body">
+                    <div class="portlet red box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                            <h5><b> Selected Prospect has not been converted to Client because of the following reason.Please try again!</b></h5>
 
-                <div class="modal-body">
-                    <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i>Something goes wrong. Selected Prospect has not been converted to Client. Please try again!</p>
-                </div>
+                            </div>
+
+                        </div>
+                        <?php $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+                        ?>
+                        <div class="portlet-body">
+                           <?php  $validate = $this->Admin_Model->validateParentClientData($prospectAry, array(), $idclient);
+                    if(!($validate)){
+                          $arErrorMessages = $this->Admin_Model->arErrorMessages;  
+                    }
+                    ?>      
+                  
+                    <?php if($arErrorMessages['abn']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['abn']; ?></p>
+                    <?php } ?>
+                      <?php if($arErrorMessages['szName']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szName']; ?></p>
+                    <?php } ?>
+                     <?php if($arErrorMessages['szEmail']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szEmail']; ?></p>
+                    <?php } ?>
+                     <?php if($arErrorMessages['szContactNumber']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szContactNumber']; ?></p>
+                    <?php } ?>
+                     <?php if($arErrorMessages['szCity']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szCity']; ?></p>
+                    <?php } ?><?php if($arErrorMessages['szZipCode']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szZipCode']; ?></p>
+                    <?php } ?><?php if($arErrorMessages['szAddress']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szAddress']; ?></p>
+                    <?php } ?><?php if($arErrorMessages['szNoOfSites']) { ?>
+                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szNoOfSites']; ?></p>
+                    <?php } ?>
+                        </div>
+                    </div>
+               </div>
+                
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord" class="btn dark btn-outline">Close</a>
+                     <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                 </div>
             </div>
         </div>
@@ -3667,7 +3704,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                                         <th> Product Code</th>
                                         <th> Product Cost</th>
                                         <th> Quantity</th>
-                                        <th> Total Price</th>
+                                        <th> Total Price EXL GST</th>
                                         <th> Dispatched Quantity</th>
                                     </tr>
                                     </thead>

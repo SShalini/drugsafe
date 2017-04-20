@@ -336,7 +336,7 @@
                                                                            href="javascript:void(0);">
                                                                             <i class="fa fa-download"></i>
                                                                         </a>
-                                                                    <?php }else{ ?>
+                                                                    <?php } elseif (($validOrdersDetailsData['status'] == 2) && ($validOrdersDetailsData['isReceived']==1) ) { ?>
                                                                       <p title="Order Status"
                                                                            class="label label-sm label-info">
                                                                            Order Received

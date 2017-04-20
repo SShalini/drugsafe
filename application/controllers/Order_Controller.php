@@ -582,7 +582,7 @@ $html .= '
                                         <th><b>Product Code</b> </th>
                                         <th> <b>Product Cost</b> </th>
                                         <th> <b>Quantity</b> </th>
-                                        <th><b>Total Price</b> </th>
+                                        <th><b>Total Price EXL GST</b> </th>
                                         <th> <b>Dispatched Quantity</b> </th>
                                     </tr>';
         $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
@@ -654,7 +654,7 @@ $html .= '
         $this->excel->getActiveSheet()->getStyle('C13')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
-        $this->excel->getActiveSheet()->setCellValue('D13', 'Total Price');
+        $this->excel->getActiveSheet()->setCellValue('D13', 'Total Price EXL GST');
         $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
