@@ -1122,5 +1122,4 @@ class Admin_Controller extends CI_Controller
         echo $result;
     }  
 }
-
 ?>

@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home_Controller extends CI_Controller {
+class Home_Controller extends CI_Controller
+{
 
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->model('Order_Model');
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Order_Model');
         $this->load->model('StockMgt_Model');
         $this->load->library('pagination');
         $this->load->model('Ordering_Model');
@@ -19,36 +20,29 @@ class Home_Controller extends CI_Controller {
         $this->load->model('StockMgt_Model');
         $this->load->model('Webservices_Model');
         $this->load->library('pagination');
-	}
-	
-	public function index()
-	{
-            $is_user_login = is_user_login($this);
-           if($is_user_login)
-            {
-                if($_SESSION['drugsafe_user']['iRole']=='5')
-                {
-                    ob_end_clean();
-                      redirect(base_url('/admin/franchiseeList'));
-                    die;
-                }
-                elseif($_SESSION['drugsafe_user']['iRole']=='1'){
-                    ob_end_clean();
-                      redirect(base_url('/admin/operationManagerList'));
-                    die;
-                }
-                else
-                {
-                    ob_end_clean();
-                      redirect(base_url('/franchisee/clientRecord'));
-                    die;
-                }
-            }
-            else
-            {
+    }
+
+    public function index()
+    {
+        $is_user_login = is_user_login($this);
+        if ($is_user_login) {
+            if ($_SESSION['drugsafe_user']['iRole'] == '5') {
                 ob_end_clean();
-                  redirect(base_url('/admin/admin_login'));
+                redirect(base_url('/admin/franchiseeList'));
+                die;
+            } elseif ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                ob_end_clean();
+                redirect(base_url('/admin/operationManagerList'));
+                die;
+            } else {
+                ob_end_clean();
+                redirect(base_url('/franchisee/clientRecord'));
                 die;
             }
-	}
+        } else {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+    }
 }
