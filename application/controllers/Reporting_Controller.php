@@ -3899,8 +3899,8 @@ class Reporting_Controller extends CI_Controller
                                         <th> <b>Net Revenue EXL GST</b> </th>
                                     </tr>';
         }
-            
-        if ($singleline == 0 && $getManualCalcStartToEndDate) {
+
+        if ($singleline == 0 && !empty($getManualCalcStartToEndDate)) {
 
             $i = 0;
             $totalRevenu = '';
@@ -4012,7 +4012,7 @@ class Reporting_Controller extends CI_Controller
                    </tr>';
         }elseif($singleline == 1) {
         $allfranchisee = $this->Form_Management_Model->getAllsosFormDetails();
-        if (!empty($allfranchisee)) {
+        if (!empty($allfranchisee)){
             $allfranchiseeTotalAfterDis = '';
             $allfranchiseetotalRoyaltyfees = '';
             $allfranchiseetotalNetProfit = '';
@@ -4024,6 +4024,7 @@ class Reporting_Controller extends CI_Controller
                 if (!empty($clientArr)) {
                     foreach ($clientArr as $clientData) {
                         $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc(array(), $allfranchiseeData['franchiseeId'], $clientData['id']);
+                        if(!empty($getManualCalcStartToEndDate)){
                         $totalRevenu = '';
                         $totalRoyaltyfees = '';
                         $totalNetProfit = '';
@@ -4105,9 +4106,9 @@ class Reporting_Controller extends CI_Controller
                         $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
                         $totalNetProfit = number_format($totalNetProfit, 2, '.', '');
                         $html .= '<tr>
-                            <td>' . $i . '</td>'.
-                            (($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)?'
-                            <td>' . $frDataAry['szName'] . '</td>':'').'
+                            <td>' . $i . '</td>' .
+                            (($_SESSION['drugsafe_user']['iRole'] == 1) || ($_SESSION['drugsafe_user']['iRole'] == 5) ? '
+                            <td>' . $frDataAry['szName'] . '</td>' : '') . '
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
                             <td>$' . number_format($totalRevenu, 2, '.', ',') . '</td>
@@ -4118,6 +4119,7 @@ class Reporting_Controller extends CI_Controller
                         $allfranchiseetotalRoyaltyfees += $totalRoyaltyfees;
                         $allfranchiseetotalNetProfit += $totalNetProfit;
                         $i++;
+                    }
                     }
                 }
             }
@@ -4132,11 +4134,8 @@ class Reporting_Controller extends CI_Controller
                         </tr>';
         }
     }
-        $html .= '
-                            </table>
-                        </div>
-                      
-                        ';
+        $html .= '</table>
+                        </div>';
         $pdf->writeHTML($html, true, false, true, false, '');
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
         error_reporting(E_ALL);
@@ -4413,6 +4412,7 @@ class Reporting_Controller extends CI_Controller
                     if (!empty($clientArr)) {
                         foreach ($clientArr as $clientData) {
                             $getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc(array(), $allfranchiseeData['franchiseeId'], $clientData['id']);
+                            if(!empty($getManualCalcStartToEndDate)){
                             $totalRevenu = '';
                             $totalRoyaltyfees = '';
                             $totalNetProfit = '';
@@ -4494,7 +4494,7 @@ class Reporting_Controller extends CI_Controller
                             $totalRoyaltyfees = number_format($totalRoyaltyfees, 2, '.', '');
                             $totalNetProfit = number_format($totalNetProfit, 2, '.', '');
 
-                            if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
+                            if (($_SESSION['drugsafe_user']['iRole'] == 1) || ($_SESSION['drugsafe_user']['iRole'] == 5)) {
                                 $this->excel->getActiveSheet()->setCellValue('A' . $i, $x);
                                 $this->excel->getActiveSheet()->setCellValue('B' . $i, $frDataAry['szName']);
                                 $this->excel->getActiveSheet()->setCellValue('C' . $i, $userDataAry['szName']);
@@ -4530,6 +4530,7 @@ class Reporting_Controller extends CI_Controller
                             $allfranchiseetotalNetProfit += $totalNetProfit;
                             $i++;
                             $x++;
+                        }
                         }
                     }
                     if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
