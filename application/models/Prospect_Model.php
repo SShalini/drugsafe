@@ -14,9 +14,9 @@ class Prospect_Model extends Error_Model
     {
         $this->data['szEmail'] = $this->validateInput($value, __VLD_CASE_EMAIL__, "$field", "$message", false, false, $flag);
     }
-    function set_szContactNo($value,$field=false,$message=false, $flag = true)
+    function set_szContactNumber($value,$field=false,$message=false, $flag = true)
     {
-        $this->data['szContactNo'] = $this->validateInput($value, __VLD_CASE_PHONE2__,$field,$message, false, 10, $flag);
+        $this->data['szContactNumber'] = $this->validateInput($value, __VLD_CASE_PHONE2__,$field,$message, false, 10, $flag);
     }
     function set_szCity($value, $flag = true)
     {
@@ -72,7 +72,7 @@ class Prospect_Model extends Error_Model
        else{
        $array = array('isDeleted' => '0');
          }
-         $query = $this->db->select('id,iFranchiseeId,szName,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
+         $query = $this->db->select('id,iFranchiseeId,szName,szNoOfSites,dt_last_updated_status,L_G_Channel,szCity,szState,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNumber,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting,clientcreated')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("dt_last_updated_status","desc")
            ->limit($limit, $offset)
@@ -106,10 +106,10 @@ class Prospect_Model extends Error_Model
             if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), false);
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", false);
             if (!in_array('szEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szEmail'])),"szEmail","Primary Email address", false);
-            if (!in_array('szContactNo', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactNo'])),"szContactNo","Primary Phone Number", false);
+            if (!in_array('szContactNumber', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactNumber'])),"szContactNumber","Primary Phone Number", false);
             if (!in_array('szContactEmail', $arExclude)) $this->set_szEmail(sanitize_all_html_input(trim($data['szContactEmail'])),"szContactEmail","Contact Email address", false);
-            if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
-            if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNo(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
+            if (!in_array('szContactPhone', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactPhone'])),"szContactPhone"," Contact Phone Number", false);
+            if (!in_array('szContactMobile', $arExclude)) $this->set_szContactNumber(sanitize_all_html_input(trim($data['szContactMobile'])),"szContactMobile","Contact Mobile Number", false);
             if (!in_array('szCity', $arExclude)) $this->set_szCity(sanitize_all_html_input(trim($data['szCity'])), false);
             if (!in_array('L_G_Channel', $arExclude)) $this->set_L_G_Channel(sanitize_all_html_input(trim($data['L_G_Channel'])), true);
             if (!in_array('szNoOfSites', $arExclude)) $this->set_szNoOfSites(sanitize_all_html_input(trim($data['szNoOfSites'])), false); 
@@ -258,11 +258,11 @@ class Prospect_Model extends Error_Model
                     else{
                        $data['szEmail'] = $data['szEmail'];  
                     }
-                     if($data['szContactNo']=='N/A'){
-                     $data['szContactNo'] = '';
+                     if($data['szContactNumber']=='N/A'){
+                     $data['szContactNumber'] = '';
                     }  
                     else{
-                       $data['szContactNo'] = $data['szContactNo'];  
+                       $data['szContactNumber'] = $data['szContactNumber'];  
                     }
                      if($data['szCountry']=='N/A'){
                      $data['szCountry'] = '';
@@ -304,7 +304,7 @@ class Prospect_Model extends Error_Model
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
-                'szContactNo' => $data['szContactNo'],
+                'szContactNumber' => $data['szContactNumber'],
                 'dtCreatedOn' =>$date,
                 'dtUpdatedOn' =>$date,
                 'isDeleted' =>'0',
@@ -331,7 +331,7 @@ class Prospect_Model extends Error_Model
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
-                'szContactNo' => $data['szContactNo'],
+                'szContactNumber' => $data['szContactNumber'],
                 'dtUpdatedOn' =>$date,
                 'dtCreatedOn' =>$date,
                 'isDeleted' =>'0',
@@ -376,7 +376,7 @@ class Prospect_Model extends Error_Model
     {
         
         $array = array('id' => (int)$prospectsId, 'isDeleted' => '0');
-        $query = $this->db->select('id,szName,dt_last_updated_status,L_G_Channel,szNoOfSites,iFranchiseeId,szEmail,szContactNo,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
+        $query = $this->db->select('id,szName,dt_last_updated_status,L_G_Channel,szNoOfSites,iFranchiseeId,szEmail,szContactNumber,abn,szCity,szCountry,szBusinessName,szContactEmail,szContactPhone,szContactMobile,industry,szZipCode,szAddress,dtCreatedOn,dtUpdatedOn,status')
             ->from(__DBC_SCHEMATA_PROSPECT__)
             ->where($array)
             ->get();
@@ -430,7 +430,7 @@ class Prospect_Model extends Error_Model
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
                 'szName' => $data['szName'],
                 'szEmail' => $data['szEmail'],
-                'szContactNo' => $data['szContactNo'],
+                'szContactNumber' => $data['szContactNumber'],
                 'szCountry' => $data['szCountry'],
                 'abn' => $data['abn'], 
                 'szCity' => $data['szCity'],
@@ -718,7 +718,7 @@ class Prospect_Model extends Error_Model
       
        $array = array('iFranchiseeId' => (int)$franchiseeId, 'isDeleted' => '0');
         
-           $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNo,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
+           $query = $this->db->select('id,szName,szCity,szZipCode,abn,szContactMobile,szContactEmail,szContactPhone,industry,szCountry,szAddress,szBusinessName,szEmail,szContactNumber,dtCreatedOn,dtUpdatedOn,status,dt_last_updated_meeting')
             ->from(__DBC_SCHEMATA_PROSPECT__)
            ->order_by("id","desc") 
            ->limit($limit, $offset)
@@ -741,7 +741,7 @@ class Prospect_Model extends Error_Model
            die;*/
            $data['szName'] = $prospectArr['szName'];
            $data['szEmail'] = $prospectArr['szEmail'];
-           $prospectArr['szContactNumber'] = $prospectArr['szContactNo'];
+           $prospectArr['szContactNumber'] = $prospectArr['szContactNumber'];
            $data['szCountry'] = $prospectArr['szCountry'];
            $data['abn'] = $prospectArr['abn'];
            $data['szCity'] = $prospectArr['szCity'];
@@ -780,7 +780,7 @@ class Prospect_Model extends Error_Model
           
            $array =__DBC_SCHEMATA_PROSPECT__ . '.iFranchiseeId = ' . (int)$franchiseeid . ' AND '. __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn >= '.'"'.$dtStart .'00:00:00 " AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn <= '.'"'.$dtEnd .' 23:59:59"'. (!empty($szBusinessName) ? ' AND ' . __DBC_SCHEMATA_PROSPECT__ . '.szBusinessName = ' .'"'.$szBusinessName.'"':'').(!empty($status) ? ' AND ' . __DBC_SCHEMATA_STATUS__ . '.status = ' .(int)$status:'');
           
-           $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNo');
+           $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNumber');
            $this->db->from('tbl_prospect_status');
            $this->db->join('tbl_prospect', 'tbl_prospect_status.prospectId = tbl_prospect.id');
            $this->db ->order_by("tbl_prospect_status.dtUpdatedOn","desc") ;

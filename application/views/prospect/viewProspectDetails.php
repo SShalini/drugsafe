@@ -90,7 +90,7 @@
                             <lable>Primary Phone No:</lable>
                         </div>
                         <div class="col-sm-8">
-                             <p><?php if(empty($prospectDetailsAry['szContactNo'])){echo "N/A";} else {echo $prospectDetailsAry['szContactNo'];} ?></p>
+                             <p><?php if(empty($prospectDetailsAry['szContactNumber'])){echo "N/A";} else {echo $prospectDetailsAry['szContactNumber'];} ?></p>
                         </div>
                     </div>
                     <div class="row">

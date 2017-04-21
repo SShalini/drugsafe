@@ -598,7 +598,7 @@ public function deleteProspectConfirmation()
         $data[0]['contact_name'] ='Contact Name';
         $data[0]['abn'] ='ABN';
         $data[0]['szEmail'] ='Primary Email';
-        $data[0]['szContactNo'] ='Primary Phone No';
+        $data[0]['szContactNumber'] ='Primary Phone No';
         $data[0]['industry'] ='Industry';
         $data[0]['status'] ='Status';
         $data[0]['szContactEmail'] ='Contact Email No';
@@ -671,7 +671,7 @@ public function deleteProspectConfirmation()
                        $data[$i]['contact_name'] =($prospectDetailsData['szName']==''?'N/A':$prospectDetailsData['szName']);
                        $data[$i]['abn'] =($prospectDetailsData['abn']==''?'N/A':$prospectDetailsData['abn']);
                        $data[$i]['szEmail'] =($prospectDetailsData['szEmail']==''?'N/A':$prospectDetailsData['szEmail']);
-                       $data[$i]['szContactNo'] =($prospectDetailsData['szContactNo']==''?'N/A':$prospectDetailsData['szContactNo']);
+                       $data[$i]['szContactNumber'] =($prospectDetailsData['szContactNumber']==''?'N/A':$prospectDetailsData['szContactNumber']);
                        $data[$i]['industry'] = $value;
                        $data[$i]['status'] =($prospectDetailsData['status']=='1'?'Pre Discovery':($prospectDetailsData['status']=='2'?'Discovery Meeting':($prospectDetailsData['status']=='3'?'In Progress' :($prospectDetailsData['status']=='4'?'Non Convertible' :($prospectDetailsData['status']=='5'?'Contact Later':($prospectDetailsData['status']=='6'?'Closed Sale':''))))));
                        $data[$i]['szContactEmail'] =($prospectDetailsData['szContactEmail']==''?'N/A':$prospectDetailsData['szContactEmail']);
@@ -740,7 +740,7 @@ public function deleteProspectConfirmation()
                $_POST['prospectAry']['szName'] = $worksheet[2];
                $_POST['prospectAry']['abn'] = $worksheet[3];
                $_POST['prospectAry']['szEmail'] = $worksheet[4]; 
-               $_POST['prospectAry']['szContactNo'] = $worksheet[5]; 
+               $_POST['prospectAry']['szContactNumber'] = $worksheet[5]; 
                $_POST['prospectAry']['industry'] = $worksheet[6]; 
                $_POST['prospectAry']['status'] = $worksheet[7]; 
                $_POST['prospectAry']['szContactEmail'] = $worksheet[8]; 
@@ -875,41 +875,42 @@ public function deleteProspectConfirmation()
  { 
    
     $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($this->input->post('prospectId'));
+  
     if($prospectAry){
    $emptyFieldArr = array();
-   if(!in_array('abn',$prospectAry)){
+     if(empty($prospectAry['abn'])){
    array_push($emptyFieldArr, 'ABN');
    }         
-    if(!in_array('szName',$prospectAry)){
+    if(empty($prospectAry['szName'])){
        array_push($emptyFieldArr, 'Name');
       }
-     if(!in_array('szEmail',$prospectAry)){
+       if(empty($prospectAry['szEmail'])){
      array_push($emptyFieldArr, 'Email');
      }
-     if(!in_array('szContactNo',$prospectAry)){
+    if(empty($prospectAry['szContactNumber'])){
     array_push($emptyFieldArr, 'Contact No');
      }
-    if(!in_array('szAddress',$prospectAry)){
+      if(empty($prospectAry['szAddress'])){
     array_push($emptyFieldArr, 'Address');
      }
-    if(!in_array('szNoOfSites',$prospectAry)){
+      if(empty($prospectAry['szNoOfSites'])){
     array_push($emptyFieldArr, 'No Of Sites');
      }
-   if(!in_array('szCountry',$prospectAry)){
+      if(empty($prospectAry['szCountry'])){
     array_push($emptyFieldArr, 'Country');
      }
-    if(!in_array('szZipCode',$prospectAry)){
+       if(empty($prospectAry['szZipCode'])){
     array_push($emptyFieldArr, 'Zip Code');
      }
-   if(!in_array('szCity',$prospectAry)){
+   if(empty($prospectAry['szCity'])){
     array_push($emptyFieldArr, 'City');
      }
      } 
-    
     if(!empty($emptyFieldArr)){
      $data['mode'] = '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__'; 
-     $data['emptyFieldArr'] = $emptyFieldArr; 
+     $data['emptyFieldArr'] = $emptyFieldArr;
      $data['prospectAry'] = $prospectAry; 
+     $data['prospectId'] =  $this->input->post('prospectId'); 
     }
     else{
       $this->Prospect_Model->changeToClient($this->input->post('prospectId'));   

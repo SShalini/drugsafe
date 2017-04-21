@@ -122,23 +122,23 @@
 
                                     </div>
                                
-                                <div class="form-group <?php if (!empty($arErrorMessages['szContactNo']) != '') { ?>has-error<?php } ?>">
+                                <div class="form-group <?php if (!empty($arErrorMessages['szContactNumber']) != '') { ?>has-error<?php } ?>">
                                     <label class="col-md-4 control-label"> Primary Phone</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-phone"></i>
                                                 </span>
-                                            <input id="szContactNo" class="form-control" type="text"
-                                                   value="<?php echo $_POST['addprospect']['szContactNo']; ?>"
+                                            <input id="szContactNumber" class="form-control" type="text"
+                                                   value="<?php echo $_POST['addprospect']['szContactNumber']; ?>"
                                                    placeholder="Primary Phone Number"
                                                    onfocus="remove_formError(this.id,'true')"
-                                                   name="addprospect[szContactNo]">
+                                                   name="addprospect[szContactNumber]">
                                         </div>
-                                        <?php if (!empty($arErrorMessages['szContactNo'])) { ?>
+                                        <?php if (!empty($arErrorMessages['szContactNumber'])) { ?>
                                             <span class="help-block pull-left">
                                                 <i class="fa fa-times-circle"></i>
-                                                <?php echo $arErrorMessages['szContactNo']; ?>
+                                                <?php echo $arErrorMessages['szContactNumber']; ?>
                                             </span>
                                         <?php } ?>
                                     </div>

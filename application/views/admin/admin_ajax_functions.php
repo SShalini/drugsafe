@@ -3143,7 +3143,9 @@ if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
                             </div>
 
                         </div>
-                        <?php $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+                        <?php
+                        
+                        $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($prospectId);
                         ?>
                         <div class="portlet-body">
                            <?php  $validate = $this->Admin_Model->validateParentClientData($prospectAry, array(), $idclient);

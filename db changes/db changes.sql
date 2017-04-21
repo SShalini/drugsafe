@@ -43,3 +43,4 @@ ALTER TABLE `fo_topic` ADD `isAdminApproved` TINYINT(1) NOT NULL AFTER `isApprov
 ALTER TABLE `tbl_prospect` CHANGE `abn` `abn` VARCHAR(12) NOT NULL, CHANGE `szZipCode` `szZipCode` VARCHAR(4) NOT NULL, CHANGE `szNoOfSites` `szNoOfSites` VARCHAR(11) NOT NULL;
 ALTER TABLE `tbl_product` ADD `supplier` VARCHAR(200) NOT NULL AFTER `szProductCategory`, ADD `min_ord_qty` INT NOT NULL AFTER `supplier`, ADD `model_stk_val` INT NOT NULL AFTER `min_ord_qty`;
 ALTER TABLE `ds_orders` ADD `freightprice` DECIMAL(10,2) NOT NULL AFTER `price`;
+ALTER TABLE `tbl_prospect` CHANGE `szContactNo` `szContactNumber` VARCHAR(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
