@@ -110,14 +110,6 @@
                             <p><?php echo $getState['name'];?></p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4 text-info bold">
-                            <lable>Region Name:</lable>
-                        </div>
-                        <div class="col-sm-8">
-                            <p><?php echo $regionname;?></p>
-                        </div>
-                    </div>
 
                 </div>
                 <div class="col-md-6">

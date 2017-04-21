@@ -170,35 +170,41 @@
                                     </div>
 
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group <?php if(form_error('agentData[szState]')){?>has-error<?php }?>">
                                     <label class="col-md-4 control-label">State</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-map-marker"></i>
                                             </span>
-                                            <div class="form-control">
-                                                <?php echo $getState['name'] ;?>
-                                            </div>
-
+                                            <!--<div class="form-control">
+                                                <?php /*echo $getState['name'] ;*/?>
+                                            </div>-->
+                                            <select class="form-control " name="agentData[szState]" id="szState"
+                                                    Placeholder="State" onfocus="remove_formError(this.id,'true')">
+                                                <!--onchange="getAllReginolCodeForAgent(this.value);"-->
+                                                <option value=''>Select</option>
+                                                <?php
+                                                if (!empty($getAllStates)) {
+                                                    if(form_error('agentData[szState]') || set_value('agentData[szState]')){
+                                                        foreach ($getAllStates as $getAllStatesData) {
+                                                            $selected = (($getAllStatesData['id'] == set_value('agentData[szState]'))?'selected="selected"' :'');
+                                                            echo '<option value="' . $getAllStatesData['id'] . '"' . $selected . ' >' . $getAllStatesData['name'] . '</option>';
+                                                        }
+                                                    }else{
+                                                        foreach ($getAllStates as $getAllStatesData) {
+                                                            $selected = ((($getAllStatesData['id'] == $getState['id']) ? 'selected="selected"' : ''));
+                                                            echo '<option value="' . $getAllStatesData['id'] . '"' . $selected . ' >' . $getAllStatesData['name'] . '</option>';
+                                                        }
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
-
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Region Name</label>
-                                    <div class="col-md-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-map-marker"></i>
-                                            </span>
-                                            <div class="form-control">
-                                                <?php echo $regionname ;?>
-                                            </div>
-
-                                        </div>
-
+                                        <?php
+                                        if(form_error('agentData[szState]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szState]');?></span>
+                                            </span><?php }?>
                                     </div>
 
                                 </div>
@@ -216,8 +222,8 @@
                                                    name="agentData[szCity]">
                                         </div>
                                         <?php
-                                            if(form_error('agentData[szState]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szState]');?></span>
+                                            if(form_error('agentData[szCity]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('agentData[szCity]');?></span>
                                             </span><?php }?>
                                     </div>
 

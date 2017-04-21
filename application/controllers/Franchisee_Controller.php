@@ -857,9 +857,9 @@ class Franchisee_Controller extends CI_Controller
         $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
         $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
         $allIndustry = $this->Admin_Model->viewAllIndustryList();
-        if ($_POST['agentData']['szState']) {
+        /*if ($_POST['agentData']['szState']) {
             $getReginolCode = $this->Admin_Model->getRegionByStateId($_POST['agentData']['szState']);
-        }
+        }*/
         $this->load->library('form_validation');
         $this->form_validation->set_rules('agentData[szBusinessName]', 'Name', 'required|alpha_dash_space|chekDuplicate['. __DBC_SCHEMATA_USERS__ . '.szName]');
         $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
@@ -867,6 +867,7 @@ class Franchisee_Controller extends CI_Controller
         $this->form_validation->set_rules('agentData[szEmail]', 'Email', 'required|chekDuplicate['. __DBC_SCHEMATA_USERS__ . '.szEmail]|valid_email');
         $this->form_validation->set_rules('agentData[szContactNumber]', 'Contact No.', 'required|valid_phone_number');
         $this->form_validation->set_rules('agentData[szAddress]', 'Address', 'required');
+        $this->form_validation->set_rules('agentData[szState]', 'State', 'required');
         $this->form_validation->set_rules('agentData[szCity]', 'City', 'required');
         $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
         $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
@@ -882,7 +883,7 @@ class Franchisee_Controller extends CI_Controller
             $data['allIndustry'] = $allIndustry;
             $data['getState']=$getState;
             $data['getAllStates'] = $getAllStates;
-            $data['getReginolCode'] = $getReginolCode;
+//            $data['getReginolCode'] = $getReginolCode;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/addAgent');
             $this->load->view('layout/admin_footer');
@@ -921,23 +922,17 @@ class Franchisee_Controller extends CI_Controller
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $idAgent = $this->session->userdata('idAgent');
         $franchiseId = $_SESSION['drugsafe_user']['id'];
-        $getState=$this->Franchisee_Model->getStateByFranchiseeId($idAgent);
+        $getState=$this->Franchisee_Model->getStateByAgentid($idAgent);
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
         if ($idAgent > 0) {
             $data_validate = $this->input->post('agentData');
             if (empty($data_validate)) {
                 $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseId,$idAgent);
                 
                 $agentDataArray = $recordArr[0];
-                if(!empty($agentDataArray)){
-                    $getRegionName = $this->Admin_Model->getregionbyregionid($agentDataArray['regionId']);
-                }
-                //print_r($agentDataArray);
             } else {
                 $agentDataArray = $data_validate;
-                $agentoriginaldata = $agentDataArray = $this->Franchisee_Model->getAgentrecord($franchiseId, $idAgent);
-                if(!empty($agentDataArray)){
-                    $getRegionName = $this->Admin_Model->getregionbyregionid($agentDataArray[0]['regionId']);
-                }
+                $agentoriginaldata = $this->Franchisee_Model->getAgentrecord($franchiseId, $idAgent);
             }
         }
 
@@ -959,6 +954,7 @@ class Franchisee_Controller extends CI_Controller
         $this->form_validation->set_rules('agentData[szEmail]', 'Email', 'required|valid_email' . $isunique);
         $this->form_validation->set_rules('agentData[szContactNumber]', 'Contact No.', 'required|valid_phone_number');
         $this->form_validation->set_rules('agentData[szAddress]', 'Address', 'required');
+        $this->form_validation->set_rules('agentData[szState]', 'State', 'required');
         $this->form_validation->set_rules('agentData[szCity]', 'City', 'required');
         $this->form_validation->set_rules('agentData[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
         $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
@@ -973,8 +969,8 @@ class Franchisee_Controller extends CI_Controller
             $data['idAgent'] = $idAgent;
             $_POST['agentData'] = $agentDataArray;
             $data['notification'] = $count;
+            $data['getAllStates'] = $getAllStates;
             $data['getState']=$getState;
-            $data['regionname']=$getRegionName['regionName'];
             $data['commentnotification'] = $commentReplyNotiCount;
             $this->load->view('layout/admin_header', $data);
             $this->load->view('franchisee/editAgent');
@@ -1474,8 +1470,7 @@ class Franchisee_Controller extends CI_Controller
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
         $recordArr = $this->Franchisee_Model->getAgentrecord($franchiseeid, $idAgent);
-        $getState=$this->Franchisee_Model->getStateByFranchiseeId($idAgent);
-        $getRegionName = $this->Admin_Model->getregionbyregionid($recordArr[0]['regionId']);
+        $getState=$this->Franchisee_Model->getStateByAgentid($idAgent);
         $data['recordArr'] = $recordArr;
         $data['getState'] = $getState;
         $data['franchiseeid'] = $franchiseeid;
@@ -1484,7 +1479,6 @@ class Franchisee_Controller extends CI_Controller
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
-        $data['regionname']=$getRegionName['regionName'];
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/viewAgentDetails');
         $this->load->view('layout/admin_footer');

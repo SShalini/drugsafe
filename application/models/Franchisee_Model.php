@@ -662,7 +662,23 @@ class Franchisee_Model extends Error_Model
             return array();
         }
     }
+    public function getStateByAgentid($agentId = 0)
+    {
 
+        $this->db->select('states.id, states.name, agemap.franchiseeid');
+        $this->db->from(__DBC_SCHEMATA_AGENT_FRANCHISEE__.' as agemap');
+
+        $this->db->join(__DBC_SCHEMATA_STATE__.' as states', 'states.id = agemap.stateid');
+        $this->db->where('agemap.agentid', (int)$agentId);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        } else {
+            return array();
+        }
+    }
     public function getFranchiseeDetailsByOperationManagerId($id = 0)
     {
 
@@ -762,7 +778,8 @@ class Franchisee_Model extends Error_Model
 
         $clientAry = array(
             'franchiseeid' => $franchiseeId,
-            'agentid' => $id_agent
+            'agentid' => $id_agent,
+            'stateid' => (int)$data['szState']
         );
 
         if ($this->db->affected_rows() > 0) {
@@ -846,9 +863,21 @@ class Franchisee_Model extends Error_Model
         );
         $whereAry = array('id' => (int)$idAgent);
         $this->db->where($whereAry);
-        $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataPasswordAry);              
+        $queyUpdate = $this->db->update(__DBC_SCHEMATA_USERS__, $dataPasswordAry);
+
         }
-            return true;
+                $StateAry = array(
+                    'stateid' => $data['szState']
+                );
+                $whereStateAry = array('agentid' => (int)$idAgent);
+                $this->db->where($whereStateAry);
+                $queystateUpdate = $this->db->update(__DBC_SCHEMATA_AGENT_FRANCHISEE__, $StateAry);
+                if($queystateUpdate){
+                    return true;
+                }else{
+                    return false;
+                }
+
         } else {
             return false;
         }
