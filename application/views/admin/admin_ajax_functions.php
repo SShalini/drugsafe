@@ -3138,7 +3138,7 @@ if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
                     <div class="portlet red box">
                         <div class="portlet-title">
                             <div class="caption">
-                            <h5><b> Selected Prospect has not been converted to Client because of the following reason.Please try again!</b></h5>
+                            <h5><b> Selected Prospect has not been converted to Client because of the following reason. Please try again!</b></h5>
 
                             </div>
 
@@ -3180,7 +3180,12 @@ if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
                </div>
                 
                 <div class="modal-footer">
-                     <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
+                    <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                   <button type="button"
+                        onclick="editProspectDetails('<?php echo $prospectId; ?>',1);"
+                        class="btn green-meadow" name="submit"><i class="icon-pencil"></i> Edit Prospect
+                     </button>
+                    
                 </div>
             </div>
         </div>

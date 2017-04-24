@@ -677,7 +677,6 @@ class Franchisee_Controller extends CI_Controller
         $this->load->view('layout/admin_header', $data);
         $this->load->view('franchisee/clientRecordByFr');
         $this->load->view('layout/admin_footer');
-     
     }
    function clientRecord()
     {

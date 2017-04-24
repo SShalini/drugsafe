@@ -1108,7 +1108,6 @@ class Admin_Controller extends CI_Controller
  
          $regionListArray = $this->Admin_Model->getRegionByStateIdForSearch($_POST['StateId']);
         
-
         $result = "<select class=\"form-control custom-select required\" id=\"szSearchRegionName\" name=\"szSearchRegionName\" placeholder=\"Region Name\" onfocus=\"remove_formError(this.id,'true')\">";
         if (!empty($regionListArray)) {
             $result .= "<option value=''>Region Name</option>";
@@ -1121,5 +1120,6 @@ class Admin_Controller extends CI_Controller
         $result .= "</select>";
         echo $result;
     }  
+ 
 }
 ?>

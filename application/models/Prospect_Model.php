@@ -102,6 +102,38 @@ class Prospect_Model extends Error_Model
             {
                $data['szContactMobile']=''; 
             }
+             if($data['abn']=='N/A')
+            {
+               $data['abn']=''; 
+            }
+             if($data['szName']=='N/A')
+            {
+               $data['szName']=''; 
+            }
+              if($data['szContactNumber']=='N/A')
+            {
+               $data['szContactNumber']=''; 
+            }
+             if($data['szEmail']=='N/A')
+            {
+               $data['szEmail']=''; 
+            }
+             if($data['szCity']=='N/A')
+            {
+               $data['szCity']=''; 
+            }
+             if($data['szAddress']=='N/A')
+            {
+               $data['szAddress']=''; 
+            }
+             if($data['szZipCode']=='N/A')
+            {
+               $data['szZipCode']=''; 
+            }
+             if($data['szNoOfSites']=='N/A')
+            {
+               $data['szNoOfSites']=''; 
+            }
             if (!in_array('szBusinessName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szBusinessName'])),"szBusinessName","Business Name",true);
             if (!in_array('abn', $arExclude)) $this->set_abn(sanitize_all_html_input(trim($data['abn'])), false);
             if (!in_array('szName', $arExclude)) $this->set_szName(sanitize_all_html_input(trim($data['szName'])),"szName","Contact Name", false);
@@ -135,11 +167,12 @@ class Prospect_Model extends Error_Model
                 }
                
             }
-        
-            if ($this->error == true)
-                return false;
-            else
+             
+            if ($this->error == true){
+            return false; }
+            else {
                 return true;
+            }
         }
         return false;
     

@@ -50,14 +50,11 @@
                         </li>
                         <?php
                         if (!empty($clientAry)) {
-
-
                             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientAry['0']['franchiseeId']);
                             ?>
                             <li>
                                 <a onclick=""
                                    href="javascript:void(0);"><?php echo $franchiseeDetArr1['szName']; ?></a>
-
                                 <i class="fa fa-circle"></i>
                             </li>
 
@@ -124,7 +121,7 @@
                                         foreach ($searchOptionArr as $searchOptionList) {
 
                                             $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                            echo '<option value="' . $searchOptionList['id'] . '"' . $selected . ' >' . $searchOptionList['szName'] . '</option>';
+                                            echo '<option value="' . $searchOptionList['id'] . '"' . $selected . ' >' .$searchOptionList['userCode'].'-'. $searchOptionList['szName'] . '</option>';
                                         }
                                         ?>
                                     </select>
@@ -197,8 +194,8 @@
                                                 ?>
                                                 <tr>
                                                     <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
-                                                    <td> <?php echo $clientData['szName']; ?> </td>
-                                                    <td> <?php echo $clientData['szEmail']; ?> </td>
+                                                     <td> <?php echo(!empty($clientData['szName']) ? $clientData['szName'] : 'N/A'); ?> </td>
+                                                      <td> <?php echo(!empty($clientData['szEmail']) ? $clientData['szEmail'] : 'N/A'); ?> </td>
                                                     <?php
                                                     if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                                                         ?>
@@ -220,7 +217,8 @@
 
 
                                                     </td>
-                                                    <td> <?php echo $clientData['szContactNumber']; ?> </td>
+                                                     <td> <?php echo(!empty($clientData['szContactNumber']) ? $clientData['szContactNumber'] : 'N/A'); ?> </td>
+                                                      
 
                                                     <td>
                                                         <?php
@@ -314,8 +312,9 @@
                                                     ?>
                                                     <tr>
                                                         <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
-                                                        <td> <?php echo $CorpclientData['szName']; ?> </td>
-                                                        <td> <?php echo $CorpclientData['szEmail']; ?> </td>
+                                                        <td> <?php echo(!empty($CorpclientData['szName']) ? $CorpclientData['szName'] : 'N/A'); ?> </td>
+                                                        <td> <?php echo(!empty($CorpclientData['szName']) ? $CorpclientData['szName'] : 'N/A'); ?> </td>
+                                                   
                                                         <?php
                                                         if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                                                             ?>
@@ -337,7 +336,7 @@
 
 
                                                         </td>
-                                                        <td> <?php echo $CorpclientData['szContactNumber']; ?> </td>
+                                                        <td> <?php echo(!empty($CorpclientData['szContactNumber']) ? $CorpclientData['szContactNumber'] : 'N/A'); ?> </td>
 
                                                         <td>
                                                             <?php
@@ -402,7 +401,7 @@
                             <div class="search col-md-3 clienttypeselect">
 
                                 <select class="form-control custom-select" name="szSearchClRecord1"
-                                        id="szSearchname"
+                                        id="szSearchClientname"
                                         onfocus="remove_formError(this.id,'true')">
                                     <option value="">Client Name</option>
                                     <?php
@@ -458,8 +457,8 @@
                                                 ?>
                                                 <tr>
                                                     <td> <?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?> </td>
-                                                    <td> <?php echo $clientData['szName'] ?> </td>
-                                                    <td> <?php echo $clientData['szEmail']; ?> </td>
+                                                     <td> <?php echo(!empty($clientData['szName']) ? $clientData['szName'] : 'N/A'); ?> </td> 
+                                                      <td> <?php echo(!empty($clientData['szEmail']) ? $clientData['szEmail'] : 'N/A'); ?> </td> 
                                                     <?php
                                                     if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                                                         ?>
@@ -478,7 +477,7 @@
 
 
                                                     </td>
-                                                    <td> <?php echo $clientData['szContactNumber']; ?> </td>
+                                                     <td> <?php echo(!empty($clientData['szContactNumber']) ? $clientData['szContactNumber'] : 'N/A'); ?> </td>
 
                                                     <td>
                                                         <?php

@@ -765,6 +765,7 @@ public function deleteProspectConfirmation()
                 {
                     $count++;
                     //continue;
+                    
                 }
             }
         
@@ -1247,7 +1248,7 @@ public function deleteProspectConfirmation()
             $this->form_validation->set_message('required', '{field} is required.');
             if ($this->form_validation->run() == FALSE)
             { 
-                    $data['szMetaTagTitle'] = "Sales CRM Summary Report";
+                    $data['szMetaTagTitle'] = "Sales CRM Detailed Report";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Reporting";
                     $data['subpageName'] = "Sales_CRM_Detailed";
@@ -1264,7 +1265,7 @@ public function deleteProspectConfirmation()
             else
             { 
                     $data['recordAry'] = $recordAry; 
-                    $data['szMetaTagTitle'] = "Sales CRM Summary Report";
+                    $data['szMetaTagTitle'] = "Sales CRM Detailed Report";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Reporting";
                     $data['subpageName'] = "Sales_CRM_Detailed";
@@ -1277,9 +1278,7 @@ public function deleteProspectConfirmation()
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/salesCrmDetailedReport');
             $this->load->view('layout/admin_footer'); 
-    }
-     
-               
+    }           
     }
       function View_pdf_Sales_Crm_Detailed_Report()
         {
@@ -1295,8 +1294,6 @@ public function deleteProspectConfirmation()
         $this->session->set_userdata('franchiseeId',$franchiseeId);
         echo "SUCCESS||||";
         echo "viewpdfsalesCRMDetailed";
-            
- 
         }
     public function viewpdfsalesCRMDetailed()
     {

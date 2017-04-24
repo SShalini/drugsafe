@@ -76,12 +76,17 @@
                     <div class="  row">
                       <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/view_fr_stock_qty_report" method="post">
                   
-                    <div class="clienttypeselect search col-md-3">  
+                    <div class="clienttypeselect search col-md-3"> 
+                        <?php  if ($_SESSION['drugsafe_user']['iRole'] == '5') {
+                    $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                     }
+                       
+                     ?>
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearch1" id="szSearch1" onchange="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
-                                            $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,false,false,false,false,false,false,false,1); 
+                                           $searchOptionArr = $this->Admin_Model->viewDistinctFranchiseeList($operationManagerId);
                                             ?>
                                           <?php
                                           foreach($searchOptionArr as $searchOptionData)

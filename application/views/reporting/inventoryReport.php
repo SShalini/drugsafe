@@ -88,7 +88,7 @@
                                           foreach($allFrPendingDetailsSearchAray as $allFrPendingDetailsSearchList)
                                           {
                                               $selected = ($allFrPendingDetailsSearchList['franchiseeid'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$allFrPendingDetailsSearchList['franchiseeid'].'"'.$selected.' >'.$allFrPendingDetailsSearchList['szName'].'</option>';
+                                              echo '<option value="'.$allFrPendingDetailsSearchList['franchiseeid'].'"'.$selected.' >'.$allFrPendingDetailsSearchList['userCode'].'-'. $allFrPendingDetailsSearchList['szName'].'</option>';
                                           }
                                           ?>
                            </select>

@@ -237,7 +237,7 @@
                         </li>
                      <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__;?>/prospect/sales_crm_detailed_report">
-                                <i class="fa fa-ge" aria-hidden="true"></i>
+                               <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Sales CRM Detailed</span>
                             </a>
                         </li>
@@ -303,7 +303,7 @@
                                 <span class="title">Inventory Ordered </span>
                             </a>
                    </li>
-                    <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Detailed') { ?> active open <?php } ?>">
+                    <li class="nav-item  <?php if ($subpageName == 'Sales_CRM_Summary') { ?> active open <?php } ?>">
                             <a class="nav-link " href="<?php echo __BASE_URL__; ?>/prospect/prospect_summary_report">
                                 <i class="fa fa-ge" aria-hidden="true"></i>
                                 <span class="title">Sales CRM Summary  </span>

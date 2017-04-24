@@ -92,7 +92,7 @@
                                         
                                         </script>
                                             <?php }
-                                            echo '<option value="' . $allFrDetailsSearchList['id'] . '"' . $selected . ' >' . $allFrDetailsSearchList['szName'] . '</option>';
+                                            echo '<option value="' . $allFrDetailsSearchList['id'] . '"' . $selected . ' >'  .$allFrDetailsSearchList['userCode'].'-'. $allFrDetailsSearchList['szName'] . '</option>';
                                         }
                                         ?>
                                     </select>

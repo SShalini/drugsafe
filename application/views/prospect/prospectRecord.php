@@ -92,8 +92,6 @@
                         if(!empty($_POST))
                         { 
                 
-                        if(!empty($prospectDetailsAry))
-                        { 
                        ?>
                        
                          <div class=" search row">
@@ -168,7 +166,7 @@
                            </form>
                           </div>
                           <?php
-                        } }
+                       }
                             ?>
                           <?php
                         if(!empty($prospectDetailsAry))

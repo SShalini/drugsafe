@@ -393,7 +393,7 @@ class Order_Model extends Error_Model {
     {
         $whereAry = array('validorder=' => '1');
         $this->db->distinct();
-        $this->db->select('szName,franchiseeid');
+        $this->db->select('szName,franchiseeid,userCode');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_user', 'ds_orders.franchiseeid = ds_user.id');
         $this->db->where($whereAry);
@@ -585,7 +585,7 @@ class Order_Model extends Error_Model {
     { 
         $whereAry = "(ds_orders.validorder LIKE '%1%' OR ds_orders.status LIKE '%4%' OR ds_orders.status LIKE '%1%')";
         $this->db->distinct();
-        $this->db->select('szName,franchiseeid');
+        $this->db->select('szName,franchiseeid,userCode');
         $this->db->from(__DBC_SCHEMATA_ORDER__);
         $this->db->join('ds_user', 'ds_orders.franchiseeid = ds_user.id');
         $this->db->where($whereAry);

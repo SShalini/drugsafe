@@ -64,7 +64,7 @@
                                             <?php
                                             foreach ($allFrDetailsSearchAray as $allFrDetailsSearchList) {
                                                 $selected = ($allFrDetailsSearchList['franchiseeid'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
-                                                echo '<option value="' . $allFrDetailsSearchList['franchiseeid'] . '"' . $selected . ' >' . $allFrDetailsSearchList['szName'] . '</option>';
+                                                echo '<option value="' . $allFrDetailsSearchList['franchiseeid'] . '"' . $selected . ' >' .$allFrDetailsSearchList['userCode'].'-'.$allFrDetailsSearchList['szName'] . '</option>';
                                             }
                                             ?>
                                         </select>
