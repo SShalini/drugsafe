@@ -269,6 +269,7 @@
                                                     <th>Test Date</th>
                                                     <th>View SOS Form</th>
                                                     <th>View COC Form</th>
+                                                    <th>Lab Advice Form</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -295,6 +296,15 @@
                                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                                         </a>
                                                     </td>
+                                                    <td><?php
+                                                        if(!empty($testdata['lab_form'])){ ?>
+                                                            <a class="btn btn-circle btn-icon-only btn-default" id="viewLAF" href="<?php echo __BASE_UPLOADED_SIGN_URL__.$testdata['lab_form'];?>" target="_blank" title="Download Lab Advice Form">
+                                                                <i class="fa fa-download" aria-hidden="true"></i>
+                                                            </a>
+                                                        <?php }else{
+                                                            echo 'N/A';
+                                                        }
+                                                        ?></td>
                                                 </tr>
                                                 <?php 
                                                 $count++;

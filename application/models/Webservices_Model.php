@@ -664,7 +664,7 @@ class Webservices_Model extends Error_Model
     function getuserdetails($userid)
     {
         $array = array('id' => (int)$userid, 'isDeleted' => 0);
-        $query = $this->db->select('id, szName, abn, szEmail, iRole, szContactNumber, szAddress, szZipCode, szCity, szCountry')
+        $query = $this->db->select('id, szName, abn, szEmail, iRole, userCode, szContactNumber, szAddress, szZipCode, szCity, szCountry')
             ->from(__DBC_SCHEMATA_USERS__)
             ->where($array)
             ->get();
@@ -1610,5 +1610,22 @@ class Webservices_Model extends Error_Model
             return $query->result_array();
         }
         return false;
+    }
+
+    function AddLabAdviceForm($sosid,$labFormName){
+        $updatearr = array('lab_form' => $labFormName);
+        $conditionarr = array('id' => (int)$sosid);
+        $this->db->where($conditionarr)
+            ->update(__DBC_SCHEMATA_SOS_FORM__, $updatearr);
+        if($this->db->affected_rows() > 0){
+            $sosDataArr = $this->getsosformdatabysosid($sosid);
+            if(!empty($sosDataArr)){
+                return $sosDataArr[0]['lab_form'];
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 } 

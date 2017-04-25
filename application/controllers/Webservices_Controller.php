@@ -1188,7 +1188,7 @@ class Webservices_Controller extends CI_Controller
         };
     }
 
-    public function sosformpdf()
+    function sosformpdf()
     {
         $jsondata = json_decode(file_get_contents("php://input"));
         $sosid = !empty($jsondata->sosid) ? $jsondata->sosid : "0";
@@ -1468,21 +1468,8 @@ class Webservices_Controller extends CI_Controller
                                     </tr>
                                     <tr>
                                         <td colspan="8">Comments or Observation: '.$sosdetarr[0]['Comments'].'</td>
-                                    </tr>';
-                                    /*$html .=\'<tr>
-                                        <td colspan="8">Products Used</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4">Products Name</td><td colspan="4">Quantity</td>
-                                    </tr>';
-        if(!empty($userprods)){
-            foreach ($userprods as $prods){
-                $html .='<tr>
-                                        <td colspan="4">'.$prods['szProductCode'].'</td><td colspan="4">'.$prods['quantity'].'</td>
-                                    </tr>';
-            }
-        }*/
-                                    $html .='<tr>
                                         <td colspan="4">Nominated Client Representative: '.$sosdetarr[0]['ClientRepresentative'].'</td>
                                         <td colspan="2">Signature: <img src="'.__BASE_UPLOADED_SIGN_URL__.$sosdetarr[0]['RepresentativeSignature'].'" /></td>
                                         <td colspan="2">Time: '.$sosdetarr[0]['RepresentativeSignatureTime'].'</td>
@@ -1497,12 +1484,13 @@ class Webservices_Controller extends CI_Controller
         ob_end_clean();
         $pdfname = 'view_sos_details-'.date('d-m-Y-H-i-s') .'-'.uniqid() . '.pdf';
         $pdf->Output(__APP_PATH__.'/'.UPLOAD_DIR.$pdfname, 'F');
+        sleep(10);
         $responsedata = array("code" => 200,"file"=>__BASE_URL__.'/uploadsign/'.$pdfname);
         header('Content-Type: application/json');
         echo json_encode($responsedata);
         }
 
-    public function cocformpdf()
+    function cocformpdf()
     {
         $jsondata = json_decode(file_get_contents("php://input"));
         $cocid = !empty($jsondata->cocid) ? $jsondata->cocid : "0";
@@ -1705,6 +1693,7 @@ class Webservices_Controller extends CI_Controller
         ob_end_clean();
         $pdfname = 'view_coc_details-'.date('d-m-Y-H-i-s') .'-'.uniqid() . '.pdf';
         $pdf->Output(__APP_PATH__.'/'.UPLOAD_DIR.$pdfname, 'F');
+        sleep(10);
         $responsedata = array("code" => 200,"file"=>__BASE_URL__.'/uploadsign/'.$pdfname);
         header('Content-Type: application/json');
         echo json_encode($responsedata);
@@ -1732,4 +1721,168 @@ class Webservices_Controller extends CI_Controller
 		}
 		return $timeval;
 	}
+
+    function generateLabAdviceForm(){
+        $jsondata = json_decode(file_get_contents("php://input"));
+        $sosid = !empty($jsondata->sosid) ? $jsondata->sosid : "0";
+
+        ob_start();
+        define('UPLOAD_DIR', 'uploadsign/');
+        $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe Lab Advice Form');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Lab Advice Form');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 15, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM - 10);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+
+        $pdf->AddPage('L');
+        $html = '';
+        $DonorsArr = $this->Webservices_Model->getdonorsbysosid($sosid);
+        if(!empty($DonorsArr)){
+            $positiveDrugCount = 0;
+            $html .= '<div class="table-responsive">
+    <table border="1" cellpadding="8">
+        <tbody>
+        <tr>
+            <td colspan="3"><a style="text-align:center;  margin-bottom:0px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
+            <td colspan="3"><br><br><b>Lab Tag/Express Post #:</b></td>
+        </tr>
+        <tr>
+            <td colspan="6" style="background-color: #000; color: #fff; font-size:24px;">
+                Laboratory Advice Form - Drug-Safe Communities
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <br><span style="margin-top:10px; font-size:18px; font-weight:bold">To be completed by Field Testing Officer collecting the specimen.</span><br />
+                <br>Please send the original copy of this form to the with the specimen(s) and the yellow copy to
+                    Drug-Safe Australia Administration Client Services included with the on-site paperwork to PO BOX
+                    1111, Crow\'s Nest, NSW 2065.
+            </td>
+        </tr>
+        <tr>
+            <th><b>No.</b></th>
+            <th><b>Donor Name</b></th>
+            <th><b>Date Collected</b></th>
+            <th><b>Barcode</b></th>
+            <th><b>T-Number</b></th>
+            <th><b>Date Result Received</b><br><span style="font-size:11px">(Support office use only)</span></th>
+        </tr>';
+            foreach ($DonorsArr as $donordata){
+                if(!empty($donordata['drug'])){
+                    $positiveDrugCount++;
+                }
+            }
+            if($positiveDrugCount>0){
+                $clientCode = '';
+                $DrugtestDate = '';
+                $TestDate = array();
+                $donorName = array();
+                $sosformData = $this->Webservices_Model->getsosformdatabysosid($sosid);
+                if(!empty($sosformData)){
+                    $DrugtestDate = date('d/m/Y',strtotime($sosformData[0]['testdate']));
+                    $getCientArr = $this->Webservices_Model->getuserhierarchybysiteid($sosformData[0]['Clientid']);
+                    if(!empty($getCientArr)){
+                        $getClientCodeArr = $this->Webservices_Model->getuserdetails($getCientArr[0]['clientType']);
+                        if(!empty($getClientCodeArr)){
+                            $clientCode = $getClientCodeArr[0]['userCode'];
+                        }
+                    }
+                }
+                foreach ($DonorsArr as $donordata){
+                    if(!empty($donordata['drug'])){
+                        array_push($donorName,$donordata['donerName']);
+                        $cocformData = $this->Webservices_Model->getcocdatabycocid($donordata['cocid']);
+                        if(!empty($cocformData)){
+                            array_push($TestDate,date('d/m/Y',strtotime($cocformData[0]['cocdate'])));
+                        }
+
+                    }
+                }
+                if($clientCode != '' && !empty($TestDate) && !empty($donorName)){
+                    $counter = 1;
+
+                            for ($i = 0; $i < count($donorName); $i++) {
+                                $html .= '<tr>
+            <td>' . $counter . '</td>
+            <td>' . $donorName[$i] . '</td>
+            <td>' . $TestDate[$i] . '</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>';
+                                $counter++;
+                            }
+                    $html .= '<tr>
+            <td colspan="6">
+                <b>Client No.: </b>'.$clientCode.'
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <b>Date sent to lab: </b>'.$DrugtestDate.'
+            </td>
+            <td colspan="3">
+                <b>Total no. sent:</b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <b>Name/emp no. of collector:</b>
+            </td>
+            <td colspan="3">
+                <b>Signed:</b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6">
+                <br><span style="margin-top:10px; font-size:18px; font-weight:bold">Referral Laboratory (please circle):</span><br />
+                <br>Laverty / RASL / Dorevitch / Safe Work QLD / Safe Work NT / Safe Work WA / Chemcentre
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2" colspan="3">Lab Advice Form - Drug-Safe Communities</td>
+            <td colspan="3">Authorised by Operations Manager</td>
+        </tr>
+        <tr>
+            <td colspan="3">Controlled document for exclusive use by Drug-Safe Communities personnel.</td>
+        </tr>
+        </tbody>
+    </table>
+    </tbody>
+    </table>
+    <p>&nbsp; &copy; Drug-Safe Australia 2017</p>
+    </div>';
+
+                }
+                $pdf->writeHTML($html, true, false, true, false, '');
+                ob_end_clean();
+                $pdfname = 'view_Lab_Advice_Form-'.date('d-m-Y-H-i-s') .'-'.uniqid() . '.pdf';
+                $pdf->Output(__APP_PATH__.'/'.UPLOAD_DIR.$pdfname, 'F');
+                $labFormUploadStat = $this->Webservices_Model->AddLabAdviceForm($sosid,$pdfname);
+                sleep(5);
+                if(!empty($labFormUploadStat)){
+                    $responsedata = array("code" => 200,"result"=>__BASE_URL__.'/uploadsign/'.$labFormUploadStat);
+                }else{
+                    $responsedata = array("code" => 200,"result"=>'0');
+                }
+
+            }else{
+                $responsedata = array("code" => 200,"result"=>'0');
+            }
+
+        }else{
+            $responsedata = array("code" => 201,"result"=>"No donor found.");
+        }
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+    }
 }
