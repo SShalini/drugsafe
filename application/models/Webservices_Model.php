@@ -227,7 +227,8 @@ class Webservices_Model extends Error_Model
                 'RepresentativeSignatureTime' => $data['nominedec'],
                 'Status' => $data['status'],
                 'sign1' => $data['sign1'],
-                'sign2' => $data['sign2']
+                'sign2' => $data['sign2'],
+                'agent_comment' => $data['agent_comment']
             );
             if ($data['update'] == '1') {
                 $wheresosAry = array('id' => (int)$data['idsos']);
@@ -646,7 +647,7 @@ class Webservices_Model extends Error_Model
                                                 sos.FurtherTestRequired, sos.TotalDonarScreeningUrine, sos.TotalDonarScreeningOral, sos.NegativeResultUrine,
                                                 sos.NegativeResultOral, sos.FurtherTestUrine, sos.FurtherTestOral, sos.TotalAlcoholScreening, sos.NegativeAlcohol,
                                                 sos.PositiveAlcohol, sos.Refusals, sos.DeviceName, sos.ExtraUsed, sos.BreathTesting, sos.Comments, sos.collsign, sos.ClientRepresentative,
-                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, sos.sign1, sos.sign2, client.clientType, client.franchiseeId')
+                                                sos.RepresentativeSignature, sos.RepresentativeSignatureTime, sos.Status, sos.sign1, sos.sign2, sos.agent_comment, client.clientType, client.franchiseeId')
             ->from(__DBC_SCHEMATA_SOS_FORM__ . ' as sos')
             ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'sos.Clientid = client.clientId')
             ->where($whereAry)
@@ -860,12 +861,12 @@ class Webservices_Model extends Error_Model
         if (!empty($data['lotexpiry'])) {
             $data['lotexpiry'] = $this->formatdate($data['lotexpiry']);
         }
-        if (!empty($data['receiveronedate'])) {
+        /*if (!empty($data['receiveronedate'])) {
             $data['receiveronedate'] = $this->formatdate($data['receiveronedate']);
         }
         if (!empty($data['receivertwodate'])) {
             $data['receivertwodate'] = $this->formatdate($data['receivertwodate']);
-        }
+        }*/
         $drugtestdata1 = '';
         $drugtestdata2 = '';
         if (!empty($data['drugtest'])) {
@@ -922,7 +923,7 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['signcoc4'])), 'signcoc4', 'Collector 2 Sign', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['comments'])), 'comments', 'Comments', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['onsitescreeningrepo'])), 'onsitescreeningrepo', 'On-Site Screening Report', true, __VLD_CASE_NUMERIC__);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['receiverone'])), 'receiverone', 'Received By (print)', true);
+            /*$this->set_fieldReq(sanitize_all_html_input(trim($data['receiverone'])), 'receiverone', 'Received By (print)', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveronedate'])), 'receiveronedate', 'Receiving Date', true, __VLD_CASE_DATE__);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveronetime'])), 'receiveronetime', 'Receiving Time', true);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['receiveroneseal'])), 'receiveroneseal', 'Seal Intact', true);
@@ -933,7 +934,7 @@ class Webservices_Model extends Error_Model
             $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwotime'])), 'receivertwotime', 'Receiving Time', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwoseal'])), 'receivertwoseal', 'Seal Intact', false);
             $this->set_fieldReq(sanitize_all_html_input(trim($data['receivertwolabel'])), 'receivertwolabel', 'Label/Bar Code', false);
-            $this->set_fieldReq(sanitize_all_html_input(trim($data['signcoc6'])), 'signcoc6', 'Receiver Signature', false);
+            $this->set_fieldReq(sanitize_all_html_input(trim($data['signcoc6'])), 'signcoc6', 'Receiver Signature', false);*/
         }
         if ($this->error) {
             return false;
@@ -971,7 +972,7 @@ class Webservices_Model extends Error_Model
                 'collectortwo' => $data['collectortwo'],
                 'comments' => $data['comments'],
                 'onsitescreeningrepo' => $data['onsitescreeningrepo'],
-                'receiverone' => $data['receiverone'],
+                /*'receiverone' => $data['receiverone'],
                 'receiveronedate' => (!empty($data['receiveronedate']) ? date('Y-m-d', strtotime($data['receiveronedate'])) : ''),
                 'receiveronetime' => $data['receiveronetime'],
                 'receiveroneseal' => $data['receiveroneseal'],
@@ -980,7 +981,7 @@ class Webservices_Model extends Error_Model
                 'receivertwodate' => (!empty($data['receivertwodate']) ? date('Y-m-d', strtotime($data['receivertwodate'])) : ''),
                 'receivertwotime' => $data['receivertwotime'],
                 'receivertwoseal' => $data['receivertwoseal'],
-                'receivertwolabel' => $data['receivertwolabel'],
+                'receivertwolabel' => $data['receivertwolabel'],*/
                 'devicesrno' => $data['devicesrno'],
                 'cutoff' => $data['cutoff'],
                 'donwaittime' => $data['donwaittime'],
@@ -992,9 +993,9 @@ class Webservices_Model extends Error_Model
                 'signcoc1' => $data['signcoc1'],
                 'signcoc2' => $data['signcoc2'],
                 'signcoc3' => $data['signcoc3'],
-                'signcoc4' => $data['signcoc4'],
+                'signcoc4' => $data['signcoc4']/*,
                 'signcoc5' => $data['signcoc5'],
-                'signcoc6' => $data['signcoc6']
+                'signcoc6' => $data['signcoc6']*/
             );
             $cocid = $data['cocid'];
             $whereAry = array('id' => (int)$cocid);

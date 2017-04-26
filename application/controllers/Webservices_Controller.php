@@ -206,6 +206,7 @@ class Webservices_Controller extends CI_Controller
         $dataArr['newkitids'] = !empty($jsondata->newkitids) ? $jsondata->newkitids : "";
         $dataArr['sign1'] = $jsondata->sign1;
         $dataArr['sign2'] = $jsondata->sign2;
+        $dataArr['agent_comment'] = !empty($jsondata->agentcomment)?$jsondata->agentcomment:"";
         for($i=1;$i<=$dataArr['donercount'];$i++){
             $namevar = 'name'.$i;
             $resultvar = 'result'.$i;
@@ -609,7 +610,7 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['collectorsigntwo'] = !empty($jsondata->collectorsigntwo) ? $jsondata->collectorsigntwo : "";
         $data['coc']['comments'] = !empty($jsondata->comments) ? $jsondata->comments : "";
         $data['coc']['onsitescreeningrepo'] = !empty($jsondata->onsitescreeningrepo) ? $jsondata->onsitescreeningrepo : "";
-        $data['coc']['receiverone'] = !empty($jsondata->receiverone) ? $jsondata->receiverone : "";
+        /*$data['coc']['receiverone'] = !empty($jsondata->receiverone) ? $jsondata->receiverone : "";
         $data['coc']['receiveronesign'] = !empty($jsondata->receiveronesign) ? $jsondata->receiveronesign : "";
         $data['coc']['receiveronedate'] = !empty($jsondata->receiveronedate) ? $jsondata->receiveronedate : "";
         $data['coc']['receiveronetime'] = trim($jsondata->receiveronetime) == ': AM' || trim($jsondata->receiveronetime) == ': PM'? "":$jsondata->receiveronetime;
@@ -620,7 +621,7 @@ class Webservices_Controller extends CI_Controller
         $data['coc']['receivertwodate'] = !empty($jsondata->receivertwodate) ? $jsondata->receivertwodate : "";
         $data['coc']['receivertwotime'] = trim($jsondata->receivertwotime) == ': AM' || trim($jsondata->receivertwotime) == ': PM' ? "":$jsondata->receivertwotime;
         $data['coc']['receivertwoseal'] = !empty($jsondata->receivertwoseal) ? $jsondata->receivertwoseal : "";
-        $data['coc']['receivertwolabel'] = !empty($jsondata->receivertwolabel) ? $jsondata->receivertwolabel : "";
+        $data['coc']['receivertwolabel'] = !empty($jsondata->receivertwolabel) ? $jsondata->receivertwolabel : "";*/
         $data['coc']['reference'] = (!empty($jsondata->reference) ? $jsondata->reference : "");
         $data['coc']['cocid'] = (!empty($jsondata->cocid) ? $jsondata->cocid : "");
         $data['coc']['status'] = (!empty($jsondata->status) ? $jsondata->status : "0");
@@ -1672,18 +1673,18 @@ class Webservices_Controller extends CI_Controller
     <td>Label/Bar Code Match</td>
 </tr>
 <tr>
-    <td colspan="2">'.$cocdetarr[0]['receiverone'].'</td>
-    <td colspan="2"><img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['receiveronesign'].'" /></td>
-    <td colspan="2">'.date('d/m/Y',strtotime($cocdetarr[0]['receiveronedate'])).' '.$cocdetarr[0]['receiveronetime'].'</td>
-    <td>'.$cocdetarr[0]['receiveroneseal'].'</td>
-    <td>'.$cocdetarr[0]['receiveronelabel'].'</td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td><br><br><br></td>
+    <td><br><br><br></td>
 </tr>
 <tr>
-    <td colspan="2">'.$cocdetarr[0]['receivertwo'].'</td>
-    <td colspan="2"><img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['receivertwosign'].'" /></td>
-    <td colspan="2">'.($cocdetarr[0]['receivertwotime']==' : 00 AM'?'':date('d/m/Y',strtotime($cocdetarr[0]['receivertwodate'])).' '.$cocdetarr[0]['receivertwotime']).'</td>
-    <td>'.$cocdetarr[0]['receivertwoseal'].'</td>
-    <td>'.$cocdetarr[0]['receivertwolabel'].'</td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td><br><br><br></td>
+    <td><br><br><br></td>
 </tr>
                             </table>
                         </div>                      

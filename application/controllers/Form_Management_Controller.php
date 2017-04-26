@@ -167,140 +167,6 @@ class Form_Management_Controller extends CI_Controller
             $this->load->view('formManagement/sos-coc-formdetails.php');
             $this->load->view('layout/admin_footer');
         }
-        /*if($_POST['szSearchFrRecord'])
-        {
-             $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchFrRecord']);
-            $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$_POST['szSearchFrRecord']);
-            $this->session->set_userdata('szSearchFrRecord',$_POST['szSearchFrRecord']);
-            if(empty($clientlistArr))
-            {  
-                $count = $this->Admin_Model->getnotification();
-                $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-                $data['searchOptionArr']=$searchOptionArr;
-                $data['data'] = $data;
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $data['notfound']="Not Found";
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('formManagement/formViewByFr');
-                $this->load->view('layout/admin_footer');
-            } 
-            else{
-                 $data['clientlistArr'] = $clientlistArr;
-            $data['userDataAry']=$userDataAry;
-            $data['data'] = $data;
-            $data['szMetaTagTitle'] = "Form Management";
-            $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Form_Management";
-            $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-            $this->load->view('layout/admin_header', $data);
-            $this->load->view('formManagement/formViewByCl'); 
-            $this->load->view('layout/admin_footer');
-            }
-           
-           
-        }
-        elseif ($_POST['szSearchClRecord']) 
-        {   $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$_POST['szSearchClRecord']);
-            $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($_POST['szSearchClRecord'],false,false,false,false);
-            $this->session->set_userdata('szSearchClRecord',$_POST['szSearchClRecord']);
-            
-            if(empty($childClientDetailsAray))
-            {
-                $count = $this->Admin_Model->getnotification();
-                $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-                $szSearchFrRecord = $this->session->userdata('szSearchFrRecord');
-                $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchFrRecord);
-                $clientlistArr = $this->Franchisee_Model->getAllClientDetails(true,false,false,false,false,false,$szSearchFrRecord);
-                $data['clientlistArr'] = $clientlistArr;
-                $data['userDataAry']=$userDataAry;
-                $data['data'] = $data;
-                $data['notfound']="Not Found";
-                $data['szMetaTagTitle'] = "Form Management";
-                $data['is_user_login'] = $is_user_login;
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $data['pageName'] = "Form_Management";
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('formManagement/formViewByCl'); 
-                $this->load->view('layout/admin_footer');
-            }
-            else{
-                $data['franchiseeDataAry'] = $franchiseeDataAry;
-            $data['childClientDetailsAray']=$childClientDetailsAray;
-            $data['data'] = $data;
-            $data['szMetaTagTitle'] = "Form Management";
-            $data['is_user_login'] = $is_user_login;
-            $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-            $data['pageName'] = "Form_Management";
-            $this->load->view('layout/admin_header', $data);
-            $this->load->view('formManagement/formViewBySite'); 
-            $this->load->view('layout/admin_footer'); 
-            }
-           
-        } 
-        elseif ($_POST['szSearchClRecord2']) 
-        {
-              $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetailsByClientId($_POST['szSearchClRecord2']);
-            if(empty($sosRormDetailsAry))
-            {
-                  $count = $this->Admin_Model->getnotification();
-                $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-                $szSearchClRecord = $this->session->userdata('szSearchClRecord');
-                $franchiseeDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$szSearchClRecord);
-                $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($szSearchClRecord,false,false,false,false);
-                $data['franchiseeDataAry'] = $franchiseeDataAry;
-                $data['childClientDetailsAray']=$childClientDetailsAray;
-                $value = "2";
-                $data['value'] = $value;
-                $data['data'] = $data;
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $data['notfound']="Not Found";
-                $data['szMetaTagTitle'] = "Form Management";
-                $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Form_Management";
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('formManagement/formViewBySite'); 
-                $this->load->view('layout/admin_footer');
-            }
-            else{
-              $data['sosRormDetailsAry'] = $sosRormDetailsAry;
-            $data['data'] = $data;
-            $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-            $data['szMetaTagTitle'] = "Form Management";
-            $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Form_Management";
-            $this->load->view('layout/admin_header', $data);
-            $this->load->view('formManagement/formViewBySite'); 
-            $this->load->view('layout/admin_footer');   
-            }
-           
-        } 
-        else 
-        {
-            $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            $data['searchOptionArr']=$searchOptionArr;
-            $data['data'] = $data;
-            $data['szMetaTagTitle'] = "Form Management";
-            $data['notification'] = $count;
-            $data['commentnotification'] = $commentReplyNotiCount;
-            $data['is_user_login'] = $is_user_login;
-            $data['pageName'] = "Form_Management";
-            $this->load->view('layout/admin_header', $data);
-            $this->load->view('formManagement/formViewByFr');
-            $this->load->view('layout/admin_footer');
-        }*/
     }
 
     function sosFormsdata()
@@ -1117,18 +983,18 @@ class Form_Management_Controller extends CI_Controller
     <td>Label/Bar Code Match</td>
 </tr>
 <tr>
-    <td colspan="2">'.$cocdetarr[0]['receiverone'].'</td>
-    <td colspan="2"><img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['receiveronesign'].'"/></td>
-    <td colspan="2">'.date('d/m/Y',strtotime($cocdetarr[0]['receiveronedate'])).' '.$cocdetarr[0]['receiveronetime'].'</td>
-    <td>'.$cocdetarr[0]['receiveroneseal'].'</td>
-    <td>'.$cocdetarr[0]['receiveronelabel'].'</td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td><br><br><br></td>
+    <td><br><br><br></td>
 </tr>
 <tr>
-    <td colspan="2">'.$cocdetarr[0]['receivertwo'].'</td>
-    <td colspan="2"><img src="'.__BASE_UPLOADED_SIGN_URL__.$cocdetarr[0]['receivertwosign'].'"/></td>
-    <td colspan="2">'.($cocdetarr[0]['receivertwotime']==' : 00 AM'?'':date('d/m/Y',strtotime($cocdetarr[0]['receivertwodate'])).' '.$cocdetarr[0]['receivertwotime']).'</td>
-    <td>'.$cocdetarr[0]['receivertwoseal'].'</td>
-    <td>'.$cocdetarr[0]['receivertwolabel'].'</td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td colspan="2"><br><br><br></td>
+    <td><br><br><br></td>
+    <td><br><br><br></td>
 </tr>
                             </table>
                         </div>                      

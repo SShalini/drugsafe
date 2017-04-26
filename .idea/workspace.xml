@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e3c04da-66fa-4690-acd3-a9a0f242329c" name="Default" comment="Lab Advice Form module added.">
+    <list default="true" id="9e3c04da-66fa-4690-acd3-a9a0f242329c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Form_Management_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Form_Management_Controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Form_Management_Model.php" afterPath="$PROJECT_DIR$/application/models/Form_Management_Model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Webservices_Model.php" afterPath="$PROJECT_DIR$/application/models/Webservices_Model.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php" afterPath="$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db changes/db changes.sql" afterPath="$PROJECT_DIR$/db changes/db changes.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/drugsafeFunctions.js" afterPath="$PROJECT_DIR$/js/drugsafeFunctions.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +24,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="1821" column="43" lean-forward="true" selection-start-line="1821" selection-start-column="43" selection-end-line="1821" selection-end-column="43" />
+            <state relative-caret-position="1194">
+              <caret line="1684" column="37" lean-forward="true" selection-start-line="1684" selection-start-column="37" selection-end-line="1684" selection-end-column="37" />
               <folding>
                 <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -45,7 +46,6 @@
                 <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#addcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -70,20 +70,30 @@
                 <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#cocformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+                <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Form_Management_Controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
+      <file leaf-file-name="drugsafeFunctions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="149" column="71" lean-forward="false" selection-start-line="149" selection-start-column="57" selection-end-line="149" selection-end-column="71" />
-              <folding />
+            <state relative-caret-position="201">
+              <caret line="3098" column="56" lean-forward="false" selection-start-line="3098" selection-start-column="43" selection-end-line="3098" selection-end-column="56" />
+              <folding>
+                <marker date="1493191178360" expanded="true" signature="88336:88343" ph="×" />
+                <marker date="1493191178360" expanded="true" signature="91704:91716" ph="..." />
+                <marker date="1493191178360" expanded="true" signature="95141:95154" ph="..." />
+                <marker date="1493191178360" expanded="true" signature="96566:96573" ph="×" />
+                <marker date="1493191178360" expanded="true" signature="98716:98723" ph="×" />
+                <marker date="1493191178360" expanded="true" signature="99106:99123" ph="..." />
+                <marker date="1493191178360" expanded="true" signature="100043:100056" ph="..." />
+                <marker date="1493191178360" expanded="true" signature="105235:105242" ph="×" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -91,28 +101,18 @@
       <file leaf-file-name="sos-coc-formdetails.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="299" column="85" lean-forward="false" selection-start-line="299" selection-start-column="85" selection-end-line="299" selection-end-column="85" />
+            <state relative-caret-position="4913">
+              <caret line="289" column="202" lean-forward="false" selection-start-line="289" selection-start-column="202" selection-end-line="289" selection-end-column="202" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="constants.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <file leaf-file-name="Form_Management_Controller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="55" column="34" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Form_Management_Model.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/models/Form_Management_Model.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="214" column="20" lean-forward="true" selection-start-line="214" selection-start-column="20" selection-end-line="214" selection-end-column="20" />
+            <state relative-caret-position="323">
+              <caret line="996" column="20" lean-forward="false" selection-start-line="996" selection-start-column="20" selection-end-line="996" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -121,8 +121,8 @@
       <file leaf-file-name="Webservices_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="663" column="13" lean-forward="false" selection-start-line="663" selection-start-column="13" selection-end-line="663" selection-end-column="13" />
+            <state relative-caret-position="433">
+              <caret line="1277" column="61" lean-forward="false" selection-start-line="1277" selection-start-column="61" selection-end-line="1277" selection-end-column="61" />
               <folding>
                 <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -132,7 +132,6 @@
                 <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getcorpclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#addsosdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#savekits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -142,14 +141,16 @@
                 <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#getclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#getsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getCorpfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getCorpclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getagentsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getagentclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getsosformdatabysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-                <element signature="n#addcocdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -173,6 +174,7 @@
                 <element signature="n#adjustFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#markKitStatusUsed#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#getcocdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseeclientsitebysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getfranchiseeorders#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -180,6 +182,7 @@
                 <element signature="n#savecollsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#savecocsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
                 <element signature="n#getFranchiseeWithClient#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+                <element signature="n#AddLabAdviceForm#0;n#Webservices_Model#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -196,15 +199,21 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addsosdata</find>
       <find>getsos</find>
       <find>getdonorsbysosid</find>
       <find>getcocdatabycocid</find>
       <find>update</find>
       <find>getsosformdatabysosid</find>
       <find>getuserdetails</find>
+      <find>addsosdata</find>
       <find>getsosformdata</find>
+      <find>getsosformdatabysiteid</find>
+      <find>showformdata</find>
       <find>viewForm</find>
+      <find>cocformpdf</find>
+      <find>showcocpdf</find>
+      <find>getcocformpdf</find>
+      <find>addcocdata</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -219,12 +228,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/dev/design.html" />
-        <option value="$PROJECT_DIR$/application/models/Webservices_Model.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
         <option value="$PROJECT_DIR$/application/models/Form_Management_Model.php" />
+        <option value="$PROJECT_DIR$/db changes/db changes.sql" />
         <option value="$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php" />
+        <option value="$PROJECT_DIR$/js/drugsafeFunctions.js" />
+        <option value="$PROJECT_DIR$/application/models/Webservices_Model.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Form_Management_Controller.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
       </list>
     </option>
   </component>
@@ -257,7 +268,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -267,6 +277,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drugsafe" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -352,44 +376,9 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -425,6 +414,12 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
@@ -462,39 +457,67 @@
       <workItem from="1493009748481" duration="466000" />
       <workItem from="1493011231524" duration="469000" />
       <workItem from="1493011759814" duration="4648000" />
-      <workItem from="1493094275496" duration="20724000" />
+      <workItem from="1493094275496" duration="21779000" />
+      <workItem from="1493178584300" duration="6868000" />
+      <workItem from="1493193619865" duration="2527000" />
     </task>
+    <task id="LOCAL-00001" summary="Lab Advice Form module added.">
+      <created>1493122109770</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1493122109770</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26968000" />
+    <option name="totallyTimeSpent" value="37418000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26479515" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2723824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5060698" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.4939302" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -508,6 +531,327 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5984">
+          <caret line="352" column="63" lean-forward="false" selection-start-line="352" selection-start-column="49" selection-end-line="352" selection-end-column="63" />
+          <folding>
+            <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deldonor#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getallcategories#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addtocart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#updatecart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#canceldonorcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsavedkitsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#delusedkit#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#testcompletebyinventorycheck#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdatabycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeorders#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1493191178360" expanded="true" signature="88336:88343" ph="×" />
+            <marker date="1493191178360" expanded="true" signature="91704:91716" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="95141:95154" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="96566:96573" ph="×" />
+            <marker date="1493191178360" expanded="true" signature="98716:98723" ph="×" />
+            <marker date="1493191178360" expanded="true" signature="99106:99123" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="100043:100056" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="105235:105242" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4913">
+          <caret line="289" column="202" lean-forward="false" selection-start-line="289" selection-start-column="202" selection-end-line="289" selection-end-column="202" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/formManagement/view_form_for_client.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="21" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="56" lean-forward="false" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11033">
+          <caret line="649" column="162" lean-forward="false" selection-start-line="649" selection-start-column="162" selection-end-line="649" selection-end-column="162" />
+          <folding>
+            <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szPassword#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#checkUserExist#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcorpclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savekits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#updatesavedkits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocidbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getCorpfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getCorpclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallcategories#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addtocart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#checkproductexistincart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#updatecart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addOrderDetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#markOrderVerified#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteOrder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#canceldonorcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#delUsedKit#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#inventoryCheck#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getSavedKitsBySosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#adjustFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#markKitStatusUsed#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclientsitebysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeorders#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentfranchisee#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savecollsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savecocsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getFranchiseeWithClient#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#AddLabAdviceForm#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8347">
+          <caret line="1821" column="43" lean-forward="false" selection-start-line="1821" selection-start-column="43" selection-end-line="1821" selection-end-column="43" />
+          <folding>
+            <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deldonor#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getallcategories#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addtocart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#updatecart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#canceldonorcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsavedkitsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#delusedkit#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#testcompletebyinventorycheck#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdatabycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeorders#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2533">
+          <caret line="149" column="71" lean-forward="false" selection-start-line="149" selection-start-column="57" selection-end-line="149" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5083">
+          <caret line="299" column="85" lean-forward="false" selection-start-line="299" selection-start-column="85" selection-end-line="299" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="55" column="34" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Form_Management_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3621">
+          <caret line="213" column="45" lean-forward="false" selection-start-line="213" selection-start-column="45" selection-end-line="213" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1394">
+          <caret line="663" column="13" lean-forward="false" selection-start-line="663" selection-start-column="13" selection-end-line="663" selection-end-column="13" />
+          <folding>
+            <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szPassword#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#checkUserExist#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcorpclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savekits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#updatesavedkits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocidbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getCorpfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getCorpclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallcategories#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addtocart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#checkproductexistincart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#updatecart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addOrderDetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#markOrderVerified#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteOrder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#canceldonorcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#delUsedKit#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#inventoryCheck#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getSavedKitsBySosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#adjustFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#markKitStatusUsed#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclientsitebysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeorders#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentfranchisee#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savecollsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savecocsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getFranchiseeWithClient#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#AddLabAdviceForm#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4760">
@@ -529,7 +873,6 @@
             <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -554,9 +897,10 @@
             <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#cocformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -574,7 +918,6 @@
             <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getcorpclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#addsosdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#savekits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -584,14 +927,16 @@
             <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getCorpfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getCorpclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getagentsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getagentclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -615,6 +960,7 @@
             <element signature="n#adjustFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#markKitStatusUsed#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeclientsitebysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeorders#0;n#Webservices_Model#0;n#!!top" expanded="false" />
@@ -622,6 +968,7 @@
             <element signature="n#savecollsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#savecocsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
             <element signature="n#getFranchiseeWithClient#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#AddLabAdviceForm#0;n#Webservices_Model#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -647,7 +994,6 @@
             <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -672,9 +1018,10 @@
             <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#cocformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -700,7 +1047,6 @@
             <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -725,9 +1071,10 @@
             <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#cocformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -753,7 +1100,6 @@
             <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -778,18 +1124,11 @@
             <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#cocformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="48" column="72" lean-forward="false" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -797,72 +1136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="96" lean-forward="false" selection-start-line="4" selection-start-column="68" selection-end-line="4" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="663" column="13" lean-forward="false" selection-start-line="663" selection-start-column="13" selection-end-line="663" selection-end-column="13" />
-          <folding>
-            <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#set_szPassword#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#checkUserExist#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getcorpclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#addsosdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#savekits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#updatesavedkits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getcocdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getcocidbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getCorpfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getCorpclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getagentsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getagentclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getallcategories#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#addtocart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#checkproductexistincart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#deleteitemfromcart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#updatecart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#addorder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseecartitems#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#addOrderDetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#emptycart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#markOrderVerified#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#deleteOrder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getorderdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#canceldonorcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#delUsedKit#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#inventoryCheck#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getSavedKitsBySosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#adjustFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#markKitStatusUsed#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseeclientsitebysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseeorders#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getagentfranchisee#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#savecollsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#savecocsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-            <element signature="n#getFranchiseeWithClient#0;n#Webservices_Model#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -870,63 +1143,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1135">
           <caret line="69" column="13" lean-forward="true" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#h2#0;n#td#0;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
-            <element signature="e#2502#2508#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="1821" column="43" lean-forward="true" selection-start-line="1821" selection-start-column="43" selection-end-line="1821" selection-end-column="43" />
-          <folding>
-            <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#deldonor#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getallprodbycatid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getallcategories#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addtocart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#emptycart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#deleteitemfromcart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseecartitems#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#updatecart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#addorder#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getorderdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#canceldonorcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getsavedkitsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#delusedkit#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#testcompletebyinventorycheck#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getsosformdatabysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getcocdatabycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseeorders#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#cocformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-            <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -938,35 +1154,187 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="149" column="71" lean-forward="false" selection-start-line="149" selection-start-column="57" selection-end-line="149" selection-end-column="71" />
-          <folding />
+        <state relative-caret-position="935">
+          <caret line="55" column="34" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+    <entry file="file://$PROJECT_DIR$/application/models/Form_Management_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="55" column="34" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="34" />
+        <state relative-caret-position="-85">
+          <caret line="213" column="45" lean-forward="false" selection-start-line="213" selection-start-column="45" selection-end-line="213" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db changes/db changes.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="56" lean-forward="false" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="299" column="85" lean-forward="false" selection-start-line="299" selection-start-column="85" selection-end-line="299" selection-end-column="85" />
+        <state relative-caret-position="4913">
+          <caret line="289" column="202" lean-forward="false" selection-start-line="289" selection-start-column="202" selection-end-line="289" selection-end-column="202" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Form_Management_Model.php">
+    <entry file="file://$PROJECT_DIR$/application/views/formManagement/view_form_for_client.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="214" column="20" lean-forward="true" selection-start-line="214" selection-start-column="20" selection-end-line="214" selection-end-column="20" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="3098" column="56" lean-forward="false" selection-start-line="3098" selection-start-column="43" selection-end-line="3098" selection-end-column="56" />
+          <folding>
+            <marker date="1493191178360" expanded="true" signature="88336:88343" ph="×" />
+            <marker date="1493191178360" expanded="true" signature="91704:91716" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="95141:95154" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="96566:96573" ph="×" />
+            <marker date="1493191178360" expanded="true" signature="98716:98723" ph="×" />
+            <marker date="1493191178360" expanded="true" signature="99106:99123" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="100043:100056" ph="..." />
+            <marker date="1493191178360" expanded="true" signature="105235:105242" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="996" column="20" lean-forward="false" selection-start-line="996" selection-start-column="20" selection-end-line="996" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Webservices_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="1277" column="61" lean-forward="false" selection-start-line="1277" selection-start-column="61" selection-end-line="1277" selection-end-column="61" />
+          <folding>
+            <element signature="n#__construct#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#validateuser#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szEmail#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_szPassword#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#checkUserExist#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcorpclientdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#formatdate#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#set_fieldReq#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savekits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#updatesavedkits#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocidbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getCorpfranchiseesosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getCorpclientsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentsosformdata#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentclients#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getsosdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#delcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deldonor#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getallcategories#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addtocart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#checkproductexistincart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#updatecart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#addOrderDetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#markOrderVerified#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#deleteOrder#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#canceldonorcoc#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#delUsedKit#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#inventoryCheck#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getSavedKitsBySosid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#adjustFranchiseeInventory#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#markKitStatusUsed#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#marksoscomplete#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdatabycocid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclientsitebysiteid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeorders#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getagentfranchisee#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savecollsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#savecocsign#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#getFranchiseeWithClient#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+            <element signature="n#AddLabAdviceForm#0;n#Webservices_Model#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1194">
+          <caret line="1684" column="37" lean-forward="true" selection-start-line="1684" selection-start-column="37" selection-end-line="1684" selection-end-column="37" />
+          <folding>
+            <element signature="n#__construct#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deldonor#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getallprodbycatid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getallcategories#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addtocart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#emptycart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteitemfromcart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseecartitems#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#updatecart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addorder#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getorderdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#canceldonorcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsavedkitsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#delusedkit#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#testcompletebyinventorycheck#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformdatabysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getcocdatabycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeorders#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#generateLabAdviceForm#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

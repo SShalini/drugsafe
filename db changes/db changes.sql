@@ -47,3 +47,4 @@ ALTER TABLE `tbl_prospect` CHANGE `szContactNo` `szContactNumber` VARCHAR(15) CH
 ALTER TABLE `ds_agentmapping` ADD `stateid` INT(5) NOT NULL AFTER `agentid`;
 
 ALTER TABLE `ds_sos` ADD `lab_form` VARCHAR(255) NOT NULL AFTER `sign2`;
+ALTER TABLE `ds_sos` ADD `agent_comment` TEXT NOT NULL ;

@@ -2570,9 +2570,12 @@ function View_excel_order_details_list(idOrder) {
     });
 
 }
-function showformdata(sosid,hide) {
+function showformdata(sosid,hide,viewAgentComment) {
     if(!hide){
         hide = 0;
+    }
+    if(!viewAgentComment){
+        viewAgentComment = 0;
     }
     $('#loader').css('display', 'block');
     var jdata = {
@@ -2678,7 +2681,8 @@ function showformdata(sosid,hide) {
                         '<tr><th>Comments or Observation:</th><td colspan="3">' + value.Comments + '</td></tr>' +
                         '<tr><th>Time:</th><td colspan="3">' + value.RepresentativeSignatureTime + '</td></tr>' +
                         '<tr><th>Nominated Client Representative:</th><td colspan="3">' + value.ClientRepresentative + '</td></tr>' +
-                        '<tr><th>Signature:</th><td colspan="3"><img src="' + __BASE_URL__ + '/uploadsign/' + value.RepresentativeSignature + '" /></td></tr>';
+                        '<tr><th>Signature:</th><td colspan="3"><img src="' + __BASE_URL__ + '/uploadsign/' + value.RepresentativeSignature + '" /></td></tr>' +
+                        '<tr><th>Agent Comment:</th><td colspan="3">' + (viewAgentComment=='1' && value.agent_comment?value.agent_comment:"N/A") + '</td></tr>';
                 });
                 modalhtml += '</tbody></table>' +
                     '</div>' +
@@ -3013,7 +3017,7 @@ function viewcocdets(cocid, donorname) {
                         '<tr><th class="col-md-2">Collector 2 Name/Number:</th><td class="col-md-2">' + value.collectortwo + '</td></tr>' +
                         '<tr><th class="col-md-2">Signature:</th><td class="col-md-2"><img src="' + __BASE_URL__ + '/uploadsign/' + value.collectorsigntwo + '" /></td></tr>' +
                         '<tr><th class="col-md-2">Comments or Observation:</th><td class="col-md-2">' + value.comments + '</td></tr>' +
-                        '<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Chain of Custody</h3></th> </tr>' +
+                        /*'<tr><th colspan="2" class="col-md-2"><h3 class="font-green-sharp">Chain of Custody</h3></th> </tr>' +
                         '<tr><th class="col-md-2">Received By(1):</th><td class="col-md-2">' + value.receiverone + '</td></tr>' +
                         '<tr><th class="col-md-2">Receiving Date:</th><td class="col-md-2">' + formatdate(value.receiveronedate) + '</td></tr>' +
                         '<tr><th class="col-md-2">Receiving Time:</th><td class="col-md-2">' + format12hrtime(value.receiveronetime) + '</td></tr>' +
@@ -3025,7 +3029,7 @@ function viewcocdets(cocid, donorname) {
                         '<tr><th class="col-md-2">Receiving Time:</th><td class="col-md-2">' + (value.receivertwo ? format12hrtime(value.receivertwotime) : '-') + '</td></tr>' +
                         '<tr><th class="col-md-2">Seal Intact:</th><td class="col-md-2">' + (value.receivertwo ? value.receivertwoseal : '-') + '</td></tr>' +
                         '<tr><th class="col-md-2">Label/Bar Code Match:</th><td class="col-md-2">' + (value.receivertwo ? value.receivertwolabel : '-') + '</td></tr>' +
-                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">' + (value.receivertwo ? '<img src="' + __BASE_URL__ + '/uploadsign/' + value.receivertwosign + '" />' : '-') + '</td></tr>' +
+                        '<tr><th class="col-md-2">Signature:</th><td class="col-md-2">' + (value.receivertwo ? '<img src="' + __BASE_URL__ + '/uploadsign/' + value.receivertwosign + '" />' : '-') + '</td></tr>' +*/
                         '</tbody></table>' +
                         '</div>' +
                         '</div>' +
