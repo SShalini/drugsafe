@@ -442,7 +442,12 @@ class Webservices_Model extends Error_Model
     function formatdate($date)
     {
         $datearr = explode('/', $date);
+        if(!empty($date)){
         $res = $datearr['2'] . '-' . $datearr['1'] . '-' . $datearr['0'];
+        }
+        else{
+         $res = '';   
+        }
         return $res;
     }
 

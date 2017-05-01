@@ -271,13 +271,10 @@ class Franchisee_Model extends Error_Model
         }
     }
 
-    public function getAllClientDetails($parent = false, $franchiseId = '', $ClientName = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
-    {
+    public function getAllClientDetails($parent = false, $franchiseId = '', $ClientName = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$fromdate='',$todate='')
+    {    
+          $array = 'isDeleted = 0 AND clientType = 0 '.($franchiseId>0?' AND franchiseeId = '.(int)$franchiseId:'').(!empty($fromdate)?" AND ds_user.dtCreatedOn >= '".$fromdate." 00:00:00 '":'').(!empty($todate)?" AND ds_user.dtCreatedOn <= '".$todate." 23:59:59'":'').(!empty($ClientName)?" AND ds_user.szName = '".$ClientName."'":'') ;
        
-          $array = 'isDeleted = 0 AND clientType = 0 '.($franchiseId>0?' AND franchiseeId = '.(int)$franchiseId:'').(!empty($ClientName)?" AND ds_user.szName = '".$ClientName."'":'') ;
-       
-       
-
             $this->db->select('*');
             $this->db->from('tbl_client');
             $this->db->join('ds_user', 'tbl_client.clientId = ds_user.id');
@@ -287,9 +284,9 @@ class Franchisee_Model extends Error_Model
             $this->db->order_by("franchiseeId", "asc");
             $this->db->limit($limit, $offset);
             $query = $this->db->get();
-        
-//       $sql = $this->db->last_query($query);
-//       print_r($sql);die;
+//        
+//     $sql = $this->db->last_query($query);
+//     print_r($sql);die;
         if ($query->num_rows() > 0) {
             return $query->result_array();
         } else {

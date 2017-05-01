@@ -3472,3 +3472,15 @@ function getDivImage(divid, linkid) {
     });
 
 }
+function ViewExcelClientReport(frId,clName,fromDate,toDate) {
+    $.post(__BASE_URL__ + "/reporting/ViewExcelClientReportData", {
+        frId: frId,
+        clName: clName,
+        fromDate: fromDate,
+        toDate: toDate
+    }, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL, '_blank');
+    });
+}

@@ -708,14 +708,20 @@ class Franchisee_Controller extends CI_Controller
       if(isset($_POST['szSearchClRecord1']) && !empty($_POST['szSearchClRecord1'])){
             $clientName = $_POST['szSearchClRecord1'];
         }
+         if(isset($_POST['szSearch4']) && !empty($_POST['szSearch4'])){
+              $fromdate = $this->Webservices_Model->formatdate($_POST['szSearch4']);
+        }
+         if(isset($_POST['szSearch5']) && !empty($_POST['szSearch5'])){
+             $todate = $this->Webservices_Model->formatdate($_POST['szSearch5']);
+        }
          $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
-         $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3)));
+         $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3),$fromdate,$todate));
          $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
            
             
          $this->pagination->initialize($config);
         
-        $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3));
+        $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3),$fromdate,$todate);
         /*$AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
         $CorpuserDetailsArr = array();
         if(!empty($AssignCorpuserDetailsArr)){

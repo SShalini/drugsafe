@@ -2,6 +2,8 @@
     $(function () {
         $("#szSearchname").customselect();
         $("#szSearchClientname").customselect();
+         $("#szSearch4").customselect();
+        $("#szSearch5").customselect();
     });
 </script>
 
@@ -73,6 +75,15 @@
                                 <i class="icon-equalizer font-green-meadow"></i>
                                 <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related clients.</span>
                             </div>
+                                 <div class="actions">
+<!--                                <a onclick="ViewpdfOrderReport('<?php echo $_POST['szSearchClientname'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                                   class=" btn green-meadow">
+                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>-->
+                                <a onclick="ViewExcelClientReport('<?php echo $_POST['szSearchname'];?>','<?php echo $_POST['szSearchClientname'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                                   class=" btn green-meadow">
+                                <i class="fa fa-file-excel-o"></i> View Xls </a>
+
+                            </div>
                         </div>
                     <?php } else { ?>
                         <div class="portlet-title">
@@ -98,11 +109,11 @@
                     <?php
                     if (($_SESSION['drugsafe_user']['iRole'] == '5')||($_SESSION['drugsafe_user']['iRole'] == '1')) {
                         ?>
-                        <div class=" search row">
+                        <div class=" row">
                             <form class="form-horizontal" id="szSearchClientRecord"
                                   action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                                   method="post">
-
+                                <div class=" row">
                                 <div class=" col-md-3 clienttypeselect">
 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
@@ -142,10 +153,69 @@
                                         </select>
                                     </div>
                                 </div>
+                            <div class="col-md-3 clienttypeselect">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
 
-                                <div class="col-md-1">
+                                                <input type="text" id="szSearch4" class="form-control"
+                                                       value="<?php echo set_value('szSearch4'); ?>" readonly
+                                                       placeholder="Start Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch4">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch4')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch4'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch4'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch4']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                    <div class="row ">
+                                   <div class=" search col-md-3 ">
+                                      <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch5" class="form-control"
+                                                       value="<?php echo set_value('szSearch5'); ?>" readonly
+                                                       placeholder="End Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch5">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch5')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch5'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch5']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div> 
+                                    </div>
+                                <div class="col-md-1 clienttypeselect">
                                     <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
+                               </div>
                             </form>
                         </div>
 
@@ -412,7 +482,64 @@
                                     ?>
                                 </select>
                             </div>
+                          <div class="col-md-3 search">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
 
+                                                <input type="text" id="szSearch4" class="form-control"
+                                                       value="<?php echo set_value('szSearch4'); ?>" readonly
+                                                       placeholder="Start Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch4">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch4')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch4'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch4'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch4']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                                   <div class="col-md-3 ">
+                                      <div
+                                            class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch5" class="form-control"
+                                                       value="<?php echo set_value('szSearch5'); ?>" readonly
+                                                       placeholder="End Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch5">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch5')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch5'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch5']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div> 
+                                    </div>
                             <div class="col-md-1">
                                 <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i>
                                 </button>

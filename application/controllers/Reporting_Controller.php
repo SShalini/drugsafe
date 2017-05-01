@@ -4939,5 +4939,127 @@ class Reporting_Controller extends CI_Controller
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
+     function ViewExcelClientReportData()
+    { 
+        $frId = $this->input->post('frId');
+        $clName = $this->input->post('clName');
+        $fromDate = $this->input->post('fromDate');
+        $toDate = $this->input->post('toDate');
+
+        $this->session->set_userdata('fromDate', $fromDate);
+        $this->session->set_userdata('toDate', $toDate);
+        $this->session->set_userdata('frName', $frName);
+        $this->session->set_userdata('clName', $clName);
+
+
+        echo "SUCCESS||||";
+        echo "ViewExcelClientReport";
+
+
+    }
+
+    public function ViewExcelClientReport()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Client Details Report';
+        $file = $filename . '-' . $title; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        
+        $frId = $this->session->userdata('frId');
+        $clName = $this->session->userdata('clName');
+        $fromDate = $this->session->userdata('fromDate');
+        $toDate = $this->session->userdata('toDate');
+        
+        
+         if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
+           if(!empty($frId))
+         {
+           $frId = $frId;   
+         }
+         else{
+           $frId = $this->session->userdata('idFr');  
+         } 
+         }
+      
+        
+         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
+       
+             $todateData = $this->Webservices_Model->formatdate($toDate);
+        
+        if(($_SESSION['drugsafe_user']['iRole']==2)){
+         $frId = $_SESSION['drugsafe_user']['id'];  
+        }
+         $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$frId,$clName,false,false,$fromdateData,$todateData);
+      
+        if (!empty($clientAray)) {
+            $i =0; 
+            foreach ($clientAray as $item) {
+             
+        $this->excel->getActiveSheet()->setCellValue('C'. (string)($i + 1), $item['szName']."'".'s Details');
+        $this->excel->getActiveSheet()->getStyle('C'. (string)($i + 1))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C'.(string)($i + 1))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C'. (string)($i + 1))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+                $this->excel->getActiveSheet()->setCellValue('A' .(string)($i + 2) , 'Business Name:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 2), $item['szBusinessName']);
+                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 3), 'ABN:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 3), $item['abn']);
+                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 4), 'Contact Name:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 4), $item['szName']);
+                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 5), 'Primary Email:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 5), $item['szEmail']);
+                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 6), 'Primary Phone:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 6), $item['szContactNumber']);
+                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 7), 'No Of Sites:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 7), $item['szNoOfSites']);
+                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 8), 'Industry:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 8), $item['industry']); 
+                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 9), 'Discount:');
+                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 9), $item['abn']);
+                
+                $this->excel->getActiveSheet()->setCellValue('D' .(string)($i + 2) , 'Contact Email:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 2), $item['szContactEmail']);
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 3), 'Contact Phone:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 3), $item['szContactPhone']);
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 4), 'Contact Mobile:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 4), $item['szContactMobile']);
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 5), 'Address:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 5), $item['szAddress']);
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 6), 'Country:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 6), $item['szCountry']);
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 7), 'State:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 7), $item['szState']);
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 8), 'Region Name:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 8), $item['szZipCode']); 
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 9), 'City:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 9), $item['szCity']);
+                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 10), 'Zip/Postal Code:');
+                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 10), $item['szCity']);
+         
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+               $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+
+            }
+             $i++;
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+
    }
 ?>
