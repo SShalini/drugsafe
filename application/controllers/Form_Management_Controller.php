@@ -626,17 +626,17 @@ class Form_Management_Controller extends CI_Controller
                                     $drugs = '';
                                     $drugarr = explode(',',$donors['drug']);
                                     if($drugarr[0] == '1'){
-                                        $drugs .= 'Ice(Methamphetamine)<br>';
+                                        $drugs .= 'Ice (Methamphetamine)<br>';
                                     }else if($drugarr[1] == '1'){
-                                        $drugs .= 'Ice(Methamphetamine)<br>';
+                                        $drugs .= 'Ice (Methamphetamine)<br>';
                                     }else if($drugarr[2] == '1'){
-                                        $drugs .= 'Ice(Methamphetamine)<br>';
+                                        $drugs .= 'Ice (Methamphetamine)<br>';
                                     }else if($drugarr[3] == '1'){
-                                        $drugs .= 'Ice(Methamphetamine)<br>';
+                                        $drugs .= 'Ice (Methamphetamine)<br>';
                                     }else if($drugarr[4] == '1'){
-                                        $drugs .= 'Ice(Methamphetamine)<br>';
+                                        $drugs .= 'Ice (Methamphetamine)<br>';
                                     }else if($drugarr[5] == '1'){
-                                        $drugs .= 'Ice(Methamphetamine)<br>';
+                                        $drugs .= 'Ice (Methamphetamine)<br>';
                                     }
 
                                     if($drugarr[0] == '2'){

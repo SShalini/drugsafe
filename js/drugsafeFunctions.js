@@ -2807,17 +2807,17 @@ function showdonorinfo(sosid) {
                     var drugs = '';
                     var drugarr = value1.drug.split(',');
                     if (drugarr[0] == '1') {
-                        drugs += 'Ice(Methamphetamine)<br>';
+                        drugs += 'Ice (Methamphetamine)<br>';
                     } else if (drugarr[1] == '1') {
-                        drugs += 'Ice(Methamphetamine)<br>';
+                        drugs += 'Ice (Methamphetamine)<br>';
                     } else if (drugarr[2] == '1') {
-                        drugs += 'Ice(Methamphetamine)<br>';
+                        drugs += 'Ice (Methamphetamine)<br>';
                     } else if (drugarr[3] == '1') {
-                        drugs += 'Ice(Methamphetamine)<br>';
+                        drugs += 'Ice (Methamphetamine)<br>';
                     } else if (drugarr[4] == '1') {
-                        drugs += 'Ice(Methamphetamine)<br>';
+                        drugs += 'Ice (Methamphetamine)<br>';
                     } else if (drugarr[5] == '1') {
-                        drugs += 'Ice(Methamphetamine)<br>';
+                        drugs += 'Ice (Methamphetamine)<br>';
                     }
 
                     if (drugarr[0] == '2') {
