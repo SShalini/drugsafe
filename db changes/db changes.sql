@@ -48,3 +48,12 @@ ALTER TABLE `ds_agentmapping` ADD `stateid` INT(5) NOT NULL AFTER `agentid`;
 
 ALTER TABLE `ds_sos` ADD `lab_form` VARCHAR(255) NOT NULL AFTER `sign2`;
 ALTER TABLE `ds_sos` ADD `agent_comment` TEXT NOT NULL ;
+
+CREATE TABLE IF NOT EXISTS `ds_partial_dispatch_tracking` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_detail_id` int(11) NOT NULL,
+  `dispatch_qty` int(11) NOT NULL,
+  `dispatch_date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+ALTER TABLE `ds_partial_dispatch_tracking` ADD `received` TINYINT(1) NOT NULL DEFAULT '0' ;

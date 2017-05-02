@@ -299,15 +299,18 @@
                                                                     </a>
                                                                 </td>
                                                                 <td>
-                                                                    <?php if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 4) { ?>
-                                                                        <a class="btn btn-circle btn-icon-only btn-default"
-                                                                           title="Edit Order Details"
-                                                                           onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
-                                                                           href="javascript:void(0);">
-                                                                            <i class="fa fa-pencil"></i>
-                                                                        </a>
-                                                                    <?php }
-
+                                                                    <?php
+                                                                    if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 2 || $validOrdersDetailsData['status'] == 4) {
+                                                                        $checkOrderEditable = $this->Order_Model->checkOrderEditable($validOrdersDetailsData['orderid']);
+                                                                        if (!empty($checkOrderEditable)) { ?>
+                                                                            <a class="btn btn-circle btn-icon-only btn-default"
+                                                                               title="Edit Order Details"
+                                                                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                                                                               href="javascript:void(0);">
+                                                                                <i class="fa fa-pencil"></i>
+                                                                            </a>
+                                                                        <?php }
+                                                                    }
                                                                     ?>
                                                                 </td>
                                                                 <td>

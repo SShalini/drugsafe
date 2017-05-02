@@ -572,38 +572,43 @@ class Order_Controller extends CI_Controller
   }
 $html .= '    
 </table>
-<br />
-<h3 style="color:black">Products Info </h3>
-            <div>
-         
-                        <div class= "table-responsive" >
-                            <table border="1" cellpadding="5">
+<h3 style="color:black">Dispatch Info </h3>
+            <div>        
+                <div class= "table-responsive" >
+                    ';
+        $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
+
+        if (!empty($totalDispatched)) {
+            $i = 0;
+            foreach ($totalDispatched as $DispatchOrderDetData) {
+                $html .='<h3>Dispatched On: '.date('d/m/Y h:i:s a',strtotime($DispatchOrderDetData['dispatch_date'])).'</h3>';
+                $html .='<table border="1" cellpadding="5">
                                     <tr>
                                         <th><b>Product Code</b> </th>
                                         <th> <b>Product Cost</b> </th>
-                                        <th> <b>Quantity</b> </th>
-                                        <th><b>Total Price EXL GST</b> </th>
                                         <th> <b>Dispatched Quantity</b> </th>
+                                        <th><b>Total Price EXL GST</b> </th>
                                     </tr>';
-        $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
-        if ($totalOrdersDetailsAray) {
-            $i = 0;
-            foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
-                $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
-
-                $html .= '<tr>
+                $DispatchedOrdDetArr = $this->Order_Model->getDispatchedOrderDetByDispatchDate($DispatchOrderDetData['dispatch_date']);
+                if(!empty($DispatchedOrdDetArr)){
+                    $totalAmount = 0.00;
+                    foreach ($DispatchedOrdDetArr as $DispatchOrderDet){
+                        $productDataArr = $this->Inventory_Model->getProductDetailsById($DispatchOrderDet['productid']);
+                        $totalAmount += number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', '');
+                        $html .= '<tr>
                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
                                             <td> $' . $productDataArr['szProductCost'] . '</td>
-                                            <td> ' . $totalOrdersDetailsData['quantity'] . ' </td>
-                                            <td> $' . number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>
-                                             <td>' . $totalOrdersDetailsData['dispatched'] . ' </td>
-                                
+                                            <td> ' . $DispatchOrderDet['dispatch_qty'] . ' </td>
+                                            <td> $' . number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>                                
                                         </tr>';
+                        $i++;
+                    }
+                }
+                $html .= '<tr><td colspan="3"><b>Total</b></td><td><b>$'.number_format($totalAmount, 2, '.', ',').'</b></td></tr>
+                </table>';
             }
         }
-        $i++;
         $html .= '
-                            </table>
                         </div>
                       
                         ';
@@ -611,8 +616,6 @@ $html .= '
         $pdf->writeHTML($html, true, false, true, false, '');
 
         error_reporting(E_ALL);
-        $this->session->unset_userdata('idOrder');
-        $this->session->unset_userdata('flag');
 
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');
@@ -916,9 +919,19 @@ $html .= '
         $ordid = $_POST['ordid'];
         $prodid = $_POST['prodid'];
         $qty = $_POST['qty'];
+        $RemainingQty = $_POST['RemainingQty'];
         $dispStat = $this->Order_Model->dispatchsingleprod($ordid,$prodid,$qty);
         if($dispStat){
-            echo 'SUCCESS';
+            $updatedRemainingQty = $qty-$RemainingQty;
+            if($updatedRemainingQty == '0'){
+                if($this->Order_Model->AllDispatched($ordid,$prodid)){
+                    echo 'SUCCESS';
+                }else{
+                    echo 'FAIL';
+                }
+            }else{
+                echo 'SUCCESS';
+            }
         }else{
             echo 'FAIL';
         }
@@ -1018,16 +1031,19 @@ $html .= '
     {
         $data['mode'] = '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__';
         $data['idOrder'] = $this->input->post('idOrder');
-        $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($data['idOrder']);
+        $data['orderdate'] = $this->input->post('orderdate');
+        //$totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($data['idOrder']);
+        $totalOrdersDetailsAray = $this->Order_Model->getDispatchedOrderDetByDispatchDate($data['orderdate'],$data['idOrder']);
          $ordid ='';
          $prodid='';
          $qty='';
         foreach($totalOrdersDetailsAray as $totalOrdersDetailData){
         $ordid = $totalOrdersDetailData['orderid'];
         $prodid = $totalOrdersDetailData['productid'];
-        $qty = $totalOrdersDetailData['dispatched'];
+        $qty = $totalOrdersDetailData['dispatch_qty'];
+        $dispatchProdId = $totalOrdersDetailData['id'];
         $this->Order_Model->adjustFranchisorInventory($prodid,$qty);
-        $this->Order_Model->updateInventoryByOrderId($ordid,$prodid,$qty); 
+        $this->Order_Model->updateInventoryByOrderId($ordid,$prodid,$qty,$dispatchProdId);
         }
         $this->load->view('admin/admin_ajax_functions', $data);
     }
@@ -1065,7 +1081,6 @@ $html .= '
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
             //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetailsByFr');
             $this->load->view('layout/admin_footer');
@@ -1086,8 +1101,6 @@ $html .= '
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetailsByFr');
             $this->load->view('layout/admin_footer');
-
-
         }
     } 
 }

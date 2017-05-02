@@ -222,7 +222,7 @@ class Order_Model extends Error_Model {
         {
           
             $whereAry = array('orderid=' => $orderId);
-            $this->db->select('orderid,productid,quantity,dispatched');
+            $this->db->select('id,orderid,productid,quantity,dispatched');
             $this->db->from(__DBC_SCHEMATA_ORDER_DETAILS__);
             $this->db->where($whereAry);
             $query = $this->db->get();
@@ -798,52 +798,76 @@ class Order_Model extends Error_Model {
         }
 
       function dispatchsingleprod($ordid,$prodid,$qty){
-        $statusarr = array('dispatched' => (int)$qty);
-        $conditionarr = array('orderid' => (int)$ordid,'productid'=>$prodid);
-        $query = $this->db->where($conditionarr)
-            ->update(__DBC_SCHEMATA_ORDER_DETAILS__, $statusarr);
-        if ($query) {
-//            if($this->adjustFranchisorInventory($prodid,$qty)){
-//            $frIdByOrderId =  $this->getOrderByOrderId($ordid);
-//           
-//            
-//           $prodQuantity =  $this->StockMgt_Model->getProductQtyDetailsById($frIdByOrderId['franchiseeid'],$prodid); 
-//           if(empty($prodQuantity)){
-//            $Quantity =$qty; 
-//              $dataAry = array(
-//                        'iFranchiseeId'=> $frIdByOrderId['franchiseeid'],
-//                        'iProductId'=> $prodid,
-//			'szQuantity' => $Quantity
-//                ); 
-//             $query =   $this->db->insert(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
-//           }
-//           else{
-//                $Quantity = $prodQuantity['szQuantity']+$qty;
-//                   $dataAry = array(
-//			'szQuantity' => $Quantity
-//                ); 
-//                 $whereAry = array('iFranchiseeId' => $frIdByOrderId['franchiseeid'],'iProductId' => $prodid);
-//                 $this->db->where($whereAry);
-//                $query =  $this->db->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
-//           }
-//           if($query)
-//                   {
-//                  return true;
-//                } 
-//                else{
-//                   return false;  
-//                }
-//                
-//                
-//                return true;
-//            }else{
-//                return false;
-//            }
-            return true;
-        } else {
-            $this->addError("error", "Something went wrong. Please try again.");
-            return false;
-        }
+
+            $query = $this->db->select('id')
+                ->where(array('orderid' => (int)$ordid,'productid'=>$prodid,'dispatched' => 0))
+            ->get(__DBC_SCHEMATA_ORDER_DETAILS__);
+          if ($query->num_rows() > 0) {
+              $result = $query->result_array();
+              if(!empty($result)){
+                  $dataAry = array(
+                      'order_detail_id'=> (int)$result[0]['id'],
+                      'dispatch_qty'=> (int)$qty,
+                      'dispatch_date' => date('Y-m-d H:i:s')
+                  );
+              }
+              $this->db->insert(__DBC_SCHEMATA_PARTIAL_DISPATCH__, $dataAry);
+              if($this->db->affected_rows() > 0){
+                  return true;
+              }else{
+                  $this->addError("error", "Something went wrong. Please try again.");
+                  return false;
+              }
+          }else{
+              $this->addError("error", "Something went wrong. Please try again.");
+              return false;
+          }
+          /* $statusarr = array('dispatched' => (int)$qty);
+           $conditionarr = array('orderid' => (int)$ordid,'productid'=>$prodid);
+           $query = $this->db->where($conditionarr)
+               ->update(__DBC_SCHEMATA_ORDER_DETAILS__, $statusarr);
+           if ($query) {
+               if($this->adjustFranchisorInventory($prodid,$qty)){
+               $frIdByOrderId =  $this->getOrderByOrderId($ordid);
+
+
+              $prodQuantity =  $this->StockMgt_Model->getProductQtyDetailsById($frIdByOrderId['franchiseeid'],$prodid);
+              if(empty($prodQuantity)){
+               $Quantity =$qty;
+                 $dataAry = array(
+                           'iFranchiseeId'=> $frIdByOrderId['franchiseeid'],
+                           'iProductId'=> $prodid,
+               'szQuantity' => $Quantity
+                   );
+                $query =   $this->db->insert(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
+              }
+              else{
+                   $Quantity = $prodQuantity['szQuantity']+$qty;
+                      $dataAry = array(
+               'szQuantity' => $Quantity
+                   );
+                    $whereAry = array('iFranchiseeId' => $frIdByOrderId['franchiseeid'],'iProductId' => $prodid);
+                    $this->db->where($whereAry);
+                   $query =  $this->db->update(__DBC_SCHEMATA_PRODUCT_STOCK_QUANTITY__, $dataAry);
+              }
+              if($query)
+                      {
+                     return true;
+                   }
+                   else{
+                      return false;
+                   }
+
+
+                   return true;
+               }else{
+                   return false;
+               }
+               return true;
+           } else {
+               $this->addError("error", "Something went wrong. Please try again.");
+               return false;
+           }*/
     }
 
     function changesdispatchstatus($ordid, $status, $price=0.00,$freightprice=0){
@@ -961,11 +985,11 @@ class Order_Model extends Error_Model {
                 return false;
             }
         }
-     function updateInventoryByOrderId($ordid,$prodid,$qty){
-        $statusarr = array('isReceived' => (int)1);
-        $conditionarr = array('id' => (int)$ordid);
+     function updateInventoryByOrderId($ordid,$prodid,$qty,$dispatchProdId){
+        $statusarr = array('received' => (int)1);
+        $conditionarr = array('id' => (int)$dispatchProdId);
         $this->db->where($conditionarr);
-        $queryUpdate = $this->db->update(__DBC_SCHEMATA_ORDER__, $statusarr);
+        $queryUpdate = $this->db->update(__DBC_SCHEMATA_PARTIAL_DISPATCH__, $statusarr);
             if ($queryUpdate) {
             $frIdByOrderId =  $this->getOrderByOrderId($ordid);
             $prodQuantity =  $this->StockMgt_Model->getProductQtyDetailsById($frIdByOrderId['franchiseeid'],$prodid); 
@@ -1023,9 +1047,10 @@ class Order_Model extends Error_Model {
         if (!empty($totalOrdersDetailsAray)) {
             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
+                $dispatchOrderDetail = $this->getRecentlyDispatchOrderDate($totalOrdersDetailsData['id']);
                 $lienItem = array(
                     "Description" => $productDataArr['szProductDiscription'],
-                    "Quantity" => $totalOrdersDetailsData['quantity'],
+                    "Quantity" => (!empty($dispatchOrderDetail['dispatch_qty'])?$dispatchOrderDetail['dispatch_qty']:'0'),
                     "UnitAmount" => $productDataArr['szProductCost'],
                     "AccountCode" => "200"
                 );
@@ -1086,5 +1111,87 @@ class Order_Model extends Error_Model {
         $invoice_number = (string) $org_invoices->Invoices->Invoice[$invoice_index]->InvoiceNumber;
         $this->updateXeroOrderDetails($ordid,$invoice_number);
     }
+
+    function checkOrderEditable($orderid){
+        $query = $this->db->select('id')
+            ->where(array('orderid'=>(int)$orderid, 'dispatched'=>'0'))
+        ->get(__DBC_SCHEMATA_ORDER_DETAILS__);
+
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    function getTotalDispatchedByOrderDetailId($orderDetailId){
+        $query = $this->db->select('SUM(dispatch_qty) as total_dispatched')
+            ->where('order_detail_id',(int)$orderDetailId)
+        ->get(__DBC_SCHEMATA_PARTIAL_DISPATCH__);
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        }else{
+            return false;
+        }
+    }
+
+    function AllDispatched($orderId,$prodid){
+        $statusarr = array('dispatched' => 1);
+        $conditionarr = array('orderid' => (int)$orderId,'productid'=>$prodid, 'dispatched' => 0);
+        $this->db->where($conditionarr)
+            ->update(__DBC_SCHEMATA_ORDER_DETAILS__, $statusarr);
+        if($this->db->affected_rows() > 0){
+            return true;
+        }else{
+            $this->addError("error", "Something went wrong. Please try again.");
+            return false;
+        }
+    }
+
+    function getRecentlyDispatchOrderDate($orderDetailId){
+        $query = $this->db->select('dispatch_qty')
+                        ->where('order_detail_id = '.(int)$orderDetailId.' AND dispatch_date IN (SELECT MAX(`dispatch_date`) FROM '.__DBC_SCHEMATA_PARTIAL_DISPATCH__.' WHERE order_detail_id = '.(int)$orderDetailId.')', NULL, FALSE)
+                        ->get(__DBC_SCHEMATA_PARTIAL_DISPATCH__);
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        }else{
+            return false;
+        }
+    }
+
+    function getTotalOrderDispatchDates($orderid,$received=false){
+        $conditionStr = 'orddet.orderid = '.(int)$orderid.($received?' AND part.received = 0':'');
+        $query = $this->db->select('part.dispatch_date')
+            ->from(__DBC_SCHEMATA_PARTIAL_DISPATCH__ . ' as part')
+            ->join(__DBC_SCHEMATA_ORDER_DETAILS__ . ' as orddet', 'orddet.id = part.order_detail_id')
+            ->where($conditionStr)
+            ->group_by('part.dispatch_date')
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
+    function getDispatchedOrderDetByDispatchDate($dispatchDate,$orderid=0){
+        $whereStr = 'part.dispatch_date = "'.$dispatchDate.'"'.($orderid>0?' AND orddet.orderid = '.(int)$orderid:'');
+        $query = $this->db->select('part.dispatch_date, part.dispatch_qty, orddet.productid, orddet.quantity, orddet.orderid, part.id')
+            ->from(__DBC_SCHEMATA_PARTIAL_DISPATCH__ . ' as part')
+            ->join(__DBC_SCHEMATA_ORDER_DETAILS__ . ' as orddet', 'orddet.id = part.order_detail_id')
+            ->where($whereStr)
+            ->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row;
+        }else{
+            return false;
+        }
+    }
+
    }
 ?>

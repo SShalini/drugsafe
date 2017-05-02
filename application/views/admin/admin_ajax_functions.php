@@ -43,7 +43,7 @@ if ($mode == '__DELETE_FRANCHISEE_CONFIRM__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span
-                                class="caption-subject font-red-sunglo bold uppercase">Deleted Franchisee Record</span>
+                                    class="caption-subject font-red-sunglo bold uppercase">Deleted Franchisee Record</span>
                         </h4>
                     </div>
 
@@ -73,35 +73,38 @@ if ($mode == '__DELETE_CLIENT_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <?php if ($flag==1){?>
-                             <span class="caption-subject font-red-sunglo bold uppercase">Delete Site Record</span>
+                            <?php if ($flag == 1) { ?>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Delete Site Record</span>
                             <?php } else { ?>
-                              <span class="caption-subject font-red-sunglo bold uppercase">Delete Client Record</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Delete Client Record</span>
                             <?php } ?>
-                           
+
                         </h4>
                     </div>
 
                 </div>
-              
+
                 <div class="modal-body">
-                      <?php if ($flag==1){?>
-                      <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        delete the selected Site?</p>
-                          
-                            <?php } else { ?>
-                             <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
-                        delete the selected Client?</p>
-                            <?php } ?>
-                 
+                    <?php if ($flag == 1) { ?>
+                        <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want
+                            to
+                            delete the selected Site?</p>
+
+                    <?php } else { ?>
+                        <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want
+                            to
+                            delete the selected Client?</p>
+                    <?php } ?>
+
                 </div>
                 <div class="modal-footer">
 
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="deleteClientConfirmation('<?php echo $idClient; ?>','<?php echo $flag; ?>'); return false;"
+                    <button type="button"
+                            onclick="deleteClientConfirmation('<?php echo $idClient; ?>','<?php echo $flag; ?>'); return false;"
                             class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
                     </button>
-                   
+
                 </div>
             </div>
         </div>
@@ -118,36 +121,36 @@ if ($mode == '__DELETE_CLIENT_CONFIRM__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                              <?php if ($flag==1){?>
-                    <span class="caption-subject font-red-sunglo bold uppercase">Deleted Site Record</span>
-                          
+                            <?php if ($flag == 1) { ?>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Deleted Site Record</span>
+
                             <?php } else { ?>
-                            <span class="caption-subject font-red-sunglo bold uppercase">Deleted Client Record</span>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Deleted Client Record</span>
                             <?php } ?>
-                           
+
                         </h4>
                     </div>
 
                 </div>
-        
+
                 <div class="modal-body">
-                      <?php if ($flag==1){?>
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Site has been successfully
-                        deleted.</p>
-                          
-                            <?php } else { ?>
-                           <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully
-                        deleted.</p>
-                            <?php } ?>
-                   
+                    <?php if ($flag == 1) { ?>
+                        <p class="alert alert-success"><i class="fa fa-check"></i> Selected Site has been successfully
+                            deleted.</p>
+
+                    <?php } else { ?>
+                        <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully
+                            deleted.</p>
+                    <?php } ?>
+
                 </div>
                 <div class="modal-footer">
-                     <?php if ($flag==1){?>
-                    <a href="<?php echo __BASE_URL__; ?>/franchisee/viewClientDetails" class="btn dark btn-outline">Close</a>
+                    <?php if ($flag == 1) { ?>
+                        <a href="<?php echo __BASE_URL__; ?>/franchisee/viewClientDetails" class="btn dark btn-outline">Close</a>
                     <?php } else { ?>
-                   <a href="<?php echo __BASE_URL__ . $url; ?>" class="btn dark btn-outline">Close</a>
+                        <a href="<?php echo __BASE_URL__ . $url; ?>" class="btn dark btn-outline">Close</a>
                     <?php } ?>
-                   
+
                 </div>
             </div>
         </div>
@@ -243,7 +246,7 @@ if ($mode == '__REQUEST_QUANTITY_POPUP__') {
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
                             <div
-                                class="form-group <?php if (form_error('requestQuantity[szQuantity]')) { ?>has-error<?php } ?>">
+                                    class="form-group <?php if (form_error('requestQuantity[szQuantity]')) { ?>has-error<?php } ?>">
                                 <label class="control-label col-md-3">Request Quantity</label>
                                 <div class="col-md-4">
                                     <div class="input-group">
@@ -345,7 +348,7 @@ if ($mode == '__ALLOT_QUANTITY_POPUP__') {
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
                             <div
-                                class="form-group <?php if (form_error('allotQuantity[szReqQuantity]')) { ?>has-error<?php } ?>">
+                                    class="form-group <?php if (form_error('allotQuantity[szReqQuantity]')) { ?>has-error<?php } ?>">
                                 <label class="control-label col-md-4">Request Quantity</label>
                                 <div class="col-md-4">
                                     <div class="input-group">
@@ -364,7 +367,7 @@ if ($mode == '__ALLOT_QUANTITY_POPUP__') {
                                 </div>
                             </div>
                             <div
-                                class="form-group <?php if (form_error('allotQuantity[szAddMoreQuantity]')) { ?>has-error<?php } ?>">
+                                    class="form-group <?php if (form_error('allotQuantity[szAddMoreQuantity]')) { ?>has-error<?php } ?>">
                                 <label class="control-label col-md-4">Assign Quantity</label>
                                 <div class="col-md-4">
                                     <div class="input-group">
@@ -416,7 +419,8 @@ if ($mode == '__ALLOT_QUANTITY_POPUP_CONFIRM__') {
                     </div>
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Product quantities have been alloted successfully.
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Product quantities have been alloted
+                        successfully.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -471,7 +475,7 @@ if ($mode == '__DELETE_OPERATION_MANAGER_CONFIRM__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span
-                                class="caption-subject font-red-sunglo bold uppercase">Deleted Operation Manager</span>
+                                    class="caption-subject font-red-sunglo bold uppercase">Deleted Operation Manager</span>
                         </h4>
                     </div>
 
@@ -700,8 +704,8 @@ if ($mode == '__TOPIC_POPUP__') {
                 <?php
 
                 $TopicsArr = $this->Forum_Model->viewTopicListByTopicId($idTopic);
-                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('',$TopicsArr['idUser']);
-            
+                $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $TopicsArr['idUser']);
+
                 ?>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -719,7 +723,7 @@ if ($mode == '__TOPIC_POPUP__') {
                     <h4 class="alert alert-success"> <?php echo $TopicsArr['szTopicDescreption']; ?> </h4>
                     <span class="todo-comment-username cmntDetais"><?php echo $franchiseeDetArr1['szName'] ?></span>
                     &nbsp; <span
-                        class="todo-comment-date"> <?php echo date('d M Y',strtotime($TopicsArr['dtCreatedOn'])) . ' at '.date('h:i A',strtotime($TopicsArr['dtCreatedOn'])); ?></span>
+                            class="todo-comment-date"> <?php echo date('d M Y', strtotime($TopicsArr['dtCreatedOn'])) . ' at ' . date('h:i A', strtotime($TopicsArr['dtCreatedOn'])); ?></span>
                 </div>
 
                 <div class="modal-footer">
@@ -776,7 +780,7 @@ if ($mode == '__SHOW_REPLY_POPUP__') {
                     <div class="text_cmnt"><h4><b> Reply </b></h4></div>
                     <p class="alert alert-success">  <?php echo $replyDataArr['0']['szReply']; ?></p>
                     <span class="todo-comment-username"><?php echo $franchiseeDetArr1['szName'] ?> </span> &nbsp; <span
-                        class="todo-comment-date"><?php echo $date['2']; ?> <?php echo $monthName; ?>  <?php echo $date['0']; ?>
+                            class="todo-comment-date"><?php echo $date['2']; ?> <?php echo $monthName; ?>  <?php echo $date['0']; ?>
                         at <?php echo $x; ?></span>
                 </div>
 
@@ -1534,31 +1538,33 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span class="caption-subject font-red-sunglo bold uppercase">Order Details</span></h4>
-                            
-                            <?php if($flag != 1){ ?>
-                        <hr>
-                            <div class = 'row'>  
-                        <div class="actions">
-                      
-                        <div class = ' col-md-6'>   
-                            
-                        </div>
-                         <div class = ' col-md-6'> 
-                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a onclick="view_order_details_pdf('<?php echo $idOrder;?>','1')" href="javascript:void(0);" 
-                      class=" btn green-meadow">
-                       <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 
-                  <a onclick="View_excel_order_details_list('<?php echo $idOrder;?>')" href="javascript:void(0);" 
-                      class=" btn green-meadow">
-                       <i class="fa fa-file-excel-o"></i> View Xls </a>
-                          </div>
-                         
-                     </div>
+                        <?php if ($flag != 1) { ?>
+                            <hr>
+                            <div class='row'>
+                                <div class="actions">
+
+                                    <div class=' col-md-6'>
+
+                                    </div>
+                                    <div class=' col-md-6'>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a onclick="view_order_details_pdf('<?php echo $idOrder; ?>','1')"
+                                           href="javascript:void(0);"
+                                           class=" btn green-meadow">
+                                            <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+
+                                        <a onclick="View_excel_order_details_list('<?php echo $idOrder; ?>')"
+                                           href="javascript:void(0);"
+                                           class=" btn green-meadow">
+                                            <i class="fa fa-file-excel-o"></i> View Xls </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
-                 <?php } ?>
-                    </div>
-                   
+
 
                 </div>
 
@@ -1606,7 +1612,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     Order Date & Time:
                                 </div>
                                 <div class="col-md-7 value">
-                                    <?php echo date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon'])); ?>
+                                    <?php echo date('d M Y', strtotime($OrdersDetailsAray['createdon'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['createdon'])); ?>
                                 </div>
                             </div>
                             <?php if ($OrdersDetailsAray['status'] == 2) { ?>
@@ -1615,26 +1621,28 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                         Dispatched Date & Time:
                                     </div>
                                     <div class="col-md-7 value">
-                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['dispatchedon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['dispatchedon'])); ?>
+                                        <?php echo date('d M Y', strtotime($OrdersDetailsAray['dispatchedon'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['dispatchedon'])); ?>
                                     </div>
                                 </div>
-                            <?php }if ($OrdersDetailsAray['status'] == 3) {?>
+                            <?php }
+                            if ($OrdersDetailsAray['status'] == 3) { ?>
                                 <div class="row static-info">
                                     <div class="col-md-5 name">
                                         Cancelled Date & Time:
                                     </div>
                                     <div class="col-md-7 value">
-                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon'])); ?>
+                                        <?php echo date('d M Y', strtotime($OrdersDetailsAray['canceledon'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['canceledon'])); ?>
                                     </div>
                                 </div>
-                             <?php } if($OrdersDetailsAray['last_changed']){?>
-<!--                            
+                            <?php }
+                            if ($OrdersDetailsAray['last_changed']) { ?>
+                                <!--
                                 <div class="row static-info">
                                     <div class="col-md-5 name">
                                         Last updated Date & Time:
                                     </div>
                                     <div class="col-md-7 value">
-                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['last_changed'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['last_changed'])); ?>
+                                        <?php echo date('d M Y', strtotime($OrdersDetailsAray['last_changed'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['last_changed'])); ?>
                                     </div>
                                 </div>-->
                             <?php } ?>
@@ -1706,19 +1714,19 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php
-/*                                    echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); */?>
+                            /*                                    echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); */ ?>
                                 </div>
                             </div>-->
-                             <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
-                            <div class="row static-info">
-                                <div class="col-md-5 name">
-                                    Franchisee:
+                            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
+                                <div class="row static-info">
+                                    <div class="col-md-5 name">
+                                        Franchisee:
+                                    </div>
+                                    <div class="col-md-7 value">
+                                        <?php echo $franchiseeDetArr1['szName'] ?>
+                                    </div>
                                 </div>
-                                <div class="col-md-7 value">
-                                    <?php echo $franchiseeDetArr1['szName'] ?>
-                                </div>
-                            </div>
-                             <?php } ?>
+                            <?php } ?>
                         </div>
                     </div>
                     <hr>
@@ -1741,7 +1749,6 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                         <th> Product Cost</th>
                                         <th> Quantity</th>
                                         <th> Total Price EXL GST</th>
-                                        <th> Dispatched Quantity</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -1756,8 +1763,6 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                             <td> $<?php
                                                 echo number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ','); ?>
                                             </td>
-                                            <td> <?php echo $totalOrdersDetailsData['dispatched']; ?> </td>
-
                                         </tr>
                                     <?php } ?>
 
@@ -1793,7 +1798,10 @@ if ($mode == '__PLACE_ORDER_POPUP_ERROR_CONFIRM__') {
 
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greater than or equal to <?php echo '<b>'.$qty.'</b>'.(!empty($prodname)?' for <b>'.$prodname.'</b>':'');?>.</p>
+                    <p class="alert alert-danger"><i class="fa fa-times"></i> Entered Quantity must be greater than or
+                        equal
+                        to <?php echo '<b>' . $qty . '</b>' . (!empty($prodname) ? ' for <b>' . $prodname . '</b>' : ''); ?>
+                        .</p>
                 </div>
                 <div class="modal-footer">
                     <?php
@@ -1853,6 +1861,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                 <th> Ordered</th>
                                                 <th> Available</th>
                                                 <th> Dispatch Qty</th>
+                                                <th> Dispatched Qty</th>
                                                 <th> Total Price EXL GST</th>
                                             </tr>
                                             </thead>
@@ -1862,49 +1871,46 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             $count = 0;
                                             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
                                                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
-                                                $count++;
+
                                                 $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
                                                 $price = 0.00;
+                                                $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
                                                 ?>
                                                 <tr>
-                                                    <td> <?php echo $productDataArr['szProductCode']; ?> <input
-                                                            type="hidden" name="ordprodid<?php echo $i; ?>"
-                                                            id="ordprodid<?php echo $i; ?>"
-                                                            value="<?php echo $totalOrdersDetailsData['productid']; ?>">
+                                                    <td> <?php echo $productDataArr['szProductCode']; ?>
                                                     </td>
                                                     <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
-                                                    <td> <?php echo $totalOrdersDetailsData['quantity']; ?> <input
-                                                            type="hidden" name="ordqtyid<?php echo $i; ?>"
-                                                            id="ordqtyid<?php echo $i; ?>"
-                                                            value="<?php echo $totalOrdersDetailsData['quantity']; ?>">
+                                                    <td> <?php echo $totalOrdersDetailsData['quantity']; ?>
                                                     </td>
-                                                    <td> <?php echo $productDataArr['szAvailableQuantity']; ?> <input
-                                                            type="hidden" name="availqtyid<?php echo $i; ?>"
-                                                            id="availqtyid<?php echo $i; ?>"
-                                                            value="<?php echo($productDataArr['szAvailableQuantity'] > '0' ? $productDataArr['szAvailableQuantity'] : '0'); ?>">
+                                                    <td> <?php echo $productDataArr['szAvailableQuantity']; ?>
                                                     </td>
                                                     <?php if ($totalOrdersDetailsData['dispatched'] > '0') {
-                                                        $price = $productDataArr['szProductCost'] * $totalOrdersDetailsData['dispatched'] ?>
+                                                        $price = $productDataArr['szProductCost'] * $totalOrdersDetailsData['quantity']; ?>
+                                                        <td><?php echo $totalOrdersDetailsData['quantity']; ?></td>
+                                                        <td><?php echo $TotalDispatched['total_dispatched'];?></td>
                                                         <td>
-                                                            <input type="number" min="1"
-                                                                   class="form-control btn-xs read-only"
-                                                                   disabled="disabled" max="100"
-                                                                   value="<?php echo $totalOrdersDetailsData['dispatched']; ?>"
-                                                                   name="order_quantity<?php echo $i; ?>"
-                                                                   id="order_quantity<?php echo $i; ?>"
-                                                                   onblur="calTotalPrice()">
-                                                            <input type="hidden"
-                                                                   name="order_prod_price<?php echo $i; ?>"
-                                                                   id="order_prod_price<?php echo $i; ?>"
-                                                                   value="<?php echo $productDataArr['szProductCost']; ?>"/>
-                                                            <input type="hidden" name="isdispid<?php echo $i; ?>"
-                                                                   id="isdispid<?php echo $i; ?>" value="1"/>
+                                                            --
                                                         </td>
-                                                        <td>
-                                                            $<?php echo number_format($price, 2, '.', ','); ?>
-                                                        </td>
-                                                    <?php } else { ?>
-                                                        <td>
+                                                    <?php } else {
+                                                        $count++;
+
+                                                        ?>
+                                                        <td><input
+                                                                    type="hidden" name="remainingQty<?php echo $i; ?>"
+                                                                    id="remainingQty<?php echo $i; ?>"
+                                                                    value="<?php echo ($totalOrdersDetailsData['quantity'] - $TotalDispatched['total_dispatched']); ?>">
+                                                            <input
+                                                                    type="hidden" name="ordprodid<?php echo $i; ?>"
+                                                                    id="ordprodid<?php echo $i; ?>"
+                                                                    value="<?php echo $totalOrdersDetailsData['productid']; ?>">
+                                                            <input
+                                                                    type="hidden" name="ordqtyid<?php echo $i; ?>"
+                                                                    id="ordqtyid<?php echo $i; ?>"
+                                                                    value="<?php echo $totalOrdersDetailsData['quantity']; ?>">
+                                                            <input
+                                                                    type="hidden" name="availqtyid<?php echo $i; ?>"
+                                                                    id="availqtyid<?php echo $i; ?>"
+                                                                    value="<?php echo($productDataArr['szAvailableQuantity'] > '0' ? $productDataArr['szAvailableQuantity'] : '0'); ?>">
                                                             <input type="hidden" name="isdispid<?php echo $i; ?>"
                                                                    id="isdispid<?php echo $i; ?>" value="0"/>
                                                             <input type="number" min="1" class="form-control btn-xs "
@@ -1917,22 +1923,22 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                                    id="order_prod_price<?php echo $i; ?>"
                                                                    value="<?php echo $productDataArr['szProductCost']; ?>"/>
                                                         </td>
+                                                        <td><?php echo $TotalDispatched['total_dispatched'];?></td>
                                                         <td>
                                                             <label class="lab<?php echo $i; ?>"
-                                                                    name="total_price<?php echo $i; ?>" value=""
-                                                                    id="total_price<?php echo $i; ?>">$0.00</label>
+                                                                   name="total_price<?php echo $i; ?>" value=""
+                                                                   id="total_price<?php echo $i; ?>">$0.00</label>
                                                         </td>
 
-                                                    <?php } ?>
+                                                    <?php
+                                                        $i++;
+                                                    } ?>
                                                 </tr>
                                                 <input id="ProductId" class="form-control" type="hidden"
                                                        value="<?php echo $productDataArr['id']; ?>"
                                                        name="product_id<?php echo $i; ?>"
                                                        id="product_id<?php echo $i; ?>">
-                                                <?php
-                                                $i++;
-                                            }
-                                            ?>
+                                                <?php } ?>
                                             <input id="orderId" class="form-control" type="hidden"
                                                    value="<?php echo $idOrder; ?>" name="order_id"
                                                    id="order_id<?php echo $i; ?>">
@@ -1950,8 +1956,10 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                             Freight Price:
                                                         </div>
                                                         <div class="col-md-6 value">
-                                                            <input id="freightprice" class="form-control" type="number" step="0.01" min="0.00"
-                                                                   value="0.00" name="freightprice" onblur="calTotalPrice()">
+                                                            <input id="freightprice" class="form-control" type="number"
+                                                                   step="0.01" min="0.00"
+                                                                   value="0.00" name="freightprice"
+                                                                   onblur="calTotalPrice()">
 
                                                         </div>
                                                     </div>
@@ -1963,9 +1971,10 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                         </div>
                                                         <div class="col-md-6 value">
                                                             <input id="totalprice" class="form-control" type="hidden"
-                                                                   value="<?php echo number_format($price, 2, '.', ''); ?>" name="totalprice">
+                                                                   value="<?php echo number_format($price, 2, '.', ''); ?>"
+                                                                   name="totalprice">
                                                             <label name="finaltotal" value=""
-                                                                    id="finaltotal">$<?php echo number_format($price, 2, '.', ','); ?></label>
+                                                                   id="finaltotal">$<?php echo number_format($price, 2, '.', ','); ?></label>
 
                                                         </div>
                                                     </div>
@@ -1984,9 +1993,10 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                 <div class="modal-footer">
                                     <button type="button"
                                             onmousedown="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','1');"
-                                            class="btn green-meadow" name="submit"><i class="icon-basket"></i> Dispatch Order
+                                            class="btn green-meadow" name="submit"><i class="icon-basket"></i> Dispatch
+                                        Order
                                     </button>
-<!--                                    <button type="button"
+                                    <!--                                    <button type="button"
                                             onclick="changeordstatus('<?php echo $idOrder; ?>','<?php echo $count; ?>','0');"
                                             class="btn green-meadow" name="pending" value="1"><i
                                             class="fa fa-shopping-cart"></i> Pending Order
@@ -2010,23 +2020,26 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
 
     <?php
 }
-if($mode == '__PRODUCT_DISPATCHED_SUCCESSFULLY__'){
+if ($mode == '__PRODUCT_DISPATCHED_SUCCESSFULLY__') {
     echo 'SUCCESS||||';
     ?>
     <div id="dispatchprodsucess" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" onclick="redirect_url('<?php echo __BASE_URL__; ?>/order/view_order_list');" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" onclick="redirect_url('<?php echo __BASE_URL__; ?>/order/view_order_list');"
+                            class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Ordered Quantities Alloted</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Ordered Quantities Alloted</span>
+                        </h4>
                     </div>
 
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Product quantities have been alloted successfully.
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Product quantities have been alloted
+                        successfully.
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -2036,14 +2049,15 @@ if($mode == '__PRODUCT_DISPATCHED_SUCCESSFULLY__'){
         </div>
     </div>
 <?php }
-if($mode == '__ORDER_STATUS_CHANGED__'){
+if ($mode == '__ORDER_STATUS_CHANGED__') {
     echo 'SUCCESS||||';
     ?>
     <div id="orderstatchanged" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" onclick="redirect_url('<?php echo __BASE_URL__; ?>/order/view_order_list');" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" onclick="redirect_url('<?php echo __BASE_URL__; ?>/order/view_order_list');"
+                            class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span class="caption-subject font-red-sunglo bold uppercase">Order Status</span></h4>
@@ -2150,34 +2164,35 @@ if ($mode == '__DISPATCH_ORDER_CONFIRM_POPUP__') {
         </div>
     </div>
 
-<?php }  
-if($mode == '__DELETE_AGENT_POPUP__')
-{
+<?php }
+if ($mode == '__DELETE_AGENT_POPUP__') {
     echo "SUCCESS||||";
     ?>
     <div id="agentStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-             
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Delete Agent</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Delete Agent</span></h4>
                 </div>
                 <div class="modal-body">
-                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to delete the selected Agent?</p>
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        delete the selected Agent?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <button type="button" onclick="agentDeleteConfirmation('<?php echo $id_agent;?>'); return false;" class="btn green-meadow"><i class="fa fa-user-times"></i> Delete</button>
+                    <button type="button" onclick="agentDeleteConfirmation('<?php echo $id_agent; ?>'); return false;"
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> Delete
+                    </button>
                 </div>
             </div>
         </div>
     </div>
     <?php
 }
-if($mode == '__DELETE_AGENT_CONFIRM__')
-{
+if ($mode == '__DELETE_AGENT_CONFIRM__') {
     echo "SUCCESS||||";
     ?>
     <div id="agentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
@@ -2185,20 +2200,22 @@ if($mode == '__DELETE_AGENT_CONFIRM__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Deleted Agent</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Deleted Agent</span></h4>
                 </div>
-           
+
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Agent has been successfully deleted.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Agent has been successfully
+                        deleted.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/franchisee/viewClientAgentDetails" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/viewClientAgentDetails"
+                       class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <?php
 }
 if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
@@ -2212,14 +2229,16 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
                     <div class="modal-title">
                         <div class="caption">
                             <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span class="caption-subject font-red-sunglo bold uppercase"> Agent-Client Assignment</span></h4>
+                                <span class="caption-subject font-red-sunglo bold uppercase"> Agent-Client Assignment</span>
+                            </h4>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
-                    <h4 class="modal-custom-heading"><i class="fa fa-users"></i> Assigned Clients</h4><hr>
+                    <h4 class="modal-custom-heading"><i class="fa fa-users"></i> Assigned Clients</h4>
+                    <hr>
                     <div class="table-reposnsive">
-                        <?php if(!empty($agentAssignedClientDetails)){?>
+                        <?php if (!empty($agentAssignedClientDetails)) { ?>
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <th>#</th>
@@ -2231,36 +2250,42 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
                                 <tbody>
                                 <?php
                                 $clcount = 1;
-                                foreach ($agentAssignedClientDetails as $agentclients){
+                                foreach ($agentAssignedClientDetails as $agentclients) {
                                     $isUnAssignable = true;
-                                        $agentCLientSitesArr = $this->Webservices_Model->getclientsites($agentclients['id']);
-                                        if(!empty($agentCLientSitesArr)){
-                                            foreach ($agentCLientSitesArr as $agentClientSite){
-                                                $siteSos = $this->Webservices_Model->getsosformdata($agentClientSite['clientId']);
-                                                if(!empty($siteSos)){
-                                                    $isUnAssignable = false;
-                                                }
+                                    $agentCLientSitesArr = $this->Webservices_Model->getclientsites($agentclients['id']);
+                                    if (!empty($agentCLientSitesArr)) {
+                                        foreach ($agentCLientSitesArr as $agentClientSite) {
+                                            $siteSos = $this->Webservices_Model->getsosformdata($agentClientSite['clientId']);
+                                            if (!empty($siteSos)) {
+                                                $isUnAssignable = false;
                                             }
                                         }
+                                    }
                                     ?>
-                                    <tr><td><?php echo $clcount;?></td>
-                                        <td><?php echo $agentclients['szName'];?></td>
-                                        <td><?php echo $agentclients['szEmail'];?></td>
-                                        <td><?php echo $agentclients['szContactNumber'];?></td>
-                                        <td><?php if($isUnAssignable){?><a class="btn btn-circle btn-icon-only btn-default" title="Unassign Client" onclick="unassignclient('<?php echo $agentclients['agentclientid'];?>');" href="javascript:void(0);">
-                                                <i class="fa fa-times"></i>
-                                            </a><?php } ?></td>
+                                    <tr>
+                                        <td><?php echo $clcount; ?></td>
+                                        <td><?php echo $agentclients['szName']; ?></td>
+                                        <td><?php echo $agentclients['szEmail']; ?></td>
+                                        <td><?php echo $agentclients['szContactNumber']; ?></td>
+                                        <td><?php if ($isUnAssignable) { ?><a
+                                                class="btn btn-circle btn-icon-only btn-default" title="Unassign Client"
+                                                onclick="unassignclient('<?php echo $agentclients['agentclientid']; ?>');"
+                                                href="javascript:void(0);">
+                                                    <i class="fa fa-times"></i>
+                                                </a><?php } ?></td>
                                     </tr>
-                                    <?php $clcount++; }
+                                    <?php $clcount++;
+                                }
                                 ?>
                                 </tbody>
                             </table>
-                        <?php }else{
+                        <?php } else {
                             echo '</p>No client is assigned to this agent/employee.</p>';
                         } ?>
                     </div>
                     <hr/>
-                    <h4 class="modal-custom-heading"><i class="fa fa-plus"></i> Assign More Clients</h4><hr>
+                    <h4 class="modal-custom-heading"><i class="fa fa-plus"></i> Assign More Clients</h4>
+                    <hr>
                     <form action="" id="assignClient" name="assignClient" method="post"
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
@@ -2270,12 +2295,12 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
                                 <div class="col-md-5">
                                     <div class="search">
                                         <div id='szClient'>
-                                            <select class="form-control custom-select" name="assignClient[szClient]" id="szClient" onfocus="remove_formError(this.id,'true')">
+                                            <select class="form-control custom-select" name="assignClient[szClient]"
+                                                    id="szClient" onfocus="remove_formError(this.id,'true')">
                                                 <option value="">Client Name</option>
                                                 <?php
-                                                foreach($clientlistArr as $clientList)
-                                                {
-                                                    echo '<option value="'.$clientList['id'].'" >'.$clientList['szName'].'</option>';
+                                                foreach ($clientlistArr as $clientList) {
+                                                    echo '<option value="' . $clientList['id'] . '" >' . $clientList['szName'] . '</option>';
                                                 }
                                                 ?>
                                             </select>
@@ -2306,29 +2331,31 @@ if ($mode == '__ASSIGN_CLIENT_POPUP_FORM__') {
     <div id="popup_box_level1"></div>
     <?php
 }
-if($mode == '__ASSIGN_CLIENT_POPUP_CONFIRMATION__')
-{
+if ($mode == '__ASSIGN_CLIENT_POPUP_CONFIRMATION__') {
     echo "SUCCESS||||";
     ?>
-    <div id="clientAgentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="clientAgentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Client Assign Confirmation</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Client Assign Confirmation</span>
+                    </h4>
                 </div>
-           
+
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully assigned.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Client has been successfully
+                        assigned.</p>
                 </div>
-               <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/franchisee/agentRecord" class="btn dark btn-outline">Close</a>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <?php
 }
 if ($mode == '__DELETE_AGENT_EMPLOYE_POPUP__') {
@@ -2374,14 +2401,15 @@ if ($mode == '___DELETE_AGENT_EMPLOYE_CONFIRM__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span
-                                class="caption-subject font-red-sunglo bold uppercase">Deleted Agent/Employee Record</span>
+                                    class="caption-subject font-red-sunglo bold uppercase">Deleted Agent/Employee Record</span>
                         </h4>
                     </div>
 
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Agent/Employee has been successfully
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected Agent/Employee has been
+                        successfully
                         deleted.</p>
                 </div>
                 <div class="modal-footer">
@@ -2425,8 +2453,7 @@ if ($mode == '__UNASSIGN_CLIENT_CONFIRMATION_POPUP_FORM__') {
     </div>
     <?php
 }
-if($mode == '__UNASSIGNED_CLIENT_SUCCESS__')
-{
+if ($mode == '__UNASSIGNED_CLIENT_SUCCESS__') {
     echo "SUCCESS||||";
     ?>
     <div id="confirmedUnassign" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
@@ -2434,15 +2461,16 @@ if($mode == '__UNASSIGNED_CLIENT_SUCCESS__')
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                        <span  class="caption-subject font-red-sunglo bold uppercase">Client Unassigned</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Client Unassigned</span></h4>
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected client has been successfully unassigned from this agent.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Selected client has been successfully
+                        unassigned from this agent.</p>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn dark btn-outline" href="<?php echo __BASE_URL__;?>/franchisee/agentRecord">Close</a>
+                    <a class="btn dark btn-outline" href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord">Close</a>
                 </div>
             </div>
         </div>
@@ -2450,7 +2478,7 @@ if($mode == '__UNASSIGNED_CLIENT_SUCCESS__')
 
     <?php
 }
-  
+
 if ($mode == '__DELETE_REGION_POPUP__') {
     echo "SUCCESS||||";
     ?>
@@ -2494,7 +2522,7 @@ if ($mode == '___DELETE_REGION_CONFIRM__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span
-                                class="caption-subject font-red-sunglo bold uppercase">Deleted Region Record</span>
+                                    class="caption-subject font-red-sunglo bold uppercase">Deleted Region Record</span>
                         </h4>
                     </div>
 
@@ -2515,11 +2543,10 @@ if ($mode == '___DELETE_REGION_CONFIRM__') {
 }
 if ($mode == '__FRANCHISEE_STATUS_POPUP__') {
     echo "SUCCESS||||";
-    if($status==1){
-        $statusMsg="Enable";
-    }
-    else{
-         $statusMsg="Disable";
+    if ($status == 1) {
+        $statusMsg = "Enable";
+    } else {
+        $statusMsg = "Disable";
     }
     ?>
     <div id="franchiseeStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
@@ -2529,20 +2556,22 @@ if ($mode == '__FRANCHISEE_STATUS_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $statusMsg;?> Franchisee</span>
+                            <span class="caption-subject font-red-sunglo bold uppercase"><?php echo $statusMsg; ?>
+                                Franchisee</span>
                         </h4>
                     </div>
 
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to disable  the selected Franchisee?</p>
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        disable the selected Franchisee?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                     <button type="button"
-                            onclick="franchiseeStatusConfirmation('<?php echo $idfranchisee; ?>',<?php echo $status;?>); return false;"
-                            class="btn green-meadow"><i class="fa fa-user-times"></i> <?php echo $statusMsg;?>
+                            onclick="franchiseeStatusConfirmation('<?php echo $idfranchisee; ?>',<?php echo $status; ?>); return false;"
+                            class="btn green-meadow"><i class="fa fa-user-times"></i> <?php echo $statusMsg; ?>
                     </button>
                 </div>
             </div>
@@ -2552,14 +2581,14 @@ if ($mode == '__FRANCHISEE_STATUS_POPUP__') {
 }
 if ($mode == '__FRANCHISEE_STATUS_CONFIRM__') {
     echo "SUCCESS||||";
-    if($status==1){
-        $statusMsg="Enable";
-    }
-    else{
-         $statusMsg="Disabled";
+    if ($status == 1) {
+        $statusMsg = "Enable";
+    } else {
+        $statusMsg = "Disabled";
     }
     ?>
-    <div id="franchiseeStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="franchiseeStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -2567,7 +2596,8 @@ if ($mode == '__FRANCHISEE_STATUS_CONFIRM__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span
-                                class="caption-subject font-red-sunglo bold uppercase"><?php echo $statusMsg;?> Franchisee</span>
+                                    class="caption-subject font-red-sunglo bold uppercase"><?php echo $statusMsg; ?>
+                                Franchisee</span>
                         </h4>
                     </div>
 
@@ -2629,7 +2659,7 @@ if ($mode == '___DELETE_DISCOUNT_CONFIRM__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span
-                                class="caption-subject font-red-sunglo bold uppercase">Deleted Discount Record</span>
+                                    class="caption-subject font-red-sunglo bold uppercase">Deleted Discount Record</span>
                         </h4>
                     </div>
 
@@ -2640,7 +2670,8 @@ if ($mode == '___DELETE_DISCOUNT_CONFIRM__') {
                         deleted.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__; ?>/ordering/discountPercentage" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__; ?>/ordering/discountPercentage"
+                       class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
@@ -2692,7 +2723,7 @@ if ($mode == '__DELETE_PROSPECT_CONFIRM__') {
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span
-                                class="caption-subject font-red-sunglo bold uppercase">Deleted Prospect Record</span>
+                                    class="caption-subject font-red-sunglo bold uppercase">Deleted Prospect Record</span>
                         </h4>
                     </div>
 
@@ -2714,7 +2745,7 @@ if ($mode == '__DELETE_PROSPECT_CONFIRM__') {
 if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
     echo "SUCCESS||||";
     ?>
-  
+
     <div id="editProspectStatus" class="modal fade" tabindex="-2" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -2723,40 +2754,58 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                     <div class="modal-title">
                         <div class="caption">
                             <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span class="caption-subject font-red-sunglo bold uppercase">Change Prospect Status</span></h4>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Change Prospect Status</span>
+                            </h4>
                         </div>
                     </div>
                 </div>
-                  <div class="modal-body">
-                         <form action="" id="changeStatus" name="changeStatus" method="post"
+                <div class="modal-body">
+                    <form action="" id="changeStatus" name="changeStatus" method="post"
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
-                            <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
+                            <?php $prospectStatusDetailsAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
                             ?>
                             <div
-                                class="form-group <?php if (form_error('changeStatus[szClient]')) { ?>has-error<?php } ?>">
+                                    class="form-group <?php if (form_error('changeStatus[szClient]')) { ?>has-error<?php } ?>">
                                 <label class="control-label col-md-4"> Status</label>
                                 <div class="col-md-5">
-                                   <div class="search">
-                                        <div id='changeStatus'>                         
-                                      <select class="form-control " name="changeStatus[status]" id="changeStatusVal"
-                                                    Placeholder="Status" onfocus="remove_formError(this.id,'true')" onchange="showSubmit(this.value);">
-                                          
+                                    <div class="search">
+                                        <div id='changeStatus'>
+                                            <select class="form-control " name="changeStatus[status]"
+                                                    id="changeStatusVal"
+                                                    Placeholder="Status" onfocus="remove_formError(this.id,'true')"
+                                                    onchange="showSubmit(this.value);">
+
                                                 <option value=''>Status</option>
-                                                <?php if (($prospectStatusDetailsAry['status']==3 )||($prospectStatusDetailsAry['status']==2 )) {?>
-                                                <option value="1" disabled <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("1") ? "selected " : ""); ?>>Pre Discovery</option>
-                                                <?php } else {?>
-                                                <option value="1" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("1") ? "selected disabled" : ""); ?>>Pre Discovery</option>
+                                                <?php if (($prospectStatusDetailsAry['status'] == 3) || ($prospectStatusDetailsAry['status'] == 2)) { ?>
+                                                    <option value="1"
+                                                            disabled <?php echo(sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("1") ? "selected " : ""); ?>>
+                                                        Pre Discovery
+                                                    </option>
+                                                <?php } else { ?>
+                                                    <option value="1" <?php echo(sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("1") ? "selected disabled" : ""); ?>>
+                                                        Pre Discovery
+                                                    </option>
                                                 <?php } ?>
-                                                <option value="2" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("2") ? "selected disabled" : ""); ?>>Discovery Meeting</option>
-                                                <option value="3" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("3") ? "selected disabled" : ""); ?>>In Progress</option>
-                                                <option value="4" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("4") ? "selected disabled" : ""); ?>>Non Convertible</option>
-                                                <option value="5" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("5") ? "selected disabled" : ""); ?>>Contact Later</option>
-                                                <option value="6" <?php echo (sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("6") ? "selected disabled" : ""); ?>>Closed Sale</option>
-                                               
+                                                <option value="2" <?php echo(sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("2") ? "selected disabled" : ""); ?>>
+                                                    Discovery Meeting
+                                                </option>
+                                                <option value="3" <?php echo(sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("3") ? "selected disabled" : ""); ?>>
+                                                    In Progress
+                                                </option>
+                                                <option value="4" <?php echo(sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("4") ? "selected disabled" : ""); ?>>
+                                                    Non Convertible
+                                                </option>
+                                                <option value="5" <?php echo(sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("5") ? "selected disabled" : ""); ?>>
+                                                    Contact Later
+                                                </option>
+                                                <option value="6" <?php echo(sanitize_post_field_value($prospectStatusDetailsAry['status']) == trim("6") ? "selected disabled" : ""); ?>>
+                                                    Closed Sale
+                                                </option>
+
                                             </select>
-                                            </div>
-                                  </div>
+                                        </div>
+                                    </div>
                                     <?php
                                     if (form_error('changeStatus[status]')) {
                                         ?>
@@ -2765,11 +2814,12 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                         </span><?php } ?>
                                 </div>
                             </div>
-                            <input type="hidden" name="statusValue" id='statusValue' value="<?php echo $prospectStatusDetailsAry['0']['status'];?>"/>
-                             <input type="hidden" name="idProspect" id='idProspect' value="<?php echo $idProspect;?>"/>
+                            <input type="hidden" name="statusValue" id='statusValue'
+                                   value="<?php echo $prospectStatusDetailsAry['0']['status']; ?>"/>
+                            <input type="hidden" name="idProspect" id='idProspect' value="<?php echo $idProspect; ?>"/>
                         </div>
                     </form>
-                  <div class="portlet green-meadow box">
+                    <div class="portlet green-meadow box">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="fa fa-cogs"></i> Status Change Info
@@ -2777,125 +2827,119 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                             </div>
 
                         </div>
-                       <?php  $prospectStatusDetailsAry = $this->Prospect_Model->getProspectStatusDetails($idProspect,1);
-                            ?>
+                        <?php $prospectStatusDetailsAry = $this->Prospect_Model->getProspectStatusDetails($idProspect, 1);
+                        ?>
                         <div class="portlet-body">
-                                <div class="portlet-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th> Sr No</th>
-                                        <th> Status</th>
-                                        <th> Updated By</th>
-                                        <th> Updated On</th
-                                         
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    $i=0;
-                                    foreach ($prospectStatusDetailsAry as $prospectStatusDetailsData) {
-                                      
-                                          $i++;
-                                     ?>
+                            <div class="portlet-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
                                         <tr>
-                                            <td> <?php echo $i; ?> </td>
-                                            <td>
-                                            <?php if ($prospectStatusDetailsData['status'] == 1) { ?>
-
-                                                <p title="Order Status"
-                                                   class="label label-sm label-warning">
-                                                    Pre Discovery
-                                                </p>
-                                                <?php
-                                            }
-                                            if ($prospectStatusDetailsData['status'] == 2) {
-                                                ?>
-                                                <p title="Order Status"
-                                                   class="label label-sm label-primary">
-                                                    Discovery Meeting
-                                                </p>
-                                                <?php
-                                            }
-
-                                            if ($prospectStatusDetailsData['status'] == 3) {
-                                                ?>
-                                                <p title="Order Status"
-                                                   class="label label-sm label-info">
-                                                     In Progress
-                                                </p>
-                                                <?php
-                                            }
-                                           if ($prospectStatusDetailsData['status'] == 4) {
-                                                ?>
-                                                <p title="Order Status"
-                                                   class="label label-sm label-danger">
-                                                    Non Convertible
-                                                </p>
-                                                <?php
-                                            }
-                                            if ($prospectStatusDetailsData['status'] == 5) {
-                                                ?>
-                                                <p title="Order Status"
-                                                   class="label label-sm label-info">
-                                                    Contact Later
-                                                </p>
-                                                <?php
-                                            }
-                                            if ($prospectStatusDetailsData['status'] == 6) {
-                                                ?>
-                                                <p title="Order Status"
-                                                   class="label label-sm label-success">
-                                                    Closed Sale
-                                                </p>
-                                                <?php
-                                            }
-                                           ?></td>
-                                        <td>
-                                            <?php 
-                                             if($prospectStatusDetailsData['szUpdatedBy'])
-                                            {
-                                                $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$prospectStatusDetailsData['szUpdatedBy']);
-                                                echo $franchiseeDetArr['szName'];
-                                            }
-                                            else
-                                            {
-                                               echo "N/A";
-                                            }
-                                           
-                                            ?> 
-                                         </td>
-                                         <td>  <?php
-                                        if($prospectStatusDetailsData['dtUpdatedOn']== '0000-00-00 00:00:00')
-                                        {
-                                          echo "N/A"; 
-                                        }
-                                        else{
-                                             echo date('d M Y',strtotime($prospectStatusDetailsData['dtUpdatedOn'])) . ' at '.date('h:i A',strtotime($prospectStatusDetailsData['dtUpdatedOn']));   
-                                          
-                                        }
-                                        ?> </td>
-                                    
+                                            <th> Sr No</th>
+                                            <th> Status</th>
+                                            <th> Updated By</th>
+                                            <th> Updated On</th
 
                                         </tr>
-                                        
-                                    <?php } ?>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $i = 0;
+                                        foreach ($prospectStatusDetailsAry as $prospectStatusDetailsData) {
 
-                                    </tbody>
-                                </table>
+                                            $i++;
+                                            ?>
+                                            <tr>
+                                                <td> <?php echo $i; ?> </td>
+                                                <td>
+                                                    <?php if ($prospectStatusDetailsData['status'] == 1) { ?>
+
+                                                        <p title="Order Status"
+                                                           class="label label-sm label-warning">
+                                                            Pre Discovery
+                                                        </p>
+                                                        <?php
+                                                    }
+                                                    if ($prospectStatusDetailsData['status'] == 2) {
+                                                        ?>
+                                                        <p title="Order Status"
+                                                           class="label label-sm label-primary">
+                                                            Discovery Meeting
+                                                        </p>
+                                                        <?php
+                                                    }
+
+                                                    if ($prospectStatusDetailsData['status'] == 3) {
+                                                        ?>
+                                                        <p title="Order Status"
+                                                           class="label label-sm label-info">
+                                                            In Progress
+                                                        </p>
+                                                        <?php
+                                                    }
+                                                    if ($prospectStatusDetailsData['status'] == 4) {
+                                                        ?>
+                                                        <p title="Order Status"
+                                                           class="label label-sm label-danger">
+                                                            Non Convertible
+                                                        </p>
+                                                        <?php
+                                                    }
+                                                    if ($prospectStatusDetailsData['status'] == 5) {
+                                                        ?>
+                                                        <p title="Order Status"
+                                                           class="label label-sm label-info">
+                                                            Contact Later
+                                                        </p>
+                                                        <?php
+                                                    }
+                                                    if ($prospectStatusDetailsData['status'] == 6) {
+                                                        ?>
+                                                        <p title="Order Status"
+                                                           class="label label-sm label-success">
+                                                            Closed Sale
+                                                        </p>
+                                                        <?php
+                                                    }
+                                                    ?></td>
+                                                <td>
+                                                    <?php
+                                                    if ($prospectStatusDetailsData['szUpdatedBy']) {
+                                                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $prospectStatusDetailsData['szUpdatedBy']);
+                                                        echo $franchiseeDetArr['szName'];
+                                                    } else {
+                                                        echo "N/A";
+                                                    }
+
+                                                    ?>
+                                                </td>
+                                                <td>  <?php
+                                                    if ($prospectStatusDetailsData['dtUpdatedOn'] == '0000-00-00 00:00:00') {
+                                                        echo "N/A";
+                                                    } else {
+                                                        echo date('d M Y', strtotime($prospectStatusDetailsData['dtUpdatedOn'])) . ' at ' . date('h:i A', strtotime($prospectStatusDetailsData['dtUpdatedOn']));
+
+                                                    }
+                                                    ?> </td>
+
+
+                                            </tr>
+
+                                        <?php } ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                           
+
                         </div>
                     </div>
-              
-                 
+
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    <?php if($prospectStatusDetailsAry['0']['status']==1)?>
+                    <?php if ($prospectStatusDetailsAry['0']['status'] == 1) ?>
                     <button type="button" id="submit_val"
                             onclick="editProspectStatusConfirmation('<?php echo $idProspect; ?>'); return false;"
                             class="btn green-meadow">Submit
@@ -2906,29 +2950,31 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
     </div>
     <?php
 }
-if($mode == '__PROSPECT_STATUS_EDIT_POPUP_CONFIRMATION__')
-{
+if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_CONFIRMATION__') {
     echo "SUCCESS||||";
     ?>
-    <div id="editProspectStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="editProspectStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Change Status Confirmation</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Change Status Confirmation</span>
+                    </h4>
                 </div>
-           
+
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Status has been changed successfully .</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> Status has been changed successfully .
+                    </p>
                 </div>
-               <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/prospect/view_prospect_details" class="btn dark btn-outline">Close</a>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/prospect/view_prospect_details" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <?php
 }
 if ($mode == '__SHOW_MEETING_DESCRIPTION_POPUP__') {
@@ -2951,13 +2997,13 @@ if ($mode == '__SHOW_MEETING_DESCRIPTION_POPUP__') {
 
                 </div>
 
-               
+
                 <div class="modal-body">
-                   
-                  <p> <?php echo $descriptionDataArr['szDescription'] ?> </p> 
-                   
+
+                    <p> <?php echo $descriptionDataArr['szDescription'] ?> </p>
+
                 </div>
- 
+
                 <div class="modal-footer">
                     <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                 </div>
@@ -2975,98 +3021,100 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                   <div class="caption">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span class="caption-subject font-red-sunglo bold uppercase">Import Prospects</span></h4>
                     </div>
-                   
-                </div>
-                 <div class="modal-body">
-                <form name="ProspectimportForm" id="ProspectimportForm" method="post" action="<?= __BASE_URL__ ?>/prospect/importCsvData" class="form-horizontal"
-                      enctype="multipart/form-data">
-                   <div class="form-body">
-                                <div  class="form-group ">
-                                      <label class="col-md-3 control-label"> </label>
-                                    <div class="col-md-5">
-                                        
-                                            <div class="input-group">
-                                      <div class="row">
-                                      <div class="col-md-12">
-                                    <input autocomplete="off" type="file" name="imp_prospects" id='imp_prospects'
-                                           onfocus="remove_formError(this.id,'true')">
-                                    </div>
-                                   </div>
-                                    </div>
-                                    </div>
 
+                </div>
+                <div class="modal-body">
+                    <form name="ProspectimportForm" id="ProspectimportForm" method="post"
+                          action="<?= __BASE_URL__ ?>/prospect/importCsvData" class="form-horizontal"
+                          enctype="multipart/form-data">
+                        <div class="form-body">
+                            <div class="form-group ">
+                                <label class="col-md-3 control-label"> </label>
+                                <div class="col-md-5">
+
+                                    <div class="input-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input autocomplete="off" type="file" name="imp_prospects"
+                                                       id='imp_prospects'
+                                                       onfocus="remove_formError(this.id,'true')">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                 <div class="row">
-                                     <div class="col-md-3">
-                                       <span></span>    
-                                     </div>
-                                     <div class="col-md-5">
-                                       <span id="error" class="err"></span>    
-                                     </div>
-                                   
-                                     </div>
-                                     <br>
-                                    <input type="hidden" name="importProspects" value="1"/>
-                                   <?php if(($_SESSION['drugsafe_user']['iRole']==5) || ($_SESSION['drugsafe_user']['iRole']==1)) {?>
-                                   <div class="form-group " >
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span></span>
+                                </div>
+                                <div class="col-md-5">
+                                    <span id="error" class="err"></span>
+                                </div>
+
+                            </div>
+                            <br>
+                            <input type="hidden" name="importProspects" value="1"/>
+                            <?php if (($_SESSION['drugsafe_user']['iRole'] == 5) || ($_SESSION['drugsafe_user']['iRole'] == 1)) { ?>
+                                <div class="form-group ">
                                     <label class="col-md-3 control-label">Franchisee</label>
                                     <div class="col-md-8">
                                         <div class="input-group">
-                                                 <select class="form-control" name="iFranchiseeId"
-                                                            id="iFranchiseeId" Placeholder="Franchisee"
-                                                            onfocus="remove_formError(this.id,'true')">
-                                                        <option value=''>Select</option>
-                                                        <?php
-                                                     $franchiseeAray =$this->Admin_Model->viewFranchiseeList(false,false);
-                                             
-                                                        if (!empty($franchiseeAray)) {
-                                                            foreach ($franchiseeAray as $franchiseeDetails) {
-                                                                ?>
-                                                                <option
-                                                                    value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['iFranchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
-                                                                <?php
-                                                            }
-                                                        }
+                                            <select class="form-control" name="iFranchiseeId"
+                                                    id="iFranchiseeId" Placeholder="Franchisee"
+                                                    onfocus="remove_formError(this.id,'true')">
+                                                <option value=''>Select</option>
+                                                <?php
+                                                $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false, false);
+
+                                                if (!empty($franchiseeAray)) {
+                                                    foreach ($franchiseeAray as $franchiseeDetails) {
                                                         ?>
-                                                    </select>
+                                                        <option
+                                                                value="<?php echo trim($franchiseeDetails['id']); ?>" <?php echo(sanitize_post_field_value($_POST['iFranchiseeId']) == trim($franchiseeDetails['id']) ? "selected" : ""); ?>><?php echo trim($franchiseeDetails['szName']); ?></option>
+                                                        <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
-                                       
+
                                     </div>
 
                                 </div>
-                                      <div class="row">
-                                     <div class="col-md-3">
-                                       <span></span>    
-                                     </div>
-                                     <div class="col-md-5">
-                                       <span id="err" class="err"></span>    
-                                     </div>
-                                   
-                                     </div>
-                                     <input type="hidden" id ="adminOrOp" name="adminOrOp" value="1"/>
-                <?php }?>
-                            </div>
-                     
-                       
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <span></span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <span id="err" class="err"></span>
+                                    </div>
 
-                     
-                    <div class="modal-footer">
-                         <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
-                        <input type="button" name="pricesimport" value="Import" onclick="import_csv_popup_confirmation()" class="btn green-meadow"/>
-                    </div>
-                </form>
-                 </div>
+                                </div>
+                                <input type="hidden" id="adminOrOp" name="adminOrOp" value="1"/>
+                            <?php } ?>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
+                            <input type="button" name="pricesimport" value="Import"
+                                   onclick="import_csv_popup_confirmation()" class="btn green-meadow"/>
+                        </div>
+                    </form>
+                </div>
             </div>
 
         </div>
     </div>
     <?php
-}  if ($mode == '__CHANGE_TO_CLIENT__') {
+}
+if ($mode == '__CHANGE_TO_CLIENT__') {
     echo "SUCCESS||||";
     ?>
     <div id="changeToClientStatus" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
@@ -3083,8 +3131,8 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i>  Are you sure you want to
-                        convert  the selected Prospect to Client?</p>
+                    <p class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Are you sure you want to
+                        convert the selected Prospect to Client?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
@@ -3097,95 +3145,117 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
         </div>
     </div>
     <?php
-}   
- if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION__') {
+}
+if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION__') {
 
     echo "SUCCESS||||";
     ?>
-    <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span  class="caption-subject font-red-sunglo bold uppercase">Convert To Client Confirmation</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Convert To Client Confirmation</span>
+                    </h4>
                 </div>
-           
+
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i>Selected Prospect has been successfully converted to Client .</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i>Selected Prospect has been successfully
+                        converted to Client .</p>
                 </div>
-               <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>
+                <div class="modal-footer">
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <?php
 }
 if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
     echo "ERROR||||";
     ?>
-    <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                        <span  class="caption-subject font-red-sunglo bold uppercase">Convert To Client Confirmation</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Convert To Client Confirmation</span>
+                    </h4>
                 </div>
-             <div class="modal-body">
+                <div class="modal-body">
                     <div class="portlet red box">
                         <div class="portlet-title">
                             <div class="caption">
-                            <h5><b> Selected Prospect has not been converted to Client because of the following reason. Please try again!</b></h5>
+                                <h5><b> Selected Prospect has not been converted to Client because of the following
+                                        reason. Please try again!</b></h5>
 
                             </div>
 
                         </div>
                         <?php
-                        
+
                         $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($prospectId);
                         ?>
                         <div class="portlet-body">
-                           <?php  $validate = $this->Admin_Model->validateParentClientData($prospectAry, array(), $idclient);
-                    if(!($validate)){
-                          $arErrorMessages = $this->Admin_Model->arErrorMessages;  
-                    }
-                    ?>      
-                  
-                    <?php if($arErrorMessages['abn']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['abn']; ?></p>
-                    <?php } ?>
-                      <?php if($arErrorMessages['szName']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szName']; ?></p>
-                    <?php } ?>
-                     <?php if($arErrorMessages['szEmail']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szEmail']; ?></p>
-                    <?php } ?>
-                     <?php if($arErrorMessages['szContactNumber']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szContactNumber']; ?></p>
-                    <?php } ?>
-                     <?php if($arErrorMessages['szCity']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szCity']; ?></p>
-                    <?php } ?><?php if($arErrorMessages['szZipCode']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szZipCode']; ?></p>
-                    <?php } ?><?php if($arErrorMessages['szAddress']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szAddress']; ?></p>
-                    <?php } ?><?php if($arErrorMessages['szNoOfSites']) { ?>
-                     <p class="alert alert-danger"><i class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szNoOfSites']; ?></p>
-                    <?php } ?>
+                            <?php $validate = $this->Admin_Model->validateParentClientData($prospectAry, array(), $idclient);
+                            if (!($validate)) {
+                                $arErrorMessages = $this->Admin_Model->arErrorMessages;
+                            }
+                            ?>
+
+                            <?php if ($arErrorMessages['abn']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['abn']; ?>
+                                </p>
+                            <?php } ?>
+                            <?php if ($arErrorMessages['szName']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szName']; ?>
+                                </p>
+                            <?php } ?>
+                            <?php if ($arErrorMessages['szEmail']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szEmail']; ?>
+                                </p>
+                            <?php } ?>
+                            <?php if ($arErrorMessages['szContactNumber']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szContactNumber']; ?>
+                                </p>
+                            <?php } ?>
+                            <?php if ($arErrorMessages['szCity']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szCity']; ?>
+                                </p>
+                            <?php } ?><?php if ($arErrorMessages['szZipCode']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szZipCode']; ?>
+                                </p>
+                            <?php } ?><?php if ($arErrorMessages['szAddress']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szAddress']; ?>
+                                </p>
+                            <?php } ?><?php if ($arErrorMessages['szNoOfSites']) { ?>
+                                <p class="alert alert-danger"><i
+                                            class="fa fa-exclamation-triangle"></i> <?php echo $arErrorMessages['szNoOfSites']; ?>
+                                </p>
+                            <?php } ?>
                         </div>
                     </div>
-               </div>
-                
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                   <button type="button"
-                        onclick="editProspectDetails('<?php echo $prospectId; ?>',1);"
-                        class="btn green-meadow" name="submit"><i class="icon-pencil"></i> Edit Prospect
-                     </button>
-                    
+                    <button type="button"
+                            onclick="editProspectDetails('<?php echo $prospectId; ?>',1);"
+                            class="btn green-meadow" name="submit"><i class="icon-pencil"></i> Edit Prospect
+                    </button>
+
                 </div>
             </div>
         </div>
@@ -3201,17 +3271,18 @@ if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
     <div id="AssignClient" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-               
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase"> Assigned Client Details</span></h4>
+                            <span class="caption-subject font-red-sunglo bold uppercase"> Assigned Client Details</span>
+                        </h4>
                     </div>
 
                 </div>
                 <div class="modal-body">
-               
+
                     <div class="portlet green-meadow box">
                         <div class="portlet-title">
                             <div class="caption">
@@ -3220,48 +3291,48 @@ if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
                             </div>
 
                         </div>
-                        <?php  $agentAssignedClientDetails = $this->Franchisee_Model->getfranchiseeagentclients($franchiseeid,$idAgent);
-                       
-                       ?>
+                        <?php $agentAssignedClientDetails = $this->Franchisee_Model->getfranchiseeagentclients($franchiseeid, $idAgent);
+
+                        ?>
                         <div class="portlet-body">
-                            <?php 
-                        if(!empty($agentAssignedClientDetails)){
-                       ?>
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th> #</th>
-                                        <th>Client Name</th>
-                                        <th> Email</th>
-                                        <th> Contact Number</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    $i=0;
-                                    foreach ($agentAssignedClientDetails as $agentAssignedClientData) {
-                                       $i++;
-                                        ?>
+                            <?php
+                            if (!empty($agentAssignedClientDetails)) {
+                                ?>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
                                         <tr>
-                                            <td> <?php echo $i; ?> </td>
-                                            <td> <?php echo $agentAssignedClientData['szName']; ?> </td>
-                                            <td> <?php echo $agentAssignedClientData['szEmail']; ?> </td>
-                                            <td> <?php echo $agentAssignedClientData['szContactNumber']  ; ?>
-                                            </td>
-                                           
-
+                                            <th> #</th>
+                                            <th>Client Name</th>
+                                            <th> Email</th>
+                                            <th> Contact Number</th>
                                         </tr>
-                                    <?php } ?>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $i = 0;
+                                        foreach ($agentAssignedClientDetails as $agentAssignedClientData) {
+                                            $i++;
+                                            ?>
+                                            <tr>
+                                                <td> <?php echo $i; ?> </td>
+                                                <td> <?php echo $agentAssignedClientData['szName']; ?> </td>
+                                                <td> <?php echo $agentAssignedClientData['szEmail']; ?> </td>
+                                                <td> <?php echo $agentAssignedClientData['szContactNumber']; ?>
+                                                </td>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                             <?php } else  { 
-                                 
-                            echo "No Record Found";     
-                            
-                             }
+
+                                            </tr>
+                                        <?php } ?>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php } else {
+
+                                echo "No Record Found";
+
+                            }
                             ?>
                         </div>
                     </div>
@@ -3286,50 +3357,60 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
                     <div class="modal-title">
                         <div class="caption">
                             <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                                <span class="caption-subject font-red-sunglo bold uppercase"> Franchisee-Client Assignment</span></h4>
+                                <span class="caption-subject font-red-sunglo bold uppercase"> Franchisee-Client Assignment</span>
+                            </h4>
                         </div>
                     </div>
                 </div>
                 <div class="modal-body">
-                    <h4 class="modal-custom-heading"><i class="fa fa-users"></i> Assigned Franchisee</h4><hr>
+                    <h4 class="modal-custom-heading"><i class="fa fa-users"></i> Assigned Franchisee</h4>
+                    <hr>
                     <div class="table-reposnsive">
-                        <?php if(!empty($NonCorpFranchiseeArr)){?>
+                        <?php if (!empty($NonCorpFranchiseeArr)) { ?>
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
-                                <th>#</th>
-                                <th>Franchisee Code</th>
-                                <th>Franchisee</th>
-                                <th>Email</th>
-                                <th>Action</th>
+                                    <th>#</th>
+                                    <th>Franchisee Code</th>
+                                    <th>Franchisee</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php
                                 $clcount = 1;
-                                foreach ($NonCorpFranchiseeArr as $franchiseedet){
+                                foreach ($NonCorpFranchiseeArr as $franchiseedet) {
                                     $franchiseeDetsArr = $this->Webservices_Model->getuserdetails($franchiseedet['franchiseeid']);
                                     $franchiseeCode = $this->Franchisee_Model->getusercodebyuserid($franchiseedet['franchiseeid']);
                                     ?>
-                                    <tr><td><?php echo $clcount;?></td>
-                                        <td><?php echo $franchiseeCode['userCode'];?></td>
-                                        <td><?php echo $franchiseeDetsArr[0]['szName'];?></td>
-                                        <td><?php echo $franchiseeDetsArr[0]['szEmail'];?></td>
-<!--                                        <td>--><?php //echo $franchiseeDetsArr[0]['szContactNumber'];?><!--</td>-->
-                                        <td><a class="btn btn-circle btn-icon-only btn-default" id="unassignsite" title="Unassign Site" onclick="unassignSite(<?php echo $franchiseedet['id'];?>);" href="javascript:void(0);"></i>
+                                    <tr>
+                                        <td><?php echo $clcount; ?></td>
+                                        <td><?php echo $franchiseeCode['userCode']; ?></td>
+                                        <td><?php echo $franchiseeDetsArr[0]['szName']; ?></td>
+                                        <td><?php echo $franchiseeDetsArr[0]['szEmail']; ?></td>
+                                        <!--                                        <td>-->
+                                        <?php //echo $franchiseeDetsArr[0]['szContactNumber'];
+                                        ?><!--</td>-->
+                                        <td><a class="btn btn-circle btn-icon-only btn-default" id="unassignsite"
+                                               title="Unassign Site"
+                                               onclick="unassignSite(<?php echo $franchiseedet['id']; ?>);"
+                                               href="javascript:void(0);"></i>
                                                 <i class="fa fa-times" aria-hidden="true"></i>
                                             </a></td>
                                     </tr>
-                                    <?php $clcount++; }
+                                    <?php $clcount++;
+                                }
                                 ?>
                                 </tbody>
                             </table>
-                        <?php }else{
+                        <?php } else {
                             echo '</p>No non-corporate franchisee is assigned to this client.</p>';
                         } ?>
                     </div>
                     <hr/>
-                    <h4 class="modal-custom-heading"><i class="fa fa-plus"></i> Assign Franchisee</h4><hr>
+                    <h4 class="modal-custom-heading"><i class="fa fa-plus"></i> Assign Franchisee</h4>
+                    <hr>
                     <form action="" id="assignClient" name="assignClient" method="post"
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
@@ -3339,12 +3420,13 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
                                 <div class="col-md-5">
                                     <div class="search">
                                         <div id='szClient'>
-                                            <select class="form-control custom-select" name="assignfrClient[szFranchisee]" id="szFranchisee" onfocus="remove_formError(this.id,'true')">
+                                            <select class="form-control custom-select"
+                                                    name="assignfrClient[szFranchisee]" id="szFranchisee"
+                                                    onfocus="remove_formError(this.id,'true')">
                                                 <option value="">Franchisee Name</option>
                                                 <?php
-                                                foreach($clientlistArr as $clientList)
-                                                {
-                                                    echo '<option value="'.$clientList['id'].'" >'.$clientList['szName'].'</option>';
+                                                foreach ($clientlistArr as $clientList) {
+                                                    echo '<option value="' . $clientList['id'] . '" >' . $clientList['szName'] . '</option>';
                                                 }
                                                 ?>
                                             </select>
@@ -3374,24 +3456,26 @@ if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_FORM__') {
     <div id="popup_box_level1"></div>
     <?php
 }
-if($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_CONFIRMATION__')
-{
+if ($mode == '__ASSIGN_CORP_FRANCHISEE_CLIENT_POPUP_CONFIRMATION__') {
     echo "SUCCESS||||";
     ?>
-    <div id="clientFrAssignmentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div id="clientFrAssignmentStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
+         data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4>   <i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                        <span  class="caption-subject font-red-sunglo bold uppercase">Franchisee Assignment Confirmation</span> </h4>
+                    <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
+                        <span class="caption-subject font-red-sunglo bold uppercase">Franchisee Assignment Confirmation</span>
+                    </h4>
                 </div>
 
                 <div class="modal-body">
-                    <p class="alert alert-success"><i class="fa fa-check"></i> This Site has been successfully assigned to the selected Franchisee.</p>
+                    <p class="alert alert-success"><i class="fa fa-check"></i> This Site has been successfully assigned
+                        to the selected Franchisee.</p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/clientRecord" class="btn dark btn-outline">Close</a>
                 </div>
             </div>
         </div>
@@ -3407,38 +3491,41 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
     <div id="showMeetingNotes" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <?php  $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
+                <?php $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
 
                 ?>
-                
-                    <div class="modal-header">
+
+                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span class="caption-subject font-red-sunglo bold uppercase">Meeting Note</span></h4>
-                <?php  if(!empty($mettingsDetailsAry)) {?> 
-                            <?php if($flag != 2){ ?>
-                        <hr>
-                            <div class = 'row'>  
-                        <div class="actions">
-                      
-                        <div class = ' col-md-6'>   
-                            
-                        </div>
-                         <div class = ' col-md-6'> 
-                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a onclick="view_meeting_note_pdf('<?php echo $idProspect;?>')" href="javascript:void(0);" 
-                      class=" btn green-meadow">
-                       <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                        <?php if (!empty($mettingsDetailsAry)) { ?>
+                            <?php if ($flag != 2) { ?>
+                                <hr>
+                                <div class='row'>
+                                    <div class="actions">
 
-                    <a onclick="View_meeting_note_excel('<?php echo $idProspect;?>')" href="javascript:void(0);" 
-                      class=" btn green-meadow">
-                       <i class="fa fa-file-excel-o"></i> View Xls </a>
-                         </div>
-                         
-                     </div>
-                    </div>
-                <?php } }?>
+                                        <div class=' col-md-6'>
+
+                                        </div>
+                                        <div class=' col-md-6'>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a onclick="view_meeting_note_pdf('<?php echo $idProspect; ?>')"
+                                               href="javascript:void(0);"
+                                               class=" btn green-meadow">
+                                                <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+
+                                            <a onclick="View_meeting_note_excel('<?php echo $idProspect; ?>')"
+                                               href="javascript:void(0);"
+                                               class=" btn green-meadow">
+                                                <i class="fa fa-file-excel-o"></i> View Xls </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            <?php }
+                        } ?>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -3450,13 +3537,13 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                             </div>
 
                         </div>
-                       
+
                         <div class="portlet-body">
-                             
+
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
-                                         <?php   if(!empty($mettingsDetailsAry)){ ?>
+                                    <?php if (!empty($mettingsDetailsAry)){ ?>
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Meeting Note</th>
@@ -3464,53 +3551,50 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                                     </thead>
                                     <tbody>
                                     <?php
-                                         $i=0;
+                                    $i = 0;
                                     foreach ($mettingsDetailsAry as $mettingsDetailsData) {
                                         $i++;
-                                       ?>
+                                        ?>
                                         <tr>
                                             <td> <?php echo $i; ?> </td>
-                                             <?php
-                                         
-                                          
+                                            <?php
 
-                                              $retval = $mettingsDetailsData['szDescription'];
-                                              $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $mettingsDetailsData['szDescription']);
-                                              $string = str_replace("\n", " ", $string);
-                                              $array = explode(" ", $string);
-                                              if (count($array)<=15)
-                                              {
-                                                  $retval = $string;
-                                              }
-                                              else
-                                              {
-                                                  array_splice($array, 15);
-                                                  $retval = implode(" ", $array)." ...";
-                                                  $retval .= '<a onclick="showDescription('.$mettingsDetailsData['id'].',1);" href="javascript:void(0);" >Read more</a>';
-                                              }
-                                               ?>
-                                            
-                                              
-                                              <td><?php echo $retval;  ?></td>
-                                            
+
+                                            $retval = $mettingsDetailsData['szDescription'];
+                                            $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $mettingsDetailsData['szDescription']);
+                                            $string = str_replace("\n", " ", $string);
+                                            $array = explode(" ", $string);
+                                            if (count($array) <= 15) {
+                                                $retval = $string;
+                                            } else {
+                                                array_splice($array, 15);
+                                                $retval = implode(" ", $array) . " ...";
+                                                $retval .= '<a onclick="showDescription(' . $mettingsDetailsData['id'] . ',1);" href="javascript:void(0);" >Read more</a>';
+                                            }
+                                            ?>
+
+
+                                            <td><?php echo $retval; ?></td>
+
                                         </tr>
-                                    <?php }} else echo "Not Found" ?>
+                                    <?php }
+                                    } else echo "Not Found" ?>
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
- 
+
                 <div class="modal-footer">
                     <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                 </div>
             </div>
         </div>
     </div>
- <div id="popup_box_level2"></div>
+    <div id="popup_box_level2"></div>
     <?php
 }
 
@@ -3525,11 +3609,12 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <div class="caption">
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
-                            <span class="caption-subject font-red-sunglo bold uppercase">Dispatched Order Details</span></h4>
-                            
-                            
+                            <span class="caption-subject font-red-sunglo bold uppercase">Dispatched Order Details</span>
+                        </h4>
+
+
                     </div>
-                   
+
 
                 </div>
 
@@ -3577,7 +3662,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                                     Order Date & Time:
                                 </div>
                                 <div class="col-md-7 value">
-                                    <?php echo date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon'])); ?>
+                                    <?php echo date('d M Y', strtotime($OrdersDetailsAray['createdon'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['createdon'])); ?>
                                 </div>
                             </div>
                             <?php if ($OrdersDetailsAray['status'] == 2) { ?>
@@ -3586,26 +3671,28 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                                         Dispatched Date & Time:
                                     </div>
                                     <div class="col-md-7 value">
-                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['dispatchedon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['dispatchedon'])); ?>
+                                        <?php echo date('d M Y', strtotime($OrdersDetailsAray['dispatchedon'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['dispatchedon'])); ?>
                                     </div>
                                 </div>
-                            <?php }if ($OrdersDetailsAray['status'] == 3) {?>
+                            <?php }
+                            if ($OrdersDetailsAray['status'] == 3) { ?>
                                 <div class="row static-info">
                                     <div class="col-md-5 name">
                                         Cancelled Date & Time:
                                     </div>
                                     <div class="col-md-7 value">
-                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon'])); ?>
+                                        <?php echo date('d M Y', strtotime($OrdersDetailsAray['canceledon'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['canceledon'])); ?>
                                     </div>
                                 </div>
-                             <?php } if($OrdersDetailsAray['last_changed']){?>
-<!--                            
+                            <?php }
+                            if ($OrdersDetailsAray['last_changed']) { ?>
+                                <!--
                                 <div class="row static-info">
                                     <div class="col-md-5 name">
                                         Last updated Date & Time:
                                     </div>
                                     <div class="col-md-7 value">
-                                        <?php echo date('d M Y',strtotime($OrdersDetailsAray['last_changed'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['last_changed'])); ?>
+                                        <?php echo date('d M Y', strtotime($OrdersDetailsAray['last_changed'])) . ' at ' . date('h:i A', strtotime($OrdersDetailsAray['last_changed'])); ?>
                                     </div>
                                 </div>-->
                             <?php } ?>
@@ -3677,19 +3764,19 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php
-/*                                    echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); */?>
+                            /*                                    echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); */ ?>
                                 </div>
                             </div>-->
-                             <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
-                            <div class="row static-info">
-                                <div class="col-md-5 name">
-                                    Franchisee:
+                            <?php if ($_SESSION['drugsafe_user']['iRole'] == 1) { ?>
+                                <div class="row static-info">
+                                    <div class="col-md-5 name">
+                                        Franchisee:
+                                    </div>
+                                    <div class="col-md-7 value">
+                                        <?php echo $franchiseeDetArr1['szName'] ?>
+                                    </div>
                                 </div>
-                                <div class="col-md-7 value">
-                                    <?php echo $franchiseeDetArr1['szName'] ?>
-                                </div>
-                            </div>
-                             <?php } ?>
+                            <?php } ?>
                         </div>
                     </div>
                     <hr>
@@ -3702,48 +3789,76 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
 
                         </div>
                         <?php $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+                        $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder,true);
                         ?>
                         <div class="portlet-body">
                             <div class="table-responsive">
+
+                                    <?php
+    if (!empty($totalDispatched)) {
+        $i = 0;
+        foreach ($totalDispatched as $DispatchOrderDetData) { ?>
+<h4>Dispatched On: <?php echo date('d/m/Y h:i:s a',strtotime($DispatchOrderDetData['dispatch_date'])); ?></h4>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                     <tr>
                                         <th> Product Code</th>
                                         <th> Product Cost</th>
-                                        <th> Quantity</th>
-                                        <th> Total Price EXL GST</th>
                                         <th> Dispatched Quantity</th>
+                                        <th> Total Price EXL GST</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
+        <?php
+        $DispatchedOrdDetArr = $this->Order_Model->getDispatchedOrderDetByDispatchDate($DispatchOrderDetData['dispatch_date']);
+        if(!empty($DispatchedOrdDetArr)) {
+            $totalAmount = 0.00;
+            foreach ($DispatchedOrdDetArr as $DispatchOrderDet) {
+                $productDataArr = $this->Inventory_Model->getProductDetailsById($DispatchOrderDet['productid']);
+                $totalAmount += number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', '');?>
+                <tr>
+                    <td> <?php echo $productDataArr['szProductCode']; ?> </td>
+                    <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
+                    <td> <?php echo $DispatchOrderDet['dispatch_qty']; ?> </td>
+                    <td> $<?php
+                        echo number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', ',') ; ?>
+                    </td>
+                </tr>
+            <?php $i++; } ?>
+            <tr><td colspan="3"><b>Total</b></td><td><b>$<?php echo number_format($totalAmount, 2, '.', ',');?></b></td></tr>
+                                    <tr><td colspan="4" align="right"><button type="button"
+                                                                onclick="receiveordstatus('<?php echo $idOrder; ?>','<?php echo $DispatchOrderDetData['dispatch_date'];?>');"
+                                                                class="btn green-meadow" name="submit"><i class="icon-check"></i> Receive Order
+                                            </button></td> </tr>
+                                    </tbody>
+            </table>
+        <?php } ?>
 
-                                    foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
-                                        $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']); ?>
+        <?php }
+    }
+                                    /*foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
+                                        $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']); */?><!--
                                         <tr>
-                                            <td> <?php echo $productDataArr['szProductCode']; ?> </td>
-                                            <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
-                                            <td> <?php echo $totalOrdersDetailsData['quantity']; ?> </td>
+                                            <td> <?php /*echo $productDataArr['szProductCode']; */?> </td>
+                                            <td> $<?php /*echo $productDataArr['szProductCost']; */?> </td>
+                                            <td> <?php /*echo $totalOrdersDetailsData['quantity']; */?> </td>
                                             <td> $<?php
-                                                echo number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ','); ?>
+/*                                                echo number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ','); */?>
                                             </td>
-                                            <td> <?php echo $totalOrdersDetailsData['dispatched']; ?> </td>
+                                            <td> <?php /*echo $totalOrdersDetailsData['dispatched']; */?> </td>
 
                                         </tr>
-                                    <?php } ?>
+                                    <?php /*} */?>
 
                                     </tbody>
-                                </table>
+                                </table>-->
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                     <button type="button"
-                        onclick="receiveordstatus('<?php echo $idOrder; ?>');"
-                        class="btn green-meadow" name="submit"><i class="icon-check"></i> Receive Order
-                     </button>
+
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -3803,7 +3918,7 @@ if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_POPUP__') {
                           class="form-horizontal form-row-sepe">
                         <div class="form-body">
                             <div
-                                class="form-group <?php if (form_error('changePassword[szNewPassword]')) { ?>has-error<?php } ?>">
+                                    class="form-group <?php if (form_error('changePassword[szNewPassword]')) { ?>has-error<?php } ?>">
                                 <label class="control-label col-md-4">New Password</label>
                                 <div class="col-md-4">
                                     <div class="input-group">
@@ -3822,8 +3937,8 @@ if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_POPUP__') {
                                         </span><?php } ?>
                                 </div>
                             </div>
-                              <div
-                                class="form-group <?php if (form_error('changePassword[szConfirmPassword]')) { ?>has-error<?php } ?>">
+                            <div
+                                    class="form-group <?php if (form_error('changePassword[szConfirmPassword]')) { ?>has-error<?php } ?>">
                                 <label class="control-label col-md-4">Confirm Password</label>
                                 <div class="col-md-4">
                                     <div class="input-group">
@@ -3882,7 +3997,7 @@ if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_CONFIRM__') {
                         changed , Please check the email.</p>
                 </div>
                 <div class="modal-footer">
-                        <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord"
+                    <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord"
                 </div>
             </div>
         </div>
@@ -3948,4 +4063,4 @@ if ($mode == '__UNASSIGN_SITE_CONFIRM_POPUP__') {
 
     <?php
 }
-  ?>
+?>

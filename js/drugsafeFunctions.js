@@ -1503,10 +1503,12 @@ function changeordstatus(ordid, prodcount, status) {
                     counter++;
                     var prodid = $('#ordprodid' + i).val();
                     var qty = $('#order_quantity' + i).val();
+                    var RemainingQty = $('#remainingQty' + i).val();
                     $.post(__BASE_URL__ + "/order/dispatchsingleprod", {
                         ordid: ordid,
                         prodid: prodid,
-                        qty: qty
+                        qty: qty,
+                        RemainingQty: RemainingQty
                     }, function (result) {
                         if (result == 'SUCCESS') {
                             check++;
@@ -1569,13 +1571,14 @@ function validatedispprod(id) {
     var availqtyid = $('#availqtyid' + id).val();
     var dispatch_quantity = $('#order_quantity' + id).val();
     var isdispid = $('#isdispid' + id).val();
+    var RemainingQty = $('#remainingQty' + id).val();
     if (dispatch_quantity > 0 && isdispid == '0') {
         if (parseInt(dispatch_quantity) > parseInt(ordqtyid)) {
-            $('#orddiperr' + id).html('Dispatch quantity must be equal to ordered quantity.');
+            $('#orddiperr' + id).html('Dispatch quantity must be less than or equal to ordered quantity.');
             $('#orddiperr' + id).show();
             return false;
-        } else if (parseInt(dispatch_quantity) < parseInt(ordqtyid)) {
-            $('#orddiperr' + id).html('Dispatch quantity must be equal to ordered quantity.');
+        } else if (parseInt(dispatch_quantity) > parseInt(RemainingQty)) {
+            $('#orddiperr' + id).html('Dispatch quantity must be less than or equal to non-dispatched ordered quantity i.e. '+RemainingQty);
             $('#orddiperr' + id).show();
             return false;
         }
@@ -3245,12 +3248,12 @@ function receive_order_details(idOrder) {
 
     });
 }
-function receiveordstatus(idOrder) {
+function receiveordstatus(idOrder,orderdate) {
     $('.modal-backdrop').remove();
     $('#static').modal("hide");
     $('#receiveOrder').modal("hide");
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/order/receiveordConfirmation", {idOrder: idOrder}, function (result) {
+    $.post(__BASE_URL__ + "/order/receiveordConfirmation", {idOrder: idOrder, orderdate: orderdate}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {

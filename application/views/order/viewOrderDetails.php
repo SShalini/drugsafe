@@ -305,15 +305,18 @@
                                                                 </td>
                                                                   <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
                                                                 <td>
-                                                                    <?php if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 4) { ?>
-                                                                        <a class="btn btn-circle btn-icon-only btn-default"
-                                                                           title="Edit Order Details"
-                                                                           onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
-                                                                           href="javascript:void(0);">
-                                                                            <i class="fa fa-pencil"></i>
-                                                                        </a>
-                                                                    <?php }
-
+                                                                    <?php
+                                                                    if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 2 || $validOrdersDetailsData['status'] == 4) {
+                                                                        $checkOrderEditable = $this->Order_Model->checkOrderEditable($validOrdersDetailsData['orderid']);
+                                                                        if (!empty($checkOrderEditable)) { ?>
+                                                                            <a class="btn btn-circle btn-icon-only btn-default"
+                                                                               title="Edit Order Details"
+                                                                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                                                                               href="javascript:void(0);">
+                                                                                <i class="fa fa-pencil"></i>
+                                                                            </a>
+                                                                        <?php }
+                                                                    }
                                                                     ?>
                                                                 </td>
                                                                  
@@ -329,19 +332,25 @@
                                                                 </td>
                                                                  <?php } ?>
                                                                   <td>
-                                                                    <?php if (($validOrdersDetailsData['status'] == 2) && ($validOrdersDetailsData['isReceived']==0) ) { ?>
-                                                                        <a class="btn btn-circle btn-icon-only btn-default"
-                                                                           title="Receive Order"
-                                                                           onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
-                                                                           href="javascript:void(0);">
-                                                                            <i class="fa fa-download"></i>
-                                                                        </a>
-                                                                    <?php } elseif (($validOrdersDetailsData['status'] == 2) && ($validOrdersDetailsData['isReceived']==1) ) { ?>
-                                                                      <p title="Order Status"
-                                                                           class="label label-sm label-info">
-                                                                           Order Received
-                                                                        </p>  
-                                                                    <?php } ?>
+                                                                      <?php
+                                                                      if($validOrdersDetailsData['status'] == 2){
+                                                                          $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($validOrdersDetailsData['orderid'],true);
+                                                                          if(!empty($dispatchDatesArr)){ ?>
+                                                                              <a class="btn btn-circle btn-icon-only btn-default"
+                                                                                 title="Receive Order"
+                                                                                 onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
+                                                                                 href="javascript:void(0);">
+                                                                                  <i class="fa fa-download"></i>
+                                                                              </a>
+                                                                          <?php }else{ ?>
+                                                                              <p title="Order Status"
+                                                                                 class="label label-sm label-info">
+                                                                                  Order Received
+                                                                              </p>
+                                                                          <?php }
+                                                                      }
+                                                                      ?>
+
                                                                 </td>
 
                                                             </tr>
