@@ -272,7 +272,7 @@ class Franchisee_Model extends Error_Model
     }
 
     public function getAllClientDetails($parent = false, $franchiseId = '', $ClientName = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$fromdate='',$todate='')
-    {    
+    {   
           $array = 'isDeleted = 0 AND clientType = 0 '.($franchiseId>0?' AND franchiseeId = '.(int)$franchiseId:'').(!empty($fromdate)?" AND ds_user.dtCreatedOn >= '".$fromdate." 00:00:00 '":'').(!empty($todate)?" AND ds_user.dtCreatedOn <= '".$todate." 23:59:59'":'').(!empty($ClientName)?" AND ds_user.szName = '".$ClientName."'":'') ;
        
             $this->db->select('*');
@@ -316,14 +316,15 @@ class Franchisee_Model extends Error_Model
         }
     }
 
-    public function viewChildClientDetails($idClient = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $id = 0,$franchiseeid=0)
+    public function viewChildClientDetails($idClient = 0, $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0, $searchAry = '', $id = 0,$franchiseeid=0,$fromdate='',$todate='')
     {
 
-        //$whereAry = array('clientType' => $idClient, 'isDeleted=' => '0');
-        $whereAry = 'clientType = '.$idClient.' AND isDeleted = 0 '.($franchiseeid>0?' AND franchiseeId = '.(int)$franchiseeid:'');
         $searchq = '';
         if ($id > '0') {
-            $searchq = 'clientId = ' . (int)$id.($franchiseeid>0?' AND franchiseeId = '.(int)$franchiseeid:'');
+            $searchq = 'clientId = ' . (int)$id.($franchiseeid>0?' AND franchiseeId = '.(int)$franchiseeid:'').(!empty($fromdate)?" AND ds_user.dtCreatedOn >= '".$fromdate." 00:00:00 '":'').(!empty($todate)?" AND ds_user.dtCreatedOn <= '".$todate." 23:59:59'":'');
+        }
+        else{
+         $whereAry = 'clientType = '.$idClient.' AND isDeleted = 0 '.($franchiseeid>0?' AND franchiseeId = '.(int)$franchiseeid:'').(!empty($fromdate)?" AND ds_user.dtCreatedOn >= '".$fromdate." 00:00:00 '":'').(!empty($todate)?" AND ds_user.dtCreatedOn <= '".$todate." 23:59:59'":'');   
         }
         $this->db->select('*');
         $this->db->from('tbl_client');
@@ -342,6 +343,7 @@ class Franchisee_Model extends Error_Model
         $this->db->limit($limit, $offset);
         $query = $this->db->get();
 //              $sql = $this->db->last_query($query);
+//print_r($sql);die;
 
 
         if ($query->num_rows() > 0) {
@@ -1400,5 +1402,21 @@ class Franchisee_Model extends Error_Model
             return false;
         }
     }
+    function getDiscountByDisId($discountid = 0)
+    {
+        $wherestr = 'id = ' . (int)$discountid;
+        $this->db->select('*');
+        $this->db->from(__DBC_SCHEMATA_DISCOUNT__);
+        $this->db->where($wherestr);
+       
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row['0'];
+        } else {
+            return array();
+        }
+    }
+
 }
 ?>

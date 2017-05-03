@@ -373,19 +373,22 @@ class Franchisee_Controller extends CI_Controller
         if (isset($_POST['szSearchClRecord2']) && !empty($_POST['szSearchClRecord2'])) {
             $id = $_POST['szSearchClRecord2'];
         }
+         if(isset($_POST['szSearch4']) && !empty($_POST['szSearch4'])){
+              $fromdate = $this->Webservices_Model->formatdate($_POST['szSearch4']);
+        }
+         if(isset($_POST['szSearch5']) && !empty($_POST['szSearch5'])){
+             $todate = $this->Webservices_Model->formatdate($_POST['szSearch5']);
+        }
         $config['base_url'] = __BASE_URL__ . "/franchisee/viewClientDetails/";
-        $config['total_rows'] = count($this->Franchisee_Model->viewChildClientDetails($idClient, $limit, $offset, $searchAry, $id));
-
+        $config['total_rows'] = count($this->Franchisee_Model->viewChildClientDetails($idClient, $limit, $offset, $searchAry, $id,$fromdate,$todate));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
-
         $this->pagination->initialize($config);
-        
         
         $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
         $franchiseId = $clientDetailsAray['franchiseeId'];
         $idfranchisee = $this->session->userdata('idfranchisee');
-        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, $config['per_page'], $this->uri->segment(3), $searchAry, $id,$idfranchisee);
+        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, $config['per_page'], $this->uri->segment(3), $searchAry, $id,$idfranchisee,$fromdate,$todate);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
         //$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);

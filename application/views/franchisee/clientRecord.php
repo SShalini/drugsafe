@@ -76,10 +76,10 @@
                                 <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related clients.</span>
                             </div>
                                  <div class="actions">
-<!--                                <a onclick="ViewpdfOrderReport('<?php echo $_POST['szSearchClientname'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                               <a onclick="ViewPdfClientReport('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
-                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>-->
-                                <a onclick="ViewExcelClientReport('<?php echo $_POST['szSearchname'];?>','<?php echo $_POST['szSearchClientname'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                                <a onclick="ViewExcelClientReport('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                 <i class="fa fa-file-excel-o"></i> View Xls </a>
 
@@ -102,6 +102,14 @@
                                             &nbsp;Add New Client
                                         </button>
                                     </div>
+                                    
+                               <a onclick="ViewPdfClientReport('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                                   class=" btn green-meadow">
+                                    <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                                <a onclick="ViewExcelClientReport('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                                   class=" btn green-meadow">
+                                <i class="fa fa-file-excel-o"></i> View Xls </a>
+
                                 </div>
                             <?php } ?>
                         </div>
@@ -109,12 +117,12 @@
                     <?php
                     if (($_SESSION['drugsafe_user']['iRole'] == '5')||($_SESSION['drugsafe_user']['iRole'] == '1')) {
                         ?>
-                        <div class=" row">
+                       
                             <form class="form-horizontal" id="szSearchClientRecord"
                                   action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                                   method="post">
                                 <div class=" row">
-                                <div class=" col-md-3 clienttypeselect">
+                                <div class=" col-md-3 search">
 
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
@@ -184,7 +192,7 @@
                                     </div>
                                     </div>
                                     <div class="row ">
-                                   <div class=" search col-md-3 ">
+                                   <div class=" col-md-3 clienttypeselect ">
                                       <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
@@ -217,7 +225,7 @@
                                 </div>
                                </div>
                             </form>
-                        </div>
+                        
 
                         <?php
 
@@ -460,15 +468,15 @@
 
                     } else {
 
-                        if (!empty($clientAry) || !empty($corpuserDetailsArr)) {
+                       
 
                     ?>
-                    <div class="row">
+                    <div class="row search">
                         <form class="form-horizontal" id="szSearchClientRecord"
                               action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                               method="post">
 
-                            <div class="search col-md-3 clienttypeselect">
+                            <div class=" col-md-3 clienttypeselect">
 
                                 <select class="form-control custom-select" name="szSearchClRecord1"
                                         id="szSearchClientname"
@@ -482,7 +490,7 @@
                                     ?>
                                 </select>
                             </div>
-                          <div class="col-md-3 search">
+                          <div class="col-md-3 ">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
@@ -547,7 +555,9 @@
                         </form>
                     </div>
 
+ <?php if (!empty($clientAry) || !empty($corpuserDetailsArr)) {
 
+                    ?>
                     <div id="page_content" class="row">
                         <div class="col-md-12">
                             <div class="row">

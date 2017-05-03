@@ -481,7 +481,7 @@
                             <lable>Contact Phone Number:</lable>
                         </div>
                         <div class="col-sm-6">
-                            <p><?php echo $userDataAry['rlr_mobile'];?></p>
+                            <p><?php echo $userDataAry['rlr_name'];?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -846,21 +846,22 @@
                         }
                     }
                     ?>
-                    
-                </div>
+                    <a onclick="ViewPdfSiteReport('<?php echo $clientDetailsAray['id'];?>','<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                        class=" btn green-meadow">
+                         <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+                     <a onclick="ViewExcelSiteReport('<?php echo $clientDetailsAray['id'];?>','<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                        class=" btn green-meadow">
+                     <i class="fa fa-file-excel-o"></i> View Xls </a>
+
+                 </div>
             </div>
             
         </div>
         <div class="portlet-body">
-            <?php        
-            if($childClientDetailsAray)
-            {
-            ?>
-            
-             <div class="row">
+             <div class="row ">
                            <form class="form-horizontal" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
-
-                               <div class="clienttypeselect search col-md-3 ">
+               <div class="row ">
+                               <div class="col-md-3 ">
 
                                    <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                        <option value="">Company Name</option>
@@ -873,13 +874,76 @@
                                        ?>
                                    </select>
                                </div>
+                                <div class="col-md-3">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
 
+                                                <input type="text" id="szSearch4" class="form-control"
+                                                       value="<?php echo set_value('szSearch4'); ?>" readonly
+                                                       placeholder="Start Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch4">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch4')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch4'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch4'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch4']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+
+                                    </div>
+                               
+                                   <div class=" col-md-3">
+                                      <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
+                                            <div class="input-group input-medium date date-picker"
+                                                 data-date-format="dd/mm/yyyy">
+
+                                                <input type="text" id="szSearch5" class="form-control"
+                                                       value="<?php echo set_value('szSearch5'); ?>" readonly
+                                                       placeholder="End Order Date"
+                                                       onfocus="remove_formError(this.id,'true')" name="szSearch5">
+                                                <span class="input-group-addon">
+                                               <i class="fa fa-calendar"></i>
+                                               </span>
+                                            </div>
+                                            <!-- /input-group -->
+                                            <?php
+                                            if (form_error('szSearch5')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch5'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch5']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div> 
+                                    </div>
+                                
                                <div class="col-md-1">
                                    <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                </div>
+                     </div>
                            </form>
                           </div>
-                    <div class="row">
+             <?php        
+            if($childClientDetailsAray)
+            {
+            ?>
+                <div class="row">
                 <div class="table-responsive">
                    <table id="sample_1" class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid" aria-describedby="sample_1_info">
                         <thead>

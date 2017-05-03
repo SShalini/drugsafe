@@ -3487,3 +3487,39 @@ function ViewExcelClientReport(frId,clName,fromDate,toDate) {
         window.open(URL, '_blank');
     });
 }
+function ViewPdfClientReport(frId,clName,fromDate,toDate) {
+    $.post(__BASE_URL__ + "/reporting/ViewPdfClientReportData", {
+        frId: frId,
+        clName: clName,
+        fromDate: fromDate,
+        toDate: toDate
+    }, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL, '_blank');
+    });
+}
+function ViewPdfSiteReport(clientId,siteName,fromDate,toDate) {
+    $.post(__BASE_URL__ + "/reporting/ViewPdfSiteReportData", {
+        clientId: clientId,
+        siteName: siteName,
+        fromDate: fromDate,
+        toDate: toDate
+    }, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL, '_blank');
+    });
+}
+function ViewExcelSiteReport(clientId,siteName,fromDate,toDate) {
+    $.post(__BASE_URL__ + "/reporting/ViewExcelSiteReportData", {
+        clientId: clientId,
+        siteName: siteName,
+        fromDate: fromDate,
+        toDate: toDate
+    }, function (result) {
+        ar_result = result.split('||||');
+        var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
+        window.open(URL, '_blank');
+    });
+}

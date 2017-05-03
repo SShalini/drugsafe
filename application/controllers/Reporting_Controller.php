@@ -4948,7 +4948,7 @@ class Reporting_Controller extends CI_Controller
 
         $this->session->set_userdata('fromDate', $fromDate);
         $this->session->set_userdata('toDate', $toDate);
-        $this->session->set_userdata('frName', $frName);
+        $this->session->set_userdata('frId', $frId);
         $this->session->set_userdata('clName', $clName);
 
 
@@ -4965,19 +4965,107 @@ class Reporting_Controller extends CI_Controller
         $title = 'Client Details Report';
         $file = $filename . '-' . $title; //save our workbook as this file name
 
-
         $this->excel->setActiveSheetIndex(0);
         
+        $this->excel->getActiveSheet()->setTitle($filename);
+          $this->excel->getActiveSheet()->setCellValue('A1', 'Business Name');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B1', 'ABN');
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        
+        
+        $this->excel->getActiveSheet()->setCellValue('C1', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D1', 'Primary Email');
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E1', 'Primary Phone');
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F1', 'No Of Sites');
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('G1', 'Industry');
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('H1', 'Discount');
+        $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('H1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('I1', 'Contact Email');
+        $this->excel->getActiveSheet()->getStyle('I1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('I1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        
+        $this->excel->getActiveSheet()->setCellValue('J1', 'Contact Phone');
+        $this->excel->getActiveSheet()->getStyle('J1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('J1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('J1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+          $this->excel->getActiveSheet()->setCellValue('K1', 'Contact Mobile');
+        $this->excel->getActiveSheet()->getStyle('K1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('K1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('K1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('L1', 'Address');
+        $this->excel->getActiveSheet()->getStyle('L1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('L1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('L1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('M1', 'Country');
+        $this->excel->getActiveSheet()->getStyle('M1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('M1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('M1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('N1', 'State');
+        $this->excel->getActiveSheet()->getStyle('N1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('N1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('N1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('O1', 'Region Name');
+        $this->excel->getActiveSheet()->getStyle('O1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('O1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('O1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+          $this->excel->getActiveSheet()->setCellValue('P1', 'City');
+        $this->excel->getActiveSheet()->getStyle('P1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('P1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('P1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('Q1', 'Zip/Postal Code');
+        $this->excel->getActiveSheet()->getStyle('Q1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('Q1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('Q1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
         $frId = $this->session->userdata('frId');
         $clName = $this->session->userdata('clName');
         $fromDate = $this->session->userdata('fromDate');
         $toDate = $this->session->userdata('toDate');
         
-        
+       
          if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
            if(!empty($frId))
          {
-           $frId = $frId;   
+           $frId = $this->session->userdata('frId');  
          }
          else{
            $frId = $this->session->userdata('idFr');  
@@ -4986,68 +5074,96 @@ class Reporting_Controller extends CI_Controller
       
         
          $fromdateData = $this->Webservices_Model->formatdate($fromDate);
-       
-             $todateData = $this->Webservices_Model->formatdate($toDate);
+         $todateData = $this->Webservices_Model->formatdate($toDate);
         
         if(($_SESSION['drugsafe_user']['iRole']==2)){
          $frId = $_SESSION['drugsafe_user']['id'];  
         }
          $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$frId,$clName,false,false,$fromdateData,$todateData);
       
-        if (!empty($clientAray)) {
-            $i =0; 
+         if (!empty($clientAray)) {
+            $i = 2;
             foreach ($clientAray as $item) {
-             
-        $this->excel->getActiveSheet()->setCellValue('C'. (string)($i + 1), $item['szName']."'".'s Details');
-        $this->excel->getActiveSheet()->getStyle('C'. (string)($i + 1))->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('C'.(string)($i + 1))->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('C'. (string)($i + 1))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-                $this->excel->getActiveSheet()->setCellValue('A' .(string)($i + 2) , 'Business Name:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 2), $item['szBusinessName']);
-                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 3), 'ABN:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 3), $item['abn']);
-                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 4), 'Contact Name:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 4), $item['szName']);
-                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 5), 'Primary Email:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 5), $item['szEmail']);
-                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 6), 'Primary Phone:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 6), $item['szContactNumber']);
-                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 7), 'No Of Sites:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 7), $item['szNoOfSites']);
-                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 8), 'Industry:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 8), $item['industry']); 
-                $this->excel->getActiveSheet()->setCellValue('A' . (string)($i + 9), 'Discount:');
-                $this->excel->getActiveSheet()->setCellValue('B' . (string)($i + 9), $item['abn']);
-                
-                $this->excel->getActiveSheet()->setCellValue('D' .(string)($i + 2) , 'Contact Email:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 2), $item['szContactEmail']);
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 3), 'Contact Phone:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 3), $item['szContactPhone']);
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 4), 'Contact Mobile:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 4), $item['szContactMobile']);
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 5), 'Address:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 5), $item['szAddress']);
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 6), 'Country:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 6), $item['szCountry']);
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 7), 'State:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 7), $item['szState']);
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 8), 'Region Name:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 8), $item['szZipCode']); 
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 9), 'City:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 9), $item['szCity']);
-                $this->excel->getActiveSheet()->setCellValue('D' . (string)($i + 10), 'Zip/Postal Code:');
-                $this->excel->getActiveSheet()->setCellValue('E' . (string)($i + 10), $item['szCity']);
-         
-
+                 $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['id']);
+                  $discount = $this->Franchisee_Model->getDiscountByDisId($item['discountid']);
+               
+                              $getRegionName = $this->Admin_Model->getregionbyregionid($item['regionId']);
+                              $countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($item['id'],false,false);
+                                    $count='0';
+                                    if($countChildClientDetailsAray)
+                                    {
+                                        $count=count($countChildClientDetailsAray);
+                                    }
+                                    
+                           if($item['industry']==1){
+                           $value = 'Agriculture, Forestry and Fishing';
+                            }
+                            if($item['industry']==2){
+                                $value = 'Mining';
+                            }
+                            if($item['industry']==3){
+                                $value = 'Manufacturing';
+                            }
+                            if($item['industry']==4){
+                                $value = 'Electricity, Gas and Water Supply';
+                            }if($item['industry']==5){
+                                $value = 'Construction';
+                            }if($item['industry']==6){
+                                $value = 'Wholesale Trade';
+                            }if($item['industry']==7){
+                                $value = 'Transport and Storage';
+                            }if($item['industry']==8){
+                                $value = 'Communication Services';
+                            }if($item['industry']==9){
+                                $value = 'Agriculture, Property and Business Services';
+                            }if($item['industry']==10){
+                                $value = 'Agriculture, Government Administration and Defence';
+                            }if($item['industry']==11){
+                                $value = 'Education';
+                            }
+                            if($item['industry']==12){
+                                $value = 'Health and Community Services';
+                            }if($item['industry']==13){
+                                $value = 'Other';
+                            }
+                         
+                $this->excel->getActiveSheet()->setCellValue('A' . $i, $item['szBusinessName']);
+                $this->excel->getActiveSheet()->setCellValue('B' . $i, $item['abn']);
+                $this->excel->getActiveSheet()->setCellValue('C' . $i, $item['szName']);
+                $this->excel->getActiveSheet()->setCellValue('D' . $i, $item['szEmail']);
+                $this->excel->getActiveSheet()->setCellValue('E' . $i, $item['szContactNumber']);
+                $this->excel->getActiveSheet()->setCellValue('F' . $i, $count);
+                $this->excel->getActiveSheet()->setCellValue('G' . $i, $value);
+                $this->excel->getActiveSheet()->setCellValue('H' . $i, $discount['percentage']);
+                $this->excel->getActiveSheet()->setCellValue('I' . $i, $item['szContactEmail']);
+                $this->excel->getActiveSheet()->setCellValue('J' . $i, $item['szContactPhone']);
+                $this->excel->getActiveSheet()->setCellValue('K' . $i, $item['szContactMobile']);
+                $this->excel->getActiveSheet()->setCellValue('L' . $i, $item['szAddress']);
+                $this->excel->getActiveSheet()->setCellValue('M' . $i, $item['szCountry']);
+                $this->excel->getActiveSheet()->setCellValue('N' . $i, $getState['name']);
+                $this->excel->getActiveSheet()->setCellValue('O' . $i, $getRegionName['regionName']);
+                $this->excel->getActiveSheet()->setCellValue('P' . $i, $item['szCity']);
+                $this->excel->getActiveSheet()->setCellValue('Q' . $i, $item['szZipCode']);
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
-               $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('I')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('J')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('K')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('L')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('M')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('N')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('O')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('P')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('Q')->setAutoSize(TRUE);
 
+                $i++;
             }
-             $i++;
         }
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
@@ -5060,6 +5176,921 @@ class Reporting_Controller extends CI_Controller
 //force user to download the Excel file without writing it to server's HD
         $objWriter->save('php://output');
     }
+  function ViewPdfClientReportData()
+    { 
+        $frId = $this->input->post('frId');
+        $clName = $this->input->post('clName');
+        $fromDate = $this->input->post('fromDate');
+        $toDate = $this->input->post('toDate');
 
+        $this->session->set_userdata('fromDate', $fromDate);
+        $this->session->set_userdata('toDate', $toDate);
+        $this->session->set_userdata('frId', $frId);
+        $this->session->set_userdata('clName', $clName);
+
+
+        echo "SUCCESS||||";
+        echo "ViewPdfClientReport";
+
+    }
+     public function ViewPdfClientReport()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+         $pdf->SetTitle('Drug-safe client details report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Client Details Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+         $pdf->AddPage('L');
+
+         $frId = $this->session->userdata('frId');
+        $clName = $this->session->userdata('clName');
+        $fromDate = $this->session->userdata('fromDate');
+        $toDate = $this->session->userdata('toDate');
+        
+       
+         if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
+           if(!empty($frId))
+         {
+           $frId = $this->session->userdata('frId');  
+         }
+         else{
+           $frId = $this->session->userdata('idFr');  
+         } 
+         }
+       
+         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
+         $todateData = $this->Webservices_Model->formatdate($toDate);
+        
+        if(($_SESSION['drugsafe_user']['iRole']==2)){
+         $frId = $_SESSION['drugsafe_user']['id'];  
+        }
+         $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$frId,$clName,false,false,$fromdateData,$todateData);
+      
+          $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Client Details Report</b></p></div>
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                  ';
+        if ($clientAray) {
+            $i = 0;
+               
+            foreach ($clientAray as $clientData) {
+                   if($clientData['industry']==1){
+                                $value = 'Agriculture, Forestry and Fishing';
+                            }
+                            if($clientData['industry']==2){
+                                $value = 'Mining';
+                            }
+                            if($clientData['industry']==3){
+                                $value = 'Manufacturing';
+                            }
+                            if($clientData['industry']==4){
+                                $value = 'Electricity, Gas and Water Supply';
+                            }if($clientData['industry']==5){
+                                $value = 'Construction';
+                            }if($clientData['industry']==6){
+                                $value = 'Wholesale Trade';
+                            }if($clientData['industry']==7){
+                                $value = 'Transport and Storage';
+                            }if($clientData['industry']==8){
+                                $value = 'Communication Services';
+                            }if($clientData['industry']==9){
+                                $value = 'Agriculture, Property and Business Services';
+                            }if($clientData['industry']==10){
+                                $value = 'Agriculture, Government Administration and Defence';
+                            }if($clientData['industry']==11){
+                                $value = 'Education';
+                            }
+                            if($clientData['industry']==12){
+                                $value = 'Health and Community Services';
+                            }if($clientData['industry']==13){
+                                $value = 'Other';
+                            } 
+                              $discount = $this->Franchisee_Model->getDiscountByDisId($clientData['discountid']);
+                              
+                             $getState=$this->Franchisee_Model->getStateByFranchiseeId($clientData['id']);
+                              $getRegionName = $this->Admin_Model->getregionbyregionid($clientData['regionId']);
+                              $countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($clientData['id'],false,false);
+                                    $count='0';
+                                    if($countChildClientDetailsAray)
+                                    {
+                                        $count=count($countChildClientDetailsAray);
+                                    }
+   
+                $html .= '  
+              <tr>
+                                        <td ><b>Business Name</b> </td>
+                                        <td> <b>ABN</b> </td>
+                                        <td> <b>Contact Name</b> </td>
+                                        <td><b>Primary Email</b> </td>
+                                        <td> <b>Primary Phone</b> </td>
+                                        <td><b>No Of Sites</b> </td>
+                                        <td> <b>Industry</b> </td>
+                                        <td> <b>Discount</b> </td>
+                                        <td><b>Contact Email</b> </td>
+                                        <br>
+                                        </tr>
+                                        <tr>
+                                          <td>' . $clientData['szBusinessName'] . ' </td>
+                                            <td> ' . $clientData['abn'] . '</td>
+                                            <td> ' . $clientData['szName'] . ' </td>
+                                            <td>' . $clientData['szEmail'] . ' </td>
+                                            <td>' . $clientData['szContactNumber'] . ' </td>
+                                            <td> ' . $count . '</td>
+                                            <td> ' . $value . ' </td>
+                                            <td>' .(!empty($discount['percentage'])?$discount['percentage']:'N/A') . ' </td> 
+                                            <td> ' . $clientData['szContactEmail'] . '</td>
+                                        </tr>
+                                      <tr>
+                                            <td ><b>Contact Phone</b> </td>
+                                        <td> <b>Contact Mobile</b> </td>
+                                        <td> <b>Address</b> </td>
+                                        <td><b>Country</b> </td>
+                                        <td> <b>State</b> </td>
+                                        <td><b>Region Name</b> </td>
+                                        <td> <b>City</b> </td>
+                                        <td><b>Zip/Postal Code</b> </td>
+                                        <br>
+                                        </tr>
+                                         <tr>
+                                          <td>' . $clientData['szContactPhone'] . ' </td>
+                                            <td> ' . $clientData['szContactMobile'] . '</td>
+                                            <td> ' . $clientData['szAddress'] . ' </td>
+                                            <td>' . $clientData['szCountry'] . ' </td>
+                                            <td> ' . $getState['name'] . '</td>
+                                            <td> ' . $getRegionName['regionName'] . '</td>
+                                            <td>' . $clientData['szCity'] . ' </td> 
+                                            <td> ' . $clientData['szZipCode'] . '</td>
+                                        </tr>
+                                         
+                                        
+                                   ';
+            }
+        }
+        $i++;
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+        $pdf->writeHTML($html, true, false, true, false, '');
+//    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+         $this->session->unset_userdata('frId');
+         $this->session->unset_userdata('fromDate');
+         $this->session->unset_userdata('toDate');
+         $this->session->unset_userdata('clName');
+         ob_end_clean();
+         $pdf->Output('client-details-report.pdf', 'I');
+    }
+  function ViewPdfSiteReportData()
+    { 
+        
+        $siteName = $this->input->post('siteName');
+        $clientId = $this->input->post('clientId');
+        $fromDate = $this->input->post('fromDate');
+        $toDate = $this->input->post('toDate');
+
+        $this->session->set_userdata('clientId', $clientId);
+        $this->session->set_userdata('fromDate', $fromDate);
+        $this->session->set_userdata('toDate', $toDate);
+        $this->session->set_userdata('siteName', $siteName);
+
+
+        echo "SUCCESS||||";
+        echo "ViewPdfSiteReport";
+
+    }
+     public function ViewPdfSiteReport()
+    {
+        ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+         $pdf->SetTitle('Drug-safe site details report');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Site Details Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+// set image scale factor
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+// set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+        // Add a page
+         $pdf->AddPage('L');
+
+       
+        $siteId = $this->session->userdata('siteName');
+        $idClient = $this->session->userdata('clientId');
+        $fromDate = $this->session->userdata('fromDate');
+        $toDate = $this->session->userdata('toDate');
+       
+         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
+         $todateData = $this->Webservices_Model->formatdate($toDate);
+        
+         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, false, flase, $searchAry, $siteId,false,$fromdateData,$todateData);
+       
+
+         if ($childClientDetailsAray) {
+    $html = '<div class="wraper">
+             <table cellpadding="5px">
+             <tr>
+             <td rowspan="4" align="left"><a style="text-align:center;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
+             </tr>
+             </table>
+             <br />
+             <h1 style="text-align: center;">Site Details Report</h1>';          
+            $i = 0;
+       
+        foreach ($childClientDetailsAray as $siteData) {
+        $userDataAry = $this->Franchisee_Model->getSiteDetailsById($siteData['clientId']);
+        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($siteData['id']); 
+        $getRegionName = $this->Admin_Model->getregionbyregionid($siteData['regionId']);
+       
+         $getState=$this->Franchisee_Model->getStateByFranchiseeId($siteData['id']);
+       if($userDataAry['onsite_service']==0){  $val = "Mobile Clinic ";}  else { $val = "In-house";}
+       if($userDataAry['risk_assessment']==0){  $raVal = "Yes";}  else { $raVal = "No";}
+      if($userDataAry['power_access']==0){  $paVal = "Yes";}  else { $paVal = "No";}
+       if($userDataAry['req_comp_induction']==0){  $rciVal = "Yes";}  else { $rciVal = "No";}
+       if($userDataAry['randomisation']==0) { $rpVal = "Marble selection (% split)-not accurate";}  elseif($userDataAry['randomisation']==1) { $rpVal = "Drugsafe given names then select via algorythm";} else {$rpVal = "Client does randomization";}
+       if($userDataAry['paperwork']==0){
+        $pwVal =  "Leave onsite with site contact" ; }
+        if($userDataAry['paperwork']==1){
+        $pwVal = "Return to Drugsafe for filing" ;  } 
+        if($userDataAry['paperwork']==2){
+        $pwVal = "Return to Drugsafe and and emailed to specific contact" ;  } 
+         if($userDataAry['ongoing_testing_req']==0){
+         $ogVal = "Random";    
+         }  
+         else{
+          $ogVal = "Blanket";   
+         }
+          if($userDataAry['initial_testing_req']==0){
+         $itrval = "Random";    
+         }  
+         else{
+          $itrval = "Blanket";   
+         }
+       
+        $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
+          if(in_array("1", $req_ppe_ary)){
+          $ppe1 = "High Vis Work Wear" ; }
+          else{
+              $ppe1 = 'N/A';
+          }
+           if(in_array("2", $req_ppe_ary)){
+          $ppe2 =  " Head Protection" ;  }
+           else{
+              $ppe2 = 'N/A';
+          }
+           if(in_array("3", $req_ppe_ary)){
+          $ppe3 = " Face/Eye Protection" ;  }
+           else{
+              $ppe3 = 'N/A';
+          }
+           if(in_array("4", $req_ppe_ary)){
+         $ppe4 = " Safety Boots" ;  }
+          else{
+              $ppe4 = 'N/A';
+          }
+          if(in_array("5", $req_ppe_ary)){
+         $ppe5 = "  Long Sleev Clothing" ; 
+          }
+           else{
+              $ppe5 = 'N/A';
+          }
+        $html .= '
+<table cellpadding="5px">
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Site Code:</b> '.(!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A').'</td><td width="50%" align="right"><b>Name of Person Completing Form:</b> '.$userDataAry['per_form_complete'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Company Name:</b> '.$siteData['szName'].'</td><td width="50%" align="right"><b>Address:</b> '.$siteData['szAddress'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Company Email:</b> '.$siteData['szEmail'].'</td><td width="50%" align="right"><b>State:</b> '.$getState['name'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Company Phone Number:</b> '.$siteData['szContactNumber'].'</td><td width="50%" align="right"><b>Region Name:</b> '.$getRegionName['regionName'].'</td>
+    </tr>
+     <tr>
+        <td width="50%" align="left"><b>City:</b> '.$siteData['szCity'].'</td><td width="50%" align="right"><b>Zip/Postal Code:</b> '.$siteData['szZipCode'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Country:</b> '.$siteData['szCountry'].'</td>
+    </tr>
+</table>
+<h3 style="color:black" align="center">Contact Details</h3>
+<h3 style="color:black" align="left">Responsible for Scheduling.</h3>
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="50%" align="left"><b>Contact Name:</b></td><td width="50%" align="right">'.$userDataAry['sp_name'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['sp_mobile'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Email:</b></td><td width="50%" align="right">'.$userDataAry['sp_email'].'</td>
+    </tr>
+</table>
+<h3 style="color:black" align="left">Receive the confirmatory lab results.</h3>
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="50%" align="left"><b>Contact Name:</b></td><td width="50%" align="right">'.$userDataAry['rlr_name'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['rlr_mobile'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Email:</b></td><td width="50%" align="right">'.$userDataAry['rlr_email'].'</td>
+    </tr>
+</table>
+<h3 style="color:black" align="left">Involved in Scheduling.</h3>
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="50%" align="left"><b>Contact Name:</b></td><td width="50%" align="right">'.$userDataAry['iis_name'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['iis_mobile'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Email:</b></td><td width="50%" align="right">'.$userDataAry['iis_email'].'</td>
+    </tr>
+</table>
+<h3 style="color:black" align="left">Other people  receive the confirmatory lab results.</h3>
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="50%" align="left"><b>Contact Name:</b></td><td width="50%" align="right">'.$userDataAry['orlr_name'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['orlr_mobile'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Contact Email:</b></td><td width="50%" align="right">'.$userDataAry['orlr_email'].'</td>
+    </tr>
+</table>
+<h3 style="color:black"align="center">ONSITE SCREENING INFORMATION</h3>
+<h3 style="color:black" align="left">Primary Site Contact.</h3>
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="50%" align="left"><b>Contact Name:</b></td><td width="50%" align="right">'.$userDataAry['psc_name'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Landline Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['psc_phone'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Mobile Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['psc_mobile'].'</td>
+    </tr>
+</table>
+<h3 style="color:black" align="left">Secondary Site Contact.</h3>
+<table border="1px" cellpadding="5px">
+    <tr>
+        <td width="50%" align="left"><b>Contact Name:</b></td><td width="50%" align="right">'.$userDataAry['ssc_name'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Landline Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['ssc_phone'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Mobile Phone Number:</b></td><td width="50%" align="right">'.$userDataAry['ssc_mobile'].'</td>
+    </tr>
+</table>
+<br />
+
+<br>
+<table cellpadding="5px">
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>People on site:</b> '.$userDataAry['site_people'].'</td><td width="50%" align="right"><b>Initial Testing Requirements:</b> '.$itrval.'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Test Count:</b> '.$userDataAry['test_count'].'</td><td width="50%" align="right"><b>Ongoing Testing Requirements:</b> '.$ogVal.'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Type of service preferred on-site:</b> '.$val .'</td><td width="50%" align="right"><b>No of times Drugsafe visit your site:</b> '.$userDataAry['site_visit'].'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Access to power for our Mobile:</b> '.$paVal.'</td><td width="50%" align="right"><b>Preferred start time:</b> '.$userDataAry['start_time'].'</td>
+    </tr>
+     <tr>
+        <td width="50%" align="left"><b>Our people required to complete an induction:</b> '.$rciVal.'</td><td width="50%" align="right"><b>Risk assessment required:</b> '.$raVal.'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Randomization process:</b> '.$rpVal.'</td><td width="50%" align="right"><b>Required PPE :</b> '.$ppe1.",".$ppe2.",".$ppe3.",".$ppe4.",".$ppe5.'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Paperwork at the time of testing:</b> '.$pwVal.'</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Special instruction for Drugsafe staff:</b> '.$userDataAry['instructions'].'</td>
+    </tr>
+    
+</table>
+        </div> <hr>';
+        
+         }
+          $i++;
+        }
+       
+        $pdf->writeHTML($html, true, false, true, false, '');
+//      $pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        error_reporting(E_ALL);
+         $this->session->unset_userdata('frId');
+         $this->session->unset_userdata('fromDate');
+         $this->session->unset_userdata('toDate');
+         $this->session->unset_userdata('clName');
+         ob_end_clean();
+         $pdf->Output('client-details-report.pdf', 'I');
+    }  
+     function ViewExcelSiteReportData()
+    { 
+       $siteName = $this->input->post('siteName');
+        $clientId = $this->input->post('clientId');
+        $fromDate = $this->input->post('fromDate');
+        $toDate = $this->input->post('toDate');
+
+        $this->session->set_userdata('clientId', $clientId);
+        $this->session->set_userdata('fromDate', $fromDate);
+        $this->session->set_userdata('toDate', $toDate);
+        $this->session->set_userdata('siteName', $siteName);
+
+
+        echo "SUCCESS||||";
+        echo "ViewExcelSiteReport";
+
+
+    }
+
+    public function ViewExcelSiteReport()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Site Details Report';
+        $file = $filename . '-' . $title; //save our workbook as this file name
+
+        $this->excel->setActiveSheetIndex(0);
+        
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A1', 'Site Details');
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+         $this->excel->getActiveSheet()->setCellValue('L1', 'Contact Details');
+        $this->excel->getActiveSheet()->getStyle('L1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('L1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('L1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+         $this->excel->getActiveSheet()->setCellValue('X1', 'ONSITE SCREENING INFORMATION');
+        $this->excel->getActiveSheet()->getStyle('X1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('X1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('X1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $this->excel->getActiveSheet()->setCellValue('L2', 'Responsible for Scheduling');
+        $this->excel->getActiveSheet()->getStyle('L2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('L2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('L2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        
+        $this->excel->getActiveSheet()->setCellValue('O2', 'Receive the confirmatory lab results');
+        $this->excel->getActiveSheet()->getStyle('O2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('O2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('O2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        
+        $this->excel->getActiveSheet()->setCellValue('R2', 'Involved in Scheduling');
+        $this->excel->getActiveSheet()->getStyle('R2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('R2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('R2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $this->excel->getActiveSheet()->setCellValue('U2', 'Other people receive the confirmatory lab results');
+        $this->excel->getActiveSheet()->getStyle('U2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('U2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('U2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+            $this->excel->getActiveSheet()->setCellValue('X2', 'Primary Site Contact');
+        $this->excel->getActiveSheet()->getStyle('X2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('X2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('X2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $this->excel->getActiveSheet()->setCellValue('AA2', 'Secondary Site Contact');
+        $this->excel->getActiveSheet()->getStyle('AA2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AA2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AA2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('A3', 'Site Code');
+        $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B3', 'Company Name');
+        $this->excel->getActiveSheet()->getStyle('B3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        
+        
+        $this->excel->getActiveSheet()->setCellValue('C3', 'Company Email');
+        $this->excel->getActiveSheet()->getStyle('C3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D3', 'Company Phone Number');
+        $this->excel->getActiveSheet()->getStyle('D3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('E3', 'Name of Person Completing Form');
+        $this->excel->getActiveSheet()->getStyle('E3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('E3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('E3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('F3', 'Address');
+        $this->excel->getActiveSheet()->getStyle('F3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('F3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('F3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('G3', 'City');
+        $this->excel->getActiveSheet()->getStyle('G3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('G3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('G3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('H3', 'State');
+        $this->excel->getActiveSheet()->getStyle('H3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('H3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('H3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('I3', 'Region Name');
+        $this->excel->getActiveSheet()->getStyle('I3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('I3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('I3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        
+        $this->excel->getActiveSheet()->setCellValue('J3', 'ZIP/Postal Code');
+        $this->excel->getActiveSheet()->getStyle('J3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('J3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('J3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+          $this->excel->getActiveSheet()->setCellValue('K3', 'Country');
+        $this->excel->getActiveSheet()->getStyle('K3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('K3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('K3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('L3', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('L3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('L3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('L3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('M3', 'Contact Phone Number');
+        $this->excel->getActiveSheet()->getStyle('M3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('M3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('M3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('N3', 'Contact Email');
+        $this->excel->getActiveSheet()->getStyle('N3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('N3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('N3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('O3', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('O3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('O3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('O3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+          $this->excel->getActiveSheet()->setCellValue('P3', 'Contact Phone Numbe');
+        $this->excel->getActiveSheet()->getStyle('P3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('P3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('P3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('Q3', 'Contact Email');
+        $this->excel->getActiveSheet()->getStyle('Q3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('Q3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('Q3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('R3', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('R3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('R3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('R3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('S3', 'Contact Phone Number');
+        $this->excel->getActiveSheet()->getStyle('S3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('S3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('S3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('T3', 'Contact Email');
+        $this->excel->getActiveSheet()->getStyle('T3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('T3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('T3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('U3', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('U3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('U3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('U3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('V3', 'Contact Phone Number');
+        $this->excel->getActiveSheet()->getStyle('V3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('V3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('V3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('W3', 'Contact Email');
+        $this->excel->getActiveSheet()->getStyle('W3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('W3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('W3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('X3', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('X3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('X3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('X3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('Y3', 'Landline Phone Number');
+        $this->excel->getActiveSheet()->getStyle('Y3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('Y3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('Y3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('Z3', 'Mobile Phone Number');
+        $this->excel->getActiveSheet()->getStyle('Z3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('Z3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('Z3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        
+         $this->excel->getActiveSheet()->setCellValue('AA3', 'Contact Name');
+        $this->excel->getActiveSheet()->getStyle('AA3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AA3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AA3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        
+           $this->excel->getActiveSheet()->setCellValue('AB3', 'Landline Phone Number');
+        $this->excel->getActiveSheet()->getStyle('AB3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AB3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AB3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+         $this->excel->getActiveSheet()->setCellValue('AC3', 'Mobile Phone Number');
+        $this->excel->getActiveSheet()->getStyle('AC3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AC3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AC3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        
+         $this->excel->getActiveSheet()->setCellValue('AD3', 'People on site');
+        $this->excel->getActiveSheet()->getStyle('AD3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AD3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AD3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AE3', 'Test Count');
+        $this->excel->getActiveSheet()->getStyle('AE3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AE3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AE3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AF3', 'Initial Testing Requirements');
+        $this->excel->getActiveSheet()->getStyle('AF3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AF3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AF3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AG3', 'Ongoing Testing Requirements');
+        $this->excel->getActiveSheet()->getStyle('AG3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AG3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AG3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AH3', 'Type of service preferred on-site');
+        $this->excel->getActiveSheet()->getStyle('AH3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AH3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AH3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AI3', 'No of times Drugsafe visit your site');
+        $this->excel->getActiveSheet()->getStyle('AI3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AI3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AI3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AJ3', 'Access to power for our Mobile');
+        $this->excel->getActiveSheet()->getStyle('AJ3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AJ3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AJ3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AK3', 'Preferred start time');
+        $this->excel->getActiveSheet()->getStyle('AK3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AK3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AK3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+          $this->excel->getActiveSheet()->setCellValue('AL3', 'Our people required to complete an induction');
+        $this->excel->getActiveSheet()->getStyle('AL3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AL3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AL3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AM3', 'Risk assessment required');
+        $this->excel->getActiveSheet()->getStyle('AM3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AM3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AM3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AN3', 'Randomization process');
+        $this->excel->getActiveSheet()->getStyle('AN3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AN3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AN3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AO3', 'Required PPE');
+        $this->excel->getActiveSheet()->getStyle('AO3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AO3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AO3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AP3', 'Paperwork at the time of testing');
+        $this->excel->getActiveSheet()->getStyle('AP3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AP3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AP3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        $this->excel->getActiveSheet()->setCellValue('AQ3', 'Special instruction for Drugsafe staff');
+        $this->excel->getActiveSheet()->getStyle('AQ3')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('AQ3')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('AQ3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+ 
+        
+        $siteId = $this->session->userdata('siteName');
+        $idClient = $this->session->userdata('clientId');
+        $fromDate = $this->session->userdata('fromDate');
+        $toDate = $this->session->userdata('toDate');
+       
+         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
+         $todateData = $this->Webservices_Model->formatdate($toDate);
+        
+         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, false, flase, $searchAry, $siteId,false,$fromdateData,$todateData);
+       
+
+         if ($childClientDetailsAray) {
+            $i = 4;
+           
+        foreach ($childClientDetailsAray as $item) {
+            
+       $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['id']);
+       $userDataAry = $this->Franchisee_Model->getSiteDetailsById($item['clientId']);
+       $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($item['id']); 
+       $getRegionName = $this->Admin_Model->getregionbyregionid($item['regionId']);
+     
+       if($userDataAry['onsite_service']==0){  $val = "Mobile Clinic ";}  else { $val = "In-house";}
+       if($userDataAry['risk_assessment']==0){  $raVal = "Yes";}  else { $raVal = "No";}
+       if($userDataAry['power_access']==0){  $paVal = "Yes";}  else { $paVal = "No";}
+       if($userDataAry['req_comp_induction']==0){  $rciVal = "Yes";}  else { $rciVal = "No";}
+       if($userDataAry['randomisation']==0) { $rpVal = "Marble selection (% split)-not accurate";}  elseif($userDataAry['randomisation']==1) { $rpVal = "Drugsafe given names then select via algorythm";} else {$rpVal = "Client does randomization";}
+       if($userDataAry['paperwork']==0){
+                             $pwVal =  "Leave onsite with site contact" ; }
+                             if($userDataAry['paperwork']==1){
+                            $pwVal = "Return to Drugsafe for filing" ;  } 
+                              if($userDataAry['paperwork']==2){
+                             $pwVal = "Return to Drugsafe and and emailed to specific contact" ;  } 
+         if($userDataAry['ongoing_testing_req']==0){
+         $ogVal = "Random";    
+         }  
+         else{
+          $ogVal = "Blanket";   
+         }
+          if($userDataAry['initial_testing_req']==0){
+         $itrval = "Random";    
+         }  
+         else{
+          $itrval = "Blanket";   
+         }
+       
+        $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
+          if(in_array("1", $req_ppe_ary)){
+          $ppe1 = "High Vis Work Wear" ; }
+          else{
+              $ppe1 = 'N/A';
+          }
+           if(in_array("2", $req_ppe_ary)){
+          $ppe2 =  " Head Protection" ;  }
+           else{
+              $ppe2 = 'N/A';
+          }
+           if(in_array("3", $req_ppe_ary)){
+          $ppe3 = " Face/Eye Protection" ;  }
+           else{
+              $ppe3 = 'N/A';
+          }
+           if(in_array("4", $req_ppe_ary)){
+         $ppe4 = " Safety Boots" ;  }
+          else{
+              $ppe4 = 'N/A';
+          }
+          if(in_array("5", $req_ppe_ary)){
+         $ppe5 = "  Long Sleev Clothing" ; 
+          }
+           else{
+              $ppe5 = 'N/A';
+          }
+        
+                $this->excel->getActiveSheet()->setCellValue('A' . $i, (!empty($franchiseecode['userCode'])?$franchiseecode['userCode']:'N/A'));
+                $this->excel->getActiveSheet()->setCellValue('B' . $i, $item['szName']);
+                $this->excel->getActiveSheet()->setCellValue('C' . $i, $item['szEmail']);
+                $this->excel->getActiveSheet()->setCellValue('D' . $i, $item['szContactNumber']);
+                $this->excel->getActiveSheet()->setCellValue('E' . $i, $userDataAry['per_form_complete']);
+                $this->excel->getActiveSheet()->setCellValue('F' . $i,$item['szAddress']);
+                $this->excel->getActiveSheet()->setCellValue('G' . $i, $item['szCity']);
+                $this->excel->getActiveSheet()->setCellValue('H' . $i, $item['szState']);
+                $this->excel->getActiveSheet()->setCellValue('I' . $i, $item['region']);
+                $this->excel->getActiveSheet()->setCellValue('J' . $i, $item['szZipCode']);
+                $this->excel->getActiveSheet()->setCellValue('K' . $i, $item['szCountry']);
+                $this->excel->getActiveSheet()->setCellValue('L' . $i, $userDataAry['sp_name']);
+                $this->excel->getActiveSheet()->setCellValue('M' . $i, $userDataAry['sp_mobile']);
+                $this->excel->getActiveSheet()->setCellValue('N' . $i, $userDataAry['sp_email']);
+                $this->excel->getActiveSheet()->setCellValue('O' . $i, $userDataAry['rlr_name']);
+                $this->excel->getActiveSheet()->setCellValue('P' . $i, $userDataAry['rlr_mobile']);
+                $this->excel->getActiveSheet()->setCellValue('Q' . $i, $userDataAry['rlr_email']);
+                 $this->excel->getActiveSheet()->setCellValue('R' . $i, $userDataAry['iis_name']);
+                $this->excel->getActiveSheet()->setCellValue('S' . $i, $userDataAry['iis_mobile']);
+                $this->excel->getActiveSheet()->setCellValue('T' . $i, $userDataAry['iis_email']);
+                $this->excel->getActiveSheet()->setCellValue('U' . $i, $userDataAry['orlr_name']);
+                $this->excel->getActiveSheet()->setCellValue('V' . $i, $userDataAry['orlr_mobile']);
+                $this->excel->getActiveSheet()->setCellValue('W' . $i, $userDataAry['orlr_email']);
+                $this->excel->getActiveSheet()->setCellValue('X' . $i, $userDataAry['psc_name']);
+                $this->excel->getActiveSheet()->setCellValue('Y' . $i, $userDataAry['psc_phone']);
+                $this->excel->getActiveSheet()->setCellValue('Z' . $i, $userDataAry['psc_mobile']);
+                 $this->excel->getActiveSheet()->setCellValue('AA' . $i, $userDataAry['ssc_name']);
+                $this->excel->getActiveSheet()->setCellValue('AB' . $i, $userDataAry['ssc_phone']);
+                $this->excel->getActiveSheet()->setCellValue('AC' . $i, $userDataAry['ssc_mobile']);
+                $this->excel->getActiveSheet()->setCellValue('AD' . $i, $userDataAry['site_people']);
+                $this->excel->getActiveSheet()->setCellValue('AE' . $i, $userDataAry['test_count']);
+                $this->excel->getActiveSheet()->setCellValue('AF' . $i, $itrval);
+                $this->excel->getActiveSheet()->setCellValue('AG' . $i, $ogVal);
+                $this->excel->getActiveSheet()->setCellValue('AH' . $i, $val);
+                $this->excel->getActiveSheet()->setCellValue('AI' . $i, $userDataAry['site_visit']);
+                $this->excel->getActiveSheet()->setCellValue('AJ' . $i, $paVal);
+                $this->excel->getActiveSheet()->setCellValue('AK' . $i, $userDataAry['start_time']);
+                $this->excel->getActiveSheet()->setCellValue('AL' . $i, $rciVal);
+                $this->excel->getActiveSheet()->setCellValue('AM' . $i, $raVal);
+                $this->excel->getActiveSheet()->setCellValue('AN' . $i, $rpVal);
+                $this->excel->getActiveSheet()->setCellValue('AO' . $i, $ppe1.','.$ppe2.','.$ppe3.','.$ppe4.','.$ppe5);
+                $this->excel->getActiveSheet()->setCellValue('AP' . $i, $pwVal);
+                $this->excel->getActiveSheet()->setCellValue('AQ' . $i, $userDataAry['instructions']);
+             
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('I')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('J')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('K')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('L')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('M')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('N')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('O')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('P')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('Q')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('R')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('S')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('T')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('U')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('V')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('W')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('X')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('Y')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('Z')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AA')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AB')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AC')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AD')->setAutoSize(TRUE);
+                 $this->excel->getActiveSheet()->getColumnDimension('AE')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AF')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AG')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AH')->setAutoSize(TRUE);
+                 $this->excel->getActiveSheet()->getColumnDimension('AH')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AI')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AJ')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AK')->setAutoSize(TRUE);
+                 $this->excel->getActiveSheet()->getColumnDimension('AL')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AM')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AN')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AO')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AP')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('AQ')->setAutoSize(TRUE);
+               
+
+                $i++;
+            }
+        }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
    }
 ?>
