@@ -250,7 +250,7 @@ class Order_Model extends Error_Model {
             if($query->num_rows() > 0)
             {
                  $row = $query->result_array();
-                 return  $row['0']; 
+                 return  $row[0];
             }
             else
             {
@@ -871,10 +871,11 @@ class Order_Model extends Error_Model {
     }
 
     function changesdispatchstatus($ordid, $status, $price=0.00,$freightprice=0){
-        $statusarr4 = array('status' => (int)$status,'last_changed'=>date('Y-m-d h:i:s'),'dispatched_price'=>(float)$price);
-        $statusarr2 = array('status' => (int)$status,'dispatchedon'=>date('Y-m-d h:i:s'),'dispatched_price'=>(float)$price);
+        $statusarr4 = array('status' => (int)$status,'last_changed'=>date('Y-m-d h:i:s'));
+        $statusarr2 = array('status' => (int)$status,'dispatchedon'=>date('Y-m-d h:i:s'));
         $conditionarr = array('id' => (int)$ordid);
         $this->db->where($conditionarr)
+            ->set('dispatched_price', 'dispatched_price + ' . (float)$price, FALSE)
             ->update(__DBC_SCHEMATA_ORDER__, ($status == '2'?$statusarr2:$statusarr4));
         if($freightprice>0){
             $priceArr = array('freightprice' => $freightprice);
@@ -1162,8 +1163,8 @@ class Order_Model extends Error_Model {
         }
     }
 
-    function getTotalOrderDispatchDates($orderid,$received=false){
-        $conditionStr = 'orddet.orderid = '.(int)$orderid.($received?' AND part.received = 0':'');
+    function getTotalOrderDispatchDates($orderid,$received=0){
+        $conditionStr = 'orddet.orderid = '.(int)$orderid.($received==1?' AND part.received = 0':($received==2?' AND part.received = 1':''));
         $query = $this->db->select('part.dispatch_date')
             ->from(__DBC_SCHEMATA_PARTIAL_DISPATCH__ . ' as part')
             ->join(__DBC_SCHEMATA_ORDER_DETAILS__ . ' as orddet', 'orddet.id = part.order_detail_id')

@@ -1696,7 +1696,9 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php
-                                    echo number_format($OrdersDetailsAray['freightprice'], 2, '.', ','); ?>
+                                    $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
+                                    $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
+                                    echo number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ','); ?>
                                 </div>
                             </div>
                             <div class="row static-info">
@@ -1747,7 +1749,8 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     <tr>
                                         <th> Product Code</th>
                                         <th> Product Cost</th>
-                                        <th> Quantity</th>
+                                        <th> Ordered Qty</th>
+                                        <th> Dispatched Qty</th>
                                         <th> Total Price EXL GST</th>
                                     </tr>
                                     </thead>
@@ -1755,13 +1758,15 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     <?php
 
                                     foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
-                                        $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']); ?>
+                                        $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
+                                        $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);?>
                                         <tr>
                                             <td> <?php echo $productDataArr['szProductCode']; ?> </td>
                                             <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
                                             <td> <?php echo $totalOrdersDetailsData['quantity']; ?> </td>
+                                            <td><?php echo $TotalDispatched['total_dispatched'];?></td>
                                             <td> $<?php
-                                                echo number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ','); ?>
+                                                echo number_format(($TotalDispatched['total_dispatched']) * ($productDataArr['szProductCost']), 2, '.', ','); ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -1843,10 +1848,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                             </div>
 
                         </div>
-                        <?php $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
-
-
-                        ?>
+                        <?php $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder); ?>
                         <div class="portlet-body">
                             <form class="form-horizontal" id="dispatchProduct"
                                   action="<?= __BASE_URL__ ?>/order/dispatchProductData" name="dispatchProduct"
@@ -1873,6 +1875,12 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
 
                                                 $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                                                $freightPrice = 0.00;
+                                                $readonly = '';
+                                                if($ordersDetailsAray['freightprice']>0.00){
+                                                    $freightPrice = number_format($ordersDetailsAray['freightprice'],2,'.','');
+                                                    $readonly = 'readonly="readonly" style="cursor:not-allowed"';
+                                                }
                                                 $price = 0.00;
                                                 $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
                                                 ?>
@@ -1956,9 +1964,9 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                             Freight Price:
                                                         </div>
                                                         <div class="col-md-6 value">
-                                                            <input id="freightprice" class="form-control" type="number"
+                                                            <input id="freightprice" <?php echo $readonly;?> class="form-control" type="number"
                                                                    step="0.01" min="0.00"
-                                                                   value="0.00" name="freightprice"
+                                                                   value="<?php echo $freightPrice; ?>" name="freightprice"
                                                                    onblur="calTotalPrice()">
 
                                                         </div>
@@ -3191,7 +3199,7 @@ if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
                     <div class="portlet red box">
                         <div class="portlet-title">
                             <div class="caption">
-                                <h5><b> Selected Prospect has not been converted to Client because of the following
+                                <h5><b> Selected Prospect can't be converted to Client because of the following
                                         reason. Please try again!</b></h5>
 
                             </div>
@@ -3746,7 +3754,9 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                                 </div>
                                 <div class="col-md-7 value">
                                     $<?php
-                                    echo number_format($OrdersDetailsAray['freightprice'], 2, '.', ','); ?>
+                                    $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
+                                    $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
+                                    echo number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ','); ?>
                                 </div>
                             </div>
                             <div class="row static-info">
@@ -3789,7 +3799,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
 
                         </div>
                         <?php $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
-                        $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder,true);
+                        $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder,1);
                         ?>
                         <div class="portlet-body">
                             <div class="table-responsive">

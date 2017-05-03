@@ -77,7 +77,7 @@
                                                              <tr>
                                                                     <th>  Image </th>
                                                                     <th>  Product Code</th>
-                                                                    <th>  Descreption</th>
+                                                                    <th>  Description</th>
                                                                     <th>  Cost</th>
                                                                     <th>  Quantity</th>
                                                                     <th>  Price</th>
@@ -125,7 +125,7 @@
                                             <div class="well">
                                                     <div class="row static-info align-reverse">
                                                             <div class="col-md-8 name">
-                                                                     Total Price:
+                                                                     Total Price(Exl GST):
                                                             </div>
                                                             <div class="col-md-3 value">
                                                                 $<?php echo number_format($priceTotal, 2, '.', ',');;?> 

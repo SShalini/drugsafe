@@ -1084,7 +1084,7 @@ public function deleteProspectConfirmation()
                 else{
                   $meetingVal = "N/A" ;  
                 }
-                $html .= 
+                $html .=
                                        ' <tr>
                                             <td colspan="7"> <b>Meeting Note:- </b>'.$meetingVal.' </td>
                                         </tr>';

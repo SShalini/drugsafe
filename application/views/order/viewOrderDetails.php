@@ -334,7 +334,7 @@
                                                                   <td>
                                                                       <?php
                                                                       if($validOrdersDetailsData['status'] == 2){
-                                                                          $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($validOrdersDetailsData['orderid'],true);
+                                                                          $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($validOrdersDetailsData['orderid'],1);
                                                                           if(!empty($dispatchDatesArr)){ ?>
                                                                               <a class="btn btn-circle btn-icon-only btn-default"
                                                                                  title="Receive Order"

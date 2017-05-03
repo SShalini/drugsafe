@@ -36,8 +36,8 @@ INSERT INTO `tbl_email_cms` (`id`, `szFriendlyName`, `sectionTitle`, `subject`, 
 UPDATE `tbl_email_cms` SET `sectionDescription` = '<p>Dear szName, <br /> <br /> <br /> <br /> <br /> Welcome to Drug-Safe Communities!<br /> <br/> <br/> <br/> You can login on Drug-Safe Communities Mobile Application with the following login details. <br/> <br/> Email - szEmail <br/> Password - szPassword <br/> <br /> Kind regards,<br /> Drug-Safe Communities.</p>' WHERE `tbl_email_cms`.`id` = 8;
 UPDATE `tbl_email_cms` SET `sectionDescription` = '<p>Dear szName, <br /> <br /> <br /> <br /> <br /> Welcome to Drug-Safe Communities!<br /> <br/> <br/> <br/> You can login on Drug-Safe Communities Mobile Application with the following login details.<br/> <br/> Email - szEmail <br/> Password - szPassword <br/> <br /> Kind regards,<br /> Drug-Safe Communities.</p>' WHERE `tbl_email_cms`.`id` = 6;
 UPDATE `tbl_email_cms` SET `sectionDescription` = '<p>Dear szName, <br /> <br /> <br /> <br /> <br /> Welcome to Drug-Safe Communities !<br /> <br/> <br/> <br/> You can login on Drug-Safe Communities Mobile Application with the following login details.<br/> <br/> Email - szEmail <br/> Password - szPassword <br/> <br /> Kind regards,<br /> Drug-Safe Communities.</p>' WHERE `tbl_email_cms`.`id` = 3;
-ALTER TABLE `fo_cmnt` DROP `isApproved`;
-ALTER TABLE `fo_reply` DROP `isAdminApproved`;
+ALTER TABLE `fo_reply` DROP `isApproved`;
+ALTER TABLE `fo_cmnt` DROP `isAdminApproved`;
 ALTER TABLE `fo_topic` ADD `isApproved` TINYINT(1) NOT NULL AFTER `idUser`;
 ALTER TABLE `fo_topic` ADD `isAdminApproved` TINYINT(1) NOT NULL AFTER `isApproved`;
 ALTER TABLE `tbl_prospect` CHANGE `abn` `abn` VARCHAR(12) NOT NULL, CHANGE `szZipCode` `szZipCode` VARCHAR(4) NOT NULL, CHANGE `szNoOfSites` `szNoOfSites` VARCHAR(11) NOT NULL;

@@ -498,22 +498,22 @@ class Order_Controller extends CI_Controller
 
         if ($OrdersDetailsAray['status'] == 1) {
 
-            $status = Ordered;
+            $status = 'Ordered';
         }
         if ($OrdersDetailsAray['status'] == 2) {
 
 
-            $status = Dispatched;
+            $status = 'Dispatched';
         }
         if ($OrdersDetailsAray['status'] == 3) {
 
 
-            $status = Canceled;
+            $status = 'Canceled';
         }
 
         if ($OrdersDetailsAray['status'] == 4) {
 
-            $status = Pending;
+            $status = 'Pending';
         }
      $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));
      $dispatchVal =     date('d M Y',strtotime($OrdersDetailsAray['dispatchedon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['dispatchedon']));
@@ -642,55 +642,27 @@ $html .= '
 
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
-        $this->excel->getActiveSheet()->setCellValue('A13', 'Product Code');
-        $this->excel->getActiveSheet()->getStyle('A13')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('A13')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('A13')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('B13', 'Product Cost');
-        $this->excel->getActiveSheet()->getStyle('B13')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('B13')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('B13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('C13', 'Quantity');
-        $this->excel->getActiveSheet()->getStyle('C13')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('C13')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('C13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('D13', 'Total Price EXL GST');
-        $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('D13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        $this->excel->getActiveSheet()->setCellValue('E13', 'Dispatched Quantity');
-        $this->excel->getActiveSheet()->getStyle('E13')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('E13')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('E13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-        
-        
-      
          $idOrder = $this->session->userdata('idOrder');
          $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
          $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
           if ($OrdersDetailsAray['status'] == 1) {
 
-            $status = Ordered;
+            $status = 'Ordered';
         }
         if ($OrdersDetailsAray['status'] == 2) {
 
 
-            $status = Dispatched;
+            $status = 'Dispatched';
         }
         if ($OrdersDetailsAray['status'] == 3) {
 
 
-            $status = Canceled;
+            $status = 'Canceled';
         }
 
         if ($OrdersDetailsAray['status'] == 4) {
 
-            $status = Pending;
+            $status = 'Pending';
         }
        if($OrdersDetailsAray['createdon']=="0000-00-00 00:00:00"){
          $dispatchVal =   "N/A";  
@@ -707,7 +679,9 @@ $html .= '
      $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));
     
      $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
-       
+        $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
+        $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
+        $totalFreightPrice = number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ',');
         $this->excel->getActiveSheet()->setTitle($filename);
         $this->excel->getActiveSheet()->setCellValue('C1', 'ORDER DETAILS');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
@@ -760,7 +734,8 @@ $html .= '
           if($OrdersDetailsAray['status'] ==3){
          $this->excel->getActiveSheet()->setCellValue('B6',$cancelVal);
          $this->excel->getActiveSheet()->setCellValue('B7',$status);
-              $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['freightprice']);
+
+              $this->excel->getActiveSheet()->setCellValue('B8','$'.$totalFreightPrice);
          $this->excel->getActiveSheet()->setCellValue('B9','$'.($OrdersDetailsAray['dispatched_price']));
           if($_SESSION['drugsafe_user']['iRole']==1){
          $this->excel->getActiveSheet()->setCellValue('B10',$franchiseeDetArr1['szName']);
@@ -769,7 +744,7 @@ $html .= '
           elseif($OrdersDetailsAray['status'] ==2){
            $this->excel->getActiveSheet()->setCellValue('B6',$dispatchVal);
            $this->excel->getActiveSheet()->setCellValue('B7',$status);
-              $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['freightprice']);
+              $this->excel->getActiveSheet()->setCellValue('B8','$'.$totalFreightPrice);
          $this->excel->getActiveSheet()->setCellValue('B9','$'.($OrdersDetailsAray['dispatched_price']));
           if($_SESSION['drugsafe_user']['iRole']==1){
          $this->excel->getActiveSheet()->setCellValue('B10',$franchiseeDetArr1['szName']);
@@ -777,14 +752,79 @@ $html .= '
          }
          else{
          $this->excel->getActiveSheet()->setCellValue('B6',$status);
-             $this->excel->getActiveSheet()->setCellValue('B7','$'.$OrdersDetailsAray['freightprice']);
+             $this->excel->getActiveSheet()->setCellValue('B7','$'.$totalFreightPrice);
          $this->excel->getActiveSheet()->setCellValue('B8','$'.($OrdersDetailsAray['dispatched_price']));
           if($_SESSION['drugsafe_user']['iRole']==1){
          $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
           }
          }
-   
-      if ($totalOrdersDetailsAray) {
+
+
+        $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
+if (!empty($totalDispatched)) {
+    $i = 12;
+    foreach ($totalDispatched as $DispatchOrderDetData) {
+        $this->excel->getActiveSheet()->mergeCells('A'.($i+1).':D'.($i+1));
+        $this->excel->getActiveSheet()->setCellValue('A'.($i+1), 'Dispatched On: '.date('d/m/Y h:i:s a',strtotime($DispatchOrderDetData['dispatch_date'])));
+        $this->excel->getActiveSheet()->getStyle('A'.($i+1))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A'.($i+1))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A'.($i+1))->getAlignment()->setVertical(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->excel->getActiveSheet()->setCellValue('A'.($i+2), 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('A'.($i+2))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A'.($i+2))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A'.($i+2))->getAlignment()->setVertical(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B'.($i+2), 'Product Cost');
+        $this->excel->getActiveSheet()->getStyle('B'.($i+2))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B'.($i+2))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B'.($i+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C'.($i+2), 'Dispatched Quantity');
+        $this->excel->getActiveSheet()->getStyle('C'.($i+2))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C'.($i+2))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C'.($i+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D'.($i+2), 'Total Price EXL GST');
+        $this->excel->getActiveSheet()->getStyle('D'.($i+2))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D'.($i+2))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D'.($i+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $DispatchedOrdDetArr = $this->Order_Model->getDispatchedOrderDetByDispatchDate($DispatchOrderDetData['dispatch_date']);
+        if(!empty($DispatchedOrdDetArr)){
+            $j = $i;
+            $totalAmount = 0.00;
+            foreach ($DispatchedOrdDetArr as $DispatchOrderDet){
+                $productDataArr = $this->Inventory_Model->getProductDetailsById($DispatchOrderDet['productid']);
+                $totalAmount += number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', '');
+                $this->excel->getActiveSheet()->setCellValue('A'.($j+3),$productDataArr['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('B'.($j+3),'$'.$productDataArr['szProductCost']);
+                $this->excel->getActiveSheet()->setCellValue('C'.($j+3),$DispatchOrderDet['dispatch_qty']);
+                $this->excel->getActiveSheet()->getStyle('C'.($j+3))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+                $this->excel->getActiveSheet()->setCellValue('D'.($j+3),'$'.number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', ','));
+
+                $j++;
+            }
+            $i = $j+3;
+        }
+
+        $this->excel->getActiveSheet()->mergeCells('A'.($i).':C'.($i));
+        $this->excel->getActiveSheet()->setCellValue('A'.($i), 'Total');
+        $this->excel->getActiveSheet()->getStyle('A'.($i))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A'.($i))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A'.($i))->getAlignment()->setVertical(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $this->excel->getActiveSheet()->setCellValue('D'.($i),'$'.number_format($totalAmount, 2, '.', ',') );
+        $this->excel->getActiveSheet()->getStyle('D'.($i))->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D'.($i))->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D'.($i))->getAlignment()->setVertical(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $i++;
+    }
+    $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+    $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+    $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+    $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+    $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
+}
+
+   /*   if ($totalOrdersDetailsAray) {
             $i = 14 ;
             foreach ($totalOrdersDetailsAray as $item) {
                 $productDataArr = $this->Inventory_Model->getProductDetailsById($item['productid']);
@@ -803,7 +843,7 @@ $html .= '
                 $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
                 $i++;
             }
-        }
+        }*/
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
