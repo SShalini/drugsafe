@@ -5084,10 +5084,18 @@ class Reporting_Controller extends CI_Controller
          if (!empty($clientAray)) {
             $i = 2;
             foreach ($clientAray as $item) {
-                 $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['id']);
-                  $discount = $this->Franchisee_Model->getDiscountByDisId($item['discountid']);
-               
-                              $getRegionName = $this->Admin_Model->getregionbyregionid($item['regionId']);
+                 if($item['regionId']==0){
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['franchiseeId']);
+                               $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $item['franchiseeId']);
+                               $regionId = $franchiseeArr['regionId'];
+                             } 
+                             else{
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['id']);
+                               $regionId = $clientData['regionId'];
+                             }
+                            
+                              $getRegionName = $this->Admin_Model->getregionbyregionid($regionId);
+                              $discount = $this->Franchisee_Model->getDiscountByDisId($item['discountid']);
                               $countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($item['id'],false,false);
                                     $count='0';
                                     if($countChildClientDetailsAray)
@@ -5280,9 +5288,17 @@ class Reporting_Controller extends CI_Controller
                                 $value = 'Other';
                             } 
                               $discount = $this->Franchisee_Model->getDiscountByDisId($clientData['discountid']);
-                              
-                             $getState=$this->Franchisee_Model->getStateByFranchiseeId($clientData['id']);
-                              $getRegionName = $this->Admin_Model->getregionbyregionid($clientData['regionId']);
+                             if($clientData['regionId']==0){
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($clientData['franchiseeId']);
+                               $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['franchiseeId']);
+                               $regionId = $franchiseeArr['regionId'];
+                             } 
+                             else{
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($clientData['id']);
+                               $regionId = $clientData['regionId'];
+                             }
+                            
+                              $getRegionName = $this->Admin_Model->getregionbyregionid($regionId);
                               $countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($clientData['id'],false,false);
                                     $count='0';
                                     if($countChildClientDetailsAray)
@@ -5422,9 +5438,17 @@ class Reporting_Controller extends CI_Controller
         foreach ($childClientDetailsAray as $siteData) {
         $userDataAry = $this->Franchisee_Model->getSiteDetailsById($siteData['clientId']);
         $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($siteData['id']); 
-        $getRegionName = $this->Admin_Model->getregionbyregionid($siteData['regionId']);
-       
-         $getState=$this->Franchisee_Model->getStateByFranchiseeId($siteData['id']);
+         if($item['regionId']==0){
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($siteData['franchiseeId']);
+                               $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $siteData['franchiseeId']);
+                               $regionId = $franchiseeArr['regionId'];
+                             } 
+                             else{
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($siteData['id']);
+                               $regionId = $clientData['regionId'];
+                             }
+                            
+                              $getRegionName = $this->Admin_Model->getregionbyregionid($regionId);    
        if($userDataAry['onsite_service']==0){  $val = "Mobile Clinic ";}  else { $val = "In-house";}
        if($userDataAry['risk_assessment']==0){  $raVal = "Yes";}  else { $raVal = "No";}
       if($userDataAry['power_access']==0){  $paVal = "Yes";}  else { $paVal = "No";}
@@ -5930,11 +5954,20 @@ class Reporting_Controller extends CI_Controller
             $i = 4;
            
         foreach ($childClientDetailsAray as $item) {
-            
-       $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['id']);
+        if($item['regionId']==0){
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['franchiseeId']);
+                               $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $item['franchiseeId']);
+                               $regionId = $franchiseeArr['regionId'];
+                             } 
+                             else{
+                               $getState=$this->Franchisee_Model->getStateByFranchiseeId($item['id']);
+                               $regionId = $clientData['regionId'];
+                             }
+                            
+                              $getRegionName = $this->Admin_Model->getregionbyregionid($regionId);     
+     
        $userDataAry = $this->Franchisee_Model->getSiteDetailsById($item['clientId']);
        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($item['id']); 
-       $getRegionName = $this->Admin_Model->getregionbyregionid($item['regionId']);
      
        if($userDataAry['onsite_service']==0){  $val = "Mobile Clinic ";}  else { $val = "In-house";}
        if($userDataAry['risk_assessment']==0){  $raVal = "Yes";}  else { $raVal = "No";}

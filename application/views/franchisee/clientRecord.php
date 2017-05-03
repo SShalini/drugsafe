@@ -102,14 +102,15 @@
                                             &nbsp;Add New Client
                                         </button>
                                     </div>
-                                    
+                              <?php if (!empty($clientAry) || !empty($corpuserDetailsArr)) {
+                            ?>      
                                <a onclick="ViewPdfClientReport('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
                                 <a onclick="ViewExcelClientReport('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
                                 <i class="fa fa-file-excel-o"></i> View Xls </a>
-
+                              <?php } ?> 
                                 </div>
                             <?php } ?>
                         </div>
