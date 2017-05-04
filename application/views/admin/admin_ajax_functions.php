@@ -3514,10 +3514,10 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                                 <div class='row'>
                                     <div class="actions">
 
-                                        <div class=' col-md-6'>
+                                        <div class=' col-md-7'>
 
                                         </div>
-                                        <div class=' col-md-6'>
+                                        <div class=' col-md-5'>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <a onclick="view_meeting_note_pdf('<?php echo $idProspect; ?>')"
                                                href="javascript:void(0);"
@@ -3555,12 +3555,19 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Meeting Note</th>
+                                        <th>Meeting Date/Time</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
                                     $i = 0;
                                     foreach ($mettingsDetailsAry as $mettingsDetailsData) {
+                                         if(($mettingsDetailsData['dtCreatedOn']) == '0000-00-00 00:00:00'){
+                                         $val = "N/A";  
+                                            }
+                                        else{
+                                       $val = date('d M Y',strtotime($mettingsDetailsData['dtCreatedOn'])) . ' at '.date('h:i A',strtotime($mettingsDetailsData['dtCreatedOn']));   
+                                     }   
                                         $i++;
                                         ?>
                                         <tr>
@@ -3583,6 +3590,7 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
 
 
                                             <td><?php echo $retval; ?></td>
+                                            <td><?php echo $val; ?></td>
 
                                         </tr>
                                     <?php }
