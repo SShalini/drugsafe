@@ -105,7 +105,9 @@
                     {*/
                        echo $clientDetailsAray['szName']."'s Details";
 //                    }
+                       
                    ?>
+                   
                     &nbsp; &nbsp;
                    <?php  if($_SESSION['drugsafe_user']['iRole']=='2' && $addEditClientDet){
                    if(($clientDetailsAray['clientType'] == '0')){?>
@@ -846,13 +848,24 @@
                         }
                     }
                     ?>
-                    <a onclick="ViewPdfSiteReport('<?php echo $clientDetailsAray['id'];?>','<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                     <?php        
+            if($childClientDetailsAray)
+            {
+                if($flag!=1)
+            {
+                $idfranchisee = $this->session->userdata('idFr');
+                $corpclient = $this->session->userdata('corpclient');
+            ?>
+                    <a onclick="ViewPdfSiteReport('<?php echo $clientDetailsAray['id'];?>','<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>','<?php echo $corpclient;?>','<?php echo $idfranchisee;?>')" href="javascript:void(0);"
                         class=" btn green-meadow">
                          <i class="fa fa-file-pdf-o"></i> View Pdf </a>
-                     <a onclick="ViewExcelSiteReport('<?php echo $clientDetailsAray['id'];?>','<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
+                     <a onclick="ViewExcelSiteReport('<?php echo $clientDetailsAray['id'];?>','<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>','<?php echo $corpclient;?>','<?php echo $idfranchisee;?>')" href="javascript:void(0);"
                         class=" btn green-meadow">
                      <i class="fa fa-file-excel-o"></i> View Xls </a>
-
+               <?php        
+            }
+               }
+            ?>
                  </div>
             </div>
             
@@ -881,7 +894,7 @@
 
                                                 <input type="text" id="szSearch4" class="form-control"
                                                        value="<?php echo set_value('szSearch4'); ?>" readonly
-                                                       placeholder="Start Order Date"
+                                                       placeholder="Date From"
                                                        onfocus="remove_formError(this.id,'true')" name="szSearch4">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
@@ -911,7 +924,7 @@
 
                                                 <input type="text" id="szSearch5" class="form-control"
                                                        value="<?php echo set_value('szSearch5'); ?>" readonly
-                                                       placeholder="End Order Date"
+                                                       placeholder="Date To"
                                                        onfocus="remove_formError(this.id,'true')" name="szSearch5">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>

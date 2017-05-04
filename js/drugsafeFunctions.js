@@ -437,14 +437,16 @@ function getStateListingProfileclient(szCountry) {
         }
     });
 }
-function viewClientDetails(idClient, idfranchisee, corpclient) {
+function viewClientDetails(idClient, idfranchisee, corpclient,flag) {
+  
     if (!corpclient) {
         corpclient = 0;
     }
     $.post(__BASE_URL__ + "/franchisee/viewClientDetailsData", {
         idClient: idClient,
         idfranchisee: idfranchisee,
-        corpclient: corpclient
+         corpclient: corpclient,
+         flag: flag
     }, function (result) {
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/franchisee/" + ar_result[1];
@@ -3499,24 +3501,28 @@ function ViewPdfClientReport(frId,clName,fromDate,toDate) {
         window.open(URL, '_blank');
     });
 }
-function ViewPdfSiteReport(clientId,siteName,fromDate,toDate) {
+function ViewPdfSiteReport(clientId,siteName,fromDate,toDate,corpclient,idfranchisee) {
     $.post(__BASE_URL__ + "/reporting/ViewPdfSiteReportData", {
         clientId: clientId,
         siteName: siteName,
         fromDate: fromDate,
-        toDate: toDate
+        toDate: toDate,
+        corpclient: corpclient,
+        idfranchisee: idfranchisee
     }, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/reporting/" + ar_result[1];
         window.open(URL, '_blank');
     });
 }
-function ViewExcelSiteReport(clientId,siteName,fromDate,toDate) {
+function ViewExcelSiteReport(clientId,siteName,fromDate,toDate,corpclient,idfranchisee) {
     $.post(__BASE_URL__ + "/reporting/ViewExcelSiteReportData", {
-        clientId: clientId,
+         clientId: clientId,
         siteName: siteName,
         fromDate: fromDate,
-        toDate: toDate
+        toDate: toDate,
+        corpclient: corpclient,
+        idfranchisee: idfranchisee
     }, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/reporting/" + ar_result[1];

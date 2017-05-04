@@ -75,6 +75,7 @@
                                 <i class="icon-equalizer font-green-meadow"></i>
                                 <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related clients.</span>
                             </div>
+                            <?php   if (!empty($clientAry) || !empty($corpuserDetailsArr)) {?>
                                  <div class="actions">
                                <a onclick="ViewPdfClientReport('<?php echo $_POST['szSearchClRecord2'];?>','<?php echo $_POST['szSearchClRecord1'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearch5'];?>')" href="javascript:void(0);"
                                    class=" btn green-meadow">
@@ -84,8 +85,9 @@
                                 <i class="fa fa-file-excel-o"></i> View Xls </a>
 
                             </div>
+                             <?php } ?>
                         </div>
-                    <?php } else { ?>
+                            <?php } else { ?>
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
@@ -169,7 +171,7 @@
 
                                                 <input type="text" id="szSearch4" class="form-control"
                                                        value="<?php echo set_value('szSearch4'); ?>" readonly
-                                                       placeholder="Start Order Date"
+                                                       placeholder="Date From"
                                                        onfocus="remove_formError(this.id,'true')" name="szSearch4">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
@@ -200,7 +202,7 @@
 
                                                 <input type="text" id="szSearch5" class="form-control"
                                                        value="<?php echo set_value('szSearch5'); ?>" readonly
-                                                       placeholder="End Order Date"
+                                                       placeholder="Date To"
                                                        onfocus="remove_formError(this.id,'true')" name="szSearch5">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
@@ -498,7 +500,7 @@
 
                                                 <input type="text" id="szSearch4" class="form-control"
                                                        value="<?php echo set_value('szSearch4'); ?>" readonly
-                                                       placeholder="Start Order Date"
+                                                       placeholder="Date From"
                                                        onfocus="remove_formError(this.id,'true')" name="szSearch4">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>
@@ -528,7 +530,7 @@
 
                                                 <input type="text" id="szSearch5" class="form-control"
                                                        value="<?php echo set_value('szSearch5'); ?>" readonly
-                                                       placeholder="End Order Date"
+                                                       placeholder="Date To"
                                                        onfocus="remove_formError(this.id,'true')" name="szSearch5">
                                                 <span class="input-group-addon">
                                                <i class="fa fa-calendar"></i>

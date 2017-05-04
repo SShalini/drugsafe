@@ -340,10 +340,12 @@ class Franchisee_Controller extends CI_Controller
         $idClient = $this->input->post('idClient');
         $idfranchisee = $this->input->post('idfranchisee');
         $corpclient = $this->input->post('corpclient');
+        $flag = $this->input->post('flag');
         {
             $this->session->set_userdata('idClient', $idClient);
             $this->session->set_userdata('idfranchisee', $idfranchisee);
             $this->session->set_userdata('corpclient', $corpclient);
+            $this->session->set_userdata('flag', $flag);
             echo "SUCCESS||||";
             echo "viewClientDetails";
         }
@@ -363,6 +365,7 @@ class Franchisee_Controller extends CI_Controller
         $addEditClientDet = true;
         $idClient = $this->session->userdata('idClient');
         $corpclient = $this->session->userdata('corpclient');
+        $flag = $this->session->userdata('flag');
         $frid = $this->session->userdata('idfranchisee');
         if (isset($_POST['szSearchClRecord']) && !empty($_POST['szSearchClRecord'])) {
             $id = $_POST['szSearchClRecord'];
@@ -441,6 +444,7 @@ class Franchisee_Controller extends CI_Controller
         }*/
         $userDetailsArr = array();
         if($corpclient == '1'){
+           
             $loggedinFranchisee = $idfranchisee;
             $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
             if(!empty($clientDetsArr)){
@@ -448,6 +452,7 @@ class Franchisee_Controller extends CI_Controller
             }
 
             $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$idfranchisee);
+            
             if(!empty($AssignCorpuserDetailsArr)){
                 $addEditClientDet = false;
                 $userDetailsArr = array();
@@ -462,6 +467,8 @@ class Franchisee_Controller extends CI_Controller
                 }
             }
         }
+      
+        $data['flag'] = $flag;
         $data['sitesArr'] = $sitesArr;
         $data['idClient'] = $idClient;
         $data['pageName'] = "Client_Record";
@@ -767,6 +774,7 @@ class Franchisee_Controller extends CI_Controller
         else{
         $_POST['szSearchClRecord2']=$idFr;
         }
+         $this->session->set_userdata('idFr', $idFr);
         $data['clientAry'] = $clientAray;
         $data['id'] = $id;
         $data['flag'] = $flag;

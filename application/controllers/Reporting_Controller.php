@@ -5051,16 +5051,12 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('P1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('P1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  
-        $this->excel->getActiveSheet()->setCellValue('Q1', 'Zip/Postal Code');
-        $this->excel->getActiveSheet()->getStyle('Q1')->getFont()->setSize(13);
-        $this->excel->getActiveSheet()->getStyle('Q1')->getFont()->setBold(true);
-        $this->excel->getActiveSheet()->getStyle('Q1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
- 
-        $frId = $this->session->userdata('frId');
+      $frId = $this->session->userdata('frId');
         $clName = $this->session->userdata('clName');
         $fromDate = $this->session->userdata('fromDate');
         $toDate = $this->session->userdata('toDate');
-        
+        $fromdateData = $this->Webservices_Model->formatdate($fromDate);
+         $todateData = $this->Webservices_Model->formatdate($toDate); 
        
          if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
            if(!empty($frId))
@@ -5071,16 +5067,49 @@ class Reporting_Controller extends CI_Controller
            $frId = $this->session->userdata('idFr');  
          } 
          }
-      
-        
-         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
-         $todateData = $this->Webservices_Model->formatdate($toDate);
-        
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($frId);
+        $AllclientAry = $this->Franchisee_Model->getAllClientDetails(true,$frId,$clName,false,false,$fromdateData,$todateData);
+        $CorpuserDetailsArr = array();
+        if(!empty($AssignCorpuserDetailsArr)){
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                if(!empty($CorpSitesDetailsArr)){
+                    foreach ($CorpSitesDetailsArr as $CorpUser){
+                        if(!in_array($CorpUser,$CorpuserDetailsArr)){
+                            array_push($CorpuserDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+            }
+        }
+         
+        if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
+         if(($clName == $CorpclientData['szName'])){
+            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);
+         }
+         else{
+             $clientAray = $AllclientAry;   
+         }
+         if($fromdateData){
+           if($fromdateData." 00:00:00" >= $CorpclientData['dtCreatedOn']){
+            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
+           } 
+         }
+           if($todateData){
+           if($todateData." 23:59:59" <= $CorpclientData['dtCreatedOn']){
+            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
+           } 
+            
+         }
+        }elseif(!empty($AllclientAry)){
+            $clientAray = $AllclientAry;
+        }elseif(!empty($CorpuserDetailsArr)){
+            $clientAray = $CorpuserDetailsArr;
+        }
+       
         if(($_SESSION['drugsafe_user']['iRole']==2)){
          $frId = $_SESSION['drugsafe_user']['id'];  
         }
-         $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$frId,$clName,false,false,$fromdateData,$todateData);
-      
          if (!empty($clientAray)) {
             $i = 2;
             foreach ($clientAray as $item) {
@@ -5223,11 +5252,12 @@ class Reporting_Controller extends CI_Controller
         // Add a page
          $pdf->AddPage('L');
 
-         $frId = $this->session->userdata('frId');
+        $frId = $this->session->userdata('frId');
         $clName = $this->session->userdata('clName');
         $fromDate = $this->session->userdata('fromDate');
         $toDate = $this->session->userdata('toDate');
-        
+        $fromdateData = $this->Webservices_Model->formatdate($fromDate);
+         $todateData = $this->Webservices_Model->formatdate($toDate); 
        
          if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
            if(!empty($frId))
@@ -5238,15 +5268,50 @@ class Reporting_Controller extends CI_Controller
            $frId = $this->session->userdata('idFr');  
          } 
          }
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($frId);
+        $AllclientAry = $this->Franchisee_Model->getAllClientDetails(true,$frId,$clName,false,false,$fromdateData,$todateData);
+        $CorpuserDetailsArr = array();
+        if(!empty($AssignCorpuserDetailsArr)){
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                if(!empty($CorpSitesDetailsArr)){
+                    foreach ($CorpSitesDetailsArr as $CorpUser){
+                        if(!in_array($CorpUser,$CorpuserDetailsArr)){
+                            array_push($CorpuserDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+            }
+        }
+         
+        if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
+         if(($clName == $CorpclientData['szName'])){
+            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);
+         }
+         else{
+             $clientAray = $AllclientAry;   
+         }
+         if($fromdateData){
+           if($fromdateData." 00:00:00" >= $CorpclientData['dtCreatedOn']){
+            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
+           } 
+         }
+           if($todateData){
+           if($todateData." 23:59:59" <= $CorpclientData['dtCreatedOn']){
+            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
+           } 
+            
+         }
+        }elseif(!empty($AllclientAry)){
+            $clientAray = $AllclientAry;
+        }elseif(!empty($CorpuserDetailsArr)){
+            $clientAray = $CorpuserDetailsArr;
+        }
        
-         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
-         $todateData = $this->Webservices_Model->formatdate($toDate);
-        
         if(($_SESSION['drugsafe_user']['iRole']==2)){
          $frId = $_SESSION['drugsafe_user']['id'];  
         }
-         $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$frId,$clName,false,false,$fromdateData,$todateData);
-      
+        
           $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Client Details Report</b></p></div>
             <div class= "table-responsive" >
@@ -5374,16 +5439,20 @@ class Reporting_Controller extends CI_Controller
     }
   function ViewPdfSiteReportData()
     { 
-        
         $siteName = $this->input->post('siteName');
         $clientId = $this->input->post('clientId');
         $fromDate = $this->input->post('fromDate');
         $toDate = $this->input->post('toDate');
+        $corpclient = $this->input->post('corpclient');
+         $idfranchisee = $this->input->post('idfranchisee');
 
         $this->session->set_userdata('clientId', $clientId);
+        $this->session->set_userdata('idfranchisee', $idfranchisee);
         $this->session->set_userdata('fromDate', $fromDate);
         $this->session->set_userdata('toDate', $toDate);
+        $this->session->set_userdata('corpclient', $corpclient);
         $this->session->set_userdata('siteName', $siteName);
+
 
 
         echo "SUCCESS||||";
@@ -5413,6 +5482,7 @@ class Reporting_Controller extends CI_Controller
          $pdf->AddPage('L');
 
        
+        $corpclient = $this->session->userdata('corpclient');
         $siteId = $this->session->userdata('siteName');
         $idClient = $this->session->userdata('clientId');
         $fromDate = $this->session->userdata('fromDate');
@@ -5420,10 +5490,79 @@ class Reporting_Controller extends CI_Controller
        
          $fromdateData = $this->Webservices_Model->formatdate($fromDate);
          $todateData = $this->Webservices_Model->formatdate($toDate);
-        
-         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, false, flase, $searchAry, $siteId,false,$fromdateData,$todateData);
-       
+ 
+        $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
+        $franchiseId = $clientDetailsAray['franchiseeId'];
+        $idfranchisee = $this->session->userdata('idfranchisee');
+        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,false,flase, $searchAry,$siteId,$idfranchisee,$fromdateData,$todateData);
+        $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
+        //$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
+ 
+        $loggedinFranchisee = $idfranchisee;
+        $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+        if(!empty($clientDetsArr)){
+            $franchiseeid = $clientDetsArr[0]['franchiseeId'];
+        }
+        if($franchiseeid != $_SESSION['drugsafe_user']['id']){
+            $addEditClientDet = false;
+        }
+        $sitesArr = array();
+        $sitesArr = $this->Webservices_Model->getclientdetails($franchiseeid,$idClient);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
+        if(!empty($AssignCorpuserDetailsArr)){
+            $addEditClientDet = false;
+            $sitesArr = array();
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+                if(!empty($CorpuserDetailsArr)){
+                    foreach ($CorpuserDetailsArr as $CorpUser){
+                        array_push($sitesArr,$CorpUser);
+                    }
+                }
+            }
+        }
+   
+       
+        $clientAray = $this->Webservices_Model->getFranchiseeWithClient($idClient,$idfranchisee);
+
+        /*if(!empty($clientAray)){
+            if(($clientAray[0]['szNoOfSites'] == 0) && $clientAray[0]['clientType'] == 0){
+                $addEditClientDet = false;
+            }
+        }*/
+        $userDetailsArr = array();
+        if($corpclient == '1'){
+            $loggedinFranchisee = $idfranchisee;
+            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+            if(!empty($clientDetsArr)){
+                $idfranchisee = $clientDetsArr[0]['franchiseeId'];
+            }
+        
+            $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$idfranchisee);
+           
+            if(!empty($AssignCorpuserDetailsArr)){
+                $addEditClientDet = false;
+                $userDetailsArr = array();
+                foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+
+                    if(!empty($CorpuserDetailsArr)){
+                        foreach ($CorpuserDetailsArr as $CorpUser){
+                            array_push($userDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+            }
+        }
+       
+     if($corpclient == '1') {
+      $childClientDetailsAray = $userDetailsArr;   
+     }
+     else{
+         $childClientDetailsAray = $childClientDetailsAray;   
+     }
+     
          if ($childClientDetailsAray) {
     $html = '<div class="wraper">
              <table cellpadding="5px">
@@ -5436,7 +5575,8 @@ class Reporting_Controller extends CI_Controller
             $i = 0;
        
         foreach ($childClientDetailsAray as $siteData) {
-        $userDataAry = $this->Franchisee_Model->getSiteDetailsById($siteData['clientId']);
+         
+        $userDataAry = $this->Franchisee_Model->getSiteDetailsById($siteData['id']);
         $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($siteData['id']); 
          if($item['regionId']==0){
                                $getState=$this->Franchisee_Model->getStateByFranchiseeId($siteData['franchiseeId']);
@@ -5647,12 +5787,15 @@ class Reporting_Controller extends CI_Controller
         $clientId = $this->input->post('clientId');
         $fromDate = $this->input->post('fromDate');
         $toDate = $this->input->post('toDate');
+        $corpclient = $this->input->post('corpclient');
+         $idfranchisee = $this->input->post('idfranchisee');
 
         $this->session->set_userdata('clientId', $clientId);
+        $this->session->set_userdata('idfranchisee', $idfranchisee);
         $this->session->set_userdata('fromDate', $fromDate);
         $this->session->set_userdata('toDate', $toDate);
+        $this->session->set_userdata('corpclient', $corpclient);
         $this->session->set_userdata('siteName', $siteName);
-
 
         echo "SUCCESS||||";
         echo "ViewExcelSiteReport";
@@ -5939,6 +6082,7 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('AQ3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  
         
+            $corpclient = $this->session->userdata('corpclient');
         $siteId = $this->session->userdata('siteName');
         $idClient = $this->session->userdata('clientId');
         $fromDate = $this->session->userdata('fromDate');
@@ -5946,10 +6090,79 @@ class Reporting_Controller extends CI_Controller
        
          $fromdateData = $this->Webservices_Model->formatdate($fromDate);
          $todateData = $this->Webservices_Model->formatdate($toDate);
-        
-         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient, false, flase, $searchAry, $siteId,false,$fromdateData,$todateData);
-       
+ 
+        $clientDetailsAray = $this->Franchisee_Model->viewClientDetails($idClient);
+        $franchiseId = $clientDetailsAray['franchiseeId'];
+        $idfranchisee = $this->session->userdata('idfranchisee');
+        $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,false,flase, $searchAry,$siteId,$idfranchisee,$fromdateData,$todateData);
+        $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
 
+        //$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
+ 
+        $loggedinFranchisee = $idfranchisee;
+        $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+        if(!empty($clientDetsArr)){
+            $franchiseeid = $clientDetsArr[0]['franchiseeId'];
+        }
+        if($franchiseeid != $_SESSION['drugsafe_user']['id']){
+            $addEditClientDet = false;
+        }
+        $sitesArr = array();
+        $sitesArr = $this->Webservices_Model->getclientdetails($franchiseeid,$idClient);
+        $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$franchiseeid);
+        if(!empty($AssignCorpuserDetailsArr)){
+            $addEditClientDet = false;
+            $sitesArr = array();
+            foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+                if(!empty($CorpuserDetailsArr)){
+                    foreach ($CorpuserDetailsArr as $CorpUser){
+                        array_push($sitesArr,$CorpUser);
+                    }
+                }
+            }
+        }
+   
+       
+        $clientAray = $this->Webservices_Model->getFranchiseeWithClient($idClient,$idfranchisee);
+
+        /*if(!empty($clientAray)){
+            if(($clientAray[0]['szNoOfSites'] == 0) && $clientAray[0]['clientType'] == 0){
+                $addEditClientDet = false;
+            }
+        }*/
+        $userDetailsArr = array();
+        if($corpclient == '1'){
+            $loggedinFranchisee = $idfranchisee;
+            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+            if(!empty($clientDetsArr)){
+                $idfranchisee = $clientDetsArr[0]['franchiseeId'];
+            }
+        
+            $AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($loggedinFranchisee,$idfranchisee);
+           
+            if(!empty($AssignCorpuserDetailsArr)){
+                $addEditClientDet = false;
+                $userDetailsArr = array();
+                foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
+                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+
+                    if(!empty($CorpuserDetailsArr)){
+                        foreach ($CorpuserDetailsArr as $CorpUser){
+                            array_push($userDetailsArr,$CorpUser);
+                        }
+                    }
+                }
+            }
+        }
+       
+     if($corpclient == '1') {
+      $childClientDetailsAray = $userDetailsArr;   
+     }
+     else{
+         $childClientDetailsAray = $childClientDetailsAray;   
+     }
+     
          if ($childClientDetailsAray) {
             $i = 4;
            
@@ -5966,7 +6179,7 @@ class Reporting_Controller extends CI_Controller
                             
                               $getRegionName = $this->Admin_Model->getregionbyregionid($regionId);     
      
-       $userDataAry = $this->Franchisee_Model->getSiteDetailsById($item['clientId']);
+       $userDataAry = $this->Franchisee_Model->getSiteDetailsById($item['id']);
        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($item['id']); 
      
        if($userDataAry['onsite_service']==0){  $val = "Mobile Clinic ";}  else { $val = "In-house";}

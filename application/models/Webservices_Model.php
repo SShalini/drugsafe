@@ -81,9 +81,9 @@ class Webservices_Model extends Error_Model
     function getclientdetails($franchiseeid, $parent = 0, $agent = 0, $site = 0)
     {
         $array = 'client.franchiseeId = ' . (int)$franchiseeid . ' AND user.isDeleted = 0 ' . ($agent > 0 && $parent == 0 ? ' AND client.agentId = ' . (int)$agent : ($agent > 0 && $parent > 0 ? ' AND client.clientType = ' . (int)$parent : ' AND client.clientType = ' . (int)$parent) . ($site > 0 ? ' AND client.clientId = ' . (int)$site : ''));
-        $query = $this->db->select('user.id, user.szName, user.szEmail, client.franchiseeId, user.szContactNumber, client.szCreatedBy, client.szLastUpdatedBy, client.szLastUpdatedBy, client.clientType,
+        $query = $this->db->select('user.id, user.szName, user.szEmail, client.franchiseeId,client.industry, user.szContactNumber, client.szCreatedBy, client.szLastUpdatedBy, client.szLastUpdatedBy, client.clientType,
                                     client.szBusinessName, client.szContactEmail, client.szContactMobile, client.discountid, client.szContactPhone, user.szCity, user.szCountry, user.abn,
-                                    user.szAddress, user.szZipCode')
+                                    user.szAddress, user.szZipCode,user.dtCreatedOn')
             ->from(__DBC_SCHEMATA_USERS__ . ' as user')
             ->join(__DBC_SCHEMATA_CLIENT__ . ' as client', 'client.clientId = user.id')
             ->where($array)
@@ -107,6 +107,8 @@ class Webservices_Model extends Error_Model
             ->join(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__ . ' as corpfranch', 'corpfranch.franchiseeid = user.id')
             ->where($array)
             ->get();
+//         $q = $this->db->last_query();
+//        echo $q; die;
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             /*$CorpCl = array();

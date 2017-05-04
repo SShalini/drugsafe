@@ -53,9 +53,9 @@
                             <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related clients.</span>
                         </div>
                       </div>
-                      <div class="row search">
+                      <div class="row ">
                              <form class="form-horizontal" id="szSearchClientRecord" action="<?=__BASE_URL__?>/franchisee/franchiseeClientRecord" name="szSearchClientRecord" method="post">
-                                  <div class="col-md-3 clienttypeselect search">
+                                  <div class="col-md-3 ">
                                       <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
