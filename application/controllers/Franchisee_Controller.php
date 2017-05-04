@@ -382,8 +382,9 @@ class Franchisee_Controller extends CI_Controller
          if(isset($_POST['szSearch5']) && !empty($_POST['szSearch5'])){
              $todate = $this->Webservices_Model->formatdate($_POST['szSearch5']);
         }
+       
         $config['base_url'] = __BASE_URL__ . "/franchisee/viewClientDetails/";
-        $config['total_rows'] = count($this->Franchisee_Model->viewChildClientDetails($idClient, $limit, $offset, $searchAry, $id,$fromdate,$todate));
+        $config['total_rows'] = count($this->Franchisee_Model->viewChildClientDetails($idClient, $limit, $offset, $searchAry, $id,$idfranchisee,$fromdate,$todate));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 
         $this->pagination->initialize($config);
@@ -420,7 +421,7 @@ class Franchisee_Controller extends CI_Controller
                 }
             }
         }
-
+    
         if ($clientDetailsAray['clientType'] > 0) {
             $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
             $data['ParentOfChild'] = $parentClientDetArr;
@@ -443,6 +444,7 @@ class Franchisee_Controller extends CI_Controller
                 $addEditClientDet = false;
             }
         }*/
+         print_r($childClientDetailsAray);die;
         $userDetailsArr = array();
         if($corpclient == '1'){
            
@@ -730,9 +732,10 @@ class Franchisee_Controller extends CI_Controller
          $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
            
             
-         $this->pagination->initialize($config);
+        $this->pagination->initialize($config);
         
         $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3),$fromdate,$todate);
+      
         /*$AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
         $CorpuserDetailsArr = array();
         if(!empty($AssignCorpuserDetailsArr)){

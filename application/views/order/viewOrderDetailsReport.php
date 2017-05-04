@@ -220,12 +220,13 @@
                                             </div>
                                             <!-- /input-group -->
                                            
-                                            <?php if (!empty($arErrorMessages['szSearch4'])) { ?>
+                                             <?php
+                                            if (form_error('szSearch4')) {
+                                               
+                                                ?>
                                                 <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                    <?php echo $arErrorMessages['szSearch4']; ?>
-                                            </span>
-                                            <?php } ?>
+                                                <span><?php echo form_error('szSearch4'); ?></span>
+                                                </span><?php } ?>
                                         </div>
 
                                     </div>
@@ -245,13 +246,13 @@
                                                </span>
                                             </div>
                                             <!-- /input-group -->
-                                           
-                                            <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
+                                             <?php
+                                            if (form_error('szSearch5')) {
+                                               
+                                                ?>
                                                 <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                    <?php echo $arErrorMessages['szSearch5']; ?>
-                                            </span>
-                                            <?php } ?>
+                                                <span><?php echo form_error('szSearch5'); ?></span>
+                                                </span><?php } ?>
                                         </div> 
                                                </div>
                               

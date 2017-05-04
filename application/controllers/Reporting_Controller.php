@@ -5487,7 +5487,7 @@ class Reporting_Controller extends CI_Controller
         $idClient = $this->session->userdata('clientId');
         $fromDate = $this->session->userdata('fromDate');
         $toDate = $this->session->userdata('toDate');
-       
+     
          $fromdateData = $this->Webservices_Model->formatdate($fromDate);
          $todateData = $this->Webservices_Model->formatdate($toDate);
  
@@ -5496,7 +5496,7 @@ class Reporting_Controller extends CI_Controller
         $idfranchisee = $this->session->userdata('idfranchisee');
         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,false,flase, $searchAry,$siteId,$idfranchisee,$fromdateData,$todateData);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
-
+ 
         //$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
  
         $loggedinFranchisee = $idfranchisee;
@@ -5524,6 +5524,21 @@ class Reporting_Controller extends CI_Controller
         }
    
        
+        if ($clientDetailsAray['clientType'] > 0) {
+            $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
+            $data['ParentOfChild'] = $parentClientDetArr;
+        }
+        if (!empty($clientFranchiseeArr)) {
+            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientFranchiseeArr[0]['franchiseeId']);
+            $data['franchiseeArr'] = $franchiseeDetArr;
+        }
+        if($franchiseeDetArr['franchiseetype'] == 1){
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($idClient);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($clientDetailsAray['regionId']);
+        }else{
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($franchiseeDetArr['regionId']);
+        }
         $clientAray = $this->Webservices_Model->getFranchiseeWithClient($idClient,$idfranchisee);
 
         /*if(!empty($clientAray)){
@@ -5555,7 +5570,7 @@ class Reporting_Controller extends CI_Controller
                 }
             }
         }
-       
+        
      if($corpclient == '1') {
       $childClientDetailsAray = $userDetailsArr;   
      }
@@ -5575,7 +5590,11 @@ class Reporting_Controller extends CI_Controller
             $i = 0;
        
         foreach ($childClientDetailsAray as $siteData) {
-         
+         $showrec = true;
+    if (isset($siteId) && !empty($siteId) && ($siteId != $siteData['id'])) {
+        $showrec = false;
+    } 
+    if ($showrec) {
         $userDataAry = $this->Franchisee_Model->getSiteDetailsById($siteData['id']);
         $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($siteData['id']); 
          if($item['regionId']==0){
@@ -5767,10 +5786,11 @@ class Reporting_Controller extends CI_Controller
 </table>
         </div> <hr>';
         
-         }
+       
           $i++;
         }
-       
+         }
+         }  
         $pdf->writeHTML($html, true, false, true, false, '');
 //      $pdf->Write(5, 'CodeIgniter TCPDF Integration');
         error_reporting(E_ALL);

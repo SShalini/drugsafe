@@ -69,7 +69,7 @@
                 </ul>
 
                 <div class="portlet light bordered">
-                    <?php if ($_SESSION['drugsafe_user']['iRole'] == '1') { ?>
+                    <?php if (($_SESSION['drugsafe_user']['iRole'] == '1') ||  ($_SESSION['drugsafe_user']['iRole'] == '5')) { ?>
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-green-meadow"></i>

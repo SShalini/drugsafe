@@ -273,6 +273,7 @@ class Franchisee_Model extends Error_Model
 
     public function getAllClientDetails($parent = false, $franchiseId = '', $ClientName = '', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$fromdate='',$todate='')
     {   
+       
           $array = 'isDeleted = 0 AND clientType = 0 '.($franchiseId>0?' AND franchiseeId = '.(int)$franchiseId:'').(!empty($fromdate)?" AND ds_user.dtCreatedOn >= '".$fromdate." 00:00:00 '":'').(!empty($todate)?" AND ds_user.dtCreatedOn <= '".$todate." 23:59:59'":'').(!empty($ClientName)?" AND ds_user.szName = '".$ClientName."'":'') ;
        
             $this->db->select('*');
@@ -332,6 +333,7 @@ class Franchisee_Model extends Error_Model
 
 
         if (!empty($searchq)) {
+            
             //$whereAry = array('clientType' => $idClient, 'isDeleted=' => '0');
             $this->db->where($searchq);
 
@@ -342,7 +344,7 @@ class Franchisee_Model extends Error_Model
 
         $this->db->limit($limit, $offset);
         $query = $this->db->get();
-//              $sql = $this->db->last_query($query);
+// $sql = $this->db->last_query($query);
 //print_r($sql);die;
 
 

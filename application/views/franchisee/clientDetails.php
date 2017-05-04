@@ -955,6 +955,7 @@
              <?php        
             if($childClientDetailsAray)
             {
+             
             ?>
                 <div class="row">
                 <div class="table-responsive">
