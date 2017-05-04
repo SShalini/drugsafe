@@ -78,9 +78,10 @@ class Webservices_Model extends Error_Model
         }
     }
 
-    function getclientdetails($franchiseeid, $parent = 0, $agent = 0, $site = 0)
+    function getclientdetails($franchiseeid, $parent = 0, $agent = 0, $site = 0,$fromDate='',$todate='')
     {
-        $array = 'client.franchiseeId = ' . (int)$franchiseeid . ' AND user.isDeleted = 0 ' . ($agent > 0 && $parent == 0 ? ' AND client.agentId = ' . (int)$agent : ($agent > 0 && $parent > 0 ? ' AND client.clientType = ' . (int)$parent : ' AND client.clientType = ' . (int)$parent) . ($site > 0 ? ' AND client.clientId = ' . (int)$site : ''));
+        $array = 'client.franchiseeId = ' . (int)$franchiseeid . ' AND user.isDeleted = 0 ' . ($agent > 0 && $parent == 0 ? ' AND client.agentId = ' . (int)$agent : ($agent > 0 && $parent > 0 ? ' AND client.clientType = ' . (int)$parent : ' AND client.clientType = ' . (int)$parent) . ($site > 0 ? ' AND client.clientId = ' . (int)$site : ''))
+        .(!empty($fromDate)?" AND user.dtCreatedOn >= '".$fromDate." 00:00:00 '":'').(!empty($todate)?" AND user.dtCreatedOn <= '".$todate." 23:59:59'":'');
         $query = $this->db->select('user.id, user.szName, user.szEmail, client.franchiseeId,client.industry, user.szContactNumber, client.szCreatedBy, client.szLastUpdatedBy, client.szLastUpdatedBy, client.clientType,
                                     client.szBusinessName, client.szContactEmail, client.szContactMobile, client.discountid, client.szContactPhone, user.szCity, user.szCountry, user.abn,
                                     user.szAddress, user.szZipCode,user.dtCreatedOn')
@@ -101,14 +102,14 @@ class Webservices_Model extends Error_Model
 
     function getcorpclientdetails($franchiseeid = 0, $corpFranchisee = 0)
     {
-        $array = 'user.isDeleted = 0 ' . ($franchiseeid > 0 ? ' AND corpfranch.franchiseeId = ' . (int)$franchiseeid : '') . ($corpFranchisee > 0 ? ' AND corpfranch.corpfrid = ' . (int)$corpFranchisee : '') . ' AND user.iActive = 1';
+        $array = 'user.isDeleted = 0 ' . ($franchiseeid > 0 ? ' AND corpfranch.franchiseeId = ' . (int)$franchiseeid : '') . ($corpFranchisee > 0 ? ' AND corpfranch.corpfrid = ' . (int)$corpFranchisee : '') .' AND user.iActive = 1';
         $query = $this->db->select('user.id, user.szName, user.szEmail, corpfranch.clientid, corpfranch.corpfrid')
             ->from(__DBC_SCHEMATA_USERS__ . ' as user')
             ->join(__DBC_SCHEMATA_CORP_FRANCHISEE_MAPPING__ . ' as corpfranch', 'corpfranch.franchiseeid = user.id')
             ->where($array)
             ->get();
-//         $q = $this->db->last_query();
-//        echo $q; die;
+         /*$q = $this->db->last_query();
+        echo $q;*/
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
             /*$CorpCl = array();
@@ -1088,7 +1089,7 @@ class Webservices_Model extends Error_Model
     function getallprodbycatid($catid)
     {
         $array = array('szProductCategory' => (int)$catid, 'isDeleted' => '0');
-        $query = $this->db->select('id, szProductCode, szProductDiscription, szProductCost')
+        $query = $this->db->select('id, szProductCode, szProductDiscription, szProductCost, min_ord_qty')
             ->from(__DBC_SCHEMATA_PRODUCT__)
             ->where($array)
             ->get();
@@ -1269,7 +1270,7 @@ class Webservices_Model extends Error_Model
     function getfranchiseecartitems($franchiseeid)
     {
         $whereAry = 'cart.franchiseeid =' . (int)$franchiseeid . ' AND product.isDeleted = 0';
-        $query = $this->db->select('cart.id, cart.franchiseeid, cart.productid, cart.quantity, product.szProductCode, product.szProductDiscription, product.szProductCost')
+        $query = $this->db->select('cart.id, cart.franchiseeid, cart.productid, cart.quantity, product.szProductCode, product.szProductDiscription, product.szProductCost, product.min_ord_qty')
             ->from(__DBC_SCHEMATA_CART__ . ' as cart')
             ->join(__DBC_SCHEMATA_PRODUCT__ . ' as product', 'product.id = cart.productid')
             ->where($whereAry)

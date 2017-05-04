@@ -824,27 +824,6 @@ if (!empty($totalDispatched)) {
     $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
 }
 
-   /*   if ($totalOrdersDetailsAray) {
-            $i = 14 ;
-            foreach ($totalOrdersDetailsAray as $item) {
-                $productDataArr = $this->Inventory_Model->getProductDetailsById($item['productid']);
-         $price =   number_format(($item['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',');
-                
-                $this->excel->getActiveSheet()->setCellValue('A'.$i, $productDataArr['szProductCode']);
-                $this->excel->getActiveSheet()->setCellValue('B'.$i, $productDataArr['szProductCost']);
-                $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['quantity']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, '$'.$price);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['dispatched']);
-
-                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
-                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
-                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
-                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
-                $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
-                $i++;
-            }
-        }*/
-
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache

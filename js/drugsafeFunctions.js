@@ -3383,7 +3383,7 @@ function updateCartData(prodcount) {
         var qty = $('#order_quantity' + j).val();
         var minqty = $('#min_prod_quantity' + j).val();
         prodname = $('#prod_code' + j).val();
-        if (qty < minqty) {
+        if (parseInt(qty) < parseInt(minqty)) {
             check = 1;
             break;
         }

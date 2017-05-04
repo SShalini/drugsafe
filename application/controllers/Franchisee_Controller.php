@@ -411,9 +411,10 @@ class Franchisee_Controller extends CI_Controller
             $addEditClientDet = false;
             $sitesArr = array();
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
-                if(!empty($CorpuserDetailsArr)){
-                    foreach ($CorpuserDetailsArr as $CorpUser){
+                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid'],$fromdate,$todate);
+	            $CorpuserSearchArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+                if(!empty($CorpuserSearchArr)){
+                    foreach ($CorpuserSearchArr as $CorpUser){
                         array_push($sitesArr,$CorpUser);
                     }
                 }
@@ -446,7 +447,7 @@ class Franchisee_Controller extends CI_Controller
         if($corpclient == '1'){
            
             $loggedinFranchisee = $idfranchisee;
-            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient,0,0,0,$fromdate,$todate);
             if(!empty($clientDetsArr)){
                 $idfranchisee = $clientDetsArr[0]['franchiseeId'];
             }
@@ -457,7 +458,7 @@ class Franchisee_Controller extends CI_Controller
                 $addEditClientDet = false;
                 $userDetailsArr = array();
                 foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid'],$fromdate,$todate);
 
                     if(!empty($CorpuserDetailsArr)){
                         foreach ($CorpuserDetailsArr as $CorpUser){
@@ -751,7 +752,8 @@ class Franchisee_Controller extends CI_Controller
         $CorpuserDetailsArr = array();
         if(!empty($AssignCorpuserDetailsArr)){
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
+                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],0,0,0,$fromdate,$todate);
+	            $CorpSitesSearchArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
                 if(!empty($CorpSitesDetailsArr)){
                     foreach ($CorpSitesDetailsArr as $CorpUser){
                         if(!in_array($CorpUser,$CorpuserDetailsArr)){
@@ -759,14 +761,21 @@ class Franchisee_Controller extends CI_Controller
                         }
                     }
                 }
+	            if(!empty($CorpSitesSearchArr)){
+		            foreach ($CorpSitesSearchArr as $CorpUser){
+			            if(!in_array($CorpUser,$CorpSitesSearchArr)){
+				            array_push($CorpSitesSearchArr,$CorpUser);
+			            }
+		            }
+	            }
             }
         }
-        if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
-            $clientlistArr = array_merge($AllclientAry, $CorpuserDetailsArr);
+        if(!empty($AllclientAry) && !empty($CorpSitesSearchArr)){
+            $clientlistArr = array_merge($AllclientAry, $CorpSitesSearchArr);
         }elseif(!empty($AllclientAry)){
             $clientlistArr = $AllclientAry;
         }elseif(!empty($CorpuserDetailsArr)){
-            $clientlistArr = $CorpuserDetailsArr;
+            $clientlistArr = $CorpSitesSearchArr;
         }
         if(!empty($_POST)){
            $_POST['szSearchClRecord2']= $_POST['szSearchClRecord2'];  

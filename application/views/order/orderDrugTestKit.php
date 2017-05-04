@@ -132,7 +132,7 @@
                                                      <td><?php echo($drugTestKitData['min_ord_qty'] > 0 ? $drugTestKitData['min_ord_qty'] : 'N/A')?></td>
                                          
                                                     <td>
-                                                         <input type="number"min="25"  class="form-control btn-xs "  name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
+                                                         <input type="number"min="<?php echo($drugTestKitData['min_ord_qty'] > 0 ? $drugTestKitData['min_ord_qty'] : '1')?>"  class="form-control btn-xs "  name="order_quantity<?php echo $i;?>" id="order_quantity<?php echo $i;?>" >
                                                     </td>
                                                     <td>
                                                         <a class="btn btn-circle btn-icon-only btn-default" title="Add To Cart" onclick="placeOrder('<?php echo $drugTestKitData['id'];?>','<?php echo $i;?>','1');" href="javascript:void(0);">

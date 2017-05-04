@@ -972,7 +972,9 @@
                         </thead>
                         <tbody>
                            <?php
+                           //print_r($childClientDetailsAray);
                                        $i = 0;
+                                       $err = true;
                                         foreach($childClientDetailsAray as $childClientDetailsData) {
                                             $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($childClientDetailsData['id']);
                                             $showrec = true;
@@ -980,6 +982,7 @@
                                                 $showrec = false;
                                             }
                                             if ($showrec) {
+                                                $err = false;
                                                 ?>
                                                 <tr>
                                                     <td><?php echo(!empty($franchiseecode['userCode']) ? $franchiseecode['userCode'] : 'N/A'); ?></td>
@@ -1053,7 +1056,9 @@
                                                 </tr>
                                                 <?php
                                                 $i++;
-                                            }
+                                            }elseif($err){ ?>
+                                                <tr><td colspan="7" style="text-align: left; padding: 5px">No site found.</td></tr>
+                                            <?php }
                                         }
                                    ?>
                         </tbody>
