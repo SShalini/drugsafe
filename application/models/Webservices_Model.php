@@ -79,7 +79,7 @@ class Webservices_Model extends Error_Model
     }
 
     function getclientdetails($franchiseeid, $parent = 0, $agent = 0, $site = 0,$fromDate='',$todate='')
-    {
+    { 
         $array = 'client.franchiseeId = ' . (int)$franchiseeid . ' AND user.isDeleted = 0 ' . ($agent > 0 && $parent == 0 ? ' AND client.agentId = ' . (int)$agent : ($agent > 0 && $parent > 0 ? ' AND client.clientType = ' . (int)$parent : ' AND client.clientType = ' . (int)$parent) . ($site > 0 ? ' AND client.clientId = ' . (int)$site : ''))
         .(!empty($fromDate)?" AND user.dtCreatedOn >= '".$fromDate." 00:00:00 '":'').(!empty($todate)?" AND user.dtCreatedOn <= '".$todate." 23:59:59'":'');
         $query = $this->db->select('user.id, user.szName, user.szEmail, client.franchiseeId,client.industry, user.szContactNumber, client.szCreatedBy, client.szLastUpdatedBy, client.szLastUpdatedBy, client.clientType,

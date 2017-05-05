@@ -5056,7 +5056,7 @@ class Reporting_Controller extends CI_Controller
         $fromDate = $this->session->userdata('fromDate');
         $toDate = $this->session->userdata('toDate');
         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
-         $todateData = $this->Webservices_Model->formatdate($toDate); 
+        $todateData = $this->Webservices_Model->formatdate($toDate); 
        
          if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
            if(!empty($frId))
@@ -5072,8 +5072,9 @@ class Reporting_Controller extends CI_Controller
         $CorpuserDetailsArr = array();
         if(!empty($AssignCorpuserDetailsArr)){
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
-                if(!empty($CorpSitesDetailsArr)){
+               $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],0,0,0,$fromdateData,$todateData);
+              
+               if(!empty($CorpSitesDetailsArr)){
                     foreach ($CorpSitesDetailsArr as $CorpUser){
                         if(!in_array($CorpUser,$CorpuserDetailsArr)){
                             array_push($CorpuserDetailsArr,$CorpUser);
@@ -5082,7 +5083,7 @@ class Reporting_Controller extends CI_Controller
                 }
             }
         }
-         
+       
         if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
          if(($clName == $CorpclientData['szName'])){
             $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);
@@ -5090,18 +5091,9 @@ class Reporting_Controller extends CI_Controller
          else{
              $clientAray = $AllclientAry;   
          }
-         if($fromdateData){
-           if($fromdateData." 00:00:00" >= $CorpclientData['dtCreatedOn']){
-            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
-           } 
+           
          }
-           if($todateData){
-           if($todateData." 23:59:59" <= $CorpclientData['dtCreatedOn']){
-            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
-           } 
-            
-         }
-        }elseif(!empty($AllclientAry)){
+       elseif(!empty($AllclientAry)){
             $clientAray = $AllclientAry;
         }elseif(!empty($CorpuserDetailsArr)){
             $clientAray = $CorpuserDetailsArr;
@@ -5110,6 +5102,7 @@ class Reporting_Controller extends CI_Controller
         if(($_SESSION['drugsafe_user']['iRole']==2)){
          $frId = $_SESSION['drugsafe_user']['id'];  
         }
+        
          if (!empty($clientAray)) {
             $i = 2;
             foreach ($clientAray as $item) {
@@ -5163,7 +5156,13 @@ class Reporting_Controller extends CI_Controller
                             }if($item['industry']==13){
                                 $value = 'Other';
                             }
-                         
+               if(!empty($discount['percentage']))
+               {
+                 $discount =$discount['percentage']; 
+               }
+               else{
+                   $discount ="N/A";  
+               }         
                 $this->excel->getActiveSheet()->setCellValue('A' . $i, $item['szBusinessName']);
                 $this->excel->getActiveSheet()->setCellValue('B' . $i, $item['abn']);
                 $this->excel->getActiveSheet()->setCellValue('C' . $i, $item['szName']);
@@ -5171,7 +5170,7 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->setCellValue('E' . $i, $item['szContactNumber']);
                 $this->excel->getActiveSheet()->setCellValue('F' . $i, $count);
                 $this->excel->getActiveSheet()->setCellValue('G' . $i, $value);
-                $this->excel->getActiveSheet()->setCellValue('H' . $i, $discount['percentage']);
+                $this->excel->getActiveSheet()->setCellValue('H' . $i, $discount);
                 $this->excel->getActiveSheet()->setCellValue('I' . $i, $item['szContactEmail']);
                 $this->excel->getActiveSheet()->setCellValue('J' . $i, $item['szContactPhone']);
                 $this->excel->getActiveSheet()->setCellValue('K' . $i, $item['szContactMobile']);
@@ -5257,7 +5256,7 @@ class Reporting_Controller extends CI_Controller
         $fromDate = $this->session->userdata('fromDate');
         $toDate = $this->session->userdata('toDate');
         $fromdateData = $this->Webservices_Model->formatdate($fromDate);
-         $todateData = $this->Webservices_Model->formatdate($toDate); 
+        $todateData = $this->Webservices_Model->formatdate($toDate); 
        
          if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){
            if(!empty($frId))
@@ -5273,8 +5272,9 @@ class Reporting_Controller extends CI_Controller
         $CorpuserDetailsArr = array();
         if(!empty($AssignCorpuserDetailsArr)){
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                $CorpSitesDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid']);
-                if(!empty($CorpSitesDetailsArr)){
+               $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],0,0,0,$fromdateData,$todateData);
+              
+               if(!empty($CorpSitesDetailsArr)){
                     foreach ($CorpSitesDetailsArr as $CorpUser){
                         if(!in_array($CorpUser,$CorpuserDetailsArr)){
                             array_push($CorpuserDetailsArr,$CorpUser);
@@ -5283,7 +5283,7 @@ class Reporting_Controller extends CI_Controller
                 }
             }
         }
-         
+       
         if(!empty($AllclientAry) && !empty($CorpuserDetailsArr)){
          if(($clName == $CorpclientData['szName'])){
             $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);
@@ -5291,18 +5291,9 @@ class Reporting_Controller extends CI_Controller
          else{
              $clientAray = $AllclientAry;   
          }
-         if($fromdateData){
-           if($fromdateData." 00:00:00" >= $CorpclientData['dtCreatedOn']){
-            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
-           } 
+           
          }
-           if($todateData){
-           if($todateData." 23:59:59" <= $CorpclientData['dtCreatedOn']){
-            $clientAray = array_merge($AllclientAry, $CorpuserDetailsArr);    
-           } 
-            
-         }
-        }elseif(!empty($AllclientAry)){
+       elseif(!empty($AllclientAry)){
             $clientAray = $AllclientAry;
         }elseif(!empty($CorpuserDetailsArr)){
             $clientAray = $CorpuserDetailsArr;
@@ -5514,7 +5505,8 @@ class Reporting_Controller extends CI_Controller
             $addEditClientDet = false;
             $sitesArr = array();
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+               $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid'],$fromdateData,$todateData);
+	       $CorpuserSearchArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
                 if(!empty($CorpuserDetailsArr)){
                     foreach ($CorpuserDetailsArr as $CorpUser){
                         array_push($sitesArr,$CorpUser);
@@ -5549,7 +5541,7 @@ class Reporting_Controller extends CI_Controller
         $userDetailsArr = array();
         if($corpclient == '1'){
             $loggedinFranchisee = $idfranchisee;
-            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+           $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient,0,0,0,$fromdateData,$todateData);
             if(!empty($clientDetsArr)){
                 $idfranchisee = $clientDetsArr[0]['franchiseeId'];
             }
@@ -5560,7 +5552,7 @@ class Reporting_Controller extends CI_Controller
                 $addEditClientDet = false;
                 $userDetailsArr = array();
                 foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+                   $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid'],$fromdateData,$todateData);
 
                     if(!empty($CorpuserDetailsArr)){
                         foreach ($CorpuserDetailsArr as $CorpUser){
@@ -5597,7 +5589,7 @@ class Reporting_Controller extends CI_Controller
     if ($showrec) {
         $userDataAry = $this->Franchisee_Model->getSiteDetailsById($siteData['id']);
         $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($siteData['id']); 
-         if($item['regionId']==0){
+         if($siteData['regionId']==0){
                                $getState=$this->Franchisee_Model->getStateByFranchiseeId($siteData['franchiseeId']);
                                $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $siteData['franchiseeId']);
                                $regionId = $franchiseeArr['regionId'];
@@ -6102,12 +6094,12 @@ class Reporting_Controller extends CI_Controller
         $this->excel->getActiveSheet()->getStyle('AQ3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
  
         
-            $corpclient = $this->session->userdata('corpclient');
+         $corpclient = $this->session->userdata('corpclient');
         $siteId = $this->session->userdata('siteName');
         $idClient = $this->session->userdata('clientId');
         $fromDate = $this->session->userdata('fromDate');
         $toDate = $this->session->userdata('toDate');
-       
+     
          $fromdateData = $this->Webservices_Model->formatdate($fromDate);
          $todateData = $this->Webservices_Model->formatdate($toDate);
  
@@ -6116,7 +6108,7 @@ class Reporting_Controller extends CI_Controller
         $idfranchisee = $this->session->userdata('idfranchisee');
         $childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails($idClient,false,flase, $searchAry,$siteId,$idfranchisee,$fromdateData,$todateData);
         $clientFranchiseeArr = $this->Franchisee_Model->getClientFranchisee($idClient);
-
+ 
         //$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
  
         $loggedinFranchisee = $idfranchisee;
@@ -6134,7 +6126,8 @@ class Reporting_Controller extends CI_Controller
             $addEditClientDet = false;
             $sitesArr = array();
             foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+               $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid'],$fromdateData,$todateData);
+	       $CorpuserSearchArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
                 if(!empty($CorpuserDetailsArr)){
                     foreach ($CorpuserDetailsArr as $CorpUser){
                         array_push($sitesArr,$CorpUser);
@@ -6144,6 +6137,21 @@ class Reporting_Controller extends CI_Controller
         }
    
        
+        if ($clientDetailsAray['clientType'] > 0) {
+            $parentClientDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientDetailsAray['clientType']);
+            $data['ParentOfChild'] = $parentClientDetArr;
+        }
+        if (!empty($clientFranchiseeArr)) {
+            $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientFranchiseeArr[0]['franchiseeId']);
+            $data['franchiseeArr'] = $franchiseeDetArr;
+        }
+        if($franchiseeDetArr['franchiseetype'] == 1){
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($idClient);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($clientDetailsAray['regionId']);
+        }else{
+            $getState=$this->Franchisee_Model->getStateByFranchiseeId($franchiseId);
+            $getRegionName = $this->Admin_Model->getregionbyregionid($franchiseeDetArr['regionId']);
+        }
         $clientAray = $this->Webservices_Model->getFranchiseeWithClient($idClient,$idfranchisee);
 
         /*if(!empty($clientAray)){
@@ -6154,7 +6162,7 @@ class Reporting_Controller extends CI_Controller
         $userDetailsArr = array();
         if($corpclient == '1'){
             $loggedinFranchisee = $idfranchisee;
-            $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient);
+           $clientDetsArr = $this->Webservices_Model->getclientdetailsbyclientid($idClient,0,0,0,$fromdateData,$todateData);
             if(!empty($clientDetsArr)){
                 $idfranchisee = $clientDetsArr[0]['franchiseeId'];
             }
@@ -6165,7 +6173,7 @@ class Reporting_Controller extends CI_Controller
                 $addEditClientDet = false;
                 $userDetailsArr = array();
                 foreach ($AssignCorpuserDetailsArr as $assignCorpUser){
-                    $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid']);
+                   $CorpuserDetailsArr = $this->Webservices_Model->getclientdetails($assignCorpUser['corpfrid'],$idClient,0,$assignCorpUser['clientid'],$fromdateData,$todateData);
 
                     if(!empty($CorpuserDetailsArr)){
                         foreach ($CorpuserDetailsArr as $CorpUser){
@@ -6175,14 +6183,13 @@ class Reporting_Controller extends CI_Controller
                 }
             }
         }
-       
+        
      if($corpclient == '1') {
       $childClientDetailsAray = $userDetailsArr;   
      }
      else{
          $childClientDetailsAray = $childClientDetailsAray;   
      }
-     
          if ($childClientDetailsAray) {
             $i = 4;
            
@@ -6261,8 +6268,8 @@ class Reporting_Controller extends CI_Controller
                 $this->excel->getActiveSheet()->setCellValue('E' . $i, $userDataAry['per_form_complete']);
                 $this->excel->getActiveSheet()->setCellValue('F' . $i,$item['szAddress']);
                 $this->excel->getActiveSheet()->setCellValue('G' . $i, $item['szCity']);
-                $this->excel->getActiveSheet()->setCellValue('H' . $i, $item['szState']);
-                $this->excel->getActiveSheet()->setCellValue('I' . $i, $item['region']);
+                $this->excel->getActiveSheet()->setCellValue('H' . $i, $getState['name']);
+                $this->excel->getActiveSheet()->setCellValue('I' . $i, $getRegionName['regionName']);
                 $this->excel->getActiveSheet()->setCellValue('J' . $i, $item['szZipCode']);
                 $this->excel->getActiveSheet()->setCellValue('K' . $i, $item['szCountry']);
                 $this->excel->getActiveSheet()->setCellValue('L' . $i, $userDataAry['sp_name']);

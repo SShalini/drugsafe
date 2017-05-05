@@ -444,7 +444,7 @@ class Franchisee_Controller extends CI_Controller
                 $addEditClientDet = false;
             }
         }*/
-         print_r($childClientDetailsAray);die;
+      ;
         $userDetailsArr = array();
         if($corpclient == '1'){
            
