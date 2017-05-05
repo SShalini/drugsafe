@@ -441,6 +441,7 @@ class Order_Controller extends CI_Controller
     {
         $data['mode'] = '__EDIT_ORDER_DETAILS_POPUP__';
         $data['idOrder'] = $this->input->post('idOrder');
+        $data['flag'] = $this->input->post('flag');
         $this->load->view('admin/admin_ajax_functions', $data);
     }
 
@@ -467,10 +468,16 @@ class Order_Controller extends CI_Controller
          $this->session->set_userdata('flag', $flag);
         $this->session->set_userdata('idOrder', $idOrder);
         echo "SUCCESS||||";
-        echo "pdforderdetails";
+        if($flag==1){
+         echo "pdf_dispatch_order_details";   
+        }
+        else{
+         echo "pdforderdetails";   
+        }
+        
     }
 
-    public function pdforderdetails()
+    public function pdf_dispatch_order_details()
     {
        ob_start();
         $this->load->library('Pdf');
@@ -496,29 +503,21 @@ class Order_Controller extends CI_Controller
      
         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
 
-        if ($OrdersDetailsAray['status'] == 1) {
-
-            $status = 'Ordered';
-        }
+        
         if ($OrdersDetailsAray['status'] == 2) {
 
 
             $status = 'Dispatched';
         }
-        if ($OrdersDetailsAray['status'] == 3) {
+        
 
-
-            $status = 'Canceled';
-        }
-
-        if ($OrdersDetailsAray['status'] == 4) {
-
-            $status = 'Pending';
-        }
      $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));
      $dispatchVal =     date('d M Y',strtotime($OrdersDetailsAray['dispatchedon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['dispatchedon']));
       $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));
- $html = '<div class="wraper">
+        $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder); 
+      $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
+        $totalFreightPrice = number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ',');
+      $html = '<div class="wraper">
         <table cellpadding="5px">
        
     <tr>
@@ -540,30 +539,24 @@ class Order_Controller extends CI_Controller
         <td width="50%" align="left"><b>Order Date & Time : </b> '.$orderVal.'</td>
     </tr>
      ';
-  if($flag==1){
-      if($OrdersDetailsAray['status'] == 3) { 
-   $html .= '      
-   <tr>
-        <td width="50%" align="left"><b>Cancelled Date & Time : </b> '. $cancelVal .'</td>
-    </tr> ';   
-    } 
+ 
      if($OrdersDetailsAray['status'] == 2) { 
    $html .= '      
    <tr>
         <td width="50%" align="left"><b>Dispatched Date & Time : </b> '. $dispatchVal .'</td>
     </tr> ';   
- } } 
+ }  
   $html .= '   <tr>
         <td width="50%" align="left"><b>Order Status : </b> '.$status.'</td>
     </tr> ';
-  if($flag==1){
+ 
    $html .= '  <tr>
-        <td width="50%" align="left"><b>Freight Price: </b> $'.$OrdersDetailsAray['freightprice'].'</td>
+        <td width="50%" align="left"><b>Freight Price: </b> $'.$totalFreightPrice.'</td>
     </tr>
      <tr>
         <td width="50%" align="left"><b>Total Price EXL GST: </b> $'.$OrdersDetailsAray['dispatched_price'].'</td>
     </tr>';
-  }
+ 
   if($_SESSION['drugsafe_user']['iRole']==1){
    $html .= '
      <tr>
@@ -620,6 +613,135 @@ $html .= '
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');
     }
+   public function pdforderdetails()
+    {
+       ob_start();
+        $this->load->library('Pdf');
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetTitle('Drug-safe Order Details');
+        $pdf->SetAuthor('Drug-safe');
+        $pdf->SetSubject('Order Details Report PDF');
+        $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+        $pdf->SetDisplayMode('real', 'default');
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+        $pdf->SetFont('times', '', 12);
+
+        $pdf->AddPage('L');
+   
+        $idOrder = $this->session->userdata('idOrder');
+        $flag = $this->session->userdata('flag');
+        $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+     
+        $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
+
+        if ($OrdersDetailsAray['status'] == 1) {
+
+            $status = Ordered;
+        }
+        
+        if ($OrdersDetailsAray['status'] == 3) {
+
+
+            $status = Canceled;
+        }
+
+        
+     $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));
+      $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));
+ $html = '<div class="wraper">
+        <table cellpadding="5px">
+       
+    <tr>
+        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
+    </tr>
+
+</table>
+<br />
+<h2 style="text-align: center;">ORDER DETAILS</h2>
+
+<br>
+<h3 style="color:black">Order Info  </h3>
+<br />
+<table cellpadding="5px">
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Order # :</b> #0000' . $idOrder . '</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Order Date & Time : </b> '.$orderVal.'</td>
+    </tr>
+     ';
+ 
+      if($OrdersDetailsAray['status'] == 3) { 
+   $html .= '      
+   <tr>
+        <td width="50%" align="left"><b>Cancelled Date & Time : </b> '. $cancelVal .'</td>
+    </tr> ';   
+    } 
+     
+  $html .= '   <tr>
+        <td width="50%" align="left"><b>Order Status : </b> '.$status.'</td>
+    </tr> ';
+  
+   $html .= '  <tr>
+        <td width="50%" align="left"><b>Total Price EXL GST : </b> $'.$OrdersDetailsAray['price'].'</td>
+    </tr>';
+
+  if($_SESSION['drugsafe_user']['iRole']==1){
+   $html .= '
+     <tr>
+        <td width="50%" align="left"><b>Franchisee : </b> '. $franchiseeDetArr1['szName'] .'</td>
+    </tr>';
+  }
+$html .= '    
+</table>
+<br />
+<h3 style="color:black">Products Info </h3>
+            <div>
+         
+                        <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th><b>Product Code</b> </th>
+                                        <th> <b>Product Cost</b> </th>
+                                        <th> <b>Quantity</b> </th>
+                                        <th><b>Total Price EXL GST</b> </th>
+                                    </tr>';
+        $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+        if ($totalOrdersDetailsAray) {
+            $i = 0;
+            foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
+                $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
+
+                $html .= '<tr>
+                                            <td> ' . $productDataArr['szProductCode'] . ' </td>
+                                            <td> $' . $productDataArr['szProductCost'] . '</td>
+                                            <td> ' . $totalOrdersDetailsData['quantity'] . ' </td>
+                                            <td> $' . number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>
+                                
+                                        </tr>';
+            }
+        }
+        $i++;
+        $html .= '
+                            </table>
+                        </div>
+                      
+                        ';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+
+        error_reporting(E_ALL);
+        $this->session->unset_userdata('idOrder');
+        $this->session->unset_userdata('flag');
+
+        ob_end_clean();
+        $pdf->Output('view_order_details.pdf', 'I');
+    }
     function View_excel_order_details_data()
         {
             $idOrder = $this->input->post('idOrder');
@@ -628,11 +750,17 @@ $html .= '
                
                 
                 echo "SUCCESS||||";
-                echo "View_excel_order_details";
+                if($flag==1){
+                   echo "View_excel_dispatch_order_details";  
+                }
+                else{
+                  echo "View_excel_order_details";   
+                }
+               
             
  
         }
-    public function View_excel_order_details()
+    public function View_excel_dispatch_order_details()
     {
         $this->load->library('excel');
         $filename = 'Report';
@@ -823,6 +951,154 @@ if (!empty($totalDispatched)) {
     $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
     $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
 }
+
+        header('Content-Type: application/vnd.ms-excel'); //mime type
+        header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); //no cache
+
+//save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+//if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
+        $this->session->unset_userdata('productCode');
+        $this->session->unset_userdata('franchiseeName');
+//force user to download the Excel file without writing it to server's HD
+        $objWriter->save('php://output');
+    }
+    public function View_excel_order_details()
+    {
+        $this->load->library('excel');
+        $filename = 'Report';
+        $title = 'Drug-safe Order Details';
+        $file = $filename . '-' . $title ; //save our workbook as this file name
+
+
+        $this->excel->setActiveSheetIndex(0);
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A13', 'Product Code');
+        $this->excel->getActiveSheet()->getStyle('A13')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A13')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A13')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('B13', 'Product Cost');
+        $this->excel->getActiveSheet()->getStyle('B13')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('B13')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('B13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('C13', 'Quantity');
+        $this->excel->getActiveSheet()->getStyle('C13')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C13')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+        $this->excel->getActiveSheet()->setCellValue('D13', 'Total Price EXL GST');
+        $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('D13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+         $idOrder = $this->session->userdata('idOrder');
+         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
+          if ($OrdersDetailsAray['status'] == 1) {
+
+            $status = Ordered;
+        }
+      
+        if ($OrdersDetailsAray['status'] == 3) {
+
+
+            $status = Canceled;
+        }
+
+       if($OrdersDetailsAray['canceledon']=="0000-00-00 00:00:00"){
+         $cancelVal =   "N/A";  
+       } 
+       else{
+         $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));   
+       }
+        if($OrdersDetailsAray['createdon']=="0000-00-00 00:00:00"){
+         $orderVal =   "N/A";
+       } 
+       else{
+         $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));   
+       }
+    
+    
+     $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
+       
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('C1', 'ORDER DETAILS');
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+     
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A2', 'Order Info ');
+        $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A2')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        $this->excel->getActiveSheet()->setTitle($filename);
+        $this->excel->getActiveSheet()->setCellValue('A11', 'Products Info ');
+        $this->excel->getActiveSheet()->getStyle('A11')->getFont()->setSize(13);
+        $this->excel->getActiveSheet()->getStyle('A11')->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle('A11')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        
+        
+         $this->excel->getActiveSheet()->setCellValue('A4','Order # :');
+         $this->excel->getActiveSheet()->setCellValue('A5','Order Date & Time :');
+         if($OrdersDetailsAray['status'] ==3){
+          $this->excel->getActiveSheet()->setCellValue('A6','Canceled Date & Time :');
+          $this->excel->getActiveSheet()->setCellValue('A7','Order Status  :');
+         $this->excel->getActiveSheet()->setCellValue('A8','Total Price EXL GST :');
+         $this->excel->getActiveSheet()->setCellValue('A9','Franchisee :');
+         }
+         else{
+           $this->excel->getActiveSheet()->setCellValue('A6','Order Status  :');
+           $this->excel->getActiveSheet()->setCellValue('A7','Total Price EXL GST :');
+            if($_SESSION['drugsafe_user']['iRole']==1){
+           $this->excel->getActiveSheet()->setCellValue('A8','Franchisee :'); 
+            }
+         }
+        
+         
+         
+         $this->excel->getActiveSheet()->setCellValue('B4','#0000' .$idOrder);
+         $this->excel->getActiveSheet()->setCellValue('B5',$orderVal);
+          if($OrdersDetailsAray['status'] ==3){
+         $this->excel->getActiveSheet()->setCellValue('B6',$cancelVal);
+         $this->excel->getActiveSheet()->setCellValue('B7',$status);
+         $this->excel->getActiveSheet()->setCellValue('B8','$'.$OrdersDetailsAray['price']);
+          if($_SESSION['drugsafe_user']['iRole']==1){
+         $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
+          }
+         }
+         
+         else{
+         $this->excel->getActiveSheet()->setCellValue('B6',$status);
+         $this->excel->getActiveSheet()->setCellValue('B7','$'.$OrdersDetailsAray['price']);
+          if($_SESSION['drugsafe_user']['iRole']==1){
+         $this->excel->getActiveSheet()->setCellValue('B8',$franchiseeDetArr1['szName']);
+          }
+         }
+         
+      if ($totalOrdersDetailsAray) {
+            $i = 14 ;
+            foreach ($totalOrdersDetailsAray as $item) {
+                $productDataArr = $this->Inventory_Model->getProductDetailsById($item['productid']);
+         $price =   number_format(($item['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',');
+                
+                $this->excel->getActiveSheet()->setCellValue('A'.$i, $productDataArr['szProductCode']);
+                $this->excel->getActiveSheet()->setCellValue('B'.$i, '$'.$productDataArr['szProductCost']);
+                $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['quantity']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, '$'.$price);
+
+                $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
+                $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
+                $i++;
+            }
+        }
 
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name

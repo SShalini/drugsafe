@@ -34,7 +34,7 @@
                     </li>
 
                     <li>
-                        <span class="active">Franchisee Stock Qty Report</span>
+                        <span class="active">Franchisee Stock Quantity Report</span>
                     </li>
                 </ul>
 
@@ -44,7 +44,7 @@
                             <div class="caption">
                                 <i class="icon-equalizer font-red-sunglo"></i>
                                 <span class="caption-subject font-red-sunglo bold uppercase">
-                                    Franchisee Stock Qty Report
+                                    Franchisee Stock Quantity Report
                                 </span>
                             </div>
                              <?php
@@ -150,42 +150,33 @@
                                                 { 
                                                     $i++ ;
                                                     ?>
-                                   <tr>
+                                    <tr>
                                         <td>
                                             <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $viewFranchiseeInventoryData['szProductImage']; ?>" width="60" height="60"/>    
                                         </td>
                                         <td>
                                            <?php echo $viewFranchiseeInventoryData['szProductCode'] ;?>
-                                    </td>
-                                    <td>
-                                         <?php echo $viewFranchiseeInventoryData['szProductDiscription'] ;?>
-                                    </td>
-                                    <td>  <?php echo $viewFranchiseeInventoryData['szQuantity']; ?> </td>
-                          
-                                </tr>
-                              <?php
-                                         
+                                        </td>
+                                        <td>
+                                           <?php echo $viewFranchiseeInventoryData['szProductDiscription'] ;?>
+                                        </td>
+                                        <td>  <?php echo $viewFranchiseeInventoryData['szQuantity']; ?> </td>
+                                    </tr>
+                              <?php   
                                               }
                                             
-                                             
                                            ?>
                             </tbody>
                             </table>
                     </div>        
                 </div>
                       <?php } else {
-                          
                             echo "Not Found";    
                            }
-                           
                             }?> 
-                  </div>
-   
-                   
                         </div>
-         
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>

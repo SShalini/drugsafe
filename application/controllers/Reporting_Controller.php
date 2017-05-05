@@ -4800,7 +4800,7 @@ class Reporting_Controller extends CI_Controller
         $viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList($franchiseeName, $prodCategory);
 
         $html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
-            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Stock Report</b></p></div>
+            <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Stock Quantity Report</b></p></div>
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Name:- </b>'.$viewFranchiseeInventoryListAry['0']['szName'].'</p></div>
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
@@ -4869,7 +4869,7 @@ class Reporting_Controller extends CI_Controller
         $this->excel->setActiveSheetIndex(0);
         
         $this->excel->getActiveSheet()->setTitle($filename);
-        $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee Stock Report');
+        $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee Stock Quantity Report');
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);

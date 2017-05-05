@@ -65,10 +65,8 @@
                                  <?php
                         if(!empty($recordAry))
                         { 
-                    
                             ?>
                            
-                               
                                  <a onclick="ViewpdfSalesCrmDetailedReport('<?php echo $_POST['szSearch1'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch4'];?>','<?php echo $_POST['szSearchBussName'];?>')" href="javascript:void(0);" 
                                    class=" btn green-meadow">
                                     <i class="fa fa-file-pdf-o"></i> View Pdf </a>
@@ -353,9 +351,9 @@
                                             <td> <?php echo $i;?> </td>
                                             <td> <?php echo $franchiseeNameArray['szName']?> </td>
                                             <td> <?php echo $recordDetailsData['szBusinessName']?> </td>
-                                            <td> <?php echo $recordDetailsData['szName']?> </td>
-                                            <td> <?php echo $recordDetailsData['szEmail'];?> </td>
-                                            
+                                            <td> <?php echo (!empty($recordDetailsData['szName'])?$recordDetailsData['szName']:'N/A');?> </td>
+                                            <td> <?php echo (!empty($recordDetailsData['szEmail'])?$recordDetailsData['szEmail']:'N/A');?> </td>
+                                      
                                             <td>
                                                                     <?php if ($recordDetailsData['status'] == 1) { ?>
 

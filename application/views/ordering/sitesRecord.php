@@ -68,7 +68,7 @@
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="icon-equalizer font-green-meadow"></i>
-                                <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related client's sites.</span>
+                                <span class="caption-subject font-green-meadow ">Plese select a Franchisee to display their related Invoices.</span>
                             </div>
                         </div>
                         <div class="row">

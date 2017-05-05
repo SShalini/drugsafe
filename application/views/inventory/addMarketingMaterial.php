@@ -106,6 +106,38 @@
                                             </span><?php }?>
                                         </div>
                                     </div>
+                                     <div class="form-group <?php if(form_error('productData[min_ord_qty]')){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label"> Minimum Order Quantity</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-cubes"></i>
+                                                </span>
+                                                 <input id="min_ord_qty" class="form-control" min="1" type="number"  value="<?php echo set_value('productData[min_ord_qty]'); ?>" placeholder="Minimum Order Quantity" onfocus="remove_formError(this.id,'true')" name="productData[min_ord_qty]">
+                                              
+                                            </div>
+                                              <?php
+                                            if(form_error('productData[min_ord_qty]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('productData[min_ord_qty]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
+                                      <div class="form-group <?php if(form_error('productData[model_stk_val]')){?>has-error<?php }?>">
+                                        <label class="col-md-3 control-label"> Model Stock Value</label>
+                                        <div class="col-md-5">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                <i class="fa fa-cube"></i>
+                                                </span>
+                                                <input id="model_stk_val" class="form-control"  type="number" min="1" value="<?php echo set_value('productData[model_stk_val]'); ?>" placeholder="Model Stock Value" onfocus="remove_formError(this.id,'true')" name="productData[model_stk_val]">
+                                              
+                                            </div>
+                                              <?php
+                                            if(form_error('productData[model_stk_val]')){?>
+                                            <span class="help-block pull-left"><span><?php echo form_error('productData[model_stk_val]');?></span>
+                                            </span><?php }?>
+                                        </div>
+                                    </div>
                                      <div class="form-group <?php if(form_error('productData[dtExpiredOn]')){?>has-error<?php }?>">
                                              <label class="col-md-3 control-label">Expiry Date</label>
                                             <div class="col-md-3">
@@ -125,38 +157,7 @@
                                             </span><?php }?>  
                                             </div>
                                     </div>
-                                      <div class="form-group <?php if(form_error('productData[min_ord_qty]')){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label"> Minimum Order Quantity</label>
-                                        <div class="col-md-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-cubes"></i>
-                                                </span>
-                                                 <input id="min_ord_qty" class="form-control" type="number"  value="<?php echo set_value('productData[min_ord_qty]'); ?>" placeholder="Minimum Order Quantity" onfocus="remove_formError(this.id,'true')" name="productData[min_ord_qty]">
-                                              
-                                            </div>
-                                              <?php
-                                            if(form_error('productData[min_ord_qty]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('productData[min_ord_qty]');?></span>
-                                            </span><?php }?>
-                                        </div>
-                                    </div>
-                                      <div class="form-group <?php if(form_error('productData[model_stk_val]')){?>has-error<?php }?>">
-                                        <label class="col-md-3 control-label"> Model Stock Value</label>
-                                        <div class="col-md-5">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-cube"></i>
-                                                </span>
-                                                <input id="model_stk_val" class="form-control" type="number"  value="<?php echo set_value('productData[model_stk_val]'); ?>" placeholder="Model Stock Value" onfocus="remove_formError(this.id,'true')" name="productData[model_stk_val]">
-                                              
-                                            </div>
-                                              <?php
-                                            if(form_error('productData[model_stk_val]')){?>
-                                            <span class="help-block pull-left"><span><?php echo form_error('productData[model_stk_val]');?></span>
-                                            </span><?php }?>
-                                        </div>
-                                    </div>
+                                     
                                     <div class="form-group <?php if(form_error('productData[szProductImage]')){?>has-error<?php }?>">
                                         <label class="col-md-3 control-label">Product Image</label>
                                         <div class="col-md-5">

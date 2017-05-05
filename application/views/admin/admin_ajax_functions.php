@@ -1539,7 +1539,9 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                         <h4><i class="icon-equalizer font-red-sunglo"></i> &nbsp;
                             <span class="caption-subject font-red-sunglo bold uppercase">Order Details</span></h4>
 
-                        <?php if ($flag != 1) { ?>
+                        <?php
+                         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                        if ($flag != 1) { ?>
                             <hr>
                             <div class='row'>
                                 <div class="actions">
@@ -1549,6 +1551,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     </div>
                                     <div class=' col-md-6'>
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                       <?php if ($OrdersDetailsAray['status'] == 2) { ?>
                                         <a onclick="view_order_details_pdf('<?php echo $idOrder; ?>','1')"
                                            href="javascript:void(0);"
                                            class=" btn green-meadow">
@@ -1558,6 +1561,17 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                            href="javascript:void(0);"
                                            class=" btn green-meadow">
                                             <i class="fa fa-file-excel-o"></i> View Xls </a>
+                                       <?php } else {?>
+                                          <a onclick="view_order_details_pdf('<?php echo $idOrder; ?>')"
+                                           href="javascript:void(0);"
+                                           class=" btn green-meadow">
+                                            <i class="fa fa-file-pdf-o"></i> View Pdf </a>
+
+                                        <a onclick="View_excel_order_details_list('<?php echo $idOrder; ?>')"
+                                           href="javascript:void(0);"
+                                           class=" btn green-meadow">
+                                            <i class="fa fa-file-excel-o"></i> View Xls </a>
+                                         <?php }?>
                                     </div>
 
                                 </div>
@@ -1579,7 +1593,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
 
                         </div>
                         <?php
-                        $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
+                       
                         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
 
                         $splitTimeStamp = explode(" ", $OrdersDetailsAray['createdon']);
@@ -1690,6 +1704,10 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                 ?>
 
                             </div>
+                                   <?php
+                                
+                                if ($OrdersDetailsAray['status'] == 2) {
+                                    ?>
                             <div class="row static-info">
                                 <div class="col-md-5 name">
                                     Freight Price:
@@ -1701,6 +1719,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     echo number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ','); ?>
                                 </div>
                             </div>
+                                   
                             <div class="row static-info">
                                 <div class="col-md-5 name">
                                     Total Price EXL GST:
@@ -1710,6 +1729,21 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     echo number_format($OrdersDetailsAray['dispatched_price'], 2, '.', ','); ?>
                                 </div>
                             </div>
+                                <?php
+                                } else{
+                                    ?>
+                                <div class="row static-info">
+                                <div class="col-md-5 name">
+                                    Total Price EXL GST:
+                                </div>
+                                <div class="col-md-7 value">
+                                    $<?php
+                                    echo number_format($OrdersDetailsAray['price'], 2, '.', ','); ?>
+                                </div>
+                            </div>
+                                <?php
+                                }
+                                    ?>
                             <!--<div class="row static-info">
                                 <div class="col-md-5 name">
                                     Dispatched Price:
@@ -1732,7 +1766,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                         </div>
                     </div>
                     <hr>
-                    <div class="portlet green-meadow box">
+                     <div class="portlet green-meadow box">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="fa fa-cogs"></i> Products Info
@@ -1750,7 +1784,13 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                         <th> Product Code</th>
                                         <th> Product Cost</th>
                                         <th> Ordered Qty</th>
+                                           <?php
+                                if ($OrdersDetailsAray['status'] == 2) {
+                                    ?>
                                         <th> Dispatched Qty</th>
+                                           <?php
+                                          }
+                                          ?>
                                         <th> Total Price EXL GST</th>
                                     </tr>
                                     </thead>
@@ -1764,10 +1804,20 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                             <td> <?php echo $productDataArr['szProductCode']; ?> </td>
                                             <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
                                             <td> <?php echo $totalOrdersDetailsData['quantity']; ?> </td>
-                                            <td><?php echo $TotalDispatched['total_dispatched'];?></td>
-                                            <td> $<?php
+                                               <?php
+                                                   if ($OrdersDetailsAray['status'] == 2) {
+                                             ?>
+                                             <td> <?php echo (!empty($TotalDispatched['total_dispatched'])?$TotalDispatched['total_dispatched']:'N/A'); ?> </td>
+                                             <td> $<?php
                                                 echo number_format(($TotalDispatched['total_dispatched']) * ($productDataArr['szProductCost']), 2, '.', ','); ?>
                                             </td>
+                                               <?php
+                                                    } else{
+                                                        ?>
+                                             <td> $<?php
+                                                echo number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ','); ?>
+                                            </td>
+                                                    <?php } ?>
                                         </tr>
                                     <?php } ?>
 
@@ -2010,10 +2060,15 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             class="fa fa-shopping-cart"></i> Pending Order
                                     </button>-->
                                     <!--                      <button type="button" onclick="pendingOrder('<?php echo $idOrder; ?>'); return false;" class="btn green-meadow"><i class="fa fa-shopping-cart"></i>  Pending Order</button>-->
+                                    <?php if ($flag!=1){?>
                                     <button type="button"
                                             onmousedown="CancelOrderConfirmation('<?php echo $idOrder; ?>'); return false;"
                                             class="btn red"><i class="fa fa-times"></i> Cancel Order
                                     </button>
+                                    <?php }?>
+                                  
+                               <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
+               
                                 </div>
                             </form>
                         </div>
@@ -3798,7 +3853,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                         </div>
                     </div>
                     <hr>
-                    <div class="portlet green-meadow box">
+                      <div class="portlet green-meadow box">
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="fa fa-cogs"></i> Products Info
@@ -3837,7 +3892,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                 <tr>
                     <td> <?php echo $productDataArr['szProductCode']; ?> </td>
                     <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
-                    <td> <?php echo $DispatchOrderDet['dispatch_qty']; ?> </td>
+                    <td> <?php echo (!empty($DispatchOrderDet['dispatch_qty'])?$DispatchOrderDet['dispatch_qty']:'N/A'); ?> </td>
                     <td> $<?php
                         echo number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', ',') ; ?>
                     </td>

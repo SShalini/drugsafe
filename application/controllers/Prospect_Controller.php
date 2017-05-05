@@ -1073,8 +1073,8 @@ public function deleteProspectConfirmation()
                                             <td> ' . $i . ' </td>
                                             <td> ' . $franchiseeArr['szName'] . '</td>
                                             <td> ' . $recordData['szBusinessName'] . ' </td>
-                                            <td> ' . $recordData['szName'] . ' </td>
-                                            <td>' . $recordData['szEmail'] . ' </td>
+                                            <td> ' . (!empty($recordData['szName'])?$recordData['szName']:'N/A') . ' </td>
+                                            <td>' . (!empty($recordData['szEmail'])?$recordData['szEmail']:'N/A') . ' </td>
                                             <td>' . ($recordData['status']=='1'?'Pre Discovery':($recordData['status']=='2'?'Discovery Meeting':($recordData['status']=='3'?'In Progress' :($recordData['status']=='4'?'Non Convertible' :($recordData['status']=='5'?'Contact Later':($recordData['status']=='6'?'Closed Sale':'')))))) . ' </td>
                                             <td> ' . $dt_last_updated_status. '  </td>
                                         </tr>';
@@ -1182,11 +1182,23 @@ public function deleteProspectConfirmation()
               else{
               $dt_last_updated_status =     date('d M Y',strtotime($item['dt_last_updated_status'])) . ' at '.date('h:i A',strtotime($item['dt_last_updated_status']));
               }
+                if(!empty($item['szName'])){
+                 $name =$item['szName'];   
+                }
+                else{
+                  $name ='N/A';  
+                }
+                 if(!empty($item['szEmail'])){
+                $Email =$item['szEmail'];    
+                }
+                else{
+                $Email ='N/A';    
+                }
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeArr['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szBusinessName']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szName']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['szEmail']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $name);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, $Email);
                 $this->excel->getActiveSheet()->setCellValue('F'.$i, ($item['status']=='1'?'Pre Discovery':($item['status']=='2'?'Discovery Meeting':($item['status']=='3'?'In Progress' :($item['status']=='4'?'Non Convertible' :($item['status']=='5'?'Contact Later':($item['status']=='6'?'Closed Sale':'')))))));
                 $this->excel->getActiveSheet()->setCellValue('G'.$i, $dt_last_updated_status);
                 
@@ -1355,8 +1367,8 @@ public function deleteProspectConfirmation()
                                             <td> ' . $i . ' </td>
                                             <td> ' . $franchiseeArr['szName'] . '</td>
                                             <td> ' . $recordData['szBusinessName'] . ' </td>
-                                            <td> ' . $recordData['szName'] . ' </td>
-                                            <td>' . $recordData['szEmail'] . ' </td>
+                                            <td> ' . (!empty($recordData['szName'])?$recordData['szName']:'N/A') . ' </td>
+                                            <td>' . (!empty($recordData['szEmail'])?$recordData['szEmail']:'N/A') . ' </td>
                                             <td>' . ($recordData['status']=='1'?'Pre Discovery':($recordData['status']=='2'?'Discovery Meeting':($recordData['status']=='3'?'In Progress' :($recordData['status']=='4'?'Non Convertible' :($recordData['status']=='5'?'Contact Later':($recordData['status']=='6'?'Closed Sale':'')))))) . ' </td>
                                             <td> ' . $dt_last_updated_status. '  </td>
                                         </tr>';
@@ -1457,11 +1469,24 @@ public function deleteProspectConfirmation()
                 $franchiseeArr = $this->Admin_Model->getUserDetailsByEmailOrId('', $item['iFranchiseeId']);
                 $dt_last_updated_status =     date('d M Y',strtotime($item['dtUpdatedOn'])) . ' at '.date('h:i A',strtotime($item['dtUpdatedOn']));
                 
+                                          
+                if(!empty($item['szName'])){
+                 $name =$item['szName'];   
+                }
+                else{
+                  $name ='N/A';  
+                }
+                 if(!empty($item['szEmail'])){
+                $Email =$item['szEmail'];    
+                }
+                else{
+                $Email ='N/A';    
+                }
                 $this->excel->getActiveSheet()->setCellValue('A'.$i, $x);
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $franchiseeArr['szName']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['szBusinessName']);
-                $this->excel->getActiveSheet()->setCellValue('D'.$i, $item['szName']);
-                $this->excel->getActiveSheet()->setCellValue('E'.$i, $item['szEmail']);
+                $this->excel->getActiveSheet()->setCellValue('D'.$i, $name);
+                $this->excel->getActiveSheet()->setCellValue('E'.$i, $Email);
                 $this->excel->getActiveSheet()->setCellValue('F'.$i, ($item['status']=='1'?'Pre Discovery':($item['status']=='2'?'Discovery Meeting':($item['status']=='3'?'In Progress' :($item['status']=='4'?'Non Convertible' :($item['status']=='5'?'Contact Later':($item['status']=='6'?'Closed Sale':'')))))));
                 $this->excel->getActiveSheet()->setCellValue('G'.$i, $dt_last_updated_status);
                 

@@ -1441,9 +1441,9 @@ function view_order_details(idOrder, flag) {
 
     });
 }
-function edit_order_details(idOrder) {
+function edit_order_details(idOrder,flag) {
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/order/editOrderData", {idOrder: idOrder,}, function (result) {
+    $.post(__BASE_URL__ + "/order/editOrderData", {idOrder: idOrder,flag: flag}, function (result) {
         var result_ary = result.split("||||");
         var res = result_ary[0].trim(" ");
         if (res == 'SUCCESS') {

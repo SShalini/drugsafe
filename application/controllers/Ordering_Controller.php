@@ -667,7 +667,7 @@ class Ordering_Controller extends CI_Controller
             
             if ($this->form_validation->run() == FALSE)
             { 
-                $data['szMetaTagTitle'] = "create Discount";
+                $data['szMetaTagTitle'] = "Create Discount";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "proforma_invoice";
                 $data['subpageName'] = "discount_percentage";

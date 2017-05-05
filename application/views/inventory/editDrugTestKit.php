@@ -113,7 +113,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-cubes"></i>
                                                 </span>
-                                                 <input id="min_ord_qty" class="form-control" type="number"  value="<?php echo set_value('productData[min_ord_qty]'); ?>" placeholder="Minimum Order Quantity" onfocus="remove_formError(this.id,'true')" name="productData[min_ord_qty]">
+                                                 <input id="min_ord_qty" class="form-control" type="number" min="1" value="<?php echo set_value('productData[min_ord_qty]'); ?>" placeholder="Minimum Order Quantity" onfocus="remove_formError(this.id,'true')" name="productData[min_ord_qty]">
                                               
                                             </div>
                                               <?php
@@ -129,7 +129,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-cube"></i>
                                                 </span>
-                                                <input id="model_stk_val" class="form-control" type="number"  value="<?php echo set_value('productData[model_stk_val]'); ?>" placeholder="Model Stock Value" onfocus="remove_formError(this.id,'true')" name="productData[model_stk_val]">
+                                                <input id="model_stk_val" class="form-control" min="1" type="number"  value="<?php echo set_value('productData[model_stk_val]'); ?>" placeholder="Model Stock Value" onfocus="remove_formError(this.id,'true')" name="productData[model_stk_val]">
                                               
                                             </div>
                                               <?php
