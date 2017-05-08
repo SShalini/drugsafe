@@ -51,14 +51,14 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
-            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required|regex_match[/^[a-zA-Z\s]*$/]');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'alpha_numeric');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
+            $this->form_validation->set_message('alpha_numeric', 'Supplier Name must be only contain alpha-numeric characters.');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required.');
-           $this->form_validation->set_message('regex_match', 'Supplier Name must be only letters and white space.');
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
@@ -99,14 +99,14 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
-             $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required|regex_match[/^[a-zA-Z\s]*$/]');
+             $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'alpha_numeric');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required.');
-            $this->form_validation->set_message('regex_match', 'Supplier Name must be only letters and white space.');
+             $this->form_validation->set_message('alpha_numeric', 'Supplier Name must be only contain alpha-numeric characters.');
             
             if ($this->form_validation->run() == FALSE)
             { 
@@ -151,14 +151,14 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
-            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'required|regex_match[/^[a-zA-Z\s]*$/]');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'alpha_numeric');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
+             $this->form_validation->set_message('alpha_numeric', 'Supplier Name must be only contain alpha-numeric characters.');
             $this->form_validation->set_message('required', '{field} is required.');
-            $this->form_validation->set_message('regex_match', 'Supplier Name must be only letters and white space.');
             if ($this->form_validation->run() == FALSE)
             { 
                 $data['notification'] = $count;
@@ -225,15 +225,15 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szProductCategory]', 'Product Category', 'required');
-            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','required|regex_match[/^[a-zA-Z\s]*$/]');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','alpha_numeric');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
              $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
+             $this->form_validation->set_message('alpha_numeric', 'Supplier Name must be only contain alpha-numeric characters.');
             
-            $this->form_validation->set_message('regex_match', 'Supplier Name must be only letters and white space.');
             $this->form_validation->set_message('required', '{field} is required.');
             
             if ($this->form_validation->run() == FALSE)
@@ -430,13 +430,13 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
-            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','required|regex_match[/^[a-zA-Z\s]*$/]');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','alpha_numeric');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
-            $this->form_validation->set_message('regex_match', 'Supplier Name must be only letters and white space.');
             $this->form_validation->set_message('required', '{field} is required.');
+             $this->form_validation->set_message('alpha_numeric', 'Supplier Name must be only contain alpha-numeric characters.');
             
             if ($this->form_validation->run() == FALSE)
             {
@@ -508,14 +508,14 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
-            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','required|regex_match[/^[a-zA-Z\s]*$/]');
+            $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','alpha_numeric');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required.');
-            $this->form_validation->set_message('regex_match', 'Supplier Name must be only letters and white space.');
+            $this->form_validation->set_message('alpha_numeric', 'Supplier Name must be only contain alpha-numeric characters.');
             
             if ($this->form_validation->run() == FALSE)
             {

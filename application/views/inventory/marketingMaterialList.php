@@ -99,7 +99,7 @@
                                        <?php
                                         if($_SESSION['drugsafe_user']['iRole']==1){
                                         ?>
-                                         <th>  Avaliable Quantity</th>  
+                                         <th>  Available Quantity</th>  
                                         <th> Actions </th>
                                        <?php }else{?>
                                         <th>  Model Stock Value</th>
