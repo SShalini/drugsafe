@@ -144,17 +144,20 @@ class Form_Management_Model extends Error_Model {
     } 
     public function getAllsosFormDetails($searchAry=array())
     {
-        
-        $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
-        $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+        $dtStart = (!empty($searchAry['dtStart'])?$this->Order_Model->getSqlFormattedDate($searchAry['dtStart']):'');
+        $dtEnd = (!empty($searchAry['dtEnd'])?$this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']):'');
+        $franchiseeid = $searchAry['szSearchClRecord2'];
         $this->db->select('*');
         $this->db->from(__DBC_SCHEMATA_MANUAL_CAL__, __DBC_SCHEMATA_SOS_FORM__,'tbl_client',__DBC_SCHEMATA_FRANCHISEE__);
         $this->db->join('ds_sos', 'tbl_manual_calc.sosid = ds_sos.id');
         $this->db->join('tbl_client', 'ds_sos.Clientid = tbl_client.clientId');
         $this->db->join('tbl_franchisee', 'tbl_client.franchiseeId = tbl_franchisee.franchiseeId');
-        if(!empty($searchAry)){
-            $this->db->where('dtCreatedOn >=', $dtStart);
-            $this->db->where('dtCreatedOn <=', $dtEnd);
+        if(!empty($searchAry['dtStart'])){
+            $this->db->where('tbl_manual_calc.dtCreatedOn >=', $dtStart);
+            $this->db->where('tbl_manual_calc.dtCreatedOn <=', $dtEnd);
+            if($franchiseeid>0){
+	            $this->db->where('tbl_client.franchiseeId = ', $franchiseeid);
+            }
         }
         $this->db->where('clientType !=', '0');
         $this->db->where('status', '1');
@@ -166,8 +169,8 @@ class Form_Management_Model extends Error_Model {
         }
         $this->db->group_by('tbl_client.franchiseeId');
         $query = $this->db->get();
-        //echo $sql = $this->db->last_query(); die();
-
+//        echo $sql = $this->db->last_query();
+        //die();
         if ($query->num_rows() > 0) {
              $row = $query->result_array();
                 return $row;

@@ -2567,8 +2567,11 @@ function getRegionNameByState(StateId) {
         }
     });
 }
-function View_excel_order_details_list(idOrder) {
-    $.post(__BASE_URL__ + "/order/View_excel_order_details_data", {idOrder: idOrder}, function (result) {
+function View_excel_order_details_list(idOrder,flag) {
+    if(!flag){
+        flag = 0;
+    }
+    $.post(__BASE_URL__ + "/order/View_excel_order_details_data", {idOrder: idOrder, flag: flag}, function (result) {
         ar_result = result.split('||||');
         var URL = __BASE_URL__ + "/order/" + ar_result[1];
         window.open(URL, '_blank');

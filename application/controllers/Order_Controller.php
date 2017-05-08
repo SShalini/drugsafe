@@ -496,7 +496,8 @@ class Order_Controller extends CI_Controller
         $pdf->SetFont('times', '', 12);
 
         $pdf->AddPage('L');
-   
+
+        //$pdf->writeCell();
         $idOrder = $this->session->userdata('idOrder');
         $flag = $this->session->userdata('flag');
         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
@@ -526,7 +527,7 @@ class Order_Controller extends CI_Controller
 
 </table>
 <br />
-<h2 style="text-align: center;">ORDER DETAILS</h2>
+<h2 style="text-align: center;">ORDER DETAILS </h2>
 
 <br>
 <h3 style="color:black">Order Info  </h3>
@@ -569,14 +570,21 @@ $html .= '
             <div>        
                 <div class= "table-responsive" >
                     ';
+	    $tbl = <<<EOD
+$html
+EOD;
+
+	    $pdf->writeHTML($tbl, true, false, false, false, '');
+
         $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
 
         if (!empty($totalDispatched)) {
             $i = 0;
             foreach ($totalDispatched as $DispatchOrderDetData) {
-                $html .='<h3>Dispatched On: '.date('d/m/Y h:i:s a',strtotime($DispatchOrderDetData['dispatch_date'])).'</h3>';
-                $html .='<table border="1" cellpadding="5">
-                                    <tr>
+                $html1 ='';
+                $html1 .='<table border="1" cellpadding="5">
+                <tr nobr="true" bgcolor="#4deecd"><td colspan="4"><h2><font color="black">Dispatched On: '.date('d/m/Y h:i:s a',strtotime($DispatchOrderDetData['dispatch_date'])).'</font></h2></td></tr>
+                                    <tr  nobr="true">
                                         <th><b>Product Code</b> </th>
                                         <th> <b>Product Cost</b> </th>
                                         <th> <b>Dispatched Quantity</b> </th>
@@ -588,7 +596,7 @@ $html .= '
                     foreach ($DispatchedOrdDetArr as $DispatchOrderDet){
                         $productDataArr = $this->Inventory_Model->getProductDetailsById($DispatchOrderDet['productid']);
                         $totalAmount += number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', '');
-                        $html .= '<tr>
+                        $html1 .= '<tr  nobr="true">
                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
                                             <td> $' . $productDataArr['szProductCost'] . '</td>
                                             <td> ' . $DispatchOrderDet['dispatch_qty'] . ' </td>
@@ -597,16 +605,28 @@ $html .= '
                         $i++;
                     }
                 }
-                $html .= '<tr><td colspan="3"><b>Total</b></td><td><b>$'.number_format($totalAmount, 2, '.', ',').'</b></td></tr>
+                $html1 .= '<tr  nobr="true"><td colspan="3"><b>Total</b></td><td><b>$'.number_format($totalAmount, 2, '.', ',').'</b></td></tr>
                 </table>';
+	            $tbl = <<<EOD
+
+                $html1
+EOD;
+
+	            $pdf->writeHTML($tbl, true, false, false, false, '');
             }
         }
-        $html .= '
+        $html2 = '</div>
                         </div>
                       
                         ';
+	    $tbl = <<<EOD
 
-        $pdf->writeHTML($html, true, false, true, false, '');
+                $html2
+EOD;
+
+		$pdf->writeHTML($tbl, true, false, true, false, '');
+
+
 
         error_reporting(E_ALL);
 
@@ -745,7 +765,8 @@ $html .= '
     function View_excel_order_details_data()
         {
             $idOrder = $this->input->post('idOrder');
-          
+	        $flag = $this->input->post('flag');
+	        $this->session->set_userdata('flag', $flag);
                 $this->session->set_userdata('idOrder',$idOrder);
                
                 

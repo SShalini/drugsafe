@@ -1557,7 +1557,7 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                            class=" btn green-meadow">
                                             <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 
-                                        <a onclick="View_excel_order_details_list('<?php echo $idOrder; ?>')"
+                                        <a onclick="View_excel_order_details_list('<?php echo $idOrder; ?>','1')"
                                            href="javascript:void(0);"
                                            class=" btn green-meadow">
                                             <i class="fa fa-file-excel-o"></i> View Xls </a>

@@ -343,9 +343,9 @@
                                                    <th>
                                                         Order Details
                                                     </th>
-                                                    <th>
+                                                    <!--<th>
                                                         Xero Invoice No.
-                                                    </th>
+                                                    </th>-->
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -430,9 +430,9 @@
                                                                 <i class="fa fa-eye"></i>
                                                             </a>
                                                         </td>
-                                                        <td>
-                                                            <?php echo (!empty($validOrdersDetailsData['XeroIDnumber'])?$validOrdersDetailsData['XeroIDnumber']:'N/A'); ?>
-                                                        </td>
+                                                        <!--<td>
+                                                            <?php /*echo (!empty($validOrdersDetailsData['XeroIDnumber'])?$validOrdersDetailsData['XeroIDnumber']:'N/A'); */?>
+                                                        </td>-->
                                                     </tr>
                                                     <?php
 

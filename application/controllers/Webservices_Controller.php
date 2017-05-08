@@ -1423,7 +1423,7 @@ class Webservices_Controller extends CI_Controller
                 $html .='<tr>
                                                 <td>'.$count.'</td>
                                                 <td colspan="2">'.$donors['donerName'].'</td>
-                                                <td>'.(!empty($drugs) || $alcoholread1 != '' || $alcoholread2 != ''?'P':'N').'</td>
+                                                <td>'.(!empty($drugs) || $alcoholread1 != '' || $alcoholread2 != ''?'U':'N').'</td>
                                                 <td>'.(!empty($drugs)?$drugs:'N/A').'</td>
                                                 <td colspan="2">'.(!empty($alcoholread1)?'P':'N').', Reading One:'.(!empty($alcoholread1)?$alcoholread1:'N/A').'<br/>'.(!empty($alcoholread2)?'P':'N').', Reading Two:'.(!empty($alcoholread2)?$alcoholread2:'N/A').'</td>
                                                 <td>'.($drugs !='' || $alcoholread1 != '' || $alcoholread2 != ''?'Y':'N').'</td>
@@ -1432,7 +1432,7 @@ class Webservices_Controller extends CI_Controller
             }
         }
         $html .='<tr>
-                                        <td colspan="3">* P = Positive, result requiring further testing N = Negative<br />** P = Positive N = Negative</td>
+                                        <td colspan="3">* U = Positive, result requiring further testing N = Negative<br />** P = Positive N = Negative</td>
                                         <td>Urine</td>
                                         <td>Oral</td>
                                         <td colspan="2">Total No Alcohol Screen</td>

@@ -44,10 +44,10 @@
                         <?php }elseif(!empty($allfranchisee)){?>
                         <div class="actions">
 
-                            <a onclick="ViewpdfRevenueSummeryClient('0','0','','','1')" href="javascript:void(0);" class=" btn green-meadow">
+                            <a onclick="ViewpdfRevenueSummeryClient('<?php echo (!empty($_POST['szSearchClRecord2'])?$_POST['szSearchClRecord2']:"");?>','0','<?php echo (!empty($_POST['dtStart'])?$_POST['dtStart']:'');?>','<?php echo (!empty($_POST['dtEnd'])?$_POST['dtEnd']:'');?>','1')" href="javascript:void(0);" class=" btn green-meadow">
                                 <i class="fa fa-file-pdf-o"></i> View Pdf </a>
 
-                            <a onclick="ViewexcelRevenueSummeryClient('0','0','','','1')" href="javascript:void(0);" class=" btn green-meadow">
+                            <a onclick="ViewexcelRevenueSummeryClient('<?php echo (!empty($_POST['szSearchClRecord2'])?$_POST['szSearchClRecord2']:"");?>','0','<?php echo (!empty($_POST['dtStart'])?$_POST['dtStart']:'');?>','<?php echo (!empty($_POST['dtEnd'])?$_POST['dtEnd']:'');?>','1')" href="javascript:void(0);" class=" btn green-meadow">
                                 <i class="fa fa-file-excel-o"></i> View Xls </a>
 
                         </div>
@@ -245,9 +245,8 @@
                        </div>
                     </div>
                     <?php
-                    if($_POST['dtStart']!='' && $_POST['dtEnd']!='')
+                    if($_POST['dtStart']!='' && $_POST['dtEnd']!='' && $onlyfranchisee>0)
                     {
-                        
                     if (!empty($getManualCalcStartToEndDate)) {
                         
                       
@@ -442,7 +441,7 @@
                 {
                     echo "<h4>No record found</h4>";
                 }
-                    }elseif(!empty($allfranchisee)){ ?>
+                    }elseif(!empty($allfranchisee)){?>
                     <div class="portlet-body alert">
                         <div class="row">
                             <div>

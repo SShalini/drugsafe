@@ -73,7 +73,7 @@ if ($mode == '__VIEW_PRODUCT_POPUP__') {
                                         <th>Cost</th>
                                         <th> Expiry Date</th>
                                         <th>Supplier Name</th>
-                                        <th>Avaliable Quantity</th>
+                                        <th>Available Quantity</th>
                                         <th>Minimum Order Quantity</th>
                                         <th>Model Stock Value</th>
                                     </tr>
