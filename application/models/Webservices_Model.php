@@ -1199,7 +1199,7 @@ class Webservices_Model extends Error_Model
         if ($data['totcartitems'] > '0') {
             for ($i = 1; $i <= $data['totcartitems']; $i++) {
 
-                if ($data['cartid' . $i] > '0' && $data['qty' . $i] >= '25') {
+                if ($data['cartid' . $i] > '0') {
                     $cartqtyupdate = array(
                         'quantity' => (int)$data['qty' . $i]
                     );

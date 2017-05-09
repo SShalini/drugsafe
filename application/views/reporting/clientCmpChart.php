@@ -117,12 +117,16 @@ $testType = ($testtype == '1' ? 'Alcohol' : ($testtype == '3' ? 'Urine AS/NZA 43
                         beta: 0
                     }
                 },
+                credits: {
+                    enabled: false
+                },
                 title: {
                     text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(' + testtype + ')</span>'
                 },
                 tooltip: {
                     pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
                 },
+                colors: ['#696969','#4169E1'],
                 plotOptions: {
                     pie: {
                         allowPointSelect: true,
@@ -142,7 +146,43 @@ $testType = ($testtype == '1' ? 'Alcohol' : ($testtype == '3' ? 'Urine AS/NZA 43
                         ['<span style="font-size:13px">Positive</span>', TotPosDoner[i]],
                         ['<span style="font-size:13px">Negative</span>', TotNegDoner[i]]
                     ]
-                }]
+                }],
+                exporting: {
+                    buttons: {
+                        contextButton: {
+                            menuItems: [{
+                                text: 'Download JPEG Image',
+                                onclick: function () {
+                                    this.exportChart({
+                                        type: 'jpeg'
+                                    });
+                                }
+                            }, {
+                                text: 'Download PNG Image',
+                                onclick: function () {
+                                    this.exportChart();
+                                },
+                                separator: false
+                            }, {
+                                text: 'Download SVG Vector Image',
+                                onclick: function () {
+                                    this.exportChart({
+                                        type: 'image/svg+xml'
+                                    });
+                                },
+                                separator: false
+                            }, {
+                                text: 'Download PDF Document',
+                                onclick: function () {
+                                    this.exportChart({
+                                        type: 'application/pdf'
+                                    });
+                                },
+                                separator: false
+                            }]
+                        }
+                    }
+                }
             });
         }
 

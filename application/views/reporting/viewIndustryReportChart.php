@@ -244,6 +244,9 @@ if (!empty($getSosAndClientDetils)) {
                             beta: 0
                         }
                     },
+                    credits: {
+                        enabled: false
+                    },
                     title: {
                         text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Alcohol Test)</span>'
                     },
@@ -270,7 +273,43 @@ if (!empty($getSosAndClientDetils)) {
                             ['<span style="font-size:13px">Positive</span>', TotPosDoner[i]],
                             ['<span style="font-size:13px">Negative</span>', TotNegDoner[i]]
                         ]
-                    }]
+                    }],
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                menuItems: [{
+                                    text: 'Download JPEG Image',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'jpeg'
+                                        });
+                                    }
+                                }, {
+                                    text: 'Download PNG Image',
+                                    onclick: function () {
+                                        this.exportChart();
+                                    },
+                                    separator: false
+                                }, {
+                                    text: 'Download SVG Vector Image',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'image/svg+xml'
+                                        });
+                                    },
+                                    separator: false
+                                }, {
+                                    text: 'Download PDF Document',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'application/pdf'
+                                        });
+                                    },
+                                    separator: false
+                                }]
+                            }
+                        }
+                    }
                 });
             }
             $('#alcohol-pie').click(function () {
@@ -302,6 +341,9 @@ if (!empty($getSosAndClientDetils)) {
                             beta: 0
                         }
                     },
+                    credits: {
+                        enabled: false
+                    },
                     title: {
                         text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Urine Test)</span>'
                     },
@@ -328,7 +370,43 @@ if (!empty($getSosAndClientDetils)) {
                             ['<span style="font-size:13px">Positive</span>', UrTotPosDoner[i]],
                             ['<span style="font-size:13px">Negative</span>', UrTotNegDoner[i]]
                         ]
-                    }]
+                    }],
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                menuItems: [{
+                                    text: 'Download JPEG Image',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'jpeg'
+                                        });
+                                    }
+                                }, {
+                                    text: 'Download PNG Image',
+                                    onclick: function () {
+                                        this.exportChart();
+                                    },
+                                    separator: false
+                                }, {
+                                    text: 'Download SVG Vector Image',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'image/svg+xml'
+                                        });
+                                    },
+                                    separator: false
+                                }, {
+                                    text: 'Download PDF Document',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'application/pdf'
+                                        });
+                                    },
+                                    separator: false
+                                }]
+                            }
+                        }
+                    }
                 });
             }
             $('#urine-pie').click(function () {
@@ -359,6 +437,9 @@ if (!empty($getSosAndClientDetils)) {
                             beta: 0
                         }
                     },
+                    credits: {
+                        enabled: false
+                    },
                     title: {
                         text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Oral Test)</span>'
                     },
@@ -385,7 +466,43 @@ if (!empty($getSosAndClientDetils)) {
                             ['<span style="font-size:13px">Positive</span>', OrTotPosDoner[i]],
                             ['<span style="font-size:13px">Negative</span>', OrTotNegDoner[i]]
                         ]
-                    }]
+                    }],
+                    exporting: {
+                        buttons: {
+                            contextButton: {
+                                menuItems: [{
+                                    text: 'Download JPEG Image',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'jpeg'
+                                        });
+                                    }
+                                }, {
+                                    text: 'Download PNG Image',
+                                    onclick: function () {
+                                        this.exportChart();
+                                    },
+                                    separator: false
+                                }, {
+                                    text: 'Download SVG Vector Image',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'image/svg+xml'
+                                        });
+                                    },
+                                    separator: false
+                                }, {
+                                    text: 'Download PDF Document',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'application/pdf'
+                                        });
+                                    },
+                                    separator: false
+                                }]
+                            }
+                        }
+                    }
                 });
             }
             $('#oral-pie').click(function () {

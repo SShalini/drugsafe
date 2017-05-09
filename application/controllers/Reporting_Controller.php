@@ -4970,6 +4970,11 @@ class Reporting_Controller extends CI_Controller {
 		$this->excel->getActiveSheet()->getStyle( 'P1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'P1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
+		$this->excel->getActiveSheet()->setCellValue( 'Q1', 'Zip Code' );
+		$this->excel->getActiveSheet()->getStyle( 'Q1' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'Q1' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'Q1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+
 		$frId         = $this->session->userdata( 'frId' );
 		$clName       = $this->session->userdata( 'clName' );
 		$fromDate     = $this->session->userdata( 'fromDate' );
@@ -5221,7 +5226,7 @@ class Reporting_Controller extends CI_Controller {
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Client Details Report</b></p></div>
             <div class= "table-responsive" >
-                            <table border="1" cellpadding="5">
+                            
                                   ';
 		if ( $clientAray ) {
 			$i = 0;
@@ -5284,7 +5289,7 @@ class Reporting_Controller extends CI_Controller {
 				}
 
 				$html .= '  
-              <tr>
+              <table border="1" cellpadding="5"><tr nobr="true">
                                         <td ><b>Business Name</b> </td>
                                         <td> <b>ABN</b> </td>
                                         <td> <b>Contact Name</b> </td>
@@ -5296,7 +5301,7 @@ class Reporting_Controller extends CI_Controller {
                                         <td><b>Contact Email</b> </td>
                                         <br>
                                         </tr>
-                                        <tr>
+                                        <tr nobr="true">
                                           <td>' . $clientData['szBusinessName'] . ' </td>
                                             <td> ' . $clientData['abn'] . '</td>
                                             <td> ' . $clientData['szName'] . ' </td>
@@ -5307,10 +5312,10 @@ class Reporting_Controller extends CI_Controller {
                                             <td>' . ( ! empty( $discount['percentage'] ) ? $discount['percentage'] : 'N/A' ) . ' </td> 
                                             <td> ' . $clientData['szContactEmail'] . '</td>
                                         </tr>
-                                      <tr>
+                                      <tr nobr="true">
                                             <td ><b>Contact Phone</b> </td>
                                         <td> <b>Contact Mobile</b> </td>
-                                        <td> <b>Address</b> </td>
+                                        <td colspan="2"> <b>Address</b> </td>
                                         <td><b>Country</b> </td>
                                         <td> <b>State</b> </td>
                                         <td><b>Region Name</b> </td>
@@ -5318,24 +5323,24 @@ class Reporting_Controller extends CI_Controller {
                                         <td><b>Zip/Postal Code</b> </td>
                                         <br>
                                         </tr>
-                                         <tr>
+                                         <tr nobr="true">
                                           <td>' . $clientData['szContactPhone'] . ' </td>
                                             <td> ' . $clientData['szContactMobile'] . '</td>
-                                            <td> ' . $clientData['szAddress'] . ' </td>
+                                            <td colspan="2"> ' . $clientData['szAddress'] . ' </td>
                                             <td>' . $clientData['szCountry'] . ' </td>
                                             <td> ' . $getState['name'] . '</td>
                                             <td> ' . $getRegionName['regionName'] . '</td>
                                             <td>' . $clientData['szCity'] . ' </td> 
                                             <td> ' . $clientData['szZipCode'] . '</td>
-                                        </tr>
-                                         
-                                        
+                                        </tr></table>
+                                         <br><br>
                                    ';
+
+				$i ++;
 			}
 		}
-		$i ++;
 		$html .= '
-                            </table>
+                            
                         </div>
                       
                         ';
@@ -5379,7 +5384,7 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetTitle( 'Drug-safe site details report' );
 		$pdf->SetAuthor( 'Drug-safe' );
 		$pdf->SetSubject( 'Site Details Report PDF' );
-		$pdf->SetMargins( PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10 );
+		$pdf->SetMargins( PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP-18, PDF_MARGIN_RIGHT - 10 );
 		$pdf->SetAutoPageBreak( true, PDF_MARGIN_BOTTOM );
 // set image scale factor
 		$pdf->setImageScale( PDF_IMAGE_SCALE_RATIO );
@@ -5514,7 +5519,6 @@ class Reporting_Controller extends CI_Controller {
 						$regionId      = $franchiseeArr['regionId'];
 					} else {
 						$getState = $this->Franchisee_Model->getStateByFranchiseeId( $siteData['id'] );
-						$regionId = $clientData['regionId'];
 					}
 
 					$getRegionName = $this->Admin_Model->getregionbyregionid( $regionId );
@@ -5660,8 +5664,7 @@ class Reporting_Controller extends CI_Controller {
     <tr>
         <td width="50%" align="left"><b>Contact Email:</b></td><td width="50%" align="right">' . $userDataAry['orlr_email'] . '</td>
     </tr>
-</table>
-<h3 style="color:black"align="center">ONSITE SCREENING INFORMATION</h3>
+</table>'.($i==0?'<br pagebreak="true" />':'').'<h3 style="color:black"align="center">ONSITE SCREENING INFORMATION</h3>
 <h3 style="color:black" align="left">Primary Site Contact.</h3>
 <table border="1px" cellpadding="5px">
     <tr>
@@ -5686,9 +5689,7 @@ class Reporting_Controller extends CI_Controller {
         <td width="50%" align="left"><b>Mobile Phone Number:</b></td><td width="50%" align="right">' . $userDataAry['ssc_mobile'] . '</td>
     </tr>
 </table>
-<br />
-
-<br>
+<br /><br />'.($i>0?'<br pagebreak="true" />':'').'
 <table cellpadding="5px">
     <tr>
         <td width="50%" align="left" font-size="20"><b>People on site:</b> ' . $userDataAry['site_people'] . '</td><td width="50%" align="right"><b>Initial Testing Requirements:</b> ' . $itrval . '</td>
@@ -5716,7 +5717,7 @@ class Reporting_Controller extends CI_Controller {
     </tr>
     
 </table>
-        </div> <hr>';
+        </div> <hr><br pagebreak="true" />';
 
 
 					$i ++;
@@ -5764,48 +5765,140 @@ class Reporting_Controller extends CI_Controller {
 		$this->excel->setActiveSheetIndex( 0 );
 
 		$this->excel->getActiveSheet()->setTitle( $filename );
+		$this->excel->getActiveSheet()->mergeCells('A1:K2');
+		$this->excel->getActiveSheet()
+		            ->getStyle('A1:K2')
+					->applyFromArray(
+						array(
+							'fill' => array(
+								'type' => PHPExcel_Style_Fill::FILL_SOLID,
+								'color' => array('rgb' => '40e1c0')
+							)
+						)
+					);
 		$this->excel->getActiveSheet()->setCellValue( 'A1', 'Site Details' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setVertical( PHPExcel_Style_Alignment::VERTICAL_CENTER );
 
+		$this->excel->getActiveSheet()->mergeCells('L1:W1');
+		$this->excel->getActiveSheet()
+		            ->getStyle('L1:W1')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => '80C8FF')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'L1', 'Contact Details' );
 		$this->excel->getActiveSheet()->getStyle( 'L1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'L1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'L1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
+		$this->excel->getActiveSheet()->mergeCells('X1:AQ1');
+		$this->excel->getActiveSheet()
+		            ->getStyle('X1:AQ1')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => 'F0F0F0')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'X1', 'ONSITE SCREENING INFORMATION' );
 		$this->excel->getActiveSheet()->getStyle( 'X1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'X1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'X1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
+		$this->excel->getActiveSheet()->mergeCells('L2:N2');
+		$this->excel->getActiveSheet()
+		            ->getStyle('L2:N2')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => 'F69923')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'L2', 'Responsible for Scheduling' );
 		$this->excel->getActiveSheet()->getStyle( 'L2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'L2' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'L2' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
+		$this->excel->getActiveSheet()->mergeCells('O2:Q2');
+		$this->excel->getActiveSheet()
+		            ->getStyle('O2:Q2')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => 'E5E6AD')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'O2', 'Receive the confirmatory lab results' );
 		$this->excel->getActiveSheet()->getStyle( 'O2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'O2' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'O2' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-
+		$this->excel->getActiveSheet()->mergeCells('R2:T2');
+		$this->excel->getActiveSheet()
+		            ->getStyle('R2:T2')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => 'E9ECF3')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'R2', 'Involved in Scheduling' );
 		$this->excel->getActiveSheet()->getStyle( 'R2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'R2' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'R2' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
+		$this->excel->getActiveSheet()->mergeCells('U2:W2');
+		$this->excel->getActiveSheet()
+		            ->getStyle('U2:W2')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => 'ED6B75')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'U2', 'Other people receive the confirmatory lab results' );
 		$this->excel->getActiveSheet()->getStyle( 'U2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'U2' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'U2' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
+		$this->excel->getActiveSheet()->mergeCells('X2:Z2');
+		$this->excel->getActiveSheet()
+		            ->getStyle('X2:Z2')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => '91C300')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'X2', 'Primary Site Contact' );
 		$this->excel->getActiveSheet()->getStyle( 'X2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'X2' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'X2' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
+		$this->excel->getActiveSheet()->mergeCells('AA2:AC2');
+		$this->excel->getActiveSheet()
+		            ->getStyle('AA2:AC2')
+		            ->applyFromArray(
+			            array(
+				            'fill' => array(
+					            'type' => PHPExcel_Style_Fill::FILL_SOLID,
+					            'color' => array('rgb' => 'EFC20F')
+				            )
+			            )
+		            );
 		$this->excel->getActiveSheet()->setCellValue( 'AA2', 'Secondary Site Contact' );
 		$this->excel->getActiveSheet()->getStyle( 'AA2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AA2' )->getFont()->setBold( true );

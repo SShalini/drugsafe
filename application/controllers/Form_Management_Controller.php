@@ -788,6 +788,9 @@ class Form_Management_Controller extends CI_Controller
                                         <td colspan="2">Time: '.$sosdetarr[0]['RepresentativeSignatureTime'].'</td>
                                     </tr>
                                     ';
+	    if($hide == '0'){
+	    	$html .= '<tr><td>Agent Comment</td><td colspan="7">'.(!empty($sosdetarr[0]['agent_comment'])?$sosdetarr[0]['agent_comment']:'N/A').'</td></tr>';
+	    }
         $html .= '
                             </table>
                         </div>                      
