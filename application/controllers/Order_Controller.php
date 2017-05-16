@@ -702,15 +702,7 @@ EOD;
         <td width="50%" align="left"><b>Cancelled Date & Time : </b> '. $cancelVal .'</td>
     </tr> ';   
     } 
-     
-  $html .= '   <tr>
-        <td width="50%" align="left"><b>Order Status : </b> '.$status.'</td>
-    </tr> ';
   
-   $html .= '  <tr>
-        <td width="50%" align="left"><b>Total Price EXL GST : </b> $'.$OrdersDetailsAray['price'].'</td>
-    </tr>';
-
   if($_SESSION['drugsafe_user']['iRole']==1){
    $html .= '
      <tr>
@@ -727,22 +719,21 @@ $html .= '
                             <table border="1" cellpadding="5">
                                     <tr>
                                         <th><b>Product Code</b> </th>
-                                        <th> <b>Product Cost</b> </th>
-                                        <th> <b>Quantity</b> </th>
-                                        <th><b>Total Price EXL GST</b> </th>
+                                        <th> <b>Product Description</b> </th>
+                                        <th> <b>Quantity Dispatched</b> </th>
                                     </tr>';
         $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
         if ($totalOrdersDetailsAray) {
             $i = 0;
             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
+              
                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
-
-                $html .= '<tr>
+                $totalQtyDispatchAray = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
+                
+                    $html .= '<tr>
                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
-                                            <td> $' . $productDataArr['szProductCost'] . '</td>
-                                            <td> ' . $totalOrdersDetailsData['quantity'] . ' </td>
-                                            <td> $' . number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>
-                                
+                                            <td> $' . $productDataArr['szProductDiscription'] . '</td>
+                                            <td> ' . $totalQtyDispatchAray['total_dispatched'] . ' </td>
                                         </tr>';
             }
         }

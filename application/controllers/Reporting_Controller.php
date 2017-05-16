@@ -4888,93 +4888,100 @@ class Reporting_Controller extends CI_Controller {
 		$this->excel->setActiveSheetIndex( 0 );
 
 		$this->excel->getActiveSheet()->setTitle( $filename );
-		$this->excel->getActiveSheet()->setCellValue( 'A1', 'Business Name' );
+                $this->excel->getActiveSheet()->setCellValue( 'A1', 'Franchisee Name:' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'B1', 'ABN' );
-		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+                $this->excel->getActiveSheet()->setCellValue( 'A3', 'Business Name' );
+		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'A3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+
+		
+		$this->excel->getActiveSheet()->setCellValue( 'B3', 'ABN' );
+		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'B3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
 
-		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Contact Name' );
-		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'C3', 'Contact Name' );
+		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'C3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'D1', 'Primary Email' );
-		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'D3', 'Primary Email' );
+		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'D3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'E1', 'Primary Phone' );
-		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'E3', 'Primary Phone' );
+		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'E3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'F1', 'No Of Sites' );
-		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'F3', 'No Of Sites' );
+		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'F3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'G1', 'Industry' );
-		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'G3', 'Industry' );
+		$this->excel->getActiveSheet()->getStyle( 'G3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'G3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'G3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'H1', 'Discount' );
-		$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'H1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'H3', 'Discount' );
+		$this->excel->getActiveSheet()->getStyle( 'H3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'H3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'H3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'I1', 'Contact Email' );
-		$this->excel->getActiveSheet()->getStyle( 'I1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'I1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'I1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'I3', 'Contact Email' );
+		$this->excel->getActiveSheet()->getStyle( 'I3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'I3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'I3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
 
-		$this->excel->getActiveSheet()->setCellValue( 'J1', 'Contact Phone' );
-		$this->excel->getActiveSheet()->getStyle( 'J1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'J1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'J1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'J3', 'Contact Phone' );
+		$this->excel->getActiveSheet()->getStyle( 'J3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'J3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'J3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'K1', 'Contact Mobile' );
-		$this->excel->getActiveSheet()->getStyle( 'K1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'K1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'K1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'K3', 'Contact Mobile' );
+		$this->excel->getActiveSheet()->getStyle( 'K3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'K3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'K3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'L1', 'Address' );
-		$this->excel->getActiveSheet()->getStyle( 'L1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'L1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'L1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'L3', 'Address' );
+		$this->excel->getActiveSheet()->getStyle( 'L3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'L3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'L3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'M1', 'Country' );
-		$this->excel->getActiveSheet()->getStyle( 'M1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'M1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'M1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'M3', 'Country' );
+		$this->excel->getActiveSheet()->getStyle( 'M3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'M3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'M3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'N1', 'State' );
-		$this->excel->getActiveSheet()->getStyle( 'N1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'N1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'N1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'N3', 'State' );
+		$this->excel->getActiveSheet()->getStyle( 'N3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'N3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'N3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'O1', 'Region Name' );
-		$this->excel->getActiveSheet()->getStyle( 'O1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'O1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'O1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'O3', 'Region Name' );
+		$this->excel->getActiveSheet()->getStyle( 'O3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'O3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'O3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'P1', 'City' );
-		$this->excel->getActiveSheet()->getStyle( 'P1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'P1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'P1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'P3', 'City' );
+		$this->excel->getActiveSheet()->getStyle( 'P3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'P3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'P3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'Q1', 'Zip Code' );
-		$this->excel->getActiveSheet()->getStyle( 'Q1' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'Q1' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'Q1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'Q3', 'Zip Code' );
+		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
+              
 		$frId         = $this->session->userdata( 'frId' );
 		$clName       = $this->session->userdata( 'clName' );
 		$fromDate     = $this->session->userdata( 'fromDate' );
@@ -5022,9 +5029,10 @@ class Reporting_Controller extends CI_Controller {
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 2 ) ) {
 			$frId = $_SESSION['drugsafe_user']['id'];
 		}
-
+                $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray['0']['franchiseeId'] );
+                $this->excel->getActiveSheet()->setCellValue( 'B1', $franchiseeArr['szName'] );
 		if ( ! empty( $clientAray ) ) {
-			$i = 2;
+			$i = 4;
 			foreach ( $clientAray as $item ) {
 				if ( $item['regionId'] == 0 ) {
 					$getState      = $this->Franchisee_Model->getStateByFranchiseeId( $item['franchiseeId'] );
@@ -5083,7 +5091,7 @@ class Reporting_Controller extends CI_Controller {
 					$value = 'Other';
 				}
 				if ( ! empty( $discount['percentage'] ) ) {
-					$discount = $discount['percentage'];
+					$discount = $discount['percentage'].'%';
 				} else {
 					$discount = "N/A";
 				}
@@ -5222,10 +5230,11 @@ class Reporting_Controller extends CI_Controller {
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 2 ) ) {
 			$frId = $_SESSION['drugsafe_user']['id'];
 		}
-
+$franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray['0']['franchiseeId'] );
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Client Details Report</b></p></div>
-            <div class= "table-responsive" >
+          <p style="text-align:left; font-size:18px; margin-bottom:5px; color:black"><b>  Franchisee Name:</b> '.$franchiseeArr['szName'].' </p>     
+<div class= "table-responsive" >
                             
                                   ';
 		if ( $clientAray ) {
@@ -5292,29 +5301,30 @@ class Reporting_Controller extends CI_Controller {
               <table border="1" cellpadding="5"><tr nobr="true">
                                         <td ><b>Business Name</b> </td>
                                         <td> <b>ABN</b> </td>
-                                        <td> <b>Contact Name</b> </td>
-                                        <td><b>Primary Email</b> </td>
+                                        <td colspan="2"><b>Primary Email</b> </td>
                                         <td> <b>Primary Phone</b> </td>
                                         <td><b>No Of Sites</b> </td>
                                         <td> <b>Industry</b> </td>
                                         <td> <b>Discount</b> </td>
-                                        <td><b>Contact Email</b> </td>
+                                        <td><b>Contact Name</b> </td>
+                                          <td ><b>Contact Phone</b> </td>
                                         <br>
                                         </tr>
                                         <tr nobr="true">
                                           <td>' . $clientData['szBusinessName'] . ' </td>
                                             <td> ' . $clientData['abn'] . '</td>
-                                            <td> ' . $clientData['szName'] . ' </td>
-                                            <td>' . $clientData['szEmail'] . ' </td>
+                                            <td colspan="2">' . $clientData['szEmail'] . ' </td>
                                             <td>' . $clientData['szContactNumber'] . ' </td>
                                             <td> ' . $count . '</td>
                                             <td> ' . $value . ' </td>
-                                            <td>' . ( ! empty( $discount['percentage'] ) ? $discount['percentage'] : 'N/A' ) . ' </td> 
-                                            <td> ' . $clientData['szContactEmail'] . '</td>
+                                            <td>' . ( ! empty( $discount['percentage'] ) ? $discount['percentage']."%": 'N/A' ) . ' </td> 
+                                            <td> ' . $clientData['szName'] . '</td>
+                                            <td>' . $clientData['szContactPhone'] . ' </td>
                                         </tr>
                                       <tr nobr="true">
-                                            <td ><b>Contact Phone</b> </td>
+                                          
                                         <td> <b>Contact Mobile</b> </td>
+                                        <td colspan="2"> <b>Contact Email</b> </td>
                                         <td colspan="2"> <b>Address</b> </td>
                                         <td><b>Country</b> </td>
                                         <td> <b>State</b> </td>
@@ -5324,8 +5334,9 @@ class Reporting_Controller extends CI_Controller {
                                         <br>
                                         </tr>
                                          <tr nobr="true">
-                                          <td>' . $clientData['szContactPhone'] . ' </td>
+                                          
                                             <td> ' . $clientData['szContactMobile'] . '</td>
+                                            <td colspan="2"> ' . $clientData['szContactEmail'] . '</td>
                                             <td colspan="2"> ' . $clientData['szAddress'] . ' </td>
                                             <td>' . $clientData['szCountry'] . ' </td>
                                             <td> ' . $getState['name'] . '</td>

@@ -189,6 +189,7 @@ class Admin_Controller extends CI_Controller
 
     function addFranchiseeData()
     {
+        $count = $this->changePassword();
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
