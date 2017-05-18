@@ -483,7 +483,7 @@
                             <lable>Contact Phone Number:</lable>
                         </div>
                         <div class="col-sm-6">
-                            <p><?php echo $userDataAry['rlr_name'];?></p>
+                            <p><?php echo $userDataAry['rlr_mobile'];?></p>
                         </div>
                     </div>
                     <div class="row">
@@ -775,28 +775,28 @@
                             <lable>Required PPE :</lable>
                         </div>
                         <div class="col-sm-6">
-                            <p><?php 
+                            <?php  $str = '';
                             $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
                              if(in_array("1", $req_ppe_ary)){
-                             echo "High Vis Work Wear" ; }
-                              ?></p>
-                               <p><?php 
+                             $val = "High Vis Work Wear" ;
+                             $str .= $val.',';
+                             } 
                              if(in_array("2", $req_ppe_ary)){
-                             echo " Head Protection" ;  } 
-                              ?></p>
-                              <p><?php 
+                             $val = "Head Protection" ;
+                             $str .= $val.',';
+                             }
                               if(in_array("3", $req_ppe_ary)){
-                               echo " Face/Eye Protection" ;  }
-                                ?></p>
-                               <p><?php 
+                               $val = "Face/Eye Protection" ;
+                                $str .= $val.',';}
                                if(in_array("4", $req_ppe_ary)){
-                               echo " Safety Boots" ;  }
-                                 ?></p>
-                                <p><?php 
-                              if(in_array("5", $req_ppe_ary)){
-                                 echo "  Long Sleev Clothing" ;  
-                               }
-                            ?></p>
+                               $val = "Safety Boots" ;
+                                $str .= $val.',';}
+                               if(in_array("5", $req_ppe_ary)){
+                                $val = "Long Sleev Clothing" ;
+                                $str .= $val.',';}
+                                $str = substr($str, 0, -1);
+                                 ?>
+                          <p><?php echo $str;?></p>
                         </div>
                     </div>
                          <?php if($userDataAry['paperwork']==2){?>

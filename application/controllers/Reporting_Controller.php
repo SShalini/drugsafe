@@ -5534,9 +5534,9 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 
 					$getRegionName = $this->Admin_Model->getregionbyregionid( $regionId );
 					if ( $userDataAry['onsite_service'] == 0 ) {
-						$val = "Mobile Clinic ";
+						$onsite_service_val = "Mobile Clinic ";
 					} else {
-						$val = "In-house";
+						$onsite_service_val = "In-house";
 					}
 					if ( $userDataAry['risk_assessment'] == 0 ) {
 						$raVal = "Yes";
@@ -5580,48 +5580,43 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 						$itrval = "Blanket";
 					}
 
-					$req_ppe_ary = explode( ",", $userDataAry['req_ppe'] );
-					if ( in_array( "1", $req_ppe_ary ) ) {
-						$ppe1 = "High Vis Work Wear";
-					} else {
-						$ppe1 = 'N/A';
-					}
-					if ( in_array( "2", $req_ppe_ary ) ) {
-						$ppe2 = " Head Protection";
-					} else {
-						$ppe2 = 'N/A';
-					}
-					if ( in_array( "3", $req_ppe_ary ) ) {
-						$ppe3 = " Face/Eye Protection";
-					} else {
-						$ppe3 = 'N/A';
-					}
-					if ( in_array( "4", $req_ppe_ary ) ) {
-						$ppe4 = " Safety Boots";
-					} else {
-						$ppe4 = 'N/A';
-					}
-					if ( in_array( "5", $req_ppe_ary ) ) {
-						$ppe5 = "  Long Sleev Clothing";
-					} else {
-						$ppe5 = 'N/A';
-					}
+                             $str = '';
+                            $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
+                             if(in_array("1", $req_ppe_ary)){
+                             $val = "High Vis Work Wear" ;
+                             $str .= $val.',';
+                             } 
+                             if(in_array("2", $req_ppe_ary)){
+                             $val = "Head Protection" ;
+                             $str .= $val.',';
+                             }
+                              if(in_array("3", $req_ppe_ary)){
+                               $val = "Face/Eye Protection" ;
+                                $str .= $val.',';}
+                               if(in_array("4", $req_ppe_ary)){
+                               $val = "Safety Boots" ;
+                                $str .= $val.',';}
+                               if(in_array("5", $req_ppe_ary)){
+                                $val = "Long Sleev Clothing" ;
+                                $str .= $val.',';}
+                                $str = substr($str, 0, -1);
+                            
 					$html .= '
 <table cellpadding="5px">
     <tr>
-        <td width="50%" align="left" font-size="20"><b>Site Code:</b> ' . ( ! empty( $franchiseecode['userCode'] ) ? $franchiseecode['userCode'] : 'N/A' ) . '</td><td width="50%" align="right"><b>Name of Person Completing Form:</b> ' . $userDataAry['per_form_complete'] . '</td>
+        <td width="50%" align="left" font-size="20"><b>Site Code:</b> ' . ( ! empty( $franchiseecode['userCode'] ) ? $franchiseecode['userCode'] : 'N/A' ) . '</td><td width="50%" align="left"><b>Name of Person Completing Form:</b> ' . $userDataAry['per_form_complete'] . '</td>
     </tr>
     <tr>
-        <td width="50%" align="left" font-size="20"><b>Company Name:</b> ' . $siteData['szName'] . '</td><td width="50%" align="right"><b>Address:</b> ' . $siteData['szAddress'] . '</td>
+        <td width="50%" align="left" font-size="20"><b>Company Name:</b> ' . $siteData['szName'] . '</td><td width="50%" align="left"><b>Address:</b> ' . $siteData['szAddress'] . '</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Company Email:</b> ' . $siteData['szEmail'] . '</td><td width="50%" align="right"><b>State:</b> ' . $getState['name'] . '</td>
+        <td width="50%" align="left"><b>Company Email:</b> ' . $siteData['szEmail'] . '</td><td width="50%" align="left"><b>State:</b> ' . $getState['name'] . '</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Company Phone Number:</b> ' . $siteData['szContactNumber'] . '</td><td width="50%" align="right"><b>Region Name:</b> ' . $getRegionName['regionName'] . '</td>
+        <td width="50%" align="left"><b>Company Phone Number:</b> ' . $siteData['szContactNumber'] . '</td><td width="50%" align="left"><b>Region Name:</b> ' . $getRegionName['regionName'] . '</td>
     </tr>
      <tr>
-        <td width="50%" align="left"><b>City:</b> ' . $siteData['szCity'] . '</td><td width="50%" align="right"><b>Zip/Postal Code:</b> ' . $siteData['szZipCode'] . '</td>
+        <td width="50%" align="left"><b>City:</b> ' . $siteData['szCity'] . '</td><td width="50%" align="left"><b>Zip/Postal Code:</b> ' . $siteData['szZipCode'] . '</td>
     </tr>
     <tr>
         <td width="50%" align="left"><b>Country:</b> ' . $siteData['szCountry'] . '</td>
@@ -5703,22 +5698,22 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 <br /><br />'.($i>0?'<br pagebreak="true" />':'').'
 <table cellpadding="5px">
     <tr>
-        <td width="50%" align="left" font-size="20"><b>People on site:</b> ' . $userDataAry['site_people'] . '</td><td width="50%" align="right"><b>Initial Testing Requirements:</b> ' . $itrval . '</td>
+        <td width="50%" align="left" font-size="20"><b>People on site:</b> ' . $userDataAry['site_people'] . '</td><td width="50%" align="left"><b>Initial Testing Requirements:</b> ' . $itrval . '</td>
     </tr>
     <tr>
-        <td width="50%" align="left" font-size="20"><b>Test Count:</b> ' . $userDataAry['test_count'] . '</td><td width="50%" align="right"><b>Ongoing Testing Requirements:</b> ' . $ogVal . '</td>
+        <td width="50%" align="left" font-size="20"><b>Test Count:</b> ' . $userDataAry['test_count'] . '</td><td width="50%" align="left"><b>Ongoing Testing Requirements:</b> ' . $ogVal . '</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Type of service preferred on-site:</b> ' . $val . '</td><td width="50%" align="right"><b>No of times Drugsafe visit your site:</b> ' . $userDataAry['site_visit'] . '</td>
+        <td width="50%" align="left"><b>Type of service preferred on-site:</b> ' . $onsite_service_val . '</td><td width="50%" align="left"><b>No of times Drugsafe visit your site:</b> ' . $userDataAry['site_visit'] . '</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Access to power for our Mobile:</b> ' . $paVal . '</td><td width="50%" align="right"><b>Preferred start time:</b> ' . $userDataAry['start_time'] . '</td>
+        <td width="50%" align="left"><b>Access to power for our Mobile:</b> ' . $paVal . '</td><td width="50%" align="left"><b>Preferred start time:</b> ' . $userDataAry['start_time'] . '</td>
     </tr>
      <tr>
-        <td width="50%" align="left"><b>Our people required to complete an induction:</b> ' . $rciVal . '</td><td width="50%" align="right"><b>Risk assessment required:</b> ' . $raVal . '</td>
+        <td width="50%" align="left"><b>Our people required to complete an induction:</b> ' . $rciVal . '</td><td width="50%" align="left"><b>Risk assessment required:</b> ' . $raVal . '</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Randomization process:</b> ' . $rpVal . '</td><td width="50%" align="right"><b>Required PPE :</b> ' . $ppe1 . "," . $ppe2 . "," . $ppe3 . "," . $ppe4 . "," . $ppe5 . '</td>
+        <td width="50%" align="left"><b>Randomization process:</b> ' . $rpVal . '</td><td width="50%" align="left"><b>Required PPE :</b> ' .$str. '</td>
     </tr>
     <tr>
         <td width="50%" align="left"><b>Paperwork at the time of testing:</b> ' . $pwVal . '</td>
@@ -6250,9 +6245,9 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				$franchiseecode = $this->Franchisee_Model->getusercodebyuserid( $item['id'] );
 
 				if ( $userDataAry['onsite_service'] == 0 ) {
-					$val = "Mobile Clinic ";
+					$onsite_service_val = "Mobile Clinic ";
 				} else {
-					$val = "In-house";
+					$onsite_service_val = "In-house";
 				}
 				if ( $userDataAry['risk_assessment'] == 0 ) {
 					$raVal = "Yes";
@@ -6296,32 +6291,26 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 					$itrval = "Blanket";
 				}
 
-				$req_ppe_ary = explode( ",", $userDataAry['req_ppe'] );
-				if ( in_array( "1", $req_ppe_ary ) ) {
-					$ppe1 = "High Vis Work Wear";
-				} else {
-					$ppe1 = 'N/A';
-				}
-				if ( in_array( "2", $req_ppe_ary ) ) {
-					$ppe2 = " Head Protection";
-				} else {
-					$ppe2 = 'N/A';
-				}
-				if ( in_array( "3", $req_ppe_ary ) ) {
-					$ppe3 = " Face/Eye Protection";
-				} else {
-					$ppe3 = 'N/A';
-				}
-				if ( in_array( "4", $req_ppe_ary ) ) {
-					$ppe4 = " Safety Boots";
-				} else {
-					$ppe4 = 'N/A';
-				}
-				if ( in_array( "5", $req_ppe_ary ) ) {
-					$ppe5 = "  Long Sleev Clothing";
-				} else {
-					$ppe5 = 'N/A';
-				}
+				 $str = '';
+                            $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
+                             if(in_array("1", $req_ppe_ary)){
+                             $val = "High Vis Work Wear" ;
+                             $str .= $val.',';
+                             } 
+                             if(in_array("2", $req_ppe_ary)){
+                             $val = "Head Protection" ;
+                             $str .= $val.',';
+                             }
+                              if(in_array("3", $req_ppe_ary)){
+                               $val = "Face/Eye Protection" ;
+                                $str .= $val.',';}
+                               if(in_array("4", $req_ppe_ary)){
+                               $val = "Safety Boots" ;
+                                $str .= $val.',';}
+                               if(in_array("5", $req_ppe_ary)){
+                                $val = "Long Sleev Clothing" ;
+                                $str .= $val.',';}
+                                $str = substr($str, 0, -1);
 
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, ( ! empty( $franchiseecode['userCode'] ) ? $franchiseecode['userCode'] : 'N/A' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $item['szName'] );
@@ -6356,14 +6345,14 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				$this->excel->getActiveSheet()->setCellValue( 'AE' . $i, $userDataAry['test_count'] );
 				$this->excel->getActiveSheet()->setCellValue( 'AF' . $i, $itrval );
 				$this->excel->getActiveSheet()->setCellValue( 'AG' . $i, $ogVal );
-				$this->excel->getActiveSheet()->setCellValue( 'AH' . $i, $val );
+				$this->excel->getActiveSheet()->setCellValue( 'AH' . $i, $onsite_service_val );
 				$this->excel->getActiveSheet()->setCellValue( 'AI' . $i, $userDataAry['site_visit'] );
 				$this->excel->getActiveSheet()->setCellValue( 'AJ' . $i, $paVal );
 				$this->excel->getActiveSheet()->setCellValue( 'AK' . $i, $userDataAry['start_time'] );
 				$this->excel->getActiveSheet()->setCellValue( 'AL' . $i, $rciVal );
 				$this->excel->getActiveSheet()->setCellValue( 'AM' . $i, $raVal );
 				$this->excel->getActiveSheet()->setCellValue( 'AN' . $i, $rpVal );
-				$this->excel->getActiveSheet()->setCellValue( 'AO' . $i, $ppe1 . ',' . $ppe2 . ',' . $ppe3 . ',' . $ppe4 . ',' . $ppe5 );
+				$this->excel->getActiveSheet()->setCellValue( 'AO' . $i, $str );
 				$this->excel->getActiveSheet()->setCellValue( 'AP' . $i, $pwVal );
 				$this->excel->getActiveSheet()->setCellValue( 'AQ' . $i, $userDataAry['instructions'] );
 

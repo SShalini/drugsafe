@@ -82,9 +82,9 @@
                         </div>
                    
                        
-                         <div class="search row">
+                        
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
-
+                         <div class=" row">
                               <?php  if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){     ?>
                                    <div class="clienttypeselect col-md-3">
                        
@@ -131,7 +131,7 @@
                                     </div>
                                 </div> 
                                     <?php } if($_SESSION['drugsafe_user']['iRole']==2){?> 
-                     <div class="search col-md-3">
+                          <div class="clienttypeselect col-md-3">
                        
                             <select class="form-control custom-select" name="szSearchBussName" id="szSearchBussName" onchange="remove_formError(this.id,'true')">
                                <option value="">Business Name</option>
@@ -152,7 +152,7 @@
                       
                     </div>
                                     <?php }?> 
-                                <div class=" col-md-3">
+                                <div class="clienttypeselect col-md-3">
                                    
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchStatus" onfocus="remove_formError(this.id,'true')">
                                          
@@ -182,8 +182,9 @@
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>
+                       </div>
                            </form>
-                          </div>
+                         
                       
                           <?php
                           

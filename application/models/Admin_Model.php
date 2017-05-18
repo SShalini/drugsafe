@@ -531,8 +531,7 @@ class Admin_Model extends Error_Model
         }
         
         $this->db->select('*');
-        
-            $this->db->where($whereAry);
+        $this->db->where($whereAry);
        
         $this->db->order_by($sortBy, $orderBy);
         $this->db->limit($limit, $offset);
