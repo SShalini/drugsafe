@@ -50,7 +50,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
-            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+//            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'alpha_numeric_spaces');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
@@ -98,7 +98,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
-            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+//            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
              $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'alpha_numeric_spaces');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
@@ -150,7 +150,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductCode]', 'Product Code', 'required|chekDuplicate['. __DBC_SCHEMATA_PRODUCT__ . '.szProductCode]');
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
-            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+//            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[supplier]', 'Supplier Name', 'alpha_numeric_spaces');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
@@ -229,7 +229,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
-            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+//            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
              $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
              $this->form_validation->set_message('alpha_numeric_spaces', 'Supplier Name must contain alpha-numeric characters only.');
@@ -429,7 +429,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[szProductDiscription]', 'Product Description', 'required');
             $this->form_validation->set_rules('productData[szProductCost]', 'Product Cost', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[szAvailableQuantity]', 'Available Quantity', 'required|numeric|greater_than_equal_to[0]|less_than_equal_to[1000]');
-            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+//            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','alpha_numeric_spaces');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
@@ -511,7 +511,7 @@ class Inventory_Controller extends CI_Controller {
             $this->form_validation->set_rules('productData[supplier]', 'Supplier Name','alpha_numeric_spaces');
             $this->form_validation->set_rules('productData[min_ord_qty]', 'Minimum Order Quantity', 'required|numeric|greater_than[0]');
             $this->form_validation->set_rules('productData[model_stk_val]', 'Model Stock Value', 'required|numeric|greater_than[0]');
-            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
+//            $this->form_validation->set_rules('productData[dtExpiredOn]', 'Expiry Date', 'required');
             $this->form_validation->set_rules('productData[szProductImage]', 'Product Image', 'required');
             $this->form_validation->set_message('chekDuplicate', ' %s already exist.');
             $this->form_validation->set_message('required', '{field} is required.');

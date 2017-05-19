@@ -150,7 +150,7 @@
                                                             $dtExpiredOn = date("d-m-Y", strtotime($date));
                                                         
                                                         ?>
-                                                        <input type="text" id="dtExpiredOn" class="form-control" value="<?php if(!empty($dtExpiredOn)) { echo $dtExpiredOn; } else{ echo "N/A";} ?>" readonly placeholder="Expired On" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
+                                                        <input type="text" id="dtExpiredOn" class="form-control" value="<?php if(!empty($dtExpiredOn) && $dtExpiredOn != '01-01-1970') { echo $dtExpiredOn; } else{ echo "";} ?>" readonly placeholder="Expired On" onfocus="remove_formError(this.id,'true')" name="productData[dtExpiredOn]">
                                                              <span class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                             </span>

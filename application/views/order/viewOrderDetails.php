@@ -311,14 +311,14 @@
                                                                         if (!empty($checkOrderEditable)) {
                                                                          if($validOrdersDetailsData['status'] == 2){
                                                                             ?>
-                                                                            <a class="btn btn-circle btn-icon-only btn-default"
+                                                                            <a class="btn btn-circle blue btn-icon-only btn-default"
                                                                                title="Edit Order Details"
                                                                                onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>,'1');"
                                                                                href="javascript:void(0);">
                                                                                 <i class="fa fa-pencil"></i>
                                                                             </a>
                                                                          <?php } else{ ?>
-                                                                           <a class="btn btn-circle btn-icon-only btn-default"
+                                                                           <a class="btn btn-circle blue btn-icon-only btn-default"
                                                                                title="Edit Order Details"
                                                                                onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
                                                                                href="javascript:void(0);">

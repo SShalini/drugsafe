@@ -1912,6 +1912,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                 <th> Product Cost</th>
                                                 <th> Ordered</th>
                                                 <th> Available</th>
+                                                <th> Back Order</th>
                                                 <th> Dispatch Qty</th>
                                                 <th> Dispatched Qty</th>
                                                 <th> Total Price EXL GST</th>
@@ -1944,6 +1945,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                     </td>
                                                     <?php if ($totalOrdersDetailsData['dispatched'] > '0') {
                                                         $price = $productDataArr['szProductCost'] * $totalOrdersDetailsData['quantity']; ?>
+                                                        <td><?php echo '0'; ?></td>
                                                         <td><?php echo $totalOrdersDetailsData['quantity']; ?></td>
                                                         <td><?php echo $TotalDispatched['total_dispatched'];?></td>
                                                         <td>
@@ -1953,6 +1955,9 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                         $count++;
 
                                                         ?>
+                                                        <td><?php
+                                                            $backorder = $totalOrdersDetailsData['quantity']-$TotalDispatched['total_dispatched'];
+                                                            echo ($backorder>0?'<span style="color:red">'.$backorder.'</span>':'0');?></td>
                                                         <td><input
                                                                     type="hidden" name="remainingQty<?php echo $i; ?>"
                                                                     id="remainingQty<?php echo $i; ?>"

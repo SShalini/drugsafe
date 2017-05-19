@@ -84,7 +84,7 @@ if ($mode == '__VIEW_PRODUCT_POPUP__') {
                                              <td><?php 
                                             $date= $productDataAry['dtExpiredOn'];
                                             $dtExpiredOn = date("d-m-Y", strtotime($date)); 
-                                            echo $dtExpiredOn;?> </td>
+                                            echo ($dtExpiredOn == '01-01-1970'?'N/A':$dtExpiredOn);?> </td>
                                              <td> <?php echo $productDataAry['supplier'];?> </td>
                                             <td> <?php echo $productDataAry['szAvailableQuantity'];?> </td>
                                            <td> <?php echo $productDataAry['min_ord_qty'];?> </td>

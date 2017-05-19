@@ -720,7 +720,9 @@ $html .= '
                                     <tr>
                                         <th><b>Product Code</b> </th>
                                         <th> <b>Product Description</b> </th>
-                                        <th> <b>Quantity Dispatched</b> </th>
+                                        <th> <b>Ordered Quantity</b> </th>
+                                        <th> <b>Dispatched</b> </th>
+                                        <th> <b>Notes</b> </th>
                                     </tr>';
         $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
         if ($totalOrdersDetailsAray) {
@@ -732,8 +734,10 @@ $html .= '
                 
                     $html .= '<tr>
                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
-                                            <td> $' . $productDataArr['szProductDiscription'] . '</td>
+                                            <td> ' . $productDataArr['szProductDiscription'] . '</td>
+                                            <td>'.$totalOrdersDetailsData['quantity'].'</td>
                                             <td> ' . $totalQtyDispatchAray['total_dispatched'] . ' </td>
+                                             <td> ' . ($totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched']>0?'Back Ordered':'') . ' </td>
                                         </tr>';
             }
         }
@@ -746,9 +750,9 @@ $html .= '
 
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        error_reporting(E_ALL);
+        /*error_reporting(E_ALL);
         $this->session->unset_userdata('idOrder');
-        $this->session->unset_userdata('flag');
+        $this->session->unset_userdata('flag');*/
 
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');

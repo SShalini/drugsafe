@@ -129,7 +129,7 @@
                                             <td><?php 
                                             $date= $marketingMaterialData['dtExpiredOn'];
                                             $dtExpiredOn = date("d-m-Y", strtotime($date)); 
-                                            echo $dtExpiredOn;?> </td>
+                                            echo ($dtExpiredOn == '01-01-1970'?'N/A':$dtExpiredOn);?> </td>
                                               <td><?php echo $marketingMaterialData['szAvailableQuantity'];?> </td>
                                             <?php
                                            if($_SESSION['drugsafe_user']['iRole']==1){
