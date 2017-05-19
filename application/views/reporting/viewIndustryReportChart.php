@@ -227,90 +227,99 @@ if (!empty($getSosAndClientDetils)) {
 
 
         if (testtype == '' || testtype == 'A') {
+            var hideA = true;
             for (var i = 0; i < DrugcategoriesArr.length; i++) {
-                var $div = $("<div>", {id: "Alco" + i, "class": "inds", "width": alcdivwidth});
-                $("#alcohal").append($div);
-                custchartAlc[i] = Highcharts.chart("Alco" + i, {
-                    chart: {
-                        type: 'pie',
-                        margin: [0, 0, 0, 0],
-                        spacingTop: 10,
-                        spacingBottom: 0,
-                        spacingLeft: 0,
-                        spacingRight: 0,
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    title: {
-                        text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Alcohol Test)</span>'
-                    },
-                    tooltip: {
-                        pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
-                    },
-                    colors: ['#696969','#4169E1'],
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            depth: 40,
-                            dataLabels: {
-                                distance: -60,
+                if (TotPosDoner[i] > 0 || TotNegDoner[i] > 0) {
+                    hideA = false;
+                    var $div = $("<div>", {id: "Alco" + i, "class": "inds", "width": alcdivwidth});
+                    $("#alcohal").append($div);
+                    custchartAlc[i] = Highcharts.chart("Alco" + i, {
+                        chart: {
+                            type: 'pie',
+                            margin: [0, 0, 0, 0],
+                            spacingTop: 10,
+                            spacingBottom: 0,
+                            spacingLeft: 0,
+                            spacingRight: 0,
+                            options3d: {
                                 enabled: true,
-                                format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                                alpha: 45,
+                                beta: 0
+                            }
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        title: {
+                            text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Alcohol Test)</span>'
+                        },
+                        tooltip: {
+                            pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
+                        },
+                        colors: ['#4169E1', '#696969'],
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                depth: 40,
+                                dataLabels: {
+                                    distance: -60,
+                                    enabled: true,
+                                    format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                                }
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: DrugcategoriesArr[i],
+                            data: [
+                                ['<span style="font-size:13px">Positive</span>', TotPosDoner[i]],
+                                ['<span style="font-size:13px">Negative</span>', TotNegDoner[i]]
+                            ]
+                        }],
+                        exporting: {
+                            buttons: {
+                                contextButton: {
+                                    menuItems: [{
+                                        text: 'Download JPEG Image',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'jpeg'
+                                            });
+                                        }
+                                    }, {
+                                        text: 'Download PNG Image',
+                                        onclick: function () {
+                                            this.exportChart();
+                                        },
+                                        separator: false
+                                    }, {
+                                        text: 'Download SVG Vector Image',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'image/svg+xml'
+                                            });
+                                        },
+                                        separator: false
+                                    }, {
+                                        text: 'Download PDF Document',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'application/pdf'
+                                            });
+                                        },
+                                        separator: false
+                                    }]
+                                }
                             }
                         }
-                    },
-                    series: [{
-                        type: 'pie',
-                        name: DrugcategoriesArr[i],
-                        data: [
-                            ['<span style="font-size:13px">Positive</span>', TotPosDoner[i]],
-                            ['<span style="font-size:13px">Negative</span>', TotNegDoner[i]]
-                        ]
-                    }],
-                    exporting: {
-                        buttons: {
-                            contextButton: {
-                                menuItems: [{
-                                    text: 'Download JPEG Image',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'jpeg'
-                                        });
-                                    }
-                                }, {
-                                    text: 'Download PNG Image',
-                                    onclick: function () {
-                                        this.exportChart();
-                                    },
-                                    separator: false
-                                }, {
-                                    text: 'Download SVG Vector Image',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'image/svg+xml'
-                                        });
-                                    },
-                                    separator: false
-                                }, {
-                                    text: 'Download PDF Document',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'application/pdf'
-                                        });
-                                    },
-                                    separator: false
-                                }]
-                            }
-                        }
-                    }
-                });
+                    });
+                }else{
+                    i++;
+                }
+                if(hideA){
+                    $('#alcohal').hide();
+                }
             }
             $('#alcohol-pie').click(function () {
                 Highcharts.exportCharts(custchartAlc);
@@ -324,90 +333,100 @@ if (!empty($getSosAndClientDetils)) {
         }
 
         if (testtype == '' || testtype == 'U') {
+            var hideU = true;
             for (var i = 0; i < DrugcategoriesArr.length; i++) {
-                var $div = $("<div>", {id: "uri" + i, "class": "inds", "width": alcdivwidth});
-                $("#Urine").append($div);
-                custchartUri[i] = Highcharts.chart("uri" + i, {
-                    chart: {
-                        type: 'pie',
-                        margin: [0, 0, 0, 0],
-                        spacingTop: 10,
-                        spacingBottom: 0,
-                        spacingLeft: 0,
-                        spacingRight: 0,
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    title: {
-                        text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Urine Test)</span>'
-                    },
-                    tooltip: {
-                        pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
-                    },
-                    colors: ['#696969','#4169E1'],
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            depth: 40,
-                            dataLabels: {
-                                distance: -60,
+                if(UrTotPosDoner[i]>0 || UrTotNegDoner[i]>0) {
+                    hideU = false;
+                    var $div = $("<div>", {id: "uri" + i, "class": "inds", "width": alcdivwidth});
+                    $("#Urine").append($div);
+                    custchartUri[i] = Highcharts.chart("uri" + i, {
+                        chart: {
+                            type: 'pie',
+                            margin: [0, 0, 0, 0],
+                            spacingTop: 10,
+                            spacingBottom: 0,
+                            spacingLeft: 0,
+                            spacingRight: 0,
+                            options3d: {
                                 enabled: true,
-                                format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                                alpha: 45,
+                                beta: 0
+                            }
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        title: {
+                            text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Urine Test)</span>'
+                        },
+                        tooltip: {
+                            pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
+                        },
+                        colors: ['#4169E1', '#696969'],
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                depth: 40,
+                                dataLabels: {
+                                    distance: -60,
+                                    enabled: true,
+                                    format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                                }
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: DrugcategoriesArr[i],
+                            data: [
+                                ['<span style="font-size:13px">Positive</span>', UrTotPosDoner[i]],
+                                ['<span style="font-size:13px">Negative</span>', UrTotNegDoner[i]]
+                            ]
+                        }],
+                        exporting: {
+                            buttons: {
+                                contextButton: {
+                                    menuItems: [{
+                                        text: 'Download JPEG Image',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'jpeg'
+                                            });
+                                        }
+                                    }, {
+                                        text: 'Download PNG Image',
+                                        onclick: function () {
+                                            this.exportChart();
+                                        },
+                                        separator: false
+                                    }, {
+                                        text: 'Download SVG Vector Image',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'image/svg+xml'
+                                            });
+                                        },
+                                        separator: false
+                                    }, {
+                                        text: 'Download PDF Document',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'application/pdf'
+                                            });
+                                        },
+                                        separator: false
+                                    }]
+                                }
                             }
                         }
-                    },
-                    series: [{
-                        type: 'pie',
-                        name: DrugcategoriesArr[i],
-                        data: [
-                            ['<span style="font-size:13px">Positive</span>', UrTotPosDoner[i]],
-                            ['<span style="font-size:13px">Negative</span>', UrTotNegDoner[i]]
-                        ]
-                    }],
-                    exporting: {
-                        buttons: {
-                            contextButton: {
-                                menuItems: [{
-                                    text: 'Download JPEG Image',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'jpeg'
-                                        });
-                                    }
-                                }, {
-                                    text: 'Download PNG Image',
-                                    onclick: function () {
-                                        this.exportChart();
-                                    },
-                                    separator: false
-                                }, {
-                                    text: 'Download SVG Vector Image',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'image/svg+xml'
-                                        });
-                                    },
-                                    separator: false
-                                }, {
-                                    text: 'Download PDF Document',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'application/pdf'
-                                        });
-                                    },
-                                    separator: false
-                                }]
-                            }
-                        }
-                    }
-                });
+                    });
+                }else {
+                    i++;
+                }
+
+                if(hideU){
+                    $('#Urine').hide();
+                }
             }
             $('#urine-pie').click(function () {
                 Highcharts.exportCharts(custchartUri);
@@ -420,90 +439,99 @@ if (!empty($getSosAndClientDetils)) {
             });
         }
         if (testtype == '' || testtype == 'O') {
+            var hideO = true;
             for (var i = 0; i < DrugcategoriesArr.length; i++) {
-                var $div = $("<div>", {id: "orl" + i, "class": "inds", "width": alcdivwidth});
-                $("#oral").append($div);
-                custchartOrl[i] = Highcharts.chart("orl" + i, {
-                    chart: {
-                        type: 'pie',
-                        margin: [0, 0, 0, 0],
-                        spacingTop: 10,
-                        spacingBottom: 0,
-                        spacingLeft: 0,
-                        spacingRight: 0,
-                        options3d: {
-                            enabled: true,
-                            alpha: 45,
-                            beta: 0
-                        }
-                    },
-                    credits: {
-                        enabled: false
-                    },
-                    title: {
-                        text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Oral Test)</span>'
-                    },
-                    tooltip: {
-                        pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
-                    },
-                    colors: ['#696969','#4169E1'],
-                    plotOptions: {
-                        pie: {
-                            allowPointSelect: true,
-                            cursor: 'pointer',
-                            depth: 40,
-                            dataLabels: {
-                                distance: -60,
+                if(OrTotPosDoner[i]>0 || OrTotNegDoner[i]>0) {
+                    hideO = false;
+                    var $div = $("<div>", {id: "orl" + i, "class": "inds", "width": alcdivwidth});
+                    $("#oral").append($div);
+                    custchartOrl[i] = Highcharts.chart("orl" + i, {
+                        chart: {
+                            type: 'pie',
+                            margin: [0, 0, 0, 0],
+                            spacingTop: 10,
+                            spacingBottom: 0,
+                            spacingLeft: 0,
+                            spacingRight: 0,
+                            options3d: {
                                 enabled: true,
-                                format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                                alpha: 45,
+                                beta: 0
+                            }
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        title: {
+                            text: DrugcategoriesArr[i] + ' <span class="pie-title" style="font-size: 12px;">(Oral Test)</span>'
+                        },
+                        tooltip: {
+                            pointFormat: '<span style="font-size:13px">{series.name}:</span> <b>{point.y}</b>'
+                        },
+                        colors: ['#4169E1', '#696969'],
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                depth: 40,
+                                dataLabels: {
+                                    distance: -60,
+                                    enabled: true,
+                                    format: '{point.name}: <span style="font-size:13px">{point.y}</span>'
+                                }
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: DrugcategoriesArr[i],
+                            data: [
+                                ['<span style="font-size:13px">Positive</span>', OrTotPosDoner[i]],
+                                ['<span style="font-size:13px">Negative</span>', OrTotNegDoner[i]]
+                            ]
+                        }],
+                        exporting: {
+                            buttons: {
+                                contextButton: {
+                                    menuItems: [{
+                                        text: 'Download JPEG Image',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'jpeg'
+                                            });
+                                        }
+                                    }, {
+                                        text: 'Download PNG Image',
+                                        onclick: function () {
+                                            this.exportChart();
+                                        },
+                                        separator: false
+                                    }, {
+                                        text: 'Download SVG Vector Image',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'image/svg+xml'
+                                            });
+                                        },
+                                        separator: false
+                                    }, {
+                                        text: 'Download PDF Document',
+                                        onclick: function () {
+                                            this.exportChart({
+                                                type: 'application/pdf'
+                                            });
+                                        },
+                                        separator: false
+                                    }]
+                                }
                             }
                         }
-                    },
-                    series: [{
-                        type: 'pie',
-                        name: DrugcategoriesArr[i],
-                        data: [
-                            ['<span style="font-size:13px">Positive</span>', OrTotPosDoner[i]],
-                            ['<span style="font-size:13px">Negative</span>', OrTotNegDoner[i]]
-                        ]
-                    }],
-                    exporting: {
-                        buttons: {
-                            contextButton: {
-                                menuItems: [{
-                                    text: 'Download JPEG Image',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'jpeg'
-                                        });
-                                    }
-                                }, {
-                                    text: 'Download PNG Image',
-                                    onclick: function () {
-                                        this.exportChart();
-                                    },
-                                    separator: false
-                                }, {
-                                    text: 'Download SVG Vector Image',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'image/svg+xml'
-                                        });
-                                    },
-                                    separator: false
-                                }, {
-                                    text: 'Download PDF Document',
-                                    onclick: function () {
-                                        this.exportChart({
-                                            type: 'application/pdf'
-                                        });
-                                    },
-                                    separator: false
-                                }]
-                            }
-                        }
-                    }
-                });
+                    });
+                }else {
+                    i++;
+                }
+                if(hideO){
+                    $('#oral').hide();
+                }
             }
             $('#oral-pie').click(function () {
                 Highcharts.exportCharts(custchartOrl);

@@ -21,7 +21,7 @@ and open the template in the editor.
 .dataTables_paginate a{display:inline-block;background:#ccc;padding:5px 7px;color:#000;margin-left:4px;}
 
 .search{
-padding: 0px;
+/*padding: 0px;*/
 margin-bottom: 16px;
 }
 .help-block p{margin:5px;}

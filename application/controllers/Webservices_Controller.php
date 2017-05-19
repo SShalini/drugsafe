@@ -156,6 +156,7 @@ class Webservices_Controller extends CI_Controller
     function addsosdata(){
         $jsondata = json_decode(file_get_contents("php://input"));
         $dataArr['sosdate'] = !empty($jsondata->sosdate) ? $jsondata->sosdate : "";
+	    $dataArr['userid'] = !empty($jsondata->userid) ? $jsondata->userid : "0";
         $dataArr['reqclient'] = !empty($jsondata->reqclient) ? $jsondata->reqclient : "";
         $dataArr['site'] = !empty($jsondata->site) ? $jsondata->site : "";
         $drug = '';
@@ -1095,9 +1096,10 @@ class Webservices_Controller extends CI_Controller
         $jsondata = json_decode(file_get_contents("php://input"));
         $data['sosid'] = !empty($jsondata->sosid) ? $jsondata->sosid : "";
         $sosformdata = $this->Webservices_Model->getsosformdatabysosid($data['sosid']);
+        $usertype = $this->Webservices_Model->getuserdetails($sosformdata[0]['createdBy']);
         if(!empty($sosformdata))
         {
-            $responsedata = array("code" => 200,"dataarr"=>$sosformdata);
+            $responsedata = array("code" => 200,"dataarr"=>$sosformdata,"role"=>$usertype[0]['iRole']);
             header('Content-Type: application/json');
         }else{
             $responsedata = array("code" => 201,"message"=>'No site found');

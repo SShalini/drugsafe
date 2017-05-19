@@ -189,14 +189,7 @@ class Admin_Controller extends CI_Controller
 
     function addFranchiseeData()
     {
-        $count = $this->changePassword();
-        $is_user_login = is_user_login($this);
-        // redirect to dashboard if already logged in
-        if (!$is_user_login) {
-            ob_end_clean();
-            redirect(base_url('/admin/admin_login'));
-            die;
-        }
+
         $idOperationManager = $this->input->post('idOperationManager');
         $flag = $this->input->post('flag');
         $this->session->set_userdata('flag', $flag);
@@ -207,8 +200,7 @@ class Admin_Controller extends CI_Controller
         echo "addFranchisee";
     }
 
-    function addFranchisee()
-    {
+    function addFranchisee(){
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {

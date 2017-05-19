@@ -175,6 +175,7 @@ function addFranchiseeData(idOperationManager, flag) {
         idOperationManager: idOperationManager,
         flag: flag
     }, function (result) {
+        console.log(result);
         ar_result = result.split('||||');
         window.location = __BASE_URL__ + "/admin/" + ar_result[1];
 
@@ -2690,7 +2691,7 @@ function showformdata(sosid,hide,viewAgentComment) {
                         '<tr><th>Time:</th><td colspan="3">' + value.RepresentativeSignatureTime + '</td></tr>' +
                         '<tr><th>Nominated Client Representative:</th><td colspan="3">' + value.ClientRepresentative + '</td></tr>' +
                         '<tr><th>Signature:</th><td colspan="3"><img src="' + __BASE_URL__ + '/uploadsign/' + value.RepresentativeSignature + '" /></td></tr>' +
-                        '<tr><th>Agent Comment:</th><td colspan="3">' + (viewAgentComment=='1' && value.agent_comment?value.agent_comment:"N/A") + '</td></tr>';
+                        (html.role == '6'?'<tr><th>Agent Comment:</th><td colspan="3">' + (viewAgentComment=='1' && value.agent_comment?value.agent_comment:"N/A") + '</td></tr>':'');
                 });
                 modalhtml += '</tbody></table>' +
                     '</div>' +

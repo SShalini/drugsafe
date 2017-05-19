@@ -52,7 +52,7 @@
                     </div>
                     <div class="portlet-body totalpr alert">
                     <div class="row">
-                        <form name="orderSearchForm" id="orderSearchForm"
+                        <form name="orderSearchForm" id="orderSearchForm" class="search-bar"
                               action="<?= __BASE_URL__ ?>/order/view_order_list_by_fr" method="post">
                             <div class="row">
 

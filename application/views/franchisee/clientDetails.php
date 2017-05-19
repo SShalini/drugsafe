@@ -872,7 +872,7 @@
         </div>
         <div class="portlet-body">
              <div class="row ">
-                           <form class="form-horizontal" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
+                           <form class="form-horizontal search-bar" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
                <div class="row ">
                                <div class="col-md-3 ">
 

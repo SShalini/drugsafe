@@ -56,7 +56,7 @@
                     </div>
                     <div class="portlet-body totalpr alert">
                          <div class="row">
-                            <form name="revenueSearchForm" id="revenueSearchForm"
+                            <form name="revenueSearchForm" id="revenueSearchForm" class="search-bar"
                                   action="<?= __BASE_URL__ ?>/reporting/view_revenue_summery_client" method="post">
                                  <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5 )){ ?>
                                   <div class="row">

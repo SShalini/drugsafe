@@ -231,7 +231,8 @@ class Webservices_Model extends Error_Model
                 'Status' => $data['status'],
                 'sign1' => $data['sign1'],
                 'sign2' => $data['sign2'],
-                'agent_comment' => $data['agent_comment']
+                'agent_comment' => $data['agent_comment'],
+	            'createdBy' => $data['userid']
             );
             if ($data['update'] == '1') {
                 $wheresosAry = array('id' => (int)$data['idsos']);

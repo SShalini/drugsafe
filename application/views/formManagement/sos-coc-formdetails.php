@@ -67,7 +67,7 @@
                     </div>
 
 
-                    <form name="orderSearchForm" id="orderSearchForm"
+                    <form name="orderSearchForm" id="orderSearchForm" class="search-bar"
                           action="<?= __BASE_URL__ ?>/formManagement/viewForm" method="post">
                       
                         <div class="row">

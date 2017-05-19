@@ -62,6 +62,10 @@ body .logo img {
   word-wrap: break-word;
 }
 .highcharts-label.creategap{margin-bottom: 15px}
+.search-bar .form-group{margin: 0px 0px 10px}
+.search-bar .form-group .date-picker.input-medium{width: 100% !important;}
+.search-bar .form-group .custom-select a{width: 100%}
+.search-bar .form-group .custom-select a span{width: 100%}
 @media (max-width: 767px) {
   .login .pull-right {
     float: none !important;

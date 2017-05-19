@@ -514,6 +514,7 @@ class Form_Management_Controller extends CI_Controller
         $sosid = $this->session->userdata('sosid');
         $hide = $this->session->userdata('hide');
         $sosdetarr = $this->Webservices_Model->getsosformdatabysosid($sosid);
+	    $usertype = $this->Webservices_Model->getuserdetails($sosdetarr[0]['createdBy']);
         $sosuserdets = $this->Webservices_Model->getuserhierarchybysiteid($sosdetarr[0]['Clientid']);
         $franchiseeDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['franchiseeId']);
         $ClientDets = $this->Webservices_Model->getuserdetails($sosuserdets[0]['clientType']);
@@ -788,7 +789,7 @@ class Form_Management_Controller extends CI_Controller
                                         <td colspan="2">Time: '.$sosdetarr[0]['RepresentativeSignatureTime'].'</td>
                                     </tr>
                                     ';
-	    if($hide == '0'){
+	    if($hide == '0' && $usertype[0]['iRole'] == '6'){
 	    	$html .= '<tr><td>Agent Comment</td><td colspan="7">'.(!empty($sosdetarr[0]['agent_comment'])?$sosdetarr[0]['agent_comment']:'N/A').'</td></tr>';
 	    }
         $html .= '

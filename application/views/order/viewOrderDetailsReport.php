@@ -64,7 +64,7 @@
                     </div>
                     <div class="portlet-body totalpr alert">
                         <div class="row">
-                            <form name="orderSearchForm" id="orderSearchForm"
+                            <form name="orderSearchForm" id="orderSearchForm" class="search-bar"
                                   action="<?= __BASE_URL__ ?>/order/view_order_report" method="post">
                                 <div class="row">
                       <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
@@ -82,7 +82,7 @@
                                             </select>
                                         </div>
                                     </div>                           
-                                   <div class="col-md-2 ">
+                                   <div class="col-md-3 ">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch2" id="szSearch2"
                                                     onfocus="remove_formError(this.id,'true')">

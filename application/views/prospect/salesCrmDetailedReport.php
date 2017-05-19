@@ -82,7 +82,7 @@
                    
                        
                        
-                              <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/sales_crm_detailed_report" name="szSearchField" method="post">
+                              <form class="form-horizontal search-bar" id="szSearchField" action="<?=__BASE_URL__?>/prospect/sales_crm_detailed_report" name="szSearchField" method="post">
                        <?php if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){  ?> 
                                   <div class="row"> 
                                     <div class="col-md-3">

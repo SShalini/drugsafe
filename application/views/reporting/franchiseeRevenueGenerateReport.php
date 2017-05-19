@@ -58,7 +58,7 @@
                     
                     <div class="portlet-body totalpr alert">
                         <div class="row">
-                            <form name="revenueSearchForm" id="revenueSearchForm"
+                            <form name="revenueSearchForm" id="revenueSearchForm" class="search-bar"
                                   action="<?= __BASE_URL__ ?>/reporting/franchisee_revenue_generate" method="post">
                                 <div class="row">
                                     <div class="col-md-3">

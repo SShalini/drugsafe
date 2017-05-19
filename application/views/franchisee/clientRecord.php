@@ -121,7 +121,7 @@
                     if (($_SESSION['drugsafe_user']['iRole'] == '5')||($_SESSION['drugsafe_user']['iRole'] == '1')) {
                         ?>
                        
-                            <form class="form-horizontal" id="szSearchClientRecord"
+                            <form class="form-horizontal search-bar" id="szSearchClientRecord"
                                   action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                                   method="post">
                                 <div class=" row">
@@ -475,7 +475,7 @@
 
                     ?>
                     <div class="row search">
-                        <form class="form-horizontal" id="szSearchClientRecord"
+                        <form class="form-horizontal search-bar" id="szSearchClientRecord"
                               action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                               method="post">
 

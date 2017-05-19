@@ -50,7 +50,7 @@
 
                     <div class="portlet-body totalpr alert">
                         <div class="row">
-                            <form name="revenueSearchForm" id="revenueSearchForm"
+                            <form name="revenueSearchForm" class="search-bar" id="revenueSearchForm"
                                   action="<?= __BASE_URL__ ?>/reporting/view_industry_report" method="post">
                                 <div class="row">
 
