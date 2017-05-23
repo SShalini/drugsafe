@@ -1193,6 +1193,35 @@ class Order_Model extends Error_Model {
             return false;
         }
     }
+    function sendOrderEmail()
+    {
+            $orderIdAry = $this->getLatestOrdersId(); 
+            $replace_ary = array();
+            $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+            $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
+         
+            createEmail($this, '__ORDER_NOTIFICATION__', $replace_ary, 'singhshalini3012@gmail.com ', '', __CUSTOMER_SUPPORT_EMAIL__,$orderIdAry['id'], __CUSTOMER_SUPPORT_EMAIL__,'',2);
+          
+        
+            return true;
+        
 
+    }  
+     public function getLatestOrdersId()
+        {
+            $this->db->select_max('id');
+            $this->db->from(__DBC_SCHEMATA_ORDER__);
+            $query = $this->db->get($query);
+         
+            if($query->num_rows() > 0)
+            {
+                $row = $query->result_array();
+                return  $row['0'];
+            }
+            else
+            {
+                return array();
+            }
+        }
    }
 ?>

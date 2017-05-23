@@ -59,3 +59,5 @@ CREATE TABLE IF NOT EXISTS `ds_partial_dispatch_tracking` (
 ALTER TABLE `ds_partial_dispatch_tracking` ADD `received` TINYINT(1) NOT NULL DEFAULT '0' ;
 
 ALTER TABLE `ds_sos` ADD `createdBy` INT(6) NOT NULL ;
+
+INSERT INTO `tbl_email_cms` (`id`, `szFriendlyName`, `sectionTitle`, `subject`, `sectionDescription`, `iActive`, `atCreatedOn`, `atUpdatedOn`) VALUES (NULL, 'Order Notification', '__ORDER_NOTIFICATION__', 'Order Notification', ' <br/> <br /> Kind regards,<br /> Drug-Safe Communities.</p>', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');

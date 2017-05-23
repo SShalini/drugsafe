@@ -345,11 +345,9 @@ public function getAllQtyAssignDetailsForPdf($FrName = '',$productCode='')
            echo $q;*/
 
         if ($query->num_rows() > 0) {
-             return $query->result_array();
-               
-        } else {
+             return $query->result_array();   
+        }else{
             return array();
-        
         }
     }
 

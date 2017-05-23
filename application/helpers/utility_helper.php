@@ -372,6 +372,161 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
          $message .= $emailCMSAry['sectionDescription'];  
        
         }
+         elseif($flag==2)    {
+         $subject = $emailCMSAry['subject'];
+         $orderDetails = $obj->Order_Model->getOrderDetailsByOrderId($id_player);
+        $orderDetailsOfOrderTbl= $obj->Order_Model->getOrderByOrderId($id_player);
+         $franchiseeDetArr1 = $obj->Admin_Model->getAdminDetailsByEmailOrId('', $orderDetailsOfOrderTbl['franchiseeid']);
+          $message .= '
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b"><b> Dear Fawada, </b></p></div>
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Below are the order details,</p></div>';
+          
+    $message .= ' 
+        <table cellpadding="5px"><tr>
+        <td width="50%" align="left" font-size="20"><b>Order #:</b> ' .sprintf(__FORMAT_NUMBER__, $id_player). '</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left" font-size="20"><b>Order Date & Time:</b> ' .date('d M Y', strtotime($orderDetailsOfOrderTbl['createdon'])) . ' at ' . date('h:i A', strtotime($orderDetailsOfOrderTbl['createdon'])). '</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Total Price EXL GST:</b> ' .number_format($orderDetailsOfOrderTbl['price'], 2, '.', ','). '</td>
+    </tr>
+    <tr>
+        <td width="50%" align="left"><b>Franchisee:</b> ' . $franchiseeDetArr1['szName'] . '</td>
+    </tr>
+   
+</table> ';
+          if ($orderDetails) {
+          $message .= '
+            <tr nobr="true" bgcolor="#4deecd"><td colspan="4"><h2><font color="black">Product Info</font></h2></td></tr>
+            
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b> Product Code</b> </th>
+                                        <th> <b>Product Cost</b> </th>
+                                        <th> <b>Ordered Qty</b> </th>
+                                        <th style="width:150px"><b>Total Price EXL GST</b> </th>
+                                       
+                                    </tr>';
+       
+            $i = 0;
+            foreach ($orderDetails as $orderData) {
+                 $i++;
+                 $productDataArr = $obj->Inventory_Model->getProductDetailsById($orderData['productid']);
+                 $TotalDispatched = $obj->Order_Model->getTotalDispatchedByOrderDetailId($orderData['id']); 
+               $message .= '<tr>
+                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
+                                            <td> ' . $productDataArr['szProductCost'] . '</td>
+                                            <td> ' . $orderData['quantity'] . ' </td>
+                                            <td>' . number_format(($orderData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>
+                                           
+                                            
+                                
+                                        </tr>';
+            }
+        
+       
+       $message .= '
+                         </table>
+                        </div>
+                      
+                       <hr style=" margin-top:25px; "> ';
+          }
+          if ($commentList) {
+          $message .= '
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Comments</b></p></div>
+            
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>#</b> </th>
+                                        <th> <b>Comment</b> </th>
+                                        <th> <b>Topic</b> </th>
+                                        <th style="width:150px"><b>Forum</b> </th>
+                                        <th style="width:150px"><b>Commenter</b> </th>
+                                       
+                                    </tr>';
+      
+             
+            $i = 0;
+            foreach ($commentList as $commentData) {
+          
+        
+                 $i++;
+                $franchiseeArr = $obj->Admin_Model->getAdminDetailsByEmailOrId('', $commentData['idCmnters']);
+                
+                 $TopicDetails = $obj->Order_Model->getTopicDetailsbyTopicId($commentData['idTopic']);
+                  $forumList = $obj->Order_Model->getForumDetailsByForumId($TopicDetails['idForum']);
+               $message .= '<tr>
+                                            <td> ' . $i . ' </td>
+                                            <td> ' . $commentData['szCmnt'] . '</td>
+                                            <td> ' . $TopicDetails['szTopicTitle'] . '</td>
+                                            <td> ' . $forumList['0']['szForumTitle'] . ' </td>
+                                            <td>' . $franchiseeArr['szName'] . ' </td>
+                                            
+                                
+                                        </tr>';
+            }
+       
+       
+       $message .= '
+                            </table>
+                        </div>
+                      
+                       <hr style=" margin-top:25px; "> ';
+        }
+         $ReplyList = $obj->Forum_Model->getTodayReplyList();
+             if ($ReplyList) {
+       $message .= '
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Reply</b></p></div>
+            
+            <div class= "table-responsive" >
+                            <table border="1" cellpadding="5">
+                                    <tr>
+                                        <th style="width:80px"><b>#</b> </th>
+                                        <th> <b>Reply</b> </th>
+                                        <th> <b>Comment</b> </th>
+                                        <th style="width:150px"><b>Topic</b> </th>
+                                        <th style="width:150px"><b>Forum</b> </th>
+                                        <th style="width:150px"><b>Replier</b> </th>
+                                       
+                                    </tr>';
+       
+            $i = 0;
+            foreach ($ReplyList as $ReplyData) {
+          
+        
+                 $i++;
+                 $commentDetails = $obj->Forum_Model->getAllCommentsByCmntId($ReplyData['idCmnt']);
+                $franchiseeArr = $obj->Admin_Model->getAdminDetailsByEmailOrId('', $ReplyData['idReplier']);
+                
+                 $TopicDetailsData = $obj->Forum_Model->getTopicDetailsbyTopicId($commentDetails['idTopic']);
+                 $forumListData = $obj->Forum_Model->getForumDetailsByForumId($TopicDetailsData['idForum']);
+                 
+               $message .= '<tr>
+                                            <td> ' . $i . ' </td>
+                                            <td> ' . $ReplyData['szReply'] . '</td>
+                                            <td> ' . $commentDetails['szCmnt'] . '</td>
+                                            <td> ' . $TopicDetailsData['szTopicTitle'] . '</td>
+                                            <td> ' . $forumListData['0']['szForumTitle'] . ' </td>
+                                            <td>' . $franchiseeArr['szName'] . ' </td>
+                                            
+                                
+                                        </tr>';
+            }
+       
+       
+       $message .= '
+                            </table>
+                        </div>
+                      
+                       <hr style=" margin-top:25px; "> ';
+   }
+         $message .= $emailCMSAry['sectionDescription'];  
+       
+          
+         }
         else{
           $subject = $emailCMSAry['subject'];
           $message .= $emailCMSAry['sectionDescription'];  

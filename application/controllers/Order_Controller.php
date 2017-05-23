@@ -327,13 +327,15 @@ class Order_Controller extends CI_Controller
                 $queryInsert = $this->Order_Model->InsertOrderDetails($totalOrdersData, $idorder);
             }
             if ($queryInsert) {
-
+                $sendEmailForOrderAray =$this->Order_Model->sendOrderEmail();
+                if($sendEmailForOrderAray){
                 $szMessage['type'] = "success";
                 $szMessage['content'] = "<strong><h3>Your Order has been successfully placed.</h3></strong> ";
                 $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 ob_end_clean();
                 $this->session->unset_userdata('idfranchisee');
                 redirect(base_url('/order/ordersuccess'));
+                }
             }
 
         }

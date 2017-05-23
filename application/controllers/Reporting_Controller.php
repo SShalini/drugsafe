@@ -5302,7 +5302,7 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
                                         <td ><b>Business Name</b> </td>
                                         <td> <b>ABN</b> </td>
                                         <td colspan="2"><b>Primary Email</b> </td>
-                                        <td> <b>Primary Phone</b> </td>
+                                        <td><b>Primary Phone</b></td>
                                         <td><b>No Of Sites Recorded</b> </td>
                                         <td> <b>Industry</b> </td>
                                         <td> <b>Discount</b> </td>
