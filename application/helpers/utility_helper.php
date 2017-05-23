@@ -403,7 +403,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        <th style="width:80px"><b> Product Code</b> </th>
+                                        <th style="width:200px"><b> Product Code</b> </th>
                                         <th> <b>Product Cost</b> </th>
                                         <th> <b>Ordered Qty</b> </th>
                                         <th style="width:150px"><b>Total Price EXL GST</b> </th>
@@ -417,7 +417,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                  $TotalDispatched = $obj->Order_Model->getTotalDispatchedByOrderDetailId($orderData['id']); 
                $message .= '<tr>
                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
-                                            <td> ' . $productDataArr['szProductCost'] . '</td>
+                                            <td> $'. $productDataArr['szProductCost'] . '</td>
                                             <td> ' . $orderData['quantity'] . ' </td>
                                             <td>$' . number_format(($orderData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>
                                            
@@ -428,7 +428,6 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
              $message .= '<tr>
                                                      <td></td>
                                                      <td></td>
-                                                    
                                                      <td><b>Total</b></td>
                                                      <td>
                                                         $'.number_format($orderDetailsOfOrderTbl['price'], 2, '.', ','). '
