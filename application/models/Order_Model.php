@@ -1200,7 +1200,8 @@ class Order_Model extends Error_Model {
             $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
             $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
          
-            createEmail($this, '__ORDER_NOTIFICATION__', $replace_ary, 'singhshalini3012@gmail.com ', '', __CUSTOMER_SUPPORT_EMAIL__,$orderIdAry['id'], __CUSTOMER_SUPPORT_EMAIL__,'',2);
+            createEmail($this, '__ORDER_NOTIFICATION__', $replace_ary, 'fawadmobileconnekt@hotmail.com', '', __CUSTOMER_SUPPORT_EMAIL__,$orderIdAry['id'], __CUSTOMER_SUPPORT_EMAIL__,'',2);
+	    createEmail($this, '__ORDER_NOTIFICATION__', $replace_ary, 'fawadamin089@gmail.com', '', __CUSTOMER_SUPPORT_EMAIL__,$orderIdAry['id'], __CUSTOMER_SUPPORT_EMAIL__,'',2);
           
         
             return true;
