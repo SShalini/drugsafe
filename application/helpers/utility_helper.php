@@ -378,8 +378,8 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
         $orderDetailsOfOrderTbl= $obj->Order_Model->getOrderByOrderId($id_player);
          $franchiseeDetArr1 = $obj->Admin_Model->getAdminDetailsByEmailOrId('', $orderDetailsOfOrderTbl['franchiseeid']);
           $message .= '
-            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b"><b> Dear Fawada, </b></p></div>
-            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Below are the order details,</p></div>';
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; ><b> Dear Fawada, </b></p></div>
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; >Below are the order details,</p></div>';
           
     $message .= ' 
         <table cellpadding="5px"><tr>
@@ -389,7 +389,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
         <td width="50%" align="left" font-size="20"><b>Order Date & Time:</b> ' .date('d M Y', strtotime($orderDetailsOfOrderTbl['createdon'])) . ' at ' . date('h:i A', strtotime($orderDetailsOfOrderTbl['createdon'])). '</td>
     </tr>
     <tr>
-        <td width="50%" align="left"><b>Total Price EXL GST:</b> ' .number_format($orderDetailsOfOrderTbl['price'], 2, '.', ','). '</td>
+        <td width="50%" align="left"><b>Total Price EXL GST:</b> $' .number_format($orderDetailsOfOrderTbl['price'], 2, '.', ','). '</td>
     </tr>
     <tr>
         <td width="50%" align="left"><b>Franchisee:</b> ' . $franchiseeDetArr1['szName'] . '</td>
@@ -398,7 +398,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
 </table> ';
           if ($orderDetails) {
           $message .= '
-            <tr nobr="true" bgcolor="#4deecd"><td colspan="4"><h2><font color="black">Product Info</font></h2></td></tr>
+            <tr><td colspan="4"><h2><font color="black">Product Info</font></h2></td></tr>
             
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
@@ -416,18 +416,25 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                  $productDataArr = $obj->Inventory_Model->getProductDetailsById($orderData['productid']);
                  $TotalDispatched = $obj->Order_Model->getTotalDispatchedByOrderDetailId($orderData['id']); 
                $message .= '<tr>
-                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
+                                            <td> ' . $productDataArr['szProductCode'] . ' </td>
                                             <td> ' . $productDataArr['szProductCost'] . '</td>
                                             <td> ' . $orderData['quantity'] . ' </td>
-                                            <td>' . number_format(($orderData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>
+                                            <td>$' . number_format(($orderData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ',') . ' </td>
                                            
                                             
                                 
                                         </tr>';
             }
-        
+             $message .= '<tr>
+                                                     <td></td>
+                                                     <td></td>
+                                                    
+                                                     <td><b>Total</b></td>
+                                                     <td>
+                                                        $'.number_format($orderDetailsOfOrderTbl['price'], 2, '.', ','). '
+                                                     </td>
        
-       $message .= '
+                       </tr>
                          </table>
                         </div>
                       
