@@ -4,8 +4,6 @@
         $("#szTestType").customselect();
     });
 </script>
-
-
 <div class="page-content-wrapper">
     <div class="page-content">
         <?php //test ?>
@@ -140,23 +138,29 @@ if (!empty($getSosAndClientDetils)) {
         $totalNegativeOral[] = $getSosAndClientData['totalNegativeOral'];
         $FinalTotalOrlNeg += $getSosAndClientData['totalNegativeOral'];
     }
+    
     $alcohalCat = "'" . implode("','", $alcohalCat) . "'";
     $alcohalCat = $alcohalCat . ",'Total'";
+ 
     $totalAlcohalDoner = "" . implode(",", $totalAlcohalDoner) . "";
+     
     $totalPositiveAlcohol = "" . implode(",", $totalPositiveAlcohol) . "";
     $totalPositiveAlcohol = $totalPositiveAlcohol . ',' . $FinalTotalAlcPos;
     $totalNegativeAlcohol = "" . implode(",", $totalNegativeAlcohol) . "";
     $totalNegativeAlcohol = $totalNegativeAlcohol . ',' . $FinalTotalAlcNeg;
+    
     $totalDonarUrine = "" . implode(",", $totalDonarUrine) . "";
     $totalPositiveUrine = "" . implode(",", $totalPositiveUrine) . "";
     $totalPositiveUrine = $totalPositiveUrine . ',' . $FinalTotalUriPos;
     $totalNegativeUrine = "" . implode(",", $totalNegativeUrine) . "";
     $totalNegativeUrine = $totalNegativeUrine . ',' . $FinalTotalUriNeg;
+     
     $totalDonarOral = "" . implode(",", $totalDonarOral) . "";
     $totalPositiveDonarOral = "" . implode(",", $totalPositiveDonarOral) . "";
     $totalPositiveDonarOral = $totalPositiveDonarOral . ',' . $FinalTotalOrlPos;
     $totalNegativeOral = "" . implode(",", $totalNegativeOral) . "";
     $totalNegativeOral = $totalNegativeOral . ',' . $FinalTotalOrlNeg;
+    
 }
 
 ?>
@@ -174,6 +178,7 @@ if (!empty($getSosAndClientDetils)) {
     var custchartAlc = [];
     var custchartUri = [];
     var custchartOrl = [];
+    
     $(function () {
         Highcharts.getSVG = function (charts) {
             var svgArr = [],
@@ -331,10 +336,11 @@ if (!empty($getSosAndClientDetils)) {
                 });
             });
         }
-
+ 
         if (testtype == '' || testtype == 'U') {
             var hideU = true;
             for (var i = 0; i < DrugcategoriesArr.length; i++) {
+                
                 if(UrTotPosDoner[i]>0 || UrTotNegDoner[i]>0) {
                     hideU = false;
                     var $div = $("<div>", {id: "uri" + i, "class": "inds", "width": alcdivwidth});
@@ -420,7 +426,8 @@ if (!empty($getSosAndClientDetils)) {
                             }
                         }
                     });
-                }else {
+                }
+                else {
                     i++;
                 }
 

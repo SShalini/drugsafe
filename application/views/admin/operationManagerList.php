@@ -111,9 +111,9 @@
                            </div>
                            </form>
                           </div>
-                             <div class="row">
+                            
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
+                          <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th> Id.</th>
@@ -164,7 +164,7 @@
                                 </tbody>
                             </table>
                         </div>
-                                 </div>
+                                
                              <?php
                             
                         }

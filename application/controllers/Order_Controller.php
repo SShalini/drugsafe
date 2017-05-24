@@ -684,7 +684,7 @@ EOD;
 
 </table>
 <br />
-<h2 style="text-align: center;">ORDER DETAILS</h2>
+<h2 style="text-align: center;">Delivery Docket</h2>
 
 <br>
 <h3 style="color:black">Order Info  </h3>
@@ -733,13 +733,13 @@ $html .= '
               
                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
                 $totalQtyDispatchAray = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
-                
+                 $backorder = $totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched'];
                     $html .= '<tr>
                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
                                             <td> ' . $productDataArr['szProductDiscription'] . '</td>
                                             <td>'.$totalOrdersDetailsData['quantity'].'</td>
                                             <td> ' . $totalQtyDispatchAray['total_dispatched'] . ' </td>
-                                             <td> ' . ($totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched']>0?'Back Ordered':'') . ' </td>
+                                             <td> ' . ($totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched']>0?'Back Ordered - '.$backorder:'') . ' </td>
                                         </tr>';
             }
         }

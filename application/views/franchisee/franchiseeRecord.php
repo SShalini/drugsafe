@@ -204,7 +204,7 @@
                                   </div>
                            </form>
                           </div>
-                    <div class="row">
+                 
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -345,7 +345,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        </div>
+                       
                         <?php
 
                     } else {

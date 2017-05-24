@@ -145,7 +145,7 @@
                         if(!empty($validPendingOrdersDetailsAray)) 
                         {
                            ?>      
-                    <div class="row">
+                  
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-striped">
                             <thead>
@@ -178,6 +178,7 @@
                                                     $i++ ;
                                                    $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrdersDetailsData['szProductCategory']));
                                                    $availprodqty = $this->Order_Model->getorderdanddispatchval($validPendingOrdersDetailsData['iFranchiseeId'],$validPendingOrdersDetailsData['id']);
+                                                 
                                                    ?>
                             <tr>
                                     <td><?php echo $i; ?> </td>
@@ -220,7 +221,7 @@
                             </tbody>
                             </table>
                     </div>        
-                </div>
+               
                       <?php } else {
                           
                             echo "Not Found";    

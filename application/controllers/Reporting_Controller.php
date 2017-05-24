@@ -4650,9 +4650,7 @@ class Reporting_Controller extends CI_Controller {
 		$viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList( $franchiseeName, $catid );
 
 		$this->load->library( 'form_validation' );
-		$this->form_validation->set_rules( 'szSearch1', 'Franchisee Name ', 'required' );
 		$this->form_validation->set_rules( 'szSearch2', 'Product Category', 'required' );
-
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
 			$data['szMetaTagTitle']  = "Franchisee Stock Qty Report";
@@ -4727,13 +4725,14 @@ class Reporting_Controller extends CI_Controller {
 
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Stock Quantity Report</b></p></div>
-            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Name:- </b>' . $viewFranchiseeInventoryListAry['0']['szName'] . '</p></div>
+           
             <div class= "table-responsive" >
                             <table border="1" cellpadding="5">
                                     <tr>
-                                        <th><b>Image</b> </th>
                                         <th> <b>Product Code </b> </th>
                                         <th><b> Description  </b> </th>
+                                        <th><b>  Franchisee Name </b></th>
+                                        <th><b>  State</b> </th>
                                         <th> <b>Available Stock Quantity</b> </th>
                                        
                                    
@@ -4742,12 +4741,14 @@ class Reporting_Controller extends CI_Controller {
 
 			$i = 0;
 			foreach ( $viewFranchiseeInventoryListAry as $viewFranchiseeInventoryData ) {
+                             $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $viewFranchiseeInventoryData['iFranchiseeId'] );
+                             $getState = $this->Franchisee_Model->getStateByFranchiseeId($viewFranchiseeInventoryData['iFranchiseeId']);
+                                                
 				$html .= '<tr>
-                                           <td>
-                                            <img class="file_preview_image" src="' . __BASE_USER_PRODUCT_IMAGES_URL__ . '/' . $viewFranchiseeInventoryData['szProductImage'] . '" width="60" height="60"/>    
-                                        </td>
                                             <td> ' . $viewFranchiseeInventoryData['szProductCode'] . '</td>
                                             <td> ' . $viewFranchiseeInventoryData['szProductDiscription'] . ' </td>
+                                            <td> ' . $franchiseeArr['szName'] . '</td>
+                                            <td> ' . $getState['name'] . ' </td>  
                                             <td>' . $viewFranchiseeInventoryData['szQuantity'] . ' </td>';
 
 
@@ -4798,25 +4799,30 @@ class Reporting_Controller extends CI_Controller {
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
 
-		$this->excel->getActiveSheet()->setCellValue( 'A3', 'Franchisee Name:-' );
+		$this->excel->getActiveSheet()->setCellValue( 'A3', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'A5', 'Product Code' );
-		$this->excel->getActiveSheet()->getStyle( 'A5' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'A5' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'A5' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'B3', 'Description' );
+		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'B3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'B5', 'Description' );
-		$this->excel->getActiveSheet()->getStyle( 'B5' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'B5' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'B5' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+		$this->excel->getActiveSheet()->setCellValue( 'C3', 'Franchisee Name' );
+		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'C3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'C5', 'Available Stock Quantity' );
-		$this->excel->getActiveSheet()->getStyle( 'C5' )->getFont()->setSize( 13 );
-		$this->excel->getActiveSheet()->getStyle( 'C5' )->getFont()->setBold( true );
-		$this->excel->getActiveSheet()->getStyle( 'C5' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+                $this->excel->getActiveSheet()->setCellValue( 'D3', 'State' );
+		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'D3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+
+                $this->excel->getActiveSheet()->setCellValue( 'E3', 'Available Stock Quantity' );
+		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setSize( 13 );
+		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setBold( true );
+		$this->excel->getActiveSheet()->getStyle( 'E3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
 
 		$franchiseeName = $this->session->userdata( 'franchiseeName' );
@@ -4824,17 +4830,21 @@ class Reporting_Controller extends CI_Controller {
 
 
 		$viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList( $franchiseeName, $prodCategory );
-		$this->excel->getActiveSheet()->setCellValue( 'B3', $viewFranchiseeInventoryListAry['0']['szName'] );
+		
 		if ( ! empty( $viewFranchiseeInventoryListAry ) ) {
-			$i = 6;
+			$i = 4;
 			$x = 0;
 			foreach ( $viewFranchiseeInventoryListAry as $item ) {
-
+                         $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $item['iFranchiseeId'] );
+                             $getState = $this->Franchisee_Model->getStateByFranchiseeId($item['iFranchiseeId']);
+                              
 				$x ++;
 
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $item['szProductCode'] );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $item['szProductDiscription'] );
-				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $item['szQuantity'] );
+                                $this->excel->getActiveSheet()->setCellValue( 'C' . $i, $franchiseeArr['szName'] );
+                                $this->excel->getActiveSheet()->setCellValue( 'D' . $i, $getState['name'] );
+				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, $item['szQuantity'] );
 
 
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
@@ -4920,7 +4930,7 @@ class Reporting_Controller extends CI_Controller {
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-		$this->excel->getActiveSheet()->setCellValue( 'F3', 'No Of Sites Recorded' );
+		$this->excel->getActiveSheet()->setCellValue( 'F3', 'No Of Sites' );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
@@ -5303,7 +5313,7 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
                                         <td> <b>ABN</b> </td>
                                         <td colspan="2"><b>Primary Email</b> </td>
                                         <td><b>Primary Phone</b></td>
-                                        <td><b>No Of Sites Recorded</b> </td>
+                                        <td><b>No Of Sites</b> </td>
                                         <td> <b>Industry</b> </td>
                                         <td> <b>Discount</b> </td>
                                         <td><b>Contact Name</b> </td>

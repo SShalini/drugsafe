@@ -216,7 +216,6 @@
                                                     <?php
                                                     $colcount++;
                                                 }
-
                                                 ?>
                                                 <th>Total</th>
                                             </tr>
@@ -240,7 +239,7 @@
                                                         <?php
                                                     }
                                                     ?>
-<td><?php echo $FinalTotalAlc;?></td>
+                                                 <td><?php echo $FinalTotalAlc;?></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
@@ -382,12 +381,9 @@
                                                 <?php
                                             }
                                             ?>
-
-
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -398,7 +394,6 @@
                 }
                 }
                 ?>
-
             </div>
 
         </div>

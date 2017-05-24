@@ -121,7 +121,7 @@
                                     {*/
                                             if ((!empty($manualCalcDetails) && $_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '2')|| (!empty($manualCalcDetails) && $_SESSION['drugsafe_user']['iRole'] == '5')) {
                                         if ($j == 0) { ?>
-                                            <div class="row tabrow">
+<!--                                            <div class="row tabrow">-->
                                             <div class="table-responsive">
                                             <table class="table table-striped table-bordered table-hover">
                                             <thead>
@@ -203,7 +203,7 @@
                             }
                             ?>
                             </div>
-                            </div>
+<!--                            </div>-->
                             <?php
 
                         } else {

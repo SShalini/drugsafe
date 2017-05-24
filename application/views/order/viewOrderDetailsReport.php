@@ -66,8 +66,9 @@
                         <div class="row">
                             <form name="orderSearchForm" id="orderSearchForm" class="search-bar"
                                   action="<?= __BASE_URL__ ?>/order/view_order_report" method="post">
-                                <div class="row">
+                               
                       <?php if($_SESSION['drugsafe_user']['iRole']==1){?>
+                                 <div class="row">
                                     <div class="clienttypeselect col-md-3">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch1" id="szSearch1"
@@ -189,7 +190,7 @@
 
                                   </div>
                       <?php } else { ?>  
-                                <div class="row">
+                               
                              <div class="col-md-3">
                                         <div class="form-group ">
                                             <select class="form-control custom-select" name="szSearch2" id="szSearch2"

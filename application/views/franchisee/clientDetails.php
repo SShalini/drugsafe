@@ -255,7 +255,7 @@
                         ?>
                         <div class="row">
                             <div class="col-sm-4 text-info bold">
-                                <lable>Total No of Sites:</lable>
+                                <lable>No of Sites:</lable>
                             </div>
                             <div class="col-sm-8">
                                 <p><?php
@@ -871,7 +871,7 @@
             
         </div>
         <div class="portlet-body">
-             <div class="row ">
+          
                            <form class="form-horizontal search-bar" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
                <div class="row ">
                                <div class="col-md-3 ">
@@ -951,13 +951,13 @@
                                </div>
                      </div>
                            </form>
-                          </div>
+             
              <?php        
             if($childClientDetailsAray)
             {
              
             ?>
-                <div class="row">
+              
                 <div class="table-responsive">
                    <table id="sample_1" class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer" role="grid" aria-describedby="sample_1_info">
                         <thead>
@@ -1065,8 +1065,7 @@
                         </tbody>
                     </table>
                 </div>
-                 
-                          </div>
+               
                        
             <?php 
             }

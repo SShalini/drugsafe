@@ -241,7 +241,7 @@
                                     <span class="caption-subject font-red-sunglo bold uppercase">Client Record</span>
                                 </div>
                             </div>
-                            <div class="row">
+                          
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
@@ -258,7 +258,7 @@
                                             }
                                             ?>
 
-                                            <th> No. of sites</th>
+                                            <th> No of Sites</th>
                                             <th> Contact No.</th>
                                             <th> Created By</th>
                                             <th> Updated By</th>
@@ -461,7 +461,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
                             <?php
 
                         } else {
@@ -563,7 +562,7 @@
                     ?>
                     <div id="page_content" class="row">
                         <div class="col-md-12">
-                            <div class="row">
+                           
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover">
                                         <thead>
@@ -577,7 +576,7 @@
                                                 <th> Franchisee</th>
                                             <?php } ?>
 
-                                            <th> No. of sites</th>
+                                            <th> No of Sites</th>
                                             <th> Contact No.</th>
                                             <th> Created By</th>
                                             <th> Updated By</th>
@@ -774,7 +773,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                          
                             <?php
 
                         } else {

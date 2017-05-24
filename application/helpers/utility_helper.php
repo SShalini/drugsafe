@@ -362,7 +362,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                                         </tr>';
             }
        
-     //cmnt  
+     
        $message .= '
                             </table>
                         </div>

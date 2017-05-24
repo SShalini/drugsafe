@@ -129,18 +129,20 @@
             </form>  
                       </div>
                 <?php
-                        if(!empty($_POST['szSearch2']) && !empty($_POST['szSearch1']) ){
+                        if(!empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
                         if(!empty($viewFranchiseeInventoryListAry)) 
                         {
-                           ?>      
-                    <div class="row">
+                          ?>      
+                   
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>  Image </th>
+                               
                                 <th>  Product Code</th>
                                 <th>  Description</th>
+                                <th>  Franchisee Name </th>
+                                <th>  State </th>
                                 <th>  Available Stock Quantity</th>
                             </thead>
                             <tbody>
@@ -148,17 +150,24 @@
                                      $i = 0;
                                                 foreach($viewFranchiseeInventoryListAry as $viewFranchiseeInventoryData)
                                                 { 
+                                                  
+                                                 $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $viewFranchiseeInventoryData['iFranchiseeId'] );
+                                                 $getState = $this->Franchisee_Model->getStateByFranchiseeId($viewFranchiseeInventoryData['iFranchiseeId']);
+                                                
                                                     $i++ ;
                                                     ?>
                                     <tr>
-                                        <td>
-                                            <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $viewFranchiseeInventoryData['szProductImage']; ?>" width="60" height="60"/>    
-                                        </td>
                                         <td>
                                            <?php echo $viewFranchiseeInventoryData['szProductCode'] ;?>
                                         </td>
                                         <td>
                                            <?php echo $viewFranchiseeInventoryData['szProductDiscription'] ;?>
+                                        </td>
+                                        <td>
+                                           <?php echo $franchiseeArr['szName'] ;?>
+                                        </td>
+                                        <td>
+                                           <?php echo $getState['name'] ;?>
                                         </td>
                                         <td>  <?php echo $viewFranchiseeInventoryData['szQuantity']; ?> </td>
                                     </tr>
@@ -169,7 +178,7 @@
                             </tbody>
                             </table>
                     </div>        
-                </div>
+              
                       <?php } else {
                             echo "Not Found";    
                            }

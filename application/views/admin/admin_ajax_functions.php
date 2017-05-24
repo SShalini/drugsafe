@@ -1910,11 +1910,13 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             <tr>
                                                 <th> Product Code</th>
                                                 <th> Product Cost</th>
-                                                <th> Ordered</th>
+                                               
                                                 <th> Available</th>
+                                                 <th> Ordered</th>
+                                                 <th> Dispatched Qty</th>
                                                 <th> Back Order</th>
                                                 <th> Dispatch Qty</th>
-                                                <th> Dispatched Qty</th>
+                                               
                                                 <th> Total Price EXL GST</th>
                                             </tr>
                                             </thead>
@@ -1939,14 +1941,16 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                     <td> <?php echo $productDataArr['szProductCode']; ?>
                                                     </td>
                                                     <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
-                                                    <td> <?php echo $totalOrdersDetailsData['quantity']; ?>
-                                                    </td>
+                                                   
                                                     <td> <?php echo $productDataArr['szAvailableQuantity']; ?>
+                                                    </td>
+                                                     <td> <?php echo $totalOrdersDetailsData['quantity']; ?>
                                                     </td>
                                                     <?php if ($totalOrdersDetailsData['dispatched'] > '0') {
                                                         $price = $productDataArr['szProductCost'] * $totalOrdersDetailsData['quantity']; ?>
                                                         <td><?php echo '0'; ?></td>
-                                                        <td><?php echo $totalOrdersDetailsData['quantity']; ?></td>
+                                                        <td>-</td>
+<!--                                                        <td><?php echo $totalOrdersDetailsData['quantity']; ?></td>-->
                                                         <td><?php echo $TotalDispatched['total_dispatched'];?></td>
                                                         <td>
                                                             --
@@ -1955,9 +1959,20 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                         $count++;
 
                                                         ?>
+                                                         <td><?php echo $TotalDispatched['total_dispatched'];?></td>
                                                         <td><?php
                                                             $backorder = $totalOrdersDetailsData['quantity']-$TotalDispatched['total_dispatched'];
-                                                            echo ($backorder>0?'<span style="color:red">'.$backorder.'</span>':'0');?></td>
+                                                            if((empty($TotalDispatched['total_dispatched']))){
+                                                            echo "-";    
+                                                            }
+                                                            elseif($backorder == $totalOrdersDetailsData['quantity']){
+                                                              
+                                                               echo "-";    
+                                                            }
+                                                           else{
+                                                             echo ($backorder>0?'<span style="color:red">'.$backorder.'</span>':'0');  
+                                                           }
+                                                            ?></td>
                                                         <td><input
                                                                     type="hidden" name="remainingQty<?php echo $i; ?>"
                                                                     id="remainingQty<?php echo $i; ?>"
@@ -1986,7 +2001,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                                    id="order_prod_price<?php echo $i; ?>"
                                                                    value="<?php echo $productDataArr['szProductCost']; ?>"/>
                                                         </td>
-                                                        <td><?php echo $TotalDispatched['total_dispatched'];?></td>
+                                                       
                                                         <td>
                                                             <label class="lab<?php echo $i; ?>"
                                                                    name="total_price<?php echo $i; ?>" value=""

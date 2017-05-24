@@ -64,7 +64,7 @@
 
   <!-- somewhere deep end -->      
                         
-                    <div class="row">
+                  
                         <div class="table-responsive ">
                             <table class="table table-striped  table-hover ">
                                 <thead>
@@ -95,7 +95,7 @@
                                 </tbody>
                             </table>
                              </div>
-                        </div>
+                       
   <p><?php echo $franchiseeDetArr1['szName']?></p>
                              <?php
                             
@@ -234,7 +234,7 @@
                                                                      <?php }?>
                                                                
                                                                    </div>
-                                                            <div class="row">
+                                                             <div class="row">
                                                                 <div class="col-md-1"></div>
                                                                 <div class="col-md-9">
                                                                 <p class="todo-text-color">
