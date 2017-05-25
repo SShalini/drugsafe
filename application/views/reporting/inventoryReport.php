@@ -196,8 +196,14 @@
                                                     if(!empty($availprodqty)) {
                                                         $printzero = true;
                                                         foreach ($availprodqty as $requestedqty) {
-                                                            if ($requestedqty['productid'] == $validPendingOrdersDetailsData['id']) { ?>
-                                                                <td>  <?php echo $requestedqty['quantity']; ?> </td>
+                                                             $getAllDispatchedQtyAry = $this->Order_Model->getAllDispatchedQty($requestedqty['franchiseeid'],$requestedqty['productid']);
+                                                         
+                                                             if ($requestedqty['productid'] == $validPendingOrdersDetailsData['id']) {
+                                                              $qty = $requestedqty['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];  
+                                                           
+                                                                ?>
+                                   
+                                                                <td>  <?php echo $qty; ?> </td>
                                                                
                                                             <?php $printzero = false; }
                                                         }

@@ -739,7 +739,7 @@ $html .= '
                                             <td> ' . $productDataArr['szProductDiscription'] . '</td>
                                             <td>'.$totalOrdersDetailsData['quantity'].'</td>
                                             <td> ' . $totalQtyDispatchAray['total_dispatched'] . ' </td>
-                                             <td> ' . ($totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched']>0?'Back Ordered - '.$backorder:'') . ' </td>
+                                             <td> ' . ($totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched']>0?'Back Ordered - '.$backorder:'--') . ' </td>
                                         </tr>';
             }
         }

@@ -259,7 +259,7 @@
                                             ?>
 
                                             <th> No of Sites</th>
-                                            <th> Contact No.</th>
+                                            <th> Contact No</th>
                                             <th> Created By</th>
                                             <th> Updated By</th>
                                             <th> Actions</th>
@@ -577,7 +577,7 @@
                                             <?php } ?>
 
                                             <th> No of Sites</th>
-                                            <th> Contact No.</th>
+                                            <th> Contact No</th>
                                             <th> Created By</th>
                                             <th> Updated By</th>
                                             <th> Actions</th>
@@ -617,7 +617,6 @@
 
                                                     </td>
                                                      <td> <?php echo(!empty($clientData['szContactNumber']) ? $clientData['szContactNumber'] : 'N/A'); ?> </td>
-
                                                     <td>
                                                         <?php
                                                         if ($clientData['szCreatedBy']) {
@@ -632,10 +631,9 @@
                                                         if ($clientData['szLastUpdatedBy']) {
                                                             $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientData['szLastUpdatedBy']);
                                                             echo $franchiseeDetArr['szName'];
-                                                        } else {
+                                                        }else{
                                                             echo "N.A";
                                                         }
-
                                                         ?>
                                                     </td>
 
@@ -794,7 +792,6 @@
 
                         <?php } ?>
                     </div>
-
                 </div>
             </div>
         </div>

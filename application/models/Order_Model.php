@@ -917,9 +917,43 @@ class Order_Model extends Error_Model {
             }
         }
 
-        function  getorderdanddispatchval($franchiseeid,$prodid){
+        function  getAllDispatchedQty($franchiseeid,$prodid){
 
-            $searchQuery = 'validorder = 1 AND status != 3 AND status !=2'  ;
+//            $searchQuery = 'dispatched = 0'  ;
+
+                if($franchiseeid>0){
+                    $searchQuery.="
+                     ds_orders.franchiseeid = ".(int)($franchiseeid);
+                }
+                if($prodid>0)
+                {
+                    $searchQuery .="
+               AND
+                     ds_order_details.productid = ".(int)($prodid);
+
+                }
+            $this->db->where($searchQuery);
+            $this->db->select('SUM(ds_partial_dispatch_tracking.dispatch_qty) as dispatch_qty');
+            $this->db->from(__DBC_SCHEMATA_ORDER__.' as ds_orders');
+            $this->db->join(__DBC_SCHEMATA_ORDER_DETAILS__.' as ds_order_details', 'ds_orders.id = ds_order_details.orderid');
+             $this->db->join(__DBC_SCHEMATA_PARTIAL_DISPATCH__.' as ds_partial_dispatch_tracking', 'ds_order_details.id = ds_partial_dispatch_tracking.order_detail_id');
+           
+            $query = $this->db->get();
+//           $q = $this->db->last_query();
+//            echo $q;
+//                die;
+            if ($query->num_rows() > 0) {
+                return $query->result_array();
+
+            }
+
+            else {
+                return array();
+            }
+        }
+ function  getorderdanddispatchval($franchiseeid,$prodid){
+
+            $searchQuery = 'validorder = 1 AND status != 3'  ;
 
                 if($franchiseeid>0){
                     $searchQuery.="
@@ -933,7 +967,7 @@ class Order_Model extends Error_Model {
 
                 }
             $this->db->where($searchQuery);
-            $this->db->select('SUM(ds_order_details.dispatched) as dispatched, ds_order_details.productid, SUM(ds_order_details.quantity) as quantity');
+            $this->db->select('SUM(ds_order_details.dispatched) as dispatched, ds_orders.franchiseeid,ds_order_details.productid, SUM(ds_order_details.quantity) as quantity');
             $this->db->from(__DBC_SCHEMATA_ORDER__.' as ds_orders');
             $this->db->join(__DBC_SCHEMATA_ORDER_DETAILS__.' as ds_order_details', 'ds_orders.id = ds_order_details.orderid');
             $this->db->group_by('ds_order_details.productid');
@@ -950,7 +984,6 @@ class Order_Model extends Error_Model {
                 return array();
             }
         }
-
         function getProductDetsByfranchiseeid($franchiseeid,$catid=0,$prodcode=0){
             $whereAry = 'prodstock.iFranchiseeId =' . (int)$franchiseeid .' AND prod.isDeleted = 0 '.($catid>0?' AND prod.szProductCategory = '.(int)$catid:'').($prodcode>0?' AND prod.id = '.(int)$prodcode:'') ;
             $query = $this->db->select('prodstock.szQuantity, prodstock.iFranchiseeId, prod.id, prod.szProductCode, prod.model_stk_val, prod.szProductDiscription, prod.szProductCategory,prod.szAvailableQuantity')
