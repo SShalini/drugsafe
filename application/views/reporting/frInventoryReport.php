@@ -71,11 +71,9 @@
                                     
                             </div>
                             <?php
-                        }  } 
+                             }  } 
                             ?>
-                       
                         </div>
-                        
                     <div class="row">
                       <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/frInventoryReport" method="post">
                     <div class="col-md-3 clienttypeselect">

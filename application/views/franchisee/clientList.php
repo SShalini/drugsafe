@@ -282,7 +282,7 @@
                                     <th>Client Code</th>
                                     <th> Name</th>
                                     <th> Email</th>
-                                    <th> No of sites</th>
+                                    <th> No of Sites</th>
                                     <th> Contact No</th>
                                     <th> Created By</th>
                                     <th> Updated By</th>

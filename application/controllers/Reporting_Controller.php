@@ -1504,13 +1504,18 @@ class Reporting_Controller extends CI_Controller {
                                             <td>' . $reqOrderData['szAvailableQuantity'] . ' </td>';
 				if ( ! empty( $availprodqty ) ) {
 					$printzero = true;
-					foreach ( $availprodqty as $requestedqty ) {
-						if ( $requestedqty['productid'] == $reqOrderData['id'] ) {
-							$html      .= '<td>' . $requestedqty['quantity'] . '</td>
+                                  
+					foreach ($availprodqty as $requestedqty) {
+                                                             $getAllDispatchedQtyAry = $this->Order_Model->getAllDispatchedQty($requestedqty['franchiseeid'],$requestedqty['productid']);
+                                                         
+                                                            if ( $requestedqty['productid'] == $reqOrderData['id'] ) {
+                                                              $qty = $requestedqty['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];  
+                                                           
+                                                               $html      .= '<td>' . $qty . '</td>
                                                    ';
 							$printzero = false;
 						}
-					}
+                                                        }
 					if ( $printzero ) {
 						$html .= '<td>0</td>
                                                ';
@@ -1611,13 +1616,17 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, $item['szAvailableQuantity'] );
 				if ( ! empty( $availprodqty ) ) {
 					$printzero = true;
-					foreach ( $availprodqty as $requestedqty ) {
-						if ( $requestedqty['productid'] == $item['id'] ) {
-							$this->excel->getActiveSheet()->setCellValue( 'F' . $i, $requestedqty['quantity'] );
-
-							$printzero = false;
-						}
-					}
+                                        foreach ($availprodqty as $requestedqty) {
+                                                             $getAllDispatchedQtyAry = $this->Order_Model->getAllDispatchedQty($requestedqty['franchiseeid'],$requestedqty['productid']);
+                                                         
+                                                           if ( $requestedqty['productid'] == $item['id'] ) {
+                                                              $qty = $requestedqty['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];  
+                                                       $this->excel->getActiveSheet()->setCellValue( 'F' . $i, $qty);
+                                                        $printzero = false;
+                                                                
+                                                            }
+                                                        }
+                                      
 					if ( $printzero ) {
 						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, 0 );
 
