@@ -143,7 +143,7 @@
                 <?php
                         if(!empty($validPendingOrdersDetailsAray) || !empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
                         if(!empty($validPendingOrdersDetailsAray)) 
-                        {
+                        { 
                            ?>      
                   
                     <div class="table-responsive">

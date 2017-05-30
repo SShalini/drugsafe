@@ -154,6 +154,12 @@
                                                         $i++;
                                                     $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
                                                     $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['szProductCategory'], $validPendingOrderFrDetailsData['productid']);
+                                                
+                                                    $prodqtyarr = $this->Order_Model->getTotalFrOrderdqty($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['productid']);
+                                                    $getAllDispatchedQtyAry = $this->Order_Model->getAllDispatchedQty($validPendingOrderFrDetailsData['franchiseeid'],$validPendingOrderFrDetailsData['productid']);
+                                                     
+                                                    $qty = $prodqtyarr[0]['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];
+                                                    if($qty!='0'){
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $i; ?> </td>
@@ -182,13 +188,21 @@
                                                         } ?>
 
                                                         <td>  <?php
-                                                            $prodqtyarr = $this->Order_Model->getTotalFrOrderdqty($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['productid']);
-                                                            //echo $validPendingOrderFrDetailsData['quantity'] ;
-                                                            echo $prodqtyarr[0]['quantity']; ?> </td>
+                                                            
+                                                            if(!empty($getAllDispatchedQtyAry))
+                                                            {  
+                                                             $qty = $prodqtyarr[0]['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];  
+                                                            echo $qty;
+                                                            } else {
+                                                            echo $prodqtyarr[0]['quantity'];    
+                                                            }
+                                                            
+                                                            ?> </td>
 
 
                                                     </tr>
                                                     <?php
+                                                    }
                                                     array_push($checkarr, $validPendingOrderFrDetailsData['productid']);
                                                 }
                                               }

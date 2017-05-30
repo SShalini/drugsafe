@@ -1256,7 +1256,7 @@ class Reporting_Controller extends CI_Controller {
 		$prodCategory = $this->session->userdata( 'prodCategory' );
 
 
-		$allReqOrderAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf( $productCode, $prodCategory );
+		$validPendingOrderFrDetailsAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf( $productCode, $prodCategory );
 
 
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
@@ -1272,18 +1272,25 @@ class Reporting_Controller extends CI_Controller {
                                        
                                    
                                     </tr>';
-		if ( $allReqOrderAray ) {
-
-			$i = 0;
-			foreach ( $allReqOrderAray as $allReqOrderData ) {
-				$i ++;
-
-				$productcatAry                    = $this->Order_Model->getCategoryDetailsById( trim( $allReqOrderData['szProductCategory'] ) );
-				$validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid( $allReqOrderData['franchiseeid'], $allReqOrderData['szProductCategory'], $allReqOrderData['productid'] );
-				$html                             .= '<tr>
+		if ( $validPendingOrderFrDetailsAray ) {
+                               $i = 0;
+                                     $checkarr = array();
+                                                foreach($validPendingOrderFrDetailsAray as $validPendingOrderFrDetailsData) {
+                                                    if (!in_array($validPendingOrderFrDetailsData['productid'], $checkarr))
+                                                    {
+                                                        $i++;
+                                                    $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
+                                                    $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['szProductCategory'], $validPendingOrderFrDetailsData['productid']);
+                                                
+                                                    $prodqtyarr = $this->Order_Model->getTotalFrOrderdqty($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['productid']);
+                                                    $getAllDispatchedQtyAry = $this->Order_Model->getAllDispatchedQty($validPendingOrderFrDetailsData['franchiseeid'],$validPendingOrderFrDetailsData['productid']);
+                                                     
+                                                    $qty = $prodqtyarr[0]['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];
+                                                    if($qty!='0'){
+				$html  .= '<tr>
                                             <td> ' . $i . ' </td>
                                             <td> ' . $productcatAry['szName'] . '</td>
-                                            <td> ' . $allReqOrderData['szProductCode'] . ' </td>';
+                                            <td> ' . $validPendingOrderFrDetailsData['szProductCode'] . ' </td>';
 
 				if ( ! empty( $validPendingOrdersQtyDetailsAray ) ) {
 					$printzero = true;
@@ -1299,14 +1306,21 @@ class Reporting_Controller extends CI_Controller {
 				} else {
 					$html .= '<td>0</td>';
 				}
+                                 if(!empty($getAllDispatchedQtyAry))
+                                {  
+                                 $qty = $prodqtyarr[0]['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];  
+                             $html .= '<td>' . $qty . ' </td>';
+                                } else {
+                                 $html .= '<td>' .  $prodqtyarr[0]['quantity'] . ' </td>';   
+                                 }
 
-				$html .= '<td>' . $allReqOrderData['quantity'] . ' </td>
-                                             
-                                                    
-                                
-                                        </tr>';
+				$html .=
+                                     '</tr>';
+                                             }
+                                                    array_push($checkarr, $validPendingOrderFrDetailsData['productid']);
+                                                }
+                                              }
 			}
-		}
 
 		$html .= '
                             </table>
@@ -1373,15 +1387,24 @@ class Reporting_Controller extends CI_Controller {
 		$productCode  = $this->session->userdata( 'productCode' );
 		$prodCategory = $this->session->userdata( 'prodCategory' );
 
-		$allReqOrderAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf( $productCode, $prodCategory );
+		$validPendingOrderFrDetailsAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf( $productCode, $prodCategory );
 
-		if ( ! empty( $allReqOrderAray ) ) {
+		if ( $validPendingOrderFrDetailsAray ) {
 			$i = 2;
 			$x = 0;
-			foreach ( $allReqOrderAray as $item ) {
-				$productcatAry                    = $this->Order_Model->getCategoryDetailsById( trim( $item['szProductCategory'] ) );
-				$validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid( $item['franchiseeid'], $item['szProductCategory'], $item['productid'] );
+			 $checkarr = array();
+                            foreach($validPendingOrderFrDetailsAray as $validPendingOrderFrDetailsData) {
+                                if (!in_array($validPendingOrderFrDetailsData['productid'], $checkarr))
+                                {
+                                    $i++;
+                                $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
+                                $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['szProductCategory'], $validPendingOrderFrDetailsData['productid']);
 
+                                $prodqtyarr = $this->Order_Model->getTotalFrOrderdqty($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['productid']);
+                                $getAllDispatchedQtyAry = $this->Order_Model->getAllDispatchedQty($validPendingOrderFrDetailsData['franchiseeid'],$validPendingOrderFrDetailsData['productid']);
+
+                                $qty = $prodqtyarr[0]['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];
+                                if($qty!='0'){
 
 				if ( ! empty( $validPendingOrdersQtyDetailsAray ) ) {
 					$printzero = true;
@@ -1396,14 +1419,20 @@ class Reporting_Controller extends CI_Controller {
 				} else {
 					$val = '0';
 				}
-
+                             if(!empty($getAllDispatchedQtyAry))
+                                {  
+                                 $qty = $prodqtyarr[0]['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];  
+                                $item =  $qty;
+                                } else {
+                                $item =  $prodqtyarr[0]['quantity'];    
+                                }
 
 				$x ++;
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $productcatAry['szName'] );
-				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $item['szProductCode'] );
+				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $validPendingOrderFrDetailsData['szProductCode'] );
 				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, $val );
-				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, $item['quantity'] );
+				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, $item);
 
 
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
@@ -1411,10 +1440,11 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
-
-				$i ++;
-			}
-		}
+ }
+                                                    array_push($checkarr, $validPendingOrderFrDetailsData['productid']);
+                                                }
+                                              }
+			 }
 
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name

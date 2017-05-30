@@ -679,7 +679,7 @@ class Order_Model extends Error_Model {
      public function getallValidPendingOrderFrDetails($searchAry=array())
     {
          $franchiseeid = $_SESSION['drugsafe_user']['id'];
-         $searchQuery = "validorder LIKE '%1%'AND franchiseeid LIKE '%$franchiseeid%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
+         $searchQuery = "validorder LIKE '%1%'AND franchiseeid LIKE '%$franchiseeid%' AND status != '3'";
          if(!empty($searchAry))
         {  
              foreach($searchAry as $key=>$searchData)
@@ -731,14 +731,14 @@ class Order_Model extends Error_Model {
         {
         $franchiseeid = $_SESSION['drugsafe_user']['id'];
         if(!empty($prodCategory)){
-               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
+               $searchq = " szProductCategory LIKE '%$prodCategory%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' ";
             }
             if(!empty($productCode)){
-               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
+               $searchq = "productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' ";
             }
             if(!empty($prodCategory) && !empty($productCode)){
                 
-                $searchq = "szProductCategory LIKE '%$prodCategory%' AND productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3' AND status != '2' AND dispatched LIKE '%0%' ";
+                $searchq = "szProductCategory LIKE '%$prodCategory%' AND productid LIKE '%$productCode%' AND franchiseeid LIKE '%$franchiseeid%' AND validorder LIKE '%1%' AND status != '3'";
              
             }
             $this->db->where($searchq);
@@ -1003,7 +1003,8 @@ class Order_Model extends Error_Model {
         }
 
         function getTotalFrOrderdqty($franchiseeid,$prodid){
-            $whereAry = 'ord.franchiseeid =' . (int)$franchiseeid .' AND orddet.productid = '.(int)$prodid.' AND orddet.dispatched = 0' ;
+            $whereAry = 'ord.franchiseeid =' . (int)$franchiseeid .' AND orddet.productid = '.(int)$prodid ;
+             //$whereAry = 'ord.franchiseeid =' . (int)$franchiseeid .' AND orddet.productid = '.(int)$prodid.' AND orddet.dispatched = 0' ;
             $query = $this->db->select('SUM(orddet.quantity) as quantity')
                 ->from(__DBC_SCHEMATA_ORDER_DETAILS__. ' as orddet')
                 ->join(__DBC_SCHEMATA_ORDER__ . ' as ord', 'ord.id = orddet.orderid')
