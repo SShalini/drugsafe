@@ -316,7 +316,7 @@
                      
                       
                      <?php
-                     $fromEndDate = form_error('dtEnd');
+                     $fromEndDate = form_error('szSearch2');
                     if(($_POST['szSearch1']!='') && ($_POST['szSearch2']!='') && (empty($fromEndDate)))
                     {
                     if (!empty($recordAry)) {
