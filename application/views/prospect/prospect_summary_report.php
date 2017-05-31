@@ -86,7 +86,7 @@
                               <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
                          <div class=" row">
                               <?php  if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){     ?>
-                                   <div class="clienttypeselect col-md-3">
+                           <div class="clienttypeselect col-md-3">
                        
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchfr']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearchfr" id="szSearchfr" onblur="remove_formError(this.id,'true')" onchange="getBussinessListByFrId(this.value);">
@@ -131,8 +131,7 @@
                                     </div>
                                 </div> 
                                     <?php } if($_SESSION['drugsafe_user']['iRole']==2){?> 
-                          <div class="clienttypeselect col-md-3">
-                       
+                          <div class="clienttypeselect padding col-md-3">
                             <select class="form-control custom-select" name="szSearchBussName" id="szSearchBussName" onchange="remove_formError(this.id,'true')">
                                <option value="">Business Name</option>
                                   
@@ -190,9 +189,12 @@
                           
                         if(!empty($recordAry))
                         { 
-                    
+                    if($_SESSION['drugsafe_user']['iRole']==2){
                             ?>
-                             <div class="row">
+                        <div class="row table_align">
+                            <?php } else { ?> 
+                         <div class="row">
+                              <?php } ?>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>

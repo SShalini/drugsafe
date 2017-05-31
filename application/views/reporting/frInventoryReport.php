@@ -56,7 +56,7 @@
            
                              if(!empty($validPendingOrderFrDetailsAray)) 
                         {      
-                           
+                          
                             ?>
                         
                             <div class="actions">
@@ -121,7 +121,7 @@
                 <?php
                        if(!empty($_POST['szSearch2'])){
                         if(!empty($validPendingOrderFrDetailsAray)) 
-                        {
+                        { 
                            ?>      
                     <div class="row">
                     <div class="table-responsive">

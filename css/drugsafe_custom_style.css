@@ -146,5 +146,18 @@ margin-bottom: 10px;
 text-align: center;
 margin-top: 17px;
  margin-bottom: 20px;
+ 
+}
+.totalsearchalign{
+margin-bottom: -5px;
+padding: 4px 0px; 
 }
 
+.table_align {
+    
+    margin-top: 20px;
+}
+.padding{
+  
+margin-left: -14px;
+}

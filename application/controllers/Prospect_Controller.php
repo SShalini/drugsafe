@@ -1237,8 +1237,8 @@ public function deleteProspectConfirmation()
            $count = $this->Admin_Model->getnotification();
            $searchAry = $_POST;
            $franchiseeid = $_POST['szSearch3'];
-           $startDate = $_POST['szSearch1'];
-           $endDate = $_POST['szSearch2'];
+           $dtStart = $this->Prospect_Model->getSqlFormattedDate($_POST['szSearch1']);
+           $dtEnd = $this->Prospect_Model->getSqlFormattedDate($_POST['szSearch2']);
            $status = $_POST['szSearch4'];
             $szBusinessName = $_POST['szSearchBussName'];
              if($franchiseeid){
@@ -1247,13 +1247,19 @@ public function deleteProspectConfirmation()
             if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeid = $_SESSION['drugsafe_user']['id'];
              }
-           
+          
            if($_POST){
-             $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status,$szBusinessName);   
+             $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeid,$dtStart,$dtEnd,$status,$szBusinessName);   
            }
+          
             $this->load->library('form_validation');
             $this->form_validation->set_rules('szSearch1', 'Start Date ', 'required');
-            $this->form_validation->set_rules('szSearch2', 'End Date ', 'required');
+            if(!empty($_POST['szSearch2'])){
+                 $this->form_validation->set_rules('szSearch2', 'End Date ', 'required|callback_endDate_check');    
+                }
+                else{
+                 $this->form_validation->set_rules( 'szSearch2', 'End Date', 'required' );   
+                }
             $this->form_validation->set_rules('szSearch3', 'Franchisee Name ', 'required');
             
             
@@ -1292,6 +1298,23 @@ public function deleteProspectConfirmation()
             $this->load->view('layout/admin_footer'); 
     }           
     }
+     function endDate_check()
+        {
+          $searchAry = $_POST;
+          $dtStart = $this->Prospect_Model->getSqlFormattedDate($searchAry['szSearch1']);
+          $dtEnd = $this->Prospect_Model->getSqlFormattedDate($searchAry['szSearch2']);
+          
+          
+          if(($dtStart)> ($dtEnd))
+          {
+              $this->form_validation->set_message('endDate_check', 'End Date should be greater than Start Date.');
+               return false;
+          }
+          else{
+               return true;
+          }
+          
+       }
       function View_pdf_Sales_Crm_Detailed_Report()
         {
         $startDate = $this->input->post('startDate');
@@ -1333,6 +1356,8 @@ public function deleteProspectConfirmation()
        $status = $this->session->userdata('status');
        $startDate = $this->session->userdata('startDate');
        $endDate = $this->session->userdata('endDate');
+       $dtStart = $this->Prospect_Model->getSqlFormattedDate($startDate);
+       $dtEnd = $this->Prospect_Model->getSqlFormattedDate($endDate);
         $szBusinessName = $this->session->userdata('szBusinessName');
          if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeId = $_SESSION['drugsafe_user']['id'];
@@ -1354,7 +1379,7 @@ public function deleteProspectConfirmation()
                                         <th style="width:170px"> <b>Status Updated On</b> </th>
                                    
                                    </tr>';
-         $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeId,$startDate,$endDate,$status,$szBusinessName);   
+         $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeId,$dtStart,$dtEnd,$status,$szBusinessName);   
         if ($recordAry) {
             $i = 0;
             foreach ($recordAry as $recordData) {
@@ -1455,11 +1480,14 @@ public function deleteProspectConfirmation()
         $status = $this->session->userdata('status');
         $startDate = $this->session->userdata('startDate');
         $endDate = $this->session->userdata('endDate');
+        
+       $dtStart = $this->Prospect_Model->getSqlFormattedDate($startDate);
+       $dtEnd = $this->Prospect_Model->getSqlFormattedDate($endDate);
         $szBusinessName = $this->session->userdata('szBusinessName');
          if($_SESSION['drugsafe_user']['iRole']==2){ 
              $franchiseeId = $_SESSION['drugsafe_user']['id'];
              }
-          $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeId,$startDate,$endDate,$status,$szBusinessName);   
+          $recordAry = $this->Prospect_Model->getstatusDetailsforDetailedReport($franchiseeId,$dtStart,$dtEnd,$status,$szBusinessName);   
         $x=0;
          if ($recordAry) {
            

@@ -247,13 +247,18 @@
                                                </span>
                                             </div>
                                             <!-- /input-group -->
-                                             <?php
+                                              <?php
                                             if (form_error('szSearch5')) {
-                                               
                                                 ?>
                                                 <span class="help-block pull-left">
                                                 <span><?php echo form_error('szSearch5'); ?></span>
                                                 </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch5'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch5']; ?>
+                                            </span>
+                                            <?php } ?>
                                         </div> 
                                                </div>
                               
@@ -294,9 +299,12 @@
                             </form>
                         </div>
                     </div>
-                    <?php
-                    if ((!empty($validOrdersDetailsAray)) || (!empty($_POST['szSearch2'])) || (!empty($_POST['szSearch1'])) || (!empty($_POST['szSearch4'])) || (!empty($_POST['szSearch5']))|| (!empty($arErrorMessages['szSearch5'])) || (!empty($arErrorMessages['szSearch5']))) {
+                     <?php
+                    if(($_POST['szSearch4']!='') && ($_POST['szSearch5']!=''))
+                    {
+                    if (!empty($validOrdersDetailsAray)) {
                     ?>
+                   
                     <div class="portlet-body alert">
                         <div class="row">
                             <div>
@@ -451,8 +459,11 @@
                             </div>
                         </div>
                     </div>
+                     <?php }
+                    }
+                     ?>
                 </div>
-                <?php }?>
+               
 
             </div>
 

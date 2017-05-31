@@ -313,15 +313,14 @@
                       </div>     
                 <?php }  ?> 
                            </form>
-                         
+                     
                       
-                          <?php
-                    if ((!empty($recordAry)) || (!empty($_POST['szSearch1'])) || (!empty($_POST['szSearch2'])) || (!empty($_POST['szSearch2'])) || (!empty($_POST['szSearch4']))|| (!empty($arErrorMessages['szSearch1'])) || (!empty($arErrorMessages['szSearch2']))|| (!empty($arErrorMessages['szSearch3']))) {
-                   
-                        if(!empty($recordAry))
-                        { 
-                    
-                            ?>
+                     <?php
+                     
+                    if(($_POST['szSearch1']!='') && ($_POST['szSearch2']!='') && (empty(form_error('szSearch2'))))
+                    {
+                    if (!empty($recordAry)) {
+                    ?> 
                             
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
@@ -429,7 +428,15 @@
                         }
                         else
                         {
+                        if(($_SESSION['drugsafe_user']['iRole']==2)){
+                          
                             echo "Not Found";
+                           }
+                           else{
+                                if(empty(form_error('szSearch3'))){ 
+                                  echo "Not Found";   
+                                }
+                           }
                         }
                         }
                         ?>

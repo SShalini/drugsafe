@@ -1440,7 +1440,7 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
- }
+                                    }
                                                     array_push($checkarr, $validPendingOrderFrDetailsData['productid']);
                                                 }
                                               }
@@ -1775,7 +1775,7 @@ class Reporting_Controller extends CI_Controller {
 				if ( $_SESSION['drugsafe_user']['iRole'] == 1 ) {
 					$html .= '  <td> ' . $franchiseeDetArr1['szName'] . '</td>';
 				}
-				$html .= '<td> ' . date( 'd M Y', strtotime( $reqOrderData['createdon'] ) ) . ' at ' . date( 'h:i A', strtotime( $reqOrderData['createdon'] ) ) . ' </td>
+				$html .= '<td> ' . date( 'd M Y', strtotime( $reqOrderData['createdon'] ) ) . ' at '  .  date(' h:i A', strtotime( $reqOrderData['createdon'] ) ) . ' </td>
                                                <td>#' . sprintf( __FORMAT_NUMBER__, $reqOrderData['orderid'] ) . ' </td>
                                                <td>' . $status . ' </td>                                              
                                                <td>' . $reqOrderData['totalproducts'] . ' </td>
@@ -2365,7 +2365,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->library( 'form_validation' );
 		$this->form_validation->set_rules( 'szFranchisee', 'Franchisee ', 'required' );
 		$this->form_validation->set_rules( 'dtStart', 'Start Revenue date ', 'required' );
-		$this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );
+                if(!empty($_POST['dtEnd'])){
+                 $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required|callback_endRevenueDate_check');    
+                }
+                else{
+                 $this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );   
+                }
 		if ( $_POST['dtStart'] != '' && $_POST['dtEnd'] != '' && $_POST['szFranchisee'] != '' ) {
 			$searchAry = $_POST;
 
@@ -2406,7 +2411,23 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'layout/admin_footer' );
 		}
 	}
-
+  function endRevenueDate_check()
+        {
+          $searchAry = $_POST;
+          $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+          $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+          
+          
+          if(($dtStart)> ($dtEnd))
+          {
+              $this->form_validation->set_message('endRevenueDate_check', 'End Revenue date should be greater than Start Revenue date.');
+               return false;
+          }
+          else{
+               return true;
+          }
+          
+       }
 	public function franchisee_revenue_generate() {
 		$count         = $this->Admin_Model->getnotification();
 		$is_user_login = is_user_login( $this );
@@ -2421,7 +2442,13 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->library( 'form_validation' );
 		$this->form_validation->set_rules( 'szFranchisee', 'Franchisee ', 'required' );
 		$this->form_validation->set_rules( 'dtStart', 'Start Revenue date ', 'required' );
-		$this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );
+                if(!empty($_POST['dtEnd'])){
+                 $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required|callback_endRevenueDate_check');    
+                }
+                else{
+                 $this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );   
+                }
+		
 		if ( $_POST['dtStart'] != '' && $_POST['dtEnd'] != '' && $idfranchisee != '' ) {
 			$searchAry                   = $_POST;
 			$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $idfranchisee );
@@ -2484,7 +2511,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->library( 'form_validation' );
 
 		$this->form_validation->set_rules( 'dtStart', 'Start Revenue date ', 'required' );
-		$this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );
+		 if(!empty($_POST['dtEnd'])){
+                 $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required|callback_endRevenueDate_check');    
+                }
+                else{
+                 $this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );   
+                }
 
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
@@ -3076,7 +3108,13 @@ class Reporting_Controller extends CI_Controller {
 		$allIndustry = $this->Admin_Model->viewAllIndustryList();
 		$this->load->library( 'form_validation' );
 		$this->form_validation->set_rules( 'dtStart', 'Start Industry date ', 'required' );
-		$this->form_validation->set_rules( 'dtEnd', 'End Industry date', 'required' );
+                if(!empty($_POST['dtEnd'])){
+                $this->form_validation->set_rules( 'dtEnd', 'End Industry date', 'required|callback_endDate_check' );    
+                }
+                else{
+                 $this->form_validation->set_rules( 'dtEnd', 'End Industry date', 'required' );   
+                }
+		
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
 			$data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
@@ -3110,7 +3148,23 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'layout/admin_footer' );
 		}
 	}
-
+      function endDate_check()
+        {
+          $searchAry = $_POST;
+          $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+          $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+          
+          
+          if(($dtStart)> ($dtEnd))
+          {
+              $this->form_validation->set_message('endDate_check', 'End Industry date should be greater than Start Industry date.');
+               return false;
+          }
+          else{
+               return true;
+          }
+          
+       }
 	function industryReportPdf() {
 		$dtStart    = $this->input->post( 'dtStart' );
 		$dtEnd      = $this->input->post( 'dtEnd' );
@@ -3735,7 +3789,12 @@ class Reporting_Controller extends CI_Controller {
 
 		$this->form_validation->set_rules( 'szSearchClRecord2', 'Franchisee ', 'required' );
 		$this->form_validation->set_rules( 'dtStart', 'Start Revenue date ', 'required' );
-		$this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );
+		 if(!empty($_POST['dtEnd'])){
+                 $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required|callback_endRevenueDate_check');    
+                }
+                else{
+                 $this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );   
+                }
 
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {

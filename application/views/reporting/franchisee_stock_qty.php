@@ -128,11 +128,11 @@
                  
             </form>  
                       </div>
-                <?php
-                        if(!empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
-                        if(!empty($viewFranchiseeInventoryListAry)) 
-                        {
-                          ?>      
+               <?php
+                    if($_POST['szSearch2']!='')
+                    {
+                    if (!empty($viewFranchiseeInventoryListAry)) {
+                    ?>       
                    
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-striped">

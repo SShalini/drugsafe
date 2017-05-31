@@ -239,7 +239,7 @@
                     </form>
 
                     <?php
-                    if (!$err && !empty($compareresultarr)) {
+                    if ((!$err) && (!empty($compareresultarr))) {
                         ?>
                         <div class="portlet-body alert">
                             <div class="row">

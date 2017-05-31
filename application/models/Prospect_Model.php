@@ -808,10 +808,9 @@ class Prospect_Model extends Error_Model
     }
      function getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status='0',$szBusinessName='', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {  
-           $dtStart = $this->getSqlFormattedDate($startDate);
-           $dtEnd = $this->getSqlFormattedDate($endDate);
+       
           
-           $array =__DBC_SCHEMATA_PROSPECT__ . '.iFranchiseeId = ' . (int)$franchiseeid . ' AND '. __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn >= '.'"'.$dtStart .'00:00:00 " AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn <= '.'"'.$dtEnd .' 23:59:59"'. (!empty($szBusinessName) ? ' AND ' . __DBC_SCHEMATA_PROSPECT__ . '.szBusinessName = ' .'"'.$szBusinessName.'"':'').(!empty($status) ? ' AND ' . __DBC_SCHEMATA_STATUS__ . '.status = ' .(int)$status:'');
+           $array =__DBC_SCHEMATA_PROSPECT__ . '.iFranchiseeId = ' . (int)$franchiseeid . ' AND '. __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn >= '.'"'.$startDate .'00:00:00 " AND ' . __DBC_SCHEMATA_STATUS__ . '.dtUpdatedOn <= '.'"'.$endDate .' 23:59:59"'. (!empty($szBusinessName) ? ' AND ' . __DBC_SCHEMATA_PROSPECT__ . '.szBusinessName = ' .'"'.$szBusinessName.'"':'').(!empty($status) ? ' AND ' . __DBC_SCHEMATA_STATUS__ . '.status = ' .(int)$status:'');
           
            $this->db->select('tbl_prospect_status.status,iFranchiseeId,tbl_prospect_status.dtUpdatedOn,szName,szBusinessName,szEmail,szContactNumber');
            $this->db->from('tbl_prospect_status');

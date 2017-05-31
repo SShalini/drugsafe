@@ -117,7 +117,13 @@ class Form_Management_Controller extends CI_Controller
         }
         $this->load->library('form_validation');
         $this->form_validation->set_rules('dtStart', 'Test Date From ', 'required');
-        $this->form_validation->set_rules('dtEnd', 'Test Date To', 'required');
+          if(!empty($_POST['dtEnd'])){
+               $this->form_validation->set_rules('dtEnd', 'Test Date To', 'required|callback_endDate_check');
+                }
+                else{
+                 $this->form_validation->set_rules( 'dtEnd', 'Test Date To', 'required' );   
+                }
+      
         $this->form_validation->set_rules('szSearch1', 'Franchisee Name', 'required');
         $this->form_validation->set_rules('szSearch2', 'Client Name', 'required');
         $this->form_validation->set_rules('szSearch3', 'Company Name/site', 'required');
@@ -168,7 +174,23 @@ class Form_Management_Controller extends CI_Controller
             $this->load->view('layout/admin_footer');
         }
     }
-
+function endDate_check()
+        {
+          $searchAry = $_POST;
+          $dtStart = $this->Order_Model->getSqlFormattedDate($searchAry['dtStart']);
+          $dtEnd = $this->Order_Model->getSqlFormattedDate($searchAry['dtEnd']);
+          
+          
+          if(($dtStart)> ($dtEnd))
+          {
+              $this->form_validation->set_message('endDate_check', 'Test Date To should be greater than Test Date From.');
+               return false;
+          }
+          else{
+               return true;
+          }
+          
+       }
     function sosFormsdata()
     {
         $idsite = $this->input->post('idsite');

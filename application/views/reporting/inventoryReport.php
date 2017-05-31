@@ -140,11 +140,11 @@
                  
             </form>  
                       </div>
-                <?php
-                        if(!empty($validPendingOrdersDetailsAray) || !empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) ){
-                        if(!empty($validPendingOrdersDetailsAray)) 
-                        { 
-                           ?>      
+                 <?php
+                    if(($_POST['szSearch2']!='') && ($_POST['szSearch1']!=''))
+                    {
+                    if (!empty($validPendingOrdersDetailsAray)) {
+                    ?>     
                   
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered table-striped">

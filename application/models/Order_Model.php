@@ -323,7 +323,7 @@ class Order_Model extends Error_Model {
                             {
                                 if(strtotime($startcreatedon) > strtotime($endcreatedon))
                                 {
-                                    $this->addError("szSearch5","To Date should be greater than From Date.");
+                                    $this->addError("szSearch5","End Order date should be greater than Start Order date.");
                                     return false;
                                 }
                             }

@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     <?php
-                    if ($_POST['dtStart'] != '' && $_POST['dtEnd'] != '')
+                    if (($_POST['dtStart'] != '') && ($_POST['dtEnd'] != '') && (empty(form_error('dtEnd'))))
                     {
 
                     if (!empty($getSosAndClientDetils)) {

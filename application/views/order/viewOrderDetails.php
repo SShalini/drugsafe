@@ -162,8 +162,10 @@
                     </div>
                         </div>
                     <?php
-                    if (!empty($validOrdersDetailsAray) || !empty($_POST['szSearch2']) || !empty($_POST['szSearch1']) || !empty($_POST['szSearch4']) || !empty($_POST['szSearch5'])) {
-                        ?>
+                    if(($_POST['szSearch4']!='') && ($_POST['szSearch5']!=''))
+                    {
+                    if (!empty($validOrdersDetailsAray)) {
+                    ?>
                         <div class="portlet-body alert">
                             <div class="row">
                                 <div>
@@ -381,8 +383,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php }?>
+                       
+                    <?php } }?>
+                     </div>
                 </div>
             </div>
         </div>

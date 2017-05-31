@@ -241,7 +241,7 @@
                 </form>
                    
                     <?php 
-                    if(!empty($_POST))
+                    if(($_POST['szSearch1']!='') && ($_POST['szSearch2']!='') && ($_POST['szSearch3']!='')&& ($_POST['dtStart']!='') && ($_POST['dtEnd']!='') && (empty(form_error('dtEnd'))))
                     {
                         if (!empty($TestList)) { ?>
                     <div class="portlet-body alert">
