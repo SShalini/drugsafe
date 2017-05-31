@@ -83,7 +83,7 @@
                              
                            </form>
                           </div>
-                        <div class="row search">
+                        <div class="row search_align">
                             
                             <?php if(!empty($_POST['szSearchFrRecord'])){
                                     if(empty($clientAray)){echo "Not Found";}}?>
