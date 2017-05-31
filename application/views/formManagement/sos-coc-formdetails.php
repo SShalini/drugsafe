@@ -240,8 +240,9 @@
              
                 </form>
                    
-                    <?php 
-                    if(($_POST['szSearch1']!='') && ($_POST['szSearch2']!='') && ($_POST['szSearch3']!='')&& ($_POST['dtStart']!='') && ($_POST['dtEnd']!='') && (empty(form_error('dtEnd'))))
+                    <?php
+                    $fromEndDate = form_error('dtEnd');
+                    if(($_POST['szSearch1']!='') && ($_POST['szSearch2']!='') && ($_POST['szSearch3']!='')&& ($_POST['dtStart']!='') && ($_POST['dtEnd']!='') && (empty($fromEndDate)))
                     {
                         if (!empty($TestList)) { ?>
                     <div class="portlet-body alert">

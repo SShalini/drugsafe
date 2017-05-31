@@ -319,8 +319,6 @@ if (!empty($getSosAndClientDetils)) {
                             }
                         }
                     });
-                }else{
-                    i++;
                 }
                 if(hideA){
                     $('#alcohal').hide();
@@ -427,9 +425,6 @@ if (!empty($getSosAndClientDetils)) {
                         }
                     });
                 }
-                else {
-                    i++;
-                }
 
                 if(hideU){
                     $('#Urine').hide();
@@ -533,8 +528,6 @@ if (!empty($getSosAndClientDetils)) {
                             }
                         }
                     });
-                }else {
-                    i++;
                 }
                 if(hideO){
                     $('#oral').hide();

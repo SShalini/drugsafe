@@ -487,7 +487,7 @@
                                     <?php
                                     foreach ($clientlistArr as $clientIdList) {
                                         $selected = ($clientIdList['szName'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                        echo '<option value="' . $clientIdList['szName'] . '"' . $selected . ' >' . $clientIdList['szName'] . '</option>';
+                                        echo '<option value="' . $clientIdList['szName'] . '" ' . $selected . ' >' . $clientIdList['szName'] . '</option>';
                                     }
                                     ?>
                                 </select>

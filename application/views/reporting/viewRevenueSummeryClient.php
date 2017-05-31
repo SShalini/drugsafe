@@ -245,7 +245,8 @@
                        </div>
                     </div>
                     <?php
-                    if(($_POST['dtStart']!='') && ($_POST['dtEnd']!='') && ($onlyfranchisee>0) && (empty(form_error('dtEnd'))))
+                    $fromEndDate = form_error('dtEnd');
+                    if(($_POST['dtStart']!='') && ($_POST['dtEnd']!='') && ($onlyfranchisee>0) && (empty($fromEndDate)))
                     {
                     if (!empty($getManualCalcStartToEndDate)) {
                         
