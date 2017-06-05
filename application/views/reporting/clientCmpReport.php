@@ -64,8 +64,9 @@
                         <?php } ?>
                     </div>
 
-
-                    <form name="orderSearchForm" id="orderSearchForm"
+    
+                    <div class="  row">
+                    <form class="search-bar" name="orderSearchForm" id="orderSearchForm"
                           action="<?= __BASE_URL__ ?>/reporting/clientcomparisonReport" method="post">
                         <div class="row">
                         <?php if(($_SESSION['drugsafe_user']['iRole'] == 1)||($_SESSION['drugsafe_user']['iRole'] == 5)){?>
@@ -143,7 +144,6 @@
                             </div>
                           
                             <div class="clienttypeselect col-md-3">
-
                                 <div class="form-group ">
                                     <div id="sitename">
                                         <select class="form-control custom-select" name="szSearch3" id="szSearch3"
@@ -166,9 +166,9 @@
                                         </span><?php } ?>
                                 </div>
                             </div>
-
+                   </div>
                         <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
-                        </div>
+                       
                         <div class="row">
                             <?php }else{?>
                               
@@ -237,7 +237,7 @@
 
                         </div>
                     </form>
-
+                        </div>
                     <?php
                     if ((!$err) && (!empty($compareresultarr))) {
                         ?>

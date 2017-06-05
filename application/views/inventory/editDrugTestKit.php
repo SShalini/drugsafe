@@ -5,7 +5,11 @@
                 <div class="col-md-12">
                      <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                            <a href="<?php echo __BASE_URL__;?>/inventory/drugtestkitlist"><?php echo set_value('productData[szProductCode]'); ?></a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>

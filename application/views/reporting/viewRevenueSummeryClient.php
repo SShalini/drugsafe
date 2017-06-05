@@ -95,6 +95,7 @@
                                      <div class=" col-md-3 clienttypeselect">
                                
                                     <div id='szClient'>
+                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
                                         <select class="form-control custom-select" name="szSearchClRecord1"
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Client Name</option>
@@ -106,7 +107,8 @@
                                             }
                                             ?>
                                         </select>
-                                    </div>
+                                     </div>
+                                         </div>
                                 </div>
                                     <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['dtStart']) != '') { ?>has-error<?php } ?>">
@@ -283,6 +285,7 @@
                                                     <th>
                                                         Client Code 
                                                     </th>
+                                                    <th> Proforma Invoice Date</th>
                                                     <th>
                                                         Revenue EXL GST
                                                     </th>
@@ -303,7 +306,7 @@
                                                 $totalNetProfit='';
 						  foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
-                                                       
+                                                
                               $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                               $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
                               $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($getClientDetails['id']);
@@ -389,6 +392,7 @@
                                                         <td>
                                                          <?php echo $userDataAry['userCode'];?>
                                                         </td>
+                                                        <td><?php echo ((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A');?> </td>
                                                         <td>
                                                          $<?php  echo ($discountpercent>0?number_format($totalafterdiscount, 2, '.', ','):number_format($totalinvoiceAmt, 2, '.', ',')); ?>
                                                         </td>
@@ -406,6 +410,7 @@
                                                 ?>											   
                                                   <tr>
                                                    <td></td>
+                                                    <td></td>
                                                    <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)) {?>
                                                     <td></td>
                                                    <?php } ?>
@@ -475,6 +480,9 @@
                                                     Client Code
                                                 </th>
                                                 <th>
+                                                   Proforma Invoice Date 
+                                                </th>
+                                                <th>
                                                     Revenue EXL GST
                                                 </th>
                                                 <th>
@@ -495,6 +503,7 @@
                                             $i = 1;
                                             foreach($allfranchisee as $allfranchiseeData)
                                             {
+                                               
                                                 $clientArr = $this->Webservices_Model->getclientdetails($allfranchiseeData['franchiseeId']);
                                                 if(!empty($clientArr)) {
                                                     foreach ($clientArr as $clientData) {
@@ -595,6 +604,9 @@
                                                                 <?php echo $userDataAry['userCode']; ?>
                                                             </td>
                                                             <td>
+                                                                <?php echo date('d M Y',strtotime($getManualCalcData['dtCreatedOn'])) . ' at '.date('h:i A',strtotime($getManualCalcData['dtCreatedOn']));?>
+                                                            </td>
+                                                            <td>
                                                                 $<?php
                                                                 $totalRevenu = number_format($totalRevenu, 2, '.', '');
                                                                 echo number_format($totalRevenu, 2, '.', ','); ?>
@@ -623,9 +635,9 @@
                                             ?>
                                             <tr>
                                                 <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)) {?>
-                                                    <td colspan="3"></td>
+                                                    <td colspan="4"></td>
                                                 <?php }else{ ?>
-                                                <td colspan="2"></td>
+                                                <td colspan="3"></td>
                                                 <?php } ?>
                                                 <td>
                                                     <b>Total</b>

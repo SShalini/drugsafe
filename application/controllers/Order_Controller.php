@@ -448,11 +448,33 @@ class Order_Controller extends CI_Controller
     }
 
     public function cancelOrderConfirmation()
-    {
+    {    $searchAry['szSearch1'] = $this->input->post('frName');
+         $searchAry['szSearch4'] = $this->input->post('startDate');
+         $searchAry['szSearch5'] = $this->input->post('endDate');
+         $searchAry['szSearch2'] = $this->input->post('orderNo');
+
         $data['mode'] = '__CANCEL_ORDER_CONFIRM_DETAILS_POPUP__';
-        $data['idOrder'] = $this->input->post('idOrder');
-        $this->Order_Model->updateOrderByOrderId($data['idOrder'], 3);
+        $data['idOrder'] = $this->input->post('idOrder'); 
+       if($this->Order_Model->updateOrderByOrderId($data['idOrder'], 3)){
+        
+        $count = $this->Admin_Model->getnotification();
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+        
+            $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+          
         $this->load->view('admin/admin_ajax_functions', $data);
+       }  
     }
 
     public function deliverOrderConfirmation()
@@ -1256,6 +1278,28 @@ if (!empty($totalDispatched)) {
         $freightPrice = $_POST['freightPrice'];
         $dispStat = $this->Order_Model->changesdispatchstatus($ordid,'2',$price,$freightPrice);
         if($dispStat){
+            
+         $searchAry['szSearch1'] = $this->input->post('frName');
+         $searchAry['szSearch4'] = $this->input->post('startDate');
+         $searchAry['szSearch5'] = $this->input->post('endDate');
+         $searchAry['szSearch2'] = $this->input->post('orderNo');
+
+        $count = $this->Admin_Model->getnotification();
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+        
+            $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+          
             $data['mode'] = '__PRODUCT_DISPATCHED_SUCCESSFULLY__';
             $this->load->view('admin/admin_ajax_functions', $data);
             $this->Order_Model->xeroIntigration($ordid);

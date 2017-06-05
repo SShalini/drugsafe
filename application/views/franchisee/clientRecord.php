@@ -52,13 +52,18 @@
                         </li>
                         <?php
                         if (!empty($clientAry)) {
+                       $operation_manager_id = $this->Franchisee_Model->getoperationManagerId($clientAry['0']['franchiseeId']);
+                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operation_manager_id['operationManagerId']);
                             $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $clientAry['0']['franchiseeId']);
                             ?>
-                            <li>
-                                <a onclick=""
-                                   href="javascript:void(0);"><?php echo $franchiseeDetArr1['szName']; ?></a>
-                                <i class="fa fa-circle"></i>
-                            </li>
+                           <li>
+                        <a onclick="viewFranchisee(<?php echo $operation_manager_id['operationManagerId'];?>);" href="javascript:void(0);"><?php echo $franchiseeDetArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
+                        <li>
+                        <a onclick="viewClient(<?php echo $clientAry['0']['franchiseeId'];?>);" href="javascript:void(0);"><?php echo $franchiseeDetArr1['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
 
                         <?php } ?>
                     <?php } ?>
@@ -121,12 +126,12 @@
                     if (($_SESSION['drugsafe_user']['iRole'] == '5')||($_SESSION['drugsafe_user']['iRole'] == '1')) {
                         ?>
                        
-                            <form class="form-horizontal search-bar" id="szSearchClientRecord"
+                            <form class="search-bar" id="szSearchClientRecord"
                                   action="<?= __BASE_URL__ ?>/franchisee/clientRecord" name="szSearchClientRecord"
                                   method="post">
                                 <div class=" row">
                                 <div class=" col-md-3 search">
-
+            <div class="form-group <?php if (!empty($arErrorMessages['szSearchFrRecord']) != '') { ?>has-error<?php } ?>">
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
                                             onchange="getClientListByFrId(this.value);">
@@ -148,9 +153,11 @@
                                         ?>
                                     </select>
                                 </div>
+                                </div>
 
                                 <div class=" col-md-3 clienttypeselect">
                                     <div id='szClient'>
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord1']) != '') { ?>has-error<?php } ?>">
                                         <select class="form-control custom-select" name="szSearchClRecord1"
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Client Name</option>
@@ -163,6 +170,7 @@
                                             ?>
                                         </select>
                                     </div>
+                                        </div>
                                 </div>
                             <div class="col-md-3 clienttypeselect">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">

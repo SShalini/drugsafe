@@ -55,7 +55,8 @@
                         <form name="orderSearchForm" id="orderSearchForm" class="search-bar"
                               action="<?= __BASE_URL__ ?>/order/view_order_list" method="post">
                             <div class="row">
-                        <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
+                        <?php  if($_SESSION['drugsafe_user']['iRole']==1){ 
+                            ?>
                                 <div class="clienttypeselect col-md-3">
                                     <div class="form-group ">
                                         <select class="form-control custom-select" name="szSearch1" id="szSearch1"
@@ -162,11 +163,13 @@
                     </div>
                         </div>
                     <?php
+                    
                     if(($_POST['szSearch4']!='') && ($_POST['szSearch5']!=''))
                     {
                     if (!empty($validOrdersDetailsAray)) {
+                        
                     ?>
-                        <div class="portlet-body alert">
+                        <div class="portlet-body alert" >
                             <div class="row">
                                 <div>
                                     <div class="portlet green-meadow box">
@@ -181,9 +184,8 @@
 
                                         if (!empty($validOrdersDetailsAray)) {
                                             ?>
-
                                             <div class="portlet-body">
-                                                <div class="table-responsive">
+                                                <div class="table-responsive" id="table_content_data">
                                                     <table class="table table-hover table-bordered table-striped">
                                                         <thead>
                                                         <tr>

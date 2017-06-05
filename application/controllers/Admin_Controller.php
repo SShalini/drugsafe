@@ -743,7 +743,8 @@ class Admin_Controller extends CI_Controller
             $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
             $data['notification'] = $count;
             $_POST['editOperationManager']['szState'] = $stateId;
-            $data['getAllStates'] = $getAllStates;
+            $data['idOperationManager'] = $idOperationManager;
+             $data['getAllStates'] = $getAllStates;
             $data['commentnotification'] = $commentReplyNotiCount;
             $data['flag'] = $flag;
             $this->load->view('layout/admin_header', $data);

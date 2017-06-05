@@ -35,12 +35,11 @@
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                    <?php if($prospectDetailsAry['szName']) { ?>
+                   
                    <li>
-                        <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord"><?php echo $prospectDetailsAry['szName'];?></a>
+                        <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord"><?php echo $prospectDetailsAry['szBusinessName'];?></a>
                         <i class="fa fa-circle"></i>
                     </li>
-                    <?php }?>
                     <li>
                         <span class="active">Prospect Details</span>
                     </li>
