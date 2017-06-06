@@ -165,9 +165,9 @@
                     <?php
                     
                     if(($_POST['szSearch4']!='') && ($_POST['szSearch5']!=''))
-                    {
+                    { 
                     if (!empty($validOrdersDetailsAray)) {
-                        
+                       
                     ?>
                         <div class="portlet-body alert" >
                             <div class="row">
@@ -372,7 +372,9 @@
                                 </div>
                             </div>
                        
-                    <?php } }?>
+                    <?php } else{
+                         echo 'No record found';
+                         }}?>
                      </div>
                 </div>
             </div>
