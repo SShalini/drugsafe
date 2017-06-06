@@ -64,11 +64,24 @@
                     
                             ?>
                          <div class="row">
-                              <form class="search-bar" id="szSearchField" action="<?=__BASE_URL__?>/admin/operationManagerList" name="szSearchField" method="post">
-
-                                 <div class="search col-md-3 clienttypeselect">
-                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
-                                           <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                              <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/admin/operationManagerList" name="szSearchField" method="post">
+<!--                           <div class="search col-md-3">
+                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?=sanitize_post_field_value($_POST['szSearch'])?>">
+                          <select class="form-control custom-select" name="szSearch1" id="szSearch" onfocus="remove_formError(this.id,'true')">
+                                  <option value="">Operation Manager Id</option>
+                                  <?php
+                                      foreach($allOperationManager as $operationManagerIdList)
+                                      {
+                                          $selected = ($operationManagerIdList['id'] == $_POST['szSearch1'] ? 'selected="selected"' : '');
+                                          echo '<option value="'.$operationManagerIdList['id'].'" >Om-'.$operationManagerIdList['id'].'</option>';
+                                      }
+                                  ?>
+                              </select>
+                          </div>
+                                    <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
+                                  <div class="search col-md-3 clienttypeselect" >
+                                   
+                                      <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Operation Manager Name</option>
                                           <?php
                                           foreach($allOperationManager as $operationManagerIdList)
@@ -78,23 +91,21 @@
                                           }
                                           ?>
                                       </select>
-                                            <?php
-                                            if (form_error('szSearch2')) {
-                                                ?>
-                                                <span class="help-block pull-left">
-                                                <span><?php echo form_error('szSearch2'); ?></span>
-                                                </span><?php } ?>
-                                            <?php if (!empty($arErrorMessages['szSearch2'])) { ?>
-                                                <span class="help-block pull-left">
-                                                <i class="fa fa-times-circle"></i>
-                                                    <?php echo $arErrorMessages['szSearch2']; ?>
-                                            </span>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                  
-                                  
-                        
+                                  </div>
+<!--                               <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <div class="search col-md-3">
+                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
+                                      <select class="form-control custom-select" name="szSearch" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Operation Manager Email</option>
+                                          <?php
+                                          foreach($allOperationManager as $operationManagerIdList)
+                                          {
+                                              $selected = ($operationManagerIdList['id'] == $_POST['szSearch'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$operationManagerIdList['id'].'" >'.$operationManagerIdList['szEmail'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>-->
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>
@@ -105,7 +116,7 @@
                           <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th> Id</th>
+                                        <th> Id.</th>
                                         <th> Name</th>
                                         <th> Email</th>
                                         <th> Contact No </th>

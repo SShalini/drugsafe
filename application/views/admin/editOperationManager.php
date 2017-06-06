@@ -9,14 +9,9 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                        <a onclick="viewFranchisee(<?php echo $idOperationManager?>);" href="javascript:void(0);"><?php echo $_POST['editOperationManager']['szName'] ;?></a>
-                        <i class="fa fa-circle"></i>
-                       </li>
-                        <li>
                             <span class="active">Edit Operation Manager</span>
                         </li>
                     </ul>
-                    
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption">

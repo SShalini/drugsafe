@@ -7,10 +7,6 @@
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                     <li>
-                        <a href="<?php __BASE_URL__ ?>/forum/categoriesList" ><?php echo set_value('forumData[szName]'); ?></a>
-                        <i class="fa fa-circle"></i>
-                    </li>
                     <li>
                         <span class="active">Edit Category</span>
                     </li>

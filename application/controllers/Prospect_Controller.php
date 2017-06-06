@@ -214,7 +214,6 @@ public function deleteProspectConfirmation()
                     $_POST['editProspect'] = $prospectDataAry;
                     $data['getState']=$getState;
                     $_POST['flag'] = $flag;
-                    $data['flag'] = $flag;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/editProspect');

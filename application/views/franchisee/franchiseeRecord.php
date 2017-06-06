@@ -183,10 +183,10 @@
 
                         ?>
                      <div class="row">
-                              <form class="search-bar" id="szSearchFranchiseeList" action="<?=__BASE_URL__?>/franchisee/franchiseeRecord" name="szSearchFranchiseeList" method="post">
+                              <form class="form-horizontal" id="szSearchFranchiseeList" action="<?=__BASE_URL__?>/franchisee/franchiseeRecord" name="szSearchFranchiseeList" method="post">
 
                                   <div class="search clienttypeselect col-md-3">
-                                   <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>"> 
+                                  
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
@@ -198,7 +198,7 @@
                                           ?>
                                       </select>
                                   </div>
-                                    </div>
+
                                   <div class="col-md-1">
                                   <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>

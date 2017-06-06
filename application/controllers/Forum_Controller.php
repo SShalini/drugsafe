@@ -91,8 +91,7 @@ class Forum_Controller extends CI_Controller {
                 $data['szMetaTagTitle'] = "Add Topic";
                 $data['is_user_login'] = $is_user_login;
                 $data['pageName'] = "Forum";
-                $data['idForum'] = $idForum;
-                 $data['subpageName'] = "Categories";
+                $data['subpageName'] = "Categories";
                 $this->load->view('layout/admin_header', $data);
                 $this->load->view('forum/addTopic');
                 $this->load->view('layout/admin_footer');

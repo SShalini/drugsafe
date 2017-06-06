@@ -54,9 +54,8 @@
                             
                       </div>
                       <div class="row">
-                             <form class="search-bar" id="szSearchRecord" action="<?=__BASE_URL__?>/franchisee/viewAgentEmpByfranchisee" name="szSearchRecord" method="post">
+                             <form class="form-horizontal" id="szSearchRecord" action="<?=__BASE_URL__?>/franchisee/viewAgentEmpByfranchisee" name="szSearchRecord" method="post">
                                   <div class="search clienttypeselect col-md-3">
-                                     <div class="form-group <?php if (!empty($arErrorMessages['szSearchFrRecord']) != '') { ?>has-error<?php } ?>"> 
                                       <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                            <?php
@@ -74,7 +73,6 @@
                                             }
                                           ?>
                                       </select>
-                                    </div>
                                   </div>
 
                                   <div class="col-md-1">
@@ -83,7 +81,7 @@
                              
                            </form>
                           </div>
-                        <div class="row search_align"> 
+                        <div class="row"> 
                             
                             <?php if(!empty($_POST['szSearchFrRecord'])){
                                     if(empty($recordArr)){echo "Not Found";}}?>

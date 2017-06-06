@@ -39,22 +39,15 @@
                             <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                     <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($forumDataArr['idCategory']); 
-                       ?>
+                     
                          <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/categoriesList"><?php echo $categoriesListAray['szName']; ?></a>
+                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"> <?php echo $forumDataArr['szForumTitle'];?></a>
                             <i class="fa fa-circle"></i>
                         </li>
                          <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"><?php echo $forumDataArr['szForumTitle']; ?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/viewForum"> <?php echo $forumTopicDataAry['0']['szTopicTitle']?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
-                         <li>
-                           Details
+                            <a onclick=""
+                               href="javascript:void(0);"><?php echo $forumTopicDataAry['0']['szTopicTitle']?>'s Details</a>
+                            
                         </li>
                      
                     </ul>

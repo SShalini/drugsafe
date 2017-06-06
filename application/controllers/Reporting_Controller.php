@@ -3907,7 +3907,6 @@ class Reporting_Controller extends CI_Controller {
                                         <th> <b>Franchisee Name </b> </th>
                                         <th> <b>Client Name  </b> </th>
                                          <th> <b>Client Code  </b> </th>
-                                         <th><b> Proforma Invoice Date</b></th>
                                         <th> <b> Revenue EXL GST</b> </th> 
                                         <th><b> Royalty Fees </b> </th>
                                         <th> <b>Net Revenue EXL GST</b> </th>
@@ -3921,7 +3920,6 @@ class Reporting_Controller extends CI_Controller {
                                         <th><b>  #</b> </th>
                                         <th> <b>Client Name  </b> </th>
                                          <th> <b>Client Code  </b> </th>
-                                         <th><b> Proforma Invoice Date</b></th>
                                         <th> <b> Revenue EXL GST</b> </th> 
                                         <th><b> Royalty Fees </b> </th>
                                         <th> <b>Net Revenue EXL GST</b> </th>
@@ -4011,7 +4009,6 @@ class Reporting_Controller extends CI_Controller {
                             <td>' . $frDataAry['szName'] . '</td>
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
-                                 <td>'.((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A').' </td>
                             <td>$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) . '</td>
                             <td>$' . number_format( $Royaltyfees, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $NetTotal, 2, '.', ',' ) . '</td>
@@ -4022,7 +4019,6 @@ class Reporting_Controller extends CI_Controller {
                             <td>' . $i . '</td>
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
-                            <td>'.((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A').' </td>
                             <td>$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) . '</td>
                             <td>$' . number_format( $Royaltyfees, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $NetTotal, 2, '.', ',' ) . '</td>
@@ -4035,7 +4031,6 @@ class Reporting_Controller extends CI_Controller {
 				$html .= ' <td></td> ';
 			}
 			$html .= '<td></td> 
-                    <td></td>
                     <td></td>
                     <td><b>Total</b></td>
                     <td><b>$' . number_format( $totalRevenu, 2, '.', ',' ) . '</b></td>
@@ -4143,7 +4138,6 @@ class Reporting_Controller extends CI_Controller {
                             <td>' . $frDataAry['szName'] . '</td>' : '' ) . '
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
-                            <td>'.((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A').' </td>
                             <td>$' . number_format( $totalRevenu, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $totalNetProfit, 2, '.', ',' ) . '</td>                            
@@ -4157,8 +4151,8 @@ class Reporting_Controller extends CI_Controller {
 					}
 				}
 				$html .= '<tr>' .
-				( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ? '
-                            <td colspan="4"></td>' : '<td colspan="3"></td>' ) . '
+				         ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ? '
+                            <td colspan="3"></td>' : '<td colspan="2"></td>' ) . '
                             <td><b>Total</b></td>
                             <td><b>$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) . '</b></td>
                             <td><b>$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) . '</b></td>
@@ -4211,8 +4205,7 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-                        
-                        
+
 			$this->excel->getActiveSheet()->setCellValue( 'C1', 'Client Name' );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
@@ -4223,25 +4216,20 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-                        $this->excel->getActiveSheet()->setCellValue( 'E1', 'Proforma Invoice Date' );
+			$this->excel->getActiveSheet()->setCellValue( 'E1', ' Revenue EXL GST' );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-                        
-			$this->excel->getActiveSheet()->setCellValue( 'F1', ' Revenue EXL GST' );
+
+			$this->excel->getActiveSheet()->setCellValue( 'F1', 'Royalty Fees' );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-			$this->excel->getActiveSheet()->setCellValue( 'G1', 'Royalty Fees' );
+			$this->excel->getActiveSheet()->setCellValue( 'G1', 'Net Revenue EXL GST' );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-			$this->excel->getActiveSheet()->setCellValue( 'H1', 'Net Revenue EXL GST' );
-			$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setSize( 13 );
-			$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setBold( true );
-			$this->excel->getActiveSheet()->getStyle( 'H1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 		} else {
 			$this->excel->setActiveSheetIndex( 0 );
 			$this->excel->getActiveSheet()->setTitle( $title );
@@ -4265,20 +4253,15 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
-                        $this->excel->getActiveSheet()->setCellValue( 'E1', 'Proforma Invoice Date' );
+			$this->excel->getActiveSheet()->setCellValue( 'E1', 'Royalty Fees' );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-                        
-			$this->excel->getActiveSheet()->setCellValue( 'F1', 'Royalty Fees' );
+
+			$this->excel->getActiveSheet()->setCellValue( 'F1', 'Net Revenue EXL GST' );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-			$this->excel->getActiveSheet()->setCellValue( 'G1', 'Net Revenue EXL GST' );
-			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
-			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
-			$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 
 		}
 
@@ -4373,37 +4356,11 @@ class Reporting_Controller extends CI_Controller {
 				$x ++;
 
 				$value = number_format( $ValTotal, 2, '.', ',' );
-                                if((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00'))
-                                {
-                                  $date_data = date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])); 
-                                }
-                                else{
-                                 $date_data = 'N/A';   
-                                }
-                                
 				if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 					$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 					$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $frDataAry['szName'] );
 					$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['szName'] );
 					$this->excel->getActiveSheet()->setCellValue( 'D' . $i, $userDataAry['userCode'] );
-                                        $this->excel->getActiveSheet()->setCellValue( 'E' . $i, $date_data );
-					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) );
-					$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $Royaltyfees, 2, '.', ',' ) );
-					$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $NetTotal, 2, '.', ',' ) );
-
-					$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
-					$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
-					$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
-					$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
-					$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
-					$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
-					$this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
-                                        $this->excel->getActiveSheet()->getColumnDimension( 'H' )->setAutoSize( true );
-				} else {
-					$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
-					$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $userDataAry['szName'] );
-					$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['userCode'] );
-                                        $this->excel->getActiveSheet()->setCellValue( 'D' . $i, $date_data );
 					$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) );
 					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $Royaltyfees, 2, '.', ',' ) );
 					$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $NetTotal, 2, '.', ',' ) );
@@ -4414,7 +4371,21 @@ class Reporting_Controller extends CI_Controller {
 					$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
-                                        $this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
+					$this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
+				} else {
+					$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
+					$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $userDataAry['szName'] );
+					$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['userCode'] );
+					$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) );
+					$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $Royaltyfees, 2, '.', ',' ) );
+					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $NetTotal, 2, '.', ',' ) );
+
+					$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
+					$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
+					$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
+					$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
+					$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
+					$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
 				}
 				$i ++;
 			}
@@ -4422,20 +4393,23 @@ class Reporting_Controller extends CI_Controller {
 			$totalRoyaltyfees = number_format( $totalRoyaltyfees, 2, '.', '' );
 			$totalNetProfit   = number_format( $totalNetProfit, 2, '.', '' );
 			if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
-				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, Total );
-				$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
-				$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
-				$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
-
-			} else {
 				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, Total );
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
 
+
+			} else {
+				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, Total );
+				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
+				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
+				$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
+
 			}
 
+			$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setSize( 13 );
+			$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setBold( true );
+			$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 			$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
@@ -4448,9 +4422,6 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
-			$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setSize( 13 );
-			$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setBold( true );
-			$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 		} elseif ( $singleline == 1 ) {
 			$allfranchisee = $this->Form_Management_Model->getAllsosFormDetails($searchAry);
 			if ( ! empty( $allfranchisee ) ) {
@@ -4548,36 +4519,11 @@ class Reporting_Controller extends CI_Controller {
 								$totalRoyaltyfees = number_format( $totalRoyaltyfees, 2, '.', '' );
 								$totalNetProfit   = number_format( $totalNetProfit, 2, '.', '' );
 
-                                                                if((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00'))
-                                                                    {
-                                                                      $date_data = date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])); 
-                                                                    }
-                                                                    else{
-                                                                     $date_data = 'N/A';   
-                                                                    }
 								if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 									$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 									$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $frDataAry['szName'] );
 									$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['szName'] );
 									$this->excel->getActiveSheet()->setCellValue( 'D' . $i, $userDataAry['userCode'] );
-                                                                        $this->excel->getActiveSheet()->setCellValue( 'E' . $i, $date_data);
-									$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
-									$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
-									$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
-									$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
-									$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
-									$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
-									$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
-									$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
-									$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
-									$this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
-                                                                        $this->excel->getActiveSheet()->getColumnDimension( 'H' )->setAutoSize( true );
-								} else {
-									$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
-									$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $userDataAry['szName'] );
-									$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['userCode'] );
-                                                                        $this->excel->getActiveSheet()->setCellValue( 'D' . $i, $date_data);
 									$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
 									$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
 									$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
@@ -4588,7 +4534,21 @@ class Reporting_Controller extends CI_Controller {
 									$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
-                                                                        $this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
+									$this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
+								} else {
+									$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
+									$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $userDataAry['szName'] );
+									$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['userCode'] );
+									$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
+									$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
+									$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
+
+									$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
+									$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
+									$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
+									$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
+									$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
+									$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
 								}
 								$allfranchiseeTotalAfterDis    += $totalRevenu;
 								$allfranchiseetotalRoyaltyfees += $totalRoyaltyfees;
@@ -4599,20 +4559,23 @@ class Reporting_Controller extends CI_Controller {
 						}
 					}
 					if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
-						$this->excel->getActiveSheet()->setCellValue( 'E' . $i, Total );
-						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) );
-						$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) );
-						$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) );
-
-
-					} else {
 						$this->excel->getActiveSheet()->setCellValue( 'D' . $i, Total );
 						$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) );
 						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) );
 						$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) );
 
+
+					} else {
+						$this->excel->getActiveSheet()->setCellValue( 'C' . $i, Total );
+						$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) );
+						$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) );
+						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) );
+
 					}
 				}
+				$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setSize( 13 );
+				$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setBold( true );
+				$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 				$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setSize( 13 );
 				$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setBold( true );
 				$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
@@ -4625,9 +4588,6 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setSize( 13 );
 				$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setBold( true );
 				$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
-				$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setSize( 13 );
-				$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setBold( true );
-				$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 			}
 		}
 

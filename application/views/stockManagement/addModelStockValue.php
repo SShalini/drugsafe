@@ -1,16 +1,10 @@
 <div class="page-content-wrapper">
     <div class="page-content">
-        <?php $operation_manager_id = $this->Franchisee_Model->getoperationManagerId($franchiseeArr['id']);
-                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operation_manager_id['operationManagerId']);?>
           <ul class="page-breadcrumb breadcrumb">
              
                         <li>
                             <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList">Home</a>
                             <i class="fa fa-circle"></i>
-                        </li>
-                        <li>
-                        <a onclick="viewFranchisee(<?php echo $operation_manager_id['operationManagerId'];?>);" href="javascript:void(0);"><?php echo $franchiseeDetArr['szName'];?></a>
-                        <i class="fa fa-circle"></i>
                         </li>
                          <li>
                         <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>

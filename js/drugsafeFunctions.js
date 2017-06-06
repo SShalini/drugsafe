@@ -1456,42 +1456,23 @@ function edit_order_details(idOrder,flag) {
     });
 }
 function CancelOrderConfirmation(idOrder) {
-    
-     var startDate = jQuery('#szSearch4').val();
-     var endDate = jQuery('#szSearch5').val();
-     var frName = jQuery('#szSearch1').val();
-     var orderNo = jQuery('#szSearch2').val();
-
-   
-   
+    $('.modal-backdrop').remove();
+    $('#static').modal("hide");
+    $('#editOrder').modal("hide");
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/order/cancelOrderConfirmation", {idOrder: idOrder,startDate: startDate,endDate: endDate,frName: frName,orderNo: orderNo}, function (result) {
-       
-       var result_ary = result.split("||||"); 
-         if (result_ary[0] == 'SUCCESS')
-        {
-            $('.modal-backdrop').remove();
-            $('#static').modal("hide");
-            $('#editOrder').modal("hide");
-            jQuery('#popup_box').html(result_ary[1]);
-            jQuery('#cancelOrderConfirmation').modal("show");
-           
-            jQuery("#table_content_data").html(result_ary[2]);
+    $.post(__BASE_URL__ + "/order/cancelOrderConfirmation", {idOrder: idOrder}, function (result) {
+        var result_ary = result.split("||||");
+        var res = result_ary[0].trim(" ");
+        if (res == 'SUCCESS') {
+            $("#popup_box").html(result_ary[1]);
+            $('#cancelOrderConfirmation').modal("show");
         }
-     
         jQuery('#loader').attr('style', 'display:none');
 
     });
 }
 
 function changeordstatus(ordid, prodcount, status) {
-
-     var startDate = jQuery('#szSearch4').val();
-     var endDate = jQuery('#szSearch5').val();
-     var frName = jQuery('#szSearch1').val();
-     var orderNo = jQuery('#szSearch2').val();
-
-
 
     var counter = 0;
     var check = 0;
@@ -1556,22 +1537,15 @@ function changeordstatus(ordid, prodcount, status) {
                 $.post(__BASE_URL__ + "/order/dispatchfinal", {
                     ordid: ordid,
                     price: price,
-                    freightPrice:freightPrice,
-                    startDate: startDate,
-                    endDate: endDate,
-                    frName: frName,
-                    orderNo: orderNo
+                    freightPrice:freightPrice
                 }, function (result) {
-                    var result_ary = result.split("||||"); 
-                    if (result_ary[0] == 'SUCCESS')
-                   {
-                        $('.modal-backdrop').remove();
-                        $('#static').modal("hide");
+                    var result_ary = result.split("||||");
+                    var res = result_ary[0].trim(" ");
+                    if (res == 'SUCCESS') {
                         $('#loader').attr('style', 'display:none');
                         $("#popup_box").html(result_ary[1]);
                         $('#editOrder').modal("hide");
                         $('#dispatchprodsucess').modal("show");
-                        jQuery("#table_content_data").html(result_ary[2]);
                     }
                 });
             }
@@ -1592,11 +1566,11 @@ function changeordstatus(ordid, prodcount, status) {
             }
         }
     }, 1000);
+
 }
 
 function validatedispprod(id) {
     var ordqtyid = $('#ordqtyid' + id).val();
-    var availqtyafterdisid = $('#availqtyafterdisid' + id).val();
     var availqtyid = $('#availqtyid' + id).val();
     var dispatch_quantity = $('#order_quantity' + id).val();
     var isdispid = $('#isdispid' + id).val();
@@ -1610,16 +1584,6 @@ function validatedispprod(id) {
             $('#orddiperr' + id).html('Dispatch quantity must be less than or equal to non-dispatched ordered quantity i.e. '+RemainingQty);
             $('#orddiperr' + id).show();
             return false;
-        }
-         else if (parseInt(availqtyafterdisid) != parseInt(availqtyid)) {
-             if(parseInt(dispatch_quantity) > parseInt(availqtyafterdisid)){
-            $('#orddiperr' + id).html('Dispatch quantity must be less than or equal to available after dispatch quantity i.e. '+availqtyafterdisid);
-            $('#orddiperr' + id).show();
-            return false;
-             }
-             else{
-              return true;      
-             }
         }
         else if (parseInt(dispatch_quantity) > parseInt(availqtyid)) {
             $('#orddiperr' + id).html('Dispatch quantity must be less than or equal to available quantity.');

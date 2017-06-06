@@ -8,15 +8,14 @@
                             <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                         <li>
-                            
-                      <?php  if($flag==1){?>
-                        <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord"><?php echo  $_POST['editProspect']['szBusinessName'];?></a>
+                          <li>
+                         <?php if($flag==1){?>
+                        <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord"><?php echo  $_POST['editProspect']['szName'];?></a>
                          <?php } else {?>
-                         <a href="<?php echo __BASE_URL__;?>/prospect/view_prospect_details"><?php echo $_POST['editProspect']['szBusinessName'];?></a>
+                         <a href="<?php echo __BASE_URL__;?>/prospect/view_prospect_details"><?php echo  $_POST['editProspect']['szName'];?></a>
                          <?php }?>
-                       <i class="fa fa-circle"></i>
-                        </li>
+                        <i class="fa fa-circle"></i>
+                       </li>
                              
                         <li>
                             <span class="active">Edit Prospect</span>

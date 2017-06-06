@@ -846,7 +846,7 @@ class Franchisee_Controller extends CI_Controller
         $data['operationManagerAray'] = $operationManagerAray;
         $data['franchiseeAray'] = $franchiseeAray;
         $data['idOperationManager'] = $idOperationManager;
-        $data['pageName'] = "Operation_Manager_List";
+        $data['pageName'] = "Franchisee_Record";
         $data['szMetaTagTitle'] = "Franchisee List";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;

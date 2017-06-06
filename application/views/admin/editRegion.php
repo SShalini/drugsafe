@@ -13,6 +13,7 @@
                         <span class="active">Edit Region</span>
                     </li>
                 </ul>
+               
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -24,7 +25,8 @@
                         <form class="form-horizontal" id="addfranchisee"
                               action="<?= __BASE_URL__ ?>/admin/editRegion" name="editRegion" method="post">
                             <div class="form-body">
-                                <?php if($_POST['editRegion']['assign']==1) { ?>
+                               
+                                             <?php if($_POST['editRegion']['assign']==1) { ?>
                                   <div class="form-group <?php if(form_error('editRegion[stateId]')){?>has-error<?php }?>">
                                     <label class="col-md-3 control-label">State</label>
                                     <div class="col-md-5">

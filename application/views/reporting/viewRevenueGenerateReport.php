@@ -60,6 +60,7 @@
                             </div>
                         <?php } ?>
                     </div>
+                    
                     <div class="portlet-body totalpr alert">
                         <div class="row">
                             <form name="revenueSearchForm" id="revenueSearchForm" class="search-bar"

@@ -76,7 +76,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->insertProduct())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<h4><strong> Marketing Material added successfully.</strong></h4>";
+                    $szMessage['content'] = "<strong><h3> Marketing Material added successfully.</h3></strong>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                      redirect(base_url('/inventory/marketingMaterialList'));
                     die;
@@ -128,7 +128,7 @@ class Inventory_Controller extends CI_Controller {
                     if($szProductCategory==1)
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<h4><strong>Drug Test Kit added successfully.</strong></h4>";
+                        $szMessage['content'] = "<strong><h3>Drug Test Kit added successfully.</h3></strong>";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                          redirect(base_url('/inventory/drugTestKitList'));
                         die;
@@ -176,7 +176,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->insertProduct())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<h4><strong>Consumables added successfully.</strong></h4>  ";
+                    $szMessage['content'] = "<strong><h3>Consumables added successfully.</h3> </strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                      redirect(base_url('/inventory/consumablesList'));
                   
@@ -255,7 +255,7 @@ class Inventory_Controller extends CI_Controller {
                 {
                    
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "</h4> <strong> Drug Test Kit updated successfully.</strong><h4>  ";
+                        $szMessage['content'] = "<strong></h3> Drug Test Kit updated successfully.<h3> </strong> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
@@ -456,7 +456,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
                     $szMessage['type'] = "success";
-                        $szMessage['content'] = "<h4><strong> Marketing Material updated successfully. </strong> </h4>  ";
+                        $szMessage['content'] = "<strong><h3> Marketing Material updated successfully.</h3> </strong> ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
@@ -535,7 +535,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<h4> <strong> Consumables updated successfully.</strong></h4>  ";
+                    $szMessage['content'] = "<strong><h3> Consumables updated successfully.</h3> </strong> ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     $this->session->unset_userdata('idProduct');
                     $this->session->unset_userdata('flag');

@@ -9,7 +9,7 @@
                     </li>
 
                     <?php
-                     if($_SESSION['drugsafe_user']['iRole']=='2')
+                     if($_SESSION['drugsafe_user']['iRole']=='1')
                     {
                         ?>
                        <li>

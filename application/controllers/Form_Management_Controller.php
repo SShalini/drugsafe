@@ -517,7 +517,7 @@ function endDate_check()
     {
         ob_start();
         $this->load->library('Pdf');
-        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetTitle('Drug-safe SOS Form Details');
         $pdf->SetAuthor('Drug-safe');
@@ -531,7 +531,7 @@ function endDate_check()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
 
-        $pdf->AddPage('P');
+        $pdf->AddPage('L');
 
         $sosid = $this->session->userdata('sosid');
         $hide = $this->session->userdata('hide');
@@ -850,7 +850,7 @@ function endDate_check()
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
 
-        $pdf->AddPage('P');
+        $pdf->AddPage('L');
 
         $cocid = $this->session->userdata('cocid');
         $cocdetarr = $this->Webservices_Model->getcocdatabycocid($cocid);

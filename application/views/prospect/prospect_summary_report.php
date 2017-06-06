@@ -80,7 +80,10 @@
                     ?>
                             </div>
                         </div>
-                    <form class="search-bar" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
+                   
+                       
+                        
+                              <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/prospect/prospect_summary_report" name="szSearchField" method="post">
                          <div class=" row">
                               <?php  if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){     ?>
                            <div class="clienttypeselect col-md-3">
@@ -109,11 +112,11 @@
                              </span><?php }?> 
                         </div>
                     </div>
-                  
+                   
+                   
                          <div class=" col-md-3 clienttypeselect">
                                
                                     <div id='szBusinessName'>
-                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearchBussName']) != '') { ?>has-error<?php } ?>">
                                         <select class="form-control custom-select" name="szSearchBussName"
                                                 id="szSearchBussName" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Business Name</option>
@@ -126,11 +129,9 @@
                                             ?>
                                         </select>
                                     </div>
-                                        </div>
                                 </div> 
                                     <?php } if($_SESSION['drugsafe_user']['iRole']==2){?> 
                           <div class="clienttypeselect padding col-md-3">
-                               <div class="form-group <?php if (!empty($arErrorMessages['szSearchBussName']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearchBussName" id="szSearchBussName" onchange="remove_formError(this.id,'true')">
                                <option value="">Business Name</option>
                                   
@@ -147,11 +148,11 @@
                                           }
                                           ?>
                            </select>
-                      </div>
+                      
                     </div>
                                     <?php }?> 
                                 <div class="clienttypeselect col-md-3">
-                                     <div class="form-group <?php if (!empty($arErrorMessages['szSearchBussName']) != '') { ?>has-error<?php } ?>">
+                                   
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchStatus" onfocus="remove_formError(this.id,'true')">
                                          
                                         <option value=''>Status</option>
@@ -175,7 +176,6 @@
                                         </option>
                                   
                                       </select>
-                                           </div>
                                   </div>
 <!--                                  <div class="search col-md-1"> </div>-->
                                   <div class="col-md-1">

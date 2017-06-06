@@ -75,7 +75,7 @@
                             ?>
                         </div>
                     <div class="row">
-                      <form class="search-bar" name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/frInventoryReport" method="post">
+                      <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/frInventoryReport" method="post">
                     <div class="col-md-3 clienttypeselect">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             

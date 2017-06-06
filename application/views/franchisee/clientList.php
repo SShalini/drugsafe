@@ -226,13 +226,26 @@
                     if (!empty($clientAry)) {
                         ?>
                      <div class="row">
-                              <form class="search-bar" id="szSearchClientList" action="<?=__BASE_URL__?>/franchisee/clientList" name="szSearchClientList" method="post">
-                     
+                              <form class="form-horizontal" id="szSearchClientList" action="<?=__BASE_URL__?>/franchisee/clientList" name="szSearchClientList" method="post">
+<!--                                                           <div class="search col-md-3">
+                                  
+                                      <select class="form-control custom-select" name="szSearchClRecord" id="szSearch" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Client Id</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >CL-'.$clientIdList['id'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>
+                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>-->
+                                  <!--                           <!--<button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>-->
                                   <div class="search col-md-3 clienttypeselect">
-                                
-                                      <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
+                                      <!--                            <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="--><?/*//=sanitize_post_field_value($_POST['szSearch'])*/?><!--">-->
                                       <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
-                                          <option value="">Client Name</option>
+                                          <option value="">Name</option>
                                           <?php
                                           foreach($clientlistArr as $clientIdList)
                                           {
@@ -241,9 +254,21 @@
                                           }
                                           ?>
                                       </select>
-                                    </div>
                                   </div>
-
+<!--                                  <div class="col-md-1" style="text-align: center; padding: 5px 0px;">OR</div>
+                                  <div class="search col-md-3">
+                                                                  <input type="text" name="szSearch" id="szSearch" class="form-control input-square-right " placeholder="Id Or Name Or Email" value="<?//=sanitize_post_field_value($_POST['szSearch'])?>">
+                                      <select class="form-control custom-select" name="szSearchClRecord1" id="szSearchemail" onfocus="remove_formError(this.id,'true')">
+                                          <option value="">Email</option>
+                                          <?php
+                                          foreach($clientlistArr as $clientIdList)
+                                          {
+                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'" >'.$clientIdList['szEmail'].'</option>';
+                                          }
+                                          ?>
+                                      </select>
+                                  </div>-->
                                    <div class="col-md-1">
                                   <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>

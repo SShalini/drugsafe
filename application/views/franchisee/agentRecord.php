@@ -52,10 +52,10 @@
                              <?php }?>
                         </div>
                         <div class="search  row">
-                              <form class="search-bar" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
+                              <form class="form-horizontal" id="szSearchClientRecord" action="<?php echo base_url();?>franchisee/agentRecord" name="szSearchClientRecord" method="post">
                            <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)){?>
                                   <div class="search clienttypeselect col-md-3">
-                                     <div class="form-group <?php if (!empty($arErrorMessages['szSearchAgentRecord']) != '') { ?>has-error<?php } ?>">                         
+                                                           
                                       <select class="form-control custom-select" name="szSearchAgentRecord" id="szSearchAgentRecord" onfocus="remove_formError(this.id,'true')" onchange="getAgentListByFrId(this.value);">
                                           <option value="">Franchisee Name</option>
                                             <?php
@@ -74,10 +74,8 @@
                                           ?>
                                       </select>
                                     </div>
-                                  </div>
-                                      <div class="clienttypeselect col-md-3">
-                                        <div id='szAgent'> 
-                                            <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord']) != '') { ?>has-error<?php } ?>">                         
+                                  <div class="clienttypeselect col-md-3">
+                                        <div id='szAgent'>                         
                                       <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Agent/Employee Name</option>
                                           <?php
@@ -89,13 +87,11 @@
                                           }
                                           ?>
                                       </select>
-                                                  </div>
                                             </div>
                                   </div>
                              <?php } else {?>
                                   <div class=" search clienttypeselect col-md-3">
-                                        <div id='szAgent'>  
-                                       <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord']) != '') { ?>has-error<?php } ?>">                            
+                                        <div id='szAgent'>                         
                                       <select class="form-control custom-select" name="szSearchClRecord" id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Agent/Employee Name</option>
                                           <?php
@@ -107,7 +103,6 @@
                                           }
                                           ?>
                                       </select>
-                                             </div>
                                             </div>
                                   </div>
                                    <?php } ?>
