@@ -1887,7 +1887,6 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                  <th> Dispatched Qty</th>
                                                 <th> Back Order</th>
                                                 <th> Dispatch Qty</th>
-                                               
                                                 <th> Total Price EXL GST</th>
                                             </tr>
                                             </thead>
@@ -1896,6 +1895,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             $i = 1;
                                             $count = 0;
                                             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
+                                               
                                                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
                                                 $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
                                                 $freightPrice = 0.00;
@@ -1904,9 +1904,23 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                     $freightPrice = number_format($ordersDetailsAray['freightprice'],2,'.','');
                                                     $readonly = 'readonly="readonly" style="cursor:not-allowed"';
                                                 }
-                                                $price = 0.00;
-                                                $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
-                                                $avilableqtyafterdispatch = ($productDataArr['szAvailableQuantity'])-($TotalDispatched['total_dispatched']);
+                                                 $price = 0.00;
+                                                 $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
+                                                 $TotalReceivedDispatched = $this->Order_Model->getTotalReceivedDispatchedqty ($totalOrdersDetailsData['id']);
+                                              
+                                                 if ($TotalDispatched['total_dispatched'] > '0') {
+                                                  
+                                                $avilableqtyafterdispatch = (($productDataArr['szAvailableQuantity'])-($TotalDispatched['total_dispatched'])) + ($TotalReceivedDispatched['total_dispatched']);
+                                                if($avilableqtyafterdispatch > '0') {
+                                                  $avilableqtyafterdispatch = $avilableqtyafterdispatch;  
+                                                } 
+                                                else{
+                                                   $avilableqtyafterdispatch = '0' ;
+                                                }
+                                                } else {
+                                                      $avilableqtyafterdispatch = '-';
+                                                 }
+                                                 $avilableqtyafterdispatchValForCheck = (($productDataArr['szAvailableQuantity'])-($TotalDispatched['total_dispatched'])) + ($TotalReceivedDispatched['total_dispatched']);
                                                 ?>
                                                 <tr>
                                                     <td> <?php echo $productDataArr['szProductCode']; ?>
@@ -1915,6 +1929,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                    
                                                     <td> <?php echo $productDataArr['szAvailableQuantity']; ?>
                                                     </td>
+                                                    
                                                     <td> <?php echo $avilableqtyafterdispatch; ?>
                                                    
                                                     </td>
@@ -1965,7 +1980,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                             <input
                                                                     type="hidden" name="availqtyafterdisid<?php echo $i; ?>"
                                                                     id="availqtyafterdisid<?php echo $i; ?>"
-                                                                    value="<?php echo($avilableqtyafterdispatch > '0' ? $avilableqtyafterdispatch : '0'); ?>">
+                                                                    value="<?php echo($avilableqtyafterdispatchValForCheck > '0' ? $avilableqtyafterdispatchValForCheck: '0'); ?>">
                                                             
                                                             <input type="hidden" name="isdispid<?php echo $i; ?>"
                                                                    id="isdispid<?php echo $i; ?>" value="0"/>

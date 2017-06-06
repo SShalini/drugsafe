@@ -1171,6 +1171,18 @@ class Order_Model extends Error_Model {
             return false;
         }
     }
+    function getTotalReceivedDispatchedqty($orderDetailId){
+        $query = $this->db->select('SUM(dispatch_qty) as total_dispatched')
+            ->where('order_detail_id',(int)$orderDetailId)
+            ->where('received',(int)'1')
+        ->get(__DBC_SCHEMATA_PARTIAL_DISPATCH__);
+        if ($query->num_rows() > 0) {
+            $row = $query->result_array();
+            return $row[0];
+        }else{
+            return false;
+        }
+    }
 
     function AllDispatched($orderId,$prodid){
         $statusarr = array('dispatched' => 1);
