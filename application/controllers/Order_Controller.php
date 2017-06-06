@@ -379,8 +379,8 @@ class Order_Controller extends CI_Controller
          $searchAry['szSearch4'] = $this->input->post('startDate');
          $searchAry['szSearch5'] = $this->input->post('endDate');
          $searchAry['szSearch2'] = $this->input->post('orderNo');
-        $data['mode'] = '__CANCEL_ORDER_CONFIRM_DETAILS_POPUP__';
-        $data['idOrder'] = $this->input->post('idOrder'); 
+         $data['mode'] = '__CANCEL_ORDER_CONFIRM_DETAILS_POPUP__';
+         $data['idOrder'] = $this->input->post('idOrder'); 
        if($this->Order_Model->updateOrderByOrderId($data['idOrder'], 3)){
         
         $count = $this->Admin_Model->getnotification();
@@ -1223,11 +1223,16 @@ if (!empty($totalDispatched)) {
 	
     public function receiveordConfirmation()
     {
-        $data['mode'] = '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__';
-        $data['idOrder'] = $this->input->post('idOrder');
-        $data['orderdate'] = $this->input->post('orderdate');
-        //$totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($data['idOrder']);
-        $totalOrdersDetailsAray = $this->Order_Model->getDispatchedOrderDetByDispatchDate($data['orderdate'],$data['idOrder']);
+        $searchAry['szSearch1'] = $this->input->post('frName');
+         $searchAry['szSearch4'] = $this->input->post('startDate');
+         $searchAry['szSearch5'] = $this->input->post('endDate');
+         $searchAry['szSearch2'] = $this->input->post('orderNo');
+         
+         $data['mode'] = '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__';
+         $data['idOrder'] = $this->input->post('idOrder');
+         $data['orderdate'] = $this->input->post('orderdate');
+         
+         $totalOrdersDetailsAray = $this->Order_Model->getDispatchedOrderDetByDispatchDate($data['orderdate'],$data['idOrder']);
          $ordid ='';
          $prodid='';
          $qty='';
@@ -1239,7 +1244,23 @@ if (!empty($totalDispatched)) {
         $this->Order_Model->adjustFranchisorInventory($prodid,$qty);
         $this->Order_Model->updateInventoryByOrderId($ordid,$prodid,$qty,$dispatchProdId);
         }
-        $this->load->view('admin/admin_ajax_functions', $data);
+       
+        $count = $this->Admin_Model->getnotification();
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+        
+            $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+       $this->load->view('admin/admin_ajax_functions', $data);
     }
     public function view_order_list_by_fr()
     {

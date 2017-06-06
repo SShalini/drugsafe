@@ -3291,16 +3291,25 @@ function receive_order_details(idOrder) {
     });
 }
 function receiveordstatus(idOrder,orderdate) {
-    $('.modal-backdrop').remove();
-    $('#static').modal("hide");
-    $('#receiveOrder').modal("hide");
+    
+     var startDate = jQuery('#szSearch4').val();
+     var endDate = jQuery('#szSearch5').val();
+     var frName = jQuery('#szSearch1').val();
+     var orderNo = jQuery('#szSearch2').val();
+    
     jQuery('#loader').attr('style', 'display:block');
-    $.post(__BASE_URL__ + "/order/receiveordConfirmation", {idOrder: idOrder, orderdate: orderdate}, function (result) {
-        var result_ary = result.split("||||");
-        var res = result_ary[0].trim(" ");
-        if (res == 'SUCCESS') {
+    $.post(__BASE_URL__ + "/order/receiveordConfirmation", {idOrder: idOrder, orderdate: orderdate,startDate: startDate,endDate: endDate,frName: frName,orderNo: orderNo}, function (result) {
+        
+        
+         var result_ary = result.split("||||"); 
+         if (result_ary[0] == 'SUCCESS')
+        {
+            $('.modal-backdrop').remove();
+            $('#static').modal("hide");
+            $('#receiveOrder').modal("hide");
             $("#popup_box").html(result_ary[1]);
-            $('#receiveOrderConfirmation').modal("show");
+             $('#receiveOrderConfirmation').modal("show");
+             jQuery("#table_content_data").html(result_ary[2]);
         }
         jQuery('#loader').attr('style', 'display:none');
 

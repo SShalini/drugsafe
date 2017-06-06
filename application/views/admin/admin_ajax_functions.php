@@ -4256,7 +4256,6 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                 </div>
 
                 <div class="modal-footer">
-
                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -4266,6 +4265,9 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
 }
 if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
     echo "SUCCESS||||";
+    if($data)
+        {
+    ?>
     ?>
     <div id="receiveOrderConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
@@ -4285,13 +4287,188 @@ if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
                 <div class="modal-footer">
                     <?php
                     ?>
-                    <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
+                     <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+<?php
+     echo '||||'; 
+         ?>      
+    <div class="table-responsive" id="table_content_data">
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+        <tr>
+                                                            <th>
+                                                                #
+                                                            </th>
+                                                            <th>
+                                                                Order No
+                                                            </th>
+                                                             <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
+                                                            <th>
+                                                                Franchisee
+                                                            </th>
+                                                             <?php  } ?>
+                                                            <th>
+                                                                Order Date
+                                                            </th>
+                                                            <th>
+                                                                Status
+                                                            </th>
+                                                            <th>
+                                                                Order Details
+                                                            </th>
+                                                             <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
+                                                            <th>
+                                                                Edit Order
+                                                            </th>
+                                                           
+                                                            <th>
+                                                                Delivery Docket
+                                                            </th>
+                                                              <?php  } ?>
+                                                             <th>
+                                                              Order Received 
+                                                            </th>
 
-    <?php
+                                                        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i = 0;
+        foreach ($validOrdersDetailsAray as $validOrdersDetailsData) {
+            $i++;
+            $productDataArr = $this->Inventory_Model->getProductDetailsById($validOrdersDetailsData['productid']);
+            $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $validOrdersDetailsData['franchiseeid']);
+            ?>
+            <tr>
+                <td><?php echo $i; ?> </td>
+                <td>
+                    #<?php echo sprintf(__FORMAT_NUMBER__, $validOrdersDetailsData['orderid']); ?>
+                </td>
+
+                <td>
+                    <?php echo $franchiseeDetArr1['szName']; ?>
+                </td>
+
+                <td>
+                     <?php echo date('d M Y', strtotime($validOrdersDetailsData['createdon'])) . ' at ' . date('h:i A', strtotime($validOrdersDetailsData['createdon'])); ?>
+                </td>
+                <td>
+                    <?php if ($validOrdersDetailsData['status'] == 1) { ?>
+
+                        <p title="Order Status"
+                           class="label label-sm label-warning">
+                            Ordered
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 2) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-success">
+                         Dispatched
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 3) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-danger">
+                            Canceled
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 4) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-info">
+                            Pending
+                        </p>
+                        <?php
+                    }
+                    ?></td>
+
+                <td>
+                    <a class="btn btn-circle btn-icon-only btn-default"
+                       title="View Order Details"
+                       onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>','1')"
+                       href="javascript:void(0);">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+                  <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
+                <td>
+                    <?php
+                    if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 2 || $validOrdersDetailsData['status'] == 4) {
+                        $checkOrderEditable = $this->Order_Model->checkOrderEditable($validOrdersDetailsData['orderid']);
+                        if (!empty($checkOrderEditable)) {
+                         if($validOrdersDetailsData['status'] == 2){
+                            ?>
+                            <a class="btn btn-circle blue btn-icon-only btn-default"
+                               title="Edit Order Details"
+                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>,'1');"
+                               href="javascript:void(0);">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                         <?php } else{ ?>
+                           <a class="btn btn-circle blue btn-icon-only btn-default"
+                               title="Edit Order Details"
+                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                               href="javascript:void(0);">
+                                <i class="fa fa-pencil"></i>
+                            </a>  
+                        <?php
+                         }
+                         }
+                    }
+                    ?>
+                </td>
+
+                <td>
+                    <?php if ($validOrdersDetailsData['status'] == 2) { ?>
+                        <a class="btn btn-circle btn-icon-only btn-default"
+                           title="View Pdf"
+                           onclick="view_order_details_pdf(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                           href="javascript:void(0);">
+                            <i class="fa fa-file-pdf-o"></i>
+                        </a>
+                    <?php } ?>
+                </td>
+                 <?php } ?>
+                  <td>
+                      <?php
+                      if($validOrdersDetailsData['status'] == 2){
+                          $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($validOrdersDetailsData['orderid'],1);
+                          if(!empty($dispatchDatesArr)){ ?>
+                              <a class="btn btn-circle btn-icon-only btn-default"
+                                 title="Receive Order"
+                                 onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
+                                 href="javascript:void(0);">
+                                  <i class="fa fa-download"></i>
+                              </a>
+                          <?php }else{ ?>
+                              <p title="Order Status"
+                                 class="label label-sm label-info">
+                                  Order Received
+                              </p>
+                          <?php }
+                      }
+                      ?>
+
+                </td>
+
+            </tr>
+            <?php
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
+            
+    <?php    }
+     
 }
 if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_POPUP__') {
     echo "SUCCESS||||";
