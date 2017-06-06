@@ -16,7 +16,6 @@
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php
-
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
@@ -29,6 +28,17 @@
                     $this->session->unset_userdata('drugsafe_user_message');
             }
             ?>
+            <ul class="page-breadcrumb breadcrumb">
+             
+                        <li>
+                            <a href="<?php echo __BASE_URL__;?>/admin/operationManagerList">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                       
+                        <li>
+                            <span class="active">Region List</span>
+                        </li>
+     </ul>
             <div id="page_content" class="row">
                 <div class="col-md-12">
                     <div class="portlet light bordered">
@@ -46,7 +56,7 @@
                             </div>
                         </div>
                          <div class=" search row">
-                            <form class="form-horizontal" id="szSearchRegionRecord"
+                            <form class="search-bar" id="szSearchRegionRecord"
                                   action="<?= __BASE_URL__ ?>/admin/regionManagerList" name="szSearchRegionRecord"
                                   method="post">
                  
@@ -60,7 +70,6 @@
                                         <?php
                                      
                                         foreach ($getAllStatesAry as $getAllStates) {
-
                                             $selected = ($getAllStates['id'] == $_POST['szSearchstate'] ? 'selected="selected"' : '');
                                             echo '<option value="' . $getAllStates['id'] . '"' . $selected . ' >' . $getAllStates['name'] . '</option>';
                                         }
@@ -68,22 +77,23 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-3">
-                                    <div id='szRegion'>
-                                        <select class="form-control custom-select" name="szSearchRegionName"
+                                <div class="search col-md-3 clienttypeselect">
+                                     <div id='szRegion'>
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearchRegionName']) != '') { ?>has-error<?php } ?>">
+                                            <select class="form-control custom-select" name="szSearchRegionName"
                                                 id="szSearchRegionName" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Region Name</option>
                                             <?php
                                             foreach ($regionListArray as $regionList) {
                                                 $selected = ($regionList['regionName'] == $_POST['szSearchRegionName'] ? 'selected="selected"' : '');
-
                                                 echo '<option value="' . $regionList['regionName'] . '"' . $selected . ' >' . $regionList['regionName'] . '</option>';
                                             }
                                             ?>
                                         </select>
+                                        </div>
+                                          </div>
                                     </div>
-                                </div>
-                              
+                               
                                 <div class="col-md-1">
                                     <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                                 </div>

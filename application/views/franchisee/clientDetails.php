@@ -44,39 +44,59 @@
                  
                      <?php
                     if($_SESSION['drugsafe_user']['iRole'] == '1'){
+                        
+                        $operation_manager_id = $this->Franchisee_Model->getoperationManagerId($clientDetailsAray['franchiseeId']);
+                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operation_manager_id['operationManagerId']);
                      ?>
-                        <li>
-                            <!--onclick="viewClient(<?php /*echo $franchiseeArr['id'];*/?>);"-->
-                            <a href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
+                       <li>
+                        <a onclick="viewFranchisee(<?php echo $operation_manager_id['operationManagerId'];?>);" href="javascript:void(0);"><?php echo $franchiseeDetArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
+                       <li>
+                        <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
+                       
                          <?php
                     }
                      ?>
+                       <?php
+                     if($_SESSION['drugsafe_user']['iRole']=='2')
+                    {
+                        ?>
+                       <li>
+                           <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord"><?php echo $franchiseeArr['szName'];?></a>
+                           <i class="fa fa-circle"></i>
+                       </li>
+                        <?php
+                    }
+                    ?>
                      <?php
                     if($_SESSION['drugsafe_user']['iRole'] == '5'){
                      ?>
-                         <li>
-                             <!--onclick="viewClient(<?php /*echo $franchiseeArr['id'];*/?>);"-->
-                            <a href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
+                        <li>
+                        <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
                          <?php
                     }
                      ?>
-                        <?php if($clientDetailsAray['clientType'] > '0'){?>
-                            <li>
-                                <!--onclick="viewClientDetails(<?php /*echo $ParentOfChild['id'];*/?>,<?php /*echo $idfranchisee; */?>);"-->
+                         <?php if($clientDetailsAray['clientType'] > '0'){?>
+                        <li>
+                        <a onclick="viewClientDetails(<?php echo $ParentOfChild['id'];?>);" href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
+<!--                            <li>
+                                onclick="viewClientDetails(<?php /*echo $ParentOfChild['id'];*/?>,<?php /*echo $idfranchisee; */?>);"
                                 <a href="javascript:void(0);"><?php echo $ParentOfChild['szName'];?></a>
                                 <i class="fa fa-circle"></i>
-                            </li>
+                            </li>-->
                             
                         <?php } ?>
                         <li>
-                            <!--onclick="viewClientDetails(<?php /*echo $clientDetailsAray['id'];*/?>,<?php /*echo $idfranchisee; */?>);"-->
-                            <a href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
+                        <a onclick="viewClientDetails(<?php echo $clientDetailsAray['id'];?>);" href="javascript:void(0);"><?php echo $clientDetailsAray['szName'];?></a>
                         
-                        </li>
+                       </li>
                       
                         <?php if($clientDetailsAray['clientType'] == '0'){?>
                             <li>
@@ -88,7 +108,7 @@
                                 <i class="fa fa-circle"></i>
                                 <span class="active"> Details</span>
                             </li>
-                      <?php }  ?>
+                      <?php } ?>
                     </ul>
      <div class="portlet light bordered about-text" id="user_info">
         <div class="portlet-title">
@@ -138,10 +158,8 @@
                          $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientDetailsAray['id']);
                      }
                       $regioncode = $this->Admin_Model->getregionbyregionid($franchiseeArr['regionId']);
-
                     if($clientDetailsAray['clientType']=='0')
                     {
-
                         ?>
                         <div class="row">
                             <div class="col-sm-4 text-info bold">
@@ -872,10 +890,10 @@
         </div>
         <div class="portlet-body">
           
-                           <form class="form-horizontal search-bar" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
+             <form class="search-bar" id="szSearchClientDetailsList" action="<?=__BASE_URL__?>/franchisee/viewClientDetails" name="szSearchClientDetailsList" method="post">
                <div class="row ">
                                <div class="col-md-3 ">
-
+             <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
                                    <select class="form-control custom-select" name="szSearchClRecord2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                        <option value="">Company Name</option>
                                        <?php
@@ -886,6 +904,7 @@
                                        }
                                        ?>
                                    </select>
+                  </div>
                                </div>
                                 <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
@@ -1007,7 +1026,6 @@
                                                         } else {
                                                             echo "N/A";
                                                         }
-
                                                         ?>
                                                     </td>
                                                     <td>
@@ -1074,11 +1092,11 @@
              if($clientDetailsAray['clientType']=='0'){
             ?>
             
-                <p>No Site Found.</p>
+                <p>No Site Found</p>
             <?php
             }else{ ?>
                 
-              <p>No Client Found.</p>   
+              <p>No Client Found</p>   
             <?php } }
             ?>
                          <?php  if(!empty($childClientDetailsAray)){?>

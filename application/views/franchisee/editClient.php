@@ -9,7 +9,7 @@
                     </li>
 
                     <?php
-                     if($_SESSION['drugsafe_user']['iRole']=='1')
+                     if($_SESSION['drugsafe_user']['iRole']=='2')
                     {
                         ?>
                        <li>
@@ -17,7 +17,6 @@
                            <i class="fa fa-circle"></i>
                        </li>
                         <?php
-
                     }
                     ?>
 
@@ -366,7 +365,6 @@
                                         <i class="fa fa-user"></i>
                                         </span>
                                         <select class="form-control required" name="clientData[szParentId]" id="szParentId" onfocus="remove_formError(this.id,'true')">
-
                                             <?php
 /*                                                        if(!empty($parentClient))
                                                 {
@@ -387,12 +385,10 @@
                                     </span>
                                 <?php /*}*/?>
                                 </div>
-
                             </div>
                                  --><?php
 /*
                             }
-
                             */?>
                             <?php if($_POST['clientData']['clientType'] > 0){?>
                                 <input id="szParentId" class="form-control" type="hidden" value="<?php echo $_POST['clientData']['clientType'];?>" name="clientData[szParentId]">

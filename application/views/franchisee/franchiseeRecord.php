@@ -3,7 +3,6 @@
         $("#szSearch").customselect();
         $("#szSearchname").customselect();
         $("#szSearchemail").customselect();
-
     });
 </script>
 <div class="page-content-wrapper">
@@ -59,7 +58,6 @@
                  
                     <?php 
                        echo "operation manager Details";
-
                    ?>
                     &nbsp; &nbsp;
                     <a class="btn btn-circle btn-icon-only btn-default" title="Edit Operation Manager Data" onclick="editOperationManagerDetails('<?php echo $operationManagerAray['id'];?>','2');" href="javascript:void(0);">
@@ -180,13 +178,12 @@
                     <?php
                   
                     if (!empty($franchiseeAray)) {
-
                         ?>
                      <div class="row">
-                              <form class="form-horizontal" id="szSearchFranchiseeList" action="<?=__BASE_URL__?>/franchisee/franchiseeRecord" name="szSearchFranchiseeList" method="post">
+                              <form class="search-bar" id="szSearchFranchiseeList" action="<?=__BASE_URL__?>/franchisee/franchiseeRecord" name="szSearchFranchiseeList" method="post">
 
                                   <div class="search clienttypeselect col-md-3">
-                                  
+                                   <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>"> 
                                       <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
@@ -198,7 +195,7 @@
                                           ?>
                                       </select>
                                   </div>
-
+                                    </div>
                                   <div class="col-md-1">
                                   <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                   </div>
@@ -311,11 +308,9 @@
                                         
                                         
 <!--                                     <td>
-
                                                 <a class="btn btn-circle btn-icon-only btn-default" title="Edit franchisee Data" onclick="editFranchiseeDetails('<?php echo $franchiseeData['id'];?>',<?php echo $operationManagerAray['id'];?>);" href="javascript:void(0);">
                                                     <i class="fa fa-pencil"></i> 
                                                 </a>
-
                                                 <a class="btn btn-circle btn-icon-only btn-default" id="modelStoclVal" title="Model Stock Value Management" onclick="viewModelStockValMgt(<?php echo $franchiseeData['id'];?>);" href="javascript:void(0);"></i>
                                                     <i class="fa fa-cube" aria-hidden="true"></i>
                                                 </a>
@@ -347,7 +342,6 @@
                         </div>
                        
                         <?php
-
                     } else {
                         echo "Not Found";
                     }

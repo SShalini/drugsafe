@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Prospect_Controller extends CI_Controller
 {
     
@@ -60,7 +59,6 @@ public function prospectRecord()
            
         $prospectDetailsAry = $this->Prospect_Model->getAllProspectDetails($id,$szBusinessName,$status, $config['per_page'],$this->uri->segment(3));
         $prospectDetailsSearchAry = $this->Prospect_Model->getAllProspectDetails($id);
-
         if (!empty($_POST)) {
             $_POST['szSearch3'] = $_POST['szSearch3'];
         } else {
@@ -73,11 +71,9 @@ public function prospectRecord()
        $data['is_user_login'] = $is_user_login;
        $data['pageName'] = "Prospect_Record";
        $data['id'] = $id;
-
        $this->load->view('layout/admin_header', $data);
        $this->load->view('prospect/prospectRecord');
        $this->load->view('layout/admin_footer');
-
    }
 public function addprospect()
 {
@@ -124,7 +120,6 @@ public function addprospect()
     $this->load->view('layout/admin_header', $data);
     $this->load->view('prospect/addProspect');
     $this->load->view('layout/admin_footer');
-
 }
 public function deleteprospectAlert()
       {
@@ -214,6 +209,7 @@ public function deleteProspectConfirmation()
                     $_POST['editProspect'] = $prospectDataAry;
                     $data['getState']=$getState;
                     $_POST['flag'] = $flag;
+                    $data['flag'] = $flag;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/editProspect');
@@ -479,7 +475,6 @@ public function deleteProspectConfirmation()
                                                 </p>
                                                 <?php
                                             }
-
                                             if ($prospectStatusDetailsData['status'] == 2) {
                                                 ?>
                                                 <p title="Order Status"
@@ -488,7 +483,6 @@ public function deleteProspectConfirmation()
                                                 </p>
                                                 <?php
                                             }
-
                                            ?></td>
                                         <td>
                                             <?php 
@@ -572,9 +566,7 @@ public function deleteProspectConfirmation()
       
      public function export_prospect_csv()
         {
-
         ob_start();
-
         ini_set('max_execution_time', 5000);
         header( 'Content-type: text/html; charset=utf-8' );
         
@@ -615,7 +607,6 @@ public function deleteProspectConfirmation()
         
                        
                            
-
         $i=1;
         if(!empty($prospectDetailsAry))
            {
@@ -665,7 +656,6 @@ public function deleteProspectConfirmation()
                                $value = 'Other';
                             }  
                             
-
                        $data[$i]['sn'] =$i;
                        $data[$i]['business_name'] =$prospectDetailsData['szBusinessName'];
                        $data[$i]['contact_name'] =($prospectDetailsData['szName']==''?'N/A':$prospectDetailsData['szName']);
@@ -687,7 +677,6 @@ public function deleteProspectConfirmation()
                        $data[$i]['dt_last_updated_status'] = $statusVal ; 
                       
                        $i++;
-
                }
            }
         header('Content-type: text/csv','charset=utf-8');
@@ -700,16 +689,12 @@ public function deleteProspectConfirmation()
                    $download= fputcsv($f, $fields);    
            }
         }
-
      }
-
-
       public function import_csv_popup_alert()
       {
           $data['mode'] = '__IMPORT_CSV_POPUP__';
           $this->load->view('admin/admin_ajax_functions',$data);
       }
-
     public function importCsvData(){
    
     $target_dir = __APP_PATH__."/uploads/";
@@ -722,7 +707,6 @@ public function deleteProspectConfirmation()
         if (move_uploaded_file($_FILES["imp_prospects"]["tmp_name"], $target_file)) {
             
            $File =$target_file;
-
            $arrResult  = array();
            $handle     = fopen($File, "r");
            if(empty($handle) === false) {
@@ -788,7 +772,6 @@ public function deleteProspectConfirmation()
                     redirect(base_url('/prospect/prospectRecord'));
                
                     }
-
         } else {
                     $szMessage['type'] = "error";
                     $szMessage['content'] = "<h4><strong> Sorry, there was an error While importing your file.</strong></h4>";
@@ -802,7 +785,6 @@ public function deleteProspectConfirmation()
      }
     function franchiseeProspectRecord()
     {
-
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
@@ -811,13 +793,10 @@ public function deleteProspectConfirmation()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-
         $searchAry = '';
-
         if (isset($_POST['szSearchFrRecord']) && !empty($_POST['szSearchFrRecord'])) {
             $id = $_POST['szSearchFrRecord'];
         }
-
         if ($id > 0) {
             if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                 $prospectAray = $this->Prospect_Model->getAllProspectDetails($id);
@@ -829,17 +808,14 @@ public function deleteProspectConfirmation()
             if (!empty($prospectAray)) {
                 $this->session->set_userdata('id', $id);
                 redirect(base_url('/prospect/prospectRecord'));
-
             }
         }
-
         $data['prospectAray'] = $prospectAray;
         $data['pageName'] = "Prospect_Record";
         $data['szMetaTagTitle'] = "Prospect Record";
         $data['is_user_login'] = $is_user_login;
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('prospect/showProspectByFranchisee');
         $this->load->view('layout/admin_footer');
@@ -850,9 +826,7 @@ public function deleteProspectConfirmation()
         if (trim($idFranchisee) != '') {
             $_POST['idFranchisee'] = $idFranchisee;
         }
-
         $prospectAray = $this->Prospect_Model->getAllProspectDetailsByFrId($_POST['idFranchisee']);
-
         $result = "<select class=\"form-control custom-select required\" id=\"szSearch1\" name=\"szSearch1\" placeholder=\"Business Name\" onfocus=\"remove_formError(this.id,'true')\">";
         if (!empty($prospectAray)) {
             $result .= "<option value=''>Business Name</option>";
@@ -924,7 +898,6 @@ public function deleteProspectConfirmation()
  }
   public function prospect_summary_report()
     {
-
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -963,7 +936,6 @@ public function deleteProspectConfirmation()
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
-
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/prospect_summary_report');
             $this->load->view('layout/admin_footer'); 
@@ -980,7 +952,6 @@ public function deleteProspectConfirmation()
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
-
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/prospect_summary_report');
             $this->load->view('layout/admin_footer'); 
@@ -994,7 +965,6 @@ public function deleteProspectConfirmation()
           $data['idProspect'] = $this->input->post('idProspect');
           $this->load->view('admin/admin_ajax_functions',$data);
       }
-
       function View_pdf_Sales_Crm_Report()
         {
         $szBusinessName = $this->input->post('szBusinessName');
@@ -1122,45 +1092,36 @@ public function deleteProspectConfirmation()
         $filename = 'Report';
         $title = 'Sales CRM Summary Report';
         $file = $filename . '-' . $title ; //save our workbook as this file name
-
-
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
         $this->excel->getActiveSheet()->setCellValue('A1', 'Sr No.');
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee Name');
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('C1', 'Business Name');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('D1', 'Contact Name');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('E1', 'Email');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('F1', 'Status');
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
          $this->excel->getActiveSheet()->setCellValue('G1', 'Status Updated On');
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         
        $franchiseeId = $this->session->userdata('franchiseeId');
          $szBusinessName = $this->session->userdata('szBusinessName');
@@ -1212,11 +1173,9 @@ public function deleteProspectConfirmation()
                 $i++;
             }
         }
-
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
@@ -1275,7 +1234,6 @@ public function deleteProspectConfirmation()
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
-
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/salesCrmDetailedReport');
             $this->load->view('layout/admin_footer'); 
@@ -1292,7 +1250,6 @@ public function deleteProspectConfirmation()
                     $data['data'] = $data;
                     $data['recordAry']=$recordAry;
                     $data['arErrorMessages'] = $this->Prospect_Model->arErrorMessages;
-
             $this->load->view('layout/admin_header',$data);
             $this->load->view('prospect/salesCrmDetailedReport');
             $this->load->view('layout/admin_footer'); 
@@ -1436,45 +1393,36 @@ public function deleteProspectConfirmation()
         $filename = 'Report';
         $title = 'Sales CRM Detailed Report';
         $file = $filename . '-' . $title ; //save our workbook as this file name
-
-
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
         $this->excel->getActiveSheet()->setCellValue('A1', 'Sr No.');
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('B1', 'Franchisee Name');
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('C1', 'Business Name');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('D1', 'Contact Name');
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('E1', 'Email');
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('E1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('F1', 'Status');
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('F1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
          $this->excel->getActiveSheet()->setCellValue('G1', 'Status Updated On');
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         
         $franchiseeId = $this->session->userdata('franchiseeId');
         $status = $this->session->userdata('status');
@@ -1528,11 +1476,9 @@ public function deleteProspectConfirmation()
                 $i++;
             }
         }
-
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
@@ -1571,7 +1517,6 @@ public function deleteProspectConfirmation()
         $pdf->setPrintFooter(false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
-
         $pdf->AddPage('L');
    
           $idProspect = $this->session->userdata('idProspect');
@@ -1585,11 +1530,9 @@ public function deleteProspectConfirmation()
     <tr>
         <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
     </tr>
-
 </table>
 <br />
 <h2 style="text-align: center;">PROSPECT DETAILS</h2>
-
 <br>
 <h3 style="color:black">Prospect Info  </h3>
 <br />
@@ -1605,7 +1548,6 @@ public function deleteProspectConfirmation()
         <td width="50%" align="left"><b>Contact Name : </b> '. $prospectAry['szName'] .'</td>
     </tr>      
   
-
    <tr>
     <td width="50%" align="left"><b>Email : </b> '.$prospectAry['szEmail'].'</td>
       
@@ -1652,9 +1594,7 @@ public function deleteProspectConfirmation()
                         </div>
                       
                         ';
-
         $pdf->writeHTML($html, true, false, true, false, '');
-
         error_reporting(E_ALL);
         $this->session->unset_userdata('idProspect');
   
@@ -1679,24 +1619,20 @@ public function deleteProspectConfirmation()
         $filename = 'Report';
         $title = 'Drug-safe Meeting Note Details';
         $file = $filename . '-' . $title ; //save our workbook as this file name
-
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
         $this->excel->getActiveSheet()->setCellValue('A12', 'Sr No');
         $this->excel->getActiveSheet()->getStyle('A12')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A12')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A12')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('B12', 'Meeting Note');
         $this->excel->getActiveSheet()->getStyle('B12')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B12')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B12')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('C12', 'Meeting Date/Time');
         $this->excel->getActiveSheet()->getStyle('C12')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C12')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C12')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
        
           $idProspect = $this->session->userdata('idProspect');
           $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
@@ -1704,29 +1640,21 @@ public function deleteProspectConfirmation()
           $meetingAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
     
           if ($prospectAry['status'] == 1) {
-
             $status = "Pre Discovery";
         }
         if ($prospectAry['status'] == 2) {
-
             $status = "Discovery Meeting";
         }
         if ($prospectAry['status'] == 3) {
-
-
             $status = "In Progress" ;
         }
-
         if ($prospectAry['status'] == 4) {
-
             $status = "Non Convertible";
         }
          if ($prospectAry['status'] == 5) {
-
             $status = "Contact Later";
         }
          if ($prospectAry['status'] == 6) {
-
             $status = "Closed Sale";
         }
    
@@ -1779,7 +1707,6 @@ public function deleteProspectConfirmation()
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, $item['szDescription']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $date);
               
-
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
@@ -1787,11 +1714,9 @@ public function deleteProspectConfirmation()
                 $i++;
             }
         }
-
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
@@ -1824,7 +1749,6 @@ public function deleteProspectConfirmation()
         }
         $result .= "</select>";
         echo $result;
-
     }
 }
 ?>

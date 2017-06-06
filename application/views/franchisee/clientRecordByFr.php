@@ -1,9 +1,6 @@
-
 <script type='text/javascript'>
     $(function() {
-
         $("#szSearchname").customselect();
-
     });
 </script>
 <div class="page-content-wrapper">
@@ -54,8 +51,9 @@
                         </div>
                       </div>
                       <div class="row ">
-                             <form class="form-horizontal search-bar" id="szSearchClientRecord" action="<?=__BASE_URL__?>/franchisee/franchiseeClientRecord" name="szSearchClientRecord" method="post">
+                             <form class="search-bar" id="szSearchClientRecord" action="<?=__BASE_URL__?>/franchisee/franchiseeClientRecord" name="szSearchClientRecord" method="post">
                                   <div class="col-md-3 ">
+                                     <div class="form-group <?php if (!empty($arErrorMessages['szSearchFrRecord']) != '') { ?>has-error<?php } ?>">
                                       <select class="form-control custom-select" name="szSearchFrRecord" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
@@ -75,6 +73,7 @@
                                             }
                                           ?>
                                       </select>
+                                          </div>
                                   </div>
 
                                   <div class="col-md-1 search">
@@ -83,6 +82,7 @@
                              
                            </form>
                           </div>
+                    
                         <div class="row search_align">
                             
                             <?php if(!empty($_POST['szSearchFrRecord'])){
@@ -95,4 +95,4 @@
     </div>
 </div>
 </div>
-<div id="popup_box"></div>       
+<div id="popup_box"></div>  

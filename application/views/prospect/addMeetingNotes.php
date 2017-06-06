@@ -11,9 +11,9 @@
                          <?php
                           $prospectDetailsAry = $this->Prospect_Model->getProspectDetailsByProspectsId($idProspect);
                          if($flag==1){?>
-                        <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord"><?php echo  $prospectDetailsAry['szName'];?></a>
+                        <a href="<?php echo __BASE_URL__;?>/prospect/prospectRecord"><?php echo  $prospectDetailsAry['szBusinessName'];?></a>
                          <?php } else {?>
-                         <a href="<?php echo __BASE_URL__;?>/prospect/view_prospect_details"><?php echo  $prospectDetailsAry['szName'];?></a>
+                         <a href="<?php echo __BASE_URL__;?>/prospect/view_prospect_details"><?php echo  $prospectDetailsAry['szBusinessName'];?></a>
                          <?php }?>
                         <i class="fa fa-circle"></i>
                        </li>

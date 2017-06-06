@@ -16,7 +16,6 @@
                         <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                     </div>
                 <?php
-
                 }
                 if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                 {
@@ -39,8 +38,7 @@
                      <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($idCategory); 
                    ?>
                      <li>
-                        <a onclick=""
-                           href="javascript:void(0);"><?php echo $categoriesListAray['szName']; ?></a>
+                        <a href="<?php __BASE_URL__ ?>/forum/categoriesList" ><?php echo $categoriesListAray['szName']; ?></a>
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
@@ -72,16 +70,14 @@
 
                     </div>
                     <?php
-
                     if(!empty($forumDataAray))
                     {
-
                         ?>
 
                     <div class="row">
-                        <form class="form-horizontal" id="szSearchforumData" action="<?=__BASE_URL__?>/forum/forumList " name="szSearchforumData" method="post">
+                        <form class="search-bar" id="szSearchforumData" action="<?=__BASE_URL__?>/forum/forumList " name="szSearchforumData" method="post">
                             <div class="search col-md-3">
-        <!--                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProdCode'])?><!--">-->
+                        <div class="form-group">
                                 <select class="form-control custom-select" name="szSearchforumTitle" id="szSearchforumTitle" onfocus="remove_formError(this.id,'true')">
                                     <option value="">Forum Title</option>
                                     <?php
@@ -92,6 +88,7 @@
                                     }
                                     ?>
                                 </select>
+                            </div>
                             </div>
                             <div class="col-md-1">
                              <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
@@ -118,7 +115,6 @@
                                     foreach($forumDataAray as $forumDataData)
                                     {  
                                     $TotalTopics = count($this->Forum_Model->viewTopicList($forumDataData['id'])); 
-
                                         ?>
                                     <tr>
 
@@ -157,7 +153,6 @@
                     </div>
              
                          <?php
-
                     }
                     else
                     {

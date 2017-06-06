@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Form_Management_Controller extends CI_Controller
 {
     function __construct()
@@ -20,7 +19,6 @@ class Form_Management_Controller extends CI_Controller
         $this->load->model('Webservices_Model');
         $this->load->library('pagination');
     }
-
     public function index()
     {
         $is_user_login = is_user_login($this);
@@ -34,7 +32,6 @@ class Form_Management_Controller extends CI_Controller
             die;
         }
     }
-
     function viewFormData()
     {
         $flag = $this->input->post('flag');
@@ -42,7 +39,6 @@ class Form_Management_Controller extends CI_Controller
         echo "SUCCESS||||";
         echo "viewForm";
     }
-
     function viewForm()
     {
         $is_user_login = is_user_login($this);
@@ -141,7 +137,6 @@ class Form_Management_Controller extends CI_Controller
             $this->load->view('layout/admin_header', $data);
             $this->load->view('formManagement/sos-coc-formdetails.php');
             $this->load->view('layout/admin_footer');
-
         } else {
             $search['dtStart'] = $this->input->post('dtStart');
             $search['dtEnd'] = $this->input->post('dtEnd');
@@ -195,16 +190,11 @@ function endDate_check()
     {
         $idsite = $this->input->post('idsite');
         $idClient = $this->input->post('idClient');
-
         $this->session->set_userdata('idClient', $idClient);
         $this->session->set_userdata('idsite', $idsite);
-
         echo "SUCCESS||||";
         echo "sosForm";
-
-
     }
-
     function sosForm()
     {
         $is_user_login = is_user_login($this);
@@ -219,8 +209,6 @@ function endDate_check()
         $idsite = $this->session->userdata('idsite');
         $idClient = $this->session->userdata('idClient');
         $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetails($idClient, 1);
-
-
         $data['idClient'] = $idClient;
         $data['idsite'] = $idsite;
         $data['data'] = $data;
@@ -234,19 +222,15 @@ function endDate_check()
         $this->load->view('formManagement/sosForm');
         $this->load->view('layout/admin_footer');
     }
-
     function ViewSosFormPdfData()
     {
         $idClient = $this->input->post('idClient');
         $idsite = $this->input->post('idsite');
-
         $this->session->set_userdata('idClient', $idClient);
         $this->session->set_userdata('idsite', $idsite);
-
         echo "SUCCESS||||";
         echo "pdf_sosform";
     }
-
     public function pdf_sosform()
     {
         $this->load->library('Pdf');
@@ -270,7 +254,6 @@ function endDate_check()
         $idClient = $this->session->userdata('idClient');
         $idsite = $this->session->userdata('idsite');
         $sosRormDetailsAry = $this->Form_Management_Model->getsosFormDetails($idClient, 1);
-
         $html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Form Management Report</b></p></div>
@@ -290,8 +273,6 @@ function endDate_check()
                         <div>
                              <lable><b>Service Commenced On :</b> ' . $sosRormDetailsAry['ServiceCommencedOn'] . '</lable>   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <lable><b>Service Concluded On :</b> ' . $sosRormDetailsAry['ServiceConcludedOn'] . '</lable>  
                         </div>';
-
-
         $html .= '
                   
                     
@@ -308,13 +289,10 @@ function endDate_check()
                                    
                                     </tr>';
         if ($sosRormDetailsAry) {
-
             $donarDetailBySosIdAry = $this->Form_Management_Model->getDonarDetailBySosId($idsite);
             if (!empty($donarDetailBySosIdAry)) {
                 $i = 0;
                 foreach ($donarDetailBySosIdAry as $donarDetailBySosIdData) {
-
-
                     $html .= '<tr>
                                             <td>' . $donarDetailBySosIdData['id'] . ' </td>
                                             <td>' . $donarDetailBySosIdData['donerName'] . ' </td>
@@ -397,7 +375,6 @@ function endDate_check()
         ob_end_clean();
         $pdf->Output('Drugsafe_Form_Management_report.pdf', 'I');
     }
-
     function cocFormDetails()
     {
         $count = $this->Admin_Model->getnotification();
@@ -409,31 +386,22 @@ function endDate_check()
             redirect(base_url('/admin/admin_login'));
             die;
         }
-
-
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
         $data['szMetaTagTitle'] = "Form Management";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Form_Management";
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('formManagement/cocForm');
         $this->load->view('layout/admin_footer');
     }
-
     function ViewDonorDetailsData()
     {
-
         $idsos = $this->input->post('idsos');
-
-
         $this->session->set_userdata('idsos', $idsos);
-
         echo "SUCCESS||||";
         echo "ViewDonorDetails";
     }
-
     function ViewDonorDetails()
     {
         $idsos = $this->session->userdata('idsos');
@@ -447,7 +415,6 @@ function endDate_check()
             die;
         }
         $DonorDetailsAry = $this->Form_Management_Model->getActiveDonorDetailsBySosId($idsos);
-
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
         $data['idsos'] = $idsos;
@@ -455,25 +422,19 @@ function endDate_check()
         $data['DonorDetailsAry'] = $DonorDetailsAry;
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Form_Management";
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('formManagement/donorDetailsList');
         $this->load->view('layout/admin_footer');
     }
-
     function ViewCocFormData()
     {
-
         $idcoc = $this->input->post('idcoc');
         $idsos = $this->input->post('idsos');
-
         $this->session->set_userdata('idsos', $idsos);
         $this->session->set_userdata('idcoc', $idcoc);
-
         echo "SUCCESS||||";
         echo "ViewCocForm";
     }
-
     function ViewCocForm()
     {
         $idcoc = $this->session->userdata('idcoc');
@@ -488,7 +449,6 @@ function endDate_check()
             die;
         }
         $cocFormDetailsAry = $this->Form_Management_Model->getCocFormDetailsByCocId($idcoc);
-
         $data['notification'] = $count;
         $data['commentnotification'] = $commentReplyNotiCount;
         $data['idcoc'] = $idcoc;
@@ -497,12 +457,10 @@ function endDate_check()
         $data['cocFormDetailsAry'] = $cocFormDetailsAry;
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Form_Management";
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('formManagement/cocForm');
         $this->load->view('layout/admin_footer');
     }
-
     function getsosformpdf()
     {
         $sosid = $this->input->post('sosid');
@@ -512,12 +470,11 @@ function endDate_check()
         echo "SUCCESS||||";
         echo "sosformpdf";
     }
-
     public function sosformpdf()
     {
         ob_start();
         $this->load->library('Pdf');
-        $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetTitle('Drug-safe SOS Form Details');
         $pdf->SetAuthor('Drug-safe');
@@ -530,9 +487,7 @@ function endDate_check()
         $pdf->setPrintFooter(false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
-
-        $pdf->AddPage('L');
-
+        $pdf->AddPage('P');
         $sosid = $this->session->userdata('sosid');
         $hide = $this->session->userdata('hide');
         $sosdetarr = $this->Webservices_Model->getsosformdatabysosid($sosid);
@@ -556,7 +511,6 @@ function endDate_check()
             }else if($testtypesarr[0]=='4'){
                 $asnza = true;
             }
-
             if($testtypesarr[1]=='1'){
                 $alchohol = true;
             }else if($testtypesarr[1]=='2'){
@@ -566,7 +520,6 @@ function endDate_check()
             }else if($testtypesarr[1]=='4'){
                 $asnza = true;
             }
-
             if($testtypesarr[2]=='1'){
                 $alchohol = true;
             }else if($testtypesarr[2]=='2'){
@@ -576,7 +529,6 @@ function endDate_check()
             }else if($testtypesarr[2]=='4'){
                 $asnza = true;
             }
-
             if($testtypesarr[3]=='1'){
                 $alchohol = true;
             }else if($testtypesarr[3]=='2'){
@@ -587,7 +539,6 @@ function endDate_check()
                 $asnza = true;
             }
         }
-
         $drugteststring = '';
         if($alchohol){
             $drugteststring = 'Alcohol, ';
@@ -602,7 +553,6 @@ function endDate_check()
             $drugteststring .= 'AS/NZA 4308:2008, ';
         }
         $drugteststring = substr(trim($drugteststring),0,-1);
-
         $html = '<a style="text-align:center;  margin-bottom:0px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:0px; color:black"><b>SOS Details</b></p></div>
             <div class= "table-responsive" >
@@ -661,7 +611,6 @@ function endDate_check()
                                     }else if($drugarr[5] == '1'){
                                         $drugs .= 'Ice (Methamphetamine)<br>';
                                     }
-
                                     if($drugarr[0] == '2'){
                                         $drugs .= 'Marijuana<br>';
                                     }else if($drugarr[1] == '2'){
@@ -675,7 +624,6 @@ function endDate_check()
                                     }else if($drugarr[5] == '2'){
                                         $drugs .= 'Marijuana<br>';
                                     }
-
                                     if($drugarr[0] == '3'){
                                         $drugs .= 'Heroin<br>';
                                     }else if($drugarr[1] == '3'){
@@ -689,7 +637,6 @@ function endDate_check()
                                     }else if($drugarr[5] == '3'){
                                         $drugs .= 'Heroin<br>';
                                     }
-
                                     if($drugarr[0] == '4'){
                                         $drugs .= 'Cocaine<br>';
                                     }else if($drugarr[1] == '4'){
@@ -703,7 +650,6 @@ function endDate_check()
                                     }else if($drugarr[5] == '4'){
                                         $drugs .= 'Cocaine<br>';
                                     }
-
                                     if($drugarr[0] == '5'){
                                         $drugs .= 'Benzos<br>';
                                     }else if($drugarr[1] == '5'){
@@ -717,7 +663,6 @@ function endDate_check()
                                     }else if($drugarr[5] == '5'){
                                         $drugs .= 'Benzos<br>';
                                     }
-
                                     if($drugarr[0] == '6'){
                                         $drugs .= 'Amphetamine<br>';
                                     }else if($drugarr[1] == '6'){
@@ -731,11 +676,9 @@ function endDate_check()
                                     }else if($drugarr[5] == '6'){
                                         $drugs .= 'Amphetamine<br>';
                                     }
-
                                     if(!empty($donors['otherdrug'])){
                                         $drugs .= $donors['otherdrug'].'<br>';
                                     }
-
                                     $alcoholread1 = '';
                                     $alcoholread2 = '';
                                     if($donors['alcoholreading1']!=''){
@@ -818,7 +761,6 @@ function endDate_check()
                             </table>
                         </div>                      
                         ';
-
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
         $pdf->Output('view_sos_details.pdf', 'I');
@@ -830,7 +772,6 @@ function endDate_check()
         echo "SUCCESS||||";
         echo "cocformpdf";
     }
-
     public function cocformpdf()
     {
         
@@ -849,9 +790,7 @@ function endDate_check()
         $pdf->setPrintFooter(false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
-
-        $pdf->AddPage('L');
-
+        $pdf->AddPage('P');
         $cocid = $this->session->userdata('cocid');
         $cocdetarr = $this->Webservices_Model->getcocdatabycocid($cocid);
         $sosdetarr = $this->Webservices_Model->getsosdatabycocid($cocid,1,1);
@@ -1025,7 +964,6 @@ function endDate_check()
                             </table>
                         </div>                      
                         ';
-
         $pdf->writeHTML($html, true, false, true, false, '');
         ob_end_clean();
         $pdf->Output('view_coc_details.pdf', 'I');

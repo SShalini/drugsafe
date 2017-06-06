@@ -11,7 +11,6 @@
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php
-
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
@@ -39,15 +38,22 @@
                             <a href="<?php echo __BASE_URL__;?>">Home</a>
                             <i class="fa fa-circle"></i>
                         </li>
-                     
+                     <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($forumDataArr['idCategory']); 
+                       ?>
                          <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"> <?php echo $forumDataArr['szForumTitle'];?></a>
+                            <a href="<?php echo __BASE_URL__;?>/forum/categoriesList"><?php echo $categoriesListAray['szName']; ?></a>
                             <i class="fa fa-circle"></i>
                         </li>
                          <li>
-                            <a onclick=""
-                               href="javascript:void(0);"><?php echo $forumTopicDataAry['0']['szTopicTitle']?>'s Details</a>
-                            
+                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"><?php echo $forumDataArr['szForumTitle']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                            <a href="<?php echo __BASE_URL__;?>/forum/viewForum"> <?php echo $forumTopicDataAry['0']['szTopicTitle']?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                           Details
                         </li>
                      
                     </ul>
@@ -132,17 +138,12 @@
                     foreach($commentsDataArr as $commentsData)
                     {
                      
-
                     $splitTime = explode(" ",$commentsData['cmntDate']);
                     $Cmntdate = $splitTime[0];
                     $time = $splitTime[1];
-
                       $Cmnttime=  date("g:i a", strtotime($time));
-
                      $NewdateComment= explode('-', $Cmntdate);
-
                      $CnmtmonthNum  = $NewdateComment['1'];
-
                      $dateObj   = DateTime::createFromFormat('!m', $CnmtmonthNum);
                      $CmntmonthName = $dateObj->format('M');
                         

@@ -64,8 +64,9 @@
                         <?php } ?>
                     </div>
 
-
-                    <form name="orderSearchForm" id="orderSearchForm"
+    
+                    <div class="  row">
+                    <form class="search-bar" name="orderSearchForm" id="orderSearchForm"
                           action="<?= __BASE_URL__ ?>/reporting/clientcomparisonReport" method="post">
                         <div class="row">
                         <?php if(($_SESSION['drugsafe_user']['iRole'] == 1)||($_SESSION['drugsafe_user']['iRole'] == 5)){?>
@@ -109,7 +110,6 @@
                             <input type="hidden" name="szSearch1" value="<?php echo $_SESSION['drugsafe_user']['id'];?>" />
                             <script type="text/javascript">
                                 setTimeout(function(){getClientListByFrIdData('<?php echo $_SESSION['drugsafe_user']['id'];?>','<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>');},300);
-
                             </script>
                         <?php } ?>
                             <div class="col-md-3 clienttypeselect">
@@ -125,7 +125,6 @@
                                                 if($clientData['id'] == $_POST['szSearch2']){ ?>
                                                     <script type="text/javascript">
                                                         setTimeout(function(){getSiteListByClientIdData('<?php echo $_POST['szSearch2'];?>','<?php echo $_POST['szSearch3'];?>','<?php echo $_POST['szSearch1'];?>');},500);
-
                                                     </script>
                                                 <?php }
                                                 echo '<option value="' . $clientData['id'] . '"' . $selected . ' >' . $clientData['szName'] . '</option>';
@@ -143,7 +142,6 @@
                             </div>
                           
                             <div class="clienttypeselect col-md-3">
-
                                 <div class="form-group ">
                                     <div id="sitename">
                                         <select class="form-control custom-select" name="szSearch3" id="szSearch3"
@@ -166,9 +164,9 @@
                                         </span><?php } ?>
                                 </div>
                             </div>
-
+                   </div>
                         <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
-                        </div>
+                       
                         <div class="row">
                             <?php }else{?>
                               
@@ -237,7 +235,7 @@
 
                         </div>
                     </form>
-
+                        </div>
                     <?php
                     if ((!$err) && (!empty($compareresultarr))) {
                         ?>

@@ -76,7 +76,6 @@
                                        ?>   
                                        <?php
                                         foreach ($searchOptionArr as $searchOptionList) {
-
                                             $selected = ($searchOptionList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
                                             echo '<option value="' . $searchOptionList['id'] . '"' . $selected . ' >'.$searchOptionList['userCode'].'-'.$searchOptionList['szName'] . '</option>';
                                         }
@@ -95,18 +94,19 @@
                                      <div class=" col-md-3 clienttypeselect">
                                
                                     <div id='szClient'>
+                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>"> 
                                         <select class="form-control custom-select" name="szSearchClRecord1"
                                                 id="szSearchClientname" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Client Name</option>
                                             <?php
                                             foreach ($clientlistArr as $clientList) {
                                                 $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-
                                                 echo '<option value="' . $clientList['id'] . '"' . $selected . ' >'.$clientList['userCode']."-" .$clientList['szName'] . '</option>';
                                             }
                                             ?>
                                         </select>
-                                    </div>
+                                     </div>
+                                         </div>
                                 </div>
                                     <div class="col-md-3">
                                         <div class="form-group <?php if (!empty($arErrorMessages['dtStart']) != '') { ?>has-error<?php } ?>">
@@ -178,7 +178,6 @@
                                             <?php
                                             foreach ($clientlistArr as $clientList) {
                                                 $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-
                                                 echo '<option value="' . $clientList['id'] . '"' . $selected . ' >'.$clientList['userCode']."-" .$clientList['szName'] . '</option>';
                                             }
                                             ?>
@@ -283,6 +282,7 @@
                                                     <th>
                                                         Client Code 
                                                     </th>
+                                                    <th> Proforma Invoice Date</th>
                                                     <th>
                                                         Revenue EXL GST
                                                     </th>
@@ -303,7 +303,7 @@
                                                 $totalNetProfit='';
 						  foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
 														
-                                                       
+                                                
                               $getClientId=$this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                               $getClientDetails=$this->Admin_Model->getAdminDetailsByEmailOrId('',$getClientId['Clientid']);
                               $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($getClientDetails['id']);
@@ -314,7 +314,6 @@
                               $data = $this->Ordering_Model->getManualCalculationBySosId($getManualCalcData['sosid']);
                               $frDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $getManualCalcData['franchiseeId']);
                               $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
-
                                                       if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr) || in_array(4, $DrugtestidArr)) {
                                                           $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
                                                       }
@@ -340,9 +339,7 @@
                               $calloutprice = $data['cobp'] * ($data['cohr']>3?$data['cohr']:3);
                               $fcoprice = $data['fcobp'] * ($data['fcohr']>2?$data['fcohr']:2);
                               $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
-
                               $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
-
                               $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
                               $GSTmanual = ($TotalTrevenu * 0.1);
                               $GSTmanual = number_format($GSTmanual, 2, '.', '');
@@ -367,10 +364,8 @@
                               }
                               $Royaltyfees = ($discountpercent>0?number_format($totalafterdiscount, 2, '.', ''):number_format($totalinvoiceAmt, 2, '.', ''))*0.1;
                               $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
-
                               $NetTotal = ($discountpercent>0?number_format($totalafterdiscount, 2, '.', ''):number_format($totalinvoiceAmt, 2, '.', '')) - $Royaltyfees;
                               $NetTotal = number_format($NetTotal, 2, '.', '');
-
                               $totalRevenu=$totalRevenu+($discountpercent>0?number_format($totalafterdiscount, 2, '.', ''):number_format($totalinvoiceAmt, 2, '.', ''));
                               $totalRoyaltyfees=$totalRoyaltyfees+$Royaltyfees;
                               $totalNetProfit=$totalNetProfit+$NetTotal;
@@ -389,6 +384,7 @@
                                                         <td>
                                                          <?php echo $userDataAry['userCode'];?>
                                                         </td>
+                                                        <td><?php echo ((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A');?> </td>
                                                         <td>
                                                          $<?php  echo ($discountpercent>0?number_format($totalafterdiscount, 2, '.', ','):number_format($totalinvoiceAmt, 2, '.', ',')); ?>
                                                         </td>
@@ -406,6 +402,7 @@
                                                 ?>											   
                                                   <tr>
                                                    <td></td>
+                                                    <td></td>
                                                    <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)) {?>
                                                     <td></td>
                                                    <?php } ?>
@@ -475,6 +472,9 @@
                                                     Client Code
                                                 </th>
                                                 <th>
+                                                   Proforma Invoice Date 
+                                                </th>
+                                                <th>
                                                     Revenue EXL GST
                                                 </th>
                                                 <th>
@@ -495,6 +495,7 @@
                                             $i = 1;
                                             foreach($allfranchisee as $allfranchiseeData)
                                             {
+                                               
                                                 $clientArr = $this->Webservices_Model->getclientdetails($allfranchiseeData['franchiseeId']);
                                                 if(!empty($clientArr)) {
                                                     foreach ($clientArr as $clientData) {
@@ -504,19 +505,15 @@
                                                         $totalRoyaltyfees = '';
                                                         $totalNetProfit = '';
                                                         foreach ($getManualCalcStartToEndDate as $getManualCalcData) {
-
-
                                                             $getClientId = $this->Form_Management_Model->getSosDetailBySosId($getManualCalcData['sosid']);
                                                             $getClientDetails = $this->Admin_Model->getAdminDetailsByEmailOrId('', $getClientId['Clientid']);
                                                             $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($getClientDetails['id']);
-
                                                             $ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId($getClientId['Clientid']);
                                                             $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $ClirntDetailsDataAry['clientType']);
                                                             $discount = $this->Ordering_Model->getClientDiscountByClientId($ClirntDetailsDataAry['clientType']);
                                                             $data = $this->Ordering_Model->getManualCalculationBySosId($getManualCalcData['sosid']);
                                                             $frDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $getManualCalcData['franchiseeId']);
                                                             $DrugtestidArr = array_map('intval', str_split($getClientId['Drugtestid']));
-
                                                             if (in_array(1, $DrugtestidArr) || in_array(2, $DrugtestidArr) || in_array(3, $DrugtestidArr) || in_array(4, $DrugtestidArr)) {
                                                                 $countDoner = count($this->Form_Management_Model->getDonarDetailBySosId($getManualCalcData['sosid']));
                                                             }
@@ -542,9 +539,7 @@
                                                             $calloutprice = $data['cobp'] * ($data['cohr'] > 3 ? $data['cohr'] : 3);
                                                             $fcoprice = $data['fcobp'] * ($data['fcohr'] > 2 ? $data['fcohr'] : 2);
                                                             $travel = $data['travelBasePrice'] * ($data['travelHr'] > 1 ? $data['travelHr'] : 1);
-
                                                             $TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
                                                             $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
                                                             $GSTmanual = ($TotalTrevenu * 0.1);
                                                             $GSTmanual = number_format($GSTmanual, 2, '.', '');
@@ -569,10 +564,8 @@
                                                             }
                                                             $Royaltyfees = ($discountpercent > 0 ? number_format($totalafterdiscount, 2, '.', '') : number_format($totalinvoiceAmt, 2, '.', '')) * 0.1;
                                                             $Royaltyfees = number_format($Royaltyfees, 2, '.', '');
-
                                                             $NetTotal = ($discountpercent > 0 ? number_format($totalafterdiscount, 2, '.', '') : number_format($totalinvoiceAmt, 2, '.', '')) - $Royaltyfees;
                                                             $NetTotal = number_format($NetTotal, 2, '.', '');
-
                                                             $totalRevenu = $totalRevenu + ($discountpercent > 0 ? number_format($totalafterdiscount, 2, '.', '') : number_format($totalinvoiceAmt, 2, '.', ''));
                                                             $totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
                                                             $totalNetProfit = $totalNetProfit + $NetTotal;
@@ -593,6 +586,9 @@
                                                             </td>
                                                             <td>
                                                                 <?php echo $userDataAry['userCode']; ?>
+                                                            </td>
+                                                            <td>
+                                                                <?php echo date('d M Y',strtotime($getManualCalcData['dtCreatedOn'])) . ' at '.date('h:i A',strtotime($getManualCalcData['dtCreatedOn']));?>
                                                             </td>
                                                             <td>
                                                                 $<?php
@@ -617,15 +613,14 @@
                                                         $i++;
                                                     }
                                                 }
-
                                                 }
                                             }
                                             ?>
                                             <tr>
                                                 <?php if(($_SESSION['drugsafe_user']['iRole']==1)||($_SESSION['drugsafe_user']['iRole']==5)) {?>
-                                                    <td colspan="3"></td>
+                                                    <td colspan="4"></td>
                                                 <?php }else{ ?>
-                                                <td colspan="2"></td>
+                                                <td colspan="3"></td>
                                                 <?php } ?>
                                                 <td>
                                                     <b>Total</b>

@@ -76,7 +76,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->insertProduct())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Marketing Material added successfully.</h3></strong>";
+                    $szMessage['content'] = "<h4><strong> Marketing Material added successfully.</strong></h4>";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage);
                      redirect(base_url('/inventory/marketingMaterialList'));
                     die;
@@ -128,7 +128,7 @@ class Inventory_Controller extends CI_Controller {
                     if($szProductCategory==1)
                     {
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3>Drug Test Kit added successfully.</h3></strong>";
+                        $szMessage['content'] = "<h4><strong>Drug Test Kit added successfully.</strong></h4>";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                          redirect(base_url('/inventory/drugTestKitList'));
                         die;
@@ -176,7 +176,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->insertProduct())
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3>Consumables added successfully.</h3> </strong> ";
+                    $szMessage['content'] = "<h4><strong>Consumables added successfully.</strong></h4>  ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                      redirect(base_url('/inventory/consumablesList'));
                   
@@ -255,7 +255,7 @@ class Inventory_Controller extends CI_Controller {
                 {
                    
                         $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong></h3> Drug Test Kit updated successfully.<h3> </strong> ";
+                        $szMessage['content'] = "</h4> <strong> Drug Test Kit updated successfully.</strong><h4>  ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
@@ -264,7 +264,6 @@ class Inventory_Controller extends CI_Controller {
                         die;
                    
                 }
-
             }
         }
         function uploadProfileImage()
@@ -314,7 +313,6 @@ class Inventory_Controller extends CI_Controller {
              $config['base_url'] = __BASE_URL__ . "/inventory/drugtestkitlist/";
              $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit,$offset,$searchAry));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
              $this->pagination->initialize($config);
             
                $idfranchisee = $_SESSION['drugsafe_user']['id'];
@@ -323,7 +321,6 @@ class Inventory_Controller extends CI_Controller {
             $drugTestKitListAray =$this->Inventory_Model->viewDrugTestKitList();
                $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-
                     $data['drugTestKitAray'] = $drugTestKitAray;
                     $data['szMetaTagTitle'] = " Drug Test Kit List";
                     $data['is_user_login'] = $is_user_login;
@@ -353,7 +350,6 @@ class Inventory_Controller extends CI_Controller {
              $config['base_url'] = __BASE_URL__ . "/inventory/marketingmateriallist/";
              $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry,$limit,$offset));
              $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
              $this->pagination->initialize($config);
             
              $idfranchisee = $_SESSION['drugsafe_user']['id'];
@@ -456,7 +452,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
                     $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3> Marketing Material updated successfully.</h3> </strong> ";
+                        $szMessage['content'] = "<h4><strong> Marketing Material updated successfully. </strong> </h4>  ";
                         $this->session->set_userdata('drugsafe_user_message', $szMessage);
                         $this->session->unset_userdata('idProduct');
                         $this->session->unset_userdata('flag');
@@ -464,7 +460,6 @@ class Inventory_Controller extends CI_Controller {
                           redirect(base_url('/inventory/marketingMaterialList'));
                         die;
                 }
-
             }
         }
         function editConsumablesData()
@@ -535,7 +530,7 @@ class Inventory_Controller extends CI_Controller {
                 if( $this->Inventory_Model->UpdateProduct($idProduct))
                 {
                     $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Consumables updated successfully.</h3> </strong> ";
+                    $szMessage['content'] = "<h4> <strong> Consumables updated successfully.</strong></h4>  ";
                     $this->session->set_userdata('drugsafe_user_message', $szMessage); 
                     $this->session->unset_userdata('idProduct');
                     $this->session->unset_userdata('flag');
@@ -543,7 +538,6 @@ class Inventory_Controller extends CI_Controller {
                     redirect(base_url('/inventory/ConsumablesList'));
                     die;
                 }
-
             }
         }
         function consumableslist()
@@ -566,7 +560,6 @@ class Inventory_Controller extends CI_Controller {
                $consumableslistAry =$this->Inventory_Model->viewConsumablesList();
                $count = $this->Admin_Model->getnotification();
             $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-
                     $data['consumablesAray'] = $consumablesAray;
                     $data['szMetaTagTitle'] = " Consumables List";
                     $data['is_user_login'] = $is_user_login;

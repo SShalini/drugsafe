@@ -5,7 +5,11 @@
                 <div class="col-md-12">
                      <ul class="page-breadcrumb breadcrumb">
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/inventory/consumableslist">Home</a>
+                            <a href="<?php echo __BASE_URL__;?>">Home</a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                            <a href="<?php echo __BASE_URL__;?>/inventory/consumableslist"><?php echo set_value('productData[szProductCode]'); ?></a>
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
@@ -215,10 +219,8 @@
     </div>
     
     <script type="text/javascript">
-
         $(document).ready(function()
         {
-
             var settings = {
                     url: "<?php echo __BASE_URL__; ?>/inventory/uploadProfileImage",
                     method: "POST",
@@ -249,8 +251,6 @@
             if($('#product_image').is(':visible')){
                 setTimeout(function() { hideUploadBtn(); }, 500);
             }
-
-
         });
         function removeIncidentPhoto(){
         $('#product_image').hide();
@@ -262,5 +262,4 @@
         {
             $(".ajax-upload-dragdrop").addClass('hide');
         }
-
 </script>

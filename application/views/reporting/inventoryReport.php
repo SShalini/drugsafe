@@ -76,7 +76,7 @@
                         </div>
                         
                     <div class="  row">
-                      <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/inventoryReport" method="post">
+                      <form class="search-bar" name="orderSearchForm" class="search-bar" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/inventoryReport" method="post">
                 
                     
                     <div class="clienttypeselect search col-md-3">

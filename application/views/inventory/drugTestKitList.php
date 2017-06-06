@@ -16,7 +16,6 @@
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php
-
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
@@ -67,9 +66,9 @@
                             ?>
                         
                           <div class="row">
-                           <form class="form-horizontal" id="szSearchDrugTestList" action="<?=__BASE_URL__?>/inventory/drugtestkitlist " name="szSearchDrugTestList" method="post">
+                           <form class="search-bar" id="szSearchDrugTestList" action="<?=__BASE_URL__?>/inventory/drugtestkitlist " name="szSearchDrugTestList" method="post">
                           <div class="search col-md-3 clienttypeselect">
-<!--                            <input type="text" name="szSearchProdCode" id="szSearchProdCode" class="form-control input-square-right " placeholder="Product Code" value="--><?//=sanitize_post_field_value($_POST['szSearchProdCode'])?><!--">-->
+                          <div class="form-group <?php if (!empty($arErrorMessages['szSearchProdCode']) != '') { ?>has-error<?php } ?>">
                               <select class="form-control custom-select" name="szSearchProdCode" id="szSearchProdCode" onfocus="remove_formError(this.id,'true')">
                                   <option value="">Product Code</option>
                                   <?php
@@ -80,6 +79,7 @@
                                   }
                                   ?>
                               </select>
+                               </div>
                           </div>
                                <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>

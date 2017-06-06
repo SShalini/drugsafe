@@ -1,12 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Forum_Controller extends CI_Controller {
-     
-	function __construct()
-	{
-            parent::__construct();
-           
-           $this->load->model('Order_Model');
+class Admin_Controller extends CI_Controller
+{
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Order_Model');
         $this->load->model('StockMgt_Model');
         $this->load->library('pagination');
         $this->load->model('Ordering_Model');
@@ -19,733 +18,973 @@ class Forum_Controller extends CI_Controller {
         $this->load->model('StockMgt_Model');
         $this->load->model('Webservices_Model');
         $this->load->library('pagination');
-        }
-	public function addCategory() {
-           $count = $this->Admin_Model->getnotification();
-        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if (!$is_user_login) {
-                ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
-                die;
-            }
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('forumData[szCategoryName]', 'Category Name', 'required');
-            $this->form_validation->set_rules('forumData[szCategoryDiscription]', 'Category Description', 'required');
-            $this->form_validation->set_message('required', '{field} is required.');
-            if ($this->form_validation->run() == FALSE)
-            { 
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $data['szMetaTagTitle'] = "Add Category";
-                $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Forum";
-                $data['subpageName'] = "Categories";
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('forum/addCategory');
-                $this->load->view('layout/admin_footer');
-            }
-            else
-            {
-                if( $this->Forum_Model->insertCategory())
-                {
-                    $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Category added successfully.</h3></strong>";
-                    $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                  redirect(base_url('/forum/categoriesList'));
-                    die;
-                }
-            }
-        }
-        function addTopicData()
-        {
-            $idForum = $this->input->post('idForum');
-            $this->session->set_userdata('idForum',$idForum);
-           
-            echo "SUCCESS||||";
-            echo "addTopic";
-            
-        }
-        public function addTopic() {
-              $count = $this->Admin_Model->getnotification();
-              $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-              $is_user_login = is_user_login($this);
-              $idForum = $this->session->userdata('idForum');
-              $value = $this->input->post('forumData');
-             
-            // redirect to dashboard if already logged in
-            if (!$is_user_login) {
-                ob_end_clean();
-              redirect(base_url('/admin/admin_login'));
-                die;
-            }
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('forumData[szTopicTitle]', 'Topic Title', 'required');
-            $this->form_validation->set_rules('forumData[szTopicDiscription]', 'Topic Description', 'required');
-            $this->form_validation->set_message('required', '{field} is required.');
-            if ($this->form_validation->run() == FALSE)
-            { 
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $data['szMetaTagTitle'] = "Add Topic";
-                $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Forum";
-                $data['subpageName'] = "Categories";
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('forum/addTopic');
-                $this->load->view('layout/admin_footer');
-            }
-            else
-            {
-                if( $this->Forum_Model->insertTopic($value,$idForum))
-                {
-                    $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Forum Topic added successfully.</h3></strong>";
-                    $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                     $this->session->unset_userdata('idForum');
-                    redirect(base_url('/forum/forumList'));
-                }
-            }
-        }
-        function editCategoryData()
-        {
-            $idCategory = $this->input->post('idCategory');
-            $this->session->set_userdata('idCategory',$idCategory);
-           
-            echo "SUCCESS||||";
-            echo "editCategory";
-            
-        }
-        
-        public function editCategory() {
-            $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if (!$is_user_login) {
-                ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
-                die;
-            }
-           
-            $idCategory = $this->session->userdata('idCategory');
-            $CategoryDataAry = $this->Forum_Model->getCategoryDetailsById($idCategory);
-         
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('forumData[szName]', 'Category Name', 'required');
-            $this->form_validation->set_rules('forumData[szDiscription]', 'Category Description', 'required');
-             $this->form_validation->set_message('required', '{field} is required.');
-            
-            if ($this->form_validation->run() == FALSE)
-            {
-                $data['szMetaTagTitle'] = "Edit Category";
-                $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Forum";
-                $data['subpageName'] = "Categories";
-                $_POST['forumData']= $CategoryDataAry;
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('forum/editCategory');
-                $this->load->view('layout/admin_footer');
-            }
-            else
-            {
-                if( $this->Forum_Model->UpdateCategory($idCategory))
-                {
-                   
-                        $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3> Category updated successfully.</h3></strong>";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                        $this->session->unset_userdata('idCategory');
-                        ob_end_clean();
-                        redirect(base_url('/forum/categoriesList'));
-                    die;
-                }
-            }
-        }
-       
-
-        function categoriesList()
-        {
-           $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if(!$is_user_login)
-            {
-                ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
-                die;
-            }
-             $searchAry = $_POST['szSearchCtName'];
-//             print_r($searchAry);die;
-             
-             $config['base_url'] = __BASE_URL__ . "/forum/categoriesList/";
-             $config['total_rows'] = count($this->Forum_Model->viewCategoriesList($limit,$offset,$searchAry));
-             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
-             $this->pagination->initialize($config);
-            
-               $idfranchisee = $_SESSION['drugsafe_user']['id'];
-               $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
-               $categoriesListAray =$this->Forum_Model->viewDistinctCategoriesList();
-               $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-
-                    $data['categoriesAray'] = $categoriesAray;
-                    $data['szMetaTagTitle'] = " Categories List";
-                    $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Forum";
-                    $data['subpageName'] = "Forum_List";
-                    $data['notification'] = $count;
-            $data['commentnotification'] = $commentReplyNotiCount;
-                    $data['data'] = $data;
-                    $data['categoriesListAray'] = $categoriesListAray;
- 
-            $this->load->view('layout/admin_header',$data);
-            $this->load->view('forum/categoriesList');
-            $this->load->view('layout/admin_footer');
-        }
-        public function deleteCategoryAlert()
-        {
-            $data['mode'] = '__DELETE_CATEGORY_POPUP__';
-            $data['idCategory'] = $this->input->post('idCategory');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function deleteCategoryConfirmation()
-        {
-            $data['mode'] = '__DELETE_CATEGORY_POPUP_CONFIRM__';
-            $data['idCategory'] = $this->input->post('idCategory');
-            $this->Forum_Model->deleteCategory($data['idCategory']);
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }   
-         public function forumDeleteAlert()
-        {
-            $data['mode'] = '__DELETE_FORUM_POPUP__';
-            $data['id'] = $this->input->post('id');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function deleteForumConfirmation()
-        {
-            $data['mode'] = '__DELETE_FORUM_POPUP_CONFIRM__';
-            $data['id'] = $this->input->post('id');
-            $this->Forum_Model->deleteForum($data['id']);
-            $this->load->view('admin/admin_ajax_functions',$data);
-        } 
-         function viewForumData()
-        {
-            $idCategory = $this->input->post('idCategory');
-            $this->session->set_userdata('idCategory',$idCategory);
-           
-            echo "SUCCESS||||";
-            echo "forumList";
-            
-        }
-        
-         function forumList()
-        {
-           $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if(!$is_user_login)
-            {
-                ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
-                die;
-            }
-             $idCategory = $this->session->userdata('idCategory');
-             $searchAry = $_POST['szSearchforumTitle'];
-             
-             $config['base_url'] = __BASE_URL__ . "/forum/forumList/";
-             $config['total_rows'] = count($this->Forum_Model->viewForumDataList($limit,$offset,$searchAry,$idCategory));
-             $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
-             $this->pagination->initialize($config);
-            
-             
-          
-               $forumDataAray =$this->Forum_Model->viewForumDataList($config['per_page'],$this->uri->segment(3),$searchAry,$idCategory);
-               $forumDataSearchAray =$this->Forum_Model->viewForumDataList(false,false,false,$idCategory);
-               $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-
-                    $data['forumDataAray'] = $forumDataAray;
-                    $data['szMetaTagTitle'] = " Forum List";
-                    $data['is_user_login'] = $is_user_login;
-                    $data['idCategory'] = $idCategory;
-                    $data['pageName'] = "Forum";
-                    $data['subpageName'] = "Forum_List";
-                    $data['notification'] = $count;
-            $data['commentnotification'] = $commentReplyNotiCount;
-                    $data['data'] = $data;
-            $data['forumDataSearchAray'] = $forumDataSearchAray;
- 
-            $this->load->view('layout/admin_header',$data);
-            $this->load->view('forum/forumList');
-            $this->load->view('layout/admin_footer');
-        }
-         function addForumData()
-        {
-            $idCategory = $this->input->post('idCategory');
-            $flag = $this->input->post('flag');
-            $this->session->set_userdata('idCategory',$idCategory);
-            $this->session->set_userdata('flag',$flag);
-           
-            echo "SUCCESS||||";
-            echo "addforum";
-            
-        }
-         public function addforum() 
-        {
-            $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-             $validate = $this->input->post('forumData');
-             $idCategory = $this->session->userdata('idCategory');
-             $flag = $this->session->userdata('flag');
-            $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if (!$is_user_login) {
-                ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
-                die;
-            }
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('forumData[szForumTitle]', 'Forum Title', 'required');
-            $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Description', 'required');
-            $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Description', 'required');
-            $this->form_validation->set_rules('forumData[idCategory]', 'category ', 'required');
-            $this->form_validation->set_message('required', '{field} is required.');
-            if ($this->form_validation->run() == FALSE)
-            { 
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $data['idCategory'] = $idCategory;
-                $data['flag'] = $flag;
-                $data['szMetaTagTitle'] = "Add Forum Data";
-                $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Forum";
-                $data['subpageName'] = "Forum_List";
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('forum/addForum');
-                $this->load->view('layout/admin_footer');
-            }
-            else
-            {
-                if( $this->Forum_Model->insertForumData($validate))
-                {
-                    $szMessage['type'] = "success";
-                    $szMessage['content'] = "<strong><h3> Forum Data added successfully.</h3></strong>";
-                    $this->session->set_userdata('drugsafe_user_message', $szMessage); 
-                    redirect(base_url('/forum/forumList'));
-                    die;
-                }
-            }
-        }
-         function editForumData()
-        {
-            $id = $this->input->post('id');
-            $this->session->set_userdata('id',$id);
-           
-            echo "SUCCESS||||";
-            echo "editForum";
-            
-        }
-        
-        public function editForum() {
-            
-              $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if (!$is_user_login) {
-                ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
-                die;
-            }
-            $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-            $is_user_login = is_user_login($this);
-            $validate = $this->input->post('forumData');
-            $id = $this->session->userdata('id');
-            $forumDataAry = $this->Forum_Model->getForumDetailsById($id);
-            
-           
-         
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('forumData[szForumTitle]', 'Forum Title', 'required');
-            $this->form_validation->set_rules('forumData[szForumDiscription]', 'Forum Description', 'required');
-            $this->form_validation->set_rules('forumData[szForumLongDiscription]', 'Forum Long Description', 'required');
-            $this->form_validation->set_message('required', '{field} is required.');
-            
-            if ($this->form_validation->run() == FALSE)
-            {
-                
-                $data['szMetaTagTitle'] = "Edit Forum Data";
-                $data['is_user_login'] = $is_user_login;
-                $data['pageName'] = "Forum";
-                $data['subpageName'] = "Forum_List";
-                $_POST['forumData']= $forumDataAry;
-                $data['notification'] = $count;
-                $data['commentnotification'] = $commentReplyNotiCount;
-                $this->load->view('layout/admin_header',$data);
-                $this->load->view('forum/editForum');
-                $this->load->view('layout/admin_footer');
-            }
-            else
-            {
-                if( $this->Forum_Model->UpdateForum($validate,$id))
-                {
-                   
-                        $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3> Forum Data updated successfully.</h3></strong>";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                        $this->session->unset_userdata('id');
-                        ob_end_clean();
-                        redirect(base_url('/forum/forumList'));
-                    die;
-                }
-            }
-        }
-         function viewForumListData()
-        {
-            $idForum = $this->input->post('idForum');
-            
-                $this->session->set_userdata('idForum',$idForum);
-                
-                echo "SUCCESS||||";
-                echo "viewForum";
-            
- 
-        }
-        function viewForum()
+    }
+    public function index()
     {
-        $idForum = $this->session->userdata('idForum');
         $is_user_login = is_user_login($this);
-
-        // redirect to dashboard if already logged in
-        if (!$is_user_login) {
+        if ($is_user_login) {
+            if ($_SESSION['drugsafe_user']['iRole'] == '5') {
+                ob_end_clean();
+                redirect(base_url('/admin/franchiseeList'));
+                die;
+            } elseif ($_SESSION['drugsafe_user']['iRole'] == '1') {
+                ob_end_clean();
+                redirect(base_url('/admin/operationManagerList'));
+                die;
+            }elseif ($_SESSION['drugsafe_user']['iRole'] == '2') {
+                ob_end_clean();
+                 redirect(base_url('/franchisee/clientRecord'));
+                die;
+            }
+            else {
+                ob_end_clean();
+                redirect(base_url('/formManagement/view_form_for_client'));
+                die;
+            }
+        } else {
             ob_end_clean();
             redirect(base_url('/admin/admin_login'));
             die;
         }
-         $searchAry = '';
-         
-         // handle pagination
-      
-        $config['base_url'] = __BASE_URL__ . "/forum/viewForum/";
-        $config['total_rows'] = count($this->Forum_Model->viewTopicList($idForum,false,false,$limit,$offset));
-        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
-
-        $this->pagination->initialize($config);
-      
-       $forumDetailsAry = $this->Forum_Model->getForumDetailsByForumId($idForum);
-//       $forumDataSearchAray =$this->Forum_Model->getForumDetailsByForumId($idForum);
-       $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-       $forumTopicDataAry =$this->Forum_Model->viewTopicList($idForum,false,false,$config['per_page'],$this->uri->segment(3));
-   
-        $data['forumTopicDataAry'] = $forumTopicDataAry;
-        $data['forumDetailsAry'] = $forumDetailsAry;
-//        $data['forumDataSearchAray'] = $forumDataSearchAray;
-        $data['pageName'] = "Forum";
-        $data['subpageName'] = "Forum_List";
-        $data['szMetaTagTitle'] = "Forum Details List";
+    }
+    public function admin_login()
+    {
+        ob_start();
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+    if($_SESSION['drugsafe_user']['id']>0){
+        if ($is_user_login) {
+            ob_end_clean();
+            echo "<script type='text/javascript'>window.location.href = '" . __BASE_URL__ . "/admin/franchiseeList';</script>";
+            exit();
+            /*header("Location:" . __BASE_URL__ . "/admin/franchiseeList");
+           die;*/
+    }}
+        $validate = $this->input->post('adminLogin');
+        $iRemember = (int)$this->input->post('adminLogin[iRemember]');
+        
+        if ($this->Admin_Model->validateAdminData($validate)) {
+           
+            $adminAry = $this->Admin_Model->adminLoginUser($validate);
+            if (!empty($adminAry)) {
+                if ((int)$iRemember == 1) {
+                    set_customer_cookie($this, $adminAry);
+                }
+                $user_session = $this->session->userdata('drugsafe_user');
+                if ($user_session[iRole] == '1') {
+                    ob_end_clean();
+                    redirect(base_url('/admin/operationManagerList'));
+                } elseif ($user_session[iRole] == '5') {
+                    ob_end_clean();
+                    redirect(base_url('/admin/franchiseeList'));
+                }elseif ($user_session[iRole] == '2') {
+                ob_end_clean();
+                 redirect(base_url('/franchisee/clientRecord'));
+                die;
+            }
+            else {
+                ob_end_clean();
+                redirect(base_url('/formManagement/view_form_for_client'));
+                die;
+            }
+            }
+        }
+       
+        $data['szMetaTagTitle'] = "Admin Login";
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
         $data['is_user_login'] = $is_user_login;
-        $data['notification'] = $count;
-            $data['commentnotification'] = $commentReplyNotiCount;
-        $this->load->view('layout/admin_header', $data);
-        $this->load->view('forum/viewForum');
-        $this->load->view('layout/admin_footer');
-       
+        $this->load->view('layout/login_header', $data);
+        $this->load->view('admin/admin_login');
+        $this->load->view('layout/login_footer');
     }
-     function viewTopicData()
-        {
-            $idTopic = $this->input->post('idTopic');
-            $idForum = $this->input->post('idForum');
-            $this->session->set_userdata('idTopic',$idTopic);
-            $this->session->set_userdata('idForum',$idForum);
-                
-                echo "SUCCESS||||";
-                echo "viewTopicDetails";
-            
- 
-        }
-        function viewTopicDetails()
+    public function dashboard()
     {
-        $idTopic = $this->session->userdata('idTopic');
-        $idForum = $this->session->userdata('idForum');
         $is_user_login = is_user_login($this);
-
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $user_session = $this->session->userdata('drugsafe_user');
+        $data['szMetaTagTitle'] = "Dashboard";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Admin_Dashboard";
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('admin/dashboard');
+        $this->load->view('layout/admin_footer');
+    }
+    function logout()
+    {
+        logout($this);
+        ob_end_clean();
+        redirect(base_url('/admin/admin_login'));
+    }
+    function changePassword()
+    {
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
             ob_end_clean();
             redirect(base_url('/admin/admin_login'));
             die;
         }
-  
-        $forumTopicDataAry =$this->Forum_Model->viewTopicList($idForum,$idTopic,1);
-        
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('replyData[szForumLongDiscription]', 'Comments', 'required');
-            
-            $this->form_validation->set_message('required', '{field} is required.');
-            
-            if ($this->form_validation->run() == FALSE)
-            {
-                $data['forumTopicDataAry'] = $forumTopicDataAry;
-                $data['pageName'] = "Forum";
-                 $data['idForum'] = $idForum;
-                $data['subpageName'] = "Forum_List";
-                $data['szMetaTagTitle'] = "Topic Details ";
-                $data['is_user_login'] = $is_user_login;
-                $data['notification'] = $count;
-
-
-                $this->load->view('layout/admin_header', $data);
-                $this->load->view('forum/viewTopicDetails');
-                $this->load->view('layout/admin_footer');
-            }
-            else
-            {
-                if( $this->Forum_Model->insertComents($idTopic))
-                {
-                   
-                        $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3> Comments Posted successfully.</h3></strong>";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                        ob_end_clean();
-                       
-                        redirect(base_url('/forum/viewTopicDetails'));
+        $data_validate = $this->input->post('drugsafeChangePassword');
+        if ($this->Admin_Model->validateUserData($data_validate)) {
+            if ($this->Admin_Model->updateChangePassword()) {
+                $szMessage['type'] = "success";
+                $szMessage['content'] = "<h4><strong>Your new password successfully updated.</strong></h4> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                if ($_SESSION['drugsafe_user']['iRole'] == 5) {
+                    ob_end_clean();
+                    redirect(base_url('/admin/franchiseeList'));
+                    die;
+                } elseif ($_SESSION['drugsafe_user']['iRole'] == 2) {
+                    redirect(base_url('/franchisee/clientRecord'));
+                    die;
+                } else {
+                    ob_end_clean();
+                    redirect(base_url('/admin/operationManagerList'));
                     die;
                 }
             }
-
+        }
+        $data['szMetaTagTitle'] = "Change Password";
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Profile";
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('admin/changePassword');
+        $this->load->view('layout/admin_footer');
     }
-    public function replyToCmnt()
+    function addFranchiseeData()
     {
-        $data['mode'] = '__REPLY_POPUP__';
-        $data['idCmnt'] = $this->input->post('idCmnt');
-        $this->load->view('admin/admin_ajax_functions',$data);
+        $idOperationManager = $this->input->post('idOperationManager');
+        $flag = $this->input->post('flag');
+        $this->session->set_userdata('flag', $flag);
+        if ($idOperationManager > 0) {
+            $this->session->set_userdata('idOperationManager', $idOperationManager);
+        }
+        echo "SUCCESS||||";
+        echo "addFranchisee";
     }
-    public function replyToCmntConfirmation()
-    {
-        
-        $data['mode'] = '__REPLY_CONFIRM_POPUP__';
-        $data['idCmnt'] = $this->input->post('idCmnt');
-        $data['val'] = $this->input->post('val');
-        $this->Forum_Model->insertReply($data['idCmnt'],$data['val']);
-        $this->load->view('admin/admin_ajax_functions', $data);
-    }
-    function approvallist()
-    {
-           $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if(!$is_user_login)
-            {
+    function addFranchisee(){
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $validate = $this->input->post('addFranchisee');
+        if ($validate['szState']) {
+            $getReginolCode = $this->Admin_Model->getRegionByStateId($validate['szState']);
+        }
+        $idOperationManager = $this->session->userdata('idOperationManager');
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
+        $flag = $this->session->userdata('flag');
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('addFranchisee[sztype]', 'Franchisee Type', 'required');
+        $this->form_validation->set_rules('addFranchisee[szName]', 'Name', 'required|alpha_dash_space');
+        $this->form_validation->set_message('alpha_dash_space', ' %s must be only letters and white space.');
+        $this->form_validation->set_rules('addFranchisee[abn]', 'ABN', 'required|abn_numeric|abn_length');
+        $this->form_validation->set_rules('addFranchisee[operationManagerId]', 'Operation Manager', 'required');
+        $this->form_validation->set_rules('addFranchisee[szRegionName]', 'Region Name', 'required');
+        $this->form_validation->set_rules('addFranchisee[szState]', 'State', 'required');
+        $this->form_validation->set_rules('addFranchisee[szEmail]', 'Email', 'required|chekDuplicate[' .__DBC_SCHEMATA_USERS__. '.szEmail]|valid_email');
+        $this->form_validation->set_rules('addFranchisee[szContactNumber]', 'Contact No', 'required|valid_phone_number');
+        $this->form_validation->set_rules('addFranchisee[szAddress]', 'Address', 'required');
+        $this->form_validation->set_rules('addFranchisee[szCity]', 'City', 'required|alpha_dash_space');
+        $this->form_validation->set_rules('addFranchisee[szZipCode]', 'ZIP/Postal Code', 'required|zipCode_legth');
+        $this->form_validation->set_message('valid_phone_number', ' %s : enter 10 digit number.');
+        $this->form_validation->set_message('chekDuplicate', ' %s must be unique.');
+        $this->form_validation->set_message('abn_numeric', ' %s must be only digits.');
+        $this->form_validation->set_message('abn_length', ' %s must contain 11 digits only.');
+        $this->form_validation->set_message('zipCode_legth', ' %s must contain 4 digits only.');
+        $this->form_validation->set_message('required', '{field} is required.');
+        if ($this->form_validation->run() == FALSE) {
+            $data['idOperationManager'] = $idOperationManager;
+            $data['szMetaTagTitle'] = "Add Franchisee";
+            $data['pageName'] = "Franchisee_List";
+            $data['validate'] = $validate;
+            $data['flag'] = $flag;
+            $data['getAllStates'] = $getAllStates;
+            $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+            $data['notification'] = $count;
+            $data['getReginolCode'] = $getReginolCode;
+            $data['commentnotification'] = $commentReplyNotiCount;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('admin/addFranchisee');
+            $this->load->view('layout/admin_footer');
+        } else {
+            if ($this->Admin_Model->insertUserDetails($validate)) {
+                $szMessage['type'] = "success";
+                $szMessage['content'] = "<h4><strong>New franchisee added successfully.</strong></h4> ";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
                 ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
+                $this->session->unset_userdata('idOperationManager');
+                $this->session->unset_userdata('flag');
+                redirect(base_url('/admin/franchiseeList'));
                 die;
             }
-//               $replyDataArr = $this->Forum_Model->getAllReply(false,2);
-//               $cmntDataArr = $this->Forum_Model->getAllCommentsByTopicId(false,1); 
-            $topicDataArr = $this->Forum_Model->viewUnapprovedTopicList();
-            
-               $count = $this->Admin_Model->getnotification();
-              $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-                  
-                    $data['szMetaTagTitle'] = "Topic Approval";
-                    $data['topicDataArr'] = $topicDataArr; 
-                    $data['is_user_login'] = $is_user_login;
-                    $data['pageName'] = "Forum";
-                    $data['subpageName'] = "Topic Approval";
-                    $data['notification'] = $count;
-                    $data['commentnotification'] = $commentReplyNotiCount;
-                   
-                    $data['data'] = $data;
-           
- 
-            $this->load->view('layout/admin_header',$data);
-            $this->load->view('forum/replyListForApproval');
+        }
+    }
+    function welweb()
+    {
+        $responsedata = array("code" => 200, "message" => "Webservice Working sucessfully.");
+        header('Content-Type: application/json');
+        echo json_encode($responsedata);
+        die;
+    }
+    function franchiseeList()
+    {
+//            echo 'fr1';
+        $is_user_login = is_user_login($this);
+//            echo 'fr2';
+        // redirect to dashboard if already logged in
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+//            echo 'fr3';
+        if (!$is_user_login) {
+//                echo 'fr4';
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+//            echo 'fr5';
+        if ($_SESSION['drugsafe_user']['iRole'] == '5') {
+            $operationManagerId = $_SESSION['drugsafe_user']['id'];
+        }
+//        die('fr6');
+        $searchAry = '';
+        if (isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])) {
+            $szName = $_POST['szSearch2'];
+        }
+        // handle pagination
+        $config['base_url'] = __BASE_URL__ . "/admin/franchiseeList/";
+        $config['total_rows'] = count($this->Admin_Model->viewFranchiseeList($searchAry, $operationManagerId, false, false, $id, $szName, $email, $opId));
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
+        $this->pagination->initialize($config);
+        $franchiseeAray = $this->Admin_Model->viewFranchiseeList($searchAry, $operationManagerId, $config['per_page'], $this->uri->segment(3), $id, $szName, $email, $opId);
+        $searchOptionArr = $this->Admin_Model->viewDistinctFranchiseeList($operationManagerId);
+        $data['szMetaTagTitle'] = "Franchisee List";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Franchisee_List";
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+        $data['data'] = $data;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+        $data['franchiseeAray'] = $franchiseeAray;
+        $data['allfranchisee'] = $searchOptionArr;
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('admin/franchiseeList');
+        $this->load->view('layout/admin_footer');
+    }
+    function operationManagerList()
+    {
+        $is_user_login = is_user_login($this);
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        } elseif ($_SESSION['drugsafe_user']['iRole'] != '1') {
+            ob_end_clean();
+            redirect(base_url('/franchisee/clientRecord'));
+        }
+        $searchAry = '';
+        if (isset($_POST['szSearch2']) && !empty($_POST['szSearch2'])) {
+            $name = $_POST['szSearch2'];
+        }
+        // handle pagination
+        $config['base_url'] = __BASE_URL__ . "/admin/operationManagerList/";
+        $config['total_rows'] = count($this->Admin_Model->viewOperationManagerList($searchAry, false, false, $name));
+        $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
+        $this->pagination->initialize($config);
+        $operationManagerAray = $this->Admin_Model->viewOperationManagerList($searchAry, $config['per_page'], $this->uri->segment(3), $name);
+        $searchOptionArr = $this->Admin_Model->viewDistinctOperationManagerList();
+        $data['szMetaTagTitle'] = "Operation Manager List";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Operation_Manager_List";
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+        $data['data'] = $data;
+        $data['notification'] = $count;
+        $data['commentnotification'] = $commentReplyNotiCount;
+        $data['operationManagerAray'] = $operationManagerAray;
+        $data['allOperationManager'] = $searchOptionArr;
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('admin/operationManagerList');
+        $this->load->view('layout/admin_footer');
+    }
+    function getStatesByCountry($szCountry = '')
+    {
+        if (trim($szCountry) != '') {
+            $_POST['szCountry'] = $szCountry;
+        }
+        $stateAry = $this->Admin_Model->getStatesByCountry(trim($_POST['szCountry']));
+        if (!empty($stateAry)) {
+            $result = "<select class=\"form-control required\" id=\"szState\" name=\"addFranchisee[szState]\" placeholder=\"State\" onfocus=\"remove_formError(this.id,'true')\">";
+            foreach ($stateAry as $stateDetails) {
+                $result .= "<option value='" . $stateDetails['name'] . "'>" . $stateDetails['name'] . "</option>";
+            }
+            $result .= "</select>";
+        } else {
+            $result = "<input type=\"text\" class=\"form-control required\" id=\"szState\" name=\"addFranchisee[szState]\" placeholder=\"State\" onfocus=\"remove_formError(this.id,'true')\">";
+        }
+        echo $result;
+    }
+    function getFranchiseeByOperationManager($operationManagerId = '')
+    {
+        if (trim($operationManagerId) != '') {
+            $_POST['operationManagerId'] = $operationManagerId;
+        }
+        $franchiseeAry = $this->Admin_Model->viewFranchiseeList(false, trim($_POST['operationManagerId']));
+        if (!empty($franchiseeAry)) {
+            $result = "<select class=\"form-control \" id=\"franchiseeId\" name=\"clientData[franchiseeId]\" placeholder=\"Franchisee\" onfocus=\"remove_formError(this.id,'true')\">";
+            foreach ($franchiseeAry as $franchiseeDetails) {
+                $result .= "<option value='" . $franchiseeDetails['id'] . "' >" . $franchiseeDetails['szName'] . "</option>";
+            }
+            $result .= "</select>";
+        } else {
+            $result = "<input type=\"text\" class=\"form-control required\" id=\"franchiseeId\" name=\"clientData[franchiseeId]\" placeholder=\"Franchisee\" onfocus=\"remove_formError(this.id,'true')\">";
+        }
+        echo $result;
+    }
+    function editfranchiseedata()
+    {
+        $idfranchisee = $this->input->post('idfranchisee');
+        $idOperationManager = $this->input->post('idOperationManager');
+        if ($idfranchisee > 0) {
+            $this->session->set_userdata('idfranchisee', $idfranchisee);
+            $this->session->set_userdata('idOperationManager', $idOperationManager);
+            echo "SUCCESS||||";
+            echo "editFranchisee";
+        }
+    }
+    public function editFranchisee()
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $idOperationManager = $this->session->userdata('idOperationManager');
+        $idfranchisee = $this->session->userdata('idfranchisee');
+        $getState = $this->Franchisee_Model->getStateByFranchiseeId($idfranchisee);
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        if ($idfranchisee > 0) {
+            $data_validate = $this->input->post('addFranchisee');
+            if ($data_validate['szState']) {
+                $getReginolCode = $this->Admin_Model->getRegionByStateId($data_validate['szState']);
+            }
+            $reginolIdArray = $this->Admin_Model->getUserDetailsByEmailOrId('', $idfranchisee);
+            $clientDetailsAray = $this->Franchisee_Model->getClientCountId($idfranchisee);
+            if (!empty($clientDetailsAray)) {
+                $stateReginolClass = "stateReginolhidden";
+            }
+            $reginolId = $reginolIdArray['reginolId'];
+            if (empty($data_validate)) {
+                $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $idfranchisee);
+            } else {
+                $userDataAry = $data_validate;
+            }
+            if ($this->Admin_Model->validateUsersData($data_validate, array(), $idfranchisee, false, 1, 2)) {
+                if ($this->Admin_Model->updateUsersDetails($data_validate, $idfranchisee)) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong>Franchisee data successfully updated.</strong></h4> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    ob_end_clean();
+                    $this->session->unset_userdata('idOperationManager');
+                    $this->session->unset_userdata('idfranchisee');
+                    redirect(base_url('/admin/franchiseeList'));
+                }
+            }
+            $data['szMetaTagTitle'] = "Edit Franchisee Details ";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Franchisee_List";
+            $data['validate'] = $validate;
+            $data['idfranchisee'] = $idfranchisee;
+            $data['idOperationManager'] = $idOperationManager;
+            $_POST['addFranchisee'] = $userDataAry;
+            $data['stateReginolClass'] = $stateReginolClass;
+            $data['reginolId'] = $reginolId;
+            $data['getState'] = $getState;
+            $data['getAllStates'] = $getAllStates;
+            $data['getReginolCode'] = $getReginolCode;
+            $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+            $data['notification'] = $count;
+            $data['commentnotification'] = $commentReplyNotiCount;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('admin/editFranchisee');
             $this->load->view('layout/admin_footer');
         }
-        public function showTopicData()
-        {
-            $data['mode'] = '__TOPIC_POPUP__';
-            $data['idTopic'] = $this->input->post('idTopic');
-         
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function showReplyData()
-        {
-            $data['mode'] = '__SHOW_REPLY_POPUP__';
-            $data['idReply'] = $this->input->post('idReply');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function approveReplyAlert()
-        {
-            $data['mode'] = '__APPROVE_REPLY_POPUP__';
-            $data['idReply'] = $this->input->post('idReply');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-         public function approveReplyConfirmation()
+    }
+    public function deleteFranchiseeAlert()
     {
-        
-        $data['mode'] = '__REPLY_APPROVE_CONFIRM_POPUP__';
-        $data['idReply'] = $this->input->post('idReply');
-        $this->Forum_Model->updateReplyApproval($data['idReply']);
+        $data['mode'] = '__DELETE_FRANCHISEE_POPUP__';
+        $data['idfranchisee'] = $this->input->post('idfranchisee');
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-      public function replyDeleteAlert()
-        {
-            $data['mode'] = '__DELETE_REPLY_POPUP__';
-            $data['idReply'] = $this->input->post('idReply');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function replyDeleteConfirmation()
-        {
-            $data['mode'] = '__DELETE_REPLY_POPUP_CONFIRM__';
-            $data['idReply'] = $this->input->post('idReply');
-            $this->Forum_Model->deleteReply($data['idReply']);
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }  
-      public function unapproveReplyAlert()
-        {
-            $data['mode'] = '__UNAPPROVE_REPLY_POPUP__';
-            $data['idReply'] = $this->input->post('idReply');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function unapproveReplyConfirmation()
-        {
-         
-            $data['mode'] = '__REPLY_UNAPPROVE_CONFIRM_POPUP__';
-            $data['idReply'] = $this->input->post('idReply');
-            $this->Forum_Model->updateReplyUnapproval($data['idReply']);
-            $this->load->view('admin/admin_ajax_functions', $data);
-        }
-        public function cmntDeleteAlert()
-        {
-            $data['mode'] = '__DELETE_COMMENT_POPUP__';
-            $data['idCmnt'] = $this->input->post('idCmnt');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function cmntDeleteConfirmation()
-        {
-            $data['mode'] = '__DELETE_COMMENT_POPUP_CONFIRM__';
-           $data['idCmnt'] = $this->input->post('idCmnt');
-            $this->Forum_Model->deleteCmnt($data['idCmnt']);
-            $this->load->view('admin/admin_ajax_functions',$data);
-        } 
-         public function closeTopicAlert()
-        {
-            $data['mode'] = '__TOPIC_CLOSE_POPUP__';
-            $data['idTopic'] = $this->input->post('idTopic');
-          
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function closeTopicConfirmationData()
-        {
-            $data['mode'] = '__TOPIC_CLOSE_POPUP_CONFIRM__';
-           $data['idTopic'] = $this->input->post('idTopic');
-            $this->Forum_Model->closeTopic( $data['idTopic']);
-            $this->load->view('admin/admin_ajax_functions',$data);
-        } 
-          public function replyEditData()
-        {
-            $data['mode'] = '__EDIT_REPLY_POPUP__';
-            $data['idReply'] = $this->input->post('idReply');
-            $replyArr = $this->Forum_Model->getAllReply($data['idReply'],1);
-            $data['szReply'] = $replyArr['0']['szReply'];
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function replyEditConfirmation()
-        {
-            $data['mode'] = '__EDIT_REPLY_POPUP_CONFIRM__';
-            $data['idReply'] = $this->input->post('idReply');
-            $data['val'] = $this->input->post('val');
-            $this->Forum_Model->updateReply($data['idReply'],$data['val']);
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-         public function approveTopicAlert()
-        {
-            $data['mode'] = '__APPROVE_TOPIC_POPUP__';
-            $data['idTopic'] = $this->input->post('idTopic');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-         public function approveTopicConfirmation()
+    public function deleteFranchiseeConfirmation()
     {
-        
-        $data['mode'] = '__TOPIC_APPROVE_CONFIRM_POPUP__';
-        $data['idTopic'] = $this->input->post('idTopic');
-        $this->Forum_Model->updateTopicApproval($data['idTopic']);
+        $data['mode'] = '__DELETE_FRANCHISEE_CONFIRM__';
+        $data['idfranchisee'] = $this->input->post('idfranchisee');
+        $franchiseeDets = $this->Admin_Model->getUserDetailsByEmailOrId('', $data['idfranchisee']);
+        if (!empty($franchiseeDets) && $franchiseeDets['iRole'] == '2') {
+            $this->Admin_Model->assignUnassignRegionCode($franchiseeDets['regionId'], false);
+        }
+        $this->Admin_Model->deletefranchisee($data['idfranchisee']);
+        $this->Admin_Model->deletemodelStockValue($data['idfranchisee']);
+        $this->Admin_Model->deleteProductStockQuantity($data['idfranchisee']);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-     public function unapproveTopicAlert()
-        {
-            $data['mode'] = '__UNAPPROVE_TOPIC_POPUP__';
-            $data['idTopic'] = $this->input->post('idTopic');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-         public function unapproveTopicConfirmation()
+    public function admin_forgotPassword()
     {
-        
-        $data['mode'] = '__TOPIC_UNAPPROVE_CONFIRM_POPUP__';
-        $data['idTopic'] = $this->input->post('idTopic');
-        $this->Forum_Model->updateTopicUnapproval($data['idTopic']);
+        $is_user_login = is_user_login($this);
+        if ($is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $data_validate = $this->input->post('drugSafeForgotPassword');
+        //$data_validate = array('szEmail'=>$data_validate);
+        $data_not_validate = array(
+            'id',
+            'szName',
+            'szContactNumber',
+            'szCountry',
+            'szState',
+            'szCity',
+            'szZipCode',
+            'szAddress'
+        );
+        if ($this->Admin_Model->validateUsersData($data_validate, $data_not_validate, '0', true)) {
+            if ($this->Admin_Model->checkAdminAccountStatus($data_validate['szEmail'])) {
+                if ($this->Admin_Model->sendNewPasswordToAdmin($data_validate['szEmail'])) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong> Please check your email to recover your password.</strong></h4>";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    $this->session->userdata('drugsafe_user_message');
+                    ob_end_clean();
+                    redirect(base_url('/admin/admin_login'));
+                    die;
+                }
+            }
+        }
+        $data['szMetaTagTitle'] = "Admin Forgot Password";
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+        $data['is_user_login'] = $is_user_login;
+        $this->load->view('layout/login_header', $data);
+        $this->load->view('admin/forgotPassword');
+        $this->load->view('layout/login_footer');
+    }
+    public function adminPassword_Recover($arg1 = '', $arg2 = '')
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if ($is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/franchiseeList'));
+            die;
+        }
+        //echo " Hello";
+        $passwordKey = $this->Admin_Model->sql_real_escape_string(trim($arg1));
+        //  echo $passwordKey;
+        if ($this->Admin_Model->checkPasswordRecoveryExist($passwordKey)) {
+            //echo $passwordKey;
+            $data_validate = $this->input->post('recoverAdminData');
+            // echo $data_validate;
+            $data_not_validate = array(
+                'id',
+                'szName',
+                'szEmail',
+                'szContactNumber',
+                'szCountry',
+                'szState',
+                'szCity',
+                'szZipCode',
+                'szAddress'
+            );
+            if ($this->Admin_Model->validateUsersData($data_validate, $data_not_validate, 0, TRUE)) {
+                if ($this->Admin_Model->updateAdminPassword($passwordKey, $data_validate)) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong>Your new password successfully updated.</strong></h4>";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    ob_end_clean();
+                    redirect(base_url('/admin/admin_login'));
+                    die;
+                } else {
+                    $szMessage['type'] = "error";
+                    $szMessage['content'] = "<h4><strong>Password recovery link is expired. Please reset your password again.</strong></h4>";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    ob_end_clean();
+                    redirect(base_url('/admin/admin_login'));
+                    die;
+                }
+            }
+        } else {
+            $szMessage['type'] = "error";
+            $szMessage['content'] = "<h4><strong> Your Password Key is wrong. Please reset your password again.</strong></h4>";
+            $this->session->set_userdata('drugsafe_user_message', $szMessage);
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $data['szMetaTagTitle'] = "Admin Forgot Password";
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+        $data['is_user_login'] = $is_user_login;
+        $data['passwordKey'] = $passwordKey;
+        $this->load->view('layout/login_header', $data);
+        $this->load->view('admin/adminPassword_Recover', $data);
+        $this->load->view('layout/login_footer');
+    }
+    function addOperationManager()
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $validate = $this->input->post('addOperationManager');
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        if ($this->Admin_Model->validateUsersData($validate)) {
+            if ($this->Admin_Model->insertOpertionDetails($validate)) {
+                $szMessage['type'] = "success";
+                $szMessage['content'] = "<h4><strong>New Operation Manager added successfully.</strong></h4>";
+                $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                redirect(base_url('/admin/operationManagerList'));
+            }
+        }
+        $data['szMetaTagTitle'] = "Add Operation Manager";
+        $data['pageName'] = "Operation_Manager_List";
+        $data['validate'] = $validate;
+        $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+        $data['notification'] = $count;
+        $data['getAllStates'] = $getAllStates;
+        $data['commentnotification'] = $commentReplyNotiCount;
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('admin/addOperationManager');
+        $this->load->view('layout/admin_footer');
+    }
+    function editOperationManagerData()
+    {
+        $idOperationManager = $this->input->post('idOperationManager');
+        $flag = $this->input->post('flag');
+        if ($idOperationManager > 0) {
+            $this->session->set_userdata('flag', $flag);
+            $this->session->set_userdata('idOperationManager', $idOperationManager);
+            echo "SUCCESS||||";
+            echo "edit_Operation_Manager";
+        }
+    }
+    public function edit_Operation_Manager()
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
+        $idOperationManager = $this->session->userdata('idOperationManager');
+        $flag = $this->session->userdata('flag');
+        $count = $this->Admin_Model->getnotification();
+        $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        if ($idOperationManager > 0) {
+            $data_validate = $this->input->post('editOperationManager');
+            if (empty($data_validate)) {
+                $userDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('', $idOperationManager);
+                if (!empty($userDataAry)) {
+                    $getStateIdByOperationId = $this->Admin_Model->getStateByOperationid($userDataAry['id']);
+                    $stateId = $getStateIdByOperationId['stateId'];
+                }
+            } else {
+                $userDataAry = $data_validate;
+                $stateId = $userDataAry['szState'];
+            }
+            if ($this->Admin_Model->validateUsersData($data_validate, array(), $idOperationManager)) {
+                if ($this->Admin_Model->updateOperationDetails($data_validate, $idOperationManager)) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong> Operation Manager data successfully updated.</strong><h4> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                    if ($flag == 1) {
+                        $this->session->unset_userdata('flag');
+                        $this->session->unset_userdata('idOperationManager');
+                        redirect(base_url('/admin/operationManagerList'));
+                    } else {
+                        $this->session->unset_userdata('flag');
+                        redirect(base_url('/franchisee/franchiseeRecord'));
+                    }
+                }
+            }
+            $data['szMetaTagTitle'] = "Edit Operation Manager Details ";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Operation_Manager_List";
+            $data['validate'] = $validate;
+            $_POST['editOperationManager'] = $userDataAry;
+            $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
+            $data['notification'] = $count;
+            $_POST['editOperationManager']['szState'] = $stateId;
+            $data['idOperationManager'] = $idOperationManager;
+             $data['getAllStates'] = $getAllStates;
+            $data['commentnotification'] = $commentReplyNotiCount;
+            $data['flag'] = $flag;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('admin/editOperationManager');
+            $this->load->view('layout/admin_footer');
+        }
+    }
+    public function deleteOperationManagerAlert()
+    {
+        $data['mode'] = '__DELETE_OPERATION_MANAGER_POPUP__';
+        $data['idOperationManager'] = $this->input->post('idOperationManager');
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-    
-     public function commentEditData()
-        {
-            $data['mode'] = '__EDIT_COMMENT_POPUP__';
-            $data['idComment'] = $this->input->post('idComment');
-            $commentArr = $this->Forum_Model->viewCmntListByCmntId($data['idComment']);
-            $data['szComment'] = $commentArr['szCmnt'];
-            $this->load->view('admin/admin_ajax_functions',$data);
+    public function deleteOperationManagerConfirmation()
+    {
+        $data['mode'] = '__DELETE_OPERATION_MANAGER_CONFIRM__';
+        $data['idOperationManager'] = $this->input->post('idOperationManager');
+        $this->Admin_Model->deleteOperationManagerDetails($data['idOperationManager']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+    function getReginolCode()
+    {
+        $stateId = $this->input->post('stateId');
+        $getReginolCode = $this->Admin_Model->getRegionByStateId($stateId);
+        ?>
+        <div class="form-group <?php if (!empty($arErrorMessages['szRegionName']) != '') { ?>has-error<?php } ?>">
+            <label class="col-md-3 control-label">Region Name</label>
+            <div class="col-md-5">
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                         </span>
+                    <select class="form-control " name="addFranchisee[szRegionName]" id="szRegionName"
+                            Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">
+                        <option value=''>Select</option>
+                        <?php
+                        if (!empty($getReginolCode)) {
+                            foreach ($getReginolCode as $getReginolCodeData) {
+                                $selected = ($getReginolCodeData['id'] == $_POST['addFranchisee']['szRegionName'] ? 'selected="selected"' : '');
+                                echo '<option value="' . $getReginolCodeData['id'] . '"' . $selected . ' >' . $getReginolCodeData['regionName'] . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <?php if (!empty($arErrorMessages['szRegionName'])) { ?>
+                    <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                        <?php echo $arErrorMessages['szRegionName']; ?>
+                                            </span>
+                <?php } ?>
+            </div>
+
+        </div>
+        <?php
+    }
+    function getAllReginolCode()
+    {
+        $Err = $this->input->post('error');
+        $regionid = $this->input->post('regionid');
+        $stateId = $this->input->post('stateId');
+        $getReginolCode = $this->Admin_Model->getAllRegionByStateId($stateId);
+        ?>
+        <div class="form-group <?php if (!empty($Err)) { ?>has-error<?php } ?>">
+            <label class="col-md-4 control-label">Region Name</label>
+            <div class="col-md-6">
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                         </span>
+                    <select class="form-control " name="clientData[szRegionName]" id="szRegionName"
+                            Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">
+                        <option value=''>Select</option>
+                        <?php
+                        if (!empty($getReginolCode)) {
+                            foreach ($getReginolCode as $getReginolCodeData) {
+                                $selected = ($getReginolCodeData['id'] == $regionid ? 'selected="selected"' : '');
+                                echo '<option value="' . $getReginolCodeData['id'] . '"' . $selected . ' >' . $getReginolCodeData['regionName'] . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <?php if (!empty($Err)) { ?>
+                    <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                        <?php echo $Err; ?>
+                                            </span>
+                <?php } ?>
+            </div>
+
+        </div>
+        <?php
+    }
+    function getAllReginolCodeForAgent()
+    {
+        $Err = $this->input->post('error');
+        $regionid = $this->input->post('regionid');
+        $stateId = $this->input->post('stateId');
+        $getReginolCode = $this->Admin_Model->getAllRegionByStateId($stateId);
+        ?>
+        <div class="form-group <?php if (!empty($Err)) { ?>has-error<?php } ?>">
+            <label class="col-md-4 control-label">Region Name</label>
+            <div class="col-md-6">
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-map-marker"></i>
+                         </span>
+                    <select class="form-control " name="agentData[szRegionName]" id="szRegionName"
+                            Placeholder="Region Name" onfocus="remove_formError(this.id,'true')">
+                        <option value=''>Select</option>
+                        <?php
+                        if (!empty($getReginolCode)) {
+                            foreach ($getReginolCode as $getReginolCodeData) {
+                                $selected = ($getReginolCodeData['id'] == $regionid ? 'selected="selected"' : '');
+                                echo '<option value="' . $getReginolCodeData['id'] . '"' . $selected . ' >' . $getReginolCodeData['regionName'] . '</option>';
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <?php if (!empty($Err)) { ?>
+                    <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                        <?php echo $Err; ?>
+                                            </span>
+                <?php } ?>
+            </div>
+
+        </div>
+        <?php
+    }
+    function regionManagerList()
+    {
+        $is_user_login = is_user_login($this);
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
         }
-        public function commentEditConfirmation()
-        {
-            $data['mode'] = '__EDIT_COMMENT_POPUP_CONFIRM__';
-            $data['idComment'] = $this->input->post('idComment');
-            $data['val'] = $this->input->post('val');
-            $this->Forum_Model->updateComment($data['idComment'],$data['val']);
-            $this->load->view('admin/admin_ajax_functions',$data);
+        $idState = $_POST['szSearchstate'];
+        $regionName = $_POST['szSearchRegionName'];
+        
+        $getAllStatesAry = $this->Admin_Model->getAllStateByCountryId('101');
+        $getAllRegion = $this->Admin_Model->getAllRegion($idState,$regionName);
+        
+        $regionListArray = $this->Admin_Model->getRegionByStateIdForSearch($idState);
+        
+        $data['szMetaTagTitle'] = "Region List";
+        $data['is_user_login'] = $is_user_login;
+        $data['pageName'] = "Region_Manager_List";
+        $data['getAllStatesAry'] = $getAllStatesAry;
+        $data['getAllRegion'] = $getAllRegion;
+        $data['regionListArray'] = $regionListArray;
+        $this->load->view('layout/admin_header', $data);
+        $this->load->view('admin/regionList');
+        $this->load->view('layout/admin_footer');
+    }
+    function addRegion()
+    {
+        $is_user_login = is_user_login($this);
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
         }
-            public function deleteTopicAlert()
-        {
-            $data['mode'] = '__DELETE_TOPIC_POPUP__';
-            $data['idTopic'] = $this->input->post('idTopic');
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-        public function topicDeleteConfirmation()
-        {
-            $data['mode'] = '__DELETE_TOPIC_POPUP_CONFIRM__';
-            $data['idTopic'] = $this->input->post('idTopic');
-            $this->Forum_Model->deleteTopic($data['idTopic']);
-            $this->load->view('admin/admin_ajax_functions',$data);
-        }
-          function sendEmail()
-        {
-           $is_user_login = is_user_login($this);
-            // redirect to dashboard if already logged in
-            if(!$is_user_login)
-            {
-                ob_end_clean();
-                redirect(base_url('/admin/admin_login'));
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
+        $data = $_POST['addRegion'];
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('addRegion[szState]', 'State', 'required');
+        $this->form_validation->set_rules('addRegion[szRegionName]', 'Region Name', 'required');
+        $this->form_validation->set_message('required', '{field} is required.');
+        if ($this->form_validation->run() == FALSE) {
+            $data['szMetaTagTitle'] = "add Region";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Region_Manager_List";
+            $data['getAllStates'] = $getAllStates;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('admin/addRegion');
+            $this->load->view('layout/admin_footer');
+        } else {
+            if ($this->Admin_Model->insertRegion($data)) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong>New Region has been added successfully .</strong><h4> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                redirect(base_url('admin/regionManagerList/'));
                 die;
             }
-           
-               $sendEmailAray =  $this->Forum_Model->sendEmail();
-      
-                if($sendEmailAray)
-                {
-                 
-                        $szMessage['type'] = "success";
-                        $szMessage['content'] = "<strong><h3> Email has been sent successfully.</h3></strong>";
-                        $this->session->set_userdata('drugsafe_user_message', $szMessage);
-                        ob_end_clean();
-                        redirect(base_url('/admin/operationManagerList'));
-                    die;
-                    
-                }
-                   
-        } 
-    }      
+        }
+    }
+    function addRegionCode()
+    {
+        $stateId = $this->input->post('stateId');
+        $getRegionCode = $this->Admin_Model->getRegionCode($stateId);
+        if ($getRegionCode['regionCodeMax'] == '') {
+            $regionCode = $stateId * 100+1;
+        } else {
+            $regionCode = $getRegionCode['regionCodeMax'] + 1;
+        }
+        ?>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Region Code</label>
+            <div class="col-md-5">
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-area-chart"></i>
+                        </span>
+                    <input id="iRegionCode" class="form-control" type="text" value="<?php echo $regionCode; ?>"
+                           placeholder="Region Code" onfocus="remove_formError(this.id,'true')"
+                           name="addRegion[iRegionCode]" readonly>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+    function editRegionDetails()
+    {
+        $idRegion = $this->input->post('idRegion');
+        if ($idRegion > 0) {
+            $this->session->set_userdata('idRegion', $idRegion);
+            echo "SUCCESS||||";
+            echo "editRegion";
+        }
+    }
+    public function editRegion()
+    {
+        $is_user_login = is_user_login($this);
+        // redirect to dashboard if already logged in
+        if (!$is_user_login) {
+            ob_end_clean();
+            redirect(base_url('/admin/admin_login'));
+            die;
+        }
+        $data_validate = $this->input->post('editRegion');
+    
+        $idRegion = $this->session->userdata('idRegion');
+        if (empty($data_validate)) {
+            $getRegionData = $this->Admin_Model->getRegionById($idRegion);
+        } else {
+            $getRegionData = $data_validate;
+        }
+        $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
+        $idRegion = $this->session->userdata('idRegion');
+        
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('editRegion[stateId]', 'State', 'required');
+        $this->form_validation->set_rules('editRegion[regionName]', 'Region Name', 'required');
+        $this->form_validation->set_message('required', '{field} is required.');
+        if ($this->form_validation->run() == FALSE) {
+            $_POST['editRegion'] = $getRegionData;
+            $data['szMetaTagTitle'] = "Edit Region ";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Region_Manager_List";
+            $_POST['addFranchisee'] = $userDataAry;
+            $data['getAllStates'] = $getAllStates;
+            $this->load->view('layout/admin_header', $data);
+            $this->load->view('admin/editRegion');
+            $this->load->view('layout/admin_footer');
+        } else {
+            if ($this->Admin_Model->updateRegion($data_validate, $idRegion)) {
+                    $szMessage['type'] = "success";
+                    $szMessage['content'] = "<h4><strong> Region data has been updated successfully .</strong><h4> ";
+                    $this->session->set_userdata('drugsafe_user_message', $szMessage);
+                redirect(base_url('admin/regionManagerList/'));
+                die;
+            }
+        }
+    }
+    function editRegionCode()
+    {
+        $stateId = $this->input->post('stateId');
+        $getRegionCode = $this->Admin_Model->getRegionCode($stateId);
+        if ($getRegionCode['regionCodeMax'] == '') {
+            $regionCode = ($stateId * 100)+1;
+        } else {
+            $regionCode = $getRegionCode['regionCodeMax'] + 1;
+        }
+        ?>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Region Code</label>
+            <div class="col-md-5">
+                <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-area-chart"></i>
+                        </span>
+                    <input id="regionCode" class="form-control" type="text" value="<?php echo $regionCode; ?>"
+                           placeholder="Region Code" onfocus="remove_formError(this.id,'true')"
+                           name="editRegion[regionCode]" readonly>
+                </div>
+            </div>
+        </div>
+        <?php
+    }
+    public function regionDeleteeAlert()
+    {
+        $data['mode'] = '__DELETE_REGION_POPUP__';
+        $data['regionId'] = $this->input->post('regionId');
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+    public function deleteRegionConfirmation()
+    {
+        $data['mode'] = '___DELETE_REGION_CONFIRM__';
+        $data['regionId'] = $this->input->post('regionId');
+        $this->Admin_Model->deleteRegion($data['regionId']);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+    public function franchiseeStatus()
+    {
+        $data['mode'] = '__FRANCHISEE_STATUS_POPUP__';
+        $data['idfranchisee'] = $this->input->post('idfranchisee');
+        $data['status'] = $this->input->post('status');
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+    public function franchiseeStatusConfirmation()
+    {
+        $idfranchisee = $this->input->post('idfranchisee');
+        $status = $this->input->post('status');
+        $data['mode'] = '__FRANCHISEE_STATUS_CONFIRM__';
+        $data['idfranchisee'] = $idfranchisee;
+        $data['status'] = $status;
+        $this->Admin_Model->updateFranchiseeStatus($idfranchisee, $status);
+        $this->load->view('admin/admin_ajax_functions', $data);
+    }
+     function getRegionNameByStateData($idState = '')
+    {
+        if (trim($idState) != '') {
+            $_POST['StateId'] = $idState;
+        }
+ 
+         $regionListArray = $this->Admin_Model->getRegionByStateIdForSearch($_POST['StateId']);
+        
+        $result = "<select class=\"form-control custom-select required\" id=\"szSearchRegionName\" name=\"szSearchRegionName\" placeholder=\"Region Name\" onfocus=\"remove_formError(this.id,'true')\">";
+        if (!empty($regionListArray)) {
+            $result .= "<option value=''>Region Name</option>";
+            foreach ($regionListArray as $regionList) {
+                $result .= "<option value='" . $regionList['regionName'] . "'>" . $regionList['regionName'] . "</option>";
+            }
+        } else {
+            $result .= "<option value=''>Region Name</option>";
+        }
+        $result .= "</select>";
+        echo $result;
+    }  
+ 
+}
 ?>

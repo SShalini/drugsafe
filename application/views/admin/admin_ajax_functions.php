@@ -62,7 +62,6 @@ if ($mode == '__DELETE_FRANCHISEE_CONFIRM__') {
 
     <?php
 }
-
 if ($mode == '__DELETE_CLIENT_POPUP__') {
     echo "SUCCESS||||";
     ?>
@@ -158,7 +157,6 @@ if ($mode == '__DELETE_CLIENT_CONFIRM__') {
 
     <?php
 }
-
 if ($mode == '__DELETE_PRODUCT_POPUP__') {
     echo "SUCCESS||||";
     ?>
@@ -614,7 +612,6 @@ if ($mode == '__DELETE_FORUM_POPUP_CONFIRM__') {
 
     <?php
 }
-
 if ($mode == '__REPLY_POPUP__') {
     echo "SUCCESS||||";
     ?>
@@ -702,10 +699,8 @@ if ($mode == '__TOPIC_POPUP__') {
         <div class="modal-dialog">
             <div class="modal-content">
                 <?php
-
                 $TopicsArr = $this->Forum_Model->viewTopicListByTopicId($idTopic);
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $TopicsArr['idUser']);
-
                 ?>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -736,7 +731,6 @@ if ($mode == '__TOPIC_POPUP__') {
 
     <?php
 }
-
 if ($mode == '__SHOW_REPLY_POPUP__') {
     echo "SUCCESS||||";
     ?>
@@ -745,21 +739,14 @@ if ($mode == '__SHOW_REPLY_POPUP__') {
         <div class="modal-dialog">
             <div class="modal-content">
                 <?php $replyDataArr = $this->Forum_Model->getAllReplyByCmntsId($idReply, 2);
-
                 $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $replyDataArr['0']['idReplier']);
                 $cmntDataArr = $this->Forum_Model->getAllCommentsByCmntId($replyDataArr['0']['idCmnt']);
-
                 $splitTimeStamp = explode(" ", $replyDataArr['0']['dtReplyOn']);
                 $date1 = $splitTimeStamp[0];
                 $time1 = $splitTimeStamp[1];
-
                 $x = date("g:i a", strtotime($time1));
-
                 $date = explode('-', $date1);
-
-
                 $monthNum = $date['1'];
-
                 $dateObj = DateTime::createFromFormat('!m', $monthNum);
                 $monthName = $dateObj->format('M');
                 ?>
@@ -1086,10 +1073,8 @@ if ($mode == '__TOPIC_CLOSE_POPUP_CONFIRM__') {
 
     <?php
 }
-
 if ($mode == '__EDIT_REPLY_POPUP__') {
     echo "SUCCESS||||";
-
     ?>
     <div id="replyEdit" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
@@ -1283,10 +1268,8 @@ if ($mode == '__TOPIC_UNAPPROVE_CONFIRM_POPUP__') {
 
     <?php
 }
-
 if ($mode == '__EDIT_COMMENT_POPUP__') {
     echo "SUCCESS||||";
-
     ?>
     <div id="commentEdit" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
@@ -1444,7 +1427,6 @@ if ($mode == '__PLACE_ORDER_POPUP_CONFIRM__') {
                     <?php $flag = $this->session->userdata('flag');
                     if ($flag == 1) {
                         $this->session->unset_userdata('orderid');
-
                         ?>
                         <a href="<?php echo __BASE_URL__; ?>/order/drugtestkit" class="btn dark btn-outline">Close</a>
                     <?php }
@@ -1595,22 +1577,14 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                         <?php
                        
                         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
-
                         $splitTimeStamp = explode(" ", $OrdersDetailsAray['createdon']);
                         $date1 = $splitTimeStamp[0];
                         $time1 = $splitTimeStamp[1];
-
                         $x = date("g:i a", strtotime($time1));
-
                         $date = explode('-', $date1);
-
-
                         $monthNum = $date['1'];
-
                         $dateObj = DateTime::createFromFormat('!m', $monthNum);
                         $monthName = $dateObj->format('M');
-
-
                         ?>
                         <div class="portlet-body">
                             <div class="row static-info">
@@ -1690,7 +1664,6 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
 
                                     <?php
                                 }
-
                                 if ($OrdersDetailsAray['status'] == 4) {
                                     ?>
                                     <div class="col-md-7 value">
@@ -1700,7 +1673,6 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
 
                                     <?php
                                 }
-
                                 ?>
 
                             </div>
@@ -1796,7 +1768,6 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     </thead>
                                     <tbody>
                                     <?php
-
                                     foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
                                         $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
                                         $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);?>
@@ -1870,7 +1841,7 @@ if ($mode == '__PLACE_ORDER_POPUP_ERROR_CONFIRM__') {
 
     <?php
 }
-if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
+if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {   
     echo "SUCCESS||||";
     ?>
 
@@ -1903,15 +1874,15 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                             <form class="form-horizontal" id="dispatchProduct"
                                   action="<?= __BASE_URL__ ?>/order/dispatchProductData" name="dispatchProduct"
                                   method="post">
-                                <div class="form-body">
+                                <div class="form-body" id="tabel_content">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                 <th> Product Code</th>
                                                 <th> Product Cost</th>
-                                               
                                                 <th> Available</th>
+                                                 <th> Available After Dispatch</th>
                                                  <th> Ordered</th>
                                                  <th> Dispatched Qty</th>
                                                 <th> Back Order</th>
@@ -1926,7 +1897,6 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             $count = 0;
                                             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
                                                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
-
                                                 $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
                                                 $freightPrice = 0.00;
                                                 $readonly = '';
@@ -1936,6 +1906,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                 }
                                                 $price = 0.00;
                                                 $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
+                                                $avilableqtyafterdispatch = ($productDataArr['szAvailableQuantity'])-($TotalDispatched['total_dispatched']);
                                                 ?>
                                                 <tr>
                                                     <td> <?php echo $productDataArr['szProductCode']; ?>
@@ -1943,6 +1914,9 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                     <td> $<?php echo $productDataArr['szProductCost']; ?> </td>
                                                    
                                                     <td> <?php echo $productDataArr['szAvailableQuantity']; ?>
+                                                    </td>
+                                                    <td> <?php echo $avilableqtyafterdispatch; ?>
+                                                   
                                                     </td>
                                                      <td> <?php echo $totalOrdersDetailsData['quantity']; ?>
                                                     </td>
@@ -1957,7 +1931,6 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                         </td>
                                                     <?php } else {
                                                         $count++;
-
                                                         ?>
                                                          <td><?php echo $TotalDispatched['total_dispatched'];?></td>
                                                         <td><?php
@@ -1989,6 +1962,11 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                                     type="hidden" name="availqtyid<?php echo $i; ?>"
                                                                     id="availqtyid<?php echo $i; ?>"
                                                                     value="<?php echo($productDataArr['szAvailableQuantity'] > '0' ? $productDataArr['szAvailableQuantity'] : '0'); ?>">
+                                                            <input
+                                                                    type="hidden" name="availqtyafterdisid<?php echo $i; ?>"
+                                                                    id="availqtyafterdisid<?php echo $i; ?>"
+                                                                    value="<?php echo($avilableqtyafterdispatch > '0' ? $avilableqtyafterdispatch : '0'); ?>">
+                                                            
                                                             <input type="hidden" name="isdispid<?php echo $i; ?>"
                                                                    id="isdispid<?php echo $i; ?>" value="0"/>
                                                             <input type="number" min="1" class="form-control btn-xs "
@@ -2086,8 +2064,8 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             class="btn red"><i class="fa fa-times"></i> Cancel Order
                                     </button>
                                     <?php }?>
-                                  
-                               <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
+                               
+                               <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                
                                 </div>
                             </form>
@@ -2105,6 +2083,8 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
 }
 if ($mode == '__PRODUCT_DISPATCHED_SUCCESSFULLY__') {
     echo 'SUCCESS||||';
+    if($data)
+        {
     ?>
     <div id="dispatchprodsucess" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
@@ -2126,12 +2106,189 @@ if ($mode == '__PRODUCT_DISPATCHED_SUCCESSFULLY__') {
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
+                   <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                 </div>
             </div>
         </div>
     </div>
-<?php }
+ <?php
+     echo '||||'; 
+         ?>      
+    <div class="table-responsive" id="table_content_data">
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Order No
+            </th>
+
+            <th>
+                Franchisee
+            </th>
+
+            <th>
+                Order Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Order Details
+            </th>
+
+            <th>
+                Edit Order
+            </th>
+
+            <th>
+                Delivery Docket
+            </th>
+
+             <th>
+              Order Received 
+            </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i = 0;
+        foreach ($validOrdersDetailsAray as $validOrdersDetailsData) {
+            $i++;
+            $productDataArr = $this->Inventory_Model->getProductDetailsById($validOrdersDetailsData['productid']);
+            $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $validOrdersDetailsData['franchiseeid']);
+            ?>
+            <tr>
+                <td><?php echo $i; ?> </td>
+                <td>
+                    #<?php echo sprintf(__FORMAT_NUMBER__, $validOrdersDetailsData['orderid']); ?>
+                </td>
+
+                <td>
+                    <?php echo $franchiseeDetArr1['szName']; ?>
+                </td>
+
+                <td>
+                     <?php echo date('d M Y', strtotime($validOrdersDetailsData['createdon'])) . ' at ' . date('h:i A', strtotime($validOrdersDetailsData['createdon'])); ?>
+                </td>
+                <td>
+                    <?php if ($validOrdersDetailsData['status'] == 1) { ?>
+
+                        <p title="Order Status"
+                           class="label label-sm label-warning">
+                            Ordered
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 2) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-success">
+                         Dispatched
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 3) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-danger">
+                            Canceled
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 4) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-info">
+                            Pending
+                        </p>
+                        <?php
+                    }
+                    ?></td>
+
+                <td>
+                    <a class="btn btn-circle btn-icon-only btn-default"
+                       title="View Order Details"
+                       onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>','1')"
+                       href="javascript:void(0);">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+                  <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
+                <td>
+                    <?php
+                    if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 2 || $validOrdersDetailsData['status'] == 4) {
+                        $checkOrderEditable = $this->Order_Model->checkOrderEditable($validOrdersDetailsData['orderid']);
+                        if (!empty($checkOrderEditable)) {
+                         if($validOrdersDetailsData['status'] == 2){
+                            ?>
+                            <a class="btn btn-circle blue btn-icon-only btn-default"
+                               title="Edit Order Details"
+                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>,'1');"
+                               href="javascript:void(0);">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                         <?php } else{ ?>
+                           <a class="btn btn-circle blue btn-icon-only btn-default"
+                               title="Edit Order Details"
+                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                               href="javascript:void(0);">
+                                <i class="fa fa-pencil"></i>
+                            </a>  
+                        <?php
+                         }
+                         }
+                    }
+                    ?>
+                </td>
+
+                <td>
+                    <?php if ($validOrdersDetailsData['status'] == 2) { ?>
+                        <a class="btn btn-circle btn-icon-only btn-default"
+                           title="View Pdf"
+                           onclick="view_order_details_pdf(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                           href="javascript:void(0);">
+                            <i class="fa fa-file-pdf-o"></i>
+                        </a>
+                    <?php } ?>
+                </td>
+                 <?php } ?>
+                  <td>
+                      <?php
+                      if($validOrdersDetailsData['status'] == 2){
+                          $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($validOrdersDetailsData['orderid'],1);
+                          if(!empty($dispatchDatesArr)){ ?>
+                              <a class="btn btn-circle btn-icon-only btn-default"
+                                 title="Receive Order"
+                                 onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
+                                 href="javascript:void(0);">
+                                  <i class="fa fa-download"></i>
+                              </a>
+                          <?php }else{ ?>
+                              <p title="Order Status"
+                                 class="label label-sm label-info">
+                                  Order Received
+                              </p>
+                          <?php }
+                      }
+                      ?>
+
+                </td>
+
+            </tr>
+            <?php
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
+            
+    <?php    }
+     
+}
 if ($mode == '__ORDER_STATUS_CHANGED__') {
     echo 'SUCCESS||||';
     ?>
@@ -2160,7 +2317,10 @@ if ($mode == '__ORDER_STATUS_CHANGED__') {
     </div>
 <?php }
 if ($mode == '__CANCEL_ORDER_CONFIRM_DETAILS_POPUP__') {
+   
     echo "SUCCESS||||";
+    if($data)
+        {
     ?>
     <div id="cancelOrderConfirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
@@ -2179,15 +2339,190 @@ if ($mode == '__CANCEL_ORDER_CONFIRM_DETAILS_POPUP__') {
                 </div>
                 <div class="modal-footer">
                     <?php
-
                     ?>
-                    <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
+                    <a href="" class="btn dark btn-outline" data-dismiss="modal">Close</a>
                 </div>
             </div>
         </div>
     </div>
-
+ 
     <?php
+     echo '||||'; 
+         ?>      
+    <div class="table-responsive" id="table_content_data">
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Order No
+            </th>
+
+            <th>
+                Franchisee
+            </th>
+
+            <th>
+                Order Date
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Order Details
+            </th>
+
+            <th>
+                Edit Order
+            </th>
+
+            <th>
+                Delivery Docket
+            </th>
+
+             <th>
+              Order Received 
+            </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        $i = 0;
+        foreach ($validOrdersDetailsAray as $validOrdersDetailsData) {
+            $i++;
+            $productDataArr = $this->Inventory_Model->getProductDetailsById($validOrdersDetailsData['productid']);
+            $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $validOrdersDetailsData['franchiseeid']);
+            ?>
+            <tr>
+                <td><?php echo $i; ?> </td>
+                <td>
+                    #<?php echo sprintf(__FORMAT_NUMBER__, $validOrdersDetailsData['orderid']); ?>
+                </td>
+
+                <td>
+                    <?php echo $franchiseeDetArr1['szName']; ?>
+                </td>
+
+                <td>
+                     <?php echo date('d M Y', strtotime($validOrdersDetailsData['createdon'])) . ' at ' . date('h:i A', strtotime($validOrdersDetailsData['createdon'])); ?>
+                </td>
+                <td>
+                    <?php if ($validOrdersDetailsData['status'] == 1) { ?>
+
+                        <p title="Order Status"
+                           class="label label-sm label-warning">
+                            Ordered
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 2) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-success">
+                         Dispatched
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 3) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-danger">
+                            Canceled
+                        </p>
+                        <?php
+                    }
+                    if ($validOrdersDetailsData['status'] == 4) {
+                        ?>
+                        <p title="Order Status"
+                           class="label label-sm label-info">
+                            Pending
+                        </p>
+                        <?php
+                    }
+                    ?></td>
+
+                <td>
+                    <a class="btn btn-circle btn-icon-only btn-default"
+                       title="View Order Details"
+                       onclick="view_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>','1')"
+                       href="javascript:void(0);">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                </td>
+                  <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
+                <td>
+                    <?php
+                    if ($validOrdersDetailsData['status'] == 1 || $validOrdersDetailsData['status'] == 2 || $validOrdersDetailsData['status'] == 4) {
+                        $checkOrderEditable = $this->Order_Model->checkOrderEditable($validOrdersDetailsData['orderid']);
+                        if (!empty($checkOrderEditable)) {
+                         if($validOrdersDetailsData['status'] == 2){
+                            ?>
+                            <a class="btn btn-circle blue btn-icon-only btn-default"
+                               title="Edit Order Details"
+                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>,'1');"
+                               href="javascript:void(0);">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                         <?php } else{ ?>
+                           <a class="btn btn-circle blue btn-icon-only btn-default"
+                               title="Edit Order Details"
+                               onclick="edit_order_details(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                               href="javascript:void(0);">
+                                <i class="fa fa-pencil"></i>
+                            </a>  
+                        <?php
+                         }
+                         }
+                    }
+                    ?>
+                </td>
+
+                <td>
+                    <?php if ($validOrdersDetailsData['status'] == 2) { ?>
+                        <a class="btn btn-circle btn-icon-only btn-default"
+                           title="View Pdf"
+                           onclick="view_order_details_pdf(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                           href="javascript:void(0);">
+                            <i class="fa fa-file-pdf-o"></i>
+                        </a>
+                    <?php } ?>
+                </td>
+                 <?php } ?>
+                  <td>
+                      <?php
+                      if($validOrdersDetailsData['status'] == 2){
+                          $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($validOrdersDetailsData['orderid'],1);
+                          if(!empty($dispatchDatesArr)){ ?>
+                              <a class="btn btn-circle btn-icon-only btn-default"
+                                 title="Receive Order"
+                                 onclick="receive_order_details('<?php echo $validOrdersDetailsData['orderid']; ?>')"
+                                 href="javascript:void(0);">
+                                  <i class="fa fa-download"></i>
+                              </a>
+                          <?php }else{ ?>
+                              <p title="Order Status"
+                                 class="label label-sm label-info">
+                                  Order Received
+                              </p>
+                          <?php }
+                      }
+                      ?>
+
+                </td>
+
+            </tr>
+            <?php
+        }
+        ?>
+        </tbody>
+    </table>
+</div>
+            
+    <?php    }
+     
 }
 if ($mode == '__DELIVER_ORDER_CONFIRM_DETAILS_POPUP__') {
     echo "SUCCESS||||";
@@ -2209,7 +2544,6 @@ if ($mode == '__DELIVER_ORDER_CONFIRM_DETAILS_POPUP__') {
                 </div>
                 <div class="modal-footer">
                     <?php
-
                     ?>
                     <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
                 </div>
@@ -2239,7 +2573,6 @@ if ($mode == '__DISPATCH_ORDER_CONFIRM_POPUP__') {
                 </div>
                 <div class="modal-footer">
                     <?php
-
                     ?>
                     <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
                 </div>
@@ -2561,7 +2894,6 @@ if ($mode == '__UNASSIGNED_CLIENT_SUCCESS__') {
 
     <?php
 }
-
 if ($mode == '__DELETE_REGION_POPUP__') {
     echo "SUCCESS||||";
     ?>
@@ -2929,7 +3261,6 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                         <?php
                                         $i = 0;
                                         foreach ($prospectStatusDetailsAry as $prospectStatusDetailsData) {
-
                                             $i++;
                                             ?>
                                             <tr>
@@ -2951,7 +3282,6 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                         </p>
                                                         <?php
                                                     }
-
                                                     if ($prospectStatusDetailsData['status'] == 3) {
                                                         ?>
                                                         <p title="Order Status"
@@ -2993,7 +3323,6 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                     } else {
                                                         echo "N/A";
                                                     }
-
                                                     ?>
                                                 </td>
                                                 <td>  <?php
@@ -3001,7 +3330,6 @@ if ($mode == '__PROSPECT_STATUS_EDIT_POPUP_FORM__') {
                                                         echo "N/A";
                                                     } else {
                                                         echo date('d M Y', strtotime($prospectStatusDetailsData['dtUpdatedOn'])) . ' at ' . date('h:i A', strtotime($prospectStatusDetailsData['dtUpdatedOn']));
-
                                                     }
                                                     ?> </td>
 
@@ -3069,7 +3397,6 @@ if ($mode == '__SHOW_MEETING_DESCRIPTION_POPUP__') {
         <div class="modal-dialog">
             <div class="modal-content">
                 <?php $descriptionDataArr = $this->Prospect_Model->getMettingDetailsById($idMeetingNote);
-
                 ?>
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -3154,7 +3481,6 @@ if ($mode == '__IMPORT_CSV_POPUP__') {
                                                 <option value=''>Select</option>
                                                 <?php
                                                 $franchiseeAray = $this->Admin_Model->viewFranchiseeList(false, false);
-
                                                 if (!empty($franchiseeAray)) {
                                                     foreach ($franchiseeAray as $franchiseeDetails) {
                                                         ?>
@@ -3230,7 +3556,6 @@ if ($mode == '__CHANGE_TO_CLIENT__') {
     <?php
 }
 if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION__') {
-
     echo "SUCCESS||||";
     ?>
     <div id="changeToClientStatusConfirmation" class="modal fade" tabindex="-1" data-backdrop="static"
@@ -3281,7 +3606,6 @@ if ($mode == '__CHANGE_TO_CLIENT_CONFIRMATION_FAIL__') {
 
                         </div>
                         <?php
-
                         $prospectAry = $this->Prospect_Model->getProspectDetailsByProspectsId($prospectId);
                         ?>
                         <div class="portlet-body">
@@ -3375,7 +3699,6 @@ if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
 
                         </div>
                         <?php $agentAssignedClientDetails = $this->Franchisee_Model->getfranchiseeagentclients($franchiseeid, $idAgent);
-
                         ?>
                         <div class="portlet-body">
                             <?php
@@ -3412,9 +3735,7 @@ if ($mode == '__VIEW_ASSIGN_CLIENT_POPUP__') {
                                     </table>
                                 </div>
                             <?php } else {
-
                                 echo "No Record Found";
-
                             }
                             ?>
                         </div>
@@ -3575,7 +3896,6 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
         <div class="modal-dialog">
             <div class="modal-content">
                 <?php $mettingsDetailsAry = $this->Prospect_Model->getAllMeetingDetailsByProspectsId($idProspect);
-
                 ?>
 
                 <div class="modal-header">
@@ -3648,8 +3968,6 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
                                         <tr>
                                             <td> <?php echo $i; ?> </td>
                                             <?php
-
-
                                             $retval = $mettingsDetailsData['szDescription'];
                                             $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $mettingsDetailsData['szDescription']);
                                             $string = str_replace("\n", " ", $string);
@@ -3688,7 +4006,6 @@ if ($mode == '__SHOW_MEETING_NOTES_POPUP__') {
     <div id="popup_box_level2"></div>
     <?php
 }
-
 if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
     echo "SUCCESS||||";
     ?>
@@ -3722,22 +4039,14 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                         <?php
                         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
                         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
-
                         $splitTimeStamp = explode(" ", $OrdersDetailsAray['createdon']);
                         $date1 = $splitTimeStamp[0];
                         $time1 = $splitTimeStamp[1];
-
                         $x = date("g:i a", strtotime($time1));
-
                         $date = explode('-', $date1);
-
-
                         $monthNum = $date['1'];
-
                         $dateObj = DateTime::createFromFormat('!m', $monthNum);
                         $monthName = $dateObj->format('M');
-
-
                         ?>
                         <div class="portlet-body">
                             <div class="row static-info">
@@ -3817,7 +4126,6 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
 
                                     <?php
                                 }
-
                                 if ($OrdersDetailsAray['status'] == 4) {
                                     ?>
                                     <div class="col-md-7 value">
@@ -3827,7 +4135,6 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
 
                                     <?php
                                 }
-
                                 ?>
 
                             </div>
@@ -3939,10 +4246,8 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
 /*                                                echo number_format(($totalOrdersDetailsData['quantity']) * ($productDataArr['szProductCost']), 2, '.', ','); */?>
                                             </td>
                                             <td> <?php /*echo $totalOrdersDetailsData['dispatched']; */?> </td>
-
                                         </tr>
                                     <?php /*} */?>
-
                                     </tbody>
                                 </table>-->
                             </div>
@@ -3979,7 +4284,6 @@ if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
                 </div>
                 <div class="modal-footer">
                     <?php
-
                     ?>
                     <a href="<?php echo __BASE_URL__; ?>/order/view_order_list" class="btn dark btn-outline">Close</a>
                 </div>
@@ -4097,7 +4401,6 @@ if ($mode == '__CHANGE_PASSWORD_AGENT_EMPLOYE_CONFIRM__') {
     </div>
     <?php
 }
-
 if ($mode == '__UNASSIGN_SITE_POPUP__') {
     echo "SUCCESS||||";
     ?>

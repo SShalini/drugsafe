@@ -11,7 +11,6 @@
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php
-
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
@@ -23,11 +22,17 @@
                     }
                     $this->session->unset_userdata('drugsafe_user_message');
             }
+                        $operation_manager_id = $this->Franchisee_Model->getoperationManagerId($franchiseeArr['id']);
+                        $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $operation_manager_id['operationManagerId']);
             ?> 
       <ul class="page-breadcrumb breadcrumb">
                         <li>
                             <a href="<?php echo __BASE_URL__;?>/admin/franchiseeList">Home</a>
                             <i class="fa fa-circle"></i>
+                        </li>
+                        <li>
+                        <a onclick="viewFranchisee(<?php echo $operation_manager_id['operationManagerId'];?>);" href="javascript:void(0);"><?php echo $franchiseeDetArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
                         </li>
                         <li>
                         <a onclick="viewClient(<?php echo $franchiseeArr['id'];?>);" href="javascript:void(0);"><?php echo $franchiseeArr['szName'];?></a>
@@ -91,10 +96,8 @@
                                         </div>
                                        </div>
                                     <?php
-
                                     if(!empty($drugTestKitAray))
                                     {
-
                                         ?>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered table-hover">
@@ -143,7 +146,6 @@
                                         </table>
                                     </div>
                                          <?php
-
                                     }
                                     else
                                     {
@@ -166,13 +168,10 @@
                         <span class="caption-subject font-red-sunglo bold uppercase">Marketing Material</span>
                     </div>
                
-
                 </div>
                 <?php
-
                 if(!empty($marketingMaterialAray))
                 {
-
                     ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
@@ -191,12 +190,10 @@
                                $i = 0;
                                 foreach($marketingMaterialAray as $marketingMaterialData)
                                 {
-
                                 ?>
                                 <tr>
                                    <td>
                                         <img class="file_preview_image" src="<?php echo __BASE_USER_PRODUCT_IMAGES_URL__; ?>/<?php echo $marketingMaterialData['szProductImage']; ?>" width="60" height="60"/>
-
                                     </td>
                                     <td> <?php echo $marketingMaterialData['szProductCode']?> </td>
                                     <td> <?php echo $marketingMaterialData['szProductDiscription'];?> </td>
@@ -230,7 +227,6 @@
                     echo "Not Found";
                 }
                 ?>
-
             </div>
         </div>
     </div> 
@@ -247,10 +243,8 @@
     </div>
     </div>
     <?php
-
     if(!empty($consumablesAray))
     {
-
     ?>
     <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
@@ -288,7 +282,6 @@
                           <i class="fa fa-pencil"></i> 
                       </a>
                       <?php }?>
-
                   </td>
               </tr>
               <?php
@@ -299,14 +292,12 @@
     </table>
     </div>
     <?php
-
     }
     else
     {
     echo "Not Found";
     }
     ?>
-
     </div>
     </div>
     </div> -->

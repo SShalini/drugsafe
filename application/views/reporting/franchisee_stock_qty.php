@@ -74,7 +74,7 @@
                         </div>
                         
                     <div class="  row">
-                      <form name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/view_fr_stock_qty_report" method="post">
+                      <form class="search-bar" name="orderSearchForm" id="orderSearchForm" action="<?=__BASE_URL__?>/reporting/view_fr_stock_qty_report" method="post">
                   
                     <div class="clienttypeselect search col-md-3"> 
                         <?php  if ($_SESSION['drugsafe_user']['iRole'] == '5') {
@@ -82,7 +82,8 @@
                      }
                        
                      ?>
-                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>">
+                 
+                          <div class="form-group <?php if (!empty($arErrorMessages['szSearch1']) != '') { ?>has-error<?php } ?>"> 
                             <select class="form-control custom-select" name="szSearch1" id="szSearch1" onchange="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
@@ -100,8 +101,9 @@
                                if(form_error('szSearch1')){?>
                                <span class="help-block pull-left"><span><?php echo form_error('szSearch1');?></span>
                              </span><?php }?> 
-                        </div>
-                    </div>
+                       </div>
+                          </div>
+                 
                        <div class="col-md-3 clienttypeselect">
                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                             

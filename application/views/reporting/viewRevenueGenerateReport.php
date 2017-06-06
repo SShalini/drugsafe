@@ -60,7 +60,6 @@
                             </div>
                         <?php } ?>
                     </div>
-                    
                     <div class="portlet-body totalpr alert">
                         <div class="row">
                             <form name="revenueSearchForm" id="revenueSearchForm" class="search-bar"
@@ -256,9 +255,7 @@
                                                     $calloutprice = $data['cobp'] * ($data['cohr']>3?$data['cohr']:3);
                                                     $fcoprice = $data['fcobp'] * ($data['fcohr']>2?$data['fcohr']:2);
                                                     $travel = $data['travelBasePrice'] * ($data['travelHr']>1?$data['travelHr']:1);
-
                                                     $TotalTrevenu = $data['urineNata'] + $data['labconf']+$data['cancelfee']+ $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen+ $travel + $calloutprice + $fcoprice;
-
                                                     $TotalTrevenu = number_format($TotalTrevenu, 2, '.', '');
                                                     $GSTmanual = ($TotalTrevenu * 0.1);
                                                     $GSTmanual = number_format($GSTmanual, 2, '.', '');
@@ -318,10 +315,7 @@
                                                  </tr>
                                                 
                                                     <?php
-
                                                 }
-
-
                                                 ?>
                                                   <tr>
                                                      <td></td>

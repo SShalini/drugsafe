@@ -3,7 +3,6 @@
         $("#szSearch").customselect();
         $("#szSearchname").customselect();
         $("#szSearchemail").customselect();
-
     });
 </script>
 <div class="page-content-wrapper">
@@ -35,12 +34,11 @@
                         <a href="<?php echo __BASE_URL__;?>">Home</a>
                         <i class="fa fa-circle"></i>
                     </li>
-                    <?php if($prospectDetailsAry['szName']) { ?>
+                   
                    <li>
-                        <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord"><?php echo $prospectDetailsAry['szName'];?></a>
+                        <a href="<?php echo __BASE_URL__; ?>/prospect/prospectRecord"><?php echo $prospectDetailsAry['szBusinessName'];?></a>
                         <i class="fa fa-circle"></i>
                     </li>
-                    <?php }?>
                     <li>
                         <span class="active">Prospect Details</span>
                     </li>
@@ -54,7 +52,6 @@
                  
                     <?php 
                        echo "Prospect Details";
-
                       if($_SESSION['drugsafe_user']['iRole']==2){
                             if (($prospectDetailsAry['status']==1) || ($prospectDetailsAry['status']== 2)|| ($prospectDetailsAry['status']== 3)|| ($prospectDetailsAry['status']== 5)) { ?>
                     &nbsp; &nbsp;
@@ -224,7 +221,6 @@
 
                                     <?php
                                 }
-
                                 ?>
                         </div>   
                 </div>
@@ -435,7 +431,6 @@
                                           <?php
                                          
                                           
-
                                               $retval = $mettingsDetailsData['szDescription'];
                                               $string = preg_replace('/(?<=\S,)(?=\S)/', ' ', $mettingsDetailsData['szDescription']);
                                               $string = str_replace("\n", " ", $string);
@@ -479,7 +474,6 @@
                         </div>
                        
                         <?php
-
                     } else {
                         echo "Not Found";
                     }

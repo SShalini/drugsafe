@@ -10,7 +10,6 @@
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php
-
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
@@ -33,13 +32,15 @@
                         <?php $categoriesListAray =$this->Forum_Model->viewCategoriesListByCatId($forumDetailsAry['0']['idCategory']); 
                        ?>
                          <li>
-                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"><?php echo $categoriesListAray['szName']; ?></a>
+                            <a href="<?php echo __BASE_URL__;?>/forum/categoriesList"><?php echo $categoriesListAray['szName']; ?></a>
                             <i class="fa fa-circle"></i>
                         </li>
                          <li>
-                            <a onclick=""
-                               href="javascript:void(0);"><?php echo $forumDetailsAry['0']['szForumTitle']; ?>'s Details</a>
-                            
+                            <a href="<?php echo __BASE_URL__;?>/forum/forumList"><?php echo $forumDetailsAry['0']['szForumTitle']; ?></a>
+                            <i class="fa fa-circle"></i>
+                        </li>
+                         <li>
+                           Details   
                         </li>
                      
                     </ul>

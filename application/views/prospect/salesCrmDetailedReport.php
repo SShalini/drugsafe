@@ -18,7 +18,6 @@
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php
-
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
@@ -82,7 +81,7 @@
                    
                        
                        
-                              <form class="form-horizontal search-bar" id="szSearchField" action="<?=__BASE_URL__?>/prospect/sales_crm_detailed_report" name="szSearchField" method="post">
+                     <form class="search-bar" id="szSearchField" action="<?=__BASE_URL__?>/prospect/sales_crm_detailed_report" name="szSearchField" method="post">
                        <?php if(($_SESSION['drugsafe_user']['iRole']==1)|| ($_SESSION['drugsafe_user']['iRole']==5) ){  ?> 
                                   <div class="row"> 
                                     <div class="col-md-3">
@@ -108,8 +107,7 @@
                                     </div>
                                       
                                            <div class="col-md-3">
-                                              <div
-                                            class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
+                                              <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
                                             <div class="input-group input-medium date date-picker"
                                                  data-date-format="dd/mm/yyyy">
 
@@ -161,8 +159,8 @@
                          
                     <div class=" row">
                          <div class=" col-md-3 search clienttypeselect">
-                               
                                     <div id='szBusinessName'>
+                                         <div class="form-group">
                                         <select class="form-control custom-select" name="szSearchBussName"
                                                 id="szSearchBussName" onfocus="remove_formError(this.id,'true')">
                                             <option value="">Business Name</option>
@@ -174,11 +172,12 @@
                                           }
                                             ?>
                                         </select>
+                                       </div>
                                     </div>
                                 </div>     
 
                                 <div class=" col-md-3">
-                                   
+                                   <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                       <select class="form-control custom-select" name="szSearch4" id="szSearch4" onfocus="remove_formError(this.id,'true')">
                                          
                                         <option value=''>Status</option>
@@ -203,7 +202,7 @@
                                   
                                       </select>
                                   </div>
-                            
+                             </div>
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                            </div>
@@ -257,7 +256,7 @@
                                     </div>
                              
                                 <div class="search col-md-3">
-                                   
+                                    <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                                       <select class="form-control custom-select" name="szSearch4" id="szSearch4" onfocus="remove_formError(this.id,'true')">
                                          
                                         <option value=''>Status</option>
@@ -282,10 +281,11 @@
                                   
                                       </select>
                                      </div>    
+                                      </div> 
                                         </div>  
                                   <div class="row">    
                                 <div class="search col-md-3">
-                       
+                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
                             <select class="form-control custom-select" name="szSearchBussName" id="szSearchBussName" onchange="remove_formError(this.id,'true')">
                                <option value="">Business Name</option>
                                   
@@ -305,7 +305,7 @@
                                           }
                                           ?>
                            </select>
-                      
+                       </div>  
                          </div>
                                   <div class="col-md-1">
                            <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
@@ -404,7 +404,6 @@
                                                                         </p>
                                                                         <?php
                                                                     }
-
                                                                     ?></td>
                                                         
                                                      <td>  <?php 

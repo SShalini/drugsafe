@@ -15,7 +15,6 @@
                             <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                         </div>
                     <?php
-
                     }
                     if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                     {
@@ -67,14 +66,12 @@
                         <?php
                         if(!empty($franchiseeAray))
                         {
-                            ?>
-                         <div class="row">
-                              <form class="form-horizontal" id="szSearchField" action="<?=__BASE_URL__?>/admin/franchiseeList" name="szSearchField" method="post">
-
-
-                                  <div class="search clienttypeselect col-md-3 ">
-                                   
-                                      <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                         ?>
+                        <div class="row">
+                                <form class="search-bar" id="szSearchField" action="<?=__BASE_URL__?>/admin/franchiseeList" name="szSearchField" method="post">
+                                <div class="search clienttypeselect col-md-3 ">
+                                        <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
+                                           <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Franchisee Name</option>
                                           <?php
                                           foreach($allfranchisee as $franchiseeIdList)
@@ -83,15 +80,32 @@
                                               echo '<option value="'.$franchiseeIdList['szName'].'"' . $selected . ' >'.$franchiseeIdList['szName'].'</option>';
                                           }
                                           ?>
-                                      </select>
-                                  </div>
-
+                                        </select>
+                                            <?php
+                                            if (form_error('szSearch2')) {
+                                                ?>
+                                                <span class="help-block pull-left">
+                                                <span><?php echo form_error('szSearch2'); ?></span>
+                                                </span><?php } ?>
+                                            <?php if (!empty($arErrorMessages['szSearch2'])) { ?>
+                                                <span class="help-block pull-left">
+                                                <i class="fa fa-times-circle"></i>
+                                                    <?php echo $arErrorMessages['szSearch2']; ?>
+                                            </span>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                  
+                                  
+                        
                                   <div class="col-md-1">
-                                  <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
-                                  </div>
+                           <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
+                           </div>
                            </form>
                           </div>
-                            
+                        
+                        
+                        
                              <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>

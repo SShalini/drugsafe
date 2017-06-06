@@ -9,6 +9,15 @@
                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
+                        <?php $CategoryDataAry = $this->Forum_Model->getCategoryDetailsById(set_value('forumData[idCategory]'));?>
+                        <a href="<?php __BASE_URL__ ?>/forum/categoriesList" ><?php echo $CategoryDataAry['szName'] ; ?></a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                     <li>
+                        <a href="<?php __BASE_URL__ ?>/forum/forumList" ><?php echo set_value('forumData[szForumTitle]'); ?></a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                        <li>
                             <span class="active">Edit Forum </span>
                         </li>
                     </ul>
@@ -162,10 +171,8 @@
 </div>
     
   <script type="text/javascript">
-
         $(document).ready(function()
         {
-
             var settings = {
                     url: "<?php echo __BASE_URL__; ?>/inventory/uploadProfileImage",
                     method: "POST",
@@ -196,8 +203,6 @@
             if($('#product_image').is(':visible')){
                 setTimeout(function() { hideUploadBtn(); }, 500);
             }
-
-
         });
         function removeIncidentPhoto(){
         $('#product_image').hide();
@@ -209,7 +214,6 @@
         {
             $(".ajax-upload-dragdrop").addClass('hide');
         }
-
 </script>
 <script>
 CKEDITOR.replace( 'szForumLongDiscription' );

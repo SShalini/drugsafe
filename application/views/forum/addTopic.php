@@ -3,9 +3,19 @@
         <div id="page_content" class="row">
             <div class="col-md-12">
                 <ul class="page-breadcrumb breadcrumb">
+                    <?php $forumDataAry = $this->Forum_Model->getForumDetailsById($idForum);?>
                     <li>
                        <a href="<?php echo __BASE_URL__;?>">Home</a>
                        <i class="fa fa-circle"></i>
+                    </li>
+                     <li>
+                        <?php $CategoryDataAry = $this->Forum_Model->getCategoryDetailsById($forumDataAry['idCategory']);?>
+                        <a href="<?php __BASE_URL__ ?>/forum/categoriesList" ><?php echo $CategoryDataAry['szName']; ?></a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                     <li>
+                        <a href="<?php __BASE_URL__ ?>/forum/forumList" ><?php echo $forumDataAry[szForumTitle]; ?></a>
+                        <i class="fa fa-circle"></i>
                     </li>
                     <li>
                        <span class="active">Add Topic</span>

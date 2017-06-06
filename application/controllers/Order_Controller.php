@@ -1,13 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Order_Controller extends CI_Controller
 {
-
     function __construct()
     {
         parent::__construct();
-
         
         $this->load->model('Order_Model');
         $this->load->model('StockMgt_Model');
@@ -22,10 +19,7 @@ class Order_Controller extends CI_Controller
         $this->load->model('StockMgt_Model');
         $this->load->model('Webservices_Model');
         $this->load->library('pagination');
-
-
     }
-
     function drugtestkit()
     {
         $is_user_login = is_user_login($this);
@@ -36,19 +30,14 @@ class Order_Controller extends CI_Controller
             die;
         }
         $searchAry = $_POST['szSearchProdCode'];
-
         $config['base_url'] = __BASE_URL__ . "/order/drugtestkit/";
         $config['total_rows'] = count($this->Inventory_Model->viewDrugTestKitList($limit, $offset, $searchAry, 2));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
         $this->pagination->initialize($config);
-
         $idfranchisee = $_SESSION['drugsafe_user']['id'];
-
         $drugTestKitAray = $this->Inventory_Model->viewDrugTestKitList($config['per_page'], $this->uri->segment(3), $searchAry, 2);
         $drugTestKitListAray = $this->Inventory_Model->viewDrugTestKitList(false, false, false, 2);
         $count = $this->Admin_Model->getnotification();
-
         $data['drugTestKitAray'] = $drugTestKitAray;
         $data['szMetaTagTitle'] = " Drug Test Kit ";
         $data['is_user_login'] = $is_user_login;
@@ -58,12 +47,10 @@ class Order_Controller extends CI_Controller
         $data['data'] = $data;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
         $data['drugtestkitlist'] = $drugTestKitListAray;
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('order/orderDrugTestKit');
         $this->load->view('layout/admin_footer');
     }
-
     function marketingmaterial()
     {
         $is_user_login = is_user_login($this);
@@ -73,20 +60,15 @@ class Order_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
-
         $searchAry = $_POST['szSearchProdCode'];
         $config['base_url'] = __BASE_URL__ . "/order/marketingmaterial/";
         $config['total_rows'] = count($this->Inventory_Model->viewMarketingMaterialList($searchAry, $limit, $offset, 2));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
         $this->pagination->initialize($config);
-
         $idfranchisee = $_SESSION['drugsafe_user']['id'];
         $marketingMaterialAray = $this->Inventory_Model->viewMarketingMaterialList($searchAry, $config['per_page'], $this->uri->segment(3), 2);
         $marketingMaterialListAray = $this->Inventory_Model->viewMarketingMaterialList(false, false, false, 2);
         $count = $this->Admin_Model->getnotification();
-
-
         $data['marketingMaterialAray'] = $marketingMaterialAray;
         $data['szMetaTagTitle'] = "Marketing Material";
         $data['is_user_login'] = $is_user_login;
@@ -96,18 +78,13 @@ class Order_Controller extends CI_Controller
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
         $data['data'] = $data;
         $data['marketingMaterialListAray'] = $marketingMaterialListAray;
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('order/orderMarketingMaterial');
         $this->load->view('layout/admin_footer');
     }
-
-
     function uploadProfileImage()
     {
-
         $output_dir = __APP_PATH_PRODUCT_IMAGES__;
-
         $ret = array();
         $RandomNum = time();
         $ImageName = str_replace(' ', '-', strtolower($_FILES['myfile']['name']));
@@ -130,10 +107,8 @@ class Order_Controller extends CI_Controller
         $ret['img_div'] = '<div id="photoDiv_' . $randomNum . '"><img class="" src="' . __BASE_USER_PRODUCT_IMAGES_URL__ . '/' . $NewImageName . '" width="60" height="60" alt="Product  Image" />
                                    <a href="javascript:void(0);" id="remove_btn_' . $randomNum . '" class="btn red-intense btn-sm" onclick="removeIncidentPhoto();">Remove</a>
                            </div>';
-
         echo json_encode($ret);
     }
-
     function consumables()
     {
         $is_user_login = is_user_login($this);
@@ -149,11 +124,9 @@ class Order_Controller extends CI_Controller
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
         $this->pagination->initialize($config);
         $idfranchisee = $_SESSION['drugsafe_user']['id'];
-
         $consumablesAray = $this->Inventory_Model->viewConsumablesList($config['per_page'], $this->uri->segment(3), $searchAry, 3);
         $consumableslistAry = $this->Inventory_Model->viewConsumablesList(false, false, false, 3);
         $count = $this->Admin_Model->getnotification();
-
         $data['consumablesAray'] = $consumablesAray;
         $data['szMetaTagTitle'] = " Consumables";
         $data['is_user_login'] = $is_user_login;
@@ -162,12 +135,10 @@ class Order_Controller extends CI_Controller
         $data['notification'] = $count;
         $data['data'] = $data;
         $data['consumableslist'] = $consumableslistAry;
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('order/orderConsumables');
         $this->load->view('layout/admin_footer');
     }
-
     function placeOrderData()
     {
         $idProduct = $this->input->post('idProduct');
@@ -184,16 +155,12 @@ class Order_Controller extends CI_Controller
             echo "placeOrderErrorConfirmation||||".$MinQuantity['min_ord_qty'];
         }
     }
-
     public function placeOrder()
     {
         $flag = $this->session->userdata('flag');
         $data['mode'] = '__PLACE_ORDER_POPUP_CONFIRM__';
         $this->load->view('admin/admin_ajax_functions', $data);
-
-
     }
-
     public function placeOrderErrorConfirmation()
     {
         $qty = $this->input->post('qty');
@@ -202,10 +169,7 @@ class Order_Controller extends CI_Controller
         $data['qty'] = $qty;
         $data['prodname'] = $this->input->post('prodname');
         $this->load->view('admin/admin_ajax_functions', $data);
-
-
     }
-
     function orderList()
     {
         $is_user_login = is_user_login($this);
@@ -216,21 +180,14 @@ class Order_Controller extends CI_Controller
             die;
         }
         $searchAry = $_POST['szSearchProdCode'];
-
         $config['base_url'] = __BASE_URL__ . "/order/orderList/";
         $config['total_rows'] = count($this->Order_Model->getOrdersList($limit, $offset, $searchAry));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
-
         $this->pagination->initialize($config);
-
         $idfranchisee = $_SESSION['drugsafe_user']['id'];
-
-
         $totalOrdersAray = $this->Order_Model->getOrdersList($config['per_page'], $this->uri->segment(3), $searchAry);
         $totalOrdersSearchAray = $this->Order_Model->getOrdersList();
-
         $count = $this->Admin_Model->getnotification();
-
         $data['totalOrdersSearchAray'] = $totalOrdersSearchAray;
         $data['totalOrdersAray'] = $totalOrdersAray;
         $data['szMetaTagTitle'] = " Order List";
@@ -240,19 +197,16 @@ class Order_Controller extends CI_Controller
         $data['data'] = $data;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
         //$data['drugtestkitlist'] = $drugTestKitListAray;
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('order/cartOrderValuelist');
         $this->load->view('layout/admin_footer');
     }
-
     public function DeleteOrderAlert()
     {
         $data['mode'] = '__DELETE_ORDER_POPUP__';
         $data['idOrder'] = $this->input->post('idOrder');
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-
     public function OrderDeleteConfirmation()
     {
         $data['mode'] = '__DELETE_ORDER_CONFIRM__';
@@ -260,10 +214,8 @@ class Order_Controller extends CI_Controller
         $this->Order_Model->deleteOrder($data['idOrder']);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-
     public function updateCartData()
     {
-
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -272,7 +224,6 @@ class Order_Controller extends CI_Controller
             die;
         }
         $count = $_POST['count'];
-
         for ($i = 1; $i <= $count; $i++) {
             $quantity = $_POST['order_quantity' . $i];
             $orderId = $_POST['order_id' . $i];
@@ -285,9 +236,7 @@ class Order_Controller extends CI_Controller
             ob_end_clean();
             redirect(base_url('/order/orderList'));
         }
-
     }
-
     function checkOutOrderData()
     {
         $idfranchisee = $this->input->post('idfranchisee');
@@ -301,10 +250,8 @@ class Order_Controller extends CI_Controller
             echo "placeOrderErrorConfirmation";
         }
     }
-
     public function checkOutOrder()
     {
-
         $is_user_login = is_user_login($this);
         // redirect to dashboard if already logged in
         if (!$is_user_login) {
@@ -337,11 +284,8 @@ class Order_Controller extends CI_Controller
                 redirect(base_url('/order/ordersuccess'));
                 }
             }
-
         }
-
     }
-
     public function ordersuccess()
     {
         $count = $this->Admin_Model->getnotification();
@@ -354,8 +298,6 @@ class Order_Controller extends CI_Controller
         }
         $orderid = $this->session->userdata('orderid');
         $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($orderid);
-
-
         $data['totalOrdersDetailsAray'] = $totalOrdersDetailsAray;
         $data['orderid'] = $orderid;
         $data['szMetaTagTitle'] = "Order Details";
@@ -365,13 +307,10 @@ class Order_Controller extends CI_Controller
         $data['data'] = $data;
         $data['arErrorMessages'] = $this->Admin_Model->arErrorMessages;
         //$data['drugtestkitlist'] = $drugTestKitListAray;
-
         $this->load->view('layout/admin_header', $data);
         $this->load->view('order/successOrder');
         $this->load->view('layout/admin_footer');
-
     }
-
     public function view_order_list()
     {
         $count = $this->Admin_Model->getnotification();
@@ -382,17 +321,13 @@ class Order_Controller extends CI_Controller
             redirect(base_url('/admin/admin_login'));
             die;
         }
-
         $searchAry = $_POST;
-
         $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
         $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
         $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
         $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
-
         $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
@@ -405,11 +340,9 @@ class Order_Controller extends CI_Controller
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
             //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetails');
             $this->load->view('layout/admin_footer');
-
         } else {
             $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
@@ -422,15 +355,11 @@ class Order_Controller extends CI_Controller
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
             //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetails');
             $this->load->view('layout/admin_footer');
-
-
         }
     }
-
     public function viewOrderData()
     {
         $data['mode'] = '__VIEW_ORDER_DETAILS_POPUP__';
@@ -438,7 +367,6 @@ class Order_Controller extends CI_Controller
         $data['flag'] = $this->input->post('flag');
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-
     public function editOrderData()
     {
         $data['mode'] = '__EDIT_ORDER_DETAILS_POPUP__';
@@ -446,15 +374,34 @@ class Order_Controller extends CI_Controller
         $data['flag'] = $this->input->post('flag');
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-
     public function cancelOrderConfirmation()
-    {
+    {    $searchAry['szSearch1'] = $this->input->post('frName');
+         $searchAry['szSearch4'] = $this->input->post('startDate');
+         $searchAry['szSearch5'] = $this->input->post('endDate');
+         $searchAry['szSearch2'] = $this->input->post('orderNo');
         $data['mode'] = '__CANCEL_ORDER_CONFIRM_DETAILS_POPUP__';
-        $data['idOrder'] = $this->input->post('idOrder');
-        $this->Order_Model->updateOrderByOrderId($data['idOrder'], 3);
+        $data['idOrder'] = $this->input->post('idOrder'); 
+       if($this->Order_Model->updateOrderByOrderId($data['idOrder'], 3)){
+        
+        $count = $this->Admin_Model->getnotification();
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+        
+            $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+          
         $this->load->view('admin/admin_ajax_functions', $data);
+       }  
     }
-
     public function deliverOrderConfirmation()
     {
         $data['mode'] = '__DELIVER_ORDER_CONFIRM_DETAILS_POPUP__';
@@ -462,7 +409,6 @@ class Order_Controller extends CI_Controller
         $this->Order_Model->updateOrderByOrderId($data['idOrder'], 2);
         $this->load->view('admin/admin_ajax_functions', $data);
     }
-
     function view_order_details()
     {
         $idOrder = $this->input->post('idOrder');
@@ -478,7 +424,6 @@ class Order_Controller extends CI_Controller
         }
         
     }
-
     public function pdf_dispatch_order_details()
     {
        ob_start();
@@ -496,24 +441,18 @@ class Order_Controller extends CI_Controller
         $pdf->setPrintFooter(false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
-
         $pdf->AddPage('L');
-
         //$pdf->writeCell();
         $idOrder = $this->session->userdata('idOrder');
         $flag = $this->session->userdata('flag');
         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
      
         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
-
         
         if ($OrdersDetailsAray['status'] == 2) {
-
-
             $status = 'Dispatched';
         }
         
-
      $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));
      $dispatchVal =     date('d M Y',strtotime($OrdersDetailsAray['dispatchedon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['dispatchedon']));
       $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));
@@ -526,11 +465,9 @@ class Order_Controller extends CI_Controller
     <tr>
         <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
     </tr>
-
 </table>
 <br />
 <h2 style="text-align: center;">ORDER DETAILS </h2>
-
 <br>
 <h3 style="color:black">Order Info  </h3>
 <br />
@@ -575,11 +512,8 @@ $html .= '
 	    $tbl = <<<EOD
 $html
 EOD;
-
 	    $pdf->writeHTML($tbl, true, false, false, false, '');
-
         $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
-
         if (!empty($totalDispatched)) {
             $i = 0;
             foreach ($totalDispatched as $DispatchOrderDetData) {
@@ -610,10 +544,8 @@ EOD;
                 $html1 .= '<tr  nobr="true"><td colspan="3"><b>Total</b></td><td><b>$'.number_format($totalAmount, 2, '.', ',').'</b></td></tr>
                 </table>';
 	            $tbl = <<<EOD
-
                 $html1
 EOD;
-
 	            $pdf->writeHTML($tbl, true, false, false, false, '');
             }
         }
@@ -622,16 +554,10 @@ EOD;
                       
                         ';
 	    $tbl = <<<EOD
-
                 $html2
 EOD;
-
 		$pdf->writeHTML($tbl, true, false, true, false, '');
-
-
-
         error_reporting(E_ALL);
-
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');
     }
@@ -652,7 +578,6 @@ EOD;
         $pdf->setPrintFooter(false);
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
-
         $pdf->AddPage('L');
    
         $idOrder = $this->session->userdata('idOrder');
@@ -660,18 +585,13 @@ EOD;
         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
      
         $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
-
         if ($OrdersDetailsAray['status'] == 1) {
-
             $status = Ordered;
         }
         
         if ($OrdersDetailsAray['status'] == 3) {
-
-
             $status = Canceled;
         }
-
         
      $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));
       $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));
@@ -681,11 +601,9 @@ EOD;
     <tr>
         <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
     </tr>
-
 </table>
 <br />
 <h2 style="text-align: center;">Delivery Docket</h2>
-
 <br>
 <h3 style="color:black">Order Info  </h3>
 <br />
@@ -749,13 +667,10 @@ $html .= '
                         </div>
                       
                         ';
-
         $pdf->writeHTML($html, true, false, true, false, '');
-
         /*error_reporting(E_ALL);
         $this->session->unset_userdata('idOrder');
         $this->session->unset_userdata('flag');*/
-
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');
     }
@@ -784,30 +699,21 @@ $html .= '
         $filename = 'Report';
         $title = 'Drug-safe Order Details';
         $file = $filename . '-' . $title ; //save our workbook as this file name
-
-
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
          $idOrder = $this->session->userdata('idOrder');
          $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
          $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
           if ($OrdersDetailsAray['status'] == 1) {
-
             $status = 'Ordered';
         }
         if ($OrdersDetailsAray['status'] == 2) {
-
-
             $status = 'Dispatched';
         }
         if ($OrdersDetailsAray['status'] == 3) {
-
-
             $status = 'Canceled';
         }
-
         if ($OrdersDetailsAray['status'] == 4) {
-
             $status = 'Pending';
         }
        if($OrdersDetailsAray['createdon']=="0000-00-00 00:00:00"){
@@ -880,7 +786,6 @@ $html .= '
           if($OrdersDetailsAray['status'] ==3){
          $this->excel->getActiveSheet()->setCellValue('B6',$cancelVal);
          $this->excel->getActiveSheet()->setCellValue('B7',$status);
-
               $this->excel->getActiveSheet()->setCellValue('B8','$'.$totalFreightPrice);
          $this->excel->getActiveSheet()->setCellValue('B9','$'.($OrdersDetailsAray['dispatched_price']));
           if($_SESSION['drugsafe_user']['iRole']==1){
@@ -904,8 +809,6 @@ $html .= '
          $this->excel->getActiveSheet()->setCellValue('B9',$franchiseeDetArr1['szName']);
           }
          }
-
-
         $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
 if (!empty($totalDispatched)) {
     $i = 12;
@@ -919,17 +822,14 @@ if (!empty($totalDispatched)) {
         $this->excel->getActiveSheet()->getStyle('A'.($i+2))->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A'.($i+2))->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A'.($i+2))->getAlignment()->setVertical(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('B'.($i+2), 'Product Cost');
         $this->excel->getActiveSheet()->getStyle('B'.($i+2))->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B'.($i+2))->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B'.($i+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('C'.($i+2), 'Dispatched Quantity');
         $this->excel->getActiveSheet()->getStyle('C'.($i+2))->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C'.($i+2))->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C'.($i+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('D'.($i+2), 'Total Price EXL GST');
         $this->excel->getActiveSheet()->getStyle('D'.($i+2))->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D'.($i+2))->getFont()->setBold(true);
@@ -946,12 +846,10 @@ if (!empty($totalDispatched)) {
                 $this->excel->getActiveSheet()->setCellValue('C'.($j+3),$DispatchOrderDet['dispatch_qty']);
                 $this->excel->getActiveSheet()->getStyle('C'.($j+3))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
                 $this->excel->getActiveSheet()->setCellValue('D'.($j+3),'$'.number_format(($DispatchOrderDet['dispatch_qty']) * ($productDataArr['szProductCost']), 2, '.', ','));
-
                 $j++;
             }
             $i = $j+3;
         }
-
         $this->excel->getActiveSheet()->mergeCells('A'.($i).':C'.($i));
         $this->excel->getActiveSheet()->setCellValue('A'.($i), 'Total');
         $this->excel->getActiveSheet()->getStyle('A'.($i))->getFont()->setSize(13);
@@ -969,11 +867,9 @@ if (!empty($totalDispatched)) {
     $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(TRUE);
     $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(TRUE);
 }
-
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
@@ -988,44 +884,34 @@ if (!empty($totalDispatched)) {
         $filename = 'Report';
         $title = 'Drug-safe Order Details';
         $file = $filename . '-' . $title ; //save our workbook as this file name
-
-
         $this->excel->setActiveSheetIndex(0);
         $this->excel->getActiveSheet()->setTitle($filename);
         $this->excel->getActiveSheet()->setCellValue('A13', 'Product Code');
         $this->excel->getActiveSheet()->getStyle('A13')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('A13')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('A13')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('B13', 'Product Cost');
         $this->excel->getActiveSheet()->getStyle('B13')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('B13')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('B13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('C13', 'Quantity');
         $this->excel->getActiveSheet()->getStyle('C13')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('C13')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('C13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
         $this->excel->getActiveSheet()->setCellValue('D13', 'Total Price EXL GST');
         $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setSize(13);
         $this->excel->getActiveSheet()->getStyle('D13')->getFont()->setBold(true);
         $this->excel->getActiveSheet()->getStyle('D13')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
          $idOrder = $this->session->userdata('idOrder');
          $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
          $franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId('', $OrdersDetailsAray['franchiseeid']);
           if ($OrdersDetailsAray['status'] == 1) {
-
             $status = Ordered;
         }
       
         if ($OrdersDetailsAray['status'] == 3) {
-
-
             $status = Canceled;
         }
-
        if($OrdersDetailsAray['canceledon']=="0000-00-00 00:00:00"){
          $cancelVal =   "N/A";  
        } 
@@ -1109,7 +995,6 @@ if (!empty($totalDispatched)) {
                 $this->excel->getActiveSheet()->setCellValue('B'.$i, '$'.$productDataArr['szProductCost']);
                 $this->excel->getActiveSheet()->setCellValue('C'.$i, $item['quantity']);
                 $this->excel->getActiveSheet()->setCellValue('D'.$i, '$'.$price);
-
                 $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(TRUE);
                 $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(TRUE);
@@ -1117,11 +1002,9 @@ if (!empty($totalDispatched)) {
                 $i++;
             }
         }
-
         header('Content-Type: application/vnd.ms-excel'); //mime type
         header('Content-Disposition: attachment;filename="' . $file . '"'); //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
         $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');
@@ -1140,7 +1023,6 @@ if (!empty($totalDispatched)) {
             die;
         }
         if ($_POST['pending'] == 1) {
-
             $count = $_POST['count'];
             $franchiseeId = $_POST['franchiseeId'];
             $total_price = 0;
@@ -1160,9 +1042,7 @@ if (!empty($totalDispatched)) {
                 } else {
                     $orderPending = $this->Order_Model->pendingOrder($quantity, $orderId, $productId, $szAvailableQuantity, $franchiseeId);
                 }
-
             }
-
             $totalPrice = $_POST['total'];
             if ($this->Order_Model->orderPendingUpdate($_POST['order_id1'], $totalPrice)) {
                 $szMessage['type'] = "success";
@@ -1171,16 +1051,12 @@ if (!empty($totalDispatched)) {
                 ob_end_clean();
                 redirect(base_url('/order/view_order_list'));
             }
-
             $szMessage['type'] = "error";
             $szMessage['content'] = "<strong><h3>Dispatch Quantity field can't be empty.</h3></strong> ";
             $this->session->set_userdata('drugsafe_user_message', $szMessage);
             ob_end_clean();
             redirect(base_url('/order/view_order_list'));
-
-
         } else {
-
             $count = $_POST['count'];
             $franchiseeId = $_POST['franchiseeId'];
             $total_price = 0;
@@ -1199,14 +1075,11 @@ if (!empty($totalDispatched)) {
                     ob_end_clean();
                     redirect(base_url('/order/view_order_list'));
                 } else {
-
                     if (!empty($quantity)) {
-
                         $orderDispatch = $this->Order_Model->dispatchOrder($quantity, $orderId, $productId, $szAvailableQuantity, $franchiseeId);
                         $countOrderDispatch = count($orderDispatch);
                     }
                 }
-
             }
             if ($countOrderDispatch == $count) {
                 $totalPrice = $_POST['total'];
@@ -1224,10 +1097,8 @@ if (!empty($totalDispatched)) {
                 ob_end_clean();
                 redirect(base_url('/order/view_order_list'));
             }
-
         }
     }
-
     function dispatchsingleprod(){
         $ordid = $_POST['ordid'];
         $prodid = $_POST['prodid'];
@@ -1249,13 +1120,33 @@ if (!empty($totalDispatched)) {
             echo 'FAIL';
         }
     }
-
     function dispatchfinal(){
         $ordid = $_POST['ordid'];
         $price = $_POST['price'];
         $freightPrice = $_POST['freightPrice'];
         $dispStat = $this->Order_Model->changesdispatchstatus($ordid,'2',$price,$freightPrice);
         if($dispStat){
+            
+         $searchAry['szSearch1'] = $this->input->post('frName');
+         $searchAry['szSearch4'] = $this->input->post('startDate');
+         $searchAry['szSearch5'] = $this->input->post('endDate');
+         $searchAry['szSearch2'] = $this->input->post('orderNo');
+        $count = $this->Admin_Model->getnotification();
+        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+        
+            $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
+            $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
+            $data['allFrDetailsSearchAray'] = $allFrDetailsSearchAray;
+            $data['szMetaTagTitle'] = "Order Details";
+            $data['is_user_login'] = $is_user_login;
+            $data['pageName'] = "Orders";
+            $data['subpageName'] = "View_Order_List";
+            $data['notification'] = $count;
+            $data['data'] = $data;
+            $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
+          
             $data['mode'] = '__PRODUCT_DISPATCHED_SUCCESSFULLY__';
             $this->load->view('admin/admin_ajax_functions', $data);
             $this->Order_Model->xeroIntigration($ordid);
@@ -1273,7 +1164,6 @@ if (!empty($totalDispatched)) {
             return false;
         }
     }
-
     public function view_order_report()
     {
         $count = $this->Admin_Model->getnotification();
@@ -1284,17 +1174,13 @@ if (!empty($totalDispatched)) {
             redirect(base_url('/admin/admin_login'));
             die;
         }
-
         $searchAry = $_POST;
-
         $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
         $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
         $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
         $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
-
         $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
@@ -1307,11 +1193,9 @@ if (!empty($totalDispatched)) {
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
             //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetailsReport');
             $this->load->view('layout/admin_footer');
-
         } else {
             $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
@@ -1324,12 +1208,9 @@ if (!empty($totalDispatched)) {
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
             //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetailsReport');
             $this->load->view('layout/admin_footer');
-
-
         }
     }
     
@@ -1370,18 +1251,14 @@ if (!empty($totalDispatched)) {
             redirect(base_url('/admin/admin_login'));
             die;
         }
-
         $searchAry = $_POST;
-
         $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
         $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
         //$validOrderIdforFr = $this->Order_Model->validOrderIdforFr();
         $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
-
         $this->load->library('form_validation');
         $this->form_validation->set_rules('szSearch4', 'Start Order date ', 'required');
         $this->form_validation->set_rules('szSearch5', 'End Order date', 'required');
-
         $this->form_validation->set_message('required', '{field} is required.');
         if ($this->form_validation->run() == FALSE) {
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
@@ -1397,7 +1274,6 @@ if (!empty($totalDispatched)) {
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetailsByFr');
             $this->load->view('layout/admin_footer');
-
         } else {
             $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
@@ -1410,7 +1286,6 @@ if (!empty($totalDispatched)) {
             $data['data'] = $data;
             $data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
             //$data['drugtestkitlist'] = $drugTestKitListAray;
-
             $this->load->view('layout/admin_header', $data);
             $this->load->view('order/viewOrderDetailsByFr');
             $this->load->view('layout/admin_footer');

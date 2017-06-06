@@ -1,8 +1,6 @@
 <?php
 defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
-
 class Reporting_Controller extends CI_Controller {
-
 	function __construct() {
 		parent::__construct();
 		$this->load->model( 'Order_Model' );
@@ -19,7 +17,6 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->model( 'StockMgt_Model' );
 		$this->load->model( 'Webservices_Model' );
 	}
-
 	public function index() {
 		$is_user_login = is_user_login( $this );
 		if ( $is_user_login ) {
@@ -32,18 +29,12 @@ class Reporting_Controller extends CI_Controller {
 			die;
 		}
 	}
-
 	function allstockreqlistData() {
 		$flag = $this->input->post( 'flag' );
-
 		$this->session->set_userdata( 'flag', $flag );
-
 		echo "SUCCESS||||";
 		echo "allstockreqlist";
-
-
 	}
-
 	function allstockreqlist() {
 		if ( ! empty( $_POST ) ) {
 			$this->session->unset_userdata( 'searchterm' );
@@ -59,51 +50,36 @@ class Reporting_Controller extends CI_Controller {
 			redirect( base_url( '/admin/admin_login' ) );
 			die;
 		}
-
 		$searchAry = '';
-
 		if ( ! empty( $_POST['szSearch'] ) && ! empty( $_POST['szSearch2'] ) ) {
 			$searchItemFr   = $_POST['szSearch'];
 			$searchItemProd = $_POST['szSearch'];
 		} else {
 			if ( isset( $_POST['szSearch'] ) && ! empty( $_POST['szSearch'] ) ) {
 				$searchItem = $_POST['szSearch'];
-
 			}
 			if ( isset( $_POST['szSearch2'] ) && ! empty( $_POST['szSearch2'] ) ) {
 				$searchItem = $_POST['szSearch2'];
 			}
 			$searchItemData = $this->Reporting_Model->searchterm_handler( $searchItem );
 		}
-
-
 		$count                 = $this->Admin_Model->getnotification();
 		$commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
 		$config['base_url']    = __BASE_URL__ . "/reporting/allstockreqlist/";
-
 		if ( ! empty( $_POST['szSearch'] ) && ! empty( $_POST['szSearch2'] ) ) {
-
 			$config['total_rows'] = count( $this->Reporting_Model->getAllQtyRequestDetails( $searchAry, $limit, $offset, $searchItemData, 3 ) );
 		} else {
 			$config['total_rows'] = count( $this->Reporting_Model->getAllQtyRequestDetails( $searchAry, $limit, $offset, $searchItemData ) );
-
 		}
-
 		$config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 		$this->pagination->initialize( $config );
-
 		if ( ! empty( $_POST['szSearch'] ) && ! empty( $_POST['szSearch2'] ) ) {
-
 			$allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails( $searchAry, $config['per_page'], $this->uri->segment( 3 ), $searchItemData, 3 );
 		} else {
 			$allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetails( $searchAry, $config['per_page'], $this->uri->segment( 3 ), $searchItemData );
-
 		}
-
 		$allQtyRequestListAray        = $this->Reporting_Model->getAllQtyRequestDetails( false, false, false, false, 1 );
 		$allQtyProductRequestListAray = $this->Reporting_Model->getAllQtyRequestDetails( false, false, false, false, 2 );
-
-
 		$data['allReqQtyAray']                = $allReqQtyAray;
 		$data['allQtyProductRequestListAray'] = $allQtyProductRequestListAray;
 		$data['allQtyRequestListAray']        = $allQtyRequestListAray;
@@ -118,18 +94,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->view( 'reporting/stockRequestList' );
 		$this->load->view( 'layout/admin_footer' );
 	}
-
 	function stockassignlistData() {
 		$flag = $this->input->post( 'flag' );
-
 		$this->session->set_userdata( 'flag', $flag );
-
 		echo "SUCCESS||||";
 		echo "stockassignlist";
-
-
 	}
-
 	function stockassignlist() {
 		if ( ! empty( $_POST ) ) {
 			$this->session->unset_userdata( 'searchtermAssign' );
@@ -147,7 +117,6 @@ class Reporting_Controller extends CI_Controller {
 		}
 		$count                 = $this->Admin_Model->getnotification();
 		$commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-
 		$searchAry = '';
 		if ( ! empty( $_POST['szSearch'] ) && ! empty( $_POST['szSearch2'] ) ) {
 			$searchItemFr   = $_POST['szSearch'];
@@ -155,7 +124,6 @@ class Reporting_Controller extends CI_Controller {
 		} else {
 			if ( isset( $_POST['szSearch'] ) && ! empty( $_POST['szSearch'] ) ) {
 				$searchItem = $_POST['szSearch'];
-
 			}
 			if ( isset( $_POST['szSearch2'] ) && ! empty( $_POST['szSearch2'] ) ) {
 				$searchItem = $_POST['szSearch2'];
@@ -163,28 +131,20 @@ class Reporting_Controller extends CI_Controller {
 			$searchItemData = $this->Reporting_Model->searchtermAssign_handler( $searchItem );
 		}
 		$config['base_url'] = __BASE_URL__ . "/reporting/stockassignlist/";
-
 		if ( ! empty( $_POST['szSearch'] ) && ! empty( $_POST['szSearch2'] ) ) {
-
 			$config['total_rows'] = count( $this->Reporting_Model->getAllQtyAssignDetails( $searchAry, $limit, $offset, false, 3 ) );
 		} else {
 			$config['total_rows'] = count( $this->Reporting_Model->getAllQtyAssignDetails( $searchAry, $limit, $offset, $searchItemData ) );
-
 		}
 		$config['per_page'] = __PAGINATION_RECORD_LIMIT__;
 		$this->pagination->initialize( $config );
 		if ( ! empty( $_POST['szSearch'] ) && ! empty( $_POST['szSearch2'] ) ) {
-
 			$allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails( $searchAry, $config['per_page'], $this->uri->segment( 3 ), false, 3 );
 		} else {
 			$allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetails( $searchAry, $config['per_page'], $this->uri->segment( 3 ), $searchItemData );
-
 		}
-
 		$allQtyAssignListAray        = $this->Reporting_Model->getAllQtyAssignDetails( false, false, false, false, 1 );
 		$allQtyProductAssignListAray = $this->Reporting_Model->getAllQtyAssignDetails( false, false, false, false, 2 );
-
-
 		$data['allQtyAssignAray']            = $allQtyAssignAray;
 		$data['allQtyAssignListAray']        = $allQtyAssignListAray;
 		$data['allQtyProductAssignListAray'] = $allQtyProductAssignListAray;
@@ -199,22 +159,14 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->view( 'reporting/stockAssignList' );
 		$this->load->view( 'layout/admin_footer' );
 	}
-
 	function ViewReqReportingPdfData() {
 		$franchiseeName = $this->input->post( 'franchiseeName' );
 		$productCode    = $this->input->post( 'productCode' );
-
-
 		$this->session->set_userdata( 'productCode', $productCode );
 		$this->session->set_userdata( 'franchiseeName', $franchiseeName );
-
-
 		echo "SUCCESS||||";
 		echo "pdfstockreqlist";
-
-
 	}
-
 	public function pdfstockreqlist() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -235,14 +187,9 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage();
-
 		$franchiseeName = $this->session->userdata( 'franchiseeName' );
 		$productCode    = $this->session->userdata( 'productCode' );
-
-
 		$allReqQtyAray = $this->Reporting_Model->getAllQtyRequestDetailsForPdf( $franchiseeName, $productCode );
-
-
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Request Report</b></p></div>
             <div class= "table-responsive" >
@@ -279,61 +226,45 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$this->session->unset_userdata( 'productCode' );
 		$this->session->unset_userdata( 'franchiseeName' );
 		$pdf->Output( 'stock-request-report.pdf', 'I' );
 	}
-
 	function excelstockreqlistData() {
 		$franchiseeName = $this->input->post( 'franchiseeName' );
 		$productCode    = $this->input->post( 'productCode' );
-
-
 		$this->session->set_userdata( 'productCode', $productCode );
 		$this->session->set_userdata( 'franchiseeName', $franchiseeName );
-
-
 		echo "SUCCESS||||";
 		echo "excelstockreqlist";
-
-
 	}
-
 	public function excelstockreqlist() {
 		$this->load->library( 'excel' );
 		$filename = 'Report';
 		$title    = 'Stock request list';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', 'Franchisee Id' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Franchisee' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D1', 'Quantity Request' );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E1', 'Requested On' );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$franchiseeName = $this->session->userdata( 'franchiseeName' );
 		$productCode    = $this->session->userdata( 'productCode' );
 		$allReqQtyAray  = $this->Reporting_Model->getAllQtyRequestDetailsForPdf( $franchiseeName, $productCode );
@@ -345,7 +276,6 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $item['szProductCode'] );
 				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, $item['szQuantity'] );
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, date( 'd/m/Y h:i:s A', strtotime( $item['dtRequestedOn'] ) ) );
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -354,11 +284,9 @@ class Reporting_Controller extends CI_Controller {
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
@@ -367,22 +295,16 @@ class Reporting_Controller extends CI_Controller {
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	function ViewAssignReportingPdfData() {
 		$franchiseeName = $this->input->post( 'franchiseeName' );
 		$productCode    = $this->input->post( 'productCode' );
 		$flag           = $this->input->post( 'flag' );
-
 		$this->session->set_userdata( 'productCode', $productCode );
 		$this->session->set_userdata( 'franchiseeName', $franchiseeName );
 		$this->session->set_userdata( 'flag', $flag );
-
 		echo "SUCCESS||||";
 		echo "pdfstockassignlist";
-
-
 	}
-
 	public function pdfstockassignlist() {
 		$this->load->library( 'Pdf' );
 		$pdf = new Pdf( 'P', 'mm', 'A4', true, 'UTF-8', false );
@@ -406,11 +328,8 @@ class Reporting_Controller extends CI_Controller {
 		$franchiseeName = $this->session->userdata( 'franchiseeName' );
 		$productCode    = $this->session->userdata( 'productCode' );
 		if ( $flag == 1 ) {
-
 			$allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetailsForPdf( $franchiseeName, $productCode );
 		}
-
-
 		$html = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Assignment Report</b></p></div>
@@ -433,20 +352,16 @@ class Reporting_Controller extends CI_Controller {
 		if ( $allQtyAssignAray ) {
 			$i = 0;
 			foreach ( $allQtyAssignAray as $allQtyAssignData ) {
-
 				$productDataAry = $this->Inventory_Model->getProductDetailsById( $allQtyAssignData['iProductId'] );
 				$franchiseeArr  = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $allQtyAssignData['iFranchiseeId'] );
-
 				if ( $allQtyAssignData['quantityDeducted'] != 0 ) {
 					$Qty             = $allQtyAssignData['quantityDeducted'];
 					$Cost            = $allQtyAssignData['szProductCost'];
 					$TotalCostPerQty = "(-) $" . ( $Qty * $Cost );
-
 				} else {
 					$Qty             = $allQtyAssignData['szQuantityAssigned'];
 					$Cost            = $allQtyAssignData['szProductCost'];
 					$TotalCostPerQty = "(+) $" . ( $Qty * $Cost );
-
 				}
 				$html .= '<tr>
                                             <td> FR-' . $allQtyAssignData['iFranchiseeId'] . ' </td>
@@ -474,80 +389,60 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->unset_userdata( 'franchiseeName' );
 		$pdf->Output( 'stock-assignment-report.pdf', 'I' );
 	}
-
 	function excelstockassignlistData() {
 		$franchiseeName = $this->input->post( 'franchiseeName' );
 		$productCode    = $this->input->post( 'productCode' );
-
-
 		$this->session->set_userdata( 'productCode', $productCode );
 		$this->session->set_userdata( 'franchiseeName', $franchiseeName );
-
-
 		echo "SUCCESS||||";
 		echo "excelstockassignlist";
-
-
 	}
-
 	public function excelstockassignlist() {
 		$this->load->library( 'excel' );
 		$filename = 'Report';
 		$title    = 'Stock assignment';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', 'Franchisee Id' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Franchisee' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D1', 'Cost Per Item' );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E1', 'Total Cost For Quantity Assign' );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'F1', 'Quantity Assigned' );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'G1', 'Quantity Adjusted' );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'H1', 'Total available quantity' );
 		$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'H1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'I1', 'Assigned On' );
 		$this->excel->getActiveSheet()->getStyle( 'I1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'I1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'I1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$franchiseeName   = $this->session->userdata( 'franchiseeName' );
 		$productCode      = $this->session->userdata( 'productCode' );
 		$allQtyAssignAray = $this->Reporting_Model->getAllQtyAssignDetailsForPdf( $franchiseeName, $productCode );
-
 		if ( ! empty( $allQtyAssignAray ) ) {
 			$i = 2;
 			foreach ( $allQtyAssignAray as $item ) {
@@ -555,14 +450,11 @@ class Reporting_Controller extends CI_Controller {
 					$Qty             = $item['quantityDeducted'];
 					$Cost            = $item['szProductCost'];
 					$TotalCostPerQty = "(-) $" . ( $Qty * $Cost );
-
 				} else {
 					$Qty             = $item['szQuantityAssigned'];
 					$Cost            = $item['szProductCost'];
 					$TotalCostPerQty = "(+) $" . ( $Qty * $Cost );
-
 				}
-
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $item['iFranchiseeId'] );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $item['szName'] );
 				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $item['szProductCode'] );
@@ -572,7 +464,6 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->setCellValue( 'G' . $i, $item['quantityDeducted'] );
 				$this->excel->getActiveSheet()->setCellValue( 'H' . $i, $item['szTotalAvailableQty'] );
 				$this->excel->getActiveSheet()->setCellValue( 'I' . $i, date( 'd/m/Y h:i:s A', strtotime( $item['dtAssignedOn'] ) ) );
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -585,11 +476,9 @@ class Reporting_Controller extends CI_Controller {
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
@@ -600,12 +489,10 @@ class Reporting_Controller extends CI_Controller {
 		//end session Unset
 		$objWriter->save( 'php://output' );
 	}
-
 	function frstockreqlist() {
 		if ( empty( $_POST ) || empty( $_POST['szSearchProdCode'] ) ) {
 			$this->session->unset_userdata( 'searchterm' );
 		}
-
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
 		if ( ! $is_user_login ) {
@@ -613,18 +500,13 @@ class Reporting_Controller extends CI_Controller {
 			redirect( base_url( '/admin/admin_login' ) );
 			die;
 		}
-
 		$searchAryData = $_POST['szSearchProdCode'];
 		$searchAry     = $this->Reporting_Model->searchterm_handler( $searchAryData );
 		$franchiseeId  = $_SESSION['drugsafe_user']['id'];
-
-
 		$config['base_url']   = __BASE_URL__ . "/reporting/frstockreqlist/";
 		$config['total_rows'] = count( $this->Reporting_Model->getFrAllQtyRequestDetails( $searchAry, $limit, $offset, $franchiseeId ) );
 		$config['per_page']   = __PAGINATION_RECORD_LIMIT__;
-
 		$this->pagination->initialize( $config );
-
 		$frAllReqQtyAray         = $this->Reporting_Model->getFrAllQtyRequestDetails( $searchAry, $config['per_page'], $this->uri->segment( 3 ), $franchiseeId );
 		$AllQtyReqListAry        = $this->Reporting_Model->getFrAllQtyRequestDetails( false, false, false, $franchiseeId );
 		$data['frAllReqQtyAray'] = $frAllReqQtyAray;
@@ -638,18 +520,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->view( 'reporting/frStockRequestList' );
 		$this->load->view( 'layout/admin_footer' );
 	}
-
 	function frstockassignlistData() {
 		$flag = $this->input->post( 'flag' );
-
 		$this->session->set_userdata( 'flag', $flag );
-
 		echo "SUCCESS||||";
 		echo "frstockassignlist";
-
-
 	}
-
 	function frstockassignlist() {
 		if ( ! empty( $_POST ) ) {
 			$this->session->unset_userdata( 'searchtermAssign' );
@@ -668,16 +544,12 @@ class Reporting_Controller extends CI_Controller {
 		$searchAryData = $_POST['szSearchProdCode'];
 		$searchAry     = $this->Reporting_Model->searchtermAssign_handler( $searchAryData );
 		$franchiseeId  = $_SESSION['drugsafe_user']['id'];
-
 		$config['base_url']   = __BASE_URL__ . "/reporting/frstockassignlist/";
 		$config['total_rows'] = count( $this->Reporting_Model->getFrAllQtyAssignDetails( $searchAry, $limit, $offset, $franchiseeId ) );
 		$config['per_page']   = __PAGINATION_RECORD_LIMIT__;
-
 		$this->pagination->initialize( $config );
-
 		$frAllQtyAssignAray   = $this->Reporting_Model->getFrAllQtyAssignDetails( $searchAry, $config['per_page'], $this->uri->segment( 3 ), $franchiseeId );
 		$allQtyAssignListAray = $this->Reporting_Model->getFrAllQtyAssignDetails( false, false, false, $franchiseeId, 1 );
-
 		$data['frAllQtyAssignAray']   = $frAllQtyAssignAray;
 		$data['allQtyAssignListAray'] = $allQtyAssignListAray;
 		$data['szMetaTagTitle']       = "Stock Assignments";
@@ -685,24 +557,16 @@ class Reporting_Controller extends CI_Controller {
 		$data['pageName']             = "Reporting";
 		$data['subpageName']          = "Franchisee_Stock_Assignments";
 		$data['data']                 = $data;
-
 		$this->load->view( 'layout/admin_header', $data );
 		$this->load->view( 'reporting/frStockAssignList' );
 		$this->load->view( 'layout/admin_footer' );
 	}
-
 	function pdffrstockreqlistData() {
-
 		$productCode = $this->input->post( 'productCode' );
-
 		$this->session->set_userdata( 'productCode', $productCode );
-
 		echo "SUCCESS||||";
 		echo "pdffrstockreqlist";
-
-
 	}
-
 	public function pdffrstockreqlist() {
 		$this->load->library( 'Pdf' );
 		$pdf = new Pdf( 'P', 'mm', 'A4', true, 'UTF-8', false );
@@ -722,7 +586,6 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage();
-
 		$franchiseeId    = $_SESSION['drugsafe_user']['id'];
 		$productCode     = $this->session->userdata( 'productCode' );
 		$frAllReqQtyAray = $this->Reporting_Model->getFrAllQtyRequestDetails( $productCode, false, false, $franchiseeId );
@@ -760,19 +623,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->unset_userdata( 'productCode' );
 		$pdf->Output( 'stock-request-report.pdf', 'I' );
 	}
-
 	function excelfrstockreqlistData() {
-
 		$productCode = $this->input->post( 'productCode' );
-
 		$this->session->set_userdata( 'productCode', $productCode );
-
 		echo "SUCCESS||||";
 		echo "excelfrstockreqlist";
-
-
 	}
-
 	public function excelfrstockreqlist() {
 		$franchiseeId    = $_SESSION['drugsafe_user']['id'];
 		$productCode     = $this->session->userdata( 'productCode' );
@@ -781,44 +637,35 @@ class Reporting_Controller extends CI_Controller {
 		$filename = 'Report';
 		$title    = 'Stock request';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Quantity Requested' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Requested On' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		if ( ! empty( $frAllReqQtyAray ) ) {
 			$i = 2;
 			foreach ( $frAllReqQtyAray as $item ) {
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $item['szProductCode'] );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $item['szQuantity'] );
 				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, date( 'd/m/Y h:i:s A', strtotime( $item['dtRequestedOn'] ) ) );
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
@@ -826,19 +673,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->unset_userdata( 'productCode' );
 		$objWriter->save( 'php://output' );
 	}
-
 	function pdf_fr_stockassignlist_Data() {
-
 		$productCode = $this->input->post( 'productCode' );
-
 		$this->session->set_userdata( 'productCode', $productCode );
-
 		echo "SUCCESS||||";
 		echo "pdf_fr_stockassignlist";
-
-
 	}
-
 	public function pdf_fr_stockassignlist() {
 		$this->load->library( 'Pdf' );
 		$pdf = new Pdf( 'P', 'mm', 'A4', true, 'UTF-8', false );
@@ -860,7 +700,6 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->AddPage();
 		$franchiseeId = $_SESSION['drugsafe_user']['id'];
 		$productCode  = $this->session->userdata( 'productCode' );
-
 		$frAllQtyAssignAray = $this->Reporting_Model->getFrAllQtyAssignDetails( $productCode, false, false, $franchiseeId );
 		$html               = '       
         <a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
@@ -889,7 +728,6 @@ class Reporting_Controller extends CI_Controller {
 					$Cost            = $frAllQtyAssignArayData['szProductCost'];
 					$TotalCostPerQty = "(+) $" . ( $Qty * $Cost );
 				}
-
 				$html .= '<tr>
                                             <td> ' . $frAllQtyAssignArayData['szProductCode'] . ' </td>
                                             <td> $' . $frAllQtyAssignArayData['szProductCost'] . ' </td>
@@ -912,19 +750,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->unset_userdata( 'productCode' );
 		$pdf->Output( 'stock-assignment-report.pdf', 'I' );
 	}
-
 	function excelfr_stockassignlist_Data() {
-
 		$productCode = $this->input->post( 'productCode' );
-
 		$this->session->set_userdata( 'productCode', $productCode );
-
 		echo "SUCCESS||||";
 		echo "excelfr_stockassignlist";
-
-
 	}
-
 	public function excelfr_stockassignlist() {
 		$franchiseeId       = $_SESSION['drugsafe_user']['id'];
 		$productCode        = $this->session->userdata( 'productCode' );
@@ -933,48 +764,36 @@ class Reporting_Controller extends CI_Controller {
 		$filename = 'Report';
 		$title    = 'Stock assignment';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Cost Per Item' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Total Cost For Quantity Assign' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'D1', 'Quantity Assigned' );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E1', 'Quantity Adjusted' );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'F1', 'Available Quantity' );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'G1', 'Assigned On' );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		if ( ! empty( $frAllQtyAssignAray ) ) {
 			$i = 2;
 			foreach ( $frAllQtyAssignAray as $item ) {
@@ -994,7 +813,6 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, $item['quantityDeducted'] );
 				$this->excel->getActiveSheet()->setCellValue( 'F' . $i, $item['szTotalAvailableQty'] );
 				$this->excel->getActiveSheet()->setCellValue( 'G' . $i, date( 'd/m/Y h:i:s A', strtotime( $item['dtAssignedOn'] ) ) );
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -1005,11 +823,9 @@ class Reporting_Controller extends CI_Controller {
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
@@ -1017,9 +833,7 @@ class Reporting_Controller extends CI_Controller {
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	public function inventoryReport() {
-
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
 		if ( ! $is_user_login ) {
@@ -1040,9 +854,7 @@ class Reporting_Controller extends CI_Controller {
 		$this->form_validation->set_rules( 'szSearch2', 'Product Category', 'required' );
 		if ( $_POST['szSearch2'] ) {
 			$productAry = $this->Inventory_Model->getProductByCategory( trim( $catid ) );
-
 		}
-
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
 			$data['validOrdersDetailsAray']        = $validOrdersDetailsAray;
@@ -1056,7 +868,6 @@ class Reporting_Controller extends CI_Controller {
 			$data['data']                          = $data;
 			$data['productAry']                    = $productAry;
 			$data['arErrorMessages']               = $this->Order_Model->arErrorMessages;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/inventoryReport' );
 			$this->load->view( 'layout/admin_footer' );
@@ -1072,17 +883,12 @@ class Reporting_Controller extends CI_Controller {
 			$data['data']                          = $data;
 			$data['productAry']                    = $productAry;
 			$data['arErrorMessages']               = $this->Order_Model->arErrorMessages;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/inventoryReport' );
 			$this->load->view( 'layout/admin_footer' );
 		}
-
-
 	}
-
 	public function viewOrderReport() {
-
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
 		if ( ! $is_user_login ) {
@@ -1090,9 +896,7 @@ class Reporting_Controller extends CI_Controller {
 			redirect( base_url( '/admin/admin_login' ) );
 			die;
 		}
-
 		$searchAry = $_POST;
-
 		$data['szMetaTagTitle']  = "Order Details";
 		$data['is_user_login']   = $is_user_login;
 		$data['pageName']        = "Orders";
@@ -1100,15 +904,11 @@ class Reporting_Controller extends CI_Controller {
 		$data['data']            = $data;
 		$data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
 		$data['drugtestkitlist'] = $drugTestKitListAray;
-
 		$this->load->view( 'layout/admin_header', $data );
 		$this->load->view( 'reporting/View_Order_Report' );
 		$this->load->view( 'layout/admin_footer' );
-
 	}
-
 	public function xero() {
-
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
 		if ( ! $is_user_login ) {
@@ -1116,9 +916,7 @@ class Reporting_Controller extends CI_Controller {
 			redirect( base_url( '/admin/admin_login' ) );
 			die;
 		}
-
 		$searchAry = $_POST;
-
 		$data['szMetaTagTitle']  = "Order Details";
 		$data['is_user_login']   = $is_user_login;
 		$data['pageName']        = "Orders";
@@ -1126,18 +924,14 @@ class Reporting_Controller extends CI_Controller {
 		$data['data']            = $data;
 		$data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
 		$data['drugtestkitlist'] = $drugTestKitListAray;
-
 		$this->load->view( 'layout/admin_header', $data );
 		$this->load->view( 'reporting/xero' );
 		$this->load->view( 'layout/admin_footer' );
-
 	}
-
 	function getProductCodeListByCategory( $szCategory = '' ) {
 		if ( trim( $szCategory ) != '' ) {
 			$_POST['szCategory'] = $szCategory;
 		}
-
 		$productAry = $this->Inventory_Model->getProductByCategory( trim( $_POST['szCategory'] ) );
 		$result     = "<select class=\"form-control custom-select required\" id=\"szSearch3\" name=\"szSearch3\" placeholder=\"Product Code\" onfocus=\"remove_formError(this.id,'true')\">";
 		if ( ! empty( $productAry ) ) {
@@ -1151,9 +945,7 @@ class Reporting_Controller extends CI_Controller {
 		$result .= "</select>";
 		echo $result;
 	}
-
 	public function frInventoryReport() {
-
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
 		if ( ! $is_user_login ) {
@@ -1165,16 +957,10 @@ class Reporting_Controller extends CI_Controller {
 		$searchAry = $_POST;
 		$catid     = $_POST['szSearch2'];
 		$prodcode  = $_POST['szSearch3'];
-
 		$validPendingOrderFrDetailsAray = $this->Order_Model->getallValidPendingOrderFrDetails( $searchAry );
-
-
 		$productAry = $this->Inventory_Model->getProductByCategory( trim( $catid ) );
-
-
 		$this->load->library( 'form_validation' );
 		$this->form_validation->set_rules( 'szSearch2', 'Product Category', 'required' );
-
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
 			$data['validPendingOrderFrDetailsAray'] = $validPendingOrderFrDetailsAray;
@@ -1187,7 +973,6 @@ class Reporting_Controller extends CI_Controller {
 			$data['arErrorMessages']                = $this->Order_Model->arErrorMessages;
 			$data['drugtestkitlist']                = $drugTestKitListAray;
 			$data['productAry']                     = $productAry;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/frInventoryReport' );
 			$this->load->view( 'layout/admin_footer' );
@@ -1204,33 +989,19 @@ class Reporting_Controller extends CI_Controller {
 			$data['productAry']                     = $productAry;
 			$data['arErrorMessages']                = $this->Order_Model->arErrorMessages;
 			$data['drugtestkitlist']                = $drugTestKitListAray;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/frInventoryReport' );
 			$this->load->view( 'layout/admin_footer' );
-
-
 		}
-
-
 	}
-
 	function ViewpdfFrInventoryReportData() {
-
 		$prodCategory = $this->input->post( 'prodCategory' );
 		$productCode  = $this->input->post( 'productCode' );
-
-
 		$this->session->set_userdata( 'prodCategory', $prodCategory );
 		$this->session->set_userdata( 'productCode', $productCode );
-
-
 		echo "SUCCESS||||";
 		echo "ViewpdfFrInventoryReport";
-
-
 	}
-
 	public function ViewpdfFrInventoryReport() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -1251,14 +1022,9 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage();
-
 		$productCode  = $this->session->userdata( 'productCode' );
 		$prodCategory = $this->session->userdata( 'prodCategory' );
-
-
 		$validPendingOrderFrDetailsAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf( $productCode, $prodCategory );
-
-
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Stock Request Report</b></p></div>
             <div class= "table-responsive" >
@@ -1291,14 +1057,12 @@ class Reporting_Controller extends CI_Controller {
                                             <td> ' . $i . ' </td>
                                             <td> ' . $productcatAry['szName'] . '</td>
                                             <td> ' . $validPendingOrderFrDetailsData['szProductCode'] . ' </td>';
-
 				if ( ! empty( $validPendingOrdersQtyDetailsAray ) ) {
 					$printzero = true;
 					foreach ( $validPendingOrdersQtyDetailsAray as $qtyData ) {
 						$html      .= '<td>' . $qtyData['szQuantity'] . ' </td>';
 						$printzero = false;
 					}
-
 					if ( $printzero ) {
 						$html .= '<td>0</td>
                                                ';
@@ -1313,7 +1077,6 @@ class Reporting_Controller extends CI_Controller {
                                 } else {
                                  $html .= '<td>' .  $prodqtyarr[0]['quantity'] . ' </td>';   
                                  }
-
 				$html .=
                                      '</tr>';
                                              }
@@ -1321,7 +1084,6 @@ class Reporting_Controller extends CI_Controller {
                                                 }
                                               }
 			}
-
 		$html .= '
                             </table>
                         </div>
@@ -1330,65 +1092,46 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'stock-request-report.pdf', 'I' );
 	}
-
 	function ViewexcelFrInventoryReportData() {
 		$prodCategory = $this->input->post( 'prodCategory' );
 		$productCode  = $this->input->post( 'productCode' );
-
-
 		$this->session->set_userdata( 'prodCategory', $prodCategory );
 		$this->session->set_userdata( 'productCode', $productCode );
-
-
 		echo "SUCCESS||||";
 		echo "ViewexcelFrInventoryReport";
-
-
 	}
-
 	public function ViewexcelFrInventoryReport() {
 		$this->load->library( 'excel' );
 		$filename = 'Report';
 		$title    = 'Inventory Report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', '#' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Category' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D1', ' In Stock ' );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E1', 'Ordered' );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$productCode  = $this->session->userdata( 'productCode' );
 		$prodCategory = $this->session->userdata( 'prodCategory' );
-
 		$validPendingOrderFrDetailsAray = $this->Order_Model->getValidPendingOdrFrDetailsForPdf( $productCode, $prodCategory );
-
 		if ( $validPendingOrderFrDetailsAray ) {
 			$i = 2;
 			$x = 0;
@@ -1399,20 +1142,16 @@ class Reporting_Controller extends CI_Controller {
                                     $i++;
                                 $productcatAry = $this->Order_Model->getCategoryDetailsById(trim($validPendingOrderFrDetailsData['szProductCategory']));
                                 $validPendingOrdersQtyDetailsAray = $this->Order_Model->getProductDetsByfranchiseeid($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['szProductCategory'], $validPendingOrderFrDetailsData['productid']);
-
                                 $prodqtyarr = $this->Order_Model->getTotalFrOrderdqty($validPendingOrderFrDetailsData['franchiseeid'], $validPendingOrderFrDetailsData['productid']);
                                 $getAllDispatchedQtyAry = $this->Order_Model->getAllDispatchedQty($validPendingOrderFrDetailsData['franchiseeid'],$validPendingOrderFrDetailsData['productid']);
-
                                 $qty = $prodqtyarr[0]['quantity']- $getAllDispatchedQtyAry['0']['dispatch_qty'];
                                 if($qty!='0'){
-
 				if ( ! empty( $validPendingOrdersQtyDetailsAray ) ) {
 					$printzero = true;
 					foreach ( $validPendingOrdersQtyDetailsAray as $qtyData ) {
 						$val       = $qtyData['szQuantity'];
 						$printzero = false;
 					}
-
 					if ( $printzero ) {
 						$val = '0';
 					}
@@ -1426,15 +1165,12 @@ class Reporting_Controller extends CI_Controller {
                                 } else {
                                 $item =  $prodqtyarr[0]['quantity'];    
                                 }
-
 				$x ++;
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $productcatAry['szName'] );
 				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $validPendingOrderFrDetailsData['szProductCode'] );
 				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, $val );
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, $item);
-
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -1445,36 +1181,25 @@ class Reporting_Controller extends CI_Controller {
                                                 }
                                               }
 			 }
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	function ViewpdfInventoryReportData() {
-
 		$prodCategory = $this->input->post( 'prodCategory' );
 		$productCode  = $this->input->post( 'productCode' );
 		$franchiseeId = $this->input->post( 'franchiseeId' );
-
-
 		$this->session->set_userdata( 'franchiseeId', $franchiseeId );
 		$this->session->set_userdata( 'productCode', $productCode );
 		$this->session->set_userdata( 'prodCategory', $prodCategory );
-
-
 		echo "SUCCESS||||";
 		echo "ViewpdfInventoryReport";
-
-
 	}
-
 	public function ViewpdfInventoryReport() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -1495,15 +1220,10 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage( 'L' );
-
 		$franchiseeId = $this->session->userdata( 'franchiseeId' );
 		$productCode  = $this->session->userdata( 'productCode' );
 		$prodCategory = $this->session->userdata( 'prodCategory' );
-
-
 		$reqOrderAray = $this->Order_Model->getProductDetsByfranchiseeid( $franchiseeId, $prodCategory, $productCode );
-
-
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Inventory Report</b></p></div>
             <div class= "table-responsive" >
@@ -1519,11 +1239,9 @@ class Reporting_Controller extends CI_Controller {
                                    
                                     </tr>';
 		if ( $reqOrderAray ) {
-
 			$i = 0;
 			foreach ( $reqOrderAray as $reqOrderData ) {
 				$i ++;
-
 				$productcatAry = $this->Order_Model->getCategoryDetailsById( trim( $reqOrderData['szProductCategory'] ) );
 				$availprodqty  = $this->Order_Model->getorderdanddispatchval( $reqOrderData['iFranchiseeId'], $reqOrderData['id'] );
 				$html          .= '<tr>
@@ -1553,11 +1271,9 @@ class Reporting_Controller extends CI_Controller {
 				} else {
 					$html .= '<td>0</td>';
 				}
-
 				$html .= '</tr>';
 			}
 		}
-
 		$html .= '
                             </table>
                         </div>
@@ -1566,71 +1282,52 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'stock-request-report.pdf', 'I' );
 	}
-
 	function ViewexcelInventoryReportData() {
 		$prodCategory = $this->input->post( 'prodCategory' );
 		$productCode  = $this->input->post( 'productCode' );
 		$franchiseeId = $this->input->post( 'franchiseeId' );
-
-
 		$this->session->set_userdata( 'franchiseeId', $franchiseeId );
 		$this->session->set_userdata( 'productCode', $productCode );
 		$this->session->set_userdata( 'prodCategory', $prodCategory );
-
 		echo "SUCCESS||||";
 		echo "ViewexcelInventoryReport";
-
-
 	}
-
 	public function ViewexcelInventoryReport() {
 		$this->load->library( 'excel' );
 		$filename = 'Report';
 		$title    = 'Inventory Report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', '#' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Category' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D1', ' Model Stock Value ' );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E1', ' In Stock ' );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'F1', 'Requested' );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$productCode  = $this->session->userdata( 'productCode' );
 		$prodCategory = $this->session->userdata( 'prodCategory' );
 		$franchiseeId = $this->session->userdata( 'franchiseeId' );
-
-
 		$reqOrderAray = $this->Order_Model->getProductDetsByfranchiseeid( $franchiseeId, $prodCategory, $productCode );
 		if ( ! empty( $reqOrderAray ) ) {
 			$i = 2;
@@ -1659,13 +1356,10 @@ class Reporting_Controller extends CI_Controller {
                                       
 					if ( $printzero ) {
 						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, 0 );
-
 					}
 				} else {
 					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, 0 );
-
 				}
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -1675,11 +1369,9 @@ class Reporting_Controller extends CI_Controller {
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
@@ -1689,10 +1381,7 @@ class Reporting_Controller extends CI_Controller {
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
-
 	function ViewpdfOrderReportData() {
-
 		$szSearch1 = $this->input->post( 'szSearch1' );
 		$szSearch2 = $this->input->post( 'szSearch2' );
 		$szSearch4 = $this->input->post( 'szSearch4' );
@@ -1703,10 +1392,7 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->set_userdata( 'szSearch5', $szSearch5 );
 		echo "SUCCESS||||";
 		echo "ViewpdfOrderReport";
-
-
 	}
-
 	public function ViewpdfOrderReport() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -1732,8 +1418,6 @@ class Reporting_Controller extends CI_Controller {
 		$searchAry['szSearch4'] = $this->session->userdata( 'szSearch4' );
 		$searchAry['szSearch5'] = $this->session->userdata( 'szSearch5' );
 		$validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails( $searchAry );
-
-
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Orders Report</b></p></div>
             <div class= "table-responsive" >
@@ -1750,26 +1434,19 @@ class Reporting_Controller extends CI_Controller {
                                         <th><b> Order Cost EXL GST </b> </th>
                                     </tr>';
 		if ( $validOrdersDetailsAray ) {
-
 			$i = 0;
 			foreach ( $validOrdersDetailsAray as $reqOrderData ) {
 				$i ++;
 				$franchiseeDetArr1 = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $reqOrderData['franchiseeid'] );
 				if ( $reqOrderData['status'] == 1 ) {
-
 					$status = 'Ordered';
 				}
 				if ( $reqOrderData['status'] == 2 ) {
-
-
 					$status = 'Dispatched';
 				}
 				if ( $reqOrderData['status'] == 3 ) {
-
-
 					$status = 'Canceled';
 				}
-
 				$html .= '<tr>
                                             <td> ' . $i . ' </td>';
 				if ( $_SESSION['drugsafe_user']['iRole'] == 1 ) {
@@ -1783,7 +1460,6 @@ class Reporting_Controller extends CI_Controller {
                                                </tr>';
 			}
 		}
-
 		$html .= '
                             </table>
                         </div>
@@ -1792,10 +1468,8 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'orders-report.pdf', 'I' );
 	}
-
 	function ViewexcelOrderReportData() {
 		$szSearch1 = $this->input->post( 'szSearch1' );
 		$szSearch2 = $this->input->post( 'szSearch2' );
@@ -1807,62 +1481,47 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->set_userdata( 'szSearch5', $szSearch5 );
 		echo "SUCCESS||||";
 		echo "ViewexcelOrdersReport";
-
-
 	}
-
 	public function ViewexcelOrdersReport() {
 		$this->load->library( 'excel' );
 		$filename = 'DrugSafe';
 		$title    = 'Orders Report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $title );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', '#' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		if ( $_SESSION['drugsafe_user']['iRole'] == 1 ) {
-
 			$this->excel->getActiveSheet()->setCellValue( 'B1', 'Franchisee' );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'C1', 'Order Date' );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'D1', 'Order #' );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'E1', 'Status' );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 			$this->excel->getActiveSheet()->setCellValue( 'F1', ' No. of Products' );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'G1', 'Order Cost EXL GST' );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			/*$this->excel->getActiveSheet()->setCellValue('H1', 'Xero Invoice No.');
             $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setSize(13);
             $this->excel->getActiveSheet()->getStyle('H1')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('H1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);*/
-
 			$searchAry['szSearch1'] = $this->session->userdata( 'szSearch1' );
 			$searchAry['szSearch2'] = $this->session->userdata( 'szSearch2' );
 			$searchAry['szSearch4'] = $this->session->userdata( 'szSearch4' );
@@ -1907,34 +1566,26 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'C1', 'Order #' );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'D1', 'Status' );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 			$this->excel->getActiveSheet()->setCellValue( 'E1', 'No. of Products' );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'F1', 'Order Cost' );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			/*$this->excel->getActiveSheet()->setCellValue('G1', 'Xero Invoice No.');
             $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setSize(13);
             $this->excel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
             $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);*/
-
-
 			$searchAry['szSearch1'] = $this->session->userdata( 'szSearch1' );
 			$searchAry['szSearch2'] = $this->session->userdata( 'szSearch2' );
 			$searchAry['szSearch4'] = $this->session->userdata( 'szSearch4' );
@@ -1976,16 +1627,13 @@ class Reporting_Controller extends CI_Controller {
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	function ViewpdfofRevenueGenerate() {
-
 		$dtStart      = $this->input->post( 'dtStart' );
 		$dtEnd        = $this->input->post( 'dtEnd' );
 		$szFranchisee = $this->input->post( 'szFranchisee' );
@@ -1995,7 +1643,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "ViewpdfRevenueGenerate";
 	}
-
 	public function ViewpdfRevenueGenerate() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -2020,8 +1667,6 @@ class Reporting_Controller extends CI_Controller {
 		$searchAry['dtEnd']          = $this->session->userdata( 'dtEnd' );
 		$searchAry['szFranchisee']   = $this->session->userdata( 'szFranchisee' );
 		$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $searchAry['szFranchisee'] );
-
-
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Revenue Generate</b></p></div>
             <div class= "table-responsive" >
@@ -2037,7 +1682,6 @@ class Reporting_Controller extends CI_Controller {
                                         <th width="13%"> <b>Net Revenue EXL GST</b> </th>
                                     </tr>';
 		if ( $getManualCalcStartToEndDate ) {
-
 			$i                = 0;
 			$totalRevenu      = '';
 			$totalRoyaltyfees = '';
@@ -2076,9 +1720,7 @@ class Reporting_Controller extends CI_Controller {
 				$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 				$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 				$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 				$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 				$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 				$GSTmanual       = ( $TotalTrevenu * 0.1 );
 				$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -2103,14 +1745,11 @@ class Reporting_Controller extends CI_Controller {
 				}
 				$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 				$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 				$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 				$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 				$totalRevenu      = $totalRevenu + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 				$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 				$totalNetProfit   = $totalNetProfit + $NetTotal;
-
 				$i ++;
 				$html .= '<tr>
                             <td> ' . $i . ' </td>
@@ -2134,7 +1773,6 @@ class Reporting_Controller extends CI_Controller {
                     <td>$' . $totalNetProfit . '</td>
                    </tr>';
 		}
-
 		$html .= '
                             </table>
                         </div>
@@ -2143,10 +1781,8 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'revenue-generate.pdf', 'I' );
 	}
-
 	function ViewexcelofRevenueGenerate() {
 		$dtStart      = $this->input->post( 'dtStart' );
 		$dtEnd        = $this->input->post( 'dtEnd' );
@@ -2156,64 +1792,50 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->set_userdata( 'szFranchisee', $szFranchisee );
 		echo "SUCCESS||||";
 		echo "ViewexcelRevenueGenerate";
-
-
 	}
-
 	public function ViewexcelRevenueGenerate() {
 		$this->load->library( 'excel' );
 		$filename = 'DrugSafe';
 		$title    = 'Revenue Generate';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $title );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', '#' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Proforma Invoice #' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', 'Proforma Invoice Date' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D1', 'Client Code' );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E1', 'Client Name' );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'F1', ' Revenue EXL GST' );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'G1', 'Royalty Fees' );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'H1', 'Net Revenue EXL GST' );
 		$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'H1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$searchAry['dtStart']      = $this->session->userdata( 'dtStart' );
 		$searchAry['dtEnd']        = $this->session->userdata( 'dtEnd' );
 		$searchAry['szFranchisee'] = $this->session->userdata( 'szFranchisee' );
 		//$getClientDeatils=$this->Webservices_Model->getclientdetails($searchAry['szFranchisee']);
-
 		$getClientDeatils = $this->Ordering_Model->getAllChClientDetails( '', '', $searchAry['szFranchisee'] );
 		$id               = array();
 		foreach ( $getClientDeatils as $getClientData ) {
@@ -2227,8 +1849,6 @@ class Reporting_Controller extends CI_Controller {
 		if ( ! empty( $sosId ) ) {
 			$getManualCalcStartToEndDate = $this->Order_Model->getManualCalcStartToEndDate( $searchAry, $sosId );
 		}
-
-
 		if ( ! empty( $getManualCalcStartToEndDate ) ) {
 			$i                = 2;
 			$x                = 0;
@@ -2269,9 +1889,7 @@ class Reporting_Controller extends CI_Controller {
 				$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 				$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 				$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 				$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 				$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 				$GSTmanual       = ( $TotalTrevenu * 0.1 );
 				$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -2296,10 +1914,8 @@ class Reporting_Controller extends CI_Controller {
 				}
 				$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 				$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 				$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 				$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 				$totalRevenu      = $totalRevenu + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 				$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 				$totalNetProfit   = $totalNetProfit + $NetTotal;
@@ -2326,25 +1942,19 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'E' . $i )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E' . $i )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 			$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
 			$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
 			$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	public function view_revenue_generate() {
 		$count         = $this->Admin_Model->getnotification();
 		$is_user_login = is_user_login( $this );
@@ -2361,7 +1971,6 @@ class Reporting_Controller extends CI_Controller {
 		} else {
 			$searchOptionArr = array();
 		}
-
 		$this->load->library( 'form_validation' );
 		$this->form_validation->set_rules( 'szFranchisee', 'Franchisee ', 'required' );
 		$this->form_validation->set_rules( 'dtStart', 'Start Revenue date ', 'required' );
@@ -2373,9 +1982,7 @@ class Reporting_Controller extends CI_Controller {
                 }
 		if ( $_POST['dtStart'] != '' && $_POST['dtEnd'] != '' && $_POST['szFranchisee'] != '' ) {
 			$searchAry = $_POST;
-
 			$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $_POST['szFranchisee'] );
-
 		}
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
@@ -2389,11 +1996,9 @@ class Reporting_Controller extends CI_Controller {
 			$data['allfranchisee']               = $searchOptionArr;
 			$data['arErrorMessages']             = $this->Order_Model->arErrorMessages;
 			//$data['drugtestkitlist'] = $drugTestKitListAray;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/viewRevenueGenerateReport' );
 			$this->load->view( 'layout/admin_footer' );
-
 		} else {
 			$data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
 			$data['szMetaTagTitle']              = "Revenue Generate";
@@ -2405,7 +2010,6 @@ class Reporting_Controller extends CI_Controller {
 			$data['allfranchisee']               = $searchOptionArr;
 			$data['arErrorMessages']             = $this->Order_Model->arErrorMessages;
 			//$data['drugtestkitlist'] = $drugTestKitListAray;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/viewRevenueGenerateReport' );
 			$this->load->view( 'layout/admin_footer' );
@@ -2452,7 +2056,6 @@ class Reporting_Controller extends CI_Controller {
 		if ( $_POST['dtStart'] != '' && $_POST['dtEnd'] != '' && $idfranchisee != '' ) {
 			$searchAry                   = $_POST;
 			$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $idfranchisee );
-
 		}
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
@@ -2467,11 +2070,9 @@ class Reporting_Controller extends CI_Controller {
 			$data['allfranchisee']               = $searchOptionArr;
 			$data['arErrorMessages']             = $this->Order_Model->arErrorMessages;
 			//$data['drugtestkitlist'] = $drugTestKitListAray;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/franchiseeRevenueGenerateReport' );
 			$this->load->view( 'layout/admin_footer' );
-
 		} else {
 			$data['getManualCalcStartToEndDate'] = $getManualCalcStartToEndDate;
 			$data['szMetaTagTitle']              = "Revenue Generate";
@@ -2480,19 +2081,14 @@ class Reporting_Controller extends CI_Controller {
 			$data['subpageName']                 = "revenue_generate";
 			$data['notification']                = $count;
 			$data['data']                        = $data;
-
 			$data['allfranchisee']   = $searchOptionArr;
 			$data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
 			//$data['drugtestkitlist'] = $drugTestKitListAray;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/franchiseeRevenueGenerateReport' );
 			$this->load->view( 'layout/admin_footer' );
-
-
 		}
 	}
-
 	public function view_revenue_summery() {
 		$count         = $this->Admin_Model->getnotification();
 		$is_user_login = is_user_login( $this );
@@ -2502,14 +2098,11 @@ class Reporting_Controller extends CI_Controller {
 			redirect( base_url( '/admin/admin_login' ) );
 			die;
 		}
-
 		if ( $_POST['dtStart'] != '' && $_POST['dtEnd'] != '' ) {
 			$searchAry    = $_POST;
 			$franchiseeId = $this->Form_Management_Model->getAllsosFormDetails( $searchAry );
 		}
-
 		$this->load->library( 'form_validation' );
-
 		$this->form_validation->set_rules( 'dtStart', 'Start Revenue date ', 'required' );
 		 if(!empty($_POST['dtEnd'])){
                  $this->form_validation->set_rules('dtEnd', 'End Revenue date', 'required|callback_endRevenueDate_check');    
@@ -2517,10 +2110,8 @@ class Reporting_Controller extends CI_Controller {
                 else{
                  $this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );   
                 }
-
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
-
 			$data['getManualCalcStartToEndDate']        = $getManualCalcStartToEndDate;
 			$data['szMetaTagTitle']                     = "Revenue Summary";
 			$data['is_user_login']                      = $is_user_login;
@@ -2535,7 +2126,6 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/viewRevenueSummery' );
 			$this->load->view( 'layout/admin_footer' );
-
 		} else {
 			$data['getManualCalcStartToEndDate']        = $getManualCalcStartToEndDate;
 			$data['szMetaTagTitle']                     = "Revenue Summary";
@@ -2553,7 +2143,6 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'layout/admin_footer' );
 		}
 	}
-
 	function ViewpdfofRevenueSummery() {
 		$dtStart = $this->input->post( 'dtStart' );
 		$dtEnd   = $this->input->post( 'dtEnd' );
@@ -2562,7 +2151,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "ViewpdfRevenueSummery";
 	}
-
 	public function ViewpdfRevenueSummery() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -2599,26 +2187,21 @@ class Reporting_Controller extends CI_Controller {
                                         <th width="23%"> <b>Net Revenue EXL GST</b> </th>
                                     </tr>';
 		if ( $allfranchisee ) {
-
-
 			$i                = 0;
 			$totalRevenu      = '';
 			$totalRoyaltyfees = '';
 			$totalNetProfit   = '';
-
 			$allfranchiseeTotalAfterDis    = '';
 			$allfranchiseetotalRoyaltyfees = '';
 			$allfranchiseetotalNetProfit   = '';
 			foreach ( $allfranchisee as $allfranchiseeData ) {
 				$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $allfranchiseeData['franchiseeId'] );
 				$getAdmindetails             = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $allfranchiseeData['franchiseeId'] );
-
 				$totalRevenu        = '';
 				$totalRoyaltyfees   = '';
 				$totalNetProfit     = '';
 				$totalAfterDiscount = '';
 				foreach ( $getManualCalcStartToEndDate as $getManualCalcData ) {
-
 					$getClientId          = $this->Form_Management_Model->getSosDetailBySosId( $getManualCalcData['sosid'] );
 					$DrugtestidArr        = array_map( 'intval', str_split( $getClientId['Drugtestid'] ) );
 					$getClientDetails     = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $getClientId['Clientid'] );
@@ -2630,7 +2213,6 @@ class Reporting_Controller extends CI_Controller {
 						$countDoner = count( $this->Form_Management_Model->getDonarDetailBySosId( $getManualCalcData['sosid'] ) );
 					}
 					$ValTotal = 0;
-
 					if ( in_array( 1, $DrugtestidArr ) ) {
 						$ValTotal = number_format( $ValTotal + $countDoner * __RRP_1__, 2, '.', '' );
 					}
@@ -2652,9 +2234,7 @@ class Reporting_Controller extends CI_Controller {
 					$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 					$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 					$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 					$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 					$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 					$GSTmanual       = ( $TotalTrevenu * 0.1 );
 					$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -2679,29 +2259,21 @@ class Reporting_Controller extends CI_Controller {
 					}
 					$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 					$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 					$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 					$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 					$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 					$totalRoyaltyfees = number_format( $totalRoyaltyfees, 2, '.', '' );
-
 					$totalNetProfit     = $totalNetProfit + $NetTotal;
 					$totalNetProfit     = number_format( $totalNetProfit, 2, '.', '' );
 					$totalAfterDiscount = $totalAfterDiscount + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 					$totalAfterDiscount = number_format( $totalAfterDiscount, 2, '.', '' );
 				}
-
 				$allfranchiseeTotalAfterDis = $allfranchiseeTotalAfterDis + $totalAfterDiscount;
 				$allfranchiseeTotalAfterDis = number_format( $allfranchiseeTotalAfterDis, 2, '.', '' );
-
 				$allfranchiseetotalRoyaltyfees = $allfranchiseetotalRoyaltyfees + $totalRoyaltyfees;
 				$allfranchiseetotalRoyaltyfees = number_format( $allfranchiseetotalRoyaltyfees, 2, '.', '' );
-
 				$allfranchiseetotalNetProfit = $allfranchiseetotalNetProfit + $totalNetProfit;
 				$allfranchiseetotalNetProfit = number_format( $allfranchiseetotalNetProfit, 2, '.', '' );
-
-
 				$i ++;
 				$html .= '<tr>
                             <td>' . $i . '</td>
@@ -2712,7 +2284,6 @@ class Reporting_Controller extends CI_Controller {
                             
                         </tr>';
 			}
-
 			$html .= '<tr>
                     
                     <td></td>
@@ -2722,7 +2293,6 @@ class Reporting_Controller extends CI_Controller {
                     <td>$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) . '</td>
                    </tr>';
 		}
-
 		$html .= '
                             </table>
                         </div>
@@ -2731,83 +2301,63 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'revenue-generate.pdf', 'I' );
 	}
-
 	function ViewexcelofRevenueSummery() {
 		$dtStart = $this->input->post( 'dtStart' );
 		$dtEnd   = $this->input->post( 'dtEnd' );
 		$this->session->set_userdata( 'dtStart', $dtStart );
 		$this->session->set_userdata( 'dtEnd', $dtEnd );
-
 		echo "SUCCESS||||";
 		echo "ViewexcelRevenueSummery";
-
-
 	}
-
 	public function ViewexcelRevenueSummery() {
 		$this->load->library( 'excel' );
 		$filename = 'DrugSafe';
 		$title    = 'Revenue Summary';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $title );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', '#' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Franchisee Name' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C1', ' Revenue EXL GST' );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D1', 'Royalty Fees' );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E1', 'Net Revenue EXL GST' );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$searchAry['dtStart'] = $this->session->userdata( 'dtStart' );
 		$searchAry['dtEnd']   = $this->session->userdata( 'dtEnd' );
 		$allfranchisee        = $this->Form_Management_Model->getAllsosFormDetails( $searchAry );
-
 		if ( ! empty( $allfranchisee ) ) {
-
 			$i                = 2;
 			$x                = 0;
 			$totalRevenu      = '';
 			$totalRoyaltyfees = '';
 			$totalNetProfit   = '';
-
 			$allfranchiseeTotalAfterDis    = '';
 			$allfranchiseetotalRoyaltyfees = '';
 			$allfranchiseetotalNetProfit   = '';
-
 			foreach ( $allfranchisee as $allfranchiseeData ) {
 				$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $allfranchiseeData['franchiseeId'] );
 				$getAdmindetails             = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $allfranchiseeData['franchiseeId'] );
-
 				$totalRevenu        = '';
 				$totalRoyaltyfees   = '';
 				$totalNetProfit     = '';
 				$totalAfterDiscount = '';
 				foreach ( $getManualCalcStartToEndDate as $getManualCalcData ) {
-
 					$DrugtestidArr        = array_map( 'intval', str_split( $getManualCalcData['Drugtestid'] ) );
 					$getClientId          = $this->Form_Management_Model->getSosDetailBySosId( $getManualCalcData['sosid'] );
 					$getClientDetails     = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $getClientId['Clientid'] );
@@ -2820,7 +2370,6 @@ class Reporting_Controller extends CI_Controller {
 						$countDoner = count( $this->Form_Management_Model->getDonarDetailBySosId( $getManualCalcData['sosid'] ) );
 					}
 					$ValTotal = 0;
-
 					if ( in_array( 1, $DrugtestidArr ) ) {
 						$ValTotal = number_format( $ValTotal + $countDoner * __RRP_1__, 2, '.', '' );
 					}
@@ -2842,9 +2391,7 @@ class Reporting_Controller extends CI_Controller {
 					$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 					$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 					$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 					$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 					$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 					$GSTmanual       = ( $TotalTrevenu * 0.1 );
 					$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -2869,69 +2416,52 @@ class Reporting_Controller extends CI_Controller {
 					}
 					$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 					$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 					$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 					$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 					$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 					$totalRoyaltyfees = number_format( $totalRoyaltyfees, 2, '.', '' );
-
 					$totalNetProfit     = $totalNetProfit + $NetTotal;
 					$totalNetProfit     = number_format( $totalNetProfit, 2, '.', '' );
 					$totalAfterDiscount = $totalAfterDiscount + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 					$totalAfterDiscount = number_format( $totalAfterDiscount, 2, '.', '' );
 				}
-
 				$allfranchiseeTotalAfterDis = $allfranchiseeTotalAfterDis + $totalAfterDiscount;
 				$allfranchiseeTotalAfterDis = number_format( $allfranchiseeTotalAfterDis, 2, '.', '' );
-
 				$allfranchiseetotalRoyaltyfees = $allfranchiseetotalRoyaltyfees + $totalRoyaltyfees;
 				$allfranchiseetotalRoyaltyfees = number_format( $allfranchiseetotalRoyaltyfees, 2, '.', '' );
-
 				$allfranchiseetotalNetProfit = $allfranchiseetotalNetProfit + $totalNetProfit;
 				$allfranchiseetotalNetProfit = number_format( $allfranchiseetotalNetProfit, 2, '.', '' );
-
 				$x ++;
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $getAdmindetails['szName'] );
 				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, '$' . number_format( $totalAfterDiscount, 2, '.', ',' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
-
 				$i ++;
 			}
 			$this->excel->getActiveSheet()->setCellValue( 'B' . $i, Total );
 			$this->excel->getActiveSheet()->getStyle( 'B' . $i )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B' . $i )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'B' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 			$this->excel->getActiveSheet()->setCellValue( 'C' . $i, '$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) );
 			$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) );
 			$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) );
-
-
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	public function clientcomparisonReport() {
-
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
 		if ( ! $is_user_login ) {
@@ -2953,7 +2483,6 @@ class Reporting_Controller extends CI_Controller {
 		$comparetype  = ( isset( $_POST['szSearch5'] ) ? $_POST['szSearch5'] : '' );
 		$clientarr    = $this->Webservices_Model->getclientdetails( $franchiseeid );
 		$sitearr      = $this->Webservices_Model->getclientdetails( $franchiseeid, $clientid );
-
 		$this->load->library( 'form_validation' );
 		$this->form_validation->set_rules( 'szSearch1', 'Franchisee Name ', 'required' );
 		$this->form_validation->set_rules( 'szSearch2', 'Client Name', 'required' );
@@ -2962,7 +2491,6 @@ class Reporting_Controller extends CI_Controller {
 		$this->form_validation->set_rules( 'szSearch5', 'Compare Data ', 'required' );
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
-
 			$data['szMetaTagTitle']  = "Client Comparison Report";
 			$data['is_user_login']   = $is_user_login;
 			$data['pageName']        = "Reporting";
@@ -2973,7 +2501,6 @@ class Reporting_Controller extends CI_Controller {
 			$data['clientarr']       = $clientarr;
 			$data['sitearr']         = $sitearr;
 			$data['arErrorMessages'] = $this->Reporting_Model->arErrorMessages;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/clientCmpReport' );
 			$this->load->view( 'layout/admin_footer' );
@@ -2999,14 +2526,11 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'reporting/clientCmpReport' );
 			$this->load->view( 'layout/admin_footer' );
 		}
-
 	}
-
 	function getClientListByFrId( $idFranchisee = '' ) {
 		if ( trim( $idFranchisee ) != '' ) {
 			$_POST['idFranchisee'] = $idFranchisee;
 		}
-
 		//$clientAry = $this->Franchisee_Model->viewClientList(true, $_POST['idFranchisee']);
 		$AllclientAry             = array();
 		$AllclientAry             = $this->Webservices_Model->getclientdetails( $_POST['idFranchisee'] );
@@ -3052,7 +2576,6 @@ class Reporting_Controller extends CI_Controller {
 		}
 		echo $result;
 	}
-
 	function getSiteListByClientId( $idClient = '' ) {
 		if ( trim( $idClient ) != '' ) {
 			$_POST['idClient'] = $idClient;
@@ -3072,7 +2595,6 @@ class Reporting_Controller extends CI_Controller {
 				$CorpuserDetailsArr = $this->Webservices_Model->getclientdetails( $assignCorpUser['corpfrid'], $_POST['idClient'], 0, $assignCorpUser['clientid'] );
 				if ( ! empty( $CorpuserDetailsArr ) ) {
 					foreach ( $CorpuserDetailsArr as $CorpUser ) {
-
 						array_push( $siteAry, $CorpUser );
 					}
 				}
@@ -3091,7 +2613,6 @@ class Reporting_Controller extends CI_Controller {
 		$result .= "</select>";
 		echo $result;
 	}
-
 	public function view_industry_report() { // something
 		$count         = $this->Admin_Model->getnotification();
 		$is_user_login = is_user_login( $this );
@@ -3131,9 +2652,7 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/viewIndustryReort' );
 			$this->load->view( 'layout/admin_footer' );
-
 		} else {
-
 			$data['szMetaTagTitle']        = "Industry Report";
 			$data['is_user_login']         = $is_user_login;
 			$data['pageName']              = "Reporting";
@@ -3177,7 +2696,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "industryReportOfPdf";
 	}
-
 	public function industryReportOfPdf() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -3198,15 +2716,11 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage( 'L' );
-
 		$searchArray['dtStart']    = $this->session->userdata( 'dtStart' );
 		$searchArray['dtEnd']      = $this->session->userdata( 'dtEnd' );
 		$searchArray['szIndustry'] = $this->session->userdata( 'szIndustry' );
 		$searchArray['szTestType'] = $this->session->userdata( 'szTestType' );
-
 		$getSosAndClientDetils = $this->Reporting_Model->getSosAndClientDetils( $searchArray );
-
-
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Industry Report</b></p></div>
             <div class= "table-responsive" >
@@ -3231,7 +2745,6 @@ class Reporting_Controller extends CI_Controller {
 				$html          .= '<td>' . ( $getSosAndClientData['totalPositiveAlcohol'] + $getSosAndClientData['totalNegativeAlcohol'] ) . '</td>';
 				$FinalTotalAlc += $getSosAndClientData['totalPositiveAlcohol'] + $getSosAndClientData['totalNegativeAlcohol'];
 			}
-
 			$html             .= '<td>' . $FinalTotalAlc . '</td></tr>
                                         <tr>
 				            <td></td>
@@ -3325,12 +2838,10 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$this->session->unset_userdata( 'productCode' );
 		$this->session->unset_userdata( 'franchiseeName' );
 		$pdf->Output( 'stock-request-report.pdf', 'I' );
 	}
-
 	function industryReportOfXls() {
 		$dtStart    = $this->input->post( 'dtStart' );
 		$dtEnd      = $this->input->post( 'dtEnd' );
@@ -3340,33 +2851,26 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->set_userdata( 'dtEnd', $dtEnd );
 		$this->session->set_userdata( 'szIndustry', $szIndustry );
 		$this->session->set_userdata( 'szTestType', $szTestType );
-
 		echo "SUCCESS||||";
 		echo "industryReportXls";
-
-
 	}
-
 	public function industryReportXls() {
 		$this->load->library( 'excel' );
 		$filename = 'DrugSafe';
 		$title    = 'Industry Report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
 		$searchArray['dtStart']    = $this->session->userdata( 'dtStart' );
 		$searchArray['dtEnd']      = $this->session->userdata( 'dtEnd' );
 		$searchArray['szIndustry'] = $this->session->userdata( 'szIndustry' );
 		$searchArray['szTestType'] = $this->session->userdata( 'szTestType' );
 		$alphabet                  = array( 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O' );
 		$getSosAndClientDetils     = $this->Reporting_Model->getSosAndClientDetils( $searchArray );
-
 		$this->excel->setActiveSheetIndex( 0 );
 		$this->excel->getActiveSheet()->setTitle( $title );
 		$this->excel->getActiveSheet()->setCellValue( 'A1', '' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B1', '' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
@@ -3374,7 +2878,6 @@ class Reporting_Controller extends CI_Controller {
 		$j = 1;
 		$k = 1;
 		foreach ( $getSosAndClientDetils as $getSosAndClientData ) {
-
 			$industryname = $this->Admin_Model->getIndustryNameByid( $getSosAndClientData['industry'] );
 			$alphaobj     = $alphabet[ $j ];
 			$this->excel->getActiveSheet()->setCellValue( $alphaobj . $k, $industryname['szName'] );
@@ -3388,9 +2891,7 @@ class Reporting_Controller extends CI_Controller {
 		$this->excel->getActiveSheet()->getStyle( $alphaobj . $k )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( $alphaobj . $k )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( $alphaobj . $k )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		if ( ! empty( $getSosAndClientDetils ) ) {
-
 			if ( $searchArray['szTestType'] == '' || $searchArray['szTestType'] == 'A' ) {
 				$j = 1;
 				$this->excel->getActiveSheet()->setCellValue( 'A2', 'Alchohol' );
@@ -3435,7 +2936,6 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->setCellValue( 'B5', '' );
 				$this->excel->getActiveSheet()->setCellValue( 'C5', '' );
 				$this->excel->getActiveSheet()->setCellValue( 'D5', '' );
-
 			}
 			if ( $searchArray['szTestType'] == '' || $searchArray['szTestType'] == 'U' ) {
 				$this->excel->getActiveSheet()->setCellValue( 'A6', 'Urine AS/NZA 4308:2001 or As/NZA 4308:2008' );
@@ -3483,9 +2983,7 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->setCellValue( 'B9', '' );
 				$this->excel->getActiveSheet()->setCellValue( 'C9', '' );
 				$this->excel->getActiveSheet()->setCellValue( 'D9', '' );
-
 			}
-
 			if ( $searchArray['szTestType'] == '' || $searchArray['szTestType'] == 'O' ) {
 				$this->excel->getActiveSheet()->setCellValue( 'A10', 'Oral Fluid AS 4760:2006' );
 				$this->excel->getActiveSheet()->setCellValue( 'B10', 'Total Donors' );
@@ -3528,11 +3026,9 @@ class Reporting_Controller extends CI_Controller {
 				}
 				$alphaobj = $alphabet[ $j ];
 				$this->excel->getActiveSheet()->setCellValue( $alphaobj . $k, ( $FinalTotalOrlNeg > 0 ? $FinalTotalOrlNeg : 0 ) );
-
 			}
 			$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 			$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
-
 			$j = 1;
 			foreach ( $getSosAndClientDetils as $getSosAndClientData ) {
 				$alphaobj = $alphabet[ $j ];
@@ -3540,18 +3036,15 @@ class Reporting_Controller extends CI_Controller {
 				$j ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	function comparisonReportPdf() {
 		$siteid      = $this->input->post( 'siteid' );
 		$testtype    = $this->input->post( 'testtype' );
@@ -3562,7 +3055,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "comparisonReportOfPdf";
 	}
-
 	public function comparisonReportOfPdf() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -3583,11 +3075,9 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage( 'L' );
-
 		$siteid      = $this->session->userdata( 'siteid' );
 		$testtype    = $this->session->userdata( 'testtype' );
 		$comparetype = $this->session->userdata( 'comparetype' );
-
 		$compareresultarr = $this->Reporting_Model->getcomparisonrecord( $siteid, $testtype, $comparetype );
 		$userdataarr      = $this->Webservices_Model->getfranchiseeclientsitebysiteid( $siteid );
 		$html             = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
@@ -3637,10 +3127,8 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'client-comparison-report.pdf', 'I' );
 	}
-
 	function comparisonReportOfXls() {
 		$siteid      = $this->input->post( 'siteid' );
 		$testtype    = $this->input->post( 'testtype' );
@@ -3648,21 +3136,17 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->set_userdata( 'siteid', $siteid );
 		$this->session->set_userdata( 'testtype', $testtype );
 		$this->session->set_userdata( 'comparetype', $comparetype );
-
 		echo "SUCCESS||||";
 		echo "comparisonReportXls";
 	}
-
 	public function comparisonReportXls() {
 		$this->load->library( 'excel' );
 		$filename = 'DrugSafe';
 		$title    = 'Client Comparison Report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
 		$siteid      = $this->session->userdata( 'siteid' );
 		$testtype    = $this->session->userdata( 'testtype' );
 		$comparetype = $this->session->userdata( 'comparetype' );
-
 		$compareresultarr = $this->Reporting_Model->getcomparisonrecord( $siteid, $testtype, $comparetype );
 		$userdataarr      = $this->Webservices_Model->getfranchiseeclientsitebysiteid( $siteid );
 		$this->excel->setActiveSheetIndex( 0 );
@@ -3672,59 +3156,47 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'B1', ( ! empty( $userdataarr['franchiseename'] ) ? $userdataarr['franchiseename'] : '' ) );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( false );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'C1', 'Client Name:' );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'D1', ( ! empty( $userdataarr['clientname'] ) ? $userdataarr['clientname'] : '' ) );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( false );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'E1', 'Company Name/site:' );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'F1', ( ! empty( $userdataarr['sitename'] ) ? $userdataarr['sitename'] : '' ) );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( false );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->mergeCells( 'A2:F2' );
-
 			$this->excel->getActiveSheet()->setCellValue( 'A3', '#' );
 			$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'A3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'B3', ( $comparetype == 1 ? 'Month' : 'Year' ) );
 			$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'B3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'C3', 'Test Type' );
 			$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'C3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'D3', 'Total Donors Screenings/Collection at Clients sites' );
 			$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'E3', 'Positive Test Result' );
 			$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'F3', 'Negative Test Result' );
 			$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setBold( true );
@@ -3752,14 +3224,12 @@ class Reporting_Controller extends CI_Controller {
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	public function view_revenue_summery_client() {
 		$count         = $this->Admin_Model->getnotification();
 		$is_user_login = is_user_login( $this );
@@ -3784,9 +3254,7 @@ class Reporting_Controller extends CI_Controller {
 			$clientAray    = $this->Reporting_Model->getAllClientCodeDetails( true, $_POST['idFranchisee'] );
 			$clientlistArr = $this->Reporting_Model->getAllClientCodeDetails( true, $_POST['szSearchClRecord2'] );
 		}
-
 		$this->load->library( 'form_validation' );
-
 		$this->form_validation->set_rules( 'szSearchClRecord2', 'Franchisee ', 'required' );
 		$this->form_validation->set_rules( 'dtStart', 'Start Revenue date ', 'required' );
 		 if(!empty($_POST['dtEnd'])){
@@ -3795,7 +3263,6 @@ class Reporting_Controller extends CI_Controller {
                 else{
                  $this->form_validation->set_rules( 'dtEnd', 'End Revenue date', 'required' );   
                 }
-
 		$this->form_validation->set_message( 'required', '{field} is required.' );
 		if ( $this->form_validation->run() == false ) {
 			$data['szMetaTagTitle']  = "Revenue Summary Client";
@@ -3827,18 +3294,13 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/viewRevenueSummeryClient' );
 			$this->load->view( 'layout/admin_footer' );
-
-
 		}
 	}
-
 	public function getClientCodeListByFrIdData( $idFranchisee = '' ) {
 		if ( trim( $idFranchisee ) != '' ) {
 			$_POST['idFranchisee'] = $idFranchisee;
 		}
-
 		$clientAray = $this->Reporting_Model->getAllClientCodeDetails( true, $_POST['idFranchisee'] );
-
 		$result = "<select class=\"form-control custom-select required\" id=\"szSearchClientname\" name=\"szSearchClRecord1\" placeholder=\"Client Name\" onfocus=\"remove_formError(this.id,'true')\">";
 		if ( ! empty( $clientAray ) ) {
 			$result .= "<option value=''>Client Name</option>";
@@ -3850,9 +3312,7 @@ class Reporting_Controller extends CI_Controller {
 		}
 		$result .= "</select>";
 		echo $result;
-
 	}
-
 	function ViewpdfofRevenueSummaryClient() {
 		$clientId     = $this->input->post( 'clientId' );
 		$franchiseeId = $this->input->post( 'franchiseeId' );
@@ -3867,7 +3327,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "ViewpdfRevenueSummaryClient";
 	}
-
 	public function ViewpdfRevenueSummaryClient() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -3896,7 +3355,6 @@ class Reporting_Controller extends CI_Controller {
 		$singleline           = $this->session->userdata( 'singleline' );
 		$searchAry['szSearchClRecord2'] = $franchiseeId;
 		$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $franchiseeId, $clientId );
-
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 			$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Revenue Summary Client</b></p></div>
@@ -3907,6 +3365,7 @@ class Reporting_Controller extends CI_Controller {
                                         <th> <b>Franchisee Name </b> </th>
                                         <th> <b>Client Name  </b> </th>
                                          <th> <b>Client Code  </b> </th>
+                                         <th><b> Proforma Invoice Date</b></th>
                                         <th> <b> Revenue EXL GST</b> </th> 
                                         <th><b> Royalty Fees </b> </th>
                                         <th> <b>Net Revenue EXL GST</b> </th>
@@ -3920,20 +3379,18 @@ class Reporting_Controller extends CI_Controller {
                                         <th><b>  #</b> </th>
                                         <th> <b>Client Name  </b> </th>
                                          <th> <b>Client Code  </b> </th>
+                                         <th><b> Proforma Invoice Date</b></th>
                                         <th> <b> Revenue EXL GST</b> </th> 
                                         <th><b> Royalty Fees </b> </th>
                                         <th> <b>Net Revenue EXL GST</b> </th>
                                     </tr>';
 		}
-
 		if ( $singleline == 0 && ! empty( $getManualCalcStartToEndDate ) ) {
-
 			$i                = 0;
 			$totalRevenu      = '';
 			$totalRoyaltyfees = '';
 			$totalNetProfit   = '';
 			foreach ( $getManualCalcStartToEndDate as $getManualCalcData ) {
-
 				$getClientId          = $this->Form_Management_Model->getSosDetailBySosId( $getManualCalcData['sosid'] );
 				$getClientDetails     = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $getClientId['Clientid'] );
 				$franchiseecode       = $this->Franchisee_Model->getusercodebyuserid( $getClientDetails['id'] );
@@ -3968,9 +3425,7 @@ class Reporting_Controller extends CI_Controller {
 				$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 				$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 				$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 				$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 				$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 				$GSTmanual       = ( $TotalTrevenu * 0.1 );
 				$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -3995,10 +3450,8 @@ class Reporting_Controller extends CI_Controller {
 				}
 				$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 				$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 				$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 				$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 				$totalRevenu      = $totalRevenu + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 				$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 				$totalNetProfit   = $totalNetProfit + $NetTotal;
@@ -4009,6 +3462,7 @@ class Reporting_Controller extends CI_Controller {
                             <td>' . $frDataAry['szName'] . '</td>
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
+                                 <td>'.((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A').' </td>
                             <td>$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) . '</td>
                             <td>$' . number_format( $Royaltyfees, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $NetTotal, 2, '.', ',' ) . '</td>
@@ -4019,6 +3473,7 @@ class Reporting_Controller extends CI_Controller {
                             <td>' . $i . '</td>
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
+                            <td>'.((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A').' </td>
                             <td>$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) . '</td>
                             <td>$' . number_format( $Royaltyfees, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $NetTotal, 2, '.', ',' ) . '</td>
@@ -4031,6 +3486,7 @@ class Reporting_Controller extends CI_Controller {
 				$html .= ' <td></td> ';
 			}
 			$html .= '<td></td> 
+                    <td></td>
                     <td></td>
                     <td><b>Total</b></td>
                     <td><b>$' . number_format( $totalRevenu, 2, '.', ',' ) . '</b></td>
@@ -4056,19 +3512,15 @@ class Reporting_Controller extends CI_Controller {
 								$totalRoyaltyfees = '';
 								$totalNetProfit   = '';
 								foreach ( $getManualCalcStartToEndDate as $getManualCalcData ) {
-
-
 									$getClientId      = $this->Form_Management_Model->getSosDetailBySosId( $getManualCalcData['sosid'] );
 									$getClientDetails = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $getClientId['Clientid'] );
 									$franchiseecode   = $this->Franchisee_Model->getusercodebyuserid( $getClientDetails['id'] );
-
 									$ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId( $getClientId['Clientid'] );
 									$userDataAry          = $this->Admin_Model->getUserDetailsByEmailOrId( '', $ClirntDetailsDataAry['clientType'] );
 									$discount             = $this->Ordering_Model->getClientDiscountByClientId( $ClirntDetailsDataAry['clientType'] );
 									$data                 = $this->Ordering_Model->getManualCalculationBySosId( $getManualCalcData['sosid'] );
 									$frDataAry            = $this->Admin_Model->getUserDetailsByEmailOrId( '', $getManualCalcData['franchiseeId'] );
 									$DrugtestidArr        = array_map( 'intval', str_split( $getClientId['Drugtestid'] ) );
-
 									if ( in_array( 1, $DrugtestidArr ) || in_array( 2, $DrugtestidArr ) || in_array( 3, $DrugtestidArr ) || in_array( 4, $DrugtestidArr ) ) {
 										$countDoner = count( $this->Form_Management_Model->getDonarDetailBySosId( $getManualCalcData['sosid'] ) );
 									}
@@ -4094,9 +3546,7 @@ class Reporting_Controller extends CI_Controller {
 									$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 									$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 									$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 									$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 									$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 									$GSTmanual       = ( $TotalTrevenu * 0.1 );
 									$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -4121,10 +3571,8 @@ class Reporting_Controller extends CI_Controller {
 									}
 									$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 									$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 									$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 									$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 									$totalRevenu      = $totalRevenu + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 									$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 									$totalNetProfit   = $totalNetProfit + $NetTotal;
@@ -4138,6 +3586,7 @@ class Reporting_Controller extends CI_Controller {
                             <td>' . $frDataAry['szName'] . '</td>' : '' ) . '
                             <td>' . $userDataAry['szName'] . '</td>
                             <td>' . $userDataAry['userCode'] . '</td>
+                            <td>'.((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00') ?date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])):'N/A').' </td>
                             <td>$' . number_format( $totalRevenu, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) . '</td>
                             <td>$' . number_format( $totalNetProfit, 2, '.', ',' ) . '</td>                            
@@ -4151,8 +3600,8 @@ class Reporting_Controller extends CI_Controller {
 					}
 				}
 				$html .= '<tr>' .
-				         ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ? '
-                            <td colspan="3"></td>' : '<td colspan="2"></td>' ) . '
+				( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ? '
+                            <td colspan="4"></td>' : '<td colspan="3"></td>' ) . '
                             <td><b>Total</b></td>
                             <td><b>$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) . '</b></td>
                             <td><b>$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) . '</b></td>
@@ -4166,10 +3615,8 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'revenue-generate.pdf', 'I' );
 	}
-
 	function ViewexcelofRevenueSummeryClient() {
 		$clientId     = $this->input->post( 'clientId' );
 		$franchiseeId = $this->input->post( 'franchiseeId' );
@@ -4183,16 +3630,12 @@ class Reporting_Controller extends CI_Controller {
 		$this->session->set_userdata( 'singleline', $singleline );
 		echo "SUCCESS||||";
 		echo "ViewexcelRevenueSummeryClient";
-
-
 	}
-
 	public function ViewexcelRevenueSummeryClient() {
 		$this->load->library( 'excel' );
 		$filename = 'DrugSafe';
 		$title    = 'Revenue Summary';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 			$this->excel->setActiveSheetIndex( 0 );
 			$this->excel->getActiveSheet()->setTitle( $title );
@@ -4200,36 +3643,37 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'B1', 'Franchisee Name' );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
+                        
+                        
 			$this->excel->getActiveSheet()->setCellValue( 'C1', 'Client Name' );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'D1', ' Client Code' );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-			$this->excel->getActiveSheet()->setCellValue( 'E1', ' Revenue EXL GST' );
+                        $this->excel->getActiveSheet()->setCellValue( 'E1', 'Proforma Invoice Date' );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-			$this->excel->getActiveSheet()->setCellValue( 'F1', 'Royalty Fees' );
+                        
+			$this->excel->getActiveSheet()->setCellValue( 'F1', ' Revenue EXL GST' );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-			$this->excel->getActiveSheet()->setCellValue( 'G1', 'Net Revenue EXL GST' );
+			$this->excel->getActiveSheet()->setCellValue( 'G1', 'Royalty Fees' );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
+			$this->excel->getActiveSheet()->setCellValue( 'H1', 'Net Revenue EXL GST' );
+			$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setSize( 13 );
+			$this->excel->getActiveSheet()->getStyle( 'H1' )->getFont()->setBold( true );
+			$this->excel->getActiveSheet()->getStyle( 'H1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 		} else {
 			$this->excel->setActiveSheetIndex( 0 );
 			$this->excel->getActiveSheet()->setTitle( $title );
@@ -4237,34 +3681,32 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'B1', 'Client Name' );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'C1', ' Client Code' );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'C1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 			$this->excel->getActiveSheet()->setCellValue( 'D1', ' Revenue EXL GST' );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-			$this->excel->getActiveSheet()->setCellValue( 'E1', 'Royalty Fees' );
+                        $this->excel->getActiveSheet()->setCellValue( 'E1', 'Proforma Invoice Date' );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'E1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-			$this->excel->getActiveSheet()->setCellValue( 'F1', 'Net Revenue EXL GST' );
+                        
+			$this->excel->getActiveSheet()->setCellValue( 'F1', 'Royalty Fees' );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'F1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
+			$this->excel->getActiveSheet()->setCellValue( 'G1', 'Net Revenue EXL GST' );
+			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setSize( 13 );
+			$this->excel->getActiveSheet()->getStyle( 'G1' )->getFont()->setBold( true );
+			$this->excel->getActiveSheet()->getStyle( 'G1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 		}
-
 		$searchAry['dtStart'] = $this->session->userdata( 'dtStart' );
 		$searchAry['dtEnd']   = $this->session->userdata( 'dtEnd' );
 		$franchiseeId         = $this->session->userdata( 'franchiseeId' );
@@ -4272,17 +3714,13 @@ class Reporting_Controller extends CI_Controller {
 		$singleline           = $this->session->userdata( 'singleline' );
 		$searchAry['szSearchClRecord2'] = $franchiseeId;
 		$getManualCalcStartToEndDate = $this->Reporting_Model->getAllRevenueManualalc( $searchAry, $franchiseeId, $clientId );
-
-
 		if ( $singleline == 0 && ! empty( $getManualCalcStartToEndDate ) ) {
 			$i                = 2;
 			$x                = 0;
 			$totalRevenu      = '';
 			$totalRoyaltyfees = '';
 			$totalNetProfit   = '';
-
 			foreach ( $getManualCalcStartToEndDate as $getManualCalcData ) {
-
 				$frDataAry            = $this->Admin_Model->getUserDetailsByEmailOrId( '', $getManualCalcData['franchiseeId'] );
 				$getClientId          = $this->Form_Management_Model->getSosDetailBySosId( $getManualCalcData['sosid'] );
 				$getClientDetails     = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $getClientId['Clientid'] );
@@ -4292,7 +3730,6 @@ class Reporting_Controller extends CI_Controller {
 				$discount             = $this->Ordering_Model->getClientDiscountByClientId( $ClirntDetailsDataAry['clientType'] );
 				$data                 = $this->Ordering_Model->getManualCalculationBySosId( $getManualCalcData['sosid'] );
 				$DrugtestidArr        = array_map( 'intval', str_split( $getClientId['Drugtestid'] ) );
-
 				if ( in_array( 1, $DrugtestidArr ) || in_array( 2, $DrugtestidArr ) || in_array( 3, $DrugtestidArr ) || in_array( 4, $DrugtestidArr ) ) {
 					$countDoner = count( $this->Form_Management_Model->getDonarDetailBySosId( $getManualCalcData['sosid'] ) );
 				}
@@ -4318,9 +3755,7 @@ class Reporting_Controller extends CI_Controller {
 				$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 				$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 				$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 				$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 				$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 				$GSTmanual       = ( $TotalTrevenu * 0.1 );
 				$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -4345,26 +3780,30 @@ class Reporting_Controller extends CI_Controller {
 				}
 				$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 				$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 				$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 				$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 				$totalRevenu      = $totalRevenu + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 				$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 				$totalNetProfit   = $totalNetProfit + $NetTotal;
-
 				$x ++;
-
 				$value = number_format( $ValTotal, 2, '.', ',' );
+                                if((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00'))
+                                {
+                                  $date_data = date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])); 
+                                }
+                                else{
+                                 $date_data = 'N/A';   
+                                }
+                                
 				if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 					$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 					$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $frDataAry['szName'] );
 					$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['szName'] );
 					$this->excel->getActiveSheet()->setCellValue( 'D' . $i, $userDataAry['userCode'] );
-					$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) );
-					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $Royaltyfees, 2, '.', ',' ) );
-					$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $NetTotal, 2, '.', ',' ) );
-
+                                        $this->excel->getActiveSheet()->setCellValue( 'E' . $i, $date_data );
+					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) );
+					$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $Royaltyfees, 2, '.', ',' ) );
+					$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $NetTotal, 2, '.', ',' ) );
 					$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -4372,20 +3811,22 @@ class Reporting_Controller extends CI_Controller {
 					$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
+                                        $this->excel->getActiveSheet()->getColumnDimension( 'H' )->setAutoSize( true );
 				} else {
 					$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 					$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $userDataAry['szName'] );
 					$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['userCode'] );
-					$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) );
-					$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $Royaltyfees, 2, '.', ',' ) );
-					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $NetTotal, 2, '.', ',' ) );
-
+                                        $this->excel->getActiveSheet()->setCellValue( 'D' . $i, $date_data );
+					$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', ',' ) : number_format( $totalinvoiceAmt, 2, '.', ',' ) ) );
+					$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $Royaltyfees, 2, '.', ',' ) );
+					$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $NetTotal, 2, '.', ',' ) );
 					$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
 					$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
+                                        $this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
 				}
 				$i ++;
 			}
@@ -4393,23 +3834,16 @@ class Reporting_Controller extends CI_Controller {
 			$totalRoyaltyfees = number_format( $totalRoyaltyfees, 2, '.', '' );
 			$totalNetProfit   = number_format( $totalNetProfit, 2, '.', '' );
 			if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
+				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, Total );
+				$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
+				$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
+				$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
+			} else {
 				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, Total );
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
-
-			} else {
-				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, Total );
-				$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
-				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
-				$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
 			}
-
-			$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setSize( 13 );
-			$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setBold( true );
-			$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 			$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
@@ -4422,6 +3856,9 @@ class Reporting_Controller extends CI_Controller {
 			$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setSize( 13 );
 			$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setBold( true );
 			$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
+			$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setSize( 13 );
+			$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setBold( true );
+			$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 		} elseif ( $singleline == 1 ) {
 			$allfranchisee = $this->Form_Management_Model->getAllsosFormDetails($searchAry);
 			if ( ! empty( $allfranchisee ) ) {
@@ -4442,19 +3879,15 @@ class Reporting_Controller extends CI_Controller {
 								$totalRoyaltyfees = '';
 								$totalNetProfit   = '';
 								foreach ( $getManualCalcStartToEndDate as $getManualCalcData ) {
-
-
 									$getClientId      = $this->Form_Management_Model->getSosDetailBySosId( $getManualCalcData['sosid'] );
 									$getClientDetails = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $getClientId['Clientid'] );
 									$franchiseecode   = $this->Franchisee_Model->getusercodebyuserid( $getClientDetails['id'] );
-
 									$ClirntDetailsDataAry = $this->Franchisee_Model->getParentClientDetailsId( $getClientId['Clientid'] );
 									$userDataAry          = $this->Admin_Model->getUserDetailsByEmailOrId( '', $ClirntDetailsDataAry['clientType'] );
 									$discount             = $this->Ordering_Model->getClientDiscountByClientId( $ClirntDetailsDataAry['clientType'] );
 									$data                 = $this->Ordering_Model->getManualCalculationBySosId( $getManualCalcData['sosid'] );
 									$frDataAry            = $this->Admin_Model->getUserDetailsByEmailOrId( '', $getManualCalcData['franchiseeId'] );
 									$DrugtestidArr        = array_map( 'intval', str_split( $getClientId['Drugtestid'] ) );
-
 									if ( in_array( 1, $DrugtestidArr ) || in_array( 2, $DrugtestidArr ) || in_array( 3, $DrugtestidArr ) || in_array( 4, $DrugtestidArr ) ) {
 										$countDoner = count( $this->Form_Management_Model->getDonarDetailBySosId( $getManualCalcData['sosid'] ) );
 									}
@@ -4480,9 +3913,7 @@ class Reporting_Controller extends CI_Controller {
 									$calloutprice       = $data['cobp'] * ( $data['cohr'] > 3 ? $data['cohr'] : 3 );
 									$fcoprice           = $data['fcobp'] * ( $data['fcohr'] > 2 ? $data['fcohr'] : 2 );
 									$travel             = $data['travelBasePrice'] * ( $data['travelHr'] > 1 ? $data['travelHr'] : 1 );
-
 									$TotalTrevenu = $data['urineNata'] + $data['labconf'] + $data['cancelfee'] + $data['nataLabCnfrm'] + $data['oralFluidNata'] + $data['SyntheticCannabinoids'] + $data['labScrenning'] + $data['RtwScrenning'] + $mobileScreen + $DcmobileScreen + $travel + $calloutprice + $fcoprice;
-
 									$TotalTrevenu    = number_format( $TotalTrevenu, 2, '.', '' );
 									$GSTmanual       = ( $TotalTrevenu * 0.1 );
 									$GSTmanual       = number_format( $GSTmanual, 2, '.', '' );
@@ -4507,10 +3938,8 @@ class Reporting_Controller extends CI_Controller {
 									}
 									$Royaltyfees = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) * 0.1;
 									$Royaltyfees = number_format( $Royaltyfees, 2, '.', '' );
-
 									$NetTotal = ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) ) - $Royaltyfees;
 									$NetTotal = number_format( $NetTotal, 2, '.', '' );
-
 									$totalRevenu      = $totalRevenu + ( $discountpercent > 0 ? number_format( $totalafterdiscount, 2, '.', '' ) : number_format( $totalinvoiceAmt, 2, '.', '' ) );
 									$totalRoyaltyfees = $totalRoyaltyfees + $Royaltyfees;
 									$totalNetProfit   = $totalNetProfit + $NetTotal;
@@ -4518,16 +3947,22 @@ class Reporting_Controller extends CI_Controller {
 								$totalRevenu      = number_format( $totalRevenu, 2, '.', '' );
 								$totalRoyaltyfees = number_format( $totalRoyaltyfees, 2, '.', '' );
 								$totalNetProfit   = number_format( $totalNetProfit, 2, '.', '' );
-
+                                                                if((!empty($getManualCalcData['dtCreatedOn']) && $getManualCalcData['dtCreatedOn'] != '0000-00-00'))
+                                                                    {
+                                                                      $date_data = date('d/m/Y',strtotime($getManualCalcData['dtCreatedOn'])); 
+                                                                    }
+                                                                    else{
+                                                                     $date_data = 'N/A';   
+                                                                    }
 								if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 									$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 									$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $frDataAry['szName'] );
 									$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['szName'] );
 									$this->excel->getActiveSheet()->setCellValue( 'D' . $i, $userDataAry['userCode'] );
-									$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
-									$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
-									$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
+                                                                        $this->excel->getActiveSheet()->setCellValue( 'E' . $i, $date_data);
+									$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
+									$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
+									$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
 									$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -4535,20 +3970,22 @@ class Reporting_Controller extends CI_Controller {
 									$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
+                                                                        $this->excel->getActiveSheet()->getColumnDimension( 'H' )->setAutoSize( true );
 								} else {
 									$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $x );
 									$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $userDataAry['szName'] );
 									$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $userDataAry['userCode'] );
-									$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
-									$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
-									$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
-
+                                                                        $this->excel->getActiveSheet()->setCellValue( 'D' . $i, $date_data);
+									$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $totalRevenu, 2, '.', ',' ) );
+									$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $totalRoyaltyfees, 2, '.', ',' ) );
+									$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $totalNetProfit, 2, '.', ',' ) );
 									$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
 									$this->excel->getActiveSheet()->getColumnDimension( 'F' )->setAutoSize( true );
+                                                                        $this->excel->getActiveSheet()->getColumnDimension( 'G' )->setAutoSize( true );
 								}
 								$allfranchiseeTotalAfterDis    += $totalRevenu;
 								$allfranchiseetotalRoyaltyfees += $totalRoyaltyfees;
@@ -4559,23 +3996,17 @@ class Reporting_Controller extends CI_Controller {
 						}
 					}
 					if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
+						$this->excel->getActiveSheet()->setCellValue( 'E' . $i, Total );
+						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) );
+						$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) );
+						$this->excel->getActiveSheet()->setCellValue( 'H' . $i, '$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) );
+					} else {
 						$this->excel->getActiveSheet()->setCellValue( 'D' . $i, Total );
 						$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) );
 						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) );
 						$this->excel->getActiveSheet()->setCellValue( 'G' . $i, '$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) );
-
-
-					} else {
-						$this->excel->getActiveSheet()->setCellValue( 'C' . $i, Total );
-						$this->excel->getActiveSheet()->setCellValue( 'D' . $i, '$' . number_format( $allfranchiseeTotalAfterDis, 2, '.', ',' ) );
-						$this->excel->getActiveSheet()->setCellValue( 'E' . $i, '$' . number_format( $allfranchiseetotalRoyaltyfees, 2, '.', ',' ) );
-						$this->excel->getActiveSheet()->setCellValue( 'F' . $i, '$' . number_format( $allfranchiseetotalNetProfit, 2, '.', ',' ) );
-
 					}
 				}
-				$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setSize( 13 );
-				$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getFont()->setBold( true );
-				$this->excel->getActiveSheet()->getStyle( 'C' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 				$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setSize( 13 );
 				$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getFont()->setBold( true );
 				$this->excel->getActiveSheet()->getStyle( 'D' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
@@ -4588,20 +4019,20 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setSize( 13 );
 				$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getFont()->setBold( true );
 				$this->excel->getActiveSheet()->getStyle( 'G' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
+				$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setSize( 13 );
+				$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getFont()->setBold( true );
+				$this->excel->getActiveSheet()->getStyle( 'H' . $i )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_LEFT );
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	function industryReportChart() {
 		$dtStart    = $this->input->post( 'dtStart' );
 		$dtEnd      = $this->input->post( 'dtEnd' );
@@ -4614,7 +4045,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "viewIndustryChart";
 	}
-
 	public function viewIndustryChart() { // something
 		$count         = $this->Admin_Model->getnotification();
 		$is_user_login = is_user_login( $this );
@@ -4629,7 +4059,6 @@ class Reporting_Controller extends CI_Controller {
 		$searchArray['szIndustry'] = $this->session->userdata( 'szIndustry' );
 		$searchArray['szTestType'] = $this->session->userdata( 'szTestType' );
 		$getSosAndClientDetils     = $this->Reporting_Model->getSosAndClientDetils( $searchArray );
-
 		$data['szMetaTagTitle']        = "Industry Report Chart";
 		$data['is_user_login']         = $is_user_login;
 		$data['pageName']              = "Reporting";
@@ -4640,9 +4069,7 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->view( 'layout/admin_header', $data );
 		$this->load->view( 'reporting/viewIndustryReportChart.php' );
 		$this->load->view( 'layout/admin_footer', $data );
-
 	}
-
 	function comparisonReportChart() {
 		$siteid      = $this->input->post( 'siteid' );
 		$testtype    = $this->input->post( 'testtype' );
@@ -4653,7 +4080,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "comparisonReportOfChart";
 	}
-
 	public function comparisonReportOfChart() {
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
@@ -4667,7 +4093,6 @@ class Reporting_Controller extends CI_Controller {
 		$comparetype      = $this->session->userdata( 'comparetype' );
 		$compareresultarr = $this->Reporting_Model->getcomparisonrecord( $siteid, $testtype, $comparetype );
 		$userdataarr      = $this->Webservices_Model->getfranchiseeclientsitebysiteid( $siteid );
-
 		$data['szMetaTagTitle']   = "Client Comparison Chart";
 		$data['is_user_login']    = $is_user_login;
 		$data['pageName']         = "Reporting";
@@ -4684,9 +4109,7 @@ class Reporting_Controller extends CI_Controller {
 		$this->load->view( 'reporting/clientCmpChart' );
 		$this->load->view( 'layout/admin_footer' );
 	}
-
 	function revenueGenerateOfChart() {
-
 		$dtStart      = $this->input->post( 'dtStart' );
 		$dtEnd        = $this->input->post( 'dtEnd' );
 		$szFranchisee = $this->input->post( 'szFranchisee' );
@@ -4696,7 +4119,6 @@ class Reporting_Controller extends CI_Controller {
 		echo "SUCCESS||||";
 		echo "revenueGenerateChart";
 	}
-
 	public function revenueGenerateChart() {
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
@@ -4708,7 +4130,6 @@ class Reporting_Controller extends CI_Controller {
 		$searchAry['dtStart']      = $this->session->userdata( 'dtStart' );
 		$searchAry['dtEnd']        = $this->session->userdata( 'dtEnd' );
 		$searchAry['szFranchisee'] = $this->session->userdata( 'szFranchisee' );
-
 		$searchAry['dtStart']                = $this->session->userdata( 'dtStart' );
 		$searchAry['dtEnd']                  = $this->session->userdata( 'dtEnd' );
 		$searchAry['szFranchisee']           = $this->session->userdata( 'szFranchisee' );
@@ -4724,16 +4145,11 @@ class Reporting_Controller extends CI_Controller {
 		$data['allfranchisee']               = $searchOptionArr;
 		$data['arErrorMessages']             = $this->Order_Model->arErrorMessages;
 		//$data['drugtestkitlist'] = $drugTestKitListAray;
-
 		$this->load->view( 'layout/admin_header', $data );
 		$this->load->view( 'reporting/viewRevenueGenerateChart' );
 		$this->load->view( 'layout/admin_footer' );
-
-
 	}
-
 	public function view_fr_stock_qty_report() {
-
 		$is_user_login = is_user_login( $this );
 		// redirect to dashboard if already logged in
 		if ( ! $is_user_login ) {
@@ -4744,9 +4160,7 @@ class Reporting_Controller extends CI_Controller {
 		$count          = $this->Admin_Model->getnotification();
 		$franchiseeName = $_POST['szSearch1'];
 		$catid          = $_POST['szSearch2'];
-
 		$viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList( $franchiseeName, $catid );
-
 		$this->load->library( 'form_validation' );
 		$this->form_validation->set_rules( 'szSearch2', 'Product Category', 'required' );
 		$this->form_validation->set_message( 'required', '{field} is required.' );
@@ -4758,7 +4172,6 @@ class Reporting_Controller extends CI_Controller {
 			$data['notification']    = $count;
 			$data['data']            = $data;
 			$data['arErrorMessages'] = $this->Order_Model->arErrorMessages;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/franchisee_stock_qty' );
 			$this->load->view( 'layout/admin_footer' );
@@ -4771,29 +4184,19 @@ class Reporting_Controller extends CI_Controller {
 			$data['notification']                   = $count;
 			$data['data']                           = $data;
 			$data['arErrorMessages']                = $this->Order_Model->arErrorMessages;
-
 			$this->load->view( 'layout/admin_header', $data );
 			$this->load->view( 'reporting/franchisee_stock_qty' );
 			$this->load->view( 'layout/admin_footer' );
 		}
 	}
-
 	function ViewpdfFrStockQtyReportData() {
-
 		$prodCategory   = $this->input->post( 'prodCategory' );
 		$franchiseeName = $this->input->post( 'franchiseeName' );
-
-
 		$this->session->set_userdata( 'franchiseeName', $franchiseeName );
 		$this->session->set_userdata( 'prodCategory', $prodCategory );
-
-
 		echo "SUCCESS||||";
 		echo "ViewpdfFrStockQtyReport";
-
-
 	}
-
 	public function ViewpdfFrStockQtyReport() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -4814,13 +4217,9 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage( 'L' );
-
 		$franchiseeName = $this->session->userdata( 'franchiseeName' );
 		$prodCategory   = $this->session->userdata( 'prodCategory' );
-
-
 		$viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList( $franchiseeName, $prodCategory );
-
 		$html = '<a style="text-align:center;  margin-bottom:5px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a>
             <div><p style="text-align:center; font-size:18px; margin-bottom:5px; color:black"><b>Franchisee Stock Quantity Report</b></p></div>
            
@@ -4836,7 +4235,6 @@ class Reporting_Controller extends CI_Controller {
                                    
                                     </tr>';
 		if ( $viewFranchiseeInventoryListAry ) {
-
 			$i = 0;
 			foreach ( $viewFranchiseeInventoryListAry as $viewFranchiseeInventoryData ) {
                              $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $viewFranchiseeInventoryData['iFranchiseeId'] );
@@ -4848,10 +4246,7 @@ class Reporting_Controller extends CI_Controller {
                                             <td> ' . $franchiseeArr['szName'] . '</td>
                                             <td> ' . $getState['name'] . ' </td>  
                                             <td>' . $viewFranchiseeInventoryData['szQuantity'] . ' </td>';
-
-
 				$html .= '</tr>';
-
 			}
 			$i ++;
 		}
@@ -4863,70 +4258,49 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->writeHTML( $html, true, false, true, false, '' );
 //    $pdf->Write(5, 'CodeIgniter TCPDF Integration');
 		error_reporting( E_ALL );
-
 		$pdf->Output( 'stock-request-report.pdf', 'I' );
 	}
-
 	function ViewExcelFrStockQtyReportData() {
 		$prodCategory   = $this->input->post( 'prodCategory' );
 		$franchiseeName = $this->input->post( 'franchiseeName' );
-
-
 		$this->session->set_userdata( 'franchiseeName', $franchiseeName );
 		$this->session->set_userdata( 'prodCategory', $prodCategory );
-
 		echo "SUCCESS||||";
 		echo "ViewExcelFrStockQtyReportReport";
-
-
 	}
-
 	public function ViewExcelFrStockQtyReportReport() {
 		$this->load->library( 'excel' );
 		$filename = 'Report';
 		$title    = 'Drug-safe fr stock qty report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
-
 		$this->excel->setActiveSheetIndex( 0 );
-
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->setCellValue( 'B1', 'Franchisee Stock Quantity Report' );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'A3', 'Product Code' );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B3', 'Description' );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'C3', 'Franchisee Name' );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
                 $this->excel->getActiveSheet()->setCellValue( 'D3', 'State' );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
                 $this->excel->getActiveSheet()->setCellValue( 'E3', 'Available Stock Quantity' );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$franchiseeName = $this->session->userdata( 'franchiseeName' );
 		$prodCategory   = $this->session->userdata( 'prodCategory' );
-
-
 		$viewFranchiseeInventoryListAry = $this->Reporting_Model->viewFranchiseeInventoryList( $franchiseeName, $prodCategory );
 		
 		if ( ! empty( $viewFranchiseeInventoryListAry ) ) {
@@ -4937,29 +4311,22 @@ class Reporting_Controller extends CI_Controller {
                              $getState = $this->Franchisee_Model->getStateByFranchiseeId($item['iFranchiseeId']);
                               
 				$x ++;
-
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, $item['szProductCode'] );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $item['szProductDiscription'] );
                                 $this->excel->getActiveSheet()->setCellValue( 'C' . $i, $franchiseeArr['szName'] );
                                 $this->excel->getActiveSheet()->setCellValue( 'D' . $i, $getState['name'] );
 				$this->excel->getActiveSheet()->setCellValue( 'E' . $i, $item['szQuantity'] );
-
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'D' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'E' )->setAutoSize( true );
-
-
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
@@ -4968,127 +4335,98 @@ class Reporting_Controller extends CI_Controller {
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	function ViewExcelClientReportData() {
 		$frId     = $this->input->post( 'frId' );
 		$clName   = $this->input->post( 'clName' );
 		$fromDate = $this->input->post( 'fromDate' );
 		$toDate   = $this->input->post( 'toDate' );
-
 		$this->session->set_userdata( 'fromDate', $fromDate );
 		$this->session->set_userdata( 'toDate', $toDate );
 		$this->session->set_userdata( 'frId', $frId );
 		$this->session->set_userdata( 'clName', $clName );
-
-
 		echo "SUCCESS||||";
 		echo "ViewExcelClientReport";
-
-
 	}
-
 	public function ViewExcelClientReport() {
 		$this->load->library( 'excel' );
 		$filename = 'Report';
 		$title    = 'Client Details Report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
 		$this->excel->setActiveSheetIndex( 0 );
-
 		$this->excel->getActiveSheet()->setTitle( $filename );
                 $this->excel->getActiveSheet()->setCellValue( 'A1', 'Franchisee Name:' );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
                 $this->excel->getActiveSheet()->setCellValue( 'A3', 'Business Name' );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		
 		$this->excel->getActiveSheet()->setCellValue( 'B3', 'ABN' );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'C3', 'Contact Name' );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D3', 'Primary Email' );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E3', 'Primary Phone' );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'F3', 'No Of Sites' );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'G3', 'Industry' );
 		$this->excel->getActiveSheet()->getStyle( 'G3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'G3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'G3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'H3', 'Discount' );
 		$this->excel->getActiveSheet()->getStyle( 'H3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'H3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'H3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'I3', 'Contact Email' );
 		$this->excel->getActiveSheet()->getStyle( 'I3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'I3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'I3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'J3', 'Contact Phone' );
 		$this->excel->getActiveSheet()->getStyle( 'J3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'J3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'J3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'K3', 'Contact Mobile' );
 		$this->excel->getActiveSheet()->getStyle( 'K3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'K3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'K3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'L3', 'Address' );
 		$this->excel->getActiveSheet()->getStyle( 'L3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'L3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'L3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'M3', 'Country' );
 		$this->excel->getActiveSheet()->getStyle( 'M3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'M3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'M3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'N3', 'State' );
 		$this->excel->getActiveSheet()->getStyle( 'N3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'N3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'N3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'O3', 'Region Name' );
 		$this->excel->getActiveSheet()->getStyle( 'O3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'O3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'O3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'P3', 'City' );
 		$this->excel->getActiveSheet()->getStyle( 'P3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'P3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'P3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'Q3', 'Zip Code' );
 		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
               
 		$frId         = $this->session->userdata( 'frId' );
 		$clName       = $this->session->userdata( 'clName' );
@@ -5096,7 +4434,6 @@ class Reporting_Controller extends CI_Controller {
 		$toDate       = $this->session->userdata( 'toDate' );
 		$fromdateData = $this->Webservices_Model->formatdate( $fromDate );
 		$todateData   = $this->Webservices_Model->formatdate( $toDate );
-
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 			if ( ! empty( $frId ) ) {
 				$frId = $this->session->userdata( 'frId' );
@@ -5110,7 +4447,6 @@ class Reporting_Controller extends CI_Controller {
 		if ( ! empty( $AssignCorpuserDetailsArr ) ) {
 			foreach ( $AssignCorpuserDetailsArr as $assignCorpUser ) {
 				$CorpuserDetailsArr = $this->Webservices_Model->getclientdetails( $assignCorpUser['corpfrid'], 0, 0, 0, $fromdateData, $todateData );
-
 				if ( ! empty( $CorpSitesDetailsArr ) ) {
 					foreach ( $CorpSitesDetailsArr as $CorpUser ) {
 						if ( ! in_array( $CorpUser, $CorpuserDetailsArr ) ) {
@@ -5120,20 +4456,17 @@ class Reporting_Controller extends CI_Controller {
 				}
 			}
 		}
-
 		if ( ! empty( $AllclientAry ) && ! empty( $CorpuserDetailsArr ) ) {
 			if ( ( $clName == $CorpclientData['szName'] ) ) {
 				$clientAray = array_merge( $AllclientAry, $CorpuserDetailsArr );
 			} else {
 				$clientAray = $AllclientAry;
 			}
-
 		} elseif ( ! empty( $AllclientAry ) ) {
 			$clientAray = $AllclientAry;
 		} elseif ( ! empty( $CorpuserDetailsArr ) ) {
 			$clientAray = $CorpuserDetailsArr;
 		}
-
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 2 ) ) {
 			$frId = $_SESSION['drugsafe_user']['id'];
 		}
@@ -5150,7 +4483,6 @@ class Reporting_Controller extends CI_Controller {
 					$getState = $this->Franchisee_Model->getStateByFranchiseeId( $item['id'] );
 					$regionId = $clientData['regionId'];
 				}
-
 				$getRegionName               = $this->Admin_Model->getregionbyregionid( $regionId );
 				$discount                    = $this->Franchisee_Model->getDiscountByDisId( $item['discountid'] );
 				$countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails( $item['id'], false, false );
@@ -5158,7 +4490,6 @@ class Reporting_Controller extends CI_Controller {
 				if ( $countChildClientDetailsAray ) {
 					$count = count( $countChildClientDetailsAray );
 				}
-
 				if ( $item['industry'] == 1 ) {
 					$value = 'Agriculture, Forestry and Fishing';
 				}
@@ -5237,39 +4568,30 @@ class Reporting_Controller extends CI_Controller {
 				$this->excel->getActiveSheet()->getColumnDimension( 'O' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'P' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'Q' )->setAutoSize( true );
-
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
 //force user to download the Excel file without writing it to server's HD
 		$objWriter->save( 'php://output' );
 	}
-
 	function ViewPdfClientReportData() {
 		$frId     = $this->input->post( 'frId' );
 		$clName   = $this->input->post( 'clName' );
 		$fromDate = $this->input->post( 'fromDate' );
 		$toDate   = $this->input->post( 'toDate' );
-
 		$this->session->set_userdata( 'fromDate', $fromDate );
 		$this->session->set_userdata( 'toDate', $toDate );
 		$this->session->set_userdata( 'frId', $frId );
 		$this->session->set_userdata( 'clName', $clName );
-
-
 		echo "SUCCESS||||";
 		echo "ViewPdfClientReport";
-
 	}
-
 	public function ViewPdfClientReport() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -5290,14 +4612,12 @@ class Reporting_Controller extends CI_Controller {
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage( 'L' );
-
 		$frId         = $this->session->userdata( 'frId' );
 		$clName       = $this->session->userdata( 'clName' );
 		$fromDate     = $this->session->userdata( 'fromDate' );
 		$toDate       = $this->session->userdata( 'toDate' );
 		$fromdateData = $this->Webservices_Model->formatdate( $fromDate );
 		$todateData   = $this->Webservices_Model->formatdate( $toDate );
-
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 1 ) || ( $_SESSION['drugsafe_user']['iRole'] == 5 ) ) {
 			if ( ! empty( $frId ) ) {
 				$frId = $this->session->userdata( 'frId' );
@@ -5311,7 +4631,6 @@ class Reporting_Controller extends CI_Controller {
 		if ( ! empty( $AssignCorpuserDetailsArr ) ) {
 			foreach ( $AssignCorpuserDetailsArr as $assignCorpUser ) {
 				$CorpuserDetailsArr = $this->Webservices_Model->getclientdetails( $assignCorpUser['corpfrid'], 0, 0, 0, $fromdateData, $todateData );
-
 				if ( ! empty( $CorpSitesDetailsArr ) ) {
 					foreach ( $CorpSitesDetailsArr as $CorpUser ) {
 						if ( ! in_array( $CorpUser, $CorpuserDetailsArr ) ) {
@@ -5321,20 +4640,17 @@ class Reporting_Controller extends CI_Controller {
 				}
 			}
 		}
-
 		if ( ! empty( $AllclientAry ) && ! empty( $CorpuserDetailsArr ) ) {
 			if ( ( $clName == $CorpclientData['szName'] ) ) {
 				$clientAray = array_merge( $AllclientAry, $CorpuserDetailsArr );
 			} else {
 				$clientAray = $AllclientAry;
 			}
-
 		} elseif ( ! empty( $AllclientAry ) ) {
 			$clientAray = $AllclientAry;
 		} elseif ( ! empty( $CorpuserDetailsArr ) ) {
 			$clientAray = $CorpuserDetailsArr;
 		}
-
 		if ( ( $_SESSION['drugsafe_user']['iRole'] == 2 ) ) {
 			$frId = $_SESSION['drugsafe_user']['id'];
 		}
@@ -5347,7 +4663,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
                                   ';
 		if ( $clientAray ) {
 			$i = 0;
-
 			foreach ( $clientAray as $clientData ) {
 				if ( $clientData['industry'] == 1 ) {
 					$value = 'Agriculture, Forestry and Fishing';
@@ -5397,14 +4712,12 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 					$getState = $this->Franchisee_Model->getStateByFranchiseeId( $clientData['id'] );
 					$regionId = $clientData['regionId'];
 				}
-
 				$getRegionName               = $this->Admin_Model->getregionbyregionid( $regionId );
 				$countChildClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails( $clientData['id'], false, false );
 				$count                       = '0';
 				if ( $countChildClientDetailsAray ) {
 					$count = count( $countChildClientDetailsAray );
 				}
-
 				$html .= '  
               <table border="1" cellpadding="5"><tr nobr="true">
                                         <td ><b>Business Name</b> </td>
@@ -5454,7 +4767,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
                                         </tr></table>
                                          <br><br>
                                    ';
-
 				$i ++;
 			}
 		}
@@ -5473,7 +4785,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		ob_end_clean();
 		$pdf->Output( 'client-details-report.pdf', 'I' );
 	}
-
 	function ViewPdfSiteReportData() {
 		$siteName     = $this->input->post( 'siteName' );
 		$clientId     = $this->input->post( 'clientId' );
@@ -5481,20 +4792,15 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		$toDate       = $this->input->post( 'toDate' );
 		$corpclient   = $this->input->post( 'corpclient' );
 		$idfranchisee = $this->input->post( 'idfranchisee' );
-
 		$this->session->set_userdata( 'clientId', $clientId );
 		$this->session->set_userdata( 'idfranchisee', $idfranchisee );
 		$this->session->set_userdata( 'fromDate', $fromDate );
 		$this->session->set_userdata( 'toDate', $toDate );
 		$this->session->set_userdata( 'corpclient', $corpclient );
 		$this->session->set_userdata( 'siteName', $siteName );
-
-
 		echo "SUCCESS||||";
 		echo "ViewPdfSiteReport";
-
 	}
-
 	public function ViewPdfSiteReport() {
 		ob_start();
 		$this->load->library( 'Pdf' );
@@ -5515,25 +4821,19 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		$pdf->SetFont( 'times', '', 12 );
 		// Add a page
 		$pdf->AddPage( 'L' );
-
-
 		$corpclient = $this->session->userdata( 'corpclient' );
 		$siteId     = $this->session->userdata( 'siteName' );
 		$idClient   = $this->session->userdata( 'clientId' );
 		$fromDate   = $this->session->userdata( 'fromDate' );
 		$toDate     = $this->session->userdata( 'toDate' );
-
 		$fromdateData = $this->Webservices_Model->formatdate( $fromDate );
 		$todateData   = $this->Webservices_Model->formatdate( $toDate );
-
 		$clientDetailsAray      = $this->Franchisee_Model->viewClientDetails( $idClient );
 		$franchiseId            = $clientDetailsAray['franchiseeId'];
 		$idfranchisee           = $this->session->userdata( 'idfranchisee' );
 		$childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails( $idClient, false, flase, $searchAry, $siteId, $idfranchisee, $fromdateData, $todateData );
 		$clientFranchiseeArr    = $this->Franchisee_Model->getClientFranchisee( $idClient );
-
 		//$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
-
 		$loggedinFranchisee = $idfranchisee;
 		$clientDetsArr      = $this->Webservices_Model->getclientdetailsbyclientid( $idClient );
 		if ( ! empty( $clientDetsArr ) ) {
@@ -5558,8 +4858,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				}
 			}
 		}
-
-
 		if ( $clientDetailsAray['clientType'] > 0 ) {
 			$parentClientDetArr    = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientDetailsAray['clientType'] );
 			$data['ParentOfChild'] = $parentClientDetArr;
@@ -5576,7 +4874,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 			$getRegionName = $this->Admin_Model->getregionbyregionid( $franchiseeDetArr['regionId'] );
 		}
 		$clientAray = $this->Webservices_Model->getFranchiseeWithClient( $idClient, $idfranchisee );
-
 		/*if(!empty($clientAray)){
             if(($clientAray[0]['szNoOfSites'] == 0) && $clientAray[0]['clientType'] == 0){
                 $addEditClientDet = false;
@@ -5589,15 +4886,12 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 			if ( ! empty( $clientDetsArr ) ) {
 				$idfranchisee = $clientDetsArr[0]['franchiseeId'];
 			}
-
 			$AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails( $loggedinFranchisee, $idfranchisee );
-
 			if ( ! empty( $AssignCorpuserDetailsArr ) ) {
 				$addEditClientDet = false;
 				$userDetailsArr   = array();
 				foreach ( $AssignCorpuserDetailsArr as $assignCorpUser ) {
 					$CorpuserDetailsArr = $this->Webservices_Model->getclientdetails( $assignCorpUser['corpfrid'], $idClient, 0, $assignCorpUser['clientid'], $fromdateData, $todateData );
-
 					if ( ! empty( $CorpuserDetailsArr ) ) {
 						foreach ( $CorpuserDetailsArr as $CorpUser ) {
 							array_push( $userDetailsArr, $CorpUser );
@@ -5606,13 +4900,11 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				}
 			}
 		}
-
 		if ( $corpclient == '1' ) {
 			$childClientDetailsAray = $userDetailsArr;
 		} else {
 			$childClientDetailsAray = $childClientDetailsAray;
 		}
-
 		if ( $childClientDetailsAray ) {
 			$html = '<div class="wraper">
              <table cellpadding="5px">
@@ -5623,7 +4915,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
              <br />
              <h1 style="text-align: center;">Site Details Report</h1>';
 			$i    = 0;
-
 			foreach ( $childClientDetailsAray as $siteData ) {
 				$showrec = true;
 				if ( isset( $siteId ) && ! empty( $siteId ) && ( $siteId != $siteData['id'] ) ) {
@@ -5639,7 +4930,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 					} else {
 						$getState = $this->Franchisee_Model->getStateByFranchiseeId( $siteData['id'] );
 					}
-
 					$getRegionName = $this->Admin_Model->getregionbyregionid( $regionId );
 					if ( $userDataAry['onsite_service'] == 0 ) {
 						$onsite_service_val = "Mobile Clinic ";
@@ -5687,7 +4977,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 					} else {
 						$itrval = "Blanket";
 					}
-
                              $str = '';
                             $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
                              if(in_array("1", $req_ppe_ary)){
@@ -5832,8 +5121,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
     
 </table>
         </div> <hr><br pagebreak="true" />';
-
-
 					$i ++;
 				}
 			}
@@ -5848,7 +5135,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		ob_end_clean();
 		$pdf->Output( 'client-details-report.pdf', 'I' );
 	}
-
 	function ViewExcelSiteReportData() {
 		$siteName     = $this->input->post( 'siteName' );
 		$clientId     = $this->input->post( 'clientId' );
@@ -5856,28 +5142,21 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		$toDate       = $this->input->post( 'toDate' );
 		$corpclient   = $this->input->post( 'corpclient' );
 		$idfranchisee = $this->input->post( 'idfranchisee' );
-
 		$this->session->set_userdata( 'clientId', $clientId );
 		$this->session->set_userdata( 'idfranchisee', $idfranchisee );
 		$this->session->set_userdata( 'fromDate', $fromDate );
 		$this->session->set_userdata( 'toDate', $toDate );
 		$this->session->set_userdata( 'corpclient', $corpclient );
 		$this->session->set_userdata( 'siteName', $siteName );
-
 		echo "SUCCESS||||";
 		echo "ViewExcelSiteReport";
-
-
 	}
-
 	public function ViewExcelSiteReport() {
 		$this->load->library( 'excel' );
 		$filename = 'Report';
 		$title    = 'Site Details Report';
 		$file     = $filename . '-' . $title; //save our workbook as this file name
-
 		$this->excel->setActiveSheetIndex( 0 );
-
 		$this->excel->getActiveSheet()->setTitle( $filename );
 		$this->excel->getActiveSheet()->mergeCells('A1:K2');
 		$this->excel->getActiveSheet()
@@ -5895,7 +5174,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
 		$this->excel->getActiveSheet()->getStyle( 'A1' )->getAlignment()->setVertical( PHPExcel_Style_Alignment::VERTICAL_CENTER );
-
 		$this->excel->getActiveSheet()->mergeCells('L1:W1');
 		$this->excel->getActiveSheet()
 		            ->getStyle('L1:W1')
@@ -5956,7 +5234,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		$this->excel->getActiveSheet()->getStyle( 'O2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'O2' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'O2' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->mergeCells('R2:T2');
 		$this->excel->getActiveSheet()
 		            ->getStyle('R2:T2')
@@ -6017,245 +5294,191 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		$this->excel->getActiveSheet()->getStyle( 'AA2' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AA2' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AA2' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'A3', 'Site Code' );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'A3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'B3', 'Company Name' );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'B3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'C3', 'Company Email' );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'C3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'D3', 'Company Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'D3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'E3', 'Name of Person Completing Form' );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'E3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'F3', 'Address' );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'F3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'G3', 'City' );
 		$this->excel->getActiveSheet()->getStyle( 'G3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'G3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'G3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'H3', 'State' );
 		$this->excel->getActiveSheet()->getStyle( 'H3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'H3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'H3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'I3', 'Region Name' );
 		$this->excel->getActiveSheet()->getStyle( 'I3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'I3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'I3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'J3', 'ZIP/Postal Code' );
 		$this->excel->getActiveSheet()->getStyle( 'J3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'J3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'J3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'K3', 'Country' );
 		$this->excel->getActiveSheet()->getStyle( 'K3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'K3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'K3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'L3', 'Contact Name' );
 		$this->excel->getActiveSheet()->getStyle( 'L3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'L3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'L3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'M3', 'Contact Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'M3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'M3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'M3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'N3', 'Contact Email' );
 		$this->excel->getActiveSheet()->getStyle( 'N3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'N3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'N3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'O3', 'Contact Name' );
 		$this->excel->getActiveSheet()->getStyle( 'O3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'O3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'O3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'P3', 'Contact Phone Numbe' );
 		$this->excel->getActiveSheet()->getStyle( 'P3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'P3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'P3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'Q3', 'Contact Email' );
 		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'Q3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'R3', 'Contact Name' );
 		$this->excel->getActiveSheet()->getStyle( 'R3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'R3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'R3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'S3', 'Contact Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'S3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'S3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'S3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'T3', 'Contact Email' );
 		$this->excel->getActiveSheet()->getStyle( 'T3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'T3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'T3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'U3', 'Contact Name' );
 		$this->excel->getActiveSheet()->getStyle( 'U3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'U3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'U3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'V3', 'Contact Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'V3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'V3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'V3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'W3', 'Contact Email' );
 		$this->excel->getActiveSheet()->getStyle( 'W3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'W3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'W3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'X3', 'Contact Name' );
 		$this->excel->getActiveSheet()->getStyle( 'X3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'X3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'X3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'Y3', 'Landline Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'Y3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'Y3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'Y3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'Z3', 'Mobile Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'Z3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'Z3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'Z3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'AA3', 'Contact Name' );
 		$this->excel->getActiveSheet()->getStyle( 'AA3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AA3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AA3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'AB3', 'Landline Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'AB3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AB3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AB3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AC3', 'Mobile Phone Number' );
 		$this->excel->getActiveSheet()->getStyle( 'AC3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AC3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AC3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$this->excel->getActiveSheet()->setCellValue( 'AD3', 'People on site' );
 		$this->excel->getActiveSheet()->getStyle( 'AD3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AD3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AD3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AE3', 'Test Count' );
 		$this->excel->getActiveSheet()->getStyle( 'AE3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AE3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AE3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AF3', 'Initial Testing Requirements' );
 		$this->excel->getActiveSheet()->getStyle( 'AF3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AF3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AF3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AG3', 'Ongoing Testing Requirements' );
 		$this->excel->getActiveSheet()->getStyle( 'AG3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AG3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AG3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AH3', 'Type of service preferred on-site' );
 		$this->excel->getActiveSheet()->getStyle( 'AH3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AH3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AH3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AI3', 'No of times Drugsafe visit your site' );
 		$this->excel->getActiveSheet()->getStyle( 'AI3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AI3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AI3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AJ3', 'Access to power for our Mobile' );
 		$this->excel->getActiveSheet()->getStyle( 'AJ3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AJ3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AJ3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AK3', 'Preferred start time' );
 		$this->excel->getActiveSheet()->getStyle( 'AK3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AK3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AK3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AL3', 'Our people required to complete an induction' );
 		$this->excel->getActiveSheet()->getStyle( 'AL3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AL3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AL3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AM3', 'Risk assessment required' );
 		$this->excel->getActiveSheet()->getStyle( 'AM3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AM3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AM3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AN3', 'Randomization process' );
 		$this->excel->getActiveSheet()->getStyle( 'AN3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AN3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AN3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AO3', 'Required PPE' );
 		$this->excel->getActiveSheet()->getStyle( 'AO3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AO3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AO3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AP3', 'Paperwork at the time of testing' );
 		$this->excel->getActiveSheet()->getStyle( 'AP3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AP3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AP3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
 		$this->excel->getActiveSheet()->setCellValue( 'AQ3', 'Special instruction for Drugsafe staff' );
 		$this->excel->getActiveSheet()->getStyle( 'AQ3' )->getFont()->setSize( 13 );
 		$this->excel->getActiveSheet()->getStyle( 'AQ3' )->getFont()->setBold( true );
 		$this->excel->getActiveSheet()->getStyle( 'AQ3' )->getAlignment()->setHorizontal( PHPExcel_Style_Alignment::HORIZONTAL_CENTER );
-
-
 		$corpclient = $this->session->userdata( 'corpclient' );
 		$siteId     = $this->session->userdata( 'siteName' );
 		$idClient   = $this->session->userdata( 'clientId' );
 		$fromDate   = $this->session->userdata( 'fromDate' );
 		$toDate     = $this->session->userdata( 'toDate' );
-
 		$fromdateData = $this->Webservices_Model->formatdate( $fromDate );
 		$todateData   = $this->Webservices_Model->formatdate( $toDate );
-
 		$clientDetailsAray      = $this->Franchisee_Model->viewClientDetails( $idClient );
 		$franchiseId            = $clientDetailsAray['franchiseeId'];
 		$idfranchisee           = $this->session->userdata( 'idfranchisee' );
 		$childClientDetailsAray = $this->Franchisee_Model->viewChildClientDetails( $idClient, false, flase, $searchAry, $siteId, $idfranchisee, $fromdateData, $todateData );
 		$clientFranchiseeArr    = $this->Franchisee_Model->getClientFranchisee( $idClient );
-
 		//$sitesArr = $this->Franchisee_Model->viewChildClientDetails($idClient,0,0,'',0,$idfranchisee);
-
 		$loggedinFranchisee = $idfranchisee;
 		$clientDetsArr      = $this->Webservices_Model->getclientdetailsbyclientid( $idClient );
 		if ( ! empty( $clientDetsArr ) ) {
@@ -6280,8 +5503,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				}
 			}
 		}
-
-
 		if ( $clientDetailsAray['clientType'] > 0 ) {
 			$parentClientDetArr    = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientDetailsAray['clientType'] );
 			$data['ParentOfChild'] = $parentClientDetArr;
@@ -6298,7 +5519,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 			$getRegionName = $this->Admin_Model->getregionbyregionid( $franchiseeDetArr['regionId'] );
 		}
 		$clientAray = $this->Webservices_Model->getFranchiseeWithClient( $idClient, $idfranchisee );
-
 		/*if(!empty($clientAray)){
             if(($clientAray[0]['szNoOfSites'] == 0) && $clientAray[0]['clientType'] == 0){
                 $addEditClientDet = false;
@@ -6311,15 +5531,12 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 			if ( ! empty( $clientDetsArr ) ) {
 				$idfranchisee = $clientDetsArr[0]['franchiseeId'];
 			}
-
 			$AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails( $loggedinFranchisee, $idfranchisee );
-
 			if ( ! empty( $AssignCorpuserDetailsArr ) ) {
 				$addEditClientDet = false;
 				$userDetailsArr   = array();
 				foreach ( $AssignCorpuserDetailsArr as $assignCorpUser ) {
 					$CorpuserDetailsArr = $this->Webservices_Model->getclientdetails( $assignCorpUser['corpfrid'], $idClient, 0, $assignCorpUser['clientid'], $fromdateData, $todateData );
-
 					if ( ! empty( $CorpuserDetailsArr ) ) {
 						foreach ( $CorpuserDetailsArr as $CorpUser ) {
 							array_push( $userDetailsArr, $CorpUser );
@@ -6328,7 +5545,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				}
 			}
 		}
-
 		if ( $corpclient == '1' ) {
 			$childClientDetailsAray = $userDetailsArr;
 		} else {
@@ -6336,7 +5552,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		}
 		if ( $childClientDetailsAray ) {
 			$i = 4;
-
 			foreach ( $childClientDetailsAray as $item ) {
 				if ( $item['regionId'] == 0 ) {
 					$getState      = $this->Franchisee_Model->getStateByFranchiseeId( $item['franchiseeId'] );
@@ -6346,12 +5561,9 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 					$getState = $this->Franchisee_Model->getStateByFranchiseeId( $item['id'] );
 					$regionId = $clientData['regionId'];
 				}
-
 				$getRegionName = $this->Admin_Model->getregionbyregionid( $regionId );
-
 				$userDataAry    = $this->Franchisee_Model->getSiteDetailsById( $item['id'] );
 				$franchiseecode = $this->Franchisee_Model->getusercodebyuserid( $item['id'] );
-
 				if ( $userDataAry['onsite_service'] == 0 ) {
 					$onsite_service_val = "Mobile Clinic ";
 				} else {
@@ -6398,7 +5610,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				} else {
 					$itrval = "Blanket";
 				}
-
 				 $str = '';
                             $req_ppe_ary = explode(",", $userDataAry['req_ppe']);
                              if(in_array("1", $req_ppe_ary)){
@@ -6419,7 +5630,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
                                 $val = "Long Sleev Clothing" ;
                                 $str .= $val.',';}
                                 $str = substr($str, 0, -1);
-
 				$this->excel->getActiveSheet()->setCellValue( 'A' . $i, ( ! empty( $franchiseecode['userCode'] ) ? $franchiseecode['userCode'] : 'N/A' ) );
 				$this->excel->getActiveSheet()->setCellValue( 'B' . $i, $item['szName'] );
 				$this->excel->getActiveSheet()->setCellValue( 'C' . $i, $item['szEmail'] );
@@ -6463,7 +5673,6 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				$this->excel->getActiveSheet()->setCellValue( 'AO' . $i, $str );
 				$this->excel->getActiveSheet()->setCellValue( 'AP' . $i, $pwVal );
 				$this->excel->getActiveSheet()->setCellValue( 'AQ' . $i, $userDataAry['instructions'] );
-
 				$this->excel->getActiveSheet()->getColumnDimension( 'A' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'B' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'C' )->setAutoSize( true );
@@ -6508,16 +5717,12 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 				$this->excel->getActiveSheet()->getColumnDimension( 'AO' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'AP' )->setAutoSize( true );
 				$this->excel->getActiveSheet()->getColumnDimension( 'AQ' )->setAutoSize( true );
-
-
 				$i ++;
 			}
 		}
-
 		header( 'Content-Type: application/vnd.ms-excel' ); //mime type
 		header( 'Content-Disposition: attachment;filename="' . $file . '"' ); //tell browser what's the file name
 		header( 'Cache-Control: max-age=0' ); //no cache
-
 //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
 //if you want to save it as .XLSX Excel 2007 format
 		$objWriter = PHPExcel_IOFactory::createWriter( $this->excel, 'Excel5' );
@@ -6525,5 +5730,4 @@ $franchiseeArr = $this->Admin_Model->getAdminDetailsByEmailOrId( '', $clientAray
 		$objWriter->save( 'php://output' );
 	}
 }
-
 ?>

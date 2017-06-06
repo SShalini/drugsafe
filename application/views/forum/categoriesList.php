@@ -15,7 +15,6 @@
                         <?php echo $_SESSION['drugsafe_user_message']['content'];?>
                     </div>
                 <?php
-
                 }
                 if(trim($_SESSION['drugsafe_user_message']['type']) == "error")
                 {
@@ -57,27 +56,27 @@
 
                     </div>
                     <?php
-
                     if(!empty($categoriesAray))
                     {
-
                         ?>
 
                         <div class="row">
-                            <form class="form-horizontal" id="szSearchCategory" action="<?=__BASE_URL__?>/forum/categoriesList " name="szSearchCategory" method="post">
+                            <form class="search-bar" id="szSearchCategory" action="<?=__BASE_URL__?>/forum/categoriesList " name="szSearchCategory" method="post">
                                 <div class="search col-md-3">
-                                    <select class="form-control custom-select" name="szSearchCtName" id="szSearchCtName" onfocus="remove_formError(this.id,'true')">
+                                    
+                                    <div class="form-group">
+                                        <select class="form-control custom-select" name="szSearchCtName" id="szSearchCtName" onfocus="remove_formError(this.id,'true')">
                                         <option value="">Category Name</option>
                                         <?php
                                         foreach($categoriesListAray as $categoriesItem)
                                         {
                                             $selected = ($categoriesItem['szName'] == $_POST['szSearchCtName'] ? 'selected="selected"' : '');
-
                                              echo '<option value="'.$categoriesItem['szName'].'"' . $selected . ' >'.$categoriesItem['szName'].'</option>';
                                         }
                                         ?>
                                     </select>
                                 </div>
+                                    </div>
                                 <div class="col-md-1">
                                     <button class="btn green-meadow" type="submit" ><i class="fa fa-search"></i></button>
                                 </div>
@@ -140,7 +139,6 @@
                                 </div>
                            
                          <?php
-
                     }
                     else
                     {
