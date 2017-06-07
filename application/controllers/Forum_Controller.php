@@ -21,7 +21,7 @@ class Forum_Controller extends CI_Controller {
         $this->load->library('pagination');
         }
 	public function addCategory() {
-           $count = $this->Admin_Model->getnotification();
+        $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
             $is_user_login = is_user_login($this);
             // redirect to dashboard if already logged in
@@ -67,7 +67,7 @@ class Forum_Controller extends CI_Controller {
             echo "addTopic";
             
         }
-        public function addTopic() {
+        public function addTopic(){
               $count = $this->Admin_Model->getnotification();
               $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
               $is_user_login = is_user_login($this);
@@ -189,14 +189,14 @@ class Forum_Controller extends CI_Controller {
                $categoriesAray =$this->Forum_Model->viewCategoriesList($config['per_page'],$this->uri->segment(3),$searchAry);
                $categoriesListAray =$this->Forum_Model->viewDistinctCategoriesList();
                $count = $this->Admin_Model->getnotification();
-            $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+               $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
                     $data['categoriesAray'] = $categoriesAray;
                     $data['szMetaTagTitle'] = " Categories List";
                     $data['is_user_login'] = $is_user_login;
                     $data['pageName'] = "Forum";
                     $data['subpageName'] = "Forum_List";
                     $data['notification'] = $count;
-            $data['commentnotification'] = $commentReplyNotiCount;
+                    $data['commentnotification'] = $commentReplyNotiCount;
                     $data['data'] = $data;
                     $data['categoriesListAray'] = $categoriesListAray;
  

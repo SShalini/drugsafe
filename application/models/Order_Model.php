@@ -797,8 +797,8 @@ class Order_Model extends Error_Model {
             }
         }
 
-      function dispatchsingleprod($ordid,$prodid,$qty){
-
+      function dispatchsingleprod($ordid,$prodid,$qty,$freightPrice){
+     
             $query = $this->db->select('id')
                 ->where(array('orderid' => (int)$ordid,'productid'=>$prodid,'dispatched' => 0))
             ->get(__DBC_SCHEMATA_ORDER_DETAILS__);
@@ -808,6 +808,7 @@ class Order_Model extends Error_Model {
                   $dataAry = array(
                       'order_detail_id'=> (int)$result[0]['id'],
                       'dispatch_qty'=> (int)$qty,
+                      'freightprice'=> $freightPrice,
                       'dispatch_date' => date('Y-m-d H:i:s')
                   );
               }
@@ -871,6 +872,7 @@ class Order_Model extends Error_Model {
     }
 
     function changesdispatchstatus($ordid, $status, $price=0.00,$freightprice=0){
+        $ordersDetailsAray = $this->getOrderByOrderId($ordid);
         $statusarr4 = array('status' => (int)$status,'last_changed'=>date('Y-m-d h:i:s'));
         $statusarr2 = array('status' => (int)$status,'dispatchedon'=>date('Y-m-d h:i:s'));
         $conditionarr = array('id' => (int)$ordid);
@@ -878,7 +880,7 @@ class Order_Model extends Error_Model {
             ->set('dispatched_price', 'dispatched_price + ' . (float)$price, FALSE)
             ->update(__DBC_SCHEMATA_ORDER__, ($status == '2'?$statusarr2:$statusarr4));
         if($freightprice>0){
-            $priceArr = array('freightprice' => $freightprice);
+            $priceArr = array('freightprice' =>($freightprice+$ordersDetailsAray['freightprice']));
             $this->db->where($conditionarr)
                 ->update(__DBC_SCHEMATA_ORDER__, $priceArr);
             return true;

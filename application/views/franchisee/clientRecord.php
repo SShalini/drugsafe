@@ -131,7 +131,7 @@
                                   method="post">
                                 <div class=" row">
                                 <div class=" col-md-3 search">
-            <div class="form-group <?php if (!empty($arErrorMessages['szSearchFrRecord']) != '') { ?>has-error<?php } ?>">
+            <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>">
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
                                             onchange="getClientListByFrId(this.value);">
@@ -474,7 +474,7 @@
                               method="post">
 
                             <div class=" col-md-3 clienttypeselect">
-
+                                <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>">
                                 <select class="form-control custom-select" name="szSearchClRecord1"
                                         id="szSearchClientname"
                                         onfocus="remove_formError(this.id,'true')">
@@ -486,6 +486,7 @@
                                     }
                                     ?>
                                 </select>
+                                </div>
                             </div>
                           <div class="col-md-3 ">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">

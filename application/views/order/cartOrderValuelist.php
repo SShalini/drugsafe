@@ -61,6 +61,7 @@
 
                                                 }?>
                               <span class="badge badge-danger"><?php echo $count;?></span>
+                              <a href="cartOrderValuelist.php"></a>
                             </div>
                           </div>
                          

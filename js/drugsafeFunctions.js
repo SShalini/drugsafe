@@ -1411,10 +1411,12 @@ function checkOutOrder(idfranchisee, prodcount) {
         var minqty = $('#min_prod_quantity' + j).val();
         prodname = $('#prod_code' + j).val();
         if (qty < minqty) {
+            
             check = 1;
             break;
         }
     }
+   
     if (check == 1) {
         placeOrderErrorConfirmation(minqty,prodname);
     }
@@ -1530,7 +1532,8 @@ function changeordstatus(ordid, prodcount, status) {
                         ordid: ordid,
                         prodid: prodid,
                         qty: qty,
-                        RemainingQty: RemainingQty
+                        RemainingQty: RemainingQty,
+                        freightPrice : freightPrice
                     }, function (result) {
                         if (result == 'SUCCESS') {
                             check++;

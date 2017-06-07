@@ -104,16 +104,13 @@ margin-bottom: 16px;
      color: #1bbc9b;
      margin-top: 10px;  
      margin-bottom : 1px;
-     text-align: center; 
-     
-     
+     text-align: center;     
 }
 .text_cmntData{
      
      margin-top: 10px;  
      margin-bottom : 1px;
-     text-align: center;   
-     
+     text-align: center;      
 }
 .cmntDetais{
        text-align: right; 
@@ -132,7 +129,7 @@ margin-bottom: 16px;
 padding: 4px 28px;  
 }
 .Text_align{
-  text-align: right;
+text-align: right;
 margin-bottom: 10px;
 }
 .err{color: red}

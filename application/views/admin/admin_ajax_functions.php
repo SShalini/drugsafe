@@ -1688,7 +1688,8 @@ if ($mode == '__VIEW_ORDER_DETAILS_POPUP__') {
                                     $<?php
                                     $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
                                     $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
-                                    echo number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ','); ?>
+                                    echo number_format($freightpriceval, 2, '.', ','); 
+//                                    echo number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ','); ?>
                                 </div>
                             </div>
                                    
@@ -1895,15 +1896,16 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                             $i = 1;
                                             $count = 0;
                                             foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
-                                               
+                                             
                                                 $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
                                                 $ordersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
                                                 $freightPrice = 0.00;
-                                                $readonly = '';
+//                                                $readonly = '';
                                                 if($ordersDetailsAray['freightprice']>0.00){
                                                     $freightPrice = number_format($ordersDetailsAray['freightprice'],2,'.','');
-                                                    $readonly = 'readonly="readonly" style="cursor:not-allowed"';
+//                                                    $readonly = 'readonly="readonly" style="cursor:not-allowed"';
                                                 }
+                                               
                                                  $price = 0.00;
                                                  $TotalDispatched = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
                                                  $TotalReceivedDispatched = $this->Order_Model->getTotalReceivedDispatchedqty ($totalOrdersDetailsData['id']);
@@ -2027,7 +2029,7 @@ if ($mode == '__EDIT_ORDER_DETAILS_POPUP__') {
                                                             Freight Price:
                                                         </div>
                                                         <div class="col-md-6 value">
-                                                            <input id="freightprice" <?php echo $readonly;?> class="form-control" type="number"
+                                                            <input id="freightprice" class="form-control" type="number"
                                                                    step="0.01" min="0.00"
                                                                    value="<?php echo $freightPrice; ?>" name="freightprice"
                                                                    onblur="calTotalPrice()">

@@ -1100,11 +1100,13 @@ if (!empty($totalDispatched)) {
         }
     }
     function dispatchsingleprod(){
+       
         $ordid = $_POST['ordid'];
         $prodid = $_POST['prodid'];
         $qty = $_POST['qty'];
         $RemainingQty = $_POST['RemainingQty'];
-        $dispStat = $this->Order_Model->dispatchsingleprod($ordid,$prodid,$qty);
+        $freightPrice = $_POST['freightPrice'];
+        $dispStat = $this->Order_Model->dispatchsingleprod($ordid,$prodid,$qty,$freightPrice);
         if($dispStat){
             $updatedRemainingQty = $qty-$RemainingQty;
             if($updatedRemainingQty == '0'){
@@ -1131,10 +1133,10 @@ if (!empty($totalDispatched)) {
          $searchAry['szSearch4'] = $this->input->post('startDate');
          $searchAry['szSearch5'] = $this->input->post('endDate');
          $searchAry['szSearch2'] = $this->input->post('orderNo');
-        $count = $this->Admin_Model->getnotification();
-        $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
-        $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
-        $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
+            $count = $this->Admin_Model->getnotification();
+            $validOrdersDetailsAray = $this->Order_Model->getallValidOrderDetails($searchAry);
+            $validOrdersDetailsSearchAray = $this->Order_Model->getallValidOrderDetails();
+            $allFrDetailsSearchAray = $this->Order_Model->getallValidOrderFrId();
         
             $data['validOrdersDetailsAray'] = $validOrdersDetailsAray;
             $data['validOrdersDetailsSearchAray'] = $validOrdersDetailsSearchAray;
