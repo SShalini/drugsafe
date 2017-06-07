@@ -4163,7 +4163,7 @@ if ($mode == '__RECEIVE_ORDER_DETAILS_POPUP__') {
                                     $<?php
                                     $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
                                     $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
-                                    echo number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ','); ?>
+                                    echo number_format($freightpriceval, 2, '.', ','); ?>
                                 </div>
                             </div>
                             <div class="row static-info">

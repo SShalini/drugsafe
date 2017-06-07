@@ -57,7 +57,6 @@ CREATE TABLE IF NOT EXISTS `ds_partial_dispatch_tracking` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 ALTER TABLE `ds_partial_dispatch_tracking` ADD `received` TINYINT(1) NOT NULL DEFAULT '0' ;
-
 ALTER TABLE `ds_sos` ADD `createdBy` INT(6) NOT NULL ;
-
 INSERT INTO `tbl_email_cms` (`id`, `szFriendlyName`, `sectionTitle`, `subject`, `sectionDescription`, `iActive`, `atCreatedOn`, `atUpdatedOn`) VALUES (NULL, 'Order Notification', '__ORDER_NOTIFICATION__', 'Order Notification', ' <br/> <br /> Kind regards,<br /> Drug-Safe Communities.</p>', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+ALTER TABLE `ds_partial_dispatch_tracking` ADD `freightprice` DECIMAL(10,2) NOT NULL AFTER `received`;
