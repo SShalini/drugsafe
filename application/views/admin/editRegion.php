@@ -9,6 +9,10 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
+                        <a href="<?php echo __BASE_URL__;?>/admin/regionManagerList"><?php echo $_POST['editRegion']['regionName']; ?></a>
+                            <i class="fa fa-circle"></i>
+                    </li>
+                    <li>
                         <span class="active">Edit Region</span>
                     </li>
                 </ul>

@@ -11,7 +11,7 @@
                         <i class="fa fa-circle"></i>
                         </li>
                         <li>
-                        <a onclick="#" href="javascript:void(0);"><?php echo $productDataAry['szProductCode'];?></a>
+                        <a href="<?php echo __BASE_URL__;?>/stock_management/modelstockvalue"><?php echo $productDataAry['szProductCode'];?></a>
                         <i class="fa fa-circle"></i>
                         </li>
                         <li>

@@ -19,6 +19,11 @@
                             <i class="icon-equalizer font-red-sunglo"></i>
                             <span class="caption-subject font-red-sunglo bold uppercase">Add Region</span>
                         </div>
+                         <div class="actions">
+                        <a href="<?php echo __BASE_URL__;?>/admin/regionManagerList"
+                                   class=" btn green-meadow">
+                                Back </a>
+                              </div>
                     </div>
                    <div class="portlet-body">
                         <form class="form-horizontal" id="addfranchisee"

@@ -4364,11 +4364,11 @@ if ($mode == '__RECEIVE_ORDER_CONFIRM_DETAILS_POPUP__') {
                 <td>
                     #<?php echo sprintf(__FORMAT_NUMBER__, $validOrdersDetailsData['orderid']); ?>
                 </td>
-
+                  <?php  if($_SESSION['drugsafe_user']['iRole']==1){ ?>
                 <td>
                     <?php echo $franchiseeDetArr1['szName']; ?>
                 </td>
-
+                  <?php } ?>
                 <td>
                      <?php echo date('d M Y', strtotime($validOrdersDetailsData['createdon'])) . ' at ' . date('h:i A', strtotime($validOrdersDetailsData['createdon'])); ?>
                 </td>

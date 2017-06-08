@@ -60,17 +60,7 @@
                          <?php
                     }
                      ?>
-                       <?php
-                     if($_SESSION['drugsafe_user']['iRole']=='2')
-                    {
-                        ?>
-                       <li>
-                           <a href="<?php echo __BASE_URL__;?>/franchisee/clientRecord"><?php echo $franchiseeArr['szName'];?></a>
-                           <i class="fa fa-circle"></i>
-                       </li>
-                        <?php
-                    }
-                    ?>
+                     
                      <?php
                     if($_SESSION['drugsafe_user']['iRole'] == '5'){
                      ?>

@@ -13,8 +13,8 @@
                           //$clientDetailsDataAry = $this->Admin_Model->getUserDetailsByEmailOrId('',$ClientDataAry['clientType']);
                     ;?>
                         <li>
-                            <a onclick="viewClient(<?php echo $franchiseeArr['id']; ?>);"
-                               href="javascript:void(0);"><?php echo $clientDetailsDataAry['szName']; ?></a>
+                            <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord"><?php echo $userDataAry['szName']; ?></a>
+                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
                             <span class="active">Edit Agent/Employee</span>

@@ -9,6 +9,11 @@
                         <i class="fa fa-circle"></i>
                     </li>
                     <li>
+                          <?php  $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('', $idOperationManager);?>
+                        <a onclick="viewFranchisee(<?php echo $idOperationManager?>);" href="javascript:void(0);"><?php echo $franchiseeDetArr['szName'] ;?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
+                    <li>
                         <span class="active">Add Franchisee</span>
                     </li>
                 </ul>
@@ -28,12 +33,12 @@
                             </div>
                         </div>
                     </div>
+                  
                     <div class="portlet-body">
                         <form class="form-horizontal" id="addfranchisee"
                               action="<?= __BASE_URL__ ?>/admin/addFranchisee" name="addfranchisee" method="post">
                             <div class="form-body">
-                                <div
-                                        class="form-group <?php if(form_error('addFranchisee[sztype]')){?>has-error<?php }?>">
+                                <div class="form-group <?php if(form_error('addFranchisee[sztype]')){?>has-error<?php }?>">
                                     <label class="col-md-3 control-label">Franchisee Type</label>
                                     <div class="col-md-5">
                                         <div class="input-group">

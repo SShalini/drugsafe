@@ -41,14 +41,16 @@
                      <?php
                    
                      $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId('',$franchiseeid);
+                    if(($_SESSION['drugsafe_user']['iRole'] == '1') || ($_SESSION['drugsafe_user']['iRole'] == '5')){
                      ?>
                         <li>
-                            <a href="<?php echo __BASE_URL__;?>/franchisee/agentRecord" ><?php echo $franchiseeDetArr['szName'];?></a>
-                            <i class="fa fa-circle"></i>
-                        </li>
+                        <a onclick="viewClient(<?php echo $franchiseeid ;?>);" href="javascript:void(0);"><?php echo $franchiseeDetArr['szName'];?></a>
+                        <i class="fa fa-circle"></i>
+                       </li>
+                    <?php }?>
                          <li>
-                            <a onclick="" href="javascript:void(0);"><?php echo $recordArr['0']['szName'];?></a>
-                            <i class="fa fa-circle"></i>
+                            <a href="<?php echo __BASE_URL__; ?>/franchisee/agentRecord"><?php echo $recordArr['0']['szName']; ?></a>
+                             <i class="fa fa-circle"></i>
                         </li>
                         <li>
                               

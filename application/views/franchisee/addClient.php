@@ -9,6 +9,7 @@
                     </li>
                     <?php
                     if ($franchiseeArr['id']) {
+                    if (($_SESSION['drugsafe_user']['iRole'] == '5')|| ($_SESSION['drugsafe_user']['iRole'] == '1')) {    
                         ?>
                         <li>
                             <a onclick="viewClient(<?php echo $franchiseeArr['id']; ?>);"
@@ -17,7 +18,7 @@
                         </li>
                         <?php
 
-                    }
+                    } }
                     ?>
 
                     <?php
