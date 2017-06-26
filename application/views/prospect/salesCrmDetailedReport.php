@@ -432,7 +432,8 @@
                             echo "Not Found";
                            }
                            else{
-                                if(empty(form_error('szSearch3'))){ 
+                            $searchdate3 = form_error('szSearch3');
+                                if(empty($searchdate3)){
                                   echo "Not Found";   
                                 }
                            }

@@ -561,7 +561,7 @@ EOD;
         ob_end_clean();
         $pdf->Output('view_order_details.pdf', 'I');
     }
-   public function pdforderdetails()
+        public function pdforderdetails()
     {
        ob_start();
         $this->load->library('Pdf');
@@ -579,7 +579,7 @@ EOD;
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
         $pdf->SetFont('times', '', 12);
         $pdf->AddPage('L');
-   
+        //$pdf->writeCell();
         $idOrder = $this->session->userdata('idOrder');
         $flag = $this->session->userdata('flag');
         $OrdersDetailsAray = $this->Order_Model->getOrderByOrderId($idOrder);
@@ -593,13 +593,13 @@ EOD;
             $status = Canceled;
         }
         
-     $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));
+      $orderVal =     date('d M Y',strtotime($OrdersDetailsAray['createdon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['createdon']));
       $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));
  $html = '<div class="wraper">
         <table cellpadding="5px">
        
     <tr>
-        <td rowspan="4" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
+        <td rowspan="5" align="left"><a style="text-align:left;  margin-bottom:15px;" href="' . __BASE_URL__ . '" ><img style="width:145px" src="' . __BASE_URL__ . '/images/logo.png" alt="logo" class="logo-default" /> </a></td>
     </tr>
 </table>
 <br />
@@ -633,46 +633,71 @@ $html .= '
 </table>
 <br />
 <h3 style="color:black">Products Info </h3>
-            <div>
-         
-                        <div class= "table-responsive" >
-                            <table border="1" cellpadding="5">
-                                    <tr>
+            <div>       
+                <div class= "table-responsive" >
+                    ';
+	    $tbl = <<<EOD
+$html
+EOD;
+	    $pdf->writeHTML($tbl, true, false, false, false, '');
+       $totalDispatched = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
+        if (!empty($totalDispatched)) {
+            $i = 0;
+            foreach ($totalDispatched as $totalDispatchedData) {
+                $html1 ='';
+                $html1 .='<table border="1" cellpadding="5">
+                <tr nobr="true" bgcolor="#4deecd"><td colspan="5"><h2><font color="black">Dispatched On: '.date('d/m/Y h:i:s a',strtotime($totalDispatchedData['dispatch_date'])).'</font></h2></td></tr>
+                                    <tr  nobr="true">
                                         <th><b>Product Code</b> </th>
                                         <th> <b>Product Description</b> </th>
                                         <th> <b>Ordered Quantity</b> </th>
                                         <th> <b>Dispatched</b> </th>
                                         <th> <b>Notes</b> </th>
                                     </tr>';
-        $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
-        if ($totalOrdersDetailsAray) {
-            $i = 0;
-            foreach ($totalOrdersDetailsAray as $totalOrdersDetailsData) {
-              
-                $productDataArr = $this->Inventory_Model->getProductDetailsById($totalOrdersDetailsData['productid']);
-                $totalQtyDispatchAray = $this->Order_Model->getTotalDispatchedByOrderDetailId($totalOrdersDetailsData['id']);
-                 $backorder = $totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched'];
-                    $html .= '<tr>
+                $DispatchedOrdDetArr = $this->Order_Model->getDispatchedOrderDetByDispatchDate($totalDispatchedData['dispatch_date']);
+                if(!empty($DispatchedOrdDetArr)){
+                   
+                    $i=0;
+                    foreach ($DispatchedOrdDetArr as $DispatchOrderDet){ 
+                        $totalQtyDispatchAray = $this->Order_Model->getTotalDispatchedByOrderDetailId($DispatchOrderDet['order_detail_id']);
+                        $productDataArr = $this->Inventory_Model->getProductDetailsById($DispatchOrderDet['productid']);
+//                        $previousBackOrder = $DispatchOrderDet['quantity']- $totalQtyDispatchAray['total_dispatched'];
+//                      if($backorder == ''){
+//                          $backorder = $DispatchOrderDet['quantity']- $totalQtyDispatchAray['total_dispatched'];
+//                      }
+//                      else{
+//                        $backorder = $backorder + $DispatchOrderDet['dispatch_qty'];  
+//                      }
+//                         $backorder = $DispatchOrderDet['quantity']- $totalQtyDispatchAray['total_dispatched'];
+                        $html1 .= '<tr nobr="true">
                                             <td> ' . $productDataArr['szProductCode'] . ' </td>
                                             <td> ' . $productDataArr['szProductDiscription'] . '</td>
-                                            <td>'.$totalOrdersDetailsData['quantity'].'</td>
-                                            <td> ' . $totalQtyDispatchAray['total_dispatched'] . ' </td>
-                                             <td> ' . ($totalOrdersDetailsData['quantity']-$totalQtyDispatchAray['total_dispatched']>0?'Back Ordered - '.$backorder:'--') . ' </td>
+                                            <td>'.   $DispatchOrderDet['quantity'].'</td>
+                                            <td> ' . $DispatchOrderDet['dispatch_qty'] . ' </td>
+                                            <td> ' . ($DispatchOrderDet['back_order'] >0?'Back Ordered - '.$DispatchOrderDet['back_order'] :'--') . ' </td> 
                                         </tr>';
+                        $i++;
+                    }
+                }
+                $html1 .= '
+                </table>';
+	            $tbl = <<<EOD
+                $html1
+EOD;
+	            $pdf->writeHTML($tbl, true, false, false, false, '');
             }
         }
-        $i++;
-        $html .= '
-                            </table>
+        $html2 = '</div>
                         </div>
                       
                         ';
-        $pdf->writeHTML($html, true, false, true, false, '');
-        /*error_reporting(E_ALL);
-        $this->session->unset_userdata('idOrder');
-        $this->session->unset_userdata('flag');*/
+	    $tbl = <<<EOD
+                $html2
+EOD;
+	$pdf->writeHTML($tbl, true, false, true, false, '');
+        error_reporting(E_ALL);
         ob_end_clean();
-        $pdf->Output('view_order_details.pdf', 'I');
+       $pdf->Output('view_order_details.pdf', 'I');
     }
     function View_excel_order_details_data()
         {
@@ -1106,7 +1131,7 @@ if (!empty($totalDispatched)) {
         $qty = $_POST['qty'];
         $RemainingQty = $_POST['RemainingQty'];
         $freightPrice = $_POST['freightPrice'];
-        $dispStat = $this->Order_Model->dispatchsingleprod($ordid,$prodid,$qty,$freightPrice);
+        $dispStat = $this->Order_Model->dispatchsingleprod($ordid,$prodid,$qty,$freightPrice,$RemainingQty);
         if($dispStat){
             $updatedRemainingQty = $qty-$RemainingQty;
             if($updatedRemainingQty == '0'){

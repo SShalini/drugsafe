@@ -797,10 +797,11 @@ class Order_Model extends Error_Model {
             }
         }
 
-      function dispatchsingleprod($ordid,$prodid,$qty,$freightPrice){
-     
+      function dispatchsingleprod($ordid,$prodid,$qty,$freightPrice,$RemainingQty){
+          
+     $back_order = ($RemainingQty)-($qty);
             $query = $this->db->select('id')
-                ->where(array('orderid' => (int)$ordid,'productid'=>$prodid,'dispatched' => 0))
+             ->where(array('orderid' => (int)$ordid,'productid'=>$prodid,'dispatched' => 0))
             ->get(__DBC_SCHEMATA_ORDER_DETAILS__);
           if ($query->num_rows() > 0) {
               $result = $query->result_array();
@@ -808,6 +809,7 @@ class Order_Model extends Error_Model {
                   $dataAry = array(
                       'order_detail_id'=> (int)$result[0]['id'],
                       'dispatch_qty'=> (int)$qty,
+                      'back_order'=> (int)$back_order,
                       'freightprice'=> $freightPrice,
                       'dispatch_date' => date('Y-m-d H:i:s')
                   );
@@ -1164,7 +1166,7 @@ class Order_Model extends Error_Model {
 
     function getTotalDispatchedByOrderDetailId($orderDetailId){
         $query = $this->db->select('SUM(dispatch_qty) as total_dispatched')
-            ->where('order_detail_id',(int)$orderDetailId)
+         ->where('order_detail_id',(int)$orderDetailId)
         ->get(__DBC_SCHEMATA_PARTIAL_DISPATCH__);
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -1217,6 +1219,7 @@ class Order_Model extends Error_Model {
             ->from(__DBC_SCHEMATA_PARTIAL_DISPATCH__ . ' as part')
             ->join(__DBC_SCHEMATA_ORDER_DETAILS__ . ' as orddet', 'orddet.id = part.order_detail_id')
             ->where($conditionStr)
+            ->order_by(" part.id","desc")
             ->group_by('part.dispatch_date')
             ->get();
         if ($query->num_rows() > 0) {
@@ -1229,10 +1232,11 @@ class Order_Model extends Error_Model {
 
     function getDispatchedOrderDetByDispatchDate($dispatchDate,$orderid=0){
         $whereStr = 'part.dispatch_date = "'.$dispatchDate.'"'.($orderid>0?' AND orddet.orderid = '.(int)$orderid:'');
-        $query = $this->db->select('part.dispatch_date, part.dispatch_qty, orddet.productid, orddet.quantity, orddet.orderid, part.id')
+        $query = $this->db->select('part.dispatch_date, part.dispatch_qty, orddet.productid, part.freightprice, orddet.quantity, orddet.orderid, part.id ,orddet.id as order_detail_id,part.back_order')
             ->from(__DBC_SCHEMATA_PARTIAL_DISPATCH__ . ' as part')
             ->join(__DBC_SCHEMATA_ORDER_DETAILS__ . ' as orddet', 'orddet.id = part.order_detail_id')
             ->where($whereStr)
+            ->order_by(" part.id","desc")
             ->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
