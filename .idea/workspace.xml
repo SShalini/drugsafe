@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e3c04da-66fa-4690-acd3-a9a0f242329c" name="Default" comment="Docket changes done.">
+    <list default="true" id="9e3c04da-66fa-4690-acd3-a9a0f242329c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Order_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Order_Model.php" afterPath="$PROJECT_DIR$/application/models/Order_Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/prospect/salesCrmDetailedReport.php" afterPath="$PROJECT_DIR$/application/views/prospect/salesCrmDetailedReport.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -53,8 +51,8 @@
       <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="398">
-              <caret line="1888" column="40" lean-forward="true" selection-start-line="1888" selection-start-column="40" selection-end-line="1888" selection-end-column="40" />
+            <state relative-caret-position="4488">
+              <caret line="1888" column="40" lean-forward="false" selection-start-line="1888" selection-start-column="40" selection-end-line="1888" selection-end-column="40" />
               <folding>
                 <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
                 <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -105,11 +103,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Order_Model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Order_Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="922" column="0" lean-forward="false" selection-start-line="922" selection-start-column="0" selection-end-line="922" selection-end-column="0" />
+            <state relative-caret-position="268">
+              <caret line="978" column="43" lean-forward="false" selection-start-line="978" selection-start-column="43" selection-end-line="978" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Order_Controller.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="700" column="5" lean-forward="true" selection-start-line="700" selection-start-column="5" selection-end-line="700" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -221,8 +229,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="p" />
         <option value="Prashant Singh &lt;prashant12it@gmail.com&gt;" />
+        <option value="p" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -272,7 +280,6 @@
         <option value="$PROJECT_DIR$/application/views/order/viewOrderDetails.php" />
         <option value="$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/clientRecord.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
         <option value="$PROJECT_DIR$/application/models/Order_Model.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/clientList.php" />
         <option value="$PROJECT_DIR$/application/views/reporting/viewIndustryReportChart.php" />
@@ -282,6 +289,7 @@
         <option value="$PROJECT_DIR$/application/views/reporting/viewRevenueSummeryClient.php" />
         <option value="$PROJECT_DIR$/application/views/formManagement/sos-coc-formdetails.php" />
         <option value="$PROJECT_DIR$/application/views/prospect/salesCrmDetailedReport.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
       </list>
     </option>
   </component>
@@ -312,8 +320,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -626,7 +634,8 @@
       <workItem from="1496906959173" duration="1492000" />
       <workItem from="1497255228794" duration="754000" />
       <workItem from="1497931166382" duration="5025000" />
-      <workItem from="1498452314589" duration="843000" />
+      <workItem from="1498452314589" duration="1578000" />
+      <workItem from="1498456819498" duration="106000" />
     </task>
     <task id="LOCAL-00001" summary="Lab Advice Form module added.">
       <created>1493122109770</created>
@@ -705,26 +714,34 @@
       <option name="project" value="LOCAL" />
       <updated>1496223592066</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Docket changes done.">
+      <created>1498453230973</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1498453230973</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253252000" />
+    <option name="totallyTimeSpent" value="254093000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="1370" height="735" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2870229" sideWeight="0.4942717" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29160306" sideWeight="0.4942717" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5060698" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.51495016" sideWeight="0.4939302" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51495016" sideWeight="0.4939302" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22534142" sideWeight="0.5057283" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22534142" sideWeight="0.5057283" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -803,7 +820,8 @@
     <MESSAGE value="18/5/2017 Changes done" />
     <MESSAGE value="19/5/2017 Changes done except freight price change" />
     <MESSAGE value="bugs resolved" />
-    <option name="LAST_COMMIT_MESSAGE" value="bugs resolved" />
+    <MESSAGE value="Docket changes done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Docket changes done." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1085,7 +1103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2958">
           <caret line="174" column="25" lean-forward="false" selection-start-line="174" selection-start-column="25" selection-end-line="175" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,8 +1197,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="1888" column="40" lean-forward="true" selection-start-line="1888" selection-start-column="40" selection-end-line="1888" selection-end-column="40" />
+        <state relative-caret-position="4488">
+          <caret line="1888" column="40" lean-forward="false" selection-start-line="1888" selection-start-column="40" selection-end-line="1888" selection-end-column="40" />
           <folding>
             <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -1231,18 +1248,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
+    <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="748" column="8" lean-forward="true" selection-start-line="748" selection-start-column="8" selection-end-line="748" selection-end-column="8" />
+        <state relative-caret-position="268">
+          <caret line="978" column="43" lean-forward="false" selection-start-line="978" selection-start-column="43" selection-end-line="978" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="922" column="0" lean-forward="false" selection-start-line="922" selection-start-column="0" selection-end-line="922" selection-end-column="0" />
+        <state relative-caret-position="204">
+          <caret line="700" column="5" lean-forward="true" selection-start-line="700" selection-start-column="5" selection-end-line="700" selection-end-column="5" />
           <folding />
         </state>
       </provider>

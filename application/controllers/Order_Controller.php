@@ -567,9 +567,9 @@ EOD;
         $this->load->library('Pdf');
         $pdf = new Pdf('L', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetTitle('Drug-safe Order Details');
+        $pdf->SetTitle('Drug-safe Delivery Docket');
         $pdf->SetAuthor('Drug-safe');
-        $pdf->SetSubject('Order Details Report PDF');
+        $pdf->SetSubject(' Delivery Docket PDF');
         $pdf->SetMargins(PDF_MARGIN_LEFT - 10, PDF_MARGIN_TOP - 18, PDF_MARGIN_RIGHT - 10);
         $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
         $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
@@ -697,7 +697,7 @@ EOD;
 	$pdf->writeHTML($tbl, true, false, true, false, '');
         error_reporting(E_ALL);
         ob_end_clean();
-       $pdf->Output('view_order_details.pdf', 'I');
+       $pdf->Output('view_delivery_docket.pdf', 'I');
     }
     function View_excel_order_details_data()
         {
