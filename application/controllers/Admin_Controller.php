@@ -286,7 +286,7 @@ class Admin_Controller extends CI_Controller
         $this->load->view('layout/admin_footer');
     }
     function operationManagerList()
-    {
+    {   
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
