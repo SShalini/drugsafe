@@ -50,10 +50,10 @@
                     </li>
                 </ul>
                 
-                <div class="portlet light bordered about-text" id="user_info">
+        <div class="portlet light bordered about-text" id="user_info">
         <div class="portlet-title">
             <div class="caption">
-                <i class="icon-equalizer font-red-sunglo"></i>
+                <i class="icon-equalizer font-red-sunglo equalizer"></i>
                 <span class="caption-subject font-red-sunglo bold uppercase">
                  
                     <?php 

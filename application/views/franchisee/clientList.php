@@ -234,8 +234,9 @@
                                           <?php
                                           foreach($clientlistArr as $clientIdList)
                                           {
-                                              $selected = ($clientIdList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
-                                              echo '<option value="'.$clientIdList['id'].'"' . $selected . ' >'.$clientIdList['szName'].'</option>';
+                                               $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientIdList['id']);
+                                               $selected = ($clientIdList['id'] == $_POST['szSearchClRecord2'] ? 'selected="selected"' : '');
+                                              echo '<option value="'.$clientIdList['id'].'"' . $selected . ' >' .$franchiseecode['userCode'].'-'. $clientIdList['szName'].'</option>';
                                           }
                                           ?>
                                       </select>

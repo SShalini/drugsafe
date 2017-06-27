@@ -124,6 +124,7 @@
                     <?php } ?>
                     <?php
                     if (($_SESSION['drugsafe_user']['iRole'] == '5')||($_SESSION['drugsafe_user']['iRole'] == '1')) {
+                         
                         ?>
                        
                             <form class="search-bar" id="szSearchClientRecord"
@@ -131,7 +132,7 @@
                                   method="post">
                                 <div class=" row">
                                 <div class=" col-md-3 search">
-            <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>">
+                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearchClRecord2']) != '') { ?>has-error<?php } ?>">
                                     <select class="form-control custom-select" name="szSearchClRecord2"
                                             id="szSearchname" onblur="remove_formError(this.id,'true')"
                                             onchange="getClientListByFrId(this.value);">
@@ -142,7 +143,7 @@
                                            $searchOptionArr =$this->Admin_Model->viewFranchiseeList();
                                             }
                                             else{
-                                                      $operationManagerId = $_SESSION['drugsafe_user']['id'];
+                                                     $operationManagerId = $_SESSION['drugsafe_user']['id'];
                                                      $searchOptionArr =$this->Admin_Model->viewFranchiseeList(false,$operationManagerId);
                                             }
                                         foreach ($searchOptionArr as $searchOptionList) {
@@ -162,8 +163,9 @@
                                             <option value="">Client Name</option>
                                             <?php
                                             foreach ($clientlistArr as $clientList) {
-                                                $selected = ($clientList['szName'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                                echo '<option value="' . $clientList['szName'] . '"' . $selected . ' >' . $clientList['szName'] . '</option>';
+                                            $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientList['id']);
+                                                $selected = ($clientList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                                echo '<option value="' . $clientList['id'] . '"' . $selected . ' >' .$franchiseecode['userCode'].'-'. $clientList['szName'] . '</option>';
                                             }
                                             ?>
                                         </select>
@@ -481,8 +483,9 @@
                                     <option value="">Client Name</option>
                                     <?php
                                     foreach ($clientlistArr as $clientIdList) {
-                                        $selected = ($clientIdList['szName'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
-                                        echo '<option value="' . $clientIdList['szName'] . '" ' . $selected . ' >' . $clientIdList['szName'] . '</option>';
+                                        $franchiseecode = $this->Franchisee_Model->getusercodebyuserid($clientIdList['id']);
+                                                $selected = ($clientIdList['id'] == $_POST['szSearchClRecord1'] ? 'selected="selected"' : '');
+                                                echo '<option value="' . $clientIdList['id'] . '"' . $selected . ' >' .$franchiseecode['userCode'].'-'. $clientIdList['szName'] . '</option>';
                                     }
                                     ?>
                                 </select>

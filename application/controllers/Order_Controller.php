@@ -458,7 +458,7 @@ class Order_Controller extends CI_Controller
       $cancelVal =     date('d M Y',strtotime($OrdersDetailsAray['canceledon'])) . ' at '.date('h:i A',strtotime($OrdersDetailsAray['canceledon']));
         $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder); 
       $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
-        $totalFreightPrice = number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ',');
+        $totalFreightPrice = number_format($freightpriceval, 2, '.', ',');
       $html = '<div class="wraper">
         <table cellpadding="5px">
        
@@ -758,7 +758,7 @@ EOD;
      $totalOrdersDetailsAray = $this->Order_Model->getOrderDetailsByOrderId($idOrder);
         $dispatchDatesArr = $this->Order_Model->getTotalOrderDispatchDates($idOrder);
         $freightpriceval = number_format($OrdersDetailsAray['freightprice'], 2, '.', '');
-        $totalFreightPrice = number_format($freightpriceval, 2, '.', ',').' x '.count($dispatchDatesArr).' = $'.number_format(($freightpriceval*count($dispatchDatesArr)), 2, '.', ',');
+        $totalFreightPrice = number_format($freightpriceval, 2, '.', ',');
         $this->excel->getActiveSheet()->setTitle($filename);
         $this->excel->getActiveSheet()->setCellValue('C1', 'ORDER DETAILS');
         $this->excel->getActiveSheet()->getStyle('C1')->getFont()->setSize(13);

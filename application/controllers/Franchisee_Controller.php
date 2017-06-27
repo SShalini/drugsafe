@@ -644,7 +644,7 @@ class Franchisee_Controller extends CI_Controller
            $idFr = $_SESSION['drugsafe_user']['id'];  
         }
       if(isset($_POST['szSearchClRecord1']) && !empty($_POST['szSearchClRecord1'])){
-            $clientName = $_POST['szSearchClRecord1'];
+            $clientId = $_POST['szSearchClRecord1'];
         }
          if(isset($_POST['szSearch4']) && !empty($_POST['szSearch4'])){
               $fromdate = $this->Webservices_Model->formatdate($_POST['szSearch4']);
@@ -653,13 +653,13 @@ class Franchisee_Controller extends CI_Controller
              $todate = $this->Webservices_Model->formatdate($_POST['szSearch5']);
         }
          $config['base_url'] = __BASE_URL__ . "/franchisee/clientRecord/";
-         $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3),$fromdate,$todate));
+         $config['total_rows'] = count($this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientId,$config['per_page'],$this->uri->segment(3),$fromdate,$todate));
          $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
            
             
         $this->pagination->initialize($config);
         
-        $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientName,$config['per_page'],$this->uri->segment(3),$fromdate,$todate);
+        $clientAray = $this->Franchisee_Model->getAllClientDetails(true,$idFr,$clientId,$config['per_page'],$this->uri->segment(3),$fromdate,$todate);
       
         /*$AssignCorpuserDetailsArr = $this->Webservices_Model->getcorpclientdetails($idFr);
         $CorpuserDetailsArr = array();

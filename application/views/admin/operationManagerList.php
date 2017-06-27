@@ -66,7 +66,7 @@
 
                                  <div class="search col-md-3 clienttypeselect">
                                         <div class="form-group <?php if (!empty($arErrorMessages['szSearch2']) != '') { ?>has-error<?php } ?>">
-                                           <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
+                                          <select class="form-control custom-select" name="szSearch2" id="szSearchname" onfocus="remove_formError(this.id,'true')">
                                           <option value="">Operation Manager Name</option>
                                           <?php
                                           foreach($allOperationManager as $operationManagerIdList)
