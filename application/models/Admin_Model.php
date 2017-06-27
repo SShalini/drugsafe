@@ -548,7 +548,6 @@ class Admin_Model extends Error_Model
     }
  public function viewDistinctOperationManagerList()
     {
-       
         $this->db->select('szName');
          $this->db->distinct('szName');
             $whereAry = array('isDeleted=' => '0', 'iRole' => '5');
