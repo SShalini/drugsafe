@@ -328,7 +328,7 @@
                                                                     <?php if ($validOrdersDetailsData['status'] == 2) { ?>
                                                                         <a class="btn btn-circle btn-icon-only btn-default"
                                                                            title="View Pdf"
-                                                                           onclick="view_order_details_pdf(<?php echo $validOrdersDetailsData['orderid']; ?>);"
+                                                                           onclick="view_order_details_pdf(<?php echo $validOrdersDetailsData['orderid']; ?>,'3');"
                                                                            href="javascript:void(0);">
                                                                             <i class="fa fa-file-pdf-o"></i>
                                                                         </a>
