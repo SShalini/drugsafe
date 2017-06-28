@@ -15,14 +15,14 @@ class Inventory_Model extends Error_Model {
             $dtExpiredOn = date("Y-m-d", strtotime($expiredOn));
             $dataAry = array(
                                 'szProductImage' => $_POST['productData']['szProductImage'],
-                                'szProductCode' => $_POST['productData']['szProductCode'],
-                                'szProductDiscription'=>$_POST['productData']['szProductDiscription'],
-                                'supplier' => $_POST['productData']['supplier'],
-                                'min_ord_qty' => $_POST['productData']['min_ord_qty'],
-                                'model_stk_val' => $_POST['productData']['model_stk_val'],
-                                'szProductCost' => $_POST['productData']['szProductCost'],
-                                'szProductCategory' => $_POST['productData']['szProductCategory'],
-                                'szAvailableQuantity' => $_POST['productData']['szAvailableQuantity'],
+                                'szProductCode' => trim($_POST['productData']['szProductCode']),
+                                'szProductDiscription'=>trim($_POST['productData']['szProductDiscription']),
+                                'supplier' => trim($_POST['productData']['supplier']),
+                                'min_ord_qty' => trim($_POST['productData']['min_ord_qty']),
+                                'model_stk_val' => trim($_POST['productData']['model_stk_val']),
+                                'szProductCost' => trim($_POST['productData']['szProductCost']),
+                                'szProductCategory' => trim($_POST['productData']['szProductCategory']),
+                                'szAvailableQuantity' => trim($_POST['productData']['szAvailableQuantity']),
 				'dtCreatedOn' => $date,
                                 'dtExpiredOn' => $dtExpiredOn
                             );
@@ -64,15 +64,15 @@ class Inventory_Model extends Error_Model {
             $dtExpiredOn = date("Y-m-d", strtotime($expiredOn));
             $dataAry = array(                                  
                                 'szProductImage' => $_POST['productData']['szProductImage'],
-                                'szProductCode' => $_POST['productData']['szProductCode'],
-                                'szProductDiscription'=>$_POST['productData']['szProductDiscription'],
-                                'supplier' => $_POST['productData']['supplier'],
-                                'min_ord_qty' => $_POST['productData']['min_ord_qty'],
-                                'model_stk_val' => $_POST['productData']['model_stk_val'],
-                                'szProductCost' => $_POST['productData']['szProductCost'],
-                                'szAvailableQuantity' => $_POST['productData']['szAvailableQuantity'],
+                                'szProductCode' => trim($_POST['productData']['szProductCode']),
+                                'szProductDiscription'=>trim($_POST['productData']['szProductDiscription']),
+                                'supplier' => trim($_POST['productData']['supplier']),
+                                'min_ord_qty' => trim($_POST['productData']['min_ord_qty']),
+                                'model_stk_val' => trim($_POST['productData']['model_stk_val']),
+                                'szProductCost' => trim($_POST['productData']['szProductCost']),
+                                'szAvailableQuantity' => trim($_POST['productData']['szAvailableQuantity']),
                                 'dtExpiredOn' => $dtExpiredOn,
-                                'szProductCategory' => $_POST['productData']['szProductCategory'],
+                                'szProductCategory' => trim($_POST['productData']['szProductCategory']),
                             );
                 $this->db->where('id',(int)$id);
                 $queyUpdate=$this->db->update(__DBC_SCHEMATA_PRODUCT__, $dataAry);

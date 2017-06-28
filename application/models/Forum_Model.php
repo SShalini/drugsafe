@@ -138,8 +138,8 @@ class Forum_Model extends Error_Model {
         {		
             $date = date('Y-m-d');
             $dataAry = array(
-                                'szName' => $_POST['forumData']['szCategoryName'],
-                                'szDiscription' => $_POST['forumData']['szCategoryDiscription'],
+                                'szName' => trim($_POST['forumData']['szCategoryName']),
+                                'szDiscription' => trim($_POST['forumData']['szCategoryDiscription']),
 				'dtCreatedOn' => $date,
                             );
 	    $this->db->insert(__DBC_SCHEMATA_FORUM_CATEGORY__, $dataAry);
@@ -152,14 +152,15 @@ class Forum_Model extends Error_Model {
             {
                 return false;
              }
-        } function insertForumData($data)
+        } 
+        function insertForumData($data)
         {		
              $date = date('Y-m-d H:i:s');
             $dataAry = array(
-                                'szForumTitle' => $data['szForumTitle'],
+                                'szForumTitle' => trim($data['szForumTitle']),
                                 'idCategory' => $data['idCategory'],
-                                'szForumDiscription' => $data['szForumDiscription'],
-				'szForumLongDiscription' => $data['szForumLongDiscription'],
+                                'szForumDiscription' => trim($data['szForumDiscription']),
+				'szForumLongDiscription' => trim($data['szForumLongDiscription']),
                                 'szforumImage' => $data['szforumImage'],
                                 'dtCreatedOn' => $date,                
                             );
@@ -311,8 +312,8 @@ class Forum_Model extends Error_Model {
         {
             $date = date('Y-m-d');
             $dataAry = array(                                  
-                                'szName' => $_POST['forumData']['szName'],
-                                'szDiscription' => $_POST['forumData']['szDiscription'],
+                                'szName' => trim($_POST['forumData']['szName']),
+                                'szDiscription' => trim($_POST['forumData']['szDiscription']),
                                 'dtUpdatedOn'=>$date
                               
                             );
@@ -327,13 +328,13 @@ class Forum_Model extends Error_Model {
                     return false;
                 }
             } 
-             public function UpdateForum($data,$id)
+    public function UpdateForum($data,$id)
         {
            $date = date('Y-m-d H:i:s');
             $dataAry = array(                                  
-                                 'szForumTitle' => $data['szForumTitle'],
-                                'szForumDiscription' => $data['szForumDiscription'],
-				'szForumLongDiscription' => $data['szForumLongDiscription'],
+                                'szForumTitle' => trim($data['szForumTitle']),
+                                'szForumDiscription' => trim($data['szForumDiscription']),
+				'szForumLongDiscription' => trim($data['szForumLongDiscription']),
                                 'szforumImage' => $data['szforumImage'],
                                 'dtCreatedOn' => $date,
                                 'idCategory' => $data['idCategory'],
@@ -351,14 +352,14 @@ class Forum_Model extends Error_Model {
                 }
             }
               
-        function insertTopic($data,$idForum)
+    function insertTopic($data,$idForum)
         {
              $date = date('Y-m-d H:i:s');
              if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                  
                  $dataAry = array(
-                                'szTopicTitle' =>$data['szTopicTitle'],
-                                'szTopicDescreption' =>$data['szTopicDiscription'],
+                                'szTopicTitle' =>trim($data['szTopicTitle']),
+                                'szTopicDescreption' =>trim($data['szTopicDiscription']),
                                 'isApproved'  => '1',
                                 'isAdminApproved' => '1',
 				'dtCreatedOn' => $date,
@@ -369,8 +370,8 @@ class Forum_Model extends Error_Model {
            
               } else{
                               $dataAry = array(
-                                'szTopicTitle' =>$data['szTopicTitle'],
-                                'szTopicDescreption' =>$data['szTopicDiscription'],
+                                'szTopicTitle' =>trim($data['szTopicTitle']),
+                                'szTopicDescreption' =>trim($data['szTopicDiscription']),
 				'dtCreatedOn' => $date,
                                 'isApproved'  => '0',
                                 'isAdminApproved' => '0',
@@ -391,7 +392,7 @@ class Forum_Model extends Error_Model {
                 return false;
              }
         } 
-   public function viewTopicList($idForum,$idTopic='',$flag='0',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
+    public function viewTopicList($idForum,$idTopic='',$flag='0',$limit = __PAGINATION_RECORD_LIMIT__,$offset = 0)
         {
            
             if($flag==1){
@@ -416,13 +417,13 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }
-   function insertComents($idTopic)
+    function insertComents($idTopic)
         {
         $date = date('Y-m-d H:i:s');
          if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                  
                    $dataAry = array(
-                                'szCmnt' => $_POST['replyData']['szForumLongDiscription'],
+                                'szCmnt' => trim($_POST['replyData']['szForumLongDiscription']),
                                 'idTopic' => $idTopic,
 				'cmntDate' => $date,
                                 'idCmnters' => $_SESSION['drugsafe_user']['id']
@@ -431,7 +432,7 @@ class Forum_Model extends Error_Model {
            
               } else{
                               $dataAry = array(
-                                'szCmnt' => $_POST['replyData']['szForumLongDiscription'],
+                                'szCmnt' => trim($_POST['replyData']['szForumLongDiscription']),
                                 'idTopic' => $idTopic,
 				'cmntDate' => $date,
                                 'idCmnters' => $_SESSION['drugsafe_user']['id'],
@@ -449,7 +450,7 @@ class Forum_Model extends Error_Model {
                 return false;
              }
         }   
-         public function getAllCommentsByCmntId($idCmnt)
+    public function getAllCommentsByCmntId($idCmnt)
         {
               
            
@@ -472,7 +473,7 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }
-        public function getAllCommentsByTopicId($idTopic='',$flag='')
+    public function getAllCommentsByTopicId($idTopic='',$flag='')
         {
               
             if($flag==1){
@@ -499,14 +500,14 @@ class Forum_Model extends Error_Model {
             }
         }
         
-            function insertReply($idCmnt,$Reply)
+    function insertReply($idCmnt,$Reply)
         {		
             $date = date('Y-m-d H:i:s');
              if ($_SESSION['drugsafe_user']['iRole'] == '1') {
                  
                   $dataAry = array(
                                 'idCmnt' => $idCmnt,
-                                'szReply' => $Reply,
+                                'szReply' => trim($Reply),
 				'dtReplyOn' => $date,
                                 'idReplier' =>$_SESSION['drugsafe_user']['id'],
                                 
@@ -515,7 +516,7 @@ class Forum_Model extends Error_Model {
               } else{
                                $dataAry = array(
                                 'idCmnt' => $idCmnt,
-                                'szReply' => $Reply,
+                                'szReply' =>trim($Reply),
 				'dtReplyOn' => $date,
                                 'idReplier' =>$_SESSION['drugsafe_user']['id'],
                                 
@@ -533,7 +534,7 @@ class Forum_Model extends Error_Model {
                 return false;
              }
             }   
-             public function getAllReplyByCmntsId($id,$flag='0')
+    public function getAllReplyByCmntsId($id,$flag='0')
         {
                  if($flag==1){
                    $whereAry = array('idCmnt='=> $id);
@@ -564,7 +565,7 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }
-          public function deleteReply($idReply)
+    public function deleteReply($idReply)
 	{
 		
                 $this->db->where('id', $idReply);
@@ -577,7 +578,7 @@ class Forum_Model extends Error_Model {
                     return false;
                 }	
 	}
-         public function deleteCmnt($idCmnt)
+    public function deleteCmnt($idCmnt)
 	{   
           $replyDataArr = $this->Forum_Model->getAllReplyByCmntsId($idCmnt,1); 
          
@@ -598,8 +599,8 @@ class Forum_Model extends Error_Model {
                     return false;
                 }	
 	}
-        public function getAllReply($idReply='0',$flag='0')
-        {
+    public function getAllReply($idReply='0',$flag='0')
+    {
             if($flag==1){
                 $whereAry = array('id='=> $idReply);  
                  $this->db->where($whereAry); 
@@ -647,7 +648,7 @@ class Forum_Model extends Error_Model {
 //        }
 //
 //    }
-     public function updateTopicApproval($idTopic)
+    public function updateTopicApproval($idTopic)
     {
 
         $dataAry = array(
@@ -669,11 +670,11 @@ class Forum_Model extends Error_Model {
         }
 
     }
-     public function updateComment($idComment,$val)
+    public function updateComment($idComment,$val)
     {
 
         $dataAry = array(
-            'szCmnt' => $val,
+            'szCmnt' => trim($val),
         );
 
         $whereAry = array('id ' => (int)$idComment);
@@ -690,7 +691,7 @@ class Forum_Model extends Error_Model {
         }
 
     }
-     public function updateTopicUnapproval($idTopic)
+    public function updateTopicUnapproval($idTopic)
     {
 
         $dataAry = array(
@@ -713,35 +714,35 @@ class Forum_Model extends Error_Model {
 
     }
     
-      public function updateReplyUnapproval($idReply)
+    public function updateReplyUnapproval($idReply)
     {
 
-        $dataAry = array(
-            'isAdminApproved' => '0',
-            'isApproved' => '1'
-        );
+      $dataAry = array(
+          'isAdminApproved' => '0',
+          'isApproved' => '1'
+      );
 
-        $whereAry = array('id ' => (int)$idReply);
+      $whereAry = array('id ' => (int)$idReply);
 
-        $this->db->where($whereAry);
+      $this->db->where($whereAry);
 
-        $this->db->update(__DBC_SCHEMATA_FORUM_REPLY__, $dataAry);
+      $this->db->update(__DBC_SCHEMATA_FORUM_REPLY__, $dataAry);
 
 
-        if ($this->db->affected_rows() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+      if ($this->db->affected_rows() > 0) {
+          return true;
+      } else {
+          return false;
+      }
 
     }
     
     
-      public function updateReply($idReply,$val)
+    public function updateReply($idReply,$val)
     {
 
         $dataAry = array(
-            'szReply' => $val,
+            'szReply' => trim($val),
         );
 
         $whereAry = array('id ' => (int)$idReply);
@@ -785,45 +786,45 @@ class Forum_Model extends Error_Model {
         return$totalNotificationCount;
     }
    
-        public function getTodayForumList()
-        {
-               $todayStartDate = date("Y-m-d");
-               $todayEndDate = date("Y-m-d 23:59:59");
-               $whereAry = "dtCreatedOn >= '" . $todayStartDate." 00:00:00' AND dtCreatedOn <= '" . $todayStartDate." 23:59:59'";
-          
-               $this->db->where($whereAry); 
-           
-            $this->db->select('id,szForumTitle,idCategory');
-        
-            $this->db->limit($limit, $offset);
-            $query = $this->db->get(__DBC_SCHEMATA_FORUM_DATA__);
+    public function getTodayForumList()
+    {
+           $todayStartDate = date("Y-m-d");
+           $todayEndDate = date("Y-m-d 23:59:59");
+           $whereAry = "dtCreatedOn >= '" . $todayStartDate." 00:00:00' AND dtCreatedOn <= '" . $todayStartDate." 23:59:59'";
+
+           $this->db->where($whereAry); 
+
+        $this->db->select('id,szForumTitle,idCategory');
+
+        $this->db->limit($limit, $offset);
+        $query = $this->db->get(__DBC_SCHEMATA_FORUM_DATA__);
 //      $sql = $this->db->last_query($query);
 //   print_r($sql);die;
-            if($query->num_rows() > 0)
-            {
-               return $query->result_array();
-                
-            }
-            else
-            {   
-                    return array();
-            }
-        } 
-        function sendEmail()
-    {
-            
-            $replace_ary = array();
-            $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
-            $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
-         
-            createEmail($this, '__FORUM_NOTIFICATION__', $replace_ary, 'fawada@mobileconnekt.com.au', '', __CUSTOMER_SUPPORT_EMAIL__, '', __CUSTOMER_SUPPORT_EMAIL__,'',1);
-          
-        
-            return true;
-        
+        if($query->num_rows() > 0)
+        {
+           return $query->result_array();
+
+        }
+        else
+        {   
+                return array();
+        }
+    } 
+    function sendEmail()
+      {
+
+        $replace_ary = array();
+        $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
+        $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
+
+        createEmail($this, '__FORUM_NOTIFICATION__', $replace_ary, 'fawada@mobileconnekt.com.au', '', __CUSTOMER_SUPPORT_EMAIL__, '', __CUSTOMER_SUPPORT_EMAIL__,'',1);
+
+
+        return true;
+
 
     }  
-     public function getTodayTopicList()
+    public function getTodayTopicList()
         {
                $todayStartDate = date("Y-m-d");
                $todayEndDate = date("Y-m-d 23:59:59");
@@ -846,7 +847,7 @@ class Forum_Model extends Error_Model {
                     return array();
             }
         }
-         public function getTodayCommentList()
+        public function getTodayCommentList()
         {
                $todayStartDate = date("Y-m-d");
                $todayEndDate = date("Y-m-d 23:59:59");

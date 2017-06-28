@@ -285,12 +285,13 @@ class Admin_Controller extends CI_Controller
         $this->load->view('admin/franchiseeList');
         $this->load->view('layout/admin_footer');
     }
+//Operation Manager List
     function operationManagerList()
     {   
         $is_user_login = is_user_login($this);
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
-        if (!$is_user_login) {
+        if (!$is_user_login){
             ob_end_clean();
             redirect(base_url('/admin/admin_login'));
             die;
@@ -307,8 +308,13 @@ class Admin_Controller extends CI_Controller
         $config['total_rows'] = count($this->Admin_Model->viewOperationManagerList($searchAry, false, false, $name));
         $config['per_page'] = __PAGINATION_RECORD_LIMIT__;
         $this->pagination->initialize($config);
+        //end pagination
+        
+        //listing function
         $operationManagerAray = $this->Admin_Model->viewOperationManagerList($searchAry, $config['per_page'], $this->uri->segment(3), $name);
         $searchOptionArr = $this->Admin_Model->viewDistinctOperationManagerList();
+        //end listing function
+        
         $data['szMetaTagTitle'] = "Operation Manager List";
         $data['is_user_login'] = $is_user_login;
         $data['pageName'] = "Operation_Manager_List";
@@ -318,10 +324,13 @@ class Admin_Controller extends CI_Controller
         $data['commentnotification'] = $commentReplyNotiCount;
         $data['operationManagerAray'] = $operationManagerAray;
         $data['allOperationManager'] = $searchOptionArr;
+        
         $this->load->view('layout/admin_header', $data);
         $this->load->view('admin/operationManagerList');
         $this->load->view('layout/admin_footer');
     }
+// End Operation Manager List
+    
     function getStatesByCountry($szCountry = '')
     {
         if (trim($szCountry) != '') {
@@ -561,6 +570,7 @@ class Admin_Controller extends CI_Controller
         $getAllStates = $this->Admin_Model->getAllStateByCountryId('101');
         $count = $this->Admin_Model->getnotification();
         $commentReplyNotiCount = $this->Forum_Model->commentReplyNotifications();
+        //validate and insert data in db
         if ($this->Admin_Model->validateUsersData($validate)) {
             if ($this->Admin_Model->insertOpertionDetails($validate)) {
                 $szMessage['type'] = "success";
@@ -569,6 +579,7 @@ class Admin_Controller extends CI_Controller
                 redirect(base_url('/admin/operationManagerList'));
             }
         }
+        //end validate and insert data in db
         $data['szMetaTagTitle'] = "Add Operation Manager";
         $data['pageName'] = "Operation_Manager_List";
         $data['validate'] = $validate;
@@ -641,7 +652,7 @@ class Admin_Controller extends CI_Controller
             $data['notification'] = $count;
             $_POST['editOperationManager']['szState'] = $stateId;
             $data['idOperationManager'] = $idOperationManager;
-             $data['getAllStates'] = $getAllStates;
+            $data['getAllStates'] = $getAllStates;
             $data['commentnotification'] = $commentReplyNotiCount;
             $data['flag'] = $flag;
             $this->load->view('layout/admin_header', $data);

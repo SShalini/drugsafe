@@ -177,7 +177,7 @@ class Admin_Model extends Error_Model
         }
         return false;
     }
-
+//validation function
     function validateUsersData($data, $arExclude = array(), $idUser = 0, $forgotpass = FALSE, $flag = 0, $flag2 = 0)
     {
         if (!empty($data)) {
@@ -291,25 +291,25 @@ class Admin_Model extends Error_Model
         $flag = false;
         $szNewPassword = create_login_password();
         if (!empty($data['abn'])) {
-            $abn = $data['abn'];
+            $abn = trim($data['abn']);
         } else {
             $abn = '';
         }
 
         $date = date('Y-m-d H:i:s');
         $dataAry = array(
-            'szName' => $data['szName'],
-            'abn' => $abn,
-            'szEmail' => $data['szEmail'],
+            'szName' => trim($data['szName']),
+            'abn' => trim($abn),
+            'szEmail' => trim($data['szEmail']),
             'szPassword' => encrypt($szNewPassword),
-            'szContactNumber' => $data['szContactNumber'],
-            'szCountry' => $data['szCountry'],
-            'szCity' => $data['szCity'],
-            'szZipCode' => $data['szZipCode'],
-            'szAddress' => $data['szAddress'],
-            'iRole' => $data['iRole'],
+            'szContactNumber' => trim($data['szContactNumber']),
+            'szCountry' => trim($data['szCountry']),
+            'szCity' => trim($data['szCity']),
+            'szZipCode' => trim($data['szZipCode']),
+            'szAddress' => trim($data['szAddress']),
+            'iRole' => trim($data['iRole']),
             'iActive' => '1',
-            'regionId' => $data['szRegionName'],
+            'regionId' => trim($data['szRegionName']),
             'franchiseetype' => ($data['sztype']=='1'?'1':'0'),
             'dtCreatedOn' => $date
         );
@@ -358,17 +358,17 @@ class Admin_Model extends Error_Model
             if($flag){
                 $id_player = (int)$id_franchisee;
                 $replace_ary = array();
-                $replace_ary['szName'] = $data['szName'];
-                $replace_ary['szEmail'] = $data['szEmail'];
+                $replace_ary['szName'] = trim($data['szName']);
+                $replace_ary['szEmail'] = trim($data['szEmail']);
                 $replace_ary['szPassword'] = $szNewPassword;
                 $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
                 $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
                 if ($data['iRole'] == 2) {
-                    createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                    createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, trim($data['szEmail']), '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
 
                 }
                 if ($data['iRole'] == 5) {
-                    createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                    createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, trim($data['szEmail']), '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
                 }
 
                 return true;
@@ -548,6 +548,7 @@ class Admin_Model extends Error_Model
     }
  public function viewDistinctOperationManagerList()
     {
+       
         $this->db->select('szName');
          $this->db->distinct('szName');
             $whereAry = array('isDeleted=' => '0', 'iRole' => '5');
@@ -726,16 +727,15 @@ class Admin_Model extends Error_Model
     {
         $date = date('Y-m-d H:i:s');
         $dataAry = array(
-
-            'szName' => $data['szName'],
-            'szEmail' => $data['szEmail'],
-            'abn' => $data['abn'],
-            'szContactNumber' => $data['szContactNumber'],
-            'szCountry' => $data['szCountry'],
-            'szCity' => $data['szCity'],
-            'szZipCode' => $data['szZipCode'],
-            'szAddress' => $data['szAddress'],
-            'iRole' => $data['iRole'],
+            'szName' => trim($data['szName']),
+            'szEmail' => trim($data['szEmail']),
+            'abn' => trim($data['abn']),
+            'szContactNumber' => trim($data['szContactNumber']),
+            'szCountry' => trim($data['szCountry']),
+            'szCity' => trim($data['szCity']),
+            'szZipCode' => trim($data['szZipCode']),
+            'szAddress' => trim($data['szAddress']),
+            'iRole' => trim($data['iRole']),
             'dtUpdatedOn' => $date
         );
 
@@ -750,12 +750,12 @@ class Admin_Model extends Error_Model
                     $szNewPassword = create_login_password();
                     $replace_ary = array();
                     $id_player = (int)$this->db->insert_id();
-                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szName'] = trim($data['szName']);
                     $replace_ary['szPassword'] = $szNewPassword;
-                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['szEmail'] = trim($data['szEmail']);
                     $replace_ary['supportEmail'] = __ADMIN_EMAIL__;
       
-                    createEmail($this, '__NEW_EMAIL_FOR_FRANCHISEE__', $replace_ary, $data['szEmail'], '',__ADMIN_EMAIL__, $id_player,__ADMIN_EMAIL__);
+                    createEmail($this, '__NEW_EMAIL_FOR_FRANCHISEE__', $replace_ary, trim($data['szEmail']), '',__ADMIN_EMAIL__, $id_player,__ADMIN_EMAIL__);
            
                     
             $dataPasswordAry = array(
@@ -1319,22 +1319,22 @@ print_r($arErrorMessages);die;
         $flag = false;
         $szNewPassword = create_login_password();
         if (!empty($data['abn'])) {
-            $abn = $data['abn'];
+            $abn = trim($data['abn']);
         } else {
             $abn = '';
         }
         $date = date('Y-m-d');
         $dataAry = array(
-            'szName' => $data['szName'],
+            'szName' => trim($data['szName']),
             'abn' => $abn,
-            'szEmail' => $data['szEmail'],
+            'szEmail' => trim($data['szEmail']),
             'szPassword' => encrypt($szNewPassword),
-            'szContactNumber' => $data['szContactNumber'],
-            'szCountry' => $data['szCountry'],
-            'szCity' => $data['szCity'],
-            'szZipCode' => $data['szZipCode'],
-            'szAddress' => $data['szAddress'],
-            'iRole' => $data['iRole'],
+            'szContactNumber' => trim($data['szContactNumber']),
+            'szCountry' => trim($data['szCountry']),
+            'szCity' => trim($data['szCity']),
+            'szZipCode' => trim($data['szZipCode']),
+            'szAddress' => trim($data['szAddress']),
+            'iRole' => trim($data['iRole']),
             'iActive' => '1',
             'dtCreatedOn' => $date
         );
@@ -1360,17 +1360,17 @@ print_r($arErrorMessages);die;
             }
             $id_player = (int)$id_franchisee;
             $replace_ary = array();
-            $replace_ary['szName'] = $data['szName'];
-            $replace_ary['szEmail'] = $data['szEmail'];
+            $replace_ary['szName'] = trim($data['szName']);
+            $replace_ary['szEmail'] = trim($data['szEmail']);
             $replace_ary['szPassword'] = $szNewPassword;
             $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
             $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
             if ($data['iRole'] == 2) {
-                createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                createEmail($this, '__ADD_NEW_FRANCHISEE__', $replace_ary, trim($data['szEmail']), '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
 
             }
             if ($data['iRole'] == 5) {
-                createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                createEmail($this, '__ADD_NEW_OPERATION_MANAGER__', $replace_ary, trim($data['szEmail']), '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
             }
 
             return true;
@@ -1408,16 +1408,15 @@ print_r($arErrorMessages);die;
 
             $date = date('Y-m-d');
             $dataAry = array(
-
-                'szName' => $data['szName'],
-                'szEmail' => $data['szEmail'],
-                'abn' => $data['abn'],
-                'szContactNumber' => $data['szContactNumber'],
-                'szCountry' => $data['szCountry'],
-                'szCity' => $data['szCity'],
-                'szZipCode' => $data['szZipCode'],
-                'szAddress' => $data['szAddress'],
-                'iRole' => $data['iRole'],
+                'szName' => trim($data['szName']),
+                'szEmail' => trim($data['szEmail']),
+                'abn' => trim($data['abn']),
+                'szContactNumber' => trim($data['szContactNumber']),
+                'szCountry' => trim($data['szCountry']),
+                'szCity' => trim($data['szCity']),
+                'szZipCode' => trim($data['szZipCode']),
+                'szAddress' => trim($data['szAddress']),
+                'iRole' => trim($data['iRole']),
                 'dtUpdatedOn' => $date
             );
 
@@ -1435,16 +1434,16 @@ print_r($arErrorMessages);die;
                 $this->db->where($whereAry);
                 $this->db->update(__DBC_SCHEMATA_FRANCHISEE__, $OmAry);
                 
-                  if(($data['szEmail'])!= ($data['szOrgEmail'])){
+                  if(trim(($data['szEmail']))!= (trim($data['szOrgEmail']))){
                     $szNewPassword = create_login_password();
                     $replace_ary = array();
                     $id_player = (int)$this->db->insert_id();
-                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szName'] = trim($data['szName']);
                     $replace_ary['szPassword'] = $szNewPassword;
-                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['szEmail'] = trim($data['szEmail']);
                     $replace_ary['supportEmail'] = __ADMIN_EMAIL__;
       
-                    createEmail($this, '__NEW_EMAIL_FOR_OPERATION_MANAGER__', $replace_ary, $data['szEmail'], '',__ADMIN_EMAIL__, $id_player,__ADMIN_EMAIL__);
+                    createEmail($this, '__NEW_EMAIL_FOR_OPERATION_MANAGER__', $replace_ary, trim($data['szEmail']), '',__ADMIN_EMAIL__, $id_player,__ADMIN_EMAIL__);
            
                 
             $dataPasswordAry = array(
@@ -1469,7 +1468,7 @@ print_r($arErrorMessages);die;
         $regionAry = array(
             'stateId' => $data['szState'],
             'regionCode' => $data['iRegionCode'],
-            'regionName' => $data['szRegionName'],
+            'regionName' => trim($data['szRegionName']),
         );
 
         if ($query = $this->db->insert(__DBC_SCHEMATA_REGION__, $regionAry)) {
@@ -1553,7 +1552,7 @@ print_r($arErrorMessages);die;
     {
         $dataAry = array(
             'stateId' => $data['stateId'],
-            'regionName' => $data['regionName'],
+            'regionName' => trim($data['regionName']),
             'regionCode' => $data['regionCode']
         );
         $this->db->where('id', $idRegion);

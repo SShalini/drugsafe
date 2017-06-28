@@ -20,21 +20,21 @@ class Franchisee_Model extends Error_Model
 
         $date = date('Y-m-d H:i:s');
         if (!empty($data['abn'])) {
-            $abn = $data['abn'];
+            $abn = trim($data['abn']);
         } else {
             $abn = '';
         }
         $dataAry = array(
 
-            'szName' => $data['szName'],
-            'szEmail' => $data['szEmail'],
+            'szName' => trim($data['szName']),
+            'szEmail' => trim($data['szEmail']),
             'szPassword' => encrypt($szNewPassword),
-            'szContactNumber' => $data['szContactNumber'],
-            'szCountry' => $data['szCountry'],
-            'abn' => $abn,
-            'szCity' => $data['szCity'],
-            'szZipCode' => $data['szZipCode'],
-            'szAddress' => $data['szAddress'],
+            'szContactNumber' => trim($data['szContactNumber']),
+            'szCountry' => trim($data['szCountry']),
+            'abn' => trim($abn),
+            'szCity' => trim($data['szCity']),
+            'szZipCode' => trim($data['szZipCode']),
+            'szAddress' => trim($data['szAddress']),
             'regionId' => ($data['frtype'] == '1'?(int)$data['szRegionName']:0),
             'iRole' => '3',
             'iActive' => '1',
@@ -65,12 +65,12 @@ class Franchisee_Model extends Error_Model
                 'clientId' => $id_client,
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
-                'szBusinessName' => $data['szBusinessName'],
-                'szContactEmail' => $data['szContactEmail'],
-                'szContactPhone' => $data['szContactPhone'],
-                'szContactMobile' => $data['szContactMobile'],
-                'szNoOfSites' => $data['szNoOfSites'],
-                'industry' => $data['industry'],
+                'szBusinessName' => trim($data['szBusinessName']),
+                'szContactEmail' => trim($data['szContactEmail']),
+                'szContactPhone' => trim($data['szContactPhone']),
+                'szContactMobile' => trim($data['szContactMobile']),
+                'szNoOfSites' => trim($data['szNoOfSites']),
+                'industry' => trim($data['industry']),
                 'clientCode' => (int)$nextclientcode,
                 'discountid' => (int)$data['discount']
             );
@@ -91,7 +91,7 @@ class Franchisee_Model extends Error_Model
                 'clientType' => $clientType,
                 'szCreatedBy' => $CreatedBy,
                 'clientCode' => (int)$nextclientcode,
-                'industry' => $clientdets['industry']
+                'industry' => trim($clientdets['industry'])
             );
         }
 
@@ -108,13 +108,13 @@ class Franchisee_Model extends Error_Model
                 if (empty($clientType)) {
                     $replace_ary = array();
                     $id_player = (int)$this->db->insert_id();
-                    $replace_ary['szName'] = $data['szName'];
-                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['szName'] = trim($data['szName']);
+                    $replace_ary['szEmail'] = trim($data['szEmail']);
                     $replace_ary['szPassword'] = $szNewPassword;
                     $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
                     $replace_ary['Link'] = __BASE_URL__ . "/franchisee/addClient";
 
-                    createEmail($this, '__ADD_NEW_CLIENT__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                    createEmail($this, '__ADD_NEW_CLIENT__', $replace_ary, trim($data['szEmail']), '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
 
                 }
                 if (!empty($clientType)) {
@@ -126,53 +126,53 @@ class Franchisee_Model extends Error_Model
 
                     $siteAry = array(
                         'siteid' => (int)$id_site,
-                        'per_form_complete' => $data['per_form_complete'],
-                        'sp_name' => $data['sp_name'],
-                        'sp_mobile' => $data['sp_mobile'],
-                        'sp_email' => $data['sp_email'],
-                        'iis_name' => $data['iis_name'],
-                        'iis_mobile' => $data['iis_mobile'],
-                        'iis_email' => $data['iis_email'],
-                        'rlr_name' => $data['rlr_name'],
-                        'rlr_mobile' => $data['rlr_mobile'],
-                        'rlr_email' => $data['rlr_email'],
-                        'orlr_name' => $data['orlr_name'],
-                        'orlr_mobile' => $data['orlr_mobile'],
-                        'orlr_email' => $data['orlr_email'],
-                        'psc_name' => $data['psc_name'],
-                        'psc_phone' => $data['psc_phone'],
-                        'psc_mobile' => $data['psc_mobile'],
-                        'ssc_name' => $data['ssc_name'],
-                        'ssc_phone' => $data['ssc_phone'],
-                        'ssc_mobile' => $data['ssc_mobile'],
-                        'instructions' => $data['instructions'],
-                        'site_people' => $data['site_people'],
-                        'test_count' => $data['test_count'],
-                        'initial_testing_req' => $data['initial_testing_req'],
-                        'ongoing_testing_req' => $data['ongoing_testing_req'],
-                        'site_visit' => $data['site_visit'],
-                        'onsite_service' => $data['onsite_service'],
-                        'start_time' => $data['start_time'],
-                        'power_access' => $data['power_access'],
-                        'risk_assessment' => $data['risk_assessment'],
-                        'req_comp_induction' => $data['req_comp_induction'],
-                        'randomisation' => $data['randomisation'],
-                        'req_ppe' => $reqppval,
-                        'paperwork' => $data['paperwork'],
-                        'specify_contact' => $data['specify_contact'],
+                        'per_form_complete' => trim($data['per_form_complete']),
+                        'sp_name' => trim($data['sp_name']),
+                        'sp_mobile' => trim($data['sp_mobile']),
+                        'sp_email' => trim($data['sp_email']),
+                        'iis_name' => trim($data['iis_name']),
+                        'iis_mobile' => trim($data['iis_mobile']),
+                        'iis_email' => trim($data['iis_email']),
+                        'rlr_name' => trim($data['rlr_name']),
+                        'rlr_mobile' => trim($data['rlr_mobile']),
+                        'rlr_email' => trim($data['rlr_email']),
+                        'orlr_name' => trim($data['orlr_name']),
+                        'orlr_mobile' => trim($data['orlr_mobile']),
+                        'orlr_email' => trim($data['orlr_email']),
+                        'psc_name' => trim($data['psc_name']),
+                        'psc_phone' => trim($data['psc_phone']),
+                        'psc_mobile' => trim($data['psc_mobile']),
+                        'ssc_name' => trim($data['ssc_name']),
+                        'ssc_phone' => trim($data['ssc_phone']),
+                        'ssc_mobile' => trim($data['ssc_mobile']),
+                        'instructions' => trim($data['instructions']),
+                        'site_people' => trim($data['site_people']),
+                        'test_count' => trim($data['test_count']),
+                        'initial_testing_req' => trim($data['initial_testing_req']),
+                        'ongoing_testing_req' => trim($data['ongoing_testing_req']),
+                        'site_visit' => trim($data['site_visit']),
+                        'onsite_service' => trim($data['onsite_service']),
+                        'start_time' => trim($data['start_time']),
+                        'power_access' => trim($data['power_access']),
+                        'risk_assessment' => trim($data['risk_assessment']),
+                        'req_comp_induction' => trim($data['req_comp_induction']),
+                        'randomisation' => trim($data['randomisation']),
+                        'req_ppe' => trim($reqppval),
+                        'paperwork' => trim($data['paperwork']),
+                        'specify_contact' => trim($data['specify_contact']),
 
                     );
                     $this->db->insert(__DBC_SCHEMATA_SITES__, $siteAry);
                     if ($this->db->affected_rows() > 0) {
                         $replace_ary = array();
                         $id_player = (int)$this->db->insert_id();
-                        $replace_ary['szName'] = $data['szName'];
-                        $replace_ary['szEmail'] = $data['szEmail'];
+                        $replace_ary['szName'] = trim($data['szName']);
+                        $replace_ary['szEmail'] = trim($data['szEmail']);
                         $replace_ary['szPassword'] = $szNewPassword;
                         $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
                         $replace_ary['Link'] = __BASE_URL__ . "/franchisee/addClient";
 
-                        createEmail($this, '__ADD_NEW_SITE__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                        createEmail($this, '__ADD_NEW_SITE__', $replace_ary, trim($data['szEmail']), '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
 
 
                         return true;
@@ -433,14 +433,14 @@ class Franchisee_Model extends Error_Model
     {
         $date = date('Y-m-d');
         $dataAry = array(
-            'szName' => $data['szName'],
-            'szEmail' => $data['szEmail'],
-            'szContactNumber' => $data['szContactNumber'],
-            'abn' => $data['abn'],
-            'szCountry' => $data['szCountry'],
-            'szCity' => $data['szCity'],
-            'szZipCode' => $data['szZipCode'],
-            'szAddress' => $data['szAddress'],
+            'szName' => trim($data['szName']),
+            'szEmail' => trim($data['szEmail']),
+            'szContactNumber' => trim($data['szContactNumber']),
+            'abn' => trim($data['abn']),
+            'szCountry' => trim($data['szCountry']),
+            'szCity' => trim($data['szCity']),
+            'szZipCode' => trim($data['szZipCode']),
+            'szAddress' => trim($data['szAddress']),
             'iRole' => '3',
             'iActive' => '1',
             'dtUpdatedOn' => $date
@@ -455,15 +455,15 @@ class Franchisee_Model extends Error_Model
                     $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId($UpdatedBy);
                     $replace_ary = array();
                     $id_player = (int)$this->db->insert_id();
-                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szName'] = trim($data['szName']);
                     $replace_ary['szPassword'] = $szNewPassword;
-                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['szEmail'] = trim($data['szEmail']);
                     $replace_ary['supportEmail'] = $franchiseeDetArr['szEmail'];
       if (!empty($clientType)) {
-                    createEmail($this, '__NEW_EMAIL_FOR_SITE__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
+                    createEmail($this, '__NEW_EMAIL_FOR_SITE__', $replace_ary, trim($data['szEmail']), '', trim($franchiseeDetArr['szEmail']), $id_player, trim($franchiseeDetArr['szEmail']));
       }
       else{
-            createEmail($this, '__NEW_EMAIL_FOR_CLIENT__', $replace_ary,$data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']); 
+            createEmail($this, '__NEW_EMAIL_FOR_CLIENT__', $replace_ary,trim($data['szEmail']), '', trim($franchiseeDetArr['szEmail']), $id_player, trim($franchiseeDetArr['szEmail'])); 
       }
                     
             $dataPasswordAry = array(
@@ -487,11 +487,11 @@ class Franchisee_Model extends Error_Model
                 'clientType' => $clientType,
                 'szLastUpdatedBy' => $UpdatedBy,
                 'industry' => $data['industry'],
-                'szBusinessName' => $data['szBusinessName'],
-                'szContactEmail' => $data['szContactEmail'],
-                'szContactPhone' => $data['szContactPhone'],
-                'szContactMobile' => $data['szContactMobile'],
-                'szNoOfSites' => $data['szNoOfSites'],
+                'szBusinessName' => trim($data['szBusinessName']),
+                'szContactEmail' => trim($data['szContactEmail']),
+                'szContactPhone' => trim($data['szContactPhone']),
+                'szContactMobile' => trim($data['szContactMobile']),
+                'szNoOfSites' => $trim($data['szNoOfSites']),
                 'discountid' => $data['discount']
             );
         } else {
@@ -517,40 +517,40 @@ class Franchisee_Model extends Error_Model
                         $specify_contact = ' ';
                     }
                     $siteAry = array(
-                        'per_form_complete' => $data['per_form_complete'],
-                        'sp_name' => $data['sp_name'],
-                        'sp_mobile' => $data['sp_mobile'],
-                        'sp_email' => $data['sp_email'],
-                        'iis_name' => $data['iis_name'],
-                        'iis_mobile' => $data['iis_mobile'],
-                        'iis_email' => $data['iis_email'],
-                        'rlr_name' => $data['rlr_name'],
-                        'rlr_mobile' => $data['rlr_mobile'],
-                        'rlr_email' => $data['rlr_email'],
-                        'orlr_name' => $data['orlr_name'],
-                        'orlr_mobile' => $data['orlr_mobile'],
-                        'orlr_email' => $data['orlr_email'],
-                        'psc_name' => $data['psc_name'],
-                        'psc_phone' => $data['psc_phone'],
-                        'psc_mobile' => $data['psc_mobile'],
-                        'ssc_name' => $data['ssc_name'],
-                        'ssc_phone' => $data['ssc_phone'],
-                        'ssc_mobile' => $data['ssc_mobile'],
-                        'instructions' => $data['instructions'],
-                        'site_people' => $data['site_people'],
-                        'test_count' => $data['test_count'],
-                        'initial_testing_req' => $data['initial_testing_req'],
-                        'ongoing_testing_req' => $data['ongoing_testing_req'],
-                        'site_visit' => $data['site_visit'],
-                        'onsite_service' => $data['onsite_service'],
-                        'start_time' => $data['start_time'],
-                        'power_access' => $data['power_access'],
-                        'risk_assessment' => $data['risk_assessment'],
-                        'req_comp_induction' => $data['req_comp_induction'],
-                        'randomisation' => $data['randomisation'],
-                        'req_ppe' => $reqppval,
-                        'paperwork' => $data['paperwork'],
-                        'specify_contact' => $specify_contact,
+                        'per_form_complete' => trim($data['per_form_complete']),
+                        'sp_name' => trim($data['sp_name']),
+                        'sp_mobile' => trim($data['sp_mobile']),
+                        'sp_email' => trim($data['sp_email']),
+                        'iis_name' => trim($data['iis_name']),
+                        'iis_mobile' => trim($data['iis_mobile']),
+                        'iis_email' => trim($data['iis_email']),
+                        'rlr_name' => trim($data['rlr_name']),
+                        'rlr_mobile' => trim($data['rlr_mobile']),
+                        'rlr_email' => trim($data['rlr_email']),
+                        'orlr_name' => trim($data['orlr_name']),
+                        'orlr_mobile' => trim($data['orlr_mobile']),
+                        'orlr_email' => trim($data['orlr_email']),
+                        'psc_name' => trim($data['psc_name']),
+                        'psc_phone' => trim($data['psc_phone']),
+                        'psc_mobile' => trim($data['psc_mobile']),
+                        'ssc_name' => trim($data['ssc_name']),
+                        'ssc_phone' => trim($data['ssc_phone']),
+                        'ssc_mobile' => trim($data['ssc_mobile']),
+                        'instructions' => trim($data['instructions']),
+                        'site_people' => trim($data['site_people']),
+                        'test_count' => trim($data['test_count']),
+                        'initial_testing_req' => trim($data['initial_testing_req']),
+                        'ongoing_testing_req' => trim($data['ongoing_testing_req']),
+                        'site_visit' => trim($data['site_visit']),
+                        'onsite_service' => trim($data['onsite_service']),
+                        'start_time' => trim($data['start_time']),
+                        'power_access' => trim($data['power_access']),
+                        'risk_assessment' => trim($data['risk_assessment']),
+                        'req_comp_induction' => trim($data['req_comp_induction']),
+                        'randomisation' => trim($data['randomisation']),
+                        'req_ppe' => trim($reqppval),
+                        'paperwork' => trim($data['paperwork']),
+                        'specify_contact' => trim($specify_contact),
 
                     );
                     $userDataAry = $this->getClientDetailsId($idClient);
@@ -758,15 +758,15 @@ class Franchisee_Model extends Error_Model
         }
         $dataAry = array(
 
-            'szName' => $data['szBusinessName'],
-            'szEmail' => $data['szEmail'],
+            'szName' => trim($data['szBusinessName']),
+            'szEmail' => trim($data['szEmail']),
             'szPassword' => encrypt($szNewPassword),
-            'szContactNumber' => $data['szContactNumber'],
-            'szCountry' => $data['szCountry'],
-            'abn' => $abn,
-            'szCity' => $data['szCity'],
-            'szZipCode' => $data['szZipCode'],
-            'szAddress' => $data['szAddress'],
+            'szContactNumber' => trim($data['szContactNumber']),
+            'szCountry' => trim($data['szCountry']),
+            'abn' => trim($abn),
+            'szCity' => trim($data['szCity']),
+            'szZipCode' => trim($data['szZipCode']),
+            'szAddress' => trim($data['szAddress']),
             'regionId' => (int)$data['szRegionName'],
             'iRole' => '6',
             'iActive' => '1',
@@ -792,12 +792,12 @@ class Franchisee_Model extends Error_Model
                 if (empty($clientType)) {
                     $replace_ary = array();
                     $id_player = (int)$this->db->insert_id();
-                    $replace_ary['szName'] = $data['szBusinessName'];
-                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['szName'] = trim($data['szBusinessName']);
+                    $replace_ary['szEmail'] = trim($data['szEmail']);
                     $replace_ary['szPassword'] = $szNewPassword;
                     $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
 
-                    createEmail($this, '__ADD_NEW_AGENT__', $replace_ary, $data['szEmail'], '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
+                    createEmail($this, '__ADD_NEW_AGENT__', $replace_ary, trim($data['szEmail']), '', __CUSTOMER_SUPPORT_EMAIL__, $id_player, __CUSTOMER_SUPPORT_EMAIL__);
 
                 }
 
@@ -847,17 +847,17 @@ class Franchisee_Model extends Error_Model
     {
         $updateAgent = $this->updateUserdata($idAgent, $data);
         if ($updateAgent) {
-            if(($data['szEmail'])!= ($data['szOrgEmail'])){
+            if((trim($data['szEmail']))!= (trim($data['szOrgEmail']))){
                 $UpdatedBy = $_SESSION['drugsafe_user']['id'];
                     $szNewPassword = create_login_password();
                     $franchiseeDetArr = $this->Admin_Model->getAdminDetailsByEmailOrId($UpdatedBy);
                     $replace_ary = array();
                     $id_player = (int)$this->db->insert_id();
-                    $replace_ary['szName'] = $data['szName'];
+                    $replace_ary['szName'] = trim($data['szName']);
                     $replace_ary['szPassword'] = $szNewPassword;
-                    $replace_ary['szEmail'] = $data['szEmail'];
+                    $replace_ary['szEmail'] = trim($data['szEmail']);
                     $replace_ary['supportEmail'] = $franchiseeDetArr['szEmail'];
-                    createEmail($this, '__NEW_EMAIL_FOR_AGENT__', $replace_ary, $data['szEmail'], '', $franchiseeDetArr['szEmail'], $id_player, $franchiseeDetArr['szEmail']);
+                    createEmail($this, '__NEW_EMAIL_FOR_AGENT__', $replace_ary, trim($data['szEmail']), '', trim($franchiseeDetArr['szEmail']), $id_player, trim($franchiseeDetArr['szEmail']));
                  
             $dataPasswordAry = array(
            'szPassword' => encrypt($szNewPassword)
@@ -889,14 +889,14 @@ class Franchisee_Model extends Error_Model
         $date = date('Y-m-d H:i:s');
         $recordAry = array(
 
-            'szName' => $dataArr['szName'],
-            'szEmail' => $dataArr['szEmail'],
-            'szContactNumber' => $dataArr['szContactNumber'],
-            'szCountry' => $dataArr['szCountry'],
-            'abn' => $dataArr['abn'],
-            'szCity' => $dataArr['szCity'],
-            'szZipCode' => $dataArr['szZipCode'],
-            'szAddress' => $dataArr['szAddress'],
+            'szName' => trim($dataArr['szName']),
+            'szEmail' => trim($dataArr['szEmail']),
+            'szContactNumber' => trim($dataArr['szContactNumber']),
+            'szCountry' => trim($dataArr['szCountry']),
+            'abn' => trim($dataArr['abn']),
+            'szCity' => trim($dataArr['szCity']),
+            'szZipCode' => trim($dataArr['szZipCode']),
+            'szAddress' => trim($dataArr['szAddress']),
             'dtUpdatedOn' => $date
         );
 

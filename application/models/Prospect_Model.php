@@ -58,7 +58,7 @@ class Prospect_Model extends Error_Model
         $this->data['L_G_Channel'] = $this->validateInput($value, __VLD_CASE_ANYTHING__, "L_G_Channel", "Lead Generation Channel", false, false, $flag);
     }
 
-     function getAllProspectDetails($franchiseeId='0',$szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+    function getAllProspectDetails($franchiseeId='0',$szBusinessName='0',$status='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {
 
           if($franchiseeId){
@@ -87,7 +87,7 @@ class Prospect_Model extends Error_Model
         }
     }
     function validateProspectData($data, $arExclude = array(), $idUser=0,$flag='0')
-  {
+      {
         if (!empty($data)) {
             $this->error = FALSE;
             if($data['szContactEmail']=='N/A')
@@ -177,7 +177,7 @@ class Prospect_Model extends Error_Model
         return false;
     
   }
-      function insertProspectData($data,$flag='0'){
+    function insertProspectData($data,$flag='0'){
        
           if(empty($data['iFranchiseeId'])){
              $data['iFranchiseeId']  =  $_SESSION['drugsafe_user']['id'];  
@@ -335,26 +335,26 @@ class Prospect_Model extends Error_Model
                     }
                 $whereAry = array(
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
-                'szName' => $data['szName'],
-                'szEmail' => $data['szEmail'],
-                'szContactNumber' => $data['szContactNumber'],
+                'szName' => trim($data['szName']),
+                'szEmail' => trim($data['szEmail']),
+                'szContactNumber' => trim($data['szContactNumber']),
                 'dtCreatedOn' =>$date,
                 'dtUpdatedOn' =>$date,
                 'isDeleted' =>'0',
-                'szCountry' => $data['szCountry'],
-                'abn' => $data['abn'], 
-                'szCity' => $data['szCity'],
-                'szZipCode' => $data['szZipCode'],
-                'szAddress' => $data['szAddress'],
-                'szBusinessName' => $data['szBusinessName'],
-                'szContactEmail' => $data['szContactEmail'],
-                'szContactPhone' => $data['szContactPhone'],
-                'szContactMobile' => $data['szContactMobile'],
-                'industry' => $value,
-                'status' => $status,
+                'szCountry' => trim($data['szCountry']),
+                'abn' => trim($data['abn']), 
+                'szCity' => trim($data['szCity']),
+                'szZipCode' => trim($data['szZipCode']),
+                'szAddress' => trim($data['szAddress']),
+                'szBusinessName' => trim($data['szBusinessName']),
+                'szContactEmail' => trim($data['szContactEmail']),
+                'szContactPhone' => trim($data['szContactPhone']),
+                'szContactMobile' => trim($data['szContactMobile']),
+                'industry' => trim($value),
+                'status' => trim($status),
                 'szCreatedBy' => (int)$_SESSION['drugsafe_user']['id'],
-                'szNoOfSites' => $data['szNoOfSites'],
-                'L_G_Channel' => $data['L_G_Channel'],
+                'szNoOfSites' => trim($data['szNoOfSites']),
+                'L_G_Channel' => trim($data['L_G_Channel']),
                'dt_last_updated_meeting' => $meetingDateTime,
                'dt_last_updated_status' => $statusDateTime
             );    
@@ -362,27 +362,27 @@ class Prospect_Model extends Error_Model
        else{
         $whereAry = array(
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
-                'szName' => $data['szName'],
-                'szEmail' => $data['szEmail'],
-                'szContactNumber' => $data['szContactNumber'],
+                'szName' => trim($data['szName']),
+                'szEmail' => trim($data['szEmail']),
+                'szContactNumber' => trim($data['szContactNumber']),
                 'dtUpdatedOn' =>$date,
                 'dtCreatedOn' =>$date,
                 'isDeleted' =>'0',
-                'szCountry' => $data['szCountry'],
-                'abn' => $data['abn'], 
-                'szCity' => $data['szCity'],
-                'szZipCode' => $data['szZipCode'],
-                'szAddress' => $data['szAddress'],
-                'szBusinessName' => $data['szBusinessName'],
-                'szContactEmail' => $data['szContactEmail'],
-                'szContactPhone' => $data['szContactPhone'],
-                'szContactMobile' => $data['szContactMobile'],
+                'szCountry' => trim($data['szCountry']),
+                'abn' => trim($data['abn']), 
+                'szCity' => trim($data['szCity']),
+                'szZipCode' => trim($data['szZipCode']),
+                'szAddress' => trim($data['szAddress']),
+                'szBusinessName' => trim($data['szBusinessName']),
+                'szContactEmail' => trim($data['szContactEmail']),
+                'szContactPhone' => trim($data['szContactPhone']),
+                'szContactMobile' => trim($data['szContactMobile']),
                 'szCreatedBy' => (int)$_SESSION['drugsafe_user']['id'],
-                'industry' => $data['industry'],
+                'industry' => trim($data['industry']),
                 'status' => '1',
-                'szNoOfSites' => $data['szNoOfSites'],
+                'szNoOfSites' => trim($data['szNoOfSites']),
                 'dt_last_updated_status' => $date,
-                'L_G_Channel' => $data['L_G_Channel']
+                'L_G_Channel' => trim($data['L_G_Channel'])
             );   
            }
            
@@ -422,7 +422,7 @@ class Prospect_Model extends Error_Model
             return false;
         }
     }
-     public function deleteProspectRecord($prospectId)
+    public function deleteProspectRecord($prospectId)
     {
        $prospectStatusAry = $this->Prospect_Model->getProspectStatusDetails($idProspect,1);
        if(!empty($prospectStatusAry))
@@ -449,7 +449,7 @@ class Prospect_Model extends Error_Model
             return false;
         }
     }
-     function updateProspectDetails($data,$prospectId){
+    function updateProspectDetails($data,$prospectId){
          if(empty($data['iFranchiseeId'])){
              $data['iFranchiseeId']  =  $_SESSION['drugsafe_user']['id'];  
           }
@@ -461,23 +461,23 @@ class Prospect_Model extends Error_Model
          $date = date('Y-m-d H:i:s');
             $dataAry = array(
                 'iFranchiseeId' => (int)$data['iFranchiseeId'],
-                'szName' => $data['szName'],
-                'szEmail' => $data['szEmail'],
-                'szContactNumber' => $data['szContactNumber'],
-                'szCountry' => $data['szCountry'],
-                'abn' => $data['abn'], 
-                'szCity' => $data['szCity'],
-                'szZipCode' => $data['szZipCode'],
-                'szAddress' => $data['szAddress'],
-                'szBusinessName' => $data['szBusinessName'],
-                'szContactEmail' => $data['szContactEmail'],
-                'szContactPhone' => $data['szContactPhone'],
-                'szContactMobile' => $data['szContactMobile'],
+                'szName' => trim($data['szName']),
+                'szEmail' => trim($data['szEmail']),
+                'szContactNumber' => trim($data['szContactNumber']),
+                'szCountry' => trim($data['szCountry']),
+                'abn' => trim($data['abn']), 
+                'szCity' => trim($data['szCity']),
+                'szZipCode' => trim($data['szZipCode']),
+                'szAddress' => trim($data['szAddress']),
+                'szBusinessName' => trim($data['szBusinessName']),
+                'szContactEmail' => trim($data['szContactEmail']),
+                'szContactPhone' => trim($data['szContactPhone']),
+                'szContactMobile' => trim($data['szContactMobile']),
                 'szCreatedBy' => $_SESSION['drugsafe_user']['id'],
-                'industry' => $data['industry'],
+                'industry' => trim($data['industry']),
                 'dtUpdatedOn' =>$date,
-                'szNoOfSites' => $data['szNoOfSites'],
-                'L_G_Channel' => $data['L_G_Channel'] ,
+                'szNoOfSites' => trim($data['szNoOfSites']),
+                'L_G_Channel' => trim($data['L_G_Channel']) ,
                 'isDeleted' =>'0'
             );
          
@@ -493,13 +493,13 @@ class Prospect_Model extends Error_Model
                return true; 
             }
     }
-     function insertMeetingNotes($data,$idProspect){
+    function insertMeetingNotes($data,$idProspect){
        
         $date = date('Y-m-d H:i:s');
         $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
             $whereAry = array(
                 'idProspect' => (int)$idProspect,
-                'szDescription' => $data['szDiscription'],
+                'szDescription' => trim($data['szDiscription']),
                 'dtCreatedOn' => $date,
                 'szCreatedBy' => $franchiseeid
             );
@@ -518,7 +518,7 @@ class Prospect_Model extends Error_Model
             }
         
     }
-     function getAllMeetingDetailsByProspectsId($prospectsId,$meetingNoteCreatedBy='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$flag='')
+    function getAllMeetingDetailsByProspectsId($prospectsId,$meetingNoteCreatedBy='0', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0,$flag='')
     { 
        if($meetingNoteCreatedBy > 0){
          $array = array('idProspect' => (int)$prospectsId,'szCreatedBy' => (int)$meetingNoteCreatedBy,);   
@@ -555,7 +555,7 @@ class Prospect_Model extends Error_Model
             return false;
         }
     }
-     function getProspectStatusDetails($prospectsId,$flag='0')
+    function getProspectStatusDetails($prospectsId,$flag='0')
     {
          $array = array('prospectId' => (int)$prospectsId);
         if($flag==1){
@@ -586,7 +586,7 @@ class Prospect_Model extends Error_Model
             return false;
         }
     } 
-     function getStatusDetailsByStatusId($statusId)
+    function getStatusDetailsByStatusId($statusId)
     {
        
         $array = array('id' => (int)$statusId);
@@ -604,7 +604,7 @@ class Prospect_Model extends Error_Model
         }
     }
     
-         function updateProspectStatus($data,$prospectsId)
+    function updateProspectStatus($data,$prospectsId)
     { 
         $date = date('Y-m-d H:i:s');
         $franchiseeid  =  $_SESSION['drugsafe_user']['id'];
@@ -633,7 +633,7 @@ class Prospect_Model extends Error_Model
             }
         
     }
-     function getMettingDetailsById($Id)
+    function getMettingDetailsById($Id)
     {
         
        $array = array('id' => (int)$Id);
@@ -650,7 +650,7 @@ class Prospect_Model extends Error_Model
             return false;
         }
     }
-     public function checkProspectExists($szEmail = false, $id = 0)
+    public function checkProspectExists($szEmail = false, $id = 0)
     {
 
         $szEmail = trim($szEmail);
@@ -698,29 +698,29 @@ class Prospect_Model extends Error_Model
             return false;
         }
     } 
-  function getSqlFormattedDate($unFormatted_date)
-{ 
-    $dateAry = explode('at', $unFormatted_date);
-    $dateDataAry = explode('/',$dateAry['0']);
-   
-    $timeDataAry = explode(':',$dateAry['1']);
-    
-    $time1DataAry = explode(' ',$timeDataAry['1']);
-   if($time1DataAry=='AM'){
-    $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' ';  
-   
+    function getSqlFormattedDate($unFormatted_date)
+    { 
+        $dateAry = explode('at', $unFormatted_date);
+        $dateDataAry = explode('/',$dateAry['0']);
+
+        $timeDataAry = explode(':',$dateAry['1']);
+
+        $time1DataAry = explode(' ',$timeDataAry['1']);
+       if($time1DataAry=='AM'){
+        $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' ';  
+
+        }
+       else{
+           $value =$timeDataAry['0'] ;
+           $time = 12+$value;
+           $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' ';  
+
+
+       }
+
+       return $formattedDate;  
     }
-   else{
-       $value =$timeDataAry['0'] ;
-       $time = 12+$value;
-       $formattedDate=trim($dateDataAry['2']).'-'.trim($dateDataAry['1']).'-'.$dateDataAry['0'].' ';  
-   
-       
-   }
- 
-   return $formattedDate;  
-}
- public function deleteMeeting($meetingId)
+    public function deleteMeeting($meetingId)
 	{   
           
                 $this->db->where('id', $meetingId);
@@ -733,10 +733,9 @@ class Prospect_Model extends Error_Model
                     return false;
                 }	
 	}
-         public function deleteStatus($prospectId)
-	{   
-          
-                $this->db->where('prospectId', $prospectId);
+    public function deleteStatus($prospectId)
+   {   
+         $this->db->where('prospectId', $prospectId);
 		if($query = $this->db->delete(__DBC_SCHEMATA_STATUS__))
                 {
                     return true;
@@ -746,7 +745,7 @@ class Prospect_Model extends Error_Model
                     return false;
                 }	
 	}
-  function getAllProspectDetailsByFrId($franchiseeId)
+    function getAllProspectDetailsByFrId($franchiseeId)
     {
       
        $array = array('iFranchiseeId' => (int)$franchiseeId, 'isDeleted' => '0');
@@ -766,7 +765,7 @@ class Prospect_Model extends Error_Model
             return false;
         }
     }
-     public function changeToClient($idProspect)
+    public function changeToClient($idProspect)
     {
        $prospectArr = $this->getProspectDetailsByProspectsId($idProspect);
        if(!empty($prospectArr)){
@@ -806,7 +805,7 @@ class Prospect_Model extends Error_Model
            }
        }
     }
-     function getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status='0',$szBusinessName='', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
+    function getstatusDetailsforDetailedReport($franchiseeid,$startDate,$endDate,$status='0',$szBusinessName='', $limit = __PAGINATION_RECORD_LIMIT__, $offset = 0)
     {  
        
           
@@ -846,7 +845,7 @@ class Prospect_Model extends Error_Model
             return array();
         }
     }
-     function getLatestMettingDetailsById($Id,$meatingDate)
+    function getLatestMettingDetailsById($Id,$meatingDate)
     {
         
        $array = array('idProspect' => (int)$Id,'dtCreatedOn' => $meatingDate);
