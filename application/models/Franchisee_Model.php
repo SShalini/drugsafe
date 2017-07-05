@@ -491,7 +491,7 @@ class Franchisee_Model extends Error_Model
                 'szContactEmail' => trim($data['szContactEmail']),
                 'szContactPhone' => trim($data['szContactPhone']),
                 'szContactMobile' => trim($data['szContactMobile']),
-                'szNoOfSites' => $trim($data['szNoOfSites']),
+                'szNoOfSites' => trim($data['szNoOfSites']),
                 'discountid' => $data['discount']
             );
         } else {

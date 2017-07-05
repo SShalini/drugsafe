@@ -1569,7 +1569,20 @@ class Webservices_Controller extends CI_Controller
     <td colspan="4">'.($cocdetarr[0]['employeetype'] == '1'?'Employee':($cocdetarr[0]['employeetype'] == '2'?'Contractor':'')).'</td>
 </tr>
 <tr>
-    <td colspan="4">Drug to be tested: '.($drugtype[0] == '1'?'Breath Alcohol':($drugtype[0] == '2'?'AS/NZS 4308:2008':'')).'</td>
+    <td colspan="4">Drug to be tested: ';
+		if ( ! empty( $drugtype ) ) {
+			$drugtestList = '';
+			foreach ( $drugtype as $key => $val ) {
+				if ( $val == '1' ) {
+					$drugtestList .= 'Breath Alcohol, ';
+				}
+				if ( $val == '2' ) {
+					$drugtestList .= 'AS/NZS 4308:2008, ';
+				}
+			}
+			$html .= substr(trim($drugtestList),0,-1);
+		}
+		$html .= '</td>
     <td colspan="4">Contractor details: '.(!empty($cocdetarr[0]['contractor'])?$cocdetarr[0]['contractor']:'').'</td>
 </tr>
 <tr>

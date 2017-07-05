@@ -419,7 +419,7 @@ class Order_Controller extends CI_Controller
         if($flag==1){
          echo "pdf_dispatch_order_details";   
         }
-        elseif($flag==1){
+        elseif($flag==3){
          echo "pdforderdetails";   
         }
         else{
