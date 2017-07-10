@@ -201,7 +201,7 @@ class Ordering_Controller extends CI_Controller
             $sosRormDetailsAry = array_filter($sosRormDetailsAry);
         }
         $manualCalcDetails = $this->Ordering_Model->getManualCalculationBySosId($sosRormDetailsAry['id']);
-       
+
         $data['childclientAray'] = $childclientAray;
         $data['sosRormDetailsAry'] = $sosRormDetailsAry;
         $data['pageName'] = "proforma_invoice";

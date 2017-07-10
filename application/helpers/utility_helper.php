@@ -554,7 +554,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
     $message .= ob_get_clean();
     
     if($flag==1){
-         sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player,'fawada089@gmail.com'); 
+         sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player,'prashant@whiz-solutions.com');
          
     }
     else{

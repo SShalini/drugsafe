@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e3c04da-66fa-4690-acd3-a9a0f242329c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cron.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Form_Management_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Form_Management_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Order_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Order_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Franchisee_Model.php" afterPath="$PROJECT_DIR$/application/models/Franchisee_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/config/xero.php" afterPath="$PROJECT_DIR$/application/config/xero.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Ordering_Controller.php" afterPath="$PROJECT_DIR$/application/controllers/Ordering_Controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/helpers/utility_helper.php" afterPath="$PROJECT_DIR$/application/helpers/utility_helper.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Forum_Model.php" afterPath="$PROJECT_DIR$/application/models/Forum_Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/ordering/sitesRecord.php" afterPath="$PROJECT_DIR$/application/views/ordering/sitesRecord.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,76 +27,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Franchisee_Model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/Franchisee_Model.php">
+      <file leaf-file-name="Ordering_Controller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/Ordering_Controller.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="523">
-              <caret line="500" column="48" lean-forward="false" selection-start-line="500" selection-start-column="48" selection-end-line="500" selection-end-column="48" />
+            <state relative-caret-position="312">
+              <caret line="203" column="0" lean-forward="false" selection-start-line="203" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Form_Management_Controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
+      <file leaf-file-name="sitesRecord.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/ordering/sitesRecord.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="857" column="18" lean-forward="false" selection-start-line="844" selection-start-column="39" selection-end-line="857" selection-end-column="18" />
+            <state relative-caret-position="324">
+              <caret line="163" column="12" lean-forward="true" selection-start-line="163" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Webservices_Controller.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="1570" column="4" lean-forward="true" selection-start-line="1570" selection-start-column="4" selection-end-line="1570" selection-end-column="4" />
-              <folding>
-                <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getuserdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getclientdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#addsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getsosformdatabysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getsossitesbyfranchiseeid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getclientsites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getfranchiseeclients#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getfranchiseesites#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getclientsallsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getfranchiseesosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getagentsosdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getdonorsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getsosbycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#addcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getuserhierarchybysiteid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#marksoscomplete#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#delcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#deldonor#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getallprodbycatid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getallcategories#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#addtocart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#emptycart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#deleteitemfromcart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getfranchiseecartitems#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#updatecart#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#addorder#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getorderdetails#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#canceldonorcoc#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getsavedkitsbysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#delusedkit#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#testcompletebyinventorycheck#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getclientdetailsbyclientid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getsosformdatabysosid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getcocdatabycocid#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getfranchiseeorders#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getagentfranchisee#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#uploaddata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#uploadcocdata#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#sosformpdf#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-                <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
-              </folding>
+            <state relative-caret-position="-1581">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,24 +68,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>insertUserDetails</find>
-      <find>pdf_dispatch_order_details</find>
-      <find>viewForm</find>
-      <find>view_order_list</find>
-      <find>form-horizontal</find>
-      <find>addsosdata</find>
-      <find>clientRecord</find>
-      <find>addFranchiseeData</find>
-      <find>showformdata</find>
-      <find>getsosformdatabysosid</find>
-      <find>sosformpdf</find>
       <find>addDrugTestKit</find>
       <find>__VIEW_PRODUCT_POPUP__</find>
       <find>viewProductDetails</find>
       <find>userd</find>
       <find>editOrderDat</find>
       <find>pdforderdetails</find>
-      <find>__EDIT_ORDER_DETAILS_POPUP__</find>
       <find>is_user_login</find>
       <find>getallPendingValidOrderFrId</find>
       <find>inventoryReport</find>
@@ -140,6 +86,18 @@
       <find>insertOpertionDetails</find>
       <find>CI_ENV</find>
       <find>cocformpdf</find>
+      <find>xero</find>
+      <find>sendEmail</find>
+      <find>sitesR</find>
+      <find>View_Order_List</find>
+      <find>view_order_list</find>
+      <find>dispatchf</find>
+      <find>edit_order_details</find>
+      <find>editOrderData</find>
+      <find>dispatchfinal</find>
+      <find>xeroIntigration</find>
+      <find>changeordstatus</find>
+      <find>__EDIT_ORDER_DETAILS_POPUP__</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -155,15 +113,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/dev/application/controllers/Order_Controller.php" />
-        <option value="$PROJECT_DIR$/dev/application/views/inventory/consumablesList.php" />
-        <option value="$PROJECT_DIR$/dev/application/views/inventory/drugTestKitList.php" />
-        <option value="$PROJECT_DIR$/dev/application/views/inventory/marketingMaterialList.php" />
-        <option value="$PROJECT_DIR$/dev/application/views/admin/common_ajax_functions.php" />
-        <option value="$PROJECT_DIR$/application/views/reporting/clientCmpChart.php" />
-        <option value="$PROJECT_DIR$/application/config/xero.php" />
-        <option value="$PROJECT_DIR$/application/config/constants.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Reporting_Controller.php" />
         <option value="$PROJECT_DIR$/application/views/franchisee/clientDetails.php" />
         <option value="$PROJECT_DIR$/css/drugsafe_custom_style.css" />
         <option value="$PROJECT_DIR$/css/prashant.css" />
@@ -206,6 +155,15 @@
         <option value="$PROJECT_DIR$/live/Form_Management_Controller.php" />
         <option value="$PROJECT_DIR$/application/controllers/Webservices_Controller.php" />
         <option value="$PROJECT_DIR$/live/Webservices_Controller.php" />
+        <option value="$PROJECT_DIR$/application/models/Forum_Model.php" />
+        <option value="$PROJECT_DIR$/application/helpers/utility_helper.php" />
+        <option value="$PROJECT_DIR$/application/controllers/Ordering_Controller.php" />
+        <option value="$PROJECT_DIR$/dev/application/config/constants.php" />
+        <option value="$PROJECT_DIR$/dev/application/views/error_log" />
+        <option value="$PROJECT_DIR$/application/config/xero.php" />
+        <option value="$PROJECT_DIR$/dev/application/config/xero.php" />
+        <option value="$PROJECT_DIR$/dev/application/views/ordering/sitesRecord.php" />
+        <option value="$PROJECT_DIR$/application/views/ordering/sitesRecord.php" />
       </list>
     </option>
   </component>
@@ -219,7 +177,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1378" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectView">
@@ -249,61 +207,15 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="live" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drugsafe" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../drugsafeapp/www" />
+    <property name="last_opened_file_path" value="F:/xampp/htdocs/clubhire" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -455,7 +367,12 @@
       <workItem from="1498708702059" duration="692000" />
       <workItem from="1498710473279" duration="166000" />
       <workItem from="1498716279544" duration="1591000" />
-      <workItem from="1499227310173" duration="2150000" />
+      <workItem from="1499227310173" duration="2824000" />
+      <workItem from="1499232936566" duration="3825000" />
+      <workItem from="1499255574545" duration="45000" />
+      <workItem from="1499322475912" duration="2614000" />
+      <workItem from="1499662947161" duration="15437000" />
+      <workItem from="1499684314669" duration="4905000" />
     </task>
     <task id="LOCAL-00001" summary="Lab Advice Form module added.">
       <created>1493122109770</created>
@@ -548,27 +465,33 @@
       <option name="project" value="LOCAL" />
       <updated>1498457001189</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="4 July issue resolved">
+      <created>1499229988536</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1499229988536</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266192000" />
+    <option name="totallyTimeSpent" value="293692000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2193646" sideWeight="0.4942717" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23596358" sideWeight="0.4942717" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5060698" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5139116" sideWeight="0.4939302" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22534142" sideWeight="0.5057283" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -586,11 +509,11 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5060698" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5155483" sideWeight="0.4939302" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5139116" sideWeight="0.4939302" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25493172" sideWeight="0.4942717" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23216996" sideWeight="0.4942717" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -649,152 +572,20 @@
     <MESSAGE value="bugs resolved" />
     <MESSAGE value="Docket changes done." />
     <MESSAGE value="Docket pdf name change." />
-    <option name="LAST_COMMIT_MESSAGE" value="Docket pdf name change." />
+    <MESSAGE value="4 July issue resolved" />
+    <option name="LAST_COMMIT_MESSAGE" value="4 July issue resolved" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetailsReport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6080">
-          <caret line="84" column="55" lean-forward="false" selection-start-line="84" selection-start-column="55" selection-end-line="84" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetailsByFr.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="54" column="91" lean-forward="false" selection-start-line="54" selection-start-column="91" selection-end-line="54" selection-end-column="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/application/controllers/Admin_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="190" column="5" lean-forward="false" selection-start-line="190" selection-start-column="5" selection-end-line="190" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientRecordByFr.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="56" column="68" lean-forward="false" selection-start-line="56" selection-start-column="68" selection-end-line="56" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/drugsafe_custom_style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="15" lean-forward="false" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reporting/franchiseeRevenueGenerateReport.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="60" column="99" lean-forward="false" selection-start-line="60" selection-start-column="99" selection-end-line="60" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Franchisee_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1864">
-          <caret line="678" column="55" lean-forward="false" selection-start-line="678" selection-start-column="43" selection-end-line="678" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/common_ajax_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="86" column="98" lean-forward="false" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/inventory/editProduct.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1157">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/inventory/editDrugTestKit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="152" column="218" lean-forward="false" selection-start-line="152" selection-start-column="218" selection-end-line="152" selection-end-column="218" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="3456" column="56" lean-forward="false" selection-start-line="3456" selection-start-column="38" selection-end-line="3456" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/inventory/editConsumables.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="152" column="218" lean-forward="false" selection-start-line="152" selection-start-column="218" selection-end-line="152" selection-end-column="218" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/inventory/editMarketingMaterial.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="152" column="149" lean-forward="false" selection-start-line="152" selection-start-column="149" selection-end-line="152" selection-end-column="181" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/inventory/consumablesList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="135" column="98" lean-forward="false" selection-start-line="135" selection-start-column="98" selection-end-line="135" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/inventory/marketingMaterialList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="131" column="98" lean-forward="false" selection-start-line="131" selection-start-column="98" selection-end-line="131" selection-end-column="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/inventory/drugTestKitList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="134" column="50" lean-forward="true" selection-start-line="134" selection-start-column="50" selection-end-line="134" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-919">
-          <caret line="313" column="105" lean-forward="false" selection-start-line="313" selection-start-column="105" selection-end-line="313" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/utility_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="9" lean-forward="false" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/franchisee/clientRecord.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8517">
           <caret line="501" column="78" lean-forward="false" selection-start-line="501" selection-start-column="78" selection-end-line="501" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" column="41" lean-forward="false" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -896,13 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16320">
-          <caret line="960" column="0" lean-forward="false" selection-start-line="960" selection-start-column="0" selection-end-line="960" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Admin_Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-28">
@@ -928,14 +712,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Ordering_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/live/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -958,27 +734,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7259">
-          <caret line="427" column="8" lean-forward="false" selection-start-line="427" selection-start-column="8" selection-end-line="427" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/live/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/live/constants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="1" lean-forward="false" selection-start-line="44" selection-start-column="1" selection-end-line="44" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -986,7 +745,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1530">
           <caret line="90" column="29" lean-forward="false" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -994,13 +752,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
           <caret line="90" column="14" lean-forward="false" selection-start-line="90" selection-start-column="14" selection-end-line="90" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Franchisee_Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
+        <state relative-caret-position="8500">
           <caret line="500" column="48" lean-forward="false" selection-start-line="500" selection-start-column="48" selection-end-line="500" selection-end-column="48" />
           <folding />
         </state>
@@ -1010,15 +767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="841" column="41" lean-forward="false" selection-start-line="841" selection-start-column="41" selection-end-line="841" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="857" column="18" lean-forward="false" selection-start-line="844" selection-start-column="39" selection-end-line="857" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1026,14 +774,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="1584" column="18" lean-forward="false" selection-start-line="1584" selection-start-column="18" selection-end-line="1584" selection-end-column="18" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Form_Management_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="319">
+          <caret line="766" column="5" lean-forward="true" selection-start-line="766" selection-start-column="5" selection-end-line="766" selection-end-column="5" />
+          <folding>
+            <element signature="n#index#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewFormData#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewForm#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#endDate_check#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosFormsdata#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosForm#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#ViewSosFormPdfData#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#pdf_sosform#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#cocFormDetails#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#ViewDonorDetailsData#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#ViewDonorDetails#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#ViewCocFormData#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#ViewCocForm#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getsosformpdf#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#sosformpdf#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#getcocformpdf#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#cocformpdf#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#formatcustomTime#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#view_form_for_client#0;n#Form_Management_Controller#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Webservices_Controller.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="1570" column="4" lean-forward="true" selection-start-line="1570" selection-start-column="4" selection-end-line="1570" selection-end-column="4" />
+        <state relative-caret-position="17">
+          <caret line="1578" column="36" lean-forward="false" selection-start-line="1578" selection-start-column="36" selection-end-line="1578" selection-end-column="36" />
           <folding>
             <element signature="n#index#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#userlogin#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
@@ -1079,6 +854,292 @@
             <element signature="n#getfranchiseeinventory#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
             <element signature="n#formatcustomTime#0;n#Webservices_Controller#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/utility_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="556" column="96" lean-forward="false" selection-start-line="556" selection-start-column="96" selection-end-line="556" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/error_log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret line="2884" column="72" lean-forward="false" selection-start-line="2884" selection-start-column="72" selection-end-line="2884" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Forum_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1111">
+          <caret line="819" column="17" lean-forward="false" selection-start-line="819" selection-start-column="17" selection-end-line="819" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Forum_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="723" column="62" lean-forward="false" selection-start-line="723" selection-start-column="53" selection-end-line="723" selection-end-column="62" />
+          <folding>
+            <element signature="n#addCategory#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addTopicData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addTopic#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#editCategoryData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#editCategory#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#categoriesList#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteCategoryAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteCategoryConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#forumDeleteAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteForumConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewForumData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#forumList#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addForumData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#addforum#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#editForumData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#editForum#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewForumListData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewForum#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewTopicData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewTopicDetails#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#replyToCmnt#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#replyToCmntConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#approvallist#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#showTopicData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#showReplyData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#approveReplyAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#approveReplyConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#replyDeleteAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#replyDeleteConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#unapproveReplyAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#unapproveReplyConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#cmntDeleteAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#cmntDeleteConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#closeTopicAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#closeTopicConfirmationData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#replyEditData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#replyEditConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#approveTopicAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#approveTopicConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#unapproveTopicAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#unapproveTopicConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#commentEditData#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#commentEditConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deleteTopicAlert#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#topicDeleteConfirmation#0;n#Forum_Controller#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Order_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="1124" column="29" lean-forward="true" selection-start-line="1124" selection-start-column="29" selection-end-line="1124" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/order/viewOrderDetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="308" column="101" lean-forward="false" selection-start-line="308" selection-start-column="101" selection-end-line="308" selection-end-column="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/live/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="38" column="12" lean-forward="false" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Order_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="1310" column="82" lean-forward="true" selection-start-line="1310" selection-start-column="82" selection-end-line="1310" selection-end-column="82" />
+          <folding>
+            <element signature="n#drugtestkit#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#marketingmaterial#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#uploadProfileImage#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#consumables#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#placeOrderData#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#placeOrder#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#placeOrderErrorConfirmation#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#orderList#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#DeleteOrderAlert#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#OrderDeleteConfirmation#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#updateCartData#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#checkOutOrderData#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#checkOutOrder#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#ordersuccess#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#viewOrderData#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#cancelOrderConfirmation#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#deliverOrderConfirmation#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#view_order_details#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#pdf_dispatch_order_details#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#pdforderdetails#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#pdf_order_details#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#View_excel_order_details_data#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#View_excel_dispatch_order_details#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#View_excel_order_details#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#dispatchProductData#0;n#Order_Controller#0;n#!!top" expanded="false" />
+            <element signature="n#dispatchsingleprod#0;n#Order_Controller#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1416">
+          <caret line="99" column="8" lean-forward="false" selection-start-line="99" selection-start-column="8" selection-end-line="99" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/application/config/constants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="43" column="58" lean-forward="false" selection-start-line="43" selection-start-column="58" selection-end-line="43" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/application/config/xero.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="55" lean-forward="false" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/config/xero.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="55" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/application/models/Order_Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="1140" column="43" lean-forward="false" selection-start-line="1140" selection-start-column="43" selection-end-line="1140" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/drugsafeFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="1579" column="13" lean-forward="false" selection-start-line="1558" selection-start-column="46" selection-end-line="1558" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/application/views/error_log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/layout/admin_header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="55" column="51" lean-forward="false" selection-start-line="55" selection-start-column="51" selection-end-line="55" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/admin/admin_ajax_functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="1847" column="0" lean-forward="true" selection-start-line="1847" selection-start-column="0" selection-end-line="1847" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/application/views/ordering/sitesRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1499684158704" expanded="true" signature="4876:12894" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="5308:12786" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="7027:12683" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="7134:12407" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="7186:7921" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="7235:7868" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="7973:12370" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8158:12021" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8213:8317" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8380:8459" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8522:8551" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8614:8680" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8743:8792" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8855:8904" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="8966:9137" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="9193:11975" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="9249:11922" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="9376:10179" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="9535:10071" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="9713:9752" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="9760:9780" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="9788:9821" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="10187:11872" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="10289:11115" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="10456:11055" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="10643:10682" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="10690:10710" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="10718:10751" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="10759:10791" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="11223:11763" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="11406:11445" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="11453:11473" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="11481:11514" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="12442:12647" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="12531:12617" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="12794:12872" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="12944:13392" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="12970:13390" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="13014:13362" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="13075:13329" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="13170:13294" ph="..." />
+            <marker date="1499684158704" expanded="true" signature="13213:13254" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Ordering_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="203" column="0" lean-forward="false" selection-start-line="203" selection-start-column="0" selection-end-line="203" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1581">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cron.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/ordering/sitesRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="163" column="12" lean-forward="true" selection-start-line="163" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

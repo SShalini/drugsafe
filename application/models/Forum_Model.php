@@ -817,7 +817,7 @@ class Forum_Model extends Error_Model {
         $replace_ary['supportEmail'] = __CUSTOMER_SUPPORT_EMAIL__;
         $replace_ary['Link'] = __BASE_URL__ . "/admin/admin_login";
 
-        createEmail($this, '__FORUM_NOTIFICATION__', $replace_ary, 'fawada@mobileconnekt.com.au', '', __CUSTOMER_SUPPORT_EMAIL__, '', __CUSTOMER_SUPPORT_EMAIL__,'',1);
+        createEmail($this, '__FORUM_NOTIFICATION__', $replace_ary, 'prashant12it@gmail.com', '', __CUSTOMER_SUPPORT_EMAIL__, '', __CUSTOMER_SUPPORT_EMAIL__,'',1);
 
 
         return true;

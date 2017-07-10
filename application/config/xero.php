@@ -3,7 +3,7 @@
 /**
  * Configuration options for Xero private application
  */
-if(ENVIRONMENT == 'production') {
+if(ENVIRONMENT == 'production' || ENVIRONMENT == 'live') {
 	/******Live*******/
 	$config = array(
 		'consumer'	=> array(
