@@ -91,6 +91,7 @@ class Ordering_Model extends Error_Model {
             $whereAry = array('sosid' => $this->sql_real_escape_string(trim($sisId)));
             $this->db->select('*');
             $this->db->where($whereAry);
+            $this->db->order_by("dtCreatedOn","asc");
             $query = $this->db->get(__DBC_SCHEMATA_MANUAL_CAL__);
             
             $sql = $this->db->last_query();

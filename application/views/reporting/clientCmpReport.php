@@ -165,12 +165,9 @@
                                 </div>
                             </div>
                    </div>
-                        <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
                        
                         <div class="row">
-                            <?php }else{?>
-                              
-                            <?php }?>
+                           
                             <div class="col-md-3">
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
 
@@ -199,12 +196,9 @@
 
                                 </div>
                             </div>
-                            <?php if($_SESSION['drugsafe_user']['iRole'] == 1){?>
-                            
-                            <?php }else{?>
-                        </div>
-                                <div class="row">
-                            <?php }?>
+                           
+                       
+                               
                             <div class="col-md-3">
                                 <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
 
@@ -232,8 +226,7 @@
                             <div class="col-md-1">
                                 <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                             </div>
-
-                        </div>
+                      </div>
                     </form>
                         </div>
                     <?php
