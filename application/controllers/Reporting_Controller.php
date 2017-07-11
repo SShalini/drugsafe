@@ -2527,6 +2527,7 @@ class Reporting_Controller extends CI_Controller {
 			$this->load->view( 'layout/admin_footer' );
 		}
 	}
+        //get Client list By Franchisee
 	function getClientListByFrId( $idFranchisee = '' ) {
 		if ( trim( $idFranchisee ) != '' ) {
 			$_POST['idFranchisee'] = $idFranchisee;

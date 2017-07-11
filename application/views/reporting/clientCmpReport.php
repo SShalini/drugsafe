@@ -164,8 +164,71 @@
                                         </span><?php } ?>
                                 </div>
                             </div>
-                   </div>
+                  
+                       <?php if($_SESSION['drugsafe_user']['iRole']==2 ){ ?>
                        
+                           
+                            <div class="col-md-3">
+                                <div class="form-group <?php if (!empty($arErrorMessages['szSearch4']) != '') { ?>has-error<?php } ?>">
+
+                                    <select class="form-control custom-select" name="szSearch4" id="szSearch4"
+                                            onblur="remove_formError(this.id,'true')">
+                                        <option value=''>Test Type</option>
+                                        <option value="A" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("A") ? "selected" : ""); ?>>
+                                            Alcohol
+                                        </option>
+                                        <option value="U" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("U") ? "selected" : ""); ?>>
+                                            Urine AS/NZA 4308:2001
+                                        </option>
+                                        <option value="O" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("O") ? "selected" : ""); ?>>
+                                            Oral Fluid AS 4760:2006
+                                        </option>
+                                        <option value="AZ" <?php echo(sanitize_post_field_value($_POST['szSearch4']) == trim("AZ") ? "selected" : ""); ?>>
+                                            As/NZA 4308:2008
+                                        </option>
+                                    </select>
+                                    <?php
+                                    if (form_error('szSearch4')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('szSearch4'); ?></span>
+                                        </span><?php } ?>
+
+                                </div>
+                            </div>
+                            </div>
+                        <div class="row">
+                               
+                            <div class="col-md-3">
+                                <div class="form-group <?php if (!empty($arErrorMessages['szSearch5']) != '') { ?>has-error<?php } ?>">
+
+                                    <select class="form-control custom-select" name="szSearch5" id="szSearch5"
+                                            onblur="remove_formError(this.id,'true')">
+                                        <option value=''>Compare Data</option>
+                                        <option value="1" <?php echo(sanitize_post_field_value($_POST['szSearch5']) == trim("1") ? "selected" : ""); ?>>
+                                            Monthly
+                                        </option>
+                                        <option value="2" <?php echo(sanitize_post_field_value($_POST['szSearch5']) == trim("2") ? "selected" : ""); ?>>
+                                            Yearly
+                                        </option>
+
+                                    </select>
+                                    <?php
+                                    if (form_error('szSearch5')) {
+                                        ?>
+                                        <span class="help-block pull-left">
+                                        <span><?php echo form_error('szSearch5'); ?></span>
+                                        </span><?php } ?>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                      </div>
+                       <?php }  else { ?>
+                         </div>
                         <div class="row">
                            
                             <div class="col-md-3">
@@ -227,6 +290,7 @@
                                 <button class="btn green-meadow" type="submit"><i class="fa fa-search"></i></button>
                             </div>
                       </div>
+                       <?php } ?>
                     </form>
                         </div>
                     <?php
