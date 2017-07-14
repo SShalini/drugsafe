@@ -56,4 +56,8 @@ class Home_Controller extends CI_Controller
             die;
         }
     }
+
+    function sendemail(){
+	    $this->Forum_Model->sendEmail();
+    }
 }

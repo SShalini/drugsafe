@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Home_Controller';
 $route['home'] = "Home_Controller";
 $route['handle_ajax_request'] = 'Ajax_Controller';
-
+$route['home/(:any)'] = "Home_Controller/$1";
 $route['admin'] = "Admin_Controller";
 $route['admin/(:any)'] = "Admin_Controller/$1";
 $route['admin/(:any)/(:any)'] = "Admin_Controller/$1/$2";
