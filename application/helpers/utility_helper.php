@@ -239,9 +239,9 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
         $ReplyList = $obj->Forum_Model->getTodayReplyList();
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b"><b> Dear Fawada, </b></p></div>
-            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Today Forum Activities</p></div>';
-       if (($topicList)|| ($commentList) || ($ReplyList) ) {
-          if ($topicList) {
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Today\'s Forum Activities</p></div>';
+       if (!empty($topicList)|| !empty($commentList) || !empty($ReplyList) ) {
+          if (!empty($topicList)) {
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Topics</b></p></div>
             
@@ -279,7 +279,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                       
                        <hr style=" margin-top:25px; "> ';
           }
-          if ($commentList) {
+          if (!empty($commentList)) {
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Comments</b></p></div>
             
@@ -323,7 +323,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                        <hr style=" margin-top:25px; "> ';
         }
          
-             if ($ReplyList) {
+             if (!empty($ReplyList)) {
        $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Reply</b></p></div>
             
@@ -558,8 +558,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
     $message .= ob_get_clean();
     
     if($flag==1){
-         sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player,'prashant@whiz-solutions.com');
-         
+         sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player,__NOTIFICATION2_EMAIL__);
     }
     else{
        sendEmail($obj,$to,$from,$subject,$message,$pdf,$id_player);   

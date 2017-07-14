@@ -115,6 +115,8 @@ define("__DBC_SCHEMATA_PROSPECT__", "tbl_prospect");
 define("__DBC_SCHEMATA_STATUS__", "tbl_prospect_status");
 define("__DBC_SCHEMATA_MEETINGS_NOTE__", "tbl_meetings_note");
 define("__DBC_SCHEMATA_PARTIAL_DISPATCH__", "ds_partial_dispatch_tracking");
+define("__NOTIFICATION1_EMAIL__", "ops@drugsafe.com.au");
+define("__NOTIFICATION2_EMAIL__", "mike@drugsafe.com.au");
 
 /**
  * Validate an int, uses is_numeric
