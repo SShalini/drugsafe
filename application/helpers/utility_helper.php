@@ -234,13 +234,13 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
          $subject = $emailCMSAry['subject'];
          
         
-         $topicList = $obj->Forum_Model->getTodayTopicList();
+        $topicList = $obj->Forum_Model->getTodayTopicList();
         $commentList = $obj->Forum_Model->getTodayCommentList();
-      
+        $ReplyList = $obj->Forum_Model->getTodayReplyList();
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b"><b> Dear Fawada, </b></p></div>
-            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Below are the forum details,</p></div>';
-      
+            <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:#1bbc9b">Today Forum Activities</p></div>';
+       if (($topicList)|| ($commentList) || ($ReplyList) ) {
           if ($topicList) {
           $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Topics</b></p></div>
@@ -322,7 +322,7 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                       
                        <hr style=" margin-top:25px; "> ';
         }
-         $ReplyList = $obj->Forum_Model->getTodayReplyList();
+         
              if ($ReplyList) {
        $message .= '
             <div><p style="text-align:left; font-size:18px; margin-bottom:5px; color:red"><b> Reply</b></p></div>
@@ -369,6 +369,10 @@ function createEmail($obj,$email_template, $replace_ary, $to, $subject, $reply_t
                       
                        <hr style=" margin-top:25px; "> ';
    }
+       }
+       else{ 
+        $message .= ' <div><p style="text-align:left; font-size:12px; margin-bottom:5px; color:Black">No Activities Found.</p></div>';  
+       }
          $message .= $emailCMSAry['sectionDescription'];  
        
         }
